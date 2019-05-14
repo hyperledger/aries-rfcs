@@ -100,8 +100,7 @@ value from it. So:
 - Socialize the ideas. Use them in other RFCs and documentation.
 - Update the agent test suite to reflect the ideas.
 
-When you believe an RFC is a _de facto_ standard, raise a PR that changes the status to ADOPTED. 
-the __adopted__ status. If the community is friendly to the idea, the doc
+When you believe an RFC is a _de facto_ standard, raise a PR that changes the status to ADOPTED.  If the community is friendly to the idea, the doc
 will enter a two-week "Final Comment Period" (FCP), after which there will
 be a vote on disposition.
 
@@ -115,7 +114,7 @@ This repository is licensed under an [Apache 2 License](LICENSE).
 
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the repo by you, as defined in the Apache-2.0 license, shall be
-dual licensed as above, without any additional terms or conditions.
+licensed as above, without any additional terms or conditions.
 
 #### Acknowledgement
 
