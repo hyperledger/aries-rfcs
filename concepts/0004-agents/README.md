@@ -1,7 +1,13 @@
-# 0002: Agents
+# 0004: Agents
 - Author: Daniel Hardman <daniel.hardman@gmail.com>
 - Start Date: 2017-11-01 (approx, backdated)
-- PR: [#86](https://github.com/hyperledger/indy-hipe/pull/86)
+
+## Status
+- Status: [ACCEPTED](/README.md#rfc-lifecycle)
+- Status Date: 2019-01-15
+- Status Note: On a standards track and beginning to influence many mental
+  models, but not yet [ADOPTED](/README.md#rfc-lifecycle). This supersedes
+  [Indy HIPE 0002](https://github.com/hyperledger/indy-hipe/tree/master/text/0002-agents).
 
 ## Summary
 [summary]: #summary
