@@ -14,15 +14,15 @@
 This RFC describes a simple, standard notation for various concepts related
 to independent identity (II) and self-sovereign identity (SSI). (II and SSI
 are related but not synonymous, in that IoT things are independent but not
-sovereign owners; the HIPE covers both but uses SSI in its name as the more
+sovereign owners; the RFC covers both but uses SSI in its name as the more
 recognized term.)
 
-The notation could be used in design docs, other HIPEs, source code comments,
+The notation could be used in design docs, other RFCs, source code comments,
 chat channels, scripts, debug logs, and miscellaneous technical
-materials throughout the Indy ecosystem. We hope it is also used in the larger
+materials throughout the Aries ecosystem. We hope it is also used in the larger
 SSI community.
 
-This HIPE is complementary to the [Sovrin Glossary](
+This RFC is complementary to the [Sovrin Glossary](
 https://sovrin.org/library/glossary/), which carefully curates terms and their
 meanings. We start from the concepts and verbiage defined there. Another
 complementary effort is the work to standardize ZKLang (a symbolic
@@ -41,7 +41,7 @@ definitive usage.
 [tutorial]: #tutorial
 
 The following explanation is meant to be read sequentially and should provide a
-friendly overview for most who encounter the HIPE. See the 
+friendly overview for most who encounter the RFC. See the
 [Reference section](#reference)
 for quick lookup.
 
@@ -74,7 +74,7 @@ might need to be embedded. They create UML diagrams. They type in shells.
 They paste code into slide decks and word processors. All of these
 behaviors militate against a notation that requires complex markup.
 Instead, we want something simple, clean, and universally supported.
-Hence the 7-bit ASCII requirement. A future version of this HIPE,
+Hence the 7-bit ASCII requirement. A future version of this RFC,
 or an addendum to it, might explain how to map this 7-bit
 ASCII notation to various schemes that use mathematical symbols
 and are familiar to experts from other fields.
@@ -374,7 +374,7 @@ to refer to the first public key used by one of the agents owned by Alice with
 a notation like: `did:sov:VUrvFeWW2cPv9hkNZ2ms2a;#key1`.
 
 This notation is important and useful, but it is somewhat orthogonal to the concerns
-of this HIPE. In the context of SSI notation, we are not DID-centric; we are
+of this RFC. In the context of SSI notation, we are not DID-centric; we are
 owner centric, and owners are identified by a single capital alpha instead of
 by their DID. This helps with brevity. It lets us ignore the specific DID value
 and instead focus on the higher level semantics; compare:

@@ -48,9 +48,10 @@ https://docs.google.com/document/d/1gfIz5TT0cNp2kxGMLFXr19x1uoZsruUe_0glHst2fZ8/
 3. It interacts using interoperable [DID Comm protocols](
 https://github.com/hyperledger/indy-hipe/pull/69).
 
-These characteristics don't tie an agent to Indy or to a blockchain
-that has Indy DNA. It is possible to implement agents without any
-use of Indy, and some efforts outside the Indy dev community are
+These characteristics don't tie an agent to any particular blockchain.
+It is possible to implement agents without any
+use of blockchain at all (e.g., with [peer DIDs](
+https://github.com/openssi/peer-did-method-spec)), and some efforts to do so are
 quite active. 
 
 #### Canonical Examples
@@ -147,7 +148,7 @@ are not ready-to-use business solutions.
 
 #### How to Write an Agent
 
-This is one of the most common questions that Indy newcomers ask.
+This is one of the most common questions that Aries newcomers ask.
 It's a challenging one to answer, because it's so open-ended. It's
 sort of like someone asking, "Can you give me a recipe for dinner?"
 The obvious follow-up question would be, "What type of dinner did you
@@ -238,8 +239,8 @@ speak. Line 3 requires the keys of the sender, which would
 normally be held in a [wallet](
 https://github.com/hyperledger/indy-hipe/blob/master/text/0013-wallets/README.md).
 
-If you are building this sort of code using Indy technology, you
-will certainly want to use [Indy SDK](
+If you are building this sort of code using Aries technology, you
+will certainly want to use [Aries Agent SDK](
 https://github.com/hyperledger/indy-sdk/blob/master/README.md).
 This gives you a ready-made,
 highly secure wallet that can be adapted to many requirements.
@@ -255,8 +256,8 @@ or in its Getting Started Guide.
 * Use the mailing list: [hyperledger-indy@lists.hyperledger.org](mailto:hyperledger-indy@lists.hyperledger.org)
 * Study the reference agents and agent test suite in the [indy-agent repo on github.com](https://github.com/hyperledger/indy-agent). 
 * Study the sample mobile agent at [github.com/sovrin-foundation/connector-app](https://github.com/sovrin-foundation/connector-app).
-* Browse other [HIPEs](https://github.com/hyperledger/indy-hipe/tree/master/text) and [proposed HIPEs](https://github.com/hyperledger/indy-hipe/pulls).
-* Attend the indy-agent working group on Wednesdays. (See [HL community calendar](https://wiki.hyperledger.org/display/HYP/Calendar+of+Public+Meetings) for details; note that the default timezone is GMT.)
+* Browse other [RFCs](https://github.com/hyperledger/aries-rfcs/tree/master/text).
+* Attend the Aries working group on Wednesdays. (See [HL community calendar](https://wiki.hyperledger.org/display/HYP/Calendar+of+Public+Meetings) for details; note that the default timezone is GMT.)
 * Review [this slide deck](
   https://docs.google.com/presentation/d/1w_5yf08wfqV0Z-WJLqE5Nh_IVgcMACLWyNw0XjrgTVI/edit)
   about integrating agents with familiar web development paradigms. 
@@ -267,7 +268,7 @@ or in its Getting Started Guide.
 #### Categorizing Agents
 
 Agents can be categorized in various ways, and these categories
-lead to terms you're likely to encounter in HIPEs and other
+lead to terms you're likely to encounter in RFCs and other
 documentation. Understanding the categories will help the
 definitions make sense.
 
@@ -371,7 +372,7 @@ blockchains, rather than A2A to other agents.
 
 ###### DIF Hubs
 A [DIF Identity Hub](https://github.com/decentralized-identity/identity-hub/blob/master/explainer.md)
-is an agent that focuses on the data-sharing aspects of identity.
+is an agent-like construct that focuses on the data-sharing aspects of identity.
 Currently DIF Hubs do not use the protocols known to the Indy
 community, and vice versa. However, there are efforts to bridge
 that gap.
@@ -418,7 +419,7 @@ perspective is that the Sovrin community has a very fuzzy
 identity.
 
 ###### Validators
-Validator nodes on an Indy network are agents of the stewards
+Validator nodes on a particular blockchain are agents of the stewards
 that operate them.
 
 ###### Digital Assistants

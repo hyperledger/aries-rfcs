@@ -1,13 +1,13 @@
-# Template for Protocol HIPEs
+# Template for Protocol RFCs
 
-A protocol HIPE conforms to general HIPE patterns, but includes some
+A protocol RFC conforms to general RFC patterns, but includes some
 specific substructure.
 
 [![template sections](template-sections.png)](https://docs.google.com/presentation/d/15UAkh_2WfDk7wlto7pSL7YU9NJr_XVMgGAOeNIRbzK8/edit#slide=id.g5609c67f13_0_113)
 
 ### "Name and Version" under "Tutorial"
 
-The first section of a protocol HIPE, under "Tutorial", should be called
+The first section of a protocol RFC, under "Tutorial", should be called
 "Name and Version". It should specify the official name of the protocol
 and its version.
 
@@ -50,7 +50,7 @@ its simpler variants.
 >See [this note](parties-roles-participants.md) for definitions of the terms
 "party", "role", and "participant".
 
-The "Roles" subsection comes next in a protocol HIPE. It gives a formal name
+The "Roles" subsection comes next in a protocol RFC. It gives a formal name
 to each role in the protocol, says who and how many can play each role, and
 describes constraints associated with those roles (e.g., "You can only issue
 a credential if you have a DID on the public ledger"). The issue of qualification
@@ -88,7 +88,7 @@ and the PUML and BPMN forms have the virtue that they can support line-by-line
 diffs when checked in with source code. However, they don't offer an
 easy way to see if all possible flows have been considered; what they may
 NOT describe isn't obvious. This--and the freedom from fancy tools--is why
-the matrix form is used in many early HIPEs. We leave it up to
+the matrix form is used in many early RFCs. We leave it up to
 the community to settle on whether it wants to strongly recommend specific
 diagram types.
 
@@ -118,7 +118,7 @@ fields may not appear; an exhaustive catalog is saved for the "Reference"
 section.
 
 Sample messages that are presented in the narrative should also be checked
-in next to the markdown of the HIPE, in [DIDComm Plaintext format](
+in next to the markdown of the RFC, in [DIDComm Plaintext format](
 https://github.com/hyperledger/indy-hipe/blob/master/text/0026-agent-file-format/README.md#agent-plaintext-messages-ap).
 
 ##### Adopted Messages
@@ -153,7 +153,7 @@ the alias defined inside the namespace of the `rendezvous` protocol:
 ![diff on @type caused by adoption](adoption.png)
 
 Adoption should be declared in an "Adopted" subsection of "Messages" in
-a protocol HIPE. When adoption is specified, it should include a __minimum
+a protocol RFC. When adoption is specified, it should include a __minimum
 adopted version__ of the adopted message type: "This protocol adopts
 `ack` with version >= 1.4". All versions of the adopted message that share
 the same major number should be compatible, given the [semver rules](#semver-rules)
@@ -192,16 +192,16 @@ the protocol.
 This section is optional. It could be used to reference files, code,
 relevant standards, oracles, test suites, or other artifacts that would
 be useful to an implementer. In general, collateral should be checked in
-with the HIPE.
+with the RFC.
 
 ### "Localization" under "Reference"
 
 If communication in the protocol involves humans, then localization of
 message content may be relevant. Default settings for localization of
 all messages in the protocol can be specified in an `l10n.json` file
-described here and checked in with the HIPE. See ["Decorators at Message
+described here and checked in with the RFC. See ["Decorators at Message
 Type Scope"](https://github.com/hyperledger/indy-hipe/blob/318f265d508a3ddf1da7d91c79ae4ae27ab9142b/text/localized-messages/README.md#decorator-at-message-type-scope)
-in the [Localization HIPE](https://github.com/hyperledger/indy-hipe/pull/64).
+in the [Localization RFC](https://github.com/hyperledger/indy-hipe/pull/64).
 
 ### "Message Catalog" under "Reference"
 
