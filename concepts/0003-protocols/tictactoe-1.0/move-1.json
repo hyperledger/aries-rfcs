@@ -1,0 +1,9 @@
+
+{
+  "@type": "did:sov:SLfEi9esrjzybysFxQZbfq;spec/tictactoe/1.0/move",
+  "@id": "518be002-de8e-456e-b3d5-8fe472477a86",
+  "me": "X",
+  "moves": ["X:B2"],
+  "comment": "Let's play tic-tac-toe. I'll be X. I pick cell B2."
+}
+

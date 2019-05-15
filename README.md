@@ -19,7 +19,7 @@ RFCs go through a standard lifecycle:
 Status => PROPOSED
 
 * To get an RFC __accepted__ or merged, [build consensus](#how-to-get-an-RFC-accepted)
-  for your RFC on [Rocket Chat](http://chat.hyperledger.org/#aries) and in community meetings. RFCs are merged as soon as the community thinks they reasonably embody an idea worth standardizing. A merged RFC is incubating on a standards track. Status => ACCEPTED
+  for your RFC on [Rocket Chat](http://chat.hyperledger.org/#aries) and in community meetings. RFCs are merged as soon as the community thinks they reasonably embody an idea worth standardizing. An accepted RFC is incubating on a standards track. Status => ACCEPTED
 
 * To get an RFC __adopted__, [socialize and implement](#how-to-get-a-hipe-adopted).
 Once a RFC has momentum, it is formally given the "adopted" status. This happens
@@ -34,6 +34,22 @@ standard. Status => ADOPTED
 
     Significant refinements require a superseding document; the original RFC is
     __superseded__ with a forwarding hyperlink, not replaced. Status => SUPERSEDED
+
+### Github Issues
+
+RFCs that are not on the brink of changing status are discussed through Github Issues.
+Any community member can open an issue; specify the RFC number in the issue title so
+the relationship is clear. For example, to open an issue on RFC 0025, an appropriate
+title for the issue might be:
+
+    RFC 0025: Need better diagram in Reference section
+    
+When the community feels that it's reasonable to suggest a formal status change for
+an RFC, best efforts are made to resolve all open issues against it. Then a PR is
+raised against the RFC's main README.md, where the status field in the header is
+updated. Discussion about the status change typically takes place in the comment
+stream for the PR, with issues being reserved for non-status-change topics.
+
 
 ### Do you need an RFC?
 
