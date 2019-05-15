@@ -19,7 +19,7 @@ RFCs go through a standard lifecycle:
 Status => PROPOSED
 
 * To get an RFC __accepted__ or merged, [build consensus](#how-to-get-an-RFC-accepted)
-  for your RFC on [Rocket Chat](http://chat.hyperledger.org/#aries) and in community meetings. RFCs are merged as soon as the community thinks they reasonably embody an idea worth standardizing. An accepted RFC is incubating on a standards track. Status => ACCEPTED
+  for your RFC on [chat](https://chat.hyperledger.org/channel/aries) and in community meetings. RFCs are merged as soon as the community thinks they reasonably embody an idea worth standardizing. An accepted RFC is incubating on a standards track. Status => ACCEPTED
 
 * To get an RFC __adopted__, [socialize and implement](#how-to-get-a-hipe-adopted).
 Once a RFC has momentum, it is formally given the "adopted" status. This happens
@@ -43,7 +43,7 @@ the relationship is clear. For example, to open an issue on RFC 0025, an appropr
 title for the issue might be:
 
     RFC 0025: Need better diagram in Reference section
-    
+
 When the community feels that it's reasonable to suggest a formal status change for
 an RFC, best efforts are made to resolve all open issues against it. Then a PR is
 raised against the RFC's main README.md, where the status field in the header is
@@ -58,9 +58,9 @@ those changes need to be understood by developers who use Aries.
 
 ### How to propose an RFC
 
-Before writing a RFC, consider exploring the idea on [Rocket Chat](
-http://chat.hyperledger.org/#aries), on community calls (see the 
-[Hyperledger Community Calendar](
+Before writing a RFC, consider exploring the idea on
+[chat](https://chat.hyperledger.org/channel/aries), on community calls
+(see the [Hyperledger Community Calendar](
 https://wiki.hyperledger.org/community/calendar-public-meetings)),
 or on [aries@lists.hyperledger.org](
 mailto:aries@lists.hyperledger.org). Encouraging feedback from maintainers
@@ -87,7 +87,7 @@ is a good sign that you're on the right track.
 Make sure that all of your commits satisfy the [DCO requirements](
 https://github.com/probot/dco#how-it-works) of the repo.
 
-The RFC Maintainers will check to see if the process has been followed, and request any process changes before merging the PR. 
+The RFC Maintainers will check to see if the process has been followed, and request any process changes before merging the PR.
 
 When the PR is merged, your RFC is now in the PROPOSED state.
 
