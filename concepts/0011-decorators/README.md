@@ -103,7 +103,7 @@ https://github.com/hyperledger/indy-hipe/blob/3d8ec6c522cacaaef20b3a999f3c75b5b1
 
 ### Basic Conventions
 
-Decorators are defined in HIPEs that document a general pattern such as [message threading RFC](
+Decorators are defined in RFCs that document a general pattern such as [message threading RFC](
 ../0008-message-id-and-threading)
 or [message localization](https://github.com/hyperledger/indy-hipe/pull/64).
 The documentation for a decorator explains its semantics and offers examples.
@@ -202,7 +202,7 @@ targets:
 ## Reference
 
 This section of this RFC will be kept up-to-date with a list of globally accepted
-decorators, and links to the HIPEs that define them.
+decorators, and links to the RFCs that define them.
 
 * [`~thread`](../0008/message-id-and-threading): provide request/reply and threading semantics
 * [`~timing`](https://github.com/hyperledger/indy-hipe/pull/68): timestamps, expiration, elapsed time
@@ -234,7 +234,7 @@ a connection, not just to an individual message).
 We may be able to resolve these two worldviews, such that decorators are viewed as overlays
 and inherit some overlay goodness as a result. However, it is unlikely that decorators
 will change significantly in form or substance as a result. We thus believe the current
-mental model is already HIPE-worthy, and represents a reasonable foundation for immediate
+mental model is already RFC-worthy, and represents a reasonable foundation for immediate
 use.
 
 ## Prior art
