@@ -17,7 +17,7 @@ Explain how decorators work in DID communication.
 Certain semantic patterns manifest over and over again in communication. For
 example, all communication needs the pattern of testing the type of message
 received. The pattern of identifying a message and referencing it later is likely
-to be useful in a high percentage of all agent protocols that are ever written.
+to be useful in a high percentage of all [protocols](../0003-protocols) that are ever written.
 A pattern that associates messages with debugging/tracing/timing metadata is equally
 relevant. And so forth.
 
@@ -35,7 +35,7 @@ problem domain of a specific type of interaction.
 
 You can think of decorators as a sort of [mixin](https://en.wikipedia.org/wiki/Mixin)
 for agent-to-agent messaging. This is not a perfect analogy, but it is a good one.
-Decorators in A2A also have some overlap (but not a direct congruence) with
+Decorators in DIDComm also have some overlap (but not a direct congruence) with
 [annotations in Java]( https://en.wikipedia.org/wiki/Java_annotation), [attributes in
 C#](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/), 
 and both [decorators](https://www.python.org/dev/peps/pep-0318/) and
@@ -84,8 +84,7 @@ and making the underlying patterns less obvious.
 What we want instead is a way to inject into _any_ message the idea of a thread, such
 that we can easily associate responses with requests, errors with the messages that
 triggered them, and child interactions that branch off of the main one. This is the
-subject of the [message threading HIPE](
-https://github.com/hyperledger/indy-hipe/blob/7bd05ee7191d5175dd6606bb5851980076b310aa/text/message-threading/README.md),
+subject of the [message threading RFC](../0008-message-id-and-threading),
 and the solution is the `~thread` decorator, which can be added to any response:
 
 ```JSON
@@ -98,19 +97,19 @@ and the solution is the `~thread` decorator, which can be added to any response:
 }
 ```
 This chunk of JSON is defined independent of any particular message schema, but
-[is understood to be available in all A2A schemas](
+[is understood to be available in all DIDComm schemas](
 https://github.com/hyperledger/indy-hipe/blob/3d8ec6c522cacaaef20b3a999f3c75b5b1217b70/text/json-ld-compatibility/README.md#decorators
 ).
 
 ### Basic Conventions
 
-Decorators are defined in HIPEs that document a general pattern such as [message threading](
-https://github.com/hyperledger/indy-hipe/blob/7bd05ee7191d5175dd6606bb5851980076b310aa/text/message-threading/README.md)
+Decorators are defined in HIPEs that document a general pattern such as [message threading RFC](
+../0008-message-id-and-threading)
 or [message localization](https://github.com/hyperledger/indy-hipe/pull/64).
 The documentation for a decorator explains its semantics and offers examples.
 
 Decorators are recognized by name. The name must begin with the `~` character (which
-is reserved in A2A messages for decorator use), and be a short, single-line string
+is reserved in DIDComm messages for decorator use), and be a short, single-line string
 suitable for use as a JSON attribute name.
 
 Decorators may be simple key:value pairs `"~foo": "bar"`.
@@ -147,7 +146,7 @@ Namespacing *is also* supported, as we may discover legitimate uses. When
 namespaces are desired, dotted name notation is used, as in
 `~mynamespace.mydecoratorname`. We may elaborate this topic more in the future.
 
-Decorators are orthogonal to [JSON-LD constructs in A2A messages](https://github.com/hyperledger/indy-hipe/pull/83).
+Decorators are orthogonal to [JSON-LD constructs in DIDComm messages](https://github.com/hyperledger/indy-hipe/pull/83).
 
 ### Decorator Scope
 
