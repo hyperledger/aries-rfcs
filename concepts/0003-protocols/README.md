@@ -106,10 +106,9 @@ When agents receive messages, they map the messages to a __protocol handler__
 and possibly to an __interaction state__ that was previous persisted. The
 protocol handler is code that knows the rules of a particular protocol; the
 interaction state tracks progress through an interaction. For more information,
-see the [agents explainer HIPE](
-https://github.com/hyperledger/indy-hipe/blob/36913b80/text/0002-agents/README.md#general-patterns)
-and the [DIDComm explainer HIPE](
-https://github.com/hyperledger/indy-hipe/blob/b0708395/text/0003-did-comm/README.md).
+see the [agents explainer -- RFC 0004](../0004-agents/README.md#general-patterns)
+and the [DIDComm explainer -- RFC 0005](
+../0005-didcomm/README.md).
 
 #### Composable
 
@@ -174,11 +173,11 @@ _timeouts_, and other things
 
 #### How to define a protocol or message family
 
-To define a protocol, write a HIPE. Specific instructions for
-protocol HIPEs, and a discussion about the theory behind detailed
-protocol concepts, are given in the [Template for Protocol HIPEs](
+To define a protocol, write an RFC. Specific instructions for
+protocol RFCs, and a discussion about the theory behind detailed
+protocol concepts, are given in the [Template for Protocol RFCs](
 template.md). The [tictactoe 1.0 protocol](
-tictactoe-1.0/README.md) is also attached to this HIPE as an example.
+tictactoe-1.0/README.md) is also attached to this RFC as an example.
 
 [![tictactoe protocol](tictactoe-1.0/tile.png)](tictactoe-1.0/README.md)
 
@@ -191,7 +190,7 @@ tictactoe-1.0/README.md) is also attached to this HIPE as an example.
 
 ## Drawbacks
 
-This HIPE creates some formalism around defining protocols. It doesn't go
+This RFC creates some formalism around defining protocols. It doesn't go
 nearly as far as SOAP or CORBA/COM did, but it is slightly more demanding
 of a protocol author than the familiar world of RESTful [Swagger/OpenAPI](
 https://swagger.io/docs/specification/about/).
@@ -239,7 +238,7 @@ an elegent and intuitive visual representation. However, even a BPMN
 choreography doesn't have a way to discuss interactions with decorators,
 adoption of generic messages, and other A2A-specific concerns. Thus, we may
 lean on BPMN for some diagramming tasks, but it is not a substitute for the
-HIPE definition procedure described here. 
+RFC definition procedure described here.
 
 #### WSDL
 

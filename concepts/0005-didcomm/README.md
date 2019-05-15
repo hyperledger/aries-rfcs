@@ -33,7 +33,7 @@ https://github.com/hyperledger/indy-hipe/pull/86). If you find yourself
 lost, please review that material for background and starting assumptions. 
 
 Agents have to interact with one another to get work done. How they
-talk in general is DIDComm, the subject of this HIPE. The specific interactions enabled by
+talk in general is DIDComm, the subject of this RFC. The specific interactions enabled by
 DIDComm--connecting and maintaining relationships, issuing credentials,
 providing proof, etc.--are called __protocols__; they are described [elsewhere](
 https://github.com/hyperledger/indy-hipe/pull/69).
@@ -99,7 +99,7 @@ decentralized and maximally opaque to the surveillance economy.
 _Interoperable_ means that DIDComm should work across programming languages,
 blockchains, vendors, OS/platforms, networks, legal jurisdictions, geos,
 cryptographies, and hardware--as well as across time. That's quite a list. It means that
-DIDComm intends something more than just Indy compatibility; it aims to be
+DIDComm intends something more than just compatibility within Aries; it aims to be
 a future-proof _lingua franca_ of all self-sovereign interactions.
 
 _Transport-agnostic_ means that it should be possible to use DIDComm over
@@ -205,7 +205,7 @@ from other communities.
 
 Note that while precedent set by other communities is some motivation, it
 does not on its own motivate an enhancement proposal here. Please also take
-into consideration that Indy sometimes intentionally diverges from common
+into consideration that Aries sometimes intentionally diverges from common
 identity features.
 
 ## Unresolved questions

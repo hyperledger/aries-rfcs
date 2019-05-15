@@ -237,7 +237,7 @@ path back to the sender to be useful.
 ### Collateral
 
 A reference implementation of the logic of a game is provided with this
-HIPE as python 3.x code. See [game.py](game.py). There is also a simple
+RFC as python 3.x code. See [game.py](game.py). There is also a simple
 hand-coded AI that can play the game when plugged into an agent (see
 [ai.py](ai.py)), and a set of unit tests that prove correctness (see
 [test_tictactoe.py](test_tictactoe.py)).
@@ -272,7 +272,7 @@ in the form of an implicit `~l10n` decorator that looks like this:
 [![~l10n](~l10n.png)](~l10n.json)
 
 This JSON fragment is checked in next to the narrative content of this
-HIPE as [~l10n.json](~l10n.json), for easy machine parsing.
+RFC as [~l10n.json](~l10n.json), for easy machine parsing.
 
 Individual messages can use the `~l10n` decorator to supplement or override
 these settings.
@@ -292,7 +292,7 @@ official, immutable URL to this version of the catalog file is:
 
     https://github.com/hyperledger/indy-hipe/blob/fc7a6028/text/tictactoe-protocol/catalog.json
 
-This JSON fragment is checked in next to the narrative content of this HIPE
+This JSON fragment is checked in next to the narrative content of this RFC
 as [catalog.json](catalog.json), for easy machine parsing. The catalog
 currently contains localized alternatives only for English. Other language
 contributions would be welcome.
