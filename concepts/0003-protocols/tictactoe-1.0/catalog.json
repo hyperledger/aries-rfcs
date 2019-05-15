@@ -1,0 +1,13 @@
+
+{
+  "not-your-turn": {
+    "en": "You moved when it was my turn."
+  },
+  "already-occupied": {
+    "en": "You can't place a mark in cell {where}. It is already occupied."
+  },
+  "bad-move": {
+    "en": "Move \"{move}\" makes no sense. Expected a string like \"X:A1\" or \"O:C3\"."
+  }
+}
+
