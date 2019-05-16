@@ -21,7 +21,7 @@ Status => PROPOSED
 * To get an RFC __accepted__ or merged, [build consensus](#how-to-get-an-RFC-accepted)
   for your RFC on [chat](https://chat.hyperledger.org/channel/aries) and in community meetings. RFCs are merged as soon as the community thinks they reasonably embody an idea worth standardizing. An accepted RFC is incubating on a standards track. Status => ACCEPTED
 
-* To get an RFC __adopted__, [socialize and implement](#how-to-get-a-hipe-adopted).
+* To get an RFC __adopted__, [socialize and implement](#how-to-get-an-rfc-adopted).
 Once a RFC has momentum, it is formally given the "adopted" status. This happens
 when implementations accumulate, or when the mental model it advocates has begun
 to permeate our discourse. In other words, adoption is acknowledgment of a _de facto_
