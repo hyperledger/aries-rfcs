@@ -33,11 +33,13 @@ for rfc in rfcs:
 
 
 #group rfcs by status
-with open("index.md", 'w', encoding='utf-8') as out:
+fname = os.path.join(os.path.dirname(__file__), '..', 'index.md')
+with open(fname, 'w', encoding='utf-8') as out:
+    out.write("(This file is machine-generated; see [code/generate_index.py](code/generate_index.py).)\n\n")
     out.write("# Aries RFCs by Status\n")
     for status in status_list:
         out.write(f"\n## Status: {status}\n")
         for rfc in [rfc for rfc in rfcs if rfc['status'] == status]:
-            out.write(f"[{rfc['number']}: {rfc['title']}]({rfc['path']})\n")
+            out.write(f"* [{rfc['number']}: {rfc['title']}]({rfc['path']})\n")
 
 print("Done")
