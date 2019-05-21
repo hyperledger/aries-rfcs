@@ -1,8 +1,12 @@
 # Aries RFC
 
 This repo holds RFCs for the Aries project. They describe important
-topics ([not minor details](#do-you-need-an-RFC) that we want to
-standardize across the Aries ecosystem. There are 2 types of RFCs:
+topics ([not minor details](#do-you-need-an-RFC)) that we want to
+standardize across the Aries ecosystem.
+
+See [this doc](index.md) for a current listing of all RFCs and their statuses.
+
+There are 2 types of RFCs:
 
 * RFCs that describe individual features (the [/features](./features) folder)
 * RFCs that explain concepts underpinning many features (the [/concepts](./concepts) folder)
