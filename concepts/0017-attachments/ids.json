@@ -1,0 +1,20 @@
+{
+  "A_pic": "#image1",
+  "B_pic": "#image1",
+  "C_pic": "#image2",
+  ...
+  "~attach": [
+    {
+      "@id": "image1",
+      "data": {
+        "base64": "Ugd29ybIHl ...(many bytes omitted)... GQaGVsbG8s="
+      }
+    },
+    {
+      "@id": "image2",
+      "data": {
+        "base64": "GQaGV29yU ...(many bytes omitted)... bIsbG8sgdHl="
+      }
+    }
+  ]
+}
