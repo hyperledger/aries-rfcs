@@ -367,7 +367,7 @@ be equivalent but unnecessary to write `A.2.pk@A:B`.
 The mention of keys belonging to agents naturally raises the question of DID
 Docs and the things they contain. How do they relate to our notaiton? 
 [DIDs are designed to be URIs](
-https://w3c-ccg.github.io/did-spec/#the-generic-did-scheme), and items that carry
+https://w3c-ccg.github.io/did-spec/#generic-did-syntax), and items that carry
 an `id` property within a DID Doc [can be referenced with standard URI fragment
 notation]( https://w3c-ccg.github.io/did-spec/#fragments). This allows someone, for example,
 to refer to the first public key used by one of the agents owned by Alice with
