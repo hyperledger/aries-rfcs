@@ -8,17 +8,25 @@ LINK_PAT = re.compile(r'\[([^[(]+)\][(]([^)]+)\)', re.S)
 RFC_NAME_PAT = re.compile(r'\d{4}-[-_.a-z0-9]+', re.I)
 HTML_ANCHOR_PAT_TXT = r'<a[ \t\r\n]+[^>]*name=[\'"]X[\'"]'
 MD_ANCHOR_PAT = re.compile(r'^[ \t]*(?:\[[^]]+\][ \t]*:[ \t]*)?#+[ \t]*(.*)$', re.MULTILINE)
-UNRELIABLE_ANCHORS_PAT = ['//w3c-ccg.github.io/', 'github.com/hyperledger/indy-hipe', 'https://docs.google.com/', 'https://www.visual-paradigm.com/guide/bpmn']
+# The following URI patterns are heavy on javascript and alter the DOM after fetch;
+# experience has shown that we can't detect anchors in them reliably.
+SKIP_PATS = [
+    '://w3c-ccg.github.io/',
+    '://github.com/hyperledger/indy-hipe',
+    '://docs.google.com/',
+    '://www.visual-paradigm.com/guide/bpmn',
+    '://semver.org/',
+    '://www.learningmachine.com',
+    '://agilemodeling.com'
+]
 COMMIT_HASH_URI_PAT = re.compile('.*://github.com/hyperledger/[a-zA-Z-_]+/blob/[a-f0-9]+/text/([a-zA-Z0-9_-]+)(/.*)?$')
 
 def make_md_anchor(txt):
     anchor = ''
     for c in txt.lower():
-        if c == '@':
-            pass
-        elif c.isalpha():
+        if c.isalpha() or c.isdigit() or c in '_-':
             anchor += c
-        else:
+        elif c == ' ':
             anchor += '-'
     return anchor
 
@@ -35,8 +43,8 @@ def fragment_in_content(fragment, content, ct):
                 break
         return found
 
-def is_unreliable_anchors_website(uri):
-    for pat in UNRELIABLE_ANCHORS_PAT:
+def should_skip_website(uri):
+    for pat in SKIP_PATS:
         if pat in uri:
             return True
 
@@ -121,7 +129,7 @@ def check_link(fname, short_fname, txt, match, rfcs, cache):
                 uri = uri[:i]
             # Now look at what type of URI it is.
             if uri.startswith('http'):
-                if is_unreliable_anchors_website(uri):
+                if should_skip_website(uri):
                     return None
                 error, content, ct = handle_web_resource(uri, rfcs, cache)
             elif uri.startswith('mailto:'):
@@ -150,7 +158,7 @@ def check_link(fname, short_fname, txt, match, rfcs, cache):
         alt = match.group(1).strip()
         if len(alt) > 20:
             alt = alt[:20] + '...'
-        print("Error in %s, with hyperlink [%s](%s): %s" % (short_fname, alt, full_uri, error))
+        print("%s: error with hyperlink [%s](%s): %s" % (short_fname, alt, full_uri, error))
     return error
 
 def check_links(fname, rfcs, cache):
@@ -166,7 +174,7 @@ def check_links(fname, rfcs, cache):
     for match in LINK_PAT.finditer(txt):
         if check_link(fname, relative_fname, txt, match, rfcs, cache):
             error_count += 1
-    return not error_count
+    return error_count
 
 def get_rfcs(folder):
     return [x for x in os.listdir(folder) if RFC_NAME_PAT.match(x) and os.path.isdir(os.path.join(folder, x))]

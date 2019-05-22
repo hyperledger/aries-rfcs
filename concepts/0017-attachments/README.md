@@ -15,7 +15,7 @@ an agent message.
 ## Motivation
 [motivation]: #motivation
 
-[DIDComm](../0005-didcomm) messages
+[DIDComm](../0005-didcomm/README.md) messages
 use a structured format with a defined schema and a
 small inventory of scalar data types (string, number, date, etc).
 However, it will be quite common for messages to supplement formalized
@@ -44,7 +44,7 @@ some semantic differences matter:
 to a communication context. [Messages are a mechanism whereby
 state evolves in a protocol](../0003-protocols/README.md#ingredients).
 Protocols are [versioned according to the structure and semantics of
-messages](../0003-protocols/README.md#semver-rules).
+messages](../0003-protocols/semver.md).
 Messages are usually small, consisting of a modest number of fields with
 a structure that's focused on furthering the goals of their protocol.
 

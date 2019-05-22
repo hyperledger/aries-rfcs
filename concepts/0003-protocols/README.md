@@ -146,7 +146,8 @@ https://github.com/hyperledger/indy-hipe/blob/790987b9/text/introductions/README
 A message family is a collection of messages that share a common theme, goal, or
 usage pattern. The messages used by a protocol may be a subset of a particular
 message family; for example, the [connection establishment protocol](
-../0031-connection-protocol/README.md) uses one subset of the messages in the
+https://github.com/hyperledger/indy-hipe/blob/master/text/0031-connection-protocol/README.md)
+uses one subset of the messages in the
 `connections` message family, and the [connection management protocol](
 https://github.com/hyperledger/indy-hipe/blob/baa1ead5/text/conn-mgmt-protocols/README.md)
 uses a different subset.
@@ -165,7 +166,7 @@ A protocol has the following ingredients:
 * [_Messages (primary message family)_](template.md#messages-under-tutorial)
 * [_Adopted messages_](template.md#adopted-messages)
 * [_Roles_](template.md#roles-under-tutorial)
-* [_State_ and _sequencing rules_](template.md#state-under-tutorial)
+* [_State_ and _sequencing rules_](template.md#states-under-tutorial)
 * _Events that can change state_ -- notably, _messages_, but also _errors_,
 _timeouts_, and other things
 * _Constraints that provide trust and incentives_

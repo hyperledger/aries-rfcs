@@ -43,7 +43,7 @@ acknowledgments to confirm a shared understanding.
 
 ### Implicit ACKs
 
-[Message threading](../0008-message-id-and-threading) includes
+[Message threading](../0008-message-id-and-threading/README.md) includes
 a lightweight, automatic sort of ACK in the form of the `~thread.received_orders` field.
 This allows Alice to report that she has received Bob's recent message that had
 `~thread.sender_order` = N. We expect threading to be best practice in many use cases,
@@ -100,8 +100,8 @@ This says, "Please send me an ack as soon as you receive this message."
 
 #### Adopting acks
 
-As discussed in [RFC 0003 Protocols](../0003-protocols), a protocol can [adopt the ack message into
-its own namespace](../0003-protocols/README.md#adopted-messages).
+As discussed in [RFC 0003 Protocols](../0003-protocols/README.md), a protocol can [adopt the ack message into
+its own namespace](../0003-protocols/template.md#adopted-messages).
 This allows the type of an ack to change from:
     `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack`
 to something like:
