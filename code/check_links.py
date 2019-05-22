@@ -12,7 +12,7 @@ MD_ANCHOR_PAT = re.compile(r'^[ \t]*(?:\[[^]]+\][ \t]*:[ \t]*)?#+[ \t]*(.*)$', r
 # experience has shown that we can't detect anchors in them reliably.
 SKIP_PATS = [
     '://w3c-ccg.github.io/',
-    '://github.com/hyperledger/indy-hipe',
+    '://github.com/hyperledger/indy-',
     '://docs.google.com/',
     '://www.visual-paradigm.com/guide/bpmn',
     '://semver.org/',
@@ -28,6 +28,8 @@ def make_md_anchor(txt):
             anchor += c
         elif c == ' ':
             anchor += '-'
+    if 'elapsed' in anchor:
+        pass
     return anchor
 
 def fragment_in_content(fragment, content, ct):
@@ -112,10 +114,6 @@ def check_link(fname, short_fname, txt, match, rfcs, cache):
     # What's exactly the uri as it appears in the markdown link?
     full_uri = match.group(2).strip()
     uri = full_uri
-    if '3d8ec6c52' in uri:
-        uri = uri[:1] + uri[1:]
-    if '0008' in fname:
-        uri = uri[:1] + uri[1:]
     try:
         if uri in cache:
             error, content = cache[uri]

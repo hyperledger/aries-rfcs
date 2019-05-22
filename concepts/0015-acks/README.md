@@ -190,8 +190,8 @@ buy did not lead to the outcome Alice intended when she sent it.
 
 This raises the question of errors. Any time an unexpected *problem*
 arises, best practice is to report it to the sender of the message that
-triggered the problem. This is the subject of the [Problem Reporting RFC](
-../0015-problem-report).
+triggered the problem. This is the subject of the [problem reporting mechanism](
+https://github.com/hyperledger/indy-hipe/blob/459a055/text/error-reporting/README.md).
 
 A `problem_report` is inherently a sort of ACK. In fact, the `ack` message type
 and the `problem_report` message type are both members of the same `notification`
