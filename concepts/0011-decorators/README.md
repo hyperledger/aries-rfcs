@@ -17,7 +17,7 @@ Explain how decorators work in DID communication.
 Certain semantic patterns manifest over and over again in communication. For
 example, all communication needs the pattern of testing the type of message
 received. The pattern of identifying a message and referencing it later is likely
-to be useful in a high percentage of all [protocols](../0003-protocols) that are ever written.
+to be useful in a high percentage of all [protocols](../0003-protocols/README.md) that are ever written.
 A pattern that associates messages with debugging/tracing/timing metadata is equally
 relevant. And so forth.
 
@@ -84,7 +84,7 @@ and making the underlying patterns less obvious.
 What we want instead is a way to inject into _any_ message the idea of a thread, such
 that we can easily associate responses with requests, errors with the messages that
 triggered them, and child interactions that branch off of the main one. This is the
-subject of the [message threading RFC](../0008-message-id-and-threading),
+subject of the [message threading RFC](../0008-message-id-and-threading/README.md),
 and the solution is the `~thread` decorator, which can be added to any response:
 
 ```JSON
@@ -104,7 +104,7 @@ https://github.com/hyperledger/indy-hipe/blob/3d8ec6c522cacaaef20b3a999f3c75b5b1
 ### Basic Conventions
 
 Decorators are defined in RFCs that document a general pattern such as [message threading RFC](
-../0008-message-id-and-threading)
+../0008-message-id-and-threading/README.md)
 or [message localization](https://github.com/hyperledger/indy-hipe/pull/64).
 The documentation for a decorator explains its semantics and offers examples.
 
@@ -204,7 +204,7 @@ targets:
 This section of this RFC will be kept up-to-date with a list of globally accepted
 decorators, and links to the RFCs that define them.
 
-* [`~thread`](../0008/message-id-and-threading): provide request/reply and threading semantics
+* [`~thread`](../0008-message-id-and-threading/README.md): provide request/reply and threading semantics
 * [`~timing`](https://github.com/hyperledger/indy-hipe/pull/68): timestamps, expiration, elapsed time
 * [`~trace`](https://github.com/hyperledger/indy-hipe/pull/60): collaborative debugging and monitoring
 * [`~l10n`](https://github.com/hyperledger/indy-hipe/pull/64): localization support

@@ -43,7 +43,7 @@ acknowledgments to confirm a shared understanding.
 
 ### Implicit ACKs
 
-[Message threading](../0008-message-id-and-threading) includes
+[Message threading](../0008-message-id-and-threading/README.md) includes
 a lightweight, automatic sort of ACK in the form of the `~thread.received_orders` field.
 This allows Alice to report that she has received Bob's recent message that had
 `~thread.sender_order` = N. We expect threading to be best practice in many use cases,
@@ -100,8 +100,8 @@ This says, "Please send me an ack as soon as you receive this message."
 
 #### Adopting acks
 
-As discussed in [RFC 0003 Protocols](../0003-protocols), a protocol can [adopt the ack message into
-its own namespace](../0003-protocols/README.md#adopted-messages).
+As discussed in [RFC 0003 Protocols](../0003-protocols/README.md), a protocol can [adopt the ack message into
+its own namespace](../0003-protocols/template.md#adopted-messages).
 This allows the type of an ack to change from:
     `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack`
 to something like:
@@ -190,8 +190,8 @@ buy did not lead to the outcome Alice intended when she sent it.
 
 This raises the question of errors. Any time an unexpected *problem*
 arises, best practice is to report it to the sender of the message that
-triggered the problem. This is the subject of the [Problem Reporting RFC](
-../0015-problem-report).
+triggered the problem. This is the subject of the [problem reporting mechanism](
+https://github.com/hyperledger/indy-hipe/blob/459a055/text/error-reporting/README.md).
 
 A `problem_report` is inherently a sort of ACK. In fact, the `ack` message type
 and the `problem_report` message type are both members of the same `notification`

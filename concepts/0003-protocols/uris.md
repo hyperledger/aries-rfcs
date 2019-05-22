@@ -38,13 +38,12 @@ A match will have captures groups of (1) = `doc-uri`, (2) = `protocol-name`,
 The goals of this URI are, in descending priority:
 
 * Code can use the URI to route messages to protocol
-handlers using semver rules.
+handlers using [semver rules](semver.md).
 
 * The definition of a protocol should be tied to the URI such
 that it is semantically stable. This means that once version 1.0
-of a protocol is defined, its definition should not change in
-ways that would break implementations. (See the [semver](#semver)
-section for more on this.)
+of a protocol is defined, its definition [should not change in
+ways that would break implementations](semver.md).
 
 * Developers can discover information about novel protocols, using
 the URI to browse or search the web.

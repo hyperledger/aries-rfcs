@@ -95,8 +95,7 @@ message-based, and is secured by modern, best-practice public key
 cryptography. _How_ messages flow over a transport may vary--but their
 security and privacy toolset, their links to the [DIDs and DID Docs of
 identity owners](https://w3c-ccg.github.io/did-spec/), and [the ways
-their messages are packaged and handled](
-https://github.com/dhh1128/indy-hipe/blob/a2a/text/0003-a2a/README.md)
+their messages are packaged and handled](../0005-didcomm/README.md)
 are standard.
 
 Agents connect to one another through a standard [connection
@@ -256,7 +255,7 @@ or in its Getting Started Guide.
 * Use the mailing list: [hyperledger-indy@lists.hyperledger.org](mailto:hyperledger-indy@lists.hyperledger.org)
 * Study the reference agents and agent test suite in the [indy-agent repo on github.com](https://github.com/hyperledger/indy-agent). 
 * Study the sample mobile agent at [github.com/sovrin-foundation/connector-app](https://github.com/sovrin-foundation/connector-app).
-* Browse other [RFCs](https://github.com/hyperledger/aries-rfcs/tree/master/text).
+* Browse other [RFCs](../../index.md).
 * Attend the Aries working group on Wednesdays. (See [HL community calendar](https://wiki.hyperledger.org/display/HYP/Calendar+of+Public+Meetings) for details; note that the default timezone is GMT.)
 * Review [this slide deck](
   https://docs.google.com/presentation/d/1w_5yf08wfqV0Z-WJLqE5Nh_IVgcMACLWyNw0XjrgTVI/edit)
@@ -382,8 +381,8 @@ The [uPort app](https://www.uport.me/) is an edge agent. Here,
 too, there are efforts to bridge a protocol gap.
 
 ###### Learning Machine
-The credential issuance technology offered by [Learning
-Machine](https://www.learningmachine.com/), and the app used
+The credential issuance technology offered by [Learning Machine](
+https://www.learningmachine.com/), and the app used
 to share those credentials, are agents of institutions and
 individuals, respectively. Again, there is a protocol gap to
 bridge.
@@ -393,7 +392,7 @@ A cron job that runs once a night at Faber, scanning a database
 and revoking credentials that have changes status during the day,
 is an agent for Faber. This is true even though it doesn't listen
 for incoming messages (it only talks [revocation protocol](
-../0011-cred-revocation/README.md) to the ledger). In order to
+https://github.com/hyperledger/indy-hipe/tree/master/text/0011-cred-revocation) to the ledger). In order to
 talk that protocol, it must hold keys delegated by Faber, and it
 is surely Faber's fiduciary.
 

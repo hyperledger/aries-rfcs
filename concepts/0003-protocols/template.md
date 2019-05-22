@@ -80,7 +80,7 @@ is typical.
 
 [Choreography Diagrams](
 https://www.visual-paradigm.com/guide/bpmn/bpmn-orchestration-vs-choreography-vs-collaboration/#bpmn-choreography)
-from [BPMN](#bpmn) are good artifacts here, as are [PUML sequence diagrams](
+from [BPMN](README.md#bpmn) are good artifacts here, as are [PUML sequence diagrams](
 http://plantuml.com/sequence-diagram) and [UML-style state machine diagrams](http://agilemodeling.com/artifacts/stateMachineDiagram.htm).
 The matrix form is nice because it forces an exhaustive analysis of every
 possible event. The diagram styles are often simpler to create and consume,
@@ -156,8 +156,8 @@ Adoption should be declared in an "Adopted" subsection of "Messages" in
 a protocol RFC. When adoption is specified, it should include a __minimum
 adopted version__ of the adopted message type: "This protocol adopts
 `ack` with version >= 1.4". All versions of the adopted message that share
-the same major number should be compatible, given the [semver rules](#semver-rules)
-noted above.
+the same major number should be compatible, given the [semver rules](semver.md)
+that apply to protocols.
 
 ### "Constraints" under "Tutorial"
 
