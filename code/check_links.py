@@ -1,21 +1,16 @@
-import requests
 import os
 import re
+import requests
 import sys
+import traceback
 
 ROOT_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 LINK_PAT = re.compile(r'\[([^[(]+)\][(]([^)]+)\)', re.S)
 RFC_NAME_PAT = re.compile(r'\d{4}-[-_.a-z0-9]+', re.I)
 HTML_ANCHOR_PAT_TXT = r'<a[ \t\r\n]+[^>]*name=[\'"]X[\'"]'
 MD_ANCHOR_PAT = re.compile(r'^[ \t]*(?:\[[^]]+\][ \t]*:[ \t]*)?#+[ \t]*(.*)$', re.MULTILINE)
-# The following URI patterns are heavy on javascript and alter the DOM after fetch;
-# experience has shown that we can't detect anchors in them reliably.
+# The following URI patterns give errors even when we http HEAD them.
 SKIP_PATS = [
-    '://w3c-ccg.github.io/',
-    '://github.com/hyperledger/indy-',
-    '://docs.google.com/',
-    '://www.visual-paradigm.com/guide/bpmn',
-    '://semver.org/',
     '://www.learningmachine.com',
     '://agilemodeling.com'
 ]
@@ -83,7 +78,6 @@ def find_matching_rfc(rfcs, which):
 
 def handle_web_resource(uri, rfcs, cache):
     error = None
-    content = None
     ct = None
     # Do we have the uri cached?
     if uri in cache:
@@ -95,7 +89,7 @@ def handle_web_resource(uri, rfcs, cache):
             if rfc:
                 error = 'should reference RFC %s' % rfc
         if not error:
-            r = requests.get(uri, timeout=10)
+            r = requests.head(uri, timeout=10)
             if r.status_code < 200 or r.status_code > 299:
                 error = "returns HTTP status code " + str(r.status_code)
             else:
@@ -103,10 +97,8 @@ def handle_web_resource(uri, rfcs, cache):
                 i = ct.find(';')
                 if i > -1:
                     ct = ct[:i]
-                if 'html' in ct:
-                    content = r.text
-        cache[uri] = (error, content)
-    return error, content, ct
+        cache[uri] = (error, None)
+    return error, ct
 
 def check_link(fname, short_fname, txt, match, rfcs, cache):
     """Look at a link and return an error string about it, if any."""
@@ -118,9 +110,10 @@ def check_link(fname, short_fname, txt, match, rfcs, cache):
         if uri in cache:
             error, content = cache[uri]
         else:
+            content = None
+            ct = "text/markdown"
             # Split into most-of-uri + fragment
             fragment = None
-            ct = "text/markdown"
             i = uri.find('#')
             if i > -1:
                 fragment = uri[i + 1:]
@@ -129,7 +122,7 @@ def check_link(fname, short_fname, txt, match, rfcs, cache):
             if uri.startswith('http'):
                 if should_skip_website(uri):
                     return None
-                error, content, ct = handle_web_resource(uri, rfcs, cache)
+                error, ct = handle_web_resource(uri, rfcs, cache)
             elif uri.startswith('mailto:'):
                 return None
             # If URI is empty, then the URI is relative to the open file, so it was probably a pure fragment
@@ -144,19 +137,19 @@ def check_link(fname, short_fname, txt, match, rfcs, cache):
                 if cacheable in cache:
                     error, content = cache[cacheable]
                 else:
-                    if not content or not fragment_in_content(fragment, content, ct):
+                    if ct and content and (not fragment_in_content(fragment, content, ct)):
                         error = "#%s not in %s content" % (fragment, ct)
                     # Cache what we learned about the specific URI+fragment
                     cache[cacheable] = (error, None)
     except KeyboardInterrupt:
         sys.exit(1)
-    except BaseException as ex:
-        error = str(ex)
+    except BaseException:
+        error = traceback.format_exc()
     if error:
         alt = match.group(1).strip()
         if len(alt) > 20:
             alt = alt[:20] + '...'
-        print("%s: error with hyperlink [%s](%s): %s" % (short_fname, alt, full_uri, error))
+        print("%s: [%s](%s) %s" % (short_fname, alt, full_uri, error))
     return error
 
 def check_links(fname, rfcs, cache):

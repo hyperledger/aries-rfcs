@@ -127,7 +127,7 @@ a superprotocol from another (as when protocols are nested at least 3 deep).
 ![super- and subprotocols](super-sub.png)
 
 Commonly, protocols wait for subprotocols to complete, and then they continue.
-A good example of this is [ACKs](https://github.com/hyperledger/indy-hipe/blob/518b5a9a/text/acks/README.md),
+A good example of this is [ACKs](../0015-acks/README.md),
 which are often used as a discrete step in a larger flow.
 
 In other cases, a subprotocol is not "contained" inside its superprotocol.
