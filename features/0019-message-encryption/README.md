@@ -1,4 +1,4 @@
-# 0019: Message Encryption
+# 0019: Encryption Envelope
 - Author: Kyle Den Hartog(kyle.denhartog@evernym.com), Stephen Curran (swcurran@gmail.com), Sam Curren (sam@sovrin.org), Mike Lodder (mike@sovrin.org)
 - Start Date: 2018-07-10 (approximate, backdated)
 
