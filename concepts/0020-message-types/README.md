@@ -11,7 +11,7 @@
 
 ## Summary
 
-Define structure of message type strings used in agent to agent communication, describe their resolution to documentation URIs, and offer guidelines for type family specifications.
+Define structure of message type strings used in agent to agent communication, describe their resolution to documentation URIs, and offer guidelines for protocol specifications.
 
 ## Motivation
 
@@ -30,19 +30,9 @@ Types are specified within a message using the `@type` attribute:
 }
 ```
 
-Message types are URIs that resolve to developer documentation for the message type. The end portion of the URI MUST follow the following format:
+Message types are URIs that resolve to developer documentation for the message type, as described in [Protocol URIs](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/uris.md). 
 
-```
-/<message_family>/<major_family_version>.<minor_family_version>/<message_type>
-```
-
-this allows for support of minor version update support with agents, as well as serving as a namespace.
-
-We recommend that message types are ledger resolvable DIDs with an endpoint specifier and path. This allows for the document locations to be updated to a new location for a stable definition:
-
-```
-did:<method>:<id-string>;<serviceid>/<message_family>/<major_family_version>.<minor_family_version>/<message_type>
-```
+We recommend that message types are ledger resolvable DIDs with an endpoint specifier and path. This allows for the document locations to be updated to a new location for a stable definition.
 
 ### Example DID and DID Document for Message Type Specification
 
@@ -59,10 +49,10 @@ How to use a DID to identify a digital object that:
 Use a full DID reference that contains a service name and path.
 
 ##### Example DID Reference
-This DID reference contains a service name (`;spec`) followed by a path that expresses the semantics of an example message type family.
+This DID reference contains a service name (`;spec`) followed by a path that expresses the semantics of an example protocol.
 
 ```
-did:sov:123456789abcdefghi1234;spec/examplefamily/1.0/exampletype
+did:sov:123456789abcdefghi1234;spec/exampleprotocol/1.0/exampletype
 ```
 
 #### Example DID Document
@@ -124,7 +114,7 @@ The following agent message is received with a type not known to the developer:
 
 ```json
 {
-    '@type': 'did:sov:123456789abcdefghi1234;spec/examplefamily/1.0/exampletype',
+    '@type': 'did:sov:123456789abcdefghi1234;spec/exampleprotocol/1.0/exampletype',
     'attr_a': 5,
     'attr_b': 'Gouda'
 }
@@ -133,29 +123,29 @@ The following agent message is received with a type not known to the developer:
 The `@type` is extracted, with a DID reference that resolves to the example `service` block above:
 
 ``` json
-did:sov:123456789abcdefghi1234;spec/examplefamily/1.0/exampletype
+did:sov:123456789abcdefghi1234;spec/exampleprotocol/1.0/exampletype
 ```
 
 A DID resolver would algorithmically transform that DID reference to the following concrete URL:
 
 ```
-https://sovrin.org/specs/examplefamily/1.0/exampletype
+https://sovrin.org/specs/exampleprotocol/1.0/exampletype
 ```
 
 The developer would then be able to load this URL in a browser to discover the meaning of `attr_a` and `attr_b`.
 
 ### Aries Core Message Namespace
 
-`did:sov:BzCbsNYhMrjHiqZDTUASHg` will be used to namespace message families defined by the community as "core message families" or message families that agents must minimally support.
+`did:sov:BzCbsNYhMrjHiqZDTUASHg` will be used to namespace protocols defined by the community as "core protocols" or protocols that agents should minimally support.
 
 This DID is currently held by Daniel Hardman. Ownership will be transferred to the correct entity as soon as possible.
 
-### Message Families
-Message families provide a logical grouping for message types. These families, along with each type belonging to that family, are to be defined in future HIPEs or through means appropriate to subprojects.
+### Protocols
+Protocols provide a logical grouping for message types. These protocols, along with each type belonging to that protocol, are to be defined in future HIPEs or through means appropriate to subprojects.
 
-#### Family Versioning
+#### Protocol Versioning
 Version numbering should essentially follow [Semantic Versioning 2.0.0](https://semver.org/), excluding patch version
-number. To summarize, a change in the major family version number indicates a breaking change while the minor family version number indicates non-breaking additions.
+number. To summarize, a change in the major protocol version number indicates a breaking change while the minor protocol version number indicates non-breaking additions.
 
 ## Message Type Design Guidelines
 
@@ -173,9 +163,9 @@ Data, id, and package, are often terrible names. Adjust the name to enhance mean
 
 Technically, attribute names can be any valid json key (except prefixed with @, as mentioned above). Practically, you should avoid using special characters, including those that need to be escaped. Underscores and dashes [_,-] are totally acceptable, but you should avoid quotation marks, punctuation, and other symbols.
 
-#### Use attributes consistently across message families
+#### Use attributes consistently within a protocol
 
-Be consistent with attribute names between the different types within a message family. Only use the same attribute name for the same data. If the attribute values are similar, but not exactly the same, adjust the name to indicate the difference.
+Be consistent with attribute names between the different types within a protocol. Only use the same attribute name for the same data. If the attribute values are similar, but not exactly the same, adjust the name to indicate the difference.
 
 #### Nest Attributes only when useful
 
@@ -219,5 +209,5 @@ Suggestions: Ambiguous names, unnecessary nesting, symbols in names.
 - [Daniel Hardman's Agent Summit Notes](http://bit.ly/2KkdWjE)
 - [Stephen Curran's presentation summarizing the Agent Summit](https://docs.google.com/presentation/d/1l-po2IKVhXZHKlgpLba2RGq0Md9Rf19lDLEXMKwLdco/edit)
 - [DID Spec](https://w3c-ccg.github.io/did-spec/)
-- [Semantic Versioning](https://semver.org)
+- [Semantic Versioning](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/semver.md)
 - [Core Message Structure](https://github.com/hyperledger/indy-hipe/pull/17)
