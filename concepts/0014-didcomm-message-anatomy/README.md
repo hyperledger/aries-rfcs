@@ -1,5 +1,5 @@
 # Title (Ex. 0014: DID Comm Message Anatomy)
-- Author: Tobias Looker (tobias.looker@mattr.global)
+- Author: Tobias Looker (tobias.looker@mattr.global), Daniel Hardman (daniel.hardman@gmail.com)
 - Start Date: 2019-05-25
 
 ## Status
@@ -19,11 +19,11 @@ overarching view of the two distinct levels of messages in a single place.
 
 ## Tutorial
 
-DID Comm messages are comprised of the following two main layers which are not dissimilar to how postal messages occur in the real world.
+DID Comm messages are comprised of the following two main layers, which are not dissimilar to how postal messages occur in the real world.
 
 ### Envelope Level
 
-As the name suggests the name borrows from the analogy of how physical messages are handled in the postal system, this level acts as the digital envelope for DID Comm messages.
+As the name suggests, `envelope` borrows from the analogy of how physical messages are handled in the postal system, this message format level acts as the digital envelope for DID Comm messages.
 
 There are two main variations of the envelope level format which are defined to cater for the different audiences and use cases DID Comm messages serve.
 
@@ -36,7 +36,7 @@ Within this encrypted format, there are multiple sub-formats which give rise to 
 1. Anonymous Encrypted format
 This format is when a message is encrypted to a recipient in an anonymous fashion, and it does not include any sender information.
 2. Authenticated Encrypted format
-This format is when a message is encrypted to a recipient and sender information is included through the use of authenticated encryption(link). With this format only the true recipient(s) can both decrypt the message and authenticate its content is truly from the sender.
+This format is when a message is encrypted to a recipient and sender information is included through the use of authenticated encryption. With this format only the true recipient(s) can both decrypt the message and authenticate its content is truly from the sender.
 3. Signed Encrypted format
 This format is when a message is encrypted to the recipient and sender information is included along with a non-reputable signature. In this case the recipient(s) is still the only party that can decrypt the message. However, because the underlying message includes non-reputability, authentication of the decrypted message content can be done by any party who knows the sender.
 
@@ -46,7 +46,7 @@ This format is for when the audience of the message is unknown (for example some
 
 #### Serialization Format
 
-All of the envelope level formats are achieved through [JOSE](https://jose.readthedocs.io/en/latest/) based structures. The encrypted format uses a JWE structure, whereas the signed unencrypted format uses a JWS structure.
+All of the envelope level formats are achieved through [JOSE](https://jose.readthedocs.io/en/latest/) based structures. The encrypted formats uses a JWE structure, whereas the signed unencrypted format uses a JWS structure.
 
 Details on the encrypted forms are found [here](https://github.com/hyperledger/aries-rfcs/blob/master/features/0019-encryption-envelope/README.md)
 
@@ -63,7 +63,7 @@ The most important concepts to introduce about these conventions are the followi
 #### Message Type 
 Every message contains a message type which allows the context of the message to be established and therefore process the content,
 see [here](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0020-message-types/README.md) for more information. It is also important to
-note that in DID Comms the message identification does not identify the message in isolation, messages are instead organized into `protocols`, these
+note that in DID Comms, the message identification does not just identify the message, the message type also identifies the associated protocol. These
 protocols are essentially a group of related messages that are together required to achieve some form of multi-step flow see [here](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/README.md) for more information.
 
 #### Message Id 
@@ -75,7 +75,7 @@ DID Comm messages at a content level allow for the support of re-usable conventi
 
 A relevant analogy for decorators, is that they are like HTTP headers in a HTTP request. The same HTTP header is often reused as a convention across multiple requests to achieve cross cutting functionality. 
 
-See for [here](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0011-decorators/README.md) for more details.
+See [here](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0011-decorators/README.md) for more details.
 
 #### Serialization Format
 
