@@ -1,4 +1,4 @@
-# Title (Ex. 0014: DID Comm Message Anatomy)
+# 0021: DID Comm Message Anatomy
 - Author: Tobias Looker (tobias.looker@mattr.global), Daniel Hardman (daniel.hardman@gmail.com)
 - Start Date: 2019-05-25
 
