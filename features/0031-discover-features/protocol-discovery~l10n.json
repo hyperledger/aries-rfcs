@@ -1,0 +1,8 @@
+{
+
+  "~l10n": {
+    "locales": { "en": ["comment"] },
+    "catalogs": ["https://github.com/hyperledger/indy-hipe/blob/88352a55/text/agent-protocols/catalog.json"]
+  }
+
+}
