@@ -1,9 +1,10 @@
 import os
 import re
+from operator import itemgetter
 
 rfcs = []
 
-top_paths = ["concepts"]
+top_paths = ["concepts", "features"]
 status_list = ["PROPOSED", "ACCEPTED", "ADOPTED", "SUPERSEDED"]
 
 for top_path in top_paths:
@@ -31,7 +32,7 @@ for rfc in rfcs:
 
     print(rfc)
 
-
+rfcs.sort(key=itemgetter('number'))
 #group rfcs by status
 fname = os.path.join(os.path.dirname(__file__), '..', 'index.md')
 with open(fname, 'w', encoding='utf-8') as out:
