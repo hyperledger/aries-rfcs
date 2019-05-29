@@ -5,12 +5,15 @@ from pathlib import Path
 
 rfcs = []
 
+root_path = Path(os.path.dirname(__file__)).parent
+# We need all paths that we walk and store to be relative to the root
+# of the repo, even if that's not where we're running the script.
+os.chdir(root_path)
 top_paths = ["concepts", "features"]
 status_list = ["PROPOSED", "ACCEPTED", "ADOPTED", "SUPERSEDED"]
 
 for top_path in top_paths:
-    rfc_paths = Path(top_path).iterdir()
-    for rfc_path in rfc_paths:
+    for rfc_path in Path(top_path).iterdir():
         rfcs.append({
             'type': top_path,
             'path': rfc_path / "README.md",
@@ -35,7 +38,7 @@ for rfc in rfcs:
 
 rfcs.sort(key=itemgetter('number'))
 #group rfcs by status
-fname = Path(os.path.dirname(__file__)).parent / 'index.md'
+fname = root_path / 'index.md'
 with fname.open('w', encoding='utf-8') as out:
     out.write("(This file is machine-generated; see [code/generate_index.py](code/generate_index.py).)\n\n")
     out.write("# Aries RFCs by Status\n")
