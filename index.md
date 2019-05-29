@@ -8,6 +8,7 @@
 * [0013: overlays](concepts/0013-overlays/README.md)
 * [0015: acks](concepts/0015-acks/README.md)
 * [0021: didcomm-message-anatomy](concepts/0021-didcomm-message-anatomy/README.md)
+* [0028: introduce](features/0028-introduce/README.md)
 
 ## Status: ACCEPTED
 * [0003: protocols](concepts/0003-protocols/README.md)
