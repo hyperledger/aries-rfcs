@@ -25,7 +25,7 @@ Standardized transport methods are detailed here.
 HTTP(S) is the first transport for DID Communication that has received heavy attention.
 
 - Messages are transported via HTTP POST.
-- The MIME Type for the POST request is `application/ssi-agent-wire`.
+- The MIME Type for the POST request is `application/didcomm-envelope-enc`.
 - A received message should be responded to with a 202 Accepted status code. This indicates that the request was received, but not necessarily processed. Accepting a 200 OK status code is allowed.
 - POST requests are considered transmit only by default. No agent messages will be returned in the response. This behavior may be modified with additional signaling.
 - Using HTTPS with TLS 1.2 or greater with a forward secret cipher will provide Perfect Forward Secrecy (PFS) on the transmission leg.
@@ -52,7 +52,7 @@ Websockets are an efficient way to transmit multiple messages without the overhe
 
 ### Other Transports
 
-Other transports may be used for Agent messaging. As they are developed, this HIPE should be updated with appropriate standards for the transport method. A PR should be raised against this doc to facilitate discussion of the proposed additions and/or updates. New transports should highlight the common elements of the transport (such as an HTTP response code for the HTTP transport) and how they should be applied.
+Other transports may be used for Agent messaging. As they are developed, this RFC should be updated with appropriate standards for the transport method. A PR should be raised against this doc to facilitate discussion of the proposed additions and/or updates. New transports should highlight the common elements of the transport (such as an HTTP response code for the HTTP transport) and how they should be applied.
 
 ### Message Routing
 
