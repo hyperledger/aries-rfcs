@@ -1,8 +1,10 @@
-# Title (Ex. 0000: Template)
+# 0036: Issue Credential
+
 - Author: Nikita Khateev
 - Start Date: 2019-01-30
 
 ## Status
+
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
 - Status Date: 2019-05-28
 - Status Note: This supersedes the Issue Credential part of [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md). See [Aries RFC 0037](../0037-present-proof) for the presentation part of the same Indy HIPE PR.
@@ -13,7 +15,7 @@ Formalization and generalization of existing message formats used for issuing a 
 
 ## Motivation
 
-We need to define standard protocols for credential issuance.
+We need a standard protocol for issuing credentials.
 
 ## Tutorial
 
@@ -24,15 +26,15 @@ The Issue Credential protocol consists of these messages:
 * Request Credential - Prover to Issuer
 * Issue Credential - Issuer to Prover
 
-In addition, the [ack](#) and [problem report](#) messages are adopted into the protocol for confirmation and error handling.
+In addition, the [ack](../../concepts/0015-acks) and [problem report](#) messages are adopted into the protocol for confirmation and error handling.
 
 #### Choreography Diagram:
 
 ![issuance](credential-issuance.png)
 
-#### Credential Proposal
+#### Propose Credential
 
-This optional message is sent by the Prover to the Issuer to initiate credential issuance or in response to a Credential Offer when the Prover wants some fixes or changes to the credential data offered by Issuer. In Hyperledger Indy, where the Request Credential message can **only** be sent in response to an Offer Credential message, the Propose Credential message must be used by the Prover to initiate the protocol. Schema:
+An optional message sent by the Prover to the Issuer to initiate the protocol or in response to a `offer-credential` message when the Prover wants some adjustments made to the credential data offered by Issuer. In Hyperledger Indy, where the `request-credential` message can **only** be sent in response to an `offer-credential` message, the `propose-credential` message must be used if the Prover wants to initiate the protocol. Schema:
 
 ```json
 {
@@ -54,7 +56,7 @@ Description of attributes:
 
 #### Offer Credential
 
-This message is sent by the Issuer to the Prover to initiate credential issuance when required by the Credential flow. In Hyperledger Indy, this message is required. Schema:
+A message sent by the Issuer to the Prover to initiate the protocol when required by the Credential flow. In Hyperledger Indy, this message is required. In credential implementations where this message is optional, an Issuer can use the message to negotiate the issuing following receipt of a `request-credential` message. Schema:
 
 ```json
 {
@@ -92,7 +94,7 @@ Description of fields:
 
 #### Request Credential
 
-This message is sent by the Prover to the Issuer to request the issuance of a Credential. Where supported by the Credential implementation, this message initiates the protocol. In Hyperledger Indy, this message can only be sent in response to an Offer Credential message. Schema:
+A message sent by the Prover to the Issuer to request the issuance of a Credential. Where supported by the Credential implementation, this message initiates the protocol. In Hyperledger Indy, this message can only be sent in response to an Offer Credential message. Schema:
 
 ```json
 {
@@ -183,7 +185,7 @@ This is not a message but an inner object for other messages in this protocol. I
 }
 ```
 
-The main field here is `attributes`. It is an array of objects with three fields in it:
+The main element is `attributes`. It is an array of objects with three fields in it:
 
 * `name` -- string with attribute name;
 * `mime-type` -- type of attribute
