@@ -3,7 +3,7 @@
 - Start Date: 2018-11-30
 
 ## Status
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
+- Status: [PROPOSED](/README.md#rfc-lifecycle)
 - Status Date: 2019-04-01
 - Status Note: Broadly socialized within the Indy community,
   and used in some of the other RFCs. Not yet implemented
