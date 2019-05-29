@@ -1,0 +1,7 @@
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0/proposal",
+  "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
+  "to": {
+    "name": "Bob"
+  }
+}
