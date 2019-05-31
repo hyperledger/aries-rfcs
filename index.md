@@ -9,6 +9,16 @@
 * [0015: acks](concepts/0015-acks/README.md)
 * [0021: didcomm-message-anatomy](concepts/0021-didcomm-message-anatomy/README.md)
 * [0028: introduce](features/0028-introduce/README.md)
+* [0029: message-trust-contexts](concepts/0029-message-trust-contexts/README.md)
+* [0030: sync-connection](features/0030-sync-connection/README.md)
+* [0032: message-timing](features/0032-message-timing/README.md)
+* [0034: message-tracing](features/0034-message-tracing/README.md)
+* [0035: report-problem](features/0035-report-problem/README.md)
+* [0036: issue-credential](features/0036-issue-credential/README.md)
+* [0037: present-proof](features/0037-present-proof/README.md)
+* [0042: lox](features/0042-lox/README.md)
+* [0043: l10n](features/0043-l10n/README.md)
+* [0044: didcomm-file-and-mime-types](features/0044-didcomm-file-and-mime-types/README.md)
 
 ## Status: ACCEPTED
 * [0003: protocols](concepts/0003-protocols/README.md)
