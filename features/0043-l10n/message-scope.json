@@ -1,0 +1,9 @@
+{
+  "@type": "did:example:12345...;spec/rendezvous/1.0/meeting_proposal",
+  "~l10n": { "locales": {"en": ["note", "fallback_plan"]}},
+  "proposed_location": "1010 Imaginary Street, Sydney, Nova Scotia, B2A 3L7",
+  "note": "Let's have a picnic.",
+  "note~l10n": { "fr": "Faisons un pique-nique." },
+  "fallback_plan": "Call me on my cell phone.",
+  "fallback_plan~l10n": { "fr": "S'il vous plaît appelez-moi sur mon téléphone portable." }
+}
