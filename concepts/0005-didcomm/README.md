@@ -1,4 +1,4 @@
-# 0003: DID Communication
+# 0005: DID Communication
 - Author: Daniel Hardman <daniel.hardman@gmail.com>
 - Start Date: 2018-01-05 (approx, backdated)
 
@@ -56,15 +56,15 @@ to access two key pieces of information:
 * An endpoint (web, email, etc) where messages can be delivered to Bob.
 * The public key that Bob's agent is using in the Alice:Bob relationship.
 
-Now Alice's agent uses its own private key to encrypt the plaintext so only
-Bob's agent can read it, and it arranges delivery to Bob. This "arranging"
-can involve various hops and intermediaries. It can be complex.
+Now Alice's agent uses Bob's public key to encrypt the plaintext so that
+only Bob's agent can read it, adding authentication with its own private key.
+The agent arranges delivery to Bob. This "arranging" can involve various
+hops and intermediaries. It can be complex.
 
-Bob's agent eventually receives and decrypts the message. It knows that
-it came from Alice because her private key contributed to the encryption.
-It prepares its response and routes it back using a reciprocal process
-(plaintext -> lookup endpoint and public key for Alice -> encrypt -> arrange
-delivery).
+Bob's agent eventually receives and decrypts the message, authenticating its
+origin as Alice using her public key. It prepares its response and routes it
+back using a reciprocal process (plaintext -> lookup endpoint and public key
+for Alice -> encrypt with authentication -> arrange delivery).
 </blockquote>
 
 That's it.
