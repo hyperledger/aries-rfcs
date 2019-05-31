@@ -1,0 +1,32 @@
+@startuml
+par2
+User -> Process: Perform secure action
+else
+Process -> Keyring: Get secret
+end
+Keyring --> Process: Access denied - Pending authentication
+Keyring --> User: \nLocked - Authentication Request
+
+User -> Keyring: Authentication Response
+alt success
+Keyring --> Process: secret
+Process --> User: Action successful
+
+User -> Process: Perform secure action #2
+Process -> Keyring: Get another secret
+Keyring --> Process: another secret
+Process --> User: Action #2 successful
+else fail
+par2
+Keyring --> Process: Access Denied
+else
+Keyring --> User: Access Denied
+User -> Keyring: Authentication Response #2
+Keyring --> User: Access Denied
+User -> Keyring: Authentication Response #3
+Keyring --> User: Access Denied
+User -> Keyring: Authentication Response #4
+Keyring --> User: Lockout period. Please wait
+end
+
+@enduml
