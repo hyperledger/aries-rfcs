@@ -1,0 +1,10 @@
+
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/problem-report",
+  "explain": "Unable to route to specified agent",
+  "explain~l10n": {
+    "code": "cant-route-to-agent",
+    "es": "No se puede enrutar este mensaje al agente especificado."
+  }
+}
+
