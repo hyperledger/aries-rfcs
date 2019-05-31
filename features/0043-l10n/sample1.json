@@ -1,0 +1,5 @@
+{
+  "@type": "did:example:12345...;spec/rendezvous/1.0/meeting_proposal",
+  "proposed_location": "1010 Imaginary Street, Sydney, Nova Scotia, B2A 3L7",
+  "note": "Let's have a picnic."
+}
