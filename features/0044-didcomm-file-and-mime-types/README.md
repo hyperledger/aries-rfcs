@@ -12,7 +12,7 @@
   status. This RFC supersedes [Indy HIPE 0026](
   https://github.com/hyperledger/indy-hipe/blob/master/text/0026-agent-file-format/README.md).
 
-![message in envelope](msg-in-envelope.png]
+![message in envelope](msg-in-envelope.png)
 
 ## Summary
 [summary]: #summary
