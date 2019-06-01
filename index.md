@@ -19,6 +19,7 @@
 * [0042: lox](features/0042-lox/README.md)
 * [0043: l10n](features/0043-l10n/README.md)
 * [0044: didcomm-file-and-mime-types](features/0044-didcomm-file-and-mime-types/README.md)
+* [0051: dkms](concepts/0051-dkms/README.md)
 
 ## Status: ACCEPTED
 * [0003: protocols](concepts/0003-protocols/README.md)
@@ -28,6 +29,12 @@
 * [0017: attachments](concepts/0017-attachments/README.md)
 * [0019: encryption-envelope](features/0019-encryption-envelope/README.md)
 * [0020: message-types](concepts/0020-message-types/README.md)
+* [0031: discover-features](features/0031-discover-features/README.md)
+* [0046: mediators-and-relays](concepts/0046-mediators-and-relays/README.md)
+* [0047: json-ld-compatibility](concepts/0047-json-ld-compatibility/README.md)
+* [0048: trust-ping](features/0048-trust-ping/README.md)
+* [0049: repudiation](concepts/0049-repudiation/README.md)
+* [0050: wallets](concepts/0050-wallets/README.md)
 
 ## Status: ADOPTED
 
