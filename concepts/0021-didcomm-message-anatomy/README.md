@@ -38,11 +38,11 @@ This format is when a message is encrypted to a recipient in an anonymous fashio
 2. Authenticated Encrypted format
 This format is when a message is encrypted to a recipient and sender information is included through the use of authenticated encryption. With this format only the true recipient(s) can both decrypt the message and authenticate its content is truly from the sender.
 3. Signed Encrypted format
-This format is when a message is encrypted to the recipient and sender information is included along with a non-reputable signature. In this case the recipient(s) is still the only party that can decrypt the message. However, because the underlying message includes non-reputability, authentication of the decrypted message content can be done by any party who knows the sender.
+This format is when a message is encrypted to the recipient and sender information is included along with a non-repudiable signature. In this case the recipient(s) is still the only party that can decrypt the message. However, because the underlying message includes non-repudiability, authentication of the decrypted message content can be done by any party who knows the sender.
 
 #### 2. Signed Unencrypted
 
-This format is for when the audience of the message is unknown (for example some form of public challenge). This format is signed, so that when a member of the audience receives the message they can authenticate the message with its non-reputable signature.
+This format is for when the audience of the message is unknown (for example some form of public challenge). This format is signed, so that when a member of the audience receives the message they can authenticate the message with its non-repudiable signature.
 
 #### Serialization Format
 
