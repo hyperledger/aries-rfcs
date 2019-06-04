@@ -7,7 +7,8 @@
 - Status Date: 2019-12-26
 - Status Note: Broadly socialized and beginning to be implemented. Several
   protocols assume ACK behavior. May be nearing the maturity and uptake
-  appropriate for ACCEPTED status.
+  appropriate for ACCEPTED status. Note: this RFC supersedes [Indy HIPE
+  PR #77](https://github.com/hyperledger/indy-hipe/pull/77).
 
 ## Summary
 
