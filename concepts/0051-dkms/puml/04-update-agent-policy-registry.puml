@@ -1,0 +1,42 @@
+@startuml
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 15
+skinparam maxmessagesize 100
+skinparam sequence {
+	ArrowColor grey
+	LifeLineBorderColor grey
+	ParticipantBorderColor grey
+	boxbordercolor white
+	ParticipantFontSize 17
+	actorfontsize 17
+	boxfontsize 17
+	boxfontcolor grey
+	ActorBorderColor grey
+	Actorbackgroundcolor white
+}
+
+participant "Agent" as ag
+participant "Ledger" as le
+
+ag -> ag: create policy address commitment
+note right
+    create commitment A<sub>p</sub><sup>1-ac</sup>
+    for policy address  **//P//** and A<sub>p</sub><sup>1-svc</sup>
+end note
+
+ag -> le: send A<sub>p</sub><sup>1-svc</sup> to policy at  **//P//**\n\
+with authorizations and policy updates along with A<sub>p</sub><sup>1-ac</sup>
+note right
+	Authorizations include:
+	PROVE,REVOKE_PROVE,PROVISION_PROVE,ADMIN
+end note
+le -> le: add A<sub>p</sub><sup>1-svc</sup> to policy at  **//P//**\n\
+
+le --> le: add A<sub>p</sub><sup>1-acc</sup> to prover registry
+note right
+    A<sub>p</sub><sup>1-ac</sup> is added to prover registry if it was
+    added to  **//P//** with PROVE authorization.
+end note
+le -> ag: result
+
+@enduml
