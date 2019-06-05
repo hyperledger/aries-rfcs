@@ -66,7 +66,7 @@ A message sent by the Issuer to the Prover to initiate the protocol when require
     "credential_preview": <json-ld object>,
     "offers~attach": [
         {
-            "@id": "cred-offer-0",
+            "@id": "libindy-cred-offer-0",
             "mime-type": "application/json",
             "data": {
                 "base64": "<bytes for base64>"
@@ -103,7 +103,7 @@ A message sent by the Prover to the Issuer to request the issuance of a Credenti
     "comment": "some comment",
     "requests~attach": [
         {
-            "@id": "cred-req-0",
+            "@id": "libindy-cred-req-0",
             "mime-type": "application/json",
             "data": {
                 "base64": "<bytes for base64>"
