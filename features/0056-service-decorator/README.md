@@ -13,32 +13,38 @@ The `~service` decorator describes a DID service endpoint inline to a message.
 
 ## Motivation
 
-This allows messages to self contain endpoint and routing information normally in a DID Document. This comes in handy when DIDs or DID Documents have not been exchanged.
+This allows messages to self contain endpoint and routing information normally found in a DID Document. This comes in handy when DIDs or DID Documents have not been exchanged.
 
 Examples include the Connect Protocol and Challenge Protocols.
 
-The `~service` decorator on a message contains the service definition that you might expect to find in a DID Document. These values function the same way.
+The `~service` decorator on a message extends the service definition that you might expect to find in a DID Document.
 
 ## Tutorial
 
-Usage looks like this, with the contents defined the [Service Endpoint section of the DID Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints):
+Usage looks like this, extending the contents defined in the [Service Endpoint section of the DID Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints):
 
-```json=
+```json
 {
     "@type": "somemessagetype",
     "~service": {
         "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
-        "routingKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"]
-        "serviceEndpoint": "https://example.com/endpoint"
+        "routingKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
+        "serviceEndpoint": "https://example.com/endpoint",
+        "forwardMsgReq": "did:example:aYgjkk34JDJKLJh;service=schema/exampleschema/1.0/exampletype"   # optional
     }
 }
 ```
 
+`forwardMsgReq` is optional and its value is a URI for a schema:
 
+* The inclusion of `forwardMsgReq` signals to the Sender that `forwardMsg` is required on the *Forward* message in order for the message to reach the Recipient.
+* There are no restrictions on the language used to describe the schema so long as both parties (sender, router) understand it.
+
+The combination of `forwardMsgReq` and `forwardMsg` enable more sofisticated gatekeeping as described in [Indy HIPE 0022 - Cross Domain Messaging](https://github.com/hyperledger/indy-hipe/tree/master/text/0022-cross-domain-messaging).
 
 ## Reference
 
-The contents of the `~service` decorator are defined by the  [Service Endpoint section of the DID Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints).
+The base contents of the `~service` decorator are defined by the  [Service Endpoint section of the DID Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints).
 
 The decorator should not be used when the message recipient already has a service endpoint. 
 
