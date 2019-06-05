@@ -25,11 +25,11 @@ The present proof protocol consists of these messages:
 * Request Proof - Verifier to Prover
 * Present Proof - Prover to Verifier
 
-In addition, the [ack](../../concepts/0015-acks) and [problem report](#) messages are adopted into the protocol for confirmation and error handling.
+In addition, the [ack](../../features/0015-acks) and [report problem](../0035-report-problem) messages are adopted into the protocol for confirmation and error handling.
 
 #### Choreography Diagram:
 
-![issuance](present-proof.png)
+![present proof](present-proof.png)
 
 #### Propose Presentation
 
