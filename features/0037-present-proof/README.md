@@ -60,9 +60,9 @@ Request presentation is a message from a verifier to a prover that describes val
     "comment": "some comment",
     "request_presentations~attach": [
         {
-            "nickname": "libindy-request-presentation",
+            "@id": "libindy-request-presentation-0",
             "mime-type": "application/json",
-            "content":  {
+            "data":  {
                 "base64": "<bytes for base64>"
             }
         }
@@ -102,9 +102,9 @@ This message is a response to a Presentation Request message and contains signed
     "comment": "some comment",
     "presentations~attach": [
         {
-            "nickname": "libindy-presentation",
+            "@id": "libindy-presentation-0",
             "mime-type": "application/json",
-            "content": {
+            "data": {
                 "base64": "<bytes for base64>"
             }
         },
