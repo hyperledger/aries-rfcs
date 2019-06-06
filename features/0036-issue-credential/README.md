@@ -26,7 +26,7 @@ The Issue Credential protocol consists of these messages:
 * Request Credential - Prover to Issuer
 * Issue Credential - Issuer to Prover
 
-In addition, the [ack](../../concepts/0015-acks) and [problem report](#) messages are adopted into the protocol for confirmation and error handling.
+In addition, the [ack](../../concepts/0015-acks) and [report problem](../0035-report-problem) messages are adopted into the protocol for confirmation and error handling.
 
 #### Choreography Diagram:
 
@@ -66,9 +66,9 @@ A message sent by the Issuer to the Prover to initiate the protocol when require
     "credential_preview": <json-ld object>,
     "offers~attach": [
         {
-            "nickname": "libindy-offer",
+            "@id": "libindy-cred-offer-0",
             "mime-type": "application/json",
-            "content": {
+            "data": {
                 "base64": "<bytes for base64>"
             }
         }
@@ -79,7 +79,7 @@ A message sent by the Issuer to the Prover to initiate the protocol when require
 Description of fields:
 
 * `comment` -- a field that provides some human readable information about this Credential Offer;
-* `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview_credential);
+* `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview-credential);
 * `offers~attach` -- an array of attachments defining the offered formats for the credential.
   * For Indy, the attachment contains data from libindy about the credential offer, base64 encoded. The following JSON is an example of the `libindy-offer` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
 
@@ -103,9 +103,9 @@ A message sent by the Prover to the Issuer to request the issuance of a Credenti
     "comment": "some comment",
     "requests~attach": [
         {
-            "nickname": "libindy_cred_req",
+            "@id": "libindy-cred-req-0",
             "mime-type": "application/json",
-            "content": {
+            "data": {
                 "base64": "<bytes for base64>"
             }
         },
@@ -140,9 +140,9 @@ This message contains the credentials being issued and is sent in response to a 
     "comment": "some comment",
     "credentials~attach": [
         {
-            "nickname": "libindy-cred",
+            "@id": "libindy-cred-0",
             "mime-type": "application/json",
-            "content": {
+            "data": {
                 "base64": "<bytes for base64>"  
             }
         }

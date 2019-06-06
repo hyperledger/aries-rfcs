@@ -25,11 +25,11 @@ The present proof protocol consists of these messages:
 * Request Proof - Verifier to Prover
 * Present Proof - Prover to Verifier
 
-In addition, the [ack](../../concepts/0015-acks) and [problem report](#) messages are adopted into the protocol for confirmation and error handling.
+In addition, the [ack](../../features/0015-acks) and [report problem](../0035-report-problem) messages are adopted into the protocol for confirmation and error handling.
 
 #### Choreography Diagram:
 
-![issuance](present-proof.png)
+![present proof](present-proof.png)
 
 #### Propose Presentation
 
@@ -60,9 +60,9 @@ Request presentation is a message from a verifier to a prover that describes val
     "comment": "some comment",
     "request_presentations~attach": [
         {
-            "nickname": "libindy-request-presentation",
+            "@id": "libindy-request-presentation-0",
             "mime-type": "application/json",
-            "content":  {
+            "data":  {
                 "base64": "<bytes for base64>"
             }
         }
@@ -102,9 +102,9 @@ This message is a response to a Presentation Request message and contains signed
     "comment": "some comment",
     "presentations~attach": [
         {
-            "nickname": "libindy-presentation",
+            "@id": "libindy-presentation-0",
             "mime-type": "application/json",
-            "content": {
+            "data": {
                 "base64": "<bytes for base64>"
             }
         },

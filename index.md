@@ -6,8 +6,9 @@
 * [0005: didcomm](concepts/0005-didcomm/README.md)
 * [0011: decorators](concepts/0011-decorators/README.md)
 * [0013: overlays](concepts/0013-overlays/README.md)
-* [0015: acks](concepts/0015-acks/README.md)
+* [0015: acks](features/0015-acks/README.md)
 * [0021: didcomm-message-anatomy](concepts/0021-didcomm-message-anatomy/README.md)
+* [0025: didcomms-transports](features/0025-didcomms-transports/README.md)
 * [0028: introduce](features/0028-introduce/README.md)
 * [0029: message-trust-contexts](concepts/0029-message-trust-contexts/README.md)
 * [0030: sync-connection](features/0030-sync-connection/README.md)
@@ -20,6 +21,7 @@
 * [0043: l10n](features/0043-l10n/README.md)
 * [0044: didcomm-file-and-mime-types](features/0044-didcomm-file-and-mime-types/README.md)
 * [0051: dkms](concepts/0051-dkms/README.md)
+* [0056: service-decorator](features/0056-service-decorator/README.md)
 
 ## Status: ACCEPTED
 * [0003: protocols](concepts/0003-protocols/README.md)

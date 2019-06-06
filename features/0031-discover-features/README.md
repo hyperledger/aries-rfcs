@@ -27,13 +27,13 @@ supported by one another's agents. They need a way to find out.
 
 This RFC introduces a protocol for discussing the protocols an agent
 can handle. The identifier for the message family used by this protocol is
-`protocol-discovery`, and the fully qualified URI for its definition is:
+`discover-features`, and the fully qualified URI for its definition is:
 
     did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0
     
 ### Roles
 
-There are two roles in the `protocol-discovery` protocol: `requester` and
+There are two roles in the `discover-features` protocol: `requester` and
 `responder`. The requester asks the responder about the protocols it
 supports, and the responder answers. Each role uses a single message type.
 
@@ -109,18 +109,18 @@ protocols that match your query." An agent might not tell another that
 it supports a protocol for various reasons, including: the trust that
 it imputes to the other party based on cumulative interactions so far,
 whether it's in the middle of upgrading a plugin, whether it's currently
-under high load, and so forth. And responses to a `protocol-discovery` request are
+under high load, and so forth. And responses to a `discover-features` request are
 not guaranteed to be true forever; agents can be upgraded or downgraded,
 although they probably won't churn in their protocol support from moment
 to moment.
 
 ### Privacy Considerations
 
-Because the regex in a `request` message can be very inclusive, the `protocol-discovery`
+Because the regex in a `request` message can be very inclusive, the `discover-features`
 protocol could be used to mine information suitable for agent fingerprinting,
 in much the same way that browser fingerprinting works. This is antithetical
 to the ethos of our ecosystem, and represents bad behavior. Agents should
-use `protocol-discovery` to answer legitimate questions, and not to build detailed
+use `discover-features` to answer legitimate questions, and not to build detailed
 profiles of one another. However, fingerprinting may be attempted
 anyway.
 
@@ -182,10 +182,10 @@ As shown in the above `~l10n` decorator, all agents using this protocol have
 [a simple message catalog](catalog.json) in scope. This allows agents to
 send [`problem-report`s](
 https://github.com/hyperledger/indy-hipe/blob/6a5e4fe2/text/error-handling/README.md#the-problem-report-message-type
-) to complain about something related to `protocol-discovery` issues.
+) to complain about something related to `discover-features` issues.
 The catalog looks like this:
 
-[![error catalog for protocol-discovery protocol](catalog.png)](catalog.json)
+[![error catalog for discover-features protocol](catalog.png)](catalog.json)
 
 For more information, see the [localization
 RFC](https://github.com/hyperledger/indy-hipe/blob/569357c6/text/localized-messages/README.md).
