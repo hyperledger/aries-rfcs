@@ -92,6 +92,8 @@ Description of fields:
 }
 ```
 
+This message may have payment request decorator, see [payment section below](#payments-while-credential-exchange)
+
 #### Request Credential
 
 A message sent by the Prover to the Issuer to request the issuance of a Credential. Where supported by the Credential implementation, this message initiates the protocol. In Hyperledger Indy, this message can only be sent in response to an Offer Credential message. Schema:
@@ -128,6 +130,8 @@ Description of Fields:
   "nonce": string
 }
 ```
+
+This message may have payment confirmation decorator, see [payment section below](#payments-while-credential-exchange)
 
 #### Issue Credential
 
@@ -196,6 +200,49 @@ The main element is `attributes`. It is an array of objects with three fields in
 Threading can be used to initiate a sub-protocol during an issue credential protocol instance. For example, during credential issuance, the Issuer may initiate a child thread to execute the `Present Proof` sub-protocol to have the Prover prove attributes about themselves before issuing the credential.
 
 Details about threading can be found in the [message id and threading](../../concepts/0008-message-id-and-threading/README.md) RFC.
+
+## Payments while credential exchange
+
+There is a high probability that some networks would like to use some implementation of utility token for balance in ecosystem. The value flow already presents while CX but it looks one way for simple case: issuer gives value to hodler (credential which can be used by holder for his needs) but doesn’t receive anything back. To resolve this case some utility token may be charged by Issuer from Holder per credential. In general different token flows are possible. Like a holder may provide proof to verifier for some data analysis or other Verifier’s need and in this case Verifier may pay some tokens to Holder.
+So both processes described in this RFC (issuance) and [presentation](../0037-present-proof/README.md) may be tied with tokens exchange.
+Also there is a good chance that token flow may be combined with other message flows, so it may be considered as decorator. This decorator is optional.
+
+### Payment decorators
+
+These decorators are expected to be specific for network and they are out of subject of this RFC.
+There is a proposal for the decorators in [Indy ecosystem](https://github.com/hyperledger/indy-hipe/pull/129).
+
+#### Payment request
+
+```json
+{
+  ...msg...
+  "~payment-info" : {
+    "@type": ".../payment/request",
+    "price": ""
+  }
+}
+
+```
+
+#### Payment confirmation
+```json
+{
+  ...msg...
+  "~payment-info" : {
+    "@type": ".../payment/receipt",
+    "receipt(s)": ""
+  }
+}
+```
+
+### Payment flow
+Payment request may be included to Credential Offer msg from Issuer to Holder. And receipt should be provided in this case in Credential Request by Issuer.
+While credential presentation the Verifier may transfer tokens as compensation for Holder for disclosing data. Payment receipt should be included into Presentation Request. Verifier may skip it in first request, but in this case Holder may request payment by sending back Presentation Proposal with appropriate decorator inside it.
+
+### Limitations
+Smart contracts may be missed in ecosystem, so operation "issue credential after payment received" is not atomic. It’s possible case that malicious issuer will charge tokens first and then will not issue credential in fact. But this situation should be easily detected and appropriate penalty should be applied in such type of networks.
+
 
 ## Negotiation and Preview
 
