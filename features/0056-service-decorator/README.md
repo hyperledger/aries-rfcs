@@ -40,7 +40,7 @@ Usage looks like this, extending the contents defined in the [Service Endpoint s
 * The inclusion of `forwardMsgReq` signals to the Sender that `forwardMsg` is required on the *Forward* message in order for the message to reach the Recipient.
 * There are no restrictions on the language used to describe the schema so long as both parties (sender, router) understand it.
 
-The combination of `forwardMsgReq` and `forwardMsg` enable more sofisticated gatekeeping as described in [Indy HIPE 0022 - Cross Domain Messaging](https://github.com/hyperledger/indy-hipe/tree/master/text/0022-cross-domain-messaging).
+The combination of `forwardMsgReq` and `forwardMsg` enable more sophisticated gatekeeping as described in [Indy HIPE 0022 - Cross Domain Messaging](https://github.com/hyperledger/indy-hipe/tree/master/text/0022-cross-domain-messaging).
 
 ## Reference
 
