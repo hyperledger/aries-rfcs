@@ -14,9 +14,7 @@ the RFC is currently fodder for discussion and is not normative yet.
 
 Identifies some conventions that are generally accepted
 as best practice by developers of DIDComm software. Explains
-their rationale.
-
-This document is explanatory, not normative.
+their rationale. This document is a recommendation, not normative.
 
 ## Motivation
 
@@ -28,7 +26,7 @@ don't want framework police trying to enforce rigid paradigms.
 However, some best practices are worth documenting. There is tribal
 knowledge in the community that represents battle scars. Collaboration
 is fostered if learning curves don't have to proliferate. Therefore,
-we offer the following guidelines as recommendations.
+we offer the following guidelines.
 
 ## Tutorial
 
@@ -47,7 +45,7 @@ https://codecraft.co/2012/08/28/good-code-is-named-right/).
 * Be consistent.
 
 These are so common-sense that we won't argue them. But a few other
-points are worthy of comment:
+points are worthy of comment.
 
 #### snake_case and variants
 
@@ -58,10 +56,10 @@ to avoid a religious debate about these conventions, and we want to leave
 developers the freedom to choose their own styles. However, we also want
 to avoid random variation that makes it hard to predict the correct form.
 Therefore, we try to stay idiomatic in the language we're using, and many of our
-tokens are defined to compare case-insensitive with
-punctuation omitted. This is the case with protocol names and message type names,
+tokens are defined to compare case-insensitive with punctuation omitted, so
+the differences melt away. This is the case with protocol names and message type names,
 for example; it means that you should interpret "TicTacToe" and "tic-tac-toe" and
-"ticTacToe" as being the same protocol. If you are writing a java class for it,
+"ticTacToe" as being the same protocol. If you are writing a java function for it,
 by all means use "ticTacToe"; if you are writing CSS, by all means use "tic-tac-toe".
 
 The community tries to use `snake_case` in JSON key names, even though camelCase is
@@ -135,7 +133,7 @@ Many loosely typed programming languages conflate the concept of an associative 
 with the concept of object. In python, for example, an object is just a `dict` with some syntactic
 sugar, and python's JSON serialization handles the two interchangeably when serializing.
 
-This makes it tempting to do the same thing in JSON. An example of doing the wrong thing:
+This makes it tempting to do the same thing in JSON. An unhappy example:
 
 ```JSON
 {
@@ -347,8 +345,8 @@ For advanced use cases, it may be necessary to understand subtleties like [Unico
 normalization forms and canonical equivalence](https://unicode.org/reports/tr15/).
 We generally assume that we can compare strings for equality and sort order using a
 simple binary algorithm. This is approximately but (in some corner cases) not exactly
-the same as assuming that text is in NFC normalization form with no fancy
-sorting expectations and no extraneous surrogate pairs. Where more precision is
+the same as assuming that text is in NFC normalization form with no case
+folding expectations and no extraneous surrogate pairs. Where more precision is
 required, the definition of DIDComm message fields should provide it.
 
 ## Reference
