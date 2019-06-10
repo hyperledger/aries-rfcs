@@ -97,8 +97,13 @@ whereupon the player transitions to the `done` state.
 
 All messages in this protocol are part of the "tictactoe 1.0" message
 family uniquely identified by this DID reference: `did:sov:SLfEi9esrjzybysFxQZbfq;spec/tictactoe/1.0`
+
+    NOTE 1: All the messages defined in a protocol should follow
+    [DIDComm Best Practices](../../concepts/0072-didcomm-best-practices/README.md)
+    as far as how they name fields and define their data types and
+    semantics.
     
-    About the "DID Reference" URI that appears here: DIDs can be resolved
+    NOTE 2: About the "DID Reference" URI that appears here: DIDs can be resolved
     to a DID doc that contains an endpoint, to which everything after a
     semicolon can be appended. Thus, if this DID is publicly registered
     and its DID doc gives an endpoint of http://example.com, this URI
