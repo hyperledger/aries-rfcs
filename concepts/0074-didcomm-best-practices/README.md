@@ -1,4 +1,4 @@
-# 00xx: DIDComm Best Practices
+# 0074: DIDComm Best Practices
 - Authors: Devin Fisher, Daniel Hardman
 - Start Date: 2019-01-15
 

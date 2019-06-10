@@ -100,8 +100,8 @@ family uniquely identified by this DID reference: `did:sov:SLfEi9esrjzybysFxQZbf
 
 <blockquote>
 <em>NOTE 1</em>: All the messages defined in a protocol should follow
-<a target="_blank" href="../../concepts/0072-didcomm-best-practices/README.md">
-DIDComm best practices</a>as far as how they name fields and define their data types and
+<a target="_blank" href="../../concepts/0074-didcomm-best-practices/README.md">
+DIDComm best practices</a> as far as how they name fields and define their data types and
 semantics.
 </blockquote>
 
