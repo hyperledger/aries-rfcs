@@ -11,18 +11,16 @@ https://github.com/hyperledger/indy-hipe/pull/129).
 ## Summary
 [summary]: #summary
 
-Defines the `~payment_request` and `~payment_receipt` decorators, which offer standard
-payment features in all DIDComm interactions. The `~payment_request` decorator lets
-DIDComm take advantage of the [W3C's Payment Request API]( https://www.w3.org/TR/payment-request)
-in an interoperable way.
+Defines the `~payment_request`, `payment_internal_response`, and `~payment_receipt` decorators.
+These offer standard payment features in all DIDComm interactions, and let DIDComm take advantage
+of the [W3C's Payment Request API]( https://www.w3.org/TR/payment-request) in an interoperable way.
 
 ## Motivation
 [motivation]: #motivation
 
 Instead of inventing custom messages for payments in each protocol, arbitrary messages
-can express payment semantics with `~payment_request` and `~payment_receipt`
-decorators. Individual protocol specs should clarify on which messages and under which
-conditions the decorators are used.
+can express payment semantics with payment decorators. Individual protocol specs should
+clarify on which messages and under which conditions the decorators are used.
 
 ## Tutorial
 
@@ -36,153 +34,257 @@ between three parties:
 The payer is usually imagined to be a person operating a web browser,
 the payee is imagined to be an online store, and the payment method might be something like
 a credit card processing service. The payee emits a [PaymentRequest](
- https://www.w3.org/TR/payment-request/#paymentrequest-interface) JSON structure; this
-causes the payee to be prompted. The payer decides whether to pay, and if so, which payment
-method and options she prefers. The payer's choices are embodied in a [PaymentResponse](
+https://www.w3.org/TR/payment-request/#paymentrequest-interface) JSON structure (step 1
+below); this causes the payee to be prompted (step 2, "Render"). The payer decides
+whether to pay, and if so, which payment method and options she prefers (step 3, "Configure").
+The payer's choices are embodied in a [PaymentResponse](
 https://www.w3.org/TR/payment-request/#paymentresponse-interface)
-JSON structure. This is then used to select the appropriate codepath and inputs to
-invoke the desired payment method.
+JSON structure (step 4). This is then used to select the appropriate codepath and inputs to
+invoke the desired payment method (step 5).
 
 [![API flow](payment-request-api-flow.png)](payment-request-api-flow.puml)
 
-Notice that this flow does not include anything coming back to the payer. The PaymentResponse
-is a response from the payer to the payer's own agent, embodying choices about which credit
-card to use and which shipping options are desired; it's not a response that crosses identity
-boundaries. That's reasonable because this is the Payment __Request__ API, not a Payment
-Roundtrip API. It's only about requesting payments, not completing payments or reporting
-results. Also, each payment method will have unique APIs for fulfillment and receipts; the
-W3C spec does not attempt to harmonize them.
+Notice that this flow does not include anything coming back to the payer. In this API,
+the PaymentResponse structure embodies a response from the payer to the payer's own agent,
+expressing choices about which credit card to use and which shipping options are desired;
+it's not a response that crosses identity boundaries. That's reasonable because this is
+the Payment __Request__ API, not a Payment Roundtrip API. It's only about requesting
+payments, not completing payments or reporting results. Also, each payment method will
+have unique APIs for fulfillment and receipts; the W3C Payment Request spec does not
+attempt to harmonize them, though some work in that direction is underway in the
+separate [Payment Handler API](https://www.w3.org/TR/payment-handler/) spec.
 
-In DIDComm, the major emphasis is on interactions between parties with different identities.
-Thus the PaymentRequest going from payer to payee overlaps with DIDComm's focus, but
-the PaymentResponse moving
-payee and the payer both hold DIDs to interact over a secure channel,
-and are both using [agents](../../concepts/0004-agents/README.md) to do the low-level
-interacting.
+In DIDComm, the normal emphasis is on interactions between parties with different identities.
+This makes PaymentResponse and the communication that elicits it (steps 2-4) a bit
+unusual from a DIDComm perspective; normally DIDComm would use the word "response"
+for something that comes back from Bob, after Alice asks Bob a question. It also makes
+the scope of the W3C API feel incomplete, because we'd like to be able to model
+the entire flow, not just part of it.
 
-The _payer_:_payment method_ interaction that actually transfers funds _might_ be DIDComm
-as well, but since there are many existing payment methods that don't use DIDComm, we will
-not assume that in this version of the spec. In the interaction between payer and payee,
-how the payment is actually consummated is not nearly as interesting as knowing with
-confidence that the payment has been made. Thus, we will leave the _payer_:_payment method_
-interaction out of scope, and allow payment consummation to be solved in whatever way
-suits the circumstances.
+The DIDComm payment decorators map to the W3C API as follows:
 
-This leaves us with the need to represent the W3C's PaymentRequest data structure
+* DIDComm's `payment_request` decorator is exactly equivalent to the JSON representation
+of PaymentRequest in the W3C API, including all internal fields and semantics, and the
+use of camelCase.
+* DIDComm's `payment_internal_response` decorator is exactly equivalent to the JSON
+representation of PaymentResponse in the W3C API. However, we never expect it to appear
+on messages that cross a sovereign domain boundary. It is only relevant if Alice has
+two agents that want to confer about Alice's choices in responding to a `payment_request`,
+and is thus not relevant to interoperability. However, it is defined so internal
+conversations about Alice's choices may leverage a standard mechanism, if they like.
+* DIDComm's `payment_receipt` decorator has no analog in the W3C spec, because it
+encapsulates proof from payer to payee, that payment has actually taken place.
+* Neither DIDComm nor the W3C spec define messages for the interaction between payer
+and payment method handler. Rather, both allow this communication to be proprietary.
+At a future date, perhaps standardization will happen here.
+
+## Reference
 
 ### `~payment_request`
 
-A sample `~payment_request decorator might look like this:
+Please see the [PaymentRequest interface docs in the W3C spec](
+https://www.w3.org/TR/payment-request/#paymentrequest-interface) for a full
+reference, or [Section 2, Examples of Usage](https://www.w3.org/TR/payment-request/#examples-of-usage)
+in the W3C spec for a narration that builds a PaymentRequest
+from first principles.
 
-```json=
-{
-  "~payment_request": {
-    "methodData": [ ... ],
-    "details": {
-      id: "super-store-order-123-12312",
-      displayItems: [
-        {
-          label: "Sub-total",
-          amount: { currency: "USD", value: "55.00" },
-        },
-        {
-          label: "Sales Tax",
-          amount: { currency: "USD", value: "5.00" },
-          type: "tax"
-        },
-      ],
-      total: {
-        label: "Total due",
-        // The total is USD$65.00 here because we need to
-        // add shipping (below). The selected shipping
-        // costs USD$5.00.
-         amount: { currency: "USD", value: "65.00" },
-      },
-    }
-      "@id": "xyz", //functions like a purchase order number
-      "method": "sovrin",
-      "unit": "tokens",
-      "amount": "0.2", //or int? look at token work
-      "recipient": "<address>"
-  }
-}
-```
-The `~payment_request` decorator is a list of payment structures. When multiple options are
-present, they represent multiple payment options for the same thing.
-
-The decorator can be applied at any level of a message, allowing a single message to indicate
-payment methods for different things.
-
-**method**:  which payment method is requested.
-
-**unit**: Unit applied to the `amount` attribute. Unit will relate to the payment method.
-
-**amount**: amount being requested.
-
-**recipient**: payment address when payment is made.
-
-#### Potential future attributes
-
-- non-required payments (required =  false)
-- multiple payments at once options (_and_ instead of _or_)
-- expiration (date in request, date in receipt somehow, maybe use the timing decorator)
-
-### `~payment_receipt`
-
-This decorator on a message indicates that a payment has been made.
-
-```json=
-{
-  "~payment_receipt": [{
-      "related_requests": ["xyz"],
-      "method": "sovrin",
-      "amount": 0.2,
-      "receipt": "",
-      "recipient": "<address>",
-      "extra": "?"
-  }]
-}
-```
-
-**related_requests**: This contains the `@id`s of `~payment_requests` that this payment receipt satisfies.
-
-**receipt**: String which identifies payment for verification.
-
-**extra**: Contains extra information about the payment made.
-
-#### Notes
-
-- Proof of payment could be a stronger form of receipt.
-
-## Tutorial
-
-[tutorial]: #tutorial
-
-These decorators can be incorporated into messages as appropriate. Each protocol that uses
-these decorators must designate which messages they may be used in and where in the state/sequence
-they appear. If these decorators appear in a message where they are not expected, they should be
-ignored.
-
-Here are some examples from Credential Exchange HIPE. Note that unrelated attributes have been
-removed from the examples. There are two messages within the Credential Exchange message family where
-payment decorators are appropriate: `credential-offer` and `credential-request`.
-
-#### Example Credential Offer
-
-This message is sent by the issuer. The payment request indicates that payment requested for this offered credential.
+The following is a sample `~payment_request` decorator with some
+interesting details to suggest what's possible:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/credential-issuance/1.0/credential-offer",
-    "@id": "<uuid-offer>",
+  "~payment_request": {
+    "methodData": [
+      {
+        "supportedMethods": "basic-card",
+        "data": {
+          "supportedNetworks": ["visa", "mastercard"],
+          "payeeId": "12345"
+        },
+      },
+      {
+        "supportedMethods": "sovrin",
+        "data": {
+          "supportedNetworks": ["sov", "sov:test", "ibm-indy"],
+          "payeeId": "XXXX"
+        },
+      }
+    ],
+    "details": {
+      "id": "super-store-order-123-12312",
+      "displayItems": [
+        {
+          "label": "Sub-total",
+          "amount": { "currency": "USD", "value": "55.00" },
+        },
+        {
+          "label": "Sales Tax",
+          "amount": { "currency": "USD", "value": "5.00" },
+          "type": "tax"
+        },
+      ],
+      "total": {
+        "label": "Total due",
+        // The total is USD$65.00 here because we need to
+        // add shipping (below). The selected shipping
+        // costs USD$5.00.
+        "amount": { "currency": "USD", "value": "65.00" }
+      },
+      "shippingOptions": [
+        {
+          "id": "standard",
+          "label": "Ground Shipping (2 days)",
+          "amount": { "currency": "USD", "value": "5.00" },
+          "selected": true,
+        },
+        {
+          "id": "drone",
+          "label": "Drone Express (2 hours)",
+          "amount": { "currency": "USD", "value": "25.00" }
+        }
+      ],
+      "modifiers": [
+        {
+          "additionalDisplayItems": [{
+            "label": "Card processing fee",
+            "amount": { "currency": "USD", "value": "3.00" },
+          }],
+          "supportedMethods": "basic-card",
+          "total": {
+            "label": "Total due",
+            "amount": { "currency": "USD", "value": "68.00" },
+          },
+          "data": {
+            "supportedNetworks": ["visa"],
+          },
+        },
+        {
+          "supportedMethods": "sovrin",
+          "total": {
+            "label": "Total due",
+            "amount": { "currency": "SOV", "value": "2254" },
+          },
+        },
+      ]
+    },
+    "options": {
+      "requestPayerEmail": false,
+      "requestPayerName": true,
+      "requestPayerPhone": false,
+      "requestShipping": true
+    }
+  }
+}
+```
+
+The `details.id` field contains an invoice number, shopping cart ID, or similar
+identifier that unambiguously identifies the goods and services for which payment
+is requested. The `payeeId` field would contain a payment address for cryptocurrency
+payment methods, or a merchant ID for credit cards. The `modifiers` section shows
+how the requested payment amount should be modified if the `basic-card` method
+is selected. That specific example is discussed in greater detail in the W3C spec.
+It also shows how the currency could be changed if a token-based method is selected
+instead of a fiat-based method. See the separate [W3C spec on Payment Method IDs](
+https://www.w3.org/TR/payment-method-id).
+
+Note that [standard DIDComm localization](../../features/0043-l10n/README.md) can be used
+to provide localized alternatives to the `label` fields; this is a DIDComm-specific
+extension.
+
+This example shows `options` where the payee is requesting self-attested
+data from the payer. DIDComm offers the option of replacing this simple approach with
+a sophisticated presentation request based on verifiable credentials. The simple approach
+is fine where self-attested data is enough; the VC approach is useful when assurance
+of the data must be higher (e.g., a verified email address), or where fancy logic about
+what's required (Name plus either Email or Phone) is needed.
+
+The DIDComm `payment_request` decorator may be combined with the `~timing.expires_time`
+decorator to express the idea that the payment must be made within a certain time
+period or else the price or availability of merchandise is not guaranteed.
+
+### `~payment_internal_response`
+
+This decorator exactly matches [PaymentResponse](
+https://www.w3.org/TR/payment-request/#paymentresponse-interface) from the W3C
+API and will not be further described here. A useful example of a response
+is given in the [related Basic Card Response doc](
+https://www.w3.org/TR/payment-method-basic-card/#dom-basiccardresponse).
+
+### `~payment_receipt`
+
+This decorator on a message indicates that a payment has been made. It looks like
+this (note the snake_case since we are not matching a W3C spec):
+
+```json
+{
+  "~payment_receipt": {
+      "request_id": "super-store-order-123-12312",
+      "selected_method": "sovrin",
+      "selected_shippingOption": "standard",
+      "transaction_id": "abc123",
+      "proof": "directly verifiable proof of payment",
+      "payeeId": "XXXX",
+      "amount": { "currency": "SOV", "value": "2254" }
+  }
+}
+```
+
+**request_id**: This contains the `details.id` of `~payment_request` that this payment receipt satisfies.
+
+**selected_method**: Which payment method was chosen to pay.
+
+**selected_shippingOption**: Which shipping option was chosen.
+
+**transaction_id**: A transaction identifier that can be checked by the payee to verify that funds were transferred,
+and that the transfer relates to this payment request instead of another. This might be a ledger's transaction ID,
+for example.
+
+**proof**: Optional. A base64-encoded blob that contains directly verifiable proof that the
+transaction took place. This might be useful for payments enacted by a [triple-signed receipt](
+http://opentransactions.org/wiki/index.php/Triple-Signed_Receipts)
+mechanism, for example. When this is present, `transaction_id` becomes optional. For ledgers
+that support state proofs, the state proof could be offered here.
+
+### Example
+
+Here is a rough description of how these decorators might be used in a [protocol to issue
+credentials](../../features/0036-issue-credential/README.md). We are not guaranteeing that
+the message details will remain up-to-date as that protocol evolves; this is only for
+purposes of general illustration.
+
+#### Credential Offer
+
+This message is sent by the issuer; it indicates that payment is requested for the
+credential under discussion.
+
+```json
+{
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue_credential/1.0/offer_credential",
+    "@id": "5bc1989d-f5c1-4eb1-89dd-21fd47093d96",
     "cred_def_id": "KTwaKJkvyjKKf55uc6U8ZB:3:CL:59:tag1",
-    "~payment_request": [{
-      "@id": "offer-34567654324565454",
-      "method": "sovrin",
-      "unit": "tokens",
-      "amount": "0.2",
-      "recipient": "pay:sov:45678987654345678987"
-  	}],
+    "~payment_request": {
+        "methodData": [
+          {
+            "supportedMethods": "ETH",
+            "data": {
+              "payeeId": "0xD15239C7e7dDd46575DaD9134a1bae81068AB2A4"
+            },
+          }
+        ],
+        "details": {
+          "id": "0a2bc4a6-1f45-4ff0-a046-703c71ab845d",
+          "displayItems": [
+            {
+              "label": "commercial driver's license",
+              "amount": { "currency": "ETH", "value": "0.0023" },
+            }
+          ],
+          "total": {
+            "label": "Total due",
+            "amount": { "currency": "ETH", "value": "0.0023" }
+          }
+        }
+      },
     "credential_preview": <json-ld object>,
     ///...
 }
@@ -194,51 +296,40 @@ This Credential Request is sent to the issuer, indicating that they have paid th
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/credential-issuance/1.0/credential-request",
-    "@id": "<uuid-request>",
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue_credential/1.0/request_credential",
+    "@id": "94af9be9-5248-4a65-ad14-3e7a6c3489b6",
+    "~thread": { "thid": "5bc1989d-f5c1-4eb1-89dd-21fd47093d96" },
     "cred_def_id": "KTwaKJkvyjKKf55uc6U8ZB:3:CL:59:tag1",
-    "~payment_receipt": [{
-        "related_requests": ["offer-34567654324565454"],
-        "method": "sovrin",
-        "amount": "0.2",
-        "receipt": "",
-        "recipient": "pay:sov:45678987654345678987",
-        "extra": "something"
-    }]
+    "~payment_receipt": {
+      "request_id": "0a2bc4a6-1f45-4ff0-a046-703c71ab845d",
+      "selected_method": "ETH",
+      "transaction_id": "0x5674bfea99c480e110ea61c3e52783506e2c467f108b3068d642712aca4ea479",
+      "payeeId": "0xD15239C7e7dDd46575DaD9134a1bae81068AB2A4",
+      "amount": { "currency": "ETH", "value": "0.0023" }
+    }
+
 	///...
 }
 ```
 
 ## Drawbacks
 
-[drawbacks]: #drawbacks
-
-A difficult aspect of this is managing all the way that different payments apply to this decorator.
+TBD
 
 ## Rationale and alternatives
-[alternatives]: #alternatives
 
 - We could allow each message family to indicate payment information independently. This would be very flexible, but tedious and very messy.
 - We could not include payment information in messages, but that would limit useful applications.
 
 ## Prior art
-[prior-art]: #prior-art
 
-What applies here?
+* [Indy HIPE PR #129]( https://github.com/hyperledger/indy-hipe/pull/129) contains an earlier
+version of this thinking.
 
 ## Unresolved questions
-[unresolved]: #unresolved-questions
 
-- Should `method` be a json-ld `@type` to allow for different payment attributes? Example:
-
-```json
-{
-    "@id": "xyz", //functions like a purchase order number
-    "@type": "http://example.com/paymentmethods/sovrin",
-    "unit": "tokens",
-    "amount": "0.2", //or int? look at token work
-    "recipient": "<address>"
-}
-```
-
-This could allow the customization of the fields required for that payment. For example, if a payment method only had one unit, or perhaps required two attributes for the recipient address.
+* What about a receipt that covers multiple invoices?
+* The W3C spec allows almost free variation in the fields used to communicate to specific
+payment methods. Do we want to standardize? Do we need to link to specific payment method
+definitions? Do we need to define our new payment methods (e.g., cryptocurrency-based)
+to be aligned with existing ones?
