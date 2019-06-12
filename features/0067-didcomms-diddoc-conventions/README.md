@@ -45,12 +45,12 @@ When a Did document wishes to express support for Did communications, the follow
 - id : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints).
 - type : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints). It is mandatory that this field is set to `did-communication`
 - priority : This represents the priority of the service endpoint, used for distinction when multiple `did-communication` service endpoints are present in a single Did document. It is mandatory that this field is set to an unsigned integer with the default value of `0`.
-- recipientKeys : This is an array of [did key references](https://w3c-ccg.github.io/did-spec/#public-keys) used to denote the default recipients of an endpoint.*
+- recipientKeys : This is an array of [did key references](https://w3c-ccg.github.io/did-spec/#public-keys) used to denote the default recipients of an endpoint. (*Note-1*)
 - routingKeys: This is an array of [did key references](https://w3c-ccg.github.io/did-spec/#public-keys), ordered from most destward to most srcward, used to denote the individual routing hops in between the sender and recipients. See [TBC]() for more information on how routing is intended to operate.
 - serviceEndpoint : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints). This URL based endpoint is used to declare how the message should be sent. Did communication is transport agnostic, and therefore leverages existing application level transport protocols. However for each transport defined, which is identified by the URL scheme e.g `http`, a set of transport specific considerations are defined see [transports](../0025-didcomms-transports/README.md) for more details.
 
-> Notes
->- *The keys featured in this array must resolve to keys of the same type, for example a mix `Ed25519VerificationKey2018` or `RsaVerificationKey2018` in the same array is invalid.
+>Notes
+>1. The keys featured in this array must resolve to keys of the same type, for example a mix `Ed25519VerificationKey2018` or `RsaVerificationKey2018` in the same array is invalid.
 
 ### Message Preparation Conventions
 
@@ -69,18 +69,14 @@ Below describes the process under which a Did communication message is prepared 
     - If the service endpoint is not a Did URL, send the message using the transport protocol declared by the URL's scheme.  
 
 > Notes
-
->1.There are two main situations that an agent will be in prior to preparing a new message.
-    >- The agent is responding to a message that has just been received and has the context of the sender key of the previous message.
-    >- The agent is creating a new message to a connection and will use the default `did-communication` service convention for preparation of a message.
+>1. There are two main situations that an agent will be in prior to preparing a new message.
+>>-  The agent is responding to a message that has just been received and has the context of the sender key of the previous message.
+>>-  The agent is creating a new message to a connection and will use the default `did-communication` service convention for preparation of a message.
 >With the first case. A targeted lookup of the `did-communication` service definition could be done to find a service definition that features the sender key as a recipient key which would ensure that the response was delivered back to the sender.
 >With the second case. The default `did-communication` service description would be used by resolving the lowest priority service definition from the connections Did document
-
 >2. When preparing this envelope the sender has two main choices to make around properties to include in envelope
-    >- Whether to include sender information
-    >- Whether to include a non-reputable signature
-
->Both of the above properties of the envelope are decided upon by the sender based on the context of the interaction.
+    >>- Whether to include sender information
+    >>- Whether to include a non-reputable signature
 
 ### Example: Domain and Did document
 
