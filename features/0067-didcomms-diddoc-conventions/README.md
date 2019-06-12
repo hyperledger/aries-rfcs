@@ -45,7 +45,7 @@ When a Did document wishes to express support for Did communications, the follow
 - id : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints).
 - type : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints). It is mandatory that this field is set to `did-communication`
 - priority : This represents the priority of the service endpoint, used for distinction when multiple `did-communication` service endpoints are present in a single Did document. It is mandatory that this field is set to an unsigned integer with the default value of `0`.
-- recipientKeys : This is an array of [did key references](https://w3c-ccg.github.io/did-spec/#public-keys) used to denote the default recipients of an endpoint. (*Note-1*)
+- recipientKeys : This is an array of [did key references](https://w3c-ccg.github.io/did-spec/#public-keys) used to denote the default recipients of an endpoint. (*note-1*)
 - routingKeys: This is an array of [did key references](https://w3c-ccg.github.io/did-spec/#public-keys), ordered from most destward to most srcward, used to denote the individual routing hops in between the sender and recipients. See [TBC]() for more information on how routing is intended to operate.
 - serviceEndpoint : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints). This URL based endpoint is used to declare how the message should be sent. Did communication is transport agnostic, and therefore leverages existing application level transport protocols. However for each transport defined, which is identified by the URL scheme e.g `http`, a set of transport specific considerations are defined see [transports](../0025-didcomms-transports/README.md) for more details.
 
@@ -60,7 +60,7 @@ Below describes the process under which a Did communication message is prepared 
 
 1. The sender resolves the relevant `did-communication` service of the intended recipient(s) Did document.
 2. The sender resolves the recipient keys present in the `recipientKeys` array of the service declaration.
-3. Using the resolved keys, the sender takes the content level message and packs it inside an [encrypted envelope](../../concepts/0021-didcomm-message-anatomy/README.md) for the recipient keys. (*Note-2*)
+3. Using the resolved keys, the sender takes the content level message and packs it inside an [encrypted envelope](../../concepts/0021-didcomm-message-anatomy/README.md) for the recipient keys. (*note-2*)
 4. The sender then inspects the `routingKeys` array, if it is found to be empty, then the process skips to step 5. Otherwise, the sender prepares a content level message of type `forward`. The resolved keys from the `recipientKeys` array is set as the contents of the `to` field in the forward message and the encrypted envelope from the previous step is set as the contents of the `msg` field in the forward message. Following this, for each element in the `routingKeys` array the following sub-process is repeated:
     1. The sender resolves the current key in the routing array and takes the outputted encrypted envelope from the previous step and packs it inside a new encrypted envelope for the current key.
     2. The sender prepares a content level message of type `forward`. The current key in the routing array is set as the contents of the `to` field in the forward message and the encrypted envelope from the previous step is set as the contents of the `msg` field in the forward message.
@@ -75,8 +75,8 @@ Below describes the process under which a Did communication message is prepared 
 >With the first case. A targeted lookup of the `did-communication` service definition could be done to find a service definition that features the sender key as a recipient key which would ensure that the response was delivered back to the sender.
 >With the second case. The default `did-communication` service description would be used by resolving the lowest priority service definition from the connections Did document
 >2. When preparing this envelope the sender has two main choices to make around properties to include in envelope
-    >>- Whether to include sender information
-    >>- Whether to include a non-reputable signature
+>>- Whether to include sender information
+>>- Whether to include a non-reputable signature
 
 ### Example: Domain and Did document
 
@@ -170,8 +170,8 @@ Alices agent goes to prepare a message `desired_msg` for Bob.
 
 ## Prior art
 
-[Did Communication Message Anatomy](../0025-didcomms-transports/README.md)
-[Did Communication Encryption Envelope](../0019-encryption-envelope/README.md)
+- [Did Communication Message Anatomy](../0025-didcomms-transports/README.md)
+- [Did Communication Encryption Envelope](../0019-encryption-envelope/README.md)
 
 ## Unresolved questions
 
