@@ -1,4 +1,4 @@
-# Did communication Did document conventions
+# DID communication DID document conventions
 - Author: Tobias Looker (tobias.looker@mattr.global), Stephen Curran (swcurran@gmail.com)
 - Start Date: 04/15/2019
 
@@ -9,25 +9,25 @@
 
 ## Summary
 
-Explain the Did document conventions required to enable Did communications.
+Explain the DID document conventions required to enable DID communications.
 
 ## Motivation
 
-Standardization of these conventions is essential to promoting interoperability of Did communications.
+Standardization of these conventions is essential to promoting interoperability of DID communications.
 
 ## Tutorial
 
-### Did documents
+### DID documents
 
-A Did document is the associated data model to a Did, it contains important associated cryptographic information and a declaration of capabilities the Did supports. 
+A DID document is the associated data model to a DID, it contains important associated cryptographic information and a declaration of capabilities the DID supports. 
 
-Of particular interested to this RFC is the definition of [service endpoints](https://w3c-ccg.github.io/did-spec/#service-endpoints). The primary object of this RFC is to document the Did communication service type and describe the associated conventions.
+Of particular interested to this RFC is the definition of [service endpoints](https://w3c-ccg.github.io/did-spec/#service-endpoints). The primary object of this RFC is to document the DID communication service type and describe the associated conventions.
 
 ### Service Conventions
 
-As referenced above within the [Did specification](https://w3c-ccg.github.io/did-spec/#did-documents) lies a section called [service endpoints](https://w3c-ccg.github.io/did-spec/#service-endpoints), this section of the Did document is reserved for `any type of service the entity wishes to advertise, including decentralized identity management services for further discovery, authentication, authorization, or interaction`.
+As referenced above within the [DID specification](https://w3c-ccg.github.io/did-spec/#did-documents) lies a section called [service endpoints](https://w3c-ccg.github.io/did-spec/#service-endpoints), this section of the DID document is reserved for `any type of service the entity wishes to advertise, including decentralized identity management services for further discovery, authentication, authorization, or interaction`.
 
-When a Did document wishes to express support for Did communications, the following service definition is defined.
+When a DID document wishes to express support for DID communications, the following service definition is defined.
 
 ```json
 {
@@ -44,41 +44,40 @@ When a Did document wishes to express support for Did communications, the follow
 
 - id : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints).
 - type : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints). It is mandatory that this field is set to `did-communication`
-- priority : This represents the priority of the service endpoint, used for distinction when multiple `did-communication` service endpoints are present in a single Did document. It is mandatory that this field is set to an unsigned integer with the default value of `0`.
+- priority : This represents the priority of the service endpoint, used for distinction when multiple `did-communication` service endpoints are present in a single DID document. It is mandatory that this field is set to an unsigned integer with the default value of `0`.
 - recipientKeys : This is an array of [did key references](https://w3c-ccg.github.io/did-spec/#public-keys) used to denote the default recipients of an endpoint. (*note-1*)
 - routingKeys: This is an array of [did key references](https://w3c-ccg.github.io/did-spec/#public-keys), ordered from most destward to most srcward, used to denote the individual routing hops in between the sender and recipients. See [TBC]() for more information on how routing is intended to operate.
-- serviceEndpoint : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints). This URL based endpoint is used to declare how the message should be sent. Did communication is transport agnostic, and therefore leverages existing application level transport protocols. However for each transport defined, which is identified by the URL scheme e.g `http`, a set of transport specific considerations are defined see [transports](../0025-didcomms-transports/README.md) for more details.
+- serviceEndpoint : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints). This URL based endpoint is used to declare how the message should be sent. DID communication is transport agnostic, and therefore leverages existing application level transport protocols. However for each transport defined, which is identified by the URL scheme e.g `http`, a set of transport specific considerations are defined see [transports](../0025-didcomms-transports/README.md) for more details.
 
 >Notes
 >1. The keys featured in this array must resolve to keys of the same type, for example a mix `Ed25519VerificationKey2018` or `RsaVerificationKey2018` in the same array is invalid.
 
 ### Message Preparation Conventions
 
-Below describes the process under which a Did communication message is prepared and sent to a Did based on the conventions declared in the associated Did document. The scenario in which the below is predicated has the following conditions.
-    - The sender possesses the Did document for the intended recipient(s) of a Did communication message.
+Below describes the process under which a DID communication message is prepared and sent to a DID based on the conventions declared in the associated DID document. The scenario in which the below is predicated has the following conditions.
+    - The sender possesses the DID document for the intended recipient(s) of a DID communication message.
     - The sender has created a [content level message](../../concepts/0021-didcomm-message-anatomy/README.md) that is now ready to be prepared for sending to the intended recipient(s). 
 
-1. The sender resolves the relevant `did-communication` service of the intended recipient(s) Did document.
+1. The sender resolves the relevant `did-communication` service of the intended recipient(s) DID document.
 2. The sender resolves the recipient keys present in the `recipientKeys` array of the service declaration.
 3. Using the resolved keys, the sender takes the content level message and packs it inside an [encrypted envelope](../../concepts/0021-didcomm-message-anatomy/README.md) for the recipient keys. (*note-2*)
 4. The sender then inspects the `routingKeys` array, if it is found to be empty, then the process skips to step 5. Otherwise, the sender prepares a content level message of type `forward`. The resolved keys from the `recipientKeys` array is set as the contents of the `to` field in the forward message and the encrypted envelope from the previous step is set as the contents of the `msg` field in the forward message. Following this, for each element in the `routingKeys` array the following sub-process is repeated:
     1. The sender resolves the current key in the routing array and takes the outputted encrypted envelope from the previous step and packs it inside a new encrypted envelope for the current key.
     2. The sender prepares a content level message of type `forward`. The current key in the routing array is set as the contents of the `to` field in the forward message and the encrypted envelope from the previous step is set as the contents of the `msg` field in the forward message.
 5. Resolve the service endpoint:
-    - If the endpoint is a valid Did URL, check that it resolves to another Did service definition. If the resolution is successful the process from step 2. is repeated using the message outputted from this process as the input message. 
-    - If the service endpoint is not a Did URL, send the message using the transport protocol declared by the URL's scheme.  
+    - If the endpoint is a valid DID URL, check that it resolves to another DID service definition. If the resolution is successful the process from step 2. is repeated using the message outputted from this process as the input message. 
+    - If the service endpoint is not a DID URL, send the message using the transport protocol declared by the URL's scheme.  
 
 > Notes
 >1. There are two main situations that an agent will be in prior to preparing a new message.
->>-  The agent is responding to a message that has just been received and has the context of the sender key of the previous message.
->>-  The agent is creating a new message to a connection and will use the default `did-communication` service convention for preparation of a message.
->With the first case. A targeted lookup of the `did-communication` service definition could be done to find a service definition that features the sender key as a recipient key which would ensure that the response was delivered back to the sender.
->With the second case. The default `did-communication` service description would be used by resolving the lowest priority service definition from the connections Did document
+>>-  The agent is responding to a message that has just been received and has the context of the sender key of the previous message. In this case, a targeted lookup of the `did-communication` service definition can be done to find the service definition that features the sender key as a recipient key which would ensure that the response was delivered back to the sender.
+>>-  The agent is creating a new message to a connection and will use the default `did-communication` service convention for preparation of a message. In this case, the default `did-communication` service description would be used by resolving the lowest priority service definition from the connections DID document.
+>
 >2. When preparing this envelope the sender has two main choices to make around properties to include in envelope
 >>- Whether to include sender information
 >>- Whether to include a non-reputable signature
 
-### Example: Domain and Did document
+### Example: Domain and DID document
 
 The following is an example of an arbitrary pair of domains that will be helpful in providing context to conventions defined above.
 
@@ -95,11 +94,11 @@ In the diagram above:
   - 2 Cloud Agents - "3", "6"
   - 1 Domain Endpoint - "9"
 
-#### Bob's Did document for his Relationship with Alice
+#### Bob's DID document for his Relationship with Alice
 
-Bob’s domain has 3 devices he uses for processing messages - two phones (4 and 5) and a cloud-based agent (6). As well, Bob has one agent that he uses as a mediator (3) that can hold messages for the two phones when they are offline. However, in Bob's relationship with Alice, he ONLY uses one phone (4) and the cloud-based agent (6). Thus the key for device 5 is left out of the Did document (see below). For further privacy preservation, Bob also elects to use a shared domain endpoint (agents-r-us), giving him an extra layer of isolation from correlation. This is represented by the `serviceEndpoint` in the service definition not directly resolving to an endpoint URI rather resolving to another `did-communication` service description which is owned and controlled by the endpoint owner (agents-r-us). 
+Bob’s domain has 3 devices he uses for processing messages - two phones (4 and 5) and a cloud-based agent (6). As well, Bob has one agent that he uses as a mediator (3) that can hold messages for the two phones when they are offline. However, in Bob's relationship with Alice, he ONLY uses one phone (4) and the cloud-based agent (6). Thus the key for device 5 is left out of the DID document (see below). For further privacy preservation, Bob also elects to use a shared domain endpoint (agents-r-us), giving him an extra layer of isolation from correlation. This is represented by the `serviceEndpoint` in the service definition not directly resolving to an endpoint URI rather resolving to another `did-communication` service description which is owned and controlled by the endpoint owner (agents-r-us). 
 
-Bobs Did document given to Alice
+Bobs DID document given to Alice
 
 ```json
 {
@@ -126,7 +125,7 @@ Bobs Did document given to Alice
 }
 ```
 
-Agents r Us Did document - resolvable by Alice
+Agents r Us DID document - resolvable by Alice
 
 ```json
 {
@@ -170,8 +169,8 @@ Alices agent goes to prepare a message `desired_msg` for Bob.
 
 ## Prior art
 
-- [Did Communication Message Anatomy](../0025-didcomms-transports/README.md)
-- [Did Communication Encryption Envelope](../0019-encryption-envelope/README.md)
+- [DID Communication Message Anatomy](../0025-didcomms-transports/README.md)
+- [DID Communication Encryption Envelope](../0019-encryption-envelope/README.md)
 
 ## Unresolved questions
 
