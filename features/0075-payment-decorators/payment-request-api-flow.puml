@@ -1,0 +1,15 @@
+@startuml
+autonumber 1
+hide footbox
+entity Payee
+control Payer_User_Agent
+actor Payer
+entity Payment_Method
+Payee --> Payer_User_Agent: Payment Request
+group internal to payer
+Payer_User_Agent -[#blue]-\ Payer: Render
+Payer -[#blue]-\ Payer_User_Agent: Configure
+Payer_User_Agent ->o Payer_User_Agent: Payment Response
+end
+Payer_User_Agent -> Payment_Method: Invoke
+@enduml
