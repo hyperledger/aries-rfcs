@@ -186,8 +186,6 @@ Use cases and other specifics of controllership are explored in greater depth in
 We recommend that all three forms of indirect identity control be modeled with some
 common ingredients:
 
-#### Ingredients
-
 * A __proxy trust framework__ that specifies the rules and conventions in force
  for a particular class of indirect identity control use cases.
 
@@ -204,7 +202,7 @@ credential__, __guardianship credential__, __controllership credential__), and
 they have minor differences. However, they work so similarly that they'll be
 described generically, with differences noted where necessary.
 
-##### Proxy Trust Framework
+### Proxy Trust Framework
 
 A proxy trust framework is a published, versioned document (or collection
 of documents) that's accessible by URI. Writing one doesn't have to be a
@@ -249,7 +247,7 @@ need to be formally defined and referencable by URI.)
 
 1. What __freshness rules__ are used for revocation testing and offline mode?
 
-##### Proxy Credential
+### Proxy Credential
 
 A proxy credential conforms to the [Verifiable Credential Data Model 1.0](
 https://w3c.github.io/vc-data-model/). It can use any style of proof or data
@@ -330,11 +328,11 @@ contains an array of __grants__, each of which is a JSON object in the form:
 
     An example of the `credentialSubject.proxied.permissions` field might be:
 
-        ![permissions example](permissions.png)
+    ![permissions example](permissions.png)
 
-        This says: Let a guardian who has the role of parent perform the "medical_care" and "school"
-        actions for the dependent. Let a sibling perform the "school" action. Let either (parent+grandparent)
-        or (3*grandparent) do all actions.
+    This says: Let a guardian who has the role of parent perform the "medical_care" and "school"
+    actions for the dependent. Let a sibling perform the "school" action. Let either (parent+grandparent)
+    or (3*grandparent) do all actions.
 
 1. The credential MAY or MUST contain additional fields under `credentialSubject.holder` that
 describe the holder (e.g., the holder's name, DID, biometric, etc.). If the credential is
@@ -346,7 +344,7 @@ the credential MUST contain such fields.
 describe the proxied identity (e.g., a dependent's name or biometric; a pet's RFID tag; a
 drone's serial number).
 
-##### Proxy Challenge
+### Proxy Challenge
 
 A proxy challenge is an interaction in which the proxy must justify the control they are exerting
 over the proxied identity. The heart of the challenge is a request for a verifiable presentation
