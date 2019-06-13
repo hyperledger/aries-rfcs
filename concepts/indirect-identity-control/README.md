@@ -1,4 +1,4 @@
-# 0061: Indirect Identity Control
+# 00xx: Indirect Identity Control
 - Author: Daniel Hardman
 - Start Date: 2019-05-10
 
@@ -300,18 +300,18 @@ contains an array of __grants__, each of which is a JSON object in the form:
 
 ...where `recipient` is one of the following:
 
-    * A named role such as `pilot` (going back to the controllership-of-a-drone example above)
+  * A named role such as `pilot` (going back to the controllership-of-a-drone example above)
     or `next_of_kin` (going back to the guardianship example above).
-    * A JSON "n-of" object in the form:
+  * A JSON "n-of" object in the form:
 
     ![{"n": 3, "of": [recipients]}](n-of.png)
 
-    ...where recipients allow recursion, and `n` is a positive
-    integer <= the size of the recipients array. If n == 1, then this is effectively a
-    boolean OR; any member of the recipients group can independently take the action.
-    If n == length of recipients array, then this is effectively a boolean AND; all
-    members of the recipients group must agree. If n is some other value, then a subset
-    of the specified size must agree.
+  ...where recipients allow recursion, and `n` is a positive
+  integer <= the size of the recipients array. If n == 1, then this is effectively a
+  boolean OR; any member of the recipients group can independently take the action.
+  If n == length of recipients array, then this is effectively a boolean AND; all
+  members of the recipients group must agree. If n is some other value, then a subset
+  of the specified size must agree.
 
 ...and `actions` is an array of actions defined in the trust framework. This could include
 actions like piloting a drone, changing a child's legal name, etc.
