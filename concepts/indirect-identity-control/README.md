@@ -54,10 +54,10 @@ Here, we will simply reproduce two diagrams as a summary:
 >Note: The type of delegation described in Appendix C, and the type we focus on
 in this doc, is one that crosses identity boundaries. There is another type
 that happens _within_ an identity, as Alice delegates work to her various
-agents. For the time being, ignore this __intra-identity delegation__; we
-will return to it [near the end](#intra-identity delegation).
+agents. For the time being, ignore this __intra-identity delegation__; it is
+explored more carefully near the end of the [Delegation Details](delegation-details.md) doc.
 
-### Common Foundations
+### Commonalities
 
 All of these forms of identity control share the issue of indirectness. All of them
 introduce risks beyond the ones that dominate in direct identity management. All
@@ -71,13 +71,14 @@ ways, in the context of similarly structured trust frameworks.
 Understanding and implementing support for one of them should give developers and
 organizations a massive headstart in implementing the others.
 
-Before we provide details about what's common in their solutions, however, let's explore
-them a bit more deeply as separate problems. This will make the unique and common aspects
-more obvious.
+Before we provide details about solutions, however, let's explore what's common
+and unique about each of the three forms of indirect identity control.
+
+### Compare and Contrast
 
 #### Delegation
 
-![delegation](delegation.png)
+[![delegation](delegation.png)](delegation-details.md)
 
 Delegation can be either __transparent__ or __opaque__, depending on whether it's
 obvious to an external party that a delegate is involved. A lawyer that files a
@@ -115,14 +116,17 @@ The rules of how delegation work need to be spelled out in a __trust framework__
 Sometimes, the indirect authority of a delegate should be __recursively extensible__
 (allow sub-delegation). Other times, this may be inappropriate.
 
+Use cases and other specifics of delegation are explored in greater depth in the
+[Delegation Details](delegation-details.md) doc.
+
 #### Guardianship
 
-![guardianship](guardianship.png)
+[![guardianship](guardianship.png)](guardianship-details.md)
 
-Except for recursive extension, guardianship has all the bolded properties of delegation.
-Guardianship also adds some unique considerations.
+Guardianship has all the bolded properties of delegation. It also adds some
+unique considerations.
 
-Since guardianship does not always derive from the choices of the dependent (that is,
+Since guardianship does not always derive from dependent consent (that is,
 the dependent is often unable to exercise sovereignty), the dependent in a guardianship
 relationship is particularly vulnerable to abuse from _within_.
 
@@ -130,6 +134,7 @@ relationship is particularly vulnerable to abuse from _within_.
 
 Because of this risk, guardianship is the most likely of the three forms of
 indirect control to require an __audit trail__ and to involve legal formalities.
+Its trust frameworks are typically the most nuanced and complex.
 
 Guardianship is also the form of indirect identity control with the most complications
 related to __privacy__.
@@ -139,33 +144,112 @@ has that status. Not all bases are equally strong; a child lacking an obvious pa
 may receive a temporary guardian, but this guardian's status could change if a parent
 is found. Having a formal basis allows conflicting guardianship claims to be adjudicated.
 
+![eval guardian](eval-guardian.png)
+
+Either the guardian _role_ or specific guardianship _duties_ may be delegated. An
+example of the former is when a parent leaves on a long, dangerous trip, and appoints
+a grandparent to be guardian in their absence. An example of the latter is when a
+parent asks a grandparent to drive a child to the school to sign up for the soccer
+team. When the guardian _role_ is delegated, the result is a new guardian. When
+only guardianship _duties_ are delegated, this is simple delegation and ceases to
+be guardianship.
+
+Use cases and other specifics of guardianship are explored in greater depth in the
+[Delegation Details](delegation-details.md) doc.
+
 #### Controllership
 
+[![controllership](controllership.png)](controllership-details.md)
 
+Controllership shares nearly all bolded features with delegation. It is usually
+transparent because things are assumed not to control themselves.
 
-It often requires legal adjudication, and
-therefore
+Like guardianship, controllership has a basis. Usually, it is rooted in property
+ownership, but occasionally it might derive from court appointment. Also like
+guardianship, either the _role_ or specific _duties_ of controllership may be
+delegated. When controllership involves animals instead of machines, it may
+have risks of abuse and complex protections and trust frameworks.
 
-The theory of delegation with DIDs and credentials has been explored thoughtfully
-in many following places. The emergent consensus is:
+Unlike guardianship, controlled things usually require minimal privacy. However,
+things that constantly identify their controller(s) in a correlatable way may undermine
+the privacy of controllers in unexpected ways.
 
-1. __Formal delegation is best accomplished with a credential__. This creates an audit
-trail, makes it possible to declare and enforce limits on what the delegate can do,
-takes advantage of standard verification and revocation features, and makes recursive
-delegation possible but not automatic.
+### Solution
 
-2. __Informal__ (undeclared, invisible) __delegation could be accomplished
-by granting access to a shared wallet__. However, this [introduces risks of
-abuse](https://docs.google.com/presentation/d/1-nEPpomAhhm6HPZf9C1o-rEljSNNKj-i4NuXjIW8BLI/edit#slide=id.g572b6fbf26_0_63)
-that make it unsuitable for use cases requiring high standards of
-security, accountability, and privacy.
+We recommend that all three forms of indirect identity control be modeled with some
+common ingredients:
 
-For more information about how delegation works, see [delegation
-details](delegation.md).
+#### Ingredients
 
-### Implementing Guardianship
+* A __proxy trust framework__ that specifies the rules and conventions in force
+ for a particular class of indirect identity control use cases.
+* A __proxy credential__ that binds a controlled entity to its proxy and
+ clarifies the nature and limits of the control for that specific relationship.
+* A __proxy challenge__ that evaluates the proxy credential in a particular
+ context, proving or disproving the legitimacy of indirect control and creating
+ opportunities for auditing and enforcement.
 
-Guardianship is
+Here, "proxy" is used as a generic cover term for all three forms of indirect
+identity control. Each ingredient has a variant for each form (e.g., __delegation
+credential__, __guardianship credential__, __controllership credential__), and
+they have minor differences. However, they work so similarly that they'll be
+described generically, with differences noted where necessary.
+
+##### Proxy Trust Framework
+
+A proxy trust framework is a published, versioned document (or collection
+of documents) that's accessible by URI. Writing one doesn't have to be a
+massive undertaking; see the [sample guardianship trust framework](
+guardianship-sample/trust-framework.md) for a simple example).
+
+It should answer at least the following questions:
+
+1. What is the trust framework's __formal name__, __version__, and __URI__?
+2. In what __geos__ and __legal jurisdictions__ is it valid?
+3. On what __bases__ are proxies appointed? (For guardianship, these might
+include values like `kinship` and `court_order`. Each basis needs to be formally
+defined, named, and published at a URI, because proxy credentials will reference
+them. This question is mostly irrelevant to delegation, where the basis is
+always an action of the delegator.)
+4. What are the __required and recommended behaviors of a proxy__? How
+will this be enforced?
+5. What __permissions__ vis-a-vis the proxied identity govern proxy actions?
+(For a delegate, these might include values like `sign`, `pay`, or `arrange_travel`.
+For a guardian, these might include values like `financial`, `medical`, `do_not_resuscitate`,
+`foreign_travel`, or `new_relationships`. Like _bases_, permissions need to be
+formally defined and referencable by URI.)
+6. What are possible __constraints__ on a proxy? (Constraints are bound to a
+particular proxies, whereas a permission model is bound to the identity that
+the proxy is controlling. Some constraints might include `geo_radius`,
+`jurisdiction`, `biometric_consent_freshness`, and so forth. These values also
+need to be formally defined and referencable by URI.)
+7. What __auditing mechanisms__ are required, recommended, or allowed?
+8. What __appeal mechanisms__ are required or supported?
+9. What __proxy challeng procedures__ are best practice?
+10. What __freshness rules__ are used for revocation testing and offline mode?
+
+##### Proxy Credential
+
+A proxy credential conforms to the [Verifiable Credential Data Model 1.0](
+https://w3c.github.io/vc-data-model/). It can use any style of proof or data
+format (JSON-LD, JWT, Sovrin ZKP, etc). It is recognizable as a proxy
+credential by the following characteristics:
+
+1. Its `@context` field, besides including the "https://www.w3.org/2018/credentials/v1"
+ required by Verifiable Credentials in general, also includes a reference to this spec:
+ "https://github.com/hyperledger/aries-rfcs/concepts/0080-indirect-identity-control".
+
+2. The `type` field contains, in addition to "VerifiableCredential", a string in the
+format:
+
+![Proxy/form/trust framework/variant](proxy-cred-name-pat.png)
+
+where `form` is one of the letters D (for Delegation), G (for Guardianship), or C
+(for controllership), `trust framework` is the name and version that a Proxy Trust
+Framework formally declares for itself, and `variant` is a specific schema named
+in the trust framework.
+
+2.
 
 ## Reference
 

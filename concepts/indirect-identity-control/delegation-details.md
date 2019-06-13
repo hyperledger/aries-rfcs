@@ -1,5 +1,28 @@
 # Delegation Details
 
+Three basic approaches to delegation are possible:
+
+1. Delegate by expressing intent in a DID Doc.
+2. Delegate with verifiable credentials.
+3. Delegate by sharing a wallet.
+
+The alternative of delegating via the `authorization` section of a DID Doc
+(option #1) is [unnecessarily fragile, cumbersome, redundant, and expensive to implement](
+https://docs.google.com/presentation/d/1-nEPpomAhhm6HPZf9C1o-rEljSNNKj-i4NuXjIW8BLI/edit#slide=id.g572b6fbf26_0_69).
+The theory of delegation with DIDs and credentials has been explored thoughtfully
+in many places (see [Prior Art](#prior-art)). The emergent consensus is:
+
+* __Formal delegation is best accomplished with a credential__ (option 2). This creates an audit
+trail, makes it possible to declare and enforce limits on what the delegate can do,
+takes advantage of standard verification and revocation features, and makes recursive
+delegation possible but not automatic.
+
+* __Informal__ (undeclared, invisible) __delegation could be accomplished
+by granting access to a shared wallet__ (option 3). However, this [introduces risks of
+abuse](https://docs.google.com/presentation/d/1-nEPpomAhhm6HPZf9C1o-rEljSNNKj-i4NuXjIW8BLI/edit#slide=id.g572b6fbf26_0_63)
+that make it unsuitable for use cases requiring high standards of
+security, accountability, and privacy.
+
 ## Use Cases
 
 The following use cases are good tests of whether we're implementing delegation
@@ -56,16 +79,6 @@ Like [#1](1-departments-of-a-company), but simpler. 3 or 4 people each need sign
 so LLC delegates that authority.
 
 
-Three basic approaches to delegation are possible:
-
-1. Delegate by expressing intent in a DID Doc.
-2. Delegate with verifiable credentials.
-3. Delegate by sharing a wallet.
-
-The alternative of
-delegating via the `authorization` section of a DID Doc is [unnecessarily
-fragile, cumbersome, redundant, and expensive to implement](
-https://docs.google.com/presentation/d/1-nEPpomAhhm6HPZf9C1o-rEljSNNKj-i4NuXjIW8BLI/edit#slide=id.g572b6fbf26_0_69).
 
 ## Prior Art and References
 
@@ -80,4 +93,5 @@ Framework.)
 * [Appendix C of the W3C Verifiable Credentials Spec](https://w3c.github.io/vc-data-model/#subject-holder-relationships)
 * [Object Capabilities for Linked Data](https://w3c-ccg.github.io/ocap-ld/)
 * [Section 5.3 of the DID Spec](https://w3c-ccg.github.io/did-spec/#authorization-and-delegation)
-* "Delegation Concepts in Sovrin"(https://docs.google.com/presentation/d/1-nEPpomAhhm6HPZf9C1o-rEljSNNKj-i4NuXjIW8BLI/edit)
+* "[Delegation Concepts in Sovrin](https://docs.google.com/presentation/d/1-nEPpomAhhm6HPZf9C1o-rEljSNNKj-i4NuXjIW8BLI/edit)"
+* "[Human Agency Has a Standard](https://docs.google.com/document/d/112GrR_i7HgstckRSiamlpu6scLV4dqroImFAjwDmFUI/edit)", by Adrian Gropper
