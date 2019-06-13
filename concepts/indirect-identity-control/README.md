@@ -300,8 +300,8 @@ defined in the trust framework. The schema must include the following fields:
     `blood_relative` or `tribal_member` basis, for example. For controllers, the basisURI
     might point to a definition of `legal_appointment` or `property_owner`.
 
-  The schema may also include zero or more `constraint.*` fields. These fields would be used
-  to limit the time, place, or circumstances in which the proxy may operate.
+    The schema may also include zero or more `constraint.*` fields. These fields would be used
+    to limit the time, place, or circumstances in which the proxy may operate.
 
 1. `credentialSubject.proxied.type` must be a URI pointing to a schema for `credentialSubject.proxied` as
   defined in the trust framework. The schema must include a `permissions` field. This field
