@@ -171,10 +171,19 @@ Strive to guarantee that:
 - Implementation trajectory is well defined.
 - Corner cases are dissected by example.
 
-## Drawbacks
-[drawbacks]: #drawbacks
+## Related RFCs
 
-Why should we *not* do this?
+[0021: DID Comm Message Anatomy](<https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0021-didcomm-message-anatomy/README.md>)
+
+[0020: Message Types](<https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0020-message-types/README.md>)
+
+[0011: Decorators](<https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0011-decorators/README.md>)
+
+[0008: Message ID and Threading](<https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0008-message-id-and-threading/README.md>)
+
+[0019: Encryption Envelope](<https://github.com/hyperledger/aries-rfcs/blob/master/features/0019-encryption-envelope/README.md>)
+
+[0025: Agent Transports](<https://github.com/hyperledger/aries-rfcs/blob/master/features/0025-didcomms-transports/README.md>)
 
 ## Rationale and alternatives
 [alternatives]: #alternatives
