@@ -286,19 +286,19 @@ is the delegator, dependent, or controlled thing.
 1. `credentialSubject.holder.type` must be a URI pointing to a schema for `credentialSubject.holder` as
 defined in the trust framework. The schema must include the following fields:
 
-  * `role`: A string naming the role that the holder plays in the permissioning scheme of
-  the dependent. These roles must be formally defined in the trust framework. For example, a
-  guardian credential might identify the holder (guardian) as playing the `next_of_kin` role,
-  and this `next_of_kin` role might be granted a subset of all permissions that are possible
-  for the dependent's identity. A controllership credential for a drone might identify the holder
-  (controller) as playing the `pilot` role, which has different permissions from the
-  `maintenance_crew` role.
+    * `role`: A string naming the role that the holder plays in the permissioning scheme of
+    the dependent. These roles must be formally defined in the trust framework. For example, a
+    guardian credential might identify the holder (guardian) as playing the `next_of_kin` role,
+    and this `next_of_kin` role might be granted a subset of all permissions that are possible
+    for the dependent's identity. A controllership credential for a drone might identify the holder
+    (controller) as playing the `pilot` role, which has different permissions from the
+    `maintenance_crew` role.
 
-  * `basisURI`: Required for guardianship credentials, optional for the other types. This
-  links to a formal definition in the trust framework of a justification for holding
-  identity control status. For guardians, the basisURI might point to a definition of the
-  `blood_relative` or `tribal_member` basis, for example. For controllers, the basisURI
-  might point to a definition of `legal_appointment` or `property_owner`.
+    * `basisURI`: Required for guardianship credentials, optional for the other types. This
+    links to a formal definition in the trust framework of a justification for holding
+    identity control status. For guardians, the basisURI might point to a definition of the
+    `blood_relative` or `tribal_member` basis, for example. For controllers, the basisURI
+    might point to a definition of `legal_appointment` or `property_owner`.
 
   The schema may also include zero or more `constraint.*` fields. These fields would be used
   to limit the time, place, or circumstances in which the proxy may operate.
