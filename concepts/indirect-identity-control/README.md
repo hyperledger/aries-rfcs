@@ -250,30 +250,30 @@ credential by the following characteristics:
  "https://github.com/hyperledger/aries-rfcs/concepts/0080-indirect-identity-control".
 
 1. Its `type` field contains, in addition to "VerifiableCredential", a string in the
-format:
+  format:
 
-![Proxy.form/trust framework/tfver/variant](proxy-cred-name-pat.png)
+  ![Proxy.form/trust framework/tfver/variant](proxy-cred-name-pat.png)
 
-...where `form` is one of the letters D (for Delegation), G (for Guardianship), or C
-(for controllership), `trust framework` is the name that a Proxy Trust
-Framework formally declares for itself, `tfver` is its version, and `variant`
-is a specific schema named in the trust framework. A regex that matches this
-pattern is: `Proxy[.]([DGC])/([^/]+)/(\d+[^/]*)/(.+)`, and an example of a
-matching string is: `Proxy.G/UNICEF Vulnerable Populations Trust Framework/1.0/ChildGuardian`.
+  ...where `form` is one of the letters D (for Delegation), G (for Guardianship), or C
+  (for controllership), `trust framework` is the name that a Proxy Trust
+  Framework formally declares for itself, `tfver` is its version, and `variant`
+  is a specific schema named in the trust framework. A regex that matches this
+  pattern is: `Proxy[.]([DGC])/([^/]+)/(\d+[^/]*)/(.+)`, and an example of a
+  matching string is: `Proxy.G/UNICEF Vulnerable Populations Trust Framework/1.0/ChildGuardian`.
 
 1. The metadata fields for the credential include `trustFrameworkURI" (the value of which is
-a URI linking to the relevant trust framework), `auditURI` (the value of which is a URI linking
-to a third-party auditing service, and which may be constrained or empty as specified in the
-trust framework), and `appealURI` (the value of which is a URI linking to an arbitration or
-adjudication authority for the credential, and which may be constrained or empty as specified
-in the trust framework).
+  a URI linking to the relevant trust framework), `auditURI` (the value of which is a URI linking
+  to a third-party auditing service, and which may be constrained or empty as specified in the
+  trust framework), and `appealURI` (the value of which is a URI linking to an arbitration or
+  adjudication authority for the credential, and which may be constrained or empty as specified
+  in the trust framework).
 
 1. The `credentialSubject` section of the credential describes a subject called `holder` and
-a subject called `proxied`. The holder is the delegate, guardian, or controller; the proxied
-is the delegator, dependent, or controlled thing.
+  a subject called `proxied`. The holder is the delegate, guardian, or controller; the proxied
+  is the delegator, dependent, or controlled thing.
 
 1. `credentialSubject.holder.type` must be a URI pointing to a schema for `credentialSubject.holder` as
-defined in the trust framework. The schema must include the following fields:
+  defined in the trust framework. The schema must include the following fields:
 
     * `role`: A string naming the role that the holder plays in the permissioning scheme of
     the dependent. These roles must be formally defined in the trust framework. For example, a
@@ -289,50 +289,51 @@ defined in the trust framework. The schema must include the following fields:
     `blood_relative` or `tribal_member` basis, for example. For controllers, the basisURI
     might point to a definition of `legal_appointment` or `property_owner`.
 
-The schema may also include zero or more `constraint.*` fields. These fields would be used
-to limit the time, place, or circumstances in which the proxy may operate.
+  The schema may also include zero or more `constraint.*` fields. These fields would be used
+  to limit the time, place, or circumstances in which the proxy may operate.
 
 1. `credentialSubject.proxied.type` must be a URI pointing to a schema for `credentialSubject.proxied` as
-defined in the trust framework. The schema must include a `permissions` field. This field
-contains an array of __grants__, each of which is a JSON object in the form:
+  defined in the trust framework. The schema must include a `permissions` field. This field
+  contains an array of __grants__, each of which is a JSON object in the form:
 
-![{"let": recipient, "do": actions}](grant.png)
+  ![{"let": recipient, "do": actions}](grant.png)
 
-...where `recipient` is one of the following:
+  ...where `recipient` is one of the following:
 
-  * A named role such as `pilot` (going back to the controllership-of-a-drone example above)
-    or `next_of_kin` (going back to the guardianship example above).
-  * A JSON "n-of" object in the form:
+    * A named role such as `pilot` (going back to the controllership-of-a-drone example above)
+      or `next_of_kin` (going back to the guardianship example above).
 
-    ![{"n": 3, "of": [recipients]}](n-of.png)
+    * A JSON "n-of" object in the form:
 
-  ...where recipients allow recursion, and `n` is a positive
-  integer <= the size of the recipients array. If n == 1, then this is effectively a
-  boolean OR; any member of the recipients group can independently take the action.
-  If n == length of recipients array, then this is effectively a boolean AND; all
-  members of the recipients group must agree. If n is some other value, then a subset
-  of the specified size must agree.
+      ![{"n": 3, "of": [recipients]}](n-of.png)
 
-...and `actions` is an array of actions defined in the trust framework. This could include
-actions like piloting a drone, changing a child's legal name, etc.
+      ...where recipients allow recursion, and `n` is a positive
+      integer <= the size of the recipients array. If n == 1, then this is effectively a
+      boolean OR; any member of the recipients group can independently take the action.
+      If n == length of recipients array, then this is effectively a boolean AND; all
+      members of the recipients group must agree. If n is some other value, then a subset
+      of the specified size must agree.
 
-An example of the `credentialSubject.proxied.permissions` field might be:
+  ...and `actions` is an array of actions defined in the trust framework. This could include
+  actions like piloting a drone, changing a child's legal name, etc.
 
-![permissions example](permissions.png)
+  An example of the `credentialSubject.proxied.permissions` field might be:
 
-This says: Let a guardian who has the role of parent perform the "medical_care" and "school"
-actions for the dependent. Let a sibling perform the "school" action. Let either (parent+grandparent)
-or (3*grandparent) do all actions.
+  ![permissions example](permissions.png)
+
+  This says: Let a guardian who has the role of parent perform the "medical_care" and "school"
+  actions for the dependent. Let a sibling perform the "school" action. Let either (parent+grandparent)
+  or (3*grandparent) do all actions.
 
 1. The credential MAY or MUST contain additional fields under `credentialSubject.holder` that
-describe the holder (e.g., the holder's name, DID, biometric, etc.). If the credential is
-based on ZKP/link secret technologies, then these may be unnecessary, because the holder
-can bind their proxy credential to other credentials that prove who they are. If not, then
-the credential MUST contain such fields.
+  describe the holder (e.g., the holder's name, DID, biometric, etc.). If the credential is
+  based on ZKP/link secret technologies, then these may be unnecessary, because the holder
+  can bind their proxy credential to other credentials that prove who they are. If not, then
+  the credential MUST contain such fields.
 
 1. The credential MUST contain additional fields under `credentialSubject.proxied` that
-describe the proxied identity (e.g., a dependent's name or biometric; a pet's RFID tag; a
-drone's serial number).
+  describe the proxied identity (e.g., a dependent's name or biometric; a pet's RFID tag; a
+  drone's serial number).
 
 ##### Proxy Challenge
 
