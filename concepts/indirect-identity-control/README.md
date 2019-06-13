@@ -96,16 +96,16 @@ Delegation needs __constraints__. These can take many forms, such as:
 
 ##### Constraints
 
-1. Time (for what period(s) delegate has that status)
-2. Place (in what physical or virtual locations delegate is approved)
-3. Function (legal vs. medical vs. educational)
-4. Circumstances (for particular event(s))
-5. Biometrics (for delegator involvement)
-6. Relationships (who delegate can interact with)
-7. Attributes (data/credentials -- what delegate can know or prove about delegator)
-8. Agents (what software/devices delegate can use)
-9. Cooperation (act as delegate with joint approval of other delegates)
-10. Oversight (audit trail, reporting)
+* Time (for what period(s) delegate has that status)
+* Place (in what physical or virtual locations delegate is approved)
+* Function (legal vs. medical vs. educational)
+* Circumstances (for particular event(s))
+* Biometrics (for delegator involvement)
+* Relationships (who delegate can interact with)
+* Attributes (data/credentials -- what delegate can know or prove about delegator)
+* Agents (what software/devices delegate can use)
+* Cooperation (act as delegate with joint approval of other delegates)
+* Oversight (audit trail, reporting)
 
 Delegation needs to be __revokable__.
 
@@ -190,8 +190,10 @@ common ingredients:
 
 * A __proxy trust framework__ that specifies the rules and conventions in force
  for a particular class of indirect identity control use cases.
+
 * A __proxy credential__ that binds a controlled entity to its proxy and
  clarifies the nature and limits of the control for that specific relationship.
+
 * A __proxy challenge__ that evaluates the proxy credential in a particular
  context, proving or disproving the legitimacy of indirect control and creating
  opportunities for auditing and enforcement.
@@ -215,27 +217,36 @@ It should answer at least the following questions:
 (The name cannot include a `/` character due to how it's paired with
 version in credential `type` fields (see [Proxy Credential](#proxy-credential), below).
 The version must follow [semver](https://semver.org) rules.)
+
 1. In what __geos__ and __legal jurisdictions__ is it valid?
+
 1. On what __bases__ are proxies appointed? (For guardianship, these might
 include values like `kinship` and `court_order`. Each basis needs to be formally
 defined, named, and published at a URI, because proxy credentials will reference
 them. This question is mostly irrelevant to delegation, where the basis is
 always an action of the delegator.)
+
 1. What are the __required and recommended behaviors of a proxy (holder), issuer, and
 verifier__? How will this be enforced?
+
 1. What __permissions__ vis-a-vis the proxied identity govern proxy actions?
 (For a delegate, these might include values like `sign`, `pay`, or `arrange_travel`.
 For a guardian, these might include values like `financial`, `medical`, `do_not_resuscitate`,
 `foreign_travel`, or `new_relationships`. Like _bases_, permissions need to be
 formally defined and referencable by URI.)
+
 1. What are possible __constraints__ on a proxy? (Constraints are bound to a
 particular proxies, whereas a permission model is bound to the identity that
 the proxy is controlling. Some constraints might include `geo_radius`,
 `jurisdiction`, `biometric_consent_freshness`, and so forth. These values also
 need to be formally defined and referencable by URI.)
+
 1. What __auditing mechanisms__ are required, recommended, or allowed?
+
 1. What __appeal mechanisms__ are required or supported?
+
 1. What __proxy challenge procedures__ are best practice?
+
 1. What __freshness rules__ are used for revocation testing and offline mode?
 
 ##### Proxy Credential
@@ -246,11 +257,11 @@ format (JSON-LD, JWT, Sovrin ZKP, etc). It is recognizable as a proxy
 credential by the following characteristics:
 
 1. Its `@context` field, besides including the "https://www.w3.org/2018/credentials/v1"
- required of all VCs, also includes a reference to this spec:
- "https://github.com/hyperledger/aries-rfcs/concepts/0080-indirect-identity-control".
+required of all VCs, also includes a reference to this spec:
+"https://github.com/hyperledger/aries-rfcs/concepts/0080-indirect-identity-control".
 
 1. Its `type` field contains, in addition to "VerifiableCredential", a string in the
-  format:
+format:
 
   ![Proxy.form/trust framework/tfver/variant](proxy-cred-name-pat.png)
 
@@ -262,32 +273,32 @@ credential by the following characteristics:
   matching string is: `Proxy.G/UNICEF Vulnerable Populations Trust Framework/1.0/ChildGuardian`.
 
 1. The metadata fields for the credential include `trustFrameworkURI" (the value of which is
-  a URI linking to the relevant trust framework), `auditURI` (the value of which is a URI linking
-  to a third-party auditing service, and which may be constrained or empty as specified in the
-  trust framework), and `appealURI` (the value of which is a URI linking to an arbitration or
-  adjudication authority for the credential, and which may be constrained or empty as specified
-  in the trust framework).
+a URI linking to the relevant trust framework), `auditURI` (the value of which is a URI linking
+to a third-party auditing service, and which may be constrained or empty as specified in the
+trust framework), and `appealURI` (the value of which is a URI linking to an arbitration or
+adjudication authority for the credential, and which may be constrained or empty as specified
+in the trust framework).
 
 1. The `credentialSubject` section of the credential describes a subject called `holder` and
-  a subject called `proxied`. The holder is the delegate, guardian, or controller; the proxied
-  is the delegator, dependent, or controlled thing.
+a subject called `proxied`. The holder is the delegate, guardian, or controller; the proxied
+is the delegator, dependent, or controlled thing.
 
 1. `credentialSubject.holder.type` must be a URI pointing to a schema for `credentialSubject.holder` as
-  defined in the trust framework. The schema must include the following fields:
+defined in the trust framework. The schema must include the following fields:
 
-    * `role`: A string naming the role that the holder plays in the permissioning scheme of
-    the dependent. These roles must be formally defined in the trust framework. For example, a
-    guardian credential might identify the holder (guardian) as playing the `next_of_kin` role,
-    and this `next_of_kin` role might be granted a subset of all permissions that are possible
-    for the dependent's identity. A controllership credential for a drone might identify the holder
-    (controller) as playing the `pilot` role, which has different permissions from the
-    `maintenance_crew` role.
+  * `role`: A string naming the role that the holder plays in the permissioning scheme of
+  the dependent. These roles must be formally defined in the trust framework. For example, a
+  guardian credential might identify the holder (guardian) as playing the `next_of_kin` role,
+  and this `next_of_kin` role might be granted a subset of all permissions that are possible
+  for the dependent's identity. A controllership credential for a drone might identify the holder
+  (controller) as playing the `pilot` role, which has different permissions from the
+  `maintenance_crew` role.
 
-    * `basisURI`: Required for guardianship credentials, optional for the other types. This
-    links to a formal definition in the trust framework of a justification for holding
-    identity control status. For guardians, the basisURI might point to a definition of the
-    `blood_relative` or `tribal_member` basis, for example. For controllers, the basisURI
-    might point to a definition of `legal_appointment` or `property_owner`.
+  * `basisURI`: Required for guardianship credentials, optional for the other types. This
+  links to a formal definition in the trust framework of a justification for holding
+  identity control status. For guardians, the basisURI might point to a definition of the
+  `blood_relative` or `tribal_member` basis, for example. For controllers, the basisURI
+  might point to a definition of `legal_appointment` or `property_owner`.
 
   The schema may also include zero or more `constraint.*` fields. These fields would be used
   to limit the time, place, or circumstances in which the proxy may operate.
@@ -326,14 +337,14 @@ credential by the following characteristics:
   or (3*grandparent) do all actions.
 
 1. The credential MAY or MUST contain additional fields under `credentialSubject.holder` that
-  describe the holder (e.g., the holder's name, DID, biometric, etc.). If the credential is
-  based on ZKP/link secret technologies, then these may be unnecessary, because the holder
-  can bind their proxy credential to other credentials that prove who they are. If not, then
-  the credential MUST contain such fields.
+describe the holder (e.g., the holder's name, DID, biometric, etc.). If the credential is
+based on ZKP/link secret technologies, then these may be unnecessary, because the holder
+can bind their proxy credential to other credentials that prove who they are. If not, then
+the credential MUST contain such fields.
 
 1. The credential MUST contain additional fields under `credentialSubject.proxied` that
-  describe the proxied identity (e.g., a dependent's name or biometric; a pet's RFID tag; a
-  drone's serial number).
+describe the proxied identity (e.g., a dependent's name or biometric; a pet's RFID tag; a
+drone's serial number).
 
 ##### Proxy Challenge
 
