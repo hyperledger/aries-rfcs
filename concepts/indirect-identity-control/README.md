@@ -263,9 +263,9 @@ required of all VCs, also includes a reference to this spec:
 1. Its `type` field contains, in addition to "VerifiableCredential", a string in the
 format:
 
-  ![Proxy.form/trust framework/tfver/variant](proxy-cred-name-pat.png)
+    ![Proxy.form/trust framework/tfver/variant](proxy-cred-name-pat.png)
 
-  ...where `form` is one of the letters D (for Delegation), G (for Guardianship), or C
+    ...where `form` is one of the letters D (for Delegation), G (for Guardianship), or C
   (for controllership), `trust framework` is the name that a Proxy Trust
   Framework formally declares for itself, `tfver` is its version, and `variant`
   is a specific schema named in the trust framework. A regex that matches this
