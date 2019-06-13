@@ -155,7 +155,7 @@ only guardianship _duties_ are delegated, this is simple delegation and ceases t
 be guardianship.
 
 Use cases and other specifics of guardianship are explored in greater depth in the
-[Delegation Details](delegation-details.md) doc.
+[Guardianship Details](guardianship-details.md) doc.
 
 #### Controllership
 
@@ -173,6 +173,9 @@ have risks of abuse and complex protections and trust frameworks.
 Unlike guardianship, controlled things usually require minimal privacy. However,
 things that constantly identify their controller(s) in a correlatable way may undermine
 the privacy of controllers in unexpected ways.
+
+Use cases and other specifics of controllership are explored in greater depth in the
+[Controllership Details](controllership-details.md) doc.
 
 ### Solution
 
@@ -205,28 +208,31 @@ guardianship-sample/trust-framework.md) for a simple example).
 It should answer at least the following questions:
 
 1. What is the trust framework's __formal name__, __version__, and __URI__?
-2. In what __geos__ and __legal jurisdictions__ is it valid?
-3. On what __bases__ are proxies appointed? (For guardianship, these might
+(The name cannot include a `/` character due to how it's paired with
+version in [credential `type` fields](#cred-type-field). The version must follow
+[semver](https://semver.org) rules.)
+1. In what __geos__ and __legal jurisdictions__ is it valid?
+1. On what __bases__ are proxies appointed? (For guardianship, these might
 include values like `kinship` and `court_order`. Each basis needs to be formally
 defined, named, and published at a URI, because proxy credentials will reference
 them. This question is mostly irrelevant to delegation, where the basis is
 always an action of the delegator.)
-4. What are the __required and recommended behaviors of a proxy__? How
-will this be enforced?
-5. What __permissions__ vis-a-vis the proxied identity govern proxy actions?
+1. What are the __required and recommended behaviors of a proxy (holder), issuer, and
+verifier__? How will this be enforced?
+1. What __permissions__ vis-a-vis the proxied identity govern proxy actions?
 (For a delegate, these might include values like `sign`, `pay`, or `arrange_travel`.
 For a guardian, these might include values like `financial`, `medical`, `do_not_resuscitate`,
 `foreign_travel`, or `new_relationships`. Like _bases_, permissions need to be
 formally defined and referencable by URI.)
-6. What are possible __constraints__ on a proxy? (Constraints are bound to a
+1. What are possible __constraints__ on a proxy? (Constraints are bound to a
 particular proxies, whereas a permission model is bound to the identity that
 the proxy is controlling. Some constraints might include `geo_radius`,
 `jurisdiction`, `biometric_consent_freshness`, and so forth. These values also
 need to be formally defined and referencable by URI.)
-7. What __auditing mechanisms__ are required, recommended, or allowed?
-8. What __appeal mechanisms__ are required or supported?
-9. What __proxy challeng procedures__ are best practice?
-10. What __freshness rules__ are used for revocation testing and offline mode?
+1. What __auditing mechanisms__ are required, recommended, or allowed?
+1. What __appeal mechanisms__ are required or supported?
+1. What __proxy challenge procedures__ are best practice?
+1. What __freshness rules__ are used for revocation testing and offline mode?
 
 ##### Proxy Credential
 
@@ -239,15 +245,19 @@ credential by the following characteristics:
  required by Verifiable Credentials in general, also includes a reference to this spec:
  "https://github.com/hyperledger/aries-rfcs/concepts/0080-indirect-identity-control".
 
-2. The `type` field contains, in addition to "VerifiableCredential", a string in the
+[cred type field](#cred-type-field)
+2. Its `type` field contains, in addition to "VerifiableCredential", a string in the
 format:
 
-![Proxy/form/trust framework/variant](proxy-cred-name-pat.png)
+
+![Proxy.form/trust framework/tfver/variant](proxy-cred-name-pat.png)
 
 where `form` is one of the letters D (for Delegation), G (for Guardianship), or C
-(for controllership), `trust framework` is the name and version that a Proxy Trust
-Framework formally declares for itself, and `variant` is a specific schema named
-in the trust framework.
+(for controllership), `trust framework` is the name that a Proxy Trust
+Framework formally declares for itself, `tfver` is its version, and `variant`
+is a specific schema named in the trust framework. A regex that matches this
+pattern is: `Proxy[.]([DGC])/([^/]+)/(\d+[^/]*)/(.+)`, and an example of a
+matching string is: `Proxy.G/UNICEF Vulnerable Populations Trust Framework/1.0/ChildGuardian`.
 
 2.
 
