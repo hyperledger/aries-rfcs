@@ -189,7 +189,7 @@ scheme is best suited to circumstances.
 DIDComm messages generally do not need [this feature of JSON-LD](
 https://w3c.github.io/json-ld-syntax/#type-coercion), because there are
 well understood [conventions around date-time datatypes](
-https://github.com/hyperledger/indy-hipe/pull/76), and individual
+../../concepts/0072-didcomm-best-practices/README.md#date-time-conventions), and individual
 RFCs that define each message type can further clarify such subtleties.
 However, it is available on a message-type-definition basis (not ad hoc).
 
