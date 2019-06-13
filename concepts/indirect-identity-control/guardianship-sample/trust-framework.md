@@ -18,7 +18,9 @@ jurisdictions.
 ### Name, Version, Author
 
 This is the "Sovrin ID4All Vulnerable Populations Guardianship Trust Framework", version "1.0".
-The trust framework is abbreviated as "SIVPGTF". It is maintained by the Sovrin ID4All Working Group.
+The trust framework is abbreviated in credential names and elsewhere as "SIVPGTF". It is
+maintained by the Sovrin ID4All Working Group. The guardianship credential schema described here
+is known as a "gcred".
 
 ### Scope
 
@@ -45,12 +47,27 @@ In this framework, guardianship is based on one or more of the following formall
 * `self`: No suitable guardian could be found on another basis, but the dependent needed a guardian,
   so the guardian assumed the status until a better alternative could be found.
 
+### Identifying a guardian
+
+This framework assumes that credentials will use ZKP technology. Thus, no holder attributes are
+embedded in a gcred except for the holder's blinded link secret. During a guardianship challenge,
+the holder should include appropriate identifying evidence based on ZKP credential linking.
+
 ### Identifying a dependent
 
-This framework defines the following formal ways to identify a dependent: `credentialSubject.first_name`,
-`credentialSubject.last_name`, `credentialSubject.birth_date`, `credentialSubject.gender`, `credentialSubject.native_language`,
-`credentialSubject.identifying_marks`, `credentialSubject.photo`, `credentialSubject.iris`, `credentialSubject.fingerprint`. These
-fields should appear in all guardianship credentials conforming to the framework. First name should
+This framework defines the following formal ways to identify a dependent in a gcred:
+
+* `credentialSubject.first_name`
+* `credentialSubject.last_name`
+* `credentialSubject.birth_date`
+* `credentialSubject.gender`
+* `credentialSubject.native_language`
+* `credentialSubject.identifying_marks`
+* `credentialSubject.photo`
+* `credentialSubject.iris`
+* `credentialSubject.fingerprint`
+
+These fields should appear in all gcreds. First name should
 be the name that the dependent acknowledges and answers to, not necessarily the legal first name.
 Last name may be empty if it is unknown. Birth date may be approximate. Photo is required and must
 be a color photo of at least 800x800 pixel resolution, taken at the time the guardianship credential
@@ -79,9 +96,9 @@ Guardians may be assigned some or all of the following formally defined permissi
 * `successor`: Designate a replacement to assume guardian duties.
 * `authorize`: Configure the permissions of self or other guardians.
 
-### Limits
+### Constraints
 
-Besides limits based on permissions, a guardian's privileges may be constrained in the following formal
+A guardian's ability to control the dependent may be constrained in the following formal
 ways by guardianship credentials that use this trust framework:
 
 #### Boundary
@@ -93,27 +110,27 @@ a `:` (colon) character, followed by data. All localized values must describe th
 constraints; if one locale's description is more permissive than another's, the most restrictive
 interpretation must be used. An example might be:
 
-    "limits.boundaries": "|en: West side of Euphrates river, within Baghdad city limits
+    "constraints.boundaries": "|en: West side of Euphrates river, within Baghdad city limits
         |es: lado oeste del río Eufrates, dentro del centro de Bagdad
         |fr: côté ouest de l'Euphrate, dans les limites de la ville de Bagdad
         |ar: الجانب الغربي من نهر الفرات ، داخل حدود مدينة بغداد"
 
 #### Point of Origin and Radius
 
-The `limits.point_of_origin` and `radius` fields are an additional or alternative way to specify
+The `constraints.point_of_origin` and `radius` fields are an additional or alternative way to specify
 a geographical constraint. They must be used together. Point of origin is a string that may use
 latitude/longitude notation (e.g., "@40.4043328,-111.7761829,15z"), or a landmark. Landmarks
 must be localized as described previously. Radius is an integer measured in kilometers.
 
-    "limits.point_of_origin": "|en: Red Crescent Sunrise Camp"
-    "limits.radius_km": 10
+    "constraints.point_of_origin": "|en: Red Crescent Sunrise Camp"
+    "constraints.radius_km": 10
 
 #### Jurisdictions
 
 This is a comma-separated list of legal jurisdictions where the guardianship applies.
 It is also localized:
 
-    "limits.jurisdictions": "|en: EU, India, Bangladesh"
+    "constraints.jurisdictions": "|en: EU, India, Bangladesh"
 
 #### Trigger and Circumstances
 
@@ -126,8 +143,8 @@ without a trigger would require re-evaluation with every guardianship challenge 
 be used as long as an adult is unconscious or diagnosed with dementia, or while
 traveling with a child, for example.
 
-    "limits.trigger": "|en: Death of parent"
-    "limits.circumstances": "|en: While a parent or adult sibling is unavailable, and no
+    "constraints.trigger": "|en: Death of parent"
+    "constraints.circumstances": "|en: While a parent or adult sibling is unavailable, and no
         new guardian has been adjudicated.
         |ar: في حين أن أحد الوالدين أو الأشقاء البالغين غير متوفر ، وليس
                       الوصي الجديد تم الفصل فيه."
@@ -141,8 +158,8 @@ exclusive (as soon as the date and time equals or exceeds end time, the guardian
 becomes invalid). Either value can be used by itself, in addition
 to being used in combination.
 
-    "limits.start_time": "2019-07-01T18:00"
-    "limits.end_time": "2019-08-01"
+    "constraints.startTime": "2019-07-01T18:00"
+    "constraints.endTime": "2019-08-01"
 
 ### Auditing
 
@@ -168,12 +185,18 @@ events are accomplished by generating a JSON document in the following format:
 
 ### Appeal
 
-NGO staff with authoritiy delegated from the NGO acting as guardian, and a council of 5 grandmothers
+NGO staff (who receive delegated authority from the NGO that acts as guardian), and a council of 5 grandmothers
 maintain a balance of powers. Decisions of either group may be appealed to the other. Conformant NGOs
 must identify a resource that can adjudicate an escalated appeal, and this resource must be independent
 in all respects--legal, financial, human, and otherwise--from the NGO. This resource must
 have contact information in the form of a phone number, web site, or email address, and the contact
 info must be provided in the guardianship credential in the `appeal_uri` field.
+
+### Freshness and Offline Operation
+[TODO]
+
+### Revocation
+[TODO]
 
 ### Best Practices
 

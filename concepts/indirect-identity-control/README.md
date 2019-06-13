@@ -55,7 +55,8 @@ Here, we will simply reproduce two diagrams as a summary:
 in this doc, is one that crosses identity boundaries. There is another type
 that happens _within_ an identity, as Alice delegates work to her various
 agents. For the time being, ignore this __intra-identity delegation__; it is
-explored more carefully near the end of the [Delegation Details](delegation-details.md) doc.
+explored more carefully near the end of the [Delegation Details](
+delegation-details.md#infra-identity-delegation) doc.
 
 ### Commonalities
 
@@ -372,6 +373,11 @@ The holder MUST also prove that the proxied identity is correct, to whatever sta
 is required by the trust framework. This can be done by disclosing additional fields
 under `credentialSubject.proxied`, or by proving things about the subject in zero
 knowledge.
+
+[TODO: discuss moments when proxy challenges may be vital; see
+https://docs.google.com/presentation/d/1aq45aUHTOK_WhFEICboXQrp7dalpLm9-MGg77Nsn50s/edit#slide=id.g59fffee7a0_0_39 ]
+
+[TODO: discuss offline mode, freshness, and revocation]
 
 ## Reference
 

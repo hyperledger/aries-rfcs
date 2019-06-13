@@ -78,7 +78,17 @@ name in an official capacity.
 Like [#1](1-departments-of-a-company), but simpler. 3 or 4 people each need signing authority for the LLC,
 so LLC delegates that authority.
 
+### Approaches to recursive delegation
+TODO
+1. Root authority delegates directly at every level.
+2. Follow the chain
+3. Embed the chain
 
+### Revocation
+[TODO]
+
+### Infra-identity Delegation
+TODO
 
 ## Prior Art and References
 
