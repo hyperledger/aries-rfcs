@@ -203,45 +203,19 @@ Details about threading can be found in the [message id and threading](../../con
 
 ## Payments while credential exchange
 
-There is a high probability that some networks would like to use some implementation of utility token for balance in ecosystem. The value flow already presents while CX but it looks one way for simple case: issuer gives value to hodler (credential which can be used by holder for his needs) but doesn’t receive anything back. To resolve this case some utility token may be charged by Issuer from Holder per credential. In general different token flows are possible. Like a holder may provide proof to verifier for some data analysis or other Verifier’s need and in this case Verifier may pay some tokens to Holder.
-So both processes described in this RFC (issuance) and [presentation](../0037-present-proof/README.md) may be tied with tokens exchange.
-Also there is a good chance that token flow may be combined with other message flows, so it may be considered as decorator. This decorator is optional.
+There is a high probability that some networks would like to use some implementation of payment (e.g. utility token) for balance in ecosystem. The value flow already presents while CX but it looks one way for simple case: issuer gives value to hodler (credential which can be used by holder for his needs) but doesn’t receive anything back. To resolve this case some payment may be charged by Issuer from Holder per credential. In general different payment flows are possible. Like a holder may provide proof to verifier for some data analysis or other Verifier’s need and in this case Verifier may pay to Holder.
+So both processes described in this RFC (issuance) and [presentation](../0037-present-proof/README.md) may be tied with payments.
+Also there is a good chance that payment flow may be combined with other message flows, so it may be considered as decorator. This decorator is optional.
 
 ### Payment decorators
-
-These decorators are expected to be specific for network and they are out of subject of this RFC.
-There is a proposal for the decorators in [Indy ecosystem](https://github.com/hyperledger/indy-hipe/pull/129).
-
-#### Payment request
-
-```json
-{
-  ...msg...
-  "~payment-info" : {
-    "@type": ".../payment/request",
-    "price": ""
-  }
-}
-
-```
-
-#### Payment confirmation
-```json
-{
-  ...msg...
-  "~payment-info" : {
-    "@type": ".../payment/receipt",
-    "receipt(s)": ""
-  }
-}
-```
+These decorators are out of subject of this RFC, see [Payment decorators RFC](https://github.com/hyperledger/aries-rfcs/tree/master/features/0075-payment-decorators)
 
 ### Payment flow
 Payment request may be included to Credential Offer msg from Issuer to Holder. And receipt should be provided in this case in Credential Request by Issuer.
-While credential presentation the Verifier may transfer tokens as compensation for Holder for disclosing data. Payment receipt should be included into Presentation Request. Verifier may skip it in first request, but in this case Holder may request payment by sending back Presentation Proposal with appropriate decorator inside it.
+While credential presentation the Verifier may pay to Holder as compensation for Holder for disclosing data. Payment receipt should be included into Presentation Request. Verifier may skip it in first request, but in this case Holder may request payment by sending back Presentation Proposal with appropriate decorator inside it.
 
 ### Limitations
-Smart contracts may be missed in ecosystem, so operation "issue credential after payment received" is not atomic. It’s possible case that malicious issuer will charge tokens first and then will not issue credential in fact. But this situation should be easily detected and appropriate penalty should be applied in such type of networks.
+Smart contracts may be missed in ecosystem, so operation "issue credential after payment received" is not atomic. It’s possible case that malicious issuer will charge first and then will not issue credential in fact. But this situation should be easily detected and appropriate penalty should be applied in such type of networks.
 
 
 ## Negotiation and Preview
