@@ -71,7 +71,7 @@ Below describes the process under which a DID communication message is prepared 
 > Notes
 >1. There are two main situations that an agent will be in prior to preparing a new message.
 >>-  The agent is responding to a message that has just been received and has the context of the sender key of the previous message. In this case, a targeted lookup of the `did-communication` service definition can be done to find the service definition that features the sender key as a recipient key which would ensure that the response was delivered back to the sender.
->>-  The agent is creating a new message to a connection and will use the default `did-communication` service convention for preparation of a message. In this case, the default `did-communication` service description would be used by resolving the lowest priority service definition from the connections DID document.
+>>-  The agent is creating a new message to a connection and will use the default `did-communication` service definition for preparation of a message. In this case, the default `did-communication` service definition would be used by resolving the lowest priority service definition from the connections DID document.
 >
 >2. When preparing this envelope the sender has two main choices to make around properties to include in envelope
 >>- Whether to include sender information
@@ -96,7 +96,7 @@ In the diagram above:
 
 #### Bob's DID document for his Relationship with Alice
 
-Bob’s domain has 3 devices he uses for processing messages - two phones (4 and 5) and a cloud-based agent (6). As well, Bob has one agent that he uses as a mediator (3) that can hold messages for the two phones when they are offline. However, in Bob's relationship with Alice, he ONLY uses one phone (4) and the cloud-based agent (6). Thus the key for device 5 is left out of the DID document (see below). For further privacy preservation, Bob also elects to use a shared domain endpoint (agents-r-us), giving him an extra layer of isolation from correlation. This is represented by the `serviceEndpoint` in the service definition not directly resolving to an endpoint URI rather resolving to another `did-communication` service description which is owned and controlled by the endpoint owner (agents-r-us). 
+Bob’s domain has 3 devices he uses for processing messages - two phones (4 and 5) and a cloud-based agent (6). As well, Bob has one agent that he uses as a mediator (3) that can hold messages for the two phones when they are offline. However, in Bob's relationship with Alice, he ONLY uses one phone (4) and the cloud-based agent (6). Thus the key for device 5 is left out of the DID document (see below). For further privacy preservation, Bob also elects to use a shared domain endpoint (agents-r-us), giving him an extra layer of isolation from correlation. This is represented by the `serviceEndpoint` in the service definition not directly resolving to an endpoint URI rather resolving to another `did-communication` service definition which is owned and controlled by the endpoint owner (agents-r-us). 
 
 Bobs DID document given to Alice
 
