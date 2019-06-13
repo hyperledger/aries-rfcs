@@ -7,29 +7,30 @@
   "expirationDate",
   "credentialStatus", { "id" /*points to rev reg*/, "type": "sovrin rev reg 1.0" }
   "issuer", // <did>
-  "trust_framework", // uri to a website
-  "audit_uri", // constrained by trust framework, but a URI
-  "appeal_uri", // same
+  "trustFramework", // uri to a website
+  "auditURI", // constrained by trust framework, but a URI
+  "appealURI", // same
   "credentialSubject.holder.type", // uri to schema for a holder
   "credentialSubject.holder.role", // "parent" or "grandparent"
-  "credentialSubject.holder.basis_uri", // uri from trust framework that defines which basis justifies the guardianship
-  "credentialSubject.holder.first_name",
-  "credentialSubject.holder.limits.boundaries",
-  "credentialSubject.holder.limits.point_of_origin",
-  "credentialSubject.holder.limits.radius_km",
-  "credentialSubject.holder.limits.jurisdictions",
-  "credentialSubject.holder.limits.trigger",
-  "credentialSubject.holder.limits.circumstances",
-  "credentialSubject.holder.limits.start_time",
-  "credentialSubject.holder.limits.end_time",
-  "credentialSubject.dependent.first_name",
-  "credentialSubject.dependent.permissions", // string of JSON array of grants
-  "credentialSubject.dependent.last_name",
-  "credentialSubject.dependent.birth_date",
-  "credentialSubject.dependent.gender",
-  "credentialSubject.dependent.native_language",
-  "credentialSubject.dependent.identifying_marks",
-  "credentialSubject.dependent.photo",
-  "credentialSubject.dependent.iris",
-  "credentialSubject.dependent.fingerprint",
+  "credentialSubject.holder.basisURI", // uri from trust framework that defines which basis justifies the guardianship
+  "credentialSubject.holder.firstName",
+  "credentialSubject.holder.constraints.boundaries",
+  "credentialSubject.holder.constraints.pointOfOrigin",
+  "credentialSubject.holder.constraints.radiusKM",
+  "credentialSubject.holder.constraints.jurisdictions",
+  "credentialSubject.holder.constraints.trigger",
+  "credentialSubject.holder.constraints.circumstances",
+  "credentialSubject.holder.constraints.startTime",
+  "credentialSubject.holder.constraints.endTime",
+  "credentialSubject.proxied.type", // uri to schema for a dependent
+  "credentialSubject.proxied.permissions", // string of JSON array of grants
+  "credentialSubject.proxied.firstName",
+  "credentialSubject.proxied.lastName",
+  "credentialSubject.proxied.birthDate",
+  "credentialSubject.proxied.gender",
+  "credentialSubject.proxied.nativeLanguage",
+  "credentialSubject.proxied.identifyingMarks",
+  "credentialSubject.proxied.photo",
+  "credentialSubject.proxied.iris",
+  "credentialSubject.proxied.fingerprint"
 ]

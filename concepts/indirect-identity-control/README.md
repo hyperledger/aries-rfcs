@@ -146,7 +146,7 @@ has that status. Not all bases are equally strong; a child lacking an obvious pa
 may receive a temporary guardian, but this guardian's status could change if a parent
 is found. Having a formal basis allows conflicting guardianship claims to be adjudicated.
 
-    ![eval guardian](eval-guardian.png)
+![eval guardian](eval-guardian.png)
 
 Either the guardian _role_ or specific guardianship _duties_ may be delegated. An
 example of the former is when a parent leaves on a long, dangerous trip, and appoints
@@ -164,7 +164,8 @@ Use cases and other specifics of guardianship are explored in greater depth in t
 [![controllership](controllership.png)](controllership-details.md)
 
 Controllership shares nearly all bolded features with delegation. It is usually
-transparent because things are assumed not to control themselves.
+transparent because things are usually known not to be identity owners in their
+interactions, and things are assumed not to control themselves.
 
 Like guardianship, controllership has a basis. Usually, it is rooted in property
 ownership, but occasionally it might derive from court appointment. Also like
@@ -211,8 +212,8 @@ It should answer at least the following questions:
 
 1. What is the trust framework's __formal name__, __version__, and __URI__?
 (The name cannot include a `/` character due to how it's paired with
-version in [credential `type` fields](#cred-type-field). The version must follow
-[semver](https://semver.org) rules.)
+version in credential `type` fields (see [Proxy Credential](#proxy-credential), below).
+The version must follow [semver](https://semver.org) rules.)
 1. In what __geos__ and __legal jurisdictions__ is it valid?
 1. On what __bases__ are proxies appointed? (For guardianship, these might
 include values like `kinship` and `court_order`. Each basis needs to be formally
@@ -244,76 +245,140 @@ format (JSON-LD, JWT, Sovrin ZKP, etc). It is recognizable as a proxy
 credential by the following characteristics:
 
 1. Its `@context` field, besides including the "https://www.w3.org/2018/credentials/v1"
- required by Verifiable Credentials in general, also includes a reference to this spec:
+ required of all VCs, also includes a reference to this spec:
  "https://github.com/hyperledger/aries-rfcs/concepts/0080-indirect-identity-control".
 
-[cred type field](#cred-type-field)
-2. Its `type` field contains, in addition to "VerifiableCredential", a string in the
+1. Its `type` field contains, in addition to "VerifiableCredential", a string in the
 format:
-
 
 ![Proxy.form/trust framework/tfver/variant](proxy-cred-name-pat.png)
 
-where `form` is one of the letters D (for Delegation), G (for Guardianship), or C
+...where `form` is one of the letters D (for Delegation), G (for Guardianship), or C
 (for controllership), `trust framework` is the name that a Proxy Trust
 Framework formally declares for itself, `tfver` is its version, and `variant`
 is a specific schema named in the trust framework. A regex that matches this
 pattern is: `Proxy[.]([DGC])/([^/]+)/(\d+[^/]*)/(.+)`, and an example of a
 matching string is: `Proxy.G/UNICEF Vulnerable Populations Trust Framework/1.0/ChildGuardian`.
 
-2.
+1. The metadata fields for the credential include `trustFrameworkURI" (the value of which is
+a URI linking to the relevant trust framework), `auditURI` (the value of which is a URI linking
+to a third-party auditing service, and which may be constrained or empty as specified in the
+trust framework), and `appealURI` (the value of which is a URI linking to an arbitration or
+adjudication authority for the credential, and which may be constrained or empty as specified
+in the trust framework).
+
+1. The `credentialSubject` section of the credential describes a subject called `holder` and
+a subject called `proxied`. The holder is the delegate, guardian, or controller; the proxied
+is the delegator, dependent, or controlled thing.
+
+1. `credentialSubject.holder.type` must be a URI pointing to a schema for `credentialSubject.holder` as
+defined in the trust framework. The schema must include the following fields:
+
+    * `role`: A string naming the role that the holder plays in the permissioning scheme of
+    the dependent. These roles must be formally defined in the trust framework. For example, a
+    guardian credential might identify the holder (guardian) as playing the `next_of_kin` role,
+    and this `next_of_kin` role might be granted a subset of all permissions that are possible
+    for the dependent's identity. A controllership credential for a drone might identify the holder
+    (controller) as playing the `pilot` role, which has different permissions from the
+    `maintenance_crew` role.
+
+    * `basisURI`: Required for guardianship credentials, optional for the other types. This
+    links to a formal definition in the trust framework of a justification for holding
+    identity control status. For guardians, the basisURI might point to a definition of the
+    `blood_relative` or `tribal_member` basis, for example. For controllers, the basisURI
+    might point to a definition of `legal_appointment` or `property_owner`.
+
+The schema may also include zero or more `constraint.*` fields. These fields would be used
+to limit the time, place, or circumstances in which the proxy may operate.
+
+1. `credentialSubject.proxied.type` must be a URI pointing to a schema for `credentialSubject.proxied` as
+defined in the trust framework. The schema must include a `permissions` field. This field
+contains an array of __grants__, each of which is a JSON object in the form:
+
+![{"let": recipient, "do": actions}](grant.png)
+
+...where `recipient` is one of the following:
+
+    * A named role such as `pilot` (going back to the controllership-of-a-drone example above)
+    or `next_of_kin` (going back to the guardianship example above).
+    * A JSON "n-of" object in the form:
+
+    ![{"n": 3, "of": [recipients]}](n-of.png)
+
+    ...where recipients allow recursion, and `n` is a positive
+    integer <= the size of the recipients array. If n == 1, then this is effectively a
+    boolean OR; any member of the recipients group can independently take the action.
+    If n == length of recipients array, then this is effectively a boolean AND; all
+    members of the recipients group must agree. If n is some other value, then a subset
+    of the specified size must agree.
+
+...and `actions` is an array of actions defined in the trust framework. This could include
+actions like piloting a drone, changing a child's legal name, etc.
+
+An example of the `credentialSubject.proxied.permissions` field might be:
+
+![permissions example](permissions.png)
+
+This says: Let a guardian who has the role of parent perform the "medical_care" and "school"
+actions for the dependent. Let a sibling perform the "school" action. Let either (parent+grandparent)
+or (3*grandparent) do all actions.
+
+1. The credential MAY or MUST contain additional fields under `credentialSubject.holder` that
+describe the holder (e.g., the holder's name, DID, biometric, etc.). If the credential is
+based on ZKP/link secret technologies, then these may be unnecessary, because the holder
+can bind their proxy credential to other credentials that prove who they are. If not, then
+the credential MUST contain such fields.
+
+1. The credential MUST contain additional fields under `credentialSubject.proxied` that
+describe the proxied identity (e.g., a dependent's name or biometric; a pet's RFID tag; a
+drone's serial number).
+
+##### Proxy Challenge
+
+A proxy challenge is an interaction in which the proxy must justify the control they are exerting
+over the proxied identity. The heart of the challenge is a request for a verifiable presentation
+based on a proxy credential, followed by an evaluation of the evidence. This evaluation includes
+traditional credential verification, but also a comparison of a proxy's role (`credentialSubject.holder.role`)
+to permissions (`credentialSubject.proxied.permissions`), and a comparison of circumstances
+to constraints (`credentialSubject.holder.constraints.*`). It may also involve the creation of
+an audit trail, depending ont he value of the `auditURI` field.
+
+During the verifiable presentation, the holder MUST disclose all of the following fields:
+
+* `@context`
+* `type`
+* `issuanceDate` (if present in schema)
+* `expirationDate` (if present in schema)
+* `credentialStatus` (if present in schema)
+* `issuer`
+* `trustFramework`
+* `auditURI`
+* `appealURI`
+* `credentialSubject.holder.type`
+* `credentialSubject.holder.role`
+* `credentialSubject.holder.basisURI`
+* `credentialSubject.holder.constraints.*`
+* `credentialSubject.proxied.type`
+* `credentialSubject.proxied.permissions`
+
+In addition, the holder MUST prove that the proxy is the intended holder of the
+credential, to whatever standard is required by the trust framework. This can be
+done by disclosing additional fields under `credentialSubject.holder`, or by proving
+things about the holder in zero knowledge, if the credential supports ZKPs. In the
+latter case, proofs about the holder could also come from other credentials in the
+holder's possession, linked to the proxy credential through the link secret.
+
+The holder MUST also prove that the proxied identity is correct, to whatever standard
+is required by the trust framework. This can be done by disclosing additional fields
+under `credentialSubject.proxied`, or by proving things about the subject in zero
+knowledge.
 
 ## Reference
 
-Provide guidance for implementers, procedures to inform testing,
-interface definitions, formal function prototypes, error codes,
-diagrams, and other technical details that might be looked up.
-Strive to guarantee that:
+A complete sample of a guardianship trust framework and credential schema
+are attached for reference. Please also see the details about each form of
+indirect identity control:
 
-- Interactions with other features are clear.
-- Implementation trajectory is well defined.
-- Corner cases are dissected by example.
-
-## Drawbacks
-
-Why should we *not* do this?
-
-## Rationale and alternatives
-
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not
-choosing them?
-- What is the impact of not doing this?
-
-## Prior art
-
-Discuss prior art, both the good and the bad, in relation to this proposal.
-A few examples of what this can include are:
-
-- Does this feature exist in other SSI ecosystems and what experience have
-their community had?
-- For other teams: What lessons can we learn from other attempts?
-- Papers: Are there any published papers or great posts that discuss this?
-If you have some relevant papers to refer to, this can serve as a more detailed
-theoretical background.
-
-This section is intended to encourage you as an author to think about the
-lessons from other implementers, provide readers of your proposal with a
-fuller picture. If there is no prior art, that is fine - your ideas are
-interesting to us whether they are brand new or if they are an adaptation
-from other communities.
-
-Note that while precedent set by other communities is some motivation, it
-does not on its own motivate an enhancement proposal here. Please also take
-into consideration that Aries sometimes intentionally diverges from common
-identity features.
-
-## Unresolved questions
-
-- What parts of the design do you expect to resolve through the
-enhancement proposal process before this gets merged?
-- What parts of the design do you expect to resolve through the
-implementation of this feature before stabilization?
-- What related issues do you consider out of scope for this 
-proposal that could be addressed in the future independently of the
-solution that comes out of this doc?
+* Delegation Details
+* Guardianship Details
+* Controllership Details
