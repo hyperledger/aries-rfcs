@@ -123,7 +123,9 @@ Use cases and other specifics of delegation are explored in greater depth in the
 
 [![guardianship](guardianship.png)](guardianship-details.md)
 
-Guardianship has all the bolded properties of delegation. It also adds some
+Guardianship has all the bolded properties of delegation: transparent or opaque styles,
+constraints, revocation, the need to not mix identity data, the need for a
+trust framework, and the potential for recursive extensibility. It also adds some
 unique considerations.
 
 Since guardianship does not always derive from dependent consent (that is,
@@ -144,7 +146,7 @@ has that status. Not all bases are equally strong; a child lacking an obvious pa
 may receive a temporary guardian, but this guardian's status could change if a parent
 is found. Having a formal basis allows conflicting guardianship claims to be adjudicated.
 
-![eval guardian](eval-guardian.png)
+    ![eval guardian](eval-guardian.png)
 
 Either the guardian _role_ or specific guardianship _duties_ may be delegated. An
 example of the former is when a parent leaves on a long, dangerous trip, and appoints
