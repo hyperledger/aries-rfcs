@@ -1,10 +1,10 @@
-# Aries RFC
+# ![Aries RFCs](collateral/aries-rfcs-logo.png)
 
 This repo holds RFCs for the Aries project. They describe important
 topics ([not minor details](#do-you-need-an-RFC)) that we want to
 standardize across the Aries ecosystem.
 
-See [this doc](index.md) for a current listing of all RFCs and their statuses.
+See [the RFC Index](index.md) for a current listing of all RFCs and their statuses.
 
 There are 2 types of RFCs:
 
