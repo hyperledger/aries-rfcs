@@ -1,4 +1,4 @@
-# Trust Ping Protocol
+# 0048: Trust Ping Protocol 1.0
 - Authors: Daniel Hardman <daniel.hardman@gmail.com>
 - Start Date: 2018-12-11
 

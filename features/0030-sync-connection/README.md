@@ -1,4 +1,4 @@
-# 0030: Sync Connection 1.0
+# 0030: Sync Connection Protocol 1.0
 - Authors: Daniel Hardman <daniel.hardman@gmail.com>, Devin Fisher <devin.fisher@evernym.com>, Sam Curren <sam@sovrin.org>
 
 ## Status

@@ -1,4 +1,4 @@
-# DID communication DID document conventions
+# 0067: DIDComm DID document conventions
 - Author: Tobias Looker (tobias.looker@mattr.global), Stephen Curran (swcurran@gmail.com)
 - Start Date: 04/15/2019
 

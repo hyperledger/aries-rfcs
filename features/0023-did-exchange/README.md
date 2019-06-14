@@ -1,4 +1,4 @@
-# 0023: DID Exchange Protocol
+# 0023: DID Exchange Protocol 1.0
 
 - Authors: Ryan West <ryan.west@sovrin.org>, Daniel Bluhm <daniel.bluhm@sovrin.org>, Matthew Hailstone, Stephen Curran, Sam Curren <sam@sovrin.org>
 - Start Date: 2018-6-29

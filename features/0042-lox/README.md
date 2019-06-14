@@ -1,4 +1,4 @@
-# LOX: A more secure pluggable framework for protecting wallet keys
+# 0042: LOX -- A more secure pluggable framework for protecting wallet keys
 - Author: Michael Lodder (mike@sovrin.org)
 - Start Date: 2019-05-30
 

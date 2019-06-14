@@ -1,4 +1,4 @@
-# 0043 l10n (locali[s|z]ation)
+# 0043: l10n (Locali[s|z]ation)
 - Author: Daniel Hardman
 - Start Date: 2018-11-30
 
