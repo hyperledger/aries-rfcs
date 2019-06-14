@@ -21,7 +21,7 @@ for top_path in top_paths:
         })
 
 #example status line - Status: [ACCEPTED](/README.md#rfc-lifecycle)
-status_re = pattern = re.compile(r'Status:[ /[]*(\w+)')
+status_re = pattern = re.compile(r'^\s*(?:[-*]\s*)?Status:[ \t/[]*(\w+)', re.I | re.M)
 
 for rfc in rfcs:
 
@@ -29,12 +29,15 @@ for rfc in rfcs:
     rfc['number'], _, rfc['title'] = rfc['number-title'].partition("-")
 
     # read README file for status
-    with open(rfc['path'], "r", encoding='utf-8') as rfc_text:
-        for line in rfc_text.readlines():
-            for matched_object in status_re.finditer(line):
-                rfc['status'] = matched_object.group(1)
+    with open(rfc['path'], "rt", encoding='utf-8') as f:
+        rfc_text = f.read()
 
-    print(rfc)
+    m = status_re.search(rfc_text)
+    if m:
+        rfc['status'] = m.group(1).upper()
+    else:
+        print("Didn't find status line in %s" % rfc['path'])
+    #print(rfc)
 
 rfcs.sort(key=itemgetter('number'))
 #group rfcs by status

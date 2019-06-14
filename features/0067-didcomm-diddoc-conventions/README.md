@@ -3,7 +3,7 @@
 - Start Date: 04/15/2019
 
 ## Status
-- Status: [![proposed](/proposed.png)](/README.md#hipe-lifecycle)
+- Status: [PROPOSED](/README.md#hipe-lifecycle)
 - Status Date: 06/10/2019
 - Status Note: This revises the former [INDY HIPE](https://github.com/hyperledger/indy-hipe/pull/92)
 
