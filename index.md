@@ -42,8 +42,9 @@
 * [0047: json-ld-compatibility](concepts/0047-json-ld-compatibility/README.md)
 * [0048: trust-ping](features/0048-trust-ping/README.md)
 * [0049: repudiation](concepts/0049-repudiation/README.md)
-* [0050: wallets](concepts/0050-wallets/README.md)
+* [0050: wallets](concepts/0050-wallets/README.md) 
 
 ## Status: ADOPTED
+
 
 ## Status: SUPERSEDED
