@@ -1,4 +1,4 @@
-# 0037: Present Proof
+# 0037: Present Proof Protocol 1.0
 
 - Author: Nikita Khateev
 - Start Date: 2019-01-30

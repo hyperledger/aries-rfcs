@@ -1,4 +1,4 @@
-# 0035: Report Problem 1.0
+# 0035: Report Problem Protocol 1.0
 - Author: Stephen Curran <swcurran@cloudcompass.ca>, Daniel Hardman <daniel.hardman@gmail.com>
 - Start Date: 2018-11-26
 

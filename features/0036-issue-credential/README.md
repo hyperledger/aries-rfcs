@@ -1,4 +1,4 @@
-# 0036: Issue Credential
+# 0036: Issue Credential Protocol 1.0
 
 - Author: Nikita Khateev
 - Start Date: 2019-01-30

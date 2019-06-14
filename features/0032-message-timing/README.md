@@ -1,4 +1,4 @@
-# 0032 Message Timing
+# 0032: Message Timing
 - Authors: Daniel Hardman <daniel.hardman@gmail.com>
 - Start Date: 2018-12-11
 

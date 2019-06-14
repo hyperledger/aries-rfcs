@@ -1,4 +1,4 @@
-# 0025: Agent Transports
+# 0025: DIDComm Transports
 - Author: Sam Curren <sam@sovrin.org>
 - Start Date: 2019-02-26
 
