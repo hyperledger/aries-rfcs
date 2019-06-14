@@ -17,7 +17,7 @@ DIDCom-over-XMPP enables:
 
 - Initiation, use, maintenance and termination of a trusted electronic relationship
 - DIDCom agents being available for incoming DIDCom messages despite being behind a firewall
-- Binding of that relationship to a human-to-human communication channel
+- Binding of that relationship to a human-to-human communication channel 
 
 and all of this in spite of the presence of firewalls.
 
