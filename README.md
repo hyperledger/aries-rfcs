@@ -89,7 +89,9 @@ is a good sign that you're on the right track.
     by figuring out what the next PR number will be). Rename your folder from <your folder name>
     to <your 4-digit number>-<your folder name>. At the top of your README.md, modify the title
     so it is in the form: <your 4-digit number>: Friendly Version of Your Title. Commit
-    and push your changes.
+    your changes.
+  - In the root of the repo, run `python code/generate_index.py` to update the index
+    with your new RFC. Commit the updated version of /index.md and push your changes.
   - Submit a pull request.
 
 Make sure that all of your commits satisfy the [DCO requirements](
