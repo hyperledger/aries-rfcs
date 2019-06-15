@@ -84,8 +84,8 @@ is a good sign that you're on the right track.
     design, or are disingenuous about the drawbacks or alternatives tend to be
     poorly received. You can add supporting artifacts, such as diagrams and sample
     data, in the RFC's folder.
-  - Assign a number to your RFC. Get the number by loading [this web page](
-    https://dhh1128.github.io/next-aries-rfc-num/) (or, if you want to do it the hard way,
+  - Assign a number to your RFC. Get the number by loading <a target="rfcnum"
+    href="https://dhh1128.github.io/next-aries-rfc-num/">this web page</a> (or, if you want to do it the hard way,
     by figuring out what the next PR number will be). Rename your folder from <your folder name>
     to <your 4-digit number>-<your folder name>. At the top of your README.md, modify the title
     so it is in the form: <your 4-digit number>: Friendly Version of Your Title. Commit
