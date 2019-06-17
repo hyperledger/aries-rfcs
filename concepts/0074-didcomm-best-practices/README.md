@@ -4,11 +4,11 @@
 
 ## Status
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: (date of last status change)
+- Status Date: 2019-06-10
 - Status Note: This captures some tribal knowledge from the Indy
 community. However, it is by no means uniformly accepted inside
 that group, and it has never been shared in a larger context. Therefore,
-the RFC is currently fodder for discussion and is not normative yet.
+the RFC is currently fodder for discussion.
 
 ## Summary
 
