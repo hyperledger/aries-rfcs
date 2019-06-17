@@ -11,7 +11,8 @@ There are 2 types of RFCs:
 * RFCs that describe individual features (the [/features](./features) folder)
 * RFCs that explain concepts underpinning many features (the [/concepts](./concepts) folder)
 
-RFCs are for developers *building on* Aries. They don't provide guidance on how Aries implements features internally; individual Aries repos have design docs for that.
+RFCs are for developers *building on* Aries. They don't provide guidance on how Aries
+implements features internally; individual Aries repos have design docs for that.
 
 ### RFC Lifecycle
 
@@ -19,17 +20,27 @@ RFCs go through a standard lifecycle:
 
 ![lifecycle](lifecycle.png)
 
-* To __propose__ an RFC, [raise a PR](#how-to-propose-an-RFC) against this repo. Proposed RFCs are considered a Work in Progress.
+* To __propose__ an RFC, [raise a PR](#how-to-propose-an-RFC) against this repo. Proposed
+RFCs are considered a "work in progress", even after they are merged. In other words, they
+haven't been endorsed by the community yet, but they seem like reasonable ideas worth
+exploring.
+
 Status => PROPOSED
 
-* To get an RFC __accepted__ or merged, [build consensus](#how-to-get-an-RFC-accepted)
-  for your RFC on [chat](https://chat.hyperledger.org/channel/aries) and in community meetings. RFCs are merged as soon as the community thinks they reasonably embody an idea worth standardizing. An accepted RFC is incubating on a standards track. Status => ACCEPTED
+* To get an RFC __accepted__, [build consensus](#how-to-get-an-RFC-accepted)
+for your RFC on [chat](https://chat.hyperledger.org/channel/aries) and in community
+meetings. An accepted RFC is incubating on a standards track; the community has decided
+to polish it and is exploring or pursuing implementation.
+
+Status => ACCEPTED
 
 * To get an RFC __adopted__, [socialize and implement](#how-to-get-an-rfc-adopted).
 Once a RFC has momentum, it is formally given the "adopted" status. This happens
 when implementations accumulate, or when the mental model it advocates has begun
 to permeate our discourse. In other words, adoption is acknowledgment of a _de facto_
-standard. Status => ADOPTED
+standard.
+
+Status => ADOPTED
 
 * To __refine__ an RFC, propose changes to it through additional PRs. Typically
   these changes are driven by experience that accumulates during or after adoption.
@@ -74,6 +85,8 @@ is a good sign that you're on the right track.
 
   - Fork [the RFC repo](https://github.com/hyperledger/aries-RFC).
   - Pick a descriptive folder name for your RFC. Don't pick a number yet.
+    See [Best Practices: RFC Naming](../0074-didcomm-best-practices/README.md#rfc-naming)
+    for guidance.
   - Decide which parent folder is appropriate for your RFC.
     If it is about a specific protocol or decorator or feature, its parent
     should be /features; if it is about a concept that will be used in many
@@ -83,15 +96,21 @@ is a good sign that you're on the right track.
     convincing motivation, demonstrate an understanding of the impact of the
     design, or are disingenuous about the drawbacks or alternatives tend to be
     poorly received. You can add supporting artifacts, such as diagrams and sample
-    data, in the RFC's folder.
+    data, in the RFC's folder. Make sure you follow [community-endorsed best
+    practices](../0074-didcomm-best-practices/README.md).
   - Assign a number to your RFC. Get the number by loading <a target="rfcnum"
-    href="https://dhh1128.github.io/next-aries-rfc-num/">this web page</a> (or, if you want to do it the hard way,
-    by figuring out what the next PR number will be). Rename your folder from
+    href="https://dhh1128.github.io/next-aries-rfc-num/">this web page</a> (or,
+    if you want to do it the hard way, by inspecting open and closed PRs against
+    this repo to figure out what the next PR number will be). Rename your folder from
     `<your folder name>` to `<your 4-digit number>-<your folder name>`. At the
     top of your README.md, modify the title so it is in the form: `<your 4-digit
     number>: Friendly Version of Your Title`. Commit your changes.
   - In the root of the repo, run `python code/generate_index.py` to update the index
-    with your new RFC. Commit the updated version of /index.md and push your changes.
+    with your new RFC.
+  - In the root of your repo, run 'pytest code` to see whether your RFC passes all
+    automated tests. The RFC tests are simple. They just check for things like
+    naming conventions and hyperlink correctness.
+  - Commit the updated version of /index.md and push your changes.
   - Submit a pull request.
 
 Make sure that all of your commits satisfy the [DCO requirements](

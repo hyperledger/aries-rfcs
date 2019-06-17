@@ -96,6 +96,26 @@ formally define abbreviations or acronyms for terms and then use the short forms
 However, we don't value terseness so much that we are willing to give up clarity. Abbreviating
 "wallet" as "wal" or "agent" as "ag" is quirky and discouraged.
 
+#### RFC naming
+
+RFCs that define a protocol should be named in the form `<do something>-protocol`, where
+`<do-something>` is a verb phrase like `issue-credential`, or possibly a noun phrase like
+`did-exchange`--something that makes the theme of the protocol obvious. The intent is to
+be clear; a protocol name like "connection" is [too vague because you can do lots of things
+with connections](https://docs.google.com/presentation/d/11UVwJ2xqMmXyXr2BVsjz53S-tbMUhD1tmkhzfN7KMRw/edit#slide=id.g5b1be5d0c1_0_66).
+
+Protocol RFCs need to be [versioned thoughtfully](../../concepts/0003-protocols/semver.md).
+However, we do not put version numbers in a protocl RFC's folder name. Rather, the RFC
+folder contains all versions of the protocol, with the latest version documented in
+README.md, and earlier versions documented in subdocs named according to version, as
+in `version-0.9.md` or similar. The main README.md should contain a section of links
+to previous versions. This allows the most natural permalink for a protocol to be a link
+to the current version, but it also allows us to link to previous versions explicitly
+if we need to.
+
+RFCs that define a decorator should be named in the form `<decorator name>-decorator`, as
+in `timing-decorator` or `trace-decorator`.
+
 ### JSON
 
 Json is a very flexible data format. This can be nice, but it can also lead to data
