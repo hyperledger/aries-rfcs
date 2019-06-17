@@ -35,10 +35,9 @@ to polish it and is exploring or pursuing implementation.
 
 #### Status == ADOPTED
 To get an RFC __adopted__, [socialize and implement](contributing.md#how-to-get-an-rfc-adopted).
-Once a RFC has momentum, it is formally given the "adopted" status. This happens
-when implementations accumulate, or when the mental model it advocates has begun
-to permeate our discourse. In other words, adoption is acknowledgment of a _de facto_
-standard.
+An RFC gets this status once it has significant momentum--when implementations accumulate,
+or when the mental model it advocates has begun to permeate our discourse. In other words,
+adoption is acknowledgment of a _de facto_ standard.
 
 To __refine__ an RFC, propose changes to it through additional PRs. Typically
 these changes are driven by experience that accumulates during or after adoption.
