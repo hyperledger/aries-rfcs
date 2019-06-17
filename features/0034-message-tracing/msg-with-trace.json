@@ -1,0 +1,8 @@
+
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/route/1.0/forward",
+  "@id": "98fd8d72-80f6-4419-abc2-c65ea39d0f38",
+  "msg": "U2VlIHRoZSB3aXJlIG1lc3NhZ2VzIEhJUEUgZm9yIGRldGFpbHMgcGFja2luZyBhbmQgZW5jcnlwdGluZy4=",
+  "~trace": "http://example.com/tracer"
+}
+

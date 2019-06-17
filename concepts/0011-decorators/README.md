@@ -97,15 +97,13 @@ and the solution is the `~thread` decorator, which can be added to any response:
 }
 ```
 This chunk of JSON is defined independent of any particular message schema, but
-[is understood to be available in all DIDComm schemas](
-https://github.com/hyperledger/indy-hipe/blob/3d8ec6c522cacaaef20b3a999f3c75b5b1217b70/text/json-ld-compatibility/README.md#decorators
-).
+[is understood to be available in all DIDComm schemas](../0047-json-ld-compatibility/README.md#decorators).
 
 ### Basic Conventions
 
 Decorators are defined in RFCs that document a general pattern such as [message threading RFC](
 ../0008-message-id-and-threading/README.md)
-or [message localization](https://github.com/hyperledger/indy-hipe/pull/64).
+or [message localization](../../features/0043-l10n/README.md).
 The documentation for a decorator explains its semantics and offers examples.
 
 Decorators are recognized by name. The name must begin with the `~` character (which
@@ -146,7 +144,7 @@ Namespacing *is also* supported, as we may discover legitimate uses. When
 namespaces are desired, dotted name notation is used, as in
 `~mynamespace.mydecoratorname`. We may elaborate this topic more in the future.
 
-Decorators are orthogonal to [JSON-LD constructs in DIDComm messages](https://github.com/hyperledger/indy-hipe/pull/83).
+Decorators are orthogonal to [JSON-LD constructs in DIDComm messages](../0047-json-ld-compatibility/README.md).
 
 ### Decorator Scope
 
@@ -176,7 +174,7 @@ targets:
   that the field *values* in a concrete instance of a decorator applies to all instances
   of a message family. The localization pattern contemplates this usage as a way to
   declare default localization semantics. 
-* [**Message Type**](https://github.com/hyperledger/indy-hipe/blob/master/text/0021-message-types/README.md):
+* [**Message Type**](../0020-message-types/README.md):
   A decorator can be declared in the documentation on a specific message
   type. If this happens, semantics of the decorator on the message type should be
   understood as overriding or enriching the semantics of that same decorator on the
@@ -205,9 +203,9 @@ This section of this RFC will be kept up-to-date with a list of globally accepte
 decorators, and links to the RFCs that define them.
 
 * [`~thread`](../0008-message-id-and-threading/README.md): provide request/reply and threading semantics
-* [`~timing`](https://github.com/hyperledger/indy-hipe/pull/68): timestamps, expiration, elapsed time
-* [`~trace`](https://github.com/hyperledger/indy-hipe/pull/60): collaborative debugging and monitoring
-* [`~l10n`](https://github.com/hyperledger/indy-hipe/pull/64): localization support
+* [`~timing`](../../features/0032-message-timing/README.md): timestamps, expiration, elapsed time
+* [`~trace`](../../features/0034-message-tracing/README.md): collaborative debugging and monitoring
+* [`~l10n`](../../features/0043-l10n/README.md): localization support
  
 
 ## Drawbacks

@@ -13,6 +13,11 @@ By convention, our community describes state and sequence rules using the
 concept of state machines, and we encourage developers who implement
 protocols to build them that way.
 
+Among other benefits, this helps with error handling: when one agent
+sends a [`problem-report`](../../features/0035-report-problem/README.md)
+message to another, the message can make it crystal clear which state it
+has fallen back to as a result of the error.
+
 Many developers will have encountered a formal definition of this concept as
 they wrote parsers or worked on other highly demanding tasks, and may worry
 that state machines are heavy and intimidating. But as they are used in

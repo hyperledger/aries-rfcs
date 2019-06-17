@@ -9,9 +9,9 @@
       "filename": "doorway.jpg",
       "byte_count": 98112,
       "lastmod_time": "2018-12-21 18:24:07Z",
-      "sha256": "f8dca1d901d18c802e6a8ce1956d4b0d17f03d9dc5e4e1f618b6a022153ef373",
       "description": "view from doorway, facing east, with lights off",
       "data": {
+        "sha256": "f8dca1d901d18c802e6a8ce1956d4b0d17f03d9dc5e4e1f618b6a022153ef373",
         "links": ["https://ibb.co/TtgKkZY"]
       }
     }

@@ -1,4 +1,4 @@
-# 0017 Attachments
+# 0017: Attachments
 - Author: Daniel Hardman <daniel.hardman@gmail.com>, Sam Curren
 - Start Date: 2018-12-24
 
@@ -402,6 +402,8 @@ refer to the attachment later in the thread, in error messages, and so forth.
 Because `@id` is used to compose URIs, it is recommended that this
 name be brief and avoid spaces and other characters that require URI
 escaping.
+
+* `description`: An optional human-readable description of the content.
 
 * `filename`: A hint about the name that might be used if this attachment is
 persisted as a file. It is not required, and need not be unique. If this field

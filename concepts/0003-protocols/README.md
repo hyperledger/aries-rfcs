@@ -73,23 +73,23 @@ decisions and and react to them.
 
 The most common protocol style in DID Communication is __request-response__.
 This style involve two *parties*, with the `requester` making the first move,
-and the `responder` completing the interaction. The [Protocol Discovery Protocol](
-https://github.com/hyperledger/indy-hipe/pull/73) uses this style.
+and the `responder` completing the interaction. The [Discover Feature Protocol](
+../../features/) uses this style.
 
 ![request-response](request-response.png)
 
 A second common pattern that's also important is __notification__. This style also
 involves two parties, but it is one-way: the `notifier` emits a message,
 and the protocol ends when the `notified` receives it. The [ACK Protocol](
-https://github.com/hyperledger/indy-hipe/pull/77) and the [Problem Report
-Protocol](https://github.com/hyperledger/indy-hipe/pull/65) use this style.
+../../features/0015-acks/README.md) and the [Report Problem
+Protocol](../../features/0035-report-problem/README.md) use this style.
 
 ![notification](notification.png)
 
-However, more complex protocols exist. The [Introductions Protocol](
-https://github.com/hyperledger/indy-hipe/pull/110) involves three parties,
-not two. When the [Connection Management Protocol](
-https://github.com/hyperledger/indy-hipe/pull/104) includes organizations, it
+However, more complex protocols exist. The [Introduce Protocol](
+../../features/0028-introduce/README.md) involves three parties,
+not two. When the [Connect Protocol](
+../../features/0023-connect/README.md) includes organizations, it
 may involve dozens of *participants*, and it has cycles and other complex
 state evolution.
 
@@ -127,17 +127,17 @@ a superprotocol from another (as when protocols are nested at least 3 deep).
 ![super- and subprotocols](super-sub.png)
 
 Commonly, protocols wait for subprotocols to complete, and then they continue.
-A good example of this is [ACKs](../0015-acks/README.md),
+A good example of this is [ACKs](../../features/0015-acks/README.md),
 which are often used as a discrete step in a larger flow.
 
 In other cases, a subprotocol is not "contained" inside its superprotocol.
 Rather, the superprotocol triggers the subprotocol, then continues in parallel,
-without waiting for the subprotocol to complete. In the [introduction protocol](
-https://github.com/hyperledger/indy-hipe/blob/790987b9/text/introductions/README.md),
+without waiting for the subprotocol to complete. In the [introduce protocol](
+../../features/0028-introduce/README.md),
 the final step is to begin a connection protocol between the two introducees--
-but [the introduction superprotocol completes when the connection subprotocol
+but [the introduction superprotocol completes when the connect subprotocol
 *starts*, not when it *completes*](
-https://github.com/hyperledger/indy-hipe/blob/790987b9/text/introductions/README.md#goal).
+../../features/0028-introduce/README.md#goal).
 
 ![super- and async subprotocols](super-sub-async.png)
 
@@ -145,11 +145,11 @@ https://github.com/hyperledger/indy-hipe/blob/790987b9/text/introductions/README
 
 A message family is a collection of messages that share a common theme, goal, or
 usage pattern. The messages used by a protocol may be a subset of a particular
-message family; for example, the [connection establishment protocol](
-https://github.com/hyperledger/indy-hipe/blob/master/text/0031-connection-protocol/README.md)
+message family; for example, the [connect protocol](
+../../features/0023-connect/README.md)
 uses one subset of the messages in the
-`connections` message family, and the [connection management protocol](
-https://github.com/hyperledger/indy-hipe/blob/baa1ead5/text/conn-mgmt-protocols/README.md)
+`connections` message family, and the [sync connection protocol](
+../../features/0030-sync-connection/README.md)
 uses a different subset.
 
 Collectively, the message types of a protocol serve as its _interface_. Each protocol
