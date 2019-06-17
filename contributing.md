@@ -23,7 +23,7 @@ is a good sign that you're on the right track.
 
   - Fork [the RFC repo](https://github.com/hyperledger/aries-RFC).
   - Pick a descriptive folder name for your RFC. Don't pick a number yet.
-    See [Best Practices: RFC Naming](../0074-didcomm-best-practices/README.md#rfc-naming)
+    See [Best Practices: RFC Naming](concepts/0074-didcomm-best-practices/README.md#rfc-naming)
     for guidance.
   - Decide which parent folder is appropriate for your RFC.
     If it is about a specific protocol or decorator or feature, its parent
@@ -35,7 +35,7 @@ is a good sign that you're on the right track.
     design, or are disingenuous about the drawbacks or alternatives tend to be
     poorly received. You can add supporting artifacts, such as diagrams and sample
     data, in the RFC's folder. Make sure you follow [community-endorsed best
-    practices](../0074-didcomm-best-practices/README.md).
+    practices](concepts/0074-didcomm-best-practices/README.md).
   - Assign a number to your RFC. Get the number by loading <a target="rfcnum"
     href="https://dhh1128.github.io/next-aries-rfc-num/">this web page</a> (or,
     if you want to do it the hard way, by inspecting open and closed PRs against
