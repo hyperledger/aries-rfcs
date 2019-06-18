@@ -73,8 +73,8 @@ decisions and and react to them.
 
 The most common protocol style in DID Communication is __request-response__.
 This style involve two *parties*, with the `requester` making the first move,
-and the `responder` completing the interaction. The [Discover Feature Protocol](
-../../features/) uses this style.
+and the `responder` completing the interaction. The [Discover Features Protocol](
+../../features/0031-discover-features/README.md) uses this style.
 
 ![request-response](request-response.png)
 
@@ -88,8 +88,8 @@ Protocol](../../features/0035-report-problem/README.md) use this style.
 
 However, more complex protocols exist. The [Introduce Protocol](
 ../../features/0028-introduce/README.md) involves three parties,
-not two. When the [Connect Protocol](
-../../features/0023-connect/README.md) includes organizations, it
+not two. When the [DID Exchange Protocol](
+../../features/0023-did-exchange/README.md) includes organizations, it
 may involve dozens of *participants*, and it has cycles and other complex
 state evolution.
 
@@ -132,7 +132,7 @@ which are often used as a discrete step in a larger flow.
 
 In other cases, a subprotocol is not "contained" inside its superprotocol.
 Rather, the superprotocol triggers the subprotocol, then continues in parallel,
-without waiting for the subprotocol to complete. In the [introduce protocol](
+without waiting for the subprotocol to complete. In the [Introduce Protocol](
 ../../features/0028-introduce/README.md),
 the final step is to begin a connection protocol between the two introducees--
 but [the introduction superprotocol completes when the connect subprotocol
@@ -145,8 +145,8 @@ but [the introduction superprotocol completes when the connect subprotocol
 
 A message family is a collection of messages that share a common theme, goal, or
 usage pattern. The messages used by a protocol may be a subset of a particular
-message family; for example, the [connect protocol](
-../../features/0023-connect/README.md)
+message family; for example, the [DID Exchange Protocol](
+../../features/0023-did-exchange/README.md)
 uses one subset of the messages in the
 `connections` message family, and the [sync connection protocol](
 ../../features/0030-sync-connection/README.md)

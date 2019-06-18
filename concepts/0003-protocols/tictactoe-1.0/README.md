@@ -100,7 +100,7 @@ family uniquely identified by this DID reference: `did:sov:SLfEi9esrjzybysFxQZbf
 
 <blockquote>
 <em>NOTE 1</em>: All the messages defined in a protocol should follow
-<a target="_blank" href="../../concepts/0074-didcomm-best-practices/README.md">
+<a target="_blank" href="../../0074-didcomm-best-practices/README.md">
 DIDComm best practices</a> as far as how they name fields and define their data types and
 semantics.
 </blockquote>
@@ -146,7 +146,7 @@ conventions of [localized messages](
 https://github.com/hyperledger/indy-hipe/pull/64).
 
 Other decorators could be placed on tic-tac-toe messages, such as those
-to enable [message timing](https://github.com/hyperledger/indy-hipe/blob/2167762c31dec10777a36d14c5038130b1a06670/text/message-timing/README.md#decorators)
+to enable [message timing](../../../features/0032-message-timing/README.md)
 to force players to make a move within a certain period of time.
 
 ##### Subsequent Moves

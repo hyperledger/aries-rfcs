@@ -8,8 +8,8 @@ See [the RFC Index](index.md) for a current listing of all RFCs and their status
 
 There are 2 types of RFCs:
 
-* RFCs that describe individual features (the [/features](./features) folder)
-* RFCs that explain concepts underpinning many features (the [/concepts](./concepts) folder)
+* RFCs that describe individual features (the [features](./features) folder)
+* RFCs that explain concepts underpinning many features (the [concepts](./concepts) folder)
 
 RFCs are for developers *building on* Aries. They don't provide guidance on how Aries
 implements features internally; individual Aries repos have design docs for that.
@@ -62,6 +62,7 @@ For more instructions about contributing, see [Contributing](contributing.md).
 
 #### Acknowledgement
 
-The structure and a lot of the initial language of this repository was borrowed from [Indy HIPEs](<https://github.com/hyperledger/indy-hipe>), which borrowed it from [Rust RFC](https://github.com/rust-lang/rfcs).
+The structure and a lot of the initial language of this repository was borrowed from [Indy HIPEs](
+https://github.com/hyperledger/indy-hipe), which borrowed it from [Rust RFC](https://github.com/rust-lang/rfcs).
 Their good work has made the setup of this repository much quicker and better than it otherwise would have been.
 If you are not familiar with the Rust community, you should check them out.

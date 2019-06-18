@@ -80,7 +80,7 @@ A DIDComm-over-XMPP service shall comply to the following.
 2. The type shall be "XmppService". 
 3. The serviceEndpoint
    - shall not have a resource part (i.e. "/...resource...")
-   - shall comply to the following [ABNF](ftp://ftp.rfc-editor.org/in-notes/std/std68.txt).
+   - shall comply to the following [ABNF](https://tools.ietf.org/html/rfc5234).
 
 ```
 xmpp-service-endpoint = "xmpp:" userpart "@did." domainpart

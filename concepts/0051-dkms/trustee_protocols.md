@@ -13,7 +13,7 @@
 1. Trustees will safeguard recovery shares. Their app will encrypt the share and not expose it to anyone else
 1. Trustees authenticate out-of-band an identity owner when a recovery event occurs
 1. The Trustees' app should only send a recovery share to an identity owner after they have been authenticated
-1. All messages will use [Message Packaging](https://github.com/evernym/protocol/blob/master/message-packaging.md).
+1. All messages will use a standard [DIDComm Envelope](../../features/0019-encryption-envelope/README.md).
 
 ## Messages and Structures
 Messages are formatted as JSON. All binary encodings use base64url.

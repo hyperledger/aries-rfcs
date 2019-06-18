@@ -80,7 +80,7 @@ Use terms correctly and consistently.
 
 The [Sovrin Glossary V2](https://docs.google.com/document/d/1gfIz5TT0cNp2kxGMLFXr19x1uoZsruUe_0glHst2fZ8/edit)
 is considered a definitive source of terms. We will probably move it over to Aries at some point as
-an officially sponsored artifact of this group. [RFC 0006: SSI Notation](../0006-ssi-notation) is also
+an officially sponsored artifact of this group. [RFC 0006: SSI Notation](../0006-ssi-notation/README.md) is also
 a definitive reference.
 
 RFCs in general should make every effort to define new terms only when needed, to
@@ -205,7 +205,7 @@ Json numeric fields are very flexible. As wikipedia notes in its discussion abou
 Knowing that something is a number may be enough in javascript, but in many other programming
 languages, more clarity is helpful or even required. If the intent is for the number to be
 a non-negative or positive-only integer, say so when your field is [defined in a protocol](
-../../concepts/0003-protocols/tictactoe-1.0/README.md#Reference). If you know the
+../0003-protocols/tictactoe-1.0/README.md#reference). If you know the
 valid range, give it. Specify whether the field is nullable.
 
 Per the [first guideline above about names](#names), name your numeric fields in a way that
@@ -374,7 +374,7 @@ required, the definition of DIDComm message fields should provide it.
 - [Discussion of date and time datatypes on Wikipedia](https://en.wikipedia.org/wiki/System_time)
 - [ISO 8601](https://de.wikipedia.org/wiki/ISO_8601)
 - [Unicode TR 15 on Normalization Forms](https://unicode.org/reports/tr15/)
-- [DIDComm's stance on JSON-LD Compatibility](../../concepts/0047-json-ld-compatibility/README.md)
+- [DIDComm's stance on JSON-LD Compatibility](../0047-json-ld-compatibility/README.md)
 - [DIDComm localization](../../features/0043-l10n/README.md)
 
 ## Drawbacks
@@ -391,7 +391,7 @@ to avoid that.
 - [JSON-LD allows some forms of datatype coercion](https://w3c.github.io/json-ld-syntax/#type-coercion),
   but not enough to satisfy all our requirements. It is also considered overly heavy in terms of
   parsing and validation dependencies. See [DIDComm's stance on JSON-LD Compatibility](
-  ../../concepts/0047-json-ld-compatibility/README.md)
+  ../0047-json-ld-compatibility/README.md)
 
 ## Unresolved questions
 

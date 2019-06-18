@@ -13,7 +13,7 @@ https://github.com/hyperledger/indy-hipe/pull/129).
 
 Defines the `~payment_request`, `payment_internal_response`, and `~payment_receipt` decorators.
 These offer standard payment features in all DIDComm interactions, and let DIDComm take advantage
-of the [W3C's Payment Request API]( https://www.w3.org/TR/payment-request) in an interoperable way.
+of the [W3C's Payment Request API]( https://www.w3.org/TR/payment-request/) in an interoperable way.
 
 ## Motivation
 [motivation]: #motivation
@@ -24,7 +24,7 @@ clarify on which messages and under which conditions the decorators are used.
 
 ## Tutorial
 
-The [W3C's Payment Request API](https://www.w3.org/TR/payment-request) governs interactions
+The [W3C's Payment Request API](https://www.w3.org/TR/payment-request/) governs interactions
 between three parties:
 
 1. payer
@@ -185,9 +185,9 @@ how the requested payment amount should be modified if the `basic-card` method
 is selected. That specific example is discussed in greater detail in the W3C spec.
 It also shows how the currency could be changed if a token-based method is selected
 instead of a fiat-based method. See the separate [W3C spec on Payment Method IDs](
-https://www.w3.org/TR/payment-method-id).
+https://www.w3.org/TR/payment-method-id/).
 
-Note that [standard DIDComm localization](../../features/0043-l10n/README.md) can be used
+Note that [standard DIDComm localization](../0043-l10n/README.md) can be used
 to provide localized alternatives to the `label` fields; this is a DIDComm-specific
 extension.
 
@@ -248,7 +248,7 @@ that support state proofs, the state proof could be offered here.
 ### Example
 
 Here is a rough description of how these decorators might be used in a [protocol to issue
-credentials](../../features/0036-issue-credential/README.md). We are not guaranteeing that
+credentials](../0036-issue-credential/README.md). We are not guaranteeing that
 the message details will remain up-to-date as that protocol evolves; this is only for
 purposes of general illustration.
 
