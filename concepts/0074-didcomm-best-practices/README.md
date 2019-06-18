@@ -4,11 +4,11 @@
 
 ## Status
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: (date of last status change)
+- Status Date: 2019-06-10
 - Status Note: This captures some tribal knowledge from the Indy
 community. However, it is by no means uniformly accepted inside
 that group, and it has never been shared in a larger context. Therefore,
-the RFC is currently fodder for discussion and is not normative yet.
+the RFC is currently fodder for discussion.
 
 ## Summary
 
@@ -86,7 +86,7 @@ a definitive reference.
 RFCs in general should make every effort to define new terms only when needed, to
 be clear about the concepts they are labeling, and use prior work
 consistently. If you find a misalignment in the terminology or notation used by RFCs,
-please [open a github issue](/README.md#github-issues).
+please [open a github issue](../../github-issues.md).
 
 #### Terseness and abbreviations
 
@@ -95,6 +95,26 @@ formally define abbreviations or acronyms for terms and then use the short forms
 
 However, we don't value terseness so much that we are willing to give up clarity. Abbreviating
 "wallet" as "wal" or "agent" as "ag" is quirky and discouraged.
+
+#### RFC naming
+
+RFCs that define a protocol should be named in the form `<do something>-protocol`, where
+`<do-something>` is a verb phrase like `issue-credential`, or possibly a noun phrase like
+`did-exchange`--something that makes the theme of the protocol obvious. The intent is to
+be clear; a protocol name like "connection" is [too vague because you can do lots of things
+with connections](https://docs.google.com/presentation/d/11UVwJ2xqMmXyXr2BVsjz53S-tbMUhD1tmkhzfN7KMRw/edit#slide=id.g5b1be5d0c1_0_66).
+
+Protocol RFCs need to be [versioned thoughtfully](../../concepts/0003-protocols/semver.md).
+However, we do not put version numbers in a protocl RFC's folder name. Rather, the RFC
+folder contains all versions of the protocol, with the latest version documented in
+README.md, and earlier versions documented in subdocs named according to version, as
+in `version-0.9.md` or similar. The main README.md should contain a section of links
+to previous versions. This allows the most natural permalink for a protocol to be a link
+to the current version, but it also allows us to link to previous versions explicitly
+if we need to.
+
+RFCs that define a decorator should be named in the form `<decorator name>-decorator`, as
+in `timing-decorator` or `trace-decorator`.
 
 ### JSON
 
@@ -348,6 +368,29 @@ simple binary algorithm. This is approximately but (in some corner cases) not ex
 the same as assuming that text is in NFC normalization form with no case
 folding expectations and no extraneous surrogate pairs. Where more precision is
 required, the definition of DIDComm message fields should provide it.
+
+### Hyperlinks
+
+This repo is designed to be browsed as HTML. Browsing can be done directly through
+github, but we may publish the content using Github Pages and/or ReadTheDocs. As
+a result, some [hyperlink hygiene is observed](https://github.com/hyperledger/aries-rfcs/issues/92)
+to make the content as useful as possible:
+
+* Hyperlinks (both internal to the repo and external to it) must not be broken.
+* Fragments like `#heading-title` must correctly reference a real markdown heading.
+* Hyperlinks to an RFC should point to the RFC's README.md rather than to a folder
+with (possibly) many documents.
+* Hyperlinks from one RFC to another should be in relative form (`../features/my-rfc/README.md`),
+not in absolute form (`/features/my-rfc/README.md`) or external form
+(`https://github.com/hyperledger/aries-rfcs/blob/master/features/my-rfc/README.md`).
+This lets us move or embed the content, and it prevents branch names from
+cluttering the hyperlink.
+
+These rules are enforced by a unit test that runs `code/check_links.py`. To run
+it, go to the root of the repo and run `pytest code` -- or simply invoke the
+`check_links` script directly. Normally, `check_links` does not test external
+hyperlinks on the web, because it is too time-consuming; if you want that check,
+add `--full` as a command-line argument. 
 
 ## Reference
 
