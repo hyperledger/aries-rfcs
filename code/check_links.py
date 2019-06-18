@@ -121,6 +121,8 @@ def check_link(fname, short_fname, txt, match, rfcs, cache, problem_count_in_fil
     error = None
     # What's exactly the uri as it appears in the markdown link?
     full_uri = match.group(2).strip()
+    if full_uri.startswith('<') and full_uri.endswith('>'):
+        full_uri = full_uri[1:-1].strip()
     uri = full_uri
     try:
         if uri in cache:

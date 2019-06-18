@@ -86,7 +86,7 @@ a definitive reference.
 RFCs in general should make every effort to define new terms only when needed, to
 be clear about the concepts they are labeling, and use prior work
 consistently. If you find a misalignment in the terminology or notation used by RFCs,
-please [open a github issue](/README.md#github-issues).
+please [open a github issue](../../github-issues.md).
 
 #### Terseness and abbreviations
 
