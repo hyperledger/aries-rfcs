@@ -1,4 +1,4 @@
-# 0036: Issue Credential
+# 0036: Issue Credential Protocol 1.0
 
 - Author: Nikita Khateev
 - Start Date: 2019-01-30
@@ -7,7 +7,8 @@
 
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
 - Status Date: 2019-05-28
-- Status Note: This supersedes the Issue Credential part of [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md). See [Aries RFC 0037](../0037-present-proof) for the presentation part of the same Indy HIPE PR.
+- Status Note: This supersedes the Issue Credential part of [Indy HIPE PR #89](
+https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md). See [RFC 0037](../0037-present-proof/README.md) for the presentation part of the same Indy HIPE PR.
 
 ## Summary
 
@@ -26,7 +27,7 @@ The Issue Credential protocol consists of these messages:
 * Request Credential - Prover to Issuer
 * Issue Credential - Issuer to Prover
 
-In addition, the [ack](../../concepts/0015-acks) and [problem report](#) messages are adopted into the protocol for confirmation and error handling.
+In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-report-problem/README.md) messages are adopted into the protocol for confirmation and error handling.
 
 #### Choreography Diagram:
 
@@ -50,7 +51,7 @@ An optional message sent by the Prover to the Issuer to initiate the protocol or
 Description of attributes:
 
 * `comment` -- a field that provides some human readable information about this Credential Proposal;
-* `credential_proposal` -- a JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview_credential);
+* `credential_proposal` -- a JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential);
 * `schema_id` -- optional filter to request credential based on particular Schema
 * `cred_def_id` -- optional filter to request credential based on particular Credential Definition
 
@@ -66,9 +67,9 @@ A message sent by the Issuer to the Prover to initiate the protocol when require
     "credential_preview": <json-ld object>,
     "offers~attach": [
         {
-            "nickname": "libindy-offer",
+            "@id": "libindy-cred-offer-0",
             "mime-type": "application/json",
-            "content": {
+            "data": {
                 "base64": "<bytes for base64>"
             }
         }
@@ -79,7 +80,7 @@ A message sent by the Issuer to the Prover to initiate the protocol when require
 Description of fields:
 
 * `comment` -- a field that provides some human readable information about this Credential Offer;
-* `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview_credential);
+* `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview-credential);
 * `offers~attach` -- an array of attachments defining the offered formats for the credential.
   * For Indy, the attachment contains data from libindy about the credential offer, base64 encoded. The following JSON is an example of the `libindy-offer` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
 
@@ -92,6 +93,8 @@ Description of fields:
 }
 ```
 
+This message may have payment request decorator, see [payment section below](#payments-while-credential-exchange)
+
 #### Request Credential
 
 A message sent by the Prover to the Issuer to request the issuance of a Credential. Where supported by the Credential implementation, this message initiates the protocol. In Hyperledger Indy, this message can only be sent in response to an Offer Credential message. Schema:
@@ -103,9 +106,9 @@ A message sent by the Prover to the Issuer to request the issuance of a Credenti
     "comment": "some comment",
     "requests~attach": [
         {
-            "nickname": "libindy_cred_req",
+            "@id": "libindy-cred-req-0",
             "mime-type": "application/json",
-            "content": {
+            "data": {
                 "base64": "<bytes for base64>"
             }
         },
@@ -117,7 +120,7 @@ Description of Fields:
 
 * `comment` -- a field that provides some human readable information about this request.
 * `requests~attach` -- an array of attachments defining the requested formats for the credential.
-  * For Indy, the attachment contains data from libindy about the credential request, base64 encoded. The following JSON is an example of the `libindy_cred_req` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
+  * For Indy, the attachment contains data from libindy about the credential request, base64 encoded. The following JSON is an example of the `libindy-cred-req-0` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
 
 ```json
 {
@@ -128,6 +131,8 @@ Description of Fields:
   "nonce": string
 }
 ```
+
+This message may have payment confirmation decorator, see [payment section below](#payments-while-credential-exchange)
 
 #### Issue Credential
 
@@ -140,9 +145,9 @@ This message contains the credentials being issued and is sent in response to a 
     "comment": "some comment",
     "credentials~attach": [
         {
-            "nickname": "libindy-cred",
+            "@id": "libindy-cred-0",
             "mime-type": "application/json",
-            "content": {
+            "data": {
                 "base64": "<bytes for base64>"  
             }
         }
@@ -154,7 +159,7 @@ Description of fields:
 
 * `comment` -- a field that provides some human readable information about the issued Credential.
 * `credentials~attach` -- an array of attachments containing the issued credentials.
-  * For Indy, the attachment contains data from libindy about credential to be issued, base64 encoded. The following JSON is an example of the `libindy-cred` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
+  * For Indy, the attachment contains data from libindy about credential to be issued, base64 encoded. The following JSON is an example of the `libindy-cred-0` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
 
 ```json
 {
@@ -197,6 +202,23 @@ Threading can be used to initiate a sub-protocol during an issue credential prot
 
 Details about threading can be found in the [message id and threading](../../concepts/0008-message-id-and-threading/README.md) RFC.
 
+## Payments while credential exchange
+
+There is a high probability that some networks would like to use some implementation of payment (e.g. utility token) for balance in ecosystem. The value flow already presents while CX but it looks one way for simple case: issuer gives value to hodler (credential which can be used by holder for his needs) but doesn’t receive anything back. To resolve this case some payment may be charged by Issuer from Holder per credential. In general different payment flows are possible. Like a holder may provide proof to verifier for some data analysis or other Verifier’s need and in this case Verifier may pay to Holder.
+So both processes described in this RFC (issuance) and [presentation](../0037-present-proof/README.md) may be tied with payments.
+Also there is a good chance that payment flow may be combined with other message flows, so it may be considered as decorator. This decorator is optional.
+
+### Payment decorators
+These decorators are out of subject of this RFC, see [Payment decorators RFC](../0075-payment-decorators/README.md)
+
+### Payment flow
+Payment request may be included to Credential Offer msg from Issuer to Holder. And receipt should be provided in this case in Credential Request by Issuer.
+While credential presentation the Verifier may pay to Holder as compensation for Holder for disclosing data. Payment receipt should be included into Presentation Request. Verifier may skip it in first request, but in this case Holder may request payment by sending back Presentation Proposal with appropriate decorator inside it.
+
+### Limitations
+Smart contracts may be missed in ecosystem, so operation "issue credential after payment received" is not atomic. It’s possible case that malicious issuer will charge first and then will not issue credential in fact. But this situation should be easily detected and appropriate penalty should be applied in such type of networks.
+
+
 ## Negotiation and Preview
 
 Negotiation prior to issuing the credential can be done using the `offer-credential` and `propose-credential` messages. A common negotiation use case would be about the data to go into the credential. For that, the `credential_preview` element is used.
@@ -204,7 +226,7 @@ Negotiation prior to issuing the credential can be done using the `offer-credent
 ## Reference
 
 * [VCX](https://github.com/hyperledger/indy-sdk/tree/master/vcx/libvcx/src/api) -- this implementation might not be perfect and needs to be improved, you can gather some info on parameters purpose from it
-* A pre-RFC (labelled version 0.1) implementation of the protocol was implemented by a number of groups in the Hyperledger Indy community leading up to IIW28 in April 2019. The protocol defined and implemented can be reviewed [here](https://hackmd.io/s/HkklVzww4). It was the basis of the [IIWBook demo](https://vonx.io/how_to/iiwbook) from BC Gov and collaborators.
+* A pre-RFC (labelled version 0.1) implementation of the protocol was implemented by a number of groups in the Hyperledger Indy community leading up to IIW28 in April 2019. The protocol defined and implemented can be reviewed [here](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view). It was the basis of the [IIWBook demo](https://vonx.io/how_to/iiwbook) from BC Gov and collaborators.
 
 ## Drawbacks
 

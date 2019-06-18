@@ -1,4 +1,4 @@
-# 0025: Agent Transports
+# 0025: DIDComm Transports
 - Author: Sam Curren <sam@sovrin.org>
 - Start Date: 2019-02-26
 
@@ -32,9 +32,9 @@ HTTP(S) is the first transport for DID Communication that has received heavy att
 
 #### Known Implementations
 
-[Python Reference Agent](<https://github.com/hyperledger/indy-agent/tree/master/python>)
+[Python Reference Agent](https://github.com/hyperledger/indy-agent/tree/master/python)
 
-[Indy Catalyst Agent](<https://github.com/bcgov/indy-catalyst/tree/master/agent>)
+[Indy Catalyst Agent](https://github.com/bcgov/indy-catalyst/tree/master/agent)
 
 ### Websocket
 
@@ -47,7 +47,7 @@ Websockets are an efficient way to transmit multiple messages without the overhe
 
 #### Known Implementations
 
-[Python Reference Agent](<https://github.com/hyperledger/indy-agent/tree/master/python>)
+[Python Reference Agent](https://github.com/hyperledger/indy-agent/tree/master/python)
 
 
 ### Other Transports
@@ -56,7 +56,7 @@ Other transports may be used for Agent messaging. As they are developed, this RF
 
 ### Message Routing
 
-The transports described here are used between two agents. In the case of [message routing](<https://github.com/hyperledger/indy-hipe/tree/master/text/0022-cross-domain-messaging>), a message will travel across multiple agent connections. Each intermediate agent (see [Mediators and Relays](<https://github.com/hyperledger/indy-hipe/tree/master/text/0036-mediators-and-relays>)) may use a different transport. These transport details are not made known to the sender, who only knows the keys of Mediators and the first endpoint of the route. 
+The transports described here are used between two agents. In the case of [message routing](https://github.com/hyperledger/indy-hipe/tree/master/text/0022-cross-domain-messaging), a message will travel across multiple agent connections. Each intermediate agent (see [Mediators and Relays](../../concepts/0046-mediators-and-relays/README.md)) may use a different transport. These transport details are not made known to the sender, who only knows the keys of Mediators and the first endpoint of the route. 
 
 ### Message Context
 

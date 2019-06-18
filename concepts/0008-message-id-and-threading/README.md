@@ -24,7 +24,7 @@ Referring to messages is useful in many interactions. A standard method of addin
 ### Message IDs
 
 Message IDs are specified with the @id attribute, which [comes from JSON-LD](
-https://github.com/hyperledger/indy-hipe/blob/3d8ec6c522cacaaef20b3a999f3c75b5b1217b70/text/json-ld-compatibility/README.md#id).
+../0047-json-ld-compatibility/README.md#id).
 The sender of the message is responsible for creating the message ID, and any
 message can be identified by the combination of the sender and the message ID.
 Message IDs should be considered to be opaque identifiers by any recipients.
@@ -33,7 +33,7 @@ Message IDs should be considered to be opaque identifiers by any recipients.
 
 - A short stream of characters matching regex `[-_./a-ZA-Z0-9]{8,64}` (Note the
   [special semantics of a dotted suffix on IDs](
-  https://github.com/hyperledger/indy-hipe/blob/996adb82e61ab63b37a56254b92f57100ff8c8d9/text/message-tracing/README.md#message-ids),
+  ../../features/0034-message-tracing/README.md#message-ids),
   as described in the message tracing HIPE proposal)
 - Should be compared case-sensitive (no case folding)
 - Sufficiently unique

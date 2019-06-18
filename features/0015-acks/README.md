@@ -1,4 +1,4 @@
-# 0015 ACKs
+# 0015: ACKs
 - Author: Daniel Hardman <daniel.hardman@gmail.com>
 - Start Date: 2018-12-26
 
@@ -7,7 +7,8 @@
 - Status Date: 2019-12-26
 - Status Note: Broadly socialized and beginning to be implemented. Several
   protocols assume ACK behavior. May be nearing the maturity and uptake
-  appropriate for ACCEPTED status.
+  appropriate for ACCEPTED status. Note: this RFC supersedes [Indy HIPE
+  PR #77](https://github.com/hyperledger/indy-hipe/pull/77).
 
 ## Summary
 
@@ -43,7 +44,7 @@ acknowledgments to confirm a shared understanding.
 
 ### Implicit ACKs
 
-[Message threading](../0008-message-id-and-threading/README.md) includes
+[Message threading](../../concepts/0008-message-id-and-threading/README.md) includes
 a lightweight, automatic sort of ACK in the form of the `~thread.received_orders` field.
 This allows Alice to report that she has received Bob's recent message that had
 `~thread.sender_order` = N. We expect threading to be best practice in many use cases,
@@ -93,15 +94,15 @@ is about to put her phone in airplane mode because her plane's ready to take off
 she may want an immediate ACK that the bid was accepted.
 
 The dynamic need for acks is expressed with the `~please_ack` message [decorator](
-https://github.com/hyperledger/indy-RFC/pull/71). In its simplest form, it looks
+../../concepts/0011-decorators/README.md). In its simplest form, it looks
 like this: `"~please_ack": {}`.
 
 This says, "Please send me an ack as soon as you receive this message."
 
 #### Adopting acks
 
-As discussed in [RFC 0003 Protocols](../0003-protocols/README.md), a protocol can [adopt the ack message into
-its own namespace](../0003-protocols/template.md#adopted-messages).
+As discussed in [0003: Protocols](../../concepts/0003-protocols/README.md), a protocol can [adopt the ack message into
+its own namespace](../../concepts/0003-protocols/template.md#adopted-messages).
 This allows the type of an ack to change from:
     `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack`
 to something like:
@@ -241,8 +242,8 @@ ACK happen in the same message that wants acknowledgment.
 ##### __`on`__
 Describes the circumstances under which an ack is desired. Possible
 values in this array include `RECEIPT`, `OUTCOME`, and strings that express a
-time interval, as [documented in the RFC about date- and time-related conventions](
-https://github.com/hyperledger/indy-RFC/blob/72d2bc1f380b51ba72bdfe9857518a500e9f0990/text/date-time-conventions/README.md#_elapsed).
+time interval, as [documented in the RFC that discusses date- and time-related conventions](
+../../concepts/0074-didcomm-best-practices/README.md#_dur).
 Support for acks on a time interval is an advanced feature and should not be
 depended upon in the general case.
 

@@ -1,4 +1,4 @@
-# 0037: Present Proof
+# 0037: Present Proof Protocol 1.0
 
 - Author: Nikita Khateev
 - Start Date: 2019-01-30
@@ -7,7 +7,7 @@
 
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
 - Status Date: 2019-05-28
-- Status Note: This supersedes the Present Proof part of [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md). See [Aries RFC 0036](../0036-issue-credential) for the issue credential part of the same Indy HIPE PR.
+- Status Note: This supersedes the Present Proof part of [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md). See [RFC 0036](../0036-issue-credential/README.md) for the issue credential part of the same Indy HIPE PR.
 
 ## Summary
 
@@ -25,11 +25,11 @@ The present proof protocol consists of these messages:
 * Request Proof - Verifier to Prover
 * Present Proof - Prover to Verifier
 
-In addition, the [ack](../../concepts/0015-acks) and [problem report](#) messages are adopted into the protocol for confirmation and error handling.
+In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-report-problem/README.md) messages are adopted into the protocol for confirmation and error handling.
 
 #### Choreography Diagram:
 
-![issuance](present-proof.png)
+![present proof](present-proof.png)
 
 #### Propose Presentation
 
@@ -60,9 +60,9 @@ Request presentation is a message from a verifier to a prover that describes val
     "comment": "some comment",
     "request_presentations~attach": [
         {
-            "nickname": "libindy-request-presentation",
+            "@id": "libindy-request-presentation-0",
             "mime-type": "application/json",
-            "content":  {
+            "data":  {
                 "base64": "<bytes for base64>"
             }
         }
@@ -74,7 +74,7 @@ Description of fields:
 
 * `comment` -- a field that provides some human readable information about this request for a presentation.
 * `request_presentations~attach` -- an array of attachments defining the acceptable formats for the presentation.
-  * For Indy, the attachment contains data from libindy about the presentation request, base64 encoded. The following JSON is an example of the `libindy-request-presentation` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
+  * For Indy, the attachment contains data from libindy about the presentation request, base64 encoded. The following JSON is an example of the `libindy-request-presentation-0` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
 
 ```json
 {
@@ -102,9 +102,9 @@ This message is a response to a Presentation Request message and contains signed
     "comment": "some comment",
     "presentations~attach": [
         {
-            "nickname": "libindy-presentation",
+            "@id": "libindy-presentation-0",
             "mime-type": "application/json",
-            "content": {
+            "data": {
                 "base64": "<bytes for base64>"
             }
         },
@@ -116,7 +116,7 @@ Description of fields:
 
 * `comment` -- a field that provides some human readable information about this presentation.
 * `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
-  * For Indy, the attachment contains data from libindy that is the presentation, base64 encoded. The following JSON is an example of the `libindy-presentation` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404).
+  * For Indy, the attachment contains data from libindy that is the presentation, base64 encoded. The following JSON is an example of the `libindy-presentation-0` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404).
 
 ```json
 {
@@ -175,7 +175,7 @@ Negotiation prior to the presentation can be done using the `propose-presentatio
 ## Reference
 
 * [VCX](https://github.com/hyperledger/indy-sdk/tree/master/vcx/libvcx/src/api) -- this implementation might not be perfect and needs to be improved, you can gather some info on parameters purpose from it
-* A pre-RFC (labeled version 0.1) implementation of the protocol was implemented by a number of groups in the Hyperledger Indy community leading up to IIW28 in April 2019. The protocol can be found [here](https://hackmd.io/s/HkklVzww4). It was the basis of the [IIWBook demo](https://vonx.io/how_to/iiwbook) from BC Gov and collaborators.
+* A pre-RFC (labeled version 0.1) implementation of the protocol was implemented by a number of groups in the Hyperledger Indy community leading up to IIW28 in April 2019. The protocol can be found [here](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view). It was the basis of the [IIWBook demo](https://vonx.io/how_to/iiwbook) from BC Gov and collaborators.
 
 ## Drawbacks
 

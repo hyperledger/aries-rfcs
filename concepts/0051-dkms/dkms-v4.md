@@ -8,7 +8,7 @@
 
 **Advisors**: Stephen Wilson
 
-**STATUS:** This design and architecture for a decentralized key management system (DKMS) has been developed by Evernym Inc. under [a contract with the U.S. Department of Homeland Security Science & Technology Directorate](https://www.dhs.gov/science-and-technology/news/2017/07/20/news-release-dhs-st-awards-749k-evernym-decentralized-key). This fourth draft is being released on 29 Mar 2019 to begin an open public review and comment process in preparation for DKMS to be submitted to a standards development organization such as [OASIS](http://www.oasis-open.org/) for formal standardization.
+**STATUS:** This design and architecture for a decentralized key management system (DKMS) has been developed by Evernym Inc. under [a contract with the U.S. Department of Homeland Security Science & Technology Directorate](https://www.dhs.gov/science-and-technology/news/2017/07/20/news-release-dhs-st-awards-749k-evernym-decentralized-key). This fourth draft is being released on 29 Mar 2019 to begin an open public review and comment process in preparation for DKMS to be submitted to a standards development organization such as [OASIS](https://www.oasis-open.org/) for formal standardization.
 
 **Acknowledgements:** 
 
@@ -38,9 +38,11 @@
 
 DKMS (Decentralized Key Management System) is a new approach to cryptographic key management intended for use with blockchain and distributed ledger technologies (DLTs) where there are no centralized authorities. DKMS inverts a core assumption of conventional [PKI (public key infrastructure)](https://en.wikipedia.org/wiki/Public_key_infrastructure) architecture, namely that public key certificates will be issued by centralized or federated [certificate authorities](https://en.wikipedia.org/wiki/Certificate_authority) (CAs). With DKMS, the initial "root of trust" for all participants is any distributed ledger or decentralized protocol that supports a new form of root identity record called a DID (decentralized identifier).
 
-A DID is a globally unique identifier that is generated cryptographically and self-registered with the identity owner’s choice of a DID-compatible distributed ledger or decentralized protocol so no central registration authority is required. Each DID points to a DID document—a JSON or JSON-LD object containing the associated public verification key(s) and addresses of services such as off-ledger agent(s) supporting secure peer-to-peer interactions with the identity owner. For more on DIDs, see the [DID Primer](https://github.com/WebOfTrustInfo/rebooting-the-web-of-trust-spring2018/blob/master/topics-and-advance-readings/did-primer.md). For more on peer-to-peer interactions, see the [DID Communications explainer](https://github.com/hyperledger/indy-hipe/blob/b0708395/text/0003-did-comm/README.md).
+A DID is a globally unique identifier that is generated cryptographically and self-registered with the identity owner’s choice of a DID-compatible distributed ledger or decentralized protocol so no central registration authority is required. Each DID points to a DID document—a JSON or JSON-LD object containing the associated public verification key(s) and addresses of services such as off-ledger agent(s) supporting secure peer-to-peer interactions with the identity owner. For more on DIDs, see the [DID Primer](
+https://github.com/WebOfTrustInfo/rwot6-santabarbara/blob/master/topics-and-advance-readings/did-primer.md). For more on peer-to-peer interactions, see the [DID Communication explainer](../0005-didcomm/README.md).
 
-Since no third party is involved in the initial registration of a DID and DID document, it begins as "trustless". From this starting point, trust between DID-identified peers can be built up through the exchange of [verifiable credentials](https://www.w3.org/2017/vc/charter.html)—credentials about identity attributes that include cryptographic proof of authenticity of authorship. These proofs can be verified by reference to the issuer’s DID and DID document. For more about verifiable credentials, see the [Verifiable Credentials Primer](https://github.com/WebOfTrustInfo/rebooting-the-web-of-trust-spring2018/blob/master/topics-and-advance-readings/verifiable-credentials-primer.md). 
+Since no third party is involved in the initial registration of a DID and DID document, it begins as "trustless". From this starting point, trust between DID-identified peers can be built up through the exchange of [verifiable credentials](https://www.w3.org/2017/vc/charter.html)—credentials about identity attributes that include cryptographic proof of authenticity of authorship. These proofs can be verified by reference to the issuer’s DID and DID document. For more about verifiable credentials, see the [
+Verifiable Credentials Primer](https://github.com/WebOfTrustInfo/rwot6-santabarbara/blob/master/topics-and-advance-readings/verifiable-credentials-primer.md). 
 
 This decentralized [web of trust model](https://en.wikipedia.org/wiki/Web_of_trust) leverages the security, immutability, availability, and resiliency properties of distributed ledgers to provide highly scalable key distribution, verification, and recovery. This inversion of conventional [public key infrastructure](https://en.wikipedia.org/wiki/Public_key_infrastructure) (PKI) into [decentralized PKI (DPKI)](https://github.com/WebOfTrustInfo/rebooting-the-web-of-trust/blob/master/final-documents/dpki.pdf) removes centralized gatekeepers, making the benefits of PKI accessible to everyone. However this lack of centralized authorities for DKMS shifts the majority of responsibility for key management directly to participating identity owners. This demands the decentralized equivalent of the centralized cryptographic key management systems (CKMS) that are the current best practice in most enterprises. The purpose of this document is to specify a design and architecture that fulfills this market need.
 
@@ -78,13 +80,17 @@ DKMS architecture and DPKI provides the following major benefits:
 
 ## 2.1. Conventional CKMS Requirements: NIST 800-130 Analysis
 
-As a general rule, DKMS requirements are a derivation of CKMS requirements, adjusted for the lack of centralized authorities or systems for key management operations. Evernym’s DKMS team and subcontractors performed an extensive analysis of the applicability of conventional CKMS requirements to DKMS using [NIST Special Publication 800-130: A Framework for Designing Cryptographic Key Management Systems](http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-130.pdf). For a summary of the results, see:
+As a general rule, DKMS requirements are a derivation of CKMS requirements, adjusted for the lack of
+centralized authorities or systems for key management operations. Evernym’s DKMS team and subcontractors
+performed an extensive analysis of the applicability of conventional CKMS requirements to DKMS using 
+[NIST Special Publication 800-130: A Framework for Designing Cryptographic Key Management Systems](
+https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-130.pdf). For a summary of the results, see:
 
-* [Evernym HSHQDC-17-C-00018 - DKMS Requirements Spreadsheet Based On NIST 800-130](pdf/DKMS%20Requirements%20Spreadsheet%20Based%20On%20NIST%20800-130%20-%20Sheet1.pdf)
+* [Evernym HSHQDC-17-C-00018 - DKMS Requirements Spreadsheet Based On NIST 800-130](pdf/spreadsheet.pdf)
 
-* [Evernym HSHQDC-17-C-00018 - DKMS Requirements Text Based on NIST 800-130](pdf/DKMS%20Requirements%20Text%20Based%20on%20NIST%20800-130.pdf)
+* [Evernym HSHQDC-17-C-00018 - DKMS Requirements Text Based on NIST 800-130](pdf/requirements-text.pdf)
 
-* [Evernym HSHQDC-17-C-00018 - DKMS Requirements Report - 30 June 2017](pdf/DKMS%20Requirements%20Report%20-%2030%20June%202017.pdf)
+* [Evernym HSHQDC-17-C-00018 - DKMS Requirements Report - 30 June 2017](pdf/report-30-june-2017.pdf)
 
 The most relevant special requirements are highlighted in the following sections.
 
@@ -210,7 +216,7 @@ Cloud agents and wallets will typically be hosted by a service provider called a
 
 From an architectural standpoint, it is critical that the cloud layer be designed so that it does not "recentralize" any aspect of DKMS. In other words, even if an identity owner chooses to use a specific DKMS service provider for a specific set of cloud agent functions, the identity owner should be able to substitute another DKMS service provider at a later date and retain complete portability of her DKMS keys, data and metadata.
 
-Another feature of the cloud layer is that cloud agents can use DIDs and DID documents to automatically negotiate mutually authenticated secure connections with each other using [DID Communication](https://github.com/hyperledger/indy-hipe/blob/b0708395/text/0003-did-comm/README.md), a protocol being designed for this purpose.
+Another feature of the cloud layer is that cloud agents can use DIDs and DID documents to automatically negotiate mutually authenticated secure connections with each other using [DID Communication](../0005-didcomm/README.md), a protocol being designed for this purpose.
 
 ## 3.3. The Edge Layer: Edge Agents and Edge Wallets
 
@@ -218,7 +224,7 @@ The edge layer is vital to DKMS because it is where identity owners interact dir
 
 Therefore, the edge layer is where most DKMS private keys and link secrets are generated and where most key operations and storage are performed. To meet the security and privacy requirements, DKMS architecture makes the following two assumptions:
 
-1. A DKMS agent is always installed in an environment that includes a [secure element](https://www.globalplatform.org/mediaguideSE.asp) or [Trusted Platform Module](https://en.wikipedia.org/wiki/Trusted_Platform_Module) (for simplicity, this document will use the term "secure element" or “SE” for this module).
+1. A DKMS agent is always installed in an environment that includes a [secure element](https://globalplatform.org/wp-content/uploads/2018/05/Introduction-to-Secure-Element-15May2018.pdf) or [Trusted Platform Module](https://en.wikipedia.org/wiki/Trusted_Platform_Module) (for simplicity, this document will use the term "secure element" or “SE” for this module).
 
 2. Private keys used by the agent never leave the secure element. 
 
@@ -228,7 +234,7 @@ By default edge agents are always paired with a corresponding cloud agent due to
 
 By themselves, DIDs are "trustless", i.e., they carry no more inherent trust than an IP address. The primary difference is that they provide a mechanism for resolving the DID to a DID document containing the necessary cryptographic keys and endpoints to bootstrap secure communications with the associated agent.
 
-To achieve a higher level of trust, DKMS agents may exchange digitally signed credentials called [verifiable credentials](https://www.w3.org/2017/vc/). Verifiable credentials are being standardized by the W3C Working Group of the same name. The purpose is summarized in the [charter](https://www.w3.org/2017/vc/charter.html):
+To achieve a higher level of trust, DKMS agents may exchange digitally signed credentials called [verifiable credentials](https://w3c.github.io/vc-data-model/#what-is-a-verifiable-credential). Verifiable credentials are being standardized by the W3C Working Group of the same name. The purpose is summarized in the [charter](https://www.w3.org/2017/vc/charter.html):
 
 *It is currently difficult to express banking account information, education qualifications, healthcare data, and other sorts of machine-readable personal information that has been verified by a 3rd party on the Web. These sorts of data are often referred to as **verifiable credentials**. The mission of the Verifiable Credentials Working Group is to make expressing, exchanging, and verifying credentials easier and more secure on the Web.*
 
@@ -252,7 +258,7 @@ There are a variety of ledger designs and governance models as illustrated in Fi
 
 Figure 4: Blockchain and distributed ledger governance models
 
-**Public ledgers** are available for anyone to access, while **private ledgers** have restricted access. **Permissionless ledgers** allow anyone to run a validator node of the ledger (a node that participates in the [consensus protocol](https://en.wikipedia.org/wiki/Consensus_(computer_science)#Some_consensus_protocols)), and thus require proof-of-work, proof-of-stake, or other protections against [Sybil attacks](https://en.wikipedia.org/wiki/Sybil_attack). **Permissioned ledgers** restrict who can run a validator node, and thus can typically operate at a higher transaction rate.
+**Public ledgers** are available for anyone to access, while **private ledgers** have restricted access. **Permissionless ledgers** allow anyone to run a validator node of the ledger (a node that participates in the [consensus protocol](https://en.wikipedia.org/wiki/Consensus_%28computer_science%29#Some_consensus_protocols)), and thus require proof-of-work, proof-of-stake, or other protections against [Sybil attacks](https://en.wikipedia.org/wiki/Sybil_attack). **Permissioned ledgers** restrict who can run a validator node, and thus can typically operate at a higher transaction rate.
 
 For decentralized identity management, a core requirement of DIDs and DKMS is that they can interoperate with any of these ledgers. However for privacy and scalability reasons, certain types of ledgers play specific roles in DKMS architecture.
 
@@ -929,5 +935,5 @@ Now the trustee’s edge agent is ready to return the recovery data share to Ali
 
 # 12. Future Standardization
 
-It is the recommendation of the authors that the work described in this document be carried forward to full Internet standardization. We believe [OASIS](http://www.oasis-open.org/) is a strong candidate for this work due to its hosting of the [Key Management Interoperability Protocol (KMIP)](https://en.wikipedia.org/wiki/Key_Management_Interoperability_Protocol_(KMIP)) at the [KMIP Technical Committee](http://www.oasis-open.org/committees/kmip/) since 2010. Please contact the authors if you are interested in contributing to organizing an open standard effort for DKMS.
+It is the recommendation of the authors that the work described in this document be carried forward to full Internet standardization. We believe [OASIS](https://www.oasis-open.org/) is a strong candidate for this work due to its hosting of the [Key Management Interoperability Protocol (KMIP)](https://en.wikipedia.org/wiki/Key_Management_Interoperability_Protocol_(KMIP)) at the [KMIP Technical Committee](https://www.oasis-open.org/committees/kmip/) since 2010. Please contact the authors if you are interested in contributing to organizing an open standard effort for DKMS.
 

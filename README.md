@@ -1,15 +1,15 @@
-# Aries RFC
+# ![Aries RFCs](collateral/aries-rfcs-logo.png)
 
 This repo holds RFCs for the Aries project. They describe important
 topics ([not minor details](#do-you-need-an-RFC)) that we want to
 standardize across the Aries ecosystem.
 
-See [this doc](index.md) for a current listing of all RFCs and their statuses.
+See [the RFC Index](index.md) for a current listing of all RFCs and their statuses.
 
 There are 2 types of RFCs:
 
-* RFCs that describe individual features (the [/features](./features) folder)
-* RFCs that explain concepts underpinning many features (the [/concepts](./concepts) folder)
+* RFCs that describe individual features (the [features](./features) folder)
+* RFCs that explain concepts underpinning many features (the [concepts](./concepts) folder)
 
 RFCs are for developers *building on* Aries. They don't provide guidance on how Aries implements features internally; individual Aries repos have design docs for that.
 
@@ -73,25 +73,32 @@ is a good sign that you're on the right track.
 #### Mechanics
 
   - Fork [the RFC repo](https://github.com/hyperledger/aries-RFC).
-  - Pick a folder name for your RFC. The name should consist of a zero-padded
-    4-digit number plus a descriptive name for the topic. Use lower-kebab-case
-    for the descriptive name. Get the RFC number by finding the number
-    of [the most recent pull request](https://github.com/hyperledger/aries-rfc/pulls)
-    and incrementing by 1. For example, if the highest numbered PR is 125, your
-    RFC number would be 126. You should end up with a folder name like
-    `0026-my-cool-feature`.
-  - Create the folder and copy `0000-template.md` to `text/<your folder name>/README.md`.
+  - Pick a descriptive folder name for your RFC. Don't pick a number yet.
+  - Decide which parent folder is appropriate for your RFC.
+    If it is about a specific protocol or decorator or feature, its parent
+    should be `features`; if it is about a concept that will be used in many
+    different features, its parent should be `concepts`.
+  - Create the folder and copy `0000-template.md` to `<parent>/<your folder name>/README.md`.
   - Fill in the RFC. Put care into the details: RFCs that do not present
     convincing motivation, demonstrate an understanding of the impact of the
     design, or are disingenuous about the drawbacks or alternatives tend to be
     poorly received. You can add supporting artifacts, such as diagrams and sample
     data, in the RFC's folder.
+  - Assign a number to your RFC. Get the number by loading <a target="rfcnum"
+    href="https://dhh1128.github.io/next-aries-rfc-num/">this web page</a> (or, if you want to do it the hard way,
+    by figuring out what the next PR number will be). Rename your folder from
+    `<your folder name>` to `<your 4-digit number>-<your folder name>`. At the
+    top of your README.md, modify the title so it is in the form: `<your 4-digit
+    number>: Friendly Version of Your Title`. Commit your changes.
+  - In the root of the repo, run `python code/generate_index.py` to update the index
+    with your new RFC. Commit the updated version of /index.md and push your changes.
   - Submit a pull request.
 
 Make sure that all of your commits satisfy the [DCO requirements](
 https://github.com/probot/dco#how-it-works) of the repo.
 
-The RFC Maintainers will check to see if the process has been followed, and request any process changes before merging the PR.
+The RFC Maintainers will check to see if the process has been followed, and request
+any process changes before merging the PR.
 
 When the PR is merged, your RFC is now in the PROPOSED state.
 

@@ -1,4 +1,4 @@
-# 0032 Message Timing
+# 0032: Message Timing
 - Authors: Daniel Hardman <daniel.hardman@gmail.com>
 - Start Date: 2018-12-11
 
@@ -23,7 +23,7 @@ We need a standard way to talk about them.
 
 This RFC introduces a decorator to communicate about timing of messages.
 It is compatible with, but independent from, [conventions around date and
-time fields in messages](../../concepts/00xx-conventions/README.md).
+time fields in messages](../../concepts/0074-didcomm-best-practices/README.md).
 
 Timing attributes of messages can be described with the `~timing`
 decorator. It offers a number of optional subfields:
