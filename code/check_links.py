@@ -3,18 +3,23 @@ import re
 import requests
 import sys
 import traceback
+import urllib
 
 ROOT_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 LINK_PAT = re.compile(r'\[([^[(]+)\][(]([^)]+)\)', re.S)
 RFC_NAME_PAT = re.compile(r'\d{4}-[-_.a-z0-9]+', re.I)
 HTML_ANCHOR_PAT_TXT = r'<a[ \t\r\n]+[^>]*name=[\'"]X[\'"]'
 MD_ANCHOR_PAT = re.compile(r'^[ \t]*(?:\[[^]]+\][ \t]*:[ \t]*)?#+[ \t]*(.*)$', re.MULTILINE)
+COMMON_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'
 # The following URI patterns give errors even when we http HEAD them.
 SKIP_PATS = [
     '://www.learningmachine.com',
-    '://agilemodeling.com'
+    '://agilemodeling.com',
+    '://nvlpubs.nist.gov',
+    '://crates.io'
 ]
 COMMIT_HASH_URI_PAT = re.compile('.*://github.com/hyperledger/[a-zA-Z-_]+/blob/[a-f0-9]+/text/([a-zA-Z0-9_-]+)(/.*)?$')
+SHORTENER_PAT = re.compile('http://(bit.ly|t.co|goo.gl|youtu.be)')
 
 def make_md_anchor(txt):
     anchor = ''
@@ -76,6 +81,17 @@ def find_matching_rfc(rfcs, which):
         if n_which == n_rfc:
             return rfc
 
+def retry_web_with_encoded_uri(uri):
+    i = uri.find('://')
+    if i > -1:
+        i = uri.find('/', i + 3)
+        if i > -1:
+            encoded = uri[:i + 1] + urllib.parse.quote(uri[i + 1:])
+            if encoded != uri:
+                r = requests.head(encoded, headers={'User-Agent': COMMON_USER_AGENT}, timeout=10)
+                if r.status_code >= 200 and r.status_code <= 299:
+                    return True
+
 def handle_web_resource(uri, rfcs, cache):
     error = None
     ct = None
@@ -83,15 +99,24 @@ def handle_web_resource(uri, rfcs, cache):
     if uri in cache:
         error, content = cache[uri]
     else:
+        m = SHORTENER_PAT.match(uri)
+        if m:
+            return error, ct
         m = COMMIT_HASH_URI_PAT.match(uri)
         if m:
             rfc = find_matching_rfc(rfcs, m.group(1))
             if rfc:
                 error = 'should reference RFC %s' % rfc
         if not error:
-            r = requests.head(uri, timeout=10)
+            r = requests.head(uri, headers={'User-Agent': COMMON_USER_AGENT}, timeout=10)
             if r.status_code < 200 or r.status_code > 299:
                 error = "returns HTTP status code " + str(r.status_code)
+                # Try fetching a percent-encoded version of the URI. It is common
+                # for URIs in markdown to be identical to what's displayed in a
+                # browser's address bar, which will often show parens, spaces, and other
+                # punctuation chars as literals instead of as percent-encoded...
+                if r.status_code == 404 and retry_web_with_encoded_uri(uri):
+                    error = ''
             else:
                 ct = r.headers['content-type']
                 i = ct.find(';')
@@ -100,7 +125,7 @@ def handle_web_resource(uri, rfcs, cache):
         cache[uri] = (error, None)
     return error, ct
 
-def check_link(fname, short_fname, txt, match, rfcs, cache):
+def check_link(fname, short_fname, txt, match, rfcs, cache, problem_count_in_file_thus_far, full_check):
     """Look at a link and return an error string about it, if any."""
     error = None
     # What's exactly the uri as it appears in the markdown link?
@@ -120,9 +145,12 @@ def check_link(fname, short_fname, txt, match, rfcs, cache):
                 uri = uri[:i]
             # Now look at what type of URI it is.
             if uri.startswith('http'):
-                if should_skip_website(uri):
+                if not full_check:
                     return None
-                error, ct = handle_web_resource(uri, rfcs, cache)
+                else:
+                    if should_skip_website(uri):
+                        return None
+                    error, ct = handle_web_resource(uri, rfcs, cache)
             elif uri.startswith('mailto:'):
                 return None
             # If URI is empty, then the URI is relative to the open file, so it was probably a pure fragment
@@ -149,10 +177,12 @@ def check_link(fname, short_fname, txt, match, rfcs, cache):
         alt = match.group(1).strip()
         if len(alt) > 20:
             alt = alt[:20] + '...'
-        print("%s: [%s](%s) %s" % (short_fname, alt, full_uri, error))
+        if problem_count_in_file_thus_far == 0:
+            print(short_fname)
+        print("    [%s](%s) %s" % (alt, full_uri, error))
     return error
 
-def check_links(fname, rfcs, cache):
+def check_links(fname, rfcs, cache, full_check):
     relative_fname = os.path.relpath(fname, ROOT_FOLDER)
     sys.stdout.write(relative_fname.ljust(80, ' ') + '\r')
     error_count = 0
@@ -163,14 +193,14 @@ def check_links(fname, rfcs, cache):
     else:
         txt = cache[fname][1]
     for match in LINK_PAT.finditer(txt):
-        if check_link(fname, relative_fname, txt, match, rfcs, cache):
+        if check_link(fname, relative_fname, txt, match, rfcs, cache, error_count, full_check):
             error_count += 1
     return error_count
 
 def get_rfcs(folder):
     return [x for x in os.listdir(folder) if RFC_NAME_PAT.match(x) and os.path.isdir(os.path.join(folder, x))]
 
-def main():
+def main(full_check = False):
     error_count = 0
     folders = [x for x in map(lambda x: os.path.join(ROOT_FOLDER, x), ["concepts", "features"]) if os.path.isdir(x)]
     rfcs = []
@@ -181,10 +211,11 @@ def main():
         for root, dirs, files in os.walk(starting_point):
             for file in files:
                 if file.endswith('.md'):
-                    error_count += check_links(os.path.join(root, file), rfcs, cache)
+                    error_count += check_links(os.path.join(root, file), rfcs, cache, full_check)
     if error_count:
         print('\n%d errors.' % error_count)
     sys.exit(error_count)
 
 if __name__ == '__main__':
-    main()
+    full_check = (len(sys.argv) > 1 and sys.argv[1] == '--full')
+    main(full_check)

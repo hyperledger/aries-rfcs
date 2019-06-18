@@ -11,7 +11,7 @@
 
 ## Summary
 
-Defines how to send a [DIDComm](../../concepts/0005-didcomm)
+Defines how to send a [DIDComm](../../concepts/0005-didcomm/README.md)
 message in a way that facilitates interoperable
 localization, so humans communicating through agents can interact without
 natural language barriers.
@@ -42,8 +42,8 @@ to explore a way to facilitate localization that allows interoperability
 without imposing undue burdens on any implementer or participant.
 
 >NOTE: JSON-LD also describes a localization mechanism. We have chosen not
-to use it, for reasons [enumerated in the DIDComm RFC about JSON-LD
-compatibility](../00xx-json-ld-compatibility/README.md#internationalization-and-localization).
+to use it, for reasons [enumerated in the RFC about JSON-LD
+compatibility](../../concepts/0047-json-ld-compatibility/README.md#internationalization-and-localization).
 
 # Tutorial
 [tutorial]: #tutorial
@@ -57,7 +57,7 @@ depending on needs.
 The default assumption about locale with respect to all DIDComm messages
 is that they are locale-independent, because they are going to be processed
 entirely by automation. [Dates should be in ISO 8601 format, typically in UTC](
-../../concepts/00xx-conventions/README.md).
+../../concepts/0074-didcomm-best-practices/README.md#date-time-conventions).
 Numbers should use JSON formatting rules (or, if embedded in strings, the "C"
 locale). Booleans and null values use JSON keywords.
 
@@ -292,8 +292,8 @@ important features--and it remains nicely encapsulated.
 We could choose not to support this feature.
 
 We could also use [JSON-LD's `@language` feature](https://w3c.github.io/json-ld-syntax/#string-internationalization).
-However, this feature has a number of limitations, as [documented in the JSON-LD
-compatibility RFC](../00xx-json-ld-compatibility/README.md#internationalization-and-localization).
+However, this feature has a number of limitations, as [documented in the RFC
+about JSON-LD compatibility](../../concepts/0047-json-ld-compatibility/README.md#internationalization-and-localization).
 
 # Prior art
 [prior-art]: #prior-art

@@ -8,8 +8,8 @@ See [the RFC Index](index.md) for a current listing of all RFCs and their status
 
 There are 2 types of RFCs:
 
-* RFCs that describe individual features (the [/features](./features) folder)
-* RFCs that explain concepts underpinning many features (the [/concepts](./concepts) folder)
+* RFCs that describe individual features (the [features](./features) folder)
+* RFCs that explain concepts underpinning many features (the [concepts](./concepts) folder)
 
 RFCs are for developers *building on* Aries. They don't provide guidance on how Aries implements features internally; individual Aries repos have design docs for that.
 
@@ -76,8 +76,8 @@ is a good sign that you're on the right track.
   - Pick a descriptive folder name for your RFC. Don't pick a number yet.
   - Decide which parent folder is appropriate for your RFC.
     If it is about a specific protocol or decorator or feature, its parent
-    should be /features; if it is about a concept that will be used in many
-    different features, its parent should be /concepts.
+    should be `features`; if it is about a concept that will be used in many
+    different features, its parent should be `concepts`.
   - Create the folder and copy `0000-template.md` to `<parent>/<your folder name>/README.md`.
   - Fill in the RFC. Put care into the details: RFCs that do not present
     convincing motivation, demonstrate an understanding of the impact of the

@@ -95,17 +95,18 @@ The _inviter_ uses sent DID Doc information to send a DID and DID Doc to the _in
 The *invitee* sends the *inviter* an ack or any other message that confirms the response was received.
 
 ## 0. Invitation to Exchange
-[0-invitation]: #1-invitation
 
-An invitation to exchange may be transferred using any method that can reliably transmit text. The result  must be the essential data necessary to initiate a [Exchange Request](#2.-exchange-request) message. A exchange invitation is an agent message with agent plaintext format, but is an **out-of-band communication** and therefore not communicated using wire level encoding or encryption. The necessary data that an invitation to exchange must result in is:
+An invitation to exchange may be transferred using any method that can reliably transmit text. The result
+must be the essential data necessary to initiate an [Exchange Request](#2-exchange-request) message. A exchange
+invitation is an agent message with agent plaintext format, but is an **out-of-band communication** and therefore 
+not communicated using wire level encoding or encryption. The necessary data that an invitation to exchange must result in is:
+
 * suggested label
-
 * publicly resolvable did
 
   OR
 
 * suggested label
-
 * `~service` decorator block that contains a serviceEndpoint, recipientKeys, and optionally routingKeys.
 
 This information is used by the _invitee_ to send an exchange response message to the _inviter_. 
@@ -215,9 +216,6 @@ Example URL encoded as a QR Code:
 ![exampleqr](exampleqr.png)
 
 
-
-
-
 #### Invitation Publishing
 
 The _inviter_ will then publish or transmit the invitation URL in a manner available to the intended _invitee_. After publishing, we have entered the _invited_ state.
@@ -230,7 +228,6 @@ A user that already has those steps accomplished will have the URL received by s
 If they _invitee_ wants to accept the invitation, they will use the information present in the invitation message to prepare the request
 
 ## 1. Exchange Request
-[1-exchange-request]: #1-exchange-request
 
 The exchange request message is used to communicate the DID document of the _invitee_ to the _inviter_ using the provisional service information present in the _invitation_ message.
 
@@ -295,8 +292,6 @@ Possible reasons:
 - unknown processing error
 
 ## 2. Exchange Response
-
-[2-exchange-response]: #2-exchange-response
 
 The exchange response message is used to complete the exchange. This message is required in the flow, as it updates the provisional information presented in the invitation.
 

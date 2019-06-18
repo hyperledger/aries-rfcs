@@ -37,7 +37,7 @@ JSON-LD has significant gravitas in
 identity circles. It gives to JSON some capabilities that
 are sorely needed to model the semantic web, including linking, namespacing,
 datatyping, signing, and a strong story for schema (partly through the use of
-JSON-LD on [schema.org](http://schema.org)).
+JSON-LD on [schema.org](https://schema.org)).
 
 However, JSON-LD also comes with some conceptual and technical baggage. It can
 be hard for developers to master its subtleties; it requires very flexible parsing
@@ -56,7 +56,7 @@ OS. They don't need arbitrary semantic complexity.
 
 If we wanted to use email technology to send a verifiable credential, we would
 model the credential as an attachment, not enrich the schema of raw
-email message bodies. DIDComm invites a [similar approach](../../concepts/0017-attachments/README.md).
+email message bodies. DIDComm invites a [similar approach](../0017-attachments/README.md).
 
 ### Goal
 
@@ -87,7 +87,7 @@ JSON-LD constructs before embracing them in protocols with broad interoperabilit
 intentions, because of the [goal articulated above](#goal).
 
 * __The decorator concept in DIDComm is orthogonal to JSON-LD__, and is far more likely
-to be relevant to your early learning. See the [Decorator RFC](../../concepts/0011/decorators/README.md).
+to be relevant to your early learning. See the [Decorator RFC](../0011-decorators/README.md).
 
 That's it.
 
@@ -167,7 +167,7 @@ is automatically imputed to every DIDComm message:
 ```
 
 All decorators use the reserved prefix char `~` (tilde). For more on
-decorators, see the [Decorator RFC]( ../../concepts/0011-decorators/README.md).
+decorators, see the [Decorator RFC]( ../0011-decorators/README.md).
 
 #### Signing
 
@@ -189,7 +189,7 @@ scheme is best suited to circumstances.
 DIDComm messages generally do not need [this feature of JSON-LD](
 https://w3c.github.io/json-ld-syntax/#type-coercion), because there are
 well understood [conventions around date-time datatypes](
-../../concepts/0072-didcomm-best-practices/README.md#date-time-conventions), and individual
+../0074-didcomm-best-practices/README.md#date-time-conventions), and individual
 RFCs that define each message type can further clarify such subtleties.
 However, it is available on a message-type-definition basis (not ad hoc).
 
