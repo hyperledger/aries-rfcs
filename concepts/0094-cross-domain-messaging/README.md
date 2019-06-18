@@ -155,7 +155,7 @@ This RFC specifies (below) the "Forward" message type, a part of the "Routing" f
 
 ### DID, DIDDoc and Routing
 
-A DID owned by the Receiver is resolvable by the Sender as a DIDDoc using either a Public Ledger or using the [did:peer spec](https://dhh1128.github.io/peer-did-method-spec/index.html). The related [DIDcomm DIDDoc Conventions](../../features/0067-didcomm-diddoc-conventions/README.md) RFC defines the required contents of a DIDDoc created by the receiving entity. Notably, the DIDDoc given to the Sender by the Receiver specifies the required routing of the message through an optional set of [mediators](../concepts/0046-mediators-and-relays/README.md).
+A DID owned by the Receiver is resolvable by the Sender as a DIDDoc using either a Public Ledger or using the [did:peer spec](https://dhh1128.github.io/peer-did-method-spec/index.html). The related [DIDcomm DIDDoc Conventions](../../features/0067-didcomm-diddoc-conventions/README.md) RFC defines the required contents of a DIDDoc created by the receiving entity. Notably, the DIDDoc given to the Sender by the Receiver specifies the required routing of the message through an optional set of [mediators](../0046-mediators-and-relays/README.md).
 
 ### Cross Domain Interoperability
 
@@ -203,7 +203,7 @@ The diagram below shows an example use of the `forward` messages to encrypt the 
 
 #### Required: Cross Domain Encryption
 
-While within a domain the Agents MAY choose to use encryption or not when sending messages from Agent to Agent, encryption MUST be used when sending a message into the Receiver's domain. The endpoint agent unpack()'s the encryption envelope and processes the message - usually a `forward`. Note that within a domain, the agents may use arbitrary [relays](../concepts/0046-mediators-and-relays/README.md) for messages, unknown to the sender. How the agents within the domain knows where to send the message is implementation specific - likely some sort of dynamic DID-to-Agent routing table. If the path to the receiving agent includes mediators, the message must go through those mediators in order (for example, through 3 in our example) as the message being forwarded has been encrypted for the mediators.
+While within a domain the Agents MAY choose to use encryption or not when sending messages from Agent to Agent, encryption MUST be used when sending a message into the Receiver's domain. The endpoint agent unpack()'s the encryption envelope and processes the message - usually a `forward`. Note that within a domain, the agents may use arbitrary [relays](../0046-mediators-and-relays/README.md) for messages, unknown to the sender. How the agents within the domain knows where to send the message is implementation specific - likely some sort of dynamic DID-to-Agent routing table. If the path to the receiving agent includes mediators, the message must go through those mediators in order (for example, through 3 in our example) as the message being forwarded has been encrypted for the mediators.
 
 #### Required: Mediators Process Forward Messages
 
