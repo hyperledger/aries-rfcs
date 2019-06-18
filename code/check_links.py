@@ -88,18 +88,6 @@ def find_matching_rfc(rfcs, which):
             return rfc
 
 
-def retry_web_with_encoded_uri(uri):
-    i = uri.find('://')
-    if i > -1:
-        i = uri.find('/', i + 3)
-        if i > -1:
-            encoded = uri[:i + 1] + urllib.parse.quote(uri[i + 1:])
-            if encoded != uri:
-                r = requests.head(encoded, headers={'User-Agent': COMMON_USER_AGENT}, timeout=10)
-                if r.status_code >= 200 and r.status_code <= 299:
-                    return True
-
-
 def handle_web_resource(uri, rfcs, cache):
     error = None
     ct = None
@@ -119,12 +107,6 @@ def handle_web_resource(uri, rfcs, cache):
             r = requests.head(uri, headers={'User-Agent': COMMON_USER_AGENT}, timeout=10)
             if r.status_code < 200 or r.status_code > 299:
                 error = "returns HTTP status code " + str(r.status_code)
-                # Try fetching a percent-encoded version of the URI. It is common
-                # for URIs in markdown to be identical to what's displayed in a
-                # browser's address bar, which will often show parens, spaces, and other
-                # punctuation chars as literals instead of as percent-encoded...
-                if r.status_code == 404 and retry_web_with_encoded_uri(uri):
-                    error = ''
             else:
                 ct = r.headers['content-type']
                 i = ct.find(';')
@@ -225,9 +207,10 @@ def main(full_check = False):
                 if file.endswith('.md'):
                     error_count += check_links(os.path.join(root, file), rfcs, cache, full_check)
     print('%s\n%d errors.' % (''.rjust(80), error_count))
-    sys.exit(error_count)
+    return error_count
 
 
 if __name__ == '__main__':
     full_check = (len(sys.argv) > 1 and sys.argv[1] == '--full')
-    main(full_check)
+    error_count = main(full_check)
+    sys.exit(error_count)
