@@ -369,6 +369,29 @@ the same as assuming that text is in NFC normalization form with no case
 folding expectations and no extraneous surrogate pairs. Where more precision is
 required, the definition of DIDComm message fields should provide it.
 
+### Hyperlinks
+
+This repo is designed to be browsed as HTML. Browsing can be done directly through
+github, but we may publish the content using Github Pages and/or ReadTheDocs. As
+a result, some [hyperlink hygiene is observed](https://github.com/hyperledger/aries-rfcs/issues/92)
+to make the content as useful as possible:
+
+* Hyperlinks (both internal to the repo and external to it) must not be broken.
+* Fragments like `#heading-title` must correctly reference a real markdown heading.
+* Hyperlinks to an RFC should point to the RFC's README.md rather than to a folder
+with (possibly) many documents.
+* Hyperlinks from one RFC to another should be in relative form (../features/my-rfc/README.md),
+not in absolute form (`/features/my-rfc/README.md`) or external form
+(`https://github.com/hyperledger/aries-rfcs/blob/master/features/my-rfc/README.md`).
+This lets us move or embed the content, and it prevents branch names from
+cluttering the hyperlink.
+
+These rules are enforced by a unit test that runs `code/check_links.py`. To run
+it, go to the root of the repo and run `pytest code` -- or simply invoke the
+`check_links` script directly. Normally, `check_links` does not test external
+hyperlinks on the web, because it is too time-consuming; if you want that check,
+add `--full` as a command-line argument. 
+
 ## Reference
 
 - [Discussion of date and time datatypes on Wikipedia](https://en.wikipedia.org/wiki/System_time)
