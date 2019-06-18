@@ -1,11 +1,11 @@
 # 0092: Transports Return Route
-- Author: Sam Curren <sam@sovrin.org>
+- Author: Sam Curren sam@sovrin.org
 - Start Date: 2019-03-04
 
 ## Status
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
 - Status Date: 2019-06-18
-- Status Note: Supersedes [INDY HIPE PR 116](<https://github.com/hyperledger/indy-hipe/pull/116>)
+- Status Note: Supersedes [INDY HIPE PR 116](https://github.com/hyperledger/indy-hipe/pull/116)
 
 ## Summary
 
@@ -78,7 +78,7 @@ If transport decorators are desired but no message needs to be sent, a `noop` me
 
 ## Prior art
 
-The [Decorators RFC](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0011-decorators/README.md) describes scope of decorators. Transport isn't one of the scopes listed.
+The [Decorators RFC](../../concepts/0011-decorators/README.md) describes scope of decorators. Transport isn't one of the scopes listed.
 
 ## Unresolved questions
 
