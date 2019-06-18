@@ -160,7 +160,6 @@ _easily_ be built atop it). When authentication is required, all
 parties do it the same way.
 
 ## Reference
-[reference]: #reference
 
 Provide guidance for implementers, procedures to inform testing,
 interface definitions, formal function prototypes, error codes,
@@ -173,20 +172,14 @@ Strive to guarantee that:
 
 ## Related RFCs
 
-[0021: DID Comm Message Anatomy](<https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0021-didcomm-message-anatomy/README.md>)
-
-[0020: Message Types](<https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0020-message-types/README.md>)
-
-[0011: Decorators](<https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0011-decorators/README.md>)
-
-[0008: Message ID and Threading](<https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0008-message-id-and-threading/README.md>)
-
-[0019: Encryption Envelope](<https://github.com/hyperledger/aries-rfcs/blob/master/features/0019-encryption-envelope/README.md>)
-
-[0025: Agent Transports](<https://github.com/hyperledger/aries-rfcs/blob/master/features/0025-didcomms-transports/README.md>)
+*[0021: DID Comm Message Anatomy](../0021-didcomm-message-anatomy/README.md)
+*[0020: Message Types](../0020-message-types/README.md)
+*[0011: Decorators](../0011-decorators/README.md)
+*[0008: Message ID and Threading](../0008-message-id-and-threading/README.md)
+*[0019: Encryption Envelope](../../features/0019-encryption-envelope/README.md)
+*[0025: Agent Transports](../../features/0025-didcomm-transports/README.md)
 
 ## Rationale and alternatives
-[alternatives]: #alternatives
 
 - Why is this design the best in the space of possible designs?
 - What other designs have been considered and what is the rationale for not
@@ -194,7 +187,6 @@ choosing them?
 - What is the impact of not doing this?
 
 ## Prior art
-[prior-art]: #prior-art
 
 Discuss prior art, both the good and the bad, in relation to this proposal.
 A few examples of what this can include are:
@@ -218,7 +210,6 @@ into consideration that Aries sometimes intentionally diverges from common
 identity features.
 
 ## Unresolved questions
-[unresolved]: #unresolved-questions
 
 - What parts of the design do you expect to resolve through the
 enhancement proposal process before this gets merged?

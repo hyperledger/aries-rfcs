@@ -16,4 +16,6 @@ def test_index(scratch_space):
     if os.system('diff %s %s' % (perm_idx, temp_idx)):
         pytest.fail("/index.md needs to be updated. Run python code/generate_index.py.")
     
-
+def test_links():
+    import check_links
+    assert check_links.main() == 0

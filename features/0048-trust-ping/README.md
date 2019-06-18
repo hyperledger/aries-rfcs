@@ -62,9 +62,9 @@ creates a `ping` message like this:
 
 Only `@type` and `@id` are required; `~timing.out_time`, `~timing.expires_time`, and `~timing.delay_milli`
 are optional [message timing decorators](
-../../features/0032-message-timing/README.md), and `comment`
+../0032-message-timing/README.md), and `comment`
 follows the conventions of [localizable message fields](
-../../features/0043-l10n/README.md). If present, it may
+../0043-l10n/README.md). If present, it may
 be used to display a human-friendly description of the ping to a user
 that gives approval to respond. (Whether an agent responds to a trust
 ping is a decision for each agent owner to make, per policy and/or
@@ -117,4 +117,4 @@ along the way. This allows two parties to evaluate the completeness of
 a channel and the alignment of all agents that maintain it.
 
 3. This interaction may be traced using the general [message tracing
-mechanism](../../features/0034-message-tracing/README.md).
+mechanism](../0034-message-tracing/README.md).

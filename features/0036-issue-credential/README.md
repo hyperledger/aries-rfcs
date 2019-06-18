@@ -7,7 +7,8 @@
 
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
 - Status Date: 2019-05-28
-- Status Note: This supersedes the Issue Credential part of [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md). See [Aries RFC 0037](../0037-present-proof) for the presentation part of the same Indy HIPE PR.
+- Status Note: This supersedes the Issue Credential part of [Indy HIPE PR #89](
+https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md). See [RFC 0037](../0037-present-proof/README.md) for the presentation part of the same Indy HIPE PR.
 
 ## Summary
 
@@ -26,7 +27,7 @@ The Issue Credential protocol consists of these messages:
 * Request Credential - Prover to Issuer
 * Issue Credential - Issuer to Prover
 
-In addition, the [ack](../../concepts/0015-acks) and [report problem](../0035-report-problem) messages are adopted into the protocol for confirmation and error handling.
+In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-report-problem/README.md) messages are adopted into the protocol for confirmation and error handling.
 
 #### Choreography Diagram:
 
@@ -50,7 +51,7 @@ An optional message sent by the Prover to the Issuer to initiate the protocol or
 Description of attributes:
 
 * `comment` -- a field that provides some human readable information about this Credential Proposal;
-* `credential_proposal` -- a JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview_credential);
+* `credential_proposal` -- a JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential);
 * `schema_id` -- optional filter to request credential based on particular Schema
 * `cred_def_id` -- optional filter to request credential based on particular Credential Definition
 
@@ -208,7 +209,7 @@ So both processes described in this RFC (issuance) and [presentation](../0037-pr
 Also there is a good chance that payment flow may be combined with other message flows, so it may be considered as decorator. This decorator is optional.
 
 ### Payment decorators
-These decorators are out of subject of this RFC, see [Payment decorators RFC](https://github.com/hyperledger/aries-rfcs/tree/master/features/0075-payment-decorators)
+These decorators are out of subject of this RFC, see [Payment decorators RFC](../0075-payment-decorators/README.md)
 
 ### Payment flow
 Payment request may be included to Credential Offer msg from Issuer to Holder. And receipt should be provided in this case in Credential Request by Issuer.
@@ -225,7 +226,7 @@ Negotiation prior to issuing the credential can be done using the `offer-credent
 ## Reference
 
 * [VCX](https://github.com/hyperledger/indy-sdk/tree/master/vcx/libvcx/src/api) -- this implementation might not be perfect and needs to be improved, you can gather some info on parameters purpose from it
-* A pre-RFC (labelled version 0.1) implementation of the protocol was implemented by a number of groups in the Hyperledger Indy community leading up to IIW28 in April 2019. The protocol defined and implemented can be reviewed [here](https://hackmd.io/s/HkklVzww4). It was the basis of the [IIWBook demo](https://vonx.io/how_to/iiwbook) from BC Gov and collaborators.
+* A pre-RFC (labelled version 0.1) implementation of the protocol was implemented by a number of groups in the Hyperledger Indy community leading up to IIW28 in April 2019. The protocol defined and implemented can be reviewed [here](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view). It was the basis of the [IIWBook demo](https://vonx.io/how_to/iiwbook) from BC Gov and collaborators.
 
 ## Drawbacks
 

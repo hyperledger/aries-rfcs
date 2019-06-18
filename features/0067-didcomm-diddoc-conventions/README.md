@@ -3,7 +3,7 @@
 - Start Date: 04/15/2019
 
 ## Status
-- Status: [PROPOSED](/README.md#hipe-lifecycle)
+- Status: [PROPOSED](/README.md#rfc-lifecycle)
 - Status Date: 06/10/2019
 - Status Note: This revises the former [INDY HIPE](https://github.com/hyperledger/indy-hipe/pull/92)
 
@@ -47,7 +47,7 @@ When a DID document wishes to express support for DID communications, the follow
 - priority : This represents the priority of the service endpoint, used for distinction when multiple `did-communication` service endpoints are present in a single DID document. It is mandatory that this field is set to an unsigned integer with the default value of `0`.
 - recipientKeys : This is an array of [did key references](https://w3c-ccg.github.io/did-spec/#public-keys) used to denote the default recipients of an endpoint. (*note-1*)
 - routingKeys: This is an array of [did key references](https://w3c-ccg.github.io/did-spec/#public-keys), ordered from most destward to most srcward, used to denote the individual routing hops in between the sender and recipients. See [TBC]() for more information on how routing is intended to operate.
-- serviceEndpoint : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints). This URL based endpoint is used to declare how the message should be sent. DID communication is transport agnostic, and therefore leverages existing application level transport protocols. However for each transport defined, which is identified by the URL scheme e.g `http`, a set of transport specific considerations are defined see [transports](../0025-didcomms-transports/README.md) for more details.
+- serviceEndpoint : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints). This URL based endpoint is used to declare how the message should be sent. DID communication is transport agnostic, and therefore leverages existing application level transport protocols. However for each transport defined, which is identified by the URL scheme e.g `http`, a set of transport specific considerations are defined see [transports](../0025-didcomm-transports/README.md) for more details.
 
 >Notes
 >1. The keys featured in this array must resolve to keys of the same type, for example a mix `Ed25519VerificationKey2018` or `RsaVerificationKey2018` in the same array is invalid.
@@ -169,7 +169,7 @@ Alices agent goes to prepare a message `desired_msg` for Bob.
 
 ## Prior art
 
-- [DID Communication Message Anatomy](../0025-didcomms-transports/README.md)
+- [DID Communication Message Anatomy](../0025-didcomm-transports/README.md)
 - [DID Communication Encryption Envelope](../0019-encryption-envelope/README.md)
 
 ## Unresolved questions

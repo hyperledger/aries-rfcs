@@ -19,14 +19,13 @@ For Alice and Bob to interact, they must establish and maintain state.
 This state includes all the information in a DID Document: endpoint, keys, and
 associated authorizations.
 
-The [connect protocol](../0023-connect/README.md)
+The [DID exchange protocol](../0023-did-exchange/README.md)
 describes how these DID Docs are initially exchanged as a relationship is
 built. However, its mandate ends when a connection is established. The
 protocol described here focuses on how peers maintain their relationship
 thereafter, as DID Docs evolve.
 
 # Tutorial
-[tutorial]: #tutorial
 
 ### Background Concepts
 
@@ -78,8 +77,6 @@ connection knowledge in a DID Doc. Plenty of other state may exist, such
 as a history of credentials presented in either direction, a log of
 other messages and interactions, rich policy configured in either
 direction, and so forth. Such things are not managed in this protocol.
-(TODO: see [this note](#applying-this-protocol-to-other-state) about
-reusing the protocol for other problems.)
 
 A particular type of state that may cause confusion is authorization
 state. The authorization state that's present in DID Docs and that's
@@ -229,8 +226,8 @@ reference (a form of URI [TODO: hyperlink to def of DID reference in DID spec]):
 Of course, subsequent evolutions of the message family will replace `1.0` with
 an appropriate update per [semver](https://semver.org) rules.
 
-Note that this is the same message family used in the [connect protocol](
-../0023-connect/README.md).
+Note that this is the same message family used in the [DID Exchange Protocol](
+../0023-did-exchange/README.md).
 
 Besides the messages used in the connection protocol, the following messages are
 defined within this family: `read_state`, `state_response`, `sync_state` and `leave`.
@@ -264,7 +261,7 @@ Familiar DID Communications [decorators](
 ../../concepts/0011-decorators/README.md) can be used with this message.
 For example, to note that the request will expire or grow stale if
 not serviced quickly, [`~timing.expires_time` or `~timing.stale_time`](
-../features/00xx-message-timing/README.md#tutorial)
+../0032-message-timing/README.md#tutorial)
 can be added. Other decorators could be used to describe the preferred
 route to use in the return response, and so forth.
 
@@ -306,7 +303,7 @@ The properties in this message include:
   much like a a commit hash in git. See [State Hashes](#state-hashes) for
   details about how state hashes are computed.
 * `base_hash_time`: An [ISO 8601-formatted UTC timestamp](
-  ../../concepts/00xx-conventions/README.md#_time),
+  ../../concepts/0074-didcomm-best-practices/README.md#_time),
   identifying when the sender believes that the base hash became the
   current state. This value need not be highly accurate, and different agents in
   Alice and Bob's ecosystem may have different opinions about an appropriate
@@ -334,7 +331,7 @@ When this message is received, the following processing happens:
 
 * The `base_hash`, `deltas`, `result_hash`, and `proofs` properties are checked for
 consistency. If any errors are detected, a [`problem_report` message](
-../00xx-report-problem/README.md)
+../0035-report-problem/README.md)
 is returned, using [message threading](
  ../../concepts/0008-message-id-and-threading/README.md)
  to pinpoint the message that triggered the problem. No further processing occurs.
@@ -386,7 +383,8 @@ To reliably describe the state of a DID Doc at any given moment, we need a
 quick way to characterize its content. We do this with a SHA256 hash of the
 doc. However, we have to normalize the doc first, so irrelevant changes do
 not cause an inaccurate view of differences. We normalize the DID Doc
-according to the [JSON Canonicalization Scheme (draft RFC)](https://tools.ietf.org/id/draft-rundgren-json-canonicalization-scheme-00.html).
+according to the [JSON Canonicalization Scheme (draft RFC)](
+https://tools.ietf.org/id/draft-rundgren-json-canonicalization-scheme-00.html).
 This is a very simple, deterministic algorithm that can be implemented in
 a couple dozen lines of recursive code.
 
@@ -503,7 +501,6 @@ of scenarios in the [Test Cases doc](test_cases.md). Community members are encou
 to submit new test cases if they find situations that are not covered.
 
 ## Reference
-[reference]: #reference
 
 ### State and Sequence Rules
 
