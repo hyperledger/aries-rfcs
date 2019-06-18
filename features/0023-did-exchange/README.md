@@ -97,7 +97,7 @@ The *invitee* sends the *inviter* an ack or any other message that confirms the 
 ## 0. Invitation to Exchange
 
 An invitation to exchange may be transferred using any method that can reliably transmit text. The result
-must be the essential data necessary to initiate an [Exchange Request](#2-exchange-request) message. A exchange
+must be the essential data necessary to initiate an [Exchange Request](#1-exchange-request) message. A exchange
 invitation is an agent message with agent plaintext format, but is an **out-of-band communication** and therefore 
 not communicated using wire level encoding or encryption. The necessary data that an invitation to exchange must result in is:
 

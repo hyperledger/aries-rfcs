@@ -258,7 +258,7 @@ There are a variety of ledger designs and governance models as illustrated in Fi
 
 Figure 4: Blockchain and distributed ledger governance models
 
-**Public ledgers** are available for anyone to access, while **private ledgers** have restricted access. **Permissionless ledgers** allow anyone to run a validator node of the ledger (a node that participates in the [consensus protocol](https://en.wikipedia.org/wiki/Consensus_(computer_science)#Some_consensus_protocols)), and thus require proof-of-work, proof-of-stake, or other protections against [Sybil attacks](https://en.wikipedia.org/wiki/Sybil_attack). **Permissioned ledgers** restrict who can run a validator node, and thus can typically operate at a higher transaction rate.
+**Public ledgers** are available for anyone to access, while **private ledgers** have restricted access. **Permissionless ledgers** allow anyone to run a validator node of the ledger (a node that participates in the [consensus protocol](https://en.wikipedia.org/wiki/Consensus_%28computer_science%29#Some_consensus_protocols)), and thus require proof-of-work, proof-of-stake, or other protections against [Sybil attacks](https://en.wikipedia.org/wiki/Sybil_attack). **Permissioned ledgers** restrict who can run a validator node, and thus can typically operate at a higher transaction rate.
 
 For decentralized identity management, a core requirement of DIDs and DKMS is that they can interoperate with any of these ledgers. However for privacy and scalability reasons, certain types of ledgers play specific roles in DKMS architecture.
 

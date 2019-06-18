@@ -9,7 +9,6 @@
   RFCs about routing.
 
 ## Summary
-[summary]: #summary
 
 The mental model for agent-to-agent messaging (A2A) messaging includes
 two important communication primitives that have a meaning unique to our
@@ -37,7 +36,6 @@ Read on to explore how agent-to-agent communication can model complex
 topologies and flows using these two primitives.
 
 ## Motivation
-[motivation]: #motivation
 
 When we describe agent-to-agent communication, it is convenient to think of an
 interaction only in terms of Alice and Bob and their agents. We say things like:
@@ -51,7 +49,6 @@ multiple transports, routes that are not fully known (or knowable) to the sender
 routes that pass through mix networks, and other advanced and powerful concepts. 
 
 ## Tutorial
-[tutorial]: #tutorial
 
 ### Key Concepts
 
@@ -218,7 +215,7 @@ direction.
 
 Note how this breaks the simple assumptions of pure request-response technologies
 like HTTP, that assume the channel in (request) is also the channel out (response).
-[Duplex](https://en.wikipedia.org/wiki/Duplex_(telecommunications)) request-response
+[Duplex](https://en.wikipedia.org/wiki/Duplex_%28telecommunications%29) request-response
 can be modeled with A2A, but doing so requires support that may not always be
 available, plus cooperative behavior governed by the [`~thread`](
 ../0008-message-id-and-threading/README.md) decorator.

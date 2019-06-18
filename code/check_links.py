@@ -21,8 +21,10 @@ SKIP_PATS = [
 COMMIT_HASH_URI_PAT = re.compile('.*://github.com/hyperledger/[a-zA-Z-_]+/blob/[a-f0-9]+/text/([a-zA-Z0-9_-]+)(/.*)?$')
 SHORTENER_PAT = re.compile('http://(bit.ly|t.co|goo.gl|youtu.be)')
 
+
 def make_md_anchor(txt):
     anchor = ''
+    txt = txt.strip()
     for c in txt.lower():
         if c.isalpha() or c.isdigit() or c in '_-':
             anchor += c
@@ -31,6 +33,7 @@ def make_md_anchor(txt):
     if 'elapsed' in anchor:
         pass
     return anchor
+
 
 def fragment_in_content(fragment, content, ct):
     if "html" in ct:
@@ -45,10 +48,12 @@ def fragment_in_content(fragment, content, ct):
                 break
         return found
 
+
 def should_skip_website(uri):
     for pat in SKIP_PATS:
         if pat in uri:
             return True
+
 
 def handle_local_file(relative_to_fname, uri, cache):
     error = None
@@ -72,6 +77,7 @@ def handle_local_file(relative_to_fname, uri, cache):
         cache[path] = (error, content)
     return error, content, path
 
+
 def find_matching_rfc(rfcs, which):
     def norm_name(x):
         return re.sub('[^a-z]', '', x).lower()
@@ -80,6 +86,7 @@ def find_matching_rfc(rfcs, which):
         n_rfc = norm_name(rfc)
         if n_which == n_rfc:
             return rfc
+
 
 def retry_web_with_encoded_uri(uri):
     i = uri.find('://')
@@ -91,6 +98,7 @@ def retry_web_with_encoded_uri(uri):
                 r = requests.head(encoded, headers={'User-Agent': COMMON_USER_AGENT}, timeout=10)
                 if r.status_code >= 200 and r.status_code <= 299:
                     return True
+
 
 def handle_web_resource(uri, rfcs, cache):
     error = None
@@ -124,6 +132,7 @@ def handle_web_resource(uri, rfcs, cache):
                     ct = ct[:i]
         cache[uri] = (error, None)
     return error, ct
+
 
 def check_link(fname, short_fname, txt, match, rfcs, cache, problem_count_in_file_thus_far, full_check):
     """Look at a link and return an error string about it, if any."""
@@ -178,9 +187,10 @@ def check_link(fname, short_fname, txt, match, rfcs, cache, problem_count_in_fil
         if len(alt) > 20:
             alt = alt[:20] + '...'
         if problem_count_in_file_thus_far == 0:
-            print(short_fname)
+            print(short_fname + ':')
         print("    [%s](%s) %s" % (alt, full_uri, error))
     return error
+
 
 def check_links(fname, rfcs, cache, full_check):
     relative_fname = os.path.relpath(fname, ROOT_FOLDER)
@@ -197,8 +207,10 @@ def check_links(fname, rfcs, cache, full_check):
             error_count += 1
     return error_count
 
+
 def get_rfcs(folder):
     return [x for x in os.listdir(folder) if RFC_NAME_PAT.match(x) and os.path.isdir(os.path.join(folder, x))]
+
 
 def main(full_check = False):
     error_count = 0
@@ -212,9 +224,9 @@ def main(full_check = False):
             for file in files:
                 if file.endswith('.md'):
                     error_count += check_links(os.path.join(root, file), rfcs, cache, full_check)
-    if error_count:
-        print('\n%d errors.' % error_count)
+    print('%s\n%d errors.' % (''.rjust(80), error_count))
     sys.exit(error_count)
+
 
 if __name__ == '__main__':
     full_check = (len(sys.argv) > 1 and sys.argv[1] == '--full')

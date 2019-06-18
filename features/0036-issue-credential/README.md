@@ -51,7 +51,7 @@ An optional message sent by the Prover to the Issuer to initiate the protocol or
 Description of attributes:
 
 * `comment` -- a field that provides some human readable information about this Credential Proposal;
-* `credential_proposal` -- a JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview_credential);
+* `credential_proposal` -- a JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential);
 * `schema_id` -- optional filter to request credential based on particular Schema
 * `cred_def_id` -- optional filter to request credential based on particular Credential Definition
 

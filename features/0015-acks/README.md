@@ -242,8 +242,8 @@ ACK happen in the same message that wants acknowledgment.
 ##### __`on`__
 Describes the circumstances under which an ack is desired. Possible
 values in this array include `RECEIPT`, `OUTCOME`, and strings that express a
-time interval, as [documented in the RFC about date- and time-related conventions](
-https://github.com/hyperledger/indy-RFC/blob/72d2bc1f380b51ba72bdfe9857518a500e9f0990/text/date-time-conventions/README.md#_elapsed).
+time interval, as [documented in the RFC that discusses date- and time-related conventions](
+../../concepts/0074-didcomm-best-practices/README.md#_dur).
 Support for acks on a time interval is an advanced feature and should not be
 depended upon in the general case.
 
