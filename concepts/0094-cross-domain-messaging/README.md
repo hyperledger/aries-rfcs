@@ -20,7 +20,7 @@ The goal of this RFC is to define the rules that domains MUST follow to enable t
 
 ## Motivation
 
-The purpose of this RFC and its related RFCs is to define a layered messaging protocol such that we can ignore the transport of messages as we discuss the much richer Agent Messaging types and interactions. That is, we can assume that there is no need to include in an Agent message anything about how to route the message to the Receiver - it just magically happens. Alice (via her App Agent) sends a message to Bob, and (because of implementations based on this series of RFCs) we can ignore how the actual message got to Bob's App Agent.
+The purpose of this RFC and its related RFCs is to define a layered messaging protocol such that we can ignore the delivery of messages as we discuss the much richer Agent Messaging types and interactions. That is, we can assume that there is no need to include in an Agent message anything about how to route the message to the Receiver - it just magically happens. Alice (via her App Agent) sends a message to Bob, and (because of implementations based on this series of RFCs) we can ignore how the actual message got to Bob's App Agent.
 
 Put another way - these RFCs are about envelopes. They define a way to put a message - any message - into an envelope, put it into an outbound mailbox and have it magically appear in the Receiver's inbound mailbox in a secure and privacy-preserving manner. Once we have that, we can focus on letters and not how letters are sent.
 
