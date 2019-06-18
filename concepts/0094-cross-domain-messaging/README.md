@@ -56,8 +56,7 @@ The following terms are used in this RFC with the following meanings:
 - Domain Endpoint - a physical endpoint for messages into domains that MUST be assumed to be shared across many Identities
   - Shared by many identities (e.g. https://endpoint.agentsRus.com)
   - Agency - the handler for messages sent to the Domain Endpoint.
-- Routing Agent - the single identity-controlled entry point for a Domain per relationship (DID)
-  - A message addressed to a DID and delivered to a Domain Endpoint is passed directly to the Routing Agent for that DID
+- Mediators - agents explicitly known to the sender as part of routing messages to a Receiver.
 - DID - reference to the literal Decentralized ID text
   - e.g. did:sov:1234abcd
 - DID#keyname - reference to the DID appended with "#" and a specific key from the DIDDoc
@@ -73,7 +72,7 @@ The term "DIDDoc" is used in this RFC as it is defined in the [DID Specification
 - associated with a DID, and
 - used for a relationship.
 
-A DID can be resolved to get its corresponding DIDDoc by any Agent that needs access to the DIDDoc. This is true whether talking about a DID on the Public Ledger, or a DID persisted to a microledger. In the case of a microledger, it's the (implementation specific) domain's responsibility to ensure such resolution is available to all Agents requiring it.
+A DID can be resolved to get its corresponding DIDDoc by any Agent that needs access to the DIDDoc. This is true whether talking about a DID on a Public Ledger, or a pairwise DID persisted only to the parties of the relationship. In the case of pairwise DIDs, it's the (implementation specific) domain's responsibility to ensure such resolution is available to all Agents requiring it.
 
 #### Messages are Private
 
@@ -83,7 +82,7 @@ Agent Messages sent from a Sender to a Receiver SHOULD be private. That is, the 
 
 This RFC assumes that the Sender knows the Receiver's DID and, within the DIDDoc for that DID, the keyname to use for the Receiver's Agent. How the Sender knows the DID and keyname to send the message is not defined within this RFC - that is a higher level concern.
 
-The Receiver's DID MAY be a public or pairwise DID, and MAY be on a Public Ledger or a microledger.
+The Receiver's DID MAY be a public or pairwise DID, and MAY be on a Public Ledger or a only shared between the parties of the relationship.
 
 ### Example: Domain and DIDDoc
 
@@ -138,7 +137,7 @@ For the purposes of this discussion we are defining the message flow to be:
 
 > 1 --> 2 --> 8 --> 9 --> 3 --> 4
 
-However, that flow is arbitrary and only one hop is required:
+However, that flow is arbitrary and only one hop is actually required:
 
 - 1 is the Sender in this case and so must send the first message.
 - 4 is the Receiver in this case and so must receive the message.
@@ -173,7 +172,7 @@ The Agent Message from the Sender SHOULD be hidden from all Agents other than th
 
 Most Sender-to-Receiver messages will be sent between parties that have shared pairwise DIDs. When that is true, the Sender will (usually) AuthCrypt the message. If that is not the case, or for some other reason the Sender does not want to AuthCrypt the message, AnonCrypt will be used. In either case, the Indy-SDK `pack()` function handles the encryption.
 
-If there are mediators specified in the `RoutingKeys` of the service endpoint for the destination agent, the Sender must wrap the message for the Receiver in a 'Forward' message for each mediator. It is assumed that the Receiver can determine the from `did` based on the `to` DID using their pairwise relationship.
+If there are mediators specified in the DID service endpoint for the Receiver agent, the Sender must wrap the message for the Receiver in a 'Forward' message for each mediator. It is assumed that the Receiver can determine the from `did` based on the `to` DID using their pairwise relationship.
 
 ```json
 {
@@ -207,11 +206,11 @@ While within a domain the Agents MAY choose to use encryption or not when sendin
 
 #### Required: Mediators Process Forward Messages
 
-When a mediator (eventually) receives the message, it determines it is the target of the (current) outer forward Agent Message and so decrypts the message's `msg` value to reveal the inner "Forward" message.  Mediators uses their (implementation specific) knowledge to map from the `to` field to deliver the message to the Receiver, possibly via relays.
+When a mediator (eventually) receives the message, it determines it is the target of the (current) outer forward Agent Message and so decrypts the message's `msg` value to reveal the inner "Forward" message.  Mediators use their (implementation specific) knowledge to map from the `to` field to deliver the message to the physical endpoint of the next agent to process the message on it's way to the Receiver.
 
 #### Required: The Receiver App Agent Decrypts/Processes the Agent Message
 
-When the intended Receiver Agent receives the message, it determines it is the target of the forward message, decrypts the payload and processes the message.
+When the Receiver Agent receives the message, it determines it is the target of the forward message, decrypts the payload and processes the message.
 
 #### Exposed Data
 
@@ -225,7 +224,7 @@ The following summarizes the information needed by the Sender's agents:
 
 The DIDDoc will have a public key entry for each additional Agent message Receiver and each mediator.
 
-In many cases, the entry for the endpoint agent should be a public DID, as it will likely be operated by an agency (for example, https://agents-r-us.com) rather than by the Recipient entity (for example, a person). By making that a public DID in that case, the agency can rotate its public key(s) for receiving messages in a single operation, rather than having to notify each identity owner and in turn having them update the public key in every pairwise DID that uses that endpoint.
+In many cases, the entry for the endpoint agent should be a public DID, as it will likely be operated by an agency (for example, https://agents-r-us.com) rather than by the Receiver entity (for example, a person). By making that a public DID in that case, the agency can rotate its public key(s) for receiving messages in a single operation, rather than having to notify each identity owner and in turn having them update the public key in every pairwise DID that uses that endpoint.
 
 #### Data Not Exposed
 
