@@ -380,7 +380,7 @@ to make the content as useful as possible:
 * Fragments like `#heading-title` must correctly reference a real markdown heading.
 * Hyperlinks to an RFC should point to the RFC's README.md rather than to a folder
 with (possibly) many documents.
-* Hyperlinks from one RFC to another should be in relative form (../features/my-rfc/README.md),
+* Hyperlinks from one RFC to another should be in relative form (`../features/my-rfc/README.md`),
 not in absolute form (`/features/my-rfc/README.md`) or external form
 (`https://github.com/hyperledger/aries-rfcs/blob/master/features/my-rfc/README.md`).
 This lets us move or embed the content, and it prevents branch names from
