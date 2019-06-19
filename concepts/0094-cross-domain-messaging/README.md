@@ -72,7 +72,7 @@ The term "DIDDoc" is used in this RFC as it is defined in the [DID Specification
 - associated with a DID, and
 - used for a relationship.
 
-A DID can be resolved to get its corresponding DIDDoc by any Agent that needs access to the DIDDoc. This is true whether talking about a DID on a Public Ledger, or a pairwise DID persisted only to the parties of the relationship. In the case of pairwise DIDs, it's the (implementation specific) domain's responsibility to ensure such resolution is available to all Agents requiring it.
+A DID can be resolved to get its corresponding DIDDoc by any Agent that needs access to the DIDDoc. This is true whether talking about a DID on a Public Ledger, or a pairwise DID (using the [did:peer method](https://dhh1128.github.io/peer-did-method-spec/index.html)) persisted only to the parties of the relationship. In the case of pairwise DIDs, it's the (implementation specific) domain's responsibility to ensure such resolution is available to all Agents requiring it within the domain.
 
 #### Messages are Private
 
@@ -82,7 +82,7 @@ Agent Messages sent from a Sender to a Receiver SHOULD be private. That is, the 
 
 This RFC assumes that the Sender knows the Receiver's DID and, within the DIDDoc for that DID, the keyname to use for the Receiver's Agent. How the Sender knows the DID and keyname to send the message is not defined within this RFC - that is a higher level concern.
 
-The Receiver's DID MAY be a public or pairwise DID, and MAY be on a Public Ledger or a only shared between the parties of the relationship.
+The Receiver's DID MAY be a public or pairwise DID, and MAY be on a Public Ledger or only shared between the parties of the relationship.
 
 ### Example: Domain and DIDDoc
 
@@ -154,7 +154,7 @@ This RFC specifies (below) the "Forward" message type, a part of the "Routing" f
 
 ### DID, DIDDoc and Routing
 
-A DID owned by the Receiver is resolvable by the Sender as a DIDDoc using either a Public Ledger or using the [did:peer spec](https://dhh1128.github.io/peer-did-method-spec/index.html). The related [DIDcomm DIDDoc Conventions](../../features/0067-didcomm-diddoc-conventions/README.md) RFC defines the required contents of a DIDDoc created by the receiving entity. Notably, the DIDDoc given to the Sender by the Receiver specifies the required routing of the message through an optional set of [mediators](../0046-mediators-and-relays/README.md).
+A DID owned by the Receiver is resolvable by the Sender as a DIDDoc using either a Public Ledger or using pairwise DIDs based on the `did:peer` method. The related [DIDcomm DIDDoc Conventions](../../features/0067-didcomm-diddoc-conventions/README.md) RFC defines the required contents of a DIDDoc created by the receiving entity. Notably, the DIDDoc given to the Sender by the Receiver specifies the required routing of the message through an optional set of [mediators](../0046-mediators-and-relays/README.md).
 
 ### Cross Domain Interoperability
 
@@ -170,14 +170,14 @@ As noted above, the Sender of an Agent to Agent Message has the DID of the Recei
 
 The Agent Message from the Sender SHOULD be hidden from all Agents other than the Receiver. Thus, it SHOULD be encrypted with the public key of the Receiver. Based on our assumptions, the Sender can get the public key of the Receiver agent because they know the DID#keyname string, can resolve the DID to the DIDDoc and find the public key associated with DID#keyname in the DIDDoc. In our example above, that is the key associated with "did:sov:1234abcd#4".
 
-Most Sender-to-Receiver messages will be sent between parties that have shared pairwise DIDs. When that is true, the Sender will (usually) AuthCrypt the message. If that is not the case, or for some other reason the Sender does not want to AuthCrypt the message, AnonCrypt will be used. In either case, the Indy-SDK `pack()` function handles the encryption.
+Most Sender-to-Receiver messages will be sent between parties that have shared pairwise DIDs (using the `did:peer` method). When that is true, the Sender will (usually) AuthCrypt the message. If that is not the case, or for some other reason the Sender does not want to AuthCrypt the message, AnonCrypt will be used. In either case, the Indy-SDK `pack()` function handles the encryption.
 
-If there are mediators specified in the DID service endpoint for the Receiver agent, the Sender must wrap the message for the Receiver in a 'Forward' message for each mediator. It is assumed that the Receiver can determine the from `did` based on the `to` DID using their pairwise relationship.
+If there are mediators specified in the DID service endpoint for the Receiver agent, the Sender must wrap the message for the Receiver in a 'Forward' message for each mediator. It is assumed that the Receiver can determine the from `did` based on the `to` DID (or the sender's verkey) using their pairwise relationship.
 
 ```json
 {
   "@type" : "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward",
-  "to"   : "verkey of last mediator",
+  "to"   : "did:sov:1234abcd#4",
   "msg"  : { json object from <pack(AgentMessage,valueOf(did:sov:1234abcd#4), privKey(A.did@A:B#1))> }
 }
 ```
@@ -266,8 +266,6 @@ The `msg` field calls the Indy-SDK `pack()` function to encrypt the Agent Messag
 [reference]: #reference
 
 See the other RFCs referenced in this document:
-
-),  and . Those RFCs should be considered together in understanding  messaging.
 
 - [DIDcomm](../0005-didcomm/README.md)
 - [Encryption Envelope](../../features/0019-encryption-envelope/README.md)
