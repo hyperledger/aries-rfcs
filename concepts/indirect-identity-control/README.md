@@ -13,7 +13,7 @@ pilots and POCs.
 This RFC compares and contrasts three forms of indirect identity control: __delegation__,
 __guardianship__, and __controllership__. It then recommends mechanisms that allow identity
 technology to model each with flexibility, precision, and safety. These recommendations
-can be applied to any decentralized identity and credentialing ecosystem.
+can be applied to many decentralized identity and credentialing ecosystems.
 
 ## Motivation
 
@@ -175,8 +175,8 @@ delegated. When controllership involves animals instead of machines, it may
 have risks of abuse and complex protections and trust frameworks.
 
 Unlike guardianship, controlled things usually require minimal privacy. However,
-things that constantly identify their controller(s) in a correlatable way may undermine
-the privacy of controllers in unexpected ways.
+things that constantly identify their controller(s) in a correlatable fashion may undermine
+the privacy of controllers in ways that are unexpected.
 
 Use cases and other specifics of controllership are explored in greater depth in the
 [Controllership Details](controllership-details.md) doc.
@@ -212,8 +212,8 @@ guardianship-sample/trust-framework.md) for a simple example).
 It should answer at least the following questions:
 
 1. What is the trust framework's __formal name__, __version__, and __URI__?
-(The name cannot include a `/` character due to how it's paired with
-version in credential `type` fields (see [Proxy Credential](#proxy-credential), below).
+(The name cannot include a `/` character due to [how it's paired with
+version in credential `type` fields](#proxy-credential).
 The version must follow [semver](https://semver.org) rules.)
 
 1. In what __geos__ and __legal jurisdictions__ is it valid?
@@ -233,9 +233,11 @@ For a guardian, these might include values like `financial`, `medical`, `do_not_
 `foreign_travel`, or `new_relationships`. Like _bases_, permissions need to be
 formally defined and referencable by URI.)
 
-1. What are possible __constraints__ on a proxy? (Constraints are bound to a
+1. What are possible __constraints__ on a proxy? (Constraints are bound to
 particular proxies, whereas a permission model is bound to the identity that
-the proxy is controlling. Some constraints might include `geo_radius`,
+the proxy is controlling; this distinction will make more sense in an [example](
+guardianship-sample/trust-framework.md).
+Some constraints might include `geo_radius`,
 `jurisdiction`, `biometric_consent_freshness`, and so forth. These values also
 need to be formally defined and referencable by URI.)
 
@@ -270,7 +272,7 @@ format:
     pattern is: `Proxy[.]([DGC])/([^/]+)/(\d+[^/]*)/(.+)`, and an example of a
     matching string is: `Proxy.G/UNICEF Vulnerable Populations Trust Framework/1.0/ChildGuardian`.
 
-1. The metadata fields for the credential include `trustFrameworkURI" (the value of which is
+1. The metadata fields for the credential include `trustFrameworkURI` (the value of which is
 a URI linking to the relevant trust framework), `auditURI` (the value of which is a URI linking
 to a third-party auditing service, and which may be constrained or empty as specified in the
 trust framework), and `appealURI` (the value of which is a URI linking to an arbitration or
