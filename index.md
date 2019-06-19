@@ -27,6 +27,7 @@
 * [0067: didcomm-diddoc-conventions](features/0067-didcomm-diddoc-conventions/README.md)
 * [0074: didcomm-best-practices](concepts/0074-didcomm-best-practices/README.md)
 * [0075: payment-decorators](features/0075-payment-decorators/README.md)
+* [0092: transport-return-route](features/0092-transport-return-route/README.md)
 
 ## Status: ACCEPTED
 * [0003: protocols](concepts/0003-protocols/README.md)
