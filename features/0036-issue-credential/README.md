@@ -178,6 +178,7 @@ This is not a message but an inner object for other messages in this protocol. I
         {
             "name": "attribute name",
             "mime-type": "type",
+            "encoding": "encoding",
             "value": "value"
         },
         ...
@@ -185,10 +186,11 @@ This is not a message but an inner object for other messages in this protocol. I
 }
 ```
 
-The main element is `attributes`. It is an array of objects with three fields in it:
+The main element is `attributes`. It is an array of objects, each with the following fields:
 
 * `name` -- string with attribute name;
 * `mime-type` -- type of attribute
+* `encoding` -- encoding of value, if applicable: `"base64"` indicates base64
 * `value` -- value of credential
 
 ## Threading
