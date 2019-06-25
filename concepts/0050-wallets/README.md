@@ -48,7 +48,7 @@ architecture.
 [tutorial]: #tutorial
 
 (For a slide deck that gives a simplified overview of all the content in this
-RFC, please see [http://bit.ly/2JUcIiT](http://bit.ly/2JUcIiT). The deck also
+RFC, please see [http://bit.ly/2JUcIiT](https://docs.google.com/presentation/d/1d35TtEAP-f1tTh88XSZ2uQ2qnuPh6JIPluIWno_P3b0/edit). The deck also
 includes a link to a recorded presentation, if you prefer something verbal
 and interactive.)
 

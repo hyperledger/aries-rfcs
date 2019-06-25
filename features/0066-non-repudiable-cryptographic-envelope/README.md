@@ -1,9 +1,9 @@
-# Non-Repudiable Signature for Cryptographic Envelope
+# 0066: Non-Repudiable Signature for Cryptographic Envelope
 - Author: Kyle Den Hartog (indy@kyledenhartog.com)
 - Start Date: 04/15/2019
 
 ## Status
-- Status: [![proposed](/proposed.png)](/README.md#hipe-lifecycle)
+- Status: [PROPOSED](/README.md#rfc-lifecycle)
 - Status Date: 04/15/2019
 - Status Note: This is a second attempt to integrate non-repudiable digital signatures based on learnings and discussions over the past few months. This focuses only on the signing of entire messages. Signature Decorators will be handled seperately.
 

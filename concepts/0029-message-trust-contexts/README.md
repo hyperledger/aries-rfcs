@@ -1,4 +1,4 @@
-# Message Trust Contexts
+# 0029: Message Trust Contexts
 
 ## Status
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
@@ -32,7 +32,7 @@ This is not a binary question, with possible answers of "completely" or "not at 
 
 * Does Bob have any kind of prior relationship to Alice, such that history increases (or decreases) trust?
 
-* Is the message [repudiable](../0037-repudiation/README.md), or is Alice speaking "on the record"?
+* Is the message [repudiable](../0049-repudiation/README.md), or is Alice speaking "on the record"?
 
 * Could Alice use a malformed message to attack Bob (e.g., with buffer overflows, numeric range errors, unexpected fields, and so forth)?
 
@@ -55,7 +55,7 @@ Protocols should be designed with standard MTCs in mind. Thus, it is desirable t
 
 #### Input validations
 * __Size OK__: Do I know that the message will not overflow internal buffers or persistent storage?
-* __Deserialize OK__: Does the plaintext message deserialize into [native object representation](../0026-didcomm-file-format#native-object-representation)?
+* __Deserialize OK__: Does the plaintext message deserialize into [native object representation](../../features/0044-didcomm-file-and-mime-types/README.md#native-object-representation)?
 * __Keys OK__: As a native object, do the keys (property names) and structure match what was expected? In some approaches to deserialization, it may be combined with the previous question--but in languages that produce a loose dictionary from JSON, it is distinct.
 * __Values OK__: As a native object, do the values for properties match the datatypes, sizes, and constraints that were expected?
 
@@ -110,13 +110,18 @@ The first step may be an input validation to confirm that the message doesn't ex
 
 Another early step is decryption. This should allow population of the `confidentiality` and `authenticated_origin` dimensions, at least.
 
-Subsequent layers of code that do additional analysis should update the MTC as appropriate. For example, if a signature is not analyzed and validated until after the decryption step, the signature's presence or absence should cause `nonrepudiation` and maybe `integrity` to be updated. Similarly, once the plaintext of a message is known to be a valid enough to deserialize into an object, the MTC acquires `+deserialize_ok`. Later, when the fields of the message's [native object representation](../0026-didcomm-file-format#native-object-representation) have been analyzed to make sure they conform to a particular structure, it should be updated again with `+key_ok`. And so forth.
+Subsequent layers of code that do additional analysis should update the MTC as appropriate. For example, if a signature is not analyzed and validated until after the decryption step, the signature's presence or absence should cause `nonrepudiation` and maybe `integrity` to be updated. Similarly, once the plaintext of a message is known to be a valid enough to deserialize into an object, the MTC acquires `+deserialize_ok`. Later, when the fields of the message's [native object representation](../../features/0044-didcomm-file-and-mime-types/README.md#native-object-representation) have been analyzed to make sure they conform to a particular structure, it should be updated again with `+key_ok`. And so forth.
 
 ### Using a Message Trust Context at Runtime
 
 As message processing happens, the MTC isn't just updated. It should constantly be queried, and decisions should be made on the basis of what the MTC says. These decisions can vary according to the preferences of agent developers and the policies of agent owners. Some agents may choose not to accept any messages that are `-a`, for example, while others may be content to talk with anonymous senders. The recommendations of protocol designers should never be ignored, however; it is probably wrong to accept a `-n` message that signs a loan, even if agent policy is lax about other things. Formally declared MTCs in a protocol design may be linked to security proofs...
 
-Part of the intention with the terse MTC notation is that conversations about agent trust should be easy and interoperable. When agents send one another [`problem-report` messages](../../features/report-problem/README.md), they can turn MTCs into human-friendly text, but also use this notation: "Unable to accept a payment from message that lacks Integrity guarantees (-i)." This notation can help diagnose trust problems in logs. It may also be helpful with [message tracing](https://github.com/hyperledger/indy-hipe/pull/60), [feature discovery](../../features/discover-features/README.md), and agent testing.
+Part of the intention with the terse MTC notation is that conversations about agent trust should be easy
+and interoperable. When agents send one another [`problem-report` messages](../../features/0035-report-problem/README.md),
+they can turn MTCs into human-friendly text, but also use this notation: "Unable to accept a payment from message that
+lacks Integrity guarantees (-i)." This notation can help diagnose trust problems in logs. It may also be helpful with
+[message tracing](../../features/0034-message-tracing/README.md), 
+[feature discovery](../../features/0031-discover-features/README.md), and agent testing.
 
 ## Reference
 

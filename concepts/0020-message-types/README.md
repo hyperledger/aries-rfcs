@@ -30,7 +30,7 @@ Types are specified within a message using the `@type` attribute:
 }
 ```
 
-Message types are URIs that resolve to developer documentation for the message type, as described in [Protocol URIs](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/uris.md). 
+Message types are URIs that resolve to developer documentation for the message type, as described in [Protocol URIs](../0003-protocols/uris.md). 
 
 We recommend that message types are ledger resolvable DIDs with an endpoint specifier and path. This allows for the document locations to be updated to a new location for a stable definition.
 
@@ -206,8 +206,8 @@ Suggestions: Ambiguous names, unnecessary nesting, symbols in names.
 ## Reference
 
 - [Drummond Reed's presentation on using DIDs as message type specifiers](https://docs.google.com/document/d/1t-AsCPjvERBZq9l-iXn2xffJwlNfFoQhktfIaMFjN-c/edit#heading=h.x1wbqftasrx2)
-- [Daniel Hardman's Agent Summit Notes](http://bit.ly/2KkdWjE)
+- [Daniel Hardman's Agent Summit Notes](https://docs.google.com/document/d/1TP_7MKfuIrlY3rz4cz_tuuCFi7hdUWifeKwr5h-QTYM/edit)
 - [Stephen Curran's presentation summarizing the Agent Summit](https://docs.google.com/presentation/d/1l-po2IKVhXZHKlgpLba2RGq0Md9Rf19lDLEXMKwLdco/edit)
 - [DID Spec](https://w3c-ccg.github.io/did-spec/)
-- [Semantic Versioning](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/semver.md)
+- [Semantic Versioning](../0003-protocols/semver.md)
 - [Core Message Structure](https://github.com/hyperledger/indy-hipe/pull/17)

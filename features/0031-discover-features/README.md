@@ -1,4 +1,4 @@
-# 0031: Discover Features 1.0
+# 0031: Discover Features Protocol 1.0
 - Author: Daniel Hardman
 - Start Date: 2018-12-17
 

@@ -1,10 +1,10 @@
-# Title (Ex. 0000: Template)
+# Title (Ex. 0000: RFC Topic)
 - Author: (your name and/or email)
 - Start Date: (fill me in with today's date, YYYY-MM-DD)
 
 ## Status
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: (date of last status change)
+- Status Date: (date of first submission or last status change)
 - Status Note: (explanation of current status; if adopted, 
   links to impls or derivative ideas; if superseded, link to replacement)
 

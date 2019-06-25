@@ -1,6 +1,6 @@
 # Semver Rules for Protocols
 
-[Semver](http://semver.org) rules apply in cascading fashion to versions
+[Semver](https://semver.org) rules apply in cascading fashion to versions
 of protocols and individual message types. The version of a message type
 or protocol is expressed in the `semver` portion of its [identifying URI](
 uris.md).

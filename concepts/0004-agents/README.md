@@ -83,9 +83,8 @@ characteristics](#essential-characteristics) described above.
 
 #### How Agents Talk
 
-[DID communication](
-https://github.com/hyperledger/indy-hipe/blob/b0708395fd1669df33a9619efa7770a20c97006e/text/0003-did-comm/README.md)
-(DIDComm), and the [protocols built atop it](https://github.com/hyperledger/indy-hipe/pull/69)
+[DID communication]( ../0005-didcomm/README.md)
+(DIDComm), and the [protocols built atop it](../0003-protocols/README.md)
 are each rich subjects unto themselves. Here, we will stay very high-level.
 
 Agents can use many different communication transports: HTTP(S)
