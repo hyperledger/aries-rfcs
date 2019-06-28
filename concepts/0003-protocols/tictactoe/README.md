@@ -1,4 +1,4 @@
-# Tic Tac Toe 1.0 Protocol
+# Tic Tac Toe Protocol 1.0
 
 ![tictactoe by Symode09 via Wikimedia Commons](banner.png)
 
