@@ -6,12 +6,14 @@
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
 - Status Date: 2019-06-04
 - Status Note: Currently under study for implementation in various
-pilots and POCs.
+pilots and POCs. See, for example, the [Sovrin Foundation's
+Guardianship Task Force](https://docs.google.com/document/d/1ymWzCwu2Ud6FMGZdU8md03KCvaxmT41-gQYIRXo09Xw/edit).
 
 ## Summary
 
-This RFC compares and contrasts three forms of indirect identity control: __delegation__,
-__guardianship__, and __controllership__. It then recommends mechanisms that allow identity
+Compares and contrasts three forms of indirect identity control that have
+much in common and that should be explored together: __delegation__,
+__guardianship__, and __controllership__. Recommends mechanisms that allow identity
 technology to model each with flexibility, precision, and safety. These recommendations
 can be applied to many decentralized identity and credentialing ecosystems.
 
@@ -305,36 +307,14 @@ defined in the trust framework. The schema must include the following fields:
 
 1. `credentialSubject.proxied.type` must be a URI pointing to a schema for `credentialSubject.proxied` as
 defined in the trust framework. The schema must include a `permissions` field. This field
-contains an array of __grants__, each of which is a JSON object in the form:
+contains an array of [SGL](https://evernym.github.io/sgl) __rules__, each of which is a JSON object in the form:
 
-    ![{"let": recipient, "do": actions}](grant.png)
-
-    ...where `recipient` is one of the following:
-
-    * A named role such as `pilot` (going back to the controllership-of-a-drone example above)
-    or `next_of_kin` (going back to the guardianship example above).
-
-    * A JSON "n-of" object in the form:
-
-        ![{"n": 3, "of": [recipients]}](n-of.png)
-
-        ...where recipients allow recursion, and `n` is a positive
-        integer <= the size of the recipients array. If n == 1, then this is effectively a
-        boolean OR; any member of the recipients group can independently take the action.
-        If n == length of recipients array, then this is effectively a boolean AND; all
-        members of the recipients group must agree. If n is some other value, then a subset
-        of the specified size must agree.
-
-    ...and `actions` is an array of actions defined in the trust framework. This could include
-    actions like piloting a drone, changing a child's legal name, etc.
-
-    An example of the `credentialSubject.proxied.permissions` field might be:
-
-    ![permissions example](permissions.png)
-
-    This says: Let a guardian who has the role of parent perform the "medical_care" and "school"
-    actions for the dependent. Let a sibling perform the "school" action. Let either (parent+grandparent)
-    or (3*grandparent) do all actions.
+    ```jsonc
+    {"grant": privileges, "when": condition}
+    ```
+    
+    A [complete example for a guardianship use case](https://evernym.github.io/sgl/docs/tutorial.html#example)
+    is provided in the [SGL tutorial](https://evernym.github.io/sgl/docs/tutorial.html).
 
 1. The credential MAY or MUST contain additional fields under `credentialSubject.holder` that
 describe the holder (e.g., the holder's name, DID, biometric, etc.). If the credential is

@@ -1,5 +1,8 @@
 # Guardianship Details
 
+For a complete walkthrough or demo of how guardianship works, see
+[this demo script](https://docs.google.com/document/d/1F997KatmPe_rUCYFR4Ga9gJPKcmrN5czlx4K_qMdiJs/edit).
+
 ## Use Cases
 See https://docs.google.com/presentation/d/1qUYQa7U1jczEFun3a7sB3lKHIprlwd7brfOU9hEJ34U/edit?usp=sharing
 
