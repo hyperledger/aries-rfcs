@@ -10,7 +10,7 @@ The alternative of delegating via the `authorization` section of a DID Doc
 (option #1) is [unnecessarily fragile, cumbersome, redundant, and expensive to implement](
 https://docs.google.com/presentation/d/1-nEPpomAhhm6HPZf9C1o-rEljSNNKj-i4NuXjIW8BLI/edit#slide=id.g572b6fbf26_0_69).
 The theory of delegation with DIDs and credentials has been explored thoughtfully
-in many places (see [Prior Art](#prior-art)). The emergent consensus is:
+in many places (see [Prior Art and References](#prior-art-and-references)). The emergent consensus is:
 
 * __Formal delegation is best accomplished with a credential__ (option 2). This creates an audit
 trail, makes it possible to declare and enforce limits on what the delegate can do,
