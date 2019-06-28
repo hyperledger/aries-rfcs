@@ -75,7 +75,7 @@ name in an official capacity.
 
 ### 4. Members of an LLC
 
-Like [#3](3-acme-departments), but simpler. 3 or 4 people each need signing authority for the LLC,
+Like [#3](#3-acme-departments), but simpler. 3 or 4 people each need signing authority for the LLC,
 so LLC delegates that authority.
 
 ### Approaches to recursive delegation

@@ -377,6 +377,6 @@ A complete sample of a guardianship trust framework and credential schema
 are attached for reference. Please also see the details about each form of
 indirect identity control:
 
-* Delegation Details
-* Guardianship Details
-* Controllership Details
+* [Delegation Details](delegation-details.md)
+* [Guardianship Details](guardianship-details.md)
+* [Controllership Details](controllership-details.md)
