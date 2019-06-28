@@ -75,7 +75,7 @@ including errors, and what should happen to state as a result. A formal
 representation of this information is provided in a _state machine matrix_.
 It lists events as columns, and states as rows; a cell answers the
 question, "If I am in state X (=row), and event Y (=column) occurs,
-what happens to my state?" The [Tic Tac Toe example](tictactoe-1.0/README.md#states)
+what happens to my state?" The [Tic Tac Toe example](tictactoe/README.md#states)
 is typical.
 
 [Choreography Diagrams](
