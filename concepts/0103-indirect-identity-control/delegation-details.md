@@ -73,9 +73,9 @@ Purchase Orders and Letters of Credit, its Marketing department to officially si
 and so forth. All of these departments should be provably associated with Acme and acting under Acme’s
 name in an official capacity.
 
-### 2. Members of an LLC
+### 4. Members of an LLC
 
-Like [#1](1-departments-of-a-company), but simpler. 3 or 4 people each need signing authority for the LLC,
+Like [#3](3-acme-departments), but simpler. 3 or 4 people each need signing authority for the LLC,
 so LLC delegates that authority.
 
 ### Approaches to recursive delegation

@@ -271,7 +271,7 @@ format:
     (for controllership), `trust framework` is the name that a Proxy Trust
     Framework formally declares for itself, `tfver` is its version, and `variant`
     is a specific schema named in the trust framework. A regex that matches this
-    pattern is: `Proxy[.]([DGC])/([^/]+)/(\d+[^/]*)/(.+)`, and an example of a
+    pattern is: `Proxy\.([DGC])/([^/]+)/(\d+[^/]*)/(.+)`, and an example of a
     matching string is: `Proxy.G/UNICEF Vulnerable Populations Trust Framework/1.0/ChildGuardian`.
 
 1. The metadata fields for the credential include `trustFrameworkURI` (the value of which is
