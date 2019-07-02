@@ -1,0 +1,36 @@
+[
+  "@context", //JSON array where first = uri w3.org/2018/credentials/v1
+  "id", // optional
+  "type", //"[\",VerifiableCredential\", \"Guardaniship/1.0\"]",
+  "credentialSchema", // points to cred def
+  "issuanceDate", // standard in VCs RFC3339 Date-Time string
+  "expirationDate",
+  "credentialStatus", { "id" /*points to rev reg*/, "type": "sovrin rev reg 1.0" }
+  "issuer", // <did>
+  "trustFramework", // uri to a website
+  "auditURI", // constrained by trust framework, but a URI
+  "appealURI", // same
+  "credentialSubject.holder.type", // uri to schema for a holder
+  "credentialSubject.holder.role", // "parent" or "grandparent"
+  "credentialSubject.holder.basisURI", // uri from trust framework that defines which basis justifies the guardianship
+  "credentialSubject.holder.firstName",
+  "credentialSubject.holder.constraints.boundaries",
+  "credentialSubject.holder.constraints.pointOfOrigin",
+  "credentialSubject.holder.constraints.radiusKM",
+  "credentialSubject.holder.constraints.jurisdictions",
+  "credentialSubject.holder.constraints.trigger",
+  "credentialSubject.holder.constraints.circumstances",
+  "credentialSubject.holder.constraints.startTime",
+  "credentialSubject.holder.constraints.endTime",
+  "credentialSubject.proxied.type", // uri to schema for a dependent
+  "credentialSubject.proxied.permissions", // string of JSON array of grants
+  "credentialSubject.proxied.firstName",
+  "credentialSubject.proxied.lastName",
+  "credentialSubject.proxied.birthDate",
+  "credentialSubject.proxied.gender",
+  "credentialSubject.proxied.nativeLanguage",
+  "credentialSubject.proxied.identifyingMarks",
+  "credentialSubject.proxied.photo",
+  "credentialSubject.proxied.iris",
+  "credentialSubject.proxied.fingerprint"
+]

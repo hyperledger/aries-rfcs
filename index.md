@@ -29,6 +29,7 @@
 * [0075: payment-decorators](features/0075-payment-decorators/README.md)
 * [0092: transport-return-route](features/0092-transport-return-route/README.md)
 * [0095: basic-message](features/0095-basic-message/README.md)
+* [0103: indirect-identity-control](concepts/0103-indirect-identity-control/README.md)
 
 ## Status: ACCEPTED
 * [0003: protocols](concepts/0003-protocols/README.md)
