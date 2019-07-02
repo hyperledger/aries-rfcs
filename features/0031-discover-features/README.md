@@ -54,7 +54,7 @@ A `discover-features/query` message looks like this:
 Query messages say, "Please tell me what your capabilities are with
 respect to the protocols that match this string." This particular example
 asks if another agent knows any 1.x versions of the [tictactoe protocol](
-../../concepts/0003-protocols/tictactoe-1.0/README.md
+../../concepts/0003-protocols/tictactoe/README.md
 ).
 
 The `query` field may use the * wildcard. By itself, a query with just

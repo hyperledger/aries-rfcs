@@ -1,4 +1,4 @@
-# 0095: Basic Message
+# 0095: Basic Message Protocol 1.0
 - Author: Sam Curren
 - Start Date: 2019-01-16
 

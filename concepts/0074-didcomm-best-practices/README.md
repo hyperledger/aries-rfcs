@@ -205,7 +205,7 @@ Json numeric fields are very flexible. As wikipedia notes in its discussion abou
 Knowing that something is a number may be enough in javascript, but in many other programming
 languages, more clarity is helpful or even required. If the intent is for the number to be
 a non-negative or positive-only integer, say so when your field is [defined in a protocol](
-../0003-protocols/tictactoe-1.0/README.md#reference). If you know the
+../0003-protocols/tictactoe/README.md#reference). If you know the
 valid range, give it. Specify whether the field is nullable.
 
 Per the [first guideline above about names](#names), name your numeric fields in a way that

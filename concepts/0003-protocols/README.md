@@ -6,7 +6,8 @@
 - Status: [ACCEPTED](/README.md#rfc-lifecycle)
 - Status Date: 2019-04-01
 - Status Note: standards track and beginning to influence many mental models, but not yet
-  [ADOPTED](/README.md#rfc-lifecycle). This supersedes [Indy PR #69](https://github.com/hyperledger/indy-hipe/pull/69).
+  [ADOPTED](/README.md#rfc-lifecycle). This supersedes [Indy PR #69](
+  https://github.com/hyperledger/indy-hipe/pull/69).
 
 Defines protocols (and the closely related concept of message families)
 in the context of agent-to-agent interactions,
@@ -177,10 +178,10 @@ _timeouts_, and other things
 To define a protocol, write an RFC. Specific instructions for
 protocol RFCs, and a discussion about the theory behind detailed
 protocol concepts, are given in the [Template for Protocol RFCs](
-template.md). The [tictactoe 1.0 protocol](
-tictactoe-1.0/README.md) is also attached to this RFC as an example.
+template.md). The [tictactoe protocol](tictactoe/README.md) is
+also attached to this RFC as an example.
 
-[![tictactoe protocol](tictactoe-1.0/tile.png)](tictactoe-1.0/README.md)
+[![tictactoe protocol](tictactoe/tile.png)](tictactoe/README.md)
 
 ## Reference
 
