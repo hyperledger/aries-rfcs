@@ -3,7 +3,9 @@
   "@id": "1517207d-f50e-4ed5-a389-6a4986d718e6",
   "~thread": { "thid": "6a4986dd-f50e-4ed5-a389-718e61517207" },
   "for": "did:peer:rjHiqAzCbsNYhMZDTUASHg",
-  "did_doc": { DID Doc contents here },
+  "did_doc": {
+    // full content of resolved variant of DID Doc here
+  },
   "as_of_time": "2019-07-23 18:05:06.123Z"
 }
 
