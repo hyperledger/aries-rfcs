@@ -1,5 +1,6 @@
 # 0030: Sync Connection Protocol 1.0 (and related minor protocols)
-- Authors: Daniel Hardman <daniel.hardman@gmail.com>, Devin Fisher <devin.fisher@evernym.com>, Sam Curren <sam@sovrin.org>
+- Authors: Daniel Hardman <daniel.hardman@gmail.com>, 
+  Devin Fisher <devin.fisher@evernym.com>, Sam Curren <sam@sovrin.org>
 
 ## Status
 - Status: [PROPOSED](/README.md#rfc-lifecycle)

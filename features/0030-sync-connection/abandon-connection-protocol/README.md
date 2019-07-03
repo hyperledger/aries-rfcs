@@ -1,4 +1,4 @@
-# Abandon Connection State Protocol 1.0
+# Abandon Connection Protocol 1.0
 
 ## Summary
 
@@ -68,3 +68,17 @@ It may be desirable to use the [`~please_ack` decorator](
 ../../0015-acks/README.md#requesting-an-ack-please_ack)
 to request acknowledgment that the severance has been processed. The example shows
 this, but including it is optional.
+
+##### `ack`
+
+The [`ack` message](../../0015-acks/README.md#explicit-acks) is [adopted](
+../../../concepts/0003-protocols/template.md#adopted-messages) into this protocol. If an
+`announce` message includes the
+`~please_ack` decorator and the ack is sent, it looks something like this:
+
+```json
+{
+"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/abandon_connection/1.0/ack",
+"@thread": { "thid": "c17147d2-ada6-4d3c-a489-dc1e1bf778ab" }
+}
+```
