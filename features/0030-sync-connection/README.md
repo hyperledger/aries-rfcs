@@ -66,7 +66,7 @@ rules.
 Two related, minor protocols are also defined in subdocs of this RFC:
 
 * [Query Connection State Protocol](query-connection-state-protocol/README.md)
-* [Abandon Connection Protocol](abandon.md)
+* [Abandon Connection Protocol](abandon-connection-protocol/README.md)
 
 ### Roles
 
