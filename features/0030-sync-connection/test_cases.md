@@ -1,4 +1,4 @@
-# Test Cases for Relationship Management Protocol
+# Test Cases for Sync Connection Protocol
 
 ### Given
 
@@ -8,7 +8,7 @@ and do certain things in the DID Doc.
 
 A.1 and B.1 are routing (cloud) agents, where A.2-4 and B.2-4 run on edge devices
 that are imperfectly connected. A.1 and B.1 do not appear in the `authentication`
-section of their respective DID Docs, and thus cannot sign on Alice and Bob's behalf.
+section of their respective DID Docs, and thus cannot login on Alice and Bob's behalf.
 
 Let us further assume that Alice and Bob each have 
 two "recovery keys": A.5 and A.6; B.5 and B.6. These keys are not held by agents, but
@@ -25,7 +25,7 @@ is known as A.state[0], and that Bob's state is B.state[0].
 These states may be represented by the following `authorization` section of each
 DID Doc:
 
-[![sample authorization section](test_case_initial_authorization.png)](test_case_initial_authorization.json)
+[TODO]
 
 ### Scenarios (each starts over at the initial conditions)
 
