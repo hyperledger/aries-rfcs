@@ -50,9 +50,8 @@ example, if B.1 supports only versions 2.0 and 2.1 of protocol X, it should reje
 any messages from version 3 or version 1 or 0. In most cases, rejecting a message
 means sending a `problem-report` that the message is unsupported. The `code` field
 in such messages should be `version-not-supported`. Agents that receive such a
-`problem-report` can then use the [Protocol Discovery Protocol](
-https://github.com/hyperledger/indy-hipe/pull/73)
-to resolve version problems.
+`problem-report` can then use the [Discover Features Protocol](
+../../features/0031-discover-features/README.md) to resolve version problems.
 
 Recipient agents should accept messages that differ from their own supported version
 of a protocol only in the patch, prerelease, and/or build fields, whether these
