@@ -47,8 +47,8 @@ its simpler variants.
 
 ### "Roles" under "Tutorial"
 
->See [this note](parties-roles-participants.md) for definitions of the terms
-"party", "role", and "participant".
+>See [this note](roles-participants-etc.md) for definitions of the terms
+"role", "participant", and "party".
 
 The "Roles" subsection comes next in a protocol RFC. It gives a formal name
 to each role in the protocol, says who and how many can play each role, and
