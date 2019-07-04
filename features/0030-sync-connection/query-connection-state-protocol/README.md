@@ -54,7 +54,7 @@ looks like this:
 {
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/query_connection_state/1.0/state_request",
   "@id": "6a4986dd-f50e-4ed5-a389-718e61517207",
-  "for": "did:peer:1-F1220479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",
+  "for": "did:peer:11-479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",
   "as_of_hash": "d48f058771956a305e12a3b062a3ac81bd8653d7b1a88dd07db8f663f37bf8e0",
   "as_of_time": "2019-07-23 18:05:06.123Z"
 }
@@ -94,7 +94,7 @@ This message is the response to a `state_request` message, and looks like this:
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/query_connection_state/1.0/state_response",
   "@id": "1517207d-f50e-4ed5-a389-6a4986d718e6",
   "~thread": { "thid": "6a4986dd-f50e-4ed5-a389-718e61517207" },
-  "for": "did:peer:1-F1220479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",
+  "for": "did:peer:11-479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",
   "did_doc": { 
       // full content of resolved variant of DID Doc here  
   },
