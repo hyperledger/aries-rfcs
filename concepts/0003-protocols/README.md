@@ -94,8 +94,8 @@ not two. When the [DID Exchange Protocol](
 may involve dozens of *participants*, and it has cycles and other complex
 state evolution.
 
->See [this note](parties-roles-participants.md) for definitions of the terms
-"party", "role", and "participant".
+>See [this note](roles-participants-etc.md) for definitions of the terms
+"role", "participant", and "party".
 
 #### Agent Design
 
@@ -188,7 +188,7 @@ also attached to this RFC as an example.
 * [Message Type and Protocol Identifier URIs](uris.md)
 * [Semver Rules for Protocols](semver.md)
 * [State Details and State Machines](state-details.md)
-* [Parties, Roles, and Participants](parties-roles-participants.md)
+* [Roles, Participants, Parties, and Controllers](roles-participants-etc.md)
 
 ## Drawbacks
 

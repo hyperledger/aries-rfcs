@@ -3,7 +3,8 @@
 A protocol RFC conforms to general RFC patterns, but includes some
 specific substructure.
 
-[![template sections](template-sections.png)](https://docs.google.com/presentation/d/15UAkh_2WfDk7wlto7pSL7YU9NJr_XVMgGAOeNIRbzK8/edit#slide=id.g5609c67f13_0_113)
+[![template sections](template-sections.png)](
+https://docs.google.com/presentation/d/15UAkh_2WfDk7wlto7pSL7YU9NJr_XVMgGAOeNIRbzK8/edit#slide=id.g5609c67f13_0_113)
 
 ### "Name and Version" under "Tutorial"
 
@@ -47,8 +48,8 @@ its simpler variants.
 
 ### "Roles" under "Tutorial"
 
->See [this note](parties-roles-participants.md) for definitions of the terms
-"party", "role", and "participant".
+>See [this note](roles-participants-etc.md) for definitions of the terms
+"role", "participant", and "party".
 
 The "Roles" subsection comes next in a protocol RFC. It gives a formal name
 to each role in the protocol, says who and how many can play each role, and
