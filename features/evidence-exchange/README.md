@@ -85,36 +85,11 @@ The applicability of this protocol to real world user scenarios is discussed in 
 ### KYC Document Types
 The following, *non-exhaustive*, list of common KYC Documents are used for establishing *proof of identity*, *proof of address*. They are often accompanied with a recent photograph. Since this protocol is intended to be agnostic of business and regulatory processes, the types of acceptable KYC documents will vary.
 
-1. Proof of Identity
-  
-  1. Passport
-  1. [PAN Card](https://en.wikipedia.org/wiki/Permanent_account_number)
-  1. Voter’s Identity Card
-  1. Driving License
-  1. Photo identity proof of Central or State government
-  1. Ration card with photograph
-  1. Letter from a recognized public authority or public servant
-  1. Bank Pass Book bearing photograph
-  1. Employee identity card of a listed company or public sector company
-  1. Identity card of University or board of education
-
-1. Proof of Address
-
-  1. Passport
-  1. Voter’s Identity Card
-  1. Utility Bill (Gas, Electric, Telephone/Mobile)
-  1. Bank Account Statement
-  1. Letter from any recognized public authority or public servant
-  1. Credit Card Statement
-  1. House Purchase deed
-  1. Lease agreement along with last 3 months rent receipt
-  1. Employer’s certificate for residence proof
-
-1. Proof of Photo
-
-  1. Passport
-  1. Pistol Permit
-  1. Photo identity proof of Central or State government
+| Proof Type | Sample Documents |
+| --- | --- |
+| Address | Passport, Voter’s Identity Card, Utility Bill (Gas, Electric, Telephone/Mobile), Bank Account Statement, Letter from any recognized public authority or public servant, Credit Card Statement, House Purchase deed, Lease agreement along with last 3 months rent receipt, Employer’s certificate for residence proof |
+| Identity | Passport, [PAN Card](https://en.wikipedia.org/wiki/Permanent_account_number), Voter’s Identity Card, Driving License, Photo identity proof of Central or State government, Ration card with photograph, Letter from a recognized public authority or public servant, Bank Pass Book bearing photograph, Employee identity card of a listed company or public sector company, Identity card of University or board of education |
+| Photo | Passport, Pistol Permit, Photo identity proof of Central or State government |
 
 ## Tutorial
 
