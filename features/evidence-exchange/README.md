@@ -82,6 +82,35 @@ This protocol is intended to be a compliment to the foundational (issuance, veri
 ### User Stories
 The applicability of this protocol to real world user scenarios is discussed in the context of a [digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s).
 
+### KYC Document Types
+The following, *non-exhaustive*, list of common KYC Documents are used for establishing *proof of identity*, *proof of address*. They are often accompanied with a recent photograph. Since this protocol is intended to be agnostic of business and regulatory processes, the types of acceptable KYC documents will vary.
+
+* Proof of Identity
+  1. Passport
+  1. [PAN Card](https://en.wikipedia.org/wiki/Permanent_account_number)
+  1. Voter’s Identity Card
+  1. Driving License
+  1. Photo identity proof of Central or State government
+  1. Ration card with photograph
+  1. Letter from a recognized public authority or public servant
+  1. Bank Pass Book bearing photograph
+  1. Employee identity card of a listed company or public sector company
+  1. Identity card of University or board of education
+* Proof of Address
+  1. Passport
+  1. Voter’s Identity Card
+  1. Utility Bill (Gas, Electric, Telephone/Mobile)
+  1. Bank Account Statement
+  1. Letter from any recognized public authority or public servant
+  1. Credit Card Statement
+  1. House Purchase deed
+  1. Lease agreement along with last 3 months rent receipt
+  1. Employer’s certificate for residence proof
+* Proof of Photo
+  1. Passport
+  1. Pistol Permit
+  1. Photo identity proof of Central or State government
+
 ## Tutorial
 
 The evidence exchange protocol builds on the attachment decorator within DIDComm using the [Appending Method](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#appending).
@@ -92,48 +121,10 @@ The protocol is comprised of the following messages and associated actions:
 | --- | --- | --- |
 | Holder to Issuer | Request Evidence | Holder explores list of credentials received from Issuer and sends a ```evidence_request``` message to Issuer's agent. |
 | Issuer to Holder | Evidence Response | Issuer collects KYC Documents associated with each requested credential ID and sends a ```evidence_response``` message to Holder's agent. Upon receipt, the Holder stores evidence data in Wallet. |
-| Verifier to Holder | Evidence Existence Request | Verifier builds and sends a ```prove_evidence_request``` message to Holder's agent. |
-| Holder to Verifier | Evidence Existence Response | Holder builds and sends a ```prove_evidence_response``` message to Verifier's agent. Verifier stores acknowledgement of evidence in system of record. |
-| Verifier to Holder | Evidence Access Request | Verifier builds and sends a ```grant_access_request``` message to Holder's agent. |
-| Holder to Verifier | Evidence Access Response | Holder builds and sends a ```grant_access_response``` message to Holder's agent. Verifier fetches and validates Issuer attestation around requested documents. Stores documents in system of record. |
+| Verifier to Holder | Evidence Access Request | Verifier builds and sends a ```evidence_access_request``` message to Holder's agent. |
+| Holder to Verifier | Evidence Access Response | Holder builds and sends a ```evidence_access_response``` message to Verifier's agent.  Verifier fetches and validates Issuer attestation around requested documents. Verifier stores  evidence in system of record.|
 
-### KYC Document Types
-
-The following, *non-exhaustive*, list of common KYC Documents are used for establishing *proof of identity*, *proof of address*. They are often accompanied with a recent photograph. Since this protocol is intended to be agnostic of business and regulatory processes, the types of acceptable KYC documents will vary.
-
-* Proof of Identity
-  0. Passport
-  0. [PAN Card](https://en.wikipedia.org/wiki/Permanent_account_number)
-  0. Voter’s Identity Card
-  0. Driving License
-  0. Photo identity proof of Central or State government
-  0. Ration card with photograph
-  0. Letter from a recognized public authority or public servant
-  0. Bank Pass Book bearing photograph
-  0. Employee identity card of a listed company or public sector company
-  0. Identity card of University or board of education
-* Proof of Address
-  0. Passport
-  0. Voter’s Identity Card
-  0. Utility Bill (Gas, Electric, Telephone/Mobile)
-  0. Bank Account Statement
-  0. Letter from any recognized public authority or public servant
-  0. Credit Card Statement
-  0. House Purchase deed
-  0. Lease agreement along with last 3 months rent receipt
-  0. Employer’s certificate for residence proof
-* Proof of Photo
-  0. Passport
-  0. Pistol Permit
-  0. Photo identity proof of Central or State government
-
-To address these document types, the protocol introduces the following message attributes:
-
-* `evidence_type` -- an array containing one or more of the following types: *Address*, *Identity*, *Photo*
-
-### Message Processing
-
-#### Request Evidence
+### Request Evidence Message
 This message should be used as an accompaniment to an [issue credential message](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential#issue-credential). Upon receipt and storage of a credential the Holder should compose an ```evidence_request``` for each credential received from the Issuer. The Holder may use this message to get an update for new and existing credential from the Issuer.
 
 ```json
@@ -152,7 +143,7 @@ Description of attributes:
 * `credentials` -- A list of credential IDs associated with this pair-wise relationship with the Issuer.
 * `request-type` -- Stipulates how the Holder's Agent will manage the document access. If ```by-value```, then a copy of the document will be stored by the Holder. If ```by-reference```, then the storage provider service used by the Issuer will be the source of the document. If ```by-reference``` is used, then the complexity of the Evidence Access Response message will be impacted. However, it is preferable that document copies are minimized and as such avoid ```by-value``` where possible.  
 
-#### Evidence Response
+### Evidence Response Message
 This message is required for an Issuer Agent in response to an ```evidence_request``` message. The ```~attach``` attribute response format will be determined by the ```request_type``` attribute of the associated request message from a Holder.  
 
 ```json
@@ -193,7 +184,7 @@ Description of attributes:
 * `~attach` -- An array of embedded attachments either by-value or by-reference.
 
 
-##### By-value Attachments
+#### By-value Attachments
 
 ```json
 {
@@ -237,7 +228,7 @@ Description of attributes augments the [content formats oulined in the Aries Att
 * `description` --  A human readable description of the type of document.
 * `signature` -- Required RSA/SHA-256 Signature of the document. This is required for downstream processing by the Verifier so that the Holder can demonstrate that the Issuer was the attesting source of the document.
 
-##### By-reference Attachments
+#### By-reference Attachments
 
 ```json
 {
@@ -288,12 +279,12 @@ Description of attributes augments the [content formats outlined in the Aries At
 
 Upon completion of the Evidence Request and Response exchange, the Holder's Agent is now able to present any Verifier that has accepted a specific Issuer credential with the supporting evidence from the Issuer. This evidence, depending on the Holder's preferences may be direct or via a link to an external resource.
 
-#### Evidence Existence Request
+### Evidence Access Request Message
 Upon the successful processing of a [credential proof presentation message](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof#presentation), a Verifier may desire to request supporting evidence for the processed credential. This ```prove_evidence_request``` message is built by the Verifier and sent to the  Holder's agent. Similar to the ```request_evidence``` message, the Verifier may use this message to get an update for new and existing credentials associated with the Holder. The intent of this message is for the Verifier to establish trust that evidence exists and if necessary the Verifier can request the document on-demand.
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/evidence_exchange/1.0/prove_evidence_request",
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/evidence_exchange/1.0/evidence_access_request",
   "@id": "7c3f991836-4ed5-f50e-7207-718e6151a389",
   "for": "did:peer:1-F1220479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",
   "as_of_time": "2019-07-23 18:05:06.123Z",
@@ -310,12 +301,12 @@ Description of attributes:
   * `@id` -- Credential ID derived from a validated credential exchange (*proof presentment*).
   * `issuerDID` -- The public DID of the Issuer that issued the credential represented by the associated ID. This DID is derived from the credential validation process.
 
-#### Evidence Existence Response
+### Evidence Access Response Message
 This message is required for a Holder Agent in response to an ```prove_evidence_request``` message. The ```~attach``` attribute response format will be determined by the ```request_type``` attribute of the associated request message from a Holder. To build the response, the Holder will validate that the supplied Issuer DID corresponds to the credential represented by the supplied ID. Upon successful processing of a ```prove_evidence_response``` message, the Verifier will store acknowledgement of evidence in it's system of record.
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/evidence_exchange/1.0/prove_evidence_response",
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/evidence_exchange/1.0/evidence_access_response",
   "@id": "1517207d-f50e-4ed5-a389-6a4986d718e6",
   "~thread": { "thid": "7c3f991836-4ed5-f50e-7207-718e6151a389" },
   "for": "did:peer:1-F1220479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",
@@ -358,43 +349,6 @@ This message is required for a Holder Agent in response to an ```prove_evidence_
   ]
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### Evidence Access Request
-
-```json
-{
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/evidence_exchange/1.0/evidence_request",
-  "@id": "6a4986dd-f50e-4ed5-a389-718e61517207",
-  "for": "did:peer:1-F1220479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",
-  "as_of_time": "2019-07-23 18:05:06.123Z",
-  "credentials": [
-      { "@id": "cred-001", "evidence_type": ["Address"] },
-      { "@id": "cred-003", "evidence_type": ["Address", "Photo"] },
-      { "@id": "cred-012", "evidence_type": ["Address", "Identity"] },
-      { "@id": "cred-020", "evidence_type": ["Address", "Identity", "Photo"] }
-  ]
-}
-```
-
-
-#### Evidence Access Response
-
-
----
-
-
 
 ## Reference
 ```
