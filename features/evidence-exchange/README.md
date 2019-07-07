@@ -1,5 +1,5 @@
 # 0000: Evidence Exchange Protocol
-- Author: Dan Gisolfi <dan.gisolfi@gmail.com>
+- Author: [Dan Gisolfi](mailto:dan.gisolfi@gmail.com)
 - Start Date: 2019-07-05
 
 ## Status
@@ -67,17 +67,20 @@ In order for a Verifier to avoid or reduce KYC vetting expenses it must be able 
 * be convinced that a trusted entity has performed the necessary vetting;
 * know, if required, that access to the original vetted document(s) is possible.
 
-This implies that the protocol *must* addresss the following evidence concerns:
+This implies that the protocol *must* address the following evidence concerns:
 
 | Interaction Type | Challenge | Protocol Approach |
 | --- | --- | --- |
 | Examiner-to-Holder | How does Issuer provide Holder with evidence that it has **vetted** a KYC document? |Issuer signs hash of the document and presents signature to Holder. |
-| Holder-to-Verifier | How does Holder **present** Verifier with evidence that the Issuer of a Credential vetted an original source document? |Holder presents verifier with digitally signed hash of document, public DID of Issuer and access details associated with fetching a copy of the digital document. |\
-| Verifier-to-FileStorageProvider | How does Verifier **access** the document in digital format (base64)? | *TBD How does Verifier gain one-time access to the source?* |
-| Verifier-to-Verifier | How does Verifier **validate** that Issuer attests to the vetting of the original source as evidence for personal data claims encapsulated in issued credentials.? | Verifier validates Issuer's signature of document hash. |
+| Holder-to-Verifier | How does Holder **present** Verifier with evidence that the Issuer of a Credential vetted an original source document? |Holder presents verifier with digitally signed hash of document, public DID of Issuer and access to a copy of the digital document. |
+| Verifier-to-FileStorageProvider | How does Verifier **access** the document in digital format (base64)? | Issuer or Holder must provide secure access to a digital copy of the document. |
+| Verifier-to-Verifier | How does Verifier **validate** that Issuer attests to the vetting of the original source as evidence for personal data claims encapsulated in issued credentials? | Verifier gains access to the digital document, fetches the public key of associated with the Issuer's DID and validates Issuer's signature of document hash. |
 
 ### Protocol Outcome
 This protocol is intended to be a compliment to the foundational (issuance, verification) protocols for credential lifecycle management in support of the [Verifiable Credentials Specification](https://www.w3.org/TR/verifiable-claims-data-model/). Overtime, it is assumed that the exchange of original source documents will no longer be necessary as digital credentials become ubiquitous. In the meantime, the trust in and access to KYC documents can be achieved in private peer to peer relationships using the [Peer DID Spec](thub.com/openssi/peer-did-method-spec).
+
+### User Stories
+The applicability of this protocol to real world user scenarios is discussed in the context of a [digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s).
 
 ## Tutorial
 
