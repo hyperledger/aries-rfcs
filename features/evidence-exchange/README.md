@@ -86,6 +86,7 @@ The applicability of this protocol to real world user scenarios is discussed in 
 The following, *non-exhaustive*, list of common KYC Documents are used for establishing *proof of identity*, *proof of address*. They are often accompanied with a recent photograph. Since this protocol is intended to be agnostic of business and regulatory processes, the types of acceptable KYC documents will vary.
 
 1. Proof of Identity
+  
   1. Passport
   1. [PAN Card](https://en.wikipedia.org/wiki/Permanent_account_number)
   1. Voter’s Identity Card
@@ -96,7 +97,9 @@ The following, *non-exhaustive*, list of common KYC Documents are used for estab
   1. Bank Pass Book bearing photograph
   1. Employee identity card of a listed company or public sector company
   1. Identity card of University or board of education
+
 1. Proof of Address
+
   1. Passport
   1. Voter’s Identity Card
   1. Utility Bill (Gas, Electric, Telephone/Mobile)
@@ -106,7 +109,9 @@ The following, *non-exhaustive*, list of common KYC Documents are used for estab
   1. House Purchase deed
   1. Lease agreement along with last 3 months rent receipt
   1. Employer’s certificate for residence proof
+
 1. Proof of Photo
+
   1. Passport
   1. Pistol Permit
   1. Photo identity proof of Central or State government
