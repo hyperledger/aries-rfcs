@@ -80,7 +80,7 @@ This implies that the protocol *must* address the following evidence concerns:
 This protocol is intended to be a compliment to the foundational (issuance, verification) protocols for credential lifecycle management in support of the [Verifiable Credentials Specification](https://www.w3.org/TR/verifiable-claims-data-model/). Overtime, it is assumed that the exchange of original source documents will no longer be necessary as digital credentials become ubiquitous. In the meantime, the trust in and access to KYC documents can be achieved in private peer to peer relationships using the [Peer DID Spec](thub.com/openssi/peer-did-method-spec).
 
 ### User Stories
-The applicability of this protocol to real world user scenarios is discussed in the context of a [digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s).
+An example of the applicability of this protocol to real world user scenarios is discussed in the context of a [digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s).
 
 ### KYC Document Types
 The following, *non-exhaustive*, list of common KYC Documents are used for establishing *proof of identity*, *proof of address*. They are often accompanied with a recent photograph. Since this protocol is intended to be agnostic of business and regulatory processes, the types of acceptable KYC documents will vary.
@@ -99,13 +99,13 @@ The protocol is comprised of the following messages and associated actions:
 
 | Interaction Type | Message | Process Actions |
 | --- | --- | --- |
-| Holder to Issuer | Request Evidence | Holder explores list of credentials received from Issuer and sends a ```evidence_request``` message to Issuer's agent. |
-| Issuer to Holder | Evidence Response | Issuer collects KYC Documents associated with each requested credential ID and sends a ```evidence_response``` message to Holder's agent. Upon receipt, the Holder stores evidence data in Wallet. |
-| Verifier to Holder | Evidence Access Request | Verifier builds and sends a ```evidence_access_request``` message to Holder's agent. |
-| Holder to Verifier | Evidence Access Response | Holder builds and sends a ```evidence_access_response``` message to Verifier's agent.  Verifier fetches and validates Issuer attestation around requested documents. Verifier stores  evidence in system of record.|
+| Holder to Issuer | Request Evidence | Holder reviews the list of credentials it has received from the Issuer and sends an ```evidence_request``` message to Issuer's agent. |
+| Issuer to Holder | Evidence Response | Issuer collects KYC Documents associated with each requested credential ID and sends an ```evidence_response``` message to Holder's agent. Upon receipt, the Holder stores evidence data in Wallet. |
+| Verifier to Holder | Evidence Access Request | Verifier builds and sends an ```evidence_access_request``` message to Holder's agent. |
+| Holder to Verifier | Evidence Access Response | Holder builds and sends an ```evidence_access_response``` message to the Verifier's agent.  Verifier fetches requested documents and performs digital signature validation on each. Verifier stores evidence in system of record.|
 
 ### Request Evidence Message
-This message should be used as an accompaniment to an [issue credential message](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential#issue-credential). Upon receipt and storage of a credential the Holder should compose an ```evidence_request``` for each credential received from the Issuer. The Holder may use this message to get an update for new and existing credential from the Issuer.
+This message should be used as an accompaniment to an [issue credential message](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential#issue-credential). Upon receipt and storage of a credential the Holder should compose an ```evidence_request``` for each credential received from the Issuer. The Holder may use this message to get an update for new and existing credentials from the Issuer.
 
 ```json
 {
@@ -120,11 +120,11 @@ This message should be used as an accompaniment to an [issue credential message]
 
 Description of attributes:
 
-* `credentials` -- A list of credential IDs associated with this pair-wise relationship with the Issuer.
-* `request-type` -- Stipulates how the Holder's Agent will manage the document access. If ```by-value```, then a copy of the document will be stored by the Holder. If ```by-reference```, then the storage provider service used by the Issuer will be the source of the document. If ```by-reference``` is used, then the complexity of the Evidence Access Response message will be impacted. However, it is preferable that document copies are minimized and as such avoid ```by-value``` where possible.  
+* `credentials`: A list of credential IDs associated with this pair-wise relationship with the Issuer.
+* `request-type`: Stipulates how the Holder's Agent will manage the document access. If ```by-value```, then a copy of the document will be stored by the Holder. If ```by-reference```, then the storage provider service used by the Issuer will be the source of the document and any access control mechanisms will also need to be conveyed.   
 
 ### Evidence Response Message
-This message is required for an Issuer Agent in response to an ```evidence_request``` message. The ```~attach``` attribute response format will be determined by the ```request_type``` attribute of the associated request message from a Holder.  
+This message is required for an Issuer Agent in response to an ```evidence_request``` message. The format of the ```~attach``` attribute will be determined by the value of the ```request_type``` attribute in the associated request message from the Holder.  
 
 ```json
 {
@@ -156,13 +156,12 @@ This message is required for an Issuer Agent in response to an ```evidence_reque
 
 Description of attributes:
 
-* `credentials` -- A list of credential IDs each containing an array of evidence.
-  * `@id` -- Corresponds to each ID associated with the list of credential IDs supplied by the Holder in the ```evidence_request``` message.
-  * `evidence` -- An array of evidence attachments associated with each type of evidence the Issuer has established for a specific credential.
-    * `evidence_type` -- Stipulates the type of KYC Document proofing (Address, Identity or Photo) performed for a set of attachments.
-    * `docref` --  An array of attachment reference IDs pertaining to the list of KYC Documents used by the Issuer to establish certitude about the Holder.
-* `~attach` -- An array of embedded attachments either by-value or by-reference.
-
+* `credentials`: A list of credential IDs each containing an array of evidence.
+  * `@id`: Corresponds to each ID associated with the list of credential IDs supplied by the Holder in the ```evidence_request``` message.
+  * `evidence`: An array of evidence attachments associated with each type of evidence the Issuer has established for a specific credential.
+    * `evidence_type`: Stipulates the type of KYC Document proofing (Address, Identity or Photo) that the Issuer performed for a set of attachments.
+    * `docref`: An array of attachment reference IDs pertaining to the list of KYC Documents used by the Issuer to establish confidence about the Holder.
+* `~attach`: An array of embedded attachments either by-value or by-reference.
 
 #### By-value Attachments
 
@@ -201,12 +200,12 @@ Description of attributes:
 }
 ```
 
-Description of attributes augments the [content formats oulined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) with the following additions:
+This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) with the following additions:
 
-* `sha256` -- Optional hash of the content. Can be useful as an integrity check by Holder.
-* `vetting_process` -- A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
-* `description` --  A human readable description of the type of document.
-* `signature` -- Required RSA/SHA-256 Signature of the document. This is required for downstream processing by the Verifier so that the Holder can demonstrate that the Issuer was the attesting source of the document.
+* `vetting_process`: A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
+* `description`: A human readable description of the type of document.
+* `sha256`: *Optional hash of the content*. Can be useful as an integrity check by Holder.
+* `signature`: Required RSA/SHA-256 Signature of the document. This is required for downstream processing by the Verifier so that the Holder can demonstrate that the Issuer was the attesting source of the document.
 
 #### By-reference Attachments
 
@@ -219,7 +218,11 @@ Description of attributes augments the [content formats oulined in the Aries Att
       "vetting_process": "physical",
       "data": {
         "sha256": "1d9eb668b53d99c002123f1ffa4db0cd3728c0f0945faf525c5ee4a2d4289904",
-        "links": ["https://www.dropbox.com/s/r8rjizriaHw8T79hlidyAfe4DbWFcJYocef5/myDL.png"]
+        "links": [
+          { "url": "https://www.dropbox.com/s/r8rjizriaHw8T79hlidyAfe4DbWFcJYocef5/myDL.png",
+            "accesscode": "some_secret"
+          }
+        ]
       },
       "signature": "f67945faf9e89fg3kkh3vvvb68b53d5nh7900fn499040cd3728c0f099c002123"
     },
@@ -229,7 +232,11 @@ Description of attributes augments the [content formats oulined in the Aries Att
       "description": "ACME Electric Utility Bill",
       "data": {
         "sha256": "1d4db525c5ee4a2d42899040cd3728c0f0945faf9eb668b53d99c002123f1ffa",
-        "links": ["s3://mybucket/mykeyoyHw8T7Afe4DbWFcJYocef5"]
+        "links": [
+          { "url": "https://mySSIAgent.com/w8T7AfkeyJYo4DbWFcmyocef5eyH",
+            "accesscode": "some_secret"
+          }
+        ]
       },
       "signature": "945faf9e8999040cd3728c0f099c002123f67fg3kkh3vvvb68b53d5nh7900fn4"
     },
@@ -239,7 +246,11 @@ Description of attributes augments the [content formats oulined in the Aries Att
       "description": "State Concealed Carry Permit",
       "data": {
         "sha256": "b53d99c002123f1ffa2d42899040cd3728c0f0945fa1d4db525c5ee4af9eb668",
-        "links": ["https://myssiAgent.com/mykeyoyHw8T7Afe4DbWFcJYocef5"]
+        "links": [
+          { "url": "https://myssiAgent.com/mykeyoyHw8T7Afe4DbWFcJYocef5",
+            "accesscode": null
+          }
+        ]
       },
       "signature": "5nh7900fn499040cd3728c0f0945faf9e89kkh3vvvb68b53d99c002123f67fg3"
     }
@@ -247,20 +258,20 @@ Description of attributes augments the [content formats oulined in the Aries Att
 }
 ```
 
-Description of attributes augments the [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) with the following additions:
+This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) with the following additions:
 
-* `sha256` -- Optional hash of the content. Including this field makes the content tamper-evident.
-* `links` -- A list of zero or more locations at which the content may be fetched.
-* `vetting_process` -- A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
-* `description` --  A human readable description of the type of document.
-* `signature` -- Required RSA/SHA-256 Signature of the document. This is required for downstream processing by the Verifier so that the Holder can demonstrate that the Issuer was the attesting source of the document.
+* `vetting_process`: A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
+* `description`: A human readable description of the type of document.
+* `sha256`: *Optional hash of the content*. Including this field makes the content tamper-evident.
+* `links`: A list of zero or more locations at which the content may be fetched.
+  * `url`: Link to the external document.
+  * `accesscode`: If required, the passcode need to authenticate access to the url.
+* `signature`: Required RSA/SHA-256 Signature of the document. This is required for downstream processing by the Verifier so that the Holder can demonstrate that the Issuer was the attesting source of the document.
 
->Note: A by-reference link to a URL hosted by the Issuer does not break the correlation concern since by this point in the pair-wise peer relationship, the Verifier already knows who Issued the Holder a Credential.  
-
-Upon completion of the Evidence Request and Response exchange, the Holder's Agent is now able to present any Verifier that has accepted a specific Issuer credential with the supporting evidence from the Issuer. This evidence, depending on the Holder's preferences may be direct or via a link to an external resource.
+Upon completion of the Evidence Request and Response exchange, the Holder's Agent is now able to present any Verifier that has accepted a specific Issuer credential with the supporting evidence from the Issuer. This evidence, depending on the Holder's preferences may be direct or via a link to an external resource. For example, regardless of the delivery method used between the Issuer and Holder, the Holder's Agent may decide to provide fetch all documents and store them itself and then provide Verifiers with by-refernece access upon request.
 
 ### Evidence Access Request Message
-Upon the successful processing of a [credential proof presentation message](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof#presentation), a Verifier may desire to request supporting evidence for the processed credential. This ```prove_evidence_request``` message is built by the Verifier and sent to the  Holder's agent. Similar to the ```request_evidence``` message, the Verifier may use this message to get an update for new and existing credentials associated with the Holder. The intent of this message is for the Verifier to establish trust that evidence exists and if necessary the Verifier can request the document on-demand.
+Upon the successful processing of a [credential proof presentation message](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof#presentation), a Verifier may desire to request supporting evidence for the processed credential. This ```evidence_access_request``` message is built by the Verifier and sent to the  Holder's agent. Similar to the ```request_evidence``` message, the Verifier may use this message to get an update for new and existing credentials associated with the Holder. The intent of this message is for the Verifier to establish trust by obtaining a copy of the available evidence and performing the necessary content validation.
 
 ```json
 {
@@ -277,12 +288,12 @@ Upon the successful processing of a [credential proof presentation message](http
 
 Description of attributes:
 
-* `credentials` -- A list of credential IDs that the Verifier desires proof of evidence.
-  * `@id` -- Credential ID derived from a validated credential exchange (*proof presentment*).
-  * `issuerDID` -- The public DID of the Issuer that issued the credential represented by the associated ID. This DID is derived from the credential validation process.
+* `credentials`: A list of credential IDs that the Verifier desires proof of evidence.
+  * `@id`: Credential ID derived from a validated credential exchange (*proof presentment*).
+  * `issuerDID`: The public DID of the Issuer that issued the credential represented by the associated ID. This DID is derived from the credential validation process.
 
 ### Evidence Access Response Message
-This message is required for a Holder Agent in response to an ```prove_evidence_request``` message. The ```~attach``` attribute response format will be determined by the ```request_type``` attribute of the associated request message from a Holder. To build the response, the Holder will validate that the supplied Issuer DID corresponds to the credential represented by the supplied ID. Upon successful processing of a ```prove_evidence_response``` message, the Verifier will store acknowledgement of evidence in it's system of record.
+This message is required for a Holder Agent in response to an ```evidence_access_request``` message. The format of the ```~attach``` attribute will be determined by the storage management preferences of the Holder's Agent. To build the response, the Holder will validate that the supplied Issuer DID corresponds to the credential represented by the supplied ID. Upon successful processing of a ```evidence_access_response``` message, the Verifier will store evidence details in its system of record.
 
 ```json
 {
@@ -307,40 +318,126 @@ This message is required for a Holder Agent in response to an ```prove_evidence_
       ]
     }
   ],
+  "~attach": [ ...
+  ]
+}
+```
+
+Description of attributes:
+
+* `credentials`: A list of credential IDs each containing an array of evidence.
+  * `@id`: Corresponds to each ID associated with the list of credential IDs supplied by the Holder in the ```evidence_request``` message.
+  * `evidence`: An array of evidence attachments associated with each type of evidence the Issuer has established for a specific credential.
+    * `evidence_type`: Stipulates the type of KYC Document proofing (Address, Identity or Photo) that the Issuer performed for a set of attachments.
+    * `docref`: An array of attachment reference IDs pertaining to the list of KYC Documents used by the Issuer to establish confidence about the Holder.
+* `~attach`: An array of embedded attachments either by-value or by-reference.
+
+#### By-value Attachments
+
+```json
+{
   "~attach": [
     {
       "@id": "kycdoc1",
       "description": "driver's license",
       "vetting_process": "physical",
+      "data": {
+        "base64": <base64 of the file>
+      },
       "signature": "f67945faf9e89fg3kkh3vvvb68b53d5nh7900fn499040cd3728c0f099c002123"
     },
     {
       "@id": "kycdoc2",
       "vetting_process": "external service",
       "description": "ACME Electric Utility Bill",
+      "data": {
+        "base64": <base64 of the file>
+      },
       "signature": "945faf9e8999040cd3728c0f099c002123f67fg3kkh3vvvb68b53d5nh7900fn4"
     },
     {
       "@id": "kycdoc3",
       "vetting_process": "physical, barcode; external service",
       "description": "State Concealed Carry Permit",
+      "data": {
+        "sha256": "1d9eb668b53d99c002123f1ffa4db0cd3728c0f0945faf525c5ee4a2d4289904",
+        "base64": <base64 of the file>
+      },
       "signature": "5nh7900fn499040cd3728c0f0945faf9e89kkh3vvvb68b53d99c002123f67fg3"
     }
   ]
 }
 ```
 
-## Reference
-```
-Provide guidance for implementers, procedures to inform testing,
-interface definitions, formal function prototypes, error codes,
-diagrams, and other technical details that might be looked up.
-Strive to guarantee that:
+This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) with the following additions:
 
-- Interactions with other features are clear.
-- Implementation trajectory is well defined.
-- Corner cases are dissected by example.
+* `vetting_process`: A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
+* `description`: A human readable description of the type of document.
+* `sha256`: *Optional hash of the content*. Can be useful as an integrity check by Holder.
+* `signature`: Required RSA/SHA-256 Signature of the document. This is required for downstream processing by the Verifier so that the Holder can demonstrate that the Issuer was the attesting source of the document.
+
+#### By-reference Attachments
+
+```json
+{
+  "~attach": [
+    {
+      "@id": "kycdoc1",
+      "description": "driver's license",
+      "vetting_process": "physical",
+      "data": {
+        "sha256": "1d9eb668b53d99c002123f1ffa4db0cd3728c0f0945faf525c5ee4a2d4289904",
+        "links": [
+          { "url": "https://www.dropbox.com/s/r8rjizriaHw8T79hlidyAfe4DbWFcJYocef5/myDL.png",
+            "accesscode": "some_secret"
+          }
+        ]
+      },
+      "signature": "f67945faf9e89fg3kkh3vvvb68b53d5nh7900fn499040cd3728c0f099c002123"
+    },
+    {
+      "@id": "kycdoc2",
+      "vetting_process": "external service",
+      "description": "ACME Electric Utility Bill",
+      "data": {
+        "sha256": "1d4db525c5ee4a2d42899040cd3728c0f0945faf9eb668b53d99c002123f1ffa",
+        "links": [
+          { "url": "https://mySSIAgent.com/w8T7AfkeyJYo4DbWFcmyocef5eyH",
+            "accesscode": "some_secret"
+          }
+        ]
+      },
+      "signature": "945faf9e8999040cd3728c0f099c002123f67fg3kkh3vvvb68b53d5nh7900fn4"
+    },
+    {
+      "@id": "kycdoc3",
+      "vetting_process": "physical, barcode; external service",
+      "description": "State Concealed Carry Permit",
+      "data": {
+        "sha256": "b53d99c002123f1ffa2d42899040cd3728c0f0945fa1d4db525c5ee4af9eb668",
+        "links": [
+          { "url": "https://myssiAgent.com/mykeyoyHw8T7Afe4DbWFcJYocef5",
+            "accesscode": null
+          }
+        ]
+      },
+      "signature": "5nh7900fn499040cd3728c0f0945faf9e89kkh3vvvb68b53d99c002123f67fg3"
+    }
+  ]
+}
 ```
+
+This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) with the following additions:
+
+* `vetting_process`: A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
+* `description`: A human readable description of the type of document.
+* `sha256`: *Optional hash of the content*. Including this field makes the content tamper-evident.
+* `links`: A list of zero or more locations at which the content may be fetched.
+  * `url`: Link to the external document.
+  * `accesscode`: If required, the passcode need to authenticate access to the url.
+* `signature`: Required RSA/SHA-256 Signature of the document. This is required for downstream processing by the Verifier so that the Holder can demonstrate that the Issuer was the attesting source of the document.
+
+## Reference
 
 * Centralized Shared-KYC Trends
   * [R3 KYC Registry](http://www.euromoneyseminars.com/articles/3600987/r3-building-shared-kyc-blockchain-service-with-banks.html)
@@ -353,49 +450,18 @@ Strive to guarantee that:
   * [USA Identity Documents](https://en.wikipedia.org/wiki/Identity_documents_in_the_United_States)
   * [Aadhaar KYC Concepts](http://vikaspedia.in/social-welfare/financial-inclusion/know-your-customer-guidelines#section-2)
 
-
 ## Drawbacks
-
-Why should we *not* do this?
+This protocol does not vary much from a generic document exchange protocol. It can be argued that a special KYC Document exchange protocol is not needed. However, given the emphasis placed on KYC compliance during the early days of DIDComm adoption, we want to make sure that any special cases are addressed upfront so that we avoid adoption derailment factors.
 
 ## Rationale and alternatives
-
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not
-choosing them?
-- What is the impact of not doing this?
+As noted in the [references](#reference) section, there are a number of trending KYC Document proofing options that are being considered. Many leverage the notion of a centralized blockchain ledger for sharing documents. This effectively places control outside of the Holder and enables the sharing of documents in a B2B manner. Such approaches do not capitalize on the [advantages of Pair-wise Peer DIDs](https://github.io/peer-did-method-spec/index.html#advantages).
 
 ## Prior art
-
-Discuss prior art, both the good and the bad, in relation to this proposal.
-A few examples of what this can include are:
-
-- Does this feature exist in other SSI ecosystems and what experience have
-their community had?
-- For other teams: What lessons can we learn from other attempts?
-- Papers: Are there any published papers or great posts that discuss this?
-If you have some relevant papers to refer to, this can serve as a more detailed
-theoretical background.
-
-This section is intended to encourage you as an author to think about the
-lessons from other implementers, provide readers of your proposal with a
-fuller picture. If there is no prior art, that is fine - your ideas are
-interesting to us whether they are brand new or if they are an adaptation
-from other communities.
-
-Note that while precedent set by other communities is some motivation, it
-does not on its own motivate an enhancement proposal here. Please also take
-into consideration that Aries sometimes intentionally diverges from common
-identity features.
+This protocol builds on the foundational capabilities of DIDComm messages, most notable being the [attachment decorator](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md) within DIDComm.
 
 ## Unresolved questions
 
-* Should this be a seperate protocol or update to issuer-credential?
-
-- What parts of the design do you expect to resolve through the
-enhancement proposal process before this gets merged?
-- What parts of the design do you expect to resolve through the
-implementation of this feature before stabilization?
-- What related issues do you consider out of scope for this
-proposal that could be addressed in the future independently of the
-solution that comes out of this doc?
+1. Should this be a separate protocol or an update to issuer-credential?
+1. What is the best way to handle access control for by-reference attachments?
+1. Are there best practices to be considered for when/why/how a Holder's Agent should store and manage attachments?
+1. Can this protocol help bootstrap a prototype for a Digital Notary and thereby demonstrate to the broader ecosystem the uncessary attention being placed on alternative domain specific credential solutions like ISO-18013-5(mDL)?
