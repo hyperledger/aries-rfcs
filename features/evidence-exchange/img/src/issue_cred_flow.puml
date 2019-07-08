@@ -1,0 +1,28 @@
+@startuml
+
+title Evidence Exchange Protocol: Issue Credential Flow
+
+actor PERSON as "Alice"
+participant HOLDER as "Alice's Agent"
+participant ISSUER as "Issuer's Agent"
+participant ISOR as "Issuer's System of Record"
+
+group Offer Credential Flow (Issuer Initiated via Wallet)
+autonumber 20
+ISSUER->HOLDER: Issuer offers Credential.
+PERSON->HOLDER: Accepts Credential Offer.
+HOLDER->ISSUER: Send offer acceptance.
+ISSUER->HOLDER: Issuer sends Credential; Credential is stored in Wallet Keystore.
+end
+
+group Evidence Request/Response Flow
+autonumber 30
+HOLDER->HOLDER: Build evidence_request message.
+HOLDER->ISSUER: Send evidence_request message.
+ISSUER->ISSUER: Process evidence_request message.
+ISSUER<->ISOR: Build evidence_response message.
+ISSUER->HOLDER: Send evidence_response message.
+HOLDER->HOLDER: Process evidence_response message; Store results.
+end
+
+@enduml
