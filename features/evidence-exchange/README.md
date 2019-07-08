@@ -22,7 +22,7 @@ Regardless of the type of KYC processing performed by an entity, there may be re
 ### KYC Document Vetting
 The [Verifiable Credentials Specification](https://www.w3.org/TR/verifiable-claims-data-model/) describes three key stakeholders in an ecosystem that manages digital credentials: Issuers, Holders and Verifiers. However, before an Issuer can attest to claims about a Holder, an *Examiner* must perform the required vetting, due diligence, regulatory compliance and other tasks needed to establish confidence in making a claim about an identity trait associated with a Holder. The actions of the Examiner may include physical validation of information (i.e.: comparison of real person to a photo) as well as reliance on third party services as part of its vetting process. Depending on the situational context of a credential request or the type of privileges to be granted, the complexity of the vetting process taken by an examiner to confirm the truth about a specific trait may vary.
 
-![digital-identity-lifecycle](./digital-identity-lifecycle.png)
+![digital-identity-lifecycle](./img/digital_identity_lifecycle.png)
 
 An identity Holder may present to an Examiner a specific type of KYC document to establish proof of identity. The presentment of these KYC documents may come in a variety of formats:
 
@@ -91,6 +91,10 @@ The following, *non-exhaustive*, list of common KYC Documents are used for estab
 | Identity | Passport, [PAN Card](https://en.wikipedia.org/wiki/Permanent_account_number), Voter’s Identity Card, Driving License, Photo identity proof of Central or State government, Ration card with photograph, Letter from a recognized public authority or public servant, Bank Pass Book bearing photograph, Employee identity card of a listed company or public sector company, Identity card of University or board of education |
 | Photo | Passport, Pistol Permit, Photo identity proof of Central or State government |
 
+These documents are examples of trusted credentials that an examiner relies on during their vetting process.
+
+![examiner-workflow](./img/examine_flow.png)
+
 ## Tutorial
 
 The evidence exchange protocol builds on the attachment decorator within DIDComm using the [Appending Method](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#appending).
@@ -122,6 +126,8 @@ Description of attributes:
 
 * `credentials`: A list of credential IDs associated with this pair-wise relationship with the Issuer.
 * `request-type`: Stipulates how the Holder's Agent will manage the document access. If ```by-value```, then a copy of the document will be stored by the Holder. If ```by-reference```, then the storage provider service used by the Issuer will be the source of the document and any access control mechanisms will also need to be conveyed.   
+
+![issuer-workflow](./img/issue_cred_flow.png)
 
 ### Evidence Response Message
 This message is required for an Issuer Agent in response to an ```evidence_request``` message. The format of the ```~attach``` attribute will be determined by the value of the ```request_type``` attribute in the associated request message from the Holder.  
@@ -291,6 +297,8 @@ Description of attributes:
 * `credentials`: A list of credential IDs that the Verifier desires proof of evidence.
   * `@id`: Credential ID derived from a validated credential exchange (*proof presentment*).
   * `issuerDID`: The public DID of the Issuer that issued the credential represented by the associated ID. This DID is derived from the credential validation process.
+
+![verify-workflow](./img/verify_cred_flow.png)
 
 ### Evidence Access Response Message
 This message is required for a Holder Agent in response to an ```evidence_access_request``` message. The format of the ```~attach``` attribute will be determined by the storage management preferences of the Holder's Agent. To build the response, the Holder will validate that the supplied Issuer DID corresponds to the credential represented by the supplied ID. Upon successful processing of a ```evidence_access_response``` message, the Verifier will store evidence details in its system of record.
