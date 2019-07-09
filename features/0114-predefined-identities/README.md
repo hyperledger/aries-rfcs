@@ -49,7 +49,7 @@ we will publish them here.
 
 #### Subgroups
 
-The Aries communit may create subgroups with their own DIDs. If so,
+The Aries community may create subgroups with their own DIDs. If so,
 we may publish such information here.
 
 #### Allied communities
