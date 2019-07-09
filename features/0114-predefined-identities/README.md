@@ -54,7 +54,7 @@ we may publish such information here.
 
 #### Allied communities
 
-Other groups such as [DIF](identity.foundation), the [W3C Crecentials Community Group](
+Other groups such as [DIF](https://identity.foundation), the [W3C Crecentials Community Group](
 https://github.com/w3c-ccg), and so forth may wish to define identities and announce
 their associated DIDs here. 
 
