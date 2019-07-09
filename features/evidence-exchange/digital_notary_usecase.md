@@ -31,12 +31,16 @@ We therefore need a forcing function that will disrupt behavior. Image a trusted
 
 Today (*blue shaded activity*), an individual receives *Original Documents* from issuing institutions and presents these as evidence to each Verifier. Moving forward (*beige shaded activity*), a [wide range of businesses](#applicable-businesses) consider acting as DDNs, our reliance on *Issuers of Origination* to be the on-ramps for an individuals digital identity experience diminishes. Overtime, our dependency on the proactive nature of such institutions becomes mute and the more successful DDNs become the more reactionary these institutions will need to be to protect their value in the ecosystem.
 
+Monetization
+The linkages between proof-of-identity and proof-of-value can be achieved  using (a) individual pays for issuance of certificates; (b) a verifier pays the underwriter with Sovrin Tokens or with a crypto-currency.
+The payment is for the service of underwriting the screening of an individual so that the verifier does not have to do it. 
 
 
 
 
 
-## Applicable businesses
+
+## Applicable Businesses
 
 Any entity that has the breath and reach to connect with consumers at scale would be an ideal candidate for the role of a DDN. Some examples include:
 
@@ -46,7 +50,10 @@ Any entity that has the breath and reach to connect with consumers at scale woul
 * Mobile Field Agents
 * Background Screening Service Providers
 
+The monetization opportunities for such businesses also vary. The linkages between proof-of-identity and proof-of-value can be achieved in several manners:
 
+a. Individual pays for issuance of certificates
+b. Verifier pays the underwriter with a payment instrument (i.e.: fiat or cryptocurrency). The payment is for the service of underwriting the screening of an individual so that the Verifier does not have to do it. 
 
 ##Persona
 * Stacy: Citizen
