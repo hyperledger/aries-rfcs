@@ -1,12 +1,12 @@
 # Decentralized Digital Notary
 
 ## Preface
-The intent of this document is to describe the concepts of a *Digital Notary* with respect to the bootstrapping of the decentralized identity ecosystem and to demonstrate using *example user stories*<sup id="footnote1">[1](#commentary)</sup> the applicability of the [Evidence Exchange Protocol](./README.md).  
+The intent of this document is to describe the concepts of a *Digital Notary* with respect to the bootstrapping of the decentralized identity ecosystem and to demonstrate using *example user stories*<sup>[1](#commentary)</sup> the applicability of the [Evidence Exchange Protocol](./README.md).  
 
 ## Overview
 
 ### Problem Statement
-How do we bootstrap the digital credential ecosystem when many of the issuing institutions responsible for foundational credentials (i.e.: brith certificate, drivers license, etc) *tend to be laggards*<sup id="footnote2">[2](#commentary)</sup> when it comes to the adoption of emerging technology? What if we did not need to rely on these issuing institutions and instead leveraged the attestations of [trusted third parties](https://en.m.wikipedia.org/wiki/Trusted_third_party)?
+How do we bootstrap the digital credential ecosystem when many of the issuing institutions responsible for foundational credentials (i.e.: brith certificate, drivers license, etc) *tend to be laggards*<sup>[2](#commentary)</sup> when it comes to the adoption of emerging technology? What if we did not need to rely on these issuing institutions and instead leveraged the attestations of [trusted third parties](https://en.m.wikipedia.org/wiki/Trusted_third_party)?
 
 ### Vernacular
 
@@ -101,5 +101,5 @@ Stacey receives notification from her Insurance Company that they require an upd
 
 ## Commentary
 
-1. The concepts of a digital notary can be applied today in application domains such as indirect auto lending, title management (auto, recreational vehicle, etc). [↩](#footnote1)
-2. Since 2015, [AAMVA](https://www.aamva.org/mDL-Resources/) in conjunction with [ISO JTC1/SC27/WG10 18013-5 mDL Team](https://www.iso.org/standard/69084.html) has been working on a single credential solution for cross jurisdictional use amongst DMVs. This public sector activity is a key source of IAM industry motivation for alternative solutions to Credential Lifecycle Management. Government agencies will eventually need to address discussions around technical debit investments and defacto open source standards. [↩](#footnote2)
+1. The concepts of a digital notary can be applied today in application domains such as indirect auto lending, title management (auto, recreational vehicle, etc).
+2. Since 2015, [AAMVA](https://www.aamva.org/mDL-Resources/) in conjunction with [ISO JTC1/SC27/WG10 18013-5 mDL Team](https://www.iso.org/standard/69084.html) has been working on a single credential solution for cross jurisdictional use amongst DMVs. This public sector activity is a key source of IAM industry motivation for alternative solutions to Credential Lifecycle Management. Government agencies will eventually need to address discussions around technical debit investments and defacto open source standards.
