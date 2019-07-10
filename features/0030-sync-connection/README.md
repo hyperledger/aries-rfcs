@@ -173,20 +173,23 @@ The following best practices will dramatically improve the robustness of state
 synchronization, both within and across domains. Software implementing this protocol
 is not required to do any of these things, but they are strongly recommended.
 
-##### The `~relstate` decorator
+##### The `~state` decorator
 
-Agents should attach the `~relstate` decorator to messages to help each other discover when
-state synchronization is needed. This decorator has the following format:
+Agents using [peer DIDs](https://openssi.github.io/peer-did-method-spec/) should
+attach the `~state` decorator to messages to help
+each other discover when state synchronization is needed. This decorator has the
+following format:
 
 ```JSON
-"~relstate": [ 
+"~state": [ 
   {"did": "<my did>", "state_hash": "<my state hash>"},
   {"did": "<your did>", "state_hash": "<your state hash>"}
 ]
 ```
 
-In a message _within_ a domain, where "me" and "you" are synonyms, "them" should be used
-instead of "you"; the goal is to always describe the current known state hashes for each
+In n-wise relationships, there may be more than 2 entries in the list.
+
+The goal is to always describe the current known state hashes for each
 domain. It is also best practice for the recipient of the message to send a
 `sync_state` message back to the sender any time it detects a discrepancy.
 
