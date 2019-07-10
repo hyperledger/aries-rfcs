@@ -1,4 +1,4 @@
-# 0000: Evidence Exchange Protocol
+# 0116: Evidence Exchange Protocol
 - Author: [Dan Gisolfi](mailto:dan.gisolfi@gmail.com)
 - Start Date: 2019-07-05
 
