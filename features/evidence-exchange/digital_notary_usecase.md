@@ -1,12 +1,12 @@
 # Decentralized Digital Notary
 
 ## Preface
-The intent of this document is to describe the concepts of a *Digital Notary* with respect to the bootstrapping of the decentralized identity ecosystem and to demonstrate using example user stories the applicability of the [Evidence Exchange Protocol](./README.md).  
+The intent of this document is to describe the concepts of a *Digital Notary* with respect to the bootstrapping of the decentralized identity ecosystem and to demonstrate using *example user stories*<sup id="footnote1">[1](#commentary)</sup> the applicability of the [Evidence Exchange Protocol](./README.md).  
 
 ## Overview
 
 ### Problem Statement
-How do we bootstrap the digital credential ecosystem when many of the issuing institutions responsible for foundational credentials (i.e.: brith certificate, drivers license, etc) [tend to be laggards](#commentary) when it comes to the adoption of emerging technology? What if we did not need to rely on these issuing institutions and instead leveraged the attestations of [trusted third parties](https://en.m.wikipedia.org/wiki/Trusted_third_party)?
+How do we bootstrap the digital credential ecosystem when many of the issuing institutions responsible for foundational credentials (i.e.: brith certificate, drivers license, etc) *tend to be laggards*<sup id="footnote2">[2](#commentary)</sup> when it comes to the adoption of emerging technology? What if we did not need to rely on these issuing institutions and instead leveraged the attestations of [trusted third parties](https://en.m.wikipedia.org/wiki/Trusted_third_party)?
 
 ### Vernacular
 
@@ -58,7 +58,7 @@ The stories focus on the daily lifecycle activities of a single individual who n
 | --- | --- |
 | Stacy | An individual that desire to open a brokerage account and also apply a Life Insurance Policy. |
 | Retail Bank | DDN (Issuer) |
-| Thomas | Notary at the Retail Bank famialir with the DDN Process. |
+| Thomas | Notary at the Retail Bank familiar with the DDN Process. |
 | Brokerage Firm | Verifier |
 | Dropbox | Document Management Service |
 
@@ -68,7 +68,7 @@ The stories focus on the daily lifecycle activities of a single individual who n
 Stacy is a member of her neighborhood Retail Bank. She received an email notification that as a new member benefit, the bank is now offering members with the ability to begin their digital identity journey. Stacey is given access to literature describing the extend to the bank's offering and a video of the process for how to get started. Stacey watches the video, reads the online material and decides to make an appointment with her local bank notary and fill out the preliminary online forms.
 
 #### Retail Bank (Paper Vetting Process)
-Stacey attends her appointment with Thomas. She came prepared to request two digital credentials for the following *Official Documents*: SSN, Birth Certificate, proof of employment (paystub) and proof of address (utility bill). Thomas explains to Stacey that given the types of KYC Documents she desires to be digitally notarized, bank policy is to issue a single digital credential that attests to all the personal data she is prepared to present. The bank refers to this verifiable credential as the *Basic KYC Credential* and they use a common schema that is used by many DDNs in teh Sovrin ecosystem.
+Stacey attends her appointment with Thomas. She came prepared to request two digital credentials for the following *Official Documents*: SSN, Birth Certificate, proof of employment (paystub) and proof of address (utility bill). Thomas explains to Stacey that given the types of KYC Documents she desires to be digitally notarized, bank policy is to issue a single digital credential that attests to all the personal data she is prepared to present. The bank refers to this verifiable credential as the *Basic KYC Credential* and they use a common schema that is used by many DDNs in the Sovrin ecosystem.
 
 >Note: This story depicts one approach. Clearly, the bank's policy could be to have a schema and credential for each *Original Document*.  
 
@@ -101,5 +101,5 @@ Stacey receives notification from her Insurance Company that they require an upd
 
 ## Commentary
 
-1. This concepts of a digital notary can be applied today in application domains such as indirect auto lending, title management (auto, recreational vehicle, etc).
-2. Since 2015, [AAMVA](https://www.aamva.org/mDL-Resources/) in conjunction with [ISO JTC1/SC27/WG10 18013-5 mDL Team](https://www.iso.org/standard/69084.html) has been working on a single credential solution for cross jurisdictional use amongst DMVs. This public sector activity is a key source of IAM industry motivation for alternative solutions to Credential Lifecycle Management. Government agencies will eventually need to address discussions around technical debit investments and defacto open source standards.
+1. The concepts of a digital notary can be applied today in application domains such as indirect auto lending, title management (auto, recreational vehicle, etc). [↩](#footnote1)
+2. Since 2015, [AAMVA](https://www.aamva.org/mDL-Resources/) in conjunction with [ISO JTC1/SC27/WG10 18013-5 mDL Team](https://www.iso.org/standard/69084.html) has been working on a single credential solution for cross jurisdictional use amongst DMVs. This public sector activity is a key source of IAM industry motivation for alternative solutions to Credential Lifecycle Management. Government agencies will eventually need to address discussions around technical debit investments and defacto open source standards. [↩](#footnote2)
