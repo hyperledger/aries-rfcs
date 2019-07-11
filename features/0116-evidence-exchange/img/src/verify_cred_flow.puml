@@ -1,0 +1,29 @@
+@startuml
+
+title Evidence Exchange Protocol: Verify Credential FLow
+
+actor PERSON as "Alice"
+participant HOLDER as "Alice's Agent"
+participant VERIFIER as "Verifier's Agent"
+participant VSOR as "Verifier's System of Record"
+
+group Verify Credential Flow (via Wallet)
+autonumber 40
+VERIFIER->HOLDER: Send Proof Request.
+PERSON->HOLDER: Accepts Proof Request.
+PERSON->HOLDER: Generate Proof Response.
+HOLDER->VERIFIER: Send Proof Response.
+end
+
+group Evidence Access Request/Response Flow
+autonumber 50
+VERIFIER->VERIFIER: Build evidence_access_request message.
+VERIFIER->HOLDER: Send evidence_access_request message.
+HOLDER->HOLDER: Process evidence_access_request message.
+HOLDER<->HOLDER: Build evidence_access_response message.
+HOLDER->VERIFIER: Send evidence_access_response message.
+VERIFIER->VERIFIER: Process evidence_access_response message;\n Validate Issuer's Digital Signature over evidence.
+VERIFIER->VSOR: Store results.
+end
+
+@enduml
