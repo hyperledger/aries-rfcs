@@ -1,4 +1,4 @@
-# 0000: DID Resolution Protocol
+# 0124: DID Resolution Protocol
 - Author: Markus Sabadello (markus@danubetech.com)
 - Start Date: 2019-07-08
 
@@ -20,7 +20,7 @@ DID Resolution is an important feature of Aries. It is a prerequisite for the `u
 keys must be discovered from DIDs in order to enable trusted communication between the
 [agents](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0004-agents) associated with DIDs.
 DID Resolution is also required for other operations, e.g. for verifying credentials or for discovering
-[DIDComm service endpoints](../../features/0067-didcomm-diddoc-conventions).
+[DIDComm service endpoints](../../features/0067-didcomm-diddoc-conventions/README.md).
 
 Ideally, DID Resolution should be implemented as a local API (**TODO:** link to other RFC?). In some
 cases however, the DID Resolution function may be provided by a remote service. This RFC describes
@@ -104,7 +104,7 @@ to the `resolver`. It looks like this:
 		}
 	}
 
-`@id` is required here, as it establishes a [message thread](../../concepts/0008-message-id-and-threading)
+`@id` is required here, as it establishes a [message thread](../../concepts/0008-message-id-and-threading/README.md)
 that makes it possible to connect a subsequent response to this request.
 
 `did` is required.
