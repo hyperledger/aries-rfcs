@@ -92,7 +92,7 @@ In demos or tests, its genesis DID Doc looks like this:
         "serviceEndpoint": "https://localhost:23456"
     }],
     "publicKey": [{
-        "id": "key-1",
+        "id": "#key-1",
         "type": "Ed25519VerificationKey2018",
         "publicKeyBase58": "GBMBzuhw7XgSdbNffh8HpoKWEdEN6hU2Q5WqL1KQTG5Z"
     }],
@@ -118,25 +118,25 @@ looks like this:
         "serviceEndpoint": "https://localhost:23457"
     }],
     "publicKey": [{
-        "id": "key-2",
+        "id": "#key-2",
         "type": "Ed25519VerificationKey2018",
         "controller": "#id",
         "publicKeyBase58": "FFhViHkJwqA15ruKmHQUoZYtc5ZkddozN3tSjETrUH9z"
       },
       {
-        "id": "key-3",
+        "id": "#key-3",
         "type": "Secp256k1VerificationKey2018",
         "controller": "#id",
         "publicKeyHex": "3056301006072a8648ce3d020106052b8104000a03420004a34521c8191d625ff811c82a24a60ff9f174c8b17a7550c11bba35dbf97f3f04392e6a9c6353fd07987e016122157bf56c487865036722e4a978bb6cd8843fa8"
       },
       {
-        "id": "key-4",
+        "id": "#key-4",
         "type": "RsaVerificationKey2018",
         "controller": "#id",
         "publicKeyPem": "-----BEGIN PUBLIC KEY-----\r\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlOJu6TyygqxfWT7eLtGDwajtN\r\nFOb9I5XRb6khyfD1Yt3YiCgQWMNW649887VGJiGr/L5i2osbl8C9+WJTeucF+S76\r\nxFxdU6jE0NQ+Z+zEdhUTooNRaY5nZiu5PgDB0ED/ZKBUSLKL7eibMxZtMlUDHjm4\r\ngwQco1KRMDSmXSMkDwIDAQAB\r\n-----END PUBLIC KEY-----"
       },
       {
-        "id": "key-5",
+        "id": "#key-5",
         "type": "RsaVerificationKey2018",
         "controller": "#id",
         "publicKeyPem": "-----BEGIN PUBLIC KEY-----\r\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAoZp7md4nkmmFvkoHhQMw\r\nN0lcpYeKfeinKir7zYWFLmpClZHawZKLkB52+nnY4w9ZlKhc4Yosrw/N0h1sZlVZ\r\nfOQBnzFUQCea6uK/4BKHPhiHpN73uOwu5TAY4BHS7fsXRLPgQFB6o6iy127o2Jfb\r\nUVpbNU/rJGxVI2K1BIzkfrXAJ0pkjkdP7OFE6yRLU4ZcATWSIPwGvlF6a0/QPC3B\r\nbTvp2+DYPDC4pKWxNF/qOwOnMWqxGq6ookn12N/GufA/Ugv3BTVoy7I7Q9SXty4u\r\nUat19OBJVIqBOMgXsyDz0x/C6lhBR2uQ1K06XRa8N4hbfcgkSs+yNBkLfBl7N80Q\r\n0Wkq2PHetzQU12dPnz64vvr6s0rpYIo20VtLzhYA8ZxseGc3s7zmY5QWYx3ek7Vu\r\nwPv9QQzcmtIQQsUbekPoLnKLt6wJhPIGEr4tPXy8bmbaThRMx4tjyEQYy6d+uD0h\r\nXTLSjZ1SccMRqLxoPtTWVNXKY1E84EcS/QkqlY4AthLFBL6r+lnm+DlNaG8LMwCm\r\ncz5NMag9ooM9IqgdDYhUpWYDSdOvDubtz1YZ4hjQhaofdC2AkPXRiQvMy/Nx9WjQ\r\nn4z387kz5PK5YbadoZYkwtFttmxJ/EQkkhGEDTXoSRTufv+qjXDsmhEsdaNkvcDP\r\n1uiCSY19UWe5LQhIMbR0u/0CAwEAAQ==\r\n-----END PUBLIC KEY-----"
