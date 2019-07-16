@@ -12,7 +12,7 @@ How do we bootstrap the digital credential ecosystem when many of the issuing in
 
 | Term | Definition |
 | --- | --- |
-| Original Document | Any issued artifact that satisfies the [Original-Document Rule](https://definitions.uslegal.com/o/original-document-rule/) in accordance with [principle of evidence law](https://en.wikipedia.org/wiki/Evidence_(law)). The original artifact may be in writing or a mechanical, electronic form of publication. |
+| Original Document | Any issued artifact that satisfies the [Original-Document Rule](https://definitions.uslegal.com/o/original-document-rule/) in accordance with [principle of evidence law](https://en.wikipedia.org/wiki/Evidence_(law)). The original artifact may be in writing or a mechanical, electronic form of publication. Such a document may also be referred to as a *Foundational Document*. |
 | Issuer of Origination | The entity (business, organization, individual or government) that is the original publisher of an *Original Document*. |
 | Tier 1 Proofs | A category of [foundational credentials](./README.md#kyc-document-types) (*Original Documents*) that are often required to prove identity and address during KYC or onboarding processes. |
 | Decentralized Digital Notary (DDN) | A trusted third party that enables digital interactions between Holders and Verifiers. As an issuer of digitally verifiable credentials, it creates permanent evidence that an *Original Document* existed in a certain form at a particular point in time. This role will be especially important to address scalability and the bootstrapping of the decentralized identity ecosystem since many *Issuers of Origination* may be laggards. |
