@@ -56,7 +56,7 @@ In a decentralized identity ecosystem where peer relationships no longer depend 
 
 ### Protocol Assumptions
 
-1. Holder *must* present doc access to Verifier such that Verifier can be assured that the Issuer vetted the document.
+1. Holder *must* present document access to Verifier such that Verifier can be assured that the Issuer vetted the document.
 2. Some business processes and/or regulatory compliance requirements *may* demand that a Verifier gains access to the original vetted documents of an Issuer.
 3. Some Issuers *may* accept digital access links to documents as input into vetting process. This is often associated with Issuers who will accept copies of the original documents.
 
@@ -299,6 +299,8 @@ Description of attributes:
   * `issuerDID`: The public DID of the Issuer that issued the credential represented by the associated ID. This DID is derived from the credential validation process.
 
 ![verify-workflow](./img/verify_cred_flow.png)
+
+This protocol is intended to be flexible and applicable to a variety of use cases. While our discussion has circulated around the use of the protocol as follow-up to the processing of a credential proof presentment flow, the fact is that the protocol can be used at any point after a Pair-wise DID Exchange has been successfully established and is therefore in the [complete state](https://github.com/hyperledger/aries-rfcs/tree/master/features/0023-did-exchange#complete) as defined by the DID Exchange Protocol. An `IssuerDID` (or DID of the an entity that is one of the two parties in a private pair-wise relationship) is assumed to be known under all possible conditions once the relationship is in the complete state. 
 
 ### Evidence Access Response Message
 This message is required for a Holder Agent in response to an ```evidence_access_request``` message. The format of the ```~attach``` attribute will be determined by the storage management preferences of the Holder's Agent. To build the response, the Holder will validate that the supplied Issuer DID corresponds to the credential represented by the supplied ID. Upon successful processing of a ```evidence_access_response``` message, the Verifier will store evidence details in its system of record.
