@@ -53,7 +53,7 @@ An identity Holder may present to an Examiner a specific type of KYC document to
 | URL | Digital Copy | URL | Access by Reference |
 
 ### Why a Peer DID Protocol?
-In a decentralized identity ecosystem where peer relationships no longer depend a centralized authority for the source of truth, why should a Verifier refer to some 3rd party or back to the Issuing institution for KYC processing evidence?
+In a decentralized identity ecosystem where peer relationships no longer depend on a centralized authority for the source of truth, why should a Verifier refer to some 3rd party or back to the Issuing institution for KYC processing evidence?
 
 * Centralized Shared-KYC Providers: While there seems to be a [trend to build shared ledgers](#reference) that manage the exchange of KYC documents and data, we can not ignore the user-centric privacy by design principle that is foundational to decentralized identity solutions. Pair-wise Peer DIDs offer an alternative approach that is independent of any central source of truth, and are intended to be cheap, fast, scalable, and secure. The [advantages of Pair-wise Peer DIDs](https://github.io/peer-did-method-spec/index.html#advantages) make them suitable for most private relationships between people, organizations, and things.  
 * Issuer Communications: B2B interactions between a Verifier of a credential and the Issuer of the credential injects unnecessary correlation and behavior privacy risks for the Holder.  
@@ -86,10 +86,10 @@ This implies that the protocol *must* address the following evidence concerns:
 This protocol is intended to be a compliment to the foundational (issuance, verification) protocols for credential lifecycle management in support of the [Verifiable Credentials Specification](https://www.w3.org/TR/verifiable-claims-data-model/). Overtime, it is assumed that the exchange of original source documents will no longer be necessary as digital credentials become ubiquitous. In the meantime, the trust in and access to KYC documents can be achieved in private peer to peer relationships using the [Peer DID Spec](https://github.com/openssi/peer-did-method-spec).
 
 ### User Stories
-An example of the applicability of this protocol to real world user scenarios is discussed in the context of a [digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s).
+An example of the applicability of this protocol to real world user scenarios is discussed in the context of a [decentralized digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s).
 
 ### KYC Document Types
-The following, *non-exhaustive*, list of common KYC Documents are used for establishing *proof of identity*, *proof of address*. They are often accompanied with a recent photograph. Since this protocol is intended to be agnostic of business and regulatory processes, the types of acceptable KYC documents will vary.
+The following, *non-exhaustive*, list of common KYC Documents are used for establishing *proof of identity* and *proof of address*. They are often accompanied with a recent photograph. Since this protocol is intended to be agnostic of business and regulatory processes, the types of acceptable KYC documents will vary.
 
 | Proof Type | Sample Documents |
 | --- | --- |
@@ -105,8 +105,6 @@ These documents are examples of trusted credentials that an examiner relies on d
 
 The evidence exchange protocol builds on the attachment decorator within DIDComm using the [Appending Method](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#appending).
 
-![digital_doc_flow](./img/digital_doc_flow.png)
-
 The protocol is comprised of the following messages and associated actions:
 
 | Interaction Type | Message | Process Actions |
@@ -115,6 +113,8 @@ The protocol is comprised of the following messages and associated actions:
 | Issuer to Holder | Evidence Response | Issuer collects KYC Documents associated with each requested credential ID and sends an ```evidence_response``` message to Holder's agent. Upon receipt, the Holder stores evidence data in Wallet. |
 | Verifier to Holder | Evidence Access Request | Verifier builds and sends an ```evidence_access_request``` message to Holder's agent. |
 | Holder to Verifier | Evidence Access Response | Holder builds and sends an ```evidence_access_response``` message to the Verifier's agent.  Verifier fetches requested documents and performs digital signature validation on each. Verifier stores evidence in system of record.|
+
+![digital_doc_flow](./img/digital_doc_flow.png)
 
 ### Request Evidence Message
 This message should be used as an accompaniment to an [issue credential message](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential#issue-credential). Upon receipt and storage of a credential the Holder should compose an ```evidence_request``` for each credential received from the Issuer. The Holder may use this message to get an update for new and existing credentials from the Issuer.
