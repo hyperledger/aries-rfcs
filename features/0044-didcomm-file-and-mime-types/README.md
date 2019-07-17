@@ -18,7 +18,7 @@
 [summary]: #summary
 
 Define a file format and MIME type that holds [DIDComm](
- https://github.com/hyperledger/indy-hipe/blob/b0708395fd1669df33a9619efa7770a20c97006e/text/0003-did-comm/README.md)
+ ../../concepts/0005-didcomm/README.md)
 content--messages--as well as the encrypted and signed
 envelopes that contain them.
 
@@ -46,7 +46,7 @@ semantics of processing such files will be.
 
 [![dee icon](dee-small.png)](dee-big.png)
 
-The raw bytes of an [encrypted envelope](../../features/0019-encryption-envelope/README.md)
+The raw bytes of an [encrypted envelope](../0019-encryption-envelope/README.md)
 may be persisted to a file without any modifications whatsoever. In such a case, the data
 will be encrypted and packaged such that only specific receiver(s) can process it. However,
 the file will contain a JOSE-style header that can be used by magic bytes algorithms to detect
@@ -120,7 +120,7 @@ that expects JSON.
 However, all such files have some additional conventions, over and above the simple
 requirements of JSON. For example, key decorators have special meaning (
 [`@id`, `@thread`](../../concepts/0008-message-id-and-threading/README.md),
-[`@trace`](../../features/0034-message-tracing/README.md)
+[`@trace`](../0034-message-tracing/README.md)
 , etc). Nonces may be especially significant. The format of particular values
 such as DID and DID+key references is important. Therefore, we refer to these messages
 generically as JSON, but we also define a file
@@ -147,7 +147,7 @@ The default action for DIDComm Messages should be to
 As a general rule, DIDComm messages that are being sent in production use cases of DID communication should be stored
 in encrypted form (`*.dee`) at rest. There are cases where this might not be preferred, e.g., providing documentation of the
 format of message or during a debugging scenario using
-[message tracing](../../features/0034-message-tracing/README.md).
+[message tracing](../0034-message-tracing/README.md).
 However, these are exceptional cases. Storing meaningful `*.dm` files
 decrypted is not a security best practice, since it replaces all the privacy and
 security guarantees provided by the DID communication mechanism with only

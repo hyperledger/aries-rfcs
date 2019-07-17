@@ -10,4 +10,5 @@ official, immutable URL to this version of the catalog file is:
 
     https://github.com/x/y/blob/dc525a27d3b75/text/myfamily/catalog.json
 
-For more information, see the [Message Catalog section of the localization HIPE](x). 
+For more information, see the [Message Catalog section of the localization RFC](
+../../features/0043-l10n/README.md#message-codes-and-catalogs). 

@@ -1,4 +1,4 @@
-# 0017 Attachments
+# 0017: Attachments
 - Author: Daniel Hardman <daniel.hardman@gmail.com>, Sam Curren
 - Start Date: 2018-12-24
 
@@ -256,7 +256,7 @@ where the value assigned to `data.json` is the attached content:
 This is an overly trivial example of [GeoJSON](https://tools.ietf.org/html/rfc7946),
 but hopefully it illustrates the technique. In cases where there is no mime type
 to declare, it may be helpful to use [JSON-LD's `@type` construct](
-https://github.com/hyperledger/indy-hipe/blob/d2ca59c7/text/json-ld-compatibility/README.md#type)
+../../concepts/0047-json-ld-compatibility/README.md#type)
 to clarify the specific flavor of JSON in the embedded attachment.
 
 #### links
@@ -393,7 +393,7 @@ attachments are presented in a form that meets its needs.
 ### Attachment Descriptor structure
 
 * `@id`: A [JSON-LD construct](
-https://github.com/hyperledger/indy-hipe/blob/d2ca59c7/text/json-ld-compatibility/README.md#id)
+../../concepts/0047-json-ld-compatibility/README.md#id)
 that uniquely identifies attached content within the scope of a given
 message. Recommended on appended attachment descriptors. Possible but generally
 unused on embedded attachment descriptors. Never required if no references

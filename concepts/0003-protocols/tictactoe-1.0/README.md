@@ -97,8 +97,16 @@ whereupon the player transitions to the `done` state.
 
 All messages in this protocol are part of the "tictactoe 1.0" message
 family uniquely identified by this DID reference: `did:sov:SLfEi9esrjzybysFxQZbfq;spec/tictactoe/1.0`
-    
-    About the "DID Reference" URI that appears here: DIDs can be resolved
+
+<blockquote>
+<em>NOTE 1</em>: All the messages defined in a protocol should follow
+<a target="_blank" href="../../0074-didcomm-best-practices/README.md">
+DIDComm best practices</a> as far as how they name fields and define their data types and
+semantics.
+</blockquote>
+
+<blockquote>
+<em>NOTE 2</em> about the "DID Reference" URI that appears here: DIDs can be resolved
     to a DID doc that contains an endpoint, to which everything after a
     semicolon can be appended. Thus, if this DID is publicly registered
     and its DID doc gives an endpoint of http://example.com, this URI
@@ -108,6 +116,7 @@ family uniquely identified by this DID reference: `did:sov:SLfEi9esrjzybysFxQZbf
     If that sort of URI is used, it is best practice for it to reference
     immutable content, as with a link to specific commit on github:
       https://github.com/hyperledger/indy-hipe/blob/4a17a845/text/protocols/tictactoe-1.0/README.md#messages
+</blockquote>
     
 ##### `move` message
 
@@ -137,7 +146,7 @@ conventions of [localized messages](
 https://github.com/hyperledger/indy-hipe/pull/64).
 
 Other decorators could be placed on tic-tac-toe messages, such as those
-to enable [message timing](https://github.com/hyperledger/indy-hipe/blob/2167762c31dec10777a36d14c5038130b1a06670/text/message-timing/README.md#decorators)
+to enable [message timing](../../../features/0032-message-timing/README.md)
 to force players to make a move within a certain period of time.
 
 ##### Subsequent Moves

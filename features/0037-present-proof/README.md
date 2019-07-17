@@ -1,4 +1,4 @@
-# 0037: Present Proof
+# 0037: Present Proof Protocol 1.0
 
 - Author: Nikita Khateev
 - Start Date: 2019-01-30
@@ -7,7 +7,7 @@
 
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
 - Status Date: 2019-05-28
-- Status Note: This supersedes the Present Proof part of [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md). See [Aries RFC 0036](../0036-issue-credential) for the issue credential part of the same Indy HIPE PR.
+- Status Note: This supersedes the Present Proof part of [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md). See [RFC 0036](../0036-issue-credential/README.md) for the issue credential part of the same Indy HIPE PR.
 
 ## Summary
 
@@ -25,7 +25,7 @@ The present proof protocol consists of these messages:
 * Request Proof - Verifier to Prover
 * Present Proof - Prover to Verifier
 
-In addition, the [ack](../../features/0015-acks) and [report problem](../0035-report-problem) messages are adopted into the protocol for confirmation and error handling.
+In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-report-problem/README.md) messages are adopted into the protocol for confirmation and error handling.
 
 #### Choreography Diagram:
 
@@ -207,7 +207,7 @@ Negotiation prior to the presentation can be done using the `propose-presentatio
 ## Reference
 
 * [VCX](https://github.com/hyperledger/indy-sdk/tree/master/vcx/libvcx/src/api) -- this implementation might not be perfect and needs to be improved, you can gather some info on parameters purpose from it
-* A pre-RFC (labeled version 0.1) implementation of the protocol was implemented by a number of groups in the Hyperledger Indy community leading up to IIW28 in April 2019. The protocol can be found [here](https://hackmd.io/s/HkklVzww4). It was the basis of the [IIWBook demo](https://vonx.io/how_to/iiwbook) from BC Gov and collaborators.
+* A pre-RFC (labeled version 0.1) implementation of the protocol was implemented by a number of groups in the Hyperledger Indy community leading up to IIW28 in April 2019. The protocol can be found [here](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view). It was the basis of the [IIWBook demo](https://vonx.io/how_to/iiwbook) from BC Gov and collaborators.
 
 ## Drawbacks
 

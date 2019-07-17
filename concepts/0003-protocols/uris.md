@@ -78,5 +78,5 @@ Some examples of valid MTURIs and PIURIs include:
    where the DID functions like a domain name, and additional info is
    fetched from a DID Doc in much the same way IP address and hostname
    definitions are fetched from a DNS record--is still being finalized.
-   See the latest [DID Spec](https://w3c-ccg.github.io/did-spec) for details.)
+   See the latest [DID Spec](https://w3c-ccg.github.io/did-spec/) for details.)
 

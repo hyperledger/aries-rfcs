@@ -1,4 +1,4 @@
-# 0028: Introduce 1.0
+# 0028: Introduce Protocol 1.0
 
 - Authors: Daniel Hardman, Sam Curren, Stephen Curran, Tobias Looker
 - Start Date: 2019-03-27
@@ -61,8 +61,8 @@ do with her invitation after that is not under her control, and is outside
 the scope of the introduction.
 
 This suggests an important insight about the relationship between the
-introduce protocol and the [connect protocol](
-../0023-connect/README.md):
+introduce protocol and the [DID exchange protocol](
+../0023-did-exchange/README.md):
 *they overlap*. The invitation to form a relationship, which
 begins the connection protocol, is also the final step in an
 introduction.

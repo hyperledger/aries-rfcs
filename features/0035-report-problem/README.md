@@ -1,4 +1,4 @@
-# 0035: Report Problem 1.0
+# 0035: Report Problem Protocol 1.0
 - Author: Stephen Curran <swcurran@cloudcompass.ca>, Daniel Hardman <daniel.hardman@gmail.com>
 - Start Date: 2018-11-26
 
@@ -31,7 +31,7 @@ development, where developers only need to worry about understanding their own e
 The goal of this RFC is to provide agents with tools and techniques possible to
 address these challenges. It makes two key contributions:
 
-- A [protocol](../../concepts/0003-protocols) that helps an Agent report problems with appropriate
+- A [protocol](../../concepts/0003-protocols/README.md) that helps an Agent report problems with appropriate
   context. We expect this to be a subprotocol of nearly every interesting application-level
   protocol; messages from it may even be [adopted into other protocols](
   ../../concepts/0003-protocols/template.md#adopted-messages).
@@ -119,9 +119,9 @@ Reporting problems uses a simple one-step [notification protocol](
 The protocol includes the standard `notifier` and `notified` roles. It
 defines a single message type `problem-report`, introduced here.
 It also [adopts](../../concepts/0003-protocols/template.md#adopted-messages) the
-`ack` message from the [`ACK 1.0` protocol](../../features/0015-acks/README.md),
+`ack` message from the [`ACK 1.0` protocol](../0015-acks/README.md),
 to accommodate the possibility that the [`~please_ack`](
- ../../concepts/0015-acks#requesting-an-ack-please_ack)
+ ../../features/0015-acks/README.md#requesting-an-ack-please_ack)
  [decorator]( ../../concepts/0011-decorators/README.md) may be used on the
  notification.
 
@@ -176,7 +176,7 @@ to a message, the thread decorator is mostly redundant, as `~thread.thid` must e
 
 **comment**: Contains human-readable, localized alternative string(s) that explain the problem. It is highly recommended
 that `code` and `@msg_catalog` are included, allowing the error to be searched on the web and
-documented formally. See [the Localized Messages RFC](https://github.com/hyperledger/indy-hipe/blob/f67741ae5b06bbf457f35b95818bd2e9419767d7/text/localized-messages/README.md).
+documented formally. See [the l10n RFC](../0043-l10n/README.md).
 
 **problem_items**: A list of one or more key/value pairs that are parameters about the problem. Some examples might be:
 
@@ -261,7 +261,7 @@ An Agent in the routing flow of getting a message from a Sender to the Agent Mes
 
 If the Sender is known to the Agent having the problem, send a `problem-report` Agent Message detailing at least that a blocking issue occurred, and if relevant (such as in the first example), some details about the issue. If the message is valid, and the problem is related to a lack of resources (e.g. the second issue), also send a `problem-report` message to an escalation point within the domain.
 
-Alternatively, the capabilities described in the "Tracing" RFC (TODO: link to be added) could be used to inform others of the fact that an issue occurred.
+Alternatively, the capabilities described in [0034: Message Tracing](../0034-message-tracing/README.md) could be used to inform others of the fact that an issue occurred.
 
 ### Messages Triggered about a Transaction
 
