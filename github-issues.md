@@ -3,6 +3,9 @@
 ## Github Issues
 
 RFCs that are not on the brink of changing status are discussed through Github Issues.
+We generally use Issues to discuss changes that are controversial, and PRs to propose
+changes that are vetted. This keeps the PR backlog small.
+
 Any community member can open an issue; specify the RFC number in the issue title so
 the relationship is clear. For example, to open an issue on RFC 0025, an appropriate
 title for the issue might be:

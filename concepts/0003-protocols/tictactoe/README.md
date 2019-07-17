@@ -1,4 +1,4 @@
-# Tic Tac Toe 1.0 Protocol
+# Tic Tac Toe Protocol 1.0
 
 ![tictactoe by Symode09 via Wikimedia Commons](banner.png)
 
@@ -29,7 +29,7 @@ capture 3 cells of the grid in a straight line.
 ### Name and Version
 
 This defines the `tictactoe` protocol, version 1.x, as identified by the
-following URI:
+following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/uris.md#piuri):
 
     did:sov:SLfEi9esrjzybysFxQZbfq;spec/tictactoe/1.0
 

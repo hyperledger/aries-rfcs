@@ -1,0 +1,27 @@
+@startuml
+
+title Evidence Exchange Protocol: Examiner Flow
+
+actor PERSON as "Alice"
+participant HOLDER as "Alice's Agent"
+participant EXAMINER as "Examiner@Issuer"
+participant ISOR as "Issuer's System of Record"
+
+group Examiner Vetting Process (Face-to-face Interaction)
+autonumber 10
+PERSON->EXAMINER: Present paper/plastic document.
+EXAMINER->EXAMINER: Perform due diligence processing\n based on buisness and regulatory requirements.
+EXAMINER->ISOR: Scan document and store in System of Record (SOR).
+EXAMINER->ISOR: Write attestations pertaining to\n claims of confidence for each identity trait associated with a Holder.
+end
+
+group Examiner Vetting Process (Online Interaction)
+autonumber 10
+PERSON->EXAMINER: Present digital document.
+note right: This can be in the form of a document\n upload or via a remote url (i.e.: Dropbox)
+EXAMINER->ISOR: Integrity check document. Store in System of Record (SOR).
+EXAMINER->EXAMINER: Perform due diligence processing based\n on buisness and regulatory requirements.
+EXAMINER->ISOR: Write attestations pertaining to claims of\n confidence for each identity trait associated with a Holder.
+end
+
+@enduml

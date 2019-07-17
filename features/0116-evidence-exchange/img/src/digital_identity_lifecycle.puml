@@ -1,0 +1,21 @@
+@startuml
+
+title Credential Lifecycle Management
+
+actor PERSON as "Person"
+participant EXAMINER as "Examiner"
+participant ISOR as "Issuer's System of Record"
+participant ISSUER as "Issuer"
+participant HOLDER as "Holder"
+participant VERIFIER as "Verifier"
+
+PERSON->EXAMINER: Present original\n source documents.
+EXAMINER->EXAMINER: Gather, inspect and\n validate documents.
+EXAMINER->ISOR: Store documents in\n System of Record (SOR).
+ISSUER->ISOR: Gather claims to\n publish credentials.
+ISSUER->HOLDER: Issue credentials based\n on attestations in SOR.
+VERIFIER->HOLDER: Challenge.
+HOLDER->VERIFIER: Prove.
+VERIFIER->VERIFIER: Verify.
+
+@enduml

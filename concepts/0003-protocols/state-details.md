@@ -56,14 +56,14 @@ interaction that is only partly complete. And it makes formal
 testing for completeness and security much easier.
 
 The tictactoe example includes a complete state machine in less than 50
-lines of code. See [state-machine.py](tictactoe-1.0/state_machine.py). The
+lines of code. See [state-machine.py](tictactoe/state_machine.py). The
 unit tests prove once and for all that the rules of the tictactoe protocol
 (not the rules of the game, but the rules of how moves are communicated
 and reacted to) are perfectly followed, in a [similarly brief chunk of code](
-tictactoe-1.0/test_state_machine.py).
+tictactoe/test_state_machine.py).
 
 [![state machine thumbnail](state-machine-thumbnail.png)](
-tictactoe-1.0/state_machine.py)
+tictactoe/state_machine.py)
 
 For an extended discussion of how state machines can be used, including in nested
 protocols, and with hooks that let custom processing happen at each point in
@@ -96,7 +96,7 @@ a nice encapsulation pattern.
 If you study the state machine example in the tictactoe protocol, you will
 see that the state machine only concerns itself with *interacting* correctly;
 it doesn't deal with implementing game logic such as deciding what a valid move
-is. This is the job of an entirely different object, [game.py](tictactoe-1.0/game.py).
+is. This is the job of an entirely different object, [game.py](tictactoe/game.py).
 
 Agents building protocol support are going to see a similar pattern. The state
 machine guarantees that rules about interacting with other parties are followed
