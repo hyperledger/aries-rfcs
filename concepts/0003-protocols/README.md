@@ -6,7 +6,8 @@
 - Status: [ACCEPTED](/README.md#rfc-lifecycle)
 - Status Date: 2019-04-01
 - Status Note: standards track and beginning to influence many mental models, but not yet
-  [ADOPTED](/README.md#rfc-lifecycle). This supersedes [Indy PR #69](https://github.com/hyperledger/indy-hipe/pull/69).
+  [ADOPTED](/README.md#rfc-lifecycle). This supersedes [Indy PR #69](
+  https://github.com/hyperledger/indy-hipe/pull/69).
 
 Defines protocols (and the closely related concept of message families)
 in the context of agent-to-agent interactions,
@@ -93,8 +94,8 @@ not two. When the [DID Exchange Protocol](
 may involve dozens of *participants*, and it has cycles and other complex
 state evolution.
 
->See [this note](parties-roles-participants.md) for definitions of the terms
-"party", "role", and "participant".
+>See [this note](roles-participants-etc.md) for definitions of the terms
+"role", "participant", and "party".
 
 #### Agent Design
 
@@ -177,17 +178,17 @@ _timeouts_, and other things
 To define a protocol, write an RFC. Specific instructions for
 protocol RFCs, and a discussion about the theory behind detailed
 protocol concepts, are given in the [Template for Protocol RFCs](
-template.md). The [tictactoe 1.0 protocol](
-tictactoe-1.0/README.md) is also attached to this RFC as an example.
+template.md). The [tictactoe protocol](tictactoe/README.md) is
+also attached to this RFC as an example.
 
-[![tictactoe protocol](tictactoe-1.0/tile.png)](tictactoe-1.0/README.md)
+[![tictactoe protocol](tictactoe/tile.png)](tictactoe/README.md)
 
 ## Reference
 
 * [Message Type and Protocol Identifier URIs](uris.md)
 * [Semver Rules for Protocols](semver.md)
 * [State Details and State Machines](state-details.md)
-* [Parties, Roles, and Participants](parties-roles-participants.md)
+* [Roles, Participants, Parties, and Controllers](roles-participants-etc.md)
 
 ## Drawbacks
 

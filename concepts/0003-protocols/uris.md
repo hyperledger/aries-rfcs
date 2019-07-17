@@ -25,7 +25,7 @@ delim             = "?" / "/" / "&" / ":" / ";" / "="
 protocol-name     = identifier
 protocol-version  = semver
 message-type-name = identifier
-identifier        = alpha *(*(alphanumeric / "_" / "-" / ".") alphanumeric)
+identifier        = alpha *(*(alphanum / "_" / "-" / ".") alphanum)
 ```
 
 It can be loosely matched and parsed with the following regex:
@@ -58,7 +58,17 @@ with no human mediation involved.
 
 A shorter URI that follows the same conventions but lacks the
 `message-type-name` portion is called a __protocol identifier URI__
-(PIURI). Its loose matcher regex is:
+(PIURI).
+ 
+ 
+![PIURI structure](piuri-structure.png)
+ 
+```ABNF
+protocol-identifier-uri  = doc-uri delim protocol-name 
+    "/" semver
+```
+
+Its loose matcher regex is:
 
     (.*?)([a-z0-9._-]+)/(\d[^/]*)/?$
     

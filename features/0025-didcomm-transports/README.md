@@ -49,6 +49,20 @@ Websockets are an efficient way to transmit multiple messages without the overhe
 
 [Python Reference Agent](https://github.com/hyperledger/indy-agent/tree/master/python)
 
+### XMPP
+
+XMPP is an effective transport for incoming DID-Communication messages directly to mobile agents, like smartphones. 
+
+- Incoming DID-Communication messages will arrive, even if the mobile agent is behind a firewalls and network-address-translation (NAT).
+- Incoming DID-Communication messages continue to arrive, even when the IP adress of the mobile agent changes (switching between, 3G, 4G, Wifi, roaming, ...).
+- Independent of cloud agents and routing agents, as messages arrive directly at the mobile agent.
+- Well suited for direct consumer-to-consumer SSI transactions, from one mobile agent directly to another mobile agent without any DID-Communication intermediaries.
+- Simple encapsulation of DIDcom messages, getting trust from the DIDcom Encryption Envelope.
+- Specified in [Aries RFC 0024: DIDCom-over-XMPP](https://github.com/hyperledger/aries-rfcs/tree/master/features/0024-didcomm-over-xmpp)
+
+#### Known Implementations
+
+XMPP is implemented in the [Openfire Server](https://www.igniterealtime.org/projects/openfire/) open source project. Integration with DID Communication agents is work-in-progress.
 
 ### Other Transports
 
