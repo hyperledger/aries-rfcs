@@ -146,29 +146,59 @@ Description of fields:
 
 #### Presentation Preview
 
-This is not a message but an inner object for other messages in this protocol. It is used construct a preview of the data for the presentation. Schema:
+This is not a message but an inner object for other messages in this protocol. It is used to construct a preview of the data for the presentation. Its schema follows:
 
 ```json
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
-    "attributes": [
-        {
-            "name": "attribute name",
-            "mime-type": "type",
-            "encoding": "encoding",
-            "value": "value"
+    "<cred-def-id>": {
+        "attributes": {
+            "<attribute>": {
+                "mime-type": "<type>",
+                "encoding": "<encoding>",
+                "value": "<value>"
+            },
+            ...
         },
-        ...
-    ]
-}
+        "predicates": {
+            "<predicate>": {
+                "<attribute>": "<threshold>"
+            },
+            ...
+        },
+        "non-revocation-time": "<ISO-8601 datetime>"
+    },
+    ...
 ```
 
-The main element is `attributes`. It is an array of objects, each with the following fields:
+Topmost keys (except `@type`) in the presentation preview identify credential definitions pertinent to the presentation under negotiation. Note that this composition assumes that any presentation can include information from at most one credential per credential definition; such an approach mitigates corroboration risk.
 
-* `name` -- string with attribute name;
-* `mime-type` -- type of attribute
-* `encoding` -- encoding of value, if applicable: `"base64"` indicates base64
-* `value` -- value of credential
+For each credential definition identifier, the structure includes either `"attributes"`, `"predicates"`, or both. To propose inclusion of non-revocation status, the structure includes a `"non-revocation-time"` timestamp.
+
+##### Attributes
+
+For each credential definition identifier, the `"attributes"` key maps zero or more attribute names to their respective MIME types, encodings, and values; all of which are optional:
+
+* an empty object as the `"attributes"` value proposes no attribute inclusion from its
+  credential definition, as does the omission of the `"attributes"` key itself
+* the prover may include a MIME type and/or encoding per attribute in the preview for
+  verifier information on how to interpret its value
+* the value itself may be absent at this stage; its omission connotes the willingness
+  of the prover to include its value in proof.
+
+Any attribute specified per credential definition identifier must belong to its credential definition. In this way the structure excludes a bait-and-switch where the prover has credentials on multiple credential definitions with common attribute names (e.g., `name`, `score`).
+
+##### Predicates
+
+For each credential definition identifier, the `"predicates"` key maps zero or more predicates to their respective attributes and threshold values. Each predicate name identifies its comparison operator: `"<"`, `"<="`, `">"`, `">="`.
+
+An empty production as the value for a credential definition's `"predicates"` connotes an absence of predicates on attributes of the credential definition, as does the omission of the `"predicates"` value itself.
+
+##### Non-Revocation Timestamp
+
+For each credential definition identifier, the `"non-revocation-time"` timestamp offers an instant where the prover proposes inclusion of proof of the non-revocation of its corresponding credential.
+
+The non-revocation timestamp applies only to credentials on credential definitions that support revocation.
 
 ## Negotiation and Preview
 
@@ -181,7 +211,11 @@ Negotiation prior to the presentation can be done using the `propose-presentatio
 
 ## Drawbacks
 
-Why should we *not* do this?
+The presentation preview as proposed above does not allow nesting of predicate logic along the lines of "A and either B or C if D, otherwise A and B", nor cross-credential-definition predicates such as proposing a legal name from either a financial institution or selected government entity.
+
+The presentation preview may be indy-centric, as it assumes the inclusion of at most one credential per credential definition. In addition, it prescribes exactly four predicates and assumes mutual understanding of their semantics (e.g., could '>=' imply a lexicographic order for non-integer values, and if so, where to specify character collation algorithm?).
+
+Finally, the inclusion of a non-revocation timestamp may be premature at the preview stage.
 
 ## Rationale and alternatives
 
@@ -192,7 +226,7 @@ choosing them?
 
 ## Prior art
 
-Similar (but simplified) credential exchanged was already implemented in [von-anchor](https://von-anchor.readthedocs.io/en/latest/).
+Similar (but simplified) credential exchange was already implemented in [von-anchor](https://von-anchor.readthedocs.io/en/latest/).
 
 ## Unresolved questions
 
