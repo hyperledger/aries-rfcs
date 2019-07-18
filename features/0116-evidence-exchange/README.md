@@ -4,15 +4,21 @@
 
 ## Status
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: (date of first submission or last status change)
-- Status Note: (explanation of current status; if adopted,
-  links to impls or derivative ideas; if superseded, link to replacement)
+- Status Date: 2019-07-16
+- Status Note: Minor tweaks afters discussions with potential sponsor users.
 
 ## Summary
 Define a P2P document exchange protocol that does not involve a centralized storage facility. The protocol must allow parties using [pair-wise peer DIDs](https://github.com/openssi/peer-did-method-spec) to exchange documents that provide evidence in support of the issuance of verified credentials.
 
 ## Motivation
-During the identity verification process, an entity *may* require access to the genisis docuemets used to establish digital credentials issued by an credential issuing entity.  In support of the transition from existing business verification processes to emerging business processes that rely on digitally verified credentials using protocols such as [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential) and [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof), we need to establish a set of protocols that allow entities to make this transition while remaining compliant with business and regulatory requirements.
+During the identity verification process, an entity *may* require access to the genesis documents used to establish digital credentials issued by a credential issuing entity.  In support of the transition from existing business verification processes to emerging business processes that rely on digitally verified credentials using protocols such as [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential) and [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof), we need to establish a protocol that allow entities to make this transition while remaining compliant with business and regulatory requirements. Therefore, we need a mechanism for verifiers to obtain access to vetted documents without requiring a relationship or interaction with the issuer.
+
+### Dematerialization of physical documents
+Today, entities (businesses, organizations, government agencies) maintain existing processes for the gathering, examination and archiving of physical documents. These entities may retain a copy of the physical document, a scanned digital copy or both. Using manual or automated procedures, the information encapsulated within these documents is extracted and stored as personal data attestations about the document presenter within a system of record (SOR).
+
+![conceptual_doc_transformation](./img/conceptual_doc_transformation.png)
+
+As decentralized identity technologies begin to be adopted, these entities can transform these attestations into digital credentials.
 
 ### Understanding KYC
 *Know Your Customer (KYC)* is a process by which entities (business, governments, organizations) obtain information about the identity and address of their customers. This process helps to ensure that the services that the entity provides are not misused. KYC procedures vary based on geolocation and industry. For example, the KYC documents required to open a bank account in India versus the USA may differ but the basic intent of demonstrating proof of identity and address are similar. Additionally, the KYC documents necessary to meet business processing requirements for enrollment in a university may differ from that of onboarding a new employee.
@@ -47,7 +53,7 @@ An identity Holder may present to an Examiner a specific type of KYC document to
 | URL | Digital Copy | URL | Access by Reference |
 
 ### Why a Peer DID Protocol?
-In a decentralized identity ecosystem where peer relationships no longer depend a centralized authority for the source of truth, why should a Verifier refer to some 3rd party or back to the Issuing institution for KYC processing evidence?
+In a decentralized identity ecosystem where peer relationships no longer depend on a centralized authority for the source of truth, why should a Verifier refer to some 3rd party or back to the Issuing institution for KYC processing evidence?
 
 * Centralized Shared-KYC Providers: While there seems to be a [trend to build shared ledgers](#reference) that manage the exchange of KYC documents and data, we can not ignore the user-centric privacy by design principle that is foundational to decentralized identity solutions. Pair-wise Peer DIDs offer an alternative approach that is independent of any central source of truth, and are intended to be cheap, fast, scalable, and secure. The [advantages of Pair-wise Peer DIDs](https://github.io/peer-did-method-spec/index.html#advantages) make them suitable for most private relationships between people, organizations, and things.  
 * Issuer Communications: B2B interactions between a Verifier of a credential and the Issuer of the credential injects unnecessary correlation and behavior privacy risks for the Holder.  
@@ -56,7 +62,7 @@ In a decentralized identity ecosystem where peer relationships no longer depend 
 
 ### Protocol Assumptions
 
-1. Holder *must* present doc access to Verifier such that Verifier can be assured that the Issuer vetted the document.
+1. Holder *must* present document access to Verifier such that Verifier can be assured that the Issuer vetted the document.
 2. Some business processes and/or regulatory compliance requirements *may* demand that a Verifier gains access to the original vetted documents of an Issuer.
 3. Some Issuers *may* accept digital access links to documents as input into vetting process. This is often associated with Issuers who will accept copies of the original documents.
 
@@ -80,10 +86,10 @@ This implies that the protocol *must* address the following evidence concerns:
 This protocol is intended to be a compliment to the foundational (issuance, verification) protocols for credential lifecycle management in support of the [Verifiable Credentials Specification](https://www.w3.org/TR/verifiable-claims-data-model/). Overtime, it is assumed that the exchange of original source documents will no longer be necessary as digital credentials become ubiquitous. In the meantime, the trust in and access to KYC documents can be achieved in private peer to peer relationships using the [Peer DID Spec](https://github.com/openssi/peer-did-method-spec).
 
 ### User Stories
-An example of the applicability of this protocol to real world user scenarios is discussed in the context of a [digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s).
+An example of the applicability of this protocol to real world user scenarios is discussed in the context of a [decentralized digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s).
 
 ### KYC Document Types
-The following, *non-exhaustive*, list of common KYC Documents are used for establishing *proof of identity*, *proof of address*. They are often accompanied with a recent photograph. Since this protocol is intended to be agnostic of business and regulatory processes, the types of acceptable KYC documents will vary.
+The following, *non-exhaustive*, list of common KYC Documents are used for establishing *proof of identity* and *proof of address*. They are often accompanied with a recent photograph. Since this protocol is intended to be agnostic of business and regulatory processes, the types of acceptable KYC documents will vary.
 
 | Proof Type | Sample Documents |
 | --- | --- |
@@ -107,6 +113,8 @@ The protocol is comprised of the following messages and associated actions:
 | Issuer to Holder | Evidence Response | Issuer collects KYC Documents associated with each requested credential ID and sends an ```evidence_response``` message to Holder's agent. Upon receipt, the Holder stores evidence data in Wallet. |
 | Verifier to Holder | Evidence Access Request | Verifier builds and sends an ```evidence_access_request``` message to Holder's agent. |
 | Holder to Verifier | Evidence Access Response | Holder builds and sends an ```evidence_access_response``` message to the Verifier's agent.  Verifier fetches requested documents and performs digital signature validation on each. Verifier stores evidence in system of record.|
+
+![digital_doc_flow](./img/digital_doc_flow.png)
 
 ### Request Evidence Message
 This message should be used as an accompaniment to an [issue credential message](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential#issue-credential). Upon receipt and storage of a credential the Holder should compose an ```evidence_request``` for each credential received from the Issuer. The Holder may use this message to get an update for new and existing credentials from the Issuer.
@@ -299,6 +307,8 @@ Description of attributes:
   * `issuerDID`: The public DID of the Issuer that issued the credential represented by the associated ID. This DID is derived from the credential validation process.
 
 ![verify-workflow](./img/verify_cred_flow.png)
+
+This protocol is intended to be flexible and applicable to a variety of use cases. While our discussion has circulated around the use of the protocol as follow-up to the processing of a credential proof presentment flow, the fact is that the protocol can be used at any point after a Pair-wise DID Exchange has been successfully established and is therefore in the [complete state](https://github.com/hyperledger/aries-rfcs/tree/master/features/0023-did-exchange#complete) as defined by the DID Exchange Protocol. An `IssuerDID` (or DID of the an entity that is one of the two parties in a private pair-wise relationship) is assumed to be known under all possible conditions once the relationship is in the complete state.
 
 ### Evidence Access Response Message
 This message is required for a Holder Agent in response to an ```evidence_access_request``` message. The format of the ```~attach``` attribute will be determined by the storage management preferences of the Holder's Agent. To build the response, the Holder will validate that the supplied Issuer DID corresponds to the credential represented by the supplied ID. Upon successful processing of a ```evidence_access_response``` message, the Verifier will store evidence details in its system of record.
