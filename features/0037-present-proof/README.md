@@ -219,7 +219,7 @@ Negotiation prior to the presentation can be done using the `propose-presentatio
 
 The presentation preview as proposed above does not allow nesting of predicate logic along the lines of "A and either B or C if D, otherwise A and B", nor cross-credential-definition predicates such as proposing a legal name from either a financial institution or selected government entity.
 
-The presentation preview may be indy-centric, as it assumes the inclusion of at most one credential per credential definition. In addition, it prescribes exactly four predicates and assumes mutual understanding of their semantics (e.g., could '>=' imply a lexicographic order for non-integer values, and if so, where to specify character collation algorithm?).
+The presentation preview may be indy-centric, as it assumes the inclusion of at most one credential per credential definition. In addition, it prescribes exactly four predicates and assumes mutual understanding of their semantics (e.g., could `">="` imply a lexicographic order for non-integer values, and if so, where to specify character collation algorithm?).
 
 Finally, the inclusion of a non-revocation timestamp may be premature at the preview stage.
 
