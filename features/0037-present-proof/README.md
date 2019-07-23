@@ -82,12 +82,12 @@ Description of fields:
      "version": string,
      "nonce": string,
      "requested_attributes": {
-          "<attr_referent>": <attr_info>,
+          "<attr_referent>": <attr_info>
      },
      "requested_predicates": {
-          "<predicate_referent>": <predicate_info>,
+          "<predicate_referent>": <predicate_info>
      },
-     "non_revoked": Optional<<non_revoc_interval>>,
+     "non_revoked": Optional<<non_revoc_interval>>
 }
 ```
 
@@ -107,7 +107,7 @@ This message is a response to a Presentation Request message and contains signed
             "data": {
                 "base64": "<bytes for base64>"
             }
-        },
+        }
     ]
 }
 ```
@@ -135,11 +135,11 @@ Description of fields:
              "requested_predicate_1_referent": {sub_proof_index: int},
              "requested_predicate_2_referent": {sub_proof_index: int},
          }
-     }
+     },
      "proof": {
          "proofs": [ <credential_proof>, <credential_proof>, <credential_proof> ],
          "aggregated_proof": <aggregated_proof>
-     }
+     },
      "identifiers": [{schema_id, cred_def_id, Optional<rev_reg_id>, Optional<timestamp>}]
 }
 ```
@@ -170,7 +170,7 @@ This is not a message but an inner object for other messages in this protocol. I
             ...
         },
         ...
-    }
+    },
     "non_revocation_times": {
         "<cred_def_id>": "<iso_8601_datetime>",
         ...
