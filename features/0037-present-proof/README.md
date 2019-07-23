@@ -175,7 +175,6 @@ This is not a message but an inner object for other messages in this protocol. I
         "<cred_def_id>": "<iso_8601_datetime>",
         ...
     }
-    ...
 }
 ```
 
