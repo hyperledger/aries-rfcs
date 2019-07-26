@@ -32,6 +32,8 @@
 * [0103: indirect-identity-control](concepts/0103-indirect-identity-control/README.md)
 * [0113: question-answer](features/0113-question-answer/README.md)
 * [0114: predefined-identities](features/0114-predefined-identities/README.md)
+* [0116: evidence-exchange](features/0116-evidence-exchange/README.md)
+* [0124: did-resolution-protocol](features/0124-did-resolution-protocol/README.md)
 
 ## Status: ACCEPTED
 * [0003: protocols](concepts/0003-protocols/README.md)
