@@ -1,4 +1,4 @@
-# 0030: Sync Connection Protocol 1.0 (and related minor protocols)
+# 0030: Sync Connection Protocol 1.0 (and a related minor protocol)
 - Authors: Daniel Hardman <daniel.hardman@gmail.com>, 
   Devin Fisher <devin.fisher@evernym.com>, Sam Curren <sam@sovrin.org>
 
@@ -64,9 +64,8 @@ Of course, subsequent evolutions of the protocol will replace `1.0` with
 an appropriate update per [semver](../../concepts/0003-protocols/semver.md)
 rules.
 
-Two related, minor protocols are also defined in subdocs of this RFC:
+A related, minor protocol is also defined in subdocs of this RFC:
 
-* [Query Connection State Protocol](query-connection-state-protocol/README.md)
 * [Abandon Connection Protocol](abandon-connection-protocol/README.md)
 
 ### Roles
