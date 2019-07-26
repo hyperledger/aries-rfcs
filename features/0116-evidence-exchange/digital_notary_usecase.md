@@ -1,24 +1,12 @@
 # Decentralized Digital Notary
 
 ## Preface
-The intent of this document is to describe the concepts of a *Digital Notary* with respect to the bootstrapping of the decentralized identity ecosystem and to demonstrate using *example user stories*<sup>[1](#commentary)</sup> the applicability of the [Evidence Exchange Protocol](./README.md).  
+The intent of this document is to describe the concepts of a [Decentralized Digital Notary](./eep_glossary.md) with respect to the bootstrapping of the decentralized identity ecosystem and to demonstrate using *example user stories*<sup>[1](#commentary)</sup> the applicability of the [Evidence Exchange Protocol](./README.md).  
 
 ## Overview
 
 ### Problem Statement
 How do we bootstrap the digital credential ecosystem when many of the issuing institutions responsible for foundational credentials (i.e.: brith certificate, drivers license, etc) *tend to be laggards*<sup>[2](#commentary)</sup> when it comes to the adoption of emerging technology? What if we did not need to rely on these issuing institutions and instead leveraged the attestations of [trusted third parties](https://en.m.wikipedia.org/wiki/Trusted_third_party)?
-
-### Vernacular
-
-| Term | Definition |
-| --- | --- |
-| Original Document | Any issued artifact that satisfies the [Original-Document Rule](https://definitions.uslegal.com/o/original-document-rule/) in accordance with [principle of evidence law](https://en.wikipedia.org/wiki/Evidence_(law)). The original artifact may be in writing or a mechanical, electronic form of publication. Such a document may also be referred to as a *Foundational Document*. |
-| Issuer of Origination | The entity (business, organization, individual or government) that is the original publisher of an *Original Document*. |
-| Tier 1 Proofs | A category of [foundational credentials](./README.md#kyc-document-types) (*Original Documents*) that are often required to prove identity and address during KYC or onboarding processes. |
-| Decentralized Digital Notary (DDN) | A trusted third party that enables digital interactions between Holders and Verifiers. As an issuer of digitally verifiable credentials, it creates permanent evidence that an *Original Document* existed in a certain form at a particular point in time. This role will be especially important to address scalability and the bootstrapping of the decentralized identity ecosystem since many *Issuers of Origination* may be laggards. |
-| DDN Insurer | An entity (party) in an insurance contract that underwrites insurance risks associated with the activities of a DDN. This includes a willingness to pay compensation for any negligence on the part of the DDN for failure to perform the necessary due-diligence associated with the examination and vetting of *Original Documents*. |
-| Trust Framework Certification Authority | An entity that adheres to a governance framework for a specific ecosystem and is responsible for overseeing and auditing the Level of Assurance a DDN (Relying Party) has within the ecosystem. |
-| Mobile Field Agents | Location-based service providers that allow agencies to bring their services to remote (rural) customers. |
 
 ### Concept
 During the identity verification process, an entity may require access to the genesis documents from the Issuers of Origination before issuing credentials. We see such requirements in some of the routine identity instrument interactions of our daily lives such as obtaining a Driver's License or opening a Bank Account.
@@ -27,7 +15,7 @@ During the identity verification process, an entity may require access to the ge
 
 We assume that government agencies such and the [DMV](https://en.wikipedia.org/wiki/Department_of_Motor_Vehicles) (*drivers license*) and Vital Records (brith certificate) will not be early adopters of digital credentials yet their associated [Tier 1 Proofs](#vernacular) are critical to the the creation of a network effect for the digital credential ecosystem.
 
-We therefore need a forcing function that will disrupt behavior. Image a trusted business entity, a Decentralized Digital Notary (DDN), that would take the responsibility of vouching for the existence of *Original Documents* and have the certitude to issue verifiable credentials attesting to personal data claims made by the *Issuer of Origination*.
+We therefore need a forcing function that will disrupt behavior. Image a trusted business entity, a Decentralized Digital Notary (DDN), that would take the responsibility of vouching for the existence of [Original Documents](./eep_glossary.md) and have the certitude to issue verifiable credentials attesting to personal data claims made by the [Issuer of Origination](./eep_glossary.md).
 
 ![ddn_concept](./img/ddn_concept.png)
 
