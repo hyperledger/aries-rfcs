@@ -1,4 +1,4 @@
-# 0030: Sync Connection Protocol 1.0 (and related minor protocols)
+# 0030: Sync Connection Protocol 1.0 (and a related minor protocol)
 - Authors: Daniel Hardman <daniel.hardman@gmail.com>, 
   Devin Fisher <devin.fisher@evernym.com>, Sam Curren <sam@sovrin.org>
 
@@ -6,7 +6,7 @@
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
 - Status Date: 2018-10-01. Revised 2019-07-03.
 - Status Note: used by the [peer DID method spec](https://openssi.github.io/peer-did-method-spec).
-  Not yet implemented.
+  Implementation beginning.
   Supersedes [Indy HIPE PR #104](https://github.com/hyperledger/indy-hipe/pull/104).
 
 ## Summary
@@ -64,9 +64,8 @@ Of course, subsequent evolutions of the protocol will replace `1.0` with
 an appropriate update per [semver](../../concepts/0003-protocols/semver.md)
 rules.
 
-Two related, minor protocols are also defined in subdocs of this RFC:
+A related, minor protocol is also defined in subdocs of this RFC:
 
-* [Query Connection State Protocol](query-connection-state-protocol/README.md)
 * [Abandon Connection Protocol](abandon-connection-protocol/README.md)
 
 ### Roles
@@ -173,20 +172,23 @@ The following best practices will dramatically improve the robustness of state
 synchronization, both within and across domains. Software implementing this protocol
 is not required to do any of these things, but they are strongly recommended.
 
-##### The `~relstate` decorator
+##### The `~state` decorator
 
-Agents should attach the `~relstate` decorator to messages to help each other discover when
-state synchronization is needed. This decorator has the following format:
+Agents using [peer DIDs](https://openssi.github.io/peer-did-method-spec/) should
+attach the `~state` decorator to messages to help
+each other discover when state synchronization is needed. This decorator has the
+following format:
 
 ```JSON
-"~relstate": [ 
+"~state": [ 
   {"did": "<my did>", "state_hash": "<my state hash>"},
   {"did": "<your did>", "state_hash": "<your state hash>"}
 ]
 ```
 
-In a message _within_ a domain, where "me" and "you" are synonyms, "them" should be used
-instead of "you"; the goal is to always describe the current known state hashes for each
+In n-wise relationships, there may be more than 2 entries in the list.
+
+The goal is to always describe the current known state hashes for each
 domain. It is also best practice for the recipient of the message to send a
 `sync_state` message back to the sender any time it detects a discrepancy.
 
