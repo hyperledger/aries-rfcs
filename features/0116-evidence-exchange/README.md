@@ -4,33 +4,74 @@
 
 ## Status
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-07-16
-- Status Note: Minor tweaks afters discussions with potential sponsor users.
+- Status Date: 2019-07-30
+- Status Note: Revised to address both physical and digital identity proofing methods.
 
 ## Summary
-Define a P2P document exchange protocol that does not involve a centralized storage facility. The protocol must allow parties using [pair-wise peer DIDs](https://github.com/openssi/peer-did-method-spec) to exchange documents that provide evidence in support of the issuance of verified credentials.
+The goal of this protocol is to allow Holders to provider an inquiring Verifier with a secure and trusted mechanism for obtaining access to the foundational evidence that enabled the Issuer the assurances necessary to create the verifiable credential(s) that the Holder has presented to the Verifier. To this end, a P2P evidence exchange protocol is required that does not involve a centralized storage facility yet it will allow parties using [Pair-wise Peer DIDs](https://github.com/openssi/peer-did-method-spec) to exchange evidence in support of the issuance of verified credentials.
 
 ## Motivation
-During the identity verification process, an entity *may* require access to the genesis documents used to establish digital credentials issued by a credential issuing entity.  In support of the transition from existing business verification processes to emerging business processes that rely on digitally verified credentials using protocols such as [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential) and [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof), we need to establish a protocol that allow entities to make this transition while remaining compliant with business and regulatory requirements. Therefore, we need a mechanism for verifiers to obtain access to vetted documents without requiring a relationship or interaction with the issuer.
+During the identity verification process, an entity *may* require access to the genesis documents used to establish digital credentials issued by a credential issuing entity or Credential Service Provider (CSP).  In support of the transition from existing business verification processes to emerging business processes that rely on digitally verified credentials using protocols such as [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential) and [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof), we need to establish a protocol that allow entities to make this transition while remaining compliant with business and regulatory requirements. Therefore, **we need a mechanism for Verifiers to obtain access to vetted evidence, physical or digital information or documentation, without requiring a relationship or interaction with the Issuer**.
+
+While technology advancements around identity verification are improving, business policies (most often grounded in risk mitigation) will not change at the same rate of speed. For example, just because a financial institution in Singapore is willing to rely on the KYC due-diligence processing of another institution, we should not assume that the banks in another geolocation (i.e: Hong Kong) can embrace the same level of trust. For this reason, we must enable Verifiers with the option to obtain evidence that backs any assertions made by digital credential issuers.  
+
+Based on a *web-of-trust* and cryptographic processing techniques, Verifiers of digital credentials can fulfill their identity proofing workflow requirements. However, business policies and regulatory compliance may require them to have evidence for inquires such as but mot limited to government mandated Anti-Money Laundering (AML) Compliance audits.
+
+Verifiers or relying parties (RPs) of digital credentials need to make informed decisions about the risk of accepting a digital identity before trusting the digital credential and granting associated privileges. To mitigate such risk, the Verifier may need to understand the strength of the identity proofing process. According to a NIST Information Technology Laboratory workshop report, [Measuring Strength of Identity Proofing](https://www.nist.gov/sites/default/files/nstic-strength-identity-proofing-discussion-draft.pdf) from December 2015, there are two (2) identity proofing methods that can be leveraged by a CSP:
+
+| Method | Description |
+| --- | --- |
+| In-Person Identity Proofing | Holder is required to present themselves and their documentation directly to a trained representative of an identity proofing agency. |
+| Remote Identity Proofing | Holder is not expected to present themselves or their documents at a physical location. Validation and verification of presented data (including digital documents) is performed programmatically against one or more corroborating authoritative sources of data.|
+
+If the In-Person Identity Proofing method is used, the strength can easily be determined by allowing the Verifier to gain access to any [Original Documents](./eep_gloassay.md) used by the Issuer of a [Derived Credential](./eep_gloassay.md). In the situation where a Remote Identity Proofing method is used, confidence in the strength of the identity proofing process can be determined by allowing the Verifier to gain access to [Digital Assertions](./eep_gloassay.md) used by the Issuer of a *Derived Credential*.
+
+### Problem Scope
+This protocol is intended to address the following challenging questions:
+
+1. What evidence (information or documentation) was used to establish the level of certitude necessary to allow an Issuer to issue a [Verifiable Credential](./eep_gloassay.md)?
+
+2. For each [Identity Proofing Inquiry](./eep_gloassay.md) (challenge) such as Address, Identity, Photo and Achievement, which forms of evidence was used by the Issuer of the *Verifiable Credential*?
+
+3. When the Issuer relies on an [Identity Proofing Service Provider (IPSP)](./eep_gloassay.md) as part of its Remote Identity Proofing process:
+
+  1. Can the IPSP provide a *Digital Assertion* in association with the [Identity Instrument](./eep_gloassay.md) they have vetted as part of their service to the Issuer?
+
+  2. Can the Issuer provide a *Digital Assertion* in association with its certitude in the reliability of its due-diligence activity that is dependent on 3rd parties?
+
+4. When the Issuer relies on trained examiners for its In-Person Identity Proofing process, can is provide access to the digitally scanned documents either by-value or by-reference?
+
+### Assurance Levels
+Organizations that implement [Identity Proofing](./eep_gloassay.md) generally seek to balance cost, convenience, and security for both the Issuer and the Holder. Examples of these tradeoffs include:
+
+* Adjusting the complexity of a Remote Identity Proofing process to improve user experience can reduce the quality of the verification process;
+* Overly complex proofing processes can result in increased abandonment which is unacceptable to some service providers;
+* Overly generalized processes based on expected population characteristics (e.g., national origin, country of residency) can lead to persons that are unable to complete proofing as they may not share such characteristics.
+
+To mitigate the risk associated with such tradeoffs, the *NIST 800-63A Digital Identity Guidelines* outline three (3) levels of identity proofing assurance. These levels describe the degree of due-diligence performed during an *Identity Proofing Process*. See [Section 5.2 Identity Assurance Levels Table 5-1](https://pages.nist.gov/800-63-3/sp800-63-3.html#sec5).
+
+> Users of this protocol will associate themselves with the need to understand the *type of evidence that was collected and how it was confirmed* so that they can adhere to any business processes that require **IAL2** or **IAL3**  assurance levels supported by *Stong* or *Superior* forms of evidence.
 
 ### Dematerialization of physical documents
-Today, entities (businesses, organizations, government agencies) maintain existing processes for the gathering, examination and archiving of physical documents. These entities may retain a copy of the physical document, a scanned digital copy or both. Using manual or automated procedures, the information encapsulated within these documents is extracted and stored as personal data attestations about the document presenter within a system of record (SOR).
+Today, entities (businesses, organizations, government agencies) maintain existing processes for the gathering, examination and archiving of physical documents. These entities may retain a copy of a physical document, a scanned digital copy or both. Using manual or automated procedures, the information encapsulated within these documents is extracted and stored as personal data attestations about the document presenter within a system of record (SOR).
 
 ![conceptual_doc_transformation](./img/conceptual_doc_transformation.png)
 
-As decentralized identity technologies begin to be adopted, these entities can transform these attestations into digital credentials.
+As decentralized identity technologies begin to be adopted, these entities can transform these attestations into *Verifiable Credential*.
 
 ### Understanding KYC
 *Know Your Customer (KYC)* is a process by which entities (business, governments, organizations) obtain information about the identity and address of their customers. This process helps to ensure that the services that the entity provides are not misused. KYC procedures vary based on geolocation and industry. For example, the KYC documents required to open a bank account in India versus the USA may differ but the basic intent of demonstrating proof of identity and address are similar. Additionally, the KYC documents necessary to meet business processing requirements for enrollment in a university may differ from that of onboarding a new employee.
 
-Regardless of the type of KYC processing performed by an entity, there may be regulatory or business best practice requirements that mandate access to the original documents presented as evidence during the KYC process. As entities transition from paper/plastic based identity proofing practices to digitally verifiable credentials, there may exist (albeit only for a transitional period) the need to gain access to the documents that an issuer examined before issuing credentials.  
+Regardless of the type of KYC processing performed by an entity, there may be regulatory or business best practice requirements that mandate access to any *Original Documents* presented as evidence during the KYC process. As entities transition from paper/plastic based identity proofing practices to *Verifiable Credentials* there may exist (albeit only for a transitional period) the need to gain access to the [Identity Evidence](./eep_gloassay.md) that an Issuer examined before issuing credentials.  
 
-### KYC Document Vetting
+This process is time consuming and costly for the credential Issuer and often redundant and inconvenient for the Holder. Some industry attempts have been made to establish centrally controlled B2B sharing schemas to help reduce such impediments to the Issuer but these approaches are often designed and motivated by business goals and less about Holder data privacy. The purpose of this protocol is to insert the Holder at the center of the P2P C2B exchange of *Identity Evidence* while allowing Verifiers to gain confidence in identity proofing assurance levels.
+
+### Evidence Vetting Workflow
 The [Verifiable Credentials Specification](https://www.w3.org/TR/verifiable-claims-data-model/) describes three key stakeholders in an ecosystem that manages digital credentials: Issuers, Holders and Verifiers. However, before an Issuer can attest to claims about a Holder, an *Examiner* must perform the required vetting, due diligence, regulatory compliance and other tasks needed to establish confidence in making a claim about an identity trait associated with a Holder. The actions of the Examiner may include physical validation of information (i.e.: comparison of real person to a photo) as well as reliance on third party services as part of its vetting process. Depending on the situational context of a credential request or the type of privileges to be granted, the complexity of the vetting process taken by an examiner to confirm the truth about a specific trait may vary.
 
 ![digital-identity-lifecycle](./img/digital_identity_lifecycle.png)
 
-An identity Holder may present to an Examiner a specific type of KYC document to establish proof of identity. The presentment of these KYC documents may come in a variety of formats:
+An identity Holder may present to an Examiner *Identity Evidence* in the form of a physical document or other forms of *Identity Instruments* to resolve *Identity Proofing Inquires*. The presentment of these types of evidence may come in a variety of formats:
 
 * `Paper/Plastic`: Typically associated with a face to face interaction for the exchange of documents.
 * `Digital Copy`: Typically associated with an online exchange whereby the the Holder uploads a scanned image of the original source (Paper/Plastic) document.
@@ -42,7 +83,7 @@ An identity Holder may present to an Examiner a specific type of KYC document to
 
 >Note: Assumption herein is that original documents are never forfeited by an individual.
 
-| Original Source Format | Issuer Archived Format | Verifier KYC Process Format | Protocol Requirement |
+| Original Source Format | Issuer Archived Format | Verifier Business Process Format | Protocol Requirement |
 | --- | --- | --- | --- |
 | Paper/Plastic | Paper-Copy | n/a | n/a |
 | Paper/Plastic | Digital Copy | Digital Copy | Access by Value |
@@ -53,51 +94,70 @@ An identity Holder may present to an Examiner a specific type of KYC document to
 | URL | Digital Copy | URL | Access by Reference |
 
 ### Why a Peer DID Protocol?
-In a decentralized identity ecosystem where peer relationships no longer depend on a centralized authority for the source of truth, why should a Verifier refer to some 3rd party or back to the Issuing institution for KYC processing evidence?
+In a decentralized identity ecosystem where peer relationships no longer depend on a centralized authority for the source of truth, why should a Verifier refer to some 3rd party or back to the issuing institution for capturing *Identity Evidence*?
 
 * Centralized Shared-KYC Providers: While there seems to be a [trend to build shared ledgers](#reference) that manage the exchange of KYC documents and data, we can not ignore the user-centric privacy by design principle that is foundational to decentralized identity solutions. Pair-wise Peer DIDs offer an alternative approach that is independent of any central source of truth, and are intended to be cheap, fast, scalable, and secure. The [advantages of Pair-wise Peer DIDs](https://github.io/peer-did-method-spec/index.html#advantages) make them suitable for most private relationships between people, organizations, and things.  
 * Issuer Communications: B2B interactions between a Verifier of a credential and the Issuer of the credential injects unnecessary correlation and behavior privacy risks for the Holder.  
 
 ## Solution Concepts
-
+ inline v. appended attachements
 ### Protocol Assumptions
 
-1. Holder *must* present document access to Verifier such that Verifier can be assured that the Issuer vetted the document.
-2. Some business processes and/or regulatory compliance requirements *may* demand that a Verifier gains access to the original vetted documents of an Issuer.
+1. Holder *must* present *Identity Evidence* access to Verifier such that Verifier can be assured that the Issuer vetted the evidence.
+2. Some business processes and/or regulatory compliance requirements *may* demand that a Verifier gains access to the *Original Documents* vetted by a credential Issuer.
 3. Some Issuers *may* accept digital access links to documents as input into vetting process. This is often associated with Issuers who will accept copies of the original documents.
+4. Some Issuer *may* accept *Digital Assertions* from *IPSPs* as evidence of their due-diligence process. Examples of such *IPSPs* are:
+
+  * [Acuant](https://www.acuantcorp.com/)
+  * [Au10tix](https://www.au10tix.com/)
+  * [IWS](https://www.iwsinc.com/products/cloudid/)
+  * [Onfido](https://onfido.com/us/)
+  * [1Kosmos](https://onekosmos.com/)
 
 ### Protocol Objectives
 
-In order for a Verifier to avoid or reduce KYC vetting expenses it must be able to:
+In order for a Verifier to avoid or reduce evidence vetting expenses it must be able to:
 
 * be convinced that a trusted entity has performed the necessary vetting;
-* know, if required, that access to the original vetted document(s) is possible.
+* know, if required, that access to the original vetted evidence is possible.
 
 This implies that the protocol *must* address the following evidence concerns:
 
 | Interaction Type | Challenge | Protocol Approach |
 | --- | --- | --- |
-| Examiner-to-Holder | How does Issuer provide Holder with evidence that it has **vetted** a KYC document? |Issuer signs hash of the document and presents signature to Holder. |
-| Holder-to-Verifier | How does Holder **present** Verifier with evidence that the Issuer of a Credential vetted an original source document? |Holder presents verifier with digitally signed hash of document, public DID of Issuer and access to a copy of the digital document. |
-| Verifier-to-FileStorageProvider | How does Verifier **access** the document in digital format (base64)? | Issuer or Holder must provide secure access to a digital copy of the document. |
-| Verifier-to-Verifier | How does Verifier **validate** that Issuer attests to the vetting of the original source as evidence for personal data claims encapsulated in issued credentials? | Verifier gains access to the digital document, fetches the public key of associated with the Issuer's DID and validates Issuer's signature of document hash. |
+| Examiner-to-Holder | How does Issuer provide Holder with proof that it has **vetted** *Identity Evidence*? |Issuer signs hash of the evidence and presents signature to Holder. |
+| Holder-to-Verifier | How does Holder **present** Verifier with evidence that the Issuer of a Credential vetted *Identity Evidence*? |Holder presents verifier with digitally signed hash of evidence, public DID of Issuer and access to a copy of the digital evidence. |
+| Verifier-to-FileStorageProvider | How does Verifier **access** the evidence in digital format (base64)? | Issuer or Holder must provide secure access to a digital copy of the document. |
+| Verifier-to-Verifier | How does Verifier **validate** that Issuer attests to the vetting of the *Identity Evidence* for personal data claims encapsulated in issued credentials? | Verifier gains access to the digital evidence, fetches the public key associated with the Issuer's DID and validates Issuer's signature of document hash. |
 
 ### Protocol Outcome
-This protocol is intended to be a compliment to the foundational (issuance, verification) protocols for credential lifecycle management in support of the [Verifiable Credentials Specification](https://www.w3.org/TR/verifiable-claims-data-model/). Overtime, it is assumed that the exchange of original source documents will no longer be necessary as digital credentials become ubiquitous. In the meantime, the trust in and access to KYC documents can be achieved in private peer to peer relationships using the [Peer DID Spec](https://github.com/openssi/peer-did-method-spec).
+This protocol is intended to be a compliment to the foundational (issuance, verification) protocols for credential lifecycle management in support of the [Verifiable Credentials Specification](https://www.w3.org/TR/verifiable-claims-data-model/). Overtime, it is assumed that the exchange of *Identity Evidence* will no longer be necessary as digital credentials become ubiquitous. In the meantime, the trust in and access to *Identity Evidence* can be achieved in private peer to peer relationships using the [Peer DID Spec](https://github.com/openssi/peer-did-method-spec).
 
 ### User Stories
 An example of the applicability of this protocol to real world user scenarios is discussed in the context of a [decentralized digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s).
 
-### KYC Document Types
-The following, *non-exhaustive*, list of common KYC Documents are used for establishing *proof of identity* and *proof of address*. They are often accompanied with a recent photograph. Since this protocol is intended to be agnostic of business and regulatory processes, the types of acceptable KYC documents will vary.
+> ToDo: Digital Assertion User Story
+
+### Evidence Types
+In the context of this protocol, *Identity Evidence* represents physical or digital information-based artifacts that support a belief to common *Identity Proofing Inquires* (challenges):
+
+* **Proof of Identity**: Are you who you claim to be?
+* **Proof of Address**: Do you reside at a valid and confirmed place of residence?
+* **Proof of Photo**: Can you present either a physical or digital image that can be compared with corroborating authoritative sources of data?
+* **Proof of Achievement**: Have you accomplished what you claim to have achieved?
+* **Proof of Privilege**: Have you been granted certain rights or affiliations?
+
+The following, *non-exhaustive*, list of physical information-based artifacts (documents) are used as evidence when confronted with common identity related inquires. They are often accompanied with a recent photograph. Since this protocol is intended to be agnostic of business and regulatory processes, the types of acceptable documents will vary.
 
 | Proof Type | Sample Documents |
 | --- | --- |
 | Address | Passport, Voter’s Identity Card, Utility Bill (Gas, Electric, Telephone/Mobile), Bank Account Statement, Letter from any recognized public authority or public servant, Credit Card Statement, House Purchase deed, Lease agreement along with last 3 months rent receipt, Employer’s certificate for residence proof |
 | Identity | Passport, [PAN Card](https://en.wikipedia.org/wiki/Permanent_account_number), Voter’s Identity Card, Driving License, Photo identity proof of Central or State government, Ration card with photograph, Letter from a recognized public authority or public servant, Bank Pass Book bearing photograph, Employee identity card of a listed company or public sector company, Identity card of University or board of education |
 | Photo | Passport, Pistol Permit, Photo identity proof of Central or State government |
+| Achievement | Diploma, Certificate |
+| Privilege | Membership/Loyalty Card, Health Insurance Card |
 
-These documents are examples of trusted credentials that an examiner relies on during their vetting process.
+These forms of *Identity Evidence* are examples of trusted credentials that an examiner relies on during their vetting process.
 
 ![examiner-workflow](./img/examine_flow.png)
 
@@ -152,14 +212,14 @@ This message is required for an Issuer Agent in response to an ```evidence_reque
       "evidence": [
         {"evidence_type": "Address", "docref": ["#kycdoc1"]},
         {"evidence_type": "Identity", "docref": ["#kycdoc2"]},
-        {"evidence_type": "Photo", "docref": null},
+        {"evidence_type": "Photo", "docref": null}
       ]
     },
     { "@id": "cred-002",
       "evidence": [
         {"evidence_type": "Address", "docref": ["#kycdoc1","#kycdoc3"]},
         {"evidence_type": "Identity", "docref": ["#kycdoc3"]},
-        {"evidence_type": "Photo", "docref": ["#kycdoc1"]},
+        {"evidence_type": "Photo", "docref": ["#kycdoc1"]}
       ]
     }
   ],
@@ -216,8 +276,8 @@ Description of attributes:
 
 This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) with the following additions:
 
-* `vetting_process`: A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
 * `description`: A human readable description of the type of document.
+* `vetting_process`: A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
 * `sha256`: *Optional hash of the content*. Can be useful as an integrity check by Holder.
 * `signature`: Required RSA/SHA-256 Signature of the document. This is required for downstream processing by the Verifier so that the Holder can demonstrate that the Issuer was the attesting source of the document.
 
@@ -274,15 +334,15 @@ This message adheres to the attribute [content formats outlined in the Aries Att
 
 This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) with the following additions:
 
-* `vetting_process`: A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
 * `description`: A human readable description of the type of document.
+* `vetting_process`: A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
 * `sha256`: *Optional hash of the content*. Including this field makes the content tamper-evident.
 * `links`: A list of zero or more locations at which the content may be fetched.
   * `url`: Link to the external document.
   * `accesscode`: If required, the passcode need to authenticate access to the url.
 * `signature`: Required RSA/SHA-256 Signature of the document. This is required for downstream processing by the Verifier so that the Holder can demonstrate that the Issuer was the attesting source of the document.
 
-Upon completion of the Evidence Request and Response exchange, the Holder's Agent is now able to present any Verifier that has accepted a specific Issuer credential with the supporting evidence from the Issuer. This evidence, depending on the Holder's preferences may be direct or via a link to an external resource. For example, regardless of the delivery method used between the Issuer and Holder, the Holder's Agent may decide to provide fetch all documents and store them itself and then provide Verifiers with by-refernece access upon request.
+Upon completion of the Evidence Request and Response exchange, the Holder's Agent is now able to present any Verifier that has accepted a specific Issuer credential with the supporting evidence from the Issuer. This evidence, depending on the Holder's preferences may be direct or via a link to an external resource. For example, regardless of the delivery method used between the Issuer and Holder, the Holder's Agent may decide to fetch all documents and store them itself and then provide Verifiers with by-reference access upon request.
 
 ### Evidence Access Request Message
 Upon the successful processing of a [credential proof presentation message](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof#presentation), a Verifier may desire to request supporting evidence for the processed credential. This ```evidence_access_request``` message is built by the Verifier and sent to the  Holder's agent. Similar to the ```request_evidence``` message, the Verifier may use this message to get an update for new and existing credentials associated with the Holder. The intent of this message is for the Verifier to establish trust by obtaining a copy of the available evidence and performing the necessary content validation.
@@ -295,7 +355,7 @@ Upon the successful processing of a [credential proof presentation message](http
   "as_of_time": "2019-07-23 18:05:06.123Z",
   "credentials": [
       { "@id": "cred-001", "issuerDID": "~BzCbsNYhMrjHiqZD" },
-      { "@id": "cred-002", "issuerDID": "~BzCbsNYhMrjHiqZD" },
+      { "@id": "cred-002", "issuerDID": "~BzCbsNYhMrjHiqZD" }
   ]
 }
 ```
@@ -325,14 +385,14 @@ This message is required for a Holder Agent in response to an ```evidence_access
       "evidence": [
         {"evidence_type": "Address", "docref": ["#kycdoc1"]},
         {"evidence_type": "Identity", "docref": ["#kycdoc2"]},
-        {"evidence_type": "Photo", "docref": null},
+        {"evidence_type": "Photo", "docref": null}
       ]
     },
     { "@id": "cred-002",
       "evidence": [
         {"evidence_type": "Address", "docref": ["#kycdoc1","#kycdoc3"]},
         {"evidence_type": "Identity", "docref": ["#kycdoc3"]},
-        {"evidence_type": "Photo", "docref": ["#kycdoc1"]},
+        {"evidence_type": "Photo", "docref": ["#kycdoc1"]}
       ]
     }
   ],
@@ -389,8 +449,8 @@ Description of attributes:
 
 This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) with the following additions:
 
-* `vetting_process`: A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
 * `description`: A human readable description of the type of document.
+* `vetting_process`: A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
 * `sha256`: *Optional hash of the content*. Can be useful as an integrity check by Holder.
 * `signature`: Required RSA/SHA-256 Signature of the document. This is required for downstream processing by the Verifier so that the Holder can demonstrate that the Issuer was the attesting source of the document.
 
@@ -447,8 +507,8 @@ This message adheres to the attribute [content formats outlined in the Aries Att
 
 This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) with the following additions:
 
-* `vetting_process`: A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
 * `description`: A human readable description of the type of document.
+* `vetting_process`: A descriptive field allowing the Issuer to specify the type of due diligence performed on the attached document.
 * `sha256`: *Optional hash of the content*. Including this field makes the content tamper-evident.
 * `links`: A list of zero or more locations at which the content may be fetched.
   * `url`: Link to the external document.
