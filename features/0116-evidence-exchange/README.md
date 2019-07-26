@@ -4,8 +4,8 @@
 
 ## Status
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-07-30
-- Status Note: Revised to address both physical and digital identity proofing methods.
+- Status Date: 2019-07-26
+- Status Note: Revised to address both physical and digital identity proofing methods and NIST assurance levels.
 
 ## Summary
 The goal of this protocol is to allow Holders to provider an inquiring Verifier with a secure and trusted mechanism for obtaining access to the foundational evidence that enabled the Issuer the assurances necessary to create the verifiable credential(s) that the Holder has presented to the Verifier. To this end, a P2P evidence exchange protocol is required that does not involve a centralized storage facility yet it will allow parties using [Pair-wise Peer DIDs](https://github.com/openssi/peer-did-method-spec) to exchange evidence in support of the issuance of verified credentials.
@@ -19,30 +19,30 @@ Based on a *web-of-trust* and cryptographic processing techniques, Verifiers of 
 
 Verifiers or relying parties (RPs) of digital credentials need to make informed decisions about the risk of accepting a digital identity before trusting the digital credential and granting associated privileges. To mitigate such risk, the Verifier may need to understand the strength of the identity proofing process. According to a NIST Information Technology Laboratory workshop report, [Measuring Strength of Identity Proofing](https://www.nist.gov/sites/default/files/nstic-strength-identity-proofing-discussion-draft.pdf) from December 2015, there are two (2) identity proofing methods that can be leveraged by a CSP:
 
-| Method | Description |
+| Proofing Method | Description |
 | --- | --- |
 | In-Person Identity Proofing | Holder is required to present themselves and their documentation directly to a trained representative of an identity proofing agency. |
 | Remote Identity Proofing | Holder is not expected to present themselves or their documents at a physical location. Validation and verification of presented data (including digital documents) is performed programmatically against one or more corroborating authoritative sources of data.|
 
-If the In-Person Identity Proofing method is used, the strength can easily be determined by allowing the Verifier to gain access to any [Original Documents](./eep_gloassay.md) used by the Issuer of a [Derived Credential](./eep_gloassay.md). In the situation where a Remote Identity Proofing method is used, confidence in the strength of the identity proofing process can be determined by allowing the Verifier to gain access to [Digital Assertions](./eep_gloassay.md) used by the Issuer of a *Derived Credential*.
+If the In-Person Identity Proofing method is used, the strength can easily be determined by allowing the Verifier to gain access to any [Original Documents](./eep_glossary.md) used by the Issuer of a [Derived Credential](./eep_glossary.md). In the situation where a Remote Identity Proofing method is used, confidence in the strength of the identity proofing process can be determined by allowing the Verifier to gain access to [Digital Assertions](./eep_glossary.md) used by the Issuer of a *Derived Credential*.
 
 ### Problem Scope
 This protocol is intended to address the following challenging questions:
 
-1. What evidence (information or documentation) was used to establish the level of certitude necessary to allow an Issuer to issue a [Verifiable Credential](./eep_gloassay.md)?
+1. What evidence (information or documentation) was used to establish the level of certitude necessary to allow an Issuer to issue a [Verifiable Credential](./eep_glossary.md)?
 
-2. For each [Identity Proofing Inquiry](./eep_gloassay.md) (challenge) such as Address, Identity, Photo and Achievement, which forms of evidence was used by the Issuer of the *Verifiable Credential*?
+2. For each [Identity Proofing Inquiry](./eep_glossary.md) (challenge) such as Address, Identity, Photo and Achievement, which forms of evidence was used by the Issuer of the *Verifiable Credential*?
 
-3. When the Issuer relies on an [Identity Proofing Service Provider (IPSP)](./eep_gloassay.md) as part of its Remote Identity Proofing process:
+3. When the Issuer relies on an [Identity Proofing Service Provider (IPSP)](./eep_glossary.md) as part of its Remote Identity Proofing process:
 
-  1. Can the IPSP provide a *Digital Assertion* in association with the [Identity Instrument](./eep_gloassay.md) they have vetted as part of their service to the Issuer?
+  1. Can the IPSP provide a *Digital Assertion* in association with the [Identity Instrument](./eep_glossary.md) they have vetted as part of their service to the Issuer?
 
   2. Can the Issuer provide a *Digital Assertion* in association with its certitude in the reliability of its due-diligence activity that is dependent on 3rd parties?
 
 4. When the Issuer relies on trained examiners for its In-Person Identity Proofing process, can is provide access to the digitally scanned documents either by-value or by-reference?
 
 ### Assurance Levels
-Organizations that implement [Identity Proofing](./eep_gloassay.md) generally seek to balance cost, convenience, and security for both the Issuer and the Holder. Examples of these tradeoffs include:
+Organizations that implement [Identity Proofing](./eep_glossary.md) generally seek to balance cost, convenience, and security for both the Issuer and the Holder. Examples of these tradeoffs include:
 
 * Adjusting the complexity of a Remote Identity Proofing process to improve user experience can reduce the quality of the verification process;
 * Overly complex proofing processes can result in increased abandonment which is unacceptable to some service providers;
@@ -50,7 +50,7 @@ Organizations that implement [Identity Proofing](./eep_gloassay.md) generally se
 
 To mitigate the risk associated with such tradeoffs, the *NIST 800-63A Digital Identity Guidelines* outline three (3) levels of identity proofing assurance. These levels describe the degree of due-diligence performed during an *Identity Proofing Process*. See [Section 5.2 Identity Assurance Levels Table 5-1](https://pages.nist.gov/800-63-3/sp800-63-3.html#sec5).
 
-> Users of this protocol will associate themselves with the need to understand the *type of evidence that was collected and how it was confirmed* so that they can adhere to any business processes that require **IAL2** or **IAL3**  assurance levels supported by *Stong* or *Superior* forms of evidence.
+> Users of this protocol will associate themselves with the need to understand the *type of evidence that was collected and how it was confirmed* so that they can adhere to any business processes that require **IAL2** or **IAL3**  assurance levels supported by *Strong* or *Superior* forms of evidence.
 
 ### Dematerialization of physical documents
 Today, entities (businesses, organizations, government agencies) maintain existing processes for the gathering, examination and archiving of physical documents. These entities may retain a copy of a physical document, a scanned digital copy or both. Using manual or automated procedures, the information encapsulated within these documents is extracted and stored as personal data attestations about the document presenter within a system of record (SOR).
@@ -62,7 +62,7 @@ As decentralized identity technologies begin to be adopted, these entities can t
 ### Understanding KYC
 *Know Your Customer (KYC)* is a process by which entities (business, governments, organizations) obtain information about the identity and address of their customers. This process helps to ensure that the services that the entity provides are not misused. KYC procedures vary based on geolocation and industry. For example, the KYC documents required to open a bank account in India versus the USA may differ but the basic intent of demonstrating proof of identity and address are similar. Additionally, the KYC documents necessary to meet business processing requirements for enrollment in a university may differ from that of onboarding a new employee.
 
-Regardless of the type of KYC processing performed by an entity, there may be regulatory or business best practice requirements that mandate access to any *Original Documents* presented as evidence during the KYC process. As entities transition from paper/plastic based identity proofing practices to *Verifiable Credentials* there may exist (albeit only for a transitional period) the need to gain access to the [Identity Evidence](./eep_gloassay.md) that an Issuer examined before issuing credentials.  
+Regardless of the type of KYC processing performed by an entity, there may be regulatory or business best practice requirements that mandate access to any *Original Documents* presented as evidence during the KYC process. As entities transition from paper/plastic based identity proofing practices to *Verifiable Credentials* there may exist (albeit only for a transitional period) the need to gain access to the [Identity Evidence](./eep_glossary.md) that an Issuer examined before issuing credentials.  
 
 This process is time consuming and costly for the credential Issuer and often redundant and inconvenient for the Holder. Some industry attempts have been made to establish centrally controlled B2B sharing schemas to help reduce such impediments to the Issuer but these approaches are often designed and motivated by business goals and less about Holder data privacy. The purpose of this protocol is to insert the Holder at the center of the P2P C2B exchange of *Identity Evidence* while allowing Verifiers to gain confidence in identity proofing assurance levels.
 
@@ -217,7 +217,7 @@ This message is required for an Issuer Agent in response to an ```evidence_reque
       ]
     }
   ],
-	"examiner_assertions": [ ... ],
+  "examiner_assertions": [ ... ],
   "~attach": [ ... ]
 }
 ```
@@ -237,19 +237,19 @@ Description of attributes:
 ```json
 {
   "examiner_assertions": [
-  	{
-  		"@id": "kycdoc4",
-  		"approval_timestamp": "2017-06-21 09:04:088",
-  		"description": "driver's license",
-  		"vetting_process": {
-  			"method": "remote",
-  			"technology": "api"
-  		},
-  		"ipsp_did": "~3d5nh7900fn4",
-  		"ipsp_claim": <base64 of the file>,
-  		"ipsp_claim_sig": "3vvvb68b53d5nh7900fn499040cd9e89fg3kkh0f099c0021233728cf67945faf",
-  		"examinerSignature": "f67945faf9e89fg3kkh3vvvb68b53d5nh7900fn499040cd3728c0f099c002123"
-  	}
+    {
+      "@id": "kycdoc4",
+      "approval_timestamp": "2017-06-21 09:04:088",
+      "description": "driver's license",
+      "vetting_process": {
+        "method": "remote",
+        "technology": "api"
+      },
+      "ipsp_did": "~3d5nh7900fn4",
+      "ipsp_claim": <base64 of the file>,
+      "ipsp_claim_sig": "3vvvb68b53d5nh7900fn499040cd9e89fg3kkh0f099c0021233728cf67945faf",
+      "examinerSignature": "f67945faf9e89fg3kkh3vvvb68b53d5nh7900fn499040cd3728c0f099c002123"
+    }
   ]
 }
 ```
@@ -459,7 +459,7 @@ This message is required for a Holder Agent in response to an ```evidence_access
       ]
     }
   ],
-	"examiner_assertions": [ ... ],
+  "examiner_assertions": [ ... ],
   "~attach": [ ...
   ]
 }
