@@ -6,7 +6,7 @@
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
 - Status Date: 2018-10-01. Revised 2019-07-03.
 - Status Note: used by the [peer DID method spec](https://openssi.github.io/peer-did-method-spec).
-  Not yet implemented.
+  Implementation beginning.
   Supersedes [Indy HIPE PR #104](https://github.com/hyperledger/indy-hipe/pull/104).
 
 ## Summary
