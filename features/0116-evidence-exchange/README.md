@@ -8,10 +8,12 @@
 - Status Note: Revised to address both physical and digital identity proofing methods and NIST assurance levels.
 
 ## Summary
-The goal of this protocol is to allow Holders to provider an inquiring Verifier with a secure and trusted mechanism for obtaining access to the foundational evidence that enabled the Issuer the assurances necessary to create the verifiable credential(s) that the Holder has presented to the Verifier. To this end, a P2P evidence exchange protocol is required that does not involve a centralized storage facility yet it will allow parties using [Pair-wise Peer DIDs](https://github.com/openssi/peer-did-method-spec) to exchange evidence in support of the issuance of verified credentials.
+The goal of this protocol is to allow Holders to provider an inquiring Verifier with a secure and trusted mechanism for obtaining access to the foundational evidence that enabled the Issuer the assurances necessary to create the [Verifiable Credential(s)](./eep_glossary.md) that the Holder has presented to the Verifier. To this end, a P2P evidence exchange protocol is required that will allow parties using [Pair-wise Peer DIDs](https://github.com/openssi/peer-did-method-spec) to exchange evidence in support of the issuance of *Verified Credentials* without any dependencies on a  centralized storage facility.
 
 ## Motivation
-During the identity verification process, an entity *may* require access to the genesis documents used to establish digital credentials issued by a credential issuing entity or Credential Service Provider (CSP).  In support of the transition from existing business verification processes to emerging business processes that rely on digitally verified credentials using protocols such as [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential) and [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof), we need to establish a protocol that allow entities to make this transition while remaining compliant with business and regulatory requirements. Therefore, **we need a mechanism for Verifiers to obtain access to vetted evidence, physical or digital information or documentation, without requiring a relationship or interaction with the Issuer**.
+During the identity verification process, an entity *may* require access to the genesis documents used to establish digital credentials issued by a credential issuing entity or [Credential Service Provider (CSP)](./eep_glossary.md).  In support of the transition from existing business verification processes to emerging business processes that rely on digitally verified credentials using protocols such as [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential) and [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof), we need to establish a protocol that allow entities to make this transition while remaining compliant with business and regulatory requirements. Therefore, **we need a mechanism for Verifiers to obtain access to vetted evidence (physical or digital information or documentation) without requiring a relationship or interaction with the Issuer**.
+
+>While this protocol *should* be supported by all persona, its relevance to decentralized identity ecosystems is highly dependent on the business policies of a market segment of Verifiers. For more details see the [Persona](#persona) section.
 
 While technology advancements around identity verification are improving, business policies (most often grounded in risk mitigation) will not change at the same rate of speed. For example, just because a financial institution in Singapore is willing to rely on the KYC due-diligence processing of another institution, we should not assume that the banks in another geolocation (i.e: Hong Kong) can embrace the same level of trust. For this reason, we must enable Verifiers with the option to obtain evidence that backs any assertions made by digital credential issuers.  
 
@@ -29,7 +31,7 @@ If the In-Person Identity Proofing method is used, the strength can easily be de
 ### Problem Scope
 This protocol is intended to address the following challenging questions:
 
-1. What evidence (information or documentation) was used to establish the level of certitude necessary to allow an Issuer to issue a [Verifiable Credential](./eep_glossary.md)?
+1. What evidence (information or documentation) was used to establish the level of certitude necessary to allow an Issuer to issue a *Verifiable Credential*?
 
 2. For each [Identity Proofing Inquiry](./eep_glossary.md) (challenge) such as Address, Identity, Photo and Achievement, which forms of evidence was used by the Issuer of the *Verifiable Credential*?
 
@@ -126,6 +128,16 @@ This implies that the protocol *must* address the following evidence concerns:
 
 ### Protocol Outcome
 This protocol is intended to be a compliment to the foundational (issuance, verification) protocols for credential lifecycle management in support of the [Verifiable Credentials Specification](https://www.w3.org/TR/verifiable-claims-data-model/). Overtime, it is assumed that the exchange of *Identity Evidence* will no longer be necessary as digital credentials become ubiquitous. In the meantime, the trust in and access to *Identity Evidence* can be achieved in private peer to peer relationships using the [Peer DID Spec](https://github.com/openssi/peer-did-method-spec).
+
+### Persona
+This protocol addresses the business policy needs of a market segment of Verifiers. Agent Software](https://docs.google.com/document/d/1gfIz5TT0cNp2kxGMLFXr19x1uoZsruUe_0glHst2fZ8/edit#heading=h.2mgh3opwe21u) used by the following persona is required to support this market segment.
+
+| Persona | Applicability |
+| --- | --- |
+| Examiner | Entities that perform In-Person and/or Remote Identity Proofing processes and need to support potential requests for evidence in support of *Verifiable Credentials* issued based on the results of such processes. |
+| Issuer | Entities with the certitude to share with a Holder supporting evidence for the due-diligence performed is association with attestations backing an issued *Verifiable Credential*. |
+| Holder | A recipient of a *Verifiable Credential*, that desires to proactively gather supporting evidence of such a credential incase a Verifier should inquire.  |
+| Verifier | Entities that require access to *Original Documents* or *Digital Assertions* because they can not (for business policy reasons) rely on the identity proofing due-diligence of others. |
 
 ### User Stories
 An example of the applicability of this protocol to real world user scenarios is discussed in the context of a [decentralized digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s).
