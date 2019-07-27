@@ -17,9 +17,9 @@ During the identity verification process, an entity *may* require access to the 
 
 While technology advancements around identity verification are improving, business policies (most often grounded in risk mitigation) will not change at the same rate of speed. For example, just because a financial institution in Singapore is willing to rely on the KYC due-diligence processing of another institution, we should not assume that the banks in another geolocation (i.e: Hong Kong) can embrace the same level of trust. For this reason, we must enable Verifiers with the option to obtain evidence that backs any assertions made by digital credential issuers.  
 
-Based on a *web-of-trust* and cryptographic processing techniques, Verifiers of digital credentials can fulfill their identity proofing workflow requirements. However, business policies and regulatory compliance may require them to have evidence for inquires such as but mot limited to government mandated Anti-Money Laundering (AML) Compliance audits.
+Based on a *web-of-trust* and cryptographic processing techniques, Verifiers of digital credentials can fulfill their identity proofing workflow requirements. However, business policies and regulatory compliance may require them to have evidence for oversight activities such as but not limited to government mandated Anti-Money Laundering (AML) Compliance audits.
 
-Verifiers or relying parties (RPs) of digital credentials need to make informed decisions about the risk of accepting a digital identity before trusting the digital credential and granting associated privileges. To mitigate such risk, the Verifier may need to understand the strength of the identity proofing process. According to a NIST Information Technology Laboratory workshop report, [Measuring Strength of Identity Proofing](https://www.nist.gov/sites/default/files/nstic-strength-identity-proofing-discussion-draft.pdf) from December 2015, there are two (2) identity proofing methods that can be leveraged by a CSP:
+Verifiers or relying parties (RPs) of digital credentials need to make informed decisions about the risk of accepting a digital identity before trusting the digital credential and granting associated privileges. To mitigate such risk, the Verifier may need to understand the strength of the identity proofing process. According to a *December 2015 - NIST Information Technology Laboratory Workshop Report*, [Measuring Strength of Identity Proofing](https://www.nist.gov/sites/default/files/nstic-strength-identity-proofing-discussion-draft.pdf), there are two (2) identity proofing methods that can be leveraged by a CSP:
 
 | Proofing Method | Description |
 | --- | --- |
@@ -37,9 +37,9 @@ This protocol is intended to address the following challenging questions:
 
 3. When the Issuer relies on an [Identity Proofing Service Provider (IPSP)](./eep_glossary.md) as part of its Remote Identity Proofing process:
 
-  1. Can the IPSP provide a *Digital Assertion* in association with the [Identity Instrument](./eep_glossary.md) they have vetted as part of their service to the Issuer?
+   1. Can the IPSP provide a *Digital Assertion* in association with the [Identity Instrument](./eep_glossary.md) they have vetted as part of their service to the Issuer?
 
-  2. Can the Issuer provide a *Digital Assertion* in association with its certitude in the reliability of its due-diligence activity that is dependent on 3rd parties?
+   2. Can the Issuer provide a *Digital Assertion* in association with its certitude in the reliability of its due-diligence activity that is dependent on 3rd parties?
 
 4. When the Issuer relies on trained examiners for its In-Person Identity Proofing process, can is provide access to the digitally scanned documents either by-value or by-reference?
 
@@ -137,7 +137,7 @@ This protocol addresses the business policy needs of a market segment of Verifie
 | Examiner | Entities that perform In-Person and/or Remote Identity Proofing processes and need to support potential requests for evidence in support of *Verifiable Credentials* issued based on the results of such processes. |
 | Issuer | Entities with the certitude to share with a Holder supporting evidence for the due-diligence performed is association with attestations backing an issued *Verifiable Credential*. |
 | Holder | A recipient of a *Verifiable Credential*, that desires to proactively gather supporting evidence of such a credential incase a Verifier should inquire.  |
-| Verifier | Entities that require access to *Original Documents* or *Digital Assertions* because they can not (for business policy reasons) rely on the identity proofing due-diligence of others. |
+| Verifier | Entities that require access to *Original Documents* or *Digital Assertions* because they can not (for business policy reasons) rely on the identity proofing due-diligence of others. These entities may refer to a *Trust Score* based on their own business heuristics associated with the type of evidence supplied: *Original Documents*, *Digital Assertions*. |
 
 ### User Stories
 An example of the applicability of this protocol to real world user scenarios is discussed in the context of a [decentralized digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s).
