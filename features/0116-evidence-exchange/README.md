@@ -35,13 +35,13 @@ This protocol is intended to address the following challenging questions:
 
 2. For each [Identity Proofing Inquiry](./eep_glossary.md) (challenge) such as Address, Identity, Photo and Achievement, which forms of evidence was used by the Issuer of the *Verifiable Credential*?
 
-3. When the Issuer relies on an [Identity Proofing Service Provider (IPSP)](./eep_glossary.md) as part of its Remote Identity Proofing process:
+3. When the Issuer's Examinier relies on an [Identity Proofing Service Provider (IPSP)](./eep_glossary.md) as part of its Remote Identity Proofing process:
 
-   1. Can the IPSP provide a *Digital Assertion* in association with the [Identity Instrument](./eep_glossary.md) they have vetted as part of their service to the Issuer?
+   1. Can the IPSP provide a *Digital Assertion* in association with the [Identity Instrument](./eep_glossary.md) they have vetted as part of their service to the Examiner?
 
    2. Can the Issuer provide a *Digital Assertion* in association with its certitude in the reliability of its due-diligence activity that is dependent on 3rd parties?
 
-4. When the Issuer relies on trained examiners for its In-Person Identity Proofing process, can is provide access to the digitally scanned documents either by-value or by-reference?
+4. When the Issuer relies on trained examiners for its In-Person Identity Proofing process, can the Issuer provide access to the digitally scanned documents either by-value or by-reference?
 
 ### Assurance Levels
 Organizations that implement [Identity Proofing](./eep_glossary.md) generally seek to balance cost, convenience, and security for both the Issuer and the Holder. Examples of these tradeoffs include:
@@ -52,21 +52,21 @@ Organizations that implement [Identity Proofing](./eep_glossary.md) generally se
 
 To mitigate the risk associated with such tradeoffs, the *NIST 800-63A Digital Identity Guidelines* outline three (3) levels of identity proofing assurance. These levels describe the degree of due-diligence performed during an *Identity Proofing Process*. See [Section 5.2 Identity Assurance Levels Table 5-1](https://pages.nist.gov/800-63-3/sp800-63-3.html#sec5).
 
-> Users of this protocol will associate themselves with the need to understand the *type of evidence that was collected and how it was confirmed* so that they can adhere to any business processes that require **IAL2** or **IAL3**  assurance levels supported by *Strong* or *Superior* forms of evidence.
+> Users of this protocol will need to understand the *type of evidence that was collected and how it was confirmed* so that they can adhere to any business processes that require **IAL2** or **IAL3**  assurance levels supported by *Strong* or *Superior* forms of evidence.
 
 ### Dematerialization of physical documents
 Today, entities (businesses, organizations, government agencies) maintain existing processes for the gathering, examination and archiving of physical documents. These entities may retain a copy of a physical document, a scanned digital copy or both. Using manual or automated procedures, the information encapsulated within these documents is extracted and stored as personal data attestations about the document presenter within a system of record (SOR).
 
 ![conceptual_doc_transformation](./img/conceptual_doc_transformation.png)
 
-As decentralized identity technologies begin to be adopted, these entities can transform these attestations into *Verifiable Credential*.
+As decentralized identity technologies begin to be adopted, these entities can transform these attestations into *Verifiable Credentials*.
 
 ### Understanding KYC
 *Know Your Customer (KYC)* is a process by which entities (business, governments, organizations) obtain information about the identity and address of their customers. This process helps to ensure that the services that the entity provides are not misused. KYC procedures vary based on geolocation and industry. For example, the KYC documents required to open a bank account in India versus the USA may differ but the basic intent of demonstrating proof of identity and address are similar. Additionally, the KYC documents necessary to meet business processing requirements for enrollment in a university may differ from that of onboarding a new employee.
 
 Regardless of the type of KYC processing performed by an entity, there may be regulatory or business best practice requirements that mandate access to any *Original Documents* presented as evidence during the KYC process. As entities transition from paper/plastic based identity proofing practices to *Verifiable Credentials* there may exist (albeit only for a transitional period) the need to gain access to the [Identity Evidence](./eep_glossary.md) that an Issuer examined before issuing credentials.  
 
-This process is time consuming and costly for the credential Issuer and often redundant and inconvenient for the Holder. Some industry attempts have been made to establish centrally controlled B2B sharing schemas to help reduce such impediments to the Issuer but these approaches are often designed and motivated by business goals and less about Holder data privacy. The purpose of this protocol is to insert the Holder at the center of the P2P C2B exchange of *Identity Evidence* while allowing Verifiers to gain confidence in identity proofing assurance levels.
+This process is time consuming and costly for the credential Issuer and often redundant and inconvenient for the Holder. Some industry attempts have been made to establish centrally controlled B2B sharing schemas to help reduce such impediments to the Issuer. These approaches are typically viewed as vital for the betterment of the Issuers and Verifiers and are not designed for or motivated by the data privacy concerns of the Holder. The purpose of this protocol is to place the Holder at the center of the P2P C2B exchange of *Identity Evidence* while allowing Verifiers to gain confidence in identity proofing assurance levels.
 
 ### Evidence Vetting Workflow
 The [Verifiable Credentials Specification](https://www.w3.org/TR/verifiable-claims-data-model/) describes three key stakeholders in an ecosystem that manages digital credentials: Issuers, Holders and Verifiers. However, before an Issuer can attest to claims about a Holder, an *Examiner* must perform the required vetting, due diligence, regulatory compliance and other tasks needed to establish confidence in making a claim about an identity trait associated with a Holder. The actions of the Examiner may include physical validation of information (i.e.: comparison of real person to a photo) as well as reliance on third party services as part of its vetting process. Depending on the situational context of a credential request or the type of privileges to be granted, the complexity of the vetting process taken by an examiner to confirm the truth about a specific trait may vary.
@@ -92,6 +92,7 @@ An identity Holder may present to an Examiner *Identity Evidence* in the form of
 | Paper/Plastic | Digital Copy | URL | Access by Reference |
 | Digital Copy | Digital Copy | Digital Copy | Access by Value |
 | Digital Copy | Digital Copy | URL | Access by Reference |
+| Digital Scan | Digital Copy | Digital Copy  | Digital Assertion |
 | URL | Digital Copy | Digital Copy | Access by Value |
 | URL | Digital Copy | URL | Access by Reference |
 
@@ -107,7 +108,7 @@ In a decentralized identity ecosystem where peer relationships no longer depend 
 
 1. Holder *must* present *Identity Evidence* access to Verifier such that Verifier can be assured that the Issuer vetted the evidence.
 2. Some business processes and/or regulatory compliance requirements *may* demand that a Verifier gains access to the *Original Documents* vetted by a credential Issuer.
-3. Some Issuers *may* accept digital access links to documents as input into vetting process. This is often associated with Issuers who will accept copies of the original documents.
+3. Some Issuers *may* accept digital access links to documents as input into vetting process. This is often associated with Issuers who will accept copies of the *Original Documents*.
 4. Some Issuer *may* accept *Digital Assertions* from *IPSPs* as evidence of their due-diligence process. Examples of such *IPSPs* are: [Acuant](https://www.acuantcorp.com/), [Au10tix](https://www.au10tix.com/), [IWS](https://www.iwsinc.com/products/cloudid/), [Onfido](https://onfido.com/us/) and [1Kosmos](https://onekosmos.com/).
 
 ### Protocol Objectives
@@ -130,19 +131,17 @@ This implies that the protocol *must* address the following evidence concerns:
 This protocol is intended to be a compliment to the foundational (issuance, verification) protocols for credential lifecycle management in support of the [Verifiable Credentials Specification](https://www.w3.org/TR/verifiable-claims-data-model/). Overtime, it is assumed that the exchange of *Identity Evidence* will no longer be necessary as digital credentials become ubiquitous. In the meantime, the trust in and access to *Identity Evidence* can be achieved in private peer to peer relationships using the [Peer DID Spec](https://github.com/openssi/peer-did-method-spec).
 
 ### Persona
-This protocol addresses the business policy needs of a market segment of Verifiers. Agent Software](https://docs.google.com/document/d/1gfIz5TT0cNp2kxGMLFXr19x1uoZsruUe_0glHst2fZ8/edit#heading=h.2mgh3opwe21u) used by the following persona is required to support this market segment.
+This protocol addresses the business policy needs of a market segment of Verifiers. [Agent Software](https://docs.google.com/document/d/1gfIz5TT0cNp2kxGMLFXr19x1uoZsruUe_0glHst2fZ8/edit#heading=h.2mgh3opwe21u) used by the following persona is required to support this market segment.
 
 | Persona | Applicability |
 | --- | --- |
-| Examiner | Entities that perform In-Person and/or Remote Identity Proofing processes and need to support potential requests for evidence in support of *Verifiable Credentials* issued based on the results of such processes. |
-| Issuer | Entities with the certitude to share with a Holder supporting evidence for the due-diligence performed is association with attestations backing an issued *Verifiable Credential*. |
+| Examiner | Entities that perform In-Person and/or Remote Identity Proofing processes and need to support potential requests for evidence in support of the issuance of *Verifiable Credentials* based on the results of such processes. |
+| Issuer | Entities with the certitude to share with a Holder supporting evidence for the due-diligence performed in association with attestations backing an issued *Verifiable Credential*. |
 | Holder | A recipient of a *Verifiable Credential*, that desires to proactively gather supporting evidence of such a credential incase a Verifier should inquire.  |
 | Verifier | Entities that require access to *Original Documents* or *Digital Assertions* because they can not (for business policy reasons) rely on the identity proofing due-diligence of others. These entities may refer to a *Trust Score* based on their own business heuristics associated with the type of evidence supplied: *Original Documents*, *Digital Assertions*. |
 
 ### User Stories
-An example of the applicability of this protocol to real world user scenarios is discussed in the context of a [decentralized digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s).
-
-> ToDo: Digital Assertion User Story
+An example of the applicability of this protocol to real world user scenarios is discussed in the context of a [decentralized digital notary](./digital_notary_usecase.md) where the credential issuing institution is not the issuer of the original source document(s) or digital assertions.
 
 ### Evidence Types
 In the context of this protocol, *Identity Evidence* represents physical or digital information-based artifacts that support a belief to common *Identity Proofing Inquires* (challenges):
@@ -163,13 +162,13 @@ The following, *non-exhaustive*, list of physical information-based artifacts (d
 | Achievement | Diploma, Certificate |
 | Privilege | Membership/Loyalty Card, Health Insurance Card |
 
-These forms of *Identity Evidence* are examples of trusted credentials that an examiner relies on during their vetting process.
+These forms of *Identity Evidence* are examples of trusted credentials that an Examiner relies on during their vetting process.
 
 ![examiner-workflow](./img/examine_flow.png)
 
 ## Tutorial
 
-The evidence exchange protocol builds on the attachment decorator within DIDComm using the the [Inlining Method] for *Digital Assertions* and the [Appending Method](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#appending) for *Original Documents*.
+The evidence exchange protocol builds on the attachment decorator within DIDComm using the the [Inlining Method](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#inlining) for *Digital Assertions* and the [Appending Method](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#appending) for *Original Documents*.
 
 The protocol is comprised of the following messages and associated actions:
 
@@ -204,7 +203,7 @@ Description of attributes:
 ![issuer-workflow](./img/issue_cred_flow.png)
 
 ### Evidence Response Message
-This message is required for an Issuer Agent in response to an ```evidence_request``` message. The format of the ```~attach``` attribute will be determined by the value of the ```request_type``` attribute in the associated request message from the Holder. If the Issuer relied one or more *IPSPs* during the *Identity Proofing Process*, then this message will also include an inline attachment using the ```examiner_assertions``` attribute.
+This message is required for an Issuer Agent in response to an ```evidence_request``` message. The format of the ```~attach``` attribute will be determined by the value of the ```request_type``` attribute in the associated request message from the Holder. If the Issuer relied on one or more *IPSPs* during the *Identity Proofing Process*, then this message will also include an inline attachment using the ```examiner_assertions``` attribute.
 
 ```json
 {
@@ -446,7 +445,7 @@ Description of attributes:
 This protocol is intended to be flexible and applicable to a variety of use cases. While our discussion has circulated around the use of the protocol as follow-up to the processing of a credential proof presentment flow, the fact is that the protocol can be used at any point after a Pair-wise DID Exchange has been successfully established and is therefore in the [complete state](https://github.com/hyperledger/aries-rfcs/tree/master/features/0023-did-exchange#complete) as defined by the DID Exchange Protocol. An `IssuerDID` (or DID of the an entity that is one of the two parties in a private pair-wise relationship) is assumed to be known under all possible conditions once the relationship is in the complete state.
 
 ### Evidence Access Response Message
-This message is required for a Holder Agent in response to an ```evidence_access_request``` message. The format of the ```~attach``` attribute will be determined by the storage management preferences of the Holder's Agent. As such the Holder can respond by-value or by-reference. To build the response, the Holder will validate that the supplied Issuer DID corresponds to the credential represented by the supplied ID. If the Issuer relied one or more *IPSPs* during the *Identity Proofing Process*, then this message will also include an inline attachment using the ```examiner_assertions``` attribute. Upon successful processing of a ```evidence_access_response``` message, the Verifier will store evidence details in its system of record.
+This message is required for a Holder Agent in response to an ```evidence_access_request``` message. The format of the ```~attach``` attribute will be determined by the storage management preferences of the Holder's Agent. As such the Holder can respond by-value or by-reference. To build the response, the Holder will validate that the supplied Issuer DID corresponds to the credential represented by the supplied ID. If the Issuer relied on one or more *IPSPs* during the *Identity Proofing Process*, then this message will also include an inline attachment using the ```examiner_assertions``` attribute. Upon successful processing of a ```evidence_access_response``` message, the Verifier will store evidence details in its system of record.
 
 ```json
 {
