@@ -17,6 +17,6 @@ The following terms are either derived from terminology found in the [NIST 800-6
 | Identity Proofing Service Provider (IPSP) | A remote 3rd party service provider that carries out one or more aspects of an *Identity Proofing* process. |
 | Issuer of Origination | The entity (business, organization, individual or government) that is the original publisher of an *Original Document*. |
 | Mobile Field Agents | Location-based service providers that allow agencies to bring their services to remote (rural) customers. |
-| Tier 1 Proofs | A category of [foundational credentials](./README.md#kyc-document-types) (*Original Documents*) that are often required to prove identity and address during KYC or onboarding processes. |
+| Tier 1 Proofs | A category of [foundational credentials](./README.md#evidence-types) (*Original Documents*) that are often required to prove identity and address during KYC or onboarding processes. |
 | Trust Framework Certification Authority | An entity that adheres to a governance framework for a specific ecosystem and is responsible for overseeing and auditing the Level of Assurance a DDN (Relying Party) has within the ecosystem. |
 | Verifiable Credential | A digital credential that is compliant with the [W3C Verifiable Credential Specification](https://w3c.github.io/vc-data-model/).|
