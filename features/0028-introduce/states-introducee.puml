@@ -1,0 +1,10 @@
+@startuml
+hide empty description
+[*] --> deciding : proposal
+[*] --> requesting
+requesting : selection criteria
+requesting --> deciding : counter-proposal
+deciding --> [*] : rejected
+deciding --> waiting : approved
+waiting --> [*] : did-exchange
+@enduml

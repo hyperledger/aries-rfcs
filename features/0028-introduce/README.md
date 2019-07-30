@@ -17,10 +17,11 @@ it already knows, but that do not know each other.
 ## Motivation
 [motivation]: #motivation
 
-Introductions are a fundamental activity in human relationships. They allow
-us to bootstrap contact information and trust. They are also a source of
-virality. We need a standard way to do introductions in an SSI ecosystem,
-and it needs to be flexible, secure, privacy-respecting, and well documented.
+Introductions are a fundamental activity in human relationships. They allow us
+to bootstrap contact information and trust and connect us to needed resources.
+They are also a source of virality. We need a standard way to do introductions
+in an SSI ecosystem, and it needs to be flexible, secure, privacy-respecting,
+and well documented.
 
 ## Tutorial
 [tutorial]: #tutorial
@@ -97,12 +98,137 @@ Meanwhile, each introducee progresses from `[start] -> deciding -> waiting
 Of course, errors and optional choices complicate the possibilities. The
 full state machine for each party are:
 
-[![state machine matrix](states.png)](https://docs.google.com/spreadsheets/d/1jjLQMCXWCN3nuXUg8mSpJQlzXGlYeo1n0W9yNuYJQLM/edit)
+|Introducer State Diagram|Introducee State Diagram|
+|------------------------|------------------------|
+|![introducer state](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/hyperledger/aries-rfcs/master/features/0028-introduce/states-introducer.puml)|![introducee state](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/hyperledger/aries-rfcs/master/features/0028-introduce/states-introducee.puml)|
 
 The subtleties are explored in the [Advanced Use Cases](#advanced-use-cases)
 section.
 
 ### Messages
+
+##### `request`
+
+Optional message that asks for an introduction to be made. This message also
+uses the [introducee descriptor](#introducee-descriptor) block that describes
+the object of the sender's interest:
+
+```jsonc
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0/request",
+  "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
+  "please_introduce_to": {
+    "name": "Carol",
+    "description": "The woman who spoke after you at the PTA meeting last night.",
+    "expected": true
+  },
+  "nwise": false,
+  "~timing": { "expires_time": "2019-04-23 18:00Z" }
+}
+```
+
+The recipient can choose whether or not to honor it in their own way, on their
+own schedule. However, a `~please_ack` decorator could be used to make it more
+interactive, and a `problem-report` could be returned if the recipient chooses
+not to honor it.
+
+###### Introducee descriptor
+
+The _introducee descriptor_ object has the following structure:
+
+```jsonc
+{
+  "name": "ACME Bank",
+  "description": "To process your credit card application.",
+  "expected": true,
+  "criteria~attach": { # optional
+    "mime-type": "application/json",
+    "data": {
+      "base64: "base64 encoded network-specific data"
+    }
+  }
+}
+```
+
+`criteria~attach` is optional and is interpreted by Agent software for _resource
+discovery_. It contains a set of _selection criteria_ that describe the
+credentials or proofs sought after. The Introducer honors the request by
+searching for matching candidates that can provide the resources. Because there
+are now certain expectations on the outcome, the Introducer MUST inform the
+Introducee of any subset of the criteria that cannot be satisfied for any
+reason. Since the criteria may be satisfied by a group of candidates in
+aggregate - as opposed to a single party satisfying all criteria - then this
+would result in multiple rounds of introductions.
+
+(`TODO can we standardise on a language for the selection criteria?`)
+
+A technical specification for the structure of the criteria is out of scope of
+this document. At this early stage of the Agent ecosystem we would rather adopt
+the “generic attachment with implementation-specific payload” pattern used in
+other RFCs. See examples
+[`request-presentation`](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof#request-presentation)
+and
+[`request-credential`](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential#request-credential).
+
+An example of the network-specific payload of `criteria~attach`:
+
+```jsonc
+{
+  "queryExpression": {
+    "type": "and",
+    "expressions": [
+      {
+        "name": "driversLicense",
+        "from": "http://www.ministryoftransportation.gov/schemas/driversLicense",
+        "fields": [
+          "given_name",
+          "family_name"
+        ]
+      },
+      {
+        "name": "creditReport",
+        "from": "https://www.ministryoffinance.gov/schemas/creditReport",
+        "fields": [
+          "score"
+        ]
+      }
+    ]
+  }
+}
+```
+
+##### `counter-proposal`
+
+A response to a [`request`](#request) message where the Introducer enumerates
+the criteria for which they were able to find matching candidates:
+
+```jsonc
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0/counter-proposal",
+  "@id": "283e15b5-a3f7-43e7-bac8-b75e4e7a0a25",
+  "~thread": {"thid": "df3b699d-3aa9-4fd0-bb67-49594da545bd"},
+  "candidates~attach": {
+    "mime-type": "application/json",
+    "data": {
+      "base64": "base64 encoding"
+    }
+  }
+}
+```
+
+##### `candidates-response`
+
+A response to a [`counter-proposal`](#counter-proposal) where the Introducee
+approves or rejects:
+
+```jsonc
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0/candidates-response",
+  "@id": "281523b5-a3f7-43e7-bac8-b7294n7a0a25",
+  "~thread": {"thid": "df3b699d-3aa9-4fd0-bb67-49594da545bd"},
+  "approve": true
+}
+```
 
 ##### `proposal`
 
@@ -116,9 +242,17 @@ non-agent world:
 
 The DIDComm message looks like this:
 
-[![simple proposal example](simple-proposal.png)](simple-proposal.json)
+```jsonc
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0/proposal",
+  "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
+  "to": {
+    "name": "Bob"
+  }
+}
+```
 
-The `to` field contains an __introducee descriptor__ that provides
+The `to` field contains an [_introducee descriptor_](#introducee-descriptor) that provides
 context about the introduction, helping the party receiving the proposal
 to evaluate whether they wish to accept it. Depending on how much context
 is available between introducer and introducee independent of the formal
@@ -130,11 +264,33 @@ proposal message, this can be as simple as a name, or something fancier (see
 A standard example of the message that an introducee sends in response
 to an introduction proposal would be:
 
-[![simple response from DID-based introducee](simple-response-did.png)](simple-response-did.json)
+```jsonc
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0/response",
+  "@id": "283e15b5-a3f7-43e7-bac8-b75e4e7a0a25",
+  "~thread": {"thid": "df3b699d-3aa9-4fd0-bb67-49594da545bd"},
+  "approve": true,
+  "invitation": {
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation",
+    "@id": "12345678900987654321",
+    "label": "Robert",
+    "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
+    "serviceEndpoint": "https://example.com/endpoint",
+    "routingKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"]
+  }
+}
+```
 
 A simpler response, also valid, might look like this:
 
-[![simple response from non-DID-based introducee](simple-response-other.png)](simple-response-other.json)
+```jsonc
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0/response",
+  "@id": "283e15b5-a3f7-43e7-bac8-b75e4e7a0a25",
+  "~thread": {"thid": "df3b699d-3aa9-4fd0-bb67-49594da545bd"},
+  "approve": true
+}
+```
 
 The difference between the two forms is whether the response contains
 a valid `connection-invitation` message. Normally, it should--but sometimes,
@@ -145,17 +301,16 @@ section for more details.
 
 At least one of the more complete variants must be received by an
 introducer to successfully complete the introduction, because the final step in
-the protocol is to begin the [connection protocol](
-https://github.com/hyperledger/indy-hipe/blob/master/text/0031-connection-protocol/README.md)
+the protocol is to begin the [did-exchange protocol](../0023-did-exchange/README.md)
 by forwarding the `connection-invitation` message from one introducee
 to the other.
 
-##### `connection-invitation`
+##### `invitation`
 
-This message is not a member of the `introductions/1.0` message family;
-it is not even adopted. It is part of the `connections/1.0` family, and
-is no different from the message that two parties would generate when one
-invites the other with no intermediary, except that:
+This message is not a member of the `introductions/1.0` message family - it is
+part of the `didexchange/1.0` family, and is no different from the message that
+two parties would generate when one invites the other with no intermediary,
+except that:
 
 * It is delivered by the introducer, not by either of the introducees.
 * It has a `~thread` decorator that identifies the introduction as
@@ -168,21 +323,12 @@ the introducer, rather than the other introducee, to "sponsor" the introducee
 that needs SSI onboarding?]
 * If the invitation is delivered over a DIDComm channel, it is unusual
 in that it is from a party other than the one that owns the channel.
+* If the invitation is a result of a request with
+[criteria](#introducee-descriptor) then it must be tagged with the matching
+criteria for this introducee.
 
-##### `request`
-
-An optional message in this family is one that asks for an introduction to be
-made. This message also uses the `introducee descriptor` block, to tell
-the potential introducer which introducee is the object of the sender's
-interest:
-
-[![sample request](request.png)](request.json)
-
-This message is not part of any state machine; it can be sent at any time,
-and when it is received, the recipient can choose whether or not to honor
-it in their own way, on their own schedule. However, a `~please_ack` decorator
-could be used to make it more interactive, and a `problem-report` could be
-returned if the recipient chooses not to honor it.
+(`TODO: how to tag introducee with criteria in the didexchange/invitation
+message? Decorator? Update the didexchange RFC?`)
 
 ### Advanced Use Cases
 
@@ -200,8 +346,7 @@ Some specific examples follow.
 
 #### One introducee can't do DIDComm
 
-The [connection protocol](
-https://github.com/hyperledger/indy-hipe/blob/master/text/0031-connection-protocol/README.md)
+The [did-exchange protocol](../0023-did-exchange/README.md)
 allows the invited party to be onboarded (acquire software and an agent)
 as part of the workflow.
 
@@ -276,7 +421,31 @@ What if she is introducing 2 public entities and has a connection to neither?]
 In the tutorial narrative, only a simple proposal was presented. A
 fancier version might be:
 
-[![fancy proposal example](fancy-proposal.png)](fancy-proposal.json)
+```jsonc
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0/proposal",
+  "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
+  "to": {
+    "name": "Kaiser Hospital",
+    "description": "Where I want to schedule your MRI. NOTE: NOT the one downtown!",
+    "description~l10n": { "locale": "en", "es": "Donde se toma el MRI; no en el centro"},
+    "where": "@34.0291739,-118.3589892,12z",
+    "img~attach": {
+      "description": "view from Marina Blvd",
+      "mime-type": "image/png",
+      "filename": "kaiser_culver_google.jpg",
+      "content": {
+        "link": "http://bit.ly/2FKkby3",
+        "byte_count": 47738,
+        "sha256": "cd5f24949f453385c89180207ddb1523640ac8565a214d1d37c4014910a4593e"
+      }
+    },
+    "proposed": false
+  },
+  "nwise": true,
+  "~timing": { "expires_time": "2019-04-23 18:00Z" }
+}
+```
 
 This adds a number of fields to the introducee descriptor. Each is optional
 and may be appropriate in certain circumstances. Most should be self-explanatory,

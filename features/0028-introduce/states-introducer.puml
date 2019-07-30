@@ -1,0 +1,20 @@
+@startuml
+hide empty description
+[*] --> searching
+searching : received request for
+searching : introduction with criteria
+searching --> counterproposing
+counterproposing : candidates satisfy
+counterproposing : all or part of criteria
+counterproposing --> arranging : approved
+counterproposing --> [*] : rejected
+[*] --> arranging
+arranging : sending proposals
+arranging --> [*] : rejected
+arranging --> delivering : accepted
+delivering : forwarding connection
+delivering : details
+delivering --> [*]
+delivering --> confirming : if ~please-ack
+confirming --> [*]
+@enduml
