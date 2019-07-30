@@ -1,11 +1,11 @@
 # 0028: Introduce Protocol 1.0
 
-- Authors: Daniel Hardman, Sam Curren, Stephen Curran, Tobias Looker
+- Authors: Daniel Hardman, George Aristy, Sam Curren, Stephen Curran, Tobias Looker
 - Start Date: 2019-03-27
 
 ## Status
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-04-15
+- Status Date: begun 2019-04-15, revised 2019-08-01
 - Status Note: Referenced in some discussions about the peer DID method spec and n-wise
   DIDs, but not yet implemented.
 
@@ -69,7 +69,7 @@ begins the connection protocol, is also the final step in an
 introduction.
 
 Said differently, *the goal of the introduce protocol is to start the
-connect protocol*.
+DID exchange protocol*.
 
 ##### Transferring Trust
 
@@ -109,7 +109,7 @@ section.
 
 ##### `request`
 
-Optional message that asks for an introduction to be made. This message also
+Optional message from a potential introducee to a potential introducer, asking for an introduction to be made. This message also
 uses the [introducee descriptor](#introducee-descriptor) block that describes
 the object of the sender's interest:
 
@@ -134,7 +134,7 @@ not to honor it.
 
 ###### Introducee descriptor
 
-The _introducee descriptor_ object has the following structure:
+The _introducee descriptor_ object may be complex, but a simple version might look like this:
 
 ```jsonc
 {
@@ -151,14 +151,16 @@ The _introducee descriptor_ object has the following structure:
 ```
 
 `criteria~attach` is optional and is interpreted by Agent software for _resource
-discovery_. It contains a set of _selection criteria_ that describe the
-credentials or proofs sought after. The Introducer honors the request by
+discovery_. It contains a set of _selection criteria_ that describe an introducee to the introducer. The Introducer honors the request by
 searching for matching candidates that can provide the resources. Because there
-are now certain expectations on the outcome, the Introducer MUST inform the
-Introducee of any subset of the criteria that cannot be satisfied for any
-reason. Since the criteria may be satisfied by a group of candidates in
-aggregate - as opposed to a single party satisfying all criteria - then this
-would result in multiple rounds of introductions.
+are now certain expectations on the outcome, the Introducer SHOULD inform the
+Introducee of any subset of the criteria that cannot be satisfied.
+
+>Note 1: This protocol does not intend for the introducer to be strongly trusted; criteria must be double-checked after an introduction if trust is important.
+
+>Note 2: An agent could request an introduction with criteria that allow the introducee to be strongly identified. This could end up undermining privacy or cybersecurity, if the introducer reveals a match for overly selective criteria. The introducer MUST take this issue into consideration when responding to a request.
+ 
+>Note 3: Since the criteria may be satisfied by a group of candidates in aggregate - as opposed to a single party satisfying all criteria - a partciular introducee descriptor may trigger multiple rounds of introductions.
 
 (`TODO can we standardise on a language for the selection criteria?`)
 
@@ -172,30 +174,7 @@ and
 
 An example of the network-specific payload of `criteria~attach`:
 
-```jsonc
-{
-  "queryExpression": {
-    "type": "and",
-    "expressions": [
-      {
-        "name": "driversLicense",
-        "from": "http://www.ministryoftransportation.gov/schemas/driversLicense",
-        "fields": [
-          "given_name",
-          "family_name"
-        ]
-      },
-      {
-        "name": "creditReport",
-        "from": "https://www.ministryoffinance.gov/schemas/creditReport",
-        "fields": [
-          "score"
-        ]
-      }
-    ]
-  }
-}
-```
+[TODO: NEED NEW EXAMPLE THAT DOESN'T DEMONSTRATE A PRIVACY SUBVERSION.]
 
 ##### `counter-proposal`
 
