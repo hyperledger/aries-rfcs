@@ -82,12 +82,12 @@ Description of fields:
      "version": string,
      "nonce": string,
      "requested_attributes": {
-          "<attr_referent>": <attr_info>,
+          "<attr_referent>": <attr_info>
      },
      "requested_predicates": {
-          "<predicate_referent>": <predicate_info>,
+          "<predicate_referent>": <predicate_info>
      },
-     "non_revoked": Optional<<non_revoc_interval>>,
+     "non_revoked": Optional<<non_revoc_interval>>
 }
 ```
 
@@ -107,7 +107,7 @@ This message is a response to a Presentation Request message and contains signed
             "data": {
                 "base64": "<bytes for base64>"
             }
-        },
+        }
     ]
 }
 ```
@@ -135,40 +135,75 @@ Description of fields:
              "requested_predicate_1_referent": {sub_proof_index: int},
              "requested_predicate_2_referent": {sub_proof_index: int},
          }
-     }
+     },
      "proof": {
          "proofs": [ <credential_proof>, <credential_proof>, <credential_proof> ],
          "aggregated_proof": <aggregated_proof>
-     }
+     },
      "identifiers": [{schema_id, cred_def_id, Optional<rev_reg_id>, Optional<timestamp>}]
 }
 ```
 
 #### Presentation Preview
 
-This is not a message but an inner object for other messages in this protocol. It is used construct a preview of the data for the presentation. Schema:
+This is not a message but an inner object for other messages in this protocol. It is used to construct a preview of the data for the presentation. Its schema follows:
 
 ```json
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
-    "attributes": [
-        {
-            "name": "attribute name",
-            "mime-type": "type",
-            "encoding": "encoding",
-            "value": "value"
+    "attributes": {
+        "<cred_def_id>": {
+            "<attribute>": {
+                "mime-type": "<type>",
+                "encoding": "<encoding>",
+                "value": "<value>"
+            }
         },
         ...
-    ]
+    },
+    "predicates": {
+        "<cred_def_id>": {
+            "<predicate>": {
+                "<attribute>": "<threshold>",
+                ...
+            },
+            ...
+        },
+        ...
+    },
+    "non_revocation_times": {
+        "<cred_def_id>": "<iso_8601_datetime>",
+        ...
+    }
 }
 ```
 
-The main element is `attributes`. It is an array of objects, each with the following fields:
+The preview identifies attributes, predicates, and non-revocation timestamps by credential definition identifier. Note that this composition assumes that any presentation can include information from at most one credential per credential definition; such an approach mitigates corroboration risk.
 
-* `name` -- string with attribute name;
-* `mime-type` -- type of attribute
-* `encoding` -- encoding of value, if applicable: `"base64"` indicates base64
-* `value` -- value of credential
+##### Attributes
+
+The `"attributes"` key maps zero or more credential definition identifiers to one or more inner objects; each such inner object maps an attribute name to its respective MIME types, encodings, and values (all optional) for the presentation:
+
+* the prover may include a MIME type and/or encoding per attribute in the preview for verifier information on how to interpret its value
+* the value itself may be absent at this stage; its omission in the preview indicates its ultimate inclusion in the presentation itself.
+
+Any attribute specified per credential definition identifier must belong to its corresponding credential definition. In this way the structure excludes a bait-and-switch where the prover has credentials on multiple credential definitions with common attribute names (e.g., `name`, `score`).
+
+For consistency and completeness, an empty production `"{}"` as the value for the `"attributes"` key denotes that the preview specifies zero attributes.
+
+##### Predicates
+
+The `"predicates"` key maps zero or more credential definition identifiers to one or more inner objects; each such inner object maps predicate names to their respective attributes and thresholds for the presentation. Each predicate name identifies its comparison operator: `"<"`, `"<="`, `">"`, `">="`. Each attribute so specified per credential definition identifier must belong to its corresponding credential definition.
+
+For consistency and completeness, an empty production `"{}"` as the value for the `"predicates"` key denotes that the preview specifies zero predicates.
+
+##### Non-Revocation Timestamps
+
+The `"non_revocation_times"` key maps zero or more credential definition identifiers to ISO 8601 datetimes, each of which offers an instant where the prover or verifier proposes inclusion of proof of the non-revocation of its corresponding credential in the presentation.
+
+Non-revocation timestamps apply only to credentials on credential definitions that support revocation.
+
+For consistency and completeness, an empty production `"{}"` as the value for the `"non_revocation_times"` key denotes that the preview specifies zero non-revocation timestamps.
 
 ## Negotiation and Preview
 
@@ -181,7 +216,11 @@ Negotiation prior to the presentation can be done using the `propose-presentatio
 
 ## Drawbacks
 
-Why should we *not* do this?
+The presentation preview as proposed above does not allow nesting of predicate logic along the lines of "A and either B or C if D, otherwise A and B", nor cross-credential-definition predicates such as proposing a legal name from either a financial institution or selected government entity.
+
+The presentation preview may be indy-centric, as it assumes the inclusion of at most one credential per credential definition. In addition, it prescribes exactly four predicates and assumes mutual understanding of their semantics (e.g., could `">="` imply a lexicographic order for non-integer values, and if so, where to specify character collation algorithm?).
+
+Finally, the inclusion of a non-revocation timestamp may be premature at the preview stage.
 
 ## Rationale and alternatives
 
@@ -192,7 +231,7 @@ choosing them?
 
 ## Prior art
 
-Similar (but simplified) credential exchanged was already implemented in [von-anchor](https://von-anchor.readthedocs.io/en/latest/).
+Similar (but simplified) credential exchange was already implemented in [von-anchor](https://von-anchor.readthedocs.io/en/latest/).
 
 ## Unresolved questions
 
