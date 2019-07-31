@@ -100,7 +100,7 @@ full state machine for each party are:
 
 |Introducer State Diagram|Introducee State Diagram|
 |------------------------|------------------------|
-|![introducer state](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/hyperledger/aries-rfcs/master/features/0028-introduce/states-introducer.puml)|![introducee state](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/hyperledger/aries-rfcs/master/features/0028-introduce/states-introducee.puml)|
+|![introducer state](states-introducer.png)|![introducee state](states-introducee.png)|
 
 The subtleties are explored in the [Advanced Use Cases](#advanced-use-cases)
 section.
