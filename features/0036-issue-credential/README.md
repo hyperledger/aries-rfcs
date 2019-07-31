@@ -31,7 +31,13 @@ In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-
 
 #### Choreography Diagram:
 
-![issuance](credential-issuance.png)
+##### Issuance staring with Offer
+
+![issuance](credential-issuance-offer.png)
+
+##### Issuance staring with Proposal
+
+![issuance](credential-issuance-proposal.png)
 
 #### Propose Credential
 
