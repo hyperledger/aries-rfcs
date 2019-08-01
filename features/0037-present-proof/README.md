@@ -237,3 +237,5 @@ Similar (but simplified) credential exchange was already implemented in [von-anc
 
 - We might need some explicit documentation for nested `@type` fields.
 - There might need to be a way to associate a payment with the present proof protocol.
+
+Diagrams were made in draw.io. To make some changes you can just upload the HTML from this repo to this site.
