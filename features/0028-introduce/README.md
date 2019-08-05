@@ -68,7 +68,7 @@ begins the DID Exchange protocol, is also the final step in an
 introduction.
 
 Said differently, *the goal of the introduce protocol is to start the
-DOD Exchange protocol*.
+DID Exchange protocol*.
 
 ##### Transferring Trust
 
