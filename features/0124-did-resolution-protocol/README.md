@@ -237,3 +237,12 @@ This RFC inherits a long list of unresolved questions and issues that currently 
 
 We need to decide whether the DID Resolution and DID URL Dereferencing functions (`resolve()` and `dereference()`)
 should be exposed as the same message type, or as two different message types (including two different responses).
+   
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  | 
+

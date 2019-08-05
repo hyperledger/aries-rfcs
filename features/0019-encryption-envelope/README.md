@@ -343,3 +343,12 @@ The [JWE](https://tools.ietf.org/html/rfc7516) family of encryption methods.
     - There's not much certainty whether routing tables or some other mechanism will be used. This needs to be defined in another HIPE.
 - If the wire protocol fails, how is that failure passed back to those involved in the transmission?
     - This should be handled using the error-reporting mechanism which is currently proposed HIPE #65 by Stephen Curran.
+   
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  | 
+
