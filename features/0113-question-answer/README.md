@@ -6,7 +6,7 @@
 - Status: [Proposed](/README.md#rfc-lifecycle)
 - Status Date: 2019-07-05
  
-# Simple Question/Answer Protocol
+# Summary
 [summary]: #summary
 
 A simple protocol where a questioner asks a responder a question with at least one valid answer.  The responder then replies with an answer or ignores the question.
