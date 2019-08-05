@@ -9,7 +9,7 @@
 
 ## Summary
 
-The BasicMessage message family describes a stateless, easy to support user message protocol. It has a single message type used to communicate.
+The BasicMessage protocol describes a stateless, easy to support user message protocol. It has a single message type used to communicate.
 
 ## Motivation
 
@@ -27,7 +27,7 @@ There are not really states in this protocol, as sending a message leaves both p
 
 #### Out of Scope
 
-There are many useful features of user messaging systems that we will not be adding to this protocol message family. We anticipate the development of more advanced and full-featured message families to fill these needs. Features that are considered out of scope for this message family include:
+There are many useful features of user messaging systems that we will not be adding to this protocol. We anticipate the development of more advanced and full-featured message protocols to fill these needs. Features that are considered out of scope for this protocol include:
 
 - read receipts
 - emojii responses
