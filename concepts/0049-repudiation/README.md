@@ -1,5 +1,5 @@
 # 0049: Repudiation
-- Daniel Hardman <daniel.hardman@gmail.com>
+- Author: Daniel Hardman <daniel.hardman@gmail.com>
 - Start Date: 2018-03-01 (backdated)
 
 ## Status
