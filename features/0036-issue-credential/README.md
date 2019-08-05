@@ -259,3 +259,12 @@ Similar (but simplified) credential exchanged was already implemented in [von-an
 - There should be a way to ask for some payment with `offer-credential` and to send a payment (or payment receipt) in the request-credential.
 
 Diagrams were made in draw.io. To make some changes you can just upload the HTML from this repo to this site.
+   
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  | 
+

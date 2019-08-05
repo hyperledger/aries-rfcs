@@ -55,3 +55,12 @@ When you send a message through a connection, you can use the `~transport` decor
 ## Prior art
 
 The [Decorators RFC](../../concepts/0011-decorators/README.md) describes scope of decorators. Transport isn't one of the scopes listed.
+   
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  | 
+
