@@ -2,12 +2,14 @@
 - Author: Daniel Hardman <daniel.hardman@gmail.com>
 - Start Date: 2018-12-28
 
-## Summary
+## Status
 - Status: [ACCEPTED](/README.md#rfc-lifecycle)
 - Status Date: 2019-04-01
 - Status Note: standards track and beginning to influence many mental models, but not yet
   [ADOPTED](/README.md#rfc-lifecycle). This supersedes [Indy PR #69](
   https://github.com/hyperledger/indy-hipe/pull/69).
+
+## Summary
 
 Defines protocols (and the closely related concept of message families)
 in the context of agent-to-agent interactions,
