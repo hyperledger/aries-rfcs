@@ -1,4 +1,5 @@
 # 0029: Message Trust Contexts
+- Author: Daniel Hardman <daniel.hardman@gmail.com>
 
 ## Status
 - Status: [PROPOSED](/README.md#rfc-lifecycle)
