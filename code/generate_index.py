@@ -44,7 +44,8 @@ def main(fname = None):
                     line += f", [{rfc.impl_count} impl"
                     if rfc.impl_count > 1:
                         line += 's'
-                line += '](' + rfc.relpath + '#implementations) &mdash; ' + ' '.join(tags) + ')'
+                    line += '](' + rfc.relpath + '#implementations)'
+                line += ' &mdash; ' + ' '.join(tags) + ')'
                 out.write(line + '\n')
         out.write("\n\n>(This file is machine-generated; see [code/generate_index.py](code/generate_index.py).)\n")
     update(fname, tmp_fname)
