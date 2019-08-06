@@ -18,13 +18,13 @@
 * [0049: Repudiation](concepts/0049-repudiation/README.md) (2019-03-01 &mdash; [`concept`](/tags.md#concept))
 * [0050: Wallets](concepts/0050-wallets/README.md) (2018-07-01, [1 impl](concepts/0050-wallets/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0094: Cross-Domain Messaging](concepts/0094-cross-domain-messaging/README.md) (2018-10-29 &mdash; [`concept`](/tags.md#concept))
+* [0095: Basic Message Protocol 1.0](features/0095-basic-message/README.md) (2019-08-06, [6 impls](features/0095-basic-message/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 ## [DEMONSTRATED](README.md#demonstrated)
 * [0005: DID Communication](concepts/0005-didcomm/README.md) (2019-01-15, [9 impls](concepts/0005-didcomm/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0011: Decorators](concepts/0011-decorators/README.md) (2019-01-31, [10 impls](concepts/0011-decorators/README.md#implementations) &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
 * [0029: Message Trust Contexts](concepts/0029-message-trust-contexts/README.md) (2019-05-10, [2 impls](concepts/0029-message-trust-contexts/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0051: Decentralized Key Management](concepts/0051-dkms/README.md) (2019-03-29, [2 impls](concepts/0051-dkms/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
-* [0095: Basic Message Protocol 1.0](features/0095-basic-message/README.md) (2019-06-18, [6 impls](features/0095-basic-message/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0113: Question Answer Protocol 0.9](features/0113-question-answer/README.md) (2019-07-05, [2 impls](features/0113-question-answer/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 ## [PROPOSED](README.md#proposed)
