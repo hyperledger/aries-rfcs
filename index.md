@@ -18,6 +18,7 @@
 * [0049: Repudiation](concepts/0049-repudiation/README.md) (2019-03-01 &mdash; [`concept`](/tags.md#concept))
 * [0050: Wallets](concepts/0050-wallets/README.md) (2018-07-01, [1 impl](concepts/0050-wallets/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0094: Cross-Domain Messaging](concepts/0094-cross-domain-messaging/README.md) (2018-10-29 &mdash; [`concept`](/tags.md#concept))
+* [0160: Connection Protocol](features/0160-connection-protocol/README.md) (2019-08-06, [5 impls](features/0160-connection-protocol/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 ## [DEMONSTRATED](README.md#demonstrated)
 * [0005: DID Communication](concepts/0005-didcomm/README.md) (2019-01-15, [9 impls](concepts/0005-didcomm/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
