@@ -3,3 +3,5 @@
 __pycache__
 *.pyc
 *.tmp
+.vscode
+.pytest_cache

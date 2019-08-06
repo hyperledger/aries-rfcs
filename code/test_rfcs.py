@@ -56,3 +56,4 @@ def test_rfc_metadata():
     if errors:
         msg = '\n' + '\n'.join(errors)
         raise BaseException(msg)
+
