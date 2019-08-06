@@ -1,7 +1,7 @@
 # Aries RFC 0095: Basic Message Protocol 1.0
 
 - Authors: Sam Curren
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-06-18
 - Status Note:  
 - Supersedes: [Indy 0033](https://github.com/hyperledger/indy-hipe/edit/master/text/0033-basic-message/README.md)

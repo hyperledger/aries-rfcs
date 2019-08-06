@@ -1,7 +1,7 @@
 # Aries RFC 0005: DID Communication
 
 - Authors: Daniel Hardman <daniel.hardman@gmail.com>
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-01-15
 - Status Note: Probably almost mature enough to propose [ACCEPTED](/README.md#rfc-lifecycle) status. 
 - Supersedes: [Indy PR #98](https://github.com/hyperledger/indy-hipe/pull/98)

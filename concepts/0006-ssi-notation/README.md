@@ -762,4 +762,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  |
+Peer DID Method Spec | https://openssi.github.io/peer-did-method-spec/ |
