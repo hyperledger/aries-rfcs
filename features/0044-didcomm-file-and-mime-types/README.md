@@ -8,7 +8,7 @@
 - Start Date: 2018-11-13
 - Tags: feature
 
- [![message in envelope](small-msg-in-envelope.png)](msg-in-envelope.png)
+[![message in envelope](small-msg-in-envelope.png)](msg-in-envelope.png)
  
 ## Summary
 
