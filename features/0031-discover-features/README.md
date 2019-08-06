@@ -199,4 +199,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  |
+Aries Protocol Test Suite | https://github.com/hyperledger/aries-protocol-test-suite | 

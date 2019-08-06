@@ -310,3 +310,10 @@ For more information, see the [Message Catalog section of the localization HIPE]
 https://github.com/hyperledger/indy-hipe/blob/569357c6/text/localized-messages/README.md#message-codes-and-catalogs
 ).
 
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+Verity | https://www.evernym.com/products/ | Commercially licensed enterprise agent, SaaS or on-prem. 

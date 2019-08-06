@@ -111,4 +111,5 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  |
+Connect.Me | https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/ | Free mobile app from Evernym. Installed via app store on iOS and Android. 
+Verity | https://www.evernym.com/products/ | Commercially licensed enterprise agent, SaaS or on-prem.
