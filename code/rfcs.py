@@ -37,7 +37,7 @@ _start_date_pat = _field('Start[-_ ]?Date')
 _supersedes_pat = _field('Supersedes')
 _superseded_by_pat = _field('Superseded[-_ ]?By')
 _tags_pat = _field('Tags')
-_status_val_pat = re.compile('\[[ \t]*(\w+)')
+_status_val_pat = re.compile(r'\[[ \t]*(\w+)')
 
 _extractors = [
     _author_pat, _status_pat, _since_pat, _status_note_pat, _start_date_pat, _supersedes_pat, _superseded_by_pat, _tags_pat
