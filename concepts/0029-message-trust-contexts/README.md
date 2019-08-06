@@ -2,7 +2,7 @@
 
 - Authors: Daniel Hardman <daniel.hardman@gmail.com>
 - Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-05-1
+- Since: 2019-05-10
 - Status Note: Only implemented in one codebase and in the sample code here. 
 - Supersedes: [Indy HIPE PR #120](https://github.com/hyperledger/indy-hipe/pull/120)
 - Start Date: 2018-02-10 (approx, backdated)
