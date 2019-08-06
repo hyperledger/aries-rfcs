@@ -31,7 +31,7 @@
 * [0025: DIDComm Transports](features/0025-didcomm-transports/README.md) (2019-05-27 &mdash; [`feature`](/tags.md#feature))
 * [0028: Introduce Protocol 1.0](features/0028-introduce/README.md) (2019-04-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0029: Message Trust Contexts](concepts/0029-message-trust-contexts/README.md) (2019-05-1 &mdash; [`concept`](/tags.md#concept))
-* [0030: Sync Connection (and a related minor protocol) Protocol 1.0](features/0030-sync-connection/README.md) (2019-07-03 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator) [`protocol`](/tags.md#protocol))
+* [0030: Sync Connection Protocol 1.0](features/0030-sync-connection/README.md) (2019-07-03 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator) [`protocol`](/tags.md#protocol))
 * [0032: Message Timing](features/0032-message-timing/README.md) (2019-05-01 &mdash; [`feature`](/tags.md#feature))
 * [0034: Message Tracing](features/0034-message-tracing/README.md) (2018-10-24 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0035: Report Problem Protocol 1.0](features/0035-report-problem/README.md) (2019-04-01 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))

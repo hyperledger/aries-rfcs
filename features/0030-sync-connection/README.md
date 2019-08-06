@@ -1,4 +1,4 @@
-# Aries RFC 0030: Sync Connection (and a related minor protocol) Protocol 1.0
+# Aries RFC 0030: Sync Connection Protocol 1.0
 
 - Authors: Daniel Hardman <daniel.hardman@gmail.com>,
 - Status: [PROPOSED](/README.md#proposed)
