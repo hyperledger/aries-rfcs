@@ -85,10 +85,11 @@ are both __introducees__.
 
 ### States
 
-In a successful introduction, the introducer state progresses from
-`[start] -> arranging -> delivering -> confirming (optional) -> [done]`.
+In a successful introduction, one possible progression of the introducer's state
+is `[start] -> searching -> counterproposing -> arranging -> delivering ->
+[done]`.
 
-Meanwhile, each introducee progresses from `[start] -> deciding -> waiting
+Meanwhile, an introducee can progress from `[start] -> deciding -> waiting
 -> [done]`.
 
 Of course, errors and optional choices complicate the possibilities. The
