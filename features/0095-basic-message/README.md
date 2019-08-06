@@ -9,7 +9,7 @@
 
 ## Summary
 
-The BasicMessage message family describes a stateless, easy to support user message protocol. It has a single message type used to communicate.
+The BasicMessage protocol describes a stateless, easy to support user message protocol. It has a single message type used to communicate.
 
 ## Motivation
 
@@ -27,7 +27,7 @@ There are not really states in this protocol, as sending a message leaves both p
 
 #### Out of Scope
 
-There are many useful features of user messaging systems that we will not be adding to this protocol message family. We anticipate the development of more advanced and full-featured message families to fill these needs. Features that are considered out of scope for this message family include:
+There are many useful features of user messaging systems that we will not be adding to this protocol. We anticipate the development of more advanced and full-featured message protocols to fill these needs. Features that are considered out of scope for this protocol include:
 
 - read receipts
 - emojii responses
@@ -75,3 +75,12 @@ BasicMessage has parallels to SMS, which led to the later creation of MMS and ev
 ## Unresolved questions
 
 - Receive receipts (NOT read receipts) may be implicitly supported by an ack decorator with pre-processing support. 
+   
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  | 
+

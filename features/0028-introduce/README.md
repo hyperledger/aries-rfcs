@@ -64,11 +64,11 @@ This suggests an important insight about the relationship between the
 introduce protocol and the [DID exchange protocol](
 ../0023-did-exchange/README.md):
 *they overlap*. The invitation to form a relationship, which
-begins the connection protocol, is also the final step in an
+begins the DID Exchange protocol, is also the final step in an
 introduction.
 
 Said differently, *the goal of the introduce protocol is to start the
-connect protocol*.
+DID Exchange protocol*.
 
 ##### Transferring Trust
 
@@ -137,7 +137,7 @@ A simpler response, also valid, might look like this:
 [![simple response from non-DID-based introducee](simple-response-other.png)](simple-response-other.json)
 
 The difference between the two forms is whether the response contains
-a valid `connection-invitation` message. Normally, it should--but sometimes,
+a valid `didexchange/../invitation` message. Normally, it should--but sometimes,
 an introducee may not be able to (or may not want to) share a DIDComm 
 endpoint to facilitate the introduction. In such cases, the stripped-down
 variant may be the right choice. See the [Advanced Use Cases](#advanced-use-cases)
@@ -145,15 +145,15 @@ section for more details.
 
 At least one of the more complete variants must be received by an
 introducer to successfully complete the introduction, because the final step in
-the protocol is to begin the [connection protocol](
-https://github.com/hyperledger/indy-hipe/blob/master/text/0031-connection-protocol/README.md)
-by forwarding the `connection-invitation` message from one introducee
+the protocol is to begin the [DID Exchange protocol](
+../../features/0023-did-exchange/README.md)
+by forwarding the `invitation` message from one introducee
 to the other.
 
-##### `connection-invitation`
+##### `didexchange/invitation`
 
-This message is not a member of the `introductions/1.0` message family;
-it is not even adopted. It is part of the `connections/1.0` family, and
+This message is not a member of the `introductions/1.0` protocol;
+it is not even adopted. It belongs to the `didexchange/1.0` protocol, and
 is no different from the message that two parties would generate when one
 invites the other with no intermediary, except that:
 
@@ -181,7 +181,7 @@ interest:
 This message is not part of any state machine; it can be sent at any time,
 and when it is received, the recipient can choose whether or not to honor
 it in their own way, on their own schedule. However, a `~please_ack` decorator
-could be used to make it more interactive, and a `problem-report` could be
+could be used to make it more interactive, and a `problem_report` could be
 returned if the recipient chooses not to honor it.
 
 ### Advanced Use Cases
@@ -200,8 +200,7 @@ Some specific examples follow.
 
 #### One introducee can't do DIDComm
 
-The [connection protocol](
-https://github.com/hyperledger/indy-hipe/blob/master/text/0031-connection-protocol/README.md)
+The [DID Exchange Protocol]( ../../features/0023-did-exchange/README.md)
 allows the invited party to be onboarded (acquire software and an agent)
 as part of the workflow.
 
@@ -211,14 +210,14 @@ Introductions support this use case, too. In such a case, the introducer
 sends a standard `proposal` to the introducee that DOES have DIDComm
 capabilities, but conveys the equivalent of a `proposal` over a
 non-DIDComm channel to the other introducee. The `response` from the
-DIDComm-capable introducee must include a `connection-invitation` with
+DIDComm-capable introducee must include a `didexchange/invitation` with
 a deep link for onboarding, and this is sent to the introducee that needs
 onboarding.
 
 #### Neither introducee can do DIDComm
 
 In this case, the introducer first goes through onboarding via the
-connection protocol with one introducee. Once that introducee can do DIDComm,
+DID Exchange protocol with one introducee. Once that introducee can do DIDComm,
 the previous workflow is used.
 
 #### Introducer doesn't have DIDComm capabilities
@@ -233,7 +232,7 @@ other that way.
 In this case, the introducer conveys the same information that a
 `proposal` would contain, using non-DIDComm channels. As long as one
 of the introducees sends back some kind of response that includes
-approval and a `connection-invitation`, the invitation can be
+approval and a `didexchange/invitation`, the invitation can be
 delivered. The entire interaction is DIDComm-less.
 
 #### One introducee has a public DID with a standing invitation
@@ -340,3 +339,12 @@ implementation of this feature before stabilization?
 - What related issues do you consider out of scope for this 
 proposal that could be addressed in the future independently of the
 solution that comes out of this doc?
+   
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  | 
+

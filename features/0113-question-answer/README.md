@@ -107,3 +107,12 @@ The responder may send an invalid, incomplete, or unsigned response. In this cas
 ### Trust and Constraints
 
 Using already established pairwise relationships allows each side to trust each other. The responder can know who sent the message and the questioner knows that only the responder could have encrypted the response. This response gives a high level of trust to the exchange.
+   
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  | 
+

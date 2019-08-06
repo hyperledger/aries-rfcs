@@ -60,3 +60,12 @@ The Connect Protocol had previously included this same information as an attribu
 - Does allowing multiple service type definitions make sense?
 - Should we allow for pointing to a remote service block instead of including it line?
 - Should we allow for the decorator to be used within an existing connection? What should the behavior be? What security vulnerabilities does this present?
+   
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  | 
+

@@ -29,27 +29,6 @@ When you send a message through a connection, you can use the `~transport` decor
 }
 ```
 
-Outbound messages can return the `~transport` decorator as well, with a `queued_message_count` attribute. This is useful for HTTP transports which can only receive one return message at a time. When a client sees this decorator on a message, they can use it to immediately reconnect to receive another queued message. The number of messages returned depends on the properties of the transport used.
-
-```json
-{
-    "~transport": {
-        "queued_message_count": 7
-    }
-}
-```
-
-If transport decorators are desired but no message needs to be sent, a `noop` message can be sent. This is useful if making a request to an agent just to establish a return route.
-
-```json
-{
-    "@type": "?/1.0/noop",
-    "~transport": {
-        "return_route": "thread",
-        "return_route_thread": "1234567899876543"
-    }
-}
-```
 
 ## Reference
 
@@ -61,16 +40,13 @@ If transport decorators are desired but no message needs to be sent, a `noop` me
 
   The `~transport` decorator should be processed after unpacking and prior to routing the message to a message handler.
 
-  For HTTP transports, the presence of this message decorator indicates that the receiving agent MAY hold onto the connection and use it to return messages as designated. HTTP transports will only be able to receive at most one message at a time. Receiving subsequent messages can be accomplished by sending any other message with the same decorator. If you have no message to send, you may use the `noop` message type.
-
-  Websocket transports are capable of receiving multiple messages. 
+  For HTTP transports, the presence of this message decorator indicates that the receiving agent MAY hold onto the connection and use it to return messages as designated. HTTP transports will only be able to receive at most one message at a time. Websocket transports are capable of receiving multiple messages. 
 
   Compliance with this indicator is optional for agents generally, but required for agents wishing to connect with client based agents. 
 
 ## Drawbacks
 
 - Application varies between transports, adding complexity to agent development.
-- Requiring outbound message queuing has agent architectural implications.
 
 ## Rationale and alternatives
 
@@ -79,10 +55,12 @@ If transport decorators are desired but no message needs to be sent, a `noop` me
 ## Prior art
 
 The [Decorators RFC](../../concepts/0011-decorators/README.md) describes scope of decorators. Transport isn't one of the scopes listed.
+   
+## Implementations
 
-## Unresolved questions
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-- Is `transport` the right name?
-- Should `~transport` be a bundle of related attributes, or should the be identified individually?
-- What family should `noop` be in?
-- Should the receiving agent indicate what type of support is present, like a `call_back_in_seconds`: 5 attribute?
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  | 
+

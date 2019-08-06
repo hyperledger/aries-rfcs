@@ -29,7 +29,7 @@ In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-
 
 #### Choreography Diagram:
 
-![present proof](present-proof.png)
+![present proof](credential-presentation.png)
 
 #### Propose Presentation
 
@@ -237,3 +237,14 @@ Similar (but simplified) credential exchange was already implemented in [von-anc
 
 - We might need some explicit documentation for nested `@type` fields.
 - There might need to be a way to associate a payment with the present proof protocol.
+
+Diagrams were made in draw.io. To make some changes you can just upload the HTML from this repo to this site.
+   
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  | 
+

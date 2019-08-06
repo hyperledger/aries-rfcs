@@ -333,3 +333,12 @@ version of this thinking.
 payment methods. Do we want to standardize? Do we need to link to specific payment method
 definitions? Do we need to define our new payment methods (e.g., cryptocurrency-based)
 to be aligned with existing ones?
+   
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  | 
+
