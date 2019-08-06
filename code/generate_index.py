@@ -12,9 +12,9 @@ def update(fname, tmp_fname):
         os.rename(tmp_fname, fname)
         print('Generated %s.' % fname)
         return
-    with open(fname, 'rt') as f:
+    with open(fname, encoding='utf-8', mode='rt') as f:
         old = f.read()
-    with open(tmp_fname, 'rt') as f:
+    with open(tmp_fname, encoding='utf-8', mode='rt') as f:
         new = f.read()
     if old == new:
         print('No change to %s.' % fname)
