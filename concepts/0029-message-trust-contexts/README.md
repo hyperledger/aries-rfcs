@@ -1,8 +1,8 @@
 # Aries RFC 0029: Message Trust Contexts
 
-- Authors: Daniel Hardman <daniel.hardman@gmail.com>
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-05-1
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
+- Since: 2019-05-10
 - Status Note: Only implemented in one codebase and in the sample code here. 
 - Supersedes: [Indy HIPE PR #120](https://github.com/hyperledger/indy-hipe/pull/120)
 - Start Date: 2018-02-10 (approx, backdated)
@@ -140,4 +140,5 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  |
+reference impl | [mtc.py in this folder](mtc.py) | Python. Includes unit tests.
+Aries Protocol Test Suite | https://github.com/hyperledger/aries-protocol-test-suite | 

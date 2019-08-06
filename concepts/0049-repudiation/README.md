@@ -1,6 +1,6 @@
 # Aries RFC 0049: Repudiation
 
-- Authors: Daniel Hardman <daniel.hardman@gmail.com>
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-03-01
 - Status Note: Well understood and baked into various protocol designs and DIDComm processes--but not yet ratified by the larger Aries community. 

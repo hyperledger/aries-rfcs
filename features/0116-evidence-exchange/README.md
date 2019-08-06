@@ -1,6 +1,6 @@
 # Aries RFC 0116: Evidence Exchange Protocol 0.9
 
-- Authors: Dan Gisolfi](mailto:dan.gisolfi@gmail.com)
+- Authors: [Dan Gisolfi](mailto:dan.gisolfi@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-07-26
 - Status Note: Revised to address both physical and digital identity proofing methods and NIST assurance levels.

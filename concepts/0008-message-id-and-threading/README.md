@@ -1,6 +1,6 @@
 # Aries RFC 0008: Message ID and Threading
 
-- Authors: Daniel Bluhm <daniel.bluhm@sovrin.org>, Sam Curren (sam@sovin.org), Daniel Hardman (daniel.hardman@gmail.com)
+- Authors: [Daniel Bluhm](daniel.bluhm@sovrin.org), [Sam Curren](sam@sovin.org), [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2018-10-01
 - Status Note: Implemented broadly in Indy, but not yet elsewhere.
@@ -251,4 +251,9 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  |
+Aries Cloud Agent - Python | https://github.com/hyperledger/aries-cloudagent-python | Contributed by the government of British Columbia.
+Aries Static Agent - Python | https://github.com/hyperledger/aries-staticagent-python | Useful for cron jobs and other simple, automated use cases.
+Connect.Me | https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/ | Free mobile app from Evernym. Installed via app store on iOS and Android. 
+Verity | https://www.evernym.com/products/ | Commercially licensed enterprise agent, SaaS or on-prem.
+Aries Protocol Test Suite | https://github.com/hyperledger/aries-protocol-test-suite | 
+ 

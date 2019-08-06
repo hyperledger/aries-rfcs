@@ -41,9 +41,10 @@ def main(fname = None):
                 tags = [f"[`{x}`](/tags.md#{x})" for x in rfc.tags]
                 line += f" ({rfc.since}"
                 if rfc.impl_count:
-                    line += f", {rfc.impl_count} impl"
+                    line += f", [{rfc.impl_count} impl"
                     if rfc.impl_count > 1:
                         line += 's'
+                    line += '](' + rfc.relpath + '#implementations)'
                 line += ' &mdash; ' + ' '.join(tags) + ')'
                 out.write(line + '\n')
         out.write("\n\n>(This file is machine-generated; see [code/generate_index.py](code/generate_index.py).)\n")

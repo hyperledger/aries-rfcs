@@ -80,8 +80,8 @@ def walk():
 
 
 _impl_pat = re.compile(r'^[ \t]*#+[ \t]*Implementations?[ \t]*$', re.M)
-_impl_table_head_pat = re.compile(r'^[ \t]*(\|[ \t]*)?Name[ \t]*\|(.*?)\|(.*?)\n[ \t]*(\|[ \t]*)?-+[ \t]*\|(.*?)\|(.*?)\n', re.M)
-_impl_table_row_pat = re.compile(r'((.*?)\|(.*?)|(.*?))\n')
+_impl_table_head_pat = re.compile(r'^[ \t]*(\|[ \t]*)?Name[ \t]*[|](.*?)[|](.*?)\n[ \t]*([|][ \t]*)?-+[ \t]*[|](.*?)[|](.*?)\n', re.M)
+_impl_table_row_pat = re.compile(r'((.*?)[|](.*?)[|](.*?))\n')
 
 def get_impl_table(txt):
     """
@@ -97,8 +97,12 @@ def get_impl_table(txt):
                 m = _impl_table_row_pat.match(txt, i)
                 if not m: break
                 row = [x.strip() for x in m.group(1).split('|')]
-                if row[0] or row[1]:
-                    rows.append(row)
+                try:
+                    if row[0] or row[1]:
+                        rows.append(row)
+                except:
+                    pass
+
                 i = m.end()
 
             return rows

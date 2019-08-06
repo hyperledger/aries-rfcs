@@ -1,6 +1,6 @@
 # Aries RFC 0024: DIDComm over XMPP
 
-- Authors: Oskar van Deventer (oskar.vandeventer@tno.nl), Galit Rahim (galit.rahim@tno.nl), Alexander Blom (alexander.blom@bloqzone.com)
+- Authors: [Oskar van Deventer](oskar.vandeventer@tno.nl), [Galit Rahim](galit.rahim@tno.nl), [Alexander Blom](alexander.blom@bloqzone.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-06-14
 - Status Note:  , moving from Indy to Aries.

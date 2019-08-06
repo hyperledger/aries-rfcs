@@ -1,11 +1,11 @@
 # Aries RFC 0023: DID Exchange Protocol 1.0
 
-- Authors: Ryan West <ryan.west@sovrin.org>, Daniel Bluhm <daniel.bluhm@sovrin.org>, Matthew Hailstone, Stephen Curran, Sam Curren <sam@sovrin.org>
+- Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-05-27
 - Status Note:  
 - Supersedes: [INDY 0031 - Connection Protocol](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol)
-- Start Date: 2018-6-29
+- Start Date: 2018-06-29
 - Tags: feature, protocol
 
 ## Summary

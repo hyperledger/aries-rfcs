@@ -1,6 +1,6 @@
 # Aries RFC 0035: JSON-LD Compatibility
 
-- Authors: Daniel Hardman <daniel.hardman@gmail.com>
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-02-20
 - Status Note: Has guided Indy design choices for several months. Not yet ratified by greater Aries community. 

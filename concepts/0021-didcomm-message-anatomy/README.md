@@ -1,6 +1,6 @@
 # Aries RFC 0021: DIDComm Message Anatomy
 
-- Authors: Tobias Looker (tobias.looker@mattr.global), Daniel Hardman (daniel.hardman@gmail.com)
+- Authors: [Tobias Looker](tobias.looker@mattr.global), [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-05-25
 - Start Date: 2019-05-25

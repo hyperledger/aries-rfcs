@@ -1,7 +1,7 @@
 # Aries RFC 0113: Question Answer Protocol 0.9
 
-- Authors: Douglas Wightman <douglas.wightman@evernym.com>
-- Status: [PROPOSED](/README.md#proposed)
+- Authors: [Douglas Wightman](douglas.wightman@evernym.com)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-07-05
 - Start Date: 2019-02-07
 - Tags: feature, protocol
@@ -111,4 +111,5 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  |
+Connect.Me | https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/ | Free mobile app from Evernym. Installed via app store on iOS and Android. 
+Verity | https://www.evernym.com/products/ | Commercially licensed enterprise agent, SaaS or on-prem.
