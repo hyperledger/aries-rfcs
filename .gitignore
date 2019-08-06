@@ -1,7 +1,7 @@
 .idea
+.vscode
 .DS_Store
 __pycache__
 *.pyc
 *.tmp
-.vscode
 .pytest_cache
