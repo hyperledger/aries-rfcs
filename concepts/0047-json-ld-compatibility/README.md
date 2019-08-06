@@ -1,22 +1,19 @@
-# 0035: JSON-LD Compatibility
-- Author: Daniel Hardman <daniel.hardman@gmail.com>
-- Start Date: 2019-01-23
+# Aries RFC 0035: JSON-LD Compatibility
 
-## Status
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2019-02-20
-- Status Note: Has guided Indy design choices for several months.
-  Not yet ratified by greater Aries community. This supersedes
-  [Indy HIPE 0035](https://github.com/hyperledger/indy-hipe/tree/master/text/0035-json-ld-compatibility).
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-02-20
+- Status Note: Has guided Indy design choices for several months. Not yet ratified by greater Aries community. 
+- Supersedes: [Indy HIPE 0035](https://github.com/hyperledger/indy-hipe/tree/master/text/0035-json-ld-compatibility)
+- Start Date: 2019-01-23
+- Tags: concept, decorator
 
 ## Summary
-[summary]: #summary
 
 Explains the goals of DID Communication with respect to JSON-LD,
 and how Indy proposes to accomplish them.
 
 ## Motivation
-[motivation]: #motivation
 
 JSON-LD is a familiar body of conventions that enriches the expressive power of
 plain JSON. It is natural for people who arrive in the DID Communication (DIDComm)
@@ -25,7 +22,6 @@ coherent answer that clarifies our intentions and that keeps us true to those
 intentions as the ecosystem evolves.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 The [JSON-LD spec](https://www.w3.org/TR/2014/REC-json-ld-20140116/) is a recommendation
 work product of the [W3C RDF Working Group](https://www.w3.org/2011/rdf-wg/wiki/Main_Page)
@@ -194,6 +190,7 @@ RFCs that define each message type can further clarify such subtleties.
 However, it is available on a message-type-definition basis (not ad hoc).
 
 #### Node References
+
 JSON-LD lets one field reference another. See [example 67](
  https://w3c.github.io/json-ld-syntax/#ex-67-referencing-node-objects) (note
  that the ref could have just been “#me” instead of the fully qualified IRI).
@@ -234,12 +231,11 @@ solution](../../features/0043-l10n/README.md) to this problem.
 #### Additional JSON-LD Constructs
 
 The following [JSON-LD keywords](https://w3c.github.io/json-ld-syntax/#keywords)
-may be useful in DIDComm at some point in the future: 
+may be useful in DIDComm at some point in the future:
 `@base`, `@index`, `@container` (cf `@list` and `@set`), `@nest`, `@value`,
 `@graph`, `@prefix`, `@reverse`, `@version`.
 
 ## Drawbacks
-[drawbacks]: #drawbacks
 
 By attempting compatibility but only lightweight usage of JSON-LD, we are
 neither all-in on JSON-LD, nor all-out. This could cause confusion. We are
@@ -248,19 +244,25 @@ details; they'll simply learn that `@type` and `@id` are special, required
 fields on messages. Designers of protocols will need to know a bit more.
 
 ## Rationale and alternatives
-[alternatives]: #alternatives
 
 - We could go all-in on JSON-LD. This would require adoption of sophisticated
 parsing that is impractical on embedded platforms, but it would add a lot
-of semantic sophistication. 
+of semantic sophistication.
 - We could avoid JSON-LD entirely. This would force us to reinvent the wheel
 in some cases, and it would be frustrating to our friends in other SSI
 communities that are more JSON-LD-centric.
 
 ## Unresolved questions
-[unresolved]: #unresolved-questions
 
 - Is the reversal of JSON-LD's default of unordered arrays valid?
 - Is there a good way to discover that new DIDComm proposals should
 consider JSON-LD solutions, and make sure such questions get evaluated
 thoughtfully?
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

@@ -1,25 +1,23 @@
-# 0032: Message Timing
-- Authors: Daniel Hardman <daniel.hardman@gmail.com>
-- Start Date: 2018-12-11
+# Aries RFC 0032: Message Timing
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-05-01
-- Status Note: Broadly socialized but not yet implemented.
-  Supersedes [Indy RFC PR #68](https://github.com/hyperledger/indy-hipe/pull/68).
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-05-01
+- Status Note: Broadly socialized but not yet implemented. 
+- Supersedes: [Indy RFC PR #68](https://github.com/hyperledger/indy-hipe/pull/68)
+- Start Date: 2018-12-11
+- Tags: feature
 
 ## Summary
 
 Explain how timing of agent messages can be communicated and constrained.
 
 ## Motivation
-[motivation]: #motivation
 
 Many timing considerations influence asynchronous messaging delivery.
 We need a standard way to talk about them.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 This RFC introduces a decorator to communicate about timing of messages.
 It is compatible with, but independent from, [conventions around date and
@@ -84,6 +82,13 @@ whether threading is active.
 
 ## Reference
 
-[reference]: #reference
 - [Discussion of date and time datatypes on Wikipedia](https://en.wikipedia.org/wiki/System_time)
 - [ISO 8601](https://de.wikipedia.org/wiki/ISO_8601)
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

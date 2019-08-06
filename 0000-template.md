@@ -1,12 +1,11 @@
 # Title (Ex. 0000: RFC Topic)
-- Author: (your name and/or email)
-- Start Date: (fill me in with today's date, YYYY-MM-DD)
-
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: (date of first submission or last status change)
-- Status Note: (explanation of current status; if adopted, 
-  links to impls or derivative ideas; if superseded, link to replacement)
+- Authors: [your name](you@github-email) -- email is optional
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-12-26 (date you submit your PR)
+- Status Note: (explanation of current status)  
+- Supersedes: (link to anything this RFC supersedes)
+- Start Date: 2018-12-26 (date you started working on this idea)
+- Tags: feature, protocol
 
 ## Summary
 
@@ -87,3 +86,12 @@ implementation of this feature before stabilization?
 - What related issues do you consider out of scope for this 
 proposal that could be addressed in the future independently of the
 solution that comes out of this doc?
+   
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  | 
+

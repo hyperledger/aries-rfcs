@@ -1,11 +1,10 @@
-# 0042: LOX -- A more secure pluggable framework for protecting wallet keys
-- Author: Michael Lodder (mike@sovrin.org)
-- Start Date: 2019-05-30
+# Aries RFC 0042: LOX -- A more secure pluggable framework for protecting wallet keys
 
-## Status
-- Status: [PROPOSED]
-- Status Date: 2019-05-30
-- Status Note:
+- Authors: [Michael Lodder](mike@sovrin.org)
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-05-30
+- Start Date: 2019-05-30
+- Tags: feature
 
 ## Summary
 
@@ -13,6 +12,7 @@ Wallets are protected by secrets that must live outside of the wallet.
 This document proposes the Lox framework for managing the wallet access key(s).
 
 ## Motivation
+
 Wallets currently use a single key to access the wallet. The key is provided directly or derived from a password.
 However, this is prone to misuse as most developers have little experience in key management. Right now there are no recommendations for protecting a key provided by Aries
 forcing implementors to choose methods based on their company's or organization's policies or practices.
@@ -46,10 +46,10 @@ Some systems back keyrings with hardware to increase security. The following flo
 
 ![Keyring](Keyring.png)
 
- 
+
 ### Secure Enclaves
 
-Secure enclaves are used to describe HSMs, TPMs, and TEEs. 
+Secure enclaves are used to describe HSMs, TPMs, and TEEs.
 An explaination of how secure enclaves work is detailed [here](https://github.com/hyperledger/indy-hipe/tree/master/text/0013-wallets#enclave-wrapping).
 
 
@@ -70,7 +70,7 @@ but is flexible to support various others that may be used.
 
 The default enclave will be the operating system keychain. Lox will also allow for
 many different enclaves that are optimal for storing keys like YubiKey, Hashicorp Vault, Intel SGX, or other methods supported by Hyperledger Ursa.
-Other hardware security modules can be plugged into the system via USB or accessed via the cloud. Trusted Platform Modules (TPMs) now come standard with 
+Other hardware security modules can be plugged into the system via USB or accessed via the cloud. Trusted Platform Modules (TPMs) now come standard with
 many laptops and higher end tablets. Communication to enclaves can be done using drivers or over Unix or TCP sockets, or the Windows Communication Framework.
 
 The goal of Lox is to remove the complexity of the various enclaves by choosing the best secure defaults and hiding details that are prone to be misused or misunderstood, making it easier to secure the wallet.
@@ -126,8 +126,16 @@ Trying to account for all of these will be difficult and may require changes to 
 
 ## Prior art
 
-A brief overview of enclaves and their services have been discussed in the [Indy wallet HIPE](https://github.com/hyperledger/indy-hipe/tree/master/text/0013-wallets). 
+A brief overview of enclaves and their services have been discussed in the [Indy wallet HIPE](https://github.com/hyperledger/indy-hipe/tree/master/text/0013-wallets).
 
 ## Unresolved questions
 
 - What enclaves should be supported besides the default provided by the operating system?
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

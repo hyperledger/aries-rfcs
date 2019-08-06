@@ -1,13 +1,11 @@
-# 0028: Introduce Protocol 1.0
+# Aries RFC 0028: Introduce Protocol 1.0
 
 - Authors: Daniel Hardman, George Aristy, Sam Curren, Stephen Curran, Tobias Looker
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-04-15
+- Status Note: Referenced in some discussions about the peer DID method spec and n-wise DIDs, but not yet implemented.
 - Start Date: 2019-03-27
-
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: begun 2019-04-15, revised 2019-08-01
-- Status Note: Referenced in some discussions about the peer DID method spec and n-wise
-  DIDs, but not yet implemented.
+- Tags: feature, protocol
 
 ## Summary
 
@@ -15,7 +13,6 @@ Describes how a go-between can introduce two parties that
 it already knows, but that do not know each other.
 
 ## Motivation
-[motivation]: #motivation
 
 Introductions are a fundamental activity in human relationships. They allow us
 to bootstrap contact information and trust and connect us to needed resources.
@@ -24,7 +21,6 @@ in an SSI ecosystem, and it needs to be flexible, secure, privacy-respecting,
 and well documented.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 ### Name and Version
 
@@ -38,7 +34,7 @@ This is the Introduce 1.0 protocol. It is uniquely identified by the URI:
 
 Introductions target scenarios like this:
 
->Alice knows Bob and Carol, and can talk to each of them. She 
+>Alice knows Bob and Carol, and can talk to each of them. She
 wants to introduce them in a way that allows a relationship to form.
 
 ![scenario diagram](scenario.png)
@@ -65,11 +61,11 @@ This suggests an important insight about the relationship between the
 introduce protocol and the [DID exchange protocol](
 ../0023-did-exchange/README.md):
 *they overlap*. The invitation to form a relationship, which
-begins the connection protocol, is also the final step in an
+begins the DID Exchange protocol, is also the final step in an
 introduction.
 
 Said differently, *the goal of the introduce protocol is to start the
-DID exchange protocol*.
+DID Exchange protocol*.
 
 ##### Transferring Trust
 
@@ -109,9 +105,10 @@ section.
 
 ##### `request`
 
-Optional message from a potential introducee to a potential introducer, asking for an introduction to be made. This message also
-uses the [introducee descriptor](#introducee-descriptor) block that describes
-the object of the sender's interest:
+Optional message from a potential introducee to a potential introducer, asking
+for an introduction to be made. This message also uses the [introducee
+	descriptor](#introducee-descriptor) block that describes the object of the
+	sender's interest:
 
 ```jsonc
 {
@@ -150,17 +147,26 @@ The _introducee descriptor_ object may be complex, but a simple version might lo
 }
 ```
 
-`criteria~attach` is optional and is interpreted by Agent software for _resource
-discovery_. It contains a set of _selection criteria_ that describe an introducee to the introducer. The Introducer honors the request by
-searching for matching candidates that can provide the resources. Because there
-are now certain expectations on the outcome, the Introducer SHOULD inform the
+`criteria~attach` is optional and is interpreted by Agent software for
+_resource discovery_. It contains a set of _selection criteria_ that describe
+an introducee to the introducer. The Introducer honors the request by searching
+for matching candidates that can provide the resources. Because there are now
+certain expectations on the outcome, the Introducer SHOULD inform the
 Introducee of any subset of the criteria that cannot be satisfied.
 
->Note 1: This protocol does not intend for the introducer to be strongly trusted; criteria must be double-checked after an introduction if trust is important.
+>Note 1: This protocol does not intend for the introducer to be strongly
+>trusted; criteria must be double-checked after an introduction if trust is
+>important.
 
->Note 2: An agent could request an introduction with criteria that allow the introducee to be strongly identified. This could end up undermining privacy or cybersecurity, if the introducer reveals a match for overly selective criteria. The introducer MUST take this issue into consideration when responding to a request.
+>Note 2: An agent could request an introduction with criteria that allow the
+>introducee to be strongly identified. This could end up undermining privacy or
+>cybersecurity, if the introducer reveals a match for overly selective
+>criteria. The introducer MUST take this issue into consideration when
+>responding to a request.
  
->Note 3: Since the criteria may be satisfied by a group of candidates in aggregate - as opposed to a single party satisfying all criteria - a partciular introducee descriptor may trigger multiple rounds of introductions.
+>Note 3: Since the criteria may be satisfied by a group of candidates in
+>aggregate - as opposed to a single party satisfying all criteria - a
+>partciular introducee descriptor may trigger multiple rounds of introductions.
 
 (`TODO can we standardise on a language for the selection criteria?`)
 
@@ -216,7 +222,7 @@ an introduction, and requests approval to do so. It works the same way
 that proposals do in [double-opt-in introductions](
 https://avc.com/2009/11/the-double-optin-introduction/) in the
 non-agent world:
-    
+
 ![sample introduction email](double-opt-in.png)
 
 The DIDComm message looks like this:
@@ -236,7 +242,7 @@ context about the introduction, helping the party receiving the proposal
 to evaluate whether they wish to accept it. Depending on how much context
 is available between introducer and introducee independent of the formal
 proposal message, this can be as simple as a name, or something fancier (see
-[Advanced Use Cases](#advanced-use-cases) below). 
+[Advanced Use Cases](#advanced-use-cases) below).
 
 ##### `response`
 
@@ -272,24 +278,24 @@ A simpler response, also valid, might look like this:
 ```
 
 The difference between the two forms is whether the response contains
-a valid `connection-invitation` message. Normally, it should--but sometimes,
-an introducee may not be able to (or may not want to) share a DIDComm 
+a valid `didexchange/../invitation` message. Normally, it should--but sometimes,
+an introducee may not be able to (or may not want to) share a DIDComm
 endpoint to facilitate the introduction. In such cases, the stripped-down
 variant may be the right choice. See the [Advanced Use Cases](#advanced-use-cases)
 section for more details.
 
-At least one of the more complete variants must be received by an
-introducer to successfully complete the introduction, because the final step in
-the protocol is to begin the [did-exchange protocol](../0023-did-exchange/README.md)
-by forwarding the `connection-invitation` message from one introducee
-to the other.
+At least one of the more complete variants must be received by an introducer to
+successfully complete the introduction, because the final step in the protocol
+is to begin the [DID Exchange protocol](../0023-did-exchange/README.md) by
+forwarding the `connection-invitation` message from one introducee to the
+other.
 
-##### `invitation`
+##### `didexchange/invitation`
 
-This message is not a member of the `introductions/1.0` message family - it is
-part of the `didexchange/1.0` family, and is no different from the message that
-two parties would generate when one invites the other with no intermediary,
-except that:
+This message is not a member of the `introductions/1.0` protocol;
+it is not even adopted. It belongs to the `didexchange/1.0` protocol, and
+is no different from the message that two parties would generate when one
+invites the other with no intermediary, except that:
 
 * It is delivered by the introducer, not by either of the introducees.
 * It has a `~thread` decorator that identifies the introduction as
@@ -309,25 +315,39 @@ criteria for this introducee.
 (`TODO: how to tag introducee with criteria in the didexchange/invitation
 message? Decorator? Update the didexchange RFC?`)
 
+##### `request`
+
+An optional message in this family is one that asks for an introduction to be
+made. This message also uses the `introducee descriptor` block, to tell
+the potential introducer which introducee is the object of the sender's
+interest:
+
+[![sample request](request.png)](request.json)
+
+This message is not part of any state machine; it can be sent at any time,
+and when it is received, the recipient can choose whether or not to honor
+it in their own way, on their own schedule. However, a `~please_ack` decorator
+could be used to make it more interactive, and a `problem_report` could be
+returned if the recipient chooses not to honor it.
+
 ### Advanced Use Cases
 
-Any of the parties can be an organization or thing instead of a person. 
+Any of the parties can be an organization or thing instead of a person.
 
 ![any identity owner type](any-identity-owner-type.png)
 
-Bob and Carol may actually know each other already, without Alice realizing
-it. The introduction may be rejected. It may create a new pairwise
-relationship between Bob and Carol that is entirely invisible to Alice.
-Or it may create an n-wise relationship in which Alice, Bob, and Carol know
-one another by the same identifiers.
+Bob and Carol may actually know each other already, without Alice realizing it.
+The introduction may be rejected. It may create a new pairwise relationship
+between Bob and Carol that is entirely invisible to Alice.  Or it may create an
+n-wise relationship in which Alice, Bob, and Carol know one another by the same
+identifiers.
 
 Some specific examples follow.
 
 #### One introducee can't do DIDComm
 
-The [did-exchange protocol](../0023-did-exchange/README.md)
-allows the invited party to be onboarded (acquire software and an agent)
-as part of the workflow.
+The [DID Exchange Protocol]( ../0023-did-exchange/README.md) allows the invited
+party to be onboarded (acquire software and an agent) as part of the workflow.
 
 ![diagram](uneven.png)
 
@@ -335,14 +355,14 @@ Introductions support this use case, too. In such a case, the introducer
 sends a standard `proposal` to the introducee that DOES have DIDComm
 capabilities, but conveys the equivalent of a `proposal` over a
 non-DIDComm channel to the other introducee. The `response` from the
-DIDComm-capable introducee must include a `connection-invitation` with
+DIDComm-capable introducee must include a `didexchange/invitation` with
 a deep link for onboarding, and this is sent to the introducee that needs
 onboarding.
 
 #### Neither introducee can do DIDComm
 
 In this case, the introducer first goes through onboarding via the
-connection protocol with one introducee. Once that introducee can do DIDComm,
+DID Exchange protocol with one introducee. Once that introducee can do DIDComm,
 the previous workflow is used.
 
 #### Introducer doesn't have DIDComm capabilities
@@ -357,7 +377,7 @@ other that way.
 In this case, the introducer conveys the same information that a
 `proposal` would contain, using non-DIDComm channels. As long as one
 of the introducees sends back some kind of response that includes
-approval and a `connection-invitation`, the invitation can be
+approval and a `didexchange/invitation`, the invitation can be
 delivered. The entire interaction is DIDComm-less.
 
 #### One introducee has a public DID with a standing invitation
@@ -373,16 +393,19 @@ this is the `skip proposal` event shown in the introducer's
 state machine.
 
 #### Proposal initiated by introducee
+
 [TODO: Alice is still doing the intro, but Bob now asks Alice to introduce
 him to Carol. Is this the same proposal message type, just with a field
 indicating that he's proposing to Alice that *she* do the intro? Or is it
 a different message?]
 
 #### Requesting confirmation
+
 [TODO: A field in the `response` where an introducee asks to be notified
 that the introduction has been made?]
 
 #### Other stuff
+
 * Using acks to report status of introduction efforts.
 * Timeouts.
 * Introducing multiple parties at the same time?
@@ -393,7 +416,6 @@ he published on his website? Are there security or privacy implications?
 What if she is introducing 2 public entities and has a connection to neither?]
 
 ## Reference
-[reference]: #reference
 
 ### `proposal`
 
@@ -440,9 +462,11 @@ relationship in which only the introducees participate.
 [TODO: do we care about having a response signed? Security? MITM?]
 
 ### Errors
+
 [TODO: What can go wrong.]
 
 ### Localization
+
 [TODO: the `description` field in an introducee descriptor. Error codes/catalog.]
 
 ## Drawbacks
@@ -485,6 +509,18 @@ identity features.
 enhancement proposal process before this gets merged?
 - What parts of the design do you expect to resolve through the
 implementation of this feature before stabilization?
-- What related issues do you consider out of scope for this 
+- What related issues do you consider out of scope for this
 proposal that could be addressed in the future independently of the
 solution that comes out of this doc?
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull
+request to add your implementation. If the implementation is open source,
+include a link to the repo or to the implementation within the repo. Please be
+consistent in the "Name" field so that a mechanical processing of the RFCs can
+generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

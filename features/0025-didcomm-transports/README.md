@@ -1,12 +1,12 @@
-# 0025: DIDComm Transports
-- Author: Sam Curren <sam@sovrin.org>
+# Aries RFC 0025: DIDComm Transports
+
+- Authors: [Sam Curren](sam@sovrin.org)
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-05-27
+- Status Note:  
+- Supersedes: [INDY PR 94](https://github.com/hyperledger/indy-hipe/pull/94)
 - Start Date: 2019-02-26
-
-## Status
-
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-05-27
-- Status Note: Supersedes [INDY PR 94](https://github.com/hyperledger/indy-hipe/pull/94)
+- Tags: feature
 
 ## Summary
 
@@ -14,11 +14,11 @@ This RFC Details how different transports are to be used for Agent Messaging.
 
 ## Motivation
 
-Agent Messaging is designed to be transport independent, including message encryption and agent message format. Each transport does have unique features, and we need to standardize how the transport features are (or are not) applied. 
+Agent Messaging is designed to be transport independent, including message encryption and agent message format. Each transport does have unique features, and we need to standardize how the transport features are (or are not) applied.
 
 ## Reference
 
-Standardized transport methods are detailed here. 
+Standardized transport methods are detailed here.
 
 ### HTTP(S)
 
@@ -38,7 +38,7 @@ HTTP(S) is the first transport for DID Communication that has received heavy att
 
 ### Websocket
 
-Websockets are an efficient way to transmit multiple messages without the overhead of individual requests. 
+Websockets are an efficient way to transmit multiple messages without the overhead of individual requests.
 
 - Each message is transmitted individually in an Encryption Envelope.
 - The trust of each message comes from the Encryption Envelope, not the socket connection itself.
@@ -51,7 +51,7 @@ Websockets are an efficient way to transmit multiple messages without the overhe
 
 ### XMPP
 
-XMPP is an effective transport for incoming DID-Communication messages directly to mobile agents, like smartphones. 
+XMPP is an effective transport for incoming DID-Communication messages directly to mobile agents, like smartphones.
 
 - Incoming DID-Communication messages will arrive, even if the mobile agent is behind a firewalls and network-address-translation (NAT).
 - Incoming DID-Communication messages continue to arrive, even when the IP adress of the mobile agent changes (switching between, 3G, 4G, Wifi, roaming, ...).
@@ -70,7 +70,7 @@ Other transports may be used for Agent messaging. As they are developed, this RF
 
 ### Message Routing
 
-The transports described here are used between two agents. In the case of [message routing](https://github.com/hyperledger/indy-hipe/tree/master/text/0022-cross-domain-messaging), a message will travel across multiple agent connections. Each intermediate agent (see [Mediators and Relays](../../concepts/0046-mediators-and-relays/README.md)) may use a different transport. These transport details are not made known to the sender, who only knows the keys of Mediators and the first endpoint of the route. 
+The transports described here are used between two agents. In the case of [message routing](https://github.com/hyperledger/indy-hipe/tree/master/text/0022-cross-domain-messaging), a message will travel across multiple agent connections. Each intermediate agent (see [Mediators and Relays](../../concepts/0046-mediators-and-relays/README.md)) may use a different transport. These transport details are not made known to the sender, who only knows the keys of Mediators and the first endpoint of the route.
 
 ### Message Context
 
@@ -93,3 +93,11 @@ Setting transport standards may prevent some uses of each transport method.
 Several agent implementations already exist that follow similar conventions.
 
 ## Unresolved questions
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

@@ -1,13 +1,12 @@
-# 0020: Message Types
-- Name: message-types
-- Authors: Daniel Bluhm <daniel.bluhm@sovrin.org>, Sam Curren <sam@sovrin.org>
+# Aries RFC 0020: Message Types
+
+- Authors: [Daniel Bluhm](daniel.bluhm@sovrin.org), [Sam Curren](sam@sovrin.org)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-05-24
+- Status Note:  
+- Supersedes: [HIPE 0021 Message Types](https://github.com/hyperledger/indy-hipe/tree/master/text/0021-message-types)
 - Start Date: 2018-07-06
-
-## Status
-
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2019-05-24
-- Status Note: Supersedes [HIPE 0021 Message Types](https://github.com/hyperledger/indy-hipe/tree/master/text/0021-message-types)
+- Tags: concept
 
 ## Summary
 
@@ -30,7 +29,7 @@ Types are specified within a message using the `@type` attribute:
 }
 ```
 
-Message types are URIs that resolve to developer documentation for the message type, as described in [Protocol URIs](../0003-protocols/uris.md). 
+Message types are URIs that resolve to developer documentation for the message type, as described in [Protocol URIs](../0003-protocols/uris.md).
 
 We recommend that message types are ledger resolvable DIDs with an endpoint specifier and path. This allows for the document locations to be updated to a new location for a stable definition.
 
@@ -39,6 +38,7 @@ We recommend that message types are ledger resolvable DIDs with an endpoint spec
 The following was taken from a presentation by Drummond Reed during the Agent Summit. A link to this presentation can be found below in the [Reference](#reference) section.
 
 #### Problem
+
 How to use a DID to identify a digital object that:
 
 1. Can be widely referenced.
@@ -46,9 +46,11 @@ How to use a DID to identify a digital object that:
 3. Is human readable *enough* for developers.
 
 #### Solution
+
 Use a full DID reference that contains a service name and path.
 
 ##### Example DID Reference
+
 This DID reference contains a service name (`;spec`) followed by a path that expresses the semantics of an example protocol.
 
 ```
@@ -56,6 +58,7 @@ did:sov:123456789abcdefghi1234;spec/exampleprotocol/1.0/exampletype
 ```
 
 #### Example DID Document
+
 This example DID document shows a service endpoint that includes a name property (emphasized) whose purpose is to enable creation of DID references that can deterministically select that service in order to have an algorithmic transformation into a concrete URI.
 
 ```json
@@ -81,6 +84,7 @@ This example DID document shows a service endpoint that includes a name property
 ```
 
 #### Resolution Process
+
 This is the full ABNF for a DID:
 
 ```ABNF
@@ -101,6 +105,7 @@ The purpose of the `did-service` component that may optionally follow a DID is t
 1. Extract the DID plus the `did-service` component from the DID reference. Call this the *DID service locator*. Call the rest of the DID reference the `service-specific` string.
 
 #### Service Selection by ID
+
 This algorithm MUST be used if the `did-service` component does NOT begin with the string `type=`.
 
 2. Select the first `service` object whose id property contains an exact match to the DID service locator.
@@ -110,6 +115,7 @@ This algorithm MUST be used if the `did-service` component does NOT begin with t
 6. The final result is the concrete URL.
 
 ##### Example
+
 The following agent message is received with a type not known to the developer:
 
 ```json
@@ -141,9 +147,11 @@ The developer would then be able to load this URL in a browser to discover the m
 This DID is currently held by Daniel Hardman. Ownership will be transferred to the correct entity as soon as possible.
 
 ### Protocols
+
 Protocols provide a logical grouping for message types. These protocols, along with each type belonging to that protocol, are to be defined in future HIPEs or through means appropriate to subprojects.
 
 #### Protocol Versioning
+
 Version numbering should essentially follow [Semantic Versioning 2.0.0](https://semver.org/), excluding patch version
 number. To summarize, a change in the major protocol version number indicates a breaking change while the minor protocol version number indicates non-breaking additions.
 
@@ -211,3 +219,18 @@ Suggestions: Ambiguous names, unnecessary nesting, symbols in names.
 - [DID Spec](https://w3c-ccg.github.io/did-spec/)
 - [Semantic Versioning](../0003-protocols/semver.md)
 - [Core Message Structure](https://github.com/hyperledger/indy-hipe/pull/17)
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+Indy Cloud Agent - Python | https://github.com/hyperledger/indy-agent/python | Contributed by the government of British Columbia.
+Streetcred AgentFramework | https://github.com/streetcred-id/agent-framework | .NET framework for building agents of all types
+Streetcred.id | https://streetcred.id/ | Commercial mobile and web app built using Streetcred AgentFramework
+Aries Cloud Agent - Python | https://github.com/hyperledger/aries-cloudagent-python | Contributed by the government of British Columbia.
+Aries Static Agent - Python | https://github.com/hyperledger/aries-staticagent-python | Useful for cron jobs and other simple, automated use cases.
+Aries Go Framework | https://github.com/hyperledger/aries-framework-go | For building agents, hubs and other DIDComm features in GoLang.
+Connect.Me | https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/ | Free mobile app from Evernym. Installed via app store on iOS and Android. 
+Verity | https://www.evernym.com/products/ | Commercially licensed enterprise agent, SaaS or on-prem. 

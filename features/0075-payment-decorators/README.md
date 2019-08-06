@@ -1,22 +1,20 @@
-# 00xx: Payment Decorators
-- Author: Sam Curren (sam@sovrin.org), Daniel Hardman (daniel.hardman@gmail.com), Tomislav Markovski
-- Start Date: 2019-04-22
+# Aries RFC 0075: Payment Decorators
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-06-11
-- Status Note: Still being studied. This supersedes [Indy HIPE PR #129](
-https://github.com/hyperledger/indy-hipe/pull/129).
+- Authors: [Sam Curren](sam@sovrin.org), [Daniel Hardman](daniel.hardman@gmail.com), Tomislav Markovski
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-06-11
+- Status Note: Still being studied. 
+- Supersedes: [Indy HIPE PR #129]( https://github.com/hyperledger/indy-hipe/pull/129)
+- Start Date: 2019-04-22
+- Tags: feature, decorator
 
 ## Summary
-[summary]: #summary
 
 Defines the `~payment_request`, `payment_internal_response`, and `~payment_receipt` decorators.
 These offer standard payment features in all DIDComm interactions, and let DIDComm take advantage
 of the [W3C's Payment Request API]( https://www.w3.org/TR/payment-request/) in an interoperable way.
 
 ## Motivation
-[motivation]: #motivation
 
 Instead of inventing custom messages for payments in each protocol, arbitrary messages
 can express payment semantics with payment decorators. Individual protocol specs should
@@ -333,3 +331,11 @@ version of this thinking.
 payment methods. Do we want to standardize? Do we need to link to specific payment method
 definitions? Do we need to define our new payment methods (e.g., cryptocurrency-based)
 to be aligned with existing ones?
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

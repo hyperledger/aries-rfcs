@@ -1,13 +1,12 @@
-# 0035: Report Problem Protocol 1.0
-- Author: Stephen Curran <swcurran@cloudcompass.ca>, Daniel Hardman <daniel.hardman@gmail.com>
-- Start Date: 2018-11-26
+# Aries RFC 0035: Report Problem Protocol 1.0
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-04-01 (review)
-- Status Note: Broadly socialized in Indy circles. Implemented in several codebases.
-  Not yet fully harmonized. Supersedes [Indy HIPE PR #65](
-  https://github.com/hyperledger/indy-hipe/pull/65).
+- Authors: [Stephen Curran](swcurran@cloudcompass.ca), [Daniel Hardman](daniel.hardman@gmail.com)
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-04-01
+- Status Note: Broadly socialized in Indy circles. Implemented in several codebases. Not yet fully harmonized. 
+- Supersedes: [Indy HIPE PR #65]( https://github.com/hyperledger/indy-hipe/pull/65)
+- Start Date: 2018-11-26
+- Tags: feature, protocol
 
 ## Summary
 
@@ -115,7 +114,7 @@ Reporting problems uses a simple one-step [notification protocol](
 ../../concepts/0003-protocols/uris.md#piuri) is:
 
     did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/report-problem/1.0
-    
+
 The protocol includes the standard `notifier` and `notified` roles. It
 defines a single message type `problem-report`, introduced here.
 It also [adopts](../../concepts/0003-protocols/template.md#adopted-messages) the
@@ -192,7 +191,7 @@ Each item in the list must be a tagged pair (a JSON {key:value}, where the key n
 
 **fix-hint-ltxt**: Contains human-readable, localized suggestions about how to fix this instance of the problem. If present, this should be viewed as overriding general hints found in a message catalog.
 
-**impact**: A string describing the breadth of impact of the problem. An enumerated type: 
+**impact**: A string describing the breadth of impact of the problem. An enumerated type:
 
 - “msg” (this is a problem with a single message only; the rest of the interaction may still be fine),
 - “thread” (this is a problem that endangers or invalidates the entire thread),
@@ -342,10 +341,18 @@ The main alternative to a formally defined error type format is leaving it to in
 
 ## Prior art
 
-A brief search was done for error handling in messaging systems with few useful results found. Perhaps the best was the Uber article referenced in the "Timeout" section above. 
+A brief search was done for error handling in messaging systems with few useful results found. Perhaps the best was the Uber article referenced in the "Timeout" section above.
 
 ## Unresolved questions
 
 - Can the Tracing facility provide a trusted way to better handle distributed errors in a production environment?
 - [Denial of service via problems that spam the wrong person with
   a problem report](https://chat.hyperledger.org/channel/indy-agent?msg=cDsBfdDfK43nGQLBE).
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

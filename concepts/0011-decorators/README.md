@@ -1,12 +1,11 @@
-# 0011: Decorators
-- Author: Daniel Hardman
-- Start Date: 2018-12-14
+# Aries RFC 0011: Decorators
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-01-31
-- Status Note: broadly used in Indy, but not yet harmonized
-  with DIF work on hubs.
+- Authors: Daniel Hardman
+- Status: [DEMONSTRATED](/README.md#demonstrated)
+- Since: 2019-01-31
+- Status Note: broadly used in Indy, but not yet harmonized with DIF work on hubs.
+- Start Date: 2018-12-14
+- Tags: concept, decorator
 
 ## Summary
 
@@ -26,7 +25,6 @@ schemas, bloating core definitions, managing complicated inheritance hierarchies
 or confusing one another. It needs to be elegant, powerful, and adaptable.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 A decorator is an optional chunk of JSON that conveys metadata. Decorators are not
 declared in a core schema but rather supplementary to it. Decorators add semantic
@@ -37,11 +35,12 @@ You can think of decorators as a sort of [mixin](https://en.wikipedia.org/wiki/M
 for agent-to-agent messaging. This is not a perfect analogy, but it is a good one.
 Decorators in DIDComm also have some overlap (but not a direct congruence) with
 [annotations in Java]( https://en.wikipedia.org/wiki/Java_annotation), [attributes in
-C#](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/), 
+C#](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/),
 and both [decorators](https://www.python.org/dev/peps/pep-0318/) and
 [annotations](https://www.python.org/dev/peps/pep-3107/) in python.
- 
+
 ### Simple Example
+
 Imagine we are designing a protocol and associated messages to arrange meetings
 between two people. We might come up with a `meeting_proposal` message that looks
 like this:
@@ -173,7 +172,7 @@ targets:
   decorator's *structure* to be part of the *schema* of a message family; this is saying
   that the field *values* in a concrete instance of a decorator applies to all instances
   of a message family. The localization pattern contemplates this usage as a way to
-  declare default localization semantics. 
+  declare default localization semantics.
 * [**Message Type**](../0020-message-types/README.md):
   A decorator can be declared in the documentation on a specific message
   type. If this happens, semantics of the decorator on the message type should be
@@ -206,7 +205,7 @@ decorators, and links to the RFCs that define them.
 * [`~timing`](../../features/0032-message-timing/README.md): timestamps, expiration, elapsed time
 * [`~trace`](../../features/0034-message-tracing/README.md): collaborative debugging and monitoring
 * [`~l10n`](../../features/0043-l10n/README.md): localization support
- 
+
 
 ## Drawbacks
 
@@ -220,7 +219,6 @@ accumulates and decorators become a familiar and central part of the thinking fo
 developers who work with agent-to-agent communication.
 
 # Rationale and alternatives
-[alternatives]: #alternatives
 
 There is ongoing work in the `#indy-semantics` channel on Rocket.Chat to explore the concept
 of __overlays__. These are layers of additional meaning that accumulate above a __schema
@@ -252,3 +250,21 @@ in a declarative style: [ [Lacunas Everywhere](https://codecraft.co/2014/07/16/l
 - What should we do, if anything, about versioning decorators?
 - What should we do, if anything, about applying decorators to stateful scopes
   like a connection or a thread?
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+Aries RFCs | [RFC 0008](../0008-message-id-and-threading/README.md), [RFC 0017](../0017-attachments/README.md), [RFC 0015](../../features/0015-acks/README.md), [RFC 0023](../../features/0023-did-exchange/README.md), [RFC 0056](../../features/0056-service-decorator/README.md), [RFC 0075](../../features/0075-payment-decorators/README.md)| many implemented RFCs depend on decorators...
+Indy Cloud Agent - Python | https://github.com/hyperledger/indy-agent/python | Contributed by the government of British Columbia.
+Streetcred AgentFramework | https://github.com/streetcred-id/agent-framework | .NET framework for building agents of all types
+Streetcred.id | https://streetcred.id/ | Commercial mobile and web app built using Streetcred AgentFramework
+Aries Cloud Agent - Python | https://github.com/hyperledger/aries-cloudagent-python | Contributed by the government of British Columbia.
+Aries Static Agent - Python | https://github.com/hyperledger/aries-staticagent-python | Useful for cron jobs and other simple, automated use cases.
+Aries Go Framework | https://github.com/hyperledger/aries-framework-go | For building agents, hubs and other DIDComm features in GoLang.
+Connect.Me | https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/ | Free mobile app from Evernym. Installed via app store on iOS and Android. 
+Verity | https://www.evernym.com/products/ | Commercially licensed enterprise agent, SaaS or on-prem.
+Aries Protocol Test Suite | https://github.com/hyperledger/aries-protocol-test-suite | 
+ 

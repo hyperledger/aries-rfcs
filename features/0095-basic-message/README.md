@@ -1,19 +1,20 @@
-# 0095: Basic Message Protocol 1.0
-- Author: Sam Curren
-- Start Date: 2019-01-16
+# Aries RFC 0095: Basic Message Protocol 1.0
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-06-18
-- Status Note: Supersedes [Indy 0033](https://github.com/hyperledger/indy-hipe/edit/master/text/0033-basic-message/README.md)
+- Authors: Sam Curren
+- Status: [DEMONSTRATED](/README.md#demonstrated)
+- Since: 2019-06-18
+- Status Note:  
+- Supersedes: [Indy 0033](https://github.com/hyperledger/indy-hipe/edit/master/text/0033-basic-message/README.md)
+- Start Date: 2019-01-16
+- Tags: feature, protocol
 
 ## Summary
 
-The BasicMessage message family describes a stateless, easy to support user message protocol. It has a single message type used to communicate.
+The BasicMessage protocol describes a stateless, easy to support user message protocol. It has a single message type used to communicate.
 
 ## Motivation
 
-It is a useful feature to be able to communicate human written messages. BasicMessage is the most basic form of this written message communication, explicitly excluding advanced features to make implementation easier. 
+It is a useful feature to be able to communicate human written messages. BasicMessage is the most basic form of this written message communication, explicitly excluding advanced features to make implementation easier.
 
 ## Tutorial
 
@@ -27,7 +28,7 @@ There are not really states in this protocol, as sending a message leaves both p
 
 #### Out of Scope
 
-There are many useful features of user messaging systems that we will not be adding to this protocol message family. We anticipate the development of more advanced and full-featured message families to fill these needs. Features that are considered out of scope for this message family include:
+There are many useful features of user messaging systems that we will not be adding to this protocol. We anticipate the development of more advanced and full-featured message protocols to fill these needs. Features that are considered out of scope for this protocol include:
 
 - read receipts
 - emojii responses
@@ -74,4 +75,18 @@ BasicMessage has parallels to SMS, which led to the later creation of MMS and ev
 
 ## Unresolved questions
 
-- Receive receipts (NOT read receipts) may be implicitly supported by an ack decorator with pre-processing support. 
+- Receive receipts (NOT read receipts) may be implicitly supported by an ack decorator with pre-processing support.
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+Indy Cloud Agent - Python | https://github.com/hyperledger/indy-agent/python | Contributed by the government of British Columbia.
+Streetcred AgentFramework | https://github.com/streetcred-id/agent-framework | .NET framework for building agents of all types
+Streetcred.id | https://streetcred.id/ | Commercial mobile and web app built using Streetcred AgentFramework
+Aries Cloud Agent - Python | https://github.com/hyperledger/aries-cloudagent-python | Contributed by the government of British Columbia.
+Aries Static Agent - Python | https://github.com/hyperledger/aries-staticagent-python | Useful for cron jobs and other simple, automated use cases.
+Aries Protocol Test Suite | https://github.com/hyperledger/aries-protocol-test-suite | 
+

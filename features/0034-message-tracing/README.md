@@ -1,12 +1,11 @@
-# 0034: Message Tracing
-- Author: Daniel Hardman
-- Start date: 2018-10-24
+# Aries RFC 0034: Message Tracing
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2018-10-24
-- Status Note: Not yet implemented broadly, but Evernym has been
-  exploring it as a solution to some debugging needs.
+- Authors: Daniel Hardman
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2018-10-24
+- Status Note: Not yet implemented broadly, but Evernym has been exploring it as a solution to some debugging needs.
+- Start Date: 2018-10-24
+- Tags: feature, decorator
 
 ## Summary
 
@@ -28,19 +27,18 @@ messages from one agent to another, and wonder why nothing happened, or why a
 particular error is reported. They will need answers.
 
 Also, developers and testers who are working with DIDComm-based protocols need a way
-to debug. 
+to debug.
 
 ## Tutorial
 
 ### Basics
-[basics]: #basics
 
 Many systems that deliver physical packages offer a "cerified delivery" or
 "return receipt requested" feature. To activate the feature, a sender affixes
 a special label to the package, announcing who should be notified, and how.
 Handlers of the package then cooperate to satisfy the request.
 
-![certified mail, by Doug Coldwell, Flickr CC by 2.0 -- http://bit.ly/2Sg6xXK](certified-mail.jpg) 
+![certified mail, by Doug Coldwell, Flickr CC by 2.0 -- http://bit.ly/2Sg6xXK](certified-mail.jpg)
 
 __DIDComm thread tracing__ works on a similar principle. When tracing is
 desired, a sender adds to the normal message metadata a special [decorator](
@@ -65,7 +63,7 @@ Tracing is requested by decorating the JSON plaintext of an DIDComm message (whi
 [![example of ~trace](msg-with-trace.png)](msg-with-trace.json)
 
 This example asks the handler of the message to perform an HTTP POST of a __trace report__
-about the message to the URI `http://example.com/tracer`. 
+about the message to the URI `http://example.com/tracer`.
 
 The service listening for trace reports--called the __trace sink__--
 doesn't have to have any special characteristics, other than support for
@@ -82,7 +80,7 @@ even if it is expired or invalid. The rationale for this choice is:
    PKI feels wrong-headed.
 4. When tracing is needed, the last thing we should do is create another fragility to
    troubleshoot.
-   
+
 ### Trace Reports
 
 The body of the HTTP request (the _trace report_) is a JSON document that looks like this:
@@ -207,7 +205,7 @@ plaintext of the report, as utf8.
   successfully; `"ERR"` (the handler failed), or `"PEND"` (the handler is still working on the
   message and does not know the final outcome). After this token, the string SHOULD contain
   a parenthetical explanation suitable for use by humans that want to troubleshoot. For `forward`
-  messages that have an outcome of `OK`, the recommended explanation is something like 
+  messages that have an outcome of `OK`, the recommended explanation is something like
   `"(forwarded to did:sov:1234abcd#4)"`.
 
 ## Drawbacks
@@ -225,9 +223,19 @@ Proprietary tracing could be added to the agents built by particular vendors. Ho
 would have limited utility if an interaction involved software not made by that vendor.
 
 ## Prior art
+
 The message threading RFC and the error reporting RFC touch on similar subjects, but are
 distinct.
 
 
 ## Unresolved questions
+
 None.
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

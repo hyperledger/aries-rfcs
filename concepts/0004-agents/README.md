@@ -1,22 +1,19 @@
-# 0004: Agents
-- Author: Daniel Hardman <daniel.hardman@gmail.com>
-- Start Date: 2017-11-01 (approx, backdated)
+# Aries RFC 0004: Agents
 
-## Status
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2019-01-15
-- Status Note: On a standards track and beginning to influence many mental
-  models, but not yet [ADOPTED](/README.md#rfc-lifecycle). This supersedes
-  [Indy HIPE 0002](https://github.com/hyperledger/indy-hipe/tree/master/text/0002-agents).
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-01-15
+- Status Note: On a standards track and beginning to influence many mental models, but not yet [ADOPTED](/README.md#rfc-lifecycle). 
+- Supersedes: [Indy HIPE 0002](https://github.com/hyperledger/indy-hipe/tree/master/text/0002-agents)
+- Start Date: 2017-11-01 (approx, backdated)
+- Tags: concept
 
 ## Summary
-[summary]: #summary
 
 Provide a high-level introduction to the concepts of agents in
 the self-sovereign identity ecosystem.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 Managing an identity is complex. We need tools to help us.
 
@@ -43,16 +40,16 @@ defining characteristics:
 
 1. It acts as a fiduciary on behalf of a single [identity owner](
 https://docs.google.com/document/d/1gfIz5TT0cNp2kxGMLFXr19x1uoZsruUe_0glHst2fZ8/edit#heading=h.2e5lma3u6c9g)
-(or, for agents of things like IoT devices, pets, and similar things, a single _controller_). 
+(or, for agents of things like IoT devices, pets, and similar things, a single _controller_).
 2. It holds cryptographic keys that uniquely embody its delegated authorization.
-3. It interacts using interoperable [DID Comm protocols](
+3. It interacts using interoperable [DIDComm protocols](
 https://github.com/hyperledger/indy-hipe/pull/69).
 
 These characteristics don't tie an agent to any particular blockchain.
 It is possible to implement agents without any
 use of blockchain at all (e.g., with [peer DIDs](
 https://github.com/openssi/peer-did-method-spec)), and some efforts to do so are
-quite active. 
+quite active.
 
 #### Canonical Examples
 
@@ -142,7 +139,7 @@ by the [Sovrin Foundation](https://sovrin.org) or other entities.
 The indy-agent repo on github.com has _reference_ agents and a test
 suite. These are intended to demonstrate agent techniques and possibly
 to provide a foundation upon which fancier agents could be built; they
-are not ready-to-use business solutions. 
+are not ready-to-use business solutions.
 
 #### How to Write an Agent
 
@@ -182,6 +179,7 @@ pluggable transports to let it talk in different ways. The
 pseudocode for its main function might look like this:
 
 ###### Pseudocode for main()
+
 ```
 1  While not done:
 2      Get next message.
@@ -201,6 +199,7 @@ a DID and DID Doc are stored, among other things.
 The pseudocode for each protocol handler it loads might look like:
 
 ###### Pseudocode for protocol handler
+
 ```
 1  Check authorization against metadata. Reject if needed.
 2  Read message header. Is it part of an ongoing interaction?
@@ -222,6 +221,7 @@ transmission to the recipient.
 The pseudocode for the outbound communication module might be:
 
 ###### Pseudocode for outbound
+
 ```
 1  Iterate through all pluggable transports to find best one to use
      with the intended recipient.
@@ -252,16 +252,15 @@ or in its Getting Started Guide.
 
 * Hang out and ask questions on `#indy-agent` on [chat.hyperledger.org](https://chat.hyperledger.org).
 * Use the mailing list: [hyperledger-indy@lists.hyperledger.org](mailto:hyperledger-indy@lists.hyperledger.org)
-* Study the reference agents and agent test suite in the [indy-agent repo on github.com](https://github.com/hyperledger/indy-agent). 
+* Study the reference agents and agent test suite in the [indy-agent repo on github.com](https://github.com/hyperledger/indy-agent).
 * Study the sample mobile agent at [github.com/sovrin-foundation/connector-app](https://github.com/sovrin-foundation/connector-app).
 * Browse other [RFCs](../../index.md).
 * Attend the Aries working group on Wednesdays. (See [HL community calendar](https://wiki.hyperledger.org/display/HYP/Calendar+of+Public+Meetings) for details; note that the default timezone is GMT.)
 * Review [this slide deck](
   https://docs.google.com/presentation/d/1w_5yf08wfqV0Z-WJLqE5Nh_IVgcMACLWyNw0XjrgTVI/edit)
-  about integrating agents with familiar web development paradigms. 
+  about integrating agents with familiar web development paradigms.
 
 ## Reference
-[reference]: #reference
 
 #### Categorizing Agents
 
@@ -354,6 +353,7 @@ Some interesting examples of less prototypical agents or
 agent-like things include:
 
 ###### Identity Wallets
+
 "Identity wallet" is a term that's [carefully defined](
 https://github.com/hyperledger/indy-hipe/blob/master/text/0013-wallets/README.md#what-is-an-identity-wallet)
 in our ecosystem, and in strict, technical usage it maps to a
@@ -361,14 +361,16 @@ concept much closer to "database" than "agent". This is because
 it is an inert storage container, not an active interacter. However, in
 casual usage, it may mean the software that uses a wallet to
 do identity work--in which case it is definitely an agent.
- 
+
 ###### Crypto Wallets
+
 Cryptocurrency wallets are quite agent-like in that they hold
 keys and represent a user. However, they diverge from the agent
 definition in that they talk proprietary protocols to
 blockchains, rather than A2A to other agents.
 
 ###### DIF Hubs
+
 A [DIF Identity Hub](https://github.com/decentralized-identity/identity-hub/blob/master/explainer.md)
 is an agent-like construct that focuses on the data-sharing aspects of identity.
 Currently DIF Hubs do not use the protocols known to the Indy
@@ -376,10 +378,12 @@ community, and vice versa. However, there are efforts to bridge
 that gap.
 
 ###### uPort
+
 The [uPort app](https://www.uport.me/) is an edge agent. Here,
 too, there are efforts to bridge a protocol gap.
 
 ###### Learning Machine
+
 The credential issuance technology offered by [Learning Machine](
 https://www.learningmachine.com/), and the app used
 to share those credentials, are agents of institutions and
@@ -387,6 +391,7 @@ individuals, respectively. Again, there is a protocol gap to
 bridge.
 
 ###### Cron Jobs
+
 A cron job that runs once a night at Faber, scanning a database
 and revoking credentials that have changes status during the day,
 is an agent for Faber. This is true even though it doesn't listen
@@ -396,17 +401,20 @@ talk that protocol, it must hold keys delegated by Faber, and it
 is surely Faber's fiduciary.
 
 ###### Operating Systems
+
 The operating system on a laptop could be described as agent-like,
 in that it works for a single owner and may have a keystore.
 However, it doesn't talk A2A to other agents--at least not yet.
 (OSes that service multiple users fit the definition less.)
 
 ###### Devices
+
 A device can be thought of as an agent (e.g., Alice's phone as
 an edge agent). However, strictly speaking, one device might
 run multiple agents, so this is only casually correct.
 
 ###### Sovrin MainNet
+
 The [Sovrin](https://sovrin.org) MainNet can be thought of
 as an agent for the Sovrin community (but NOT the Sovrin
 Foundation, which codifies the rules but leaves operation of
@@ -417,10 +425,12 @@ perspective is that the Sovrin community has a very fuzzy
 identity.
 
 ###### Validators
+
 Validator nodes on a particular blockchain are agents of the stewards
 that operate them.
 
 ###### Digital Assistants
+
 Digital assistants like Alexa and Google Home are
 somewhat agent-like. However, the Alexa in the home of the Jones family is probably not an agent for
 either the Jones family or Amazon. It accepts delegated work from
@@ -434,29 +444,32 @@ with other agents, but with non-agent entities. Perhaps agents
 and digtal assistants will converge in the future.
 
 ###### Doorbell
+
 An doorbell that emits a simple signal each time it is pressed is
 not an agent. It doesn't represent a fiduciary or hold keys. (However,
 a fancy IoT doorbell that reports to Alice's mobile agent using an
 A2A protocol _would_ be an agent.)
 
 ###### Microservices
+
 A microservice run by AcmeCorp to integrate with its vendors is
 not an agent for Acme's vendors. Depending on whether it holds
 keys and uses A2A protocols, it may or may not be an agent
 for Acme.
 
 ###### Human Delegates
+
 A human delegate who proves empowerment through keys might be
 thought of as an agent.
 
 ###### Paper
+
 The keys for an agent can be stored on paper. This storage
 basically constitutes a wallet. It isn't an agent. However, it can
 be thought of as playing the role of an agent in some cases when
 designing backup and recovery solutions.
 
 ## Prior art
-[prior-art]: #prior-art
 
 * [Alan Kay, the recipient of a Turing Award and the coiner of the
 term "Object-Oriented Programming", has emphasized the value of
@@ -471,3 +484,20 @@ similar tech, and refers to them as "user agents" in various
 RFCs. These are not true SSI agents, but they provide an
 example of ubiquitous helper tech that is the forerunner of
 the agents described here.
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+Indy Cloud Agent - Python | https://github.com/hyperledger/indy-agent/python | Contributed by the government of British Columbia.
+Streetcred AgentFramework | https://github.com/streetcred-id/agent-framework | .NET framework for building agents of all types
+Streetcred.id | https://streetcred.id/ | Commercial mobile and web app built using Streetcred AgentFramework
+Aries Cloud Agent - Python | https://github.com/hyperledger/aries-cloudagent-python | Contributed by the government of British Columbia.
+Aries Static Agent - Python | https://github.com/hyperledger/aries-staticagent-python | Useful for cron jobs and other simple, automated use cases.
+Aries Go Framework | https://github.com/hyperledger/aries-framework-go | For building agents, hubs and other DIDComm features in GoLang.
+Connect.Me | https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/ | Free mobile app from Evernym. Installed via app store on iOS and Android. 
+Verity | https://www.evernym.com/products/ | Commercially licensed enterprise agent, SaaS or on-prem.
+Aries Protocol Test Suite | https://github.com/hyperledger/aries-protocol-test-suite | 
+ 

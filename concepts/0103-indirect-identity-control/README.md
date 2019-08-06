@@ -1,13 +1,11 @@
-# 0103: Indirect Identity Control
-- Author: Daniel Hardman
-- Start Date: 2019-05-10
+# Aries RFC 0103: Indirect Identity Control
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-06-04
-- Status Note: Currently under study for implementation in various
-pilots and POCs. See, for example, the [Sovrin Foundation's
-Guardianship Task Force](https://docs.google.com/document/d/1ymWzCwu2Ud6FMGZdU8md03KCvaxmT41-gQYIRXo09Xw/edit).
+- Authors: Daniel Hardman
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-06-04
+- Status Note: Currently under study for implementation in various pilots and POCs. See, for example, the [Sovrin Foundation's Guardianship Task Force](https://docs.google.com/document/d/1ymWzCwu2Ud6FMGZdU8md03KCvaxmT41-gQYIRXo09Xw/edit).
+- Start Date: 2019-05-10
+- Tags: concept
 
 ## Summary
 
@@ -312,7 +310,7 @@ contains an array of [SGL](https://evernym.github.io/sgl) __rules__, each of whi
     ```jsonc
     {"grant": privileges, "when": condition}
     ```
-    
+
     A [complete example for a guardianship use case](https://evernym.github.io/sgl/docs/tutorial.html#example)
     is provided in the [SGL tutorial](https://evernym.github.io/sgl/docs/tutorial.html).
 
@@ -380,3 +378,11 @@ indirect identity control:
 * [Delegation Details](delegation-details.md)
 * [Guardianship Details](guardianship-details.md)
 * [Controllership Details](controllership-details.md)
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

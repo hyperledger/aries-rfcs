@@ -1,14 +1,12 @@
-# 0036: Issue Credential Protocol 1.0
+# Aries RFC 0036: Issue Credential Protocol 1.0
 
-- Author: Nikita Khateev
+- Authors: Nikita Khateev
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-05-28
+- Status Note:  See [RFC 0037](../0037-present-proof/README.md) for the presentation part of the same Indy HIPE PR.
+- Supersedes: [Indy HIPE PR #89]( https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md); also [Credential Exchange 0.1 -- IIW 2019](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view)
 - Start Date: 2019-01-30
-
-## Status
-
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-05-28
-- Status Note: This supersedes the Issue Credential part of [Indy HIPE PR #89](
-https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md). See [RFC 0037](../0037-present-proof/README.md) for the presentation part of the same Indy HIPE PR.
+- Tags: feature, decorator, protocol
 
 ## Summary
 
@@ -31,7 +29,13 @@ In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-
 
 #### Choreography Diagram:
 
-![issuance](credential-issuance.png)
+##### Issuance staring with Offer
+
+![issuance](credential-issuance-offer.png)
+
+##### Issuance staring with Proposal
+
+![issuance](credential-issuance-proposal.png)
 
 #### Propose Credential
 
@@ -148,7 +152,7 @@ This message contains the credentials being issued and is sent in response to a 
             "@id": "libindy-cred-0",
             "mime-type": "application/json",
             "data": {
-                "base64": "<bytes for base64>"  
+                "base64": "<bytes for base64>"
             }
         }
     ]
@@ -211,13 +215,16 @@ So both processes described in this RFC (issuance) and [presentation](../0037-pr
 Also there is a good chance that payment flow may be combined with other message flows, so it may be considered as decorator. This decorator is optional.
 
 ### Payment decorators
+
 These decorators are out of subject of this RFC, see [Payment decorators RFC](../0075-payment-decorators/README.md)
 
 ### Payment flow
+
 Payment request may be included to Credential Offer msg from Issuer to Holder. And receipt should be provided in this case in Credential Request by Issuer.
 While credential presentation the Verifier may pay to Holder as compensation for Holder for disclosing data. Payment receipt should be included into Presentation Request. Verifier may skip it in first request, but in this case Holder may request payment by sending back Presentation Proposal with appropriate decorator inside it.
 
 ### Limitations
+
 Smart contracts may be missed in ecosystem, so operation "issue credential after payment received" is not atomic. It’s possible case that malicious issuer will charge first and then will not issue credential in fact. But this situation should be easily detected and appropriate penalty should be applied in such type of networks.
 
 
@@ -251,3 +258,13 @@ Similar (but simplified) credential exchanged was already implemented in [von-an
 - It is a common practice when changing some attributes in credential to revoke the old credential and issue a new one. It might be useful to have an element in the `offer-credential` message to indicate a connection between a now revoked credential and the new credential being offered.
 - We might need some explicit documentation for nested `@type` fields.
 - There should be a way to ask for some payment with `offer-credential` and to send a payment (or payment receipt) in the request-credential.
+
+Diagrams were made in draw.io. To make some changes you can just upload the HTML from this repo to this site.
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

@@ -1,31 +1,28 @@
-# 0113: Question Answer Protocol
-- Authors: Douglas Wightman <douglas.wightman@evernym.com>
-- Start Date: 2019-02-07
+# Aries RFC 0113: Question Answer Protocol 0.9
 
-## Status
-- Status: [Proposed](/README.md#rfc-lifecycle)
-- Status Date: 2019-07-05
- 
-# Simple Question/Answer Protocol
-[summary]: #summary
+- Authors: [Douglas Wightman](douglas.wightman@evernym.com)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
+- Since: 2019-07-05
+- Start Date: 2019-02-07
+- Tags: feature, protocol
+
+# Summary
 
 A simple protocol where a questioner asks a responder a question with at least one valid answer.  The responder then replies with an answer or ignores the question.
 
     Note: While there is a need in the future for a robust negotiation protocol
     this is not it. This is for simple question/answer exchanges.
 
-
 # Motivation
-[summary]: #motivation
 
 There are many instances where one party needs an answer to a specific question from another party. These can be related to consent, proof of identity, authentication, or choosing from a list of options. For example, when receiving a phone call a customer service representative can ask a question to the customer’s phone to authenticate the caller, “Are you on the phone with our representative?”. The same could be done to authorize transactions, validate logins (2FA), accept terms and conditions, and any other simple, non-negotiable exchanges.
 
 # Tutorial
-[summary]: #tutorial
 
 We'll describe this protocol in terms of a [Challenge/Response] https://en.wikipedia.org/wiki/Challenge%E2%80%93response_authentication) scenario where a customer service representative for Faber Bank questions its customer Alice, who is speaking with them on the phone, to answer whether it is really her.
 
 ### Interaction
+
 Using an already established pairwise connection and agent-to-agent communication Faber will send a question to Alice with one or more valid responses with an optional deadline and Alice can select one of the valid responses or ignore the question. If she selects one of the valid responses she will respond with her answer.
 
 
@@ -62,7 +59,7 @@ The protocol begins when the questioner sends a `questionanswer` message to the 
 }
 ```
 
-The responder receives this message and chooses the answer. If the signature is required then she uses her private pairwise key to sign  her response. 
+The responder receives this message and chooses the answer. If the signature is required then she uses her private pairwise key to sign  her response.
 
     Note: Alice should sign the following: the question, the chosen answer,
     and the nonce: HASH(<question_text>+<answer_text>+<nonce>), this keeps a
@@ -87,18 +84,18 @@ The response message is then sent using the ~sig message decorator:
 }
 ```
 
-The questioner then checks the signature against the sig_data. 
+The questioner then checks the signature against the sig_data.
 
 ### Optional Elements
 
-The "question_detail" field is optional. It can be used to give "fine print"-like context around the question and all of its valid responses. While this could always be displayed, some UIs may choose to only make it available on-demand, in a "More info..." kind of way. 
+The "question_detail" field is optional. It can be used to give "fine print"-like context around the question and all of its valid responses. While this could always be displayed, some UIs may choose to only make it available on-demand, in a "More info..." kind of way.
 
 ~timing.expires_time is optional
 \~response~sig is optional when "signature_required" is false
 
 ### Business cases and auditing
 
-In the above scenario, Faber bank can audit the reply and prove that only Alice's pairwise key signed the response  (a cryptographic API like Indy-SDK can be used to guarantee the responder's signature). Conversely, Alice can also use her key to prove or dispute the validity of the signature. The cryptographic guarantees central to agent-to-agent communication and digital signatures create a trustworthy protocol for obtaining a committed answer from a pairwise connection. This  protocol can be used for approving wire transfers, accepting EULAs, or even selecting an item from a food menu. Of course,  as with a real world signature, Alice should be careful about what she signs. 
+In the above scenario, Faber bank can audit the reply and prove that only Alice's pairwise key signed the response  (a cryptographic API like Indy-SDK can be used to guarantee the responder's signature). Conversely, Alice can also use her key to prove or dispute the validity of the signature. The cryptographic guarantees central to agent-to-agent communication and digital signatures create a trustworthy protocol for obtaining a committed answer from a pairwise connection. This  protocol can be used for approving wire transfers, accepting EULAs, or even selecting an item from a food menu. Of course,  as with a real world signature, Alice should be careful about what she signs.
 
 ### Invalid replies
 
@@ -107,3 +104,12 @@ The responder may send an invalid, incomplete, or unsigned response. In this cas
 ### Trust and Constraints
 
 Using already established pairwise relationships allows each side to trust each other. The responder can know who sent the message and the questioner knows that only the responder could have encrypted the response. This response gives a high level of trust to the exchange.
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+Connect.Me | https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/ | Free mobile app from Evernym. Installed via app store on iOS and Android. 
+Verity | https://www.evernym.com/products/ | Commercially licensed enterprise agent, SaaS or on-prem.

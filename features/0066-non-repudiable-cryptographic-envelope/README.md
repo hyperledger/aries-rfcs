@@ -1,11 +1,11 @@
-# 0066: Non-Repudiable Signature for Cryptographic Envelope
-- Author: Kyle Den Hartog (indy@kyledenhartog.com)
-- Start Date: 04/15/2019
+# Aries RFC 0066: Non-Repudiable Signature for Cryptographic Envelope
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 04/15/2019
+- Authors: [Kyle Den Hartog](indy@kyledenhartog.com)
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-04-15
 - Status Note: This is a second attempt to integrate non-repudiable digital signatures based on learnings and discussions over the past few months. This focuses only on the signing of entire messages. Signature Decorators will be handled seperately.
+- Start Date: 2019-04-15
+- Tags: feature
 
 ## Summary
 
@@ -29,7 +29,7 @@ As highlighted in the repudiation RFC #0049, non-repudiable signatures are not a
 
 > If Alice is entering into a borrower:lender relationship with Carol, Carol needs to prove to third parties that Alice, and only Alice, incurred the legal obligation.
 
-A good rule of thumb for a developer to decide when to use a non-repudiable signature is: 
+A good rule of thumb for a developer to decide when to use a non-repudiable signature is:
 
 > "Does the Receiver need to be able to prove who created the message to another person?"
 
@@ -52,6 +52,7 @@ Strive to guarantee that:
 At a high level, the usage of a digital signature should occur before a message is encrypted. There's some cases where this may not make sense. This RFC will highlight a few different examples of how non-repudiable digital signatures could be used.
 
 ### Connect protocol example
+
 Starting with an initial `connections/1.0/invitation` message like this:
 
 ```json
@@ -105,7 +106,6 @@ ewogICAgImFsZyI6IkVkRFNBIiwKICAgICJraWQiOiJGWW1vRnc1NUdlUUg3U1JGYTM3ZGt4MWQyZFoz
 
 ### Basic Message protocol example
 
-
 #### Sign and encrypt process
 
 Next is an example that showcases what a basic message would look like. Since this message would utilize a connection to encrypt the message, we will produce a JWS first, and then encrypt the outputted compact JWS.
@@ -114,7 +114,7 @@ We would first encode our JOSE Header which looks like this:
 
 ```json
 {
-    "alg": "edDSA", 
+    "alg": "edDSA",
     "kid": "7XVZJUuKtfYeN1W4Dq2Tw2ameG6gC1amxL7xZSsZxQCK"
 }
 ```
@@ -219,13 +219,13 @@ Now Base64URL decode that section and you'll get the original message:
 
  - Things to consider:
      - Combining this all into the pack/unpack API would require two additional APIs. One to handle signing, and one to indicate a message isn't encrypted.
-     - I like the idea of combining the API. However, I'm not a fan of the idea of incorporating a plaintext message into pack to support the connect protocol. 
+     - I like the idea of combining the API. However, I'm not a fan of the idea of incorporating a plaintext message into pack to support the connect protocol.
      - My preference would be to create a seperate API specifically for the connect protocol given that it's an edge case.
-     - How would this affect the ephemeral challenge protocol as well as the "spectrum of trust" which was highlight by One of Daniel Hardman's previous posts? 
+     - How would this affect the ephemeral challenge protocol as well as the "spectrum of trust" which was highlight by One of Daniel Hardman's previous posts?
 
 ## Drawbacks
 
-Through the choice of a JWS formatted structure we imply that an off the shelf library will support this structure. However, it's uncommon for libraries to support the edDSA signature algorithm even though it's a valid algorithm based on the [IANA registry](https://www.iana.org/assignments/jose/jose.xhtml). This means that most implementations that support this will either need to add this signature algorithm to another JWS library or 
+Through the choice of a JWS formatted structure we imply that an off the shelf library will support this structure. However, it's uncommon for libraries to support the edDSA signature algorithm even though it's a valid algorithm based on the [IANA registry](https://www.iana.org/assignments/jose/jose.xhtml). This means that most implementations that support this will either need to add this signature algorithm to another JWS library or
 
 ## Rationale and alternatives
 
@@ -248,4 +248,12 @@ The majority of prior art discussions are mentioned above in the rationale and a
 
 - Was the usage of a JWT a better option for broader SSI adoption and backwards compatibility (e.g. Active directory and OpenID Connect)?
 - Is limiting to only ed25519 key types an unnecessary restraint given the broad support needed for DIDComm?
-- 
+-
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

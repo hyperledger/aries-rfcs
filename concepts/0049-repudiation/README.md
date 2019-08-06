@@ -1,23 +1,19 @@
-# 0049: Repudiation
-- Daniel Hardman <daniel.hardman@gmail.com>
-- Start Date: 2018-03-01 (backdated)
+# Aries RFC 0049: Repudiation
 
-## Status
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2019-03-01
-- Status Note: Well understood and baked into various protocol
-  designs and DIDComm processes--but not yet ratified by the larger
-  Aries community. This supersedes [Indy HIPE 0037](
-  https://github.com/hyperledger/indy-hipe/tree/master/text/0037-repudiation).
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-03-01
+- Status Note: Well understood and baked into various protocol designs and DIDComm processes--but not yet ratified by the larger Aries community. 
+- Supersedes: [Indy HIPE 0037]( https://github.com/hyperledger/indy-hipe/tree/master/text/0037-repudiation)
+- Start Date: 2018-03-01 (backdated)
+- Tags: concept
 
 ## Summary
-[summary]: #summary
 
 Explain DID Communication's perspective on repudiation,
 and how this influences the DIDComm approach to digital signatures.
 
 ## Motivation
-[motivation]: #motivation
 
 A very common mistake among newcomers to cryptography is to
 assume that digital signatures are the best way to prove the
@@ -30,7 +26,6 @@ technique called __authenticated encryption__. This doc
 explains the distinction and its implications.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 If Carol receives a message that purports to come from Alice, she may naturally ask:
 
@@ -118,18 +113,24 @@ In this situation, digital signatures are required. Note, however, that Alice
 is trading some privacy for her ability to publicly prove message origin.
 
 ## Reference
-[reference]: #reference
 
 Authenticated encryption is not something we invented. It is well described
 in the [documentation for libsodium](
 https://libsodium.gitbook.io/doc/public-key_cryptography/authenticated_encryption).
 It is implemented there, and also in the pure javascript port, [TweetNacl](
-https://tweetnacl.js.org/#/). 
+https://tweetnacl.js.org/#/).
 
 ## Drawbacks
-[drawbacks]: #drawbacks
 
 The main reason not to emphasize authenticated encryption over digital signatures
 is that we seem to encounter a steady impedance from people who are signature-oriented.
 It is hard and time-consuming to reset expectations. However, we have concluded that
 the gains in privacy are worth the effort.
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

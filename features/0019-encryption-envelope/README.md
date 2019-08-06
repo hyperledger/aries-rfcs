@@ -1,12 +1,12 @@
-# 0019: Encryption Envelope
-- Author: Kyle Den Hartog(kyle.denhartog@evernym.com), Stephen Curran (swcurran@gmail.com), Sam Curren (sam@sovrin.org), Mike Lodder (mike@sovrin.org)
+# Aries RFC 0019: Encryption Envelope
+
+- Authors: [Kyle Den Hartog](kyle.denhartog@evernym.com), [Stephen Curran](swcurran@gmail.com), [Sam Curren](sam@sovrin.org), [Mike Lodder](mike@sovrin.org)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-05-04
+- Status Note:  
+- Supersedes: [INDY 0028 Wire Level Format](https://github.com/hyperledger/indy-hipe/tree/master/text/0028-wire-message-format)
 - Start Date: 2018-07-10 (approximate, backdated)
-
-## Status
-
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2019-05-04
-- Status Note: Supersedes [INDY 0028 Wire Level Format](https://github.com/hyperledger/indy-hipe/tree/master/text/0028-wire-message-format)
+- Tags: feature
 
 ## Summary
 
@@ -80,7 +80,7 @@ A wire wessage is used to transport any plaintext message from one agent directl
 - Call the standard function `unpack()` to retrieve the plaintext message (and possibly its provenance) from the wire message
 
 This is repeated with each hop, but the wire messages are nested, such that the plaintext is never visible until
-it reaches its final recipient.  
+it reaches its final recipient.
 
 ## Implementation
 
@@ -107,13 +107,15 @@ discussion about the theory of non-repudiation](https://github.com/sovrin-founda
 
 packed_message = pack_message(wallet_handle, message, receiver_verkeys, sender_verkey)
 
-#### pack_message() Params: 
+#### pack_message() Params:
+
 - wallet_handle: handle to the wallet that contains the sender's secrets.
 - message: the message (plaintext, or nested wire message) as a string. If it's JSON object it should be in string format first
 - receiver_verkeys: a list of recipient verkeys as string containing a JSON array
 - sender_verkey: the sender's verkey as a string. This verkey is used to look up the sender's private key so the wallet can put supply it as input to the encryption algorithm. When an empty string ("") is passed in this parameter, anoncrypt mode is used
 
 #### pack_message() return value (Authcrypt mode)
+
 This is an example of an outputted message encrypting for two verkeys using Authcrypt.
 
 ```json
@@ -154,7 +156,7 @@ The base64URL encoded `protected` decodes to this:
 
 #### pack output format (Authcrypt mode)
 
-``` 
+```
     {
         "protected": "b64URLencoded({
             "enc": "xchachapoly1305_ietf",
@@ -185,7 +187,7 @@ The base64URL encoded `protected` decodes to this:
         * Note it this step we're encrypting the cek, so it can be decrypted by the recipient
     2. set `sender` value to base64URLencode(libsodium.crypto_box_seal(their_vk, sender_vk_string))
         * Note in this step we're encrypting the sender_verkey to protect sender anonymity
-    3. base64URLencode(cek_iv) and set to `iv` value in the header 
+    3. base64URLencode(cek_iv) and set to `iv` value in the header
         * Note the cek_iv in the header is used for the `encrypted_key` where as `iv` is for ciphertext
 3. base64URLencode the `protected` value
 4. encrypt the `message` using libsodium.crypto_aead_chacha20poly1305_ietf_encrypt_detached(message, protected_value_encoded, iv, cek) this is the ciphertext.
@@ -194,6 +196,7 @@ The base64URL encoded `protected` decodes to this:
 For a reference implementation, see https://github.com/hyperledger/indy-sdk/blob/master/libindy/src/commands/crypto.rs
 
 #### pack_message() return value (Anoncrypt mode)
+
 This is an example of an outputted message encrypted for two verkeys using Anoncrypt.
 
 ```json
@@ -230,6 +233,7 @@ The protected data decodes to this:
 ```
 
 #### pack output format (Anoncrypt mode)
+
 ```
     {
          "protected": "b64URLencoded({
@@ -306,6 +310,7 @@ For a reference implementation, see https://github.com/hyperledger/indy-sdk/blob
 ```
 
 #### unpack_message() return values (anoncrypt mode)
+
 ```json
 {
     "message": "{ \"@id\": \"123456780\",\"@type\":\"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0/message\",\"sent_time\": \"2019-01-15 18:42:01Z\",\"content\": \"Your hovercraft is full of eels.\"}",
@@ -343,3 +348,17 @@ The [JWE](https://tools.ietf.org/html/rfc7516) family of encryption methods.
     - There's not much certainty whether routing tables or some other mechanism will be used. This needs to be defined in another HIPE.
 - If the wire protocol fails, how is that failure passed back to those involved in the transmission?
     - This should be handled using the error-reporting mechanism which is currently proposed HIPE #65 by Stephen Curran.
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+Indy Cloud Agent - Python | https://github.com/hyperledger/indy-agent/python | Contributed by the government of British Columbia.
+Streetcred AgentFramework | https://github.com/streetcred-id/agent-framework | .NET framework for building agents of all types
+Streetcred.id | https://streetcred.id/ | Commercial mobile and web app built using Streetcred AgentFramework
+Aries Cloud Agent - Python | https://github.com/hyperledger/aries-cloudagent-python | Contributed by the government of British Columbia.
+Aries Static Agent - Python | https://github.com/hyperledger/aries-staticagent-python | Useful for cron jobs and other simple, automated use cases.
+Aries Go Framework | https://github.com/hyperledger/aries-framework-go | For building agents, hubs and other DIDComm features in GoLang.
+Aries Protocol Test Suite | https://github.com/hyperledger/aries-protocol-test-suite | 

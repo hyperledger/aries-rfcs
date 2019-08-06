@@ -1,11 +1,11 @@
-# 0013: Overlays
-- Author: Paul Knowles, Dativa
-- Start Date: 2018-10-01
+# Aries RFC 0013: Overlays
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-05-20
+- Authors: Paul Knowles, Dativa
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-05-20
 - Status Note: socialized for many months; no implementations yet
+- Start Date: 2018-10-01
+- Tags: concept
 
 ## Summary
 
@@ -28,6 +28,7 @@ In terms of creating a fully-fledged decentralized data economy, we are still in
 Data-centric innovation points to a future society where new values and services will be created continuously, making people’s lives more conformable and sustainable. Developing and deploying the right data capture architecture will improve the quality of externally pooled data for future AI and IoT solutions. The Overlays Data Capture Architecture (ODCA) was conceived for this purpose.
 
 ### Overlays Data Capture Architecture (ODCA)
+
 ODCA is a standardized global solution for data capture and exchange which protects PII data and provides a positive alternative to current architectures.
 
 A schema, a machine-readable definition of the semantics of a data structure, is typically created as a single data object. However, ODCA represents a schema as a multi-dimensional object consisting of a stable schema base and linked overlays, data objects that provide additional extensions, coloration, and functionality to the base object. Any sponsor can use a pre-existing schema base and build their own suite of linked overlays to add extra context to transform how information is displayed to a viewer or to guide an agent in how to apply a custom process to schema data.
@@ -44,6 +45,7 @@ ODCA offers many advantages, including:
 4. Data decentralization. ODCA enables schema base definitions to remain in their purest form thus providing a standard base from which to decentralize data. Organizations wishing to contribute data to a decentralized data lake for consented third-party usage can capture data using generic open source schema bases. This ensures that data standardization is done prior to any data lake migration.
 
 #### BLINDING IDENTITY TAXONOMY (BIT)
+
 Internet-related services and social media companies founded in the late ‘90s and early ‘00s triggered a digital hoarding revolution with large amounts of personal data captured and stored in corporate data silos under centralized control. Silicon Valley’s largest technology companies have subsequently seen revenue figures soar through deployed marketing tools built to enable third party vendors to target subsets of individuals according to dynamic criteria searches. Revenue models have tended to rely heavily on these targeted advertising mechanisms which has encouraged an unparalleled corporate drive for data ownership.
 
 Corporate responsibility regarding data privacy should have escalated in parallel with the relentless drive for data ownership but, until the General Data Protection Regulation (GDPR) came into force in May 2018, strong legislation was not in place to prevent the unethical distribution of personal data.
@@ -65,6 +67,7 @@ The latest version of the BIT is available at:
 >https://kantarainitiative.org/confluence/display/infosharing/Blinding+Identity+Taxonomy
 
 ### Background
+
 In conjunction with the exponential rise of data capture, Satoshi Nakamoto’s groundbreaking white paper “Bitcoin: A Peer-to-Peer Electronic Cash System” was published in November 2008 triggering a peer-to-peer (P2P) computing revolution where files and transaction proofs could be shared directly between network nodes without the need of a central server. In 2009, Bitcoin became the first cryptocurrency to utilize a decentralized ledger to keep a record of all transactions taking place across a P2P network. It was not until the launch of Ethereum in July 2015, that the foundational technology, “blockchain”, would feature smart contract functionality giving rise to a golden age of DLT solutions that continue to mould a decentralized data economy.
 
 DLT solutions will continue to drive uniform data processing mechanisms, verifiable proof of consent, secure data portability and self-sovereign identity (SSI). With ODCA, a standardized global solution for data capture and exchange, community driven data standards, interoperable data capture objects and PII encryption capability can also be realized.
@@ -72,11 +75,13 @@ DLT solutions will continue to drive uniform data processing mechanisms, verifia
 It is ultimately a combination of these ingredients that will enable an improved ontology-driven approach to data management allowing data to be decentralized and better AI and IoT solutions to be built for societal benefit.
 
 ### Methods
+
 Rather than a schema being created as a single data object, ODCA represents a schema as a multi-dimensional object consisting of a schema base and linked overlays. Each of these data objects serve a specific function in the overall schema definition which, when amalgamated, provide a set of metadata that adequately describes a single set of data.
 
 Each data object contains its own decentralized identifier (DID), a new type of identifier that is globally unique, resolvable with high availability, and cryptographically verifiable. In order for an overlay to be linked to a schema base, the DID of the base object must be referenced in the metadata block of the overlay. In other words, a linked overlay will contain both its own DID and, for coupling purposes, the DID of the schema base.
 
 #### Schema Base
+
 A schema base is a stable base object that defines a single set of data in its purest form thus providing a standard base from which to decentralize data.
 
 Apart from any metadata relating to the object, attribute names and types are defined in the schema base. The construct also facilitates a PII schema object which allows the issuer to flag PII attributes. With PII attributes flagged at the base layer, all corresponding data can be treated as sensitive throughout the data lifecycle and encrypted or removed at any stage thus protecting the identity of captured data subjects.
@@ -86,16 +91,19 @@ The DID of the schema base is contained in the metadata and allows the object to
 ![Figure 3: Example of a Schema Base. Attribute names and types are defined in the schema base. The construct also facilitates a PII schema object for flagging PII attributes.](figure-3.png)
 
 #### Source Overlay
+
 A source overlay is an optional linked object that can be used to specify an endpoint path containing a dynamic variable whose address is determined when the program is run.
 
 DIDs for both the overlay and associated schema base are referenced in the metadata block of the source overlay. The DID for the schema base can then be used as a coupling point to link the two data objects.
 
 #### Encode Overlay
+
 An encode overlay is a core linked object that can be used to specify a character encoding standard (e.g. UTF-8, ISO-8859-1, Windows-1251, Base58Check, etc.) or character set (e.g. English, Japanese, Arabic, etc.) for the schema.
 
 DIDs for both the overlay and associated schema base are referenced in the metadata block of the encode overlay. The DID for the schema base can then be used as a coupling point to link the two data objects.
 
 #### Entry Overlay
+
 An entry overlay is a core linked object that can be used to add predefined field values in a specified language to schema attributes.
 
 DIDs for both the overlay and associated schema base are referenced in the metadata block of the entry overlay. The DID for the schema base can then be used as a coupling point to link the two data objects.
@@ -103,6 +111,7 @@ DIDs for both the overlay and associated schema base are referenced in the metad
 ![Figure 4: Example of an entry overlay. Predefined field values are defined in an entry overlay.](figure-4.png)
 
 #### Label Overlay
+
 A label overlay is a core linked object that can be used to add labels in a specified language to schema attributes and categories.
 
 DIDs for both the overlay and associated schema base are referenced in the metadata block of the label overlay. The DID for the schema base can then be used as a coupling point to link the two data objects.
@@ -110,11 +119,13 @@ DIDs for both the overlay and associated schema base are referenced in the metad
 ![Figure 5: Example of a label overlay. Labels for schema attributes and categories are defined in a label overlay.](figure-5.png)
 
 #### Format Overlay
+
 A format overlay is a core linked object that can be used to add formats and field lengths to schema attributes.
 
 DIDs for both the overlay and associated schema base are referenced in the metadata block of the format overlay. The DID for the schema base can then be used as a coupling point to link the two data objects.
 
 #### Conditional Overlay
+
 A conditional overlay is an optional linked object that can be used to add simple conditional logic within the schema definition to trigger certain actions.
 
 DIDs for both the overlay and associated schema base are referenced in the metadata block of the conditional overlay. The DID for the schema base can then be used as a coupling point to link the two data objects.
@@ -122,6 +133,7 @@ DIDs for both the overlay and associated schema base are referenced in the metad
 ![Figure 6: Example of a conditional overlay. Simple conditional logic can be added to the schema definition to trigger certain actions. The logic is defined in a conditional overlay.](figure-6.png)
 
 #### Subset Overlay
+
 A subset overlay is an optional linked object that can be used to create a schema subset.
 
 DIDs for both the overlay and associated schema base are referenced in the metadata block of the subset overlay. The DID for the schema base can then be used as a coupling point to link the two data objects.
@@ -129,11 +141,13 @@ DIDs for both the overlay and associated schema base are referenced in the metad
 ![Figure 7: Example of a subset overlay. A schema subset is defined in a subset overlay.](figure-7.png)
 
 #### Sensitive Overlay (Holder Only)
+
 In contrast to other overlay types which are assigned by an issuer, a sensitive overlay is an optional object assigned by the data holder that can be used to flag user-defined sensitive attributes. For example, gender is not defined as a PII element in its most common presentation of male or female as, in isolation, it cannot identify an individual. However, Thailand has 18 different gender identities that are recognized in the local lexicon and, as such, may be deemed as sensitive to a Thai citizen. In this case, a sensitive overlay could be coupled to a data vault on a personal device or a data repository held by a trusted agent to flag the element.
 
 ![Figure 8: Example of a sensitive overlay. User-defined sensitive attributes are defined in a sensitive overlay by the data holder. Rather than coupling the object to a schema base, a sensitive overlay can be coupled to a data vault on a personal device or a data repository held by a trusted agent.](figure-8.png)
 
 ### Conclusion
+
 Primarily devised for data object interoperability and privacy compliant data sharing, ODCA significantly enhances the ability to pool data more effectively in terms of simplicity, accuracy, and allocation of resources. The degree of separation between schema bases and overlays allows multiple parties to use the same base objects for similar data capture requirements thus providing a standard base from which to decentralize data.
 
 ODCA aims to provide a standardized global solution for data capture and exchange which can facilitate a global decentralized lake containing non-PII data to be used for societal benefit.
@@ -189,6 +203,14 @@ identity features.
 enhancement proposal process before this gets merged?
 - What parts of the design do you expect to resolve through the
 implementation of this feature before stabilization?
-- What related issues do you consider out of scope for this 
+- What related issues do you consider out of scope for this
 proposal that could be addressed in the future independently of the
 solution that comes out of this doc?
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |

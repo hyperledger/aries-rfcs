@@ -1,13 +1,11 @@
-# 0043: l10n (Locali[s|z]ation)
-- Author: Daniel Hardman
-- Start Date: 2018-11-30
+# Aries RFC 0043: l10n (Locali[s|z]ation)
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-04-01
-- Status Note: Broadly socialized within the Indy community,
-  and used in some of the other RFCs. Not yet implemented
-  to any significant degree.
+- Authors: Daniel Hardman
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-04-01
+- Status Note: Broadly socialized within the Indy community, and used in some of the other RFCs. Not yet implemented to any significant degree.
+- Start Date: 2018-11-30
+- Tags: feature, decorator
 
 ## Summary
 
@@ -46,7 +44,6 @@ to use it, for reasons [enumerated in the RFC about JSON-LD
 compatibility](../../concepts/0047-json-ld-compatibility/README.md#internationalization-and-localization).
 
 # Tutorial
-[tutorial]: #tutorial
 
 Here we introduce some flexible and easy-to-use conventions. Software that
 uses these conventions should be able to add localization value in several ways,
@@ -152,7 +149,7 @@ form. In fact, if localization settings have much in common across a message
 family, the `Localization` section of a RFC may be defined not just for a
 message *type*, but for a whole message *family*.
 
-### Message Codes and Catalogs 
+### Message Codes and Catalogs
 
 When the same text values are used over and over again (as opposed to the sort of
 unpredictable, human-provided text that we've seen in the `note` field thus far),
@@ -191,7 +188,7 @@ To associate this catalog with a message type, the RFC defining the message type
 should contain a "Message Catalog" section that looks like this:
 
 ![catalog section of RFC](catalog-callout.png)
- 
+
 Note the verbiage about an official, immutable URL. This is important because
 localized alternatives for a message code could be an attack vector if the
 message catalog isn't handled correctly. If a hacker is able to change the
@@ -224,7 +221,7 @@ plural; its value is an array of URIs that reference specific
 catalog versions. Any catalogs listed in this URI are searched, in the
 order given, to find the definition and corresponding localized
 alternatives for a given `code`.
- 
+
 A `catalogs` field can be placed in a `~l10n` decorator at various scopes.
 If it appears at the message or field level, the catalogs it lists are
 searched before the more general catalogs.
@@ -263,7 +260,7 @@ message, and locales on keys. We may still have the `~l10n.locale` array and
 similar fields to establish defaults that are overridden in `~l10n.locales`:
 
 ```JSON
-"~l10n": { 
+"~l10n": {
   "locales": {
     "de": ["content.key@*", "content.Geburtstag", "content.Heiratsdatum"]
   }
@@ -279,7 +276,6 @@ message type, or message family scope is an elegant, concise way to cope with me
 that have mixed field locales (fields in a variety of locales).
 
 # Drawbacks
-[drawbacks]: #drawbacks
 
 The major problem with this feature is that it introduces complexity. However,
 it is complexity that most developers can ignore unless or until they care
@@ -287,7 +283,6 @@ about localization. Once that becomes a concern, the complexity provides
 important features--and it remains nicely encapsulated.
 
 # Rationale and alternatives
-[alternatives]: #alternatives
 
 We could choose not to support this feature.
 
@@ -296,7 +291,6 @@ However, this feature has a number of limitations, as [documented in the RFC
 about JSON-LD compatibility](../../concepts/0047-json-ld-compatibility/README.md#internationalization-and-localization).
 
 # Prior art
-[prior-art]: #prior-art
 
 Java's property bundle mechanism, Posix's gettext() function, and many other localization
 techniques are well known. They are not directly applicable, mostly because they don't address
@@ -304,7 +298,14 @@ the need to communicate with software that may or may not be using the same unde
 mapping/localization mechanism.
 
 # Unresolved questions
-[unresolved]: #unresolved-questions
 
 - Is encoding for units (e.g., the metric system vs. the British Imperial system)
   something that should be associated with locale?
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name | Link | Implementation Notes
+--- | --- | ---
+ |  |
