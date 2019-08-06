@@ -1,35 +1,39 @@
 # ![Aries RFCs](collateral/aries-rfcs-logo.png)
 
-This repo holds RFCs for the Aries project. They describe important
+This repo holds Request for Changes (RFCs) for the Aries project. They describe important
 topics ([not minor details](contributing.md#do-you-need-an-RFC)) that we want to
 standardize across the Aries ecosystem.
 
-See [the RFC Index](index.md) for a current listing of all RFCs and their statuses.
+If you are here to learn about Aries, we recommend you use the [the RFC Index](index.md) for a current listing of all RFCs and their statuses.
 
-There are 2 types of RFCs:
+There are 2 types of Aries RFCs:
 
-* RFCs that describe individual features (the [features](./features) folder)
-* RFCs that explain concepts underpinning many features (the [concepts](./concepts) folder)
+* RFCs that describe individual features (in the [features](./features) folder)
+* RFCs that explain concepts underpinning many features (in the [concepts](./concepts) folder)
 
-RFCs are for developers *building on* Aries. They don't provide guidance on how Aries
-implements features internally; individual Aries repos have design docs for that.
+RFCs are for developers *building on* Aries. They don't provide guidance on how Aries components
+implement features internally; individual Aries repos have design docs for that. Each
+Aries RFC includes an "implementations" section and all RFCs with a status greater than
+`Proposed` should have at least one listed implementation.
 
 ## RFC Lifecycle
 
-RFCs go through a standard lifecycle:
+RFCs go through a standard lifecycle.
 
 ![lifecycle](lifecycle.png)
 
 #### PROPOSED
-An RFC is __proposed__ [using these instructions to raise a PR](contributing.md#how-to-propose-an-RFC) against the repo. Proposed RFCs are considered a "work in progress", even after they are merged. In other words, they haven't been endorsed by the community yet, but they seem like reasonable ideas worth exploring.
+To __propose__ an RFC, [use these instructions to raise a PR](
+contributing.md#how-to-propose-an-RFC) against the repo. Proposed
+RFCs are considered a "work in progress", even after they are merged. In other words, they
+haven't been endorsed by the community yet, but they seem like reasonable ideas worth
+exploring.
 
 #### DEMONSTRATED
-An RFC is __demonstrated__ when a proof-of-concept implementation is
-publicly visible and linked from its Implementations section. This
-shows that the idea is practical and useful, and that experience is
-accumulating to refine it. The community still has not passed judgment.
-
-Concept RFCs may skip this phase.
+__Demonstrated__ RFCs have one or more implementations available, listed in the "Implementations" section
+of the RFC document. As with the PROPOSED status, demonstrated RFCs haven't been endorsed by the community,
+but the ideas put forth have been more thoroughly explored through the implementation(s). The demonstrated
+status is an optional step in the lifecycle.
 
 #### ACCEPTED
 To get an RFC __accepted__, [build consensus](contributing.md#how-to-get-an-RFC-accepted)
@@ -54,6 +58,19 @@ when implementation seems permanently stalled, or when significant refinements r
 a superseding document. If a retired RFC has been superseded, its `Superseded By` field
 should contain a link to the newer spec, and the newer spec's `Supersedes` field
 should contain a link to the older spec. Permalinks are not broken.
+
+### Changing an RFC Status
+
+The lifecycle of an RFC is driven by the author or current champion of the RFC. To move an RFC along
+in the lifecycle, submit a PR with the following characteristics:
+
+- The PR should __ONLY__ change the RFC status. Note that this requires refreshing the index (`python code/generate_index.py && pytest code`).
+- The title of the PR should include a deadline date for merging the PR and the referenced RFC.
+  - Example: `Status to Accepted, deadline 2019.08.15, RFC 0095-basic-message`
+- The PR comment should document why the status is being changed.
+- The deadline date should be 2 weeks after announcing the proposed status change on an Aries WG call. The PR should also be announced on the [#aries rocketchat channel](https://chat.hyperledger.org/channel/aries).
+- Barring negative feedback from the community, the repo's maintainers should merge the PR after the deadline.
+- The deadline should be moved by two weeks after addressing each substantive change to the RFC made during the status change review period.
 
 ## About
 
