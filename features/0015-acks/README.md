@@ -1,14 +1,12 @@
-# 0015: ACKs
-- Author: Daniel Hardman <daniel.hardman@gmail.com>
-- Start Date: 2018-12-26
+# Aries RFC 0015: ACKs
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-12-26
-- Status Note: Broadly socialized and beginning to be implemented. Several
-  protocols assume ACK behavior. May be nearing the maturity and uptake
-  appropriate for ACCEPTED status. Note: this RFC supersedes [Indy HIPE
-  PR #77](https://github.com/hyperledger/indy-hipe/pull/77).
+- Authors: Daniel Hardman <daniel.hardman@gmail.com>
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-12-26
+- Status Note: Broadly socialized and beginning to be implemented. Several protocols assume ACK behavior. May be nearing the maturity and uptake appropriate for ACCEPTED status. Note: this RFC 
+- Supersedes: [Indy HIPE PR #77](https://github.com/hyperledger/indy-hipe/pull/77)
+- Start Date: 2018-12-26
+- Tags: feature, decorator
 
 ## Summary
 
@@ -16,7 +14,6 @@ Explains how one party can request, and another party can send, acknowledgment
 messages (ACKs) to confirm receipt and clarify the status of complex processes.
 
 ## Motivation
-[motivation]: #motivation
 
 An __acknowledgment__ or __ACK__ is one of the most common procedures in protocols
 of all types. We need a flexible, powerful, and easy way to request and send such
@@ -122,7 +119,7 @@ A fancier version of `ack` might look like this:
 
 [![sample ~please_ack](please_ack.png)](please_ack.json)
 
-This says, "For the message that I already sent you, with 
+This says, "For the message that I already sent you, with
 @id=b271c889-a306-4737-81e6-6b2f2f8062ae,
 please acknowledge that you've seen it as soon as you get this new message, and
 please send me a new ack every 6 hours as long as status is still pending. Then
@@ -211,10 +208,12 @@ types overlap, and where they do not. Carelessness here is likely to cause subtl
 hard-to-duplicate surprises from time to time.
 
 ### Signed (Non-repudiable) acks
+
 [TODO: how do you ask for an ACK that commits its sender to the acknowledgment in
 a way that's provable to third parties? Open email to Mike Lodder...]
 
 ### Muliplexed acks
+
 [TODO: how do you ask for, and supply, an ACK to all of Alice's agents instead
 of just to the one who sent the ACK? Does each agent need to request the ACK
 separately? Are there denial-of-service or other security issues?]
@@ -227,19 +226,20 @@ sophisticated or fine-grained that the simple settings offered here.
 In such cases, developers should write their own ACK message type(s) and
 maybe their own decorators. However, reusing the field names and conventions
 in this RFC may still be desirable, if there is significant overlap in the
-concepts. 
+concepts.
 
 # Reference
-[reference]: #reference
 
 ### `~please_ack` decorator
 
 ##### __`message_id`__
+
 Asks for an acknowledgment of a message other than the one
 that's decorated. Usually omitted, since most requests for an
 ACK happen in the same message that wants acknowledgment.
 
 ##### __`on`__
+
 Describes the circumstances under which an ack is desired. Possible
 values in this array include `RECEIPT`, `OUTCOME`, and strings that express a
 time interval, as [documented in the RFC that discusses date- and time-related conventions](
@@ -257,10 +257,10 @@ she could request an ack to be sent with each state, or with just some of them:
 ```JSON
 "on": ["evaluating-all-offers", "OUTCOME"]
 ```
-  
+
 The order of items in the `on` array is not significant, and any unrecognized
 values in it should be ignored.
-  
+
 ### `ack` message
 
 ##### __`status`__
@@ -305,7 +305,7 @@ if the `issue-credential` protocol defines a final state for the holder called
 Suppose instead that partway through the issuance protocol, a message gets
 dropped or delayed. Bob has sent his `credential-request` message with `@id:abc123`,
 but he's been waiting for a response for AliceCorp for a long time. He now sends
-a new message, requesting an ack. The message type is `problem-report` and the 
+a new message, requesting an ack. The message type is `problem-report` and the
 severity is `WARN`, because Bob is unsure what the slow response means. `~thread.thid`
 points back to the message that began the issuance protocol, which was probably
 AliceCorp's `credential-offer`. `~thread.myindex` shows that this is the second
@@ -396,7 +396,6 @@ knows that this `ack` is the 3rd message in the interaction (credential-offer=0,
 credential=1, ack=2). Bob can now ask AliceCorp to resend. [TODO: how is this done?]
 
 # Drawbacks and Alternatives
-[drawbacks]: #drawbacks
 
 This mechanism is more complex than what developers might assume
 at first glance. Isn't an ACK just a dirt-simple message that says "Your
@@ -410,21 +409,18 @@ ungeneralized](https://codecraft.co/2015/09/02/on-forests-and-trees/),
 causing lots of wasted code and documentation and learning time.
 
 # Prior art
-[prior-art]: #prior-art
 
 See notes above about the [implicit ACK mechanism in `~thread.lrecs`](#implicit-acks).
 
 # Unresolved questions
-[unresolved]: #unresolved-questions
 
 - Security and privacy implications of ACKs. Could they be used to mount
 a denial-of-service attack or to sniff info that's undesirable?
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

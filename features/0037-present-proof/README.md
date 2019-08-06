@@ -1,13 +1,12 @@
-# 0037: Present Proof Protocol 1.0
+# Aries RFC 0037: Present Proof Protocol 1.0
 
-- Author: Nikita Khateev
+- Authors: Nikita Khateev
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-05-28
+- Status Note:  See [RFC 0036](../0036-issue-credential/README.md) for the issue credential part of the same Indy HIPE PR.
+- Supersedes: [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md)
 - Start Date: 2019-01-30
-
-## Status
-
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-05-28
-- Status Note: This supersedes the Present Proof part of [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md). See [RFC 0036](../0036-issue-credential/README.md) for the issue credential part of the same Indy HIPE PR.
+- Tags: feature, protocol
 
 ## Summary
 
@@ -239,12 +238,11 @@ Similar (but simplified) credential exchange was already implemented in [von-anc
 - There might need to be a way to associate a payment with the present proof protocol.
 
 Diagrams were made in draw.io. To make some changes you can just upload the HTML from this repo to this site.
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

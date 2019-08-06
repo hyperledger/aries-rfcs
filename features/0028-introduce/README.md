@@ -1,13 +1,11 @@
-# 0028: Introduce Protocol 1.0
+# Aries RFC 0028: Introduce Protocol 1.0
 
 - Authors: Daniel Hardman, Sam Curren, Stephen Curran, Tobias Looker
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-04-15
+- Status Note: Referenced in some discussions about the peer DID method spec and n-wise DIDs, but not yet implemented.
 - Start Date: 2019-03-27
-
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-04-15
-- Status Note: Referenced in some discussions about the peer DID method spec and n-wise
-  DIDs, but not yet implemented.
+- Tags: feature, protocol
 
 ## Summary
 
@@ -15,7 +13,6 @@ Describes how a go-between can introduce two parties that
 it already knows, but that do not know each other.
 
 ## Motivation
-[motivation]: #motivation
 
 Introductions are a fundamental activity in human relationships. They allow
 us to bootstrap contact information and trust. They are also a source of
@@ -23,7 +20,6 @@ virality. We need a standard way to do introductions in an SSI ecosystem,
 and it needs to be flexible, secure, privacy-respecting, and well documented.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 ### Name and Version
 
@@ -37,7 +33,7 @@ This is the Introduce 1.0 protocol. It is uniquely identified by the URI:
 
 Introductions target scenarios like this:
 
->Alice knows Bob and Carol, and can talk to each of them. She 
+>Alice knows Bob and Carol, and can talk to each of them. She
 wants to introduce them in a way that allows a relationship to form.
 
 ![scenario diagram](scenario.png)
@@ -111,7 +107,7 @@ an introduction, and requests approval to do so. It works the same way
 that proposals do in [double-opt-in introductions](
 https://avc.com/2009/11/the-double-optin-introduction/) in the
 non-agent world:
-    
+
 ![sample introduction email](double-opt-in.png)
 
 The DIDComm message looks like this:
@@ -123,7 +119,7 @@ context about the introduction, helping the party receiving the proposal
 to evaluate whether they wish to accept it. Depending on how much context
 is available between introducer and introducee independent of the formal
 proposal message, this can be as simple as a name, or something fancier (see
-[Advanced Use Cases](#advanced-use-cases) below). 
+[Advanced Use Cases](#advanced-use-cases) below).
 
 ##### `response`
 
@@ -138,7 +134,7 @@ A simpler response, also valid, might look like this:
 
 The difference between the two forms is whether the response contains
 a valid `didexchange/../invitation` message. Normally, it should--but sometimes,
-an introducee may not be able to (or may not want to) share a DIDComm 
+an introducee may not be able to (or may not want to) share a DIDComm
 endpoint to facilitate the introduction. In such cases, the stripped-down
 variant may be the right choice. See the [Advanced Use Cases](#advanced-use-cases)
 section for more details.
@@ -186,7 +182,7 @@ returned if the recipient chooses not to honor it.
 
 ### Advanced Use Cases
 
-Any of the parties can be an organization or thing instead of a person. 
+Any of the parties can be an organization or thing instead of a person.
 
 ![any identity owner type](any-identity-owner-type.png)
 
@@ -248,16 +244,19 @@ this is the `skip proposal` event shown in the introducer's
 state machine.
 
 #### Proposal initiated by introducee
+
 [TODO: Alice is still doing the intro, but Bob now asks Alice to introduce
 him to Carol. Is this the same proposal message type, just with a field
 indicating that he's proposing to Alice that *she* do the intro? Or is it
 a different message?]
 
 #### Requesting confirmation
+
 [TODO: A field in the `response` where an introducee asks to be notified
 that the introduction has been made?]
 
 #### Other stuff
+
 * Using acks to report status of introduction efforts.
 * Timeouts.
 * Introducing multiple parties at the same time?
@@ -268,7 +267,6 @@ he published on his website? Are there security or privacy implications?
 What if she is introducing 2 public entities and has a connection to neither?]
 
 ## Reference
-[reference]: #reference
 
 ### `proposal`
 
@@ -291,9 +289,11 @@ relationship in which only the introducees participate.
 [TODO: do we care about having a response signed? Security? MITM?]
 
 ### Errors
+
 [TODO: What can go wrong.]
 
 ### Localization
+
 [TODO: the `description` field in an introducee descriptor. Error codes/catalog.]
 
 ## Drawbacks
@@ -336,15 +336,14 @@ identity features.
 enhancement proposal process before this gets merged?
 - What parts of the design do you expect to resolve through the
 implementation of this feature before stabilization?
-- What related issues do you consider out of scope for this 
+- What related issues do you consider out of scope for this
 proposal that could be addressed in the future independently of the
 solution that comes out of this doc?
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

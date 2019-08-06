@@ -1,12 +1,12 @@
-# 0029: Message Trust Contexts
-- Author: Daniel Hardman <daniel.hardman@gmail.com>
-- Start Date: 2018-02-10 (approx, backdated)
+# Aries RFC 0029: Message Trust Contexts
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-05-1
-- Status Note: Only implemented in one codebase and in the sample code here.
-  Supersedes [Indy HIPE PR #120](https://github.com/hyperledger/indy-hipe/pull/120).
+- Authors: Daniel Hardman <daniel.hardman@gmail.com>
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-05-1
+- Status Note: Only implemented in one codebase and in the sample code here. 
+- Supersedes: [Indy HIPE PR #120](https://github.com/hyperledger/indy-hipe/pull/120)
+- Start Date: 2018-02-10 (approx, backdated)
+- Tags: concept
 
 ## Summary
 
@@ -47,6 +47,7 @@ An MTC is an object that holds trust context for a message. This context follows
 Protocols should be designed with standard MTCs in mind. Thus, it is desirable that all implementations share common names for certain concepts, so we can discuss them conveniently in design docs, error messages, logs, and so forth. The standard dimensions of trust tracked in an MTC break down into two groups:
 
 #### Crypto-related
+
 * __Confidentiality__: Could the plaintext content of the message I just received over this channel have been observed by another party?
 * __Integrity__: Could the message have been tampered with since it was sent?
 * __Authenticated Origin__: Can I know the identity of the original sender with confidence? And if so, on what basis--were multiple factors of auth required to use the keys that encrypted the message? Were biometrics at play?
@@ -56,6 +57,7 @@ Protocols should be designed with standard MTCs in mind. Thus, it is desirable t
 * __Limited Scope__: Does the sender identify me in a way that is only meaningful inside a narrow context (e.g., pairwise or nwise relationship), to preserve my privacy? Or did they use a published DID that would correlate me?
 
 #### Input validations
+
 * __Size OK__: Do I know that the message will not overflow internal buffers or persistent storage?
 * __Deserialize OK__: Does the plaintext message deserialize into [native object representation](../../features/0044-didcomm-file-and-mime-types/README.md#native-object-representation)?
 * __Keys OK__: As a native object, do the keys (property names) and structure match what was expected? In some approaches to deserialization, it may be combined with the previous question--but in languages that produce a loose dictionary from JSON, it is distinct.
@@ -86,7 +88,7 @@ Here, we are explicitly denying that `nonrepudiation` is part of the trust conte
 For further terseness in our notation, spaces can be omitted:
 
     mtc: +i+a-n
-    
+
 Finally, an mtc that makes no explicit positive or negative claims (undefined) is written as:
 
     mtc: ?
@@ -122,7 +124,7 @@ Part of the intention with the terse MTC notation is that conversations about ag
 and interoperable. When agents send one another [`problem-report` messages](../../features/0035-report-problem/README.md),
 they can turn MTCs into human-friendly text, but also use this notation: "Unable to accept a payment from message that
 lacks Integrity guarantees (-i)." This notation can help diagnose trust problems in logs. It may also be helpful with
-[message tracing](../../features/0034-message-tracing/README.md), 
+[message tracing](../../features/0034-message-tracing/README.md),
 [feature discovery](../../features/0031-discover-features/README.md), and agent testing.
 
 ## Reference
@@ -130,12 +132,12 @@ lacks Integrity guarantees (-i)." This notation can help diagnose trust problems
 A complete reference implementation of MTCs in python is attached to this RFC (see [mtc.py](mtc.py)).
 It could easily be extended with custom trust dimensions, and it would be simple to port to other
 programming languages. Note that the implementation includes unit tests written in pytest style,
-and has only been tested on python 3.x.   
+and has only been tested on python 3.x.
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

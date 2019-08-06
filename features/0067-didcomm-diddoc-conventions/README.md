@@ -1,11 +1,11 @@
-# 0067: DIDComm DID document conventions
-- Author: Tobias Looker (tobias.looker@mattr.global), Stephen Curran (swcurran@gmail.com)
-- Start Date: 04/15/2019
+# Aries RFC 0067: DIDComm DID document conventions
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 06/10/2019
+- Authors: Tobias Looker (tobias.looker@mattr.global), Stephen Curran (swcurran@gmail.com)
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 06
 - Status Note: This revises the former [INDY HIPE](https://github.com/hyperledger/indy-hipe/pull/92)
+- Start Date: 04/15/2019
+- Tags: feature
 
 ## Summary
 
@@ -19,7 +19,7 @@ Standardization of these conventions is essential to promoting interoperability 
 
 ### DID documents
 
-A DID document is the associated data model to a DID, it contains important associated cryptographic information and a declaration of capabilities the DID supports. 
+A DID document is the associated data model to a DID, it contains important associated cryptographic information and a declaration of capabilities the DID supports.
 
 Of particular interested to this RFC is the definition of [service endpoints](https://w3c-ccg.github.io/did-spec/#service-endpoints). The primary object of this RFC is to document the DID communication service type and describe the associated conventions.
 
@@ -56,7 +56,7 @@ When a DID document wishes to express support for DID communications, the follow
 
 Below describes the process under which a DID communication message is prepared and sent to a DID based on the conventions declared in the associated DID document. The scenario in which the below is predicated has the following conditions.
     - The sender possesses the DID document for the intended recipient(s) of a DID communication message.
-    - The sender has created a [content level message](../../concepts/0021-didcomm-message-anatomy/README.md) that is now ready to be prepared for sending to the intended recipient(s). 
+    - The sender has created a [content level message](../../concepts/0021-didcomm-message-anatomy/README.md) that is now ready to be prepared for sending to the intended recipient(s).
 
 1. The sender resolves the relevant `did-communication` service of the intended recipient(s) DID document.
 2. The sender resolves the recipient keys present in the `recipientKeys` array of the service declaration.
@@ -65,8 +65,8 @@ Below describes the process under which a DID communication message is prepared 
     1. The sender resolves the current key in the routing array and takes the outputted encrypted envelope from the previous step and packs it inside a new encrypted envelope for the current key.
     2. The sender prepares a content level message of type `forward`. The current key in the routing array is set as the contents of the `to` field in the forward message and the encrypted envelope from the previous step is set as the contents of the `msg` field in the forward message.
 5. Resolve the service endpoint:
-    - If the endpoint is a valid DID URL, check that it resolves to another DID service definition. If the resolution is successful the process from step 2. is repeated using the message outputted from this process as the input message. 
-    - If the service endpoint is not a DID URL, send the message using the transport protocol declared by the URL's scheme.  
+    - If the endpoint is a valid DID URL, check that it resolves to another DID service definition. If the resolution is successful the process from step 2. is repeated using the message outputted from this process as the input message.
+    - If the service endpoint is not a DID URL, send the message using the transport protocol declared by the URL's scheme.
 
 > Notes
 >1. There are two main situations that an agent will be in prior to preparing a new message.
@@ -96,7 +96,7 @@ In the diagram above:
 
 #### Bob's DID document for his Relationship with Alice
 
-Bob’s domain has 3 devices he uses for processing messages - two phones (4 and 5) and a cloud-based agent (6). As well, Bob has one agent that he uses as a mediator (3) that can hold messages for the two phones when they are offline. However, in Bob's relationship with Alice, he ONLY uses one phone (4) and the cloud-based agent (6). Thus the key for device 5 is left out of the DID document (see below). For further privacy preservation, Bob also elects to use a shared domain endpoint (agents-r-us), giving him an extra layer of isolation from correlation. This is represented by the `serviceEndpoint` in the service definition not directly resolving to an endpoint URI rather resolving to another `did-communication` service definition which is owned and controlled by the endpoint owner (agents-r-us). 
+Bob’s domain has 3 devices he uses for processing messages - two phones (4 and 5) and a cloud-based agent (6). As well, Bob has one agent that he uses as a mediator (3) that can hold messages for the two phones when they are offline. However, in Bob's relationship with Alice, he ONLY uses one phone (4) and the cloud-based agent (6). Thus the key for device 5 is left out of the DID document (see below). For further privacy preservation, Bob also elects to use a shared domain endpoint (agents-r-us), giving him an extra layer of isolation from correlation. This is represented by the `serviceEndpoint` in the service definition not directly resolving to an endpoint URI rather resolving to another `did-communication` service definition which is owned and controlled by the endpoint owner (agents-r-us).
 
 Bobs DID document given to Alice
 
@@ -155,7 +155,7 @@ Agents r Us DID document - resolvable by Alice
 Alices agent goes to prepare a message `desired_msg` for Bob.
 
 1. Alices agent resolves the above DID document `did:example:1234abcd` for Bob and resolves the `did-communication` service definition.
-2. Alices agent then packs `desired_msg` in an encrypted envelope message to the resolved keys defined in the `recipientKeys` array. 
+2. Alices agent then packs `desired_msg` in an encrypted envelope message to the resolved keys defined in the `recipientKeys` array.
 3. Because the the `routingKeys` array is not empty, a content level message of type `forward` is prepared where the `to` field of the forward message is set to the resolved keys and the `msg` field of the forward message is set to the encrypted envelope from the previous step.
 4. The resulting forward message from the previous step is then packed inside another encrypted envelope for the first and only key in the `routingKeys` array.
 5. Inspection of the service endpoint, reveals it is a did url and leads to resolving another `did-communication` service definition, this time owned and controlled by `agents-r-us`.
@@ -176,12 +176,12 @@ Alices agent goes to prepare a message `desired_msg` for Bob.
 
 The following remain unresolved:
 
-- The convention for packing the message for the required routes is dependent on the array order of key references, which could be viewed as a weak/brittle convention.   
+- The convention for packing the message for the required routes is dependent on the array order of key references, which could be viewed as a weak/brittle convention.
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

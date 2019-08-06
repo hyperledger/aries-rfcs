@@ -1,11 +1,11 @@
-# 0017: Attachments
-- Author: Daniel Hardman <daniel.hardman@gmail.com>, Sam Curren
-- Start Date: 2018-12-24
+# Aries RFC 0017: Attachments
 
-## Status
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2018-01-31
+- Authors: Daniel Hardman <daniel.hardman@gmail.com>, Sam Curren
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2018-01-31
 - Status Note: Used in a number of other RFCs.
+- Start Date: 2018-12-24
+- Tags: concept
 
 ## Summary
 
@@ -13,7 +13,6 @@ Explains the three canonical ways to attach data to
 an agent message.
 
 ## Motivation
-[motivation]: #motivation
 
 [DIDComm](../0005-didcomm/README.md) messages
 use a structured format with a defined schema and a
@@ -37,7 +36,7 @@ data, and vice versa. After all, any data can be transmitted over
 DIDComm; doesn't that turn it into a message? And any message can
 be saved; doesn't that make it data?
 
-What it is true that messages and data are highly related, 
+What it is true that messages and data are highly related,
 some semantic differences matter:
 
 * _Messages are primarily about communication_. Their meaning is tied
@@ -69,7 +68,7 @@ messages.
 parameters that change how the error is processed are probably
 part of the message, whereas a log file that provides supporting
 information should be thought of as data rather than the message
-proper. 
+proper.
 
 * The protocol for issuing credentials consists of messages that flow
 through certain steps. One of the steps eventually delivers a credential.
@@ -101,7 +100,7 @@ for the central question of this HIPE, which is:
 
 Data can be "attached" to DIDComm messages in 3 ways:
 
-1. Inlining 
+1. Inlining
 2. Embedding
 3. Appending
 
@@ -178,7 +177,7 @@ Protocol inlines a DID Doc in its `connection_request` and
 Embedded data is still associated with a known field in the
 message schema, but it can have a broader set of possible
 formats. A credential exchange protocol might embed a credential
-in the final message that does credential issuance. 
+in the final message that does credential issuance.
 
 Appended attachments are the most flexible but also the hardest
 to run through semantically sophisticated processing. They do not require
@@ -293,7 +292,7 @@ Or on an ordinary HTTP/FTP site or CDN:
 }
 ```
 
-Or on BitTorrent: 
+Or on BitTorrent:
 ```JSON
 "byte_count": 192834724,
 "data": {
@@ -308,7 +307,7 @@ Or via double indirection (URI for a BitTorrent):
 }
 ```
 
-Or as content already attached to a previous DIDComm message: 
+Or as content already attached to a previous DIDComm message:
 
 ```JSON
 "data": {
@@ -316,8 +315,8 @@ Or as content already attached to a previous DIDComm message:
 }
 ```
 
-Or even via a promise to supply the content at some point in the future, in 
-a subsequent DIDComm message: 
+Or even via a promise to supply the content at some point in the future, in
+a subsequent DIDComm message:
 
 ```JSON
 "data": {
@@ -337,7 +336,7 @@ The `links` field is plural (an array) to allow multiple locations to be
 offered for the same content. This allows an agent to fetch attachments using
 whichever mechanism(s) are best suited to its individual needs and capabilities.
 
-[TODO: discuss sending an empty message with just attachments, and how to 
+[TODO: discuss sending an empty message with just attachments, and how to
 request a send of an attachment, or an alternate download method for it]
 
 ### Size Considerations
@@ -375,7 +374,7 @@ carefully encrypted.
 
 If attachment content is fetched from an external source, then new
 complications arise. The security guarantees may change. Data streamed from a CDN
-may be observable in flight. URIs may be correlating. Content may not be 
+may be observable in flight. URIs may be correlating. Content may not be
 immutable or tamper-resistant.
 
 However, these issues are not necessarily a problem. If a DIDComm message
@@ -388,7 +387,6 @@ Code that handles attachments will need to use wise policy to decide whether
 attachments are presented in a form that meets its needs.
 
 ## Reference
-[reference]: #reference
 
 ### Attachment Descriptor structure
 
@@ -430,48 +428,42 @@ attachment. Contains the following subfields:
   This may also be undesirable, if dynamic content at a specified link is
   beneficial. Including a hash without including a way to fetch the content via
   link is a form of proof of existence.
-  
+
   * `links`: A list of zero or more locations at which the content may be fetched.
 
-
 ## Drawbacks
-[drawbacks]: #drawbacks
 
 By providing 3 different choices, we impose additional complexity on
 agents that will receive messages. They have to handle attachments
 in 3 different modes.
 
 ## Rationale and alternatives
-[alternatives]: #alternatives
 
 Originally, we only proposed the most flexible method of attaching--appending.
 However, feedback from the community suggested that stronger binding to
 schema was desirable. Inlining was independently invented, and is suggested
 by JSON-LD anyway. Embedding without appending eliminates some valuable
 features such as unnamed and undeclared ad-hoc attachments. So we ended
-up wanting to support all 3 modes. 
+up wanting to support all 3 modes.
 
 ## Prior art
-[prior-art]: #prior-art
 
 Multipart MIME (see RFCs [822](https://tools.ietf.org/html/rfc822),
 [1341](https://tools.ietf.org/html/rfc1341), and
 [2045](https://tools.ietf.org/html/rfc2045)) defines a mechanism
 somewhat like this. Since we are using JSON instead of email
 messages as the core model, we can't use these mechanisms directly.
-However, they are an inspiration for what we are showing here. 
+However, they are an inspiration for what we are showing here.
 
 # Unresolved questions
-[unresolved]: #unresolved-questions
 
 - What additional clarity do we need to provide for the URIs used
 to fetch attachment content later?
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

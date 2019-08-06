@@ -1,11 +1,12 @@
-# 0092: Transports Return Route
-- Author: Sam Curren sam@sovrin.org
-- Start Date: 2019-03-04
+# Aries RFC 0092: Transports Return Route
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-06-18
-- Status Note: Supersedes [INDY HIPE PR 116](https://github.com/hyperledger/indy-hipe/pull/116)
+- Authors: Sam Curren sam@sovrin.org
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-06-18
+- Status Note:  
+- Supersedes: [INDY HIPE PR 116](https://github.com/hyperledger/indy-hipe/pull/116)
+- Start Date: 2019-03-04
+- Tags: feature
 
 ## Summary
 
@@ -40,9 +41,9 @@ When you send a message through a connection, you can use the `~transport` decor
 
   The `~transport` decorator should be processed after unpacking and prior to routing the message to a message handler.
 
-  For HTTP transports, the presence of this message decorator indicates that the receiving agent MAY hold onto the connection and use it to return messages as designated. HTTP transports will only be able to receive at most one message at a time. Websocket transports are capable of receiving multiple messages. 
+  For HTTP transports, the presence of this message decorator indicates that the receiving agent MAY hold onto the connection and use it to return messages as designated. HTTP transports will only be able to receive at most one message at a time. Websocket transports are capable of receiving multiple messages.
 
-  Compliance with this indicator is optional for agents generally, but required for agents wishing to connect with client based agents. 
+  Compliance with this indicator is optional for agents generally, but required for agents wishing to connect with client based agents.
 
 ## Drawbacks
 
@@ -55,12 +56,11 @@ When you send a message through a connection, you can use the `~transport` decor
 ## Prior art
 
 The [Decorators RFC](../../concepts/0011-decorators/README.md) describes scope of decorators. Transport isn't one of the scopes listed.
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

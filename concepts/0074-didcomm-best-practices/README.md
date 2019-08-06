@@ -1,14 +1,11 @@
-# 0074: DIDComm Best Practices
-- Authors: Devin Fisher, Daniel Hardman
-- Start Date: 2019-01-15
+# Aries RFC 0074: DIDComm Best Practices
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-06-10
-- Status Note: This captures some tribal knowledge from the Indy
-community. However, it is by no means uniformly accepted inside
-that group, and it has never been shared in a larger context. Therefore,
-the RFC is currently fodder for discussion.
+- Authors: Devin Fisher, Daniel Hardman
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-06-10
+- Status Note: This captures some tribal knowledge from the Indy community. However, it is by no means uniformly accepted inside that group, and it has never been shared in a larger context. Therefore, the RFC is currently fodder for discussion.
+- Start Date: 2019-01-15
+- Tags: concept
 
 ## Summary
 
@@ -266,6 +263,7 @@ deprecated, because they don't say enough about what to expect from the values.
 granularity and format?)
 
 ##### `_date`
+
 Used for fields that have only date precision,
 no time component. For example, `birth_date` or `expiration_date`.
 Such fields should be represented as strings in ISO 8601 format
@@ -273,6 +271,7 @@ Such fields should be represented as strings in ISO 8601 format
 if it's meaningful (see [Timezone Offset Notation](#timezone-offset-notation)).
 
 ##### `_time`
+
 Used for fields that identify a moment with both date and
 time precision. For example, `arrival_time` might communicate when a
 train reaches the station. The datatype of such fields is a string
@@ -283,10 +282,11 @@ calendar, and the timezone defaults to UTC. However:
   explicit: "2018-05-27 18:22Z"
 * The capital 'T' that separates date from time in ISO 8601 can
 freely vary with a space. (Many datetime formatters support this
-variation, for greater readability.) 
+variation, for greater readability.)
 * If local time is needed, [Timezone Offset Notation](#timezone-offset-notation) is used.
 
 ##### `_sched`
+
 Holds a string that expresses appointment-style schedules
 such as "the first Thursday of each month, at 7 pm". The format of
 these strings is recommended to follow [ISO 8601's Repeating Intervals
@@ -296,10 +296,12 @@ single format, but just the semantic commonality of scheduling.
 
 
 ##### `_clock`
+
 Describes wall time without reference to a date, as in `13:57`.
 Uses ISO 8601 formatted strings and a 24-hour cycle, not AM/PM.
 
 ##### `_t`
+
 Used just like `_time`, but for unsigned integer seconds since
 Jan 1, 1970 (with no opinion about whether it's a 32-bit or 64-bit value).
 Thus, a field that captures a last modified timestamp for a file, as
@@ -308,17 +310,20 @@ was chosen for resonance with Posix's `time_t` datatype, which has
 similar semantics.
 
 ##### `_tt`
+
 Used just like `_time` and `_t`, but for 100-nanosecond
 intervals since Jan 1, 1601. This matches the semantics of the Windows
 FILETIME datatype.
 
 ##### `_sec` or subunits of seconds (`_milli`, `_micro`, `_nano`)
+
 Used for fields that tell how long something took. For example, a field
 describing how long a system waited before retry might be named
 `retry_milli`. Normally, this field would be represented as an unsigned
 positive integer.
 
 ##### `_dur`
+
 Tells duration (elapsed time) in friendly, calendar based
 units as a string, using the conventions of [ISO 8601's Duration
 concept](https://en.wikipedia.org/wiki/ISO_8601#Durations). `Y` = year,
@@ -328,6 +333,7 @@ by 'T' to resolve ambiguity between months and minutes: "PT1M3S" = 1 minute,
 3 seconds, whereas "P1M3S" = 1 month, 3 seconds.
 
 ##### `_when`
+
 For vague or imprecise dates and date ranges. Fragments of
 ISO 8601 are preferred, as in "1939-12" for "December 1939". The token
 "to" is reserved for inclusive ranges, and the token "circa" is reserved
@@ -390,7 +396,7 @@ These rules are enforced by a unit test that runs `code/check_links.py`. To run
 it, go to the root of the repo and run `pytest code` -- or simply invoke the
 `check_links` script directly. Normally, `check_links` does not test external
 hyperlinks on the web, because it is too time-consuming; if you want that check,
-add `--full` as a command-line argument. 
+add `--full` as a command-line argument.
 
 ## Reference
 
@@ -418,12 +424,12 @@ to avoid that.
 
 ## Unresolved questions
 
-- What other conventions do we need?   
+- What other conventions do we need?
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

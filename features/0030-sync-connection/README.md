@@ -1,14 +1,12 @@
-# 0030: Sync Connection Protocol 1.0 (and a related minor protocol)
-- Authors: Daniel Hardman <daniel.hardman@gmail.com>, 
-  Devin Fisher <devin.fisher@evernym.com>, Sam Curren <sam@sovrin.org>
+# Aries RFC 0030: Sync Connection (and a related minor protocol) Protocol 1.0
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
+- Authors: Daniel Hardman <daniel.hardman@gmail.com>,
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-07-03
+- Status Note: used by the [peer DID method spec](https://openssi.github.io/peer-did-method-spec). Implementation beginning. 
+- Supersedes: [Indy HIPE PR #104](https://github.com/hyperledger/indy-hipe/pull/104)
 - Start Date: 2018-10-01
-- Status Date: 2019-07-03.
-- Status Note: used by the [peer DID method spec](https://openssi.github.io/peer-did-method-spec).
-  Implementation beginning.
-  Supersedes [Indy HIPE PR #104](https://github.com/hyperledger/indy-hipe/pull/104).
+- Tags: feature, decorator, protocol
 
 ## Summary
 
@@ -33,7 +31,7 @@ how peers maintain their relationship thereafter, as DID docs evolve.
 >__Note 1__: This RFC assumes you are thoroughly familiar with terminology and
 constructs from the [peer DID method spec](
 https://openssi.github.io/peer-did-method-spec). Check there if you need
-background. 
+background.
 
 >__Note 2__: Most protocols between identity owners deal only with messages that
 cross a domain boundary--what Alice sends to Bob, or vice versa. What Alice
@@ -181,7 +179,7 @@ each other discover when state synchronization is needed. This decorator has the
 following format:
 
 ```JSON
-"~state": [ 
+"~state": [
   {"did": "<my did>", "state_hash": "<my state hash>"},
   {"did": "<your did>", "state_hash": "<your state hash>"}
 ]
@@ -244,12 +242,11 @@ which states, causing which transitions]
 
 [TODO: define some localized strings that could be used with these messages,
 in errors or at other generally useful points?]
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

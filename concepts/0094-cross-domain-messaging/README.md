@@ -1,12 +1,12 @@
-# 0094: Cross-Domain Messaging
-- Author: Stephen Curran (swcurran@gmail.com)
-- Start Date: 2018-08-13
+# Aries RFC 0094: Cross-Domain Messaging
 
-## Status
-- Status: [Accepted](/README.md#rfc-lifecycle)
-- Status Date: 2018-10-29
-- Status Note: Socialized and broadly understood in other conceptual
-  RFCs about routing. Supersedes Indy RFC [0022-Cross-Domain-Messaging](https://github.com/hyperledger/indy-RFC/blob/master/text/0022-cross-domain-messaging/README.md)
+- Authors: Stephen Curran (swcurran@gmail.com)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2018-10-29
+- Status Note: Socialized and broadly understood in other conceptual RFCs about routing. 
+- Supersedes: [0022-Cross-Domain-Messaging](https://github.com/hyperledger/indy-RFC/blob/master/text/0022-cross-domain-messaging/README.md)
+- Start Date: 2018-08-13
+- Tags: concept
 
 ## Summary
 
@@ -27,7 +27,6 @@ Put another way - these RFCs are about envelopes. They define a way to put a mes
 Most importantly for Agent to Agent interoperability, this RFC clearly defines the assumptions necessary to deliver a message from one domain to another - e.g. what exactly does Alice have to know about Bob's domain to send Bob a message?
 
 ## Tutorial
-[tutorial]: #tutorial
 
 ### Core Messaging Goals
 
@@ -263,7 +262,6 @@ The second form is used when the precise key (and hence, the Agent controlling t
 The `msg` field calls the Indy-SDK `pack()` function to encrypt the Agent Message to be forwarded. The Sender calls the `pack()` with the suitable arguments to AnonCrypt or AuthCrypt the message. The `pack()` and `unpack()` functions are described in more detail in the [Encryption Envelope](../../features/0019-encryption-envelope/README.md) RFC.
 
 ## Reference
-[reference]: #reference
 
 See the other RFCs referenced in this document:
 
@@ -273,12 +271,10 @@ See the other RFCs referenced in this document:
 - [DIDDoc Conventions](../../features/0067-didcomm-diddoc-conventions/README.md)
 
 ## Drawbacks
-[drawbacks]: #drawbacks
 
 N/A
 
 ## Rationale and alternatives
-[alternatives]: #alternatives
 
 A number of discussions were held about this RFC. In those discussions, the rationale for the RFC evolved into the text, and the alternatives were eliminated. See prior versions of the superseded HIPE (in status section, above) for details.
 
@@ -290,20 +286,17 @@ A suggestion was made that the following optional parameters could be defined in
 The optional parameters have been left off for now, but could be added in this RFC or to a later version of the message type.
 
 ## Prior art
-[prior-art]: #prior-art
 
 N/A
 
 ## Unresolved questions
-[unresolved]: #unresolved-questions
 
 N/A
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

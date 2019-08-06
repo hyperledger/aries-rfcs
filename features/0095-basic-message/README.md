@@ -1,11 +1,12 @@
-# 0095: Basic Message Protocol 1.0
-- Author: Sam Curren
-- Start Date: 2019-01-16
+# Aries RFC 0095: Basic Message Protocol 1.0
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-06-18
-- Status Note: Supersedes [Indy 0033](https://github.com/hyperledger/indy-hipe/edit/master/text/0033-basic-message/README.md)
+- Authors: Sam Curren
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-06-18
+- Status Note:  
+- Supersedes: [Indy 0033](https://github.com/hyperledger/indy-hipe/edit/master/text/0033-basic-message/README.md)
+- Start Date: 2019-01-16
+- Tags: feature, protocol
 
 ## Summary
 
@@ -13,7 +14,7 @@ The BasicMessage protocol describes a stateless, easy to support user message pr
 
 ## Motivation
 
-It is a useful feature to be able to communicate human written messages. BasicMessage is the most basic form of this written message communication, explicitly excluding advanced features to make implementation easier. 
+It is a useful feature to be able to communicate human written messages. BasicMessage is the most basic form of this written message communication, explicitly excluding advanced features to make implementation easier.
 
 ## Tutorial
 
@@ -74,13 +75,12 @@ BasicMessage has parallels to SMS, which led to the later creation of MMS and ev
 
 ## Unresolved questions
 
-- Receive receipts (NOT read receipts) may be implicitly supported by an ack decorator with pre-processing support. 
-   
+- Receive receipts (NOT read receipts) may be implicitly supported by an ack decorator with pre-processing support.
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

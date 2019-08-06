@@ -1,11 +1,11 @@
-# 0124: DID Resolution Protocol
-- Author: Markus Sabadello (markus@danubetech.com)
-- Start Date: 2019-07-08
+# Aries RFC 0124: DID Resolution Protocol 0.9
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-07-13
+- Authors: Markus Sabadello (markus@danubetech.com)
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-07-13
 - Status Note: Not implemented, but has been discussed as part of the [Aries DID Resolution](https://github.com/hyperledger/aries-rfcs/issues/101) work.
+- Start Date: 2019-07-08
+- Tags: feature, protocol
 
 ## Summary
 
@@ -48,16 +48,16 @@ following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/master/concepts
 
 ### Key Concepts
 
-DID Resolution is the process of obtaining a DID Document for a given DID. This is one of four required operations that can be performed on any DID ("Read"; the other ones being "Create", "Update", and "Deactivate"). The details of these operations differ depending on the DID method. Building on top of *DID Resolution*, *DID URL Dereferencing* is the process of obtaining a resource for a given DID URL. Software and/or hardware that is able to execute these processes is called a DID Resolver. 
+DID Resolution is the process of obtaining a DID Document for a given DID. This is one of four required operations that can be performed on any DID ("Read"; the other ones being "Create", "Update", and "Deactivate"). The details of these operations differ depending on the DID method. Building on top of *DID Resolution*, *DID URL Dereferencing* is the process of obtaining a resource for a given DID URL. Software and/or hardware that is able to execute these processes is called a DID Resolver.
 
 - **DID Resolver**: Software and/or hardware that is capable of DID Resolution and optionally DID URL Dereferencing for at least one DID method.
 - **DID Resolution**: An algorithm that takes a DID plus additional options as input and produces a DID Document or a DID Resolution Result as output. This algorithm relies on the "Read" operation of the applicable DID method.
 - **DID URL Dereferencing**: An algorithm that takes a DID URL plus additional options as input and produces a DID Document, a DID Resolution Result, or various other types of resources as output. This algorithm relies on DID Resolution.
-- **DID Method**: A definition of how a specific DID scheme can be implemented on a specific distributed ledger or network, including the precise method(s) by which DIDs are resolved and deactivated and DID Documents are written and updated. 
+- **DID Method**: A definition of how a specific DID scheme can be implemented on a specific distributed ledger or network, including the precise method(s) by which DIDs are resolved and deactivated and DID Documents are written and updated.
 
 ### Roles
 
-There are two *parties* and two *roles* (one for each party) in the `did_resolution` protocol: A `requester` and `resolver`. 
+There are two *parties* and two *roles* (one for each party) in the `did_resolution` protocol: A `requester` and `resolver`.
 
 The `requester` wishes to resolve DIDs or dereference DID URLs.
 
@@ -109,7 +109,7 @@ that makes it possible to connect a subsequent response to this request.
 
 `did` is required.
 
-`input_options` is optional. 
+`input_options` is optional.
 
 For further details on the `did` and `input_options` fields, see
 [Resolving a DID](https://w3c-ccg.github.io/did-resolution/#resolving) in the DID Resolution Spec.
@@ -142,7 +142,7 @@ It looks like this:
 
 If the `input_options` field of the `resolve` message contains an entry `result_type` with value `resolution-result`, then the
 `resolve_result` message contains a more extensive [DID Resolution Result](https://w3c-ccg.github.io/did-resolution/#did-resolution-result),
-which includes a DID Document plus additional metadata: 
+which includes a DID Document plus additional metadata:
 
 	{
 		"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1/resolve_result",
@@ -206,7 +206,7 @@ and [w3c-ccg/did-resolution#28](https://github.com/w3c-ccg/did-resolution/issues
 thoughts.
 
 The security and trust issues may outweigh the benefits.
-Defining and implementing this RFC may lead developers to underestimate or ignore these issues associated with remote DID Resolvers. 
+Defining and implementing this RFC may lead developers to underestimate or ignore these issues associated with remote DID Resolvers.
 
 ## Rationale and alternatives
 
@@ -237,12 +237,11 @@ This RFC inherits a long list of unresolved questions and issues that currently 
 
 We need to decide whether the DID Resolution and DID URL Dereferencing functions (`resolve()` and `dereference()`)
 should be exposed as the same message type, or as two different message types (including two different responses).
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

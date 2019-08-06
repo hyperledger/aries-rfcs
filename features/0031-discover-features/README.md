@@ -1,12 +1,12 @@
-# 0031: Discover Features Protocol 1.0
-- Author: Daniel Hardman
-- Start Date: 2018-12-17
+# Aries RFC 0031: Discover Features Protocol 1.0
 
-## Status
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2019-05-01
-- Status Note: Reached FCP status in Indy. Implemented in at least two codebases.
-  Supersedes [Indy RFC PR #73](https://github.com/hyperledger/indy-hipe/pull/73).
+- Authors: Daniel Hardman
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-05-01
+- Status Note: Reached FCP status in Indy. Implemented in at least two codebases. 
+- Supersedes: [Indy RFC PR #73](https://github.com/hyperledger/indy-hipe/pull/73)
+- Start Date: 2018-12-17
+- Tags: feature, protocol
 
 ## Summary
 
@@ -14,7 +14,6 @@ Describes how agents can query one another to discover which features
 it supports, and to what extent.
 
 ## Motivation
-[motivation]: #motivation
 
 Though some agents will support just one protocol and will be
 statically configured to interact with just one other party, many
@@ -23,14 +22,13 @@ Alice and Bob meet, they won't know in advance which features are
 supported by one another's agents. They need a way to find out.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 This RFC introduces a protocol for discussing the protocols an agent
 can handle. The identifier for the message family used by this protocol is
 `discover-features`, and the fully qualified URI for its definition is:
 
     did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0
-    
+
 ### Roles
 
 There are two roles in the `discover-features` protocol: `requester` and
@@ -45,6 +43,7 @@ predefined state machines for any `requester` and `responder`:
 [![state machines](state-machines.png)](https://docs.google.com/spreadsheets/d/1smY8qhG1qqGs0NH9g2hV4b7mDqrM6MIsmNI93tor2qk/edit)
 
 ### Messages
+
 ##### `query` Message Type
 
 A `discover-features/query` message looks like this:
@@ -160,7 +159,7 @@ might reveal your agent implementation, so use sparingly.)
 ##### Vary how you query, too.
 
 How you ask questions may also be fingerprintable.
- 
+
 ## Reference
 
 ### Localization
@@ -193,12 +192,11 @@ RFC](https://github.com/hyperledger/indy-hipe/blob/569357c6/text/localized-messa
 ## Unresolved questions
 
 - Do we want to support the discovery of features that are not protocol-related?
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

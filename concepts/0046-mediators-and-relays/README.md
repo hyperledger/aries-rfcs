@@ -1,12 +1,11 @@
-# 0046: Mediators and Relays
-- Author: Daniel Hardman <daniel.hardman@gmail.com>
-- Start Date: 2018-12-01
+# Aries RFC 0046: Mediators and Relays
 
-## Status
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2019-02-01
-- Status Note: Socialized and broadly understood in other conceptual
-  RFCs about routing.
+- Authors: Daniel Hardman <daniel.hardman@gmail.com>
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-02-01
+- Status Note: Socialized and broadly understood in other conceptual RFCs about routing.
+- Start Date: 2018-12-01
+- Tags: concept
 
 ## Summary
 
@@ -42,11 +41,11 @@ interaction only in terms of Alice and Bob and their agents. We say things like:
 "Alice's agent sends a message to Bob's agent" -- or perhaps "Alice's edge agent
 sends a message to Bob's cloud agent, which forwards it to Bob's edge agent".
 
-Such statements adopt a useful level of abstraction--one that's highly recommended 
+Such statements adopt a useful level of abstraction--one that's highly recommended
 for most discussions. However, they make a number of simplifications. By modeling
 the roles of mediators and relays in routing, we can support routes that use
 multiple transports, routes that are not fully known (or knowable) to the sender,
-routes that pass through mix networks, and other advanced and powerful concepts. 
+routes that pass through mix networks, and other advanced and powerful concepts.
 
 ## Tutorial
 
@@ -127,7 +126,7 @@ not upstream of another named party (sender or mediator).
 Mediators and relays can be combined in any order and any amount in variations on
 our fictional scenario. Bob could employ Carl as a mediator, and Carl could work
 from home and arrange delivery via George, then have his daughter Hannah run messages
-back to Bob's desk at work. Carl could hire his own mediator. Darla could arrange 
+back to Bob's desk at work. Carl could hire his own mediator. Darla could arrange
 or Ivan to substitute for her when she goes on vacation. And so forth.
 
 ### More Traditional Usage
@@ -229,20 +228,19 @@ before and after, in and out. We've chosen to standardize on two:
 
 * The [SSI Notation uses directional arrows](../0006-ssi-notation/README.md#other-punctuation).
 A message from Alice to Bob is notated as either `A --> B` or `B <-- A` -- whether
-the arrow faces left or right, it always points to Bob. 
+the arrow faces left or right, it always points to Bob.
 
-[ward]: #ward
+
 * In text, we use the words __source-ward__ and __dest-ward__ to clarify whether we
 are moving toward the sender, or toward the receiver, respectively. "Dest-ward"
 always corresponds to where the arrow is pointing and to later points in time;
 "source-ward" is the opposite direction. All messages, whether requests,
 responses, or otherwise, always flow dest-ward.
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

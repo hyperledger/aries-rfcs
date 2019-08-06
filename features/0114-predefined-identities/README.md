@@ -1,12 +1,11 @@
-# 0114: Predefined Identities
-- Author: Daniel Hardman
-- Start Date: 2019-07-10
+# Aries RFC 0114: Predefined Identities
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: (date of first submission or last status change)
-- Status Note: (explanation of current status; if adopted, 
-  links to impls or derivative ideas; if superseded, link to replacement)
+- Authors: Daniel Hardman
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 
+- Status Note: (explanation of current status; if adopted, links to impls or derivative ideas; if superseded, link to replacement)
+- Start Date: 2019-07-10
+- Tags: feature
 
 ## Summary
 
@@ -42,7 +41,7 @@ that are not canonical (e.g., in the [sample tic-tac-toe protocol](
 
 ```
 did:sov:SLfEi9esrjzybysFxQZbfq -- verkey = Ep1puxjTDREwEyz91RYzn7arKL2iKQaDEB5kYDUUUwh5
-``` 
+```
 
 This community may create DIDs for itself from other DID methods, too. If so,
 we will publish them here.
@@ -56,7 +55,7 @@ we may publish such information here.
 
 Other groups such as [DIF](https://identity.foundation), the [W3C Crecentials Community Group](
 https://github.com/w3c-ccg), and so forth may wish to define identities and announce
-their associated DIDs here. 
+their associated DIDs here.
 
 
 ### Fake Identities
@@ -151,7 +150,7 @@ their DID docs -- maybe `bob-many-2` is a did:eth using these same keys, and
 `bob-many-3` is a did:btc using them...]
 
 ### Keys
- 
+
 #### Key 1 (Ed25519)
 
 This key is used by the [`alice-sov-1`](#alice-sov-1) DID, but could also
@@ -343,12 +342,11 @@ https://github.com/sovrin-foundation/launch/blob/master/sovrin-keygen.zip)
 * [Hyperledger Indy CLI](https://github.com/hyperledger/indy-sdk/tree/master/cli)
 
 
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |
