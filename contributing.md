@@ -61,11 +61,25 @@ any process changes before merging the PR.
 
 When the PR is merged, your RFC is now formally in the PROPOSED state.
 
+### Changing an RFC Status
+
+The lifecycle of an RFC is driven by the author or current champion of the RFC. To move an RFC along
+in the lifecycle, submit a PR with the following characteristics:
+
+- The PR should __ONLY__ change the RFC status. Note that this requires refreshing the index (`python code/generate_index.py && pytest code`).
+- The title of the PR should include a deadline date for merging the PR and the referenced RFC.
+  - Example: `Status to Accepted, deadline 2019.08.15, RFC 0095-basic-message`
+- The PR comment should document why the status is being changed.
+- The deadline date should be 2 weeks after announcing the proposed status change on an Aries WG call. The PR should also be announced on the [#aries rocketchat channel](https://chat.hyperledger.org/channel/aries).
+- Barring negative feedback from the community, the repo's maintainers should merge the PR after the deadline.
+- The deadline should be moved by two weeks after addressing each substantive change to the RFC made during the status change review period.
+
+
 ### How to get an RFC demonstrated
 
 If your RFC is a feature, it's common (though not strictly required) for
 it to go to a DEMONSTRATED state next. Write some code that embodies the
-concepts in the RFC. Publish the code. Then submit a PR that adds your
+concepts in the RFC. Publish the code. Then [submit a PR](#changing-an-rfc-status) that adds your
 early implementation to the [Implementations section](/0000-template.md#implementations),
 and that changes the status to DEMONSTRATED. These PRs should be accepted
 immediately, as long as all unit tests pass.
@@ -78,7 +92,7 @@ and the author should be prepared to revise it. Updates may be made via pull req
 and those changes will be merged as long as the process is followed.
 
 When you believe that the RFC is mature enough (feedback is somewhat resolved,
-consensus is emerging, and implementation against it makes sense), submit a PR that
+consensus is emerging, and implementation against it makes sense), [submit a PR](#changing-an-rfc-status) that
 changes the status to [ACCEPTED](README.md#status--accepted). The status change PR
 will remain open until the maintainers agree on the status change.
 
@@ -99,7 +113,7 @@ value from it. So:
 - Socialize the ideas. Use them in other RFCs and documentation.
 - Update the agent test suite to reflect the ideas.
 
-When you believe an RFC is a _de facto_ standard, raise a PR that changes the
+When you believe an RFC is a _de facto_ standard, [raise a PR](#changing-an-rfc-status) that changes the
 status to [ADOPTED](README.md#status--adopted).  If the community is friendly
 to the idea, the doc will enter a two-week "Final Comment Period" (FCP), after
 which there will be a vote on disposition.
