@@ -11,6 +11,10 @@ counterproposing --> [*] : rejected
 [*] --> arranging
 arranging : sending proposals
 arranging --> [*] : rejected
+arranging --> problem_report : rejected
+problem_report : if serving request
+problem_report : for introduction
+problem_report --> [*]
 arranging --> delivering : accepted
 delivering : forwarding connection
 delivering : details
