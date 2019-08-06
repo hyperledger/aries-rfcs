@@ -105,7 +105,7 @@ The *invitee* sends the *inviter* an ack or any other message that confirms the 
 
 ## 0. Invitation to Connect
 
-[0-invitation]: #1-invitation
+[0-invitation]: #0-invitation
 
 An invitation to connect may be transferred using any method that can reliably transmit text. The result  must be the essential data necessary to initiate a [Connection Request](#1-connection-request) message. A connection invitation is an agent message with agent plaintext format, but is an **out-of-band communication** and therefore not communicated using wire level encoding or encryption. The necessary data that an invitation to connect must result in is:
 
