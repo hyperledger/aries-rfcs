@@ -60,6 +60,15 @@ any process changes before merging the PR.
 
 When the PR is merged, your RFC is now formally in the PROPOSED state.
 
+### How to get an RFC demonstrated
+
+If your RFC is a feature, it's common (though not strictly required) for
+it to go to a DEMONSTRATED state next. Write some code that embodies the
+concepts in the RFC. Publish the code. Then submit a PR that adds your
+early implementation to the [Implementations section](/0000-template.md#implementations),
+and that changes the status to DEMONSTRATED. These PRs should be accepted
+immediately, as long as all unit tests pass.
+
 ### How to get an RFC accepted
 
 After your RFC is merged and officially acquires the [PROPOSED status](
