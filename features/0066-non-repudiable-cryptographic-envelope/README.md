@@ -2,9 +2,9 @@
 
 - Authors: Kyle Den Hartog (indy@kyledenhartog.com)
 - Status: [PROPOSED](/README.md#proposed)
-- Since: 04
+- Since: 2019-04-15
 - Status Note: This is a second attempt to integrate non-repudiable digital signatures based on learnings and discussions over the past few months. This focuses only on the signing of entire messages. Signature Decorators will be handled seperately.
-- Start Date: 04/15/2019
+- Start Date: 2019-04-15
 - Tags: feature
 
 ## Summary

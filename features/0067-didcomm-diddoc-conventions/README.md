@@ -2,9 +2,9 @@
 
 - Authors: Tobias Looker (tobias.looker@mattr.global), Stephen Curran (swcurran@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
-- Since: 06
+- Since: 2019-06-10
 - Status Note: This revises the former [INDY HIPE](https://github.com/hyperledger/indy-hipe/pull/92)
-- Start Date: 04/15/2019
+- Start Date: 2019-04-15
 - Tags: feature
 
 ## Summary
