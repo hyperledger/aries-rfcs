@@ -64,7 +64,7 @@ should contain a link to the older spec. Permalinks are not broken.
 The lifecycle of an RFC is driven by the author or current champion of the RFC. To move an RFC along
 in the lifecycle, submit a PR with the following characteristics:
 
-- The PR should __ONLY__ change the RFC status.
+- The PR should __ONLY__ change the RFC status. Note that this requires refreshing the index (`python code/generate_index.py && pytest code`).
 - The title of the PR should include a deadline date for merging the PR and the referenced RFC.
   - Example: `Status to Accepted, deadline 2019.08.15, RFC 0095-basic-message`
 - The PR comment should document why the status is being changed.
