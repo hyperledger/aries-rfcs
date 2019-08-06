@@ -3,11 +3,13 @@
 - Authors: Daniel Hardman, Kyle Den Hartog
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-05-28
-- Status Note: Socialized and accepted within Indy community, and used in several implementations of protocols that want to associate a MIME type with an HTTP payload. However, this version of the spec changes the type names of types slightly to genericize, so we're resetting the status. This RFC [![message in envelope](small-msg-in-envelope.png)](msg-in-envelope.png)
+- Status Note: Socialized and accepted within Indy community, and used in several implementations of protocols that want to associate a MIME type with an HTTP payload. However, this version of the spec changes the type names of types slightly to genericize, so we're resetting the status.
 - Supersedes: [Indy HIPE 0026]( https://github.com/hyperledger/indy-hipe/blob/master/text/0026-agent-file-format/README.md)
 - Start Date: 2018-11-13
 - Tags: feature
 
+[![message in envelope](small-msg-in-envelope.png)](msg-in-envelope.png)
+ 
 ## Summary
 
 Define a file format and MIME type that holds [DIDComm](
