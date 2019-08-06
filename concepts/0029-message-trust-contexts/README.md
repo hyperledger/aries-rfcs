@@ -138,7 +138,7 @@ and has only been tested on python 3.x.
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
-reference impl | [mtc.py in this folder](mtc.py) | Python. Includes unit tests.
-Aries Protocol Test Suite | https://github.com/hyperledger/aries-protocol-test-suite | 
+Name / Link | Implementation Notes
+--- | ---
+[MTC reference impl](mtc.py) | Reference impl in python, checked in with RFC. Includes unit tests.
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 

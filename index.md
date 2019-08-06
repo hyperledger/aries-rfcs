@@ -7,7 +7,7 @@
 * [0004: Agents](concepts/0004-agents/README.md) (2019-01-15, [9 impls](concepts/0004-agents/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0006: SSI Notation](concepts/0006-ssi-notation/README.md) (2018-09-01, [1 impl](concepts/0006-ssi-notation/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0008: Message ID and Threading](concepts/0008-message-id-and-threading/README.md) (2018-10-01, [5 impls](concepts/0008-message-id-and-threading/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
-* [0017: Attachments](concepts/0017-attachments/README.md) (2019-01-31 &mdash; [`concept`](/tags.md#concept))
+* [0017: Attachments](concepts/0017-attachments/README.md) (2019-01-31, [1 impl](concepts/0017-attachments/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0019: Encryption Envelope](features/0019-encryption-envelope/README.md) (2019-05-04, [7 impls](features/0019-encryption-envelope/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 * [0020: Message Types](concepts/0020-message-types/README.md) (2019-05-24, [8 impls](concepts/0020-message-types/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0023: DID Exchange Protocol 1.0](features/0023-did-exchange/README.md) (2019-05-27 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
