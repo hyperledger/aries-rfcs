@@ -241,7 +241,7 @@ responses, or otherwise, always flow dest-ward.
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
-Connect.Me | https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/ | Free mobile app from Evernym. Installed via app store on iOS and Android. 
-Verity | https://www.evernym.com/products/ | Commercially licensed enterprise agent, SaaS or on-prem.
+Name / Link | Implementation Notes
+--- | ---
+[Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | Free mobile app from Evernym. Installed via app store on iOS and Android. 
+[Verity](https://www.evernym.com/products/) | Commercially licensed enterprise agent, SaaS or on-prem.

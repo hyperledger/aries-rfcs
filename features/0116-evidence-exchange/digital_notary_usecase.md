@@ -81,7 +81,7 @@ During Stacey's preparation activity when she was filling out the  preliminary o
 Later that evening, Stacey decides to explore her new Digital Credential features within her online bank account. She sees that she has the ability to request access to the vetted resources the bank has used to vouch for her digital identity. She opens her Wallet App and sends a `evidence_request` message to the bank. Within a few seconds she receives and processes the bank's `evidence_response` message. Her Wallet App allows her to view the evidence available to her:
 
 | Issuer | Credential | Evidence Type | Original Document |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | Retail Bank | Basic KYC Credential | Address | Utility Bill |
 | Retail Bank | Basic KYC Credential | Address | Employment PayStub |
 | Retail Bank | Basic KYC Credential | Identity | SSN |
