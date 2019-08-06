@@ -20,6 +20,7 @@ SKIP_PATS = [
 ]
 COMMIT_HASH_URI_PAT = re.compile('.*://github.com/hyperledger/[a-zA-Z-_]+/blob/[a-f0-9]+/text/([a-zA-Z0-9_-]+)(/.*)?$')
 SHORTENER_PAT = re.compile('http://(bit.ly|t.co|goo.gl|youtu.be)')
+EMAIL_PAT = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 
 
 def make_md_anchor(txt):
@@ -144,7 +145,7 @@ def check_link(fname, short_fname, txt, match, rfcs, cache, problem_count_in_fil
                     if should_skip_website(uri):
                         return None
                     error, ct = handle_web_resource(uri, rfcs, cache)
-            elif uri.startswith('mailto:'):
+            elif uri.startswith('mailto:') or EMAIL_PAT.match(uri):
                 return None
             # If URI is empty, then the URI is relative to the open file, so it was probably a pure fragment
             elif uri == '':

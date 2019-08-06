@@ -1,6 +1,6 @@
 # Aries RFC 0017: Attachments
 
-- Authors: Daniel Hardman <daniel.hardman@gmail.com>, Sam Curren
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com), Sam Curren
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-01-31
 - Status Note: Used in a number of other RFCs.

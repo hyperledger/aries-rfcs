@@ -1,6 +1,6 @@
 # Aries RFC 0008: Message ID and Threading
 
-- Authors: Daniel Bluhm <daniel.bluhm@sovrin.org>, Sam Curren (sam@sovin.org), Daniel Hardman (daniel.hardman@gmail.com)
+- Authors: [Daniel Bluhm](daniel.bluhm@sovrin.org), [Sam Curren](sam@sovin.org), [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2018-10-01
 - Status Note: Implemented broadly in Indy, but not yet elsewhere.

@@ -1,6 +1,6 @@
 # Aries RFC 0032: Message Timing
 
-- Authors: Daniel Hardman <daniel.hardman@gmail.com>
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-05-01
 - Status Note: Broadly socialized but not yet implemented. 

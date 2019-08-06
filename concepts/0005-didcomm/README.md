@@ -1,6 +1,6 @@
 # Aries RFC 0005: DID Communication
 
-- Authors: Daniel Hardman <daniel.hardman@gmail.com>
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-01-15
 - Status Note: Probably almost mature enough to propose [ACCEPTED](/README.md#rfc-lifecycle) status. 

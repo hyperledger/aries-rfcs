@@ -1,6 +1,6 @@
 # Aries RFC 0020: Message Types
 
-- Authors: Daniel Bluhm <daniel.bluhm@sovrin.org>, Sam Curren <sam@sovrin.org>
+- Authors: [Daniel Bluhm](daniel.bluhm@sovrin.org), [Sam Curren](sam@sovrin.org)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-05-24
 - Status Note:  

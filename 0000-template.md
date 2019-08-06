@@ -1,5 +1,5 @@
 # Title (Ex. 0000: RFC Topic)
-- Authors: (your name and/or email)
+- Authors: [your name](you@github-email)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-12-26 (date you submit your PR)
 - Status Note: (explanation of current status)  

@@ -1,6 +1,6 @@
 # Aries RFC 0048: Trust Ping Protocol 1.0
 
-- Authors: Daniel Hardman <daniel.hardman@gmail.com>
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-02-01
 - Status Note: Numerous implementations. 

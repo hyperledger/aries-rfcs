@@ -1,6 +1,6 @@
 # Aries RFC 0019: Encryption Envelope
 
-- Authors: Kyle Den Hartog(kyle.denhartog@evernym.com), Stephen Curran (swcurran@gmail.com), Sam Curren (sam@sovrin.org), Mike Lodder (mike@sovrin.org)
+- Authors: [Kyle Den Hartog](kyle.denhartog@evernym.com), [Stephen Curran](swcurran@gmail.com), [Sam Curren](sam@sovrin.org), [Mike Lodder](mike@sovrin.org)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-05-04
 - Status Note:  

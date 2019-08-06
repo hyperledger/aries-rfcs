@@ -1,6 +1,6 @@
 # Aries RFC 0042: LOX -- A more secure pluggable framework for protecting wallet keys
 
-- Authors: Michael Lodder (mike@sovrin.org)
+- Authors: [Michael Lodder](mike@sovrin.org)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-05-30
 - Start Date: 2019-05-30

@@ -1,6 +1,6 @@
 # Aries RFC 0029: Message Trust Contexts
 
-- Authors: Daniel Hardman <daniel.hardman@gmail.com>
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-05-10
 - Status Note: Only implemented in one codebase and in the sample code here. 
