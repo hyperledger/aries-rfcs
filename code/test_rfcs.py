@@ -56,3 +56,44 @@ def test_rfc_metadata():
     if errors:
         msg = '\n' + '\n'.join(errors)
         raise BaseException(msg)
+
+
+def test_impls():
+    errors = []
+    def e(rfc, msg):
+        errors.append(rfcs.relpath(rfc).replace('README.md','') + ': ' + msg)
+    pretty_for_normalized_names = {}
+    normalized_for_base_uri = {}
+    def map
+    for abspath in rfcs.walk_files():
+        with open(abspath, 'wt') as f:
+            txt = f.read()
+        impl_table = rfcs.get_impl_table(txt)
+        bad_count = False
+        for row in impl_table:
+            if (not bad_count) and len(row) != 2: e(abspath, 'row in impl table does not have 2 columns')
+
+        if rfc.category not in rfc.relpath: e(rfc, 'category does not match path')
+        if rfc.category[:-1] not in rfc.tags: e(rfc, 'category not in tags')
+        opposite_category = 'feature' if rfc.category == 'concepts' else 'concept'
+        if opposite_category in rfc.tags: e(rfc, 'opposite category in tags')
+        if rfc.status not in rfcs.status_list: e(rfc, 'status is not canonical')
+        if not re.match(r'\d{4}$', rfc.num): e(rfc, 'num is not 4 digits')
+        if not re.search(r'\d{4}-\d{2}-\d{2}', rfc.since): e(rfc, 'since does not contain yyyy-mm-dd')
+        if rfc.start_date:
+            if not re.search(r'\d{4}-\d{2}-\d{2}', rfc.start_date): e(rfc, 'start_date does not contain yyyy-mm-dd')
+        if bool(rfc.authors):
+            if '@' in rfc.authors:
+                if not re.search(r'\[.*?\]\([^)]+@.*?\)', rfc.authors): e(rfc, 'email is not clickable')
+        else:
+            e(rfc, 'no authors found')
+        if ','.join(rfc.tags) != ','.join(rfc.tags).lower(): e(rfc, 'tags are case-sensitive')
+        if rfc.supersedes:
+            if not re.search(r'\[.*?\]\(.*?\)', rfc.supersedes): e(rfc, 'supersedes does not contain hyperlink')
+        if rfc.superseded_by:
+            if not re.search(r'\[.*?\]\(.*?\)', rfc.superseded_by): e(rfc, 'superseded_by does not contain hyperlink')
+        if rfc.impl_count > 0:
+            if rfc.status == 'PROPOSED': e(rfc, 'should not be PROPOSED if it has an impl')
+    if errors:
+        msg = '\n' + '\n'.join(errors)
+        raise BaseException(msg)

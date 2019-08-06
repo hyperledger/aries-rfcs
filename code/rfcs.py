@@ -80,8 +80,8 @@ def walk():
 
 
 _impl_pat = re.compile(r'^[ \t]*#+[ \t]*Implementations?[ \t]*$', re.M)
-_impl_table_head_pat = re.compile(r'^[ \t]*(\|[ \t]*)?Name[ \t]*[|](.*?)[|](.*?)\n[ \t]*([|][ \t]*)?-+[ \t]*[|](.*?)[|](.*?)\n', re.M)
-_impl_table_row_pat = re.compile(r'((.*?)[|](.*?)[|](.*?))\n')
+_impl_table_head_pat = re.compile(r'^[ \t]*([|][ \t]*)?Name(.*?)[|](.*?)\n[ \t]*([|][ \t]*)?-+(.*?)*[|](.*?)\n', re.M)
+_impl_table_row_pat = re.compile(r'((.*?)[|](.*?))\n')
 
 def get_impl_table(txt):
     """
@@ -121,3 +121,9 @@ def walk_headers(txt):
     """
     for match in header_pat.finditer(txt):
         yield match
+
+
+_name_from_link_extractor_pat = re.compile('.*?\[(.*?)]')
+def normalize_impl_name(name_and_maybe_link_cell):
+    x = name_and_maybe_link_cell
+    if '[' in x:

@@ -470,6 +470,6 @@ See comment about crypto wallets, above.
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
+Name / Link | Implementation Notes
+--- | ---
 Indy SDK | https://github.com/hyperledger/indy-sdk | Most agents that implement wallets get their wallet support from Indy SDK. These are not listed separately.

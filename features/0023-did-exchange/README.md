@@ -431,6 +431,6 @@ When Peer DIDs are used in an exchange, it is likely that both Alice and Bob wil
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
+Name / Link | Implementation Notes
+--- | ---
  |  |
