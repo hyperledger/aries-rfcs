@@ -128,18 +128,19 @@ Agent providers are emerging in the marketplace, though. Some are
 governments, NGOs, or educational institutions that offer agents for
 free; others are for-profit ventures. If you'd like suggestions about
 ready-to-use agent offerings, please describe your use case in
-`#indy-agent` on [chat.hyperledger.org](https://chat.hyperledger.org).
+`#aries` on [chat.hyperledger.org](https://chat.hyperledger.org).
 
 There is also intense activity in the SSI community around building
-custom agents and the tools and processes that enable them. Some of
-this work is happening in the [indy-agent repo on github.com](
-https://github.com/hyperledger/indy-agent); other efforts are driven
-by the [Sovrin Foundation](https://sovrin.org) or other entities.
+custom agents and the tools and processes that enable them. A significant
+amount of early work occurred in the Indy Agent Community with some of
+those efforts materializing in the [indy-agent repo on github.com](
+https://github.com/hyperledger/indy-agent) and other code bases. The
+indy-agent repo is now deprecated but is still valuable in demonstrating
+the basics of agents. With the introduction of Hyperledger Aries, agent
+efforts are migrating from the Indy Agent community.
 
-The indy-agent repo on github.com has _reference_ agents and a test
-suite. These are intended to demonstrate agent techniques and possibly
-to provide a foundation upon which fancier agents could be built; they
-are not ready-to-use business solutions.
+Hyperledger Aries provides a number of code bases ranging from agent
+frameworks to tools to aid in development to ready-to-use agents.
 
 #### How to Write an Agent
 
@@ -250,9 +251,10 @@ or in its Getting Started Guide.
 
 #### How to Learn More
 
-* Hang out and ask questions on `#indy-agent` on [chat.hyperledger.org](https://chat.hyperledger.org).
-* Use the mailing list: [hyperledger-indy@lists.hyperledger.org](mailto:hyperledger-indy@lists.hyperledger.org)
-* Study the reference agents and agent test suite in the [indy-agent repo on github.com](https://github.com/hyperledger/indy-agent).
+* Hang out and ask questions on `#aries` on [chat.hyperledger.org](https://chat.hyperledger.org).
+* Use the mailing list: [aries@lists.hyperledger.org](mailto:aries@lists.hyperledger.org)
+* Follow the Aries Cloud Agent - Python [Getting Started Guide (for developers)](https://github.com/hyperledger/aries-cloudagent-python/tree/master/docs/GettingStartedAriesDev)
+* Study the [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite)
 * Study the sample mobile agent at [github.com/sovrin-foundation/connector-app](https://github.com/sovrin-foundation/connector-app).
 * Browse other [RFCs](../../index.md).
 * Attend the Aries working group on Wednesdays. (See [HL community calendar](https://wiki.hyperledger.org/display/HYP/Calendar+of+Public+Meetings) for details; note that the default timezone is GMT.)
@@ -491,7 +493,7 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name | Link | Implementation Notes
 --- | --- | ---
-Indy Cloud Agent - Python | https://github.com/hyperledger/indy-agent/python | Contributed by the government of British Columbia.
+Indy Cloud Agent - Python | https://github.com/hyperledger/indy-agent/python | Reference agent implementation contributed by Sovrin Foundation and Community
 Streetcred AgentFramework | https://github.com/streetcred-id/agent-framework | .NET framework for building agents of all types
 Streetcred.id | https://streetcred.id/ | Commercial mobile and web app built using Streetcred AgentFramework
 Aries Cloud Agent - Python | https://github.com/hyperledger/aries-cloudagent-python | Contributed by the government of British Columbia.
