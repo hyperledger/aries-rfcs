@@ -176,7 +176,7 @@ the message being acknowledged. It has 3 predefined values: `OK` (which means an
 outcome has occurred, and it was positive); `FAIL` (an outcome has occurred, and
 it was negative); and `PENDING`, which acknowledges that no outcome is yet known.
 In addition, more advanced usage is possible. See the [details in the Reference
-section](#status).
+section](#reference).
 
 ### Relationship to `problem-report`
 

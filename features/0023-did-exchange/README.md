@@ -58,7 +58,9 @@ A _exchange_response_ has been sent by the _inviter_ to the _invitee_ based on t
 
 The exchange has been completed.
 
-![State Machine Tables](chrome_2019-01-29_07-59-38.png)### Errors
+![State Machine Tables](chrome_2019-01-29_07-59-38.png)
+
+### Errors
 
 There are no errors in this protocol during the invitation phase. For the request and response, there are two error messages possible for each phase: one for an active rejection and one for an unknown error. These errors are sent using a **problem_report** message type specific to the DID Exchange Protocol. The following list details `problem-code`s that may be sent:
 

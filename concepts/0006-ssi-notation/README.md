@@ -722,7 +722,7 @@ programming languages as well.
     Highly formatted LaTeX is also quite verbose.
 
     A very simple form of LaTeX could be used (e.g., just superscripts and subscripts)--
-    but this would have to solve some of the problems [mentioned below](#superscripts), in the
+    but this would have to solve some of the problems mentioned below, in the
     DKMS section.
 
 * [ASCIIMath](http://asciimath.org/) has many of the same benefits and drawbacks as
