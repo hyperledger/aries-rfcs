@@ -107,8 +107,8 @@ section.
 
 Optional message from a potential introducee to a potential introducer, asking
 for an introduction to be made. This message also uses the [introducee
-	descriptor](#introducee-descriptor) block that describes the object of the
-	sender's interest:
+descriptor](#introducee-descriptor) block that describes the object of the
+sender's interest:
 
 ```jsonc
 {
@@ -131,7 +131,8 @@ not to honor it.
 
 ###### Introducee descriptor
 
-The _introducee descriptor_ object may be complex, but a simple version might look like this:
+The _introducee descriptor_ object may be complex, but a simple version might
+look like this:
 
 ```jsonc
 {
@@ -292,7 +293,7 @@ other.
 
 ##### `didexchange/invitation`
 
-This message is not a member of the `introductions/1.0` protocol;
+This message is not a member of the `introduce/1.0` protocol;
 it is not even adopted. It belongs to the `didexchange/1.0` protocol, and
 is no different from the message that two parties would generate when one
 invites the other with no intermediary, except that:
