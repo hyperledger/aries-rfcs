@@ -1,7 +1,7 @@
 # Aries RFC 0051: Decentralized Key Management
 
 - Authors: [Drummond Reed](drummond@connect.me) et al.
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-03-29
 - Status Note: Somewhat familiar to many in the community, and influential in the designs of other RFCs--but not yet deeply explored or socialized.
 - Start Date: 2018-09-01 (approx, backdated)
@@ -10,7 +10,7 @@
 ## Summary
 
 Describes a general approach to key management in a decentralized,
-self-sovereign world. We expect Indy to embody the principles
+self-sovereign world. We expect Aries to embody the principles
 described here, although this doc is likely to color numerous
 protocols and ecosystem features, not just to a single narrow
 problem.
@@ -86,4 +86,5 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  |
+Indy SDK | https://github.com/hyperledger/indy-sdk | partial: backup 
+Connect.Me | https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/ | partial: backup, sync to cloud 
