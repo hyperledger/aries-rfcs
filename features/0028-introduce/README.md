@@ -316,21 +316,6 @@ criteria for this introducee.
 (`TODO: how to tag introducee with criteria in the didexchange/invitation
 message? Decorator? Update the didexchange RFC?`)
 
-##### `request`
-
-An optional message in this family is one that asks for an introduction to be
-made. This message also uses the `introducee descriptor` block, to tell
-the potential introducer which introducee is the object of the sender's
-interest:
-
-[![sample request](request.png)](request.json)
-
-This message is not part of any state machine; it can be sent at any time,
-and when it is received, the recipient can choose whether or not to honor
-it in their own way, on their own schedule. However, a `~please_ack` decorator
-could be used to make it more interactive, and a `problem_report` could be
-returned if the recipient chooses not to honor it.
-
 ### Advanced Use Cases
 
 Any of the parties can be an organization or thing instead of a person.
