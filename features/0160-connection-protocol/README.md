@@ -1,10 +1,10 @@
 # 0160: Connection Protocol
-- Authors: Ryan West ryan.west@sovrin.org, Daniel Bluhm daniel.bluhm@sovrin.org, Matthew Hailstone, Stephen Curran, Sam Curren <sam@sovrin.org>
+- Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-08-06
-- Status Note: This is the protocol with existing uses. It is expected that [RFC 0023 DID Exchange](../../features\0023-did-exchange) will replace this protocol.
+- Status Note: This is the protocol with existing uses. It is expected that [RFC 0023 DID Exchange](../../features\0023-did-exchange\README.md) will replace this protocol.
 - Supersedes: [HIPE 0031 - Connection Protocol](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol)
-- Start Date: 2018-6-29
+- Start Date: 2018-06-29
 - Tags: feature, protocol
 
 ## Summary
@@ -107,7 +107,7 @@ The *invitee* sends the *inviter* an ack or any other message that confirms the 
 
 [0-invitation]: #1-invitation
 
-An invitation to connect may be transferred using any method that can reliably transmit text. The result  must be the essential data necessary to initiate a [Connection Request](#2.-connection-request) message. A connection invitation is an agent message with agent plaintext format, but is an **out-of-band communication** and therefore not communicated using wire level encoding or encryption. The necessary data that an invitation to connect must result in is:
+An invitation to connect may be transferred using any method that can reliably transmit text. The result  must be the essential data necessary to initiate a [Connection Request](#1-connection-request) message. A connection invitation is an agent message with agent plaintext format, but is an **out-of-band communication** and therefore not communicated using wire level encoding or encryption. The necessary data that an invitation to connect must result in is:
 
 - suggested label
 
@@ -253,7 +253,7 @@ If they _invitee_ wants to accept the connection invitation, they will use the i
 
 ## 1. Connection Request
 
-[1-connection-request]: #2-connection-request
+[1-connection-request]: #1-connection-request
 
 The connection request message is used to communicate the DID document of the _invitee_ to the _inviter_ using the provisional connection information present in the _connection_invitation_ message.
 
