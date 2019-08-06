@@ -36,6 +36,7 @@ is a good sign that you're on the right track.
     poorly received. You can add supporting artifacts, such as diagrams and sample
     data, in the RFC's folder. Make sure you follow [community-endorsed best
     practices](concepts/0074-didcomm-best-practices/README.md).
+  - Consider how the RFC should be [tagged](/tags.md).
   - Assign a number to your RFC. Get the number by loading <a target="rfcnum"
     href="https://dhh1128.github.io/next-aries-rfc-num/">this web page</a> (or,
     if you want to do it the hard way, by inspecting open and closed PRs against
@@ -45,7 +46,7 @@ is a good sign that you're on the right track.
     number>: Friendly Version of Your Title`. Commit your changes.
   - In the root of the repo, run `python code/generate_index.py` to update the index
     with your new RFC.
-  - In the root of your repo, run 'pytest code` to see whether your RFC passes all
+  - In the root of your repo, run `pytest code` to see whether your RFC passes all
     automated tests. The RFC tests are simple. They just check for things like
     naming conventions and hyperlink correctness.
   - Commit the updated version of /index.md and push your changes.
