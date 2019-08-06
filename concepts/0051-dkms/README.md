@@ -86,5 +86,5 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-Indy SDK | https://github.com/hyperledger/indy-sdk | partial: backup 
+[Indy SDK](https://github.com/hyperledger/indy-sdk) | partial: backup 
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | partial: backup, sync to cloud 

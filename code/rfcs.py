@@ -48,7 +48,7 @@ def walk():
     Generate an RFC tuple for every RFC in the repo.
     """
     for abspath in walk_files():
-        with open(abspath, 'rt') as f:
+        with open(abspath, 'rt', encoding='utf-8') as f:
             txt = f.read()
         m = _title_pat.search(txt)
         if m:
@@ -109,7 +109,7 @@ def get_impl_table(txt):
 
 
 def relpath(abspath):
-    return os.path.relpath(abspath, root_folder)
+    return os.path.relpath(abspath, root_folder).replace('\\', '/')
 
 
 _header_pat = re.compile(r'^\s*#+[ \t]*(.*?)$', re.M)
@@ -119,11 +119,37 @@ def walk_headers(txt):
     Generate a regex match object for each markdown header in a doc. This matcher
     can be used to find the header or to extract the text of the header.
     """
-    for match in header_pat.finditer(txt):
+    for match in _header_pat.finditer(txt):
         yield match
 
 
-_name_from_link_extractor_pat = re.compile('.*?\[(.*?)]')
-def normalize_impl_name(name_and_maybe_link_cell):
-    x = name_and_maybe_link_cell
-    if '[' in x:
+_link_split_pat = re.compile(r'\[(.*?)\]\((.*?)\).*', re.DOTALL)
+def split_hyperlink(txt):
+    """
+    Turn a markdown hyperlink [...](...) into a (clickable_text, uri) pair.
+    """
+    m = _link_split_pat.match(txt)
+    if m:
+        return m.group(1).strip(), m.group(2).strip()
+    return None, None
+
+
+def normalize_impl_name(name):
+    name = re.sub(r'[^a-zA-Z0-9]', ' ', name.lower())
+    name = re.sub(r' {2,}', ' ', name).strip()
+    return name
+
+
+_github_pat = re.compile('https?://github[.]com/[^/]+/[^/]+')
+_github_pages_pat = re.compile('https?://[^.]+[.]github[.]io/[^/]+')
+_website_pat = re.compile('https?://[^/]+/[^/]+')
+
+def get_impl_base(uri):
+    i = uri.find('?')
+    if i > -1:
+        uri = uri[:i]
+    for pat in [_github_pat, _github_pages_pat, _website_pat]:
+        m = pat.match(uri)
+        if m:
+            return m.group()
+    return uri

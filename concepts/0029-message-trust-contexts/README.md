@@ -140,5 +140,5 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-reference impl | [mtc.py in this folder](mtc.py) | Python. Includes unit tests.
+[MTC reference impl](mtc.py) | Reference impl in python, checked in with RFC. Includes unit tests.
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 
