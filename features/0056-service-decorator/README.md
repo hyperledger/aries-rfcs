@@ -1,11 +1,11 @@
-# 0056: Service Decorator
-- Author: Sam Curren <sam@sovrin.org>, Tobias Looker <>
-- Start Date: 2019-06-03
+# Aries RFC 0056: Service Decorator
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-06-03
+- Authors: Sam Curren <sam@sovrin.org>, Tobias Looker <>
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-06-03
 - Status Note: Needs refinement and validation, will be useful in any connectionless communication.
+- Start Date: 2019-06-03
+- Tags: feature, decorator
 
 ## Summary
 
@@ -40,7 +40,7 @@ Usage looks like this, with the contents defined the [Service Endpoint section o
 
 The contents of the `~service` decorator are defined by the  [Service Endpoint section of the DID Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints).
 
-The decorator should not be used when the message recipient already has a service endpoint. 
+The decorator should not be used when the message recipient already has a service endpoint.
 
 ## Drawbacks
 
@@ -52,7 +52,7 @@ The current service block definition is not very compact, and could cause proble
 
 ## Prior art
 
-The Connect Protocol had previously included this same information as an attribute of the messages themselves. 
+The Connect Protocol had previously included this same information as an attribute of the messages themselves.
 
 ## Unresolved questions
 
@@ -60,12 +60,11 @@ The Connect Protocol had previously included this same information as an attribu
 - Does allowing multiple service type definitions make sense?
 - Should we allow for pointing to a remote service block instead of including it line?
 - Should we allow for the decorator to be used within an existing connection? What should the behavior be? What security vulnerabilities does this present?
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

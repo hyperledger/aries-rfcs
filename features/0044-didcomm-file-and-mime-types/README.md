@@ -1,21 +1,14 @@
-# 0044: DIDComm File and MIME Types
-- Author: Daniel Hardman, Kyle Den Hartog
+# Aries RFC 0044: DIDComm File and MIME Types
+
+- Authors: Daniel Hardman, Kyle Den Hartog
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-05-28
+- Status Note: Socialized and accepted within Indy community, and used in several implementations of protocols that want to associate a MIME type with an HTTP payload. However, this version of the spec changes the type names of types slightly to genericize, so we're resetting the status. This RFC [![message in envelope](small-msg-in-envelope.png)](msg-in-envelope.png)
+- Supersedes: [Indy HIPE 0026]( https://github.com/hyperledger/indy-hipe/blob/master/text/0026-agent-file-format/README.md)
 - Start Date: 2018-11-13
-
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-05-28
-- Status Note: Socialized and accepted within Indy community, and used in
-  several implementations of protocols that want to associate a MIME type
-  with an HTTP payload. However, this version of the spec changes the
-  type names of types slightly to genericize, so we're resetting the
-  status. This RFC supersedes [Indy HIPE 0026](
-  https://github.com/hyperledger/indy-hipe/blob/master/text/0026-agent-file-format/README.md).
-
-[![message in envelope](small-msg-in-envelope.png)](msg-in-envelope.png)
+- Tags: feature
 
 ## Summary
-[summary]: #summary
 
 Define a file format and MIME type that holds [DIDComm](
  ../../concepts/0005-didcomm/README.md)
@@ -23,7 +16,6 @@ content--messages--as well as the encrypted and signed
 envelopes that contain them.
 
 ## Motivation
-[motivation]: #motivation
 
 Most work on DIDComm so far has assumed HTTP as a transport. However, we know
 that DID communication is transport-agnostic. We should be able to
@@ -40,7 +32,6 @@ We need to define how files can contain DIDComm messages, and what the
 semantics of processing such files will be.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 ### DIDComm Encrypted Envelope (*.dee)
 
@@ -67,7 +58,7 @@ JSON, and viewing them as generic JWEs will greatly constrain which semantics ar
 applied. Therefore, the recommended MIME type for *.dee files is
 `application/didcomm-enc-env`, with `application/jwe` as a fallback, and
 `application/json` as an even less desirable fallback. (In this, we are making
-a choice similar to the one that views `*.docx` files primarily as 
+a choice similar to the one that views `*.docx` files primarily as
 `application/msword` instead of `application/xml`.) If format evolution takes
 place, the version could become a parameter as [described in RFC 1341](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html):
 `application/didcomm-enc-env;v=2`.
@@ -171,12 +162,12 @@ and then persisted (likely after also encrypting to DIDComm Wire Format).
 
 The file extensions and MIME types described here are also accompanied by suggested graphics.
 [Vector forms of these graphics are available as well](
-https://docs.google.com/presentation/d/1QmKxuMz8KnqYbdGUEOaNqLtZSCZryQrwj9RRXMN4uAk/edit#slide=id.p).   
+https://docs.google.com/presentation/d/1QmKxuMz8KnqYbdGUEOaNqLtZSCZryQrwj9RRXMN4uAk/edit#slide=id.p).
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

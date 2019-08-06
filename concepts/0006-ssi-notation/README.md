@@ -1,15 +1,13 @@
-# 0006: SSI Notation
-- Author: Daniel Hardman
-- Start Date: 2018-05-03
+# Aries RFC 0006: SSI Notation
 
-## Status
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2018-09-01
-- Status Note: broadly accepted but not heavily used; may need
-  greater usage before it's ready for [ADOPTED](/README.md#rfc-lifecycle) status.
+- Authors: Daniel Hardman
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2018-09-01
+- Status Note: broadly accepted but not heavily used; may need greater usage before it's ready for [ADOPTED](/README.md#rfc-lifecycle) status.
+- Start Date: 2018-05-03
+- Tags: concept
 
 ## Summary
-[summary]: #summary
 
 This RFC describes a simple, standard notation for various concepts related
 to independent identity (II) and self-sovereign identity (SSI). (II and SSI
@@ -29,7 +27,6 @@ complementary effort is the work to standardize ZKLang (a symbolic
 language for representing zero knowledge proof.)
 
 ## Motivation
-[motivation]: #motivation
 
 All technical materials in our ecosystem hinge on fundamental concepts of
 self-sovereign identity such as owners, keys, DIDs, and agents. We need a
@@ -38,7 +35,6 @@ use it consistently, and so we can link to the notation's spec for
 definitive usage.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 The following explanation is meant to be read sequentially and should provide a
 friendly overview for most who encounter the RFC. See the
@@ -46,6 +42,7 @@ friendly overview for most who encounter the RFC. See the
 for quick lookup.
 
 ## Requirements
+
 This notation aims to be:
 
 * Precise
@@ -82,8 +79,9 @@ and are familiar to experts from other fields.
 ### Solution
 
 #### Entities
-Entities are the primary actors in the SSI ecosystem. They, at minimum 
-control but often own their self-sovereign domain. They are not, conceptually 
+
+Entities are the primary actors in the SSI ecosystem. They, at minimum
+control but often own their self-sovereign domain. They are not, conceptually
 at least, a digital actor. This notation separates the need for an Identity
 from the software/hardware that implement the functionality that might
 be described by this notation that provides digital identity. Entities
@@ -91,7 +89,7 @@ could be a thing that would seem to be a digital actor (ex. self-driving
 car), but the notation will still specify both the Entity and other
 elements of their domain the provide digital functionality.
 
-Two types of entities are being defined. Things and Identity Owners. 
+Two types of entities are being defined. Things and Identity Owners.
 Each have their own sections below and define their own syntax.
 
 ![taxonomy](taxonomy.png)
@@ -104,7 +102,7 @@ entity that can (at least theoretically) be held legally accountable
 for its actions. Identity owners control a __sovereign domain__ that
 encompasses all their agents, data, and devices. The notation's first
 goal is therefore an efficient and unambiguous way to anchor
-derivative concepts to owners and their domains. 
+derivative concepts to owners and their domains.
 
 Identity owners are denoted with a single
 capital ASCII alpha, often corresponding to their first initial. For
@@ -118,19 +116,19 @@ https://tools.ietf.org/html/rfc5234) fragment is:
   ucase-alpha    = %x41-5A            ; A-Z
   lcase-alpha    = %x61-7A            ; a-z
   digit          = %x30-39            ; 0-9
-  
+
   identity-owner = ucase-alpha
   ```
 Because the domain of an identity owner is like their private
 universe, the name or symbol of an identity owner is often used
 to denote a domain as well; context eliminates ambiguity. You
 will see examples of this below.
-   
+
 #### Things
 
 Identity owners are not the only participants in an SSI ecosystem.
 Other participants include Things that control their own domain.
-These __entities__ may have a high degree of autonomy (e.g., an AI in 
+These __entities__ may have a high degree of autonomy (e.g., an AI in
 a self-driving car), but they are owned, operated, or controlled in at
 least some sense by another party.
 
@@ -146,16 +144,17 @@ differ in character case but using the same letter would often be confusing.
 
 ```ABNF
   thing = lcase-alpha
-  
+
   entity = identity-owner / thing
 ```
 
 #### Association
-Since Entities don't directly act in the SSI Ecosystem; people, 
-organizations and even things can't of themselves do digital operations 
-(ex. compute digital signatures). They require software and/or hardware 
-to do the digital work of their digital Identity. These software/hardware 
-elements are part of the Entity's domain and serve the master of the domain. 
+
+Since Entities don't directly act in the SSI Ecosystem; people,
+organizations and even things can't of themselves do digital operations
+(ex. compute digital signatures). They require software and/or hardware
+to do the digital work of their digital Identity. These software/hardware
+elements are part of the Entity's domain and serve the master of the domain.
 Elements associated with a domain must be named in a way that
 makes their association clear, using a `name@context` pattern familiar
 from email addresses: `1@A` (“one at A”) is agent 1 in A’s sovereign domain.
@@ -169,11 +168,12 @@ to the relationship rather than to a participant. See the DID
 example in the next section.
 
 #### Agents
+
 Agents are not Entities. They neither control or own a domain. They
 live and act with in a domain. They are always owned and controlled by
-Entity and live within the their domain. Agents are the first example 
+Entity and live within the their domain. Agents are the first example
 of elements associated with an Entity. Despite this, agents are the
-primary source of action with SSI ecosystem. 
+primary source of action with SSI ecosystem.
 
 Additionally, agents are distinct from devices, even though
 we often (and inaccurately) used them interchangeably. We may
@@ -183,18 +183,19 @@ In reality, there may be zero, one, or more than one agents
 running on a particular device.
 
 Agents are numbered and are represented by up to three digits and
-then with an association. In most discussions, one digit is 
-plenty, but three digits are allowed so agents can be 
+then with an association. In most discussions, one digit is
+plenty, but three digits are allowed so agents can be
 conveniently grouped by prefix (e.g., all edge agents in Alice's
-domain might begin with `1`, and all cloud might begin with `2`). 
-   
+domain might begin with `1`, and all cloud might begin with `2`).
+
   ```ABNF
   agent = 1*3digit "@" entity
   ```
 
 #### Devices
+
 Devices are another example of an element that are part of an Entity's
-domain. Devices are digital hardware that are part of an Entity's domain.  
+domain. Devices are digital hardware that are part of an Entity's domain.
 
 Devices are both represented with two or more
 lower-case ASCII alphanumerics or underscore characters, where the
@@ -218,8 +219,8 @@ Agents are numbered and are represented by up to three digits.
 In most discussions, one digit is plenty, but three digits are
 allowed so agents can be conveniently grouped by prefix (e.g.,
 all agents in Alice's domain might begin with `1`, and all Bob's
-agents might begin with `2`). 
-   
+agents might begin with `2`).
+
   ```ABNF
   agent = 1*3digit
   ```
@@ -244,7 +245,7 @@ the perspective-governing entity's identifier, a single colon, then by all other
 identifiers for members of the relationship, in alphabetical order,
 separated by `+`: `A:B+C`, `B:A+C`. This is read aloud as in "A to B
 plus C."
-   
+
   ```ABNF
   next-entity = "+" entity
   short-relationship = entity ":" entity *next-entity
@@ -272,7 +273,7 @@ one `+` character:
   ```ABNF
   long-relationship = entity ":" entity 1*next-entity
   ```
-  
+
 #### Generalized Relationships
 
 Some models for SSI emphasize the concept of __personas__. These are
@@ -350,11 +351,11 @@ be `B.did@B:A`.
   inert = name-start-char 1*name-other-char
   nested = "." inert
   owned-inert = entity 1*nested
-  
+
   associated-to = identity-owner / relationship
   associated = entity 0*nested "@" associated-to
   ```
-   
+
 If `A` has a cloud agent `2`, then the public key (verification key or verkey)
 and private, secret key (signing key or sigkey) used by
 `2` in `A:B` would be: `2.pk@A:B` and `2.sk@A:B`. This is read as “2
@@ -365,7 +366,7 @@ be equivalent but unnecessary to write `A.2.pk@A:B`.
 ### DID Docs and DID References
 
 The mention of keys belonging to agents naturally raises the question of DID
-Docs and the things they contain. How do they relate to our notaiton? 
+Docs and the things they contain. How do they relate to our notaiton?
 [DIDs are designed to be URIs](
 https://w3c-ccg.github.io/did-spec/#generic-did-syntax), and items that carry
 an `id` property within a DID Doc [can be referenced with standard URI fragment
@@ -384,7 +385,7 @@ and instead focus on the higher level semantics; compare:
 ...to:
 
 <blockquote><code>did:sov:PXqKt8sVsDu9T7BpeNqBfe</code> sends its DID for
-<code>did:sov:6tb15mkMRagD7YA3SBZg3p</code> to 
+<code>did:sov:6tb15mkMRagD7YA3SBZg3p</code> to
 <code>did:sov:6tb15mkMRagD7YA3SBZg3p</code>,
 using the agent possessing <code>did:sov:PXqKt8sVsDu9T7BpeNqBfe;#key1</code>
 to encrypt with the corresponding signing key.</blockquote>
@@ -437,7 +438,7 @@ The notation [reserves standard kebab suffixes](#reserved-tokens) on messages to
 make this pattern obvious and consistent: `-offer` (step 1a), `-req` (step 1b
 or 2), and `-receipt` (step 4). Step 3 is typically named without a suffix.
 Thus: `proof-offer`, `proof-request`, `proof` (no suffix), `proof-receipt`.
-  
+
 ### Payments
 
 Economic activity is part of rich SSI ecosystems, and requires notation. A
@@ -504,12 +505,12 @@ verify       = "?"                                   ; suffix
 anon-crypt   = "{" message "}" asymmetric entity          ; e.g., {"hi"}/B
 
                 ; sender is first entity in relationship, receiver is second
-auth-crypt   = "{" message "}" asymmetric short-relationship ; e.g., {"hi"}/A:B 
-             
+auth-crypt   = "{" message "}" asymmetric short-relationship ; e.g., {"hi"}/A:B
+
 sym-crypt    = "{" message "}" symmetric entity           ; e.g., {"hi"}*B
 
 verify       = "{" message "}" verify entity              ; e.g., {"hi"}?B
-``` 
+```
 
 The relative order of suffixes reflects whether encryption or
 signing takes place first: `{"hello"}*B#` says that symmetric
@@ -518,7 +519,7 @@ the cypertext; `{"hello"#}*B` says that plaintext is signed, and
 then both the plaintext and the signature are encrypted. (The
 `{"hello"}#*B` variant is nonsensical because it splits the
 encryption notation in half).
- 
+
 All suffixes can be further decorated with a parenthesized algorithm
 name, if precision is required: `{"hello"}*(aes256)B` or
 `{"hello"}/(rsa1024)A:B` or `{"hello"#(ecdsa)}/B`.
@@ -567,6 +568,7 @@ might show something like `A:<TBD>`.
 ## Reference
 
 ### Examples
+
 * `A`: an identity owner like Alice or Acme Corp.
 * `alices_pixel@A` or `bobs_alexa@B`: a device or IoT thing
 * `7@A`: an agent, arbitrarily assigned number 7
@@ -597,11 +599,12 @@ might show something like `A:<TBD>`.
   C for agents 1 and 2.
 
 ### Reserved Tokens
+
 * `Any`: The name for the public side of a relationship between a
   specific entity and the public.
 * `did`: The DID belonging to an entity in a given relationship, as in `A.did@A:B`
 * `ipk` and `isk`: Issuer public (verification) key and issuer secret key.
-* `key`: A symmetric key. 
+* `key`: A symmetric key.
 * `ls`: The link secret belonging to an entity, as in `A.ls`.
 * `micro`: The microledger belonging to an entity in a given relationship, as in `A.micro@A:B`
 * `msg`: A generic message.
@@ -671,27 +674,24 @@ multiplex    = "%"                                   ; suffix
 anon-crypt   = "{" message "}" asymmetric entity          ; e.g., {"hi"}/B
 
                 ; sender is first entity in relationship, receiver is second
-auth-crypt   = "{" message asymmetric short-relationship ; e.g., {"hi"}/A:B 
-             
+auth-crypt   = "{" message asymmetric short-relationship ; e.g., {"hi"}/A:B
+
 sym-crypt    = "{" message "}" symmetric entity           ; e.g., {"hi"}*B
 ```
 
 ## Drawbacks
-[drawbacks]: #drawbacks
 
 * Creates one more formalism to learn. SSI is already a dense topic with a steep
   learning curve.
 * Creates something that needs to be version-controlled.
 
 ## Rationale and alternatives
-[alternatives]: #alternatives
 
 - Why is this design the best in the space of possible designs?
 - What other designs have been considered and what is the rationale for not choosing them?
 - What is the impact of not doing this?
 
 ## Prior art
-[prior-art]: #prior-art
 
 * [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides powerful
 and beautiful rendering of complex formal concepts, and uses escape sequences that are
@@ -705,11 +705,11 @@ programming languages as well.
     but you're usually encoding what something looks like, not what it means. (LaTeX
     does support logical styles and sections, but this introduces far more complexity
     than we need.)
-    
+
     The LaTeX snippet ```e^{-x_y}``` should render like this:
-     
+
     ![e^{-x_y} rendered by LaTeX engine](expression.png)
-     
+
     This is great--but it doesn't say anything about what `e`, `x`, and `y` _mean_. Thus a LaTeX
     solution would still have to define conventions for meaning in a separate spec.
     These conventions would have to find representations that are not obvious
@@ -717,14 +717,14 @@ programming languages as well.
     ownership, association). And such a spec would have to be careful not to
     ascribe meaning to a rendering that conflicts with assumptions of
     knowledgeable LaTeX users (e.g., using `\sqrt` for something other than
-    its mathematical square root function in the vocabulary would raise eyebrows). 
-    
+    its mathematical square root function in the vocabulary would raise eyebrows).
+
     Highly formatted LaTeX is also quite verbose.
-    
+
     A very simple form of LaTeX could be used (e.g., just superscripts and subscripts)--
-    but this would have to solve some of the problems [mentioned below](#superscripts), in the 
+    but this would have to solve some of the problems mentioned below, in the
     DKMS section.
-    
+
 * [ASCIIMath](http://asciimath.org/) has many of the same benefits and drawbacks as
 LaTeX. It is less ubiquitous.
 
@@ -735,7 +735,7 @@ https://github.com/hyperledger/indy-sdk/blob/677a0439487a1b7ce64c2e62671ed3e0079
 ) for an example). However, it does not encompass all the concerns
 explored here, so it would have to be expanded before it could be complete.
 
-  [superscripts]: #superscripts
+
 
   Also, experiments with superscripts and subscripts in this format led to semantic
   dead ends or undesirable nesting when patterns were applied consistently. For
@@ -747,7 +747,6 @@ explored here, so it would have to be expanded before it could be complete.
   isn't relationship-specific? And how would we handle N-way relationships?
 
 ## Unresolved questions
-[unresolved]: #unresolved-questions
 
 * Do we need to support non-ASCII characters in the notation? (I suggest no--for coders
   wishing to share simple algebra-like notes in comments or on chat, ASCII is a reasonable
@@ -756,12 +755,11 @@ explored here, so it would have to be expanded before it could be complete.
 * Do we need special notation for credentials, proofs, and the like? If so, how does
   this relate to ZKLang?
 * Do we need notation for security contexts of messages?
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

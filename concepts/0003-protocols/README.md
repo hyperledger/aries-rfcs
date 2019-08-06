@@ -1,13 +1,14 @@
-# 0003: Protocols
-- Author: Daniel Hardman <daniel.hardman@gmail.com>
+# Aries RFC 0003: Protocols
+
+- Authors: Daniel Hardman <daniel.hardman@gmail.com>
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-04-01
+- Status Note: standards track and beginning to influence many mental models, but not yet [ADOPTED](/README.md#rfc-lifecycle). 
+- Supersedes: [Indy PR #69]( https://github.com/hyperledger/indy-hipe/pull/69)
 - Start Date: 2018-12-28
+- Tags: concept
 
 ## Summary
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2019-04-01
-- Status Note: standards track and beginning to influence many mental models, but not yet
-  [ADOPTED](/README.md#rfc-lifecycle). This supersedes [Indy PR #69](
-  https://github.com/hyperledger/indy-hipe/pull/69).
 
 Defines protocols (and the closely related concept of message families)
 in the context of agent-to-agent interactions,
@@ -17,10 +18,10 @@ and shows how they should be designed and documented.
 
 When we began exploring agent-to-agent interactions, we imagined that
 interoperability would be achieved by formally defining message families.
-We have since learned that message family definitions must define more 
-than simply the attributes that are a part of each message. We also need 
-to formally define the roles in an interaction, the possible states those roles 
-can have, the way state changes in response to messages, and the errors 
+We have since learned that message family definitions must define more
+than simply the attributes that are a part of each message. We also need
+to formally define the roles in an interaction, the possible states those roles
+can have, the way state changes in response to messages, and the errors
 that may arise.
 
 [![protocol](protocol.png)](https://docs.google.com/presentation/d/15UAkh_2WfDk7wlto7pSL7YU9NJr_XVMgGAOeNIRbzK8/edit#slide=id.p)
@@ -155,7 +156,7 @@ uses a different subset.
 
 Collectively, the message types of a protocol serve as its _interface_. Each protocol
 has a primary message family, and the name of the protocol is often the name of the
-primary message family. 
+primary message family.
 
 #### Ingredients
 
@@ -206,7 +207,7 @@ section for details.)
 Some of the simplest DIDComm protocols could be specified in a Swagger/OpenAPI
 style. This would give some nice tooling. However, not all fit into that
 mold. It may be desirable to create conversion tools that allow Swagger
-interop.   
+interop.
 
 ## Prior art
 
@@ -254,30 +255,30 @@ by the caller. They are also out of favor in the programmer community at
 present, as being too heavy, [too fragile](
 https://codecraft.co/2008/07/29/decoupling-interfaces-as-versions-evolve-part-1/),
 or poorly supported by current tools.
- 
+
 #### Swagger / OpenAPI
 
 [Swagger / OpenAPI](https://swagger.io/docs/specification/about/) overlaps
  about 60% with the concerns of protocol definition in agent-to-agent
  interactions. We like the tools and the convenience of the paradigm
  offered by OpenAPI, but where these two do not overlap, we have impedance.
- 
+
  Agent-to-agent protocols must support more than 2 roles, or
  two roles that are peers, whereas RESTful web services assume just client
  and server--and only the server has a documented API.
- 
+
  Agent-to-agent protocols are fundamentally asynchronous,
  whereas RESTful web services mostly assume synchronous request~response.
- 
- Agent-to-agent protocols have complex considerations for diffuse trust, 
+
+ Agent-to-agent protocols have complex considerations for diffuse trust,
  whereas RESTful web services centralize trust in the web server.
- 
+
  Agent-to-agent protocols need to support transports beyond HTTP, whereas
  RESTful web services do not.
- 
+
  Agent-to-agent protocols are nestable, while
  RESTful web services don't provide any special support for that construct.
- 
+
 #### Other
 
 * [Pdef (Protocol Definition Language)](https://github.com/pdef/pdef): An alternative to Swagger.
@@ -288,19 +289,18 @@ or poorly supported by current tools.
 * [IPC Protocol Definition Language (IPDL)](https://developer.mozilla.org/en-US/docs/Mozilla/IPDL):
  This is much closer to agent protocols in terms of its scope of concerns
  than OpenAPI. However, it is C++ only, and intended for use within browser
- plugins. 
+ plugins.
 
 # Unresolved questions
 
 - Should we write a Swagger translator?
 - If not swagger, what formal definition format should we use in the future?
 
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

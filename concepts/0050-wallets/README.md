@@ -1,19 +1,14 @@
-# 0050: Wallets
-- Author: Daniel Hardman, Darko Kulic, Vyacheslav Gudkov, Mike Lodder
-- Start Date: 2018-05-22
+# Aries RFC 0050: Wallets
 
-## Status
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2018-07-01
-- Status Note: Fully implemented in Indy SDK, but not yet
-  socialized well in the broader Aries community. Needs some
-  updates to promote better key management; see related RFC
-  about [lox](../../features/0042-lox/README.md). This
-  supersedes [Indy HIPE 0013](
-  https://github.com/hyperledger/indy-hipe/tree/master/text/0013-wallets).
+- Authors: Daniel Hardman, Darko Kulic, Vyacheslav Gudkov, Mike Lodder
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2018-07-01
+- Status Note: Fully implemented in Indy SDK, but not yet socialized well in the broader Aries community. Needs some updates to promote better key management; see related RFC about [lox](../../features/0042-lox/README.md). 
+- Supersedes: [Indy HIPE 0013]( https://github.com/hyperledger/indy-hipe/tree/master/text/0013-wallets)
+- Start Date: 2018-05-22
+- Tags: concept
 
 ## Summary
-[summary]: #summary
 
 Specify the external interfaces of identity wallets in the Indy ecosystem, as well
 as some background concepts, theory, tradeoffs, and internal implementation guidelines.
@@ -21,7 +16,6 @@ as some background concepts, theory, tradeoffs, and internal implementation guid
 ![identity wallet](identity-wallet.png)
 
 ## Motivation
-[motivation]: #motivation
 
 Wallets are a familiar component metaphor that SSI has adopted from the world of
 cryptocurrencies. The translation isn't perfect, though; crypto wallets have only a
@@ -32,7 +26,7 @@ our actual design target.
 Since wallets are a major vector for hacking and cybersecurity issues, casual or
 fuzzy wallet requirements are a recipe for frustration or disaster. Divergent
 and substandard implementations could undermine security more broadly. This
-argues for as much design guidance and implementation help as possible. 
+argues for as much design guidance and implementation help as possible.
 
 Wallets are also a unit of identity portability--if an identity owner doesn't
 like how her software is working, she should be able to exercise her self-
@@ -42,10 +36,9 @@ are to avoid vendor lock-in.
 
 All of these reasons--to clarify design scope, to provide uniform high security, and
 to guarantee interop--suggest that we need a formal RFC to document wallet
-architecture. 
+architecture.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 (For a slide deck that gives a simplified overview of all the content in this
 RFC, please see [http://bit.ly/2JUcIiT](https://docs.google.com/presentation/d/1d35TtEAP-f1tTh88XSZ2uQ2qnuPh6JIPluIWno_P3b0/edit). The deck also
@@ -88,7 +81,7 @@ may own or control many different types of data:
 ...and much more. Different subsets of data may be worthy of different
 protection efforts:
 
-![the data risk continuum](risk-continuum.png) 
+![the data risk continuum](risk-continuum.png)
 
 The data can also show huge variety in its size and in its richness:
 
@@ -102,6 +95,7 @@ different levels of security, and different cost profiles.
 ### What's Out of Scope
 
 #### Not a Vault
+
 This variety suggests that an identity wallet as a loose grab-bag of all our
 digital "stuff" will give us a poor design. We won't be able to make good
 tradeoffs that satisfy everybody; some will want rigorous, optimized search;
@@ -159,7 +153,7 @@ thousand relationships--some with institutions, some with other people. She
 has a couple hundred credentials. She owns three different types of
 cryptocurrency. She doesn’t issue or revoke credentials--she just uses them.
 She receives proofs from other entities (people and orgs). Her main tool for
-exercising a self-sovereign identity is an app on a mobile device. 
+exercising a self-sovereign identity is an app on a mobile device.
 
 #### Faber (intitutional identity owner)
 
@@ -339,13 +333,13 @@ Instead, wallet encryption takes the following approach:
   * Initialization vector is HMAC-256 value of the field being encrypted.
   * Two more keys are needed for HMAC--one for `type` and `id` and one for
     `tag_name` and `tag_value`.
-    
+
 * For item values:
   * A new value key is generated for each item value.
   * Value key is encrypted using key for that field. (Value key also has a "column"
     key that contributes to its encryption.)
   * Initialization vector is generated every time for both encryptions.
-  
+
 * For wallet keys:
   * Encrypted with master key with random initialization vector.
 
@@ -388,7 +382,7 @@ encryption, signing). Some secrets cannot be stored in wallets like the key that
 wallet itself or keys that are backed up. These cannot be stored in enclaves as keys stored in
 enclaves cannot be extracted. Enclaves can still protect these secrets via a mechanism called
 __wrapping__.
- 
+
 #### Enclave Wrapping
 
 Suppose I have a secret, X, that needs maximum protection. However, I can’t
@@ -445,12 +439,10 @@ For technical details on how export and import work, please see the [internal
 design docs](https://github.com/hyperledger/indy-sdk/tree/master/docs/design/009-wallet-export-import).
 
 ## Reference
-[reference]: #reference
 
 - [Wallet Design](https://github.com/hyperledger/indy-sdk/tree/master/docs/design/003-wallet-storage)
 
 ## Rationale and alternatives
-[alternatives]: #alternatives
 
 We could implement wallets purely as built already in the cryptocurrency world.
 This would give us great security (except for crypto wallets that are cloud based),
@@ -465,22 +457,19 @@ your credentials using some other mechanism. It would also fragment the places w
 you could maintain an audit trail of your SSI activities.
 
 ## Prior art
-[prior-art]: #prior-art
 
 See comment about crypto wallets, above.
 
 ## Unresolved questions
-[unresolved]: #unresolved-questions
 
 - What is the relationship between a threading model in pluggable storage and
   the threading model of wallets? Is it always legal to be reading and writing
   wallets from multiple threads at the same time?
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

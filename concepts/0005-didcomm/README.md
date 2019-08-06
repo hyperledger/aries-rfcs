@@ -1,21 +1,19 @@
-# 0005: DID Communication
-- Author: Daniel Hardman <daniel.hardman@gmail.com>
-- Start Date: 2018-01-05 (approx, backdated)
+# Aries RFC 0005: DID Communication
 
-## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
-- Status Date: 2019-01-15
-- Status Note: Probably almost mature enough to propose [ACCEPTED](/README.md#rfc-lifecycle) status.
-   This supersedes [Indy PR #98](https://github.com/hyperledger/indy-hipe/pull/98).
+- Authors: Daniel Hardman <daniel.hardman@gmail.com>
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-01-15
+- Status Note: Probably almost mature enough to propose [ACCEPTED](/README.md#rfc-lifecycle) status. 
+- Supersedes: [Indy PR #98](https://github.com/hyperledger/indy-hipe/pull/98)
+- Start Date: 2018-01-05 (approx, backdated)
+- Tags: concept
 
 ## Summary
-[summary]: #summary
 
 Explain the basics of __DID communication__ (__DIDComm__) at a
 high level, and link to other RFCs to promote deeper exploration.
 
 ## Motivation
-[motivation]: #motivation
 
 The DID communication between agents is a rich subject with a lot of tribal
 knowledge. Newcomers to the [agent](https://github.com/hyperledger/indy-hipe/pull/86)
@@ -24,13 +22,12 @@ its paradigm. When they encounter dissonance, DIDComm becomes mysterious.
 We need a standard high-level reference.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 >This discussion assumes that you have a reasonable grasp on topics like
 [self-sovereign identity](https://medium.com/evernym/the-three-models-of-digital-identity-relationships-ca0727cb5186),
 [DIDs and DID Docs](https://w3c-ccg.github.io/did-spec/), and [agents](
 https://github.com/hyperledger/indy-hipe/pull/86). If you find yourself
-lost, please review that material for background and starting assumptions. 
+lost, please review that material for background and starting assumptions.
 
 Agents have to interact with one another to get work done. How they
 talk in general is DIDComm, the subject of this RFC. The specific interactions enabled by
@@ -94,7 +91,7 @@ As a list of buzz words, this may elicit nods rather than surprise.
 However, several items have deep ramifications.
 
 Taken together, _Secure_ and _Private_ require that the protocol be
-decentralized and maximally opaque to the surveillance economy. 
+decentralized and maximally opaque to the surveillance economy.
 
 _Interoperable_ means that DIDComm should work across programming languages,
 blockchains, vendors, OS/platforms, networks, legal jurisdictions, geos,
@@ -133,7 +130,7 @@ This is much closer to an email paradigm than a web paradigm.
 On top of this foundation, it is possible to build elegant, synchronous
 request-response interactions. All of us have interacted with a friend
 who's emailing or texting us in near-realtime. However, interoperability
-begins with a least-common-denominator assumption that's simpler. 
+begins with a least-common-denominator assumption that's simpler.
 
 ##### Message-Level Security, Reciprocal Authentication
 
@@ -162,19 +159,18 @@ parties do it the same way.
 ## Reference
 
 The following RFCs profide additional information:
-* [0021: DID Comm Message Anatomy](../0021-didcomm-message-anatomy/README.md)
+* [0021: DIDComm Message Anatomy](../0021-didcomm-message-anatomy/README.md)
 * [0020: Message Types](../0020-message-types/README.md)
 * [0011: Decorators](../0011-decorators/README.md)
 * [0008: Message ID and Threading](../0008-message-id-and-threading/README.md)
 * [0019: Encryption Envelope](../../features/0019-encryption-envelope/README.md)
 * [0025: Agent Transports](../../features/0025-didcomm-transports/README.md)
 
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

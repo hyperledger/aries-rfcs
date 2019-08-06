@@ -1,25 +1,22 @@
-# 0008: Message ID and Threading
-- Authors: Daniel Bluhm <daniel.bluhm@sovrin.org>, Sam Curren (sam@sovin.org), Daniel Hardman (daniel.hardman@gmail.com)
-- Start Date: 2018-08-03
+# Aries RFC 0008: Message ID and Threading
 
-## Status
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2018-10-01
+- Authors: Daniel Bluhm <daniel.bluhm@sovrin.org>, Sam Curren (sam@sovin.org), Daniel Hardman (daniel.hardman@gmail.com)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2018-10-01
 - Status Note: Implemented broadly in Indy, but not yet elsewhere.
+- Start Date: 2018-08-03
+- Tags: concept
 
 ## Summary
-[summary]: #summary
 
 Definition of the message @id field and the ~thread [decorator](
 https://github.com/hyperledger/indy-hipe/pull/71).
 
 ## Motivation
-[motivation]: #motivation
 
 Referring to messages is useful in many interactions. A standard method of adding a message ID promotes good patterns in message families. When multiple messages are coordinated in a message flow, the threading pattern helps avoid having to re-roll the same spec for each message family that needs it.
 
 ## Tutorial
-[tutorial]: #tutorial
 
 ### Message IDs
 
@@ -53,6 +50,7 @@ The following was pulled from [this document](https://raw.githubusercontent.com/
 
 
 ### Threaded Messages
+
 Message threading will be implemented as a [decorator](../0011-decorators/README.md) to messages, for example:
 
 ```json
@@ -73,6 +71,7 @@ The `~thread` decorator is generally required on any type of response, since
 this is what connects it with the original request.
 
 #### Thread object
+
 A thread object has the following fields discussed below:
 
 * `thid`: The ID of the message that serves as the thread start.
@@ -84,15 +83,17 @@ A thread object has the following fields discussed below:
   as it provides an implicit ACK.)
 
 #### Thread ID (`thid`)
+
 Because multiple interactions can happen simultaneously, it's important to
 differentiate between them. This is done with a Thread ID or `thid`.
 
 The Thread ID is the Message ID (`@id`) of the first message in the thread. The
 first message may or may not declare the `~thread` attribute block; it
 does not, but carries an
-implicit `thid` of its own `@id`. 
+implicit `thid` of its own `@id`.
 
 #### Sender Order (`sender_order`)
+
 It is desirable to know how messages within a thread should be ordered.
 However, it is very difficult to know with confidence the absolute
 ordering of events scattered across a distributed system. Alice and Bob
@@ -111,6 +112,7 @@ any message can be uniquely identified in an interaction by its `thid`,
 the sender DID and/or key, and the `sender_order`.
 
 #### Received Orders (`received_orders`)
+
 In an interaction, it may be useful for the recipient of a message to
 know if their last message was received. A `received_orders` value
 addresses this need, and could be included as a best practice to help
@@ -151,14 +153,16 @@ thread. To make that claim, use the special value `-1`, as in:
 ```
 
 ##### Example
+
 As an example, Alice is an issuer and she offers a credential to Bob.
 
-* Alice sends a CRED_OFFER as the start of a new thread, `@id`=98fd8d72-80f6-4419-abc2-c65ea39d0f38, `sender_order`=0. 
+* Alice sends a CRED_OFFER as the start of a new thread, `@id`=98fd8d72-80f6-4419-abc2-c65ea39d0f38, `sender_order`=0.
 * Bob responds with a CRED_REQUEST, `@id`=&lt;uuid2&gt;, `thid`=98fd8d72-80f6-4419-abc2-c65ea39d0f38, `sender_order`=0, `received_orders:{alice:0}`.
 * Alice sends a CRED, `@id`=&lt;uuid3&gt;, `thid`=98fd8d72-80f6-4419-abc2-c65ea39d0f38, `sender_order`=1, `received_orders:{bob:0}`.
 * Bob responds with an ACK, `@id`=&lt;uuid4&gt;, `thid`=98fd8d72-80f6-4419-abc2-c65ea39d0f38, `sender_order`=1, `received_orders:{alice:1}`.
 
 #### Nested interactions (Parent Thread ID or `pthid`)
+
 Sometimes there are interactions that need to occur with the same party, while an
 existing interaction is in-flight.
 
@@ -167,9 +171,10 @@ can include a Parent Thread ID (`pthid`). This signals to the other party that t
 is a thread that is branching off of an existing interaction.
 
 ##### Nested Example
+
 As before, Alice is an issuer and she offers a credential to Bob. This time, she wants a bit more information before she is comfortable providing a credential.
 
-* Alice sends a CRED_OFFER as the start of a new thread, `@id`=98fd8d72-80f6-4419-abc2-c65ea39d0f38, `sender_order`=0. 
+* Alice sends a CRED_OFFER as the start of a new thread, `@id`=98fd8d72-80f6-4419-abc2-c65ea39d0f38, `sender_order`=0.
 * Bob responds with a CRED_REQUEST, `@id`=&lt;uuid2&gt;, `thid`=98fd8d72-80f6-4419-abc2-c65ea39d0f38, `sender_order`=0, `received_orders:{alice:0}`.
 * **Alice sends a PROOF_REQUEST, `@id`=&lt;uuid3&gt;, `pthid`=98fd8d72-80f6-4419-abc2-c65ea39d0f38, `sender_order`=0.** Note the subthread, the parent thread ID, and the reset `sender_order` value.
 * **Bob sends a PROOF, `@id`=&lt;uuid4&gt;, `thid`=&lt;uuid3&gt;,`sender_order`=0, `received_orders:{alice:0}`.**
@@ -219,39 +224,31 @@ Effective Message with defaults in place:
 }
 ```
 
-
 ## Reference
-
-[reference]: #reference
 
 - [Message Packaging document from Sovrin Foundation Protocol Repo](https://raw.githubusercontent.com/sovrin-foundation/protocol/master/janus/message-packaging.md)
 - [Very brief summary of discussion from Agent Summit on Decorators](https://docs.google.com/presentation/d/1l-po2IKVhXZHKlgpLba2RGq0Md9Rf19lDLEXMKwLdco/edit#slide=id.g29a85e4573632dc4_58)
 
 ## Drawbacks
-[drawbacks]: #drawbacks
 
 Why should we *not* do this?
 
 ## Rationale and alternatives
-[alternatives]: #alternatives
 
 - Implement threading for each message type that needs it.
 
 ## Prior art
-[prior-art]: #prior-art
 
 If you're aware of relevant prior-art, please add it here.
 
 ## Unresolved questions
-[unresolved]: #unresolved-questions
 
 - Using a wrapping method for threading has been discussed but most seemed in favor of the annotated method. Any remaining arguments to be made in favor of the wrapping method?
-   
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

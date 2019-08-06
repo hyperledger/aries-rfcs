@@ -1,12 +1,12 @@
-# 0023: DID Exchange Protocol 1.0
+# Aries RFC 0023: DID Exchange Protocol 1.0
 
 - Authors: Ryan West <ryan.west@sovrin.org>, Daniel Bluhm <daniel.bluhm@sovrin.org>, Matthew Hailstone, Stephen Curran, Sam Curren <sam@sovrin.org>
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-05-27
+- Status Note:  
+- Supersedes: [INDY 0031 - Connection Protocol](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol)
 - Start Date: 2018-6-29
-
-## Status
-- Status: [ACCEPTED](/README.md#rfc-lifecycle)
-- Status Date: 2019-05-27
-- Status Note: Supersedes [INDY 0031 - Connection Protocol](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol)
+- Tags: feature, protocol
 
 ## Summary
 
@@ -39,21 +39,28 @@ In cases where both parties already possess SSI capabilities, deciding who plays
 ### States
 
 #### null
+
 No exchange exists or is in progress
+
 #### invited
+
 The invitation has been shared with the intended _invitee_(s), and they have not yet sent a _exchange_request_.
+
 #### requested
-A _exchange_request_ has been sent by the _invitee_ to the _inviter_ based on the information in the _invitation_. 
+
+A _exchange_request_ has been sent by the _invitee_ to the _inviter_ based on the information in the _invitation_.
+
 #### responded
+
 A _exchange_response_ has been sent by the _inviter_ to the _invitee_ based on the information in the _exchange_request_.
+
 #### complete
+
 The exchange has been completed.
 
 ![State Machine Tables](chrome_2019-01-29_07-59-38.png)
 
 ### Errors
-
-[errors]: #errors
 
 There are no errors in this protocol during the invitation phase. For the request and response, there are two error messages possible for each phase: one for an active rejection and one for an unknown error. These errors are sent using a **problem_report** message type specific to the DID Exchange Protocol. The following list details `problem-code`s that may be sent:
 
@@ -89,7 +96,8 @@ No errors are sent in timeout situations. If the inviter or invitee wishes to re
 - The `explain` attribute contains a human readable message which indicates the problem.
 
 ### Flow Overview
-The _inviter_ gives provisional information to the _invitee_ using a `~service` decorator. 
+
+The _inviter_ gives provisional information to the _invitee_ using a `~service` decorator.
 The _invitee_ uses provisional information to send a DID and DID Doc to the _inviter_.
 The _inviter_ uses sent DID Doc information to send a DID and DID Doc to the _invitee_.
 The *invitee* sends the *inviter* an ack or any other message that confirms the response was received.
@@ -98,7 +106,7 @@ The *invitee* sends the *inviter* an ack or any other message that confirms the 
 
 An invitation to exchange may be transferred using any method that can reliably transmit text. The result
 must be the essential data necessary to initiate an [Exchange Request](#1-exchange-request) message. A exchange
-invitation is an agent message with agent plaintext format, but is an **out-of-band communication** and therefore 
+invitation is an agent message with agent plaintext format, but is an **out-of-band communication** and therefore
 not communicated using wire level encoding or encryption. The necessary data that an invitation to exchange must result in is:
 
 * suggested label
@@ -109,7 +117,7 @@ not communicated using wire level encoding or encryption. The necessary data tha
 * suggested label
 * `~service` decorator block that contains a serviceEndpoint, recipientKeys, and optionally routingKeys.
 
-This information is used by the _invitee_ to send an exchange response message to the _inviter_. 
+This information is used by the _invitee_ to send an exchange response message to the _inviter_.
 
 These attributes were chosen to parallel the attributes of a DID Document for increased meaning. It is worth noting that `recipientKeys` and `routingKeys` within the `~service` decorator must be inline keys, not DID key references when contained in an invitation. As in the DID Document with `Ed25519VerificationKey2018` key types, the key must be base58 encoded.
 
@@ -151,7 +159,7 @@ Invitation Message with Keys and DID Service Endpoint Reference:
 
 ##### Implicit Invitation
 
-Any Public DID serves as an implicit invitation. If an _invitee_ wishes to connect to any Public DID, They designate their own label and skip to the end of the Invitation Processing step. There is no need to encode the invitation or transmit the invitation. 
+Any Public DID serves as an implicit invitation. If an _invitee_ wishes to connect to any Public DID, They designate their own label and skip to the end of the Invitation Processing step. There is no need to encode the invitation or transmit the invitation.
 
 ##### Routing Keys
 
@@ -167,7 +175,7 @@ In that case, the `serviceEndpoint` of the DID must be a URI, and the `recipient
 
 Using a standard invitation encoding allows for easier interoperability between multiple projects and software platforms. Using a URL for that standard encoding provides a built in fallback flow for users who are unable to automatically process the invitation. Those new users will load the URL in a browser as a default behavior, and will be presented with instructions on how to install software capable of processing the invitation. Already onboarded users will be able to process the invitation without loading in a browser via mobile app URL capture, or via capability detection after being loaded in a browser.
 
-The standard invitation format is a URL with a Base64URLEncoded json object as a query parameter. 
+The standard invitation format is a URL with a Base64URLEncoded json object as a query parameter.
 
 The Invitation URL format is as follows, with some elements described below:
 
@@ -175,7 +183,7 @@ The Invitation URL format is as follows, with some elements described below:
 https://<domain>/<path>?c_i=<invitationstring>
 ```
 
-`<domain>` and `<path>` should be kept as short as possible, and the full URL should return human readable instructions when loaded in a browser. This is intended to aid new users. The `c_i` query parameter is required and is reserved to contain the invitation string. Additional path elements or query parameters are allowed, and can be leveraged to provide coupons or other promise of payment for new users. 
+`<domain>` and `<path>` should be kept as short as possible, and the full URL should return human readable instructions when loaded in a browser. This is intended to aid new users. The `c_i` query parameter is required and is reserved to contain the invitation string. Additional path elements or query parameters are allowed, and can be leveraged to provide coupons or other promise of payment for new users.
 
 The `<invitationstring>` is an agent plaintext message (not a wire level message) that has been base64 url encoded. For brevity, the json encoding should minimize unnecessary white space.
 
@@ -209,7 +217,7 @@ Example URL:
 ```text
 http://example.com/ssi?c_i=eyJAdHlwZSI6ImRpZDpzb3Y6QnpDYnNOWWhNcmpIaXFaRFRVQVNIZztzcGVjL2Nvbm5lY3Rpb25zLzEuMC9pbnZpdGF0aW9uIiwiQGlkIjoiMTIzNDU2Nzg5MDA5ODc2NTQzMjEiLCJsYWJlbCI6IkFsaWNlIiwicmVjaXBpZW50S2V5cyI6WyI4SEg1Z1lFZU5jM3o3UFlYbWQ1NGQ0eDZxQWZDTnJxUXFFQjNuUzdaZnU3SyJdLCJzZXJ2aWNlRW5kcG9pbnQiOiJodHRwczovL2V4YW1wbGUuY29tL2VuZHBvaW50Iiwicm91dGluZ0tleXMiOlsiOEhINWdZRWVOYzN6N1BZWG1kNTRkNHg2cUFmQ05ycVFxRUIzblM3WmZ1N0siXX0=
 ```
-Invitation URLs can be transferred via any method that can send text, including an email, SMS, posting on a website, or via a QR Code. 
+Invitation URLs can be transferred via any method that can send text, including an email, SMS, posting on a website, or via a QR Code.
 
 Example URL encoded as a QR Code:
 
@@ -234,6 +242,7 @@ The exchange request message is used to communicate the DID document of the _inv
 The _invitee_ will provision a new DID according to the DID method spec. For a Peer DID, this involves creating a matching peer DID and key. The newly provisioned DID and DID Doc is presented in the exchange_request message as follows:
 
 #### Example
+
 ```json
 {
   "@id": "5678876542345",
@@ -248,7 +257,9 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
   }
 }
 ```
+
 #### Attributes
+
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
 * The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute.
 * The `connection` attribute contains the `did` and `did_doc` attributes. This format maintains consistency with the Response message where this attribute is signed.
@@ -256,7 +267,8 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 * The `did_doc` contains the DID Doc associated with the DID. If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc` attribute is optional.
 
 #### Request Transmission
-The Request message is encoded according to the standards of the Encryption Envelope, using the `recipientKeys` present in the invitation. 
+
+The Request message is encoded according to the standards of the Encryption Envelope, using the `recipientKeys` present in the invitation.
 
 If the `routingKeys` attribute was present and non-empty in the invitation, each key must be used to wrap the message in a forward request, then encoded in an Encryption Envelope. This processing is in order of the keys in the list, with the last key in the list being the one for which the `serviceEndpoint` possesses the private key.
 
@@ -265,6 +277,7 @@ The message is then transmitted to the `serviceEndpoint`.
 We are now in the `requested` state.
 
 #### Request processing
+
 After receiving the exchange request, the _inviter_ evaluates the provided DID and DID Doc according to the DID Method Spec.
 
 The _inviter_ should check the information presented with the keys used in the wire-level message transmission to ensure they match.
@@ -296,6 +309,7 @@ Possible reasons:
 The exchange response message is used to complete the exchange. This message is required in the flow, as it updates the provisional information presented in the invitation.
 
 #### Example
+
 ```json
 {
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/response",
@@ -335,12 +349,12 @@ The `connection` attribute has been removed and it's contents combined with the 
 
 Upon receipt, the signed attribute will be automatically unpacked and the signature verified. Signature information will be stored as message context, and the `connection` attribute will be replaced in it's original format before processing continues.
 
-The signature data must be used to verify against the invitation's `recipientKeys` for continuity. 
+The signature data must be used to verify against the invitation's `recipientKeys` for continuity.
 
 #### Attributes
 
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
-* The `~thread` block contains a `thid` reference to the `@id` of the request message. 
+* The `~thread` block contains a `thid` reference to the `@id` of the request message.
 * The `connection` attribute contains the `did` and `did_doc` attributes to enable simpler signing.
 * The `did` attribute is a required string value and denotes DID in use by the _inviter_. Note that this may not be the same DID used in the invitation.
 * The `did_doc` attribute contains the associated DID Doc. If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc` attribute is optional.
@@ -348,11 +362,13 @@ The signature data must be used to verify against the invitation's `recipientKey
 In addition to a new DID, the associated DID Doc might contain a new endpoint. This new DID and endpoint are to be used going forward in the relationship.
 
 #### Response Transmission
-The message should be packaged in the encrypted envelope format, using the keys from the request, and the new keys presented in the internal did doc. 
+
+The message should be packaged in the encrypted envelope format, using the keys from the request, and the new keys presented in the internal did doc.
 
 When the message is transmitted, we are now in the `responded` state.
 
 #### Response Processing
+
 When the _invitee_ receives the `response` message, they will verify the `change_sig` provided. After validation, they will update their wallet with the new information. If the endpoint was changed, they may wish to execute a Trust Ping to verify that new endpoint.
 
 #### Response Errors
@@ -372,13 +388,9 @@ Possible reasons:
 
 **response_processing_error**
 
-- unknown processing error
+- unknown processing error## 3. Exchange Acknowledgement
 
-## 3. Exchange Acknowledgement
-
-[3-exchange-ack]: #3-exchange-ack
-
-After the Response is received, the exchange is technically complete. This remains unconfirmed to the *inviter* however. The *invitee* SHOULD send a message to the *inviter*. As any message will confirm the exchange, any message will do. 
+After the Response is received, the exchange is technically complete. This remains unconfirmed to the *inviter* however. The *invitee* SHOULD send a message to the *inviter*. As any message will confirm the exchange, any message will do.
 
 Frequently, the parties of the relationship will want to trade credentials to establish trust. In such a flow, those message will serve the function of acknowledging the exchange without an extra confirmation message.
 
@@ -391,10 +403,10 @@ After a message is sent, the *invitee* in the `complete` state. Receipt of a mes
 The exchange between the _inviter_ and the _invitee_ is now established. This relationship has no trust associated with it. The next step should be the exchange of proofs to build trust sufficient for the purpose of the relationship.
 
 #### Peer DID Maintenance
+
 When Peer DIDs are used in an exchange, it is likely that both Alice and Bob will want to perform some relationship maintenance such as key rotations. Future HIPE updates will add these maintenance features.
 
 ## Reference
-[reference]: #reference
 
 * https://docs.google.com/document/d/1mRLPOK4VmU9YYdxHJSxgqBp19gNh3fT7Qk4Q069VPY8/edit#heading=h.7sxkr7hbou5i
 * [Agent to Agent Communication Video](https://drive.google.com/file/d/1PHAy8dMefZG9JNg87Zi33SfKkZvUvXvx/view)
@@ -413,12 +425,12 @@ When Peer DIDs are used in an exchange, it is likely that both Alice and Bob wil
 ## Unresolved questions
 
 - `c_i` should be updated to use something universal to DID Communication.
-- the `connection` message attribute is used by in request and response messages to bundle the DID or DID and DID Document. How do updated signatures correct   
+- the `connection` message attribute is used by in request and response messages to bundle the DID or DID and DID Document. How do updated signatures correct
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name | Link | Implementation Notes
 --- | --- | ---
- |  | 
-
+ |  |

@@ -20,20 +20,24 @@ RFCs go through a standard lifecycle:
 
 ![lifecycle](lifecycle.png)
 
-#### Status == PROPOSED
-To __propose__ an RFC, [use these instructions to raise a PR](
-contributing.md#how-to-propose-an-RFC) against the repo. Proposed
-RFCs are considered a "work in progress", even after they are merged. In other words, they
-haven't been endorsed by the community yet, but they seem like reasonable ideas worth
-exploring.
+#### PROPOSED
+An RFC is __proposed__ [using these instructions to raise a PR](contributing.md#how-to-propose-an-RFC) against the repo. Proposed RFCs are considered a "work in progress", even after they are merged. In other words, they haven't been endorsed by the community yet, but they seem like reasonable ideas worth exploring.
 
-#### Status == ACCEPTED
+#### DEMONSTRATED
+An RFC is __demonstrated__ when a proof-of-concept implementation is
+publicly visible and linked from its Implementations section. This
+shows that the idea is practical and useful, and that experience is
+accumulating to refine it. The community still has not passed judgment.
+
+Concept RFCs may skip this phase.
+
+#### ACCEPTED
 To get an RFC __accepted__, [build consensus](contributing.md#how-to-get-an-RFC-accepted)
 for your RFC on [chat](https://chat.hyperledger.org/channel/aries) and in community
 meetings. An accepted RFC is incubating on a standards track; the community has decided
 to polish it and is exploring or pursuing implementation.
 
-#### Status == ADOPTED
+#### ADOPTED
 To get an RFC __adopted__, [socialize and implement](contributing.md#how-to-get-an-rfc-adopted).
 An RFC gets this status once it has significant momentum--when implementations accumulate,
 or when the mental model it advocates has begun to permeate our discourse. In other words,
@@ -44,9 +48,12 @@ these changes are driven by experience that accumulates during or after adoption
 Minor refinements that just improve clarity can happen inline with lightweight
 review. Status is still ADOPTED.
 
-#### Status == SUPERSEDED
-Significant refinements require a superseding document; the original RFC is
-__superseded__ with a forwarding hyperlink, not replaced.
+#### RETIRED
+An RFC is __retired__ when it is withdrawn from community consideration by its authors, 
+when implementation seems permanently stalled, or when significant refinements require
+a superseding document. If a retired RFC has been superseded, its `Superseded By` field
+should contain a link to the newer spec, and the newer spec's `Supersedes` field
+should contain a link to the older spec. Permalinks are not broken.
 
 ## About
 
