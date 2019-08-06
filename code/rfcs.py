@@ -48,7 +48,7 @@ def walk():
     Generate an RFC tuple for every RFC in the repo.
     """
     for abspath in walk_files():
-        with open(abspath, 'rt') as f:
+        with open(abspath, 'rt', encoding='utf-8') as f:
             txt = f.read()
         m = _title_pat.search(txt)
         if m:
@@ -109,7 +109,7 @@ def get_impl_table(txt):
 
 
 def relpath(abspath):
-    return os.path.relpath(abspath, root_folder)
+    return os.path.relpath(abspath, root_folder).replace('\\', '/')
 
 
 _header_pat = re.compile(r'^\s*#+[ \t]*(.*?)$', re.M)
