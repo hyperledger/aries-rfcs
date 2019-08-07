@@ -456,11 +456,11 @@ Upon establishing a connection, it is likely that both Alice and Bob will want t
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
-Streetcred AgentFramework | https://github.com/streetcred-id/agent-framework | .NET framework for building agents of all types
-Streetcred.id | https://streetcred.id/ | Commercial mobile and web app built using Streetcred AgentFramework
-Aries Cloud Agent - Python | https://github.com/hyperledger/aries-cloudagent-python | Contributed by the government of British Columbia.
-Aries Static Agent - Python | https://github.com/hyperledger/aries-staticagent-python | Useful for cron jobs and other simple, automated use cases.
-Aries Protocol Test Suite | https://github.com/hyperledger/aries-protocol-test-suite | 
-Indy Cloud Agent - Python | https://github.com/hyperledger/indy-agent/python | Demonstration Agent primarily by the Sovrin Foundation. 
+Name / Link | Implementation Notes
+--- | ---
+[Streetcred AgentFramework](https://github.com/streetcred-id/agent-framework) | passed agent connectathon tests, Feb 2019
+[Streetcred.id](https://streetcred.id/) | passed agent connectathon tests, Feb 2019
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | ported from VON codebase that passed agent connectathon tests, Feb 2019
+[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | implemented July 2019
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | ported from Indy Agent codebase that provided agent connectathon tests, Feb 2019
+[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | passed agent connectathon tests, Feb 2019 
