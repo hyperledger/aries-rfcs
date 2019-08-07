@@ -263,7 +263,7 @@ Aries RFCs: [RFC 0008](../0008-message-id-and-threading/README.md), [RFC 0017](.
 [Streetcred.id](https://streetcred.id/) | message threading
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | message threading, attachments
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | message threading
-[Aries Go Framework](https://github.com/hyperledger/aries-framework-go) | message threading
+[Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | message threading
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | message threading 
 [Verity](https://www.evernym.com/products/) | message threading
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | message threading 
