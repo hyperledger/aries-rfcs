@@ -1,9 +1,22 @@
+# Aries RFC 0167: Consent Lifecycle
+
+- Authors: \
+    Jan Lindquist, Dativa\
+    Mark Lizar, OpenConsent\
+    Harshvardhan J. Pandit, ADAPT Centre, Trinity College Dublin
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-08-07
+- Status Note: This RFC is based on [[old
+    HIPE]](https://github.com/JanLin/indy-hipe/tree/master/text/consent_receipt)
+    in Indy-SDK. New demo of reference implementation was given which
+    this RFC is now based on.  
+- Supersedes: HIPE Consent Receipt
+- Start Date: 2018-11-08
+- Tags: concepts
+    
+    
 Table of Contents
 ================
-
-[00xx: Consent lifecyle](#xx-consent-lifecyle)
-
-[Status](#status)
 
 [Summary](#summary)
 
@@ -58,27 +71,6 @@ Table of Contents
 
 [Comments](#comments)
 
-00xx: Consent lifecyle
-======================
-
--   Authors:\
-    Jan Lindquist, Dativa\
-    Mark Lizar, OpenConsent\
-    Harshvardhan J. Pandit, ADAPT Centre, Trinity College Dublin
-
--   Start Date: 2019-08-07
-
-Status
-======
-
--   Status: [[PROPOSED]](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#rfc-lifecycle)
-
--   Status Date: 2019-08-07
-
--   Status Note: This RFC is based on [[old
-    HIPE]](https://github.com/JanLin/indy-hipe/tree/master/text/consent_receipt)
-    in Indy-SDK. New demo of reference implementation was given which
-    this RFC is now based on.
 
 Summary
 =======
@@ -451,8 +443,7 @@ These are the steps covered with consent receipt certificate:
 
 The following flow diagram for setting up privacy agreement.
 
-![](media/consent_flow.png){width="6.531944444444444in"
-height="4.534722222222222in"}
+![](media/consent_flow.png)
 
 Proof Request
 -------------
@@ -478,8 +469,7 @@ requiring to share any personal data.
 
 The following flow diagram for setting up privacy agreement.
 
-![](media/proof_flow.png){width="6.531944444444444in"
-height="3.102777777777778in"}
+![](media/proof_flow.png)
 
 Certification Revocation
 ------------------------
@@ -536,34 +526,33 @@ included in the PDP.
 *Note: The draft used for this annex was file "Consent receipt annex for
 29184.docx".*
 
-  **Kantara attribute**             **Hyperledger Indy mapping**
-  --------------------------------- ------------------------------
-  Version                           Schema registration
-  Jurisdiction                      Agent registration
-  Consent Timestamp                 PDP signed certificate
-  Collection Method                 \-
-  Consent Receipt ID                PDP signed certificate
-  Public Key                        Ledger
-  Language                          Overlays
-  PII Principal ID                  Schema/Agent registration
-  PII Controller                    Agent registration
-  On Behalf                         Agent registration (1)
-  PII Controller Contract           Agent registration (2)
-  PII Controller Address            Agent registration
-  PII Controller Email              Agent registration
-  PII Controller Phone              Agent registration
-  PII Controller URL \[OPTIONAL\]   \-
-  Privacy Policy                    PDP
-  services                          PDP
-  purposes                          PDP
-  Purpose Category                  \-
-  Consent Type                      PDP
-  PII Categories                    \-
-  Primary Purpose                   PDP
-  Termination                       Ledger
-  Third Party Name                  PDP
-  Sensitive PII                     Schema base
-  Sensitive PII Category            Schema base
+| **Kantara attribute** | **Hyperledger Indy mapping** |
+| --- | --- |
+| Version | Schema registration |
+| Jurisdiction | Agent registration |
+| Consent Timestamp | PDP signed certificate |
+| Collection Method | - |
+| Consent Receipt ID | PDP signed certificate |
+| Public Key | Ledger |
+| Language | Overlays |
+| PII Principal ID | Schema/Agent registration |
+| PII Controller | Agent registration |
+| On Behalf | Agent registration (1) |
+| PII Controller Contract | Agent registration (2) |
+| PII Controller Address | Agent registration |
+| PII Controller Email | Agent registration |
+| PII Controller Phone | Agent registration |
+| PII Controller URL [OPTIONAL] | - |
+| Privacy Policy | PDP |
+| services | PDP |
+| purposes | PDP |
+| Purpose Category | - |
+| Consent Type | PDP |
+| PII Categories | - |
+| Primary Purpose | PDP |
+| Termination | Ledger |
+| Third Party Name | PDP |
+| Sensitive PII | Schema base |
 
 Notes
 
@@ -649,6 +638,14 @@ feature before stabilization? - What related issues do you consider out
 of scope for this proposal that could be addressed in the future
 independently of the solution that comes out of this doc?*
 
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name / Link | Implementation Notes
+--- | ---
+ |  | 
+
 Plan
 ----
 
@@ -668,3 +665,4 @@ Comments
 | --- | --- | --- | --- |
 | Where is consent recorded? | Harsh | 2019-07-31 | There are several types of consent listed below. Where the actual consent is recorded needs Specialised Consent (legal)Generic Consent (legal)General Data Processing Consent |
 |   |   |   |   |
+
