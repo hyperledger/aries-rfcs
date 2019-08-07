@@ -1,7 +1,7 @@
 # Aries RFC 0023: DID Exchange Protocol 1.0
 
 - Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org)
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-05-27
 - Status Note: A similar protocol was implemented for IIW in spring 2019. Need link.
 - Supersedes: [HIPE 0031 - Connection Protocol](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol)
