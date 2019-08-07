@@ -123,11 +123,11 @@ mechanism](../0034-message-tracing/README.md).
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
-Indy Cloud Agent - Python | https://github.com/hyperledger/indy-agent/python | Reference agent implementation contributed by Sovrin Foundation and Community
-Streetcred AgentFramework | https://github.com/streetcred-id/agent-framework | .NET framework for building agents of all types
-Streetcred.id | https://streetcred.id/ | Commercial mobile and web app built using Streetcred AgentFramework
-Aries Cloud Agent - Python | https://github.com/hyperledger/aries-cloudagent-python | Contributed by the government of British Columbia.
-Aries Static Agent - Python | https://github.com/hyperledger/aries-staticagent-python | Useful for cron jobs and other simple, automated use cases.
-Aries Protocol Test Suite | https://github.com/hyperledger/aries-protocol-test-suite | 
+Name / Link | Implementation Notes
+--- | ---
+[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | Reference agent implementation contributed by Sovrin Foundation and Community
+[Streetcred AgentFramework](https://github.com/streetcred-id/agent-framework) | .NET framework for building agents of all types
+[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Streetcred AgentFramework
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the government of British Columbia.
+[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | Useful for cron jobs and other simple, automated use cases.
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 

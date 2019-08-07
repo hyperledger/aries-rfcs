@@ -301,14 +301,14 @@ or poorly supported by current tools.
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
-Indy Cloud Agent - Python | https://github.com/hyperledger/indy-agent/python | Reference agent implementation contributed by Sovrin Foundation and Community
-Streetcred AgentFramework | https://github.com/streetcred-id/agent-framework | .NET framework for building agents of all types
-Streetcred.id | https://streetcred.id/ | Commercial mobile and web app built using Streetcred AgentFramework
-Aries Cloud Agent - Python | https://github.com/hyperledger/aries-cloudagent-python | Contributed by the government of British Columbia.
-Aries Static Agent - Python | https://github.com/hyperledger/aries-staticagent-python | Useful for cron jobs and other simple, automated use cases.
-Aries Go Framework | https://github.com/hyperledger/aries-framework-go | For building agents, hubs and other DIDComm features in GoLang.
-Connect.Me | https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/ | Free mobile app from Evernym. Installed via app store on iOS and Android. 
-Verity | https://www.evernym.com/products/ | Commercially licensed enterprise agent, SaaS or on-prem.
-Aries Protocol Test Suite | https://github.com/hyperledger/aries-protocol-test-suite | 
+Name / Link | Implementation Notes
+--- | ---
+[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | several protocols, circa Feb 2019
+[Streetcred AgentFramework](https://github.com/streetcred-id/agent-framework) | several protocols, circa Feb 2019
+[Streetcred.id](https://streetcred.id/) | several protocols, circa Feb 2019
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | numerous protocols plus extension mechanism for pluggable protocols
+[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | 2 or 3 protocols
+[Aries Go Framework](https://github.com/hyperledger/aries-framework-go) | DID Exchange
+[Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | mature but proprietary protocols; community protocols in process
+[Verity](https://www.evernym.com/products/) | mature but proprietary protocols; community protocols in process
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 2 or 3 core protocols; active work to implement all that are ACCEPTED, since this tests conformance of other agents
