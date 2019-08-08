@@ -54,6 +54,7 @@
 * [0114: Predefined Identities](features/0114-predefined-identities/README.md) (2019-07-10 &mdash; [`feature`](/tags.md#feature))
 * [0116: Evidence Exchange Protocol 0.9](features/0116-evidence-exchange/README.md) (2019-07-26 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0124: DID Resolution Protocol 0.9](features/0124-did-resolution-protocol/README.md) (2019-07-13 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0167: Consent Lifecycle](concepts/0167-consent-lifecycle/README.md) (2019-08-07 &mdash; [`concepts`](/tags.md#concepts))
 
 ## [RETIRED](README.md#retired)
 
