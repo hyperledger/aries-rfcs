@@ -143,7 +143,7 @@ look like this:
   "criteria~attach": { # optional
     "mime-type": "application/json",
     "data": {
-      "base64: "base64 encoded network-specific data"
+      "base64": "base64 encoded network-specific data"
     }
   }
 }
