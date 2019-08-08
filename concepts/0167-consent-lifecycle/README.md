@@ -6,11 +6,9 @@
     Harshvardhan J. Pandit, ADAPT Centre, Trinity College Dublin
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-08-07
-- Status Note: This RFC is based on [[old
-    HIPE]](https://github.com/JanLin/indy-hipe/tree/master/text/consent_receipt)
-    in Indy-SDK. New demo of reference implementation was given which
-    this RFC is now based on.  
-- Supersedes: HIPE Consent Receipt
+- Status Note: This RFC is under development along with a reference implementation. The reference implementation is almost ready to be shared.  
+- Supersedes: This RFC replaces [[HIPE Consent Receipt]](https://github.com/JanLin/indy-hipe/tree/master/text/consent_receipt)
+    in Indy-SDK.
 - Start Date: 2018-11-08
 - Tags: concepts
     
@@ -155,12 +153,14 @@ The concepts section help better understand the RFC in GDPR terms. There
 is an attempt to align with the vocabulary defined in specification
 [[W3C Data Privacy Vocabulary]](https://www.w3.org/ns/dpv).
 
-To best understand the implementation guidelines several use cases with
-a reference implementation will serve as a demo \[To Be Done: add
-reference to demo in indy-sdk\]. The following illustration is an
-overview of the key actors.
+The consent lifecycle will be based on self sovereign identity (SSI) to 
+ensure that the individual (data subject) has full control of their personal
+information. To help illustrate how SSI is applied several use cases along
+a reference implementation will help show the relation between the data subject,
+data controller and data processor.
 
 ![](media/consent_overview.png)
+
 
 Concepts
 --------
