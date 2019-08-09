@@ -28,6 +28,13 @@ In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-
 
 This protocol is about the messages to support the presentation of verifiable claims, not about the specifics of particular verifiable presentation mechanisms. This is challenging since at the time of writing this version of the protocol, there is only one supported verifiable presentation mechanism(Hyperledger Indy). [DIDComm attachments](../../concepts/0017-attachments/README.md) are deliberately used in messages to try to make this protocol agnostic to the specific verifiable presentation mechanism payloads. Links are provided in the message data element descriptions to details of specific verifiable presentation implementation data structures.
 
+Diagrams in this protocol were made in draw.io. To make changes:
+
+- upload the drawing HTML from this folder to the [draw.io](https://draw.io) site (Import From...GitHub), 
+- make changes,
+- export the picture and HTML to your local copy of this repo, and
+- submit a pull request.
+
 #### Choreography Diagram:
 
 ![present proof](credential-presentation.png)
@@ -118,32 +125,6 @@ Description of fields:
 * `comment` -- a field that provides some human readable information about this presentation.
 * `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
   * For Indy, the attachment contains data from libindy that is the presentation, base64 encoded. The following JSON is an example of the `libindy-presentation-0` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404).
-
-```json
-{
-     "requested_proof": {
-         "revealed_attrs": {
-             "requested_attr1_id": {sub_proof_index: number, raw: string, encoded: string},
-             "requested_attr4_id": {sub_proof_index: number: string, encoded: string},
-         },
-         "unrevealed_attrs": {
-             "requested_attr3_id": {sub_proof_index: number}
-         },
-         "self_attested_attrs": {
-             "requested_attr2_id": self_attested_value,
-         },
-         "requested_predicates": {
-             "requested_predicate_1_referent": {sub_proof_index: int},
-             "requested_predicate_2_referent": {sub_proof_index: int},
-         }
-     },
-     "proof": {
-         "proofs": [ <credential_proof>, <credential_proof>, <credential_proof> ],
-         "aggregated_proof": <aggregated_proof>
-     },
-     "identifiers": [{schema_id, cred_def_id, Optional<rev_reg_id>, Optional<timestamp>}]
-}
-```
 
 #### Presentation Preview
 
@@ -238,8 +219,6 @@ Similar (but simplified) credential exchange was already implemented in [von-anc
 
 - We might need some explicit documentation for nested `@type` fields.
 - There might need to be a way to associate a payment with the present proof protocol.
-
-Diagrams were made in draw.io. To make some changes you can just upload the HTML from this repo to this site.
 
 ## Implementations
 
