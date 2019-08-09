@@ -1,137 +1,91 @@
-# Aries RFC 0167: Consent Lifecycle
+# Aries RFC 0167: Data Consent Lifecycle
 
-- Authors: \
-    Jan Lindquist, Dativa\
-    Mark Lizar, OpenConsent\
-    Harshvardhan J. Pandit, ADAPT Centre, Trinity College Dublin
+- Authors: Jan Lindquist, Dativa; Mark Lizar, OpenConsent; Harshvardhan J. Pandit, ADAPT Centre, Trinity College Dublin
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-08-07
 - Status Note: This RFC is under development along with a reference implementation. The reference implementation is almost ready to be shared.  
-- Supersedes: This RFC replaces [[HIPE Consent Receipt]](https://github.com/JanLin/indy-hipe/tree/master/text/consent_receipt)
-    in Indy-SDK.
+- Supersedes: [Indy HIPE PR #55: Consent Receipt](https://github.com/hyperledger/indy-hipe/pull/55)
 - Start Date: 2018-11-08
 - Tags: concepts
     
     
-Table of Contents
-================
+## Table of Contents
 
-[Summary](#summary)
-
-[Motivation](#motivation)
-
-[Overview](#overview)
-
-[Concepts](#concepts)
-
-[Use Cases](#use-cases)
-
-[Implementation Guidelines](#implementation-guidelines)
-
-[Collect Personal Data 5](#collect-personal-data)
-
-[Personal Data Processing Schema](#personal-data-processing-schema)
-
-[Example: schemas](#_Toc16020319)
-
-[Blockchain Prerequisites](#blockchain-prerequisites)
-
-[Consent Receipt Certificate](#consent-receipt-certificate)
-
-[Initial agreement of privacy agreement](#initial-agreement-of-privacy-agreement)
-
-[Proof Request](#proof-request)
-
-[Performing Proof Request](#performing-proof-request)
-
-[Certification Revocation](#certification-revocation)
-
-[Reference](#reference)
-
-[Annex A: PDP Schema mapping to Kantara Consent Receipt
+* [Summary](#summary)
+* [Motivation](#motivation)
+* [Overview](#overview)
+* [Concepts](#concepts)
+* [Use Cases](#use-cases)
+* [Implementation Guidelines](#implementation-guidelines)
+* [Collect Personal Data 5](#collect-personal-data)
+* [Personal Data Processing Schema](#personal-data-processing-schema)
+* [Example: schemas](#_Toc16020319)
+* [Blockchain Prerequisites](#blockchain-prerequisites)
+* [Consent Receipt Certificate](#consent-receipt-certificate)
+* [Initial agreement of privacy agreement](#initial-agreement-of-privacy-agreement)
+* [Proof Request](#proof-request)
+* [Performing Proof Request](#performing-proof-request)
+* [Certification Revocation](#certification-revocation)
+* [Reference](#reference)
+* [Annex A: PDP Schema mapping to Kantara Consent Receipt
 13](#annex-a-pdp-schema-mapping-to-kantara-consent-receipt)
-
-[Drawbacks](#drawbacks)
-
-[Rationale and alternatives](#rationale-and-alternatives)
-
-[Prior art](#prior-art)
-
-[ETL process](#etl-process)
-
-[Personal Data Terms and Conditions](#personal-data-terms-and-conditions)
-
-[Unresolved questions](#unresolved-questions)
-
-[Plan](#plan)
-
-[ToDo](#todo)
-
-[Comments](#comments)
+* [Drawbacks](#drawbacks)
+* [Rationale and alternatives](#rationale-and-alternatives)
+* [Prior art](#prior-art)
+* [ETL process](#etl-process)
+* [Personal Data Terms and Conditions](#personal-data-terms-and-conditions)
+* [Unresolved questions](#unresolved-questions)
+* [Plan](#plan)
+* [ToDo](#todo)
+* [Comments](#comments)
 
 
-Summary
-=======
+## Summary
 
-This RFC describes a reference implementation for privacy agreements, in
+This RFC describes a reference implementation for data privacy agreements, in
 which people initiate personal information sharing with the use of DLT
-and privacy rights as defined in the GDPR. Leveraging the GDPR to
-innovate beyond compliance to personal data control and explicit
+and privacy rights as defined in the GDPR--thus leveraging the GDPR to
+innovate beyond compliance, to personal data control and explicit
 consent.
 
-The objective is to move forward from a reference demo, to an
-implementation and guideline RFC.
-
-This RFC takes advantage of advances in standards and privacy that
+It takes advantage of advances in standards and privacy that
 operationally begins with privacy by design and default. From this
 technical context in the design of DLT, this RFC splits apart personal
 data protection processing and modularizes information overlays process,
-in order to separate the components to be used with the Hyperledger Indy
-and Aries specified technology frameworks.
+in order to separate the components to be used with the Hyperledger Aries framework.
 
-This RFC breaks these down to illustrate how to address key challenges
-that a Hyperledger oriented framework can address.
+## Motivation
 
-Motivation
-==========
+A key challenge with privacy and personal data sharing and self-initiated consent is to establish trust. There is no trust in the personal data based economy. [GDPR Article 25,
+Data Protection by Design and by Default](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/accountability-and-governance/data-protection-by-design-and-default/), lists recommendations on how
+private data is processed. Here we list the technology changes
+required to implement that GDPR article. Note the RFC focuses on formalizing the
+processing agreement associated with the consent, rather than on informal consent
+dialogue.
 
-*Why are we doing this? What use cases does it support? What is the
-expected outcome?*
-
-A key challenge with privacy and placing personal data on a distributed
-ledger technology, or self-initiated consent is to establish trust where
-there is no trust in the personal data based economy. GDPR Article 25 ,
-Data protection by design and by default, lists recommendations on how
-private data processed. This RFC will list the technology changes
-required to implement GDPR. Note the RFC focuses on preserving the
-processing agreement associated with the consent rather than consent
-dialogue. Consent dialogue is the presentation of a meaningful consent
-without in a consent.
-
-Hyperledger Indy and Aries provide the perfect frameworks for managing
-personal data specially personal identifiable information (PII). When
+Hyperledger Aries provides the perfect framework for managing
+personal data, especially personal identifiable information (PII), when
 necessary data is restricted to protect the identity of the individual
-or data subject. Currently the privacy policy that is agreed to when
+or data subject. Currently, the privacy policy that is agreed to when
 signing up for a new service dictates how personal data is processed and
-for which purpose. Currently there is no clear technology to hold a
+for which purpose. There is no clear technology to hold a
 company accountable for the privacy policy. By using blockchain and the
-consent receipt, accountability of a privacy policy can be reached. The
-consent is not limited to a single data controller (or institution) and
-data subject (or individual) but to a series of institutions that
+data consent receipt, accountability of a privacy policy can be reached. The
+data consent is not limited to a single data controller (or institution) and
+data subject (or individual), but to a series of institutions that
 process the data from the original data subject. The beauty of the
-proposal in this RFC is that the accountability is extended to ALL
+proposal in this RFC is that accountability is extended to ALL
 parties using the data subject's personal data. When the data subject
-withdraws consent so is the consent receipt agreement.
+withdraws consent, the data consent receipt agreement is withdrawn, too.
 
 GDPR lacks specifics regarding how technology should be or can be used
 to enforce obligations. This RFC provides a viable alternative with the
 mechanisms to bring accountability and at the same time protecting
 personal data.
 
-Overview
-========
+## Overview
 
-There are three key areas that need to be in place:
+Three key components need to be in place:
 
 1.  Schema bases/overlays
 
@@ -139,19 +93,18 @@ There are three key areas that need to be in place:
 
 3.  Wallet
 
-The schema bases/overlay describes a standard approach to data capture
+Schema bases/overlays describes a standard approach to data capture
 that separates raw schema building blocks from additional semantic
 layers such as data entry business logic and constraints, knowledge
-about data sensitivity, and so forth \[refer to [[overlay
-RFC]](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0013-overlays)
-for details\]. The consent lifecycle covers the consent receipt
+about data sensitivity, and so forth (refer to [[RFC 0013: Overlays](../0013-overlays/README.md)
+for details). The data consent lifecycle covers the data consent receipt
 certificate, proof request and revocation. The wallet is where all data
 is stored which requires a high level of security and control by
 individual or institution. This RFC will cover the consent lifecycle.
 
-The concepts section help better understand the RFC in GDPR terms. There
-is an attempt to align with the vocabulary defined in specification
-[[W3C Data Privacy Vocabulary]](https://www.w3.org/ns/dpv).
+The [Concepts section](#concepts) below explains the RFC in GDPR terms. There
+is an attempt to align with the vocabulary in the
+[W3C Data Privacy Vocabulary](https://www.w3.org/ns/dpv) specification.
 
 The consent lifecycle will be based on self sovereign identity (SSI) to 
 ensure that the individual (data subject) has full control of their personal
@@ -162,28 +115,26 @@ data controller and data processor.
 ![](media/consent_overview.png)
 
 
-Concepts
---------
+## Concepts
 
 These are some concepts that are important to understand when reviewing
 this RFC.
 
-**Secondary Data Controller**: The terms data subject and data
-controller \[GDPR A4(7)\] should be well understood. What is important
-to understand is that data controller is responsible for the data that
+**Secondary Data Controller**: The terms "data subject" and "data
+controller" (see [GDPR Article 4](http://www.privacy-regulation.eu/en/article-4-definitions-GDPR.htm), items 1 and 7) should be well understood. The data controller is responsible for the data that
 is shared beyond their control. A data controller which does not itself
-collect data but receives it from another controller is termed as a
-'secondary' data controller within this document. Even though the
+collect data but receives it from another controller is termed a
+'secondary' data controller. Even though the
 secondary data controller is independent in its processing of personal
 data, GDPR requires the primary or original data controller to be
-responsible for sharing data under the given consent. . The 3rd party
+responsible for sharing data under the given consent. The 3rd party
 becomes a secondary controller under the responsibility of the original
-data controller. Important to note that if 3^rd^ party does not share
-the collected data back to the original data controller then the 3^rd^
+data controller. Important to note that if a 3rd party does not share
+the collected data back to the original data controller, then the 3rd
 party is considered an independent data controller (add reference to
 CIEU).
 
-**Opt-in / Opt-out**: The opt-in / opt-out options refers to a requests
+**Opt-in / Opt-out**: These terms describe a request
 to use personal data beyond the limits of legitimate reasons for
 conducting a service. If for example the data is shared with a 3rd party
 a consent or **opt-in** is required. At any point the data subject may
@@ -207,32 +158,28 @@ TTL** gives allowances for data ingestion to be done for an extended
 period without requiring performing new proof request. Examples will be
 given that explain the usage of the term.
 
-Use Cases
----------
+## Use Cases
 
 These are the use cases to help understand the implementation guide. A
 reference implementation will help in the development.
 
-1.  Alice (data subject) accepts privacy agreement
+1.  Alice (data subject) gives data consent by accepting a privacy agreement.
 
-2.  Acme (3^rd^ party data controller) requests proof of that consent
+2.  Acme (3rd party data controller) requests proof that data consent
     was given
 
-3.  Alice terminates privacy agreement
+3.  Alice terminates privacy agreement, thus withdrawing her data consent.
 
 Note: additional use cases may be developed based on contributions to
 this RFC.
 
-Implementation Guidelines
-=========================
+## Implementation Guidelines
 
-Collect Personal Data 
-----------------------
+### Collect Personal Data 
 
 These are the steps covered with collect personal data:
 
 -   list personal Identifiable data points
-
 -   list quasi-identifiable data points
 
 The [[Blinding Identity
@@ -243,20 +190,18 @@ and shall be handled with higher level of security.
 *Section will expand terms of the explanation of personal identifiable
 and quasi-identifiable terms.*
 
-Personal Data Processing Schema
--------------------------------
+### Personal Data Processing Schema
 
 The personal data processing (PDP) schema captures attributes used to
 defines the conditions of collecting data and conditions how data may be
 shared or used.
 
-These are the PDP schema attributes
-
+These are the PDP schema attributes:
 
 | Category | Attribute | Brief description | Comment |
 | --- | --- | --- | --- |
 | Data subset | DID of associated schema or overlay | Data object identifier | _All data objects_ |
-|   | Industry Scope [1] | A predefined description of the industry scope of the issuer. | _All data objects_ |
+|   | Industry Scope [[1](#note1)] | A predefined description of the industry scope of the issuer. | _All data objects_ |
 | Storage (raw) | Expiration Date | The definitive date on which data revocation throughout the chain of engaged private data lockers of all Data Controllers and sub-Data Controllers will automatically occur. In other words when the PDP expires. | Access-Window |
 |   | Limitation (Restricted-Time) | How long data is kept in the system before being removed. Different from _expiration date_ attribute _limitation_ indicates how long personal data may be used beyond the PDP expires. Request to be forgotten supersedes the limitation. | Access-Window |
 |   | PII pseudonymization | Data stored with pseudonymization. Conditions of access to are given under _purpose_ attribute of &quot;Access&quot; category. | Encryption |
@@ -265,9 +210,9 @@ These are the PDP schema attributes
 |   | No share | The data shall not be shared outside of the Data Controller responsibility. When set no 3rd party or Secondary Data Controller are allowed. | Demarcation |
 | Access (1-n) | Purpose  | The purpose for processing data shall be specified (refer to GDPR Article 4, clause 2, for details on processing details). Applies to both a Data Controller and Secondary Data Controller. | Access-Window |
 |   | policyUrl | Reference to privacy policy URL that describes policy in human readable form. | Access-Window |
-|   | Requires 3PP PDP [3] | A PDP is required between Data Controller and Secondary Data Controller in the form of code of conduct agreement. | Access-Window |
+|   | Requires 3PP PDP [[2](#note2)] | A PDP is required between Data Controller and Secondary Data Controller in the form of code of conduct agreement. | Access-Window |
 |   | Single Use | The data is shared only for the purpose of completing the interaction at hand. &quot;Expiration-Date&quot; is set to the date of interaction completion. | Access-Window |
-|   | PII anonymisation | Data stored with no PII association. | Encryption [2] |
+|   | PII anonymisation | Data stored with no PII association. | Encryption [[3](#note3)] |
 |   | Method of anonymisation | Specify algorithm used for performing anonymisation that is acceptable. | Encryption |
 |   | Multi-attribute anonymisation | Quasi-identifiable data may be combined create a finger print of the data subject. When set a method of multi-attribute anonymisation is applied on the data | Encryption |
 |   | Method of multi-attribute anonymisation | Specifify algorithm used for performing anonymisation that is acceptable (K-anonymity). | Encryption |
@@ -278,8 +223,9 @@ These are the PDP schema attributes
 |   | Inform correlation | Correlation is shared with data subject and what data was combined related to them. | Correlation |
 |   | Open correlation | Correlation is open and does not need to be informed to data subject. | Correlation |
 
-[Notes]
+##### Notes
 
+[note1]: #note1
 \[1\] - As the PDP schema may be the only compulsory linked schema
 specified in every schema metadata block, we have an opportunity to
 store the "Framework Description" - a description of the business
@@ -295,7 +241,15 @@ to the stored GICS "Sub-industry" code (or NECS "SubSector" code) held
 in the associated metadata attribute of the primary schema base to add
 flexibility of choice for the Issuer.
 
-\[2\] - As the "PII Attribute" schema object is already in place for
+[note2]: #note2
+\[2\] - If a PDP is required between the Data Controller (Issuer) and
+sub-Data Controller, we should have a field(s) to store the Public DID
+(or Private Data Locker ID) of the sub-Data Controller(s). This will be
+vital to ensure auto-revocation from all associated private data lockers
+on the date of expiry.
+
+[note3]: #note3
+\[3\] - As the "PII Attribute" schema object is already in place for
 Issuer's to flag sensitive data according to the Blinding Identity
 Taxonomy (BIT), we already have a mechanism in place for PII. Once
 flagged, we can obviously encrypt sensitive data. Some considerations
@@ -306,14 +260,7 @@ elements should remain unencrypted in their private locker. (ii.) In a
 **Public** **Data Store** : all sensitive elements should always be
 encrypted
 
-\[3\] - If a PDP is required between the Data Controller (Issuer) and
-sub-Data Controller, we should have a field(s) to store the Public DID
-(or Private Data Locker ID) of the sub-Data Controller(s). This will be
-vital to ensure auto-revocation from all associated private data lockers
-on the date of expiry.
-
-Example: schemas
-----------------
+### Example: schemas
 
 When defining a schema there will be a consent schema associated with
 it.
@@ -353,12 +300,12 @@ The original schema will have a consent schema reference.
 
 The consent schema will have specific attributes for managing data.
 
-  Attribute     Purpose                                                   Type
-  ------------- --------------------------------------------------------- ---------
-  expiration    How long consent valid for                                Date
-  limitation    How long is data kept                                     Date
-  dictatedBy    Who sets expiration and limitation                        String
-  validityTTL   Duration proof is valid for purposes of data processing   Integer
+  Attribute|Purpose|Type
+  --------|-------|------
+  expiration|How long consent valid for|Date
+  limitation|How long is data kept|Date
+  dictatedBy|Who sets expiration and limitation|String
+  validityTTL|Duration proof is valid for purposes of data processing|Integer
 
 The issuer may optionally define an overlay that sets the consent schema
 values without input from the data subject.
@@ -405,38 +352,26 @@ the wallet.
         }
     }
 
-Blockchain Prerequisites
-------------------------
+### Blockchain Prerequisites
 
 These are the considerations when setting up the ledger:
 
 -   Ledger setup
-
 -   Wallet setup
-
 -   Types of entities
-
 -   Agents (working on behalf of entity)
-
 -   Communication between entities
-
 -   Onboarding
-
 -   Onboarding of data subject
 
-Consent Receipt Certificate
----------------------------
+### Data Consent Receipt Certificate
 
-These are the steps covered with consent receipt certificate:
+These are the steps covered with data consent receipt certificate:
 
 -   initial agreement of privacy agreement
-
 -   update agreement with changed terms of use
-
 -   update agreement with new opt-in
-
 -   terminate agreement
-
 -   apply option to forget
 
 ### Initial agreement of privacy agreement
@@ -445,15 +380,12 @@ The following flow diagram for setting up privacy agreement.
 
 ![](media/consent_flow.png)
 
-Proof Request
--------------
+### Proof Request
 
 These are the steps covered with proof request:
 
 -   performing proof request
-
 -   performing proof request without personal data
-
 -   auditing of proof request by Data Authority
 
 The proof request serves multiple purposes. The main one being the
@@ -471,8 +403,7 @@ The following flow diagram for setting up privacy agreement.
 
 ![](media/proof_flow.png)
 
-Certification Revocation
-------------------------
+### Certification Revocation
 
 These are the steps covered with certification revocation:
 
@@ -482,8 +413,7 @@ These are the steps covered with certification revocation:
 
 -   data authority initiated revocation (if owns schema base)
 
-Reference
-=========
+## Reference
 
 *Provide guidance for implementers, procedures to inform testing,
 interface definitions, formal function prototypes, error codes,
@@ -496,7 +426,7 @@ guarantee that:*
 
 -   *Corner cases are dissected by example.*
 
-1.  General Data Protection Regulatio\
+1.  General Data Protection Regulation\
     REGULATION (EU) 2016/679 OF THE EUROPEAN PARLIAMENT AND OF THE
     COUNCIL of 27 April 2016
 
@@ -515,8 +445,7 @@ guarantee that:*
     Created by Andrew Hughes, last modified on Jun 19, 2019\
     [[https://kantarainitiative.org/confluence/display/infosharing/Blinding+Identity+Taxonomy]](https://kantarainitiative.org/confluence/display/infosharing/Blinding+Identity+Taxonomy)
 
-Annex A: PDP Schema mapping to Kantara Consent Receipt
-======================================================
+## Annex A: PDP Schema mapping to Kantara Consent Receipt
 
 Kantara has defined a Consent Receipt with a list of mandatory and
 optional attributes. This annex maps the attributes to the PDP. Many of
@@ -564,46 +493,9 @@ Notes
     to be used when accepting a consent. If required suggest include as
     part of Agent registration (or requirement)
 
-Drawbacks
-=========
+## Prior art
 
-*Why should we not do this?*
-
-Rationale and alternatives
-==========================
-
-*- Why is this design the best in the space of possible designs? - What
-other designs have been considered and what is the rationale for not
-choosing them? - What is the impact of not doing this?*
-
-Prior art
-=========
-
-*Discuss prior art, both the good and the bad, in relation to this
-proposal. A few examples of what this can include are:*
-
--   *Does this feature exist in other SSI ecosystems and what experience
-    have their community had?*
-
--   *For other teams: What lessons can we learn from other attempts?*
-
--   *Papers: Are there any published papers or great posts that discuss
-    this? If you have some relevant papers to refer to, this can serve
-    as a more detailed theoretical background.*
-
-*This section is intended to encourage you as an author to think about
-the lessons from other implementers, provide readers of your proposal
-with a fuller picture. If there is no prior art, that is fine - your
-ideas are interesting to us whether they are brand new or if they are an
-adaptation from other communities.*
-
-*Note that while precedent set by other communities is some motivation,
-it does not on its own motivate an enhancement proposal here. Please
-also take into consideration that Indy sometimes intentionally diverges
-from common identity features.*
-
-ETL process
------------
+### ETL process
 
 Current data processing of PII date is not based on blockchain. Data is
 processed through ETL routines (ex. AWS API Gateway and Lambda) with a
@@ -614,29 +506,18 @@ a very short storage limitation of a couple of months. The current
 practice is to collect as much data as possible which goes against data
 minimisation.
 
-Personal Data Terms and Conditions
-----------------------------------
+### Personal Data Terms and Conditions
 
-The Customer Commons iniative
-([[customercommons.org]](file:///Users/janlindquist/Dropbox%20(Personal)/Sync-MAC/Development/Users/janlindquist/Dropbox%20(Personal)/Sync-MAC/Development/blockchain/aries/rfc/customerocmmons.org))
-has developed a [[terms and
+The [Customer Commons iniative (customercommons.org)](https://customercommons.org) has developed a [[terms and
 conditions]](https://docs.google.com/document/d/1Wf7kaXRn85pSEy8kKiX7GsVmZ295x_HbX5M0Ddu7D1s/edit)
 for personal data usage. The implementation of these terms and
 conditions will be tied to the schema and overlay definitions. The
 overlay will specify the conditions of sharing. For more broader
 conditions the schema will have new attributes for actual consent for
-data sharing. The work by Hypeledger Indy and Customer Commons
+data sharing. The work by Hypeledger Aries and Customer Commons
 complement each other.
 
-Unresolved questions
-====================
-
-*- What parts of the design do you expect to resolve through the
-enhancement proposal process before this gets merged? - What parts of
-the design do you expect to resolve through the implementation of this
-feature before stabilization? - What related issues do you consider out
-of scope for this proposal that could be addressed in the future
-independently of the solution that comes out of this doc?*
+## Unresolved questions
 
 ## Implementations
 
@@ -646,21 +527,16 @@ Name / Link | Implementation Notes
 --- | ---
  |  | 
 
-Plan
-----
+
+### Plan
 
 -   Submit RFC to Aries
-
 -   Upload consent demo to Indy-sdk
 
-ToDo
-----
-
+### ToDo
 -   Update schema examples
 
-Comments
---------
-
+### Comments
 | **Question** | **From** | **Date** | **Answer** |
 | --- | --- | --- | --- |
 | Where is consent recorded? | Harsh | 2019-07-31 | There are several types of consent listed below. Where the actual consent is recorded needs Specialised Consent (legal)Generic Consent (legal)General Data Processing Consent |
