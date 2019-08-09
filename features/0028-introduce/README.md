@@ -508,6 +508,6 @@ include a link to the repo or to the implementation within the repo. Please be
 consistent in the "Name" field so that a mechanical processing of the RFCs can
 generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
+Name / Link | Implementation Notes
+--- | ---
  |  |

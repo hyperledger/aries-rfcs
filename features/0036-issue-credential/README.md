@@ -27,6 +27,15 @@ The Issue Credential protocol consists of these messages:
 
 In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-report-problem/README.md) messages are adopted into the protocol for confirmation and error handling.
 
+This protocol is about the messages to support issuing verifiable credentials, not about the specifics of particular verifiable credential mechanisms. This is challenging since at the time of writing this version of the protocol, there is only one supported verifiable credential mechanism (Hyperledger Indy). [DIDComm attachments](../../concepts/0017-attachments/README.md) are deliberately used in messages to try to make this protocol agnostic to the specific verifiable credential mechanism payloads. Links are provided in the message data element descriptions to details of specific verifiable credential implementation data structures.
+
+Diagrams in this protocol were made in draw.io. To make changes:
+
+- upload the drawing HTML from this folder to the [draw.io](https://draw.io) site (Import From...GitHub), 
+- make changes,
+- export the picture and HTML to your local copy of this repo, and
+- submit a pull request.
+
 #### Choreography Diagram:
 
 ##### Issuance staring with Offer
@@ -259,12 +268,10 @@ Similar (but simplified) credential exchanged was already implemented in [von-an
 - We might need some explicit documentation for nested `@type` fields.
 - There should be a way to ask for some payment with `offer-credential` and to send a payment (or payment receipt) in the request-credential.
 
-Diagrams were made in draw.io. To make some changes you can just upload the HTML from this repo to this site.
-
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
+Name / Link | Implementation Notes
+--- | ---
  |  |
