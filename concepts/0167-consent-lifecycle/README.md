@@ -260,6 +260,8 @@ elements should remain unencrypted in their private locker. (ii.) In a
 **Public** **Data Store** : all sensitive elements should always be
 encrypted.
 
+### Example: Schemas
+
 When defining a schema there will be a consent schema associated with
 it.
 
