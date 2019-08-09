@@ -262,6 +262,8 @@ encrypted
 
 ### Example: schemas
 
+### Example: Schemas
+
 When defining a schema there will be a consent schema associated with
 it.
 
