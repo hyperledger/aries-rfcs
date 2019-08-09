@@ -19,7 +19,7 @@
 * [Implementation Guidelines](#implementation-guidelines)
     * [Collect Personal Data 5](#collect-personal-data)
     * [Personal Data Processing Schema](#personal-data-processing-schema)
-    * [Example: schemas](#_Toc16020319)
+    * [Example: schemas](#example-schemas)
     * [Blockchain Prerequisites](#blockchain-prerequisites)
     * [Data Consent Receipt Certificate](#data-consent-receipt-certificate)
     * [Initial agreement of privacy agreement](#initial-agreement-of-privacy-agreement)
