@@ -6,7 +6,7 @@
 - Status Note: This RFC is under development along with a reference implementation. The reference implementation is almost ready to be shared.  
 - Supersedes: [Indy HIPE PR #55: Consent Receipt](https://github.com/hyperledger/indy-hipe/pull/55)
 - Start Date: 2018-11-08
-- Tags: concepts
+- Tags: concept
     
     
 ## Table of Contents
@@ -29,8 +29,6 @@
 * [Reference](#reference)
 * [Annex A: PDP Schema mapping to Kantara Consent Receipt
 13](#annex-a-pdp-schema-mapping-to-kantara-consent-receipt)
-* [Drawbacks](#drawbacks)
-* [Rationale and alternatives](#rationale-and-alternatives)
 * [Prior art](#prior-art)
     * [ETL process](#etl-process)
     * [Personal Data Terms and Conditions](#personal-data-terms-and-conditions)
