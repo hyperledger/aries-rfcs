@@ -26,6 +26,8 @@ The present proof protocol consists of these messages:
 
 In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-report-problem/README.md) messages are adopted into the protocol for confirmation and error handling.
 
+This protocol is about the messages to support the presentation of verifiable claims, not about the specifics of particular verifiable presentation mechanisms. This is challenging since at the time of writing this version of the protocol, there is only one supported verifiable presentation mechanism(Hyperledger Indy). [DIDComm attachments](../../concepts/0017-attachments/README.md) are deliberately used in messages to try to make this protocol agnostic to the specific verifiable presentation mechanism payloads. Links are provided in the message data element descriptions to details of specific verifiable presentation implementation data structures.
+
 #### Choreography Diagram:
 
 ![present proof](credential-presentation.png)
