@@ -498,7 +498,7 @@ Name / Link | Implementation Notes
 [Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Streetcred AgentFramework
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the government of British Columbia.
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | Useful for cron jobs and other simple, automated use cases.
-[Aries Go Framework](https://github.com/hyperledger/aries-framework-go) | For building agents, hubs and other DIDComm features in GoLang.
+[Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | For building agents, hubs and other DIDComm features in GoLang.
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | Free mobile app from Evernym. Installed via app store on iOS and Android. 
 [Verity](https://www.evernym.com/products/) | Commercially licensed enterprise agent, SaaS or on-prem.
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 
