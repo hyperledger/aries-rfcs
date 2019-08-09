@@ -258,9 +258,7 @@ default position should be to encrypt all sensitive elements. However,
 the issuer should be able to specify if any of the flagged sensitive
 elements should remain unencrypted in their private locker. (ii.) In a
 **Public** **Data Store** : all sensitive elements should always be
-encrypted
-
-### Example: schemas
+encrypted.
 
 When defining a schema there will be a consent schema associated with
 it.
@@ -527,7 +525,6 @@ Name / Link | Implementation Notes
 --- | ---
  |  | 
 
-
 ### Plan
 
 -   Submit RFC to Aries
@@ -537,6 +534,7 @@ Name / Link | Implementation Notes
 -   Update schema examples
 
 ### Comments
+
 | **Question** | **From** | **Date** | **Answer** |
 | --- | --- | --- | --- |
 | Where is consent recorded? | Harsh | 2019-07-31 | There are several types of consent listed below. Where the actual consent is recorded needs Specialised Consent (legal)Generic Consent (legal)General Data Processing Consent |
