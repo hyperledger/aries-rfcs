@@ -1,7 +1,7 @@
 # Aries RFC 0011: Decorators
 
 - Authors: Daniel Hardman
-- Status: [DEMONSTRATED](/README.md#demonstrated)
+- Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-01-31
 - Status Note: broadly used in Indy, but not yet harmonized with DIF work on hubs.
 - Start Date: 2018-12-14
@@ -128,8 +128,7 @@ are no exception. Thus, software that doesn't recognize a decorator should ignor
 
 However, this does not mean that decorators are necessarily _optional_. Some messages may intend something tied so tightly to a decorator's semantics
 that the decorator effectively becomes required. An example of this is the relationship
-between a [general error reporting mechanism](
-https://github.com/hyperledger/indy-hipe/blob/6a5e4fe2d7e14953cd8e3aed07d886176332e696/text/error-handling/README.md)
+between a [general error reporting mechanism](../../features/0043-l10n/README.md)
 and the `~thread` decorator: it's not very helpful to report errors without the context
 that a thread provides.
 
@@ -144,6 +143,17 @@ namespaces are desired, dotted name notation is used, as in
 `~mynamespace.mydecoratorname`. We may elaborate this topic more in the future.
 
 Decorators are orthogonal to [JSON-LD constructs in DIDComm messages](../0047-json-ld-compatibility/README.md).
+
+### Versioning
+
+We hope that community-defined decorators are very stable. However, new fields (a non-breaking change) might need to be added to complex decorators; occasionally, more significant changes might be necessary as well. Therefore, decorators do support semver-style versioning, but in a form that allows details to be ignored unless or until they become important. The rules are:
+
+1. As with all other aspects of DIDComm messages, unrecognized fields in decorators must be ignored.
+2. Version information can be appended to the name of a decorator, as in `~mydecorator/1`. Only a major version (never minor or patch) is used, since:
+    * Minor version variations should not break decorator handling code.
+    * The dot character `.` is reserved for namespacing within field names.
+    * The extra complexity is not worth the small amount of value it might add.
+3. A decorator without a version is considered to be synonymous with version 1.0, and the version-less form is preferred. This allows version numbers to be added only in the uncommon cases where they are necessary.
 
 ### Decorator Scope
 
@@ -257,7 +267,7 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-Aries RFCs: [RFC 0008](../0008-message-id-and-threading/README.md), [RFC 0017](../0017-attachments/README.md), [RFC 0015](../../features/0015-acks/README.md), [RFC 0023](../../features/0023-did-exchange/README.md), [RFC 0056](../../features/0056-service-decorator/README.md), [RFC 0075](../../features/0075-payment-decorators/README.md)| many implemented RFCs depend on decorators...
+Aries RFCs: [RFC 0008](../0008-message-id-and-threading/README.md), [RFC 0017](../0017-attachments/README.md), [RFC 0015](../../features/0015-acks/README.md), [RFC 0023](../../features/0023-did-exchange/README.md), [RFC 0043](../../features/0043-l10n/README.md), [RFC 0056](../../features/0056-service-decorator/README.md), [RFC 0075](../../features/0075-payment-decorators/README.md)| many implemented RFCs depend on decorators...
 [Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | message threading
 [Streetcred AgentFramework](https://github.com/streetcred-id/agent-framework) | message threading
 [Streetcred.id](https://streetcred.id/) | message threading
