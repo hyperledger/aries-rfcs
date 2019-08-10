@@ -506,8 +506,8 @@ minimisation.
 
 ### Personal Data Terms and Conditions
 
-The [Customer Commons iniative (customercommons.org)](https://customercommons.org) has developed a [[terms and
-conditions]](https://docs.google.com/document/d/1Wf7kaXRn85pSEy8kKiX7GsVmZ295x_HbX5M0Ddu7D1s/edit)
+The [Customer Commons iniative (customercommons.org)](https://customercommons.org) has developed [terms and
+conditions](https://docs.google.com/document/d/1Wf7kaXRn85pSEy8kKiX7GsVmZ295x_HbX5M0Ddu7D1s/edit)
 for personal data usage. The implementation of these terms and
 conditions will be tied to the schema and overlay definitions. The
 overlay will specify the conditions of sharing. For more broader
