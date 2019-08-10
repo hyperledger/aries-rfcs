@@ -92,7 +92,6 @@ An identity Holder may present to an Examiner *Identity Evidence* in the form of
 
 >Note: Assumption herein is that original documents are never forfeited by an individual.
 
-
 | Original Source Format | Issuer Archived Format | Verifier Business Process Format | Protocol Requirement |
 | --- | --- | --- |
 | Paper/Plastic | Paper-Copy | n/a | n/a |
@@ -531,6 +530,6 @@ This protocol builds on the foundational capabilities of DIDComm messages, most 
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name / Link | Implementation Notes
---- | ---
- |  |
+Name / Link | Implementation Notes |
+| --- | --- |
+| |  |
