@@ -1,7 +1,7 @@
 # Aries RFC 0015: ACKs
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-12-26
 - Status Note: Broadly socialized and beginning to be implemented. Several protocols assume ACK behavior. May be nearing the maturity and uptake appropriate for ACCEPTED status. Note: this RFC 
 - Supersedes: [Indy HIPE PR #77](https://github.com/hyperledger/indy-hipe/pull/77)
@@ -423,4 +423,5 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- |  |
+[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | ACKs are [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by this protocol.
+[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | ACKs are [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by this protocol.
