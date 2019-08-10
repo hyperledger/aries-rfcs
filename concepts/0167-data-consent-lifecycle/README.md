@@ -437,7 +437,7 @@ guarantee that:*
     [[https://github.com/hyperledger/aries-rfcs]](https://github.com/hyperledger/aries-rfcs)
 
 4.  Overlays\
-    [[https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0013-overlays]](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0013-overlays)
+    [[../0013-overlays/README.md]](../0013-overlays/README.md)
 
 5.  Blinding Identity Taxonomy\
     Created by Andrew Hughes, last modified on Jun 19, 2019\
