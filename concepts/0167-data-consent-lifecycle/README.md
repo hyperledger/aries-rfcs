@@ -199,7 +199,7 @@ These are the PDP schema attributes:
 | Category | Attribute | Brief description | Comment |
 | --- | --- | --- | --- |
 | Data subset | DID of associated schema or overlay | Data object identifier | _All data objects_ |
-|   | Industry Scope [[1](#note1)] | A predefined description of the industry scope of the issuer. | _All data objects_ |
+|   | Industry Scope [[1](#1)] | A predefined description of the industry scope of the issuer. | _All data objects_ |
 | Storage (raw) | Expiration Date | The definitive date on which data revocation throughout the chain of engaged private data lockers of all Data Controllers and sub-Data Controllers will automatically occur. In other words when the PDP expires. | Access-Window |
 |   | Limitation (Restricted-Time) | How long data is kept in the system before being removed. Different from _expiration date_ attribute _limitation_ indicates how long personal data may be used beyond the PDP expires. Request to be forgotten supersedes the limitation. | Access-Window |
 |   | PII pseudonymization | Data stored with pseudonymization. Conditions of access to are given under _purpose_ attribute of &quot;Access&quot; category. | Encryption |
@@ -208,9 +208,9 @@ These are the PDP schema attributes:
 |   | No share | The data shall not be shared outside of the Data Controller responsibility. When set no 3rd party or Secondary Data Controller are allowed. | Demarcation |
 | Access (1-n) | Purpose  | The purpose for processing data shall be specified (refer to GDPR Article 4, clause 2, for details on processing details). Applies to both a Data Controller and Secondary Data Controller. | Access-Window |
 |   | policyUrl | Reference to privacy policy URL that describes policy in human readable form. | Access-Window |
-|   | Requires 3PP PDP [[2](#note2)] | A PDP is required between Data Controller and Secondary Data Controller in the form of code of conduct agreement. | Access-Window |
+|   | Requires 3PP PDP [[2](#2)] | A PDP is required between Data Controller and Secondary Data Controller in the form of code of conduct agreement. | Access-Window |
 |   | Single Use | The data is shared only for the purpose of completing the interaction at hand. &quot;Expiration-Date&quot; is set to the date of interaction completion. | Access-Window |
-|   | PII anonymisation | Data stored with no PII association. | Encryption [[3](#note3)] |
+|   | PII anonymisation | Data stored with no PII association. | Encryption [[3](#3)] |
 |   | Method of anonymisation | Specify algorithm used for performing anonymisation that is acceptable. | Encryption |
 |   | Multi-attribute anonymisation | Quasi-identifiable data may be combined create a finger print of the data subject. When set a method of multi-attribute anonymisation is applied on the data | Encryption |
 |   | Method of multi-attribute anonymisation | Specifify algorithm used for performing anonymisation that is acceptable (K-anonymity). | Encryption |
@@ -221,10 +221,10 @@ These are the PDP schema attributes:
 |   | Inform correlation | Correlation is shared with data subject and what data was combined related to them. | Correlation |
 |   | Open correlation | Correlation is open and does not need to be informed to data subject. | Correlation |
 
-##### Notes
+#### Notes
 
-[note1]: #note1
-\[1\] - As the PDP schema may be the only compulsory linked schema
+##### 1
+As the PDP schema may be the only compulsory linked schema
 specified in every schema metadata block, we have an opportunity to
 store the "Framework Description" - a description of the business
 framework of the issuer.
@@ -239,15 +239,15 @@ to the stored GICS "Sub-industry" code (or NECS "SubSector" code) held
 in the associated metadata attribute of the primary schema base to add
 flexibility of choice for the Issuer.
 
-[note2]: #note2
-\[2\] - If a PDP is required between the Data Controller (Issuer) and
+##### 2
+If a PDP is required between the Data Controller (Issuer) and
 sub-Data Controller, we should have a field(s) to store the Public DID
 (or Private Data Locker ID) of the sub-Data Controller(s). This will be
 vital to ensure auto-revocation from all associated private data lockers
 on the date of expiry.
 
-[note3]: #note3
-\[3\] - As the "PII Attribute" schema object is already in place for
+##### 3
+As the "PII Attribute" schema object is already in place for
 Issuer's to flag sensitive data according to the Blinding Identity
 Taxonomy (BIT), we already have a mechanism in place for PII. Once
 flagged, we can obviously encrypt sensitive data. Some considerations
@@ -257,8 +257,6 @@ the issuer should be able to specify if any of the flagged sensitive
 elements should remain unencrypted in their private locker. (ii.) In a
 **Public** **Data Store** : all sensitive elements should always be
 encrypted
-
-### Example: schemas
 
 ### Example: Schemas
 
