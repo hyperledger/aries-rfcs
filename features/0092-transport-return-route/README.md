@@ -1,8 +1,8 @@
 # Aries RFC 0092: Transports Return Route
 
 - Authors: [Sam Curren](sam@sovrin.org)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-06-18
+- Status: [DEMONSTRATED](/README.md#demonstrated)
+- Since: 2019-08-07
 - Status Note:  
 - Supersedes: [INDY HIPE PR 116](https://github.com/hyperledger/indy-hipe/pull/116)
 - Start Date: 2019-03-04
@@ -63,4 +63,6 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- |  |
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the government of British Columbia.
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | Used in Tests
+
