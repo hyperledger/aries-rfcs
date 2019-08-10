@@ -93,7 +93,7 @@ An identity Holder may present to an Examiner *Identity Evidence* in the form of
 >Note: Assumption herein is that original documents are never forfeited by an individual.
 
 | Original Source Format | Issuer Archived Format | Verifier Business Process Format | Protocol Requirement |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | Paper/Plastic | Paper-Copy | n/a | n/a |
 | Paper/Plastic | Digital Copy | Digital Copy | Access by Value |
 | Paper/Plastic | Digital Copy | URL | Access by Reference |
@@ -129,7 +129,7 @@ In order for a Verifier to avoid or reduce evidence vetting expenses it must be 
 This implies that the protocol *must* address the following evidence concerns:
 
 | Interaction Type | Challenge | Protocol Approach |
-| --- | --- |
+| --- | --- | --- |
 | Examiner-to-Holder | How does Issuer provide Holder with proof that it has **vetted** *Identity Evidence*? |Issuer signs hash of the evidence and presents signature to Holder. |
 | Holder-to-Verifier | How does Holder **present** Verifier with evidence that the Issuer of a Credential vetted *Identity Evidence*? |Holder presents verifier with digitally signed hash of evidence, public DID of Issuer and access to a copy of the digital evidence. |
 | Verifier-to-FileStorageProvider | How does Verifier **access** the evidence in digital format (base64)? | Issuer or Holder must provide secure access to a digital copy of the document. |
@@ -185,7 +185,7 @@ The evidence exchange protocol builds on the attachment decorator within DIDComm
 The protocol is comprised of the following messages and associated actions:
 
 | Interaction Type | Message | Process Actions |
-| --- | --- |
+| --- | --- | --- |
 | Holder to Issuer | Request Evidence | Holder reviews the list of credentials it has received from the Issuer and sends an ```evidence_request``` message to Issuer's agent. |
 | Issuer to Holder | Evidence Response | Issuer collects *Identity Evidence* associated with each requested credential ID and sends an ```evidence_response``` message to Holder's agent. Upon receipt, the Holder stores evidence data in Wallet. |
 | Verifier to Holder | Evidence Access Request | Verifier builds and sends an ```evidence_access_request``` message to Holder's agent. |
