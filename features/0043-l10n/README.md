@@ -1,7 +1,7 @@
 # Aries RFC 0043: l10n (Locali[s|z]ation)
 
 - Authors: Daniel Hardman
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-04-01
 - Status Note: Broadly socialized within the Indy community, and used in some of the other RFCs. Not yet implemented to any significant degree.
 - Start Date: 2018-11-30
@@ -308,4 +308,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- |  |
+[RFC 0035: Report Problem Protocol](../0035-report-problem/README.md) | Depends on this mechanism to localize the `description` field of an error.
