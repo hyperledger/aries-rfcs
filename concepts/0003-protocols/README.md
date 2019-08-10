@@ -308,7 +308,7 @@ Name / Link | Implementation Notes
 [Streetcred.id](https://streetcred.id/) | several protocols, circa Feb 2019
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | numerous protocols plus extension mechanism for pluggable protocols
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | 2 or 3 protocols
-[Aries Go Framework](https://github.com/hyperledger/aries-framework-go) | DID Exchange
+[Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | DID Exchange
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | mature but proprietary protocols; community protocols in process
 [Verity](https://www.evernym.com/products/) | mature but proprietary protocols; community protocols in process
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 2 or 3 core protocols; active work to implement all that are ACCEPTED, since this tests conformance of other agents
