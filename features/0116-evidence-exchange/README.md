@@ -92,6 +92,7 @@ An identity Holder may present to an Examiner *Identity Evidence* in the form of
 
 >Note: Assumption herein is that original documents are never forfeited by an individual.
 
+
 | Original Source Format | Issuer Archived Format | Verifier Business Process Format | Protocol Requirement |
 | --- | --- | --- |
 | Paper/Plastic | Paper-Copy | n/a | n/a |
