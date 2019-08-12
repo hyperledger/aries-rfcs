@@ -55,6 +55,7 @@
 * [0116: Evidence Exchange Protocol 0.9](features/0116-evidence-exchange/README.md) (2019-07-26 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0124: DID Resolution Protocol 0.9](features/0124-did-resolution-protocol/README.md) (2019-07-13 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0167: Data Consent Lifecycle](concepts/0167-data-consent-lifecycle/README.md) (2019-08-07 &mdash; [`concept`](/tags.md#concept))
+* [0183: Revocation Notification 1.0](features/0183-revocation-notification/README.md) (2019-08-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 ## [RETIRED](README.md#retired)
 
