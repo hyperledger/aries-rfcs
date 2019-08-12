@@ -95,16 +95,7 @@ Description of fields:
 * `comment` -- a field that provides some human readable information about this Credential Offer;
 * `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview-credential);
 * `offers~attach` -- an array of attachments defining the offered formats for the credential.
-  * For Indy, the attachment contains data from libindy about the credential offer, base64 encoded. The following JSON is an example of the `libindy-offer` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
-
-```json
-{
-   "schema_id": string,
-   "cred_def_id": string,
-   "nonce": string,
-   "key_correctness_proof" : <key_correctness_proof>
-}
-```
+  * For Indy, the attachment contains data from libindy about the credential offer, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
 
 This message may have payment request decorator, see [payment section below](#payments-while-credential-exchange)
 
@@ -133,17 +124,7 @@ Description of Fields:
 
 * `comment` -- a field that provides some human readable information about this request.
 * `requests~attach` -- an array of attachments defining the requested formats for the credential.
-  * For Indy, the attachment contains data from libindy about the credential request, base64 encoded. The following JSON is an example of the `libindy-cred-req-0` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
-
-```json
-{
-  "prover_did" : string,
-  "cred_def_id" : string,
-  "blinded_ms" : <blinded_master_secret>,
-  "blinded_ms_correctness_proof" : <blinded_ms_correctness_proof>,
-  "nonce": string
-}
-```
+  * For Indy, the attachment contains data from libindy about the credential request, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
 
 This message may have payment confirmation decorator, see [payment section below](#payments-while-credential-exchange)
 
@@ -172,18 +153,7 @@ Description of fields:
 
 * `comment` -- a field that provides some human readable information about the issued Credential.
 * `credentials~attach` -- an array of attachments containing the issued credentials.
-  * For Indy, the attachment contains data from libindy about credential to be issued, base64 encoded. The following JSON is an example of the `libindy-cred-0` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
-
-```json
-{
-    "schema_id": string,
-    "cred_def_id": string,
-    "rev_reg_def_id": Optional<string>,
-    "values": <see cred_values_json above>,
-    "signature": <signature>,
-    "signature_correctness_proof": <signature_correctness_proof>
-}
-```
+  * For Indy, the attachment contains data from libindy about credential to be issued, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
 
 #### Preview Credential
 
