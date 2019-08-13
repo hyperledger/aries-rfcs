@@ -35,11 +35,11 @@ Diagrams in this protocol were made in draw.io. To make changes:
 - export the picture and HTML to your local copy of this repo, and
 - submit a pull request.
 
-#### Choreography Diagram:
+### Choreography Diagram:
 
 ![present proof](credential-presentation.png)
 
-#### Propose Presentation
+### Propose Presentation
 
 An optional message sent by the Prover to the verifier to initiate a proof presentation process, or in response to a `request-presentation` message when the Prover wants to propose using a different presentation format. Schema:
 
@@ -57,7 +57,7 @@ Description of attributes:
 * `comment` -- a field that provides some human readable information about the proposed presentation.
 * `presentation_proposal` -- a JSON-LD object that represents the presentation example that Prover wants to provide. It should follow the schema of [Presentation Preview](#presentation-preview);
 
-#### Request Presentation
+### Request Presentation
 
 Request presentation is a message from a verifier to a prover that describes values that need to be revealed and predicates that need to be fulfilled. Schema:
 
@@ -84,7 +84,7 @@ Description of fields:
 * `request_presentations~attach` -- an array of attachments defining the acceptable formats for the presentation.
   * For Indy, the attachment contains data from libindy about the presentation request, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
 
-#### Presentation
+### Presentation
 
 This message is a response to a Presentation Request message and contains signed presentations. Schema:
 
@@ -111,23 +111,26 @@ Description of fields:
 * `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
   * For Indy, the attachment contains data from libindy that is the presentation, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404).
 
-#### Presentation Preview
+### Presentation Preview
 
 This is not a message but an inner object for other messages in this protocol. It is used to construct a preview of the data for the presentation. Its schema follows:
 
 ```json
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
-    "attributes": {
-        "<cred_def_id>": {
-            "<attribute>": {
-                "mime-type": "<type>",
-                "encoding": "<encoding>",
-                "value": "<value>"
-            }
-        },
-        ...
-    },
+    "attributes": [
+        {
+            "name": "<attribute_name>"
+            "mime-type": "<type>",
+            "encoding": "<encoding>",
+            "claim_filter": {
+                "schema_id": "<schema_id>",
+                "cred_def_id": "<cred_def_id>",
+                ...
+            },
+            "value": "<value>"
+        }
+    ],
     "predicates": {
         "<cred_def_id>": {
             "<predicate>": {
@@ -142,29 +145,49 @@ This is not a message but an inner object for other messages in this protocol. I
         "<cred_def_id>": "<iso_8601_datetime>",
         ...
     }
+
 }
 ```
 
 The preview identifies attributes, predicates, and non-revocation timestamps by credential definition identifier. Note that this composition assumes that any presentation can include information from at most one credential per credential definition; such an approach mitigates corroboration risk.
 
-##### Attributes
+#### Attributes
 
-The `"attributes"` key maps zero or more credential definition identifiers to one or more inner objects; each such inner object maps an attribute name to its respective MIME types, encodings, and values (all optional) for the presentation:
+The mandatory `"attributes"` key maps to a list (possibly empty to propose a presentation with no attributes) of specifications, one per attribute. Each such specification proposes its attribute's characteristics for creation within a presentation.
 
-* the prover may include a MIME type and/or encoding per attribute in the preview for verifier information on how to interpret its value
-* the value itself may be absent at this stage; its omission in the preview indicates its ultimate inclusion in the presentation itself.
+##### Attribute Name
 
-Any attribute specified per credential definition identifier must belong to its corresponding credential definition. In this way the structure excludes a bait-and-switch where the prover has credentials on multiple credential definitions with common attribute names (e.g., `name`, `score`).
+The mandatory `"name"` key maps to the name of the attribute.
 
-For consistency and completeness, an empty production `"{}"` as the value for the `"attributes"` key denotes that the preview specifies zero attributes.
+##### Attribute Metadata
 
-##### Predicates
+The optional `"mime-type"` and `"encoding"` keys specify any MIME type and encoding metadata pertaining to the attribute. Their values default to `"text/plain"` and `null` respectively.
 
-The `"predicates"` key maps zero or more credential definition identifiers to one or more inner objects; each such inner object maps predicate names to their respective attributes and thresholds for the presentation. Each predicate name identifies its comparison operator: `"<"`, `"<="`, `">"`, `">="`. Each attribute so specified per credential definition identifier must belong to its corresponding credential definition.
+##### Claim Filter
+
+The mandatory `"claim_filter"` key maps to an object with zero or more criteria disjunctively (via "or") applicable to the attribute as a claim. If the `"claim_filter"` specifies zero such criteria, the preview proposes that the presentation set the attribute as self-attested.
+
+Claim filter keys include:
+
+* `"schema_id"` to specify a schema identifier
+* `"cred_def_id"` to specify a credential definition identifier
+* any other criteria that both the holder and verifier understand in the context of presentation creation.
+
+##### Value
+
+The `"value"` key maps to the proposed value of the attribute to reveal within the presentation. An attribute specification must specify a `"value"`, a non-empty `"claim_filter"`, or both: 
+
+* if the `"value"` key is present and the `"claim_filter"` is empty, the preview proposes a self-attested attribute;
+* if the `"value"` key is present and the `"claim_filter"` is non-empty, the preview proposes verifiable claim to reveal in presentation;
+* if the `"value"` key is absent and the `"claim_filter"` is non-empty, the preview proposes verifiable claim not to reveal in presentation.
+
+#### Predicates
+
+The mandatory `"predicates"` key maps zero or more credential definition identifiers to one or more inner objects; each such inner object maps predicate names to their respective attributes and thresholds for the presentation. Each predicate name identifies its comparison operator: `"<"`, `"<="`, `">"`, `">="`. Each attribute so specified per credential definition identifier must belong to its corresponding credential definition.
 
 For consistency and completeness, an empty production `"{}"` as the value for the `"predicates"` key denotes that the preview specifies zero predicates.
 
-##### Non-Revocation Timestamps
+#### Non-Revocation Timestamps
 
 The `"non_revocation_times"` key maps zero or more credential definition identifiers to ISO 8601 datetimes, each of which offers an instant where the prover or verifier proposes inclusion of proof of the non-revocation of its corresponding credential in the presentation.
 
