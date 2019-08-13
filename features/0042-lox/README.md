@@ -1,7 +1,7 @@
 # Aries RFC 0042: LOX -- A more secure pluggable framework for protecting wallet keys
 
 - Authors: [Michael Lodder](mike@sovrin.org)
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-05-30
 - Start Date: 2019-05-30
 - Tags: feature
@@ -136,6 +136,6 @@ A brief overview of enclaves and their services have been discussed in the [Indy
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name / Link | Implementation Notes
---- | ---
- |  |
+| Name / Link | Implementation Notes |
+| --- | --- |
+| [Reference Code](https://github.com/hyperledger/aries-rfcs/tree/master/features/0042-lox/reference_code) | Example rust code that implements Lox using OS keychains |
