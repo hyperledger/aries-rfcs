@@ -179,7 +179,7 @@ The `"value"` key maps to the proposed value of the attribute to reveal within t
 
 ##### Non-Revocation Timestamp
 
-The `"non_revoked"` key maps to an ISO-8601 datetime at which the preview proposes to prove the (non-revoked) revocation status of an attribute if it is a claim (i.e., its `"claim filter"` is non-empty) and its credential definition supports revocation. Otherwise, the value must be `null`.
+The `"non_revoked"` key maps to an ISO-8601 datetime at which the preview proposes to prove the (non-revoked) revocation status of an attribute. The key is mandatory if the attribute specification proposes a claim (i.e., its `"claim filter"` is non-empty) and its credential definition supports revocation. Otherwise, the `"non_revoked"` key must not be present.
 
 #### Predicates
 
