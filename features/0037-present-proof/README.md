@@ -128,7 +128,8 @@ This is not a message but an inner object for other messages in this protocol. I
                 "cred_def_id": "<cred_def_id>",
                 ...
             },
-            "value": "<value>"
+            "value": "<value>",
+            "non_revoked": "<iso_8601_datetime>"
         }
     ],
     "predicates": {
@@ -140,16 +141,11 @@ This is not a message but an inner object for other messages in this protocol. I
             ...
         },
         ...
-    },
-    "non_revocation_times": {
-        "<cred_def_id>": "<iso_8601_datetime>",
-        ...
     }
-
 }
 ```
 
-The preview identifies attributes, predicates, and non-revocation timestamps by credential definition identifier. Note that this composition assumes that any presentation can include information from at most one credential per credential definition; such an approach mitigates corroboration risk.
+The preview identifies attributes and predicates to present.
 
 #### Attributes
 
@@ -181,19 +177,15 @@ The `"value"` key maps to the proposed value of the attribute to reveal within t
 * if the `"value"` key is present and the `"claim_filter"` is non-empty, the preview proposes verifiable claim to reveal in presentation;
 * if the `"value"` key is absent and the `"claim_filter"` is non-empty, the preview proposes verifiable claim not to reveal in presentation.
 
+##### Non-Revocation Timestamp
+
+The `"non_revoked"` key maps to an ISO-8601 datetime at which the preview proposes to prove the (non-revoked) revocation status of an attribute if it is a claim (i.e., its `"claim filter"` is non-empty) and its credential definition supports revocation. Otherwise, the value must be `null`.
+
 #### Predicates
 
 The mandatory `"predicates"` key maps zero or more credential definition identifiers to one or more inner objects; each such inner object maps predicate names to their respective attributes and thresholds for the presentation. Each predicate name identifies its comparison operator: `"<"`, `"<="`, `">"`, `">="`. Each attribute so specified per credential definition identifier must belong to its corresponding credential definition.
 
 For consistency and completeness, an empty production `"{}"` as the value for the `"predicates"` key denotes that the preview specifies zero predicates.
-
-#### Non-Revocation Timestamps
-
-The `"non_revocation_times"` key maps zero or more credential definition identifiers to ISO 8601 datetimes, each of which offers an instant where the prover or verifier proposes inclusion of proof of the non-revocation of its corresponding credential in the presentation.
-
-Non-revocation timestamps apply only to credentials on credential definitions that support revocation.
-
-For consistency and completeness, an empty production `"{}"` as the value for the `"non_revocation_times"` key denotes that the preview specifies zero non-revocation timestamps.
 
 ## Negotiation and Preview
 
@@ -210,7 +202,7 @@ The presentation preview as proposed above does not allow nesting of predicate l
 
 The presentation preview may be indy-centric, as it assumes the inclusion of at most one credential per credential definition. In addition, it prescribes exactly four predicates and assumes mutual understanding of their semantics (e.g., could `">="` imply a lexicographic order for non-integer values, and if so, where to specify character collation algorithm?).
 
-Finally, the inclusion of a non-revocation timestamp may be premature at the preview stage.
+Finally, the inclusion of non-revocation timestamps may be premature at the preview stage.
 
 ## Rationale and alternatives
 
