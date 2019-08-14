@@ -120,7 +120,7 @@ This is not a message but an inner object for other messages in this protocol. I
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
     "attributes": [
         {
-            "name": "<attribute_name>"
+            "name": "<attribute_name>",
             "mime-type": "<type>",
             "encoding": "<encoding>",
             "claim_filter": {
