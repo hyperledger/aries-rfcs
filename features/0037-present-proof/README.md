@@ -121,27 +121,20 @@ This is not a message but an inner object for other messages in this protocol. I
     "attributes": [
         {
             "name": "<attribute_name>",
+            "cred_def_id": "<cred_def_id>",
             "mime-type": "<type>",
             "encoding": "<encoding>",
-            "claim_filter": {
-                "schema_id": "<schema_id>",
-                "cred_def_id": "<cred_def_id>",
-                ...
-            },
-            "value": "<value>",
-            "non_revoked": "<iso_8601_datetime>"
+            "value": "<value>"
         }
     ],
-    "predicates": {
-        "<cred_def_id>": {
-            "<predicate>": {
-                "<attribute>": "<threshold>",
-                ...
-            },
-            ...
-        },
-        ...
-    }
+    "predicates": [
+        {
+            "name": "<attribute_name>",
+            "cred_def_id": "<cred_def_id>",
+            "predicate": "<predicate>",
+            "threshold": <threshold>
+        }
+    ]
 }
 ```
 
@@ -155,37 +148,51 @@ The mandatory `"attributes"` key maps to a list (possibly empty to propose a pre
 
 The mandatory `"name"` key maps to the name of the attribute.
 
-##### Attribute Metadata
+##### Credential Definition Identifier
+
+The optional `"cred_def_id"` key maps to the credential definition identifier of the credential with the current attribute. If the key is absent, the preview specifies attribute's posture in the presentation as a self-attested attribute.
+
+##### Attribute Metadata (MIME Type and Encoding)
 
 The optional `"mime-type"` and `"encoding"` keys specify any MIME type and encoding metadata pertaining to the attribute. Their values default to `"text/plain"` and `null` respectively.
 
-##### Claim Filter
-
-The mandatory `"claim_filter"` key maps to an object with zero or more criteria disjunctively (via "or") applicable to the attribute as a claim. If the `"claim_filter"` specifies zero such criteria, the preview proposes that the presentation set the attribute as self-attested.
-
-Claim filter keys include:
-
-* `"schema_id"` to specify a schema identifier
-* `"cred_def_id"` to specify a credential definition identifier
-* any other criteria that both the holder and verifier understand in the context of presentation creation.
-
 ##### Value
 
-The `"value"` key maps to the proposed value of the attribute to reveal within the presentation. An attribute specification must specify a `"value"`, a non-empty `"claim_filter"`, or both: 
+The `"value"` key maps to the proposed value of the attribute to reveal within the presentation. An attribute specification must specify a `"value"`, a `"cred_def_id"`, or both: 
 
-* if the `"value"` key is present and the `"claim_filter"` is empty, the preview proposes a self-attested attribute;
-* if the `"value"` key is present and the `"claim_filter"` is non-empty, the preview proposes verifiable claim to reveal in presentation;
-* if the `"value"` key is absent and the `"claim_filter"` is non-empty, the preview proposes verifiable claim not to reveal in presentation.
-
-##### Non-Revocation Timestamp
-
-The `"non_revoked"` key maps to an ISO-8601 datetime at which the preview proposes to prove the (non-revoked) revocation status of an attribute. The key is mandatory if the attribute specification proposes a claim (i.e., its `"claim filter"` is non-empty) and its credential definition supports revocation. Otherwise, the `"non_revoked"` key must not be present.
+* if the `"value"` key is present and the `"cred_def_id"` key is absent, the preview proposes a self-attested attribute;
+* if the `"value"` key and the `"cred_def_id"` are both present, the preview proposes verifiable claim to reveal in the presentation;
+* if the `"value"` key is absent and the `"cred_def_id"` key is present, the preview proposes verifiable claim not to reveal in the presentation.
 
 #### Predicates
 
-The mandatory `"predicates"` key maps zero or more credential definition identifiers to one or more inner objects; each such inner object maps predicate names to their respective attributes and thresholds for the presentation. Each predicate name identifies its comparison operator: `"<"`, `"<="`, `">"`, `">="`. Each attribute so specified per credential definition identifier must belong to its corresponding credential definition.
+The mandatory `"predicates"` key maps to a list (possibly empty to propose a presentation with no predicates) of predicate specifications, one per predicate. Each such specification proposes its predicate's characteristics for creation within a presentation.
 
-For consistency and completeness, an empty production `"{}"` as the value for the `"predicates"` key denotes that the preview specifies zero predicates.
+##### Attribute Name
+
+The mandatory `"name"` key maps to the name of the attribute germane to the predicate.
+
+##### Credential Definition Identifier
+
+The mandatory `"cred_def_id"` key maps to the credential definition identifier of the credential with the current attribute.
+
+##### Predicate
+
+The mandatory `"predicate"` key maps to the predicate operator: `"<"`, `"<="`, `">="`, `">"`. 
+
+##### Threshold Value
+
+The mandatory `"threshold"` key maps to the threshold value for the predicate.
+
+##### Filter
+
+The mandatory `"filter"` key maps to an object with one or more criteria disjunctively (via "or") applicable to the attribute as a claim.
+
+Filter keys include:
+
+* `"cred_def_id"` to specify a credential definition identifier
+* `"schema_id"` to specify a schema identifier
+* any other criteria that both the holder and verifier understand in the context of presentation creation.
 
 ## Negotiation and Preview
 
@@ -202,7 +209,7 @@ The presentation preview as proposed above does not allow nesting of predicate l
 
 The presentation preview may be indy-centric, as it assumes the inclusion of at most one credential per credential definition. In addition, it prescribes exactly four predicates and assumes mutual understanding of their semantics (e.g., could `">="` imply a lexicographic order for non-integer values, and if so, where to specify character collation algorithm?).
 
-Finally, the inclusion of non-revocation timestamps may be premature at the preview stage.
+Finally, the inclusion of non-revocation timestamps may become desirable at the preview stage; the standard as proposed does not accommodate such.
 
 ## Rationale and alternatives
 
