@@ -151,14 +151,14 @@ Schema:
 Description of Fields:
 
 * `comment` -- an optional field that provides human readable information about this Credential Request, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
-* `requests~attach` -- an array of [attachments](../../concepts/attachments/README.md) defining the requested formats for the credential.
+* `requests~attach` -- an array of [attachments](../../concepts/0017-attachments/README.md) defining the requested formats for the credential.
   * For Indy, the attachment is a base64-encoded version of the data returned from [`indy_prover_create_credential_req()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
 
 This message may have a [`~payment-receipt` decorator](../0075-payment-decorators/README.md#payment_receipt) to prove to the Issuer that the potential Holder has satisfied a payment requirement. See the [payment section below](#payments-during-credential-exchange).
 
 #### Issue Credential
 
-This message contains as [attached payload](../../concepts/attachments/README.md) the credentials being issued and is sent in response to a valid Request Credential message.
+This message contains as [attached payload](../../concepts/0017-attachments/README.md) the credentials being issued and is sent in response to a valid Request Credential message.
 
 Schema:
 
