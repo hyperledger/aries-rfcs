@@ -10,13 +10,13 @@
 
 ## Summary
 
-Defines protocols (and the closely related concept of message families)
-in the context of agent-to-agent interactions,
+Defines application-level protocols (and the closely related concept of message families)
+in the context of [agent](../0004-agents/README.md) interactions,
 and shows how they should be designed and documented.
 
 ## Motivation
 
-When we began exploring agent-to-agent interactions, we imagined that
+When we began exploring agent interactions, we imagined that
 interoperability would be achieved by formally defining message families.
 We have since learned that message family definitions must define more
 than simply the attributes that are a part of each message. We also need
@@ -45,24 +45,29 @@ a sort of "recipe":
 * Going through security at the airport when we fly
 * Applying for a loan
 
-Protocols are a major concern for SSI agents. Agents need a recipe for
-stateful interactions like:
+In the context of decentralized identity, protocols manifest at many different levels of the stack: at the lowest levels of networking, in cryptographic algorithms like Diffie Helman, in the management of DIDs, in the conventions of [DIDComm](../0005-didcomm/README.md), and in higher-level interactions that solve problems for people with only minimal interest in the technology they're using. However, this RFC focuses on the last of these layers, where use cases and personas are transformed into features with obvious social value like:
 
 * Connecting with one another
+* Buying and Selling
+* Negotiating
+* Enacting and enforcing contracts
 * Requesting and issuing credentials
 * Proving things using credentials
+* Discovering things
 * Putting things in escrow (and taking them out again)
-* Paying
+* Scheduling
+* Auditing
 * Reporting errors
-* Negotiating
 * Cooperative debugging
+
+When "protocol" is used in an Aries context without any qualifying adjective, it is referencing a recipe for a high-level interaction like these. Lower-level protocols are usually described more specifically and possibly with other verbiage: "cryptographic algorithms", "DID management procedures", "DIDComm conventions", "wire-level message exchange", "transports", and so forth. This helps us focus "protocol" on the place where application developers that consume Aries do most of the work that creates value.
 
 #### Decentralized
 
 As used in the agent/DIDComm world, protocols are _decentralized_. This means
 there is not an overseer for the protocol, guaranteeing information flow,
-enforcing behaviors, and ensuring a coherent view. It is a subtle but
-important divergence from API-centric approaches, where a server holds
+enforcing behaviors, and ensuring a coherent view. It is a [subtle but
+important divergence from API-centric approaches](https://www.reactivemanifesto.org/glossary#Protocol), where a server holds
 state against which all other parties (clients) operate. Instead, all
 parties are peers, and they interact by mutual consent and with a (hopefully)
 shared understanding of the rules and goals. Protocols are like a dance--not one
