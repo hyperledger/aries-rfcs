@@ -72,7 +72,7 @@ state against which all other parties (clients) operate. Instead, all
 parties are peers, and they interact by mutual consent and with a (hopefully)
 shared understanding of the rules and goals. Protocols are like a dance--not one
 that's choreographed or directed, but one where the parties make dynamic
-decisions and and react to them.
+decisions and react to them.
 
 ![dance](dance.jpg)
 
