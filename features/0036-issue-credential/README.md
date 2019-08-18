@@ -3,57 +3,79 @@
 - Authors: Nikita Khateev
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-05-28
-- Status Note:  See [RFC 0037](../0037-present-proof/README.md) for the presentation part of the same Indy HIPE PR.
+- Status Note:  See [RFC 0037](../0037-present-proof/README.md) for the presentation part of using credentials.
 - Supersedes: [Indy HIPE PR #89]( https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md); also [Credential Exchange 0.1 -- IIW 2019](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view)
 - Start Date: 2019-01-30
 - Tags: feature, decorator, protocol
 
 ## Summary
 
-Formalization and generalization of existing message formats used for issuing a credential according to existing RFCs about message formats.
+Formalizes messages used to issue a credential--whether the credential is JWT-oriented, JSON-LD-oriented, or ZKP-oriented. The general flow is similar, and this protocol intends to handle all of them. If you are using a credential type that doesn't fit this protocol, please [raise a Github issue](/github-issues.md).
 
 ## Motivation
 
-We need a standard protocol for issuing credentials.
+We need a standard protocol for issuing credentials. This is the basis of interoperability between issuers and holders.
 
 ## Tutorial
 
+### Roles
+
+There are two roles in this protocol: Issuer and Holder. Technically, the latter role is only potential until the protocol completes; that is, the second party becomes a Holder of a credential by completing the protocol. However, we will use the term Holder throughout, to keep things simple.
+
+>Note: When a holder of credentials turns around and uses those credentials to prove something, they become a Prover. In the sister RFC to this one, [0037: Present Proof](../0037-present-proof/README.md), the Holder is therefore renamed to Prover. Sometimes in casual conversation, the Holder role here might be called "Prover" as well, but more formally, "Holder" is the right term at this phase of the credential lifecycle.
+
+### States
+
+The choreography diagrams shown below detail how state evolves in this protocol, in a "happy path."
+
+Errors might occur in various places. For example, an Issuer might offer a credential for a price that the Holder is unwilling to pay. All errors are modeled with a `problem-report` message. Easy-to-anticipate errors reset the flow as shown in the diagrams, and use the code `issuance-abandoned`; more exotic errors (e.g., server crashed at issuer headquarters in the middle of a workflow) may have different codes but still cause the flow to be abandoned in the same way.
+
+### Messages
+
 The Issue Credential protocol consists of these messages:
 
-* Propose Credential - Prover to Issuer (optional)
-* Offer Credential - Issuer to Prover (optional for some credential implementations; required for Hyperledger Indy)
-* Request Credential - Prover to Issuer
-* Issue Credential - Issuer to Prover
+* `propose-credential` - potential Holder to Issuer (optional). Tells what the Holder hopes to receive.
+* `offer-credential` - Issuer to potential Holder (optional for some credential implementations; required for Hyperledger Indy). Tells what the Issuer intends to issue, and possibly, the price the Issuer expects to be paid.
+* `request-credential` - potential Holder to Issuer. If neither of the previous message types is used, this is the message that begins the protocol.
+* `issue-credential` - Issuer to new Holder. Attachment payload contains the actual credential.
 
 In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-report-problem/README.md) messages are adopted into the protocol for confirmation and error handling.
 
-This protocol is about the messages to support issuing verifiable credentials, not about the specifics of particular verifiable credential mechanisms. This is challenging since at the time of writing this version of the protocol, there is only one supported verifiable credential mechanism (Hyperledger Indy). [DIDComm attachments](../../concepts/0017-attachments/README.md) are deliberately used in messages to try to make this protocol agnostic to the specific verifiable credential mechanism payloads. Links are provided in the message data element descriptions to details of specific verifiable credential implementation data structures.
+>Note: This protocol is about the messages that must be exchanged to issue verifiable credentials, NOT about the specifics of particular verifiable credential schemes. [DIDComm attachments](../../concepts/0017-attachments/README.md) are deliberately used in messages to isolate the protocol flow/semantics from the credential artifacts themselves as separate constructs. Attachments allow credential formats and this protocol to evolve through versioning milestones independently instead of in lockstep. Links are provided in the message descriptions below, to describe how the protocol adapts to specific verifiable credential implementations.
 
-Diagrams in this protocol were made in draw.io. To make changes:
+#### Choreography Diagram
+
+<blockquote>
+Note: This diagram was made in draw.io. To make changes:
 
 - upload the drawing HTML from this folder to the [draw.io](https://draw.io) site (Import From...GitHub), 
 - make changes,
 - export the picture and HTML to your local copy of this repo, and
 - submit a pull request.
+</blockquote>
 
-#### Choreography Diagram:
+The protocol has 3 alternative beginnings:
 
-##### Issuance staring with Offer
+1. The Issuer can begin with an offer.
+2. The Holder can begin with a proposal.
+3. the holder can begin with a request.
 
-![issuance](credential-issuance-offer.png)
+The offer and proposal messages are part of an optional negotiation phase and may trigger back-and-forth counters. A request is not subject to negotiation; it can only be accepted or rejected.
 
-##### Issuance staring with Proposal
-
-![issuance](credential-issuance-proposal.png)
+![issuance](credential-issuance.png)
 
 #### Propose Credential
 
-An optional message sent by the Prover to the Issuer to initiate the protocol or in response to a `offer-credential` message when the Prover wants some adjustments made to the credential data offered by Issuer. In Hyperledger Indy, where the `request-credential` message can **only** be sent in response to an `offer-credential` message, the `propose-credential` message must be used if the Prover wants to initiate the protocol. Schema:
+An optional message sent by the potential Holder to the Issuer to initiate the protocol or in response to a `offer-credential` message when the Holder wants some adjustments made to the credential data offered by Issuer.
+
+>Note: In Hyperledger Indy, where the `request-credential` message can **only** be sent in response to an `offer-credential` message, the `propose-credential` message is the only way for a potential Holder to initiate the workflow.
+ 
+ Schema:
 
 ```json
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/propose-credential",
-    "@id": "<uuid-propose-credential>",
+    "@id": "<uuid-of-propose-message>",
     "comment": "some comment",
     "credential_proposal": <json-ld object>,
     "schema_id": "Schema ID string",
@@ -63,19 +85,21 @@ An optional message sent by the Prover to the Issuer to initiate the protocol or
 
 Description of attributes:
 
-* `comment` -- a field that provides some human readable information about this Credential Proposal;
-* `credential_proposal` -- a JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential);
-* `schema_id` -- optional filter to request credential based on particular Schema
-* `cred_def_id` -- optional filter to request credential based on particular Credential Definition
+* `comment` -- an optional field that provides human readable information about this Credential Proposal, so the proposal can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
+* `credential_proposal` -- an optional JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential).
+* `schema_id` -- optional filter to request credential based on a particular Schema. This might be helpful when requesting a version 1 passport instead of a version 2 passport, for example.
+* `cred_def_id` -- optional filter to request credential based on a particular Credential Definition. This might be helpful when requesting a commercial driver's license instead of an ordinary driver's license, for example.
 
 #### Offer Credential
 
-A message sent by the Issuer to the Prover to initiate the protocol when required by the Credential flow. In Hyperledger Indy, this message is required. In credential implementations where this message is optional, an Issuer can use the message to negotiate the issuing following receipt of a `request-credential` message. Schema:
+A message sent by the Issuer to the potential Holder, describing the credential they intend to offer and possibly the price they expect to be paid. In Hyperledger Indy, this message is required, because it forces the Issuer to make a cryptographic commitment to the set of fields in the final credential and thus prevents issuers from inserting spurious data. In credential implementations where this message is optional, an Issuer can use the message to negotiate the issuing following receipt of a `request-credential` message.
+
+Schema:
 
 ```json
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential",
-    "@id": "<uuid-offer>",
+    "@id": "<uuid-of-offer-message>",
     "comment": "some comment",
     "credential_preview": <json-ld object>,
     "offers~attach": [
@@ -92,25 +116,29 @@ A message sent by the Issuer to the Prover to initiate the protocol when require
 
 Description of fields:
 
-* `comment` -- a field that provides some human readable information about this Credential Offer;
+* `comment` -- an optional field that provides human readable information about this Credential Offer, so the offer can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview-credential);
-* `offers~attach` -- an array of attachments defining the offered formats for the credential.
-  * For Indy, the attachment contains data from libindy about the credential offer, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
+* `offers~attach` -- an array of attachments that further define the credential being offered. This might be used to clarify which formats or format versions will be issued.
+  * For Indy, the attachment includes a nonce and key correctness proof to facilitate integrity checks. It is a base64-encoded version of the data returned from [`indy_issuer_create_credential_offer()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
 
-This message may have payment request decorator, see [payment section below](#payments-while-credential-exchange)
+The Issuer may add a [`~payment-request` decorator](../0075-payment-decorators/README.md#payment_request) to this message to convey the need for payment before issuance. See the [payment section below](#payments-during-credential-exchange) for more details.
+
+It is possible for an Issuer to add a [`~timing.expires_time` decorator](../0032-message-timing/README.md#tutorial) to this message to convey the idea that the offer will expire at a particular point in the future. Such behavior is not a special part of this protocol, and support for it is not a requirement of conforming implementations; the `~timing` decorator is simply a general possibility for any DIDComm message. We mention it here just to note that the protocol can be enriched in composable ways.
 
 #### Request Credential
 
-A message sent by the Prover to the Issuer to request the issuance of a Credential. Where supported by the Credential implementation, this message initiates the protocol. In Hyperledger Indy, this message can only be sent in response to an Offer Credential message. Schema:
+This is a message sent by the potential Holder to the Issuer, to request the issuance of a credential. Where circumstances do not require a preceding Offer Credential message (e.g., there is no cost to issuance that the Issuer needs to explain in advance, and there is no need for cryptographic negotiation), this message initiates the protocol. In Hyperledger Indy, this message can only be sent in response to an Offer Credential message.
+
+Schema:
 
 ```json
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/request-credential",
-    "@id": "<uuid-request>",
+    "@id": "<uuid-of-request-message>",
     "comment": "some comment",
     "requests~attach": [
         {
-            "@id": "libindy-cred-req-0",
+            "@id": "attachment id",
             "mime-type": "application/json",
             "data": {
                 "base64": "<bytes for base64>"
@@ -122,20 +150,22 @@ A message sent by the Prover to the Issuer to request the issuance of a Credenti
 
 Description of Fields:
 
-* `comment` -- a field that provides some human readable information about this request.
-* `requests~attach` -- an array of attachments defining the requested formats for the credential.
-  * For Indy, the attachment contains data from libindy about the credential request, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
+* `comment` -- an optional field that provides human readable information about this Credential Request, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
+* `requests~attach` -- an array of [attachments](../../concepts/0017-attachments/README.md) defining the requested formats for the credential.
+  * For Indy, the attachment is a base64-encoded version of the data returned from [`indy_prover_create_credential_req()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
 
-This message may have payment confirmation decorator, see [payment section below](#payments-while-credential-exchange)
+This message may have a [`~payment-receipt` decorator](../0075-payment-decorators/README.md#payment_receipt) to prove to the Issuer that the potential Holder has satisfied a payment requirement. See the [payment section below](#payments-during-credential-exchange).
 
 #### Issue Credential
 
-This message contains the credentials being issued and is sent in response to a valid Request Credential message. Schema:
+This message contains as [attached payload](../../concepts/0017-attachments/README.md) the credentials being issued and is sent in response to a valid Request Credential message.
+
+Schema:
 
 ```json
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/issue-credential",
-    "@id": "<uuid-credential>",
+    "@id": "<uuid-of-issue-message>",
     "comment": "some comment",
     "credentials~attach": [
         {
@@ -151,15 +181,19 @@ This message contains the credentials being issued and is sent in response to a 
 
 Description of fields:
 
-* `comment` -- a field that provides some human readable information about the issued Credential.
+* `comment` -- an optional field that provides human readable information about the issued credential, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credentials~attach` -- an array of attachments containing the issued credentials.
-  * For Indy, the attachment contains data from libindy about credential to be issued, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
+  * For Indy, the attachment contains a base64-encoded credential as returned from [`indy_issuer_create_credential()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L383).
+  
+If the issuer wants an acknowledgement that the issued credential was received, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0015: ACKs](../0015-acks/README.md).
 
 #### Preview Credential
 
-This is not a message but an inner object for other messages in this protocol. It is used construct a preview of the data for the credential that is to be issued. Schema:
+This is not a message but an inner object for other messages in this protocol. It is used construct a preview of the data for the credential that is to be issued.
 
-```json
+Schema:
+
+```jsonc
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
     "attributes": [
@@ -169,7 +203,7 @@ This is not a message but an inner object for other messages in this protocol. I
             "encoding": "encoding",
             "value": "value"
         },
-        ...
+        // more attributes
     ]
 }
 ```
@@ -183,24 +217,22 @@ The main element is `attributes`. It is an array of objects, each with the follo
 
 ## Threading
 
-Threading can be used to initiate a sub-protocol during an issue credential protocol instance. For example, during credential issuance, the Issuer may initiate a child thread to execute the `Present Proof` sub-protocol to have the Prover prove attributes about themselves before issuing the credential.
+Threading can be used to initiate a [sub-protocol](../../concepts/0003-protocols/README.md#composable) during an issue credential protocol instance. For example, during credential issuance, the Issuer may initiate a child message thread to execute the `Present Proof` sub-protocol to have the potential Holder (now acting as a Prover) prove attributes about themselves before issuing the credential. Depending on circumstances, this might be a best practice for preventing credential fraud at issuance time.
 
-Details about threading can be found in the [message id and threading](../../concepts/0008-message-id-and-threading/README.md) RFC.
+If threading were added to all of the above messages, a `~thread` decorator would be present, and later messages in the flow would reference the `@id` of earlier messages to stitch the flow into a single coherent sequence. Details about threading can be found in the [0008: Message ID and Threading](../../concepts/0008-message-id-and-threading/README.md) RFC.
 
-## Payments while credential exchange
+## Payments during credential exchange
 
-There is a high probability that some networks would like to use some implementation of payment (e.g. utility token) for balance in ecosystem. The value flow already presents while CX but it looks one way for simple case: issuer gives value to hodler (credential which can be used by holder for his needs) but doesn’t receive anything back. To resolve this case some payment may be charged by Issuer from Holder per credential. In general different payment flows are possible. Like a holder may provide proof to verifier for some data analysis or other Verifier’s need and in this case Verifier may pay to Holder.
-So both processes described in this RFC (issuance) and [presentation](../0037-present-proof/README.md) may be tied with payments.
-Also there is a good chance that payment flow may be combined with other message flows, so it may be considered as decorator. This decorator is optional.
+Credentialing ecosystems may wish to associate credential issuance with payments by fiat currency or tokens. This is common with non-digital credentials today; we pay a fee when we apply for a passport or purchase a plane ticket. Instead or in addition, some circumstances may fit a mode where payment is made each time a credential is *used*, as when a Verifier pays a Prover for verifiable medical data to be used in research, or when a Prover pays a Verifier as part of a workflow that applies for admittance to a university. For maximum flexibility, we mention payment possibilities here as well as in the sister [0037: Present Proof](../0037-present-proof/README.md) RFC.
 
 ### Payment decorators
-
-These decorators are out of subject of this RFC, see [Payment decorators RFC](../0075-payment-decorators/README.md)
+Wherever they happen and whoever they involve, payments are accomplished with optional payment decorators. See [0075: Payment Decorators](../0075-payment-decorators/README.md).
 
 ### Payment flow
 
-Payment request may be included to Credential Offer msg from Issuer to Holder. And receipt should be provided in this case in Credential Request by Issuer.
-While credential presentation the Verifier may pay to Holder as compensation for Holder for disclosing data. Payment receipt should be included into Presentation Request. Verifier may skip it in first request, but in this case Holder may request payment by sending back Presentation Proposal with appropriate decorator inside it.
+A `~payment-request` may decorate a Credential Offer from Issuer to Holder. When they do, a corresponding `~payment-receipt` should be provided on the Credential Request returned to the Issuer.
+
+During credential presentation, the Verifier may pay the Holder as compensation for Holder for disclosing data. This would require a `~payment-request` in a Presentation Proposal message, and a corresponding `~payment-receipt` in the subsequent Presentation Request. If such a workflow begins with the Presentation Request, the Prover may sending back a Presentation (counter-)Proposal with appropriate decorator inside it.
 
 ### Limitations
 

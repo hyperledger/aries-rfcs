@@ -26,7 +26,7 @@
 * [0029: Message Trust Contexts](concepts/0029-message-trust-contexts/README.md) (2019-05-10, [2 impls](concepts/0029-message-trust-contexts/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0035: Report Problem Protocol 1.0](features/0035-report-problem/README.md) (2019-04-01, [2 impls](features/0035-report-problem/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0042: LOX -- A more secure pluggable framework for protecting wallet keys](features/0042-lox/README.md) (2019-05-30, [1 impl](features/0042-lox/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
-* [0043: l10n (Locali[s|z]ation)](features/0043-l10n/README.md) (2019-04-01, [1 impl](features/0043-l10n/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
+* [0043: l10n (Locali[s|z]ation)](features/0043-l10n/README.md) (2019-04-01, [3 impls](features/0043-l10n/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0051: Decentralized Key Management](concepts/0051-dkms/README.md) (2019-03-29, [2 impls](concepts/0051-dkms/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0092: Transports Return Route](features/0092-transport-return-route/README.md) (2019-08-07, [2 impls](features/0092-transport-return-route/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 * [0095: Basic Message Protocol 1.0](features/0095-basic-message/README.md) (2019-06-18, [6 impls](features/0095-basic-message/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
