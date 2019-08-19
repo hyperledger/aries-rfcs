@@ -36,17 +36,17 @@ Diagrams in this protocol were made in draw.io. To make changes:
 - export the picture and HTML to your local copy of this repo, and
 - submit a pull request.
 
-#### Choreography Diagram:
+### Choreography Diagram:
 
-##### Issuance staring with Offer
+#### Issuance staring with Offer
 
 ![issuance](credential-issuance-offer.png)
 
-##### Issuance staring with Proposal
+#### Issuance staring with Proposal
 
 ![issuance](credential-issuance-proposal.png)
 
-#### Propose Credential
+### Propose Credential
 
 An optional message sent by the Prover to the Issuer to initiate the protocol or in response to a `offer-credential` message when the Prover wants some adjustments made to the credential data offered by Issuer. In Hyperledger Indy, where the `request-credential` message can **only** be sent in response to an `offer-credential` message, the `propose-credential` message must be used if the Prover wants to initiate the protocol. Schema:
 
@@ -68,7 +68,7 @@ Description of attributes:
 * `schema_id` -- optional filter to request credential based on particular Schema
 * `cred_def_id` -- optional filter to request credential based on particular Credential Definition
 
-#### Offer Credential
+### Offer Credential
 
 A message sent by the Issuer to the Prover to initiate the protocol when required by the Credential flow. In Hyperledger Indy, this message is required. In credential implementations where this message is optional, an Issuer can use the message to negotiate the issuing following receipt of a `request-credential` message. Schema:
 
@@ -95,7 +95,7 @@ Description of fields:
 * `comment` -- a field that provides some human readable information about this Credential Offer;
 * `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview-credential);
 * `offers~attach` -- an array of attachments defining the offered formats for the credential.
-  * For Indy, the attachment contains data from libindy about the credential offer, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
+  * For Indy, the attachment contains data from libindy about the credential offer, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
 
 This message may have payment request decorator, see [payment section below](#payments-while-credential-exchange)
 
@@ -124,11 +124,11 @@ Description of Fields:
 
 * `comment` -- a field that provides some human readable information about this request.
 * `requests~attach` -- an array of attachments defining the requested formats for the credential.
-  * For Indy, the attachment contains data from libindy about the credential request, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
+  * For Indy, the attachment contains data from libindy about the credential request, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
 
 This message may have payment confirmation decorator, see [payment section below](#payments-while-credential-exchange)
 
-#### Issue Credential
+### Issue Credential
 
 This message contains the credentials being issued and is sent in response to a valid Request Credential message. Schema:
 
@@ -153,33 +153,43 @@ Description of fields:
 
 * `comment` -- a field that provides some human readable information about the issued Credential.
 * `credentials~attach` -- an array of attachments containing the issued credentials.
-  * For Indy, the attachment contains data from libindy about credential to be issued, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
+  * For Indy, the attachment contains data from libindy about credential to be issued, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
 
-#### Preview Credential
+### Preview Credential
 
-This is not a message but an inner object for other messages in this protocol. It is used construct a preview of the data for the credential that is to be issued. Schema:
+This is not a message but an inner object for other messages in this protocol. It is used construct a preview of the data for the credential that is to be issued. Its schema follows:
 
-```json
+```jsonc
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
     "attributes": [
         {
-            "name": "attribute name",
-            "mime-type": "type",
-            "encoding": "encoding",
-            "value": "value"
+            "name": "<attribute name>",
+            "value": <value>,
+            "mime-type": "<type>"
         },
-        ...
+        // more attribute specifications
     ]
 }
 ```
 
-The main element is `attributes`. It is an array of objects, each with the following fields:
+The main element is `attributes`. It is an array of (object) attribute specifications; the subsections below outline their semantics.
 
-* `name` -- string with attribute name;
-* `mime-type` -- type of attribute
-* `encoding` -- encoding of value, if applicable: `"base64"` indicates base64
-* `value` -- value of credential
+#### Name
+
+The mandatory `"name"` key maps to the attribute name as a string.
+
+#### Value
+
+The mandatory `"value"` key maps to the attribute (string or integer) value. If the `"mime-type"` key is present and does not signify its default, the value is a base64-encoded string.
+
+#### MIME Type
+
+The optional `"mime-type"` key's value advises the issuer how to render a binary attribute, to judge its content for applicability before issuing a credential containing it. Issuers should parse its value case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045).
+
+The `"mime-type"` value specifies a MIME type as a string. If the MIME type is absent, its implicit value is `"text/plain"`.
+
+Recall that if this attribute is present and does not signify its default, the holder implementation must base64-encode the `"value"` (string) value that it sets in this attribute specification.
 
 ## Threading
 
@@ -213,7 +223,7 @@ Negotiation prior to issuing the credential can be done using the `offer-credent
 
 ## Reference
 
-* [VCX](https://github.com/hyperledger/indy-sdk/tree/master/vcx/libvcx/src/api) -- this implementation might not be perfect and needs to be improved, you can gather some info on parameters purpose from it
+* [VCX](https://github.com/hyperledger/indy-sdk/tree/master/vcx/libvcx/src/api) -- this implementation might not be perfect and needs to be improved, you can gather some info on parameters' purpose from it
 * A pre-RFC (labelled version 0.1) implementation of the protocol was implemented by a number of groups in the Hyperledger Indy community leading up to IIW28 in April 2019. The protocol defined and implemented can be reviewed [here](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view). It was the basis of the [IIWBook demo](https://vonx.io/how_to/iiwbook) from BC Gov and collaborators.
 
 ## Drawbacks

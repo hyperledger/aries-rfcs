@@ -82,7 +82,7 @@ Description of fields:
 
 * `comment` -- a field that provides some human readable information about this request for a presentation.
 * `request_presentations~attach` -- an array of attachments defining the acceptable formats for the presentation.
-  * For Indy, the attachment contains data from libindy about the presentation request, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
+  * For Indy, the attachment contains data from libindy about the presentation request, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
 
 ### Presentation
 
@@ -109,13 +109,13 @@ Description of fields:
 
 * `comment` -- a field that provides some human readable information about this presentation.
 * `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
-  * For Indy, the attachment contains data from libindy that is the presentation, base64 encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404).
+  * For Indy, the attachment contains data from libindy that is the presentation, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404).
 
 ### Presentation Preview
 
 This is not a message but an inner object for other messages in this protocol. It is used to construct a preview of the data for the presentation. Its schema follows:
 
-```json
+```jsonc
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
     "attributes": [
@@ -123,9 +123,9 @@ This is not a message but an inner object for other messages in this protocol. I
             "name": "<attribute_name>",
             "cred_def_id": "<cred_def_id>",
             "mime-type": "<type>",
-            "encoding": "<encoding>",
-            "value": "<value>"
-        }
+            "value": <value>
+        },
+        // more attributes
     ],
     "predicates": [
         {
@@ -133,7 +133,8 @@ This is not a message but an inner object for other messages in this protocol. I
             "cred_def_id": "<cred_def_id>",
             "predicate": "<predicate>",
             "threshold": <threshold>
-        }
+        },
+        // more predicates
     ]
 }
 ```
@@ -152,13 +153,17 @@ The mandatory `"name"` key maps to the name of the attribute.
 
 The optional `"cred_def_id"` key maps to the credential definition identifier of the credential with the current attribute. If the key is absent, the preview specifies attribute's posture in the presentation as a self-attested attribute.
 
-##### Attribute Metadata (MIME Type and Encoding)
+##### MIME Type
 
-The optional `"mime-type"` and `"encoding"` keys specify any MIME type and encoding metadata pertaining to the attribute. Their values default to `"text/plain"` and `null` respectively.
+The optional `"mime-type"` key's value advises the verifier how to render a binary attribute, to judge its content for applicability before accepting a presentation containing it. Verifiers should parse its value case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045).
+
+The `"mime-type"` value specifies a MIME type as a string. If the MIME type is absent, its implicit value is `"text/plain"`.
+
+Recall that if this attribute is present and does not signify its default, the prover implementation must base64-encode the `"value"` (string) value that it sets in this attribute specification.
 
 ##### Value
 
-The `"value"` key maps to the proposed value of the attribute to reveal within the presentation. An attribute specification must specify a `"value"`, a `"cred_def_id"`, or both: 
+The `"value"` key maps to the proposed (string or integer) value of the attribute to reveal within the presentation. An attribute specification must specify a `"value"`, a `"cred_def_id"`, or both: 
 
 * if the `"value"` key is present and the `"cred_def_id"` key is absent, the preview proposes a self-attested attribute;
 * if the `"value"` key and the `"cred_def_id"` are both present, the preview proposes verifiable claim to reveal in the presentation;
