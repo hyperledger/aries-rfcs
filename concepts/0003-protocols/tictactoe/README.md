@@ -38,7 +38,7 @@ following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/master/concepts
 A tic-tac-toe game is an interaction where 2 parties take turns to
 make up to 9 moves. It starts when either party proposes the game, and ends when one of the parties wins, or when all all cells in the grid are occupied but nobody has won (a draw).
 
->Note: Optionally, a Tic-Tac-Toe game can be preceded by a [Coin Flip Protocol](../../../features/0192-coin-flip/README.md) to decide who goes first. This is not a high-value enhancement, but we add it for illustration purposes. If used, the `choice-id` field in the initial `propose` message of the Coin Flip should have the value `did:sov:SLfEi9esrjzybysFxQZbfq;spec/tictactoe/1.0/who-goes-first`, and the `caller-wins` and `flipper-wins` fields should contain the DIDs of the two players.
+>Note: Optionally, a Tic-Tac-Toe game can be preceded by a [Coin Flip Protocol](../../../features/0193-coin-flip/README.md) to decide who goes first. This is not a high-value enhancement, but we add it for illustration purposes. If used, the `choice-id` field in the initial `propose` message of the Coin Flip should have the value `did:sov:SLfEi9esrjzybysFxQZbfq;spec/tictactoe/1.0/who-goes-first`, and the `caller-wins` and `flipper-wins` fields should contain the DIDs of the two players.
 
 Illegal moves and moving out of turn are errors that trigger a complaint
 from the other player. However, they do not scuttle the interaction.

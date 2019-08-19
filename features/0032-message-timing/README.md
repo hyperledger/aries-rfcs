@@ -91,4 +91,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[RFC 0192: Coin Flip Protocol](../0192-coin-flip/README.md) | Uses `~timing.expires_time` to time out each step of the coin flip.
+[RFC 0193: Coin Flip Protocol](../0193-coin-flip/README.md) | Uses `~timing.expires_time` to time out each step of the coin flip.

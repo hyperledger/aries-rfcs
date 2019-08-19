@@ -1,4 +1,4 @@
-# Aries RFC 0192: Coin Flip Protocol 1.0 
+# Aries RFC 0193: Coin Flip Protocol 1.0 
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
@@ -22,7 +22,7 @@ To guarantee fairness, it is often important to pick one party in a protocol to 
 This defines the `coinflip` protocol, version 1.x, as identified by the
 following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/uris.md#piuri):
 
-    https://github.com/hyperledger/aries-rfcs/features/0192-coin-flip/1.0
+    https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0
     
 ### Roles
 
@@ -74,7 +74,7 @@ The protocol begins when Caller sends to Flipper a `propose` message that embodi
 
 ```jsonc
 {
-  "@type": "https://github.com/hyperledger/aries-rfcs/features/0192-coin-flip/1.0/propose",
+  "@type": "https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0/propose",
   "@id": "518be002-de8e-456e-b3d5-8fe472477a86",
   "caller-uuid": "d96dfb58-60ba-4fcd-9ca0-a2be41181d6f",
   "comment": "Let's flip to see who goes first.",
@@ -106,7 +106,7 @@ This message is sent from Flipper to Caller. It embodies Step 2-5 of [the algori
 
 ```jsonc
 {
-  "@type": "https://github.com/hyperledger/aries-rfcs/features/0192-coin-flip/1.0/flip",
+  "@type": "https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0/flip",
   "@id": "7a86e002-8dee-b3d5-456e-8fe47247518b",
   "flip-string-hash": "B78DC2D94F6E92B69491F13DC8C866C0A31F896069D3DD69472D0D7740967011",
   "comment": "Here you go. Do you pick heads or tails?",
@@ -127,7 +127,7 @@ This message is sent from Caller to Flipper, and embodies Step 6 of [the algorit
 
 ```jsonc
 {
-  "@type": "https://github.com/hyperledger/aries-rfcs/features/0192-coin-flip/1.0/call",
+  "@type": "https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0/call",
   "@id": "1173fe5f-86c9-47d7-911b-b8eac7d5f2ad",
   "called": "tails",
   "comment": "I pick tails.",
@@ -148,7 +148,7 @@ This message is sent from Flipper to Caller, and embodies Step 7 of [the algorit
 
 ```jsonc
 {
-  "@type": "https://github.com/hyperledger/aries-rfcs/features/0192-coin-flip/1.0/reveal",
+  "@type": "https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0/reveal",
   "@id": "e2a9454d-783d-4663-874e-29ad10776115",
   "flip_string": "tails d96dfb58-60ba-4fcd-9ca0-a2be41181d6f 01bf7abd-aa80-4389-bf8c-dba0f250bb1b",
   "winner": "caller",

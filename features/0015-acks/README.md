@@ -425,4 +425,4 @@ Name / Link | Implementation Notes
 --- | ---
 [RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | ACKs are [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by this protocol.
 [RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | ACKs are [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by this protocol.
-[RFC 0192: Coin Flip Protocol](../0192-coin-flip/README.md) | ACKs are [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by as a subprotocol.
+[RFC 0193: Coin Flip Protocol](../0193-coin-flip/README.md) | ACKs are [adopted](../../concepts/0003-protocols/template.md#adopted-messages) as a subprotocol.
