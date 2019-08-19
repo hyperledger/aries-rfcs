@@ -64,7 +64,7 @@ The offer and proposal messages are part of an optional negotiation phase and ma
 
 ![issuance](credential-issuance.png)
 
-### Propose Credential
+#### Propose Credential
 
 An optional message sent by the potential Holder to the Issuer to initiate the protocol or in response to a `offer-credential` message when the Holder wants some adjustments made to the credential data offered by Issuer.
 
@@ -90,7 +90,7 @@ Description of attributes:
 * `schema_id` -- optional filter to request credential based on a particular Schema. This might be helpful when requesting a version 1 passport instead of a version 2 passport, for example.
 * `cred_def_id` -- optional filter to request credential based on a particular Credential Definition. This might be helpful when requesting a commercial driver's license instead of an ordinary driver's license, for example.
 
-### Offer Credential
+#### Offer Credential
 
 A message sent by the Issuer to the potential Holder, describing the credential they intend to offer and possibly the price they expect to be paid. In Hyperledger Indy, this message is required, because it forces the Issuer to make a cryptographic commitment to the set of fields in the final credential and thus prevents Issuers from inserting spurious data. In credential implementations where this message is optional, an Issuer can use the message to negotiate the issuing following receipt of a `request-credential` message.
 
@@ -156,7 +156,7 @@ Description of Fields:
 
 This message may have a [`~payment-receipt` decorator](../0075-payment-decorators/README.md#payment_receipt) to prove to the Issuer that the potential Holder has satisfied a payment requirement. See the [payment section below](#payments-during-credential-exchange).
 
-### Issue Credential
+#### Issue Credential
 
 This message contains as [attached payload](../../concepts/0017-attachments/README.md) the credentials being issued and is sent in response to a valid Request Credential message.
 
@@ -187,7 +187,7 @@ Description of fields:
   
 If the issuer wants an acknowledgement that the issued credential was received, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0015: ACKs](../0015-acks/README.md).
 
-### Preview Credential
+#### Preview Credential
 
 This is not a message but an inner object for other messages in this protocol. It is used construct a preview of the data for the credential that is to be issued. Its schema follows:
 
@@ -207,15 +207,15 @@ This is not a message but an inner object for other messages in this protocol. I
 
 The main element is `attributes`. It is an array of (object) attribute specifications; the subsections below outline their semantics.
 
-#### Name
+##### Name
 
 The mandatory `"name"` key maps to the attribute name as a string.
 
-#### Value
+##### Value
 
 The mandatory `"value"` key maps to the attribute (string or integer) value. If the `"mime-type"` key is present and does not signify its default, the value is a base64-encoded string.
 
-#### MIME Type
+##### MIME Type
 
 The optional `"mime-type"` key's value advises the issuer how to render a binary attribute, to judge its content for applicability before issuing a credential containing it. Issuers should parse its value case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045).
 
