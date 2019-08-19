@@ -1,6 +1,6 @@
 # Aries RFC 0192: Coin Flip Protocol 1.0 
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com>
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-08-19
 - Status Note: recently proposed  
@@ -88,7 +88,7 @@ The protocol begins when Caller sends to Flipper a `propose` message that embodi
 }
 ```
 
-The `@type` and `@id` fields are standard for DIDComm. The `caller-uuid` field conveys the data required by Step 1 of the algorithm. The optional `comment` field follows [localization conventions](../0043-l10n/README.md) and is irrelevant unless the coin flip intends to invite human participation. The `~thread.pthid` [decorator](../../concepts/0011-decorators/README.md) is optional but should be common; it [identifies the thread of the parent interaction](../../concepts/0008-message-id-and-threading#threaded-messages) (the [superprotocol](../../concepts/0003-protocols/README.md#composable)).
+The `@type` and `@id` fields are standard for DIDComm. The `caller-uuid` field conveys the data required by Step 1 of the algorithm. The optional `comment` field follows [localization conventions](../0043-l10n/README.md) and is irrelevant unless the coin flip intends to invite human participation. The `~thread.pthid` [decorator](../../concepts/0011-decorators/README.md) is optional but should be common; it [identifies the thread of the parent interaction](../../concepts/0008-message-id-and-threading/README.md#threaded-messages) (the [superprotocol](../../concepts/0003-protocols/README.md#composable)).
 
 The `choice-id` field formally names a choice that a superprotocol has defined, and tells how the string values of the `caller-wins` and `flipper-wins` fields will be interpreted. In the example above, the choice is defined in the [Tic-Tac-Toe Protocol](../../concepts/0003-protocols/tictactoe/README.md#key-concepts), which also specifies that `caller-wins` and `flipper-wins` will contain DIDs of the parties playing the game. Some other combinations that might make sense include:
 
