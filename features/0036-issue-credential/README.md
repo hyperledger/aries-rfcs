@@ -14,7 +14,7 @@ Formalizes messages used to issue a credential--whether the credential is JWT-or
 
 ## Motivation
 
-We need a standard protocol for issuing credentials. This is the basis of interoperability between issuers and holders.
+We need a standard protocol for issuing credentials. This is the basis of interoperability between Issuers and Holders.
 
 ## Tutorial
 
@@ -28,7 +28,7 @@ There are two roles in this protocol: Issuer and Holder. Technically, the latter
 
 The choreography diagrams shown below detail how state evolves in this protocol, in a "happy path."
 
-Errors might occur in various places. For example, an Issuer might offer a credential for a price that the Holder is unwilling to pay. All errors are modeled with a `problem-report` message. Easy-to-anticipate errors reset the flow as shown in the diagrams, and use the code `issuance-abandoned`; more exotic errors (e.g., server crashed at issuer headquarters in the middle of a workflow) may have different codes but still cause the flow to be abandoned in the same way.
+Errors might occur in various places. For example, an Issuer might offer a credential for a price that the Holder is unwilling to pay. All errors are modeled with a `problem-report` message. Easy-to-anticipate errors reset the flow as shown in the diagrams, and use the code `issuance-abandoned`; more exotic errors (e.g., server crashed at Issuer headquarters in the middle of a workflow) may have different codes but still cause the flow to be abandoned in the same way.
 
 ### Messages
 
@@ -58,7 +58,7 @@ The protocol has 3 alternative beginnings:
 
 1. The Issuer can begin with an offer.
 2. The Holder can begin with a proposal.
-3. the holder can begin with a request.
+3. the Holder can begin with a request.
 
 The offer and proposal messages are part of an optional negotiation phase and may trigger back-and-forth counters. A request is not subject to negotiation; it can only be accepted or rejected.
 
@@ -92,7 +92,7 @@ Description of attributes:
 
 #### Offer Credential
 
-A message sent by the Issuer to the potential Holder, describing the credential they intend to offer and possibly the price they expect to be paid. In Hyperledger Indy, this message is required, because it forces the Issuer to make a cryptographic commitment to the set of fields in the final credential and thus prevents issuers from inserting spurious data. In credential implementations where this message is optional, an Issuer can use the message to negotiate the issuing following receipt of a `request-credential` message.
+A message sent by the Issuer to the potential Holder, describing the credential they intend to offer and possibly the price they expect to be paid. In Hyperledger Indy, this message is required, because it forces the Issuer to make a cryptographic commitment to the set of fields in the final credential and thus prevents Issuers from inserting spurious data. In credential implementations where this message is optional, an Issuer can use the message to negotiate the issuing following receipt of a `request-credential` message.
 
 Schema:
 
@@ -183,37 +183,42 @@ Description of fields:
 
 * `comment` -- an optional field that provides human readable information about the issued credential, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credentials~attach` -- an array of attachments containing the issued credentials.
-  * For Indy, the attachment contains a base64-encoded credential as returned from [`indy_issuer_create_credential()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L383).
+  * For Indy, the attachment contains data from libindy about credential to be issued, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
   
 If the issuer wants an acknowledgement that the issued credential was received, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0015: ACKs](../0015-acks/README.md).
 
 #### Preview Credential
 
-This is not a message but an inner object for other messages in this protocol. It is used construct a preview of the data for the credential that is to be issued.
-
-Schema:
+This is not a message but an inner object for other messages in this protocol. It is used construct a preview of the data for the credential that is to be issued. Its schema follows:
 
 ```jsonc
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
     "attributes": [
         {
-            "name": "attribute name",
-            "mime-type": "type",
-            "encoding": "encoding",
-            "value": "value"
+            "name": "<attribute name>",
+            "mime-type": "<type>",
+            "value": "<value>"
         },
         // more attributes
     ]
 }
 ```
 
-The main element is `attributes`. It is an array of objects, each with the following fields:
+The main element is `attributes`. It is an array of (object) attribute specifications; the subsections below outline their semantics.
 
-* `name` -- string with attribute name;
-* `mime-type` -- type of attribute
-* `encoding` -- encoding of value, if applicable: `"base64"` indicates base64
-* `value` -- value of credential
+##### Attribute Name
+
+The mandatory `"name"` key maps to the attribute name as a string.
+
+##### MIME Type and Value
+
+The optional `mime-type` advises the issuer how to render a binary attribute, to judge its content for applicability before issuing a credential containing it. Its value parses case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045). If `mime-type` is missing, its value is null.
+
+The mandatory `value` holds the attribute value:
+
+* if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
+* if `mime-type` is not null, then `value` is always a base64-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64-decoding.
 
 ## Threading
 
@@ -245,7 +250,7 @@ Negotiation prior to issuing the credential can be done using the `offer-credent
 
 ## Reference
 
-* [VCX](https://github.com/hyperledger/indy-sdk/tree/master/vcx/libvcx/src/api) -- this implementation might not be perfect and needs to be improved, you can gather some info on parameters purpose from it
+* [VCX](https://github.com/hyperledger/indy-sdk/tree/master/vcx/libvcx/src/api) -- this implementation might not be perfect and needs to be improved, you can gather some info on parameters' purpose from it
 * A pre-RFC (labelled version 0.1) implementation of the protocol was implemented by a number of groups in the Hyperledger Indy community leading up to IIW28 in April 2019. The protocol defined and implemented can be reviewed [here](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view). It was the basis of the [IIWBook demo](https://vonx.io/how_to/iiwbook) from BC Gov and collaborators.
 
 ## Drawbacks
