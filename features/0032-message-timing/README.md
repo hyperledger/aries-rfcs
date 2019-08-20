@@ -1,7 +1,7 @@
 # Aries RFC 0032: Message Timing
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-05-01
 - Status Note: Broadly socialized but not yet implemented. 
 - Supersedes: [Indy RFC PR #68](https://github.com/hyperledger/indy-hipe/pull/68)
@@ -91,4 +91,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- |  |
+[RFC 0193: Coin Flip Protocol](../0193-coin-flip/README.md) | Uses `~timing.expires_time` to time out each step of the coin flip.
