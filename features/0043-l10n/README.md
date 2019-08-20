@@ -1,7 +1,7 @@
 # Aries RFC 0043: l10n (Locali[s|z]ation)
 
 - Authors: Daniel Hardman
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-04-01
 - Status Note: Broadly socialized within the Indy community, and used in some of the other RFCs. Not yet implemented to any significant degree.
 - Start Date: 2018-11-30
@@ -306,6 +306,10 @@ mapping/localization mechanism.
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
- |  |
+Name / Link | Implementation Notes
+--- | ---
+[RFC 0035: Report Problem Protocol](../0035-report-problem/README.md) | Depends on this mechanism to localize the `description` field of an error.
+[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | Depends on this mechanism to localize the `comment` field of a `propose-credential`, `offer-credential`, `request-credential`, or `issue-credential` message.
+[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | Depends on this mechanism to localize the `comment` field of a `propose-presentation`, `offer-presentation`, or `presentation` message.
+[RFC 0193: Coin Flip Protocol](../0193-coin-flip/README.md) | Uses this mechanism to localize the `comment` field, when human iteraction around coin tosses is a a goal.
+

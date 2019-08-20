@@ -255,16 +255,16 @@ in a declarative style: [ [Lacunas Everywhere](https://codecraft.co/2014/07/16/l
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
-Aries RFCs | [RFC 0008](../0008-message-id-and-threading/README.md), [RFC 0017](../0017-attachments/README.md), [RFC 0015](../../features/0015-acks/README.md), [RFC 0023](../../features/0023-did-exchange/README.md), [RFC 0056](../../features/0056-service-decorator/README.md), [RFC 0075](../../features/0075-payment-decorators/README.md)| many implemented RFCs depend on decorators...
-Indy Cloud Agent - Python | https://github.com/hyperledger/indy-agent/python | Reference agent implementation contributed by Sovrin Foundation and Community
-Streetcred AgentFramework | https://github.com/streetcred-id/agent-framework | .NET framework for building agents of all types
-Streetcred.id | https://streetcred.id/ | Commercial mobile and web app built using Streetcred AgentFramework
-Aries Cloud Agent - Python | https://github.com/hyperledger/aries-cloudagent-python | Contributed by the government of British Columbia.
-Aries Static Agent - Python | https://github.com/hyperledger/aries-staticagent-python | Useful for cron jobs and other simple, automated use cases.
-Aries Go Framework | https://github.com/hyperledger/aries-framework-go | For building agents, hubs and other DIDComm features in GoLang.
-Connect.Me | https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/ | Free mobile app from Evernym. Installed via app store on iOS and Android. 
-Verity | https://www.evernym.com/products/ | Commercially licensed enterprise agent, SaaS or on-prem.
-Aries Protocol Test Suite | https://github.com/hyperledger/aries-protocol-test-suite | 
+Name / Link | Implementation Notes
+--- | ---
+Aries RFCs: [RFC 0008](../0008-message-id-and-threading/README.md), [RFC 0017](../0017-attachments/README.md), [RFC 0015](../../features/0015-acks/README.md), [RFC 0023](../../features/0023-did-exchange/README.md), [RFC 0056](../../features/0056-service-decorator/README.md), [RFC 0075](../../features/0075-payment-decorators/README.md)| many implemented RFCs depend on decorators...
+[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | message threading
+[Streetcred AgentFramework](https://github.com/streetcred-id/agent-framework) | message threading
+[Streetcred.id](https://streetcred.id/) | message threading
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | message threading, attachments
+[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | message threading
+[Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | message threading
+[Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | message threading 
+[Verity](https://www.evernym.com/products/) | message threading
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | message threading 
  

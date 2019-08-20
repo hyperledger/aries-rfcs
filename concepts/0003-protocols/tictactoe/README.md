@@ -36,9 +36,9 @@ following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/master/concepts
 ### Key Concepts
 
 A tic-tac-toe game is an interaction where 2 parties take turns to
-make up to 9 moves. It starts when either party proposes the game, and
-ends when one of the parties wins, or when all all cells in the grid
-are occupied but nobody has won (a draw).
+make up to 9 moves. It starts when either party proposes the game, and ends when one of the parties wins, or when all all cells in the grid are occupied but nobody has won (a draw).
+
+>Note: Optionally, a Tic-Tac-Toe game can be preceded by a [Coin Flip Protocol](../../../features/0193-coin-flip/README.md) to decide who goes first. This is not a high-value enhancement, but we add it for illustration purposes. If used, the `choice-id` field in the initial `propose` message of the Coin Flip should have the value `did:sov:SLfEi9esrjzybysFxQZbfq;spec/tictactoe/1.0/who-goes-first`, and the `caller-wins` and `flipper-wins` fields should contain the DIDs of the two players.
 
 Illegal moves and moving out of turn are errors that trigger a complaint
 from the other player. However, they do not scuttle the interaction.
@@ -314,6 +314,6 @@ https://github.com/hyperledger/indy-hipe/blob/569357c6/text/localized-messages/R
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
-Verity | https://www.evernym.com/products/ | Commercially licensed enterprise agent, SaaS or on-prem. 
+Name / Link | Implementation Notes
+--- | ---
+[Verity](https://www.evernym.com/products/) | Commercially licensed enterprise agent, SaaS or on-prem. 
