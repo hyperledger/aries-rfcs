@@ -1,0 +1,18 @@
+[package]
+name = "loxcli"
+version = "0.1.0"
+authors = ["Michael Lodder <redmike7@gmail.com>"]
+edition = "2018"
+
+[[bin]]
+bench = false
+path = "src/main.rs"
+name = "lox"
+
+[dependencies]
+clap = "2.33.0"
+colored = "1.8.0"
+liblox = { path = "../lox", version = "0.2.0", package = "lox" }
+zeroize = "0.9.3"
+rpassword = "3.0.2"
+atty = "0.2.13"
