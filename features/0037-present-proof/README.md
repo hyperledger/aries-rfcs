@@ -123,7 +123,7 @@ This is not a message but an inner object for other messages in this protocol. I
             "name": "<attribute_name>",
             "cred_def_id": "<cred_def_id>",
             "mime-type": "<type>",
-            "value": <value>
+            "value": "<value>"
         },
         // more attributes
     ],
@@ -153,21 +153,20 @@ The mandatory `"name"` key maps to the name of the attribute.
 
 The optional `"cred_def_id"` key maps to the credential definition identifier of the credential with the current attribute. If the key is absent, the preview specifies attribute's posture in the presentation as a self-attested attribute.
 
-##### MIME Type
+##### MIME Type and Value
 
-The optional `"mime-type"` key's value advises the verifier how to render a binary attribute, to judge its content for applicability before accepting a presentation containing it. Verifiers should parse its value case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045).
+The optional `mime-type` advises the verifier how to render a binary attribute, to judge its content for applicability before accepting a presentation containing it. Its value parses case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045). If `mime-type` is missing, its value is null.
 
-The `"mime-type"` value specifies a MIME type as a string. If the MIME type is absent, its implicit value is `"text/plain"`.
+The optional `value`, when present, holds the value of the attribute to reveal in presentation:
 
-Recall that if this attribute is present and does not signify its default, the prover implementation must base64-encode the `"value"` (string) value that it sets in this attribute specification.
+* if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
+* if `mime-type` is not null, then `value` is always a base64-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64-decoding.
 
-##### Value
+An attribute specification must specify a `value`, a `cred_def_id`, or both: 
 
-The `"value"` key maps to the proposed (string or integer) value of the attribute to reveal within the presentation. An attribute specification must specify a `"value"`, a `"cred_def_id"`, or both: 
-
-* if the `"value"` key is present and the `"cred_def_id"` key is absent, the preview proposes a self-attested attribute;
-* if the `"value"` key and the `"cred_def_id"` are both present, the preview proposes verifiable claim to reveal in the presentation;
-* if the `"value"` key is absent and the `"cred_def_id"` key is present, the preview proposes verifiable claim not to reveal in the presentation.
+* if `value` is present and `cred_def_id` is absent, the preview proposes a self-attested attribute;
+* if `value` and `cred_def_id` are both present, the preview proposes verifiable claim to reveal in the presentation;
+* if `value` is absent and `cred_def_id` is present, the preview proposes verifiable claim not to reveal in the presentation.
 
 #### Predicates
 

@@ -197,8 +197,8 @@ This is not a message but an inner object for other messages in this protocol. I
     "attributes": [
         {
             "name": "<attribute name>",
-            "value": <value>,
-            "mime-type": "<type>"
+            "mime-type": "<type>",
+            "value": "<value>"
         },
         // more attributes
     ]
@@ -207,21 +207,18 @@ This is not a message but an inner object for other messages in this protocol. I
 
 The main element is `attributes`. It is an array of (object) attribute specifications; the subsections below outline their semantics.
 
-##### Name
+##### Attribute Name
 
 The mandatory `"name"` key maps to the attribute name as a string.
 
-##### Value
+##### MIME Type and Value
 
-The mandatory `"value"` key maps to the attribute (string or integer) value. If the `"mime-type"` key is present and does not signify its default, the value is a base64-encoded string.
+The optional `mime-type` advises the issuer how to render a binary attribute, to judge its content for applicability before issuing a credential containing it. Its value parses case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045). If `mime-type` is missing, its value is null.
 
-##### MIME Type
+The mandatory `value` holds the attribute value:
 
-The optional `"mime-type"` key's value advises the issuer how to render a binary attribute, to judge its content for applicability before issuing a credential containing it. Issuers should parse its value case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045).
-
-The `"mime-type"` value specifies a MIME type as a string. If the MIME type is absent, its implicit value is `"text/plain"`.
-
-Recall that if this attribute is present and does not signify its default, the Holder implementation must base64-encode the `"value"` (string) value that it sets in this attribute specification.
+* if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
+* if `mime-type` is not null, then `value` is always a base64-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64-decoding.
 
 ## Threading
 
