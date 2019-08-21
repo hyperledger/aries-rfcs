@@ -150,6 +150,7 @@ Invitation Message with Keys and DID Service Endpoint Reference:
 ```json
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/invitation",
+     "@id": "12345678900987654321",
     "label": "Alice",
     "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
     "serviceEndpoint": "did:sov:A2wBhNYhMrjHiqZDTUYH7u;service=routeid",
@@ -315,7 +316,7 @@ The exchange response message is used to complete the exchange. This message is 
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/response",
   "@id": "12345678900987654321",
   "~thread": {
-    "thid": "<@id of request message>"
+    "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>"
   },
   "connection": {
     "did": "A.did@B:A",
@@ -334,7 +335,7 @@ The above message is required to be signed as described in HIPE ???. The `connec
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/response",
   "@id": "12345678900987654321",
   "~thread": {
-    "thid": "<@id of request message>"
+    "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>"
   },
   "connection~sig": {
     "@type":"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
