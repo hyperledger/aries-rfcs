@@ -17,7 +17,7 @@
 * [Concepts](#concepts)
 * [Use Cases](#use-cases)
 * [Implementation Guidelines](#implementation-guidelines)
-    * [Collect Personal Data 5](#collect-personal-data)
+    * [Collect Personal Data](#collect-personal-data)
     * [Personal Data Processing Schema](#personal-data-processing-schema)
     * [Example: schemas](#example-schemas)
     * [Blockchain Prerequisites](#blockchain-prerequisites)
@@ -27,8 +27,7 @@
     * [Performing Proof Request](#performing-proof-request)
     * [Certification Revocation](#certification-revocation)
 * [Reference](#reference)
-* [Annex A: PDP Schema mapping to Kantara Consent Receipt
-13](#annex-a-pdp-schema-mapping-to-kantara-consent-receipt)
+* [Annex A: PDP Schema mapping to Kantara Consent Receipt](#annex-a-pdp-schema-mapping-to-kantara-consent-receipt)
 * [Prior art](#prior-art)
     * [ETL process](#etl-process)
     * [Personal Data Terms and Conditions](#personal-data-terms-and-conditions)
@@ -110,7 +109,7 @@ information. To help illustrate how SSI is applied several use cases along
 a reference implementation will help show the relation between the data subject,
 data controller and data processor.
 
-![](media/consent_overview.png)
+![](media/consent_actors_overview.png)
 
 
 ## Concepts
@@ -443,6 +442,9 @@ guarantee that:*
     Created by Andrew Hughes, last modified on Jun 19, 2019\
     [[https://kantarainitiative.org/confluence/display/infosharing/Blinding+Identity+Taxonomy]](https://kantarainitiative.org/confluence/display/infosharing/Blinding+Identity+Taxonomy)
 
+6.  W3C Verifiable Credential
+    https://www.w3.org/TR/vc-data-model/
+    
 ## Annex A: PDP Schema mapping to Kantara Consent Receipt
 
 Kantara has defined a Consent Receipt with a list of mandatory and
