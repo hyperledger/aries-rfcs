@@ -458,7 +458,7 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[Streetcred AgentFramework](https://github.com/streetcred-id/agent-framework) | passed agent connectathon tests, Feb 2019
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | passed agent connectathon tests, Feb 2019
 [Streetcred.id](https://streetcred.id/) | passed agent connectathon tests, Feb 2019
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | ported from VON codebase that passed agent connectathon tests, Feb 2019
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | implemented July 2019
