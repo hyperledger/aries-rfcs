@@ -309,7 +309,7 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 Name / Link | Implementation Notes
 --- | ---
 [Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | several protocols, circa Feb 2019
-[Streetcred AgentFramework](https://github.com/streetcred-id/agent-framework) | several protocols, circa Feb 2019
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | several protocols, circa Feb 2019
 [Streetcred.id](https://streetcred.id/) | several protocols, circa Feb 2019
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | numerous protocols plus extension mechanism for pluggable protocols
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | 2 or 3 protocols

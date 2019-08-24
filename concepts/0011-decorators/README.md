@@ -259,7 +259,7 @@ Name / Link | Implementation Notes
 --- | ---
 Aries RFCs: [RFC 0008](../0008-message-id-and-threading/README.md), [RFC 0017](../0017-attachments/README.md), [RFC 0015](../../features/0015-acks/README.md), [RFC 0023](../../features/0023-did-exchange/README.md), [RFC 0056](../../features/0056-service-decorator/README.md), [RFC 0075](../../features/0075-payment-decorators/README.md)| many implemented RFCs depend on decorators...
 [Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | message threading
-[Streetcred AgentFramework](https://github.com/streetcred-id/agent-framework) | message threading
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | message threading
 [Streetcred.id](https://streetcred.id/) | message threading
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | message threading, attachments
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | message threading
