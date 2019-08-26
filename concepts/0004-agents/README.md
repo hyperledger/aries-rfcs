@@ -112,8 +112,8 @@ message of type X. It will respond with a message of type Y or type Z,
 or with an error message of type W. Repeat until the negotiation
 finishes." Some interesting A2A protocols include the one where two
 parties connect to one another to build a relationship, the one where
-agents discover which protocols they each support, the one credentials
-are issued, and the one where proof is requested and sent.
+agents discover which protocols they each support, the one where
+credentials are issued, and the one where proof is requested and sent.
 Hundreds of other protocols are being defined.
 
 #### How to Get an Agent
@@ -214,7 +214,7 @@ The pseudocode for each protocol handler it loads might look like:
 Line 4 is the workhorse. For example, if the interaction is
 about issuing credentials and this agent is doing the issuance,
 this would be where it looks up the material for the credential
-in internal databases, formats it appopriately, and records the
+in internal databases, formats it appropriately, and records the
 fact that the credential has now been built. Line 6 might be
 where that credential is attached to an outgoing message for
 transmission to the recipient.
@@ -346,7 +346,7 @@ include:
 * Has a wallet _(common, but not universal)_
 * Establishes new connections _(some may use only a small set of preconfigured connections)_
 * Exchanges credentials and proofs _(some may not use these protocols)_
-* Both listens and talks _(some may only listen or only talks)_
+* Both listens and talks _(some may only listen or only talk)_
 
 Agents that lack these characteristics can still be fully
 interoperable.
