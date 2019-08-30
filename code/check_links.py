@@ -73,7 +73,7 @@ def handle_local_file(relative_to_fname, uri, cache):
             if os.path.isdir(path):
                 error = "should link to README.md rather than folder"
             elif path.endswith('.md'):
-                with open(path, 'rt') as f:
+                with open(path, 'rt', encoding='utf-8') as f:
                     content = f.read()
         cache[path] = (error, content)
     return error, content, path
@@ -182,7 +182,7 @@ def check_links(fname, rfcs, cache, full_check):
     sys.stdout.write(relative_fname.ljust(80, ' ') + '\r')
     error_count = 0
     if fname not in cache:
-        with open(fname, "rt") as f:
+        with open(fname, "rt", encoding='utf-8') as f:
             txt = f.read()
         cache[fname] = (None, txt)
     else:

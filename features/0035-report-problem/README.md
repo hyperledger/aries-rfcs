@@ -1,7 +1,7 @@
 # Aries RFC 0035: Report Problem Protocol 1.0
 
 - Authors: [Stephen Curran](swcurran@cloudcompass.ca), [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-04-01
 - Status Note: Broadly socialized in Indy circles. Implemented in several codebases. Not yet fully harmonized. 
 - Supersedes: [Indy HIPE PR #65]( https://github.com/hyperledger/indy-hipe/pull/65)
@@ -353,6 +353,7 @@ A brief search was done for error handling in messaging systems with few useful 
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
- |  |
+Name / Link | Implementation Notes
+--- | ---
+[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | The `problem-report` message is [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by this protocol.
+[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | The `problem-report` message is [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by this protocol.

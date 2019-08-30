@@ -1,7 +1,7 @@
 # Aries RFC 0023: DID Exchange Protocol 1.0
 
 - Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org)
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-05-27
 - Status Note: A similar protocol was implemented for IIW in spring 2019. Need link.
 - Supersedes: [HIPE 0031 - Connection Protocol](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol)
@@ -150,6 +150,7 @@ Invitation Message with Keys and DID Service Endpoint Reference:
 ```json
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/invitation",
+     "@id": "12345678900987654321",
     "label": "Alice",
     "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
     "serviceEndpoint": "did:sov:A2wBhNYhMrjHiqZDTUYH7u;service=routeid",
@@ -315,7 +316,7 @@ The exchange response message is used to complete the exchange. This message is 
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/response",
   "@id": "12345678900987654321",
   "~thread": {
-    "thid": "<@id of request message>"
+    "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>"
   },
   "connection": {
     "did": "A.did@B:A",
@@ -334,7 +335,7 @@ The above message is required to be signed as described in HIPE ???. The `connec
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/response",
   "@id": "12345678900987654321",
   "~thread": {
-    "thid": "<@id of request message>"
+    "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>"
   },
   "connection~sig": {
     "@type":"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
@@ -431,6 +432,6 @@ When Peer DIDs are used in an exchange, it is likely that both Alice and Bob wil
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
+Name / Link | Implementation Notes
+--- | ---
  |  |

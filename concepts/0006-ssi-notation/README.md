@@ -760,6 +760,6 @@ explored here, so it would have to be expanded before it could be complete.
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name | Link | Implementation Notes
---- | --- | ---
-Peer DID Method Spec | https://openssi.github.io/peer-did-method-spec/ |
+Name / Link | Implementation Notes
+--- | ---
+[Peer DID Method Spec](https://openssi.github.io/peer-did-method-spec/) | uses notation in diagrams

@@ -56,3 +56,83 @@ def test_rfc_metadata():
     if errors:
         msg = '\n' + '\n'.join(errors)
         raise BaseException(msg)
+
+
+def test_impls():
+    errors = []
+
+    def e(rfc, msg):
+        errors.append(rfc + ': ' + msg)
+
+    pretty_for_normalized_names = {}
+    normalized_for_base_uri = {}
+    base_uri_for_normalized = {}
+    refs = []
+
+    def append_to_dict(dict, key, value, ref):
+        if key not in dict:
+            dict[key] = []
+        list = dict.get(key)
+        if value not in list:
+            list.append(value)
+        refs.append((dict, key, value, ref))
+
+    def track(name, link, path, row_num):
+        ref = path + ', impl row ' + str(row_num)
+        norm_name = rfcs.normalize_impl_name(name)
+        append_to_dict(pretty_for_normalized_names, norm_name, name, ref)
+        base_uri = rfcs.get_impl_base(link)
+        append_to_dict(base_uri_for_normalized, norm_name, base_uri, ref)
+        append_to_dict(normalized_for_base_uri, base_uri, norm_name, ref)
+
+    for abspath in rfcs.walk_files():
+        try:
+            with open(abspath, 'rt', encoding='utf-8') as f:
+                txt = f.read()
+            path = rfcs.relpath(abspath).replace('/README.md', '')
+            impl_table = rfcs.get_impl_table(txt)
+            bad_count = False
+            n = 1
+            for row in impl_table:
+                if len(row) == 2:
+                    cell = row[0].strip()
+                    if cell.startswith('['):
+                        name, link = rfcs.split_hyperlink(cell)
+                        if name and link:
+                            track(name, link, path, n)
+                else:
+                    if (not bad_count):
+                        e(path, 'row %d in impl table does not have 2 columns' % n)
+                        bad_count = True
+                n += 1
+        except:
+            print('Error while processing ' + abspath)
+            raise
+
+    def find_refs(dict, key, value):
+        matches = []
+        for ref in refs:
+            if ref[0] == dict:
+                if ref[1] == key:
+                    if ref[2] in value:
+                        matches.append(ref[3])
+        return matches
+
+    for key, value in pretty_for_normalized_names.items():
+        if len(value) > 1:
+            offenders = '\n'.join(find_refs(pretty_for_normalized_names, key, value))
+            e(offenders, '\n  inconsistent variants on impl name: %s' % ', '.join(['"%s"' % v for v in value]))
+
+    for key, value in normalized_for_base_uri.items():
+        if len(value) > 1:
+            offenders = '\n'.join(find_refs(normalized_for_base_uri, key, value))
+            e(offenders, '\n  same site maps to multiple impl names: %s' % ', '.join(['"%s"' % v for v in value]))
+
+    for key, value in base_uri_for_normalized.items():
+        if len(value) > 1:
+            offenders = '\n'.join(find_refs(base_uri_for_normalized, key, value))
+            e(offenders, '\n  impl name "%s" maps to multiple sites: %s' % (key, ', '.join(['"%s"' % v for v in value])))
+
+    if errors:
+        msg = '\n' + '\n'.join(errors)
+        raise BaseException(msg)
