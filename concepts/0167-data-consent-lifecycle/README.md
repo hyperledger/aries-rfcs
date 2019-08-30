@@ -530,7 +530,6 @@ Name / Link | Implementation Notes
 
 ### Plan
 
--   Submit RFC to Aries
 -   Upload consent demo to Indy-sdk
 
 ### ToDo
