@@ -4,7 +4,7 @@
 - Since: 2019-08-30
 - Status Note: socialized on an informal credential fraud study group (https://groups.google.com/d/forum/credential-fraud-study) since ~May 2019.  
 - Start Date: 2019-05-23
-- Tags: feature, credentials
+- Tags: concept, credentials
 
 ## Summary
 
