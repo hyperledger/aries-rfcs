@@ -113,13 +113,13 @@ Combinations of the above?
 
 ##### context
 * 4.7 __bad-timestamp__ ⇨ Fraud hinges on claiming a different time for an event than the time it actually occurred.
-* 4.8 __bad-ledger-read__
-* 4.9 __bad-ledger-write__
-* 4.10 __bad-revoc-read__
-* 4.11 __bad-revoc-write__
-* 4.12 __bad-payment__
-* 4.13 __bad-did-resolve__
-* 4.14 __bad-tamper-check__
+* 4.8 __bad-ledger-read__ ⇨ Malicious ledger client returns incorrect data from a query of the ledger. 
+* 4.9 __bad-ledger-write__ ⇨ Malicious ledger client alters data before writing it to the ledger.
+* 4.10 __bad-revoc-read__ ⇨ False revocation status is reported when a revocation list or revocation registry is read.
+* 4.11 __bad-revoc-write__ ⇨ Revocation status is not updated when a request to update is submitted.
+* 4.12 __bad-payment__ ⇨ A payment amount, timestamp, or responsibile party is falsified.
+* 4.13 __bad-did-resolve__ ⇨ Invalid or stale results are returned when a DID is resolved.
+* 4.14 __bad-tamper-check__ ⇨ Data is tampered with, but the tampering is not detected.
 * 4.15 __missing-evidence__ ⇨ Issuer subverts audit by removing evidence that they discriminated when a loan was issued.
 * 4.16 __bad-evidence__ ⇨ Issuer subverts audit by creating falsified evidence that they behaved properly when a loan was issued.
 * 4.17 __bad-compliance__ ⇨ Verifier asserts to government or to holder that they’ve complied with GDPR, but this is not actually true.
