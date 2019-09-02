@@ -13,3 +13,6 @@ The RFC defines a specific, concrete feature that [agents](concepts/0004-agents/
 
 ### `concept`
 The RFC defines a general aspect of the Aries system, or a pattern that manifests in many different features.
+
+### `credentials`
+The RFC explores a topic related to verifiable credentials.

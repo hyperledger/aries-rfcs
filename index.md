@@ -13,8 +13,8 @@
 * [0020: Message Types](concepts/0020-message-types/README.md) (2019-05-24, [8 impls](concepts/0020-message-types/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0031: Discover Features Protocol 1.0](features/0031-discover-features/README.md) (2019-05-01, [1 impl](features/0031-discover-features/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0035: JSON-LD Compatibility](concepts/0047-json-ld-compatibility/README.md) (2019-02-20 &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
-* [0036: Issue Credential Protocol 1.0](features/0036-issue-credential/README.md) (2019-05-28 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator) [`protocol`](/tags.md#protocol))
-* [0037: Present Proof Protocol 1.0](features/0037-present-proof/README.md) (2019-05-28 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0036: Issue Credential Protocol 1.0](features/0036-issue-credential/README.md) (2019-05-28 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials))
+* [0037: Present Proof Protocol 1.0](features/0037-present-proof/README.md) (2019-05-28 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials))
 * [0046: Mediators and Relays](concepts/0046-mediators-and-relays/README.md) (2019-02-01, [2 impls](concepts/0046-mediators-and-relays/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0048: Trust Ping Protocol 1.0](features/0048-trust-ping/README.md) (2019-02-01, [6 impls](features/0048-trust-ping/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0049: Repudiation](concepts/0049-repudiation/README.md) (2019-03-01 &mdash; [`concept`](/tags.md#concept))
@@ -57,6 +57,7 @@
 * [0167: Data Consent Lifecycle](concepts/0167-data-consent-lifecycle/README.md) (2019-08-07 &mdash; [`concept`](/tags.md#concept))
 * [0183: Revocation Notification 1.0](features/0183-revocation-notification/README.md) (2019-08-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0193: Coin Flip Protocol 1.0 ](features/0193-coin-flip/README.md) (2019-08-19 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0207: Credential Fraud Threat Model](concepts/0207-credential-fraud-threat-model/README.md) (2019-08-30 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
 
 ## [RETIRED](README.md#retired)
 
