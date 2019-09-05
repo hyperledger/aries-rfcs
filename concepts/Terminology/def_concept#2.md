@@ -1,17 +1,46 @@
 # [Term](#_Term): Concept#2
 
-| | |
-| --- | --- |
-| [Colloquial Definition](#ColloquialDefinition) | |
-| [Formal Definition](#FormalDefinition) | A service that has delegated authority in the form of keys to act as a fiduciary for exactly one specific [concept #8 “self”] in DIDComm-based interactions. |
-| [Example(s)](#Examples) | |
-| [Relevance](#Relevance) | |
-| [Properties](#Properties) | |
-| [Specializations](#Specializations) | |
-| [Pitfalls](#Pitfalls) | |
-| [Related terminology](#Related) | Indy calls this `agent`, nodding to phrases like “talent agent” and “real estate agent.” It is somewhat similar to the idea of `user agent` from browser terminology, but browser user agents often lack delegated keys and do not support DIDComm. This is what DIF would designate as a user’s Wallet App/Mobile Agent or an organization’s Enterprise Agent, which may have a CLI or dashboard interface. |
-| [Standards](#Standards) | |
-| [Miscellaneous](#Miscellaneous) | |
+
+##  [Colloquial Definition](#ColloquialDefinition) 
+
+ 
+
+##  [Formal Definition](#FormalDefinition) 
+
+ A service that has delegated authority in the form of keys to act as a fiduciary for exactly one specific [concept #8 “self”] in DIDComm-based interactions. 
+
+##  [Example(s)](#Examples) 
+
+ 
+
+##  [Relevance](#Relevance) 
+
+ 
+
+##  [Properties](#Properties) 
+
+ 
+
+##  [Specializations](#Specializations) 
+
+ 
+
+##  [Pitfalls](#Pitfalls) 
+
+ 
+
+##  [Related terminology](#Related) 
+
+ Indy calls this `agent`, nodding to phrases like “talent agent” and “real estate agent.” It is somewhat similar to the idea of `user agent` from browser terminology, but browser user agents often lack delegated keys and do not support DIDComm. This is what DIF would designate as a user’s Wallet App/Mobile Agent or an organization’s Enterprise Agent, which may have a CLI or dashboard interface. 
+
+##  [Standards](#Standards) 
+
+ 
+
+##  [Miscellaneous](#Miscellaneous) 
+
+ 
+
 
 ------
 

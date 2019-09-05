@@ -1,17 +1,46 @@
 # [Term](#_Term): Trust (by a Party in a Statement)
 
-| | |
-| --- | --- |
-| [Colloquial Definition](#ColloquialDefinition) | the level of risk associated with a Statement is acceptable for a Party |
-| [Formal Definition](#FormalDefinition) | decision by a Party that the risk it would be exposed to if some Statement would turn out not to be true, is acceptable (for him) |
-| [Example(s)](#Examples) | I trust you to tell me the (your) truth. I trust that a computer will function as I expect it to. A verifier trusts an issuer to create credentials according to the specifications set for such credentials. |
-| [Relevance](#Relevance) | Since Parties cannot know everything, and also do not control everything (since other parties, too, are Sovereigns), there is no way to know with 100% certainty that statements that are believed to be true, will turn out to be actually true. So, parties need to decide what to trust (what to believe) is true, or is going to happen. We use the word `trust` to refer to the decision by a party to believe that a statement is true, or that if it turns out to be false, the consequences are expected to be acceptable. |
-| [Properties](#Properties) | |
-| [Specializations](#Specializations) | |
-| [Pitfalls](#Pitfalls) | Trust is often used as if it has an existence of its own (i.e. is an Entity). Trust is always associated with a Party that does the trusting (trust is subjective). Also, trust is associated with some statement, which can almost be anything. Not realizing this is the source of much confusion. |
-| [Related terminology](#Related) | |
-| [Standards](#Standards) | |
-| [Miscellaneous](#Miscellaneous) | |
+
+##  [Colloquial Definition](#ColloquialDefinition) 
+
+ the level of risk associated with a Statement is acceptable for a Party 
+
+##  [Formal Definition](#FormalDefinition) 
+
+ decision by a Party that the risk it would be exposed to if some Statement would turn out not to be true, is acceptable (for him) 
+
+##  [Example(s)](#Examples) 
+
+ I trust you to tell me the (your) truth. I trust that a computer will function as I expect it to. A verifier trusts an issuer to create credentials according to the specifications set for such credentials. 
+
+##  [Relevance](#Relevance) 
+
+ Since Parties cannot know everything, and also do not control everything (since other parties, too, are Sovereigns), there is no way to know with 100% certainty that statements that are believed to be true, will turn out to be actually true. So, parties need to decide what to trust (what to believe) is true, or is going to happen. We use the word `trust` to refer to the decision by a party to believe that a statement is true, or that if it turns out to be false, the consequences are expected to be acceptable. 
+
+##  [Properties](#Properties) 
+
+ 
+
+##  [Specializations](#Specializations) 
+
+ 
+
+##  [Pitfalls](#Pitfalls) 
+
+ Trust is often used as if it has an existence of its own (i.e. is an Entity). Trust is always associated with a Party that does the trusting (trust is subjective). Also, trust is associated with some statement, which can almost be anything. Not realizing this is the source of much confusion. 
+
+##  [Related terminology](#Related) 
+
+ 
+
+##  [Standards](#Standards) 
+
+ 
+
+##  [Miscellaneous](#Miscellaneous) 
+
+ 
+
 
 ------
 

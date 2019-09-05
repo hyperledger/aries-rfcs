@@ -1,17 +1,46 @@
 # [Term](#_Term): Concept#4
 
-| | |
-| --- | --- |
-| [Colloquial Definition](#ColloquialDefinition) | |
-| [Formal Definition](#FormalDefinition) | An app (mobile, web, or native) that people or orgs use to manage secrets, including payment and identity info. |
-| [Example(s)](#Examples) | |
-| [Relevance](#Relevance) | |
-| [Properties](#Properties) | |
-| [Specializations](#Specializations) | |
-| [Pitfalls](#Pitfalls) | |
-| [Related terminology](#Related) | This concept is currently called `wallet` by many in identity circles; Indy developers would call it `an app that has a wallet`. An important nuance is that apps can be multitenant (multiple Netflix users or XBox gamers in a single household; multiple Fitbit profiles on a single tablet), which makes this concept slightly misaligned with [Concept#3 Indy “wallet”].|
-| [Standards](#Standards) | |
-| [Miscellaneous](#Miscellaneous) | |
+
+##  [Colloquial Definition](#ColloquialDefinition) 
+
+ 
+
+##  [Formal Definition](#FormalDefinition) 
+
+ An app (mobile, web, or native) that people or orgs use to manage secrets, including payment and identity info. 
+
+##  [Example(s)](#Examples) 
+
+ 
+
+##  [Relevance](#Relevance) 
+
+ 
+
+##  [Properties](#Properties) 
+
+ 
+
+##  [Specializations](#Specializations) 
+
+ 
+
+##  [Pitfalls](#Pitfalls) 
+
+ 
+
+##  [Related terminology](#Related) 
+
+ This concept is currently called `wallet` by many in identity circles; Indy developers would call it `an app that has a wallet`. An important nuance is that apps can be multitenant (multiple Netflix users or XBox gamers in a single household; multiple Fitbit profiles on a single tablet), which makes this concept slightly misaligned with [Concept#3 Indy “wallet”].
+
+##  [Standards](#Standards) 
+
+ 
+
+##  [Miscellaneous](#Miscellaneous) 
+
+ 
+
 
 ------
 

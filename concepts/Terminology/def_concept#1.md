@@ -1,17 +1,46 @@
 # [Term](#_Term): Concept#1
 
-| | |
-| --- | --- |
-| [Colloquial Definition](#ColloquialDefinition) | |
-| [Formal Definition](#FormalDefinition) | A masterless service instance that provides storage, data synchronization/replication, networking, and limited processing of messages to one or more entities wishing to manage identity and digital presence. |
-| [Example(s)](#Examples) | |
-| [Relevance](#Relevance) | |
-| [Properties](#Properties) | |
-| [Specializations](#Specializations) | |
-| [Pitfalls](#Pitfalls) | |
-| [Related terminology](#Related) | DIF uses the word `hub`|
-| [Standards](#Standards) | |
-| [Miscellaneous](#Miscellaneous) | |
+
+##  [Colloquial Definition](#ColloquialDefinition) 
+
+ 
+
+##  [Formal Definition](#FormalDefinition) 
+
+ A masterless service instance that provides storage, data synchronization/replication, networking, and limited processing of messages to one or more entities wishing to manage identity and digital presence. 
+
+##  [Example(s)](#Examples) 
+
+ 
+
+##  [Relevance](#Relevance) 
+
+ 
+
+##  [Properties](#Properties) 
+
+ 
+
+##  [Specializations](#Specializations) 
+
+ 
+
+##  [Pitfalls](#Pitfalls) 
+
+ 
+
+##  [Related terminology](#Related) 
+
+ DIF uses the word `hub`
+
+##  [Standards](#Standards) 
+
+ 
+
+##  [Miscellaneous](#Miscellaneous) 
+
+ 
+
 
 ------
 

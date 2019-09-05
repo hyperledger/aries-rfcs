@@ -1,17 +1,52 @@
 # [Term](#_Term): Claim (about an Entity, by a Party)
 
-| | |
-| --- | --- |
-| [Colloquial Definition](#ColloquialDefinition) |an artefact, that is created by or on behalf of a Party (called the **issuer of the Claim**), representing one or more characteristics and/or statements about a single Entity (called the **Subject of the Claim**). |
-| [Formal Definition](#FormalDefinition) | an artefact, that is created by or on behalf of a Party, representing one or more characteristics and/or statements about a single Entity.|
-| [Example(s)](#Examples) | |
-| [Relevance](#Relevance) | In order for a Party to reason or communicate about (characteristics of) an Entity, it needs a way to represent the relevant information (knowledge). Claims are the basic elements for reasoning or communicating with – very much like sentences (in linguistics), or propositions and predicates (in logic).|
-| [Properties](#Properties) | Every Claim either represents a part of the Identity of an Entity within the context of a specific Party, or represents a lie by that Party. |
-| [Specializations](#Specializations) |**Digital Claim**: a Claim that has a digital representation, i.e. can be stored and transferred through digital means.<br><br>**Attribute**: a Claim, that implicitly identifies its Subject, and further consists of a key-value pair, where the ‘key’ is an Identifier for the semantics of both the Claim (in the scope of its issuer) and the (optional) value.<br><br>**Verifiable Claim**: a Claim for which a proof is present by which Parties other than the issuer can determine the provenance of the Claim and whether or not the Claim has been modified since the proof was generated. |
-| [Pitfalls](#Pitfalls) | A Claim does not imply truth, first because truth is subjective, and a Party that relies on a Claim (being truthful) may have other ideas about truth than the issuer of the Claim, and secondly because parties may lie, i.e. issue claims that do not represent what they themselves consider to be true. This implies that Parties that rely on other Parties to provide verifiable claims that represent (their) truth must do some vetting of that other Party to determine whether or not that other Party is sufficiently trustworthy.<br><br>A Claim must refer to its Subject, i.e. the Entity about which the Claim is made. This implies that each claim must contain a Digital Identifier (called the Subject Identifier) that refers to the Subject of the Claim. The Subject Identifier (i.e.: the identifying property – see the definition of ‘Digital Identity’) must be owned by the Party that issues the Claim. Note that this permits that the Subject Identifier symbol itself is created by another Party.|
-| [Related terminology](#Related) | Many words exist in non-tech context that sometimes do, and sometimes don’t mean the same as what we define here. Such words include: statement, assertion, attestation. |
-| [Standards](#Standards) | |
-| [Miscellaneous](#Miscellaneous) | Claims about an Entity should (but theoretically need not) reflect a part of that Entities Digital Identity. Ideally, a Claim (that has been issued as part of a Credential) should be revoked at the moment that the Party detects that it no longer accurately reflects the corresponding part of the Digital Identity. Every Party that consequently does this thereby guarantees that every Claim (in any Credential) accurately represents the corresponding part of the Digital Identity, provided that it is verified that (a) it has been issued by that Party, (b) it has not been modified since it was issued, (c) it has not expired and (d) it has not been revoked. This is a very powerful guarantee to be able to provide. |
+
+##  [Colloquial Definition](#ColloquialDefinition) 
+
+an artefact, that is created by or on behalf of a Party (called the **issuer of the Claim**), representing one or more characteristics and/or statements about a single Entity (called the **Subject of the Claim**). 
+
+##  [Formal Definition](#FormalDefinition) 
+
+ an artefact, that is created by or on behalf of a Party, representing one or more characteristics and/or statements about a single Entity.
+
+##  [Example(s)](#Examples) 
+
+ 
+
+##  [Relevance](#Relevance) 
+
+ In order for a Party to reason or communicate about (characteristics of) an Entity, it needs a way to represent the relevant information (knowledge). Claims are the basic elements for reasoning or communicating with – very much like sentences (in linguistics), or propositions and predicates (in logic).
+
+##  [Properties](#Properties) 
+
+ Every Claim either represents a part of the Identity of an Entity within the context of a specific Party, or represents a lie by that Party. 
+
+##  [Specializations](#Specializations) 
+
+**Digital Claim**: a Claim that has a digital representation, i.e. can be stored and transferred through digital means.
+
+**Attribute**: a Claim, that implicitly identifies its Subject, and further consists of a key-value pair, where the ‘key’ is an Identifier for the semantics of both the Claim (in the scope of its issuer) and the (optional) value.
+
+**Verifiable Claim**: a Claim for which a proof is present by which Parties other than the issuer can determine the provenance of the Claim and whether or not the Claim has been modified since the proof was generated. 
+
+##  [Pitfalls](#Pitfalls) 
+
+ A Claim does not imply truth, first because truth is subjective, and a Party that relies on a Claim (being truthful) may have other ideas about truth than the issuer of the Claim, and secondly because parties may lie, i.e. issue claims that do not represent what they themselves consider to be true. This implies that Parties that rely on other Parties to provide verifiable claims that represent (their) truth must do some vetting of that other Party to determine whether or not that other Party is sufficiently trustworthy.
+
+A Claim must refer to its Subject, i.e. the Entity about which the Claim is made. This implies that each claim must contain a Digital Identifier (called the Subject Identifier) that refers to the Subject of the Claim. The Subject Identifier (i.e.: the identifying property – see the definition of ‘Digital Identity’) must be owned by the Party that issues the Claim. Note that this permits that the Subject Identifier symbol itself is created by another Party.
+
+##  [Related terminology](#Related) 
+
+ Many words exist in non-tech context that sometimes do, and sometimes don’t mean the same as what we define here. Such words include: statement, assertion, attestation. 
+
+##  [Standards](#Standards) 
+
+ 
+
+##  [Miscellaneous](#Miscellaneous) 
+
+ Claims about an Entity should (but theoretically need not) reflect a part of that Entities Digital Identity. Ideally, a Claim (that has been issued as part of a Credential) should be revoked at the moment that the Party detects that it no longer accurately reflects the corresponding part of the Digital Identity. Every Party that consequently does this thereby guarantees that every Claim (in any Credential) accurately represents the corresponding part of the Digital Identity, provided that it is verified that (a) it has been issued by that Party, (b) it has not been modified since it was issued, (c) it has not expired and (d) it has not been revoked. This is a very powerful guarantee to be able to provide. 
+
 
 ------
 

@@ -1,17 +1,50 @@
 # [Term](#_Term): Entity
 
-| | |
-| --- | --- |
-| [Colloquial Definition](#ColloquialDefinition) | something that is known to exist. |
-| [Formal Definition](#FormalDefinition) | something that is known to exist by at least one Party. |
-| [Example(s)](#Examples) | People, organizations, things, resources, but also ideas, concepts, etc. (which reside in the mind(s) of someone).|
-| [Relevance](#Relevance) | the ability to refer to something that exists without knowing anything else is necessary to define and use e.g. identifiers and identities. Also, this ability allows us to define basic terms as a specialization of something that has no other property than that it is known to exist. |
-| [Properties](#Properties) | Something of which nobody knows that it exists is not an entity, because nobody would or could (or need to) refer to it, and nobody ever has referred to it. |
-| [Specializations](#Specializations) | **Subject**: Entity to which a Claim applies. See the definition of Claim for details.<br><br>**Party**: Entity that has knowledge about what exists, the ability to reason with this knowledge, and make decisions. See its definition for details.<br><br>**Actor**: Entity that is capable of acting (doing something). See its definition for details.|
-| [Pitfalls](#Pitfalls) | The term ‘entity’ is sometimes used where more precise terms are more appropriate. For example, in [NIST] the term ‘Custodian’ is defined as “an Entity acting on behalf of another Entity …”. This suggests that Custodians are Actors (as they can act), which is not necessarily what is meant. Also, it suggests that acting can be done on behalf of any other Entity, e.g. a coffee cup. |
-| [Related terminology](#Related) | Words that colloquially have a similar meaning, such as `things` may be used. However, this term has a specific and different meaning in the context of IoT. |
-| [Standards](#Standards) | IETF RFC 3986, Uniform Resource Identifier (URI) uses the term `Resource` for this. [Merriam-Webster](https://www.merriam-webster.com/dictionary/entity): something that has separate and distinct existence and objective or conceptual reality. [Oxford (Lexico)](https://www.lexico.com/en/definition/entity) A thing with distinct and independent existence.|
-| [Miscellaneous](#Miscellaneous) | Only after something has become known can we make statements about it (that we may store, process or exchange with one another). |
+
+##  [Colloquial Definition](#ColloquialDefinition) 
+
+ something that is known to exist. 
+
+##  [Formal Definition](#FormalDefinition) 
+
+ something that is known to exist by at least one Party. 
+
+##  [Example(s)](#Examples) 
+
+ People, organizations, things, resources, but also ideas, concepts, etc. (which reside in the mind(s) of someone).
+
+##  [Relevance](#Relevance) 
+
+ the ability to refer to something that exists without knowing anything else is necessary to define and use e.g. identifiers and identities. Also, this ability allows us to define basic terms as a specialization of something that has no other property than that it is known to exist. 
+
+##  [Properties](#Properties) 
+
+ Something of which nobody knows that it exists is not an entity, because nobody would or could (or need to) refer to it, and nobody ever has referred to it. 
+
+##  [Specializations](#Specializations) 
+
+ **Subject**: Entity to which a Claim applies. See the definition of Claim for details.
+
+**Party**: Entity that has knowledge about what exists, the ability to reason with this knowledge, and make decisions. See its definition for details.
+
+**Actor**: Entity that is capable of acting (doing something). See its definition for details.
+
+##  [Pitfalls](#Pitfalls) 
+
+ The term ‘entity’ is sometimes used where more precise terms are more appropriate. For example, in [NIST] the term ‘Custodian’ is defined as “an Entity acting on behalf of another Entity …”. This suggests that Custodians are Actors (as they can act), which is not necessarily what is meant. Also, it suggests that acting can be done on behalf of any other Entity, e.g. a coffee cup. 
+
+##  [Related terminology](#Related) 
+
+ Words that colloquially have a similar meaning, such as `things` may be used. However, this term has a specific and different meaning in the context of IoT. 
+
+##  [Standards](#Standards) 
+
+ IETF RFC 3986, Uniform Resource Identifier (URI) uses the term `Resource` for this. [Merriam-Webster](https://www.merriam-webster.com/dictionary/entity): something that has separate and distinct existence and objective or conceptual reality. [Oxford (Lexico)](https://www.lexico.com/en/definition/entity) A thing with distinct and independent existence.
+
+##  [Miscellaneous](#Miscellaneous) 
+
+ Only after something has become known can we make statements about it (that we may store, process or exchange with one another). 
+
 
 ------
 

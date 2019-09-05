@@ -1,17 +1,46 @@
 # [Term](#_Term): Concept#3
 
-| | |
-| --- | --- |
-| [Colloquial Definition](#ColloquialDefinition) | |
-| [Formal Definition](#FormalDefinition) | A specialized container that provides crypto-based security guarantees, making it a safe repository for keys and other sensitive info. |
-| [Example(s)](#Examples) | |
-| [Relevance](#Relevance) | |
-| [Properties](#Properties) | |
-| [Specializations](#Specializations) | |
-| [Pitfalls](#Pitfalls) | |
-| [Related terminology](#Related) | This concept is currently called identity wallet or just wallet by Indy developers due to HIPE 0013. Its meaning is close to that of `key chain` as used by platform vendors, except that it encompasses other sensitive info as well. |
-| [Standards](#Standards) | |
-| [Miscellaneous](#Miscellaneous) |  Many in the community lack a term for this except for the informal phrase `wallet storage`; they apply the term `wallet` to [`concept#4 industry “wallet”`] instead. I wonder if we ought to rename this? Would be painful, given the amount of code that exists… (must manage keys/addresses/payment, DID relationships/contexts, and cred generation - maybe DID Manager, Secret Manager?) |
+
+##  [Colloquial Definition](#ColloquialDefinition) 
+
+ 
+
+##  [Formal Definition](#FormalDefinition) 
+
+ A specialized container that provides crypto-based security guarantees, making it a safe repository for keys and other sensitive info. 
+
+##  [Example(s)](#Examples) 
+
+ 
+
+##  [Relevance](#Relevance) 
+
+ 
+
+##  [Properties](#Properties) 
+
+ 
+
+##  [Specializations](#Specializations) 
+
+ 
+
+##  [Pitfalls](#Pitfalls) 
+
+ 
+
+##  [Related terminology](#Related) 
+
+ This concept is currently called identity wallet or just wallet by Indy developers due to HIPE 0013. Its meaning is close to that of `key chain` as used by platform vendors, except that it encompasses other sensitive info as well. 
+
+##  [Standards](#Standards) 
+
+ 
+
+##  [Miscellaneous](#Miscellaneous) 
+
+  Many in the community lack a term for this except for the informal phrase `wallet storage`; they apply the term `wallet` to [`concept#4 industry “wallet”`] instead. I wonder if we ought to rename this? Would be painful, given the amount of code that exists… (must manage keys/addresses/payment, DID relationships/contexts, and cred generation - maybe DID Manager, Secret Manager?) 
+
 
 ------
 

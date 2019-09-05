@@ -1,17 +1,55 @@
 # [Term](#_Term): Actor
 
-| | |
-| --- | --- |
-| [Colloquial Definition](#ColloquialDefinition) | an Entity that is capable of acting (i.e. doing something) |
-| [Formal Definition](#FormalDefinition) | an Entity that is capable of acting (i.e. doing something) |
-| [Example(s)](#Examples) | people (natural persons), computers (apps/applications, digital services), robots |
-| [Relevance](#Relevance) | Acquiring, storing, processing, transferring data is something that not every Entity can do. For example, an organization or a government is not capable of doing things. They need Entities that can act to work on their behalf. Therefore, it is necessary to be able to distinguish between Entities that can, and that cannot act. |
-| [Properties](#Properties) | |
-| [Specializations](#Specializations) | **Digital Actor**: an Actor in the form of hardware and/or software, e.g. hardware/software components, apps, etc.<br><br>**Agent**: an Actor that acts on behalf of a specific Party.<br><br>**Digital Agent**: Digital Actor that is also an Agent.<br><br>**Natural Person**: a body of flesh and blood.<br><br>**Mandatee**: an Actor that has been assigned the authority to perform one or more (kinds of) actions in the name and under the responsibility of another Party. For details see the definition of Mandate.|
-| [Pitfalls](#Pitfalls) | While actors can act, they do not and sometimes even cannot bear the responsibility for such actions. The extent to which an Actor is responsible/can be held accountable, is determined by criteria (rules, laws) of the Jurisdiction(s) in which the Actor acts. Usually, technology such as computers, apps, web services, drones, etc. are not responsible nor held accountable. For natural persons, national jurisdictions have (different) criteria for deciding for what, and to what extent, they are responsible and/or can be held accountable.<br><br>An Actor can be, but is not necessarily, a Party. Natural Persons are examples of Actors that are Parties. Computers, drones and such are Actors that are not Parties. There is this grey area of AI, but we do not want to go there now. |
-| [Related terminology](#Related) | |
-| [Standards](#Standards) | |
-| [Miscellaneous](#Miscellaneous) | |
+## [Colloquial Definition](#ColloquialDefinition)
+
+an Entity that is capable of acting (i.e. doing something)
+
+## [Formal Definition](#FormalDefinition)
+
+an Entity that is capable of acting (i.e. doing something)
+
+## [Example(s)](#Examples)
+
+people (natural persons), computers (apps/applications, digital services), robots
+
+## [Relevance](#Relevance)
+
+Acquiring, storing, processing, transferring data is something that not every Entity can do. For example, an organization or a government is not capable of doing things. They need Entities that can act to work on their behalf. Therefore, it is necessary to be able to distinguish between Entities that can, and that cannot act.
+
+## [Properties](#Properties)
+
+
+
+## [Specializations](#Specializations)
+
+**Digital Actor**: an Actor in the form of hardware and/or software, e.g. hardware/software components, apps, etc.
+
+**Agent**: an Actor that acts on behalf of a specific Party.
+
+**Digital Agent**: Digital Actor that is also an Agent.
+
+**Natural Person**: a body of flesh and blood.
+
+**Mandatee**: an Actor that has been assigned the authority to perform one or more (kinds of) actions in the name and under the responsibility of another Party. For details see the definition of Mandate.
+
+## [Pitfalls](#Pitfalls)
+
+While actors can act, they do not and sometimes even cannot bear the responsibility for such actions. The extent to which an Actor is responsible/can be held accountable, is determined by criteria (rules, laws) of the Jurisdiction(s) in which the Actor acts. Usually, technology such as computers, apps, web services, drones, etc. are not responsible nor held accountable. For natural persons, national jurisdictions have (different) criteria for deciding for what, and to what extent, they are responsible and/or can be held accountable.
+
+An Actor can be, but is not necessarily, a Party. Natural Persons are examples of Actors that are Parties. Computers, drones and such are Actors that are not Parties. There is this grey area of AI, but we do not want to go there now.
+
+## [Related terminology](#Related)
+
+
+
+## [Standards](#Standards)
+
+
+
+## [Miscellaneous](#Miscellaneous)
+
+
+
 
 ------
 

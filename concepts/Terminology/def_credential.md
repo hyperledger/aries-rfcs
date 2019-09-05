@@ -1,17 +1,48 @@
 # [Term](#_Term): <placeholder for term/phrase>
 
-| | |
-| --- | --- |
-| [Colloquial Definition](#ColloquialDefinition) | a set of one or more Claims that is created by or on behalf of a single Party (called the **issuer of the Credential**)|
-| [Formal Definition](#FormalDefinition) | a physical or digital construct that is created by or on behalf of a single Party (called the issuer of the Credential), and at least contains one or more Claims issued by the issuer of the Credential. |
-| [Example(s)](#Examples) | |
-| [Relevance](#Relevance) | |
-| [Properties](#Properties) | A credential may contain Claims for different Subjects. |
-| [Specializations](#Specializations) | **Digital Credential**: a Credential that consists of Digital Claims, and hence can be stored and transferred through digital means.<br><br>**Verifiable Credential**: a Digital Credential that (also) contains data that arbitrary third Parties can use to prove:<br>- the provenance of the Credential;<br>- whether or not the Credential has been modified since the proof was generated;<br>- whether or not the Credential has expired;<br>- optionally: whether or not the Credential has been suspended;<br>- optionally: whether or not the Credential has been revoked. |
-| [Pitfalls](#Pitfalls) | |
-| [Related terminology](#Related) | Many words exist in non-tech context that sometimes do, and sometimes don’t mean the same as what we define here. Such words include: identity, passport, identity document, ID-card.|
-| [Standards](#Standards) | |
-| [Miscellaneous](#Miscellaneous) | |
+
+##  [Colloquial Definition](#ColloquialDefinition) 
+
+ a set of one or more Claims that is created by or on behalf of a single Party (called the **issuer of the Credential**)
+
+##  [Formal Definition](#FormalDefinition) 
+
+ a physical or digital construct that is created by or on behalf of a single Party (called the issuer of the Credential), and at least contains one or more Claims issued by the issuer of the Credential. 
+
+##  [Example(s)](#Examples) 
+
+ 
+
+##  [Relevance](#Relevance) 
+
+ 
+
+##  [Properties](#Properties) 
+
+ A credential may contain Claims for different Subjects. 
+
+##  [Specializations](#Specializations) 
+
+ **Digital Credential**: a Credential that consists of Digital Claims, and hence can be stored and transferred through digital means.
+
+**Verifiable Credential**: a Digital Credential that (also) contains data that arbitrary third Parties can use to prove:<br>- the provenance of the Credential;<br>- whether or not the Credential has been modified since the proof was generated;<br>- whether or not the Credential has expired;<br>- optionally: whether or not the Credential has been suspended;<br>- optionally: whether or not the Credential has been revoked. 
+
+##  [Pitfalls](#Pitfalls) 
+
+ 
+
+##  [Related terminology](#Related) 
+
+ Many words exist in non-tech context that sometimes do, and sometimes don’t mean the same as what we define here. Such words include: identity, passport, identity document, ID-card.
+
+##  [Standards](#Standards) 
+
+ 
+
+##  [Miscellaneous](#Miscellaneous) 
+
+ 
+
 
 ------
 

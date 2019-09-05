@@ -1,17 +1,56 @@
 # [Term](#_Term): Mandate (of a Party)
 
-| | |
-| --- | --- |
-| [Colloquial Definition](#ColloquialDefinition) | the authority, given to one (set of) Actors, to act in the name and under the responsibility of some Party |
-| [Formal Definition](#FormalDefinition) | the authority of an Actor (called the **Mandatee**s) to perform one or more (kinds of) actions in the name and under the responsibility of some Party (called the Mandator). |
-| [Example(s)](#Examples) | |
-| [Relevance](#Relevance) | Some Parties cannot act, e.g. Organizations and governmental bodies. Still, they may have been assigned certain tasks, e.g. by law, or because it is in their job description. Employees of a company, for example, may act in the name and under the responsibility of their employer. In case some Parties have a dispute, they must be able to show that whatever actions have been carried out that led to the dispute, are (not) executed in the name and under the responsibility of one of the parties involved. |
-| [Properties](#Properties) | A Mandate specifies at least:<br>- the Mandator that issued the Mandate;<br>- the Mandatee(s) that the Mandate authorizes;<br>- the (kind(s) of) action(s) that the Mandate authorizes;<br>- a specification of all limitations within which the Mandatee(s) must exercise this authority.<br><br>An act by an Actor that is performed within the limits of his authority counts as an act of the Mandator.|
-| [Specializations](#Specializations) | **Digital Mandate**: digital artefact, that specifies a (group of) Actor(s) that have been given the authority by a specified Party (called the issuer of the Madate) to execute one or more (kinds of) actions, and that also specifies any limitations that may apply to that authority.<br><br>**Consent**: a Mandate, given by a Natural Person (Mandator), authorizing one or more Digital Agents of some Party to access data that the Mandator owns. |
-| [Pitfalls](#Pitfalls) | Mandates differ from delegation. With a Mandate, the responsibility for (not) acting remains with the Mandator. With delegation, that responsibility is what is actually delegated. Note that this implies that while Mandates are given to Actors, responsibilities can only be delegated to Parties.|
-| [Related terminology](#Related) | Governments tend to have laws that define Mandates (and delegation) for use within that government. Also, they tend to have laws that deal with responsibility and accountability by Parties that transact in their jurisdiction.<br><br>In other contexts, people seem to use words as mandate, delegation, guardianship, custodianship in the same or with different meanings.|
-| [Standards](#Standards) | |
-| [Miscellaneous](#Miscellaneous) | Common (kinds of) actions that are mandated are making certain decisions, signing certain documents, filling in (e.g. tax) forms.<br><br>Mandates may be represented as Credentials, but also as other artefacts (e.g. by OIDC/OAuth access tokens).<br><br>Digital Mandates are typically authorizations that access some digital service. This suggests that the structure of a Mandate that provides access to a (specific) digital service is to be defined by the Party that provides that digital service. This Party may create a web-interface where Mandators can create mandates for that service by filling in identifiers for the Mandatees that the Service providing party can dereference, as well as other data that is required for obtaining access. |
+
+##  [Colloquial Definition](#ColloquialDefinition) 
+
+ the authority, given to one (set of) Actors, to act in the name and under the responsibility of some Party 
+
+##  [Formal Definition](#FormalDefinition) 
+
+ the authority of an Actor (called the **Mandatee**s) to perform one or more (kinds of) actions in the name and under the responsibility of some Party (called the Mandator). 
+
+##  [Example(s)](#Examples) 
+
+ 
+
+##  [Relevance](#Relevance) 
+
+ Some Parties cannot act, e.g. Organizations and governmental bodies. Still, they may have been assigned certain tasks, e.g. by law, or because it is in their job description. Employees of a company, for example, may act in the name and under the responsibility of their employer. In case some Parties have a dispute, they must be able to show that whatever actions have been carried out that led to the dispute, are (not) executed in the name and under the responsibility of one of the parties involved. 
+
+##  [Properties](#Properties) 
+
+ A Mandate specifies at least:<br>- the Mandator that issued the Mandate;<br>- the Mandatee(s) that the Mandate authorizes;<br>- the (kind(s) of) action(s) that the Mandate authorizes;<br>- a specification of all limitations within which the Mandatee(s) must exercise this authority.
+
+An act by an Actor that is performed within the limits of his authority counts as an act of the Mandator.
+
+##  [Specializations](#Specializations) 
+
+ **Digital Mandate**: digital artefact, that specifies a (group of) Actor(s) that have been given the authority by a specified Party (called the issuer of the Madate) to execute one or more (kinds of) actions, and that also specifies any limitations that may apply to that authority.
+
+**Consent**: a Mandate, given by a Natural Person (Mandator), authorizing one or more Digital Agents of some Party to access data that the Mandator owns. 
+
+##  [Pitfalls](#Pitfalls) 
+
+ Mandates differ from delegation. With a Mandate, the responsibility for (not) acting remains with the Mandator. With delegation, that responsibility is what is actually delegated. Note that this implies that while Mandates are given to Actors, responsibilities can only be delegated to Parties.
+
+##  [Related terminology](#Related) 
+
+ Governments tend to have laws that define Mandates (and delegation) for use within that government. Also, they tend to have laws that deal with responsibility and accountability by Parties that transact in their jurisdiction.
+
+In other contexts, people seem to use words as mandate, delegation, guardianship, custodianship in the same or with different meanings.
+
+##  [Standards](#Standards) 
+
+ 
+
+##  [Miscellaneous](#Miscellaneous) 
+
+ Common (kinds of) actions that are mandated are making certain decisions, signing certain documents, filling in (e.g. tax) forms.
+
+Mandates may be represented as Credentials, but also as other artefacts (e.g. by OIDC/OAuth access tokens).
+
+Digital Mandates are typically authorizations that access some digital service. This suggests that the structure of a Mandate that provides access to a (specific) digital service is to be defined by the Party that provides that digital service. This Party may create a web-interface where Mandators can create mandates for that service by filling in identifiers for the Mandatees that the Service providing party can dereference, as well as other data that is required for obtaining access. 
+
 
 ------
 

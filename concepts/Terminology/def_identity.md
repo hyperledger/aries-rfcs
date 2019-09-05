@@ -1,18 +1,52 @@
 # [Term](#_Term): Identity (of an Entity, for some Party)
 
-| | |
-| --- | --- |
-| [Colloquial Definition](#ColloquialDefinition) | everything that a Party knows about some Entity |
-| [Formal Definition](#FormalDefinition) | the set of all characteristics and/or statements about an Entity that a specific Party knows (has stored somewhere) |
-| [Example(s)](#Examples) | The identity of you for your father is everything your father knows about you. The identity of you for your self is everything you know about yourself. The identity of you for your government is everything your government knows about you. The identity of your father/government for you is everything you know about your father/government. |
+
+##  [Colloquial Definition](#ColloquialDefinition) 
+
+ everything that a Party knows about some Entity 
+
+##  [Formal Definition](#FormalDefinition) 
+
+ the set of all characteristics and/or statements about an Entity that a specific Party knows (has stored somewhere) 
+
+##  [Example(s)](#Examples) 
+
+ The identity of you for your father is everything your father knows about you. The identity of you for your self is everything you know about yourself. The identity of you for your government is everything your government knows about you. The identity of your father/government for you is everything you know about your father/government. 
+
 | [Relevance](#Relevance) | The knowledge that a Party has about some entity determines the ways in which it interacts with that Entity. Such knowledge allows the Party to assess how it may use that Entity, how it can benefit from interacting with it or whether it better stay away, etc.<br>Digitally storing (part of) this knowledge allows the Party to manage its relation with that Entity, and to digitally interact with that Entity (if it has such capabilities).
 We also need it because a trustworthy Party would only issue Claims about an Entity when that is part of its Digital Identity, and revoke any Verifiable Credentials when they contain data that is no longer congruent with the Digital Identity.|
-| [Properties](#Properties) | A Party that has stored some Digital Identity considers all the characteristics and/or statements about the associated Entity to be true. |
-| [Specializations](#Specializations) | **Digital Identity** – all knowledge of a Party about some Entity that is digitally stored. |
-| [Pitfalls](#Pitfalls) | |
-| [Related terminology](#Related) | Others may call this a ‘Partial Digital Identity’, because it is limited to the knowledge of one Party, and the (Total) Digital Identity of an Entity would then be the union of the Digital Identities of that Entity over all Parties.<br><br>The last [paper of Pfitzmann and Hansen](https://dud.inf.tu-dresden.de/literatur/Anon_Terminology_v0.34.pdf) has a terminology for talking about privacy by data minimization that specifies this and related terms.<br><br>Many words exist in non-tech context that sometimes do, and sometimes don’t mean the same as what we define here. Such words include: name, identifier, identity, social security number, customer-id, citizen-id, passport, identity document, ID-card, credential, reference. |
-| [Standards](#Standards) | |
-| [Miscellaneous](#Miscellaneous) | The quality of the processes for registering and maintaining the knowledge about an Entity obviously determine the Level of Assurance (LoA) of the (Digital) Identity of that Entity, and by consequence of any Claims or Credentials that are issued based on that.<br><br>Claims about an Entity should (but theoretically need not) reflect a part of that Entities Digital Identity. Ideally, a Claim (that has been issued as part of a Credential) should be revoked at the moment that the Party detects that it no longer accurately reflects the corresponding part of the Digital Identity. Every Party that consequently does this thereby guarantees that every Claim (in any Credential) accurately represents the corresponding part of the Digital Identity, provided that it is verified that (a) it has been issued by that Party, (b) it has not been modified since it was issued, (c) it has not expired and (d) it has not been revoked. This is a very powerful guarantee to be able to provide.<br><br>Some people consider the Identity (of an Entity) to consist of all knowledge that all Parties (including the Entity itself if it happens to be a Party) have about that Entity – i.e. the union of every Digital Identity (of that Entity). This is not very useful for us, because such an Identity cannot be (technically) constructed." |
+##  [Properties](#Properties) 
+
+ A Party that has stored some Digital Identity considers all the characteristics and/or statements about the associated Entity to be true. 
+
+##  [Specializations](#Specializations) 
+
+ **Digital Identity** – all knowledge of a Party about some Entity that is digitally stored. 
+
+##  [Pitfalls](#Pitfalls) 
+
+ 
+
+##  [Related terminology](#Related) 
+
+ Others may call this a ‘Partial Digital Identity’, because it is limited to the knowledge of one Party, and the (Total) Digital Identity of an Entity would then be the union of the Digital Identities of that Entity over all Parties.
+
+The last [paper of Pfitzmann and Hansen](https://dud.inf.tu-dresden.de/literatur/Anon_Terminology_v0.34.pdf) has a terminology for talking about privacy by data minimization that specifies this and related terms.
+
+Many words exist in non-tech context that sometimes do, and sometimes don’t mean the same as what we define here. Such words include: name, identifier, identity, social security number, customer-id, citizen-id, passport, identity document, ID-card, credential, reference. 
+
+##  [Standards](#Standards) 
+
+ 
+
+##  [Miscellaneous](#Miscellaneous) 
+
+ The quality of the processes for registering and maintaining the knowledge about an Entity obviously determine the Level of Assurance (LoA) of the (Digital) Identity of that Entity, and by consequence of any Claims or Credentials that are issued based on that.
+
+Claims about an Entity should (but theoretically need not) reflect a part of that Entities Digital Identity. Ideally, a Claim (that has been issued as part of a Credential) should be revoked at the moment that the Party detects that it no longer accurately reflects the corresponding part of the Digital Identity. Every Party that consequently does this thereby guarantees that every Claim (in any Credential) accurately represents the corresponding part of the Digital Identity, provided that it is verified that (a) it has been issued by that Party, (b) it has not been modified since it was issued, (c) it has not expired and (d) it has not been revoked. This is a very powerful guarantee to be able to provide.
+
+Some people consider the Identity (of an Entity) to consist of all knowledge that all Parties (including the Entity itself if it happens to be a Party) have about that Entity – i.e. the union of every Digital Identity (of that Entity). This is not very useful for us, because such an Identity cannot be (technically) constructed." 
+
 
 ------
 
