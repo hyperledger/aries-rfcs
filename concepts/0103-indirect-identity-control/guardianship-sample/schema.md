@@ -4,7 +4,9 @@
 
 This document presents a sample schema for a guardian credential appropriate to the [IRC-as-guardian-of-Mya-in-a-refugee-camp use case]( https://docs.google.com/presentation/d/1qUYQa7U1jczEFun3a7sB3lKHIprlwd7brfOU9hEJ34U/edit#slide=id.p7). It is accompanied by a [sample trust framework](trust-framework.md).
  
-The raw schema is here: [![schema thumbnail](schema-thumbnail.png)](schema.json)
+The raw schema is here:
+ 
+ [![schema thumbnail](schema-thumbnail.png)](schema.json)
 
 For general background on guardianship and its associated credentials, see [this slide presentation]( http://bit.ly/2vZGJoK).
 

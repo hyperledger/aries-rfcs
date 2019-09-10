@@ -9,7 +9,7 @@
 
 ## Summary
 
-Compares and contrasts three forms of indirect identity control that have much in common and that should be explored together: __delegation__, __guardianship__, and __controllership__. Recommends mechanisms that allow identity technology to model each with flexibility, precision, and safety. These recommendations can be applied to many decentralized identity and credentialing ecosystems.
+Compares and contrasts three forms of indirect identity control that have much in common and that should be explored together: __delegation__, __guardianship__, and __controllership__. Recommends mechanisms that allow identity technology to model each with flexibility, precision, and safety. These recommendations can be applied to many decentralized identity and credentialing ecosystems--not just to the ones best known in Hyperledger circles. 
 
 ## Motivation
 
@@ -25,7 +25,7 @@ We need to understand how such situations color the interactions we have in an i
 
 ## Tutorial
 
-[Appendix C of the Sovrin Glossary V2](
+Although the Sovrin Foundation advocates a specific approach to verifiable credentials, its glossary offers a useful analysis of indirect identity control that applies to any approach. [Appendix C of the Sovrin Glossary V2](
  https://docs.google.com/document/d/1gfIz5TT0cNp2kxGMLFXr19x1uoZsruUe_0glHst2fZ8/edit?pli=1#heading=h.uiq9py7xnmxd) defines three forms of indirect identity control relationship--delegation, guardianship, controllership--matching the three bulleted examples above. Reviewing that document is highly recommended. It is the product of careful collaboration by experts in many fields, includes useful examples, and is clear and thorough.
 
 Here, we will simply reproduce two diagrams as a summary:

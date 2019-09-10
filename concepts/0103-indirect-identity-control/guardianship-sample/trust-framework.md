@@ -27,7 +27,7 @@ In this framework, guardianship is based on one or more of the following formall
  
 ### Identifying a guardian
 
-This framework assumes that credentials will use ZKP technology. Thus, no holder attributes are embedded in a gcred except for the holder's blinded link secret. During a guardianship challenge, the holder should include appropriate identifying evidence based on ZKP credential linking.
+This framework assumes that credentials will use ZKP technology. Thus, no holder attributes are embedded in a gcred except for the holder's blinded link secret. During a guardian challenge, the holder should include appropriate identifying evidence based on ZKP credential linking.
  
 ### Identifying a dependent
 
@@ -140,6 +140,6 @@ NGO staff (who receive delegated authority from the NGO that acts as guardian), 
 
 ### Best Practices
 
-* Perform a guardianship challenge whenever a guardian performs an action requiring permissions other than `school` and `necessaries`.
+* Perform a guardian challenge whenever a guardian attempts an action requiring permissions other than `school` and `necessaries`.
 * Require the disclosure of dependent photo and the comparison of the photo to the dependent, who must be physically present, for all operations using the `routine-medical-care`, `do-not-resuscitate`, `gender-identity`, and `light-travel` permissions.
 * Require a biometric match (fingerprint or iris strongly preferred, or else photo plus two related adult witnesses) for the `extended travel`, `unenroll`, `contracts`, and `marriage-family-planning` permissions to be exercised where possible.
