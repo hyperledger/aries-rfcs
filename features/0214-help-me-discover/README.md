@@ -24,7 +24,7 @@ We need a way to perform these workflows with DIDComm.
 
 This is the "Help Me Discover" protocol, version 1.0. It is uniquely identified by the following [PIURI](../../concepts/0003-protocols/uris.md#piuri):
 
-    did:aries:1;docs/help-me-discover/1.0
+    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/help-me-discover/1.0
 
 
 ### Roles and States
@@ -53,7 +53,7 @@ A simple request message looks like this:
 
 ```jsonc
 {
-    "@type": "did:aries:1;docs/help-me-discover/1.0/request",
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/help-me-discover/1.0/request",
     "@id": "a2248fb5-d46e-4898-a781-2f03e5f23964"
     // human-readable, localizable, optional
     "comment": "any ideas?",
@@ -99,7 +99,7 @@ A `response` message looks like this:
 
 ```jsonc
 {
-    "@type": "did:aries:1;docs/help-me-discover/1.0/response",
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/help-me-discover/1.0/response",
     "@id": "5f2396b5-d84e-689e-78a1-2fa2248f03e4"
     "~thread": { "thid": "a2248fb5-d46e-4898-a781-2f03e5f23964" }
     // human-readable, localizable, optional
@@ -165,7 +165,7 @@ A `request` message can ask for someone that is capable of proving using verifia
 
 ```jsonc
 {
-    "@type": "did:aries:1;docs/help-me-discover/1.0/request",
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/help-me-discover/1.0/request",
     "@id": "248fb52a-4898-a781-d46e-e5f239642f03"
     "desired": { 
         // either subjectRole or subjectDid:
@@ -189,7 +189,7 @@ Another example might be:
 ```jsonc
 {
     "@id": "a2248fb5-d46e-4898-a781-2f03e5f23964",
-    "@type": "did:aries:1;docs/help-me-discover/1.0/request",
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/help-me-discover/1.0/request",
     "comment": "blood glucose",
     "desired": {
         "all": [
@@ -222,45 +222,9 @@ This says:
 
 If we are not careful, this protocol could be used to discover attributes about third parties in a way that subverts privacy. See [Privacy Considerations](#privacy-considerations).
 
-## Rationale and alternatives
-
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not
-choosing them?
-- What is the impact of not doing this?
-
-## Prior art
-
-Discuss prior art, both the good and the bad, in relation to this proposal.
-A few examples of what this can include are:
-
-- Does this feature exist in other SSI ecosystems and what experience have
-their community had?
-- For other teams: What lessons can we learn from other attempts?
-- Papers: Are there any published papers or great posts that discuss this?
-If you have some relevant papers to refer to, this can serve as a more detailed
-theoretical background.
-
-This section is intended to encourage you as an author to think about the
-lessons from other implementers, provide readers of your proposal with a
-fuller picture. If there is no prior art, that is fine - your ideas are
-interesting to us whether they are brand new or if they are an adaptation
-from other communities.
-
-Note that while precedent set by other communities is some motivation, it
-does not on its own motivate an enhancement proposal here. Please also take
-into consideration that Aries sometimes intentionally diverges from common
-identity features.
-
 ## Unresolved questions
 
-- What parts of the design do you expect to resolve through the
-enhancement proposal process before this gets merged?
-- What parts of the design do you expect to resolve through the
-implementation of this feature before stabilization?
-- What related issues do you consider out of scope for this 
-proposal that could be addressed in the future independently of the
-solution that comes out of this doc?
+- Need to reconcile against general subprotocol/superprotocol communication.
    
 ## Implementations
 

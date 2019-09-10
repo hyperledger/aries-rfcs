@@ -61,6 +61,7 @@
 * [0212: Pickup Protocol](features/0212-pickup/README.md) (2019-09-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0213: Transfer Policy Protocol](features/0213-transfer-policy/README.md) (2019-09-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0214: "Help Me Discover" Protocol](features/0214-help-me-discover/README.md) (2019-09-10 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0217: Linkable Message Paths](concepts/0217-linkable-message-paths/README.md) (2019-09-10 &mdash; [`concept`](/tags.md#concept))
 
 ## [RETIRED](README.md#retired)
 
