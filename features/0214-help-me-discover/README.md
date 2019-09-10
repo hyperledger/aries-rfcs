@@ -20,6 +20,13 @@ We need a way to perform these workflows with DIDComm.
 
 ## Tutorial
 
+### Name and version
+
+This is the "Help Me Discover" protocol, version 1.0. It is uniquely identified by the following [PIURI](../../concepts/0003-protocols/uris.md#piuri):
+
+    did:aries:1;docs/help-me-discover/1.0
+
+
 ### Roles and States
 
 This protocol embodies a standard request-response pattern, and therefore has __requester__ and __responder__ roles. A `request` message describes what's wanted. A `response` message conveys whatever knowledge the responder wants to offer to be helpful. Standard state evolution applies:
