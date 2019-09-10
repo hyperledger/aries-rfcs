@@ -213,7 +213,7 @@ This says:
 
 ## Drawbacks
 
-If we are not careful, this protocol could be used to discover attributes about third parties in a way that subverts privacy. See [Privacy Considerations](#privacy-considerations].
+If we are not careful, this protocol could be used to discover attributes about third parties in a way that subverts privacy. See [Privacy Considerations](#privacy-considerations).
 
 ## Rationale and alternatives
 
