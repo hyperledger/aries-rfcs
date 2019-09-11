@@ -51,8 +51,17 @@ def test_rfc_metadata():
             if not re.search(r'\[.*?\]\(.*?\)', rfc.supersedes): e(rfc, 'supersedes does not contain hyperlink')
         if rfc.superseded_by:
             if not re.search(r'\[.*?\]\(.*?\)', rfc.superseded_by): e(rfc, 'superseded_by does not contain hyperlink')
-        if rfc.impl_count > 0:
-            if rfc.status == 'PROPOSED': e(rfc, 'should not be PROPOSED if it has an impl')
+        if rfc.status == 'PROPOSED':
+            for impl in rfcs.non_test_suite_impls(rfc):
+                e(rfc, 'should not be PROPOSED if it has a non-test-suite impl')
+                break
+        elif rfc.status in ['ACCEPTED', 'ADOPTED'] and 'protocol' in rfc.tags:
+            for row in rfcs.non_test_suite_impls(rfc):
+                if not rfcs.get_test_results_link(row):
+                    e(rfc, 'Impl "%s" needs a link to test results in its Notes column. Format = [test results](...)' %
+                      rfcs.describe_impl_row(row))
+
+
     if errors:
         msg = '\n' + '\n'.join(errors)
         raise BaseException(msg)

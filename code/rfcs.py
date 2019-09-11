@@ -3,7 +3,7 @@ import os
 import re
 
 RFC = collections.namedtuple('RFC', 'title abspath relpath category folder num authors status since' +
-                             ' status_note start_date supersedes superseded_by tags content_idx impl_count')
+                             ' status_note start_date supersedes superseded_by tags content_idx impl_count impl_table')
 
 
 status_list = ["ADOPTED", "ACCEPTED", "DEMONSTRATED", "PROPOSED", "RETIRED"]
@@ -75,7 +75,7 @@ def walk():
         impl_table = get_impl_table(txt)
         impl_count = len(impl_table) if impl_table else 0
         x = RFC(title, abspath, rpath, category, folder, num, fields[0], status, fields[2],
-                fields[3], fields[4], fields[5], fields[6], tags, content_idx, impl_count)
+                fields[3], fields[4], fields[5], fields[6], tags, content_idx, impl_count, impl_table)
         yield x
 
 
@@ -106,6 +106,31 @@ def get_impl_table(txt):
                 i = m.end()
 
             return rows
+
+_test_suite_pat = re.compile('test[ \t]*suite', re.I)
+
+def non_test_suite_impls(rfc):
+    if rfc.impl_table:
+        for row in rfc.impl_table:
+            if not _test_suite_pat.search(row[0]):
+                yield row
+
+
+_desc_extractor_pat = re.compile(r'\[([^\]]*)\]')
+
+def describe_impl_row(row):
+    desc = row[0].strip()
+    m = _desc_extractor_pat.search(desc)
+    if m:
+        desc = m.group(1).strip()
+    return desc
+
+
+_link_to_test_results_pat = re.compile(r'\[[ \t]*test[ \t]+results[ \t]*\]\(([^\)]*)\)', re.I)
+
+def get_test_results_link(impl_row):
+    m = _link_to_test_results_pat.search(impl_row[1])
+    return m.group(1).strip() if m else None
 
 
 def relpath(abspath):
