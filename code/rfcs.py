@@ -109,10 +109,10 @@ def get_impl_table(txt):
 
 _test_suite_pat = re.compile('test[ \t]*suite', re.I)
 
-def non_test_suite_impls(rfc):
+def test_suite_impls(rfc, return_matches):
     if rfc.impl_table:
         for row in rfc.impl_table:
-            if not _test_suite_pat.search(row[0]):
+            if bool(_test_suite_pat.search(row[0])) == return_matches:
                 yield row
 
 

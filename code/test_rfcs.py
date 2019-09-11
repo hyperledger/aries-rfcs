@@ -52,11 +52,17 @@ def test_rfc_metadata():
         if rfc.superseded_by:
             if not re.search(r'\[.*?\]\(.*?\)', rfc.superseded_by): e(rfc, 'superseded_by does not contain hyperlink')
         if rfc.status == 'PROPOSED':
-            for impl in rfcs.non_test_suite_impls(rfc):
+            for impl in rfcs.test_suite_impls(rfc, False):
                 e(rfc, 'should not be PROPOSED if it has a non-test-suite impl')
                 break
-        elif rfc.status in ['ACCEPTED', 'ADOPTED'] and 'protocol' in rfc.tags:
-            for row in rfcs.non_test_suite_impls(rfc):
+        elif rfc.status in ['ACCEPTED', 'ADOPTED'] and 'feature' in rfc.tags and ('protocol' in rfc.tags or 'decorator' in rfc.tags):
+            found_test_suite_in_impls = False
+            for row in rfcs.test_suite_impls(rfc, True):
+                found_test_suite_in_impls = True
+                break
+            if not found_test_suite_in_impls:
+                e(rfc, 'Test suite must be an impl for any protocol- or decorator-related RFC beyond DEMONSTRATED status.')
+            for row in rfcs.test_suite_impls(rfc, False):
                 if not rfcs.get_test_results_link(row):
                     e(rfc, 'Impl "%s" needs a link to test results in its Notes column. Format = [test results](...)' %
                       rfcs.describe_impl_row(row))
