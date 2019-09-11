@@ -224,7 +224,7 @@ Now a verifier can say to one credential-holding board member, "I see that you h
 
 Non-ZKP-based delegatable credentials reveal the public identity of the immediate downstream holder to each issuer (delegator) -- and they reveal the public identiy of all upstream members of the chain to the delegate (holder).
 
-ZKP-based delegatable credentials offer more granular choices. See [ZKP Variants and their privacy implications](#zkp-variants-and-their-privacy-implications] below.
+ZKP-based delegatable credentials offer more granular choices. See [ZKP Variants and their privacy implications](#zkp-variants-and-their-privacy-implications) below.
 
 ### Embedded schema
 
@@ -269,3 +269,12 @@ An expensive alternative of delegatable credentials is the holder to get credent
 ## Prior art
 
 Delegatable anonymous credentials have been explored since the last decade and the first efficient (somewhat) came in 2009 by Belenkiy et al. in "Randomizable proofs and delegatable anonymous credentials". Although this was a significant efficiency improvement over previous works, it was still impractical. Chase et al. gave a conceptually novel construction of delegatable anonymous credentials in 2013 in "Complex unary transformations and delegatable anonymous credentials" but the resulting construction was essentially as inefficient as that of Belenkiy et al. 
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+Name / Link | Implementation Notes
+--- | ---
+ |  | 
+
