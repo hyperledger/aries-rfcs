@@ -3,15 +3,17 @@
 - Authors: Daniel Hardman, Lovesh Harchandani
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-09
-- Status Note: Various aspects of this are implemented, or in the process of being implemented, in Hyperledger Ursa and Hyperledger Indy. This doc will be updated based on learnings.
+- Status Note: Various aspects of this are implemented, or in the process of being implemented, in [Hyperledger Ursa](https://github.com/hyperledger/ursa-rfcs/pull/14) and Hyperledger Indy. This doc will be updated based on learnings.
 - Start Date: 2019-08-01
 - Tags: concept, credentials
 
 ## Summary
 
-Describes a mechanism that allows verifiable credentials to be delegated and attenuated while preserving privacy and operating robustly in offline mode. This mechanism works for any W3C-conformant verifiable credential type, not just the ones developed inside Hyperledger. It is an [object capabilities (OCAP)](https://en.wikipedia.org/wiki/Capability-based_security) approach similar to [ZCAP-LD](https://w3c-ccg.github.io/zcap-ld/) in scope, features, and intent, but it accomplishes its goals a bit differently. See [here](contrast-zcap-ld.md) for an explanation of the divergence and redundancy.
+Describes a mechanism that allows verifiable credentials to be delegated and attenuated while preserving privacy and operating robustly in offline mode. This mechanism works (with some feature variations) for any W3C-conformant verifiable credential type, not just the ones developed inside Hyperledger.
 
-This RFC is a sister to [Aries RFC 0103: Indirect Identity Control](../0103-indirect-identity-control/README.md). That doc describes how delegation (and related control mechanisms like delegation and controllership) can be modeled; this one describes an underlying infrastructure to enable such a model.
+>Note 1: This is an [object capabilities (OCAP)](https://en.wikipedia.org/wiki/Capability-based_security) approach similar to [ZCAP-LD](https://w3c-ccg.github.io/zcap-ld/) in scope, features, and intent, but it accomplishes its goals a bit differently. See [here](contrast-zcap-ld.md) for an explanation of the divergence and redundancy.
+
+>Note 2: This RFC is a sister to [Aries RFC 0103: Indirect Identity Control](../0103-indirect-identity-control/README.md). That doc describes how delegation (and related control mechanisms like delegation and controllership) can be represented in credentials and governed; this one describes an underlying infrastructure to enable such a model. The ZKP implementation of this RFC [comes from Hyperledger Ursa](https://github.com/hyperledger/ursa-rfcs/pull/14) and depends on cryptography [described by Camenisch et al. in 2017](https://acmccs.github.io/papers/p683-camenischA.pdf).
 
 ## Motivation
 
@@ -21,10 +23,18 @@ Verifiable credentials have many delegation use cases. We need to support them r
 
 ### Sample use case
 
-Many use cases could be described. We chose the following one as being a good test of all the characteristics we want.
+Many use cases exist for delegating with verifiable credentials:
+
+* Company A wants to delegate to B (a vendor of HR services) the management of A's employees, including the issuance of employee-of-A credentials that are in turn used to act on behalf of A.
+* A scientific organization that operates exploratory drones wants to delegate pilot privileges to some staff members, and maintenance privileges to other staff members.
+* A parent wants to delegate medical care decisions to a babysitter for a few hours.
+
+Although these situations sound different, their underlying characteristics are surprisingly similar--and so are those of other use cases we've identified. We therefore chose a single situation as being prototypical. If we address it well, our solution will embodies all the characteristics we want. The situation is this:
 
 ![use case diagram](use-case.png)
 >Note: see [here](https://docs.google.com/presentation/d/1lMHHvsHDrP8j3_WUf5bFK1eFYCILue1l9jhnfR_mLVY/edit) for original images.
+
+#### Delegation Chain
 
 The national headquarters of Ur Wheelz (a car rental company) issues a verifiable credential, C1, to its regional office in Houston, authorizing Ur Wheelz Houston to rent, maintain, sell, drive, and delegate driving privileges to customers, for certain cars owned by the national company. 
 
@@ -33,6 +43,8 @@ Alice rents a car from Ur Wheelz Houston. Ur Wheelz Houston issues a driving pri
 Alice gets pulled over for speeding on Wednesday and uses C2 to prove to the police that she is the authorized driver of the car.
 
 On Thursday night Alice goes to a fancy restaurant. She uses valet parking. She issues credential C3 to the valet, allowing him to drive the car within 100 meters of the restaurant, for the next 2 hours while she is at the restaurant. Alice chooses to constrain C3 so the valet cannot further delegate. The valet uses C3 to unlock and drive the car to the parking garage.
+
+#### Revocation
 
 While Alice eats, law enforcement officers go to Ur Wheelz Houston with a search warrant for the car. They have discovered that the previous driver of the car was a criminal. They ask Ur Wheelz to revoke C2, because they don’t want the car to be driven any more, in case evidence is accidentally destroyed.
 
