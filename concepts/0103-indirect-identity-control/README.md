@@ -139,7 +139,7 @@ It should answer at least the following questions:
 
 1. What are the __required and recommended behaviors of a proxy (holder), issuer, and verifier__? How will this be enforced?
 
-1. What __permissions__ vis-a-vis the proxied identity govern proxy actions? (For a delegate, these might include values like `sign`, `pay`, or `arrange_travel`. For a guardian, these might include values like `financial`, `medical`, `do_not_resuscitate`, `foreign_travel`, or `new_relationships`. Like _bases_, permissions need to be formally defined and referencable by URI.)
+1. What __permissions__ vis-a-vis the proxied identity govern proxy actions? (For a delegate, these might include values like `sign`, `pay`, or `arrange_travel`. For a guardian, these might include values like `financial`, `medical`, `do_not_resuscitate`, `foreign_travel`, or `new_relationships`. Like _rationales_, permissions need to be formally defined and referencable by URI.)
 
 1. What are possible __constraints__ on a proxy? (Constraints are bound to particular proxies, whereas a permission model is bound to the identity that the proxy is controlling; this distinction will make more sense in an [example]( guardianship-sample/trust-framework.md). Some constraints might include `geo_radius`, `jurisdiction`, `biometric_consent_freshness`, and so forth. These values also need to be formally defined and referencable by URI.)
 
@@ -160,7 +160,7 @@ credential by the following characteristics:
 
 1. Its `@context` field, besides including the "https://www.w3.org/2018/credentials/v1"
 required of all VCs, also includes a reference to this spec:
-"https://github.com/hyperledger/aries-rfcs/concepts/0080-indirect-identity-control".
+"https://github.com/hyperledger/aries-rfcs/concepts/0103-indirect-identity-control".
 
 1. Its `type` field contains, in addition to "VerifiableCredential", a string in the
 format:
@@ -202,7 +202,7 @@ defined in the trust framework. The schema must include the following fields:
     `blood_relative` or `tribal_member` rationale, for example. For controllers, the rationaleURI
     might point to a definition of `legal_appointment` or `property_owner`.
 
-    The schema may also include zero or more `constraint.*` fields. These fields would be used
+    The schema may also include zero or more `credentialSubject.holder.constraint.*` fields. These fields would be used
     to limit the time, place, or circumstances in which the proxy may operate.
 
 1. `credentialSubject.proxied.type` must be a URI pointing to a schema for `credentialSubject.proxied` as
@@ -234,7 +234,7 @@ based on a proxy credential, followed by an evaluation of the evidence. This eva
 traditional credential verification, but also a comparison of a proxy's role (`credentialSubject.holder.role`)
 to permissions (`credentialSubject.proxied.permissions`), and a comparison of circumstances
 to constraints (`credentialSubject.holder.constraints.*`). It may also involve the creation of
-an audit trail, depending ont he value of the `auditURI` field.
+an audit trail, depending on the value of the `auditURI` field.
 
 During the verifiable presentation, the holder MUST disclose all of the following fields:
 
