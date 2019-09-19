@@ -81,7 +81,7 @@ No errors are sent in timeout situations. If the inviter or invitee wishes to re
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/problem_report",
   "@id": "5678876542345",
   "~thread": { "thid": "<@id of message related to problem>" },
-  "~i10n": { "locale": "en"},
+  "~l10n": { "locale": "en"},
   "problem-code": "request_not_accepted", // matches codes listed above
   "explain": "Unsupported DID method for provided DID."
 }
@@ -91,7 +91,7 @@ No errors are sent in timeout situations. If the inviter or invitee wishes to re
 
 - The `@type` attribute is a required string value that denotes that the received message is a problem_report within the didexchange protocol.
 - The `~thread` attribute provides a context for the problem, referring to the message which contains the problem.
-- Use of `~i10n` is encouraged, with at least locale defined for the message.
+- Use of `~l10n` is encouraged, with at least locale defined for the message.
 - The `problem-code` attribute contains one of a fixed set of codes defined in the list above.
 - The `explain` attribute contains a human readable message which indicates the problem.
 
