@@ -179,7 +179,7 @@ targets:
   understood as overriding or enriching the semantics of that same decorator on the
   parent message family, since the scope is becoming more specific.
 * [**Message Thread**](http://bit.ly/2SL5kab) **or thread tree**: A participant in a
-  thread could send a message containing nothing but the `@thread` with one or
+  thread could send a message containing nothing but the `~thread` with one or
   more additional decorators *inside* it. This should be viewed as a statement of semantics that
   apply to subsequent communications from the sender, on that thread, until further
   notice or until overridden at the scope of an individual message instance. (While
