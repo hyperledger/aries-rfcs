@@ -228,7 +228,7 @@ The catalog looks like this (see [catalog.json](catalog.json)):
 
 ```
 
-For more information, see the [localization RFC](../0043/l10n/README.md).
+For more information, see the [localization RFC](../0043-l10n/README.md).
 
 ## Unresolved questions
 
