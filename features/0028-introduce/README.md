@@ -1,6 +1,6 @@
 # Aries RFC 0028: Introduce Protocol 1.0
 
-- Authors: Daniel Hardman, Sam Curren, Stephen Curran, Tobias Looker
+- Authors: Daniel Hardman, Sam Curren, Stephen Curran, Tobias Looker, George Aristy
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-04-15
 - Status Note: Referenced in some discussions about the peer DID method spec and n-wise DIDs, but not yet implemented.
@@ -85,7 +85,7 @@ are both __introducees__.
 ### States
 
 In a successful introduction, the introducer state progresses from
-`[start] -> arranging -> delivering -> confirming (optional) -> [done]`.
+`[start] -> arranging -> delivering -> confirming (optional) -> [done]`. Confirming is accomplished with an ACK to an introducee to let them know that their invitation was forwarded.
 
 Meanwhile, each introducee progresses from `[start] -> deciding -> waiting
 -> [done]`.
