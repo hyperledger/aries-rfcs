@@ -48,7 +48,14 @@ predefined state machines for any `requester` and `responder`:
 
 A `discover-features/query` message looks like this:
 
-[![sample query](query.png)](query.json)
+```json
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0/query",
+  "@id": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU",
+  "query": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.*",
+  "comment": "I'm wondering if we can play tic-tac-toe..."
+}
+```
 
 Query messages say, "Please tell me what your capabilities are with
 respect to the protocols that match this string." This particular example
@@ -71,7 +78,18 @@ exchanged with a stranger.
 
 A `discover-features/disclose` message looks like this:
 
-[![sample disclose](disclose.png)](disclose.json)
+```json
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0/disclose",
+  "~thread": { "thid": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU" },
+  "protocols": [
+    {
+      "pid": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.0",
+      "roles": ["player"]
+    }
+  ]
+}
+```
 
 The `protocols` field is a JSON array of __protocol support descriptor__
 objects that match the query. Each descriptor has a `pid` that contains
@@ -88,7 +106,15 @@ your query, and some things I can do with each one."
 Responses do not have to contain exhaustive detail. For example, the following
 response is probably just as good:
 
-[![simpler response](simpler-response.png)](simpler-response.json)
+```json
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0/disclose",
+  "~thread": { "thid": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU" },
+  "protocols": [
+    {"pid": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.0"}
+  ]
+}
+```
 
 The reason why less detail probably suffices is that agents do not need to
 know everything about one another's implementations in order to start an
@@ -173,21 +199,36 @@ the content of this field as an explanation of the request.
 All message types in this family thus have the following implicit
 decorator:
 
-[![message family ~l10n decorator](protocol-discovery~l10n.png)](protocol-discovery~l10n.json)
+```json
+{
+
+  "~l10n": {
+    "locales": { "en": ["comment"] },
+    "catalogs": ["https://github.com/hyperledger/aries-rfcs/blob/a9ad499/features/0031-discover-features/catalog.json"]
+  }
+
+}
+```
 
 ### Message Catalog
 
 As shown in the above `~l10n` decorator, all agents using this protocol have
 [a simple message catalog](catalog.json) in scope. This allows agents to
 send [`problem-report`s](
-https://github.com/hyperledger/indy-hipe/blob/6a5e4fe2/text/error-handling/README.md#the-problem-report-message-type
+../0035-report-problem/README.md#the-problem-report-message-type
 ) to complain about something related to `discover-features` issues.
-The catalog looks like this:
+The catalog looks like this (see [catalog.json](catalog.json)):
 
-[![error catalog for discover-features protocol](catalog.png)](catalog.json)
+```json
+{
+  "query-too-intrusive": {
+    "en": "Protocol query asked me to reveal too much information."
+  }
+}
 
-For more information, see the [localization
-RFC](https://github.com/hyperledger/indy-hipe/blob/569357c6/text/localized-messages/README.md).
+```
+
+For more information, see the [localization RFC](../0043/l10n/README.md).
 
 ## Unresolved questions
 

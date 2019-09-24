@@ -79,6 +79,6 @@ The [`ack` message](../../0015-acks/README.md#explicit-acks) is [adopted](
 ```json
 {
 "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/abandon_connection/1.0/ack",
-"@thread": { "thid": "c17147d2-ada6-4d3c-a489-dc1e1bf778ab" }
+"~thread": { "thid": "c17147d2-ada6-4d3c-a489-dc1e1bf778ab" }
 }
 ```
