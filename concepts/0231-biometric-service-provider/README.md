@@ -10,8 +10,7 @@
 ## Summary
 
 Biometric services for Identity Verification, Authentication, Recovery
-and other use cases referred to in Aries RFCs including
-[DKMS](../../features/0051-dkms/README.md).
+and other use cases referred to in Aries RFCs including DKMS.
 
 ## Motivation
 
