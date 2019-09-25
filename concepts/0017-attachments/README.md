@@ -430,6 +430,13 @@ attachment. Contains the following subfields:
   link is a form of proof of existence.
 
   * `links`: A list of zero or more locations at which the content may be fetched.
+  
+  * `base64`: Base64-encoded data, when representing arbitrary content inline instead
+  of via `links`. Optional. 
+  
+  * `json`: Directly embedded JSON data, when representing content inline instead of
+  via `links`, and when the content is natively conveyable as JSON. Optional. 
+  
 
 ## Drawbacks
 
