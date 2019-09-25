@@ -295,7 +295,7 @@ value unencrypted, which makes the `$gt` operator possible.)
 
 ```JSON
 {
-  "subject": {"$like": "Acme%"},
+  "~subject": {"$like": "Acme%"},
   "~issue_date": {"$gt": 2018-06-01}
 }
 ```
