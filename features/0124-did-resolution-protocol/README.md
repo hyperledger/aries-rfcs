@@ -123,7 +123,7 @@ It looks like this:
 
 	{
 		"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1/resolve_result",
-		"@thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
+		"~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
 		"did_document": {
 			"@context": "https://w3id.org/did/v0.11",
 			"id": "did:sov:WRfXPg8dantKVubE3HX8pw",
@@ -146,7 +146,7 @@ which includes a DID Document plus additional metadata:
 
 	{
 		"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1/resolve_result",
-		"@thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
+		"~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
 		"did_document": {
 			"@context": "https://w3id.org/did/v0.11",
 			"id": "did:sov:WRfXPg8dantKVubE3HX8pw",
