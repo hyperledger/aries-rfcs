@@ -26,6 +26,7 @@
     * [Proof Request](#proof-request)
     * [Performing Proof Request](#performing-proof-request)
     * [Certification Revocation](#certification-revocation)
+* [Implementation Reference](#Implementation Reference)
 * [Reference](#reference)
 * [Annex A: PDP Schema mapping to Kantara Consent Receipt](#annex-a-pdp-schema-mapping-to-kantara-consent-receipt)
 * [Prior art](#prior-art)
@@ -409,6 +410,28 @@ These are the steps covered with certification revocation:
 -   data controller initiated revocation
 
 -   data authority initiated revocation (if owns schema base)
+
+## Implementation Reference
+
+A python jupyter notebook is available as reference implementation 
+to help with implementation. The base for this example is 
+getting-started jupyter notebook. In order to run the example take
+the following steps.
+
+1.   Clone indy-sdk \
+
+         git clone https://github.com/hyperledger/indy-sdk.git
+2.    Copy over following files to doc/getting-started \
+      - [consent-flow.ipynb](./reference-implementation/consent-flow.ipynb)
+      - [docker-compose.yml](./reference-implementation/docker-compose.yml) *
+
+      Note * - Reason for changing the docker-compose.yml is to be able to 
+      view consent-flow.ipynb.
+    
+3. Ready to start docker-compose \
+
+       docker-compose up
+4. Open html link and run consent-flow.ipynb
 
 ## Reference
 
