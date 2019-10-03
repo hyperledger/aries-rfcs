@@ -26,7 +26,7 @@
     * [Proof Request](#proof-request)
     * [Performing Proof Request](#performing-proof-request)
     * [Certification Revocation](#certification-revocation)
-* [Implementation Reference](#Implementation Reference)
+* [Implementation Reference](#implementation-reference)
 * [Reference](#reference)
 * [Annex A: PDP Schema mapping to Kantara Consent Receipt](#annex-a-pdp-schema-mapping-to-kantara-consent-receipt)
 * [Prior art](#prior-art)
