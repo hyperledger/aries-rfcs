@@ -1,12 +1,12 @@
 # Aries RFC 0036: Issue Credential Protocol 1.0
 
 - Authors: Nikita Khateev
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-05-28
 - Status Note:  See [RFC 0037](../0037-present-proof/README.md) for the presentation part of using credentials.
 - Supersedes: [Indy HIPE PR #89]( https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md); also [Credential Exchange 0.1 -- IIW 2019](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view)
 - Start Date: 2019-01-30
-- Tags: feature, decorator, protocol
+- Tags: feature, decorator, protocol, credentials
 
 ## Summary
 

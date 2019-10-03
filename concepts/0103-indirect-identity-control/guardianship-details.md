@@ -6,7 +6,7 @@ For a complete walkthrough or demo of how guardianship works, see
 ## Use Cases
 See https://docs.google.com/presentation/d/1qUYQa7U1jczEFun3a7sB3lKHIprlwd7brfOU9hEJ34U/edit?usp=sharing
 
-## Who appoints a guardian (bases)
+## Who appoints a guardian (rationales)
 See https://docs.google.com/presentation/d/1aq45aUHTOK_WhFEICboXQrp7dalpLm9-MGg77Nsn50s/edit#slide=id.g59fffee7a0_0_0
 
 ## Transparent vs. Opaque
