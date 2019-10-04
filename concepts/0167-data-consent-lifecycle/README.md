@@ -1,9 +1,9 @@
 # Aries RFC 0167: Data Consent Lifecycle
 
-- Authors: Jan Lindquist, Dativa; Paul Knowles, Dativa Mark Lizar, OpenConsent; Harshvardhan J. Pandit, ADAPT Centre, Trinity College Dublin
+- Authors: Jan Lindquist, Dativa; Paul Knowles, Dativa; Mark Lizar, OpenConsent; Harshvardhan J. Pandit, ADAPT Centre, Trinity College Dublin
 - Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-10-03
-- Status Note: This RFC is under development along with a reference implementation. The reference implementation is almost ready to be shared.  
+- Since: 2019-08-07 (updated 2019-10-03)
+- Status Note: This RFC is under development. The reference implementation was recently added.
 - Supersedes: [Indy HIPE PR #55: Consent Receipt](https://github.com/hyperledger/indy-hipe/pull/55)
 - Start Date: 2018-11-08
 - Tags: concept
