@@ -56,7 +56,7 @@
 * [0114: Predefined Identities](features/0114-predefined-identities/README.md) (2019-07-10 &mdash; [`feature`](/tags.md#feature))
 * [0116: Evidence Exchange Protocol 0.9](features/0116-evidence-exchange/README.md) (2019-07-26 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0124: DID Resolution Protocol 0.9](features/0124-did-resolution-protocol/README.md) (2019-07-13 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
-* [0167: Data Consent Lifecycle](concepts/0167-data-consent-lifecycle/README.md) (2019-08-07 &mdash; [`concept`](/tags.md#concept))
+* [0167: Data Consent Lifecycle](concepts/0167-data-consent-lifecycle/README.md) (2019-08-07 (updated 2019-10-03) &mdash; [`concept`](/tags.md#concept))
 * [0183: Revocation Notification 1.0](features/0183-revocation-notification/README.md) (2019-08-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0193: Coin Flip Protocol 1.0 ](features/0193-coin-flip/README.md) (2019-08-19 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0207: Credential Fraud Threat Model](concepts/0207-credential-fraud-threat-model/README.md) (2019-08-30 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
