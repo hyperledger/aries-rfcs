@@ -1,4 +1,4 @@
-# RFC xxxx: Rich Schema Objects
+# RFC 0250: Rich Schema Objects
 - Author: [Ken Ebert](ken@sovrin.org), [Brent Zundel](brent.zundel@evernym.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-10-08
