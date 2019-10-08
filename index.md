@@ -21,6 +21,7 @@
 * [0094: Cross-Domain Messaging](concepts/0094-cross-domain-messaging/README.md) (2018-10-29 &mdash; [`concept`](/tags.md#concept))
 * [0095: Basic Message Protocol 1.0](features/0095-basic-message/README.md) (2019-08-06, [6 impls](features/0095-basic-message/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0160: Connection Protocol](features/0160-connection-protocol/README.md) (2019-08-06, [5 impls](features/0160-connection-protocol/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0250: Rich Schema Objects](features/0250-rich-schemas/README.md) (2019-10-08 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 
 ## [DEMONSTRATED](README.md#demonstrated)
 * [0005: DID Communication](concepts/0005-didcomm/README.md) (2019-01-15, [9 impls](concepts/0005-didcomm/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
