@@ -1,4 +1,4 @@
-# Aries RFC xxxx: Aries SDK Rich Schema Contexts
+# Aries RFC 0249: Aries SDK Rich Schema Contexts
 - Authors: [Brent Zundel](brent.zundel@evernym.com), [Ken Ebert](ken@sovrin.org)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-10-08
