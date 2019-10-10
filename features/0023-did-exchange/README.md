@@ -107,7 +107,11 @@ The *invitee* sends the *inviter* an ack or any other message that confirms the 
 An invitation to exchange may be transferred using any method that can reliably transmit text. The result
 must be the essential data necessary to initiate an [Exchange Request](#1-exchange-request) message. A exchange
 invitation is an agent message with agent plaintext format, but is an **out-of-band communication** and therefore
-not communicated using wire level encoding or encryption. The necessary data that an invitation to exchange must result in is:
+not communicated using wire level encoding or encryption. It is also contained within its own
+[thread](../../concepts/0008-message-id-and-threading/README.md#threaded-messages) and all subsequent messages are
+exchanged in new threads spawned from this one.
+
+The necessary data that an invitation to exchange must result in is:
 
 * suggested label
 * publicly resolvable did
@@ -125,7 +129,7 @@ When considering routing and options for invitations, keep in mind that the more
 
 The _inviter_ will either use an existing invitation DID, or provision a new one according to the did method spec. They will then create the invitation message in one of the following forms.
 
-Invitation Message with Public Invitation DID:
+### Invitation Message with Public Invitation DID
 ```json
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/invitation",
@@ -134,7 +138,7 @@ Invitation Message with Public Invitation DID:
     "did": "did:sov:QmWbsNYhMrjHiqZDTUTEJs"
 }
 ```
-Invitation Message with Keys and URL endpoint:
+### Invitation Message with Keys and URL endpoint
 ```json
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/invitation",
@@ -145,7 +149,7 @@ Invitation Message with Keys and URL endpoint:
     "routingKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"]
 }
 ```
-Invitation Message with Keys and DID Service Endpoint Reference:
+### Invitation Message with Keys and DID Service Endpoint Reference
 
 ```json
 {
@@ -248,10 +252,11 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 {
   "@id": "5678876542345",
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/request",
+  "~thread": { "pthid": "<id of invitation>" },
   "label": "Bob",
   "connection": {
     "did": "B.did@B:A",
-  	"did_doc": {
+    "did_doc": {
         "@context": "https://w3id.org/did/v1"
       	// DID Doc contents here.
     }
@@ -262,10 +267,61 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 #### Attributes
 
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
+* The [`~thread`](../../concepts/0008-message-id-and-threading/README.md#thread-object) decorator MUST be included:
+  * It MUST include the ID of the parent thread (`pthid`) such that the `request` can be correlated to the corresponding `invitation`. More on correlation [below](#correlating-requests-to-invitations).
+  * It MAY include the `thid` property. In doing so, implementations MUST set its value to that of `@id` on the same request message. In other words, the values of `@id` and `~thread.thid` MUST be equal.
 * The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute.
 * The `connection` attribute contains the `did` and `did_doc` attributes. This format maintains consistency with the Response message where this attribute is signed.
 * The `did` indicates the DID being exchanged.
 * The `did_doc` contains the DID Doc associated with the DID. If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc` attribute is optional.
+
+#### Correlating requests to invitations
+
+An invitation is presented in one of two forms:
+
+* An explicit invitation with its own `@id` as seen in the three examples [above](#invitation-message-with-public-invitation-did).
+* An [implicit](#implicit-invitation) invitation contained in a DID document's [`service`](https://w3c-ccg.github.io/did-spec/#service-endpoints) attribute.
+
+When a `request` responds to an explicit invitation, its `~thread.pthid` MUST be equal to the `@id` property of the invitation.
+
+When a `request` responds to an implicit invitation, its `~thread.pthid` MUST contain a [DID URL](https://w3c-ccg.github.io/did-spec/#dfn-did-url) that resolves to the specific `service` on a DID document that contains the invitation.
+
+**Example referencing an explicit invitation**
+
+```json
+{
+  "@id": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/request",
+  "~thread": { "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" },
+  "label": "Bob",
+  "connection": {
+    "did": "B.did@B:A",
+    "did_doc": {
+        "@context": "https://w3id.org/did/v1"
+        // DID Doc contents here.
+    }
+  }
+}
+```
+
+**Example referencing an implicit invitation**
+
+```json
+{
+  "@id": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/request",
+  "~thread": { "pthid": "did:example:21tDAKCERh95uGgKbJNHYp#invitation" },
+  "label": "Bob",
+  "connection": {
+    "did": "B.did@B:A",
+    "did_doc": {
+        "@context": "https://w3id.org/did/v1"
+        // DID Doc contents here.
+    }
+  }
+}
+```
+
 
 #### Request Transmission
 
@@ -283,6 +339,8 @@ After receiving the exchange request, the _inviter_ evaluates the provided DID a
 
 The _inviter_ should check the information presented with the keys used in the wire-level message transmission to ensure they match.
 
+The _inviter_ MAY look up the corresponding invitation identified in the request's `~thread.pthid` to determine whether it should accept this exchange request.
+
 If the _inviter_ wishes to continue the exchange, they will persist the received information in their wallet. They will then either update the provisional service information to rotate the key, or provision a new DID entirely. The choice here will depend on the nature of the DID used in the invitation.
 
 The _inviter_ will then craft an exchange response using the newly updated or provisioned information.
@@ -295,11 +353,12 @@ See [Error Section](#errors) above for message format details.
 
 Possible reasons:
 
-- unsupported DID method for provided DID
+- Unsupported DID method for provided DID
 - Expired Invitation
 - DID Doc Invalid
 - Unsupported key type
 - Unsupported endpoint protocol
+- Missing reference to invitation
 
 **request_processing_error**
 
@@ -320,7 +379,7 @@ The exchange response message is used to complete the exchange. This message is 
   },
   "connection": {
     "did": "A.did@B:A",
-  	"did_doc": {
+    "did_doc": {
       "@context": "https://w3id.org/did/v1"
       // DID Doc contents here.
     }
@@ -328,7 +387,7 @@ The exchange response message is used to complete the exchange. This message is 
 }
 ```
 
-The above message is required to be signed as described in HIPE ???. The `connection` attribute above will be base64URL encoded and included as part of the `sig_data` attribute of the signed field. The result looks like this:
+The above message is required to be signed as described in [RFC0234](../0234-signature-decorator/README.md). The `connection` attribute above will be base64URL encoded and included as part of the `sig_data` attribute of the signed field. Using the `ed25519Sha512_single` signature scheme, the result looks like this:
 
 ```json
 {
@@ -339,14 +398,14 @@ The above message is required to be signed as described in HIPE ???. The `connec
   },
   "connection~sig": {
     "@type":"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
-    "signature": "<digital signature function output>",
-    "sig_data": "<base64URL(64bit_integer_from_unix_epoch||connection_attribute)>",
-    "signers": "<signing_verkey>"
+    "signature": "base64URL(ed25519 signature)",
+    "sig_data": "base64URL(64bit_integer_from_unix_epoch|msg)",
+    "signers": "base64URL(inlined_ed25519_signing_verkey)""
   }
 }
 ```
 
-The `connection` attribute has been removed and it's contents combined with the timestamp  and encoded into the `sig_data` field of the new `connection~sig` attribute.
+The [`signature-decorator`](../0234-signature-decorator/README.md) is the normative reference for the example shown above and takes precedence whenever examples in this RFC diverge from the specifications contained in it.
 
 Upon receipt, the signed attribute will be automatically unpacked and the signature verified. Signature information will be stored as message context, and the `connection` attribute will be replaced in it's original format before processing continues.
 
