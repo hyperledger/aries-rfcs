@@ -172,7 +172,7 @@ introduced.
 The Verifiable Claims Working Group of the W3C is working to publish a
 Verifiable Credentials data model specification. Put simply, the goal
 of the new data format for anonymous credentials is to comply with the W3C
-specification. 
+specification.
 
 The data model introduces some standard properties and a shared
 vocabulary so that different producers of credentials can better
@@ -286,7 +286,7 @@ reviewed for privacy and security considerations and gain or lose
 reputation.
 
 Presentation definitions specify the set of information that a verifier
-wants from a holder. This is useful regardless of the underlying signature
+wants from a holder. This is useful regardless of the underlying credential
 scheme.
 
 ### Presentations
