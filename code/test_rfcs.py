@@ -30,31 +30,14 @@ def test_links():
     assert check_links.main() == 0
 
 
-grandfathered = """
-features/0160-connection-protocol/: Impl "Aries Framework - .NET" needs a link to test results in its Notes column. Format = [test results](...)
-features/0160-connection-protocol/: Impl "Streetcred.id" needs a link to test results in its Notes column. Format = [test results](...)
-features/0160-connection-protocol/: Impl "Aries Cloud Agent - Python" needs a link to test results in its Notes column. Format = [test results](...)
-features/0160-connection-protocol/: Impl "Aries Static Agent - Python" needs a link to test results in its Notes column. Format = [test results](...)
-features/0095-basic-message/: Impl "Indy Cloud Agent - Python" needs a link to test results in its Notes column. Format = [test results](...)
-features/0095-basic-message/: Impl "Aries Framework - .NET" needs a link to test results in its Notes column. Format = [test results](...)
-features/0095-basic-message/: Impl "Streetcred.id" needs a link to test results in its Notes column. Format = [test results](...)
-features/0095-basic-message/: Impl "Aries Cloud Agent - Python" needs a link to test results in its Notes column. Format = [test results](...)
-features/0095-basic-message/: Impl "Aries Static Agent - Python" needs a link to test results in its Notes column. Format = [test results](...)
-features/0037-present-proof/: Test suite must be an impl for any protocol- or decorator-related RFC beyond DEMONSTRATED status.
-features/0048-trust-ping/: Impl "Indy Cloud Agent - Python" needs a link to test results in its Notes column. Format = [test results](...)
-features/0048-trust-ping/: Impl "Aries Framework - .NET" needs a link to test results in its Notes column. Format = [test results](...)
-features/0048-trust-ping/: Impl "Streetcred.id" needs a link to test results in its Notes column. Format = [test results](...)
-features/0048-trust-ping/: Impl "Aries Cloud Agent - Python" needs a link to test results in its Notes column. Format = [test results](...)
-features/0048-trust-ping/: Impl "Aries Static Agent - Python" needs a link to test results in its Notes column. Format = [test results](...)
-features/0036-issue-credential/: Test suite must be an impl for any protocol- or decorator-related RFC beyond DEMONSTRATED status.
-"""
-
-
 def test_rfc_metadata():
     errors = []
 
     def e(rfc, msg):
         errors.append(rfc.relpath.replace('README.md','') + ': ' + msg)
+
+    def warn(rfc, msg):
+        sys.stderr.write('Warning: ' + rfc.relpath.replace('README.md','') + ': ' + msg + '\n')
 
     for rfc in rfcs.walk():
         if not bool(rfc.title): e(rfc, 'no title found')
@@ -81,20 +64,36 @@ def test_rfc_metadata():
             for impl in rfcs.test_suite_impls(rfc, False):
                 e(rfc, 'should not be PROPOSED if it has a non-test-suite impl')
                 break
-        elif rfc.status in ['ACCEPTED', 'ADOPTED'] and 'feature' in rfc.tags and ('protocol' in rfc.tags or 'decorator' in rfc.tags):
+        # Should this RFC have links to test results?
+        elif rfc.status in ['ACCEPTED', 'ADOPTED'] and 'feature' in rfc.tags and (
+                'protocol' in rfc.tags or 'decorator' in rfc.tags):
             found_test_suite_in_impls = False
             for row in rfcs.test_suite_impls(rfc, True):
                 found_test_suite_in_impls = True
                 break
             if not found_test_suite_in_impls:
-                e(rfc, 'Test suite must be an impl for any protocol- or decorator-related RFC beyond DEMONSTRATED status.')
+                msg = 'Test suite must be an impl for any protocol- or decorator-related RFC beyond DEMONSTRATED status.'
+                if 'test-anomaly' in rfc.tags:
+                    warn(rfc, msg)
+                else:
+                    e(rfc, msg + ' Tag "test-anomaly" to temporarily override.')
             for row in rfcs.test_suite_impls(rfc, False):
-                if not rfcs.get_test_results_link(row):
-                    e(rfc, 'Impl "%s" needs a link to test results in its Notes column. Format = [test results](...)' %
-                      rfcs.describe_impl_row(row))
+                m = rfcs.get_test_results_link(row)
+                # If we lack a link entirely, this is an error, period.
+                # If we have tagged the RFC with "test-anomaly", then it becomes possible to link
+                # the ugly text "MISSING test results" to the test-anomaly tag and have the result
+                # be only a warning. This ugly text+link should only be accepted when the 'test-anomaly'
+                # tag is present.
+                desc = rfcs.describe_impl_row(row)
+                if m is None:
+                    e(rfc, 'Impl "%s" needs a link to test results in its Notes column. Format = [test results](...) or, if RFC is tagged "test-anomaly", [MISSING test results](/tags.md#test-anomaly).' % desc)
+                # Are test results explicitly declared to be missing?
+                elif ('MISSING' in m.group(1) and '/tags.md#test-anomaly' in m.group(2)):
+                    if 'test-anomaly' in rfc.tags:
+                        warn(rfc, 'Impl "%s" needs to replace missing test results with something meaningful.' % desc)
+                    else:
+                        e(rfc, 'Can\'t declare missing tests without the "test-anomaly" tag to make the RFC ugly, so impl "%s" needs a link to test results in its Notes column. Format = [test results](...).' % desc)
 
-
-    errors = [e for e in errors if e not in grandfathered]
     if errors:
         msg = '\n' + '\n'.join(errors)
         raise BaseException(msg)
@@ -175,7 +174,6 @@ def test_impls():
             offenders = '\n'.join(find_refs(base_uri_for_normalized, key, value))
             e(offenders, '\n  impl name "%s" maps to multiple sites: %s' % (key, ', '.join(['"%s"' % v for v in value])))
 
-    errors = [e for e in errors if e not in grandfathered]
     if errors:
         msg = '\n' + '\n'.join(errors)
         raise BaseException(msg)

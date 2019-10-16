@@ -5,7 +5,7 @@
 - Since: 2019-02-01
 - Status Note: Socialized and broadly understood in other conceptual RFCs about routing.
 - Start Date: 2018-12-01
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

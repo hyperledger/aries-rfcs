@@ -6,7 +6,7 @@
 - Status Note:  
 - Supersedes: [Indy 0033](https://github.com/hyperledger/indy-hipe/edit/master/text/0033-basic-message/README.md)
 - Start Date: 2019-01-16
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -83,10 +83,10 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | Reference agent implementation contributed by Sovrin Foundation and Community
-[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | .NET framework for building agents of all types
-[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET
-[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the government of British Columbia.
-[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | Useful for cron jobs and other simple, automated use cases.
-[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 
+[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | Reference agent implementation contributed by Sovrin Foundation and Community; [MISSING test results](/tags.md#test-anomaly)
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | .NET framework for building agents of all types; [MISSING test results](/tags.md#test-anomaly)
+[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET; [MISSING test results](/tags.md#test-anomaly)
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the government of British Columbia.; [MISSING test results](/tags.md#test-anomaly)
+[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | Useful for cron jobs and other simple, automated use cases.; [MISSING test results](/tags.md#test-anomaly)
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | ; [MISSING test results](/tags.md#test-anomaly)
 

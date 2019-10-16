@@ -5,7 +5,7 @@
 - Since: 2018-10-01
 - Status Note: Implemented broadly in Indy, but not yet elsewhere.
 - Start Date: 2018-08-03
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

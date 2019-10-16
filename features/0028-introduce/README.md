@@ -5,7 +5,7 @@
 - Since: 2019-04-15
 - Status Note: Referenced in some discussions about the peer DID method spec and n-wise DIDs, but not yet implemented.
 - Start Date: 2019-03-27
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 

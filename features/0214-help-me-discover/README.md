@@ -4,7 +4,7 @@
 - Since: 2019-09-10
 - Status Note: implementation is being explored by SecureKey  
 - Start Date: 2018-08-20
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 

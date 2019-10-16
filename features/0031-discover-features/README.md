@@ -6,7 +6,7 @@
 - Status Note: Reached FCP status in Indy. Implemented in at least two codebases. 
 - Supersedes: [Indy RFC PR #73](https://github.com/hyperledger/indy-hipe/pull/73)
 - Start Date: 2018-12-17
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 

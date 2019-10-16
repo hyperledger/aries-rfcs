@@ -5,7 +5,7 @@
 - Since: 2018-09-01
 - Status Note: broadly accepted but not heavily used; may need greater usage before it's ready for [ADOPTED](/README.md#rfc-lifecycle) status.
 - Start Date: 2018-05-03
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

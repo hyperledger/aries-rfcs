@@ -6,7 +6,7 @@
 - Status Note:  
 - Supersedes: [INDY HIPE PR 116](https://github.com/hyperledger/indy-hipe/pull/116)
 - Start Date: 2019-03-04
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 ## Summary
 

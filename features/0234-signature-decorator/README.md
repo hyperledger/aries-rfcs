@@ -5,7 +5,7 @@
 - Status Note: Retroactive port of [this HIPE](https://github.com/kdenhartog/indy-hipe/blob/d421fc77bae87c780aad346d15c0c49939adc281/text/digital-signatures/README.md) (never merged) on which the `did-exchange` and `connection` protocols depend
 - Supersedes: [this HIPE](https://github.com/kdenhartog/indy-hipe/blob/d421fc77bae87c780aad346d15c0c49939adc281/text/digital-signatures/README.md) (never merged)
 - Start Date: 2019-01-07
-- Tags: feature, decorator
+- Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
 
 ## Summary
 

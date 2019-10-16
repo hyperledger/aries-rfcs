@@ -70,7 +70,7 @@ def walk():
         m = _status_val_pat.search(status)
         if m:
             status = m.group(1)
-        tags = [x.strip() for x in fields[7].split(',')]
+        tags = [unlink_tag(x) for x in fields[7].split(',')]
         content_idx = txt.find('\n##')
         impl_table = get_impl_table(txt)
         impl_count = len(impl_table) if impl_table else 0
@@ -78,6 +78,13 @@ def walk():
                 fields[3], fields[4], fields[5], fields[6], tags, content_idx, impl_count, impl_table)
         yield x
 
+
+def unlink_tag(tag):
+    tag = tag.strip()
+    return tag[1:tag.find(']')].strip() if tag.startswith('[') else tag
+
+def link_tag(tag):
+    return '[' + tag + '](/tags.md#' + tag + ')'
 
 _impl_pat = re.compile(r'^[ \t]*#+[ \t]*Implementations?[ \t]*$', re.M)
 _impl_table_head_pat = re.compile(r'^[ \t]*([|][ \t]*)?Name(.*?)[|](.*?)\n[ \t]*([|][ \t]*)?-+(.*?)*[|](.*?)\n', re.M)
@@ -126,11 +133,11 @@ def describe_impl_row(row):
     return desc
 
 
-_link_to_test_results_pat = re.compile(r'\[[ \t]*test[ \t]+results[ \t]*\]\(([^\)]*)\)', re.I)
+_link_to_test_results_pat = re.compile(r'\[[ \t]*((?:MISSING[ \t]+)?test[ \t]+results)[ \t]*\]\(([^\)]*)\)', re.I)
 
 def get_test_results_link(impl_row):
     m = _link_to_test_results_pat.search(impl_row[1])
-    return m.group(1).strip() if m else None
+    return m if m else None
 
 
 def relpath(abspath):

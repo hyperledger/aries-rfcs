@@ -6,7 +6,7 @@
 - Status Note: A similar protocol was implemented for IIW in spring 2019. Need link.
 - Supersedes: [HIPE 0031 - Connection Protocol](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol)
 - Start Date: 2018-06-29
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 
