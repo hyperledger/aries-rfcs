@@ -59,6 +59,7 @@
 * [0167: Data Consent Lifecycle](concepts/0167-data-consent-lifecycle/README.md) (2019-08-07 (updated 2019-10-03) &mdash; [`concept`](/tags.md#concept))
 * [0183: Revocation Notification 1.0](features/0183-revocation-notification/README.md) (2019-08-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0193: Coin Flip Protocol 1.0 ](features/0193-coin-flip/README.md) (2019-08-19 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+<<<<<<< HEAD
 * [0207: Credential Fraud Threat Model](concepts/0207-credential-fraud-threat-model/README.md) (2019-08-30 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
 * [0211: Route Coordination Protocol](features/0211-route-coordination/README.md) (2019-09-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0212: Pickup Protocol](features/0212-pickup/README.md) (2019-09-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
@@ -68,6 +69,9 @@
 * [0231: Biometric Service Provider](concepts/0231-biometric-service-provider/README.md) (2019-09-24 &mdash; [`concept`](/tags.md#concept))
 * [0249: Aries SDK Rich Schema Contexts](features/0249-rich-schema-contexts/README.md) (2019-10-08 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0250: Rich Schema Objects](concepts/0250-rich-schemas/README.md) (2019-10-08 &mdash; [`concept`](/tags.md#concept) [`rich-schemas`](/tags.md#rich-schemas))
+=======
+* [0257: Private Credential Issuance](concepts/0257-private-credential-issuance/README.md) (2019-10-16 &mdash; [`concept`](/tags.md#concept) [`protocol`](/tags.md#protocol))
+>>>>>>> Fix broken unit tests
 
 ## [RETIRED](README.md#retired)
 
