@@ -3,8 +3,8 @@
 - Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-05-27
-- Status Note: A similar protocol was implemented for IIW in spring 2019. Need link.
-- Supersedes: [HIPE 0031 - Connection Protocol](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol)
+- Status Note: This RFC is a work in progress designed to replace the [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md) after all necessary changes have been made. This RFC is likely to change as discussions continue, and should not yet be built into production code.
+- Supersedes: [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md)
 - Start Date: 2018-06-29
 - Tags: feature, protocol
 
