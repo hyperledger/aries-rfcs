@@ -66,6 +66,8 @@
 * [0214: "Help Me Discover" Protocol](features/0214-help-me-discover/README.md) (2019-09-10 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0217: Linkable Message Paths](concepts/0217-linkable-message-paths/README.md) (2019-09-10 &mdash; [`concept`](/tags.md#concept))
 * [0231: Biometric Service Provider](concepts/0231-biometric-service-provider/README.md) (2019-09-24 &mdash; [`concept`](/tags.md#concept))
+* [0249: Aries SDK Rich Schema Contexts](features/0249-rich-schema-contexts/README.md) (2019-10-08 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
+* [0250: Rich Schema Objects](concepts/0250-rich-schemas/README.md) (2019-10-08 &mdash; [`concept`](/tags.md#concept) [`rich-schemas`](/tags.md#rich-schemas))
 
 ## [RETIRED](README.md#retired)
 
