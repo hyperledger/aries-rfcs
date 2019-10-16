@@ -1,9 +1,9 @@
-# 0194: How Private Individuals Can Issue Credentials
+# Aries RFC 0257: Private Credential Issuance
 - Authors: Daniel Hardman and Lovesh Harchandani
 - Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-12-26
-- Status Note: (explanation of current status)  
-- Start Date: 2019-8-26
+- Since: 2019-10-16
+- Status Note: under study  
+- Start Date: 2019-08-26
 - Tags: concept, protocol
 
 ## Summary

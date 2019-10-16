@@ -57,6 +57,7 @@
 * [0167: Data Consent Lifecycle](concepts/0167-data-consent-lifecycle/README.md) (2019-08-07 &mdash; [`concept`](/tags.md#concept))
 * [0183: Revocation Notification 1.0](features/0183-revocation-notification/README.md) (2019-08-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0193: Coin Flip Protocol 1.0 ](features/0193-coin-flip/README.md) (2019-08-19 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0257: Private Credential Issuance](concepts/0257-private-credential-issuance/README.md) (2019-10-16 &mdash; [`concept`](/tags.md#concept) [`protocol`](/tags.md#protocol))
 
 ## [RETIRED](README.md#retired)
 
