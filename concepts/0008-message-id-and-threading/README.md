@@ -5,7 +5,7 @@
 - Since: 2018-10-01
 - Status Note: Implemented broadly in Indy, but not yet elsewhere.
 - Start Date: 2018-08-03
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
@@ -206,7 +206,7 @@ Example Message with am Implicit Reply:
 
 ```json
 {
-    "@id': "<@id of outer message>",
+    "@id": "<@id of outer message>",
     "~thread": {
     	"thid": "<different than @id of outer message>"
 	}
@@ -215,7 +215,7 @@ Example Message with am Implicit Reply:
 Effective Message with defaults in place:
 ```json
 {
-    "@id': "<@id of outer message>",
+    "@id": "<@id of outer message>",
     "~thread": {
     	"thid": "<different than @id of outer message>"
     	"sender_order": 0,

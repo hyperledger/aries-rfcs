@@ -5,7 +5,7 @@
 - Since: 2019-03-29
 - Status Note: Somewhat familiar to many in the community, and influential in the designs of other RFCs--but not yet deeply explored or socialized.
 - Start Date: 2018-09-01 (approx, backdated)
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

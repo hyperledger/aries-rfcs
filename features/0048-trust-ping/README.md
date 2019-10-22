@@ -6,7 +6,7 @@
 - Status Note: Numerous implementations. 
 - Supersedes: [Indy HIPE 0032](https://github.com/hyperledger/indy-hipe/tree/master/text/0032-trust-ping)
 - Start Date: 2018-12-11
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -60,8 +60,8 @@ creates a `ping` message like this:
 }
 ```
 
-Only `@type` and `@id` are required; `~timing.out_time`, `~timing.expires_time`, and `~timing.delay_milli`
-are optional [message timing decorators](
+Only `@type` and `@id` are required; `~timing.out_time`, `~timing.expires_time`, 
+and `~timing.delay_milli` are optional [message timing decorators](
 ../0032-message-timing/README.md), and `comment`
 follows the conventions of [localizable message fields](
 ../0043-l10n/README.md). If present, it may
@@ -88,7 +88,7 @@ is not `false`, the receiver should reply as quickly as possible with a
 {
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/trust_ping/1.0/ping_response",
   "@id": "e002518b-456e-b3d5-de8e-7a86fe472847",
-  "@thread": { "thid": "518be002-de8e-456e-b3d5-8fe472477a86" },
+  "~thread": { "thid": "518be002-de8e-456e-b3d5-8fe472477a86" },
   "~timing": { "in_time": "2018-12-15 04:29:28Z", "out_time": "2018-12-15 04:31:00Z"},
   "comment": "Hi yourself. I'm here."
 }
@@ -121,13 +121,17 @@ mechanism](../0034-message-tracing/README.md).
 
 ## Implementations
 
-The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+The following lists the implementations (if any) of this RFC. Please do a pull 
+request to add your implementation. If the implementation is open source, 
+include a link to the repo or to the implementation within the repo. Please be 
+consistent in the "Name" field so that a mechanical processing of the RFCs can 
+generate a list of all RFCs supported by an Aries implementation.
 
 Name / Link | Implementation Notes
 --- | ---
-[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | Reference agent implementation contributed by Sovrin Foundation and Community
-[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | .NET framework for building agents of all types
-[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET
-[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the government of British Columbia.
-[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | Useful for cron jobs and other simple, automated use cases.
-[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 
+[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | Reference agent implementation contributed by Sovrin Foundation and Community; [MISSING test results](/tags.md#test-anomaly)
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | .NET framework for building agents of all types; [MISSING test results](/tags.md#test-anomaly)
+[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET; [MISSING test results](/tags.md#test-anomaly)
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the government of British Columbia.; [MISSING test results](/tags.md#test-anomaly)
+[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | Useful for cron jobs and other simple, automated use cases.; [MISSING test results](/tags.md#test-anomaly)
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | [MISSING test results](/tags.md#test-anomaly)

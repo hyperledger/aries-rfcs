@@ -5,7 +5,7 @@
 - Since: 2019-06-10
 - Status Note: This captures some tribal knowledge from the Indy community. However, it is by no means uniformly accepted inside that group, and it has never been shared in a larger context. Therefore, the RFC is currently fodder for discussion.
 - Start Date: 2019-01-15
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

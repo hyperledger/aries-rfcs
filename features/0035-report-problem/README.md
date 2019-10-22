@@ -6,7 +6,7 @@
 - Status Note: Broadly socialized in Indy circles. Implemented in several codebases. Not yet fully harmonized. 
 - Supersedes: [Indy HIPE PR #65]( https://github.com/hyperledger/indy-hipe/pull/65)
 - Start Date: 2018-11-26
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 
@@ -193,7 +193,7 @@ Each item in the list must be a tagged pair (a JSON {key:value}, where the key n
 
 **impact**: A string describing the breadth of impact of the problem. An enumerated type:
 
-- “msg” (this is a problem with a single message only; the rest of the interaction may still be fine),
+- “message” (this is a problem with a single message only; the rest of the interaction may still be fine),
 - “thread” (this is a problem that endangers or invalidates the entire thread),
 - “connection” (this is a problem that endangers or invalidates the entire connection).
 

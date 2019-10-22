@@ -1,11 +1,11 @@
 # Aries RFC 0028: Introduce Protocol 1.0
 
-- Authors: Daniel Hardman, Sam Curren, Stephen Curran, Tobias Looker
+- Authors: Daniel Hardman, Sam Curren, Stephen Curran, Tobias Looker, George Aristy
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-04-15
 - Status Note: Referenced in some discussions about the peer DID method spec and n-wise DIDs, but not yet implemented.
 - Start Date: 2019-03-27
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 
@@ -85,7 +85,7 @@ are both __introducees__.
 ### States
 
 In a successful introduction, the introducer state progresses from
-`[start] -> arranging -> delivering -> confirming (optional) -> [done]`.
+`[start] -> arranging -> delivering -> confirming (optional) -> [done]`. Confirming is accomplished with an ACK to an introducee to let them know that their invitation was forwarded.
 
 Meanwhile, each introducee progresses from `[start] -> deciding -> waiting
 -> [done]`.
@@ -243,12 +243,22 @@ to Bob. No `proposal` message needs to be sent to CarolCorp;
 this is the `skip proposal` event shown in the introducer's
 state machine.
 
-#### Proposal initiated by introducee
+#### Introducee requests introduction
 
-[TODO: Alice is still doing the intro, but Bob now asks Alice to introduce
-him to Carol. Is this the same proposal message type, just with a field
-indicating that he's proposing to Alice that *she* do the intro? Or is it
-a different message?]
+Alice still acts as the introducer, but Bob now asks Alice to introduce him to a candidate introducee discovered *a priori* with the [`help-me-discover`](../0214-help-me-discover/README.md) protocol:
+
+```jsonc
+{
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0/request",
+  "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
+  "please_introduce_to": {
+      "discovered": "didcomm:///5f2396b5-d84e-689e-78a1-2fa2248f03e4/.candidates%7B.id+%3D%3D%3D+%22Carol%22%7D"
+  },
+  "~timing": { "expires_time": "2019-04-23 18:00Z" }
+}
+```
+
+This `request` message includes a `discovered` property with a [linkable message path](../../concepts/0217-linkable-message-paths/README.md) that uniquely identifies the candidate introducee.
 
 #### Requesting confirmation
 

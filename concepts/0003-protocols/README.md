@@ -6,7 +6,7 @@
 - Status Note: standards track and beginning to influence many mental models, but not yet [ADOPTED](/README.md#rfc-lifecycle). 
 - Supersedes: [Indy PR #69]( https://github.com/hyperledger/indy-hipe/pull/69)
 - Start Date: 2018-12-28
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

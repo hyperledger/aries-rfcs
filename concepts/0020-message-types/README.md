@@ -6,7 +6,7 @@
 - Status Note:  
 - Supersedes: [HIPE 0021 Message Types](https://github.com/hyperledger/indy-hipe/tree/master/text/0021-message-types)
 - Start Date: 2018-07-06
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

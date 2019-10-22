@@ -6,7 +6,7 @@
 - Status Note: Has guided Indy design choices for several months. Not yet ratified by greater Aries community. 
 - Supersedes: [Indy HIPE 0035](https://github.com/hyperledger/indy-hipe/tree/master/text/0035-json-ld-compatibility)
 - Start Date: 2019-01-23
-- Tags: concept, decorator
+- Tags: [concept](/tags.md#concept), [decorator](/tags.md#decorator)
 
 ## Summary
 

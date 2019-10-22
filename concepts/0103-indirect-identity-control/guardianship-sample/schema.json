@@ -12,7 +12,7 @@
   "appealURI", // same
   "credentialSubject.holder.type", // uri to schema for a holder
   "credentialSubject.holder.role", // "parent" or "grandparent"
-  "credentialSubject.holder.basisURI", // uri from trust framework that defines which basis justifies the guardianship
+  "credentialSubject.holder.rationaleURI", // uri from trust framework that defines which rationale justifies the guardianship
   "credentialSubject.holder.firstName",
   "credentialSubject.holder.constraints.boundaries",
   "credentialSubject.holder.constraints.pointOfOrigin",

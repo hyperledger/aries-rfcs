@@ -5,7 +5,7 @@
 - Since: 2019-08-19
 - Status Note: recently proposed  
 - Start Date: 2019-08-19
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 
