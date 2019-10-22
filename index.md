@@ -39,7 +39,7 @@
 ## [PROPOSED](README.md#proposed)
 * [0013: Overlays](concepts/0013-overlays/README.md) (2019-05-20 &mdash; [`concept`](/tags.md#concept))
 * [0021: DIDComm Message Anatomy](concepts/0021-didcomm-message-anatomy/README.md) (2019-05-25 &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
-* [0023: DID Exchange Protocol 1.0](features/0023-did-exchange/README.md) (2019-05-27, [1 impl](features/0023-did-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0023: DID Exchange Protocol 1.0](features/0023-did-exchange/README.md) (2019-05-27 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0024: DIDComm over XMPP](features/0024-didcomm-over-xmpp/README.md) (2019-06-14 &mdash; [`feature`](/tags.md#feature))
 * [0025: DIDComm Transports](features/0025-didcomm-transports/README.md) (2019-05-27 &mdash; [`feature`](/tags.md#feature))
 * [0028: Introduce Protocol 1.0](features/0028-introduce/README.md) (2019-04-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
