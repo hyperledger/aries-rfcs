@@ -30,38 +30,22 @@ haven't been endorsed by the community yet, but they seem like reasonable ideas 
 exploring.
 
 #### DEMONSTRATED
-__Demonstrated__ RFCs have one or more implementations available, listed in the "Implementations" section
-of the RFC document. As with the PROPOSED status, demonstrated RFCs haven't been endorsed by the community,
-but the ideas put forth have been more thoroughly explored through the implementation(s). The demonstrated
-status is an optional step in the lifecycle.
+__Demonstrated__ RFCs have one or more implementations available, listed in the "Implementations" section of the RFC document. As with the PROPOSED status, demonstrated RFCs haven't been endorsed by the community, but the ideas put forth have been more thoroughly explored through the implementation(s). The demonstrated status is an optional step in the lifecycle. For protocol-related RFCs, work on protocol tests SHOULD begin in the [test suite repo](https://github.com/hyperledger/aries-protocol-test-suite) by the time this status is assigned.
 
 #### ACCEPTED
-To get an RFC __accepted__, [build consensus](contributing.md#how-to-get-an-RFC-accepted)
-for your RFC on [chat](https://chat.hyperledger.org/channel/aries) and in community
-meetings. An accepted RFC is incubating on a standards track; the community has decided
-to polish it and is exploring or pursuing implementation.
+To get an RFC __accepted__, [build consensus](contributing.md#how-to-get-an-RFC-accepted) for your RFC on [chat](https://chat.hyperledger.org/channel/aries) and in community meetings. If your RFC is a feature that's protocol- or decorator-related, it MUST have reasonable tests in the [test suite repo](https://github.com/hyperledger/aries-protocol-test-suite), it MUST list the test suite in the protocol RFC's [Implementations section](../0000-template.md#implementations), at least one other implementation must have passed the relevant portions of the test suite, and all implementations listed in this section of the RFC MUST hyperlink to their test results. An accepted RFC is incubating on a standards track; the community has decided to polish it and is exploring or pursuing implementation.
 
 #### ADOPTED
-To get an RFC __adopted__, [socialize and implement](contributing.md#how-to-get-an-rfc-adopted).
-An RFC gets this status once it has significant momentum--when implementations accumulate,
-or when the mental model it advocates has begun to permeate our discourse. In other words,
-adoption is acknowledgment of a _de facto_ standard.
+To get an RFC __adopted__, [socialize and implement](contributing.md#how-to-get-an-rfc-adopted). An RFC gets this status once it has significant momentum--when implementations accumulate, or when the mental model it advocates has begun to permeate our discourse. In other words, adoption is acknowledgment of a _de facto_ standard.
 
-To __refine__ an RFC, propose changes to it through additional PRs. Typically
-these changes are driven by experience that accumulates during or after adoption.
-Minor refinements that just improve clarity can happen inline with lightweight
-review. Status is still ADOPTED.
+To __refine__ an RFC, propose changes to it through additional PRs. Typically these changes are driven by experience that accumulates during or after adoption. Minor refinements that just improve clarity can happen inline with lightweight review. Status is still ADOPTED.
 
 #### RETIRED
-An RFC is __retired__ when it is withdrawn from community consideration by its authors, 
-when implementation seems permanently stalled, or when significant refinements require
-a superseding document. If a retired RFC has been superseded, its `Superseded By` field
-should contain a link to the newer spec, and the newer spec's `Supersedes` field
-should contain a link to the older spec. Permalinks are not broken.
+An RFC is __retired__ when it is withdrawn from community consideration by its authors, when implementation seems permanently stalled, or when significant refinements require a superseding document. If a retired RFC has been superseded, its `Superseded By` field should contain a link to the newer spec, and the newer spec's `Supersedes` field should contain a link to the older spec. Permalinks are not broken.
 
 ### Changing an RFC Status
 
-See notes about this in [Contributing](contributing.md#changing-an-rfc-status)
+See notes about this in [Contributing](contributing.md#changing-an-rfc-status).
 
 ## About
 

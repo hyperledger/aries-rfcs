@@ -5,7 +5,7 @@
 - Status Note: Part of proposed Rich Schema capabilities for credentials 
 - Supersedes: 
 - Start Date: 2019-06-07 
-- Tags: feature, rich-schemas
+- Tags: [feature](/tags.md#feature), [rich-schemas](/tags.md#rich-schemas)
 
 ## Summary
 [summary]: #summary

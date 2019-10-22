@@ -6,7 +6,7 @@
 - Status Note: Socialized and accepted within Indy community, and used in several implementations of protocols that want to associate a MIME type with an HTTP payload. However, this version of the spec changes the type names of types slightly to genericize, so we're resetting the status.
 - Supersedes: [Indy HIPE 0026]( https://github.com/hyperledger/indy-hipe/blob/master/text/0026-agent-file-format/README.md)
 - Start Date: 2018-11-13
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 [![message in envelope](small-msg-in-envelope.png)](msg-in-envelope.png)
  

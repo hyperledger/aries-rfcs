@@ -5,7 +5,7 @@
 - Since: 2019-04-15
 - Status Note: This is a second attempt to integrate non-repudiable digital signatures based on learnings and discussions over the past few months. This focuses only on the signing of entire messages. Signature Decorators will be handled seperately.
 - Start Date: 2019-04-15
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 ## Summary
 

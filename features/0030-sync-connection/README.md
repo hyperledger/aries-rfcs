@@ -6,7 +6,7 @@
 - Status Note: used by the [peer DID method spec](https://openssi.github.io/peer-did-method-spec). Implementation beginning. 
 - Supersedes: [Indy HIPE PR #104](https://github.com/hyperledger/indy-hipe/pull/104)
 - Start Date: 2018-10-01
-- Tags: feature, decorator, protocol
+- Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator), [protocol](/tags.md#protocol)
 
 ## Summary
 

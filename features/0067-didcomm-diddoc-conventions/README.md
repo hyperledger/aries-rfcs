@@ -5,7 +5,7 @@
 - Since: 2019-06-10
 - Status Note: This revises the former [INDY HIPE](https://github.com/hyperledger/indy-hipe/pull/92)
 - Start Date: 2019-04-15
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 ## Summary
 

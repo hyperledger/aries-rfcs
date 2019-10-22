@@ -6,7 +6,7 @@
 - Status Note: Socialized and broadly understood in other conceptual RFCs about routing. 
 - Supersedes: [0022-Cross-Domain-Messaging](https://github.com/hyperledger/indy-RFC/blob/master/text/0022-cross-domain-messaging/README.md)
 - Start Date: 2018-08-13
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

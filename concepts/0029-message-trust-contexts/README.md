@@ -6,7 +6,7 @@
 - Status Note: Only implemented in one codebase and in the sample code here. 
 - Supersedes: [Indy HIPE PR #120](https://github.com/hyperledger/indy-hipe/pull/120)
 - Start Date: 2018-02-10 (approx, backdated)
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

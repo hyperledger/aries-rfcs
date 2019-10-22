@@ -4,7 +4,7 @@
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-05-30
 - Start Date: 2019-05-30
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 ## Summary
 

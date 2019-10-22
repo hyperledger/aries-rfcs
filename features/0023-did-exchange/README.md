@@ -6,7 +6,7 @@
 - Status Note: This RFC is a work in progress designed to replace the [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md) after all necessary changes have been made. This RFC is likely to change as discussions continue, and should not yet be built into production code.
 - Supersedes: [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md)
 - Start Date: 2018-06-29
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 
@@ -493,4 +493,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- |  |
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | [test_manual.py](https://github.com/hyperledger/aries-protocol-test-suite/blob/master/protocol_tests/connection/test_manual.py)

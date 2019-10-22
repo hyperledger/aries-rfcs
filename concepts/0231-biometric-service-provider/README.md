@@ -5,7 +5,7 @@
 - Since: 2019-09-24
 - Status Note: Proposed for now based on authors joint work
 - Start Date: 2019-06-01
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

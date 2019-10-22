@@ -5,7 +5,7 @@
 - Since: 2018-10-24
 - Status Note: Not yet implemented broadly, but Evernym has been exploring it as a solution to some debugging needs.
 - Start Date: 2018-10-24
-- Tags: feature, decorator
+- Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
 
 ## Summary
 

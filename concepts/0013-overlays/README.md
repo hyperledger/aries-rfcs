@@ -5,7 +5,7 @@
 - Since: 2019-05-20
 - Status Note: socialized for many months; no implementations yet
 - Start Date: 2018-10-01
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

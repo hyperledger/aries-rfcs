@@ -5,7 +5,7 @@
 - Since: 2019-06-04
 - Status Note: Currently under study for implementation in various pilots and POCs. See, for example, the [Sovrin Foundation's Guardianship Task Force](https://docs.google.com/document/d/1ymWzCwu2Ud6FMGZdU8md03KCvaxmT41-gQYIRXo09Xw/edit).
 - Start Date: 2019-05-10
-- Tags: concept, credentials
+- Tags: [concept](/tags.md#concept), [credentials](/tags.md#credentials)
 
 ## Summary
 

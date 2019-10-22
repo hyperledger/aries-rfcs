@@ -4,7 +4,7 @@
 - Since: 2019-09-10
 - Status Note: Purely theoretical at this point, but may be relevant to efforts to join subprotocols to superprotocols. Mentioned in [RFC 0214 "Help Me Discover" Protocol](../../features/0214-help-me-discover/README.md).
 - Start Date: 2019-08-26
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

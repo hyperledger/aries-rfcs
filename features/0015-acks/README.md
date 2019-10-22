@@ -6,7 +6,7 @@
 - Status Note: Broadly socialized and beginning to be implemented. Several protocols assume ACK behavior. May be nearing the maturity and uptake appropriate for ACCEPTED status. Note: this RFC 
 - Supersedes: [Indy HIPE PR #77](https://github.com/hyperledger/indy-hipe/pull/77)
 - Start Date: 2018-12-26
-- Tags: feature, decorator
+- Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
 
 ## Summary
 

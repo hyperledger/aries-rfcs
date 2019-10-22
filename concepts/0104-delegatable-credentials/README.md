@@ -5,7 +5,7 @@
 - Since: 2019-09-09
 - Status Note: Various aspects of this are implemented, or in the process of being implemented, in [Hyperledger Ursa](https://github.com/hyperledger/ursa-rfcs/pull/14) and Hyperledger Indy. This doc will be updated based on learnings.
 - Start Date: 2019-08-01
-- Tags: concept, credentials
+- Tags: [concept](/tags.md#concept), [credentials](/tags.md#credentials)
 
 ## Summary
 

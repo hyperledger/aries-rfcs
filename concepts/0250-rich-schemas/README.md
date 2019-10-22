@@ -5,7 +5,7 @@
 - Status Note: Port of [this HIPE](https://github.com/hyperledger/indy-hipe/tree/master/text/0119-rich-schemas/README.md)
 - Supersedes: [this HIPE](https://github.com/hyperledger/indy-hipe/tree/master/text/0119-rich-schemas/README.md)
 - Start Date: 2019-03-19
-- Tags: concept, rich-schemas
+- Tags: [concept](/tags.md#concept), [rich-schemas](/tags.md#rich-schemas)
 
 ## Summary
 

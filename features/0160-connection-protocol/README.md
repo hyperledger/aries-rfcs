@@ -5,7 +5,7 @@
 - Status Note: This is the protocol with existing uses. It is expected that [RFC 0023 DID Exchange](../../features/0023-did-exchange/README.md) will replace this protocol.
 - Supersedes: [HIPE 0031 - Connection Protocol](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol)
 - Start Date: 2018-06-29
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -458,9 +458,9 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | passed agent connectathon tests, Feb 2019
-[Streetcred.id](https://streetcred.id/) | passed agent connectathon tests, Feb 2019
-[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | ported from VON codebase that passed agent connectathon tests, Feb 2019
-[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | implemented July 2019
-[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | ported from Indy Agent codebase that provided agent connectathon tests, Feb 2019
-[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | passed agent connectathon tests, Feb 2019 
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | passed agent connectathon tests, Feb 2019; [MISSING test results](/tags.md#test-anomaly)
+[Streetcred.id](https://streetcred.id/) | passed agent connectathon tests, Feb 2019; [MISSING test results](/tags.md#test-anomaly)
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | ported from VON codebase that passed agent connectathon tests, Feb 2019; [MISSING test results](/tags.md#test-anomaly)
+[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | implemented July 2019; [MISSING test results](/tags.md#test-anomaly)
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | ported from Indy Agent codebase that provided agent connectathon tests, Feb 2019; [MISSING test results](/tags.md#test-anomaly)
+[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | passed agent connectathon tests, Feb 2019; [MISSING test results](/tags.md#test-anomaly)

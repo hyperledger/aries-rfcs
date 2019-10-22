@@ -6,7 +6,7 @@
 - Status Note: Broadly socialized in Indy circles. Implemented in several codebases. Not yet fully harmonized. 
 - Supersedes: [Indy HIPE PR #65]( https://github.com/hyperledger/indy-hipe/pull/65)
 - Start Date: 2018-11-26
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 
