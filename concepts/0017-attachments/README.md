@@ -39,7 +39,7 @@ be saved; doesn't that make it data?
 What it is true that messages and data are highly related,
 some semantic differences matter:
 
-* _Messages are primarily about communication_. Their meaning is tied
+* __Messages are primarily about communication__. Their meaning is tied
 to a communication context. [Messages are a mechanism whereby
 state evolves in a protocol](../0003-protocols/README.md#ingredients).
 Protocols are [versioned according to the structure and semantics of
@@ -47,10 +47,10 @@ messages](../0003-protocols/semver.md).
 Messages are usually small, consisting of a modest number of fields with
 a structure that's focused on furthering the goals of their protocol.
 
-* _Data has meaning at rest_, in many different DIDComm protocols, or
+* __Data has meaning at rest__, in many different DIDComm protocols, or
 in important contexts beyond DIDComm. Data may be very large and very
 complex. It may come in formats that are quite independent from
-DIDComm. Data may be produced, consumed or handled as part of a
+DIDComm, and that are versioned independent of the protocols that share it. Data may be produced, consumed or handled as part of a
 protocol, but the actual content of the data is usually not where
 processing at the protocol level focuses. In agent codebases, it would
 be common for data handling to be implemented in different classes
@@ -84,7 +84,7 @@ venue, instructions about how to unlock the gate, pictures of certain
 resources, and so forth. This collateral is _data_, whereas the messages
 that signal progression through the steps of scheduling are not.
 
-* The [Connection Protocol](https://github.com/hyperledger/indy-hipe/blob/master/text/0031-connection-protocol/README.md)
+* The [DID Exchange Protocol](../../features/0023-did-exchange/README.md)
 exchanges messages to establish a connection between two parties. Part of
 what's exchanged is a DID Doc. The DID Doc is more like _data_ than it is
 like an ordinary _message_, since it has meaning at rest and outside the
@@ -94,7 +94,7 @@ The line between these two concepts may not be perfectly crisp in all cases,
 and that is okay. It is clear enough, most of the time, to provide context
 for the central question of this HIPE, which is:
 
->How do we send data through messages?
+>How do we send data along with messages?
 
 ### 3 Ways
 
@@ -107,16 +107,13 @@ Data can be "attached" to DIDComm messages in 3 ways:
 #### Inlining
 
 In __inlining__, data is directly assigned as the value paired with a JSON key
-in a DIDComm message. For example, [a DID Document is inlined as the
-value of the `did_doc` key in `connection_request` and
-`connection_response` messages in the Connection
-1.0 Protocol](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol#example):
+in a DIDComm message. For example, a message about arranging a rendezvous may inline data about a location:
 
-[![inlined DID Doc](inlined.png)](connection-request.json)
+[![inlined location](inlined.png)](rendezvous.json)
 
-Notice that DID Docs have a meaning at rest, outside the message that
-conveys them. Notice as well that the versioning of DID Doc formats
-may evolve independent of the versioning of the connection protocol.
+This inlined data is in Google Maps pinning format. It has a meaning at rest, outside the message that
+conveys it, and the versioning of its structure
+may evolve independent of the versioning of the rendezvous protocol.
 
 Only JSON data can be inlined, since any other data format would break
 JSON format rules.
@@ -153,6 +150,35 @@ message that conveys evidence found at a crime scene might include the
 following decorator:
 
 [![appended attachments](appended.png)](crime-scene.json)
+
+### Signing attachments
+
+In some cases it may be desirable to sign an attachment in addition to or instead of signing the message as a whole. Consider a home-buying protocol; the home inspection needs to be signed even when it is removed from a messaging context.
+
+Embedded and appended attachments support this by replacing the `data.base64` field with a [`~sig` decorator](../../features/0234-signature-decorator] inside the attachment descriptor. The decorator's `sig_data` field then encodes the bytes that are signed (along with a timestamp prefix):
+
+```jsonc
+{
+  "@type": "didcomm.org/xhomebuy/1.0/home_insp",
+  "inspection_date": "2020-03-25",
+  "inspection_address": "123 Villa de Las Fuentes, Toledo, Spain",
+  "comment": "Here's that report you asked for.",
+  "report~attach": {
+    "mime-type": "application/pdf",
+    "filename": "Garcia-inspection-March-25.png",
+    "data": {
+      ~sig": {
+        "@type":"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
+        "signature": "base64URL(ed25519 signature)",
+        "sig_data": "base64URL(64bit_integer_from_unix_epoch|msg)",
+        "signers": "base64URL(inlined_ed25519_signing_verkey)""
+      }
+    }
+  }
+}
+```
+
+This technique is not available for inlined attachments or for attachments that are embedded or appended as JSON, because there is no way to enforce canonicalization of the JSON.
 
 ### Choosing the right approach
 
@@ -432,7 +458,9 @@ attachment. Contains the following subfields:
   * `links`: A list of zero or more locations at which the content may be fetched.
   
   * `base64`: Base64-encoded data, when representing arbitrary content inline instead
-  of via `links`. Optional. 
+  of via `links`. Optional.
+  
+  * `~sig`: Signed attachment. See [above](#signing-attachments). When present, `base64` is not used.
   
   * `json`: Directly embedded JSON data, when representing content inline instead of
   via `links`, and when the content is natively conveyable as JSON. Optional. 
