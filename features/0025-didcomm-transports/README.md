@@ -6,7 +6,7 @@
 - Status Note:  
 - Supersedes: [INDY PR 94](https://github.com/hyperledger/indy-hipe/pull/94)
 - Start Date: 2019-02-26
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 ## Summary
 

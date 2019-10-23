@@ -6,7 +6,7 @@
 - Status Note: This RFC is under development. The reference implementation was recently added.
 - Supersedes: [Indy HIPE PR #55: Consent Receipt](https://github.com/hyperledger/indy-hipe/pull/55)
 - Start Date: 2018-11-08
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
     
     
 ## Table of Contents

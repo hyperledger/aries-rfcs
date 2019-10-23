@@ -5,7 +5,7 @@
 - Since: 2019-01-31
 - Status Note: broadly used in Indy, but not yet harmonized with DIF work on hubs.
 - Start Date: 2018-12-14
-- Tags: concept, decorator
+- Tags: [concept](/tags.md#concept), [decorator](/tags.md#decorator)
 
 ## Summary
 

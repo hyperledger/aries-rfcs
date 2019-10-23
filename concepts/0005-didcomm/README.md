@@ -6,7 +6,7 @@
 - Status Note: Probably almost mature enough to propose [ACCEPTED](/README.md#rfc-lifecycle) status. 
 - Supersedes: [Indy PR #98](https://github.com/hyperledger/indy-hipe/pull/98)
 - Start Date: 2018-01-05 (approx, backdated)
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

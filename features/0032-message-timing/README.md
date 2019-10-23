@@ -6,7 +6,7 @@
 - Status Note: Broadly socialized but not yet implemented. 
 - Supersedes: [Indy RFC PR #68](https://github.com/hyperledger/indy-hipe/pull/68)
 - Start Date: 2018-12-11
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 ## Summary
 

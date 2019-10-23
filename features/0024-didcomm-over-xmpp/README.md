@@ -6,7 +6,7 @@
 - Status Note:  , moving from Indy to Aries.
 - Supersedes: [Indy DIDComm-over-XMPP](https://github.com/Oskar-van-Deventer/indy-hipe/tree/master/text/didcom-over-xmpp)
 - Start Date: 2019-04-23
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 ## Summary
 

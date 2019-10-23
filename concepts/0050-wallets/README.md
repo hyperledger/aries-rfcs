@@ -6,7 +6,7 @@
 - Status Note: Fully implemented in Indy SDK, but not yet socialized well in the broader Aries community. Needs some updates to promote better key management; see related RFC about [lox](../../features/0042-lox/README.md). 
 - Supersedes: [Indy HIPE 0013]( https://github.com/hyperledger/indy-hipe/tree/master/text/0013-wallets)
 - Start Date: 2018-05-22
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
