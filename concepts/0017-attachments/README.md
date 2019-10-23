@@ -153,9 +153,9 @@ following decorator:
 
 ### Signing attachments
 
-In some cases it may be desirable to sign an attachment in addition to or instead of signing the message as a whole. Consider a home-buying protocol; the home inspection needs to be signed even when it is removed from a messaging context.
+In some cases it may be desirable to sign an attachment in addition to or instead of signing the message as a whole. Consider a home-buying protocol; the home inspection needs to be signed even when it is removed from a messaging flow.
 
-Embedded and appended attachments support this by replacing the `data.base64` field with a [`~sig` decorator](../../features/0234-signature-decorator] inside the attachment descriptor. The decorator's `sig_data` field then encodes the bytes that are signed (along with a timestamp prefix):
+Embedded and appended attachments support this by replacing the `data.base64` field with a `sig` field that uses [JWS format](../../features/0234-signature-decorator], where the payload of the JWS is the data that would otherwise have been base64-encoded:
 
 ```jsonc
 {
@@ -165,20 +165,16 @@ Embedded and appended attachments support this by replacing the `data.base64` fi
   "comment": "Here's that report you asked for.",
   "report~attach": {
     "mime-type": "application/pdf",
-    "filename": "Garcia-inspection-March-25.png",
+    "filename": "Garcia-inspection-March-25.pdf",
     "data": {
-      ~sig": {
-        "@type":"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
-        "signature": "base64URL(ed25519 signature)",
-        "sig_data": "base64URL(64bit_integer_from_unix_epoch|msg)",
-        "signers": "base64URL(inlined_ed25519_signing_verkey)""
+      "sig": "eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9.Jpc... (bytes omitted to shorten) ...lfQ.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk",
       }
     }
   }
 }
 ```
 
-This technique is not available for inlined attachments or for attachments that are embedded or appended as JSON, because there is no way to enforce canonicalization of the JSON.
+This technique is not available for inlined attachments or for attachments that are embedded or appended as JSON, because there is no way to enforce canonicalized JSON as input to the signing algorithm.
 
 ### Choosing the right approach
 
