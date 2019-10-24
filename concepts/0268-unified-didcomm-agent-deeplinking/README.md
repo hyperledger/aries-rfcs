@@ -3,14 +3,14 @@
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-10-23 
 - Status Note: Proposed  
-- Start Date: 2018-10-04 (date you started working on this idea)
+- Start Date: 2018-10-04
 - Tags: concept, agents, mobile
 
 ## Summary
 
 A set of specifications for mobile agents to standardize around to provide better interoperable support for DIDCOMM compliant messages. Standards around the way agents intepret these encoded messages allow increased user choice when picking agents. 
 
-This RFC lists a series of standards which must be followed by an Aires Compliant agent for it to be considered interoperable with other agents. 
+This RFC lists a series of standards which must be followed by an Aires compatible agent for it to be considered interoperable with other agents. 
 
 ## Motivation
 
@@ -74,7 +74,7 @@ This puts extra work on wallet developers to ensure a good experience.
 
 This allows each wallet to define their own invite page (or use an existing page provided by the community) while providing a common protocol scheme (didcomm://) for all applications. 
 
-If we don't do this, there's a likelihook that wallet applications become unable to communicate with each other effecively during the onboarding process, leading to fragmentation like in the IM world. 
+If we don't do this, there's a chance that wallet applications become unable to communicate with each other effecively during the onboarding process, leading to fragmentation, much like in the IM world. 
 
 ## Prior Art
 
