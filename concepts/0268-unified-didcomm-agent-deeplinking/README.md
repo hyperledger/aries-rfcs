@@ -76,3 +76,16 @@ This allows each wallet to define their own invite page (or use an existing page
 
 If we don't do this, there's a likelihook that wallet applications become unable to communicate with each other effecively during the onboarding process, leading to fragmentation like in the IM world. 
 
+## Prior Art
+
+## Unresolved Questions
+
+## Implementations
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+*Implementation Notes*.
+
+Name / Link | Implementation Notes
+--- | ---
+ | 
+
