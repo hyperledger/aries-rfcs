@@ -70,9 +70,13 @@
 * [0231: Biometric Service Provider](concepts/0231-biometric-service-provider/README.md) (2019-09-24 &mdash; [`concept`](/tags.md#concept))
 * [0249: Aries SDK Rich Schema Contexts](features/0249-rich-schema-contexts/README.md) (2019-10-08 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0250: Rich Schema Objects](concepts/0250-rich-schemas/README.md) (2019-10-08 &mdash; [`concept`](/tags.md#concept) [`rich-schemas`](/tags.md#rich-schemas))
+<<<<<<< HEAD
 =======
 * [0257: Private Credential Issuance](concepts/0257-private-credential-issuance/README.md) (2019-10-16 &mdash; [`concept`](/tags.md#concept) [`protocol`](/tags.md#protocol))
 >>>>>>> Fix broken unit tests
+=======
+* [0257: Private Credential Issuance](concepts/0257-private-credential-issuance/README.md) (2019-10-16 &mdash; [`concept`](/tags.md#concept) [`protocol`](/tags.md#protocol))
+>>>>>>> 1a9df147ea56e5367cb36cd1d5e75560f44c24b0
 
 ## [RETIRED](README.md#retired)
 
