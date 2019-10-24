@@ -1,4 +1,4 @@
-# Aries RFC 0258: Unified DIDCOMM Deeplinking
+# Aries RFC 0268: Unified DIDCOMM Deeplinking
 - Authors: [Dev Bharel](dev@spaceman.id), [Alexi Falquier](alexis@spaceman.id)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-10-23 
