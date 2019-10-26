@@ -29,7 +29,9 @@ However, it's important to temper our ambitions. Standards, community specs, and
 
 What we need is a tool that achieves these goals:
 
-1. **Evaluate practical interoperability** of [agents](../../concepts/0004-agents/README.md) and [other software that offers SSI features](../../concepts/0004-agents/README.md#the-agent-ness-continuum).
+1. **Evaluate practical interoperability** of [agents](../../concepts/0004-agents/README.md).
+
+    >[Other software that offers SSI features](../../concepts/0004-agents/README.md#the-agent-ness-continuum) should also be testable. Here, such components are conflated with agents for simplicity, but it's understood that the suite targets protocol participants no matter what their technical classification.
  
    Focus on remote interactions that deliver business value: [high-level protocols](../../concepts/0003-protocols/README.md) built atop [DIDComm](../../concepts/0005-didcomm/README.md), such as [credential issuance](../0036-issue-credential/README.md), [proving](../0037-present-proof), and [introducing](../0028-introduce/README.md), where each [participant](../../concepts/0003-protocols/roles-participants-etc.md#participants) uses different software. DID methods, ledgers, crypto libraries, credential implementationss, and DIDComm infrastructure should have separate tests that are out of scope here. None of these generate deep insight into whether packaged software is interoperable enough to justify purchase decisions; that's the gap we need to plug.
    
@@ -53,9 +55,11 @@ Based on the preceding context, the following rules guide our understanding of t
 * **DO** test roles in a protocol separately, and DO test only one agent at a time. The question isn't *"Does agent X support the issuance protocol?"* but rather *"Does agent X support* role Y *in the issuance protocol?"* All roles in a protocol other than the one role for the one tested agent should be played by the test suite. 
 * **DO** test required and optional [decorators](../../concepts/0011-decorators/README.md) to the extent that they are relevant to interoperability.
 * **DO** distinguish between required and optional features of a protocol in results.
-* **DO** provide value for agents that talk over transports besides HTTP: BlueTooth, SMTP, AMQP, and so forth -- but DON'T get bogged down in all the permutations of transport and routing.
+* **DO** provide value for agents that talk over transports besides HTTP: BlueTooth, SMTP, AMQP, and so forth -- but **DON'T** get bogged down in all the permutations of transport and routing.
 * **DO** describe results in a formally defined data structure that can be prettified in various ways.
 * **DO** allow the test suite to be an automated step in a CI/CD pipeline.
+* **DO** evaluate *message* correctness, but touch more lightly on *data* correctness. See [this discussion about the distinction between messages and data](../../concepts/0017-attachments/README.md#messages-versus-data), and note how the [Issue Credential](../0036-issue-credential/README.md) and [Present Proof](../0037-present-proof/README.md) protocols push credential and presentation format to a concern about the format of attached data, so the data can evolve at a different rate from the protocol.
+
 <hr> 
  
 * **DON'T** attempt to replace proper unit, functional, or integration tests for agents.
@@ -68,66 +72,137 @@ Based on the preceding context, the following rules guide our understanding of t
 * **DON'T** impose uncomfortable process, tool, or architecture constraints on builders of agents. A developer should be able to start using the test suite after their agent is designed and built, with little or no retrofit friction.
 * **DON'T** require that the test suite be runnable by an independent third party; trust results as reported by an agent's own developers. The suite might be relevant in a certification process, but is not intended to embody a certification process in and of itself.
 * **DON'T** impose build-time, install-time, or test-time dependencies that unduly burden agent developers or test suite contributors.
+* **DON'T** worry about test suite performance much. We want tests to run in minutes, so we shouldn't do anything ridiculously time-consuming--but simplicity of the suite is more important than its efficiency.
 
 ### General Approach
 
-We've chosen to pursue these goals by maintaining a modular protocol test suite as a deliverable of the Aries project. The test suite is an agent in its own right, albeit an agent with unusual behaviors and features. Currently the suite lives in the `aries-protocol-test-suite` repo, but the location and codebase could change without invalidating this RFC; those are implementation details. The contract between the test suite and our identity community is:
+We've chosen to pursue these goals by maintaining a modular protocol test suite as a deliverable of the Aries project. The test suite is an agent in its own right, albeit an agent with deliberate misbehaviors, a security model unsuitable for production deployment, and a desire to use every possible version of every protocol.
 
-#### Test Suite Contract
+Currently the suite lives in the `aries-protocol-test-suite` repo, but the location and codebase could change without invalidating this RFC; those are implementation details.
 
-1. The suite is packaged for local installation.
+### Contract Between Suite and Agent Under Test
+
+The contract between the test suite and the agents it tests is:
+
+#### Suite will...
+
+1. Be packaged for local installation.
 
     Packaging could take various convenient forms. Those testing an agent install the suite in an environment that they control, where their agent is already running, and then configure the suite to talk to their agent.
     
-2. The suite engages in protocol interactions with the **agent under test** using DIDComm over HTTP.
+2. *Evaluate* the **agent under test** by engaging in protocol interactions over a **frontchannel**, and *control* the interactions over a **backchannel**. Both channels will use DIDComm over HTTP.
 
-    Agents that interact over other transports can use transport adapters provided by the test suite, or write their own. HTTP is the least common denominator transport into which any other transports are reinterpreted. Adapting is the job of the agent developer, not the test suite--but the suite will try to make this as easy as possible.
+    Over the frontchannel, the test suite and the agent under test look like ordinary agents in the ecosystem; any messages sent over this channel could occur in the wild, with no clue that either party is in testing mode.
     
-    <figure id="channels">
+    The backchannel is the place where testing mode manifests. It lets the agent's initial state be set and reset with precision, guarantees its choices at forks in a workflow, eliminates any need for manual interaction, and captures notifications from the agent about errors. Depending on the agent under test, this backchannel may be very simple, or more complex. For more details, see [Backchannel](#backchannel) below.
+
+    Agents that interact over other transports on either channel can use transport adapters provided by the test suite, or write their own. HTTP is the least common denominator transport into which any other transports are reinterpreted. Adapting is the job of the agent developer, not the test suite--but the suite will try to make this as easy as possible.
+    
     <a href="https://docs.google.com/presentation/d/1Rn1gEnYXnIetC9IXrZynyh2FI6XHEE7n8wE6eIpvwZA/edit" target="imgsrc"><img src="channels.png" alt="channels"/></a>
-      <figcaption>channels used by test suite</figcaption>
-    </figure>
     
-3. The suite also interacts with the agent under test using a backchannel.
+3. Not probe for agent features. Instead, it will just run whatever subset of its test inventory is declared relevant to the agent under test.
+
+    This lets simple agents do simple integrations with the test suite, and avoid lots of needless error handling on both sides.
+    
+4. Use a set of predefined identities and a set of starting conditions that all agents under test must be able to recognize on demand; these are referenced on the backchannel in control messages. See [Predefined Inventory](#predefined-inventory) below.
+
+5. Run tests in arbitrary orders and combinations, but only run one test at a time.
+
+    Some agents may support lots of concurrency, but the test suite should not assume that all agents do.
+
+6. Produce an [__interop profile__](#interop-profile) for the agent under test, with respect to the tested features, for every successful run of the test suite.
+
+    A "successful" run is one where the test suite runs to completion and believes it has valid data; it has nothing to do with how many tests are passed by the agent under test. The test suite will not emit profiles for unsuccessful runs.
+     
+     Interop profiles emitted by the test suite are the artifacts that should be [hyperlinked in the Implementation Notes section of protocol RFCs](README.md#accepted). They could also be published (possibly in a prettified form) in release notes, distributed as a product or documentation artifact, or returned as an attachment with the `disclose` message of the [Discover Features protocol](../0031-discover-features/README.md).
+     
+7. Have a very modest footprint in RAM and on disk, so running it in Docker containers, VMs, and CI/CD pipelines is practical.
  
-    This lets the agent's initial state be set and reset with precision, guarantees its choices at forks in a workflow, eliminates any need for manual interaction, and captures notifications from the agent about errors. For more details, see [Backchannel](#backchannel) below.
+8. Run on modern desktop and server operating systems, but not necessarily on embedded or mobile platforms. However, since it interacts with the agent under test over a remote messaging technology, it should be able to test agents running on any platform that's capable of interacting over HTTP or over a transport that can be adapted to HTTP.
 
-4. The suite doesn't probe for agent features; it just runs the subset of its test inventory that are declared relevant to an agent under test in its configuration.
+9. Enforce reasonable timeouts unless configured not to do so (see note about user interaction below).
+ 
+#### Agent under test will...
 
-This lets simple agents do simple integrations with the test suite, and avoid lots of unnecessary error handling. 
+1. Provide a consistent name for itself, and a semver-compatible version, so test results can be compared across test suite runs.
 
+2. Use the test suite configuration mechanism to make a claim about the tests that it believes are relevant, based on the features and roles it implements.
+
+2. Implement a distinction between test mode and non-test mode, such that:
+ 
+    * Test mode causes the agent to expose and use a backchannel--but the backchannel does not introduce a risk of abuse in production mode.
+    
+    * Test mode either causes the agent to need no interaction with a user (preferred), or is combined with test suite config that turns off timeouts (not ideal but may be useful for debugging and mobile agents). This is necessary so the test suite can be automated, or so unpredictable timing on user interaction don't cause spurious results.
+    
+    The mechanism for implementing this mode distinction could be extremely primitive (conditional compilation, cmdline switches, config file, different binaries). It simply has to preserve ordinary control in the agent under test when it's in production, while ceding some control to the test suite as the suite runs.
+
+3. Faithfully create the start conditions implied by the [Predefined Inventory](#predefined-inventory), when requested on the backchannel.
+
+4. Report errors on the backchannel.
 
 ## Reference
 
+### Releasing and Versioning
 
-## Drawbacks
+Defining a release and versioning scheme is important, because the test suite's version is embedded in every interop profile it generates, and people who read test suite output need to reason about whether the results from two different test suites are comparable. By picking the right conventions, we can also avoid a lot of complexity and maintenance overhead.
 
-Why should we *not* do this?
+The test suite releases implicitly with every merged commit, and is versioned in a [semver-compatible](https://semver.org/) way as follows:
 
-## Rationale and alternatives
+* The `major` version of the test suite version corresponds to the provisions of the contract defined in this RFC. Any breaking changes in this RFC will require an increment of the major number.
 
-## Prior art
+* The `minor` version of the test suite is a count of how many protocol+version combinations the community knows about. This number is derived from a list of known [PIURIs](../0003-protocols/uris.md#piuri) that's autogenerated from metadata about protocols in the `aries-rfcs` repo. Publishing or versioning a protocol in the community thus automatically causes the test suite's minor version to increment.
 
-Discuss prior art, both the good and the bad, in relation to this proposal.
-A few examples of what this can include are:
+* The `patch` version of the test suite is the 7-character short form of the git commit hash for the source code from which it is built.
 
-- Does this feature exist in other SSI ecosystems and what experience have
-their community had?
-- For other teams: What lessons can we learn from other attempts?
-- Papers: Are there any published papers or great posts that discuss this?
-If you have some relevant papers to refer to, this can serve as a more detailed
-theoretical background.
+The major version should change rarely, after significant community debate. The minor version should update on a weekly or monthly sort of timeframe as protocols accumulate and evolve in the community--without near-zero release effort by contributors to the test suite. The patch version is updated automatically with every commit. This is a very light process, but it still allows the test suite on Monday and the test suite on Friday to report versions like `1.39.5e22189` and `1.40.c5d8aaf`, to know which version of the test suite is later, to know that both versions implement the same contract, and to know that the later version is backwards-compatible with the earlier one.
 
-This section is intended to encourage you as an author to think about the
-lessons from other implementers, provide readers of your proposal with a
-fuller picture. If there is no prior art, that is fine - your ideas are
-interesting to us whether they are brand new or if they are an adaptation
-from other communities.
+### Test Naming and Grouping
 
-Note that while precedent set by other communities is some motivation, it
-does not on its own motivate an enhancement proposal here. Please also take
-into consideration that Aries sometimes intentionally diverges from common
-identity features.
+Tests in the test suite are named in a comma-separated form that groups them by protocol, version, role, and behavior, in that order. For example, a test of the `holder` role in version `1.0` of the the `issue-credential` protocol, that checks to see if the holder sends a proper `ack` at the end, might be named:
+
+    issue-credential,1.0,holder,sends-final-ack
+    
+Because of punctuation, this format cannot be reflected in function names in code, and it also will probably not be reflected in file names in the test suite codebase. However, it provides useful grouping behavior when sorted, and it is convenient for parsing. It lets agents under test declare patterns of relevant tests with wildcards. An agent that supports the credential issuance but not holding, and that only supports the 1.1 version of the `issue-credential` protocol, can tell the test suite what's relevant with:
+
+    issue-credential,1.1,issuer,*
+    
+### Interop Profiles
+
+The results of a test suite run are represented in a JSON object that looks like this:
+
+```jsonc
+{
+    "@type": "Aries Test Suite Interop Profile v1"
+    "suite_version": "1.39.5e22189",
+    "under_test_name": "Aries Static Agent Python",
+    "under_test_version": "0.9.3",
+    "test_time": "2019-11-23T18:59:06", // when test suite launched
+    "results": [
+        {"name": "issue-credential,1.0,holder,ignores-spurious-response", "pass": false },
+        {"name": "issue-credential,1.0,holder,sends-final-ack", "pass": true },
+    ]
+}
+```
+
+### Backchannel
+
+[TODO: reconcile this against what Daniel B and Sam already envisioned. I just made this up off the top of my head...]
+
+The backchannel between test suite and agent under test is managed as a standard DIDComm protocol. The identifier for the message family is X. The messages include:
+
+* `reset-state`: Sent from suite to agent. Throws away all current state and gives keys and relationships that must exist in the KMS.
+* `start`: Sent from suite to agent. Triggers the agent under test to make the first move in a protocol. Identifies the role the agent should take, and possibly the message the agent should emit, if more than one start message is possible. Also identifies the roles and endpoints for any other participants.
+* `control-next`: Sent from suite to agent. Tells the agent under test what to do the next time it is their turn to make a decision in the protocol. For example, if the protocol under test is tic-tac-toe, this might tell the agent under test what move to make. Does this in a generic way by attaching for the agent under test an approximation of the plaintext message the test suite wants it to emit. The agent can examine this JSON and act accordingly.
+* `problem-report`: Sent from agent to suite to report errors in the testing procedure itself. Any such message invalidates the current test.
+* `report-state-change`: Sent from agent to suite to report that it is now in a new state in the protocol.
+
+### Predefined Inventory
+
+TODO: link to the predefined identity for the test suite created by Daniel B, plus the RFC about other predefined DIDs. Any and all of these should be names as possible existing states in the KMS. Other initial states:
+
+* totally empty KMS
+* corrupt KMS
+* 100 random DIDs from various DID methods, with ratios per method configurable
 
 ## Unresolved questions
 
@@ -138,14 +213,3 @@ implementation of this feature before stabilization?
 - What related issues do you consider out of scope for this 
 proposal that could be addressed in the future independently of the
 solution that comes out of this doc?
-   
-## Implementations
-
-The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
-
-*Implementation Notes* [may need to include a link to test results](README.md#accepted).
-
-Name / Link | Implementation Notes
---- | ---
- | 
-
