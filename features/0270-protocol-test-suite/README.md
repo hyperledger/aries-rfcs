@@ -114,7 +114,7 @@ The contract between the test suite and the agents it tests is:
 
     A "successful" run is one where the test suite runs to completion and believes it has valid data; it has nothing to do with how many tests are passed by the agent under test. The test suite will not emit profiles for unsuccessful runs.
      
-     Interop profiles emitted by the test suite are the artifacts that should be [hyperlinked in the Implementation Notes section of protocol RFCs](README.md#accepted). They could also be published (possibly in a prettified form) in release notes, distributed as a product or documentation artifact, or returned as an attachment with the `disclose` message of the [Discover Features protocol](../0031-discover-features/README.md).
+     Interop profiles emitted by the test suite are the artifacts that should be [hyperlinked in the Implementation Notes section of protocol RFCs](../../README.md#accepted). They could also be published (possibly in a prettified form) in release notes, distributed as a product or documentation artifact, or returned as an attachment with the `disclose` message of the [Discover Features protocol](../0031-discover-features/README.md).
      
 7. Have a very modest footprint in RAM and on disk, so running it in Docker containers, VMs, and CI/CD pipelines is practical.
  
