@@ -218,10 +218,10 @@ interop.
 
 #### BPMN
 
-[BPMN](https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation) is a
+[BPMN](https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation) (Business Process Model and Notation) is a
 graphical language for modeling flows of all types (plus things less like
 our protocols as well). BPMN is a mature standard sponsored by [OMG](
-https://en.wikipedia.org/wiki/Object_Management_Group). It has a nice
+https://en.wikipedia.org/wiki/Object_Management_Group)(Object Management Group). It has a nice
 [tool ecosystem](https://camunda.com/bpmn/tool/). It also has an XML file
 format, so the visual diagrams have a two-way transformation to and from
 formal written language. And it has a code generation mode, where BPMN
