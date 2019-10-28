@@ -155,7 +155,7 @@ following decorator:
 
 In some cases it may be desirable to sign an attachment in addition to or instead of signing the message as a whole. Consider a home-buying protocol; the home inspection needs to be signed even when it is removed from a messaging flow.
 
-Embedded and appended attachments support this by replacing the `data.base64` field with a `sig` field that uses [JWS format](https://openid.net/specs/draft-jones-json-web-signature-04.html), where the payload of the JWS is the data that would otherwise have been base64-encoded:
+Embedded and appended attachments support this by replacing the `data.base64` field with a `sig` field that uses [JWS (RFC 7515) format](https://tools.ietf.org/html/rfc7515), where the payload of the JWS is the data that would otherwise have been base64-encoded:
 
 ```jsonc
 {
@@ -174,7 +174,7 @@ Embedded and appended attachments support this by replacing the `data.base64` fi
 }
 ```
 
-Here, the JWS structure inlines a public key value in JWK format, in the header's `jwk` field. It may also use the `kid` field with a DID key reference that is timestamped or versioned--but `kid` is an optional hint, and `jwk` is mandatory.
+Here, the JWS structure inlines a public key value in [JWK (RFC 7517) format])https://tools.ietf.org/html/rfc7517), in the header's `jwk` field. It may also use the `kid` field with a DID key reference that is timestamped or versioned--but `kid` is an optional hint, and `jwk` is mandatory.
 
 This technique is not available for inlined attachments or for attachments that are embedded or appended as JSON, because there is no way to enforce canonicalized JSON as input to the signing algorithm.
 
