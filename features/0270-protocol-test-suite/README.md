@@ -2,14 +2,14 @@
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-10-25
-- Status Note: Codifies some thinking about scope and mental model that are already baked into the `aries-protocol-test-suite` repo. Provides some new thinking as well.
+- Status Note: Codifies some thinking about scope and mental model that are already socialized. Provides some new thinking as well.
 - Supersedes: Partially, and in some ways, [Indy HIPE 0015](https://github.com/hyperledger/indy-hipe/blob/master/text/0015-agent-test-suite-interface/README.md) and [Indy HIPE 0016](https://github.com/hyperledger/indy-hipe/blob/master/text/0016-agent-test-suite-v1/README.md). Also, represents answers to questions that the community first posed in [this HackMD doc](https://hackmd.io/JW5b9xYCRGKqyqhVevTZ_g) and first attempted to answer in the [indy-agent repo](https://github.com/hyperledger/indy-agent).
 - Start Date: 2018-10-25
 - Tags: feature
 
 ## Summary
 
-Describes the goals, scope, and interoperability contract of the Aries Protocol Test Suite. Does NOT serve as a design doc or a developer guide; see the [aries-protocol-test-suite repo](https://github.com/hyperledger/aries-protocol-test-suite) for that.
+Describes the goals, scope, and interoperability contract of the Aries Protocol Test Suite. Does NOT serve as a design doc for the test suite code, or as a developer guide explaining how the test suite can be run; see the [test suite odebase](https://github.com/hyperledger/aries-protocol-test-suite) for that.
 
 ## Motivation
 
@@ -68,7 +68,7 @@ Based on the preceding context, the following rules guide our understanding of t
 * **DON'T** test governance, policy, regulatory compliance, or similar high-level concerns outside fundamental interoperability. 
 * **DON'T** require manual interaction.
 * **DON'T** artificially link one protocol's results to another's.
-* **DON'T** attempt to release the test suite in synch with other Aries artifacts. Rather, use an independent release cadence that many uncoordinated agent projects can leverage per their own convenience.
+* **DON'T** attempt to release the test suite in sync with other Aries artifacts. Rather, use an independent release cadence that many uncoordinated agent projects can leverage per their own convenience.
 * **DON'T** impose uncomfortable process, tool, or architecture constraints on builders of agents. A developer should be able to start using the test suite after their agent is designed and built, with little or no retrofit friction.
 * **DON'T** require that the test suite be runnable by an independent third party; trust results as reported by an agent's own developers. The suite might be relevant in a certification process, but is not intended to embody a certification process in and of itself.
 * **DON'T** impose build-time, install-time, or test-time dependencies that unduly burden agent developers or test suite contributors.
@@ -76,9 +76,9 @@ Based on the preceding context, the following rules guide our understanding of t
 
 ### General Approach
 
-We've chosen to pursue these goals by maintaining a modular protocol test suite as a deliverable of the Aries project. The test suite is an agent in its own right, albeit an agent with deliberate misbehaviors, a security model unsuitable for production deployment, and a desire to use every possible version of every protocol.
+We've chosen to pursue these goals by maintaining a modular protocol test suite as a deliverable of the Aries project. The test suite is an agent in its own right, albeit an agent with deliberate misbehaviors, a security model unsuitable for production deployment, an independent release schedule, and a desire to use every possible version of every protocol.
 
-Currently the suite lives in the `aries-protocol-test-suite` repo, but the location and codebase could change without invalidating this RFC; those are implementation details.
+Currently the suite lives in the `aries-protocol-test-suite` repo, but the location and codebase could change without invalidating this RFC; the location is an implementation detail.
 
 ### Contract Between Suite and Agent Under Test
 
@@ -90,7 +90,7 @@ The contract between the test suite and the agents it tests is:
 
     Packaging could take various convenient forms. Those testing an agent install the suite in an environment that they control, where their agent is already running, and then configure the suite to talk to their agent.
     
-2. *Evaluate* the **agent under test** by engaging in protocol interactions over a **frontchannel**, and *control* the interactions over a **backchannel**. Both channels will use DIDComm over HTTP.
+2. *Evaluate* the **agent under test** by engaging in protocol interactions over a **frontchannel**, and *control* the interactions over a **backchannel**. Both channels use DIDComm over HTTP.
 
     Over the frontchannel, the test suite and the agent under test look like ordinary agents in the ecosystem; any messages sent over this channel could occur in the wild, with no clue that either party is in testing mode.
     
@@ -100,7 +100,7 @@ The contract between the test suite and the agents it tests is:
     
     <a href="https://docs.google.com/presentation/d/1Rn1gEnYXnIetC9IXrZynyh2FI6XHEE7n8wE6eIpvwZA/edit" target="imgsrc"><img src="channels.png" alt="channels"/></a>
     
-3. Not probe for agent features. Instead, it will just run whatever subset of its test inventory is declared relevant to the agent under test.
+3. Not probe for agent features. Instead, it will just run whatever subset of its test inventory is declared relevant by the agent under test.
 
     This lets simple agents do simple integrations with the test suite, and avoid lots of needless error handling on both sides.
     
@@ -132,13 +132,13 @@ The contract between the test suite and the agents it tests is:
  
     * Test mode causes the agent to expose and use a backchannel--but the backchannel does not introduce a risk of abuse in production mode.
     
-    * Test mode either causes the agent to need no interaction with a user (preferred), or is combined with test suite config that turns off timeouts (not ideal but may be useful for debugging and mobile agents). This is necessary so the test suite can be automated, or so unpredictable timing on user interaction don't cause spurious results.
+    * Test mode either causes the agent to need no interaction with a user (preferred), or is combined with test suite config that turns off timeouts (not ideal but may be useful for debugging and mobile agents). This is necessary so the test suite can be automated, or so unpredictable timing on user interaction doesn't cause spurious results.
     
     The mechanism for implementing this mode distinction could be extremely primitive (conditional compilation, cmdline switches, config file, different binaries). It simply has to preserve ordinary control in the agent under test when it's in production, while ceding some control to the test suite as the suite runs.
 
-3. Faithfully create the start conditions implied by the [Predefined Inventory](#predefined-inventory), when requested on the backchannel.
+3. Faithfully create the start conditions implied by named states from the [Predefined Inventory](#predefined-inventory), when requested on the backchannel.
 
-4. Report errors on the backchannel.
+4. Accurately report errors on the backchannel.
 
 ## Reference
 
@@ -190,10 +190,10 @@ The results of a test suite run are represented in a JSON object that looks like
 
 The backchannel between test suite and agent under test is managed as a standard DIDComm protocol. The identifier for the message family is X. The messages include:
 
-* `reset-state`: Sent from suite to agent. Throws away all current state and gives keys and relationships that must exist in the KMS.
-* `start`: Sent from suite to agent. Triggers the agent under test to make the first move in a protocol. Identifies the role the agent should take, and possibly the message the agent should emit, if more than one start message is possible. Also identifies the roles and endpoints for any other participants.
-* `control-next`: Sent from suite to agent. Tells the agent under test what to do the next time it is their turn to make a decision in the protocol. For example, if the protocol under test is tic-tac-toe, this might tell the agent under test what move to make. Does this in a generic way by attaching for the agent under test an approximation of the plaintext message the test suite wants it to emit. The agent can examine this JSON and act accordingly.
-* `problem-report`: Sent from agent to suite to report errors in the testing procedure itself. Any such message invalidates the current test.
+* `reset-state`: Sent from suite to agent. Throws away all current state and gives keys and relationships that must exist in the KMS, by referencing named items from the [Predefined Inventory](#predefined-inventory).
+* `start`: Sent from suite to agent. Triggers the agent under test to make the first move in a protocol. Identifies the role the agent should take, and possibly the message type the agent should emit to start, if more than one start message is possible. Also identifies the roles and endpoints for any other participants.
+* `control-next`: Sent from suite to agent. Tells the agent under test what to do the next time it is their turn to make a decision in the protocol. For example, if the protocol under test is tic-tac-toe, this might tell the agent under test what move to make. Does this in a generic way by attaching an approximation of the plaintext message the test suite wants the agent under test to emit. The agent can examine this JSON and act accordingly.
+* `problem-report`: Sent from agent to suite to report errors in the testing procedure itself. Any such message invalidates and abandons the current test.
 * `report-state-change`: Sent from agent to suite to report that it is now in a new state in the protocol.
 
 ### Predefined Inventory
