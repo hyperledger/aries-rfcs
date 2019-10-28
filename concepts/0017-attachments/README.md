@@ -174,6 +174,8 @@ Embedded and appended attachments support this by replacing the `data.base64` fi
 }
 ```
 
+Here, the JWS structure inlines a public key value in JWK format, in the header's `jwk` field. It may also use the `kid` field with a DID key reference that is timestamped or versioned--but `kid` is an optional hint, and `jwk` is mandatory.
+
 This technique is not available for inlined attachments or for attachments that are embedded or appended as JSON, because there is no way to enforce canonicalized JSON as input to the signing algorithm.
 
 ### Choosing the right approach
