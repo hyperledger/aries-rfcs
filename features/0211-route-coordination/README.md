@@ -10,6 +10,8 @@
 
 A protocol to coordinate routing configuration between a routing agent and the recipient.
 
+>This focuses on routing *within* a sovereign domain (e.g., from Alice's routing agent in the cloud to Alice's mobile device and tablet at the edge). It may also relate to routing between a [mediator](../../concepts/0046-mediators-and-relays/README.md) at an agency and Alice's routing agent. In either case, the problem is not one that the external world needs to deal with; it's an issue of Alice's internal configuration. It thus does not have a strong requirement to be standardized to achieve interoperability. However, the RFC is offered so implementations have a standard pattern that they can adopt if they like, or at least refer to or build upon as they do something more custom.
+
 ## Motivation
 
 Use of the forward message in the Routing Protocol requires an exchange of information. The Recipient must know which endpoint and routing key(s) to share, and the Router needs to know which keys should be routed via this relationship.
