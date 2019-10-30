@@ -1,7 +1,7 @@
 # Aries RFC ????: Aries SDK Rich Schema Schemas
 - Authors: [Brent Zundel](brent.zundel@evernym.com), [Ken Ebert](ken@sovrin.org)
 - Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-10-??
+- Since: 2019-10-30
 - Status Note: Part of proposed Rich Schema capabilities for credentials 
 - Supersedes: 
 - Start Date: 2019-06-07 
@@ -97,40 +97,124 @@ do not support other schema representations such as RDFS, JSON Schema, XML
 Schema, OWL, etc.
 
 ### Properties
+
+#### @id
 A rich schema must have an `@id` property. The value of this property must
 be (or map to, via a context object) a URI. It is expected that rich
 schemas stored in a verifiable data registry will be assigned a DID or
 other identifier for identification within and resolution by that registry. 
 
-The `@id` of a rich schema may be used as an additional value of the `type`
-property of a verifiable credential. A [rich schema mapping](../../concepts/0250-rich-schemas/README.md#mappings)
-will contain 
+A [rich schema](README.md) may refer to the `@id` of another rich schema to
+define a parent schema. A property of a rich schema may use the `@id` of
+another rich schema as the value of its `@type` or `@id` property.
+
+A [mapping object](../../concepts/0250-rich-schemas/README.md#mappings)
+will contain the `@id` of the rich schema being mapped.
+
+A [presentation definition](../../concepts/0250-rich-schemas/README.md#presentation-definitions)
+will contain the `@id` of any schemas a holder may use to present proofs to
+a verifier.
+
+#### @type
+A rich schema must have a `@type` property. The value of this property must
+be (or map to, via a context object) a URI. 
+
+#### @context
+A rich schema may have a `@context` property. If present, the value of this
+property must be a
+[context object](../0249-rich-schema-contexts/README.md) or a URI which can
+be dereferenced to obtain a context object.
 
 ### Use in Verifiable Credentials
-
 These schemas will be used in conjunction with the JSON-LD representation
 of the verifiable credentials data model to specify which properties may be
 included as part of the verifiable credential's `credentialSubject`
 property, as well as the types of the property values.
 
-
-
-some schema are living documents, need an immutable snapshot of which one is being used.
+The `@id` of a rich schema may be used as an additional value of the 
+[type property](https://www.w3.org/TR/vc-data-model/#types) property of a
+verifiable credential. Because the `type` values of a verifiable credential
+are not required to be dereferenced, in order for the rich schema to
+support assertion of the structure and semantic meaning of the claims in
+the credential, an additional reference to the rich schema should be made
+through the 
+[credentialSchema](https://www.w3.org/TR/vc-data-model/#data-schemas)
+property. This may be done as a direct reference to the rich schema `@id`,
+or via another rich schema object which references the rich schema `@id`
+such as a 
+[credential definition](../../concepts/0250-rich-schemas/README.md#credential-definitions) 
+as would 
+[be the case](https://www.w3.org/TR/vc-data-model/#zero-knowledge-proofs) 
+for anonymous credentials, as discussed in the
+[mapping section](../../concepts/0250-rich-schemas/README.md#mappings) of
+the rich schema overview RFC.
 
 ### Data Registry Storage
 Aries-SDK will provide a means for writing `schema` objects to and reading
 `schema` objects from a verifiable data registry (such as a distributed
 ledger).
 
-Why is this important?
-possible alternative - anchor hash of web-based schema, just use web-based, etc.
+As discussed [previously](#immutability), the ability to specify the exact
+schema that was used to issue a verifiable credential, and the assurance 
+that the meaning of that schema has not changed, may be critical for the
+trust framework. Verifiable data registries which provide immutability
+guarantees provide this assurance. Some alternative storage mechanisms do
+not. Hashlinks, which may be used to verify the hash of web-based schemas,
+are one example. These can be used inform a verifier that a schema has
+changed, but do not provide access to the original version of the schema in
+the event the original schema has been updated.
 
 ### Example schema
 ```
 "schema": {
- 
+   "@context": {
+    "schema": "http://schema.org/",
+    "bibo": "http://purl.org/ontology/bibo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dct": "http://purl.org/dc/terms/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dctype": "http://purl.org/dc/dcmitype/",
+    "eli": "http://data.europa.eu/eli/ontology#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfa": "http://www.w3.org/ns/rdfa#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "schema": "http://schema.org/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "snomed": "http://purl.bioontology.org/ontology/SNOMEDCT/",
+    "void": "http://rdfs.org/ns/void#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "xsd1": "hhttp://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "schema:recipeIngredient",
+      "@type": "rdf:Property",
+      "rdfs:comment": "A single ingredient used in the recipe, e.g. sugar, flour or garlic.",
+      "rdfs:label": "recipeIngredient",
+      "rdfs:subPropertyOf": {
+        "@id": "schema:supply"
+      },
+      "schema:domainIncludes": {
+        "@id": "schema:Recipe"
+      },
+      "schema:rangeIncludes": {
+        "@id": "schema:Text"
+      }
+    },
+    {
+      "@id": "schema:ingredients",
+      "schema:supersededBy": {
+        "@id": "schema:recipeIngredient"
+      }
+    }
+  ]
  }
 ```
+recipeIngredient schema from 
+[schema.org](https://schema.org/recipeIngredient.jsonld).
 
 ### Aries Data Registry Interface
 We propose adding two Aries-Data-Registry-Interface methods for writing and
@@ -149,7 +233,6 @@ submitter: {
 }, 
 data: {
     id: identifier for the schema,
-    type: type of the schema
     schema: schema object,
     name: schema name string,
     version: schema version string,
