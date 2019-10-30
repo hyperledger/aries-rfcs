@@ -77,7 +77,7 @@ No errors are sent in timeout situations. If the inviter or invitee wishes to re
 
 #### Error Message Example
 
-```
+```jsonc
 {
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/problem_report",
   "@id": "5678876542345",
@@ -111,7 +111,7 @@ An invitation to connect may be transferred using any method that can reliably t
 
 - suggested label
 
-- publicly resolvable did
+- publicly resolvable DID
 
   OR
 
@@ -129,7 +129,7 @@ These attributes were chosen to parallel the attributes of a DID Document for in
 
 When considering routing and options for invitations, keep in mind that the more detail is in the connection invitation, the longer the URL will be and (if used) the more dense the QR code will be. Dense QR codes can be harder to scan.
 
-The _inviter_ will either use an existing invitation DID, or provision a new one according to the did method spec. They will then create the invitation message in one of the following forms.
+The _inviter_ will either use an existing invitation DID, or provision a new one according to the DID method spec. They will then create the invitation message in one of the following forms.
 
 Invitation Message with Public Invitation DID:
 
@@ -261,16 +261,16 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 
 #### Example
 
-```json
+```jsonc
 {
   "@id": "5678876542345",
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/request",
   "label": "Bob",
   "connection": {
-    "did": "B.did@B:A",
-  	"did_doc": {
+    "DID": "B.did@B:A",
+    "DIDDoc": {
         "@context": "https://w3id.org/did/v1"
-      	// DID Doc contents here.
+        // DID Doc contents here.
     }
   }
 }
@@ -280,9 +280,9 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 
 - The `@type` attribute is a required string value that denotes that the received message is a connection request.
 - The `label` attribute provides a suggested label for the connection. This allows the user to tell multiple connection offers apart. This is not a trusted attribute.
-- The `connection` attribute contains the `did` and `did_doc` attributes. This format maintains consistency with the Response message where this attribute is signed.
-- The `did` indicates the DID of the user requesting the connection.
-- The `did_doc` contains the DID doc for the requesting user. If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc` attribute is optional.
+- The `connection` attribute contains the `DID` and `DIDDoc` attributes. This format maintains consistency with the Response message where this attribute is signed.
+- The `DID` indicates the DID of the user requesting the connection.
+- The `DIDDoc` contains the DID Doc for the requesting user. If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `DIDDoc` attribute is optional.
 
 #### Request Transmission
 
@@ -330,7 +330,7 @@ The connection response message is used to complete the connection. This message
 
 #### Example
 
-```json
+```jsonc
 {
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/response",
   "@id": "12345678900987654321",
@@ -338,8 +338,8 @@ The connection response message is used to complete the connection. This message
     "thid": "<@id of request message>"
   },
   "connection": {
-    "did": "A.did@B:A",
-  	"did_doc": {
+    "DID": "A.did@B:A",
+    "DIDDoc": {
       "@context": "https://w3id.org/did/v1"
       // DID Doc contents here.
     }
@@ -357,7 +357,7 @@ The above message is required to be signed as described in HIPE ???. The `connec
     "thid": "<@id of request message>"
   },
   "connection~sig": {
-    "@type":"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
     "signature": "<digital signature function output>",
     "sig_data": "<base64URL(64bit_integer_from_unix_epoch||connection_attribute)>",
     "signers": "<signing_verkey>"
@@ -375,15 +375,15 @@ The signature data must be used to verify against the invitation's `recipientKey
 
 - The `@type` attribute is a required string value that denotes that the received message is a connection request.
 - The `~thread` block contains a `thid` reference to the `@id` of the request message. 
-- The `connection` attribute contains the `did` and `did_doc` attributes to enable simpler signing.
-- The `did` attribute is a required string value and denotes DID in use by the _inviter_. Note that this may not be the same DID used in the invitation.
-- The `did_doc` attribute contains the associated DID Doc. If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc` attribute is optional.
+- The `connection` attribute contains the `DID` and `DIDDoc` attributes to enable simpler signing.
+- The `DID` attribute is a required string value and denotes DID in use by the _inviter_. Note that this may not be the same DID used in the invitation.
+- The `DIDDoc` attribute contains the associated DID Doc. If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `DIDDoc` attribute is optional.
 
 In addition to a new DID, the associated DID Doc might contain a new endpoint. This new DID and endpoint are to be used going forward in the connection.
 
 #### Response Transmission
 
-The message should be packaged in the wire level format, using the keys from the request, and the new keys presented in the internal did doc. 
+The message should be packaged in the wire level format, using the keys from the request, and the new keys presented in the internal DID Document.
 
 When the message is transmitted, we are now in the `responded` state.
 
