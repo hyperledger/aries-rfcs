@@ -103,7 +103,7 @@ schemas stored in a verifiable data registry will be assigned a DID or
 other identifier for identification within and resolution by that registry. 
 
 The `@id` of a rich schema may be used as an additional value of the `type`
-property of a verifiable credential. A [rich schema mapping](../concepts/0250-rich-schemas/README.md#mappings)
+property of a verifiable credential. A [rich schema mapping](../../concepts/0250-rich-schemas/README.md#mappings)
 will contain 
 
 ### Use in Verifiable Credentials
