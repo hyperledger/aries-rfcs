@@ -1,4 +1,4 @@
-# Aries RFC ????: Aries SDK Rich Schema Schemas
+# Aries RFC 0281: Aries SDK Rich Schema Schemas
 - Authors: [Brent Zundel](brent.zundel@evernym.com), [Ken Ebert](ken@sovrin.org)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-10-30
