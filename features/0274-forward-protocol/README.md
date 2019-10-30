@@ -3,15 +3,15 @@
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-10-30
 - Status Note: Barely submitted.  
-- Supersedes: the use of the `forward` message described in [RFC 0094](../../concepts/cross-domain-messaging/README.md) -- but not RFC 0094 as a whole. See note in summary below.
+- Supersedes: the use of the `forward` message described in [RFC 0094](../../concepts/0094-cross-domain-messaging/README.md) -- but not RFC 0094 as a whole. See note in summary below.
 - Start Date: 2018-10-29
 - Tags: feature, protocol
 
 ## Summary
 
-Explains a protocol that [mediators](../../concepts/mediators-and-relays/README.md) use to route messages. This protocol is essential to cross-domain messaging in DIDComm, as it lets agents receive messages even when they don't have a publicly reachable service endpoint.
+Explains a protocol that [mediators](../../concepts/0046-mediators-and-relays/README.md) use to route messages. This protocol is essential to cross-domain messaging in DIDComm, as it lets agents receive messages even when they don't have a publicly reachable service endpoint.
  
- The protocol is an evolution of the early use of the `forward` message first described in [RFC 0094](../../concepts/cross-domain-messaging/README.md). It supersedes the message definition there, but not the rest of that RFC; all of the conceptual model in RFC 0094 still applies.
+ The protocol is an evolution of the early use of the `forward` message first described in [RFC 0094](../../concepts/0094-cross-domain-messaging/README.md). It supersedes the message definition there, but not the rest of that RFC; all of the conceptual model in RFC 0094 still applies.
  
  The protocol in this RFC is given the version number 2.0 because it introduces a breaking change in how the payload of the `forward` message is managed.
 
@@ -21,7 +21,7 @@ We need a standard way to deliver messages to agents that have no public service
 
 ## Tutorial
 
->Please review the mental model for routing as described in [RFC 0094: Cross-Domain Messaging](../../concepts/cross-domain-messaging/README.md) and [RFC 0046: Mediators and Relays](../../concepts/mediators-and-relays/README.md). All of the concepts described in those RFCs still apply here, and the discussion below assumes you understand them.
+>Please review the mental model for routing as described in [RFC 0094: Cross-Domain Messaging](../../concepts/0094-cross-domain-messaging/README.md) and [RFC 0046: Mediators and Relays](../../concepts/0046-mediators-and-relays/README.md). All of the concepts described in those RFCs still apply here, and the discussion below assumes you understand them.
 
 ### Why an update?
 
@@ -34,7 +34,7 @@ This updated protocol exists because we learned some things from our first imple
     * Support for it should be discoverable over the [Discover Features Protocol](../0031-discover-features/README.md).
     * It may wish to [adopt](../../concepts/0003-protocols/template.md#adopted-messages) common protocol features like [message timing for timeouts and profiling](../0032-message-timing/README.md), [message tracing for troubleshooting](../0034-message-tracing/README.md), and a [mechanism to report problems](../0035-report-problem/README.md).
     
-2. The old way we bundled payloads into a `forward` message was unnecessarily customized. We can use the more generic payload attachment mechanism described in [RFC 0017: Attachments](../../concepts/0017-attachments). This should eliminate some redundant code, improve robustness, and add some extra flexibility.
+2. The old way we bundled payloads into a `forward` message was unnecessarily customized. We can use the more generic payload attachment mechanism described in [RFC 0017: Attachments](../../concepts/0017-attachments/README.md). This should eliminate some redundant code, improve robustness, and add some extra flexibility.
 
 3. We'd like a way to integrate DIDComm message routing with privacy-preserving mix networks like TOR. We don't want DIDComm to depend on mix networks, but we need to rationalize their co-existence.
 
@@ -216,7 +216,7 @@ solution that comes out of this doc?
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-*Implementation Notes* [may need to include a link to test results](README.md#accepted).
+*Implementation Notes* [may need to include a link to test results](/README.md#accepted).
 
 Name / Link | Implementation Notes
 --- | ---
