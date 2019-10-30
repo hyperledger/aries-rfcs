@@ -51,7 +51,7 @@ Based on the preceding context, the following rules guide our understanding of t
 * **DO** test many protocols.
 * **DO** allow easy extension for new protocols, both as contributions inside the codebase and as external code added after the test suite is installed.
 * **DO** evaluate unhappy paths (timeouts, brownouts, graceful handling of version incompatibilities, [reporting](../0035-report-problem/README.md), [troubleshooting](../0034-message-tracing/README.md)...), since practical interoperability is often a function of robustness in suboptimal circumstances. 
-* **DO** test all relevant versions of each protocol. 
+* **DO** test all relevant versions of each protocol. (The test suite does not need to maintain an unreasonably comprehensive inventory of all protocols; old protocols could be retired if they become difficult to support. An agent wishing to certify against an old protocol could download an old version of the test suite to certify. However, we generally want the test suite to support both breadth--many protocols--and depth--multiple protocol versions if they are all in active use.)
 * **DO** test roles in a protocol separately, and DO test only one agent at a time. The question isn't *"Does agent X support the issuance protocol?"* but rather *"Does agent X support* role Y *in the issuance protocol?"* All roles in a protocol other than the one role for the one tested agent should be played by the test suite. 
 * **DO** test required and optional [decorators](../../concepts/0011-decorators/README.md) to the extent that they are relevant to interoperability.
 * **DO** distinguish between required and optional features of a protocol in results.
@@ -69,9 +69,8 @@ Based on the preceding context, the following rules guide our understanding of t
 * **DON'T** require manual interaction.
 * **DON'T** artificially link one protocol's results to another's.
 * **DON'T** attempt to release the test suite in sync with other Aries artifacts. Rather, use an independent release cadence that many uncoordinated agent projects can leverage per their own convenience.
-* **DON'T** impose uncomfortable process, tool, or architecture constraints on builders of agents. A developer should be able to start using the test suite after their agent is designed and built, with little or no retrofit friction.
+* **DON'T** impose unreasonable processes, tools, architecture constraints, or dependencies on builders of agents or test suite contributors. For example, if the test suite required the agent under test to be instrumented, and the instrumentation library weren't available on certain platforms, that would violate this rule. It should be possible for just about any agent to be put under test, long after its initial design, just by implementing the backchannel.
 * **DON'T** require that the test suite be runnable by an independent third party; trust results as reported by an agent's own developers. The suite might be relevant in a certification process, but is not intended to embody a certification process in and of itself.
-* **DON'T** impose build-time, install-time, or test-time dependencies that unduly burden agent developers or test suite contributors.
 * **DON'T** worry about test suite performance much. We want tests to run in minutes, so we shouldn't do anything ridiculously time-consuming--but simplicity of the suite is more important than its efficiency.
 
 ### General Approach
