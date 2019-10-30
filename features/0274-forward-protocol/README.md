@@ -80,7 +80,19 @@ However, this doesn't quite work on close inspection, because the mediator is at
 
 ### Messages
 
-The only message in this protocol is the `forward` message. It has the following structure:
+The only message in this protocol is the `forward` message. A simple and common version of a `forward` message might look like this:
+
+```jsonc
+{
+    "@type": "https://didcomm.org/routing/2.0/forward",
+    "to"   : "did:foo:1234abcd",
+    "payloads~attach": [
+        // One payload
+    }
+}
+```
+
+A fancier version with many optional attributes has the following potential structure:
 
 ```jsonc
 {
@@ -90,18 +102,47 @@ The only message in this protocol is the `forward` message. It has the following
     "payloads~attach": [
         // An array of attached payloads, generally assumed
         // to be DIDComm encrypted envelopes, but theoretically
-        // able to be other message types as well.
-    ]
+        // could be other message types as well.
+    ],
+    // This decorator and everything in it are optional. 
+    "~timing": {
+        // Usually, delay_milli and wait_until_time don't make
+        // sense together; use one or the other but not both. If
+        // both do occur, forward shouldn't happen until the later
+        // of the two conditions is satisfied.
+        "delay_milli": 12345,
+        "wait_until_time": "2020-03-25T00:00:00Z",
+        // Abandon attempt to forward after this timestamp.
+        "expires_time": "2020-03-27T18:25:00Z" 
+    },
+    // Optional: requests use of mix network instead of direct
+    // forward, to enhance privacy.
+    "mix": {
+        // Likelihood (from 0 to 1) that a random node in a
+        // mix network should be the next hop instead of
+        // sending the message directly to its final receiver.
+        "hop_chance": 0.8,
+        // If next receiver is a mix node, multiply hop_chance
+        // by this value so hop_chance attenuates for the next
+        // receiver. This prevents infinite mixing. Max value =
+        // 0.99.
+        "hop_decay": 0.2,
+        // Likelihood (from 0 to 1) that the message size will
+        // be distorted to the next receiver. 
+        "noise_chance": 0.5
+    }
 }
 ```
 
 Unlike the 1.0 version of the routing protocol, the value of the `to` field is a DID, not a key. This hides details about the internals of a sovereign domain from external parties. The sender will have had to multiplex encrypt for all relevant recipient keys, but doesn't need to know how routing happens to those keys. The mediator and the receiver may have coordinated about how distribution to individual keys takes place (see [RFC 0211: Route Coordination](../0211-route-coordination/README.md)), but that is outside the scope of concerns of this protocol. 
 
-The attachment(s) in the `payloads~attach` field are able to use the full power of DIDComm attachments, including features like instructing the receiver to download the payloads from a CDN.
+The attachment(s) in the `payloads~attach` field are able to use the full power of DIDComm attachments, including features like instructing the receiver to download the payload content from a CDN.
 
-### Rewrapping Mode (experimental)
+The `mix` property is discussed next.
 
-Normally, the payload attached to ("inside") the `forward` message received by the mediator is transmitted directly to the receiver with no further packaging. However, optionally, the mediator can attach the opaque payload to a new `forward` message, which then acts as a fresh outer envelope for the second half of the delivery. This [rewrapping Mode](#rewrapping-mode) means that the "onion" of packed messages stays the same size rather than getting smaller as a result of the forward operation:
+### Rewrapping
+
+Normally, the payload attached to the `forward` message received by the mediator is transmitted directly to the receiver with no further packaging. However, optionally, the mediator can attach the opaque payload to a new `forward` message, which then acts as a fresh outer envelope for the second half of the delivery. This [rewrapping](#rewrapping) means that the "onion" of packed messages stays the same size rather than getting smaller as a result of the forward operation:
 
 ![re-wrapped sequence](roles2.png)
  
@@ -109,8 +150,12 @@ Rewrapping mode is invisible to senders, but mediators need to know about it, si
 
 Why is such indirection useful?
 
-* It lets the mediator decorate messages with timing and tracing mixins. (This would otherwise be impossible, since the inner payload will be tamper-evident and encrypted.)
-* It allows for dynamic routing late in the delivery chain. For example, a receiver who is concerned about eavesdroppers could ask the mediator to use rewrapping mode, to forward the rewrapped message on to  
+* It lets the mediator decorate messages with its own timing and tracing mixins, which may aid troubleshooting. (This would otherwise be impossible, since the inner payload is an opaque blob that almost certainly tamper-evident and encrypted.)
+* It lets the mediator remain uncommitted to whether the next receiver is another mediator or not. This may provide flexibility in some routing scenarios.
+* It lets the mediator change the size of the message by adding or subtracting noise from the content. 
+* It allows for dynamic routing late in the delivery chain.
+ 
+These last two characteristics are the foundation of mix networking feature for DIDComm. That feature is the subject of a different RFC; here we only note the existence of the optional feature.
 
 ## Reference
 
