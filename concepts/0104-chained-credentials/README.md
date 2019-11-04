@@ -1,23 +1,31 @@
-# Aries RFC 0104: Delegatable Credentials
+# Aries RFC 0104: Chained Credentials
 
 - Authors: Daniel Hardman, Lovesh Harchandani
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-09
-- Status Note: Various aspects of this are implemented, or in the process of being implemented, in [Hyperledger Ursa](https://github.com/hyperledger/ursa-rfcs/pull/14) and Hyperledger Indy. This doc will be updated based on learnings.
+- Status Note: Updated 2019-11-04 after discussion at IIW at on Aries community calls. Various aspects of this are implemented, or in the process of being implemented, in [Hyperledger Ursa](https://github.com/hyperledger/ursa-rfcs/pull/14) and Hyperledger Indy. This doc will be updated based on learnings.
 - Start Date: 2019-08-01
 - Tags: [concept](/tags.md#concept), [credentials](/tags.md#credentials)
 
 ## Summary
 
-Describes a mechanism that allows verifiable credentials to be delegated and attenuated while preserving privacy and operating robustly in offline mode. This mechanism works (with some feature variations) for any W3C-conformant verifiable credential type, not just the ones developed inside Hyperledger.
+Describes a set of conventions, collectively called __chained credentials__, that allows data in a verifiable credential (VC) to be traced back to its origin while retaining its verifiable quality. This chaining alters trust dynamics. It means that many issuers can skip complex issuer setup, and do not need the same strong, globally recognizable reputation that's important for true roots of trust. It increases the usefulness of offline verification. It enables powerful delegation of privileges, which unlocks many new verifiable credential use cases.
 
->Note 1: This is an [object capabilities (OCAP)](https://en.wikipedia.org/wiki/Capability-based_security) approach similar to [ZCAP-LD](https://w3c-ccg.github.io/zcap-ld/) in scope, features, and intent, but it accomplishes its goals a bit differently. See [here](contrast-zcap-ld.md) for an explanation of the divergence and redundancy.
+Chained credentials do not require any modification to the [standard data model for verifiable credentials](https://www.w3.org/TR/vc-data-model/); rather, they leverage the data model in a simple, predictable way. Chaining conventions work (with some feature variations) for any W3C-conformant verifiable credential type, not just the ones developed inside Hyperledger.
+
+>Note 1: When chained credentials are used to delegate, the result is an [object capabilities (OCAP)](https://en.wikipedia.org/wiki/Capability-based_security) solution similar to [ZCAP-LD](https://w3c-ccg.github.io/zcap-ld/) in scope, features, and intent. However, such __chained capabilities__ accomplish their goals a bit differently. See [here](contrast-zcap-ld.md) for an explanation of the divergence and redundancy.
 
 >Note 2: This RFC is a sister to [Aries RFC 0103: Indirect Identity Control](../0103-indirect-identity-control/README.md). That doc describes how delegation (and related control mechanisms like delegation and controllership) can be represented in credentials and governed; this one describes an underlying infrastructure to enable such a model. The ZKP implementation of this RFC [comes from Hyperledger Ursa](https://github.com/hyperledger/ursa-rfcs/pull/14) and depends on cryptography [described by Camenisch et al. in 2017](https://acmccs.github.io/papers/p683-camenischA.pdf).
 
 ## Motivation
 
-Verifiable credentials have many delegation use cases. We need to support them robustly so the VC ecosystem can mature.
+There is a tension between the decentralization that we want in a VC ecosystem, and the way that trust tends to centralize because knowledge and reputation are unevenly distributed. We want anyone to be able to attest to anything they like--but we know that verifiers care very much about the reputation of the parties that make those attestations.
+
+We can say that verifiers will choose which issuers they trust. However, this places a heavy burden on them--verifiers can't afford to vett every potential issuer of credentials they might encounter. The result will be a tendency to accept credentials only from a short list of issuers, which leads back to centralization.
+
+This tendency also creates problems with delegation. If all delegation has to be validated through a few authorities, a lot of the flexibility and power of delegation is frustrated.
+
+We'd like a VC landscape where a tiny startup can issue an employment credential that's taken as seriously as one from a massive global conglomerate--and with no special setup by verifiers. And we'd like parents to be able to delegate childcare decisions to a babysitter on the spur of the moment--and have the babysitter be able to prove it when she calls an ambulance.
 
 ## Tutorial
 
