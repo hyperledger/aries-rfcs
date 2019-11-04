@@ -1,19 +1,19 @@
-# 0270: Protocol Test Suite
+# 0270: Interop Test Suite
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-10-25
 - Status Note: Codifies some thinking about scope and mental model that are already socialized. Provides some new thinking as well.
 - Supersedes: Partially, and in some ways, [Indy HIPE 0015](https://github.com/hyperledger/indy-hipe/blob/master/text/0015-agent-test-suite-interface/README.md) and [Indy HIPE 0016](https://github.com/hyperledger/indy-hipe/blob/master/text/0016-agent-test-suite-v1/README.md). Also, represents answers to questions that the community first posed in [this HackMD doc](https://hackmd.io/JW5b9xYCRGKqyqhVevTZ_g) and first attempted to answer in the [indy-agent repo](https://github.com/hyperledger/indy-agent).
 - Start Date: 2018-10-25
-- Tags: feature
+- Tags: concept
 
 ## Summary
 
-Describes the goals, scope, and interoperability contract of the Aries Protocol Test Suite. Does NOT serve as a design doc for the test suite code, or as a developer guide explaining how the test suite can be run; see the [test suite odebase](https://github.com/hyperledger/aries-protocol-test-suite) for that.
+Describes the goals, scope, and interoperability contract of the Aries Interop Test Suite. Does NOT serve as a design doc for the test suite code, or as a developer guide explaining how the test suite can be run; see the [test suite codebase](https://github.com/hyperledger/aries-protocol-test-suite) for that.
 
 ## Motivation
 
-The Aries Protocol Test Suite makes SSI interoperability publicly and objectively measurable. It is a major deliverable of the Aries project as a whole--not a minor detail that only test zealots care about. It's important that the entire SSI community understand what it offers, how it works, what its results mean, and how it should be used.
+The Aries Interop Test Suite makes SSI interoperability publicly and objectively measurable. It is a major deliverable of the Aries project as a whole--not a minor detail that only test zealots care about. It's important that the entire SSI community understand what it offers, how it works, what its results mean, and how it should be used.
 
 ## Tutorial
 
@@ -33,7 +33,7 @@ What we need is a tool that achieves these goals:
 
     >[Other software that offers SSI features](../../concepts/0004-agents/README.md#the-agent-ness-continuum) should also be testable. Here, such components are conflated with agents for simplicity, but it's understood that the suite targets protocol participants no matter what their technical classification.
  
-   Focus on remote interactions that deliver business value: [high-level protocols](../../concepts/0003-protocols/README.md) built atop [DIDComm](../../concepts/0005-didcomm/README.md), such as [credential issuance](../0036-issue-credential/README.md), [proving](../0037-present-proof/README.md), and [introducing](../0028-introduce/README.md), where each [participant](../../concepts/0003-protocols/roles-participants-etc.md#participants) uses different software. DID methods, ledgers, crypto libraries, credential implementationss, and DIDComm infrastructure should have separate tests that are out of scope here. None of these generate deep insight into whether packaged software is interoperable enough to justify purchase decisions; that's the gap we need to plug.
+   Focus on remote interactions that deliver business value: [high-level protocols](../../concepts/0003-protocols/README.md) built atop [DIDComm](../../concepts/0005-didcomm/README.md), such as [credential issuance](../../features/0036-issue-credential/README.md), [proving](../../features/0037-present-proof/README.md), and [introducing](../../features/0028-introduce/README.md), where each [participant](../../concepts/0003-protocols/roles-participants-etc.md#participants) uses different software. DID methods, ledgers, crypto libraries, credential implementationss, and DIDComm infrastructure should have separate tests that are out of scope here. None of these generate deep insight into whether packaged software is interoperable enough to justify purchase decisions; that's the gap we need to plug.
    
 2. **Describe results in a formal, granular, reproducible way** that supports comparison between agents A and B, and between A at two different points of time or in two different configurations.
 
@@ -50,7 +50,7 @@ Based on the preceding context, the following rules guide our understanding of t
 * **DO** organize testing around protocols, as this is the major way that interoperability questions manifest. "Can agent X issue credentials in a way that agent Y accepts?" is a question about whether X and Y support a common protocol.
 * **DO** test many protocols.
 * **DO** allow easy extension for new protocols, both as contributions inside the codebase and as external code added after the test suite is installed.
-* **DO** evaluate unhappy paths (timeouts, brownouts, graceful handling of version incompatibilities, [reporting](../0035-report-problem/README.md), [troubleshooting](../0034-message-tracing/README.md)...), since practical interoperability is often a function of robustness in suboptimal circumstances. 
+* **DO** evaluate unhappy paths (timeouts, brownouts, graceful handling of version incompatibilities, [reporting](../../features/0035-report-problem/README.md), [troubleshooting](../../features/0034-message-tracing/README.md)...), since practical interoperability is often a function of robustness in suboptimal circumstances. 
 * **DO** test all relevant versions of each protocol. (The test suite does not need to maintain an unreasonably comprehensive inventory of all protocols; old protocols could be retired if they become difficult to support. An agent wishing to certify against an old protocol could download an old version of the test suite to certify. However, we generally want the test suite to support both breadth--many protocols--and depth--multiple protocol versions if they are all in active use.)
 * **DO** test roles in a protocol separately, and DO test only one agent at a time. The question isn't *"Does agent X support the issuance protocol?"* but rather *"Does agent X support* role Y *in the issuance protocol?"* All roles in a protocol other than the one role for the one tested agent should be played by the test suite. 
 * **DO** test required and optional [decorators](../../concepts/0011-decorators/README.md) to the extent that they are relevant to interoperability.
@@ -58,7 +58,7 @@ Based on the preceding context, the following rules guide our understanding of t
 * **DO** provide value for agents that talk over transports besides HTTP: BlueTooth, SMTP, AMQP, and so forth -- but **DON'T** get bogged down in all the permutations of transport and routing.
 * **DO** describe results in a formally defined data structure that can be prettified in various ways.
 * **DO** allow the test suite to be an automated step in a CI/CD pipeline.
-* **DO** evaluate *message* correctness, but touch more lightly on *data* correctness. See [this discussion about the distinction between messages and data](../../concepts/0017-attachments/README.md#messages-versus-data), and note how the [Issue Credential](../0036-issue-credential/README.md) and [Present Proof](../0037-present-proof/README.md) protocols push credential and presentation format to a concern about the format of attached data, so the data can evolve at a different rate from the protocol.
+* **DO** evaluate *message* correctness, but touch more lightly on *data* correctness. See [this discussion about the distinction between messages and data](../../concepts/0017-attachments/README.md#messages-versus-data), and note how the [Issue Credential](../../features/0036-issue-credential/README.md) and [Present Proof](../../features/0037-present-proof/README.md) protocols push credential and presentation format to a concern about the format of attached data, so the data can evolve at a different rate from the protocol.
 
 <hr> 
  
@@ -75,7 +75,7 @@ Based on the preceding context, the following rules guide our understanding of t
 
 ### General Approach
 
-We've chosen to pursue these goals by maintaining a modular protocol test suite as a deliverable of the Aries project. The test suite is an agent in its own right, albeit an agent with deliberate misbehaviors, a security model unsuitable for production deployment, an independent release schedule, and a desire to use every possible version of every protocol.
+We've chosen to pursue these goals by maintaining a modular interop test suite as a deliverable of the Aries project. The test suite is an agent in its own right, albeit an agent with deliberate misbehaviors, a security model unsuitable for production deployment, an independent release schedule, and a desire to use every possible version of every protocol.
 
 Currently the suite lives in the `aries-protocol-test-suite` repo, but the location and codebase could change without invalidating this RFC; the location is an implementation detail.
 
@@ -113,7 +113,7 @@ The contract between the test suite and the agents it tests is:
 
     A "successful" run is one where the test suite runs to completion and believes it has valid data; it has nothing to do with how many tests are passed by the agent under test. The test suite will not emit profiles for unsuccessful runs.
      
-     Interop profiles emitted by the test suite are the artifacts that should be [hyperlinked in the Implementation Notes section of protocol RFCs](../../README.md#accepted). They could also be published (possibly in a prettified form) in release notes, distributed as a product or documentation artifact, or returned as an attachment with the `disclose` message of the [Discover Features protocol](../0031-discover-features/README.md).
+     Interop profiles emitted by the test suite are the artifacts that should be [hyperlinked in the Implementation Notes section of protocol RFCs](../../README.md#accepted). They could also be published (possibly in a prettified form) in release notes, distributed as a product or documentation artifact, or returned as an attachment with the `disclose` message of the [Discover Features protocol](../../features/0031-discover-features/README.md).
      
 7. Have a very modest footprint in RAM and on disk, so running it in Docker containers, VMs, and CI/CD pipelines is practical.
  
