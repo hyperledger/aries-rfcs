@@ -99,7 +99,7 @@ Agents may also be paired with a digital *hub*—a data store with three special
 
 1. It is controlled exclusively by the DID subject (person, organization, or thing) and not by any intermediary or third party.
 2. All the data is encrypted with private keys in the subject’s KMS.
-3. If a DID subject has moe than one hub, they can be automatically synchronized according to the owner’s preferences.
+3. If a DID subject has more than one hub, they can be automatically synchronized according to the owner’s preferences.
 
 Work on standardizing digital hubs is proceeding in different projects besides Aries, including at the Decentralized Identity Foundation, the Ethereum Foundation, and the W3C Credentials Community Group.
 
