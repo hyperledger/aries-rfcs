@@ -23,7 +23,7 @@ The purpose of this Aries Concept RFC is to fill this gap by defining a standard
 
 Since the ultimate purpose of an "identity layer" is not actually to identify entities, but to facilitate the trust they need to interact, co-author John Jordan coined the term *Trust over IP* (ToIP) for this stack. Figure 1 is a diagram of its four layers:
 
-![Figure 1: The ToIP Stack](fig-1-toip-full-stack.png)
+![Figure 1: The ToIP Stack](./img/fig-1-toip-full-stack.png)
 
 Note that it is actually a "dual stack": two parallel stacks encompassing both technology and governance. This reflects the fact that digital trust cannot be achieved by technology alone, but only by humans and technology working together. The unique role of governance in the ToIP stack is explored in detail in the section on Layer Four.
 
@@ -40,11 +40,11 @@ DIDs are defined by an [RFC 3986](https://www.ietf.org/rfc/rfc3986.txt)-complian
 1. **Permanence**. A DID effectively functions as a Uniform Resource Name (URN) [7], i.e., once assigned to an entity (called the DID subject), a DID is a persistent identifier for that entity that should never be reassigned to another entity.
 2. **Resolvability**. A DID resolves to a *DID document*—a JSON data structure describing the public key(s) and service endpoint(s) necessary to engage in trusted interactions with the DID subject.
 3. **Cryptographic verifiability**. The cryptographic material in a DID document enables a DID subject to prove cryptographic control of a DID.
-4. **Decentralization**. Because they are cryptograpically generated and verified, DIDs do not require centralized registration authorities like those needed for phone numbers, IP addresses, or domain names today.
+4. **Decentralization**. Because they are cryptographically generated and verified, DIDs do not require centralized registration authorities like those needed for phone numbers, IP addresses, or domain names today.
 
 Figure 2 shows the resemblance between DID syntax and URN syntax (RFC 8141).
 
-![Figure 2: The syntax of DIDs follows the same basic pattern as URNs](fig-2-urn-and-did-syntax.png)
+![Figure 2: The syntax of DIDs follows the same basic pattern as URNs](./img/fig-2-urn-and-did-syntax.png)
 
 ### DID Methods
 
@@ -75,9 +75,9 @@ In summary, the interoperability of Layer One is defined by the W3C DID specific
 
 ## Layer Two: DIDComm
 
-The second layer of the Trust over IP stack is defined by the DIDComm secure messaging standards [9]. This family of Aries specifications establish a cryptographic means by which any two software agents (peers) can securely communicate either directly edge-to-edge or via intermediate cloud agents (Figure 3).
+The second layer of the Trust over IP stack is defined by the DIDComm secure messaging standards [9]. This family of Aries specifications establish a cryptographic means by which any two software agents (peers) can securely communicate either directly edge-to-edge or via intermediate cloud agents (./img/figure 3).
 
-![Figure 3: At Layer Two, agents communicate peer-to-peer using DIDComm standards](fig-3-agent-ecosystem.png)
+![Figure 3: At Layer Two, agents communicate peer-to-peer using DIDComm standards](./img/fig-3-agent-ecosystem.png)
 
 ### Peer DIDs and DID-to-DID Connections
 
@@ -121,7 +121,7 @@ Layer Three is currently the most advanced in terms of open standards. After sev
 
 Figure 4 is a diagram of the three core roles in verifiable credential exchange—often called the "trust triangle". For more information see the Verifiable Credentials Primer [13].
 
-![Figure 4: The three main roles in the W3C Verifiable Credentials ecosystem](fig-4-vc-trust-triangle.png)
+![Figure 4: The three main roles in the W3C Verifiable Credentials ecosystem](./img/fig-4-vc-trust-triangle.png)
 
 ### Credential Proof Types
 
@@ -158,9 +158,9 @@ These will typically be defined by metasystem governance frameworks (see below).
 
 The top half of Figure 5 below shows the basic trust triangle architecture used by verifiable credentials. The bottom half shows a second trust triangle—the *governance trust triangle*—that can solve a number of problems related to the real-world adoption and scalability of verifiable credentials.
 
-![Figure 5: The role of governance frameworks](fig-5-gov-frameworks.png)
+![Figure 5: The role of governance frameworks](./img/fig-5-gov-frameworks.png)
 
-### Goverance Authorities
+### Governance Authorities
 
 What the governance trust triangle represents is the same governance model that exists for many of the most successful physical credentials we use every day: passports, driving licenses, credit cards, health insurance cards, etc.
 
@@ -226,7 +226,16 @@ Verifiers often need to verify that a credential was issued by an authoritative 
 
 ### Interoperability with Other Governance Frameworks
 
-The ToIP governance stack is also designed to be compatible with—and an implementation vehicle for—national governance frameworks such as the Pan-Canadian Trust Framework (PCTF) being developed through a public/private sector collaboration with the Digital Identity and Authentication Council of Canada (DIACC) [16]. It should also interoperate with regional and local governance frameworks of all kinds. For example, the Province of British Columbia (BC) has implemented a ToIP-compatible verifiable credential registry service called [OrgBook BC](https://orgbook.gov.bc.ca). OrgBook is a holder/prover service for legally registered entities in BC and is built using [Indy Catalyst](https://www.github.com/bcgov/indy-catalyst) and [Hyperledger Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python). Other jursidctions such as Onterio, and Canada have begun to experiment with these service for business credentials which is giving rise to new kind of network where trust is at the edge. It is called VON (Verifiable Organization Network) [17].
+The ToIP governance stack is also designed to be compatible with—and an implementation vehicle for—national governance frameworks such as the Pan-Canadian Trust Framework (PCTF) being developed through a public/private sector collaboration with the Digital Identity and Authentication Council of Canada (DIACC) [16]. It should also interoperate with regional and local governance frameworks of all kinds. For example, the Province of British Columbia (BC) has implemented a ToIP-compatible verifiable credential registry service called [OrgBook BC](https://orgbook.gov.bc.ca). OrgBook is a holder/prover service for legally registered entities in BC and is built using [Indy Catalyst](https://www.github.com/bcgov/indy-catalyst) and [Hyperledger Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python). Other jurisdictions such as Ontario, and Canada have begun to experiment with these service for business credentials which is giving rise to new kind of network where trust is at the edge. It is called VON (Verifiable Organization Network) [17].
+
+## Envisioning a Network of Decentralize Identity Ecosystems
+As ToIP Architecture is adopted, the flexibility of Layer One and Layer Four concepts will allow for ecosystems of interoperable and trustworthy DID Ledgers to co-exists at scale. These DID Ledgers, or *Peer-Nets*, represent distinct systems of domain specific ledgers operated by decentralized peer nodes and are associated with a DID root or sub namespaces (i.e.: did:xxx, did.xxx.yyy). Each Peer-Net is managed by a specific organization or consortium that establishes the governance framework. While these Peer-Nets may be operated by different governing bodies and leverage different governance frameworks, they may adhere to a common ToIP Metasystem Governance Framework, the set of business, legal and technical governance documents that describe how members of a distinct ToIP Metasystem will operate. New opportunities may also reveal themselves whereby governing bodies may outsource the operations and maintenance of a Peer-Net to *Identity Utility Administrator*, service providers that specialize in the implementation of governance frameworks at Layer One.
+
+In ToIP Architecture the topic of *trust* is handle at Layer One with respect to cryptographic keys and at Layer Three with respect to data. As independent yet interoperable Peer-Nets emerge, the topic of trust is also addressed at Layer Four whereby governance frameworks at the metatsystem level can declare which Peer-Nets are trusted.
+
+![Figure 6](./img/fig-6-metasystem.png)
+
+As depicted in Figure 6, the Acme ToIP Metasystem Governance Framework would declare which Peer-Nets are trusted. Such declarations fo trust along with other metadata about the physical aspects of a Peer-Net will need to be generally available. In order to implement ToIP Architecture at scale, the concept of a Decentralized DID Namespace Registry (DDNR) will need to be implemented. A DDNR will provide registration, discovery, and access for Peer-Nets. As stakeholders in an ecosystem encounter a DID, they will need to rely on a source of truth about Peer-Nets. The DDNR allows governing bodies to register DID Namespaces in association with DID network logistics. The DDNR is not responsible for the resolution of a DID Document which is handled by the DID Method Resolver for the Peer-Net.  
 
 ## Conclusion: A Trust Layer for the Internet
 
@@ -262,5 +271,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- | 
-
+ |
