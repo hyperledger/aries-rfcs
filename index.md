@@ -72,6 +72,7 @@
 * [0268: Unified DIDCOMM Deeplinking](concepts/0268-unified-didcomm-agent-deeplinking/README.md) (2019-10-23  &mdash; [`concept`](/tags.md#concept) [`agents`](/tags.md#agents) [`mobile`](/tags.md#mobile))
 * [0270: Interop Test Suite](concepts/0270-interop-test-suite/README.md) (2019-10-25 &mdash; [`concept`](/tags.md#concept))
 * [0281: Aries Rich Schemas](features/0281-rich-schemas/README.md) (2019-10-30 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
+* [0289: The Trust Over IP Stack](concepts/0289-toip-stack/README.md) (2019-11-04 &mdash; [`concept`](/tags.md#concept) [`stack`](/tags.md#stack) [`trust layer`](/tags.md#trust layer))
 
 ## [RETIRED](README.md#retired)
 
