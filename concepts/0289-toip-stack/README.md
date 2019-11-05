@@ -1,9 +1,8 @@
-# 0289 - The Trust Over IP Stack
+# 0289: The Trust Over IP Stack
 - Authors: Matthew Davie, [Dan Gisolfi](dan.gisolfi@gmail.com), [Daniel Hardman](daniel.hardman@evernym.com), [John Jordan](john.jordan@gov.bc.ca), Darrell O'Donnell, [Drummond Reed](drummond.reed@evernym.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-11-04
 - Status Note: Initial Proposal
-- Supersedes: n/a
 - Start Date: 2019-01-01
 - Tags: concept, stack, trust layer
 
@@ -254,4 +253,14 @@ This RFC will be updated to track the evolution of the ToIP stack as it is furth
 15. Sovrin Governance Framework Working Group, [Home Page](https://docs.google.com/document/d/1aJskOztz8NP8tI-9eaKaaOypF0Fm__SCLKR-U8ptSII/edit?usp=sharing), October 2017; accessed November 2, 2019.
 16. DIACC, [Pan-Canadian Trust Framework](https://diacc.ca/pan-canadian-trust-framework/), May 2019; accessed July 6, 2019.
 17. Governments of British Columbia, Ontario, and Canada, [Verifiable Organizations Network (VON)](https://vonx.io/),June 2019; accessed July 6, 2019.
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+*Implementation Notes* [may need to include a link to test results](/README.md#accepted).
+
+Name / Link | Implementation Notes
+--- | ---
+ | 
 
