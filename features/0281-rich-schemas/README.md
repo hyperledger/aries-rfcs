@@ -1,5 +1,5 @@
-# Aries RFC 0281: Aries SDK Rich Schema Schemas
-- Authors: [Brent Zundel](brent.zundel@evernym.com), [Ken Ebert](ken@sovrin.org)
+# Aries RFC 0281: Aries Rich Schemas
+- Authors: [Brent Zundel](<brent.zundel@evernym.com>), [Ken Ebert](<ken@sovrin.org>)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-10-30
 - Status Note: Part of proposed Rich Schema capabilities for credentials 
@@ -150,7 +150,7 @@ for anonymous credentials, as discussed in the
 the rich schema overview RFC.
 
 ### Data Registry Storage
-Aries-SDK will provide a means for writing `schema` objects to and reading
+Aries will provide a means for writing `schema` objects to and reading
 `schema` objects from a verifiable data registry (such as a distributed
 ledger).
 
