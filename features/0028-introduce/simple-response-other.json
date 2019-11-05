@@ -1,6 +1,0 @@
-{
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0/response",
-  "@id": "283e15b5-a3f7-43e7-bac8-b75e4e7a0a25",
-  "~thread": {"thid": "df3b699d-3aa9-4fd0-bb67-49594da545bd"},
-  "approve": true
-}

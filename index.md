@@ -70,6 +70,8 @@
 * [0249: Aries SDK Rich Schema Contexts](features/0249-rich-schema-contexts/README.md) (2019-10-08 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0257: Private Credential Issuance](concepts/0257-private-credential-issuance/README.md) (2019-10-16 &mdash; [`concept`](/tags.md#concept) [`protocol`](/tags.md#protocol))
 * [0268: Unified DIDCOMM Deeplinking](concepts/0268-unified-didcomm-agent-deeplinking/README.md) (2019-10-23  &mdash; [`concept`](/tags.md#concept) [`agents`](/tags.md#agents) [`mobile`](/tags.md#mobile))
+* [0270: Interop Test Suite](concepts/0270-interop-test-suite/README.md) (2019-10-25 &mdash; [`concept`](/tags.md#concept))
+* [0281: Aries Rich Schemas](features/0281-rich-schemas/README.md) (2019-10-30 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 
 ## [RETIRED](README.md#retired)
 
