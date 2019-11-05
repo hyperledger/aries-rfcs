@@ -235,7 +235,13 @@ In ToIP Architecture the topic of *trust* is handle at Layer One with respect to
 
 ![Figure 6](./img/fig-6-metasystem.png)
 
-As depicted in Figure 6, the Acme ToIP Metasystem Governance Framework would declare which Peer-Nets are trusted. Such declarations fo trust along with other metadata about the physical aspects of a Peer-Net will need to be generally available. In order to implement ToIP Architecture at scale, the concept of a Decentralized DID Namespace Registry (DDNR) will need to be implemented. A DDNR will provide registration, discovery, and access for Peer-Nets. As stakeholders in an ecosystem encounter a DID, they will need to rely on a source of truth about Peer-Nets. The DDNR allows governing bodies to register DID Namespaces in association with DID network logistics. The DDNR is not responsible for the resolution of a DID Document which is handled by the DID Method Resolver for the Peer-Net.  
+As depicted in Figure 6 above, the Acme ToIP Metasystem Governance Framework would declare which Peer-Nets are trusted. Such declarations fo trust along with other metadata about the physical aspects of a Peer-Net will need to be generally available.
+
+* **Remote Peer-Net**: A system of ledgers associated with a DID Root Namespace that operates under its own Governance Framework.  
+* **Trusted Remote Network**: The system of ledgers under a Root Namespace that adhere to a specific ToIP Metasystem Governance Framework.
+* **Remote Metasystem Network**: The system of ledgers under a disparate Root Namespace that may or may not exist under a foreign ToIP Metasystem Governance Framework.
+
+In order to implement ToIP Architecture at scale, the concept of a Decentralized DID Namespace Registry (DDNR) will need to be implemented. A DDNR will provide registration, discovery, and access for Peer-Nets. As stakeholders in an ecosystem encounter a DID, they will need to rely on a source of truth about Peer-Nets. The DDNR allows governing bodies to register DID Namespaces in association with DID network logistics. The DDNR is not responsible for the resolution of a DID Document which is handled by the DID Method Resolver for the Peer-Net.  
 
 ## Conclusion: A Trust Layer for the Internet
 
