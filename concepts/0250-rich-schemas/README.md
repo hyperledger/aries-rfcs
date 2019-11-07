@@ -1,6 +1,6 @@
 # RFC 0250: Rich Schema Objects
 - Author: [Ken Ebert](ken@sovrin.org), [Brent Zundel](brent.zundel@evernym.com)
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-10-08
 - Status Note: Port of [this HIPE](https://github.com/hyperledger/indy-hipe/tree/master/text/0119-rich-schemas/README.md)
 - Supersedes: [this HIPE](https://github.com/hyperledger/indy-hipe/tree/master/text/0119-rich-schemas/README.md)
@@ -17,6 +17,11 @@ complex data. For these rich schemas to be incorporated into the aries
 anonymous credential ecosystem, we also introduce such objects as
 mappings, encodings, presentation definitions and their associated
 contexts.
+
+Though the goal of this RFC is to describe how rich schemas may
+be used with anonymous credentials, it will be noted that many of the
+objects described here may be used to allow any credential system to make
+use of rich schemas.
 
 This RFC provides a brief description of each rich schema object.
 Future RFCs will provide greater detail for each individual object and
@@ -182,6 +187,9 @@ include other schemas as property types, or extend another schema with
 additional properties. For example a schema for "employee" may inherit from
 the schema for "person."
 
+Rich schemas are an object that may be used by any verifiable credential
+system.
+
 ### Mappings
 Rich schemas are complex, hierarchical, and possibly nested objects. The
 [Camenisch-Lysyanskaya signature][CL-signatures] scheme used in anonymous
@@ -226,20 +234,23 @@ algorithm used to perform transformations for each attribute value data
 type. The encoding algorithms will also allow for extending the
 cryptographic schemes and various sizes of encodings (256-bit, 384-bit,
 etc.). The encoding algorithms will allow for broad use of predicate
-proofs, and avoid hashed values where they are not needed, as they do not
-support predicate proofs.
+proofs, and avoid hashed values where they are not needed, as hashed values
+do not support predicate proofs.
+
+Encodings, at their heart, describe an algorithm for converting data
+from one format to another, in a deterministic way. They can therefore be
+used in myriad ways, not only for the values of attributes within anonymous
+credentials.
 
 Encoding objects are written to a data registry. Encoding
 objects also allow for a means of extending the standard set of encodings.
-All encoding methods result in an integer representation of an attribute
-value according to the encoding algorithm selected by the issuer.
 
 ### Credential Definitions
 Credential definitions provide a method for issuers to specify a schema and
-mapping object, and provide public key data for credentials they issue.
-This ties the schema and public key data values to the issuer. The verifier
-uses the credential definition to check the validity of each signed
-credential attribute presented to the verifier.
+mapping object, and provide public key data for anonymous credentials they
+issue. This ties the schema and public key data values to the issuer. The
+verifier uses the credential definition to check the validity of each
+signed credential attribute presented to the verifier.
 
 ### Presentation Definitions
 A presentation definition is the means whereby a verifier asks for data
@@ -270,9 +281,13 @@ other communities. Credential offers may include the presentation
 definition the issuer would like fulfilled by the holder before issuing
 them a credential. Presentation requests may also be more simply negotiated
 by pointing to alternative acceptable presentation definitions. Writing a
-presentation definition to a data ragistry also allows it to be publicly
+presentation definition to a data registry also allows it to be publicly
 reviewed for privacy and security considerations and gain or lose
 reputation.
+
+Presentation definitions specify the set of information that a verifier
+wants from a holder. This is useful regardless of the underlying credential
+scheme.
 
 ### Presentations
 The presentation object that makes use of rich schemas is defined by the
@@ -280,22 +295,32 @@ W3C Verifiable Credentials Data Model, and is known in the specification as
 a verifiable presentation. The verifiable presentation is defined as a way
 to present multiple credentials to a verifier in a single package.
 
+As with most rich schema objects, verifiable presentations will be useful
+for credential systems beyond anonymous credentials.
+
+
 The claims that make up a presentation are specified by the presentation
-definition. The credentials from which these claims originate are used to
-create new derived credentials that only contain the specified claims and
-the cryptographic material necessary for proofs. The type of claims in
-derived credentials is also specified by the presentation definition. These
-types include revealed and predicate proof claims. The presentation also
-contains the cryptographic material which supports a proof that source
-credentials are held by the same entity. This is accomplished by proving
-knowledge of a link secret.
+definition. For anonymous credentials, the credentials from which these
+claims originate are used to create new derived credentials that only
+contain the specified claims and the cryptographic material necessary for
+proofs. 
 
-A presentation refers to the credential definitions on the data registry
-associated with the source credentials. It also refers to the presentation
-definition. A presentation is not stored on the ledger.
+The type of claims in derived credentials is also specified by the
+presentation definition. These types include revealed and predicate proof
+claims, for those credential systems which support them. 
 
-The following image illustrates the relationship between credentials and
-presentations:
+The presentation contains the cryptographic material needed to support a
+proof that source credentials are all held by the same entity. For
+anonymous credentials, this is accomplished by proving knowledge of a link
+secret.
+
+A presentation refers to the presentation definition it fulfills. For
+anonymous credentials, is also refers to the credential definitions on the
+data registry associated with the source credentials. A presentation is not
+stored on a data registry.
+
+The following image illustrates the relationship between anonymous
+credentials and presentations:
 
 ![](zkp-cred-pres.png)
 
@@ -310,7 +335,8 @@ a presentation from them.
 This document draws on a number of other documents, most notably the
 [W3C verifiable credentials and presentation data model.](https://w3c.github.io/vc-data-model/)
 
-The signature types used here are the same as those currently used.
+The signature types used for anonymous credentials are the same as those
+currently used in Indy's anonymous credential and Fabric's idemix systems.
 Here is the paper that defines
 [Camenisch-Lysyanskaya signatures.][CL-signatures] They are the source for
 [Indy's AnonCreds protocol](https://github.com/hyperledger/indy-hipe/pull/109).

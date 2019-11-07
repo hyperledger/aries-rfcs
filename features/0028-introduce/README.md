@@ -25,7 +25,7 @@ and it needs to be flexible, secure, privacy-respecting, and well documented.
 
 This is the Introduce 1.0 protocol. It is uniquely identified by the URI:
 
-    "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0"
+    "https://didcomm.org/introduce/1.0"
 
 ### Key Concepts
 
@@ -112,7 +112,15 @@ non-agent world:
 
 The DIDComm message looks like this:
 
-[![simple proposal example](simple-proposal.png)](simple-proposal.json)
+```jsonc
+{
+  "@type": "https://didcomm.org/introduce/1.0/proposal",
+  "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
+  "to": {
+    "name": "Bob"
+  }
+}
+```
 
 The `to` field contains an __introducee descriptor__ that provides
 context about the introduction, helping the party receiving the proposal
@@ -126,11 +134,33 @@ proposal message, this can be as simple as a name, or something fancier (see
 A standard example of the message that an introducee sends in response
 to an introduction proposal would be:
 
-[![simple response from DID-based introducee](simple-response-did.png)](simple-response-did.json)
+```jsonc
+{
+  "@type": "https://didcomm.org/introduce/1.0/response",
+  "@id": "283e15b5-a3f7-43e7-bac8-b75e4e7a0a25",
+  "~thread": {"thid": "df3b699d-3aa9-4fd0-bb67-49594da545bd"},
+  "approve": true,
+  "invitation": {
+    "@type": "https://didcomm.org/connections/1.0/invitation",
+    "@id": "12345678900987654321",
+    "label": "Robert",
+    "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
+    "serviceEndpoint": "https://example.com/endpoint",
+    "routingKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"]
+  }
+}
+```
 
 A simpler response, also valid, might look like this:
 
-[![simple response from non-DID-based introducee](simple-response-other.png)](simple-response-other.json)
+```jsonc
+{
+  "@type": "https://didcomm.org/introduce/1.0/response",
+  "@id": "283e15b5-a3f7-43e7-bac8-b75e4e7a0a25",
+  "~thread": {"thid": "df3b699d-3aa9-4fd0-bb67-49594da545bd"},
+  "approve": true
+}
+```
 
 The difference between the two forms is whether the response contains
 a valid `didexchange/../invitation` message. Normally, it should--but sometimes,
@@ -172,7 +202,19 @@ made. This message also uses the `introducee descriptor` block, to tell
 the potential introducer which introducee is the object of the sender's
 interest:
 
-[![sample request](request.png)](request.json)
+```jsonc
+{
+  "@type": "https://didcomm.org/introduce/1.0/request",
+  "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
+  "please_introduce_to": {
+    "name": "Carol",
+    "description": "The woman who spoke after you at the PTA meeting last night.",
+    "expected": true
+  },
+  "nwise": false,
+  "~timing": { "expires_time": "2019-04-23 18:00Z" }
+}
+```
 
 This message is not part of any state machine; it can be sent at any time,
 and when it is received, the recipient can choose whether or not to honor
@@ -249,7 +291,7 @@ Alice still acts as the introducer, but Bob now asks Alice to introduce him to a
 
 ```jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0/request",
+  "@type": "https://didcomm.org/introduce/1.0/request",
   "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
   "please_introduce_to": {
       "discovered": "didcomm:///5f2396b5-d84e-689e-78a1-2fa2248f03e4/.candidates%7B.id+%3D%3D%3D+%22Carol%22%7D"
@@ -283,7 +325,31 @@ What if she is introducing 2 public entities and has a connection to neither?]
 In the tutorial narrative, only a simple proposal was presented. A
 fancier version might be:
 
-[![fancy proposal example](fancy-proposal.png)](fancy-proposal.json)
+```jsonc
+{
+  "@type": "https://didcomm.org/introduce/1.0/proposal",
+  "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
+  "to": {
+    "name": "Kaiser Hospital",
+    "description": "Where I want to schedule your MRI. NOTE: NOT the one downtown!",
+    "description~l10n": { "locale": "en", "es": "Donde se toma el MRI; no en el centro"},
+    "where": "@34.0291739,-118.3589892,12z",
+    "img~attach": {
+      "description": "view from Marina Blvd",
+      "mime-type": "image/png",
+      "filename": "kaiser_culver_google.jpg",
+      "content": {
+        "link": "http://bit.ly/2FKkby3",
+        "byte_count": 47738,
+        "sha256": "cd5f24949f453385c89180207ddb1523640ac8565a214d1d37c4014910a4593e"
+      }
+    },
+    "proposed": false
+  },
+  "nwise": true,
+  "~timing": { "expires_time": "2019-04-23 18:00Z" }
+}
+```
 
 This adds a number of fields to the introducee descriptor. Each is optional
 and may be appropriate in certain circumstances. Most should be self-explanatory,

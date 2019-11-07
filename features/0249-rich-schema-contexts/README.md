@@ -1,4 +1,4 @@
-# Aries RFC 0249: Aries SDK Rich Schema Contexts
+# Aries RFC 0249: Aries Rich Schema Contexts
 - Authors: [Brent Zundel](brent.zundel@evernym.com), [Ken Ebert](ken@sovrin.org)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-10-08
@@ -29,9 +29,8 @@ i.e. they provide an explicit shared semantic meaning.
 establishment of a common vocabulary.
 
 ### Data Registry Storage
-Aries-SDK will provide a means for writing `@context` objects to and
-reading `@context` objects from a data registry (such as a distributed
-ledger).
+Aries will provide a means for writing `@context` objects to and reading
+`@context` objects from a data registry (such as a distributed ledger).
 
 ### Example context
 ```

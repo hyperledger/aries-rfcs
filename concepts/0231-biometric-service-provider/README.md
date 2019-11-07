@@ -63,7 +63,7 @@ and "matched" to the IBV:
 
 Both the IBV and CBV must be securely stored on a mobile device or
 server often with the help of hardware-based encryption mechanisms
-such as a Trusted Execution Environment (TEE) or Hardware Sexurity
+such as a Trusted Execution Environment (TEE) or Hardware Security
 Module (HSM).  The CBV is typically ephemeral and discarded (using
 secure erasure) following the match operation.
 
@@ -84,8 +84,8 @@ as the most common use case:
 ![bsp_aadhaar](images/bsp_aadhaar.png)
 
 Authentication Service Agents (ASAs) are licensed by the Government of
-India to connect via secure channels to fetch IBVs from the Unique
-Identification Authority of India (UIDAI) data centre and match them
+India to pass the verification request via secure channels to the Unique
+Identification Authority of India (UIDAI) data centre where IBVs are retireved and matched
 to incoming CBVs from Authentication User Agencies (AUA) that broker
 user authentication sessions from point-of-sale (PoS) terminals:
 
