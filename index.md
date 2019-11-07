@@ -21,6 +21,7 @@
 * [0094: Cross-Domain Messaging](concepts/0094-cross-domain-messaging/README.md) (2018-10-29 &mdash; [`concept`](/tags.md#concept))
 * [0095: Basic Message Protocol 1.0](features/0095-basic-message/README.md) (2019-08-06, [6 impls](features/0095-basic-message/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`test-anomaly`](/tags.md#test-anomaly))
 * [0160: Connection Protocol](features/0160-connection-protocol/README.md) (2019-08-06, [5 impls](features/0160-connection-protocol/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`test-anomaly`](/tags.md#test-anomaly))
+* [0250: Rich Schema Objects](concepts/0250-rich-schemas/README.md) (2019-10-08 &mdash; [`concept`](/tags.md#concept) [`rich-schemas`](/tags.md#rich-schemas))
 
 ## [DEMONSTRATED](README.md#demonstrated)
 * [0005: DID Communication](concepts/0005-didcomm/README.md) (2019-01-15, [9 impls](concepts/0005-didcomm/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
@@ -66,10 +67,12 @@
 * [0214: "Help Me Discover" Protocol](features/0214-help-me-discover/README.md) (2019-09-10 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0217: Linkable Message Paths](concepts/0217-linkable-message-paths/README.md) (2019-09-10 &mdash; [`concept`](/tags.md#concept))
 * [0231: Biometric Service Provider](concepts/0231-biometric-service-provider/README.md) (2019-09-24 &mdash; [`concept`](/tags.md#concept))
-* [0249: Aries SDK Rich Schema Contexts](features/0249-rich-schema-contexts/README.md) (2019-10-08 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
-* [0250: Rich Schema Objects](concepts/0250-rich-schemas/README.md) (2019-10-08 &mdash; [`concept`](/tags.md#concept) [`rich-schemas`](/tags.md#rich-schemas))
+* [0249: Aries Rich Schema Contexts](features/0249-rich-schema-contexts/README.md) (2019-10-08 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0257: Private Credential Issuance](concepts/0257-private-credential-issuance/README.md) (2019-10-16 &mdash; [`concept`](/tags.md#concept) [`protocol`](/tags.md#protocol))
 * [0268: Unified DIDCOMM Deeplinking](concepts/0268-unified-didcomm-agent-deeplinking/README.md) (2019-10-23  &mdash; [`concept`](/tags.md#concept) [`agents`](/tags.md#agents) [`mobile`](/tags.md#mobile))
+* [0270: Interop Test Suite](concepts/0270-interop-test-suite/README.md) (2019-10-25 &mdash; [`concept`](/tags.md#concept))
+* [0281: Aries Rich Schemas](features/0281-rich-schemas/README.md) (2019-10-30 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
+* [0289: The Trust Over IP Stack](concepts/0289-toip-stack/README.md) (2019-11-04 &mdash; [`concept`](/tags.md#concept) [`stack`](/tags.md#stack) [`trust layer`](/tags.md#trust layer))
 
 ## [RETIRED](README.md#retired)
 
