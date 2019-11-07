@@ -164,7 +164,7 @@ The _inviter_ will either use an existing invitation DID, or provision a new one
 
 ##### Implicit Invitation
 
-Any Public DID serves as an implicit invitation. If an _invitee_ wishes to connect to any Public DID, They designate their own label and skip to the end of the Invitation Processing step. There is no need to encode the invitation or transmit the invitation.
+Any Public DID that expresses support for DIDComm by defining a  [`service`](https://w3c.github.io/did-core/#service-endpoints) that follows the [DIDComm conventions](../0067-didcomm-diddoc-conventions/README.md#service-conventions) serves as an implicit invitation. If an _invitee_ wishes to connect to any Public DID, They designate their own label and skip to the end of the Invitation Processing step. There is no need to encode the invitation or transmit the invitation.
 
 ##### Routing Keys
 
