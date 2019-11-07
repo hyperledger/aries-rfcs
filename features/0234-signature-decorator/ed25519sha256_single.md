@@ -11,22 +11,22 @@ This scheme computes a single [ed25519](https://ed25519.cr.yp.to/) digital signa
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
     "sig_data": "base64URL(64bit_integer_from_unix_epoch|msg)",
     "signature": "base64URL(ed25519 signature)",
-    "signers": "base64URL(inlined_ed25519_signing_verkey)"
+    "signer": "base64URL(inlined_ed25519_signing_verkey)"
 }
 ```
 
 * `@type` MUST be `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single`
 * `sig_data` MUST be the base64URL encoding of a 64-bit integer prepended to the message
 * `signature` MUST be the base64URL encoding of the resulting ed25519 digital signature over `sig_data`
-* `signers` MUST be the base64URL encoding of the corresponding ed25519 public key used to sign `sig_data`
+* `signer` MUST be the base64URL encoding of the corresponding ed25519 public key used to sign `sig_data`
 
 ### Verification
 
 The successful outcome of this scheme is the `plaintext`.
 
-1. base64URL-decode `signers`
+1. base64URL-decode `signer`
 2. base64URL-decode `signature`
-3. Verify the ed25519 signature over `sig_data` with the key provided in `signers`
+3. Verify the ed25519 signature over `sig_data` with the key provided in `signer`
    1. Further processing is halted if verification fails and an "authentication failure" error is returned
 4. base64URL-decode the `sig_data`
 5. Strip out the first 8 bytes
