@@ -46,7 +46,7 @@ Digitally signing the `msg` object with the `ed25519sha256_single` scheme result
       "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
       "sig_data": "base64URL(64bit_integer_from_unix_epoch|msg_object)",
       "signature": "base64URL(digital signature function output)",
-      "signers": "base64URL(inlined_signing_verkey)"
+      "signer": "base64URL(inlined_signing_verkey)"
     }
 }
 ```
@@ -116,7 +116,7 @@ Since digital signatures are non-repudiable, it's worth noting the privacy impli
 - No, rather the receiver of the message can send an error response if they're unable to validate the signature.
 
 *How should multiple signatures be represented?*
-- One solution is to do [<digital_sig1>, <digital_sig2>] for `signature` and do [<verkey1>, <verkey2>] for `signers`
+- While not supported in this version, one solution would be to support `[digital_sig1, digital_sig2]` for `signature` and `[verkey1, verkey2]` for `signer`.
 
 ## Implementations
 
