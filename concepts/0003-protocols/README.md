@@ -250,7 +250,7 @@ RFC definition procedure described here.
 
 #### WSDL
 
-[WSDL](https://www.w3.org/TR/2001/NOTE-wsdl-20010315) is a web-centric
+[WSDL](https://www.w3.org/TR/2001/NOTE-wsdl-20010315) (Web Services Description Language) is a web-centric
 evolution of earlier, RPC-style interface definition languages like
 [IDL in all its varieties](https://en.wikipedia.org/wiki/Interface_description_language)
 and [CORBA](https://en.wikipedia.org/wiki/Common_Object_Request_Broker_Architecture).
