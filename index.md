@@ -76,6 +76,7 @@
 * [0302: Aries Stable](concepts/0302-aries-stable/README.md) (2019-11-09 &mdash; [`concept`](/tags.md#concept))
 
 ## [RETIRED](README.md#retired)
+* [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 
 >(This file is machine-generated; see [code/generate_index.py](code/generate_index.py).)
