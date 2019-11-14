@@ -1,6 +1,6 @@
 # 0302: Aries Stable
 
-* Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [John Jordan](mailto:john.jordan@gov.bc.ca)
+* Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [John Jordan](mailto:john.jordan@gov.bc.ca) Province of British Columbia
 * Status: [PROPOSED](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#proposed)
 * Since: 2019-11-09
 * Status Note: This RFC proposes an Aries Stable process and Aries Stable v1.0.0
