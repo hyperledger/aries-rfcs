@@ -76,6 +76,7 @@
 * [0302: Aries Interop Profile](concepts/0302-aries-interop-profile/README.md) (2019-11-09 &mdash; [`concept`](/tags.md#concept))
 * [0309: DIDAuthZ](features/0309-didauthz/README.md) (2019-11-14 &mdash; [`feature`](/tags.md#feature) [`credentials`](/tags.md#credentials))
 * [0317: Please ACK Decorator](features/0317-please-ack/README.md) (2019-12-26 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
+* [0327: Crypto service Protocol 1.0](features/0327-crypto-service/README.md) (2019-11-20 (date you submit your PR) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 ## [RETIRED](README.md#retired)
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
