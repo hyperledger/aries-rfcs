@@ -24,7 +24,7 @@ We need a way to perform these workflows with DIDComm.
 
 This is the "Help Me Discover" protocol, version 1.0. It is uniquely identified by the following [PIURI](../../concepts/0003-protocols/uris.md#piuri):
 
-    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/help-me-discover/1.0
+    https://didcomm.org/help-me-discover/1.0
 
 
 ### Roles and States
@@ -53,7 +53,7 @@ A simple request message looks like this:
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/help-me-discover/1.0/request",
+    "@type": "https://didcomm.org/help-me-discover/1.0/request",
     "@id": "a2248fb5-d46e-4898-a781-2f03e5f23964"
     // human-readable, localizable, optional
     "comment": "any ideas?",
@@ -99,7 +99,7 @@ A `response` message looks like this:
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/help-me-discover/1.0/response",
+    "@type": "https://didcomm.org/help-me-discover/1.0/response",
     "@id": "5f2396b5-d84e-689e-78a1-2fa2248f03e4"
     "~thread": { "thid": "a2248fb5-d46e-4898-a781-2f03e5f23964" }
     // human-readable, localizable, optional
@@ -133,7 +133,7 @@ A `candidate` in a response message like the one shown above can be referenced i
 
 ```jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/introduce/1.0/request",
+  "@type": "https://didcomm.org/introduce/1.0/request",
   "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
   "to": {
     "discovered": "didcomm:///5f2396b5-d84e-689e-78a1-2fa2248f03e4/.candidates%7B.id+%3D%3D%3D+%22Bob%22%7D"
@@ -165,7 +165,7 @@ A `request` message can ask for someone that is capable of proving using verifia
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/help-me-discover/1.0/request",
+    "@type": "https://didcomm.org/help-me-discover/1.0/request",
     "@id": "248fb52a-4898-a781-d46e-e5f239642f03"
     "desired": { 
         // either subjectRole or subjectDid:
@@ -189,7 +189,7 @@ Another example might be:
 ```jsonc
 {
     "@id": "a2248fb5-d46e-4898-a781-2f03e5f23964",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/help-me-discover/1.0/request",
+    "@type": "https://didcomm.org/help-me-discover/1.0/request",
     "comment": "blood glucose",
     "desired": {
         "all": [
