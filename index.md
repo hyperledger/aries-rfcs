@@ -74,6 +74,7 @@
 * [0281: Aries Rich Schemas](features/0281-rich-schemas/README.md) (2019-10-30 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0289: The Trust Over IP Stack](concepts/0289-toip-stack/README.md) (2019-11-04 &mdash; [`concept`](/tags.md#concept) [`stack`](/tags.md#stack) [`trust layer`](/tags.md#trust layer))
 * [0302: Aries Stable](concepts/0302-aries-stable/README.md) (2019-11-09 &mdash; [`concept`](/tags.md#concept))
+* [0309: DIDAuthZ](features/0309-didauthz/README.md) (2019-11-14 &mdash; [`feature`](/tags.md#feature) [`credentials`](/tags.md#credentials))
 
 ## [RETIRED](README.md#retired)
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
