@@ -171,7 +171,9 @@ The Caller should validate this message as follows:
 
 Having validated the message thus far, Caller determines the winner by checking to see if the value of the first field in `flip_string` equals the value of `called` from the preceding `call` message. If yes, then the value of the `winner` field must be `caller`; if no, then it must be `recorder`. The `winner` field must be present in the message, and its value must be correct, for the `reveal` message to be deemed fully valid. This confirms that both parties understand the outcome, and it prevents a Recorder from asserting a false outcome that is accepted by careless validation logic on the Caller side.
 
-The [`~please_ack` decorator](../0015-acks/README.md#requesting-an-ack-please_ack) is optional. If a superprotocol specifies the next step after a Coin Flip with sufficient precision, it may be unnecessary. However, it should be supported by implementations. The resulting `ack` message, if sent, is hereby [adopted into the Coin Flip protocol](../0015-acks/README.md#adopting-acks).
+The `~please_ack` decorator is optional. If a superprotocol specifies the next step after a Coin Flip with sufficient precision, it may be unnecessary. However, it should be supported by implementations. The resulting `ack` message, if sent, is hereby [adopted into the Coin Flip protocol](../0015-acks/README.md#adopting-acks).
+
+[To Do: Add link to ~please_ack RFC when it has been defined.]
 
 The [`~timing.expires_time` decorator](../0032-message-timing/README.md#tutorial) may be used to impose a time limit on the processing of this message. If used, the protocol must restart if the subsequent `ack` or the next message in the superprotocol is not received before the time limit.
 

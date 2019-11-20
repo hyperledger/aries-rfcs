@@ -119,10 +119,11 @@ The protocol includes the standard `notifier` and `notified` roles. It
 defines a single message type `problem-report`, introduced here.
 It also [adopts](../../concepts/0003-protocols/template.md#adopted-messages) the
 `ack` message from the [`ACK 1.0` protocol](../0015-acks/README.md),
-to accommodate the possibility that the [`~please_ack`](
- ../../features/0015-acks/README.md#requesting-an-ack-please_ack)
- [decorator]( ../../concepts/0011-decorators/README.md) may be used on the
+to accommodate the possibility that the `~please_ack`
+[decorator]( ../../concepts/0011-decorators/README.md) may be used on the
  notification.
+
+[To Do: Add link to ~please_ack RFC when it has been defined.]
 
 A `problem-report` communicates about a problem when an agent-to-agent message is
 possible and a recipient for the problem report is known. This covers, for example,
