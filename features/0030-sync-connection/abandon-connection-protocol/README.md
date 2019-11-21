@@ -64,8 +64,7 @@ forth. The nature of the relationship, the need for a historical audit trail, re
 requirements, and many other factors may influence what's appropriate; the protocol
 simply requires that the message be understood to have permanent termination semantics.
 
-It may be desirable to use the [`~please_ack` decorator](
-../../0015-acks/README.md#requesting-an-ack-please_ack)
+It may be desirable to use the [`~please_ack` decorator](../../0317-please-ack/README.md)
 to request acknowledgment that the severance has been processed. The example shows
 this, but including it is optional.
 
