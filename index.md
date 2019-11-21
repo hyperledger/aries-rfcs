@@ -26,7 +26,7 @@
 ## [DEMONSTRATED](README.md#demonstrated)
 * [0005: DID Communication](concepts/0005-didcomm/README.md) (2019-01-15, [9 impls](concepts/0005-didcomm/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0011: Decorators](concepts/0011-decorators/README.md) (2019-01-31, [10 impls](concepts/0011-decorators/README.md#implementations) &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
-* [0015: ACKs](features/0015-acks/README.md) (2019-12-26, [3 impls](features/0015-acks/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
+* [0015: ACKs](features/0015-acks/README.md) (2019-12-26, [3 impls](features/0015-acks/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 * [0029: Message Trust Contexts](concepts/0029-message-trust-contexts/README.md) (2019-05-10, [2 impls](concepts/0029-message-trust-contexts/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0032: Message Timing](features/0032-message-timing/README.md) (2019-05-01, [1 impl](features/0032-message-timing/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 * [0035: Report Problem Protocol 1.0](features/0035-report-problem/README.md) (2019-04-01, [2 impls](features/0035-report-problem/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
@@ -75,6 +75,7 @@
 * [0289: The Trust Over IP Stack](concepts/0289-toip-stack/README.md) (2019-11-04 &mdash; [`concept`](/tags.md#concept) [`stack`](/tags.md#stack) [`trust layer`](/tags.md#trust layer))
 * [0302: Aries Stable](concepts/0302-aries-stable/README.md) (2019-11-09 &mdash; [`concept`](/tags.md#concept))
 * [0309: DIDAuthZ](features/0309-didauthz/README.md) (2019-11-14 &mdash; [`feature`](/tags.md#feature) [`credentials`](/tags.md#credentials))
+* [0317: Please ACK Decorator](features/0317-please-ack/README.md) (2019-12-26 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 
 ## [RETIRED](README.md#retired)
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
