@@ -10,7 +10,7 @@
 
 ## Summary
 
-The 0.1 version of the ZKP Credential Exchange protocol (based on Hyperledger Indy) covering both issuing credentials and presenting proof. These messages were implemented to enable demonstrating credential exchange amongst interoperating agents for IIW 28 in Mountain View, CA. The use of these message types continues to today (November 2019) and so they are being added as an RFC for historical completeness and to enable reference in [Aries Stable](../../concepts/0302-aries-stable/README.md).
+The 0.1 version of the ZKP Credential Exchange protocol (based on Hyperledger Indy) covering both issuing credentials and presenting proof. These messages were implemented to enable demonstrating credential exchange amongst interoperating agents for IIW 28 in Mountain View, CA. The use of these message types continues to today (November 2019) and so they are being added as an RFC for historical completeness and to enable reference in [Aries Interop Profile](../../concepts/0302-aries-interop-profile/README.md).
 
 ## Motivation
 

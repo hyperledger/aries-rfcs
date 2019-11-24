@@ -73,7 +73,7 @@
 * [0270: Interop Test Suite](concepts/0270-interop-test-suite/README.md) (2019-10-25 &mdash; [`concept`](/tags.md#concept))
 * [0281: Aries Rich Schemas](features/0281-rich-schemas/README.md) (2019-10-30 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0289: The Trust Over IP Stack](concepts/0289-toip-stack/README.md) (2019-11-04 &mdash; [`concept`](/tags.md#concept) [`stack`](/tags.md#stack) [`trust layer`](/tags.md#trust layer))
-* [0302: Aries Stable](concepts/0302-aries-stable/README.md) (2019-11-09 &mdash; [`concept`](/tags.md#concept))
+* [0302: Aries Interop Profile](concepts/0302-aries-interop-profile/README.md) (2019-11-09 &mdash; [`concept`](/tags.md#concept))
 * [0309: DIDAuthZ](features/0309-didauthz/README.md) (2019-11-14 &mdash; [`feature`](/tags.md#feature) [`credentials`](/tags.md#credentials))
 * [0317: Please ACK Decorator](features/0317-please-ack/README.md) (2019-12-26 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 
