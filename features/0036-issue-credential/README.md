@@ -185,7 +185,7 @@ Description of fields:
 * `credentials~attach` -- an array of attachments containing the issued credentials.
   * For Indy, the attachment contains data from libindy about credential to be issued, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
   
-If the issuer wants an acknowledgement that the issued credential was received, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0015: ACKs](../0015-acks/README.md).
+If the issuer wants an acknowledgement that the issued credential was received, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0317: Please ACK Decorator](../0317-please-ack/README.md).
 
 #### Preview Credential
 
