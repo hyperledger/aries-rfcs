@@ -193,7 +193,7 @@ Each item in the list must be a tagged pair (a JSON {key:value}, where the key n
 
 > [TODO: figure out how to identify parties > 2 in n-wise interaction]
 
-**fix_-_hint**: Contains human-readable, localized suggestions about how to fix this instance of the problem. If present, this should be viewed as overriding general hints found in a message catalog.
+**fix_hint**: Contains human-readable, localized suggestions about how to fix this instance of the problem. If present, this should be viewed as overriding general hints found in a message catalog.
 
 **impact**: A string describing the breadth of impact of the problem. An enumerated type:
 
