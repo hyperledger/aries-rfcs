@@ -190,8 +190,8 @@ request:
 "~please_ack: {}"
 ```
 
-Bob honors this request and returns an `ack` as soon as he receives it. The
-interesting field is `status`, which look like this: `"status": "OK"` (or,
+Bob honors this request and returns an `ack` as soon as he receives it and stores its
+payload. The interesting field is `status`, which look like this: `"status": "OK"` (or,
 if the `issue-credential` protocol defines a final state for the holder called
 `now-holding`, Bob could be more explicit and send '"status": "now-holding"'.
 
