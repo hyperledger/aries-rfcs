@@ -77,6 +77,7 @@
 * [0309: DIDAuthZ](features/0309-didauthz/README.md) (2019-11-14 &mdash; [`feature`](/tags.md#feature) [`credentials`](/tags.md#credentials))
 * [0317: Please ACK Decorator](features/0317-please-ack/README.md) (2019-12-26 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0327: Crypto service Protocol 1.0](features/0327-crypto-service/README.md) (2019-11-20 (date you submit your PR) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0334: JWE envelope 1.0](features/0334-jwe-envelope/README.md) (2019-11-28 &mdash; [`feature`](/tags.md#feature))
 
 ## [RETIRED](README.md#retired)
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
