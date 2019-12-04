@@ -38,6 +38,33 @@ The following table defines the supported key wrapping encryption algorithms for
  ECDH-ES + AES key wrap         | ECDH-ES+A256KW                    | Anoncrypt
  ECDH-1PU + AES key wrap        | ECDH-1PU+A256KW                   | Authcrypt
 
+
+### Curves support
+
+The following curves are supported:
+
+ Curve Name                                                 | Curve identifier
+ :--------------------------------------------------------- | :-----------------
+ X25519 (aka Curve25519)                                    | X25519 (default)
+ NIST P256 (aka SECG secp256r1 and ANSI X9.62 prime256v1, ref [here](https://tools.ietf.org/search/rfc4492#appendix-A))   | P-256
+
+Other curves are optional.
+
+#### Security Consideration for Curves
+
+As noted in the ECDH-1PU [IETF draft](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-02#section-4) security considerations section, all implementations must ensure the following:
+```text
+When performing an ECDH key agreement between a static private key
+and any untrusted public key, care should be taken to ensure that the
+public key is a valid point on the same curve as the private key.
+Failure to do so may result in compromise of the static private key.
+For the NIST curves P-256, P-384, and P-521, appropriate validation
+routines are given in Section 5.6.2.3.3 of [NIST.800-56A]. For the
+curves used by X25519 and X448, consult the security considerations
+of [RFC7748].
+```
+
+
 ### JWE Examples
 
 AES GCM encryption and key wrapping examples are found in [Appendix C](https://tools.ietf.org/html/rfc7518#appendix-C) of the JSON Web Algorithm specs.
@@ -58,7 +85,7 @@ Our approach for AuthCrypt compliance is to use the NIST approved `One-Pass Unif
 
 Aries agents currently use the envelope described in [RFC0019](/features/0019-encryption-envelope/README.md). This envelope uses libsodium (NaCl) encryption/decryption, which is based on Salsa20Poly1305 algorithm.
 
-Another prior effort towards enhancing JWE compliace used XChacha20Poly1305 encryption and ECDH-SS key wrapping mode. See Aries-RFCs [issue-133](https://github.com/hyperledger/aries-rfcs/issues/133#issuecomment-535199768), [Go JWE Authcrypt package](https://github.com/hyperledger/aries-framework-go/tree/v0.1.0/pkg/didcomm/packer/jwe/authcrypt). As ECDH-SS is not specified by JOSE, a new recipient header field, `spk`, was needed to contain the static encrypted public key of the sender. Additionally (X)Chacha20Poly1305 key wrapping is also not specified by JOSE.
+Another prior effort towards enhancing JWE compliance is to use XChacha20Poly1305 encryption and ECDH-SS key wrapping mode. See Aries-RFCs [issue-133](https://github.com/hyperledger/aries-rfcs/issues/133#issuecomment-535199768) and [Go JWE Authcrypt package](https://github.com/hyperledger/aries-framework-go/tree/v0.1.0/pkg/didcomm/packer/jwe/authcrypt) for an implementation detail. As ECDH-SS is not specified by JOSE, a new recipient header field, `spk`, was needed to contain the static encrypted public key of the sender. Additionally (X)Chacha20Poly1305 key wrapping is also not specified by JOSE. For these reasons, this option is mentioned here as reference only.
 
 ## JWE formats
 
@@ -163,7 +190,7 @@ In the above two examples, `apu` is the encode ephemeral key used to encrypt the
 
 With the recipients headers representing an ephemeral key that can be used to derive the key to be used for AEAD decryption of the CEK following the [ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-02) encryption scheme.
 
-The function `XC20P` in the example above is defined as the XChahcha20Poly1035 cipher function. This can be replaced by the A256GCM cipher function for 
+The function `XC20P` in the example above is defined as the XChahcha20Poly1035 cipher function. This can be replaced by the A256GCM cipher function.
 
 ## Prior art
 
@@ -175,6 +202,7 @@ The function `XC20P` in the example above is defined as the XChahcha20Poly1035 c
 - [IANA Media Types](https://www.iana.org/assignments/media-types/media-types.xhtml#application)
 - [Public Key Authenticated Encryption for JOSE: ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-02)
 - [NIST SP 800-56A Rev. 3 Recommendation for Pair-Wise Key-Establishment schemes Using Discrete Logarithm Cryptography](https://csrc.nist.gov/publications/detail/sp/800-56a/rev-3/final)
+- [Appendix A of IETF 4492](https://tools.ietf.org/search/rfc4492#appendix-A) listing equivalent curve names.
 
 ## Unresolved questions
 
