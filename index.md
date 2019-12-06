@@ -73,9 +73,11 @@
 * [0270: Interop Test Suite](concepts/0270-interop-test-suite/README.md) (2019-10-25 &mdash; [`concept`](/tags.md#concept))
 * [0281: Aries Rich Schemas](features/0281-rich-schemas/README.md) (2019-10-30 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0289: The Trust Over IP Stack](concepts/0289-toip-stack/README.md) (2019-11-04 &mdash; [`concept`](/tags.md#concept) [`stack`](/tags.md#stack) [`trust layer`](/tags.md#trust layer))
-* [0302: Aries Stable](concepts/0302-aries-stable/README.md) (2019-11-09 &mdash; [`concept`](/tags.md#concept))
+* [0302: Aries Interop Profile](concepts/0302-aries-interop-profile/README.md) (2019-11-09 &mdash; [`concept`](/tags.md#concept))
 * [0309: DIDAuthZ](features/0309-didauthz/README.md) (2019-11-14 &mdash; [`feature`](/tags.md#feature) [`credentials`](/tags.md#credentials))
 * [0317: Please ACK Decorator](features/0317-please-ack/README.md) (2019-12-26 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
+* [0327: Crypto service Protocol 1.0](features/0327-crypto-service/README.md) (2019-11-20 (date you submit your PR) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0334: JWE envelope 1.0](features/0334-jwe-envelope/README.md) (2019-11-28 &mdash; [`feature`](/tags.md#feature))
 
 ## [RETIRED](README.md#retired)
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))

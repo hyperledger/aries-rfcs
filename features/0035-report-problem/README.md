@@ -3,7 +3,7 @@
 - Authors: [Stephen Curran](swcurran@cloudcompass.ca), [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-04-01
-- Status Note: Broadly socialized in Indy circles. Implemented in several codebases. Not yet fully harmonized. 
+- Status Note: Implemented in several codebases. Not yet fully harmonized. 
 - Supersedes: [Indy HIPE PR #65]( https://github.com/hyperledger/indy-hipe/pull/65)
 - Start Date: 2018-11-26
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
@@ -23,7 +23,7 @@ well after and well away from its cause, and when multiple parties may need to c
 a solution.
 
 Interoperability is perhaps more crucial with problem reporting than with any other aspect of
-DIDComm, since an agent written by one devloper MUST be able to understand an error reported by
+DIDComm, since an agent written by one developer MUST be able to understand an error reported by
 an entirely different team. Notice how different this is from normal enterprise software
 development, where developers only need to worry about understanding their own errors.
 
@@ -85,7 +85,7 @@ All of the following challenges need to be addressed.
   studied, its original context is available. This is particularly difficult
   in DIDComm, which is transport-agnostic and inherently asynchronous, and
   which takes place on an inconsistently connected digital landscape.
-5. __Support localization__.
+5. __Support localization__ using techniques in [the l10n RFC](../0043-l10n/README.md).
 6. __Provide consistent, locale-independent problem codes__, not just localized text,
   so problems can be researched in knowledge bases, on Stack Overflow, and in
   other internet forums, regardless of the natural language in which a message
@@ -95,13 +95,13 @@ All of the following challenges need to be addressed.
   of all possible things that can go wrong with all possible agents in all possible
   interactions is completely unrealistic. However, it may be possible to maintain
   a curated subset. While we can't enumerate everything that can go wrong in a
-  financial transaction, a code for “insufficient funds” might have near-universal
+  financial transaction, a code for "insufficient funds" might have near-universal
   usefulness. Compare the posix error inventory in [errorno.h](
   https://pubs.opengroup.org/onlinepubs/009695399/basedefs/errno.h.html).
-8. Facilitate automated problem handling by agents, not just manual handling by humans.
+8. __Facilitate automated problem handling by agents__, not just manual handling by humans.
   Perfect automation may be impossible, but high levels of automation should be
   doable.
-9. Clarify how the problem affects an in-progress interaction. Does a failure to
+9. __Clarify how the problem affects an in-progress interaction__. Does a failure to
   process payment reset the interaction to the very beginning of the protocol, or
   just back to the previous step, where payment was requested? This requires problems
   to be [matched in a formal way to the state machine](
@@ -137,7 +137,7 @@ recipient.
 Only `description.code` is required, but a maximally verbose `problem-report` could contain all
 of the following:
 
-```JSON
+```jsonc
 {
   "@type"            : "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/report-problem/1.0/problem-report",
   "@id"              : "an identifier that can be used to discuss this error message",
@@ -145,12 +145,12 @@ of the following:
   "description"      : { "en": "localized message", "code": "symbolic-name-for-error" },
   "problem_items"    : [ {"<item descrip>": "value"} ],
   "who_retries"      : "enum: you | me | both | none",
-  "fix-hint"         : { "en": "localized error-instance-specific hint of how to fix issue"},
+  "fix_hint"         : { "en": "localized error-instance-specific hint of how to fix issue"},
   "impact"           : "enum: message | thread | connection",
   "where"            : "enum: you | me | other - enum: cloud | edge | wire | agency | ..",
   "noticed_time"     : "<time>",
-  "tracking-uri"     : "",
-  "escalation-uri"   : ""
+  "tracking_uri"     : "",
+  "escalation_uri"   : ""
 }
 ```
 
@@ -170,11 +170,7 @@ the problem report is the second member (`~thread.sender_order` = 0). In such ca
 (parent thread id) here would be the `@id` of the triggering message. If the problem-report is unrelated
 to a message, the thread decorator is mostly redundant, as `~thread.thid` must equal `@id`.
 
-**@msg_catalog** (required): a DID reference that provides a way to look up the error code in a catalog. The DID resolves to an endpoint that is combined with the DID fragment (e.g. `;spec/error-codes/123` in the above) to define a concrete URL with the error details. This is the same technique used for message family specifications, and in fact could be a message family identifier, if the documentation for the message family includes codes for `problem-report`s.
-
-**comment**: Contains human-readable, localized alternative string(s) that explain the problem. It is highly recommended
-that `code` and `@msg_catalog` are included, allowing the error to be searched on the web and
-documented formally. See [the l10n RFC](../0043-l10n/README.md).
+**description**: Contains human-readable, localized alternative string(s) that explain the problem. It is highly recommended that the message follow use the guidance in [the l10n RFC](../0043-l10n/README.md), allowing the error to be searched on the web and documented formally.
 
 **problem_items**: A list of one or more key/value pairs that are parameters about the problem. Some examples might be:
 
@@ -184,29 +180,40 @@ documented formally. See [the l10n RFC](../0043-l10n/README.md).
 
 All items should have in common the fact that they exemplify the problem described by the code (e.g., each is an invalid param, or each is an unresponsive URL, or each is an unrecognized crypto algorithm, etc).
 
-Each item in the list must be a tagged pair (a JSON {key:value}, where the key names the parameter or item, and the value is the actual problem text/number/value. For example, to report that two different endpoints listed in party B’s DID Doc failed to respond when they were contacted, the code might contain “endpoint-not-responding”, and the problem_items property might contain: [{“endpoint1”: “http://agency.com/main/endpoint”}, {“endpoint2”: “http://failover.agency.com/main/endpoint”}]
+Each item in the list must be a tagged pair (a JSON {key:value}, where the key names the parameter or item, and the value is the actual problem text/number/value. For example, to report that two different endpoints listed in party B’s DID Doc failed to respond when they were contacted, the code might contain "endpoint-not-responding", and the problem_items property might contain:
 
-**who_retries**: [TODO: figure out how to identify parties > 2 in n-wise interaction] value is the string “you”, the string “me”, the string “both”, or the string “none”. This property tells whether a problem is considered permanent and who the sender of the problem report believes should have the responsibility to resolve it by retrying. Rules about how many times to retry, and who does the retry, and under what circumstances, are not enforceable and not expressed in the message text. This property is thus not a strong commitment to retry--only a recommendation of who should retry, with the assumption that retries will often occur if they make sense.
+``` jsonc
+[
+  {"endpoint1": "http://agency.com/main/endpoint"},
+  {"endpoint2": "http://failover.agency.com/main/endpoint"}
+]
+```
 
-**fix-hint-ltxt**: Contains human-readable, localized suggestions about how to fix this instance of the problem. If present, this should be viewed as overriding general hints found in a message catalog.
+**who_retries**: value is the string "you", the string "me", the string "both", or the string "none". This property tells whether a problem is considered permanent and who the sender of the problem report believes should have the responsibility to resolve it by retrying. Rules about how many times to retry, and who does the retry, and under what circumstances, are not enforceable and not expressed in the message text. This property is thus not a strong commitment to retry--only a recommendation of who should retry, with the assumption that retries will often occur if they make sense.
+
+> [TODO: figure out how to identify parties > 2 in n-wise interaction]
+
+**fix_hint**: Contains human-readable, localized suggestions about how to fix this instance of the problem. If present, this should be viewed as overriding general hints found in a message catalog.
 
 **impact**: A string describing the breadth of impact of the problem. An enumerated type:
 
-- “message” (this is a problem with a single message only; the rest of the interaction may still be fine),
-- “thread” (this is a problem that endangers or invalidates the entire thread),
-- “connection” (this is a problem that endangers or invalidates the entire connection).
+- "message" (this is a problem with a single message only; the rest of the interaction may still be fine),
+- "thread" (this is a problem that endangers or invalidates the entire thread),
+- "connection" (this is a problem that endangers or invalidates the entire connection).
 
-**where**: A string that describes where the error happened, from the perspective of the reporter, and that uses the “you” or “me” or “other” prefix, followed by a suffix like “cloud”, “edge”, “wire”, “agency”, etc.
+**where**: A string that describes where the error happened, from the perspective of the reporter, and that uses the "you" or "me" or "other" prefix, followed by a suffix like "cloud", "edge", "wire", "agency", etc.
 
-**noticed_time**: [TODO: should we refer to timestamps in a standard way ("date"? "time"? "timestamp"? "when"?) Standard time entry (ISO-8601 UTC with at least day precision and up to millisecond precision) of when the problem was detected.
+**noticed_time**: Standard time entry (ISO-8601 UTC with at least day precision and up to millisecond precision) of when the problem was detected.
 
-**tracking-uri**: Provides a URI that allows the recipient to track the status of the error. For example, if the error is related to a service that is down, the URI could be used to monitor the status of the service, so its return to operational status could be automatically discovered.
+> [TODO: should we refer to timestamps in a standard way ("date"? "time"? "timestamp"? "when"?)]
+
+**tracking_uri**: Provides a URI that allows the recipient to track the status of the error. For example, if the error is related to a service that is down, the URI could be used to monitor the status of the service, so its return to operational status could be automatically discovered.
 
 **escalation_uri**: Provides a URI where additional help on the issue can be received. For example, this might be a "mailto" and email address for the Help Desk associated with a currently down service.
 
 ### Sample
 
-```JSON
+``` jsonc
 {
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/problem-report",
   "@id": "7c9de639-c51c-4d60-ab95-103fa613c805",
@@ -215,9 +222,11 @@ Each item in the list must be a tagged pair (a JSON {key:value}, where the key n
     "sender_order": 1
   },
   "~l10n"            : {"catalog": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/error-codes"},
-  "comment"          : "Unable to find a route to the specified recipient.",
-  "comment~l10n"     : {"code": "cant-find-route" },
-  "problem_items"    : [ "recipient": "did:sov:C805sNYhMrjHiqZDTUASHg" ],
+  "description"      : "Unable to find a route to the specified recipient.",
+  "description~l10n" : {"code": "cant-find-route" },
+  "problem_items"    : [
+      { "recipient": "did:sov:C805sNYhMrjHiqZDTUASHg" }
+  ],
   "who_retries"      : "you",
   "impact"           : "message",
   "noticed_time"     : "2019-05-27 18:23:06Z"
@@ -265,7 +274,7 @@ Alternatively, the capabilities described in [0034: Message Tracing](../0034-mes
 
 #### Examples:
 
-- “You’re asking for more information than we agreed to” or “You’re giving me more than I expected.”
+- "You’re asking for more information than we agreed to" or "You’re giving me more than I expected."
 - Couldn’t pay (insufficient funds, payment mechanism is offline…)
 - You violated the terms of service we agreed to, because I see that my info has been leaked.
 - Your credential has been revoked (asynchronous)
@@ -283,7 +292,7 @@ The current advice on which to use in a given scenario is to consider how the re
 
 #### Examples
 
-- “Please resend so a different one of my agents can read this.”, or, “Agent X no longer in service. Use Agent Y instead."
+- "Please resend so a different one of my agents can read this.", or, "Agent X no longer in service. Use Agent Y instead."
 - A received a message from B that it cannot understand (message garbled, can’t be decrypted, is of an unrecognized type, uses crypto from a library that A doesn’t have, etc)
 - A wants to report to B that it believes A has been hacked, or that it is under attack
 - A wants to report to B that it believes B has been hacked, or that it is under attack
@@ -320,7 +329,7 @@ An automated "wait longer" response might be used when first interacting with a 
 
 If the decision is to retry, it would be good to have support in areas covered by other RFCs. First, it would be helpful (and perhaps necessary) for the threading decorator to support the concept of retries, so that a Recipient would know when a message is a retry of an already sent message.  Next, on "forward" message types, Agents might want to know that a message was a retry such that they can consider refreshing DIDDoc/encryption key cache before sending the message along. It could also be helpful for a retry to interact with the Tracing facility so that more information could be gathered about why messages are not getting to their destination.
 
-Excessive retrying can exacerbate an existing system issue. If the reason for the timeout is because there is a "too many messages to be processed" situation, then sending retries simply makes the problem worse. As such, a reasonable backoff strategy should be used (e.g. exponentially increasing times between retries). As well, a [strategy used at Uber](https://eng.uber.com/reliable-reprocessing/) is to flag and handle retries differently from regular messages. The analogy with Uber is not pure - that is a single-vendor system - but the notion of flagging retries such that retry messages can be handly differently is a good approach.
+Excessive retrying can exacerbate an existing system issue. If the reason for the timeout is because there is a "too many messages to be processed" situation, then sending retries simply makes the problem worse. As such, a reasonable backoff strategy should be used (e.g. exponentially increasing times between retries). As well, a [strategy used at Uber](https://eng.uber.com/reliable-reprocessing/) is to flag and handle retries differently from regular messages. The analogy with Uber is not pure - that is a single-vendor system - but the notion of flagging retries such that retry messages can be handled differently is a good approach.
 
 ## Reference
 

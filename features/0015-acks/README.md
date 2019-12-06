@@ -139,6 +139,11 @@ maybe their own decorators. However, reusing the field names and conventions
 in this RFC may still be desirable, if there is significant overlap in the
 concepts.
 
+### Requesting ACKs
+
+A decorator, `~please_ack`, allows one agent to request an ad hoc ACK from
+another agent. This is described in the [0317-please-ack RFC](../0317-please-ack/README.md).
+
 ## Reference
 
 ### `ack` message
@@ -157,9 +162,7 @@ messages.
 
 ## Drawbacks and Alternatives
 
-Does not include a mechanism for one party to request an ad hoc `ACK` from the other party.
-
-[To Do: Add in a `~please_ack` decorator RFC and update this RFC as necessary.] 
+None identified.
 
 ## Prior art
 
@@ -167,7 +170,7 @@ See notes above about the [implicit ACK mechanism in `~thread.lrecs`](#implicit-
 
 ## Unresolved questions
 
-See [Drawbacks](#drawbacks-and-alternatives) about requesting an ack.
+- Muliplexed acks. How do you supply an ACK to all of Alice's agents instead of just to the one who involved in the current protocol?
 
 ## Implementations
 
