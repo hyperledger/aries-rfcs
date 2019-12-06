@@ -1,8 +1,8 @@
 # Aries RFC 0025: DIDComm Transports
 
 - Authors: [Sam Curren](sam@sovrin.org)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-05-27
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-12-05
 - Status Note:  
 - Supersedes: [INDY PR 94](https://github.com/hyperledger/indy-hipe/pull/94)
 - Start Date: 2019-02-26
@@ -32,9 +32,8 @@ HTTP(S) is the first transport for DID Communication that has received heavy att
 
 #### Known Implementations
 
-[Python Reference Agent](https://github.com/hyperledger/indy-agent/tree/master/python)
-
-[Indy Catalyst Agent](https://github.com/bcgov/indy-catalyst/tree/master/agent)
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python)
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet)
 
 ### Websocket
 
@@ -47,7 +46,8 @@ Websockets are an efficient way to transmit multiple messages without the overhe
 
 #### Known Implementations
 
-[Python Reference Agent](https://github.com/hyperledger/indy-agent/tree/master/python)
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python)
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet)
 
 ### XMPP
 
