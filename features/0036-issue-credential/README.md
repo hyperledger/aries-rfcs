@@ -8,6 +8,15 @@
 - Start Date: 2019-01-30
 - Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
 
+## Version Change Log
+
+### 1.01/propose-credential
+
+In version 1.01 of the propose-credential message, the following optional fields were added:
+schema_name, schema_version, and issuer_did.
+
+The previous version is [1.0/propose-credential](https://github.com/hyperledger/aries-rfcs/blob/527849e/features/0036-issue-credential/README.md#propose-credential).
+
 ## Summary
 
 Formalizes messages used to issue a credential--whether the credential is JWT-oriented, JSON-LD-oriented, or ZKP-oriented. The general flow is similar, and this protocol intends to handle all of them. If you are using a credential type that doesn't fit this protocol, please [raise a Github issue](/github-issues.md).
@@ -74,12 +83,15 @@ An optional message sent by the potential Holder to the Issuer to initiate the p
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/propose-credential",
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.01/propose-credential",
     "@id": "<uuid-of-propose-message>",
     "comment": "some comment",
     "credential_proposal": <json-ld object>,
     "schema_id": "Schema ID string",
+    "schema_name": "Schema name string",
+    "schema_version": "Schema version string",
     "cred_def_id": "Credential Definition ID string"
+    "issuer_did": "DID of the proposed issuer"
 }
 ```
 
@@ -88,7 +100,10 @@ Description of attributes:
 * `comment` -- an optional field that provides human readable information about this Credential Proposal, so the proposal can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credential_proposal` -- an optional JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential).
 * `schema_id` -- optional filter to request credential based on a particular Schema. This might be helpful when requesting a version 1 passport instead of a version 2 passport, for example.
+* `schema_name` -- optional filter to request credential based on a schema name. This is useful to allow a more user-friendly experience of requesting a credential by schema name.
+* `schema_version` -- optional filter to request credential based on a schema version. This is useful to allow a more user-friendly experience of requesting a credential by schema name and version.
 * `cred_def_id` -- optional filter to request credential based on a particular Credential Definition. This might be helpful when requesting a commercial driver's license instead of an ordinary driver's license, for example.
+* `issuer_did` -- optional filter to request a credential issued by the owner of a particular DID.
 
 #### Offer Credential
 

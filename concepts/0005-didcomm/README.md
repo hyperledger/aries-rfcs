@@ -1,9 +1,9 @@
 # Aries RFC 0005: DID Communication
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-01-15
-- Status Note: Probably almost mature enough to propose [ACCEPTED](/README.md#rfc-lifecycle) status. 
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-11-21
+- Status Note: Mature as concept, with multiple implementations.
 - Supersedes: [Indy PR #98](https://github.com/hyperledger/indy-hipe/pull/98)
 - Start Date: 2018-01-05 (approx, backdated)
 - Tags: [concept](/tags.md#concept)
@@ -35,7 +35,7 @@ DIDComm--connecting and maintaining relationships, issuing credentials,
 providing proof, etc.--are called __protocols__; they are described [elsewhere](
 https://github.com/hyperledger/indy-hipe/pull/69).
 
-#### Rough Overview
+### Rough Overview
 
 A typical DIDComm interaction works like this:
 
@@ -77,7 +77,7 @@ not always individuals.
 Before we provide more details, let's explore what drives the design of
 DIDComm.
 
-#### Goals and Ramifications
+### Goals and Ramifications
 
 The DIDComm design attempts to be:
 
@@ -107,7 +107,7 @@ snail mail, carrier pigeon, and more.
 All software design involves tradeoffs. These goals, prioritized as shown,
 lead down an interesting path.
 
-##### Message-Based, Asynchronous, and Simplex
+#### Message-Based, Asynchronous, and Simplex
 
 The dominant paradigm in mobile and web development today is duplex
 request-response. You call an API with certain inputs, and you get
@@ -132,7 +132,7 @@ request-response interactions. All of us have interacted with a friend
 who's emailing or texting us in near-realtime. However, interoperability
 begins with a least-common-denominator assumption that's simpler.
 
-##### Message-Level Security, Reciprocal Authentication
+#### Message-Level Security, Reciprocal Authentication
 
 The security and privacy goals, and the asynchronous+simplex design
 decision, break familiar web assumptions in another way. Servers are
