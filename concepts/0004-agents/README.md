@@ -354,6 +354,14 @@ interoperable.
 Some interesting examples of less prototypical agents or
 agent-like things include:
 
+###### DIF Hubs
+
+A [DIF Identity Hub](https://github.com/decentralized-identity/identity-hub/blob/master/explainer.md)
+is construct that [resembles agents in some ways, but that focuses on the data-sharing aspects of identity](https://www.hyperledger.org/blog/2019/07/23/rhythm-and-melody-how-hubs-and-agents-rock-together).
+Currently DIF Hubs do not use the protocols known to the Aries
+community, and vice versa. However, there are efforts to bridge
+that gap.
+
 ###### Identity Wallets
 
 "Identity wallet" is a term that's [carefully defined](
@@ -370,14 +378,6 @@ Cryptocurrency wallets are quite agent-like in that they hold
 keys and represent a user. However, they diverge from the agent
 definition in that they talk proprietary protocols to
 blockchains, rather than A2A to other agents.
-
-###### DIF Hubs
-
-A [DIF Identity Hub](https://github.com/decentralized-identity/identity-hub/blob/master/explainer.md)
-is an agent-like construct that focuses on the data-sharing aspects of identity.
-Currently DIF Hubs do not use the protocols known to the Indy
-community, and vice versa. However, there are efforts to bridge
-that gap.
 
 ###### uPort
 
