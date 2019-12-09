@@ -15,8 +15,8 @@ high level, and link to other RFCs to promote deeper exploration.
 
 ## Motivation
 
-The DID communication between agents is a rich subject with a lot of tribal
-knowledge. Newcomers to the [agent](https://github.com/hyperledger/indy-hipe/pull/86)
+The DID communication between [agents](../0004-agents/README.md) and [agent-like things](../0004-agents/README.md#the-agent-ness-continuum) is a rich subject with a lot of tribal
+knowledge. Newcomers to the decentralized identity
 ecosystem tend to bring mental models that are subtly divergent from
 its paradigm. When they encounter dissonance, DIDComm becomes mysterious.
 We need a standard high-level reference.
@@ -25,11 +25,11 @@ We need a standard high-level reference.
 
 >This discussion assumes that you have a reasonable grasp on topics like
 [self-sovereign identity](https://medium.com/evernym/the-three-models-of-digital-identity-relationships-ca0727cb5186),
-[DIDs and DID Docs](https://w3c-ccg.github.io/did-spec/), and [agents](
+[DIDs and DID docs](https://w3c-ccg.github.io/did-spec/), and [agents](
 https://github.com/hyperledger/indy-hipe/pull/86). If you find yourself
 lost, please review that material for background and starting assumptions.
 
-Agents have to interact with one another to get work done. How they
+Agent-like things have to interact with one another to get work done. How they
 talk in general is DIDComm, the subject of this RFC. The specific interactions enabled by
 DIDComm--connecting and maintaining relationships, issuing credentials,
 providing proof, etc.--are called __protocols__; they are described [elsewhere](
