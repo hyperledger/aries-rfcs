@@ -1,4 +1,4 @@
-# 0000: Community Coordinated Update
+# 0345: Community Coordinated Update
 - Authors: [Sam Curren](telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-12-26 (date you submit your PR)
@@ -20,11 +20,11 @@ This process descries how to move from OLD to NEW. OLD and NEW represent the req
 
 In brief, we first accept OLD _and_ NEW while still defaulting to OLD, Then we default to NEW (while still accepting OLD), and then we remove support for OLD. These steps are coordinated with the community with a gracious timeline to allow for development cycles and deployment ease.
 
-#### Prerequisite: Community agreement on change.
+### Prerequisite: Community agreement on change.
 
 Before these steps are taken, the community MUST agree on the change to be made. 
 
-#### Step 1: Accept OLD and NEW 
+### Step 1: Accept OLD and NEW 
 
 The first step of the process is to accept both OLD and NEW from other agents. Typically, this is done by detecting and converting one string to the other in as few places in the software as possible. This allows the software to use a common value internally, and constrains the change logic to where the values are received.
 
@@ -36,7 +36,7 @@ This step is formalized by writing and RFC detailing which changes are expected 
 
 **Step 1 Coordination**: This is the most critical coordination step. The community should have completed step 1 _before_ moving to step 2.
 
-#### Step 2: Default to NEW
+### Step 2: Default to NEW
 
 The second step changes the outbound value in use from OLD to NEW. Communication will not break with agents who have completed Step 1. 
 
@@ -48,7 +48,7 @@ This step is formalized by writing an RFC detailing which changes are expected i
 
 **Step 2 Coordination**: The community should complete step 2 _before_ moving to step 3 to assure that OLD is no longer being sent prior to removing support.
 
-#### Step 3: Remove support for OLD.
+### Step 3: Remove support for OLD.
 
 Software will be updated to remove support for OLD. Continued use is expected to result in a failure or error as appropriate
 
