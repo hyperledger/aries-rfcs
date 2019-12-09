@@ -1,6 +1,6 @@
 # ![Aries RFCs](collateral/aries-rfcs-logo.png)
 
-This repo holds Request for Changes (RFCs) for the Aries project. They describe important
+This repo holds Request for Comment (RFCs) for the Aries project. They describe important
 topics ([not minor details](contributing.md#do-you-need-an-RFC)) that we want to
 standardize across the Aries ecosystem.
 

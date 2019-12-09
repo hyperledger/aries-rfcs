@@ -78,7 +78,7 @@ No errors are sent in timeout situations. If the inviter or invitee wishes to re
 
 ```
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/problem_report",
+  "@type": "https://didcomm.org/didexchange/1.0/problem_report",
   "@id": "5678876542345",
   "~thread": { "thid": "<@id of message related to problem>" },
   "~l10n": { "locale": "en"},
@@ -132,7 +132,7 @@ The _inviter_ will either use an existing invitation DID, or provision a new one
 ### Invitation Message with Public Invitation DID
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/invitation",
+    "@type": "https://didcomm.org/didexchange/1.0/invitation",
     "@id": "12345678900987654321",
     "label": "Alice",
     "did": "did:sov:QmWbsNYhMrjHiqZDTUTEJs"
@@ -141,7 +141,7 @@ The _inviter_ will either use an existing invitation DID, or provision a new one
 ### Invitation Message with Keys and URL endpoint
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/invitation",
+    "@type": "https://didcomm.org/didexchange/1.0/invitation",
     "@id": "12345678900987654321",
     "label": "Alice",
     "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
@@ -153,7 +153,7 @@ The _inviter_ will either use an existing invitation DID, or provision a new one
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/invitation",
+    "@type": "https://didcomm.org/didexchange/1.0/invitation",
      "@id": "12345678900987654321",
     "label": "Alice",
     "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
@@ -164,7 +164,7 @@ The _inviter_ will either use an existing invitation DID, or provision a new one
 
 ##### Implicit Invitation
 
-Any Public DID serves as an implicit invitation. If an _invitee_ wishes to connect to any Public DID, They designate their own label and skip to the end of the Invitation Processing step. There is no need to encode the invitation or transmit the invitation.
+Any Public DID that expresses support for DIDComm by defining a  [`service`](https://w3c.github.io/did-core/#service-endpoints) that follows the [DIDComm conventions](../0067-didcomm-diddoc-conventions/README.md#service-conventions) serves as an implicit invitation. If an _invitee_ wishes to connect to any Public DID, They designate their own label and skip to the end of the Invitation Processing step. There is no need to encode the invitation or transmit the invitation.
 
 ##### Routing Keys
 
@@ -204,7 +204,7 @@ Invitation:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/invitation",
+    "@type": "https://didcomm.org/didexchange/1.0/invitation",
     "@id": "12345678900987654321",
     "label": "Alice",
     "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
@@ -251,7 +251,7 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 ```json
 {
   "@id": "5678876542345",
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/request",
+  "@type": "https://didcomm.org/didexchange/1.0/request",
   "~thread": { "pthid": "<id of invitation>" },
   "label": "Bob",
   "connection": {
@@ -291,7 +291,7 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
 ```json
 {
   "@id": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/request",
+  "@type": "https://didcomm.org/didexchange/1.0/request",
   "~thread": { "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" },
   "label": "Bob",
   "connection": {
@@ -309,7 +309,7 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
 ```json
 {
   "@id": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/request",
+  "@type": "https://didcomm.org/didexchange/1.0/request",
   "~thread": { "pthid": "did:example:21tDAKCERh95uGgKbJNHYp#invitation" },
   "label": "Bob",
   "connection": {
@@ -372,7 +372,7 @@ The exchange response message is used to complete the exchange. This message is 
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/response",
+  "@type": "https://didcomm.org/didexchange/1.0/response",
   "@id": "12345678900987654321",
   "~thread": {
     "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>"
@@ -391,13 +391,13 @@ The above message is required to be signed as described in [RFC0234](../0234-sig
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/response",
+  "@type": "https://didcomm.org/didexchange/1.0/response",
   "@id": "12345678900987654321",
   "~thread": {
     "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>"
   },
   "connection~sig": {
-    "@type":"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
+    "@type":"https://didcomm.org/signature/1.0/ed25519Sha512_single",
     "signature": "base64URL(ed25519 signature)",
     "sig_data": "base64URL(64bit_integer_from_unix_epoch|msg)",
     "signers": "base64URL(inlined_ed25519_signing_verkey)""
