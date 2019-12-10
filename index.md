@@ -81,6 +81,7 @@
 * [0334: JWE envelope 1.0](features/0334-jwe-envelope/README.md) (2019-11-28 &mdash; [`feature`](/tags.md#feature))
 * [0345: Community Coordinated Update](concepts/0345-community-coordinated-update/README.md) (2019-12-26 (date you submit your PR) &mdash; [`concept`](/tags.md#concept))
 * [0347: Proof Negotiation](features/0347-proof-negotiation/README.md) (2019-12-13 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0351: Generic JSON Message](features/0351-generic-json-message/README.md) (2019-12-16 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0360: did:key Usage](features/0360-use-did-key/README.md) (2019-12-17 &mdash; [`feature`](/tags.md#feature))
 
 ## [RETIRED](README.md#retired)
