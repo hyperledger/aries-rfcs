@@ -3,7 +3,7 @@
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-05-10
-- Status Note: Only implemented in one codebase and in the sample code here. 
+- Status Note: Only implemented in one codebase and in the sample code here.
 - Supersedes: [Indy HIPE PR #120](https://github.com/hyperledger/indy-hipe/pull/120)
 - Start Date: 2018-02-10 (approx, backdated)
 - Tags: [concept](/tags.md#concept)
@@ -127,6 +127,23 @@ lacks Integrity guarantees (-i)." This notation can help diagnose trust problems
 [message tracing](../../features/0034-message-tracing/README.md),
 [feature discovery](../../features/0031-discover-features/README.md), and agent testing.
 
+### Attachments
+
+MTCs apply to the entirety of the associated message's attributes. However, _embedded_ and _appended_ message
+attachments present the unique situation of nested content with the potential for a trust context that differs from the
+parent message.
+
+The [attachment descriptor](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#embedding),
+used for both _embedded_ and _appended_ attachments, shares the same MTC as the parent message. Unpacked attachment data
+have their own Trust Contexts populated as appropriate depending on how the data was retrieved, whether the attachment
+is signed, whether an integrity checksum was provided and verified, etc.
+
+Attachments delivered by the parent message, i.e. as Base64 encoded data, inherit relevant trust contexts from the
+parent, such as `confidentiality` and `authenticated_origin`, when the message was delivered as an authenticated
+encrypted message.
+
+Attachments retrieved from a remote resource populate their trust context as relevant to the retrieval mechanism.
+
 ## Reference
 
 A complete reference implementation of MTCs in python is attached to this RFC (see [mtc.py](mtc.py)).
@@ -141,4 +158,5 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 Name / Link | Implementation Notes
 --- | ---
 [MTC reference impl](mtc.py) | Reference impl in python, checked in with RFC. Includes unit tests.
-[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) |
+[Aries Static Agent - Python Library](https://github.com/hyperledger/aries-staticagent-python) | Largely inspired by reference implementation; MTC populated and made available to handlers.
