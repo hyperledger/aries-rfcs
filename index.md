@@ -28,7 +28,7 @@
 ## [DEMONSTRATED](README.md#demonstrated)
 * [0011: Decorators](concepts/0011-decorators/README.md) (2019-01-31, [10 impls](concepts/0011-decorators/README.md#implementations) &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
 * [0015: ACKs](features/0015-acks/README.md) (2019-12-26, [3 impls](features/0015-acks/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
-* [0029: Message Trust Contexts](concepts/0029-message-trust-contexts/README.md) (2019-05-10, [2 impls](concepts/0029-message-trust-contexts/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
+* [0029: Message Trust Contexts](concepts/0029-message-trust-contexts/README.md) (2019-05-10, [3 impls](concepts/0029-message-trust-contexts/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0032: Message Timing](features/0032-message-timing/README.md) (2019-05-01, [1 impl](features/0032-message-timing/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 * [0035: Report Problem Protocol 1.0](features/0035-report-problem/README.md) (2019-04-01, [2 impls](features/0035-report-problem/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0042: LOX -- A more secure pluggable framework for protecting wallet keys](features/0042-lox/README.md) (2019-05-30, [1 impl](features/0042-lox/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
