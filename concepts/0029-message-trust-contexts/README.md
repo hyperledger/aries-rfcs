@@ -159,4 +159,4 @@ Name / Link | Implementation Notes
 --- | ---
 [MTC reference impl](mtc.py) | Reference impl in python, checked in with RFC. Includes unit tests.
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) |
-[Aries Static Agent - Python Library](https://github.com/hyperledger/aries-staticagent-python) | Largely inspired by reference implementation; MTC populated and made available to handlers.
+[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | Largely inspired by reference implementation; MTC populated and made available to handlers.
