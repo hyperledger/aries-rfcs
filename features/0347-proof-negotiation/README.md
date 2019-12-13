@@ -4,7 +4,7 @@
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-12-13
 - Status Note: Initial proposal after discussion on rocketchat
-- Supersedes: -
+- Supersedes: 
 - Start Date: 2019-09-09
 - Tags: feature, protocol
 
