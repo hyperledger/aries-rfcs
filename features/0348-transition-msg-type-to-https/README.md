@@ -12,10 +12,10 @@
 
 Per issue [#225](https://github.com/hyperledger/aries-rfcs/issues/225), the
 Aries community has agreed to change the prefix for protocol message types from
-`did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/` to `https://didcomm.org;spec/`. Examples of the two message types forms are:
+`did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/` to `https://didcomm.org/`. Examples of the two message types forms are:
 
 - Before: `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack`
-- After: `https://didcomm.org;spec/notification/1.0/ack`
+- After: `https://didcomm.org/notification/1.0/ack`
 
 This RFC follows the guidance in [RFC 0345](../../concepts/0345-community-coordinated-update/README.md) about
 community-coordinated updates to (try to) ensure that independently deployed, interoperable agents remain interoperable
