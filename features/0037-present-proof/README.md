@@ -1,12 +1,12 @@
 # Aries RFC 0037: Present Proof Protocol 1.0
 
 - Authors: Nikita Khateev
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-05-28
 - Status Note:  See [RFC 0036](../0036-issue-credential/README.md) for the issue credential part of the same Indy HIPE PR.
 - Supersedes: [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md); also [Credential Exchange 0.1 -- IIW 2019](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view)
 - Start Date: 2019-01-30
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -35,11 +35,11 @@ Diagrams in this protocol were made in draw.io. To make changes:
 - export the picture and HTML to your local copy of this repo, and
 - submit a pull request.
 
-#### Choreography Diagram:
+### Choreography Diagram:
 
 ![present proof](credential-presentation.png)
 
-#### Propose Presentation
+### Propose Presentation
 
 An optional message sent by the Prover to the verifier to initiate a proof presentation process, or in response to a `request-presentation` message when the Prover wants to propose using a different presentation format. Schema:
 
@@ -57,7 +57,7 @@ Description of attributes:
 * `comment` -- a field that provides some human readable information about the proposed presentation.
 * `presentation_proposal` -- a JSON-LD object that represents the presentation example that Prover wants to provide. It should follow the schema of [Presentation Preview](#presentation-preview);
 
-#### Request Presentation
+### Request Presentation
 
 Request presentation is a message from a verifier to a prover that describes values that need to be revealed and predicates that need to be fulfilled. Schema:
 
@@ -82,24 +82,9 @@ Description of fields:
 
 * `comment` -- a field that provides some human readable information about this request for a presentation.
 * `request_presentations~attach` -- an array of attachments defining the acceptable formats for the presentation.
-  * For Indy, the attachment contains data from libindy about the presentation request, base64 encoded. The following JSON is an example of the `libindy-request-presentation-0` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
+  * For Indy, the attachment contains data from libindy about the presentation request, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
 
-```json
-{
-     "name": string,
-     "version": string,
-     "nonce": string,
-     "requested_attributes": {
-          "<attr_referent>": <attr_info>
-     },
-     "requested_predicates": {
-          "<predicate_referent>": <predicate_info>
-     },
-     "non_revoked": Optional<<non_revoc_interval>>
-}
-```
-
-#### Presentation
+### Presentation
 
 This message is a response to a Presentation Request message and contains signed presentations. Schema:
 
@@ -124,68 +109,94 @@ Description of fields:
 
 * `comment` -- a field that provides some human readable information about this presentation.
 * `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
-  * For Indy, the attachment contains data from libindy that is the presentation, base64 encoded. The following JSON is an example of the `libindy-presentation-0` attachment content. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404).
+  * For Indy, the attachment contains data from libindy that is the presentation, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404).
 
-#### Presentation Preview
+### Presentation Preview
 
 This is not a message but an inner object for other messages in this protocol. It is used to construct a preview of the data for the presentation. Its schema follows:
 
-```json
+```jsonc
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
-    "attributes": {
-        "<cred_def_id>": {
-            "<attribute>": {
-                "mime-type": "<type>",
-                "encoding": "<encoding>",
-                "value": "<value>"
-            }
+    "attributes": [
+        {
+            "name": "<attribute_name>",
+            "cred_def_id": "<cred_def_id>",
+            "mime-type": "<type>",
+            "value": "<value>"
         },
-        ...
-    },
-    "predicates": {
-        "<cred_def_id>": {
-            "<predicate>": {
-                "<attribute>": "<threshold>",
-                ...
-            },
-            ...
+        // more attributes
+    ],
+    "predicates": [
+        {
+            "name": "<attribute_name>",
+            "cred_def_id": "<cred_def_id>",
+            "predicate": "<predicate>",
+            "threshold": <threshold>
         },
-        ...
-    },
-    "non_revocation_times": {
-        "<cred_def_id>": "<iso_8601_datetime>",
-        ...
-    }
+        // more predicates
+    ]
 }
 ```
 
-The preview identifies attributes, predicates, and non-revocation timestamps by credential definition identifier. Note that this composition assumes that any presentation can include information from at most one credential per credential definition; such an approach mitigates corroboration risk.
+The preview identifies attributes and predicates to present.
 
-##### Attributes
+#### Attributes
 
-The `"attributes"` key maps zero or more credential definition identifiers to one or more inner objects; each such inner object maps an attribute name to its respective MIME types, encodings, and values (all optional) for the presentation:
+The mandatory `"attributes"` key maps to a list (possibly empty to propose a presentation with no attributes) of specifications, one per attribute. Each such specification proposes its attribute's characteristics for creation within a presentation.
 
-* the prover may include a MIME type and/or encoding per attribute in the preview for verifier information on how to interpret its value
-* the value itself may be absent at this stage; its omission in the preview indicates its ultimate inclusion in the presentation itself.
+##### Attribute Name
 
-Any attribute specified per credential definition identifier must belong to its corresponding credential definition. In this way the structure excludes a bait-and-switch where the prover has credentials on multiple credential definitions with common attribute names (e.g., `name`, `score`).
+The mandatory `"name"` key maps to the name of the attribute.
 
-For consistency and completeness, an empty production `"{}"` as the value for the `"attributes"` key denotes that the preview specifies zero attributes.
+##### Credential Definition Identifier
 
-##### Predicates
+The optional `"cred_def_id"` key maps to the credential definition identifier of the credential with the current attribute. If the key is absent, the preview specifies attribute's posture in the presentation as a self-attested attribute.
 
-The `"predicates"` key maps zero or more credential definition identifiers to one or more inner objects; each such inner object maps predicate names to their respective attributes and thresholds for the presentation. Each predicate name identifies its comparison operator: `"<"`, `"<="`, `">"`, `">="`. Each attribute so specified per credential definition identifier must belong to its corresponding credential definition.
+##### MIME Type and Value
 
-For consistency and completeness, an empty production `"{}"` as the value for the `"predicates"` key denotes that the preview specifies zero predicates.
+The optional `mime-type` advises the verifier how to render a binary attribute, to judge its content for applicability before accepting a presentation containing it. Its value parses case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045). If `mime-type` is missing, its value is null.
 
-##### Non-Revocation Timestamps
+The optional `value`, when present, holds the value of the attribute to reveal in presentation:
 
-The `"non_revocation_times"` key maps zero or more credential definition identifiers to ISO 8601 datetimes, each of which offers an instant where the prover or verifier proposes inclusion of proof of the non-revocation of its corresponding credential in the presentation.
+* if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
+* if `mime-type` is not null, then `value` is always a base64-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64-decoding.
 
-Non-revocation timestamps apply only to credentials on credential definitions that support revocation.
+An attribute specification must specify a `value`, a `cred_def_id`, or both: 
 
-For consistency and completeness, an empty production `"{}"` as the value for the `"non_revocation_times"` key denotes that the preview specifies zero non-revocation timestamps.
+* if `value` is present and `cred_def_id` is absent, the preview proposes a self-attested attribute;
+* if `value` and `cred_def_id` are both present, the preview proposes verifiable claim to reveal in the presentation;
+* if `value` is absent and `cred_def_id` is present, the preview proposes verifiable claim not to reveal in the presentation.
+
+#### Predicates
+
+The mandatory `"predicates"` key maps to a list (possibly empty to propose a presentation with no predicates) of predicate specifications, one per predicate. Each such specification proposes its predicate's characteristics for creation within a presentation.
+
+##### Attribute Name
+
+The mandatory `"name"` key maps to the name of the attribute germane to the predicate.
+
+##### Credential Definition Identifier
+
+The mandatory `"cred_def_id"` key maps to the credential definition identifier of the credential with the current attribute.
+
+##### Predicate
+
+The mandatory `"predicate"` key maps to the predicate operator: `"<"`, `"<="`, `">="`, `">"`. 
+
+##### Threshold Value
+
+The mandatory `"threshold"` key maps to the threshold value for the predicate.
+
+##### Filter
+
+The mandatory `"filter"` key maps to an object with one or more criteria disjunctively (via "or") applicable to the attribute as a claim.
+
+Filter keys include:
+
+* `"cred_def_id"` to specify a credential definition identifier
+* `"schema_id"` to specify a schema identifier
+* any other criteria that both the holder and verifier understand in the context of presentation creation.
 
 ## Negotiation and Preview
 
@@ -202,7 +213,7 @@ The presentation preview as proposed above does not allow nesting of predicate l
 
 The presentation preview may be indy-centric, as it assumes the inclusion of at most one credential per credential definition. In addition, it prescribes exactly four predicates and assumes mutual understanding of their semantics (e.g., could `">="` imply a lexicographic order for non-integer values, and if so, where to specify character collation algorithm?).
 
-Finally, the inclusion of a non-revocation timestamp may be premature at the preview stage.
+Finally, the inclusion of non-revocation timestamps may become desirable at the preview stage; the standard as proposed does not accommodate such.
 
 ## Rationale and alternatives
 

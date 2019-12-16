@@ -6,7 +6,7 @@
 - Status Note: Socialized and accepted within Indy community, and used in several implementations of protocols that want to associate a MIME type with an HTTP payload. However, this version of the spec changes the type names of types slightly to genericize, so we're resetting the status.
 - Supersedes: [Indy HIPE 0026]( https://github.com/hyperledger/indy-hipe/blob/master/text/0026-agent-file-format/README.md)
 - Start Date: 2018-11-13
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 [![message in envelope](small-msg-in-envelope.png)](msg-in-envelope.png)
  
@@ -112,7 +112,7 @@ that expects JSON.
 
 However, all such files have some additional conventions, over and above the simple
 requirements of JSON. For example, key decorators have special meaning (
-[`@id`, `@thread`](../../concepts/0008-message-id-and-threading/README.md),
+[`@id`, `~thread`](../../concepts/0008-message-id-and-threading/README.md),
 [`@trace`](../0034-message-tracing/README.md)
 , etc). Nonces may be especially significant. The format of particular values
 such as DID and DID+key references is important. Therefore, we refer to these messages

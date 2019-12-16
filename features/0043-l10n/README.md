@@ -5,7 +5,7 @@
 - Since: 2019-04-01
 - Status Note: Broadly socialized within the Indy community, and used in some of the other RFCs. Not yet implemented to any significant degree.
 - Start Date: 2018-11-30
-- Tags: feature, decorator
+- Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
 
 ## Summary
 
@@ -309,3 +309,7 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 Name / Link | Implementation Notes
 --- | ---
 [RFC 0035: Report Problem Protocol](../0035-report-problem/README.md) | Depends on this mechanism to localize the `description` field of an error.
+[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | Depends on this mechanism to localize the `comment` field of a `propose-credential`, `offer-credential`, `request-credential`, or `issue-credential` message.
+[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | Depends on this mechanism to localize the `comment` field of a `propose-presentation`, `offer-presentation`, or `presentation` message.
+[RFC 0193: Coin Flip Protocol](../0193-coin-flip/README.md) | Uses this mechanism to localize the `comment` field, when human iteraction around coin tosses is a a goal.
+

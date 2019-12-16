@@ -5,7 +5,7 @@
 - Since: 2018-09-01
 - Status Note: broadly accepted but not heavily used; may need greater usage before it's ready for [ADOPTED](/README.md#rfc-lifecycle) status.
 - Start Date: 2018-05-03
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
@@ -63,7 +63,7 @@ Despite the intersection between SSI, cryptology, and academia, SSI
 has to serve a broader audience. Its practicioners are not just
 mathematicians; they may include support and IT staff, lawyers
 specializing in intellectual property, business people, auditors,
-regulators, or even so-called "end users." In particular, SSI
+regulators, and individuals sometimes called "end users." In particular, SSI
 ecosystems are built and maintained by coders.
 Coders regularly write docs in markdown and html. They interact with
 one another on chat. They write emails and source code where comments

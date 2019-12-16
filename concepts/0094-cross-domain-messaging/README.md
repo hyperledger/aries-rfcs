@@ -6,7 +6,7 @@
 - Status Note: Socialized and broadly understood in other conceptual RFCs about routing. 
 - Supersedes: [0022-Cross-Domain-Messaging](https://github.com/hyperledger/indy-RFC/blob/master/text/0022-cross-domain-messaging/README.md)
 - Start Date: 2018-08-13
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
@@ -176,6 +176,7 @@ If there are mediators specified in the DID service endpoint for the Receiver ag
 ```json
 {
   "@type" : "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward",
+  "@id": "54ad1a63-29bd-4a59-abed-1c5b1026e6fd",
   "to"   : "did:sov:1234abcd#4",
   "msg"  : { json object from <pack(AgentMessage,valueOf(did:sov:1234abcd#4), privKey(A.did@A:B#1))> }
 }
@@ -245,6 +246,7 @@ The core message type "forward", version 1.0 of the "routing" family is defined 
 ```json
 {
   "@type" : "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward",
+  "@id": "54ad1a63-29bd-4a59-abed-1c5b1026e6fd",
   "to"   : "did:sov:1234abcd#4",
   "msg"  : { json object from <pack(AgentMessage,valueOf(did:sov:1234abcd#4), privKey(A.did@A:B#1))> }
 }

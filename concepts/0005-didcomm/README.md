@@ -1,12 +1,12 @@
 # Aries RFC 0005: DID Communication
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-01-15
-- Status Note: Probably almost mature enough to propose [ACCEPTED](/README.md#rfc-lifecycle) status. 
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-11-21
+- Status Note: Mature as concept, with multiple implementations.
 - Supersedes: [Indy PR #98](https://github.com/hyperledger/indy-hipe/pull/98)
 - Start Date: 2018-01-05 (approx, backdated)
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
@@ -15,8 +15,8 @@ high level, and link to other RFCs to promote deeper exploration.
 
 ## Motivation
 
-The DID communication between agents is a rich subject with a lot of tribal
-knowledge. Newcomers to the [agent](https://github.com/hyperledger/indy-hipe/pull/86)
+The DID communication between [agents](../0004-agents/README.md) and [agent-like things](../0004-agents/README.md#the-agent-ness-continuum) is a rich subject with a lot of tribal
+knowledge. Newcomers to the decentralized identity
 ecosystem tend to bring mental models that are subtly divergent from
 its paradigm. When they encounter dissonance, DIDComm becomes mysterious.
 We need a standard high-level reference.
@@ -25,17 +25,17 @@ We need a standard high-level reference.
 
 >This discussion assumes that you have a reasonable grasp on topics like
 [self-sovereign identity](https://medium.com/evernym/the-three-models-of-digital-identity-relationships-ca0727cb5186),
-[DIDs and DID Docs](https://w3c-ccg.github.io/did-spec/), and [agents](
+[DIDs and DID docs](https://w3c-ccg.github.io/did-spec/), and [agents](
 https://github.com/hyperledger/indy-hipe/pull/86). If you find yourself
 lost, please review that material for background and starting assumptions.
 
-Agents have to interact with one another to get work done. How they
+Agent-like things have to interact with one another to get work done. How they
 talk in general is DIDComm, the subject of this RFC. The specific interactions enabled by
 DIDComm--connecting and maintaining relationships, issuing credentials,
 providing proof, etc.--are called __protocols__; they are described [elsewhere](
 https://github.com/hyperledger/indy-hipe/pull/69).
 
-#### Rough Overview
+### Rough Overview
 
 A typical DIDComm interaction works like this:
 
@@ -77,7 +77,7 @@ not always individuals.
 Before we provide more details, let's explore what drives the design of
 DIDComm.
 
-#### Goals and Ramifications
+### Goals and Ramifications
 
 The DIDComm design attempts to be:
 
@@ -107,7 +107,7 @@ snail mail, carrier pigeon, and more.
 All software design involves tradeoffs. These goals, prioritized as shown,
 lead down an interesting path.
 
-##### Message-Based, Asynchronous, and Simplex
+#### Message-Based, Asynchronous, and Simplex
 
 The dominant paradigm in mobile and web development today is duplex
 request-response. You call an API with certain inputs, and you get
@@ -132,7 +132,7 @@ request-response interactions. All of us have interacted with a friend
 who's emailing or texting us in near-realtime. However, interoperability
 begins with a least-common-denominator assumption that's simpler.
 
-##### Message-Level Security, Reciprocal Authentication
+#### Message-Level Security, Reciprocal Authentication
 
 The security and privacy goals, and the asynchronous+simplex design
 decision, break familiar web assumptions in another way. Servers are
@@ -174,8 +174,8 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 Name / Link | Implementation Notes
 --- | ---
 [Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | Reference agent implementation contributed by Sovrin Foundation and Community
-[Streetcred AgentFramework](https://github.com/streetcred-id/agent-framework) | .NET framework for building agents of all types
-[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Streetcred AgentFramework
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | .NET framework for building agents of all types
+[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the government of British Columbia.
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | Useful for cron jobs and other simple, automated use cases.
 [Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | For building agents, hubs and other DIDComm features in GoLang.

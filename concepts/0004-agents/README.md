@@ -6,7 +6,7 @@
 - Status Note: On a standards track and beginning to influence many mental models, but not yet [ADOPTED](/README.md#rfc-lifecycle). 
 - Supersedes: [Indy HIPE 0002](https://github.com/hyperledger/indy-hipe/tree/master/text/0002-agents)
 - Start Date: 2017-11-01 (approx, backdated)
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
@@ -112,8 +112,8 @@ message of type X. It will respond with a message of type Y or type Z,
 or with an error message of type W. Repeat until the negotiation
 finishes." Some interesting A2A protocols include the one where two
 parties connect to one another to build a relationship, the one where
-agents discover which protocols they each support, the one credentials
-are issued, and the one where proof is requested and sent.
+agents discover which protocols they each support, the one where
+credentials are issued, and the one where proof is requested and sent.
 Hundreds of other protocols are being defined.
 
 #### How to Get an Agent
@@ -214,7 +214,7 @@ The pseudocode for each protocol handler it loads might look like:
 Line 4 is the workhorse. For example, if the interaction is
 about issuing credentials and this agent is doing the issuance,
 this would be where it looks up the material for the credential
-in internal databases, formats it appopriately, and records the
+in internal databases, formats it appropriately, and records the
 fact that the credential has now been built. Line 6 might be
 where that credential is attached to an outgoing message for
 transmission to the recipient.
@@ -346,13 +346,21 @@ include:
 * Has a wallet _(common, but not universal)_
 * Establishes new connections _(some may use only a small set of preconfigured connections)_
 * Exchanges credentials and proofs _(some may not use these protocols)_
-* Both listens and talks _(some may only listen or only talks)_
+* Both listens and talks _(some may only listen or only talk)_
 
 Agents that lack these characteristics can still be fully
 interoperable.
 
 Some interesting examples of less prototypical agents or
 agent-like things include:
+
+###### DIF Hubs
+
+A [DIF Identity Hub](https://github.com/decentralized-identity/identity-hub/blob/master/explainer.md)
+is construct that [resembles agents in some ways, but that focuses on the data-sharing aspects of identity](https://www.hyperledger.org/blog/2019/07/23/rhythm-and-melody-how-hubs-and-agents-rock-together).
+Currently DIF Hubs do not use the protocols known to the Aries
+community, and vice versa. However, there are efforts to bridge
+that gap.
 
 ###### Identity Wallets
 
@@ -370,14 +378,6 @@ Cryptocurrency wallets are quite agent-like in that they hold
 keys and represent a user. However, they diverge from the agent
 definition in that they talk proprietary protocols to
 blockchains, rather than A2A to other agents.
-
-###### DIF Hubs
-
-A [DIF Identity Hub](https://github.com/decentralized-identity/identity-hub/blob/master/explainer.md)
-is an agent-like construct that focuses on the data-sharing aspects of identity.
-Currently DIF Hubs do not use the protocols known to the Indy
-community, and vice versa. However, there are efforts to bridge
-that gap.
 
 ###### uPort
 
@@ -493,9 +493,9 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | Reference agent implementation contributed by Sovrin Foundation and Community
-[Streetcred AgentFramework](https://github.com/streetcred-id/agent-framework) | .NET framework for building agents of all types
-[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Streetcred AgentFramework
+[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/tree/master/python) | Reference agent implementation contributed by Sovrin Foundation and Community
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | .NET framework for building agents of all types
+[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework for .NET
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the government of British Columbia.
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | Useful for cron jobs and other simple, automated use cases.
 [Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | For building agents, hubs and other DIDComm features in GoLang.

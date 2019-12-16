@@ -6,17 +6,17 @@
 - Status Note: standards track and beginning to influence many mental models, but not yet [ADOPTED](/README.md#rfc-lifecycle). 
 - Supersedes: [Indy PR #69]( https://github.com/hyperledger/indy-hipe/pull/69)
 - Start Date: 2018-12-28
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
-Defines protocols (and the closely related concept of message families)
-in the context of agent-to-agent interactions,
+Defines application-level protocols (and the closely related concept of message families)
+in the context of [agent](../0004-agents/README.md) interactions,
 and shows how they should be designed and documented.
 
 ## Motivation
 
-When we began exploring agent-to-agent interactions, we imagined that
+When we began exploring agent interactions, we imagined that
 interoperability would be achieved by formally defining message families.
 We have since learned that message family definitions must define more
 than simply the attributes that are a part of each message. We also need
@@ -45,29 +45,34 @@ a sort of "recipe":
 * Going through security at the airport when we fly
 * Applying for a loan
 
-Protocols are a major concern for SSI agents. Agents need a recipe for
-stateful interactions like:
+In the context of decentralized identity, protocols manifest at many different levels of the stack: at the lowest levels of networking, in cryptographic algorithms like Diffie Helman, in the management of DIDs, in the conventions of [DIDComm](../0005-didcomm/README.md), and in higher-level interactions that solve problems for people with only minimal interest in the technology they're using. However, this RFC focuses on the last of these layers, where use cases and personas are transformed into features with obvious social value like:
 
 * Connecting with one another
+* Buying and Selling
+* Negotiating
+* Enacting and enforcing contracts
 * Requesting and issuing credentials
 * Proving things using credentials
+* Discovering things
 * Putting things in escrow (and taking them out again)
-* Paying
+* Scheduling
+* Auditing
 * Reporting errors
-* Negotiating
 * Cooperative debugging
+
+When "protocol" is used in an Aries context without any qualifying adjective, it is referencing a recipe for a high-level interaction like these. Lower-level protocols are usually described more specifically and possibly with other verbiage: "cryptographic algorithms", "DID management procedures", "DIDComm conventions", "wire-level message exchange", "transports", and so forth. This helps us focus "protocol" on the place where application developers that consume Aries do most of the work that creates value.
 
 #### Decentralized
 
 As used in the agent/DIDComm world, protocols are _decentralized_. This means
 there is not an overseer for the protocol, guaranteeing information flow,
-enforcing behaviors, and ensuring a coherent view. It is a subtle but
-important divergence from API-centric approaches, where a server holds
+enforcing behaviors, and ensuring a coherent view. It is a [subtle but
+important divergence from API-centric approaches](https://www.reactivemanifesto.org/glossary#Protocol), where a server holds
 state against which all other parties (clients) operate. Instead, all
 parties are peers, and they interact by mutual consent and with a (hopefully)
 shared understanding of the rules and goals. Protocols are like a dance--not one
 that's choreographed or directed, but one where the parties make dynamic
-decisions and and react to them.
+decisions and react to them.
 
 ![dance](dance.jpg)
 
@@ -213,10 +218,10 @@ interop.
 
 #### BPMN
 
-[BPMN](https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation) is a
+[BPMN](https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation) (Business Process Model and Notation) is a
 graphical language for modeling flows of all types (plus things less like
 our protocols as well). BPMN is a mature standard sponsored by [OMG](
-https://en.wikipedia.org/wiki/Object_Management_Group). It has a nice
+https://en.wikipedia.org/wiki/Object_Management_Group)(Object Management Group). It has a nice
 [tool ecosystem](https://camunda.com/bpmn/tool/). It also has an XML file
 format, so the visual diagrams have a two-way transformation to and from
 formal written language. And it has a code generation mode, where BPMN
@@ -245,7 +250,7 @@ RFC definition procedure described here.
 
 #### WSDL
 
-[WSDL](https://www.w3.org/TR/2001/NOTE-wsdl-20010315) is a web-centric
+[WSDL](https://www.w3.org/TR/2001/NOTE-wsdl-20010315) (Web Services Description Language) is a web-centric
 evolution of earlier, RPC-style interface definition languages like
 [IDL in all its varieties](https://en.wikipedia.org/wiki/Interface_description_language)
 and [CORBA](https://en.wikipedia.org/wiki/Common_Object_Request_Broker_Architecture).
@@ -304,7 +309,7 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 Name / Link | Implementation Notes
 --- | ---
 [Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | several protocols, circa Feb 2019
-[Streetcred AgentFramework](https://github.com/streetcred-id/agent-framework) | several protocols, circa Feb 2019
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | several protocols, circa Feb 2019
 [Streetcred.id](https://streetcred.id/) | several protocols, circa Feb 2019
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | numerous protocols plus extension mechanism for pluggable protocols
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | 2 or 3 protocols

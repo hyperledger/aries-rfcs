@@ -5,7 +5,7 @@
 - Since: 2019-07-13
 - Status Note: Not implemented, but has been discussed as part of the [Aries DID Resolution](https://github.com/hyperledger/aries-rfcs/issues/101) work.
 - Start Date: 2019-07-08
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 
@@ -123,7 +123,7 @@ It looks like this:
 
 	{
 		"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1/resolve_result",
-		"@thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
+		"~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
 		"did_document": {
 			"@context": "https://w3id.org/did/v0.11",
 			"id": "did:sov:WRfXPg8dantKVubE3HX8pw",
@@ -146,7 +146,7 @@ which includes a DID Document plus additional metadata:
 
 	{
 		"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1/resolve_result",
-		"@thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
+		"~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
 		"did_document": {
 			"@context": "https://w3id.org/did/v0.11",
 			"id": "did:sov:WRfXPg8dantKVubE3HX8pw",

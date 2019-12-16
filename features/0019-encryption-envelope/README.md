@@ -6,7 +6,7 @@
 - Status Note:  
 - Supersedes: [INDY 0028 Wire Level Format](https://github.com/hyperledger/indy-hipe/tree/master/text/0028-wire-message-format)
 - Start Date: 2018-07-10 (approximate, backdated)
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 ## Summary
 
@@ -355,9 +355,9 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | Reference agent implementation contributed by Sovrin Foundation and Community
-[Streetcred AgentFramework](https://github.com/streetcred-id/agent-framework) | .NET framework for building agents of all types
-[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Streetcred AgentFramework
+[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/tree/master/python) | Reference agent implementation contributed by Sovrin Foundation and Community
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | .NET framework for building agents of all types
+[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the government of British Columbia.
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | Useful for cron jobs and other simple, automated use cases.
 [Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | For building agents, hubs and other DIDComm features in GoLang.

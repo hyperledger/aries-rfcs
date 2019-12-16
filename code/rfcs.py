@@ -3,7 +3,7 @@ import os
 import re
 
 RFC = collections.namedtuple('RFC', 'title abspath relpath category folder num authors status since' +
-                             ' status_note start_date supersedes superseded_by tags content_idx impl_count')
+                             ' status_note start_date supersedes superseded_by tags content_idx impl_count impl_table')
 
 
 status_list = ["ADOPTED", "ACCEPTED", "DEMONSTRATED", "PROPOSED", "RETIRED"]
@@ -70,14 +70,21 @@ def walk():
         m = _status_val_pat.search(status)
         if m:
             status = m.group(1)
-        tags = [x.strip() for x in fields[7].split(',')]
+        tags = [unlink_tag(x) for x in fields[7].split(',')]
         content_idx = txt.find('\n##')
         impl_table = get_impl_table(txt)
         impl_count = len(impl_table) if impl_table else 0
         x = RFC(title, abspath, rpath, category, folder, num, fields[0], status, fields[2],
-                fields[3], fields[4], fields[5], fields[6], tags, content_idx, impl_count)
+                fields[3], fields[4], fields[5], fields[6], tags, content_idx, impl_count, impl_table)
         yield x
 
+
+def unlink_tag(tag):
+    tag = tag.strip()
+    return tag[1:tag.find(']')].strip() if tag.startswith('[') else tag
+
+def link_tag(tag):
+    return '[' + tag + '](/tags.md#' + tag + ')'
 
 _impl_pat = re.compile(r'^[ \t]*#+[ \t]*Implementations?[ \t]*$', re.M)
 _impl_table_head_pat = re.compile(r'^[ \t]*([|][ \t]*)?Name(.*?)[|](.*?)\n[ \t]*([|][ \t]*)?-+(.*?)*[|](.*?)\n', re.M)
@@ -106,6 +113,31 @@ def get_impl_table(txt):
                 i = m.end()
 
             return rows
+
+_test_suite_pat = re.compile('test[ \t]*suite', re.I)
+
+def test_suite_impls(rfc, return_matches):
+    if rfc.impl_table:
+        for row in rfc.impl_table:
+            if bool(_test_suite_pat.search(row[0])) == return_matches:
+                yield row
+
+
+_desc_extractor_pat = re.compile(r'\[([^\]]*)\]')
+
+def describe_impl_row(row):
+    desc = row[0].strip()
+    m = _desc_extractor_pat.search(desc)
+    if m:
+        desc = m.group(1).strip()
+    return desc
+
+
+_link_to_test_results_pat = re.compile(r'\[[ \t]*((?:MISSING[ \t]+)?test[ \t]+results)[ \t]*\]\(([^\)]*)\)', re.I)
+
+def get_test_results_link(impl_row):
+    m = _link_to_test_results_pat.search(impl_row[1])
+    return m if m else None
 
 
 def relpath(abspath):

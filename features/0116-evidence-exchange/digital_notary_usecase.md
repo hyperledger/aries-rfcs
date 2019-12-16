@@ -81,7 +81,7 @@ During Stacey's preparation activity when she was filling out the  preliminary o
 Later that evening, Stacey decides to explore her new Digital Credential features within her online bank account. She sees that she has the ability to request access to the vetted resources the bank has used to vouch for her digital identity. She opens her Wallet App and sends a `evidence_request` message to the bank. Within a few seconds she receives and processes the bank's `evidence_response` message. Her Wallet App allows her to view the evidence available to her:
 
 | Issuer | Credential | Evidence Type | Original Document |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | Retail Bank | Basic KYC Credential | Address | Utility Bill |
 | Retail Bank | Basic KYC Credential | Address | Employment PayStub |
 | Retail Bank | Basic KYC Credential | Identity | SSN |
@@ -104,4 +104,4 @@ Stacey receives notification from her Insurance Company that they require an upd
 ## Commentary
 
 1. The concepts of a digital notary can be applied today in application domains such as (but not limited to) indirect auto lending and title management (auto, recreational vehicle, etc).
-2. Since 2015, [AAMVA](https://www.aamva.org/mDL-Resources/) in conjunction with [ISO JTC1/SC27/WG10 18013-5 mDL Team](https://www.iso.org/standard/69084.html) has been working on a single credential solution for cross jurisdictional use amongst DMVs. This public sector activity is a key source of IAM industry motivation for alternative solutions to Credential Lifecycle Management. Government agencies will eventually need to address discussions around technical debit investments and defacto open source standards.
+2. Since 2015, [AAMVA](https://www.aamva.org/mDL-Resources/) in conjunction with the [ISO JTC1/SC27/WG10 18013-5 mDL Team](https://www.iso.org/standard/69084.html) has been working on a single credential solution for cross jurisdictional use amongst DMVs. This public sector activity is a key source of IAM industry motivation for alternative solutions to Credential Lifecycle Management. Government agencies will eventually need to address discussions around technical debit investments and defacto open source standards.
