@@ -68,25 +68,25 @@ The initial version of Aries Interop Profile, based on the existing implementati
 #### Supported Aries RFC Concepts
 
 * [0003-protocols](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0003-protocols)
-* [0004-agents](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0004-agents)
+* [0004-agents](https://github.com/hyperledger/aries-rfcs/tree/f1e420f76abd9ff4af5c15d375fa6cf8c2cacb33/concepts/0004-agents)
 * [0005-didcomm](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0005-didcomm)
 * [0008-message-id-and-threading](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading)
-* [0011-decorators](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0011-decorators)
+* [0011-decorators](https://github.com/hyperledger/aries-rfcs/tree/965a975f953d72e370d2b6fb28eec538ec756c6d/concepts/0011-decorators)
 * [0017-attachments](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0017-attachments)
 * [0020-message-types](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0020-message-types)
 * [0046-mediators-and-relays](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0046-mediators-and-relays)
-* [0047-json-LD-compatibility](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0047-json-ld-compatibility)
+* [0047-json-LD-compatibility](https://github.com/hyperledger/aries-rfcs/tree/53c2e7accc8394c9c7b09563c0eec3c564c133c6/concepts/0047-json-ld-compatibility)
 * [0050-wallets](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0050-wallets)
 * [0094-cross-domain messaging](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0094-cross-domain-messaging)
 
 #### Supported Aries RFC Features
 
-* [0015-acks](https://github.com/hyperledger/aries-rfcs/tree/ff80856a2101fde63ac57382d746406b466997a8/features/0015-acks)
+* [0015-acks](https://github.com/hyperledger/aries-rfcs/tree/5cc750f0fe18e3918401489066566f22474e25a8/features/0015-acks)
 * [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/features/0019-encryption-envelope)
 * [0160-connection-protocol](https://github.com/hyperledger/aries-rfcs/tree/f5a97ef489c4c671a469de661efe4391c2a5a0e5/features/0160-connection-protocol)
-* [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/features/0025-didcomm-transports)
+* [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/b490ebe492985e1be9804fc0763119238b2e51ab/features/0025-didcomm-transports)
 * [0031-discover-features](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/features/0031-discover-features)
-* [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/features/0035-report-problem)
+* [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/89d14c15ab35b667e7a9d04fe42d4d48b10468cf/features/0035-report-problem)
 * [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/features/0036-issue-credential)
 * [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/features/0037-present-proof)
 * [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/features/0048-trust-ping)
