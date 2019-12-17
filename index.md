@@ -8,6 +8,7 @@
 * [0005: DID Communication](concepts/0005-didcomm/README.md) (2019-11-21, [9 impls](concepts/0005-didcomm/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0006: SSI Notation](concepts/0006-ssi-notation/README.md) (2018-09-01, [1 impl](concepts/0006-ssi-notation/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0008: Message ID and Threading](concepts/0008-message-id-and-threading/README.md) (2018-10-01, [5 impls](concepts/0008-message-id-and-threading/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
+* [0011: Decorators](concepts/0011-decorators/README.md) (2019-01-31, [10 impls](concepts/0011-decorators/README.md#implementations) &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
 * [0017: Attachments](concepts/0017-attachments/README.md) (2019-01-31, [1 impl](concepts/0017-attachments/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0019: Encryption Envelope](features/0019-encryption-envelope/README.md) (2019-05-04, [7 impls](features/0019-encryption-envelope/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 * [0020: Message Types](concepts/0020-message-types/README.md) (2019-05-24, [8 impls](concepts/0020-message-types/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
@@ -26,9 +27,8 @@
 * [0250: Rich Schema Objects](concepts/0250-rich-schemas/README.md) (2019-10-08 &mdash; [`concept`](/tags.md#concept) [`rich-schemas`](/tags.md#rich-schemas))
 
 ## [DEMONSTRATED](README.md#demonstrated)
-* [0011: Decorators](concepts/0011-decorators/README.md) (2019-01-31, [10 impls](concepts/0011-decorators/README.md#implementations) &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
 * [0015: ACKs](features/0015-acks/README.md) (2019-12-26, [3 impls](features/0015-acks/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
-* [0029: Message Trust Contexts](concepts/0029-message-trust-contexts/README.md) (2019-05-10, [2 impls](concepts/0029-message-trust-contexts/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
+* [0029: Message Trust Contexts](concepts/0029-message-trust-contexts/README.md) (2019-05-10, [3 impls](concepts/0029-message-trust-contexts/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0032: Message Timing](features/0032-message-timing/README.md) (2019-05-01, [1 impl](features/0032-message-timing/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 * [0035: Report Problem Protocol 1.0](features/0035-report-problem/README.md) (2019-04-01, [2 impls](features/0035-report-problem/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0042: LOX -- A more secure pluggable framework for protecting wallet keys](features/0042-lox/README.md) (2019-05-30, [1 impl](features/0042-lox/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
@@ -37,6 +37,7 @@
 * [0092: Transports Return Route](features/0092-transport-return-route/README.md) (2019-08-07, [2 impls](features/0092-transport-return-route/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 * [0113: Question Answer Protocol 0.9](features/0113-question-answer/README.md) (2019-07-05, [2 impls](features/0113-question-answer/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2019-09-27, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
+* [0348: Transition Message Type to HTTPs](features/0348-transition-msg-type-to-https/README.md) (2019-12-13, [8 impls](features/0348-transition-msg-type-to-https/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`community-update`](/tags.md#community-update))
 
 ## [PROPOSED](README.md#proposed)
 * [0013: Overlays](concepts/0013-overlays/README.md) (2019-05-20 &mdash; [`concept`](/tags.md#concept))
@@ -78,6 +79,7 @@
 * [0317: Please ACK Decorator](features/0317-please-ack/README.md) (2019-12-26 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0327: Crypto service Protocol 1.0](features/0327-crypto-service/README.md) (2019-11-20 (date you submit your PR) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0334: JWE envelope 1.0](features/0334-jwe-envelope/README.md) (2019-11-28 &mdash; [`feature`](/tags.md#feature))
+* [0345: Community Coordinated Update](concepts/0345-community-coordinated-update/README.md) (2019-12-26 (date you submit your PR) &mdash; [`concept`](/tags.md#concept))
 
 ## [RETIRED](README.md#retired)
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
