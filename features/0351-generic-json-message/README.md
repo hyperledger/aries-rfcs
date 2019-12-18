@@ -47,16 +47,20 @@ This protocol supports but does not require the use of the `~thread` decorator t
 
 #### Message Format
 
-This protocol defines one DIDComm message format, of type `https://didcomm.org/json/1.0/message`. A `message` only requires (in addition to the standard contents of DIDComm messages) a `data-type` field and a `content~attach` embedded JSON attachment. 
+This protocol defines one DIDComm message format, of type `https://didcomm.org/json/1.0/message`. A `message` only requires (in addition to the standard contents of DIDComm messages) a `data-type` field and some number of JSON attachments, under the optional fields `data`, `data~attach`, and `~attach`. 
 
-The `"data-type"` field indicates the type of data contained under the `content~attach` attachment. 
+The `"data-type"` field indicates the type of data contained under the attachments.
+
+The attachment fields are all optional, though there should be at least one.
 
 ```json
 {
   "@id": "123456780",
   "@type": "https://didcomm.org/json/1.0/message",
   "data-type": "",
-  "content~attach": {}
+  "data": {},
+  "data~attach": {},
+  "~attach": []
 }
 ```
 
@@ -68,9 +72,13 @@ The receiver registers on a particular data-type value with the receiver-agent, 
 
 The receiver must be aware of the `data-type` value of a received message, whether by registering a specific handler for a specific `data-type` value, or by being sent the `data-type` value in addition to the content.
 
-##### `content~attach`
+##### `data`, `data~attach`, `~attach`
 
-The payload transported in this message is placed in an [embedded attachment](/concepts/0017-attachments/README.md#embedding). The receiver is provided with the entire attachment descriptor.
+These 3 fields are optional, although at least one must be present. They carry attachments (inline, embedded, and appended, respectively).
+
+The payload transported in this message is placed in an [attachment](/concepts/0017-attachments/README.md). If the attachment is embedded or appended, the receiver is provided with the entire attachment descriptor.
+
+The receiver-agent must be able to process all three fields.
 
 #### Threading
 
@@ -91,7 +99,6 @@ For threading with senders or receivers that aren't aries agents, the sender-age
 
 ## Unresolved questions
 
-- Do we need to enforce that the message content be an embedded attachment?
 - Are there further semantics to define in this RFC rather than leave for specific implementations?
 - Are there any standard data types that we should define identifiers and formats for, rather than leaving everything up to implementer's choice?
 
