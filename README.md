@@ -65,4 +65,4 @@ The structure and a lot of the initial language of this repository was borrowed 
 https://github.com/hyperledger/indy-hipe), which borrowed it from [Rust RFC](https://github.com/rust-lang/rfcs).
 Their good work has made the setup of this repository much quicker and better than it otherwise would have been.
 If you are not familiar with the Rust community, you should check them out.
-.
+..
