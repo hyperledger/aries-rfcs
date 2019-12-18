@@ -9,7 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.0.0
+    - uses: actions/checkout@v2
+      with:
+        ref: master
     - name: Create local changes
       run: |
         python code\generate_index.py
