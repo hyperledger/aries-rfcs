@@ -27,7 +27,7 @@
 * [0250: Rich Schema Objects](concepts/0250-rich-schemas/README.md) (2019-10-08 &mdash; [`concept`](/tags.md#concept) [`rich-schemas`](/tags.md#rich-schemas))
 
 ## [DEMONSTRATED](README.md#demonstrated)
-* [0015: ACKs](features/0015-acks/README.md) (2019-12-26, [3 impls](features/0015-acks/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
+* [0015: ACKs RULE](features/0015-acks/README.md) (2019-12-26, [3 impls](features/0015-acks/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 * [0029: Message Trust Contexts](concepts/0029-message-trust-contexts/README.md) (2019-05-10, [3 impls](concepts/0029-message-trust-contexts/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0032: Message Timing](features/0032-message-timing/README.md) (2019-05-01, [1 impl](features/0032-message-timing/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 * [0035: Report Problem Protocol 1.0](features/0035-report-problem/README.md) (2019-04-01, [2 impls](features/0035-report-problem/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
