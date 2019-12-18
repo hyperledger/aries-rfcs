@@ -14,7 +14,7 @@ jobs:
         ref: master
     - name: Create local changes
       run: |
-        python code\generate_index.py
+        python code/generate_index.py
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
