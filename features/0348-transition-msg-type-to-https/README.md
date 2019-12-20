@@ -33,7 +33,7 @@ The transition from the old to new formats will occur in four steps:
   - Each agent builder SHOULD notify the community they have completed Step 2 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
 - **Step 3**: Agent builders SHOULD update their deployments to remove all support for receiving the old format and MUST NOT send out messages using the old message type format.
 
-> **Note**: Any RFCs that already use the new "https" message type should continue to use the use new format in all cases&mdash;accepting and sending.
+> **Note**: Any RFCs that already use the new "https" message type should continue to use the use new format in all cases&mdash;accepting and sending. New protocols defined in new and updated RFCs should use the new "https" format.
 
 The community coordination triggers between the steps above will be as follows:
 
