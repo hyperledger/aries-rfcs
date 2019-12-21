@@ -54,7 +54,6 @@ The `did:key` method uses the strings that are the DID, public key and key type 
 
 The following currently implemented RFCs would be affected by adoption of this RFC. In these RFCs, the JSON items that currently contain naked public keys (mostly the items `recipientKeys` and `routingKeys`) would be changed to use `did:key` references where applicable. Note that in these items public DIDs could also be used if applicable for a given use case.
 
-- [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/master/features/0019-encryption-envelope)
 - [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/master/features/0023-did-exchange) - Invitation Message
 - [0028-introduce](https://github.com/hyperledger/aries-rfcs/tree/master/features/0028-introduce)
 - [0056-service-decorator](https://github.com/hyperledger/aries-rfcs/tree/master/features/0056-service-decorator)
@@ -67,6 +66,8 @@ and
 should **NOT** use a `did:key` public key representation. Instead, service
 entries in the DIDDoc should reference keys defined internally in the DIDDoc
 where appropriate.
+
+> To Do: Discuss the use of `did:key` (or not) in the context of [encryption envelopes](../0019-encryption-envelope/README.md). This will be part of the ongoing discussion about [JWEs](https://tools.ietf.org/html/rfc7516) and the upcoming discussions about JWMs&mdash;a soon-to-be-proposed specification. That conversation will likely go on in the DIF DIDComm Working Group.
 
 ## Reference
 
