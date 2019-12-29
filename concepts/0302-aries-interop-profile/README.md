@@ -55,6 +55,12 @@ Aries Interop Profile versions MUST evolve at a pace determined by the Aries age
 
 All previous versions of Aries Interop Profile MUST be listed in the [Previous Versions](#previous-versions) section of the RFP and must include a link to the latest commit of this RFC at the time that version was active.
 
+A script in the `/code` folder of this repo can be run to list RFCs within an AIP
+version that have changed since the AIP version was set. For script usage information
+run the following from the root of the repo:
+
+`python code/aipUpdates.py --help`
+
 ## Reference
 
 The Aries Interop Profile version number and links to other RFCs in this section SHOULD only be updated with the agreement of the Aries agent builder community. There MAY be multiple active major Aries Interop Profile versions. A list of previous versions of Aries Interop Profile are [listed after](#previous-versions) the current version(s).
@@ -95,7 +101,7 @@ Feature | [0056-service-decorator](https://github.com/hyperledger/aries-rfcs/tre
 
 - None
 
-> Will be the version number and a link to the latest commit of this RFC while this version was current.
+> Will be the version number as a link to the latest commit of this RFC while the version was current.
 
 ## Aries Agent Builders and Agents
 
