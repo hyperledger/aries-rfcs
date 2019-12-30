@@ -45,7 +45,7 @@ In the context of decentralized identity, protocols manifest at many different l
 * [Connecting with one another](../../features/0023-did-exchange/README.md)
 * [Requesting and issuing credentials](../../features/0036-issue-credential/README.md)
 * [Proving things using credentials](../../features/0037-present-proof/README.md)
-* [Discovering things](../../0031-discover-features/README.md)
+* [Discovering things](../../features/0031-discover-features/README.md)
 * Delegating
 * Buying and Selling
 * Negotiating
@@ -146,7 +146,7 @@ which are often used as a discrete step in a larger flow.
 
 In other cases, a protocol B is not "contained" inside protocol A.
 Rather, A triggers B, then continues in parallel,
-without waiting for B to complete. This is analogous to relationship between [coroutines in computer science](https://en.wikipedia.org/wiki/Coroutine). In the [Introduce Protocol](
+without waiting for B to complete. This __coprotocol__ relationship is analogous to relationship between [coroutines in computer science](https://en.wikipedia.org/wiki/Coroutine). In the [Introduce Protocol](
 ../../features/0028-introduce/README.md),
 the final step is to begin a connection protocol between the two introducees--
 but [the introduction coprotocol completes when the connect coprotocol
