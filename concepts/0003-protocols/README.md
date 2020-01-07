@@ -10,24 +10,19 @@
 
 ## Summary
 
-Defines application-level protocols (and the closely related concept of message families)
-in the context of [agent](../0004-agents/README.md) interactions,
+Defines peer-to-peer application-level protocols
+in the context of interactions among [agent-like](../0004-agents/README.md) things,
 and shows how they should be designed and documented.
-
-## Motivation
-
-When we began exploring agent interactions, we imagined that
-interoperability would be achieved by formally defining message families.
-We have since learned that message family definitions must define more
-than simply the attributes that are a part of each message. We also need
-to formally define the roles in an interaction, the possible states those roles
-can have, the way state changes in response to messages, and the errors
-that may arise.
 
 [![protocol](protocol.png)](https://docs.google.com/presentation/d/15UAkh_2WfDk7wlto7pSL7YU9NJr_XVMgGAOeNIRbzK8/edit#slide=id.p)
 
-In addition, we realized that we need clear examples of how to define all
-these things, so designs are consistent and robust.
+
+
+## Motivation
+
+APIs in the style of Swagger are familiar to nearly all developers, and it's a common assumption that we should use them to solve the problems at hand in the decentralized identity space. However, to truly decentralize, we must think about interactions at a higher level of generalization. Protocols can model all APIs, but not the other way around. This matters. We need to explain why.
+
+We also need to show how a protocol is defined, so the analog to defining a Swagger API is demystified.
 
 ## Tutorial
 
@@ -47,13 +42,14 @@ a sort of "recipe":
 
 In the context of decentralized identity, protocols manifest at many different levels of the stack: at the lowest levels of networking, in cryptographic algorithms like Diffie Helman, in the management of DIDs, in the conventions of [DIDComm](../0005-didcomm/README.md), and in higher-level interactions that solve problems for people with only minimal interest in the technology they're using. However, this RFC focuses on the last of these layers, where use cases and personas are transformed into features with obvious social value like:
 
-* Connecting with one another
+* [Connecting with one another](../../features/0023-did-exchange/README.md)
+* [Requesting and issuing credentials](../../features/0036-issue-credential/README.md)
+* [Proving things using credentials](../../features/0037-present-proof/README.md)
+* [Discovering things](../../features/0031-discover-features/README.md)
+* Delegating
 * Buying and Selling
 * Negotiating
 * Enacting and enforcing contracts
-* Requesting and issuing credentials
-* Proving things using credentials
-* Discovering things
 * Putting things in escrow (and taking them out again)
 * Scheduling
 * Auditing
@@ -61,6 +57,17 @@ In the context of decentralized identity, protocols manifest at many different l
 * Cooperative debugging
 
 When "protocol" is used in an Aries context without any qualifying adjective, it is referencing a recipe for a high-level interaction like these. Lower-level protocols are usually described more specifically and possibly with other verbiage: "cryptographic algorithms", "DID management procedures", "DIDComm conventions", "wire-level message exchange", "transports", and so forth. This helps us focus "protocol" on the place where application developers that consume Aries do most of the work that creates value.
+
+#### Relationship to APIs
+
+The familiar world of web APIs is a world of protocols, but it comes with constraints antithetical to decentralized identity:
+
+* It assumes all interactions are between a client and a server--either two parties, or N parties mediated by a central server. Thus, the server is a natural locus for surveillance and hacking.
+* It assumes security is assymetric--not using DIDs, but driven by certs on a server and by a session for the client.
+* It assumes the transport is HTTP. This is problematic for pure mobile-to-mobile, or for use cases where the transport is complex or asymmetric.
+* Because the server can never initiate an interaction, it requires at least one party to be continuously online.
+
+Protocols impose none of these constraints. Web APIs can easily be modeled as protocols where the transport is HTTP and the payload is a message, and the Aries community actively does this. We are not opposed to APIs. We just want to describe and standardize the higher level abstraction so we don't have a web solution and a BlueTooth solution that are diverged for no good reason.
 
 #### Decentralized
 
@@ -105,12 +112,12 @@ state evolution.
 
 #### Agent Design
 
-Protocols are *the* key unit of interoperable extensibility in agents. To add a
+Protocols are *the* key unit of interoperable extensibility in agents and agent-like things. To add a
 new interoperable feature to an agent, give it the ability to handle a
 new protocol.
 
 When agents receive messages, they map the messages to a __protocol handler__
-and possibly to an __interaction state__ that was previous persisted. The
+and possibly to an __interaction state__ that was previously persisted. This is the analog to routes, route handlers, and sessions in web APIs, and could actually be implemented as such if the transport for the protocol is HTTP. The
 protocol handler is code that knows the rules of a particular protocol; the
 interaction state tracks progress through an interaction. For more information,
 see the [agents explainer -- RFC 0004](../0004-agents/README.md#general-patterns)
@@ -119,13 +126,13 @@ and the [DIDComm explainer -- RFC 0005](
 
 #### Composable
 
-Protocols are *composable*--meaning that you can nest one inside another.
-The protocol for asking someone to repeat their last sentence can occur
-inside the protocol for ordering food at a restaurant. The protocols for
-reporting an error or arranging payment can occur inside a protocol for
+Protocols are *composable*--meaning that you can build complex ones from simple ones.
+The protocol for asking someone to repeat their last sentence can be part of
+the protocol for ordering food at a restaurant. The protocols for
+reporting an error or arranging payment can be part of a protocol for
 issuing credentials.
 
-When we invoke one protocol inside another, we call the inner protocol a
+When we run one protocol _inside_ another, we call the inner protocol a
 __subprotocol__, and the outer protocol a __superprotocol__. A given protocol
 may be a subprotocol in some contexts, and a standalone protocol in others.
 In some contexts, a protocol may be a subprotocol from one perspective, and
@@ -137,16 +144,16 @@ Commonly, protocols wait for subprotocols to complete, and then they continue.
 A good example of this is [ACKs](../../features/0015-acks/README.md),
 which are often used as a discrete step in a larger flow.
 
-In other cases, a subprotocol is not "contained" inside its superprotocol.
-Rather, the superprotocol triggers the subprotocol, then continues in parallel,
-without waiting for the subprotocol to complete. In the [Introduce Protocol](
+In other cases, a protocol B is not "contained" inside protocol A.
+Rather, A triggers B, then continues in parallel,
+without waiting for B to complete. This __coprotocol__ relationship is analogous to relationship between [coroutines in computer science](https://en.wikipedia.org/wiki/Coroutine). In the [Introduce Protocol](
 ../../features/0028-introduce/README.md),
 the final step is to begin a connection protocol between the two introducees--
-but [the introduction superprotocol completes when the connect subprotocol
+but [the introduction coprotocol completes when the connect coprotocol
 *starts*, not when it *completes*](
 ../../features/0028-introduce/README.md#goal).
 
-![super- and async subprotocols](super-sub-async.png)
+![co-protocols](co-protocols.png)
 
 #### Message Families
 
@@ -159,7 +166,7 @@ uses one subset of the messages in the
 ../../features/0030-sync-connection/README.md)
 uses a different subset.
 
-Collectively, the message types of a protocol serve as its _interface_. Each protocol
+Collectively, the message types of a protocol become the skeleton of its _interface_. Each protocol
 has a primary message family, and the name of the protocol is often the name of the
 primary message family.
 
@@ -218,10 +225,10 @@ interop.
 
 #### BPMN
 
-[BPMN](https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation) is a
+[BPMN](https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation) (Business Process Model and Notation) is a
 graphical language for modeling flows of all types (plus things less like
 our protocols as well). BPMN is a mature standard sponsored by [OMG](
-https://en.wikipedia.org/wiki/Object_Management_Group). It has a nice
+https://en.wikipedia.org/wiki/Object_Management_Group)(Object Management Group). It has a nice
 [tool ecosystem](https://camunda.com/bpmn/tool/). It also has an XML file
 format, so the visual diagrams have a two-way transformation to and from
 formal written language. And it has a code generation mode, where BPMN
@@ -250,7 +257,7 @@ RFC definition procedure described here.
 
 #### WSDL
 
-[WSDL](https://www.w3.org/TR/2001/NOTE-wsdl-20010315) is a web-centric
+[WSDL](https://www.w3.org/TR/2001/NOTE-wsdl-20010315) (Web Services Description Language) is a web-centric
 evolution of earlier, RPC-style interface definition languages like
 [IDL in all its varieties](https://en.wikipedia.org/wiki/Interface_description_language)
 and [CORBA](https://en.wikipedia.org/wiki/Common_Object_Request_Broker_Architecture).

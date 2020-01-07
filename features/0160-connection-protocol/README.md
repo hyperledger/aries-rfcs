@@ -275,7 +275,6 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
   }
 }
 ```
-
 #### Attributes
 
 - The `@type` attribute is a required string value that denotes that the received message is a connection request.
@@ -283,6 +282,43 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 - The `connection` attribute contains the `DID` and `DIDDoc` attributes. This format maintains consistency with the Response message where this attribute is signed.
 - The `DID` indicates the DID of the user requesting the connection.
 - The `DIDDoc` contains the DID document for the requesting user. If the DID method for the presented DID is not a peer method and the DID document is resolvable on a ledger, the `DIDDoc` attribute is optional.
+
+#### DIDDoc Example
+
+An example of the DID document contents is the following JSON. This format was implemented in some early agents as the [DIDComm DIDDoc Conventions](../0067-didcomm-diddoc-conventions/README.md) RFC was being formalized and so does not match that RFC exactly. For example, the use of the `IndyAgent` service endpoint.
+Future versions of this protocol will align precisely with that RFC.
+
+``` jsonc
+{
+  "@context": "https://w3id.org/did/v1",
+  "id": "did:sov:QUmsj7xwB82QAuuzfmvhAi",
+  "publicKey": [
+    {
+      "id": "did:sov:QUmsj7xwB82QAuuzfmvhAi#1",
+      "type": "Ed25519VerificationKey2018",
+      "controller": "did:sov:QUmsj7xwB82QAuuzfmvhAi",
+      "publicKeyBase58": "DoDMNYwMrSN8ygGKabgz5fLA9aWV4Vi8SLX6CiyN2H4a"
+    }
+  ],
+  "authentication": [
+    {
+      "type": "Ed25519SignatureAuthentication2018",
+      "publicKey": "did:sov:QUmsj7xwB82QAuuzfmvhAi#1"
+    }
+  ],
+  "service": [
+    {
+      "id": "did:sov:QUmsj7xwB82QAuuzfmvhAi;indy",
+      "type": "IndyAgent",
+      "priority": 0,
+      "recipientKeys": [
+        "DoDMNYwMrSN8ygGKabgz5fLA9aWV4Vi8SLX6CiyN2H4a"
+      ],
+      "serviceEndpoint": "http://192.168.65.3:8030"
+    }
+  ]
+}
+```
 
 #### Request Transmission
 

@@ -1,8 +1,8 @@
 # Aries RFC 0025: DIDComm Transports
 
 - Authors: [Sam Curren](sam@sovrin.org)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-05-27
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-12-05
 - Status Note:  
 - Supersedes: [INDY PR 94](https://github.com/hyperledger/indy-hipe/pull/94)
 - Start Date: 2019-02-26
@@ -25,16 +25,15 @@ Standardized transport methods are detailed here.
 HTTP(S) is the first transport for DID Communication that has received heavy attention.
 
 - Messages are transported via HTTP POST.
-- The MIME Type for the POST request is `application/didcomm-envelope-enc`.
+- The MIME Type for the POST request is `application/didcomm-envelope-enc`; see [RFC 0044: DIDComm File and MIME Types](../0044-didcomm-file-and-mime-types/README.md) for more details.
 - A received message should be responded to with a 202 Accepted status code. This indicates that the request was received, but not necessarily processed. Accepting a 200 OK status code is allowed.
 - POST requests are considered transmit only by default. No agent messages will be returned in the response. This behavior may be modified with additional signaling.
 - Using HTTPS with TLS 1.2 or greater with a forward secret cipher will provide Perfect Forward Secrecy (PFS) on the transmission leg.
 
 #### Known Implementations
 
-[Python Reference Agent](https://github.com/hyperledger/indy-agent/tree/master/python)
-
-[Indy Catalyst Agent](https://github.com/bcgov/indy-catalyst/tree/master/agent)
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python)
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet)
 
 ### Websocket
 
@@ -47,7 +46,8 @@ Websockets are an efficient way to transmit multiple messages without the overhe
 
 #### Known Implementations
 
-[Python Reference Agent](https://github.com/hyperledger/indy-agent/tree/master/python)
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python)
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet)
 
 ### XMPP
 

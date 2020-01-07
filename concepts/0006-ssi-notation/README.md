@@ -63,7 +63,7 @@ Despite the intersection between SSI, cryptology, and academia, SSI
 has to serve a broader audience. Its practicioners are not just
 mathematicians; they may include support and IT staff, lawyers
 specializing in intellectual property, business people, auditors,
-regulators, or even so-called "end users." In particular, SSI
+regulators, and individuals sometimes called "end users." In particular, SSI
 ecosystems are built and maintained by coders.
 Coders regularly write docs in markdown and html. They interact with
 one another on chat. They write emails and source code where comments
