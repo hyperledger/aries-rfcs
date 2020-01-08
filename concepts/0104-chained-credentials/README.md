@@ -113,7 +113,7 @@ A chained credential is a verifiable credential that contains provenanced data, 
 The first entity in the provenance chain for authority (Ur Wheels National, in our acid use case) is called the **root attester**, and is probably an institution configured for traditional credential issuance (e.g., with a public DID to which reputation attaches; in Indy, this entity also publishes a credential definition). All downstream entities in the provenance chain can participate without special setup. They need not have public DIDs or credential definitions. This is because the strength of the assertion does not depend on their reputation; rather, it depends on the robustness of the algorithm that walks the provenance chain back to its root. Only the root attester needs public reputation.
  
 ###### Note: contrast with ACLs
->When chained credentials are used to convey authority (the delegate credential subtype), they are quite different from ACLs. ACLs map an identity to a list of permissions. Delegate credentials entitle their holder to whatever permissions the credential enumerates. Holding may or may not be transferrable. If it is not transferrable, then [fraud prevention must be considered](../0207/credential-fraud-threat-model/README.md). If the credential isn't bound to a holder, then it's a bearer token and is an even more canonical OCAP.
+>When chained credentials are used to convey authority (the delegate credential subtype), they are quite different from ACLs. ACLs map an identity to a list of permissions. Delegate credentials entitle their holder to whatever permissions the credential enumerates. Holding may or may not be transferrable. If it is not transferrable, then [fraud prevention must be considered](../0207-credential-fraud-threat-model/README.md). If the credential isn't bound to a holder, then it's a bearer token and is an even more canonical OCAP.
 
 #### Special Sauce
 
@@ -139,7 +139,7 @@ A chained credential delivers these features by obeying some special conventions
     
     * It uses `credentialSubject.proxied.*` fields to describe the upstream delegator to whatever extent is required.
     
-    * It uses `credentialSubject.holder.role` and `credentialSubject.proxied.permissions` to grant permissions to the holder. See [Granting Permissions](#granting-permissions) for more details.
+    * It uses `credentialSubject.holder.role` and `credentialSubject.proxied.permissions` to grant permissions to the holder. See [Delegating Permissions](#delegating-permissions) for more details.
     
     * It may use `credentialSubject.holder.constraints.*` to [impose restrictions](../../concepts/0103-indirect-identity-control/guardianship-sample/trust-framework.md#constraints) on how/when/under what circumstances the delegation is appropriate.
 
