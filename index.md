@@ -28,6 +28,7 @@
 
 ## [DEMONSTRATED](README.md#demonstrated)
 * [0015: ACKs](features/0015-acks/README.md) (2019-12-26, [3 impls](features/0015-acks/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
+* [0023: DID Exchange Protocol 1.0](features/0023-did-exchange/README.md) (2019-05-27, [1 impl](features/0023-did-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0029: Message Trust Contexts](concepts/0029-message-trust-contexts/README.md) (2019-05-10, [3 impls](concepts/0029-message-trust-contexts/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0032: Message Timing](features/0032-message-timing/README.md) (2019-05-01, [1 impl](features/0032-message-timing/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 * [0035: Report Problem Protocol 1.0](features/0035-report-problem/README.md) (2019-04-01, [2 impls](features/0035-report-problem/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
@@ -42,7 +43,6 @@
 ## [PROPOSED](README.md#proposed)
 * [0013: Overlays](concepts/0013-overlays/README.md) (2019-05-20 &mdash; [`concept`](/tags.md#concept))
 * [0021: DIDComm Message Anatomy](concepts/0021-didcomm-message-anatomy/README.md) (2019-05-25 &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
-* [0023: DID Exchange Protocol 1.0](features/0023-did-exchange/README.md) (2019-05-27 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0024: DIDComm over XMPP](features/0024-didcomm-over-xmpp/README.md) (2019-06-14 &mdash; [`feature`](/tags.md#feature))
 * [0028: Introduce Protocol 1.0](features/0028-introduce/README.md) (2019-04-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0030: Sync Connection Protocol 1.0](features/0030-sync-connection/README.md) (2019-07-03 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator) [`protocol`](/tags.md#protocol))
