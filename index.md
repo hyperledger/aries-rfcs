@@ -54,7 +54,7 @@
 * [0074: DIDComm Best Practices](concepts/0074-didcomm-best-practices/README.md) (2019-06-10 &mdash; [`concept`](/tags.md#concept))
 * [0075: Payment Decorators](features/0075-payment-decorators/README.md) (2019-06-11 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0103: Indirect Identity Control](concepts/0103-indirect-identity-control/README.md) (2019-06-04 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
-* [0104: Delegatable Credentials](concepts/0104-delegatable-credentials/README.md) (2019-09-09 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
+* [0104: Chained Credentials](concepts/0104-chained-credentials/README.md) (2019-09-09 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
 * [0114: Predefined Identities](features/0114-predefined-identities/README.md) (2019-07-10 &mdash; [`feature`](/tags.md#feature))
 * [0116: Evidence Exchange Protocol 0.9](features/0116-evidence-exchange/README.md) (2019-07-26 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0124: DID Resolution Protocol 0.9](features/0124-did-resolution-protocol/README.md) (2019-07-13 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
