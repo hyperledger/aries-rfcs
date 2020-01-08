@@ -10,7 +10,7 @@
 ## Summary
 [summary]: #summary
 
-Every rich schema object has an associated `@context`. Contexts are JSON
+Every rich schema object has an associated `@context`. Contexts are JSON-LD
 objects. They are the standard mechanism for defining shared semantic
 meaning among rich schema objects.
 
@@ -29,35 +29,38 @@ i.e. they provide an explicit shared semantic meaning.
 establishment of a common vocabulary.
 
 ### Data Registry Storage
-Aries will provide a means for writing `@context` objects to and reading
-`@context` objects from a data registry (such as a distributed ledger).
+Aries will provide a means for writing contexts to and reading contexts
+from a verifiable data registry (such as a distributed ledger).
 
 ### Example context
 ```
-"@context": [
-    "did:sov:UVj5w8DRzcmPVDpUMr4AZhJ:7:example:1.0",
-    "did:sov:AZKWUJ3zArXPG36kyTJZZm:7:base-context:1.0",
-    "did:sov:9TDvb9PPgKQUWNQcWAFMo4:7:new-person:3.5",
-    {
-          "dct": "http://purl.org/dc/terms/",
-          "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-          "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-          "Driver": "did:sov:35qJWkTM7znKnicY7dq5Yk:8:driver:2.4",
-          "DriverLicense": "did:sov:Q6kuSqnxE57waPFs2xAs7q:8:driver-license:3.5",
-          "CategoryOfVehicles": "DriverLicense:CategoryOfVehicles"
-    }
-]
+{
+    "@context": [
+        "did:sov:UVj5w8DRzcmPVDpUMr4AZhJ",
+        "did:sov:JjmmTqGfgvCBnnPJRas6f8xT",
+        "did:sov:3FtTB4kzSyApkyJ6hEEtxNH4",
+        {
+            "dct": "http://purl.org/dc/terms/",
+            "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+            "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+            "Driver": "did:sov:2mCyzXhmGANoVg5TnsEyfV8",
+            "DriverLicense": "did:sov:36PCT3Vj576gfSXmesDdAasc",
+            "CategoryOfVehicles": "DriverLicense:CategoryOfVehicles"
+        }
+    ]
+}
 ```
 
 ### Aries Data Registry Interface
 We propose adding two Aries-Data-Registry-Interface methods for writing and
-reading `@context` objects:
-- `write_context`: a method to write a `@context` object to a data
+reading context objects:
+- `write_context`: a method to write a context object to a data
 registry. 
-- `read_context`: a method to read a `@context` object from a data
+- `read_context`: a method to read a context object from a data
 registry.
 
 #### write_context
+
 ```
 Writes a context to a data registry.
 
@@ -119,7 +122,7 @@ There are no known drawbacks.
 
 ## Rationale and alternatives
 
-- A `@context` object is required by the W3C Verifiable Credentials Data
+- A context object is required by the W3C Verifiable Credentials Data
 Model specification.
 - It also supports rich schema capabilities for credentials.
 
