@@ -425,7 +425,7 @@ When the message is transmitted, we are now in the `responded` state.
 
 #### Response Processing
 
-When the _invitee_ receives the `response` message, they will verify the `change_sig` provided. After validation, they will update their wallet with the new connection information. If the endpoint was changed, they may wish to execute a Trust Ping to verify that new endpoint.
+When the _invitee_ receives the `response` message, they will verify the `sig_data` provided. After validation, they will update their wallet with the new connection information. If the endpoint was changed, they may wish to execute a Trust Ping to verify that new endpoint.
 
 #### Response Errors
 
