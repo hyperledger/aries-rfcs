@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import collections
 import os
 import re
@@ -74,7 +76,7 @@ for line in txt:
         # From the RFC line, get the commit ID and protocol file
         commit = rfc.group(3)
         protocol = rfc.group(5)
-        changed = re.search(protocol, subprocess.run(['git', 'diff', '--name-only', 'master', commit], stdout=subprocess.PIPE).stdout.decode('utf-8'))
+        changed = re.search(protocol, subprocess.run(['git', 'diff', '--name-only', commit, 'master'], stdout=subprocess.PIPE).stdout.decode('utf-8'))
         # Has this RFC changed since it was set in the RFC?
         if changed:
             # Yes - list it.
@@ -83,5 +85,5 @@ for line in txt:
             if args.diffs:
                 # If we're showing diffs, then show the diffs
                 print('')
-                print(subprocess.run(['git', 'diff', 'master', commit, protocol], stdout=subprocess.PIPE).stdout.decode('utf-8'))
+                print(subprocess.run(['git', 'diff', commit, 'master', protocol], stdout=subprocess.PIPE).stdout.decode('utf-8'))
 exit()

@@ -71,9 +71,9 @@ The initial version of Aries Interop Profile, based on the existing implementati
 
  RFC Type | RFC/Link to RFC Version
 --- | ---
-Concept | [0003-protocols](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0003-protocols)
+Concept | [0003-protocols](https://github.com/hyperledger/aries-rfcs/tree/7326eeab39195fffe66ee57dbc45177ebda3c2d5/concepts/0003-protocols)
 Concept | [0004-agents](https://github.com/hyperledger/aries-rfcs/tree/f1e420f76abd9ff4af5c15d375fa6cf8c2cacb33/concepts/0004-agents)
-Concept | [0005-didcomm](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0005-didcomm)
+Concept | [0005-didcomm](https://github.com/hyperledger/aries-rfcs/tree/f1e420f76abd9ff4af5c15d375fa6cf8c2cacb33/concepts/0005-didcomm)
 Concept | [0008-message-id-and-threading](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading)
 Concept | [0011-decorators](https://github.com/hyperledger/aries-rfcs/tree/965a975f953d72e370d2b6fb28eec538ec756c6d/concepts/0011-decorators)
 Concept | [0017-attachments](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0017-attachments)
@@ -84,13 +84,11 @@ Concept | [0050-wallets](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c
 Concept | [0094-cross-domain messaging](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0094-cross-domain-messaging)
 Feature | [0015-acks](https://github.com/hyperledger/aries-rfcs/tree/5cc750f0fe18e3918401489066566f22474e25a8/features/0015-acks)
 Feature | [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/features/0019-encryption-envelope)
-Feature | [0160-connection-protocol](https://github.com/hyperledger/aries-rfcs/tree/f5a97ef489c4c671a469de661efe4391c2a5a0e5/features/0160-connection-protocol)
+Feature | [0160-connection-protocol](https://github.com/hyperledger/aries-rfcs/tree/04ce2e2b0f956f2b3dcdad8298c6c039b31b57bc/features/0160-connection-protocol)
 Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/b490ebe492985e1be9804fc0763119238b2e51ab/features/0025-didcomm-transports)
-Feature | [0031-discover-features](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/features/0031-discover-features)
 Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/89d14c15ab35b667e7a9d04fe42d4d48b10468cf/features/0035-report-problem)
 Feature | [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/features/0036-issue-credential)
 Feature | [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/features/0037-present-proof)
-Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/features/0048-trust-ping)
 Feature | [0056-service-decorator](https://github.com/hyperledger/aries-rfcs/tree/527849ec3aa2a8fd47a7bb6c57f918ff8bcb5e8c/features/0056-service-decorator)
 
 #### Test Suite
