@@ -16,6 +16,7 @@ def scratch_space():
     x.cleanup()
 
 
+@pytest.mark.skip(reason="using actions index generation")
 def test_index(scratch_space):
     temp_idx = os.path.join(scratch_space.name, 'index.md')
     import generate_index
