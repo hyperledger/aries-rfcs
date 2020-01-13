@@ -4,7 +4,7 @@
 - Since: 2019-12-16
 - Status Note: implementation is being explored by SecureKey
 - Supersedes:
-- Start Date: 2018-12-05
+- Start Date: 2019-12-05
 - Tags: feature, decorator
 
 ## Summary
@@ -26,14 +26,14 @@ This specification allows applications that aren't Aries agents to communicate J
 
 ### The `~purpose` Decorator
 
-The `~purpose` decorator is a JSON array which describes the *semantics* of a message - the role it plays within a protocol implemented using this RFC, for example, or the type or meaning of the data contained within.
+The `~purpose` decorator is a JSON array which describes the *semantics* of a message - the role it plays within a protocol implemented using this RFC, for example, or the meaning of the data contained within.
 The purpose is the mechanism for determining which recipient(s) should be sent a message.
 
 Example: `"~purpose": ["team:01453", "delivery", "geotag", "cred"]`
 
 Each element of the purpose array is a string. An agent provides some means for recipients to *register* on a purpose, or class of purposes, by indicating the particular string values they are interested in.
 
-The particular registration semantics left to the implementation. Some possible examples include:
+The particular registration semantics are TBD. Some possible formats include:
 - A tagging system, where if a recipient registers on a list `"foo", "bar"`, it will be forwarded messages with purposes `["foo", "quux"]` and `["baz", "bar"]`
 - A hierarchical system, where if a recipient registers on a list `"foo", "bar"`, it will receive any message with purpose `["foo", "bar", ...]` but not `["foo", "baz", ...]` or `["baz", "foo", "bar", ...]`
 - A hierarchical system with wildcards: `"*", "foo"` might match any message with purpose `[..., "foo", ...]`
@@ -75,6 +75,16 @@ This example protocol wraps the message within the `data` field.
   "@type": "https://example.org/didcomm-message",
   "~purpose": [],
   "data" : {}
+}
+```
+
+For example:
+```json
+{
+  "@id": "123456789",
+  "@type": "https://example.org/didcomm-message",
+  "~purpose": ["metrics", "latency"],
+  "data": {"mean": 346457, "median": 2344}
 }
 ```
 
