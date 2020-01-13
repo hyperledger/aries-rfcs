@@ -22,7 +22,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -m "Generate Index" -a
+        git commit -m "Generate Index" -a --allow-empty
     - name: Push changes
       uses: ad-m/github-push-action@v0.5.0
       with:
