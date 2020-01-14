@@ -123,7 +123,8 @@ This is not a message but an inner object for other messages in this protocol. I
             "name": "<attribute_name>",
             "cred_def_id": "<cred_def_id>",
             "mime-type": "<type>",
-            "value": "<value>"
+            "value": "<value>",
+            "referent": "<referent>"
         },
         // more attributes
     ],
@@ -167,6 +168,39 @@ An attribute specification must specify a `value`, a `cred_def_id`, or both:
 * if `value` is present and `cred_def_id` is absent, the preview proposes a self-attested attribute;
 * if `value` and `cred_def_id` are both present, the preview proposes verifiable claim to reveal in the presentation;
 * if `value` is absent and `cred_def_id` is present, the preview proposes verifiable claim not to reveal in the presentation.
+
+##### Referent
+
+The optional `referent` can be useful in specifying multiple-credential presentations. Its value indicates which credential 
+will supply the attribute in the presentation. Sharing a `referent` value between multiple attribute specifications indicates that the holder's same credential supplies the attribute.
+
+Any attribute specifications sharing a `referent` value must all have the same `cred_def_id` value, or must all omit the `"cred_def_id"` key.
+
+For example, if an issuer issued a credential per completed game, a holder could use a presentation preview such as
+
+```jsonc
+{
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "attributes": [
+        {
+            "name": "score",
+            "cred_def_id": "BzCbsNYhMrjHiqZDTUASHg:3:CL:1234:tag",
+            "value": "1234500",
+            "referent": "0"
+        },
+        {
+            "name": "level",
+            "cred_def_id": "BzCbsNYhMrjHiqZDTUASHg:3:CL:1234:tag",
+            "value": "25",
+            "referent": "0"
+        },
+    ],
+    "predicates": [
+    ]
+}
+```
+
+to prompt a verifier to request proof of a score of 1234500 and level 25 within the same game, rather than proof of the same score and level but potentially in distinct games.
 
 #### Predicates
 
