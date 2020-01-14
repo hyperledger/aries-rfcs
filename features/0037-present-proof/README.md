@@ -166,8 +166,8 @@ The optional `value`, when present, holds the value of the attribute to reveal i
 An attribute specification must specify a `value`, a `cred_def_id`, or both: 
 
 * if `value` is present and `cred_def_id` is absent, the preview proposes a self-attested attribute;
-* if `value` and `cred_def_id` are both present, the preview proposes verifiable claim to reveal in the presentation;
-* if `value` is absent and `cred_def_id` is present, the preview proposes verifiable claim not to reveal in the presentation.
+* if `value` and `cred_def_id` are both present, the preview proposes a verifiable claim to reveal in the presentation;
+* if `value` is absent and `cred_def_id` is present, the preview proposes a verifiable claim not to reveal in the presentation.
 
 ##### Referent
 
