@@ -196,6 +196,12 @@ also attached to this RFC as an example.
 
 [![tictactoe protocol](tictactoe/tile.png)](tictactoe/README.md)
 
+#### Security Considerations
+
+##### Replay attacks
+
+It should be noted that when defining a protocol that has domain specific requirements around preventing replay attacks an `@id` property SHOULD be required. Given the `@id` field is most commonly set to be a UUID, it usually provides sufficient randomness that a nonce would in preventing replay attacks. This means that sufficient care will be needed in processing of the `@id` field however, to make sure the `@id` field hasn't been used before. In some cases, nonces require being unpredictable as well. In this case, greater review should be taken as to how the `@id` field should be used in the domain specific protocol. Additionally, in the event where the `@id` field is not adequate, it's recommended that an additional `nonce` field be required by the domain specific protocol specification.
+
 ## Reference
 
 * [Message Type and Protocol Identifier URIs](uris.md)
