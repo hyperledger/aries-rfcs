@@ -398,6 +398,12 @@ it, go to the root of the repo and run `pytest code` -- or simply invoke the
 hyperlinks on the web, because it is too time-consuming; if you want that check,
 add `--full` as a command-line argument.
 
+### Security Considerations
+
+#### Replay attacks
+
+It should be noted that when defining a protocol that has domain specific requirements around preventing replay attacks an `@id` property SHOULD be required. Given the `@id` field is most commonly set to be a UUID, it usually provides sufficient randomness that a nonce would in preventing replay attacks. This means that sufficient care will be needed in processing of the `@id` field however, to make sure the `@id` field hasn't been used before. In some cases, nonces require being unpredictable as well. In this case, greater review should be taken as to how the `@id` field should be used in the domain specific protocol. Additionally, in the event where the `@id` field is not adequate, it's recommended that an additional `nonce` field be required by the domain specific protocol specification.
+
 ## Reference
 
 - [Discussion of date and time datatypes on Wikipedia](https://en.wikipedia.org/wiki/System_time)
