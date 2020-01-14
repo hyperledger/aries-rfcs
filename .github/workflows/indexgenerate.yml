@@ -1,0 +1,29 @@
+name: Index Generation
+
+on: 
+  pull_request:
+    branches: [master]
+    types: [closed]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: master
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.7'  
+    - name: Create local changes
+      run: |
+        python code/generate_index.py
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Generate Index" -a --allow-empty
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.5.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}

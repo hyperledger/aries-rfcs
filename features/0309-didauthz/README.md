@@ -92,7 +92,7 @@ the Introduce Protocol<sup>[9]</sup>.
 
 ### Access Credentials
 
-Access credentials are delegatable credentials<sup>[17]</sup> used to access
+Access credentials are chained delegate credentials<sup>[17]</sup> used to access
 the protected resources. Embedded in them is proof of the chain of delegation
 and authorization.
 
@@ -305,5 +305,5 @@ Name / Link | Implementation Notes
 14. M. Jones, B. Campbell, J. Bradley, W. Denniss: *[IETF I-D - OAuth 2.0 Token Binding](https://tools.ietf.org/html/draft-ietf-oauth-token-binding-08)*, October 2018
 15. N. Sakimura, J. Bradley, M. Jones, B. de Medeiros, C. Mortimore: *[OpenID Connect Core 1.0](https://openid.net/developers/specs/)*, November 2014
 16. T. Lodderstedt, M. McGloin, P. Hunt: *[OAuth 2.0 Thread Model nd Security Considerations](https://tools.ietf.org/html/rfc6819)*, January 2013
-17. Daniel Hardman, Lovesh Harchandani: *[Aries RFC 0104 - Delegatable Credentials](../../concepts/0104-delegatable-credentials/README.md)*, status PROPOSED
+17. Daniel Hardman, Lovesh Harchandani: *[Aries RFC 0104 - Chained Credentials](../../concepts/0104-chained-credentials/README.md)*, status PROPOSED
 18. E. Maler, M. Machulak, J. Richer, T. Hardjono: *[Federated Authorization for User-Managed Access (UMA) 2.0](https://tools.ietf.org/html/draft-maler-oauth-umafedauthz-00)*, February 2019
