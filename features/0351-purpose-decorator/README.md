@@ -20,6 +20,12 @@ It introduces:
 
 This specification allows applications that aren't Aries agents to communicate JSON messages over DIDComm using Aries agents analogously to [mediators](/concepts/0046-mediators-and-relays/README.md). Any agent which implements this protocol can relay arbitrary new types of message for clients - without having to be updated and redeployed.
 
+The purpose decorator can be used to implement client interfaces for Aries agents. For example:
+- A client application built using an Aries framework can use the purpose decorator for client-level messaging and protocols
+- Multiple client applications can connect to an agent, for example to process different types of messages, or to log for auditing purposes
+- A server with a remote API can include an Aries agent using the purpose decorator to provide a remote API over DIDComm
+- Multiple client applications can use a single agent to perform transactions on the agent owner's identity
+
 ## Tutorial
 
 > This RFC assumes familiarity with [mediators and relays](/concepts/0046-mediators-and-relays/README.md), [attachments](/concepts/0017-attachments/README.md), and [message threading](/concepts/0008-message-id-and-threading/README.md).
