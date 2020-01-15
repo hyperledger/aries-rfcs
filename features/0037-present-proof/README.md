@@ -174,7 +174,7 @@ An attribute specification must specify a `value`, a `cred_def_id`, or both:
 The optional `referent` can be useful in specifying multiple-credential presentations. Its value indicates which credential 
 will supply the attribute in the presentation. Sharing a `referent` value between multiple attribute specifications indicates that the holder's same credential supplies the attribute.
 
-Any attribute specifications sharing a `referent` value must all have the same `cred_def_id` value, or must all omit the `"cred_def_id"` key.
+Any attribute specification using a `referent` must also have a `cred_def_id`; any attribute specifications sharing a common `referent` value must all have the same `cred_def_id` value.
 
 For example, if an issuer issued a credential per completed game, a holder could use a presentation preview such as
 
