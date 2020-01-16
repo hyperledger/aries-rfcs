@@ -19,6 +19,7 @@ jobs:
       run: |
         python code/generate_index.py
     - name: Commit files
+      continue-on-error: true
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
