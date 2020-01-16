@@ -176,22 +176,22 @@ will supply the attribute in the presentation. Sharing a `referent` value betwee
 
 Any attribute specification using a `referent` must also have a `cred_def_id`; any attribute specifications sharing a common `referent` value must all have the same `cred_def_id` value.
 
-For example, if an issuer issued a credential per completed game, a holder could use a presentation preview such as
+For example, a holder with multiple account credentials could use a presentation preview such as
 
 ```jsonc
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
     "attributes": [
         {
-            "name": "score",
+            "name": "account",
             "cred_def_id": "BzCbsNYhMrjHiqZDTUASHg:3:CL:1234:tag",
-            "value": "1234500",
+            "value": "12345678",
             "referent": "0"
         },
         {
-            "name": "level",
+            "name": "streetAddress",
             "cred_def_id": "BzCbsNYhMrjHiqZDTUASHg:3:CL:1234:tag",
-            "value": "25",
+            "value": "123 Main Street",
             "referent": "0"
         },
     ],
@@ -200,7 +200,7 @@ For example, if an issuer issued a credential per completed game, a holder could
 }
 ```
 
-to prompt a verifier to request proof of a score of 1234500 and level 25 within the same game, rather than proof of the same score and level but potentially in distinct games.
+to prompt a verifier to request proof of account number and street address from the same account, rather than potentially an account number and street address from distinct accounts.
 
 #### Predicates
 
