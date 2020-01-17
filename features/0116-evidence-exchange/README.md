@@ -5,7 +5,7 @@
 - Since: 2019-07-26
 - Status Note: Revised to address both physical and digital identity proofing methods and NIST assurance levels.
 - Start Date: 2019-07-05
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 

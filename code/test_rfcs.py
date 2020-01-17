@@ -8,12 +8,15 @@ import tempfile
 sys.path.append(os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')))
 import rfcs
 
+
 @pytest.fixture
 def scratch_space():
     x = tempfile.TemporaryDirectory()
     yield x
     x.cleanup()
 
+
+@pytest.mark.skip(reason="using actions index generation")
 def test_index(scratch_space):
     temp_idx = os.path.join(scratch_space.name, 'index.md')
     import generate_index
@@ -21,15 +24,22 @@ def test_index(scratch_space):
     perm_idx = os.path.join(os.path.dirname(__file__), '../index.md')
     if os.system('diff %s %s' % (perm_idx, temp_idx)):
         pytest.fail("/index.md needs to be updated. Run python code/generate_index.py.")
-    
+
+
 def test_links():
     import check_links
     assert check_links.main() == 0
 
+
 def test_rfc_metadata():
     errors = []
+
     def e(rfc, msg):
         errors.append(rfc.relpath.replace('README.md','') + ': ' + msg)
+
+    def warn(rfc, msg):
+        sys.stderr.write('Warning: ' + rfc.relpath.replace('README.md','') + ': ' + msg + '\n')
+
     for rfc in rfcs.walk():
         if not bool(rfc.title): e(rfc, 'no title found')
         if rfc.category not in rfc.relpath: e(rfc, 'category does not match path')
@@ -51,8 +61,40 @@ def test_rfc_metadata():
             if not re.search(r'\[.*?\]\(.*?\)', rfc.supersedes): e(rfc, 'supersedes does not contain hyperlink')
         if rfc.superseded_by:
             if not re.search(r'\[.*?\]\(.*?\)', rfc.superseded_by): e(rfc, 'superseded_by does not contain hyperlink')
-        if rfc.impl_count > 0:
-            if rfc.status == 'PROPOSED': e(rfc, 'should not be PROPOSED if it has an impl')
+        if rfc.status == 'PROPOSED':
+            for impl in rfcs.test_suite_impls(rfc, False):
+                e(rfc, 'should not be PROPOSED if it has a non-test-suite impl')
+                break
+        # Should this RFC have links to test results?
+        elif rfc.status in ['ACCEPTED', 'ADOPTED'] and 'feature' in rfc.tags and (
+                'protocol' in rfc.tags or 'decorator' in rfc.tags):
+            found_test_suite_in_impls = False
+            for row in rfcs.test_suite_impls(rfc, True):
+                found_test_suite_in_impls = True
+                break
+            if not found_test_suite_in_impls:
+                msg = 'Test suite must be an impl for any protocol- or decorator-related RFC beyond DEMONSTRATED status.'
+                if 'test-anomaly' in rfc.tags:
+                    warn(rfc, msg)
+                else:
+                    e(rfc, msg + ' Tag "test-anomaly" to temporarily override.')
+            for row in rfcs.test_suite_impls(rfc, False):
+                m = rfcs.get_test_results_link(row)
+                # If we lack a link entirely, this is an error, period.
+                # If we have tagged the RFC with "test-anomaly", then it becomes possible to link
+                # the ugly text "MISSING test results" to the test-anomaly tag and have the result
+                # be only a warning. This ugly text+link should only be accepted when the 'test-anomaly'
+                # tag is present.
+                desc = rfcs.describe_impl_row(row)
+                if m is None:
+                    e(rfc, 'Impl "%s" needs a link to test results in its Notes column. Format = [test results](...) or, if RFC is tagged "test-anomaly", [MISSING test results](/tags.md#test-anomaly).' % desc)
+                # Are test results explicitly declared to be missing?
+                elif ('MISSING' in m.group(1) and '/tags.md#test-anomaly' in m.group(2)):
+                    if 'test-anomaly' in rfc.tags:
+                        warn(rfc, 'Impl "%s" needs to replace missing test results with something meaningful.' % desc)
+                    else:
+                        e(rfc, 'Can\'t declare missing tests without the "test-anomaly" tag to make the RFC ugly, so impl "%s" needs a link to test results in its Notes column. Format = [test results](...).' % desc)
+
     if errors:
         msg = '\n' + '\n'.join(errors)
         raise BaseException(msg)

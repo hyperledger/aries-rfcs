@@ -1,7 +1,7 @@
 
 {
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0/disclose",
-  "@thread": { "thid": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU" },
+  "~thread": { "thid": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU" },
   "protocols": [
     {
       "pid": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.0",

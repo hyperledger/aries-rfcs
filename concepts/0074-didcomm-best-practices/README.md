@@ -5,7 +5,7 @@
 - Since: 2019-06-10
 - Status Note: This captures some tribal knowledge from the Indy community. However, it is by no means uniformly accepted inside that group, and it has never been shared in a larger context. Therefore, the RFC is currently fodder for discussion.
 - Start Date: 2019-01-15
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
@@ -26,6 +26,10 @@ is fostered if learning curves don't have to proliferate. Therefore,
 we offer the following guidelines.
 
 ## Tutorial
+
+### Normative language
+
+RFCs about protocols and DIDComm behaviors follow commonly understood conventions about normative language, including words like "MUST", "SHOULD", and "MAY". These conventions are documented in [IETF's RFC 2119](https://tools.ietf.org/html/rfc2119). Existing documents that were written before we clarified our intention to follow these conventions are grandfathered but should be updated to conform.
 
 ### Names
 
@@ -397,6 +401,12 @@ it, go to the root of the repo and run `pytest code` -- or simply invoke the
 `check_links` script directly. Normally, `check_links` does not test external
 hyperlinks on the web, because it is too time-consuming; if you want that check,
 add `--full` as a command-line argument.
+
+### Security Considerations
+
+#### Replay attacks
+
+It should be noted that when defining a protocol that has domain specific requirements around preventing replay attacks an `@id` property SHOULD be required. Given the `@id` field is most commonly set to be a UUID, it usually provides sufficient randomness that a nonce would in preventing replay attacks. This means that sufficient care will be needed in processing of the `@id` field however, to make sure the `@id` field hasn't been used before. In some cases, nonces require being unpredictable as well. In this case, greater review should be taken as to how the `@id` field should be used in the domain specific protocol. Additionally, in the event where the `@id` field is not adequate, it's recommended that an additional `nonce` field be required by the domain specific protocol specification.
 
 ## Reference
 

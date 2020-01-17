@@ -5,7 +5,7 @@
 - Status Note: This is the protocol with existing uses. It is expected that [RFC 0023 DID Exchange](../../features/0023-did-exchange/README.md) will replace this protocol.
 - Supersedes: [HIPE 0031 - Connection Protocol](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol)
 - Start Date: 2018-06-29
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -77,7 +77,7 @@ No errors are sent in timeout situations. If the inviter or invitee wishes to re
 
 #### Error Message Example
 
-```
+```jsonc
 {
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/problem_report",
   "@id": "5678876542345",
@@ -99,8 +99,8 @@ No errors are sent in timeout situations. If the inviter or invitee wishes to re
 ### Flow Overview
 
 The _inviter_ gives provisional connection information to the _invitee_. 
-The _invitee_ uses provisional information to send a DID and DID Doc to the _inviter_.
-The _inviter_ uses sent DID Doc information to send a DID and DID Doc to the _invitee_.
+The _invitee_ uses provisional information to send a DID and DID document to the _inviter_.
+The _inviter_ uses received DID document information to send a DID and DID document to the _invitee_.
 The *invitee* sends the *inviter* an ack or any other message that confirms the response was received.
 
 ## 0. Invitation to Connect
@@ -111,7 +111,7 @@ An invitation to connect may be transferred using any method that can reliably t
 
 - suggested label
 
-- publicly resolvable did
+- publicly resolvable DID
 
   OR
 
@@ -125,11 +125,11 @@ An invitation to connect may be transferred using any method that can reliably t
 
   This information is used to create a provisional connection to the _inviter_. That connection will be made complete in the `connection_response` message.
 
-These attributes were chosen to parallel the attributes of a DID Document for increased meaning. It is worth noting that `recipientKeys` and `routingKeys` must be inline keys, not DID key references when contained in an invitation. As in the DID Document with `Ed25519VerificationKey2018` key types, the key must be base58 encoded.
+These attributes were chosen to parallel the attributes of a DID document for increased meaning. It is worth noting that `recipientKeys` and `routingKeys` must be inline keys, not DID key references when contained in an invitation. As in the DID document with `Ed25519VerificationKey2018` key types, the key must be base58 encoded.
 
 When considering routing and options for invitations, keep in mind that the more detail is in the connection invitation, the longer the URL will be and (if used) the more dense the QR code will be. Dense QR codes can be harder to scan.
 
-The _inviter_ will either use an existing invitation DID, or provision a new one according to the did method spec. They will then create the invitation message in one of the following forms.
+The _inviter_ will either use an existing invitation DID, or provision a new one according to the DID method spec. They will then create the invitation message in one of the following forms.
 
 Invitation Message with Public Invitation DID:
 
@@ -177,7 +177,7 @@ If `routingKeys` is present and non-empty, additional forwarding wrapping will b
 
 ##### Agency Endpoint
 
-The endpoint for the connection is either present in the invitation or available in the DID Document of a presented DID. If the endpoint is not a URI but a DID itself, that DID refers to an Agency.
+The endpoint for the connection is either present in the invitation or available in the DID document of a presented DID. If the endpoint is not a URI but a DID itself, that DID refers to an Agency.
 
 In that case, the `serviceEndpoint` of the DID must be a URI, and the `recipientKeys` must contain a single key. That key is appended to the end of the list of `routingKeys` for processing. For more information about message forwarding and routing, see [RFC 0094](../../concepts/0094-cross-domain-messaging/README.md).
 
@@ -257,32 +257,68 @@ If they _invitee_ wants to accept the connection invitation, they will use the i
 
 The connection request message is used to communicate the DID document of the _invitee_ to the _inviter_ using the provisional connection information present in the _connection_invitation_ message.
 
-The _invitee_ will provision a new DID according to the DID method spec. For a Peer DID, this involves creating a matching peer DID and key. The newly provisioned DID and DID Doc is presented in the connection_request message as follows:
+The _invitee_ will provision a new DID according to the DID method spec. For a Peer DID, this involves creating a matching peer DID and key. The newly provisioned DID and DID document is presented in the connection_request message as follows:
 
 #### Example
 
-```json
+```jsonc
 {
   "@id": "5678876542345",
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/request",
   "label": "Bob",
   "connection": {
-    "did": "B.did@B:A",
-  	"did_doc": {
+    "DID": "B.did@B:A",
+    "DIDDoc": {
         "@context": "https://w3id.org/did/v1"
-      	// DID Doc contents here.
+        // DID document contents here.
     }
   }
 }
 ```
-
 #### Attributes
 
 - The `@type` attribute is a required string value that denotes that the received message is a connection request.
 - The `label` attribute provides a suggested label for the connection. This allows the user to tell multiple connection offers apart. This is not a trusted attribute.
-- The `connection` attribute contains the `did` and `did_doc` attributes. This format maintains consistency with the Response message where this attribute is signed.
-- The `did` indicates the DID of the user requesting the connection.
-- The `did_doc` contains the DID doc for the requesting user. If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc` attribute is optional.
+- The `connection` attribute contains the `DID` and `DIDDoc` attributes. This format maintains consistency with the Response message where this attribute is signed.
+- The `DID` indicates the DID of the user requesting the connection.
+- The `DIDDoc` contains the DID document for the requesting user. If the DID method for the presented DID is not a peer method and the DID document is resolvable on a ledger, the `DIDDoc` attribute is optional.
+
+#### DIDDoc Example
+
+An example of the DID document contents is the following JSON. This format was implemented in some early agents as the [DIDComm DIDDoc Conventions](../0067-didcomm-diddoc-conventions/README.md) RFC was being formalized and so does not match that RFC exactly. For example, the use of the `IndyAgent` service endpoint.
+Future versions of this protocol will align precisely with that RFC.
+
+``` jsonc
+{
+  "@context": "https://w3id.org/did/v1",
+  "id": "did:sov:QUmsj7xwB82QAuuzfmvhAi",
+  "publicKey": [
+    {
+      "id": "did:sov:QUmsj7xwB82QAuuzfmvhAi#1",
+      "type": "Ed25519VerificationKey2018",
+      "controller": "did:sov:QUmsj7xwB82QAuuzfmvhAi",
+      "publicKeyBase58": "DoDMNYwMrSN8ygGKabgz5fLA9aWV4Vi8SLX6CiyN2H4a"
+    }
+  ],
+  "authentication": [
+    {
+      "type": "Ed25519SignatureAuthentication2018",
+      "publicKey": "did:sov:QUmsj7xwB82QAuuzfmvhAi#1"
+    }
+  ],
+  "service": [
+    {
+      "id": "did:sov:QUmsj7xwB82QAuuzfmvhAi;indy",
+      "type": "IndyAgent",
+      "priority": 0,
+      "recipientKeys": [
+        "DoDMNYwMrSN8ygGKabgz5fLA9aWV4Vi8SLX6CiyN2H4a"
+      ],
+      "serviceEndpoint": "http://192.168.65.3:8030"
+    }
+  ]
+}
+```
 
 #### Request Transmission
 
@@ -296,7 +332,7 @@ We are now in the `requested` state.
 
 #### Request processing
 
-After receiving the connection request, the _inviter_ evaluates the provided DID and DID Doc according to the DID Method Spec.
+After receiving the connection request, the _inviter_ evaluates the provided DID and DID document according to the DID Method Spec.
 
 The _inviter_ should check the information presented with the keys used in the wire-level message transmission to ensure they match.
 
@@ -312,9 +348,9 @@ See [Error Section](#errors) above for message format details.
 
 Possible reasons:
 
-- unsupported DID method for provided DID
+- Unsupported DID method for provided DID
 - Expired Invitation
-- DID Doc Invalid
+- DID Document Invalid
 - Unsupported key type
 - Unsupported endpoint protocol
 
@@ -330,7 +366,7 @@ The connection response message is used to complete the connection. This message
 
 #### Example
 
-```json
+```jsonc
 {
   "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/response",
   "@id": "12345678900987654321",
@@ -338,10 +374,10 @@ The connection response message is used to complete the connection. This message
     "thid": "<@id of request message>"
   },
   "connection": {
-    "did": "A.did@B:A",
-  	"did_doc": {
+    "DID": "A.did@B:A",
+    "DIDDoc": {
       "@context": "https://w3id.org/did/v1"
-      // DID Doc contents here.
+      // DID document contents here.
     }
   }
 }
@@ -357,7 +393,7 @@ The above message is required to be signed as described in HIPE ???. The `connec
     "thid": "<@id of request message>"
   },
   "connection~sig": {
-    "@type":"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
     "signature": "<digital signature function output>",
     "sig_data": "<base64URL(64bit_integer_from_unix_epoch||connection_attribute)>",
     "signers": "<signing_verkey>"
@@ -375,21 +411,21 @@ The signature data must be used to verify against the invitation's `recipientKey
 
 - The `@type` attribute is a required string value that denotes that the received message is a connection request.
 - The `~thread` block contains a `thid` reference to the `@id` of the request message. 
-- The `connection` attribute contains the `did` and `did_doc` attributes to enable simpler signing.
-- The `did` attribute is a required string value and denotes DID in use by the _inviter_. Note that this may not be the same DID used in the invitation.
-- The `did_doc` attribute contains the associated DID Doc. If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc` attribute is optional.
+- The `connection` attribute contains the `DID` and `DIDDoc` attributes to enable simpler signing.
+- The `DID` attribute is a required string value and denotes DID in use by the _inviter_. Note that this may not be the same DID used in the invitation.
+- The `DIDDoc` attribute contains the associated DID document. If the DID method for the presented DID is not a peer method and the DID document is resolvable on a ledger, the `DIDDoc` attribute is optional.
 
-In addition to a new DID, the associated DID Doc might contain a new endpoint. This new DID and endpoint are to be used going forward in the connection.
+In addition to a new DID, the associated DID document might contain a new endpoint. This new DID and endpoint are to be used going forward in the connection.
 
 #### Response Transmission
 
-The message should be packaged in the wire level format, using the keys from the request, and the new keys presented in the internal did doc. 
+The message should be packaged in the wire level format, using the keys from the request, and the new keys presented in the internal DID document.
 
 When the message is transmitted, we are now in the `responded` state.
 
 #### Response Processing
 
-When the _invitee_ receives the `response` message, they will verify the `change_sig` provided. After validation, they will update their wallet with the new connection information. If the endpoint was changed, they may wish to execute a Trust Ping to verify that new endpoint.
+When the _invitee_ receives the `response` message, they will verify the `sig_data` provided. After validation, they will update their wallet with the new connection information. If the endpoint was changed, they may wish to execute a Trust Ping to verify that new endpoint.
 
 #### Response Errors
 
@@ -399,9 +435,9 @@ See [Error Section](#errors) above for message format details.
 
 Possible reasons:
 
-- unsupported DID method for provided DID
+- Unsupported DID method for provided DID
 - Expired Request
-- DID Doc Invalid
+- DID Document Invalid
 - Unsupported key type
 - Unsupported endpoint protocol
 - Invalid Signature
@@ -450,7 +486,7 @@ Upon establishing a connection, it is likely that both Alice and Bob will want t
 
 ## Unresolved questions
 
-- Should we eliminate the public DID option, and they just present an invitation with the connection key from their public DID Doc?
+- Should we eliminate the public DID option, and they just present an invitation with the connection key from their public DID document?
 - Should invitations have `@id`s?
 ## Implementations
 
@@ -458,9 +494,9 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | passed agent connectathon tests, Feb 2019
-[Streetcred.id](https://streetcred.id/) | passed agent connectathon tests, Feb 2019
-[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | ported from VON codebase that passed agent connectathon tests, Feb 2019
-[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | implemented July 2019
-[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | ported from Indy Agent codebase that provided agent connectathon tests, Feb 2019
-[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | passed agent connectathon tests, Feb 2019 
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | passed agent connectathon tests, Feb 2019; [MISSING test results](/tags.md#test-anomaly)
+[Streetcred.id](https://streetcred.id/) | passed agent connectathon tests, Feb 2019; [MISSING test results](/tags.md#test-anomaly)
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | ported from VON codebase that passed agent connectathon tests, Feb 2019; [MISSING test results](/tags.md#test-anomaly)
+[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | implemented July 2019; [MISSING test results](/tags.md#test-anomaly)
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | ported from Indy Agent codebase that provided agent connectathon tests, Feb 2019; [MISSING test results](/tags.md#test-anomaly)
+[Indy Cloud Agent - Python](https://github.com/hyperledger/indy-agent/python) | passed agent connectathon tests, Feb 2019; [MISSING test results](/tags.md#test-anomaly)

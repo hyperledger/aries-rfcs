@@ -4,7 +4,7 @@
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-05-25
 - Start Date: 2019-05-25
-- Tags: concept, decorator
+- Tags: [concept](/tags.md#concept), [decorator](/tags.md#decorator)
 
 ## Summary
 

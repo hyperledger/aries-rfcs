@@ -6,7 +6,7 @@
 - Status Note: Has guided Indy design choices for several months. Not yet ratified by greater Aries community. 
 - Supersedes: [Indy HIPE 0035](https://github.com/hyperledger/indy-hipe/tree/master/text/0035-json-ld-compatibility)
 - Start Date: 2019-01-23
-- Tags: concept, decorator
+- Tags: [concept](/tags.md#concept), [decorator](/tags.md#decorator)
 
 ## Summary
 
@@ -107,8 +107,7 @@ but no predefined relevance in DIDComm.
 
 The identifier for an DIDComm message is given by the JSON-LD `@id` property at the
 root of a message. [JSON-LD requires this value to be an IRI](https://w3c.github.io/json-ld-syntax/#specifying-the-type).
-DIDComm message IDs are relative IRIs, and can be converted to absolute form by
-prepending `a2a://`. Instances of `@id` on any node other than a message root
+DIDComm message IDs are relative IRIs, and can be converted to absolute form as described in [RFC 0217: Linkable Message Paths](../0217-linkable-message-paths/README.md). Instances of `@id` on any node other than a message root
 have JSON-LD meaning, but no predefined relevance in DIDComm.
 
 #### `@context`

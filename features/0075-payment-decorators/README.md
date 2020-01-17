@@ -6,7 +6,7 @@
 - Status Note: Still being studied. 
 - Supersedes: [Indy HIPE PR #129]( https://github.com/hyperledger/indy-hipe/pull/129)
 - Start Date: 2019-04-22
-- Tags: feature, decorator
+- Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
 
 ## Summary
 

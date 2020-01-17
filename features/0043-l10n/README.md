@@ -5,7 +5,7 @@
 - Since: 2019-04-01
 - Status Note: Broadly socialized within the Indy community, and used in some of the other RFCs. Not yet implemented to any significant degree.
 - Start Date: 2018-11-30
-- Tags: feature, decorator
+- Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
 
 ## Summary
 

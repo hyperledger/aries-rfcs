@@ -5,7 +5,7 @@
 - Since: 2019-06-03
 - Status Note: Needs refinement and validation, will be useful in any connectionless communication.
 - Start Date: 2019-06-03
-- Tags: feature, decorator
+- Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
 
 ## Summary
 

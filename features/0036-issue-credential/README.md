@@ -6,7 +6,16 @@
 - Status Note:  See [RFC 0037](../0037-present-proof/README.md) for the presentation part of using credentials.
 - Supersedes: [Indy HIPE PR #89]( https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md); also [Credential Exchange 0.1 -- IIW 2019](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view)
 - Start Date: 2019-01-30
-- Tags: feature, decorator, protocol, credentials
+- Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
+
+## Version Change Log
+
+### 1.1/propose-credential
+
+In version 1.1 of the propose-credential message, the following optional fields were added:
+schema_name, schema_version, and issuer_did.
+
+The previous version is [1.0/propose-credential](https://github.com/hyperledger/aries-rfcs/blob/527849e/features/0036-issue-credential/README.md#propose-credential).
 
 ## Summary
 
@@ -74,12 +83,15 @@ An optional message sent by the potential Holder to the Issuer to initiate the p
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/propose-credential",
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.1/propose-credential",
     "@id": "<uuid-of-propose-message>",
     "comment": "some comment",
     "credential_proposal": <json-ld object>,
     "schema_id": "Schema ID string",
+    "schema_name": "Schema name string",
+    "schema_version": "Schema version string",
     "cred_def_id": "Credential Definition ID string"
+    "issuer_did": "DID of the proposed issuer"
 }
 ```
 
@@ -88,7 +100,10 @@ Description of attributes:
 * `comment` -- an optional field that provides human readable information about this Credential Proposal, so the proposal can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credential_proposal` -- an optional JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential).
 * `schema_id` -- optional filter to request credential based on a particular Schema. This might be helpful when requesting a version 1 passport instead of a version 2 passport, for example.
+* `schema_name` -- optional filter to request credential based on a schema name. This is useful to allow a more user-friendly experience of requesting a credential by schema name.
+* `schema_version` -- optional filter to request credential based on a schema version. This is useful to allow a more user-friendly experience of requesting a credential by schema name and version.
 * `cred_def_id` -- optional filter to request credential based on a particular Credential Definition. This might be helpful when requesting a commercial driver's license instead of an ordinary driver's license, for example.
+* `issuer_did` -- optional filter to request a credential issued by the owner of a particular DID.
 
 #### Offer Credential
 
@@ -185,7 +200,7 @@ Description of fields:
 * `credentials~attach` -- an array of attachments containing the issued credentials.
   * For Indy, the attachment contains data from libindy about credential to be issued, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
   
-If the issuer wants an acknowledgement that the issued credential was received, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0015: ACKs](../0015-acks/README.md).
+If the issuer wants an acknowledgement that the issued credential was accepted, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0317: Please ACK Decorator](../0317-please-ack/README.md).
 
 #### Preview Credential
 

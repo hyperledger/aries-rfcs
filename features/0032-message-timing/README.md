@@ -6,7 +6,7 @@
 - Status Note: Broadly socialized but not yet implemented. 
 - Supersedes: [Indy RFC PR #68](https://github.com/hyperledger/indy-hipe/pull/68)
 - Start Date: 2018-12-11
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 ## Summary
 
@@ -54,7 +54,7 @@ The meaning of these fields is:
   should cancel attempts to process it once the deadline is past, because
   the sender won't stand behind it any longer.
 * `delay_milli`: Wait at least this many milliseconds before processing
-  the message. This may be useful to defeat temporal correlation.
+  the message. This may be useful to defeat temporal correlation. It is recommended that agents supporting this field should not honor requests for delays longer than 10 minutes (600,000 milliseconds).
 * `wait_until_time`: Wait until this time before processing the message.
 
 All information in these fields should be considered best-effort. That
