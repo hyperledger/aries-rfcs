@@ -1,7 +1,7 @@
-# Title (Ex. 0000: RFC Topic)
+# 0384: Terminology And Its Governance 
 - Authors: [Rieks Joosten](RieksJ@github-email) -- email is optional
 - Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-09-06
+- Since: 2020-01-16
 - Status Note: experimental
 - Supersedes:
 - Start Date: 2019-09-06
@@ -110,7 +110,7 @@ implementation of this feature before stabilization?
 - What related issues do you consider out of scope for this 
 proposal that could be addressed in the future independently of the
 solution that comes out of this doc?
-   
+  
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
