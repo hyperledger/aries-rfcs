@@ -58,6 +58,7 @@
 * [0183: Revocation Notification 1.0](features/0183-revocation-notification/README.md) (2019-08-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0193: Coin Flip Protocol 1.0 ](features/0193-coin-flip/README.md) (2019-08-19 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0207: Credential Fraud Threat Model](concepts/0207-credential-fraud-threat-model/README.md) (2019-08-30 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
+* [0384: Terminology And Its Goverenance](concepts/0384-terminology/README.md) (2020-01-17 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#terminology))
 
 ## [RETIRED](README.md#retired)
 
