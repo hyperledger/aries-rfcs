@@ -79,6 +79,7 @@
 * [0317: Please ACK Decorator](features/0317-please-ack/README.md) (2019-12-26 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0327: Crypto service Protocol 1.0](features/0327-crypto-service/README.md) (2019-11-20 (date you submit your PR) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0334: JWE envelope 1.0](features/0334-jwe-envelope/README.md) (2019-11-28 &mdash; [`feature`](/tags.md#feature))
+* [0335: HTTP Over DIDComm](features/0335-http-over-didcomm/README.md) (2019-12-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0345: Community Coordinated Update](concepts/0345-community-coordinated-update/README.md) (2019-12-26 (date you submit your PR) &mdash; [`concept`](/tags.md#concept))
 * [0347: Proof Negotiation](features/0347-proof-negotiation/README.md) (2019-12-13 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0351: Purpose Decorator](features/0351-purpose-decorator/README.md) (2019-12-16 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
