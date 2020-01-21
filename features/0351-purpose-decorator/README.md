@@ -44,6 +44,20 @@ The particular registration semantics are TBD. Some possible formats include:
 - A hierarchical system, where if a recipient registers on a list `"foo", "bar"`, it will receive any message with purpose `["foo", "bar", ...]` but not `["foo", "baz", ...]` or `["baz", "foo", "bar", ...]`
 - A hierarchical system with wildcards: `"*", "foo"` might match any message with purpose `[..., "foo", ...]`
 
+#### Handling Multiple Listeners
+
+##### Priority
+When multiple applications register for overlapping purposes, the agent needs a means to determine which application should receive the message, or which should receive it first. When an application registers on a purpose, it should set an integer *priority*. When the agent receives a message, it compares the priority of all matching listeners, choosing the lowest number value.
+
+##### Fall-Through
+In some cases, an application that received a message can allow other listeners to process after it. In these cases, when the application is handling the message, it can indicate to the agent that it can fall-through, in which case the agent will provide the message to the next listener.
+
+Optionally, agents can support an always-falls-through configuration, for applications which:
+ - Will always fall through on the messages they receive, and
+ - Can always safely process concurrently with subsequent applications handling the same message.
+
+This allows the agent to send the message to such listeners concurrently with the next highest-priority listener that does not always-fall-through.
+
 ### Example Protocol
 
 This is an example protocol which makes use of the `~purpose` decorator and other Aries concepts to provide a message format that can carry arbitrary payloads for non-DIDComm edge applications.
