@@ -15,7 +15,7 @@ jobs:
     - uses: actions/setup-python@v1
       with:
         python-version: '3.7'  
-    - name: merege in master changes
+    - name: merge in master changes
       run: git merge master -s theirs
     - name: Create local changes
       run: |
