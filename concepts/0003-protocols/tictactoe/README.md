@@ -316,4 +316,5 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[Verity](https://www.evernym.com/products/) | Commercially licensed enterprise agent, SaaS or on-prem. 
+[Verity](https://www.evernym.com/products/) | Commercially licensed enterprise agent, SaaS or on-prem.
+[Pico Labs](http://picolabs.io/) | Open source [TicTacToe](https://github.com/Picolab/TicTacToe) for [Pico Agents](https://github.com/Picolab/G2S)
