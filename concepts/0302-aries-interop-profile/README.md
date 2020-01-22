@@ -1,7 +1,7 @@
 # 0302: Aries Interop Profile
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [John Jordan](mailto:john.jordan@gov.bc.ca) Province of British Columbia
-- Status: [PROPOSED](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#proposed)
+- Status: [ACCEPTED](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#accepted)
 - Since: 2019-11-09
 - Status Note: This RFC proposes an Aries Interop Profile process and Aries Interop Profile v1.0.0
 - Supersedes:
@@ -71,7 +71,7 @@ The initial version of Aries Interop Profile, based on the existing implementati
 
  RFC Type | RFC/Link to RFC Version
 --- | ---
-Concept | [0003-protocols](https://github.com/hyperledger/aries-rfcs/tree/7326eeab39195fffe66ee57dbc45177ebda3c2d5/concepts/0003-protocols)
+Concept | [0003-protocols](https://github.com/hyperledger/aries-rfcs/tree/9b7ab9814f2e7d1108f74aca6f3d2e5d62899473/concepts/0003-protocols)
 Concept | [0004-agents](https://github.com/hyperledger/aries-rfcs/tree/f1e420f76abd9ff4af5c15d375fa6cf8c2cacb33/concepts/0004-agents)
 Concept | [0005-didcomm](https://github.com/hyperledger/aries-rfcs/tree/f1e420f76abd9ff4af5c15d375fa6cf8c2cacb33/concepts/0005-didcomm)
 Concept | [0008-message-id-and-threading](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading)
