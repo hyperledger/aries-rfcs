@@ -11,15 +11,16 @@
 ## Summary
 
 Per issue [#225](https://github.com/hyperledger/aries-rfcs/issues/225), the
-Aries community has agreed to change the prefix for protocol message types from
-`did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/` to `https://didcomm.org/`. Examples of the two message types forms are:
+Aries community has agreed to change the prefix for protocol message types that currently use the
+`did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/` to use `https://didcomm.org/`. Examples of the two message types forms are:
 
 - Before: `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack`
 - After: `https://didcomm.org/notification/1.0/ack`
 
-This RFC follows the guidance in [RFC 0345](../../concepts/0345-community-coordinated-update/README.md) about
-community-coordinated updates to (try to) ensure that independently deployed, interoperable agents remain interoperable
-throughout this transition.
+This RFC follows the guidance in [RFC
+0345](../../concepts/0345-community-coordinated-update/README.md) about
+community-coordinated updates to (try to) ensure that independently deployed,
+interoperable agents remain interoperable throughout this transition.
 
 The transition from the old to new formats will occur in four steps:
 
@@ -31,6 +32,8 @@ The transition from the old to new formats will occur in four steps:
 - **Step 2**: Agent builders MUST update all agent code bases and deployments to send out all messages using the new (https) format. The old (did) format is deprecated but will still be accepted. An agent deployment MAY send out an old format message type upon receipt of a message containing an old format message type.
   - Each agent builder SHOULD notify the community they have completed Step 2 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
 - **Step 3**: Agent builders SHOULD update their deployments to remove all support for receiving the old format and MUST NOT send out messages using the old message type format.
+
+> **Note**: Any RFCs that already use the new "https" message type should continue to use the use new format in all cases&mdash;accepting and sending. New protocols defined in new and updated RFCs should use the new "https" format.
 
 The community coordination triggers between the steps above will be as follows:
 

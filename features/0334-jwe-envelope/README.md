@@ -192,6 +192,89 @@ With the recipients headers representing an ephemeral key that can be used to de
 
 The function `XC20P` in the example above is defined as the XChahcha20Poly1035 cipher function. This can be replaced by the A256GCM cipher function.
 
+## JWE detached mode nested envelopes
+
+There are situations in DIDComm messaging where an envelope could be nested inside another envelope -- particularly [RFC 46: Mediators and Relays](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0046-mediators-and-relays). Normally nesting envelopes implies that the envelope payloads will incur additional encryption and encoding operations at each parent level in the nesting. This section describes a mechanism to extract the nested payloads outside the nesting structure to avoid these additional operations.
+
+### Detached mode
+
+JWS defines [detached mode](https://tools.ietf.org/html/rfc7515#appendix-F) where the payload can be removed. As stated in IETF RFC7515, this strategy has the following benefit:
+
+> Note that this method needs no support from JWS libraries, as
+  applications can use this method by modifying the inputs and outputs
+  of standard JWS libraries.
+
+We will leverage a similar detached mode for JWE in the mechanism described below.
+
+### Mechanism
+
+Sender:
+
+1. Creates the "final" JWE intended for the recipient (normal JWE operation).
+2. Extracts the ciphertext and replace with an empty string.
+3. Creates the nested envelopes around the "final" JWE (but with the empty string ciphertext).
+4. Sends the nested envelope (normal JWE) plus the ciphertext from the "final" JWE.
+
+Mediator:
+
+1. Decrypt their layer (normal JWE operation). The detached ciphertext(s) are filtered out prior to invoking the JWE library (normal JWE structure).
+2. Remove the next detached ciphertext from the structure and insert back into the ciphertext field for the next nesting level.
+
+Receiver:
+
+1. Decrypts the "final" JWE (normal JWE operation).
+
+The detached ciphertext steps are repeated at each nesting level. In this case, an array of ciphertexts is sent along with the nested envelope.
+
+This solution has the following characteristics:
+
+- Only encrypts the payload once.
+- JWE headers and metadata are included in the nested envelope's ciphertext.
+- Needs no support from JWE libraries.
+- Requires a serialization structure for transporting both the nesting JWE and the detached ciphertexts (only when there is a nested envelope). See below.
+- Requires some minor additional logic prior to invoking the JWE library.
+
+### Serialization
+
+The extracted ciphertext serialization format should have additional thought for both compact and JSON modes. As a starting point:
+
+- Compact mode: Each extracted ciphertext is appended to the end of the serialized "final" JWE (using dot seperation). These extracted cipher texts are ordered according to the nesting (from innermost to outermost).
+- JSON mode: The extracted ciphertext are placed into a JSON array. These extracted cipher texts are ordered according to the nesting (from innermost to outermost). The array is appended to the "final" JWE object as the `detached_ciphertext` field.
+
+For illustration, the following compact serialization represents nesting due to two mediators (the second mediator being closest to the Receiver).
+
+First Mediator receives:
+```
+  BASE64URL(UTF8(JWE Protected Header for First Mediator)) || '.' ||
+  BASE64URL(JWE Encrypted Key for First Mediator) || '.' ||
+  BASE64URL(JWE Initialization Vector for First Mediator) || '.' ||
+  BASE64URL(JWE Ciphertext for First Mediator) || '.' ||
+  BASE64URL(JWE Authentication Tag for First Mediator) || '.' ||
+  BASE64URL(JWE Ciphertext for Receiver) || '.' ||
+  BASE64URL(JWE Ciphertext for Second Mediator)
+```
+
+Second Mediator receives:
+```
+  BASE64URL(UTF8(JWE Protected Header for Second Mediator)) || '.' ||
+  BASE64URL(JWE Encrypted Key for Second Mediator) || '.' ||
+  BASE64URL(JWE Initialization Vector for Second Mediator) || '.' ||
+  BASE64URL(JWE Ciphertext for Second Mediator) || '.' ||
+  BASE64URL(JWE Authentication Tag for Second Mediator) || '.' ||
+  BASE64URL(JWE Ciphertext for Receiver)
+```
+
+Finally the Receiver has a normal JWE (as usual):
+```
+  BASE64URL(UTF8(JWE Protected Header for Receiver)) || '.' ||
+  BASE64URL(JWE Encrypted Key for Receiver) || '.' ||
+  BASE64URL(JWE Initialization Vector for Receiver) || '.' ||
+  BASE64URL(JWE Ciphertext for Receiver) || '.' ||
+  BASE64URL(JWE Authentication Tag for Receiver)
+```
+
+This illustration extends the serialization shown in [RFC 7516](https://tools.ietf.org/html/rfc7516#section-3.1).
+
 ## Prior art
 
 - The [JWE](https://tools.ietf.org/html/rfc7518) family of encryption methods.
