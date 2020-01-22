@@ -1,4 +1,4 @@
-# Aries RFC 0015: ACKs
+# Aries RFC 0015: ACKs RULE
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
