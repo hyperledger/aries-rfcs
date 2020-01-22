@@ -18,6 +18,10 @@ So far, proof requests were to be replied to with a proof response that containe
 
 We see a need in corporate identity and access management for a login process handling not only user authentication against an application, but also determining which privileges the user is being granted inside the application and which data the user must or may provide. Aries can provide this by combining a proof request with proof negotiation.
 
+## Use Case Example
+
+A bank needs a customer to prove they are credit-worthy using Aries-based Self-Sovereign Identity. For this, the bank wants to make the proof of credit-worthyness flexible, in that an identity owner can offer different sets and combinations of credentials. For instance, this can be a choice between a certificate of credit-worthiness from another trusted bank or alternatively a set of credentials proving ownership over real estate and a large fortune in a bank account, for example. Optionally, an Identity Owner can add certain credentials to the proof to further prove worthiness in order to be able to obtain larger loans.
+
 ## Tutorial
 
 A proof request sent to an identity owner defines the attributes to be included in the proof response, i.e. the ones to prove. To add a degree of flexibility to the process, it is possible to request attributes as necessary (meaning they have to be included in the response for it to be valid) or to allow the identity owner to pick one of or several of multiple attributes from a list. Furthermore, attributes can be marked as optional. For users, this procedure may look like the example of a privacy-friendly access permission process shown in the manifesto of [Okuna](https://www.okuna.io/de/manifesto#privacyfriendly), an open-source social network that is still in development at the time of this writing (click on "continue with Okuna" to see said example). Backend-wise, this may be implemented as follows:
@@ -183,6 +187,7 @@ The base64-encoded content above decodes to the following data structure, a pres
 ```
 
 ### Valid Proof Response with attribute negotiation
+
 The following data structure is an example for a valid answer to the above credential request. It contains all attributes from groups A and B as well as one credential from each C and D. Note that the provided credential from Group D is the one weighted 0.2 as the owner did not have or was not willing to provide the one weighted 0.8.
 
 Valid proof presentation:
@@ -282,11 +287,13 @@ the decentralized identity foundation, a "format that normalizes the definition 
 
 ## Unresolved questions
 
-The above proof request includes a schema ID for every credential requests. This was taken from the DID credential manifest. It may make more sense to include a credential definition ID there, as a credential could potentially be built from one credential definition but this credential definition from several schemas.
-The exact layout and syntax of the proof request above is open to debate, it was designed to stick as close as possible to existing RFCs and concepts.
-Can this feature be implemented in a way that does not break proof requests from anoncreds version 1.x?
-Writing this RFC rose the question if the length of a proof request is limited in any way. A JSON-message containing the attributes in the proof can theoretically be infinitely long. Is this being handled in any way? It may lead to overflows at some point.
-This RFC describes the negotiation of a proof inside the proof request itself. Depending on the functionality around proofs it may be more desirable to implement the proof negotiation as a seperate protocol which is used before the actual proof request.
+- The above proof request includes a schema ID for every credential requests. This was taken from the DID credential manifest. It may make more sense to include a credential definition ID there, as a credential could potentially be built from one credential definition but this credential definition from several schemas.
+- The exact layout and syntax of the proof request above is open to debate, it was designed to stick as close as possible to existing RFCs and concepts.
+- Can this feature be implemented in a way that does not break proof requests from anoncreds version 1.x?
+- Writing this RFC rose the question if the length of a proof request is limited in any way. A JSON-message containing the attributes in the proof can theoretically be infinitely long. Is this being handled in any way? It may lead to overflows at some point.
+- This RFC describes the negotiation of a proof inside the proof request itself. Depending on the functionality around proofs it may be more desirable to implement the proof negotiation as a seperate protocol which is used before the actual proof request.
+- It might be possible to accomplish the goal of this RFC by extending the present-preview message and adding prover functionality that allows the prover to select credentials they have to satisfy the request, just as is done in the proof request/proof process, but with the specific goal of only sending back a proposal, not a proof 
+
 
 ## Implementations
 
