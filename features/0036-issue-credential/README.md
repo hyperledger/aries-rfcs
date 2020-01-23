@@ -10,9 +10,9 @@
 
 ## Version Change Log
 
-### 1.01/propose-credential
+### 1.1/propose-credential
 
-In version 1.01 of the propose-credential message, the following optional fields were added:
+In version 1.1 of the propose-credential message, the following optional fields were added:
 schema_name, schema_version, and issuer_did.
 
 The previous version is [1.0/propose-credential](https://github.com/hyperledger/aries-rfcs/blob/527849e/features/0036-issue-credential/README.md#propose-credential).
@@ -83,7 +83,7 @@ An optional message sent by the potential Holder to the Issuer to initiate the p
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.01/propose-credential",
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.1/propose-credential",
     "@id": "<uuid-of-propose-message>",
     "comment": "some comment",
     "credential_proposal": <json-ld object>,

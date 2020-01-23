@@ -30,7 +30,7 @@ is a good sign that you're on the right track.
     should be /features; if it is about a concept that will be used in many
     different features, its parent should be /concepts.
   - Create the folder and copy `0000-template.md` to `<parent>/<your folder name>/README.md`.
-  - Fill in the RFC. Put care into the details: RFCs that do not present
+  - Fill in the RFC. [Use MUST and SHOULD per standard conventions](https://tools.ietf.org/html/rfc2119). Put care into the details: RFCs that do not present
     convincing motivation, demonstrate an understanding of the impact of the
     design, or are disingenuous about the drawbacks or alternatives tend to be
     poorly received. You can add supporting artifacts, such as diagrams and sample

@@ -27,6 +27,10 @@ we offer the following guidelines.
 
 ## Tutorial
 
+### Normative language
+
+RFCs about protocols and DIDComm behaviors follow commonly understood conventions about normative language, including words like "MUST", "SHOULD", and "MAY". These conventions are documented in [IETF's RFC 2119](https://tools.ietf.org/html/rfc2119). Existing documents that were written before we clarified our intention to follow these conventions are grandfathered but should be updated to conform.
+
 ### Names
 
 Names show up in lots of places in our work. We name RFCs, concepts
