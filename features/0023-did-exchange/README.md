@@ -198,10 +198,6 @@ invitation_string = b64urlencode(<invitation_message>)
 
 During encoding, whitespace from the json string should be eliminated to keep the resulting invitation string as short as possible.
 
-> **NOTE**: In preparing the invitation, the base64url encode implementation used **SHOULD** strip any padding
-> characters (per [https://tools.ietf.org/html/rfc7515](https://tools.ietf.org/html/rfc7515), top of page 5)
-> from the encoded string.
-
 ##### Example Invitation Encoding
 
 Invitation:

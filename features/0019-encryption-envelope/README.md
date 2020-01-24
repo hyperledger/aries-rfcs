@@ -193,10 +193,6 @@ The base64URL encoded `protected` decodes to this:
 4. encrypt the `message` using libsodium.crypto_aead_chacha20poly1305_ietf_encrypt_detached(message, protected_value_encoded, iv, cek) this is the ciphertext.
 5. base64URLencode the iv, ciphertext, and tag then serialize the format into the output format listed above.
 
-> **NOTE**: In the pack algorithm, the base64url encode implementation used **SHOULD** strip any padding
-> characters (per [https://tools.ietf.org/html/rfc7515](https://tools.ietf.org/html/rfc7515), top of page 5)
->  from the encoded string.
-
 For a reference implementation, see https://github.com/hyperledger/indy-sdk/blob/master/libindy/src/commands/crypto.rs
 
 #### pack_message() return value (Anoncrypt mode)
@@ -268,10 +264,6 @@ The protected data decodes to this:
 3. base64URLencode the `protected` value
 4. encrypt the message using libsodium.crypto_aead_chacha20poly1305_ietf_encrypt_detached(message, protected_value_encoded, iv, cek) this is the ciphertext.
 5. base64URLencode the iv, ciphertext, and tag then serialize the format into the output format listed above.
-
-> **NOTE**: In the pack algorithm, the base64url encode implementation used **SHOULD** strip any padding
-> characters (per [https://tools.ietf.org/html/rfc7515](https://tools.ietf.org/html/rfc7515), top of page 5)
->  from the encoded string.
 
 For a reference implementation, see https://github.com/hyperledger/indy-sdk/blob/master/libindy/src/commands/crypto.rs
 
