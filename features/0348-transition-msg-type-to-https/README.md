@@ -95,3 +95,4 @@ Name / Link | Implementation Notes
 [Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | No steps completed
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | No steps completed
 [Verity](https://www.evernym.com/products/) | No steps completed
+[Pico Labs](http://picolabs.io/) | No steps completed
