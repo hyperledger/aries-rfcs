@@ -193,6 +193,10 @@ The base64URL encoded `protected` decodes to this:
 4. encrypt the `message` using libsodium.crypto_aead_chacha20poly1305_ietf_encrypt_detached(message, protected_value_encoded, iv, cek) this is the ciphertext.
 5. base64URLencode the iv, ciphertext, and tag then serialize the format into the output format listed above.
 
+> **NOTE**: In the pack algorithm, the base64url encode implementation used **SHOULD** strip any padding
+> characters (per [https://tools.ietf.org/html/rfc7515](https://tools.ietf.org/html/rfc7515), top of page 5)
+>  from the encoded string.
+
 For a reference implementation, see https://github.com/hyperledger/indy-sdk/blob/master/libindy/src/commands/crypto.rs
 
 #### pack_message() return value (Anoncrypt mode)
@@ -265,11 +269,15 @@ The protected data decodes to this:
 4. encrypt the message using libsodium.crypto_aead_chacha20poly1305_ietf_encrypt_detached(message, protected_value_encoded, iv, cek) this is the ciphertext.
 5. base64URLencode the iv, ciphertext, and tag then serialize the format into the output format listed above.
 
+> **NOTE**: In the pack algorithm, the base64url encode implementation used **SHOULD** strip any padding
+> characters (per [https://tools.ietf.org/html/rfc7515](https://tools.ietf.org/html/rfc7515), top of page 5)
+>  from the encoded string.
+
 For a reference implementation, see https://github.com/hyperledger/indy-sdk/blob/master/libindy/src/commands/crypto.rs
 
 ### Unpack Message
 
-#### unpack_message() inteface
+#### unpack_message() interface
 
 unpacked_message = unpack_message(wallet_handle, jwe)
 
@@ -295,9 +303,10 @@ unpacked_message = unpack_message(wallet_handle, jwe)
         2. decrypt ciphertext using libsodium.crypto_aead_chacha20poly1305_ietf_open_detached(base64URLdecode(ciphertext_bytes), base64URLdecode(protected_data_as_bytes), base64URLdecode(nonce), cek)
         3. return `message` and `recipient_verkey` following the anoncrypt format listed below
 
+> **NOTE**: In the unpack algorithm, the base64url decode implementation used **MUST**
+> correctly decode padded and unpadded base64URL encoded data.
 
-
-For a reference implementation, see https://github.com/hyperledger/indy-sdk/blob/master/libindy/src/commands/crypto.rs
+For a reference unpack implementation, see https://github.com/hyperledger/indy-sdk/blob/master/libindy/src/commands/crypto.rs
 
 #### unpack_message() return values (authcrypt mode)
 

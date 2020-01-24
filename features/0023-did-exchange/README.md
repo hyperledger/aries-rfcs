@@ -198,6 +198,10 @@ invitation_string = b64urlencode(<invitation_message>)
 
 During encoding, whitespace from the json string should be eliminated to keep the resulting invitation string as short as possible.
 
+> **NOTE**: In preparing the invitation, the base64url encode implementation used **SHOULD** strip any padding
+> characters (per [https://tools.ietf.org/html/rfc7515](https://tools.ietf.org/html/rfc7515), top of page 5)
+> from the encoded string.
+
 ##### Example Invitation Encoding
 
 Invitation:
@@ -222,6 +226,7 @@ Example URL:
 ```text
 http://example.com/ssi?c_i=eyJAdHlwZSI6ImRpZDpzb3Y6QnpDYnNOWWhNcmpIaXFaRFRVQVNIZztzcGVjL2Nvbm5lY3Rpb25zLzEuMC9pbnZpdGF0aW9uIiwiQGlkIjoiMTIzNDU2Nzg5MDA5ODc2NTQzMjEiLCJsYWJlbCI6IkFsaWNlIiwicmVjaXBpZW50S2V5cyI6WyI4SEg1Z1lFZU5jM3o3UFlYbWQ1NGQ0eDZxQWZDTnJxUXFFQjNuUzdaZnU3SyJdLCJzZXJ2aWNlRW5kcG9pbnQiOiJodHRwczovL2V4YW1wbGUuY29tL2VuZHBvaW50Iiwicm91dGluZ0tleXMiOlsiOEhINWdZRWVOYzN6N1BZWG1kNTRkNHg2cUFmQ05ycVFxRUIzblM3WmZ1N0siXX0=
 ```
+
 Invitation URLs can be transferred via any method that can send text, including an email, SMS, posting on a website, or via a QR Code.
 
 Example URL encoded as a QR Code:
@@ -236,9 +241,12 @@ The _inviter_ will then publish or transmit the invitation URL in a manner avail
 #### Invitation Processing
 
 When they _invitee_ receives the invitation URL, there are two possible user flows that depend on the SSI preparedness of the individual. If the individual is new to the SSI universe, they will likely load the URL in a browser. The resulting page will contain instructions on how to get started by installing software or a mobile app. That install flow will transfer the invitation message to the newly installed software.
-A user that already has those steps accomplished will have the URL received by software directly. That sofware can read the invitation message directly out of the `c_i` query parameter, without loading the URL.
+A user that already has those steps accomplished will have the URL received by software directly. That software will base64URL decode the string and can read the invitation message directly out of the `c_i` query parameter, without loading the URL.
 
-If they _invitee_ wants to accept the invitation, they will use the information present in the invitation message to prepare the request
+> **NOTE**: In receiving the invitation, the base64url decode implementation used **MUST**
+> correctly decode padded and unpadded base64URL encoded data.
+
+If the _invitee_ wants to accept the invitation, they will use the information present in the invitation message to prepare the request
 
 ## 1. Exchange Request
 
