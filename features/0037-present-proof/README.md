@@ -222,16 +222,12 @@ The mandatory `"threshold"` key maps to the threshold value for the predicate.
 
 ##### Filter
 
-The mandatory `"filter"` key maps to an object with zero or more criteria disjunctively (via "or") applicable to the attribute as a claim.
+The mandatory `"filter"` key maps to an object with one or more criteria disjunctively (via "or") applicable to the attribute as a claim.
 
 Filter keys include:
 
 * `"schema_id"` to specify a schema identifier
-* `"schema_issuer_did"` to specify a schema issuer DID
-* `"schema_name"` to specify a schema name
-* `"schema_version"` to specify a schema version
 * `"cred_def_id"` to specify a credential definition identifier
-* `"issuer_did"` to specify a credential issuer DID
 * any other criteria that both the holder and verifier understand in the context of presentation creation.
 
 ## Negotiation and Preview
