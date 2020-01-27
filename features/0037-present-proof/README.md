@@ -123,7 +123,8 @@ This is not a message but an inner object for other messages in this protocol. I
             "name": "<attribute_name>",
             "cred_def_id": "<cred_def_id>",
             "mime-type": "<type>",
-            "value": "<value>"
+            "value": "<value>",
+            "referent": "<referent>"
         },
         // more attributes
     ],
@@ -165,8 +166,41 @@ The optional `value`, when present, holds the value of the attribute to reveal i
 An attribute specification must specify a `value`, a `cred_def_id`, or both: 
 
 * if `value` is present and `cred_def_id` is absent, the preview proposes a self-attested attribute;
-* if `value` and `cred_def_id` are both present, the preview proposes verifiable claim to reveal in the presentation;
-* if `value` is absent and `cred_def_id` is present, the preview proposes verifiable claim not to reveal in the presentation.
+* if `value` and `cred_def_id` are both present, the preview proposes a verifiable claim to reveal in the presentation;
+* if `value` is absent and `cred_def_id` is present, the preview proposes a verifiable claim not to reveal in the presentation.
+
+##### Referent
+
+The optional `referent` can be useful in specifying multiple-credential presentations. Its value indicates which credential 
+will supply the attribute in the presentation. Sharing a `referent` value between multiple attribute specifications indicates that the holder's same credential supplies the attribute.
+
+Any attribute specification using a `referent` must also have a `cred_def_id`; any attribute specifications sharing a common `referent` value must all have the same `cred_def_id` value.
+
+For example, a holder with multiple account credentials could use a presentation preview such as
+
+```jsonc
+{
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "attributes": [
+        {
+            "name": "account",
+            "cred_def_id": "BzCbsNYhMrjHiqZDTUASHg:3:CL:1234:tag",
+            "value": "12345678",
+            "referent": "0"
+        },
+        {
+            "name": "streetAddress",
+            "cred_def_id": "BzCbsNYhMrjHiqZDTUASHg:3:CL:1234:tag",
+            "value": "123 Main Street",
+            "referent": "0"
+        },
+    ],
+    "predicates": [
+    ]
+}
+```
+
+to prompt a verifier to request proof of account number and street address from the same account, rather than potentially an account number and street address from distinct accounts.
 
 #### Predicates
 
