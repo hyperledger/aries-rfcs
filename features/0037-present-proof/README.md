@@ -212,6 +212,10 @@ The mandatory `"predicates"` key maps to a list (possibly empty to propose a pre
 
 The mandatory `"name"` key maps to the name of the attribute.
 
+##### Credential Definition Identifier
+
+The mandatory `"cred_def_id"` key maps to the credential definition identifier of the credential with the current attribute.
+
 ##### Predicate
 
 The mandatory `"predicate"` key maps to the predicate operator: `"<"`, `"<="`, `">="`, `">"`. 
