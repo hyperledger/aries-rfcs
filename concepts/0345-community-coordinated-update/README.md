@@ -1,97 +1,123 @@
-# 0345: Community Coordinated Update
-- Authors: [Sam Curren](telegramsam@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-12-26 (date you submit your PR)
-- Status Note: Initial Draft
-- Start Date: 2019-12-06
-- Tags: concept
+# 0346: DIDCOMM BETWEEN TWO MOBILE AGENTS
+- Author: Sukalpo Mitra <sukalpomitra@gmail.com>
+- Start Date: 2019-06-23
+
+## Status
+- Status: [PROPOSED](/README.md#rfc-lifecycle)
+- Status Date: 2019-06-23
+- Status Note: ???
 
 ## Summary
 
-This RFC describes the recommended process for coordinating a community update. This is not a mandate; this process should be adapted as useful to the circumstances of the update being performed.
+Explains how one mobile edge agent can send messages to another mobile edge agent through cloud agents. The sender edge agent also determines the route of the message. The recipient, on the other hand, can consume messages at its own pace and time.
 
 ## Motivation
+[motivation]: #motivation
 
-Occasionally, an update will be needed that requires a coordinated change to be made across the community. These should be rare, but are inevitable. The steps in this process help avoid a coordinated software deployment, where multiple teams must fit a tight timeline of software deployment to avoid compatibility problems. Tightly coordinated software deployments are difficult and problematic, and should be avoided whenever possible.
+The DIDCOMM between two mobile edge agents should be easy and intuitive for a beginner to visualize and to implement.
 
-## Tutorial
+## Scenario
 
-This process descries how to move from OLD to NEW. OLD and NEW represent the required change, where OLD represents the item being replaced, and NEW represents the item OLD will be replaced with. Often, these will be strings. 
+Alice sends a connection request message to Bob and Bob sends back an acceptance response. For simplicity's sake, we will only consider the cloud agents in play while sending and receiving a message for Alice.
 
-In brief, we first accept OLD _and_ NEW while still defaulting to OLD, Then we default to NEW (while still accepting OLD), and then we remove support for OLD. These steps are coordinated with the community with a gracious timeline to allow for development cycles and deployment ease.
+## Cloud Agent Registration Process
 
-### Prerequisite: Community agreement on change.
+A registration process is necessary for an edge agent to discover cloud agents that it can use to send a message through them. Cloud agents in the simplest form are routers hosted as a web application that solves the problem of availability by providing a persistent IP address. The Web server has a wallet of it's own storing its private key as a provisioning record, along with any information needed to forward messages to other agents. Alice wants to accept a connection invitation from Bob. But before doing so Alice needs to register herself with one or more cloud agents. The more cloud agents she registers with the more cloud agents she can use in transporting her message to Bob. To register herself with a cloud agent she visits the website of a cloud agent and simply scans a QR code.
 
-Before these steps are taken, the community MUST agree on the change to be made. 
+The cloud agent registration invite looks like below
 
-### Step 1: Accept OLD and NEW 
+```JSON
+{​
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/cloudagentregistrationinvitation",​
+    "@id": "12345678900987654321",​
+    "label": "CloudAgentA",​
+    "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],​
+    "serviceEndpoint": "https://cloudagenta.com/endpoint",
+    "responseEndpoint": "https://cloudagenta.com/response", 
+    "consumer": "b1004443feff4f3cba25c45ef35b492c",
+    "consumerEndpoint" : "https://cloudagenta.com/consume"​
+}​
+```
 
-The first step of the process is to accept both OLD and NEW from other agents. Typically, this is done by detecting and converting one string to the other in as few places in the software as possible. This allows the software to use a common value internally, and constrains the change logic to where the values are received.
+The registration data is base64 encrypted and is added to alink as part of the c_a_r query param. The recipient key is the public key of "Cloud Agent A". The service endpoint is where the edge agent should send the message to. Response endpoint is where a response that is being sent to Alice should be sent to. For example, if Bob wants to send a message to Alice, then Bob should send the message to the response endpoint. Consumer endpoint is where Alice's edge agent should consume the messages that are sent to her. The "Consumer" is an identifier to identify Alice's edge agent by the cloud agent "A". This identifier is different with each cloud agent and hence provides low correlation risk. Each time an invitation QR code is generated, a new consumer id is generated. No acknowledgment is required to be sent to the cloud agent or vice versa as the consumer-generated is never repeated.
 
-OLD should still be sent on outbound communication to other agents.
+All the endpoint data and the public key of the cloud agents are then stored as non secret records in Alice's wallet with a tag "cloud-agent"
 
-During step 1, it is acceptable (but optional) to begin sending NEW when receiving NEW from the other agent. OLD should still be sent by default when the other Agent's support is unknown.
+## How connection request from Alice flows to Bob
 
-This step is formalized by writing and RFC detailing which changes are expected in this update. This step is scheduled in the community by including the update RFC in a new version of the Interop Profile and setting a community target. The schedule should allow a generous time for development, generally between 1 and 3 months.
+When Alice scans Bob's QR code invitation. It starts preparing the connection request message. It first queries the wallet record service for records tagged with "cloud-agent" and puts them in a list. The edge agent now randomly chooses one from the list (say Cloud Agent "A") and creates a new list without the cloud agent that is already chosen. Alice's edge agent creates the connection request message json and adds the service endpoint as the chosen cloud agent's response endpoint together with its consumer id. 
 
-**Step 1 Coordination**: This is the most critical coordination step. The community should have completed step 1 _before_ moving to step 2.
+```JSON
+"serviceEndpoint": "https://cloudagenta.com/response/b1004443feff4f3cba25c45ef35b492c"
+```
 
-### Step 2: Default to NEW
+It then packs this message by Bob's recipient key and then creates another json message structure like the below
 
-The second step changes the outbound value in use from OLD to NEW. Communication will not break with agents who have completed Step 1. 
+```JSON
+{​
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/cloudagentmessageforward",​
+    "@id": "12345678900987654321",​
+    "label": "CloudAgentA",​
+    "message": "<Encrypted message for Bob here>",
+    "forwardTo": "<Service endpoint of Bob>"​
+}​
+```
 
-OLD must still be accepted during step 2. OLD becomes deprecated.
+It then packs it with the public key of cloud agent "A".
 
-During step 2, it is acceptable (but optional) to keep sending OLD when receiving OLD from the other agent. NEW should still be sent by default when the other Agent's support is unknown.
+Now it randomly chooses cloud agent from the new list and keeps on repeating the process of writing the message forwarding request.
 
-This step is formalized by writing an RFC detailing which changes are expected in this update. This step is scheduled by including the update RFC in a new version of the Interop Profile and setting a community target date. The schedule should allow a generous time for development, generally between 1 and 3 months.
+For example, say the next random cloud agent that it chooses is Cloud Agent "C". So now it creates another message forward json structure as below
 
-**Step 2 Coordination**: The community should complete step 2 _before_ moving to step 3 to assure that OLD is no longer being sent prior to removing support.
+```JSON
+{​
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/cloudagentmessageforward",​
+    "@id": "12345678900987654321",​
+    "label": "CloudAgentC",​
+    "message": "<Encrypted message for Cloud Agent A>",
+    "forwardTo": "<Service endpoint of Cloud Agent A>"​
+}​
+```
+And then packs with Cloud Agent "C"'s public key.
 
-### Step 3: Remove support for OLD.
+This process happens till it has exhausted all the list of the cloud agent in the list and then sends the message to the service endpoint of the last cloud agent (say Cloud Agent "B") chosen. 
+For example, the message could have randomly been packed for this path,
+B->C->A where A is one of Bob's cloud agents that stores the message on the distributed log.
 
-Software will be updated to remove support for OLD. Continued use is expected to result in a failure or error as appropriate
+## Message Forwarding process by cloud agents
 
-This step is formalized by writing an RFC detailing which changes are expected in this update. Upon acceptance of the RFC, OLD is considered invalid. At this point, nobody should be sending the OLD.
+When the message is reached to cloud agent "B", the message is first unpacked by cliud agent "B"'s private key. It then finds out the message type is of "cloudagentmessageforward". It then processes the message by taking the value of the "message" attribute in the decrypted json and sending it to the forwardTo URI.
 
-**Step 3 Coordination**: The deadline for step 3 is less important than the previous steps, and may be scheduled at the convenience of each development team.
+Thus Cloud Agent "B" unpacks the message and forward the message to Cloud Agent "C" who then again unpacks and forwards it to Cloud Agent "A". Cloud Agent "A" ultimately unpacks and forwards it to Bob's edge agent (For simplicity sake we are not describing how the message reaches Bob through Bob's registered cloud agents)
 
-## Reference
+## Bob returns a response back
 
-This process should only be used for changes that are not detectable via the [Discover Features protocol](https://github.com/hyperledger/aries-rfcs/blob/master/features/0031-discover-features/README.md), either because the Discover Features Protocol cannot yet be run or the Discover Features Protocol does not reveal the change.
+Bob when recives the connection request message from Alice. It then creates a connection accept response and sends the response back to Alice at the service endpoint of Alice which is 
 
-#### Changes NOT applicable to this process
+```JSON
+"serviceEndpoint": "https://cloudagenta.com/response/b1004443feff4f3cba25c45ef35b492c"
+```
 
-Any changes that can be handled by increasing the version of a protocol should do so. The new version can be scheduled via Interop Profile directly without this process.
+For simplicity sake, we are not describing how the message ends up at the above endpoint from Bob after multiple routing through Bob's cloud agents. When the message actually ends up at the service endpoint mentioned by Alice, which is the response endpoint of cloud agent "A", the cloud agent simply stores it in a [distributed log](https://)(NEEDS A LINK TO KAFKA INBOX RFC) using the consumer id as a key
 
-Example proper applications of this process include switching the base common Message Type URI, and DID Doc Service Types.
+## Alice consumes connection accepted response from Bob
 
-#### Pace
+Alice's edge agent periodically checks the consumer endpoint of all the cloud agents it has registered with. For each cloud agent, Alice passes the unique consumer id that was used in registration so that cloud agent can return the correct messages. When it does the same for cloud agent "A", it simply consumes the message from the distributed log.
 
-The pace for Steps 1 and 2 should be appropriate for the change in question, but should allow generous time to allow for developer scheduling, testing, and production deployment schedules. App store approval process sometimes take a bit of time. A generous time allowance eases the burden of implementing the change.
+# Drawbacks and Alternatives
+[drawbacks]: #drawbacks
+In other suggested message formatting protocol Alice would provide a list of routing keys and the endpoint of the first hop in the chain of cloud agents. That gives allice confidence that bob is forced to use the path she has provided. The proposed routing in this RFC lacks that confidence. In contrast, routing with a list of routing keys requires a lot of overhead set up before establishing a connection. This proposed routing simplifies that overhead and provides more flexibility.
 
-## Drawbacks
+# Related art
+[related-art] #prior-art
+Aries-rfc [0046: Mediators and Relays](0046: Mediators and Relays)
 
-This approach invites the drawbacks of sanity, unpanicked deployments, and steady forward community progress.
+# Prior art
+[prior-art]: #prior-art
+???
 
-## Rationale and alternatives
+# Unresolved questions
+[unresolved]: #unresolved-questions
+Does separation of a "service endpoint" and "Consumer endpoint" provide a point of correlation that can be avoided by handling all messages through a single service endpoint?
 
-- The only other general approach is a tightly coordinated rollout, which should be avoided.
-
-## Prior art
-
-This process was discussed in [Issue 318](https://github.com/hyperledger/aries-rfcs/issues/318) and in person at the 2019 December Aries Connectathon.
-
-## Unresolved questions
-
-- Should template RFCs be included for the steps outlined?
-## Implementations
-
-The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
-
-*Implementation Notes* [may need to include a link to test results](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#accepted).
-
-Name / Link | Implementation Notes
---- | ---
- | 
-
+Can a cloud agent have their own army of servers that just basically looks into a registry of servers and randomly chooses an entry and exit node and a bunch of hops and just passes the message along. The exit node will then pass the message to the next cloud agent?  
