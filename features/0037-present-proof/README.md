@@ -123,7 +123,8 @@ This is not a message but an inner object for other messages in this protocol. I
             "name": "<attribute_name>",
             "cred_def_id": "<cred_def_id>",
             "mime-type": "<type>",
-            "value": "<value>"
+            "value": "<value>",
+            "referent": "<referent>"
         },
         // more attributes
     ],
@@ -151,7 +152,9 @@ The mandatory `"name"` key maps to the name of the attribute.
 
 ##### Credential Definition Identifier
 
-The optional `"cred_def_id"` key maps to the credential definition identifier of the credential with the current attribute. If the key is absent, the preview specifies attribute's posture in the presentation as a self-attested attribute.
+The optional `"cred_def_id"` key maps to the credential definition identifier of the credential with the current attribute. Note that since it is the holder who creates the preview and the holder possesses the corresponding credential, the holder must know its credential definition identifier.
+
+If the key is absent, the preview specifies attribute's posture in the presentation as a self-attested attribute. A self-attested attribute does not come from a credential, and hence any attribute specification without the `"cred_def_id"` key cannot use a `"referent"` key as per [Referent](#referent) below.
 
 ##### MIME Type and Value
 
@@ -165,8 +168,41 @@ The optional `value`, when present, holds the value of the attribute to reveal i
 An attribute specification must specify a `value`, a `cred_def_id`, or both: 
 
 * if `value` is present and `cred_def_id` is absent, the preview proposes a self-attested attribute;
-* if `value` and `cred_def_id` are both present, the preview proposes verifiable claim to reveal in the presentation;
-* if `value` is absent and `cred_def_id` is present, the preview proposes verifiable claim not to reveal in the presentation.
+* if `value` and `cred_def_id` are both present, the preview proposes a verifiable claim to reveal in the presentation;
+* if `value` is absent and `cred_def_id` is present, the preview proposes a verifiable claim not to reveal in the presentation.
+
+##### Referent
+
+The optional `referent` can be useful in specifying multiple-credential presentations. Its value indicates which credential 
+will supply the attribute in the presentation. Sharing a `referent` value between multiple attribute specifications indicates that the holder's same credential supplies the attribute.
+
+Any attribute specification using a `referent` must also have a `cred_def_id`; any attribute specifications sharing a common `referent` value must all have the same `cred_def_id` value (see [Credential Definition Identifier](#credential-definition-identifier) above).
+
+For example, a holder with multiple account credentials could use a presentation preview such as
+
+```jsonc
+{
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "attributes": [
+        {
+            "name": "account",
+            "cred_def_id": "BzCbsNYhMrjHiqZDTUASHg:3:CL:1234:tag",
+            "value": "12345678",
+            "referent": "0"
+        },
+        {
+            "name": "streetAddress",
+            "cred_def_id": "BzCbsNYhMrjHiqZDTUASHg:3:CL:1234:tag",
+            "value": "123 Main Street",
+            "referent": "0"
+        },
+    ],
+    "predicates": [
+    ]
+}
+```
+
+to prompt a verifier to request proof of account number and street address from the same account, rather than potentially an account number and street address from distinct accounts.
 
 #### Predicates
 
@@ -174,11 +210,11 @@ The mandatory `"predicates"` key maps to a list (possibly empty to propose a pre
 
 ##### Attribute Name
 
-The mandatory `"name"` key maps to the name of the attribute germane to the predicate.
+The mandatory `"name"` key maps to the name of the attribute.
 
 ##### Credential Definition Identifier
 
-The mandatory `"cred_def_id"` key maps to the credential definition identifier of the credential with the current attribute.
+The mandatory `"cred_def_id"` key maps to the credential definition identifier of the credential with the current attribute. Note that since it is the holder who creates the preview and the holder possesses the corresponding credential, the holder must know its credential definition identifier.
 
 ##### Predicate
 
@@ -187,16 +223,6 @@ The mandatory `"predicate"` key maps to the predicate operator: `"<"`, `"<="`, `
 ##### Threshold Value
 
 The mandatory `"threshold"` key maps to the threshold value for the predicate.
-
-##### Filter
-
-The mandatory `"filter"` key maps to an object with one or more criteria disjunctively (via "or") applicable to the attribute as a claim.
-
-Filter keys include:
-
-* `"cred_def_id"` to specify a credential definition identifier
-* `"schema_id"` to specify a schema identifier
-* any other criteria that both the holder and verifier understand in the context of presentation creation.
 
 ## Negotiation and Preview
 
