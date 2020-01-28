@@ -1,9 +1,9 @@
 # 0346: DIDCOMM BETWEEN TWO MOBILE AGENTS USING CLOUD AGENT MEDIATOR
-- Author: Sukalpo Mitra <sukalpomitra@gmail.com>
+- Author: [Sukalpo Mitra](sukalpomitra@gmail.com)
 - Start Date: 2019-06-23
 
 ## Status
-- Status: [PROPOSED](/README.md#rfc-lifecycle)
+- Status: [PROPOSED](/README.md#proposed)
 - Status Date: 2019-06-23
 - Status Note: ???
 
