@@ -204,6 +204,24 @@ Description of fields:
   
 If the issuer wants an acknowledgement that the issued credential was accepted, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0317: Please ACK Decorator](../0317-please-ack/README.md).
 
+##### Encoding Claims for Indy-based Verifiable Credentials
+
+Claims in Hyperledger Indy-based verifiable credentials are put into the credential in two forms, `raw` and `encoded`. `raw` is the actual data value, and `encoded` is the (possibly derived) integer value that is used in presentations. At this time, Indy does not take an opinion on the method used for encoding the raw value. This will change with the Rich Schema work that is underway in the Indy/Aries community, where the encoding method will be part of the credential metadata available from the public ledger.
+
+Until the Rich Schema mechanism is deployed, Aries issuers and verifiers must agree on the encoding method so that the verifier can check that the `raw` value returned in a presentation corresponds to the proven `encoded` value. The following is the encoding algorithm that MUST be used be Issuers in creating credential and SHOULD be verified by Verifiers receiving presentations:
+
+- keep any 32-bit integer as is
+- for data of any other type:
+  - convert to string (use string "None" for null)
+  - encode via utf-8 to bytes
+  - apply SHA-256 to digest the bytes
+  - convert the resulting digest bytes, big-endian, to integer
+  - stringify the integer as a decimal.
+
+An example implementation in C#/.NET can be found [here](https://github.com/streetcred-id/aries-framework-dotnet/blob/f2d6d872bde43d730d5d9aa8c2ea2e0f40450571/src/Hyperledger.Aries/Utils/CredentialUtils.cs#L54).
+
+A gist of test value pairs can be found [here](https://gist.github.com/swcurran/78e5a9e8d11236f003f6a6263c6619a6).
+
 #### Preview Credential
 
 This is not a message but an inner object for other messages in this protocol. It is used construct a preview of the data for the credential that is to be issued. Its schema follows:
