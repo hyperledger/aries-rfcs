@@ -87,6 +87,7 @@ An optional message sent by the potential Holder to the Issuer to initiate the p
     "@id": "<uuid-of-propose-message>",
     "comment": "some comment",
     "credential_proposal": <json-ld object>,
+    "schema_issuer_did": "DID of the proposed schema issuer",
     "schema_id": "Schema ID string",
     "schema_name": "Schema name string",
     "schema_version": "Schema version string",
@@ -99,6 +100,7 @@ Description of attributes:
 
 * `comment` -- an optional field that provides human readable information about this Credential Proposal, so the proposal can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credential_proposal` -- an optional JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential).
+* `schema_issuer_did` -- optional filter to request credential based on a particular Schema issuer DID.
 * `schema_id` -- optional filter to request credential based on a particular Schema. This might be helpful when requesting a version 1 passport instead of a version 2 passport, for example.
 * `schema_name` -- optional filter to request credential based on a schema name. This is useful to allow a more user-friendly experience of requesting a credential by schema name.
 * `schema_version` -- optional filter to request credential based on a schema version. This is useful to allow a more user-friendly experience of requesting a credential by schema name and version.
@@ -201,6 +203,24 @@ Description of fields:
   * For Indy, the attachment contains data from libindy about credential to be issued, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
   
 If the issuer wants an acknowledgement that the issued credential was accepted, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0317: Please ACK Decorator](../0317-please-ack/README.md).
+
+##### Encoding Claims for Indy-based Verifiable Credentials
+
+Claims in Hyperledger Indy-based verifiable credentials are put into the credential in two forms, `raw` and `encoded`. `raw` is the actual data value, and `encoded` is the (possibly derived) integer value that is used in presentations. At this time, Indy does not take an opinion on the method used for encoding the raw value. This will change with the Rich Schema work that is underway in the Indy/Aries community, where the encoding method will be part of the credential metadata available from the public ledger.
+
+Until the Rich Schema mechanism is deployed, Aries issuers and verifiers must agree on the encoding method so that the verifier can check that the `raw` value returned in a presentation corresponds to the proven `encoded` value. The following is the encoding algorithm that MUST be used by Issuers when creating credentials and SHOULD be verified by Verifiers receiving presentations:
+
+- keep any 32-bit integer as is
+- for data of any other type:
+  - convert to string (use string "None" for null)
+  - encode via utf-8 to bytes
+  - apply SHA-256 to digest the bytes
+  - convert the resulting digest bytes, big-endian, to integer
+  - stringify the integer as a decimal.
+
+An example implementation in Python can be found [here](https://github.com/hyperledger/aries-cloudagent-python/blob/0000f924a50b6ac5e6342bff90e64864672ee935/aries_cloudagent/messaging/util.py#L106).
+
+A gist of test value pairs can be found [here](https://gist.github.com/swcurran/78e5a9e8d11236f003f6a6263c6619a6).
 
 #### Preview Credential
 
