@@ -51,15 +51,14 @@ When Alice scans Bob's QR code invitation. It starts preparing the connection re
 "serviceEndpoint": "https://cloudagenta.com/response/b1004443feff4f3cba25c45ef35b492c"
 ```
 
-It then packs this message by Bob's recipient key and then creates another json message structure like the below
+It then packs this message by Bob's recipient key and then creates another json message structure like the below by ising the forward message type
 
 ```JSON
 {​
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/cloudagentmessageforward",​
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward",​
     "@id": "12345678900987654321",​
-    "label": "CloudAgentA",​
-    "message": "<Encrypted message for Bob here>",
-    "forwardTo": "<Service endpoint of Bob>"​
+    "msg": "<Encrypted message for Bob here>",
+    "to": "<Service endpoint of Bob>"​
 }​
 ```
 
@@ -71,11 +70,10 @@ For example, say the next random cloud agent that it chooses is Cloud Agent "C".
 
 ```JSON
 {​
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/cloudagentmessageforward",​
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward",​
     "@id": "12345678900987654321",​
-    "label": "CloudAgentC",​
-    "message": "<Encrypted message for Cloud Agent A>",
-    "forwardTo": "<Service endpoint of Cloud Agent A>"​
+    "msg": "<Encrypted message for Cloud Agent A>",
+    "to": "<Service endpoint of Cloud Agent A>"​
 }​
 ```
 And then packs with Cloud Agent "C"'s public key.
@@ -86,7 +84,7 @@ B->C->A where A is one of Bob's cloud agents that stores the message on the dist
 
 ## Message Forwarding process by cloud agents
 
-When the message is reached to cloud agent "B", the message is first unpacked by cliud agent "B"'s private key. It then finds out the message type is of "cloudagentmessageforward". It then processes the message by taking the value of the "message" attribute in the decrypted json and sending it to the forwardTo URI.
+When the message is reached to cloud agent "B", the message is first unpacked by cliud agent "B"'s private key. It then finds out the message type is of "forward". It then processes the message by taking the value of the "message" attribute in the decrypted json and sending it to the forwardTo URI.
 
 Thus Cloud Agent "B" unpacks the message and forward the message to Cloud Agent "C" who then again unpacks and forwards it to Cloud Agent "A". Cloud Agent "A" ultimately unpacks and forwards it to Bob's edge agent (For simplicity sake we are not describing how the message reaches Bob through Bob's registered cloud agents)
 
