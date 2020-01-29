@@ -88,7 +88,7 @@ Feature | [0160-connection-protocol](https://github.com/hyperledger/aries-rfcs/t
 Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/b490ebe492985e1be9804fc0763119238b2e51ab/features/0025-didcomm-transports)
 Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/89d14c15ab35b667e7a9d04fe42d4d48b10468cf/features/0035-report-problem)
 Feature | [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/bb42a6c35e0d5543718fb36dd099551ab192f7b0/features/0036-issue-credential)
-Feature | [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/3d378a9bec123a64bc59d7eeaf0499aa5e704222/features/0037-present-proof)
+Feature | [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/4fae574c03f9f1013db30bf2c0c676b1122f7149/features/0037-present-proof)
 Feature | [0056-service-decorator](https://github.com/hyperledger/aries-rfcs/tree/527849ec3aa2a8fd47a7bb6c57f918ff8bcb5e8c/features/0056-service-decorator)
 
 #### Test Suite
