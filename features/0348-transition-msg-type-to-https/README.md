@@ -1,11 +1,11 @@
 # Aries RFC 0348: Transition Message Type to HTTPs
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-12-13
-- Status Note: The pre-step to the transition, where we agree on the plan and do any steps needed before we start the transition.  
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2020-01-30
+- Status Note: In step 1 - community is updating implementations to accept old and new formats. **Target Completion Date: 2020.02.29** 
 - Supersedes:
-- Start Date: 2018-12-13
+- Start Date: 2019-12-13
 - Tags: feature, community-update
 
 ## Summary
@@ -24,10 +24,10 @@ interoperable agents remain interoperable throughout this transition.
 
 The transition from the old to new formats will occur in four steps:
 
-- **Pre-work**: where we agree on the transition plan outlined in this RFC.
+- **DONE Pre-work**: where we agree on the transition plan outlined in this RFC.
   - Any RFC updates related to this transition needed before starting the transition are completed.
   - > To Do: Identify if there any prerequisite RFC changes to be made.
-- **Step 1**: Agent builders MUST update all agent code bases and deployments to accept incoming message types in the old (did) and new (https) formats. During this step, agents MUST default to sending out messages in the old format.
+- **IN PROGRESS Step 1: Agent builders MUST update all agent code bases and deployments to accept incoming message types in the old (did) and new (https) formats. During this step, agents MUST default to sending out messages in the old format.**
   - Each agent builder SHOULD notify the community they have completed Step 1 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
 - **Step 2**: Agent builders MUST update all agent code bases and deployments to send out all messages using the new (https) format. The old (did) format is deprecated but will still be accepted. An agent deployment MAY send out an old format message type upon receipt of a message containing an old format message type.
   - Each agent builder SHOULD notify the community they have completed Step 2 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
