@@ -2,24 +2,24 @@
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [John Jordan](mailto:john.jordan@gov.bc.ca) Province of British Columbia
 - Status: [ACCEPTED](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#accepted)
-- Since: 2019-11-09
-- Status Note: This RFC proposes an Aries Interop Profile process and Aries Interop Profile v1.0.0
+- Since: 2020-01-30
+- Status Note: This RFC defines an Aries Interop Profile process and Aries Interop Profile v1.0
 - Supersedes:
-- Start Date: 2018-11-06
+- Start Date: 2019-11-06
 - Tags: concept
 
 ## Summary
 
 This RFC defines the process for the community of Aries agent builders to:
 
-- enumerate a versioned set of Aries concept and feature RFCs which are collectively referred to as 'Aries Interop Profile Vx.y.z'
+- enumerate a versioned set of Aries concept and feature RFCs which are collectively referred to as 'Aries Interop Profile Vx.y'
 - track Aries Interop Profile versions.
 
 "Agent builders" are organizations or teams that are developing open source code upon which agents can be built (e.g. [aries-framework-dotnet](https://github.com/hyperledger/aries-framework-dotnet)), or deployable agents (e.g. [OSMA Mobile App](https://github.com/mattrglobal/osma)), or commercially available agents.
 
 An Aries Interop Profile (AIP) version provides a clearly defined set of RFCs for Aries agent builders to target their agent implementation when they wish it to be interoperable with other agents supporting the same Aries Interop Profile version. The Aries Interop Profile versioning process is intended to provide clarity and predictability for Aries agent builders and others in the broader Aries community. The process is not concerned with proposing new, or evolving existing, RFCs, nor with the development of Aries code bases.
 
-At all times, the [Reference](#reference) section of this RFC defines one or more current Aries Interop Profile versions -- a number and set of links to specific commits of concept and features RFCs, along with a list of all previous Aries Interop Profile versions. Several current Aries Interop Profile versions can coexist during periods when multiple major Aries Interop Profile versions are in active use (e.g. 1.x.x and 2.x.x). Each entry in the previous versions list includes a link to the commit of this RFC associated with that Aries Interop Profile version. The [Reference](#reference) section MAY include one "<major>.next" version for each existing current major Aries Interop Profile versions. Such "next" versions are proposals for what is to be included in the next minor/patch AIP version.
+At all times, the [Reference](#reference) section of this RFC defines one or more current Aries Interop Profile versions -- a number and set of links to specific commits of concept and features RFCs, along with a list of all previous Aries Interop Profile versions. Several current Aries Interop Profile versions can coexist during periods when multiple major Aries Interop Profile versions are in active use (e.g. 1.x and 2.x). Each entry in the previous versions list includes a link to the commit of this RFC associated with that Aries Interop Profile version. The [Reference](#reference) section MAY include one "<major>.next" version for each existing current major Aries Interop Profile versions. Such "next" versions are proposals for what is to be included in the next minor AIP version.
 
 Once a suitably populated Aries test suite is available, each Aries Interop Profile version will include a link to the relevant subset of test cases. The test cases will include only those targeting the specific versions of the concepts and features RFCs in that version of Aries Interop Profile. A process for maintaining the link between the Aries Interop Profile version and the test cases will be defined in this RFC once the Aries test suite is further evolved.
 
@@ -65,9 +65,9 @@ run the following from the root of the repo:
 
 The Aries Interop Profile version number and links to other RFCs in this section SHOULD only be updated with the agreement of the Aries agent builder community. There MAY be multiple active major Aries Interop Profile versions. A list of previous versions of Aries Interop Profile are [listed after](#previous-versions) the current version(s).
 
-### Aries Interop Profile Version: 1.0.0
+### Aries Interop Profile Version: 1.0
 
-The initial version of Aries Interop Profile, based on the existing implementations such as [aries-cloudagent-python](https://github.com/hyperledger/aries-cloudagent-python), [aries-framework-dotnet](https://github.com/hyperledger/aries-framework-dotnet), [Open Source Mobile Agent](https://github.com/mattrglobal/osma) and [Streetcred.id](https://streetcred.id)'s IOS agent. Agents adhering to AIP 1.0.0 should be able to establish connections, exchange credentials and complete a connection-less proof-request/proof transaction.
+The initial version of Aries Interop Profile, based on the existing implementations such as [aries-cloudagent-python](https://github.com/hyperledger/aries-cloudagent-python), [aries-framework-dotnet](https://github.com/hyperledger/aries-framework-dotnet), [Open Source Mobile Agent](https://github.com/mattrglobal/osma) and [Streetcred.id](https://streetcred.id)'s IOS agent. Agents adhering to AIP 1.0 should be able to establish connections, exchange credentials and complete a connection-less proof-request/proof transaction.
 
  RFC Type | RFC/Link to RFC Version
 --- | ---
