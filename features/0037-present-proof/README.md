@@ -115,7 +115,7 @@ Description of fields:
 
 Claims in Hyperledger Indy-based verifiable credentials are put into the credential in two forms, `raw` and `encoded`. `raw` is the actual data value, and `encoded` is (possibly derived) integer value that is used in presentations. At this time, Indy does not take an opinion on the method used for encoding the raw value. This will change with the Rich Schema work that is underway in the Indy/Aries community, where the encoding method will be part of the credential metadata available from the public ledger.
 
-Until the Rich Schema mechanism is deployed, the Aries issuers and verifiers must agree on an encoding method so that the verifier can check that the `raw` value returned in a presentation corresponds to the proven `encoded` value. The following is the encoding algorithm that MUST be used be Issuers in creating credential and SHOULD be verified by Verifiers receiving presentations:
+Until the Rich Schema mechanism is deployed, the Aries issuers and verifiers must agree on an encoding method so that the verifier can check that the `raw` value returned in a presentation corresponds to the proven `encoded` value. The following is the encoding algorithm that MUST be used by Issuers when creating credentials and SHOULD be verified by Verifiers receiving presentations:
 
 - keep any 32-bit integer as is
 - for data of any other type:
@@ -125,7 +125,7 @@ Until the Rich Schema mechanism is deployed, the Aries issuers and verifiers mus
   - convert the resulting digest bytes, big-endian, to integer
   - stringify the integer as a decimal.
 
-An example implementation in C#/.NET can be found [here](https://github.com/streetcred-id/aries-framework-dotnet/blob/f2d6d872bde43d730d5d9aa8c2ea2e0f40450571/src/Hyperledger.Aries/Utils/CredentialUtils.cs#L54).
+An example implementation in Python can be found [here](https://github.com/hyperledger/aries-cloudagent-python/blob/0000f924a50b6ac5e6342bff90e64864672ee935/aries_cloudagent/messaging/util.py#L106).
 
 A gist of test value pairs can be found [here](https://gist.github.com/swcurran/78e5a9e8d11236f003f6a6263c6619a6).
 
