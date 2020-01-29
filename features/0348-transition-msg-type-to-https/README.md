@@ -2,10 +2,10 @@
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca)
 - Status: [ACCEPTED](/README.md#accepted)
-- Since: 2020-01-22
-- Status Note: In step 1 - all implementations should be updated to accept old and new formats. **Target Completion Date: 2020.02.29** 
+- Since: 2020-01-30
+- Status Note: In step 1 - community is updating implementations to accept old and new formats. **Target Completion Date: 2020.02.29** 
 - Supersedes:
-- Start Date: 2018-12-13
+- Start Date: 2019-12-13
 - Tags: feature, community-update
 
 ## Summary
