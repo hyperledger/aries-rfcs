@@ -10,6 +10,10 @@
 
 A protocol to coordinate routing configuration between a routing agent and the recipient.
 
+## Application Scope
+
+This protocol is needed when using an edge agent and a mediator agent from different vendors. Edge agents and mediator agents from the same vendor may use whatever protocol they wish without sacrificing interoperability. 
+
 ## Motivation
 
 Use of the forward message in the Routing Protocol requires an exchange of information. The Recipient must know which endpoint and routing key(s) to share, and the Router needs to know which keys should be routed via this relationship.
@@ -26,7 +30,9 @@ A recipient may discover an agent capable of routing using the Feature Discovery
 
 First, the _recipient_ sends a `route_request` message to the _router_. If the _router_ is willing to route messages, it will respond with a `route_grant` message. The _recipient_ will share the routing information in the grant message with other contacts.
 
-When a new key is used by the _recipient_, it must be registered with the _router_ to enable route identitifcation. This is done with a `keylist_update` message.
+If the _router_ requires the _recipient_  to agree to terms prior to service, a `route_deny` message will be returned listing the URIs of terms that the user must agree to. Term agreement is indicated by including the same URIs in the `terms` attribute of the `route_requeste` message. Terms the _recipient_ wish the _router_ to agree to are indicated in the `user_terms` attribute of the `route_request` message. The *router* may indicate which user terms they support in the `supported_user_terms` attribute of the `Route Deny` message.
+
+When a new key is used by the _recipient_, it must be registered with the _router_ to enable route identification. This is done with a `keylist_update` message.
 
 The `keylist_update` and `keylist_query` methods are used over time to identify and remove keys that are no longer in use by the _recipient_.
 
@@ -39,10 +45,27 @@ This message serves as a request from the recipient to the router, asking for th
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routecoordination/1.0/route-request"
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routecoordination/1.0/route-request",
+    "terms": [],
+    "user_terms": []
 }
 ```
+
+### Route Deny
+
+A mediator may require agreements prior to granting route coordination. If the agreements present in the request are not sufficient, a route deny message may be used to indicate which agreements are required.
+
+```jsonc
+{
+    "@id": "123456781",
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routecoordination/1.0/route-deny",
+    "required_terms": [],
+    "supported_user_terms": []
+}
+```
+
 ### Route Grant
+
 A route grant message is a signal from the router to the recipient that permission is given to distribute the included information as an inbound route.
 ```jsonc
 {
@@ -125,7 +148,7 @@ Questions:
 
 ## Prior art
 
-There was an Indy HIPE that never made it past the PR process that described a similar approach. That HIPE led to a partial implementaiton of this inside the Aries Cloudagent Python
+There was an Indy HIPE that never made it past the PR process that described a similar approach. That HIPE led to a partial implementation of this inside the Aries Cloudagent Python
 
 
 
