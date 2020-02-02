@@ -13,8 +13,11 @@ This Aries concept RFC introduces a complete architecture for Internet-scale dig
 ## Motivation
 
 The importance of interoperability for the widespread adoption of an information network architecture has been proven by the dramatic rise to dominance of the Internet [1]. A key driver of the Internet's rise to dominance was the open source implementation of the TCP/IP stack in Version 4.2 of Berkeley Software Distrbution (BSD) of UNIX [2].
+This widely-adopted open source implementation of the TCP/IP stack offered the capability for any two peer devices to form a connection and exchange data packets regardless of their local network.
+In addition, secure protocol suites such as the Secure Sockets Layer (SSL), and its modern version, Transport Layer Security (TLS), have been protecting Internet transactions since 1995.
 
-This widely-adopted open source implementation of the TCP/IP stack offered the capability for any two peer devices to form a connection and exchange data packets regardless of their local network. Without a doubt, the BSD stack (and other TCP/IP implementations) have driven a tremendous amount of innovation over the last 30 years. However, there remains a significant and widely-recognized gap in Internet architecture: a means for peers to establish trust over these digital connections. This gap has often been referred to as "the Internet's missing identity layer" [3].
+Without a doubt, implementations of the TCP/IP stack, followed by SSL/TLS, have driven a tremendous amount of innovation over the last 30 years.
+However, although protocols such as TLS offer world-class security, the architecture over which they have been built upon leaves a significant and widely-recognized gap: a means for any peer to establish trust over these digital connections. For example, while TLS does allow a user to trust she is accessing the right website, it does not offer, at least in an usable way, a way for the user to _log in_, or prove her identity, to the website. This gap has often been referred to as "the Internet's missing identity layer" [3].
 
 The purpose of this Aries Concept RFC is to fill this gap by defining a standard information network architecture that developers can implement to establish trusted relationships over digital communicatons networks.
 
