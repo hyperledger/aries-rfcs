@@ -63,7 +63,7 @@ When "protocol" is used in an Aries context without any qualifying adjective, it
 The familiar world of web APIs is a world of protocols, but it comes with constraints antithetical to decentralized identity:
 
 * It assumes all interactions are between a client and a server--either two parties, or N parties mediated by a central server. Thus, the server is a natural locus for surveillance and hacking.
-* It assumes security is assymetric--not using DIDs, but driven by certs on a server and by a session for the client.
+* It assumes security is asymmetric--not using DIDs, but driven by certs on a server and by a session for the client.
 * It assumes the transport is HTTP. This is problematic for pure mobile-to-mobile, or for use cases where the transport is complex or asymmetric.
 * Because the server can never initiate an interaction, it requires at least one party to be continuously online.
 

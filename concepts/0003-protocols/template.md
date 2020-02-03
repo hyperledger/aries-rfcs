@@ -70,10 +70,10 @@ case-insensitively and ignoring punctuation.
 
 ### "States" under "Tutorial"
 
-This section lists the possible states that exist for each role. It also
-enumerates the events (often but not always messages) that can occur,
+This section enumerates the possible states that exist for each role. It also
+identifies the events (often but not always messages) that can occur,
 including errors, and what should happen to state as a result. A formal
-representation of this information is provided in a _state machine matrix_.
+representation of this information is typically provided in a _state machine matrix_.
 It lists events as columns, and states as rows; a cell answers the
 question, "If I am in state X (=row), and event Y (=column) occurs,
 what happens to my state?" The [Tic Tac Toe example](tictactoe/README.md#states)
@@ -81,7 +81,7 @@ is typical.
 
 [Choreography Diagrams](
 https://www.visual-paradigm.com/guide/bpmn/bpmn-orchestration-vs-choreography-vs-collaboration/#bpmn-choreography)
-from [BPMN](README.md#bpmn) are good artifacts here, as are [PUML sequence diagrams](
+from [BPMN](README.md#bpmn) are good alternative artifacts here, as are [PUML sequence diagrams](
 http://plantuml.com/sequence-diagram) and [UML-style state machine diagrams](http://agilemodeling.com/artifacts/stateMachineDiagram.htm).
 The matrix form is nice because it forces an exhaustive analysis of every
 possible event. The diagram styles are often simpler to create and consume,
@@ -93,7 +93,7 @@ the matrix form is used in many early RFCs. We leave it up to
 the community to settle on whether it wants to strongly recommend specific
 diagram types.
 
-The formal names for each state are important, as they are used in [`ack`s]( https://github.com/hyperledger/indy-hipe/pull/77)
+Regardless of the type of diagram that's used, [the formal names for each state are important](https://docs.google.com/presentation/d/17hk6QqLW5M9E4TBPZwXIUBu9eEinMNXReceyZTF4LpA/edit?usp=sharing), as they are used in [`ack`s]( https://github.com/hyperledger/indy-hipe/pull/77)
 and [`problem-report`s](https://github.com/hyperledger/indy-hipe/pull/65)).
 For example, a `problem-report` message declares which state the sender
 arrived at because of the problem. This helps other participants
