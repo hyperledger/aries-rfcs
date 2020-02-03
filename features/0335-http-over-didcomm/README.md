@@ -94,6 +94,9 @@ The `body` field is optional.
 
 The `resource-uri` field is also optional - if omitted, the server agent needs to set the uri based on the server that is being sent the message.
 
+Each element of the `headers` array is an object with two elements:
+`{"name": "<header-name>", "value": "<header-value>"}`.
+
 ##### `response`
 
 ```
@@ -117,6 +120,9 @@ The `resource-uri` field is also optional - if omitted, the server agent needs t
 Responses need to indicate their target - the client who sent the request. Response DIDComm messages must include a `~thread` decorator so the client agent can correlate thread IDs with its stored HTTP connections.
 
 The `body` field is optional.
+
+Each element of the `headers` array is an object with two elements:
+`{"name": "<header-name>", "value": "<header-value>"}`.
 
 #### Receiving HTTP Messages Over DIDComm
 
