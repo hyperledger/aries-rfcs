@@ -190,8 +190,8 @@ request:
 "~please_ack: {}"
 ```
 
-Bob honors this request and returns an `ack` as soon as he receives it. The
-interesting field is `status`, which look like this: `"status": "OK"` (or,
+Bob honors this request and returns an `ack` as soon as he receives it and stores its
+payload. The interesting field is `status`, which look like this: `"status": "OK"` (or,
 if the `issue-credential` protocol defines a final state for the holder called
 `now-holding`, Bob could be more explicit and send '"status": "now-holding"'.
 
@@ -309,8 +309,10 @@ None specified.
 
 ## Unresolved questions
 
-- Security and privacy implications of ~please_ack decorators. Could they be used to mount
+- Security and privacy implications of `~please_ack` decorators. Could they be used to mount
 a denial-of-service attack or to sniff info that's undesirable?
+- Signed (Non-repudiable) acks. How do you ask for an ACK that commits its sender to the acknowledgment in a way that's provable to third parties?
+- Multiplexed acks. How do you ask for, and supply, an ACK to all of Alice's agents instead of just to the one who sent the ACK? Does each agent need to request the ACK separately? Are there denial-of-service or other security issues?
 
 ## Implementations
 

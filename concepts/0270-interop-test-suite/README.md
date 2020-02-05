@@ -185,7 +185,7 @@ The results of a test suite run are represented in a JSON object that looks like
 
 ### Backchannel
 
-[TODO: reconcile this against what Daniel B and Sam already envisioned. I just made this up off the top of my head...]
+> While the concept of a backchannel has been accepted by the community, there is not alignment with the definition of the backchannel provided here. Rather than maintaining this section as related work in the community evolves the concept, we're adding this note to say "this section will likely change." Once backchannel implementations stabilize with a core definition, we'll refine this section as appropriate.
 
 The backchannel between test suite and agent under test is managed as a standard DIDComm protocol. The identifier for the message family is X. The messages include:
 
