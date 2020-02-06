@@ -269,7 +269,7 @@ For a reference implementation, see https://github.com/hyperledger/indy-sdk/blob
 
 ### Unpack Message
 
-#### unpack_message() inteface
+#### unpack_message() interface
 
 unpacked_message = unpack_message(wallet_handle, jwe)
 
@@ -295,9 +295,10 @@ unpacked_message = unpack_message(wallet_handle, jwe)
         2. decrypt ciphertext using libsodium.crypto_aead_chacha20poly1305_ietf_open_detached(base64URLdecode(ciphertext_bytes), base64URLdecode(protected_data_as_bytes), base64URLdecode(nonce), cek)
         3. return `message` and `recipient_verkey` following the anoncrypt format listed below
 
+> **NOTE**: In the unpack algorithm, the base64url decode implementation used **MUST**
+> correctly decode padded and unpadded base64URL encoded data.
 
-
-For a reference implementation, see https://github.com/hyperledger/indy-sdk/blob/master/libindy/src/commands/crypto.rs
+For a reference unpack implementation, see https://github.com/hyperledger/indy-sdk/blob/master/libindy/src/commands/crypto.rs
 
 #### unpack_message() return values (authcrypt mode)
 
