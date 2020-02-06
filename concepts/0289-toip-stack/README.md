@@ -17,7 +17,7 @@ This widely-adopted open source implementation of the TCP/IP stack offered the c
 In addition, secure protocol suites such as the Secure Sockets Layer (SSL), and its modern version, Transport Layer Security (TLS), have been protecting Internet transactions since 1995.
 
 Without a doubt, implementations of the TCP/IP stack, followed by SSL/TLS, have driven a tremendous amount of innovation over the last 30 years.
-However, although protocols such as TLS offer world-class security, the architecture over which they have been built upon leaves a significant and widely-recognized gap: a means for any peer to establish trust over these digital connections. For example, while TLS does allow a user to trust she is accessing the right website, it does not offer, at least in an usable way, a way for the user to _log in_, or prove her identity, to the website. This gap has often been referred to as "the Internet's missing identity layer" [3].
+However, although protocols such as TLS offer world-class security, the architecture over which they have been built leaves a significant and widely-recognized gap: a means for any peer to establish trust over these digital connections. For example, while TLS does allow a user to trust she is accessing the right website, it does not offer, at least in an usable way, a way for the user to _log in_, or prove her identity, to the website. This gap has often been referred to as "the Internet's missing identity layer" [3].
 
 The purpose of this Aries Concept RFC is to fill this gap by defining a standard information network architecture that developers can implement to establish trusted relationships over digital communicatons networks.
 
