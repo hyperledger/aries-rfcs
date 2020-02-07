@@ -108,7 +108,7 @@ In other suggested message formatting protocol Alice would provide a list of rou
 
 # Related art
 [related-art] #prior-art
-Aries-rfc [Aries RFC 0046: Mediators and Relays](Aries RFC 0046: Mediators and Relays)
+Aries-rfc [Aries RFC 0046: Mediators and Relays](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0046-mediators-and-relays)
 
 # Prior art
 [prior-art]: #prior-art
