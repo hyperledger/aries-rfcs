@@ -112,7 +112,6 @@ Aries-rfc [Aries RFC 0046: Mediators and Relays](Aries RFC 0046: Mediators and R
 
 # Prior art
 [prior-art]: #prior-art
-???
 
 # Unresolved questions
 [unresolved]: #unresolved-questions
