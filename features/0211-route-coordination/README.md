@@ -1,14 +1,14 @@
-# 0211: Route Coordination Protocol
+# 0211: Mediator Coordination Protocol
 - Authors: [Sam Curren](telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-03
-- Status Note: Initial version 
+- Status Note: Initial version, still under discussion. Previously named `Route Coordination Protocol`.
 - Start Date: 2019-09-03
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 
-A protocol to coordinate routing configuration between a routing agent and the recipient.
+A protocol to coordinate mediation configuration between a mediating agent and the recipient.
 
 ## Application Scope
 
@@ -16,61 +16,73 @@ This protocol is needed when using an edge agent and a mediator agent from diffe
 
 ## Motivation
 
-Use of the forward message in the Routing Protocol requires an exchange of information. The Recipient must know which endpoint and routing key(s) to share, and the Router needs to know which keys should be routed via this relationship.
+Use of the forward message in the Routing Protocol requires an exchange of information. The Recipient must know which endpoint and routing key(s) to share, and the Mediator needs to know which keys should be routed via this relationship.
 
-## Tutorial
+## Protocol
+
+**Name**: coordinatemediation
+
+**Version**: 1.0
+
+**Base URI**: `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/coordinatemediation/1.0/`
 
 ### Roles
 
-**router** - The agent that will be receiving `forward` messages on behalf of the _recipient_.
+**mediator** - The agent that will be receiving `forward` messages on behalf of the _recipient_.
 **recipient** - The agent for whom the `forward` message payload is intended.
 
 ### Flow
-A recipient may discover an agent capable of routing using the Feature Discovery Protocol. If protocol is supported with the _router_ role, a _recipient_ may send a `route_request` to initiate a routing relationship.
+A recipient may discover an agent capable of routing using the Feature Discovery Protocol. If protocol is supported with the _mediator_ role, a _recipient_ may send a `route_request` to initiate a routing relationship.
 
-First, the _recipient_ sends a `route_request` message to the _router_. If the _router_ is willing to route messages, it will respond with a `route_grant` message. The _recipient_ will share the routing information in the grant message with other contacts.
+First, the _recipient_ sends a `route_request` message to the _mediator_. If the _mediator_ is willing to route messages, it will respond with a `route_grant` message. The _recipient_ will share the routing information in the grant message with other contacts.
 
-If the _router_ requires the _recipient_  to agree to terms prior to service, a `route_deny` message will be returned listing the URIs of terms that the user must agree to. Term agreement is indicated by including the same URIs in the `terms` attribute of the `route_requeste` message. Terms the _recipient_ wish the _router_ to agree to are indicated in the `user_terms` attribute of the `route_request` message. The *router* may indicate which user terms they support in the `supported_user_terms` attribute of the `Route Deny` message.
-
-When a new key is used by the _recipient_, it must be registered with the _router_ to enable route identification. This is done with a `keylist_update` message.
+When a new key is used by the _recipient_, it must be registered with the _mediator_ to enable route identification. This is done with a `keylist_update` message.
 
 The `keylist_update` and `keylist_query` methods are used over time to identify and remove keys that are no longer in use by the _recipient_.
 
+### Terms
 
+The protocol allows for term agreement between the _mediator_ and _recipient_. 
+
+**mediator_terms** indicate terms that the _mediator_ requires the _recipient_ to agree to.
+
+**recipient_terms** indicate terms that the _recipient_ requires the _mediator_ to agree to.
+
+If the _mediator_ requires the _recipient_  to agree to terms prior to service, a `mediate_deny` message will be returned listing the URIs of terms that the user must agree to. Term agreement is indicated by including the same URIs in the `mediator_terms` attribute of the `route_request` message. The *mediator* may indicate which user terms they support in the `recipient_terms` attribute of the `mediate_deny` message.
 
 ## Reference
 
-### Route Request
-This message serves as a request from the recipient to the router, asking for the permission (and routing information) to publish the endpoint as a router.
+### Mediation Request
+This message serves as a request from the _recipient_ to the _mediator_, asking for the permission (and routing information) to publish the endpoint as a mediator.
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routecoordination/1.0/route-request",
-    "terms": [],
-    "user_terms": []
+    "@type": "<baseuri>/mediate-request",
+    "mediator_terms": [],
+    "recipient_terms": []
 }
 ```
 
-### Route Deny
+### Mediation Deny
 
 A mediator may require agreements prior to granting route coordination. If the agreements present in the request are not sufficient, a route deny message may be used to indicate which agreements are required.
 
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routecoordination/1.0/route-deny",
-    "required_terms": [],
-    "supported_user_terms": []
+    "@type": "<baseuri>/mediate-deny",
+    "mediator_terms": [],
+    "recipient_terms": []
 }
 ```
 
-### Route Grant
+### Mediation Grant
 
-A route grant message is a signal from the router to the recipient that permission is given to distribute the included information as an inbound route.
+A route grant message is a signal from the mediator to the recipient that permission is given to distribute the included information as an inbound route.
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routecoordination/1.0/route-grant",
+    "@type": "<baseuri>/mediate-grant",
     "endpoint": "",
     "routing_keys": []
     
@@ -80,11 +92,11 @@ Questions:
 - What about multiple endpoint options? http and ws?
 
 ### Keylist Update
-Used to notify the _router_ of keys in use by the _recipient_.
+Used to notify the _mediator_ of keys in use by the _recipient_.
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routecoordination/1.0/keylist_update",
+    "@type": "<baseuri>/keylist_update",
     "updates":[
         {
             "recipient_key": "",
@@ -98,7 +110,7 @@ Confirmation of requested keylist updates.
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routecoordination/1.0/keylist_update_response",
+    "@type": "<baseuri>/keylist_update_response",
     "updated": [
         {
             "recipient_key": "",
@@ -115,7 +127,7 @@ Questions:
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routecoordination/1.0/key_list_query",
+    "@type": "<baseuri>/key_list_query",
     "filter":{
         "": ["",""]
     }
@@ -133,7 +145,7 @@ Questions:
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routecoordination/1.0/key_list",
+    "@type": "<baseuri>/key_list",
     "keys": [
         {
             "recipient_key": ""
@@ -148,7 +160,7 @@ Questions:
 
 ## Prior art
 
-There was an Indy HIPE that never made it past the PR process that described a similar approach. That HIPE led to a partial implementation of this inside the Aries Cloudagent Python
+There was an Indy HIPE that never made it past the PR process that described a similar approach. That HIPE led to a partial implementation of this inside the Aries Cloud Agent Python
 
 
 
@@ -156,6 +168,9 @@ There was an Indy HIPE that never made it past the PR process that described a s
 
 - Still considering alternatives to convey the right meaning.
 - Should we allow listing keys by date? You could query keys in use by date?
+- How might payment be coordinated?
+- Should key ownership be proved when registered? Is there a risk of people requesting other people's keys?
+- We are missing a way to check a single key (or a few keys) without doing a full list.
 - Additional questions in each section
   
 ## Implementations
