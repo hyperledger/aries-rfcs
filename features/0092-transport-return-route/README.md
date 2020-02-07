@@ -1,8 +1,8 @@
 # Aries RFC 0092: Transports Return Route
 
 - Authors: [Sam Curren](sam@sovrin.org)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-08-07
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2019-12-06
 - Status Note:  
 - Supersedes: [INDY HIPE PR 116](https://github.com/hyperledger/indy-hipe/pull/116)
 - Start Date: 2019-03-04
@@ -29,7 +29,6 @@ When you send a message through a connection, you can use the `~transport` decor
     }
 }
 ```
-
 
 ## Reference
 
@@ -65,4 +64,3 @@ Name / Link | Implementation Notes
 --- | ---
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the government of British Columbia.
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | Used in Tests
-
