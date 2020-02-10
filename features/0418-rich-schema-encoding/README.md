@@ -1,4 +1,4 @@
-# Title XXXX: Rich Schema Encoding Objects
+# Title 0418: Rich Schema Encoding Objects
 - Author: Ken Ebert <ken@sovrin.org>, Mike Lodder <mike@sovrin.org>, Brent Zundel <brent.zundel@evernym.com>
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-02-10
@@ -98,7 +98,7 @@ transformation algorithm implementation is correct.
     The object with the encoding data
   - `id`: The encoding's DID; the id-string of its DID is the base58
   representation of the SHA2-256 hash of the canonical form of the value of
-  the data object of the content property,
+  the encoding object,
   - `content`: This property is used to hold immutable content:
     - `type`: "enc",
     - `name`: encoding's name string,
