@@ -1,5 +1,5 @@
-# Title 0418: Rich Schema Encoding Objects
-- Author: Ken Ebert <ken@sovrin.org>, Mike Lodder <mike@sovrin.org>, Brent Zundel <brent.zundel@evernym.com>
+# Aries RFC 0418: Aries Rich Schema Encoding Objects
+- Author: [Ken Ebert](ken@sovrin.org), [Mike Lodder](mike@sovrin.org), [Brent Zundel](brent.zundel@evernym.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-02-10
 - Status Note: Part of proposed Rich Schema capabilities for credentials 
