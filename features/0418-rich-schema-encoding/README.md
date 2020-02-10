@@ -5,7 +5,7 @@
 - Status Note: Part of proposed Rich Schema capabilities for credentials 
 - Supersedes:
 - Start Date: 2019-03-19
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [rich-schemas](/tags.md#rich-schemas)
 
 ## Summary
 
@@ -307,11 +307,14 @@ values.
   
 ## Implementations
 
-The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
-
-*Implementation Notes* [may need to include a link to test results](README.md#accepted).
+The following lists the implementations (if any) of this RFC. Please do a
+pull request to add your implementation. If the implementation is open
+source, include a link to the repo or to the implementation within the
+repo. Please be consistent in the "Name" field so that a mechanical
+processing of the RFCs can generate a list of all RFCs supported by an
+Aries implementation.
 
 Name / Link | Implementation Notes
 --- | ---
- | 
+ |  | 
 
