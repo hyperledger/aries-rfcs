@@ -176,61 +176,64 @@ The top half of Figure 5 below shows the basic trust triangle architecture used 
 
 ### Governance Authorities
 
-What the governance trust triangle represents is the same governance model that exists for many of the most successful physical credentials we use every day: passports, driving licenses, credit cards, health insurance cards, etc.
+The governance trust triangle in Figure 5 represents the same governance model that exists for many of the most successful physical credentials we use every day: passports, driving licenses, credit cards, health insurance cards, etc.
 
-These credentials are "backed" by rules and policies that in many cases have taken decades to evolve. These rules and policies have been developed, published, and enforced by many different types of governance authorities—private companies, industry consortia, financial networks, and of course governments.
+These credentials are "backed" by rules and policies that in many cases have taken decades to evolve. These rules and policies have been developed, published, and enforced by many different types of existing governance authorities—private companies, industry consortia, financial networks, and of course governments.
 
-The same model can be applied to verifiable credentials simply by having these same governance authorities—or new ones formed explicitly to govern verifiable credentials—publish *digital* governance frameworks.
+The same model can be applied to verifiable credentials simply by having these same governance authorities—or new ones formed explicitly to govern verifiable credentials—publish *digital* governance frameworks. Different governance authorities will have different structures and different degrees of centralization or decentralization depending on the needs of their trust community.
 
 ### Scaling Digital Trust
 
 Any group of issuers who want to standardize, strengthen, and scale the credentials they offer can join together under the auspices of a sponsoring authority to craft a governance framework. No matter the form of the organization—government, consortia, association, cooperative—the purpose is the same: define the business, legal, and technical rules under which the members agree to operate in order to achieve trust.
 
-This of course is exactly how Visa and Mastercard—two of the world’s largest trust networks—have scaled. Any bank or merchant can verify in seconds that another bank or merchant is a member of the network and thus bound by its rules.
+This of course is exactly how Mastercard and Visa—two of the world’s largest trust networks—have scaled. Any bank or merchant can verify in seconds that another bank or merchant is a member of the network and thus bound by its rules.
 
-With the ToIP stack, this governance architecture can be applied to any set of roles and/or credentials, for any trust community, of any size.
+With the ToIP stack, this governance architecture can be applied to any set of roles and/or credentials, for any trust community, of any size, in any jurisdiction.
 
 ### Layers in the Governance Stack
 
 The ToIP stack does not define specific governance frameworks, rather it is a *metamodel* for how to design and implement digital governance frameworks that can be universally understood, referenced, and navigated online. This approach makes it easier for humans—and the software agents that represent us at Layer Two—to make trust decisions  within and across trust boundaries.
 
-Because governance applies at every level of the ToIP stack, the **ToIP Governance Stack** is actually a parallel stack covering all four levels, with each level serving a specific purpose:
+Because governance applies at every layer of the ToIP stack, the **ToIP Governance Stack** is actually a parallel stack covering all four levels, with each layer serving a specific purpose:
 
-1. **Network Governance Frameworks** specify the rules for operation of a DID registry, no matter what its form or governance model (e.g., public or private, permissioned or permissionless). Note that even permissionless networks still have rules—formal or informal—governing who can update the code.
+1. **Network Governance Frameworks** specify the rules for operation of a DID registry, no matter what its form or governance model (e.g., public or private, permissioned or permissionless). Note that even permissionless blockchain networks still have rules—formal or informal—governing who can update the code.
 2. **Provider Governance Frameworks** specify the rules for how providers of ToIP hardware, software, and agencies (hosting providers for cloud agents, wallets, and hubs) can be verified and certified.
-3. **Credential Governance Frameworks** specify the issuers whom verifiers can consider authoritative for issuing specific credentials—as well as the policies those issuers must follow to issue and revoke those credentials. Credential governance frameworks can also specify business models, liability frameworks, and insurance models.
-4. **Metasystem Governance Frameworks** are designed to serve as umbrellas covering entire trust ecosystems. They specify policies that apply to all the governance authorities and governance frameworks operating within that ecosystem—at all four levels of the ToIP stack.
+3. **Credential Governance Frameworks** specify one or more credential definitions together with the list or policy governing who can be the authoritative issuers for those credentials. They also specify the policies those issuers must follow to issue and revoke those credentials, and furthermore can include business models, liability frameworks, and insurance models.
+4. **Metasystem Governance Frameworks** are designed to serve as umbrellas governing interoperability among entire trust ecosystems. They specify policies that apply to all the governance authorities and governance frameworks operating within that ecosystem—at all four levels of the ToIP stack.
 
 ### Roles in the Governance Stack
 
 Table 1 summarizes twelve roles currently being defined in the ToIP governance stack. Each role represents a specific responsibility at a specific layer. The same legal entity may of course play more than one role—at the same layer, or at multiple layers.
 
-|    Layer Four Roles     |                        Description                        |
+|   **Layer Four Roles**  |                                                           |
 |:-----------------------:|:---------------------------------------------------------:|
 |  Governance Authority   |   Publishes and administers a governance framework (GF)   |
 |         Auditor         |       Audits participants for compliance with a GF        |
 |   Auditor Accreditor    |                Accredits auditors for a GF                |
+| | ***** |
 |  **Layer Three Roles**  |                                                           |
-|      Authoritative Issuer       |      Authoritative issuer of a credential under a GF      |
+|  Authoritative Issuer   |      Authoritative issuer of a credential under a GF      |
 |   Credential Registry   | Authoritative alternate holder (directory) of credentials |
 |         Insurer         |     Insures issuers operating under the terms of a GF     |
+| | ***** |
 |   **Layer Two Roles**   |                                                           |
 |   Hardware Developer    |             Provides ToIP-compliant hardware              |
 |   Software Developer    |       Provides ToIP-compliant agents, wallets, hubs       |
 |         Agency          |             Hosts ToIP-compliant cloud agents             |
+| | ***** |
 |   **Layer One Roles**   |                                                           |
 | Transaction Author (TA) |         Initiates a transaction on a DID network          |
-|  Transaction Endorser (TE)   | Facilitates TA transactions on a permissioned DID network |
+|  Transaction Endorser   | Facilitates TA transactions on a permissioned DID network |
 |         Steward         |       Operates a node of a permissioned DID network       |
 
-**Table 1: Standard roles in the ToIP governance stack**
+**Table 1: Standard roles in the ToIP governance metamodel**
 
-As an historical note, the ToIP governance stack has been inspired by the [Sovrin Governance Framework (SGF)](https://sovrin.org/governance-framework/) [16] developed over the past three years by the [Sovrin Foundation](https://www.sovrin.org), the governance authority for the Sovrin public ledger for self-sovereign identity (SSI). The current second-generation SGF represents a combination of:
+As an historical note, some facets of the ToIP governance stack are inspired by the [Sovrin Governance Framework (SGF)](https://sovrin.org/governance-framework/) [16] developed starting in 2017 by the [Sovrin Foundation](https://www.sovrin.org), the governance authority for the Sovrin public ledger for self-sovereign identity (SSI). The current second-generation SGF represents a combination of:
 
 1. A Layer One network governance framework for Transaction Authors, Transaction Endorsers, and Stewards of the Sovrin ledger, and
-1. A Layer Four metasystem governance framework for the Sovrin ecosystem.
+1. A Layer Four metasystem governance framework for the Sovrin ecosystem as a whole.
 
-The Sovrin Governance Framework Working Group [17] is currently developing a third generation of the SGF that will fully adapt it to the ToIP governance stack.
+The Sovrin Governance Framework Working Group [17] is currently developing a third generation of the SGF that will fully adapt it to the ToIP governance metamodel.
 
 ### Defining a Governance Framework
 
@@ -244,11 +247,12 @@ Figure 6 shows this basic architectural model:
 
 ### Discovery and Verification of Authoritative Issuers
 
-Verifiers often need to verify that a credential was issued by an authoritative issuer. The ToIP stack gives governance authorities several mechanisms for designating its set of authoritative issuers:
+Verifiers often need to verify that a credential was issued by an authoritative issuer. The ToIP stack will give governance authorities multiple mechanisms for designating their set of authoritative issuers (these options are non-exclusive—they can each be used independently or in any combination):
 
-1. **DID Documents.** If the set of authortiative issuers is relatively small, the governance authority can publish the list of authortiative issuer DIDs in a DID document on one or more DID registries of its choice.
-2. **Verifiable credentials.** As shown in Figure 5, the governance authority (or its designated auditors) can issue verifiable credentials to the authoritative issuers, which they in turn can provide directly to verifiers or indirectly via credential holders.
-3. **Credential registries.** For search and discovery, a governance authority can also publish verifiable credentials for each authoritative issuer to a credential registry. Note that in this case the credential registry serves as a *separate, cryptographically-verifiable holder of the credential*—a holder that is not the subject of the credential, but which can independently prove the validity of the credential.
+1. **DID Documents.** The governance authority can publish the list of their DIDs in a DID document on one or more DID registries of its choice.
+2. **Whitelists.** A governance authority can publish a list of DIDs via a whitelisting service available at a standard service endpoint published in the governance authority’s own DID document.
+3. **Credential registries.** If search and discovery of authoritative issuers is desired, a governance authority can publish verifiable credentials containing both the DID and additional attributes for each authoritative issuer in a credential registry.  Note that in this case the credential registry serves as a *separate, cryptographically-verifiable holder of the credential*—a holder that is not the subject of the credential, but which can independently prove the validity of the credential.
+4. **Verifiable credentials.** As shown in Figure 5, the governance authority (or its designated auditors) can issue verifiable credentials to the authoritative issuers, which they in turn can provide directly to verifiers or indirectly via credential holders.
 
 ### Interoperability with Other Governance Frameworks
 
