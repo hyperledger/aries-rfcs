@@ -12,7 +12,7 @@
 A low-level description of the components of an anonymous credential ecosystem that supports rich schemas,
 W3C Verifiable Credentials and Presentations, and correspondingly rich presentation requests. 
 
-Please see [0119: Rich Schema Objects](https://github.com/hyperledger/indy-hipe/tree/master/text/0119-rich-schemas) 
+Please see [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas) 
 for high-level description.
 
 This HIPE provides more low-level description of Rich Schema objects defining how they are identified and referenced.
@@ -20,7 +20,7 @@ It also defines a general template and common part for all Rich Schema objects.
 
 ## Motivation
 
-Please see [0119: Rich Schema Objects](https://github.com/hyperledger/indy-hipe/tree/master/text/0119-rich-schemas)
+Please see [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
 for use cases and high-level description of why Rich Schemas are needed.
 
 This HIPE serves as a low-level design of common parts between all Rich Schema objects, and can help developers to 
@@ -106,7 +106,7 @@ Any write request for Rich Schema object has the same fields:
 'ver': <format version>                        # integer                              
 ```
 - `id` is a unique ID (for example a DID with a id-string being base58 representation of the SHA2-256 hash of the `content` field)
-- The `content` field here contains a Rich Schema object in JSON-LD format (see [0119: Rich Schema Objects](https://github.com/hyperledger/indy-hipe/tree/master/text/0119-rich-schemas)).
+- The `content` field here contains a Rich Schema object in JSON-LD format (see [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)).
 It's passed and stored as-is.
 The `content` field must be serialized in the canonical form. The canonicalization scheme we recommend is the IETF draft 
  [JSON Canonicalization Scheme (JCS).](https://tools.ietf.org/id/draft-rundgren-json-canonicalization-scheme-16.html)
@@ -120,7 +120,8 @@ The `content` field must be serialized in the canonical form. The canonicalizati
 - It should be possible to get Rich Schema objects by metadata as well: `(rs_name, rs_version, rs_type)`.
 - Currently it's supposed that every Rich Schema object is queried individually, so it's up to clients and applications
 to get, query and cache all dependent Rich Schema objects.
-- We may support resolving a Rich Schema object by the DID as a DID DOC object in a standard way once DID DOC is supported in Aries.
+- We may support resolving a Rich Schema object by a DID as a DID DOC object once
+aries-vdr interface for DID resolving is defined and DID DOC specification is finalized.
 
 The following information is returned from the Ledger in a reply for any get request of a Rich Schema object:
 ```
@@ -190,7 +191,9 @@ error: {
 ```
 
 ## Reference
-- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas) 
+- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
+- [0249: Aries Rich Schema Contexts](https://github.com/hyperledger/aries-rfcs/tree/master/features/0249-rich-schema-contexts) 
+- [0281: Aries Rich Schemas](https://github.com/hyperledger/aries-rfcs/tree/master/features/0281-rich-schemas)
 
 ## Drawbacks
 
@@ -232,8 +235,8 @@ We are not requiring to define Rich Schema objects as DID DOCs for now. We may r
 is finalized.
 
 ## Unresolved questions
-- We are not defining Rich Schema objects as DID DOCs for now. We may re-consider this in future once DID DOC format
-is finalized.
+- We are not defining Rich Schema objects as DID DOCs for now. We may re-consider this in future 
+once aries-vdr interface for DID resolving is defined and DID DOC specification is finalized.
 - Whether we should extend DID to be a standard for Rich Schema object IDs.
 - Whether the proposed way to make a Canonicalization form of a content to be used for DID's id-string generation is good enough. 
 
