@@ -1,5 +1,5 @@
 # 0420: Rich Schema Objects Common
-- Author: Alexander Shcherbakov alexander.shcherbakov@evernym.com, Brent Zundel brent.zundel@evernym.com
+- Author: [Alexander Shcherbakov](alexander.shcherbakov@evernym.com), [Brent Zundel](brent.zundel@evernym.com)
 - Status: [PROPOSED](/README.md#hipe-lifecycle) 
 - Since: 2020-02-13
 - Status Note: Part of proposed Rich Schema capabilities for credentials 
@@ -94,15 +94,15 @@ subset of the attributes of a schema.
 
 ![](relationship-diagram.png)
 
-### How Rich Schema objects are stored on the Ledger
+### How Rich Schema objects are stored in the Data Registry
 
 Any write request for Rich Schema object has the same fields:
 ```
 'id': <Rich Schema object's ID>                # DID string 
 'content': <Rich Schema object as JSON-LD>     # JSON-serialized string
-'rsName': <rich schema object name>            # string
-'rsVersion': <rich schema object version>      # string
-'rsType': <rich schema object type>            # integer
+'rs_name': <rich schema object name>           # string
+'rs_version': <rich schema object version>     # string
+'rs_type': <rich schema object type>           # integer
 'ver': <format version>                        # integer                              
 ```
 - `id` is a unique ID (for example a DID with a id-string being base58 representation of the SHA2-256 hash of the `content` field)
@@ -117,7 +117,7 @@ The `content` field must be serialized in the canonical form. The canonicalizati
 
 ### Querying Rich Schema objects from the Data Registry
 - Any Rich Schema object can be get from a Data Registry (Ledger) by its ID (DID).
-- It should be possible to get Rich Schema objects by metadata as well: `(rsName, rsVersion, rsType)`.
+- It should be possible to get Rich Schema objects by metadata as well: `(rs_name, rs_version, rs_type)`.
 - Currently it's supposed that every Rich Schema object is queried individually, so it's up to clients and applications
 to get, query and cache all dependent Rich Schema objects.
 - We may support resolving a Rich Schema object by the DID as a DID DOC object in a standard way once DID DOC is supported in Aries.
@@ -126,9 +126,9 @@ The following information is returned from the Ledger in a reply for any get req
 ```
 'id': <Rich Schema object's ID>              # DID string 
 'content': <Rich Schema object as JSON-LD>   # JSON-serialized string
-'rsName': <rich schema object name>          # string
-'rsVersion': <rich schema object version>    # string
-'rsType': <rich schema object type>          # integer
+'rs_name': <rich schema object name>         # string
+'rs_version': <rich schema object version>   # string
+'rs_type': <rich schema object type>         # integer
 'ver': <format version>                      # integer
 'from': <author DID>,                        # DID string
 'endorser': <endorser DID>,                  # DID string
