@@ -100,9 +100,9 @@ Any write request for Rich Schema object has the same fields:
 ```
 'id': <Rich Schema object's ID>                # DID string 
 'content': <Rich Schema object as JSON-LD>     # JSON-serialized string
-'rsName': <rich schema object name>        # string
-'rsVersion': <rich schema object version>  # string
-'rsType': <rich schema object type>        # integer
+'rsName': <rich schema object name>            # string
+'rsVersion': <rich schema object version>      # string
+'rsType': <rich schema object type>            # integer
 'ver': <format version>                        # integer                              
 ```
 - `id` is a unique ID (for example a DID with a id-string being base58 representation of the SHA2-256 hash of the `content` field)
@@ -126,9 +126,9 @@ The following information is returned from the Ledger in a reply for any get req
 ```
 'id': <Rich Schema object's ID>              # DID string 
 'content': <Rich Schema object as JSON-LD>   # JSON-serialized string
-'rsName': <rich schema object name>        # string
-'rsVersion': <rich schema object version>  # string
-'rsType': <rich schema object type>        # integer
+'rsName': <rich schema object name>          # string
+'rsVersion': <rich schema object version>    # string
+'rsType': <rich schema object type>          # integer
 'ver': <format version>                      # integer
 'from': <author DID>,                        # DID string
 'endorser': <endorser DID>,                  # DID string
@@ -198,7 +198,7 @@ Rich schema objects introduce more complexity.
 
 ## Rationale and alternatives
 
-##### Rich Schema object ID
+#### Rich Schema object ID
 The following options on how a Rich Schema object can be identified exist:
 - DID unique for each Rich Schema
 - DID URL with the origin (issuer's) DID as a base
@@ -224,7 +224,7 @@ So, we are proposing to use a unique DID for each Rich Schema object as it gives
 an entity in the distributed ledger world.  
 
 
-##### Rich Schema object as DID DOC
+#### Rich Schema object as DID DOC
 If Rich Schema objects are identified by a unique DID, then a natural question is whether each Rich Schema object 
 needs to be presented as a DID DOC and resolved by a DID in a generic way.
 
