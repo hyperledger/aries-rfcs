@@ -1,6 +1,6 @@
 # 0420: Rich Schema Objects Common
 - Author: [Alexander Shcherbakov](alexander.shcherbakov@evernym.com), [Brent Zundel](brent.zundel@evernym.com)
-- Status: [PROPOSED](/README.md#hipe-lifecycle) 
+- Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-02-13
 - Status Note: Part of proposed Rich Schema capabilities for credentials 
 - Start Date: 2020-02-05
@@ -65,7 +65,7 @@ are mutable.
 - Every Rich Schema object is identified by a unique ID
 - DID can be used as the ID.
     - The id-string of the DID is the base58 representation of the SHA2-256 hash of the canonical form
- of the `content` field (see [How Rich Schema objects are stored on the Ledger](#how-rich-schema-objects-are-stored-on-the-ledger).
+ of the `content` field (see [How Rich Schema objects are stored in the Data Registry](#how-rich-schema-objects-are-stored-in-the-data-registry).
  The canonicalization scheme we recommend is the IETF draft 
  [JSON Canonicalization Scheme (JCS).](https://tools.ietf.org/id/draft-rundgren-json-canonicalization-scheme-16.html) 
 - There is additional metadata (aliases) that can identify Rich Schema objects on the ledger 
