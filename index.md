@@ -84,6 +84,7 @@
 * [0347: Proof Negotiation](features/0347-proof-negotiation/README.md) (2019-12-13 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0351: Purpose Decorator](features/0351-purpose-decorator/README.md) (2019-12-16 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0360: did:key Usage](features/0360-use-did-key/README.md) (2019-12-17 &mdash; [`feature`](/tags.md#feature))
+* [0420: Rich Schema Objects Common](features/0420-rich-schemas-common/README.md) (2020-02-13 &mdash; [`feature`](/tags.md#feature))
 
 ## [RETIRED](README.md#retired)
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
