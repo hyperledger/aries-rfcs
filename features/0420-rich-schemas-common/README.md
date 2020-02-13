@@ -65,7 +65,7 @@ are mutable.
 - Every Rich Schema object is identified by a unique ID
 - DID can be used as the ID.
     - The id-string of the DID is the base58 representation of the SHA2-256 hash of the canonical form
- of the `content` field (see [Common template for all Rich Schema objects on the Ledger](#Common_template_for_all_Rich_Schema_objects_on_the_Ledger)).
+ of the `content` field (see [How Rich Schema objects are stored on the Ledger](#how-rich-schema-objects-are-stored-on-the-ledger).
  The canonicalization scheme we recommend is the IETF draft 
  [JSON Canonicalization Scheme (JCS).](https://tools.ietf.org/id/draft-rundgren-json-canonicalization-scheme-16.html) 
 - There is additional metadata (aliases) that can identify Rich Schema objects on the ledger 
