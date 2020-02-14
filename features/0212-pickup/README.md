@@ -70,7 +70,57 @@ A message that contains multiple waiting messages.
 {
     "@id": "123456781",
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/batch",
-    "messages": []
+    "~attach": [
+        {
+            "@id" : "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
+            "message" : {
+                ...
+            }
+        },
+        
+        {
+            "@id" : "344a51cf-379f-40ab-ab2c-711dab3f53a9a",
+            "message" : {
+                ...
+            }
+        }
+    ]
+}
+```
+### Message Query With Message Id List
+A request to read single or multiple messages with a message message id array.
+```json=
+{
+    "@id": "123456781",
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/single_pickup",
+    "message_id": "06ca25f6-d3c5-48ac-8eee-1a9e29120c31"
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/list_pickup",
+    "message_ids": [
+        "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
+        "344a51cf-379f-40ab-ab2c-711dab3f53a9a"
+        ]
+}
+```
+`message_ids` message id array for picking up messages. Any message id in `message_ids` could be delivered via several ways to the recipient (Push notification or with an envoloped message).
+### Message List Query Response
+A response to query with message id list.
+```json=
+{
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/list-response",
+    "~attach": [
+        {
+            "@id" : "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
+            "message" : {
+                ...
+            }
+        },        
+        {
+            "@id" : "344a51cf-379f-40ab-ab2c-711dab3f53a9a",
+            "message" : {
+                ...
+            }
+        }
+    ]
 }
 ```
 ### Noop
