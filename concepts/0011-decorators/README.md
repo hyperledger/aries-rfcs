@@ -116,7 +116,7 @@ Or they may associate a key with a more complex structure:
 "~thread": {
   "thid": "e2987006-a18a-4544-9596-5ad0d9390c8b",
   "pthid": "0c8be298-45a1-48a4-5996-d0d95a397006",
-  "seqnum": 0
+  "sender_order": 0
 }
 ```
 
@@ -188,7 +188,7 @@ targets:
   type. If this happens, semantics of the decorator on the message type should be
   understood as overriding or enriching the semantics of that same decorator on the
   parent message family, since the scope is becoming more specific.
-* [**Message Thread**](http://bit.ly/2SL5kab) **or thread tree**: A participant in a
+* [**Message Thread**](../0008-message-id-and-threading/README.md) **or thread tree**: A participant in a
   thread could send a message containing nothing but the `~thread` with one or
   more additional decorators *inside* it. This should be viewed as a statement of semantics that
   apply to subsequent communications from the sender, on that thread, until further
