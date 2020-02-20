@@ -35,25 +35,22 @@ Protocol names are conventionally lower_snake_case (especially in URIs), but are
 - lets_do_lunch
 - LetsDoLunch
 
-#### URI representation
+URI: https://didcomm.org/lets_do_lunch/<version>/<messageType>
 
 Message types and protocols are identified with special URIs that match certain conventions. See [Message Type and Protocol Identifier URIs](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0003-protocols/uris.md) for more details.
-
-#### Semver
 
 The version of a protocol is declared carefully. See [Semver Rules for Protocols](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0003-protocols/semver.md) for details.
 
 ### Key Concepts
 
-This is the first subsection under "Tutorial". It is short--a paragraph or
-two. It defines terms and describes the flow of the interaction at a very
-high level. Key preconditions should be noted (e.g., "You can't issue a
-credential until you have completed the _connection_ protocol first"), as
-well as ways the protocol can start and end, and what can go wrong. The
-section might also talk about timing constraints and other assumptions.
-After reading this section, a developer should know what problem your
-protocol solves, and should have a rough idea of how the protocol works in
-its simpler variants.
+This is short--a paragraph or two. It defines terms and describes the flow of
+the interaction at a very high level. Key preconditions should be noted (e.g.,
+"You can't issue a credential until you have completed the _connection_ protocol
+first"), as well as ways the protocol can start and end, and what can go wrong.
+The section might also talk about timing constraints and other assumptions.
+After reading this section, a developer should know what problem your protocol
+solves, and should have a rough idea of how the protocol works in its simpler
+variants.
 
 ### Roles
 
