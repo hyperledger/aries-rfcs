@@ -84,7 +84,6 @@
 * [0345: Community Coordinated Update](concepts/0345-community-coordinated-update/README.md) (2019-12-26 (date you submit your PR) &mdash; [`concept`](/tags.md#concept))
 * [0347: Proof Negotiation](features/0347-proof-negotiation/README.md) (2019-12-13 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0351: Purpose Decorator](features/0351-purpose-decorator/README.md) (2019-12-16 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
-* [0360: did:key Usage](features/0360-use-did-key/README.md) (2019-12-17 &mdash; [`feature`](/tags.md#feature))
 * [0420: Rich Schema Objects Common](features/0420-rich-schemas-common/README.md) (2020-02-13 &mdash; [`feature`](/tags.md#feature))
 * [0428: Prerequisites to Issue Rich Credential](features/0428-prepare-issue-rich-credential/README.md) (2020-02-19 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 
