@@ -4,7 +4,7 @@
 - Since: 2020-02-13
 - Status Note: Part of proposed Rich Schema capabilities for credentials 
 - Start Date: 2020-02-05
-- Tags: [feature](/tags.md#concept), [rich-schemas](/tags.md#rich-schemas)
+- Tags: [concept](/tags.md#concept), [rich-schemas](/tags.md#rich-schemas)
 
 
 ## Summary
