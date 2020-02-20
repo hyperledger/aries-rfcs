@@ -41,6 +41,7 @@
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2019-09-27, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 
 ## [PROPOSED](README.md#proposed)
+* [: ](features/0418-rich-schema-encoding/README.md) (2020-02-10 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0013: Overlays](concepts/0013-overlays/README.md) (2019-05-20 &mdash; [`concept`](/tags.md#concept))
 * [0021: DIDComm Message Anatomy](concepts/0021-didcomm-message-anatomy/README.md) (2019-05-25 &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
 * [0023: DID Exchange Protocol 1.0](features/0023-did-exchange/README.md) (2019-05-27 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
