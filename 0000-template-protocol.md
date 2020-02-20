@@ -1,4 +1,4 @@
-# 0000: RFC Protocol
+# Aries RFC 0000: Your Protocol 0.9
 - Authors: [your name](you@github-email) -- email is optional
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-12-26 (date you submit your PR)
@@ -11,7 +11,7 @@
 
 One paragraph explanation of the feature.
 
-> If the RFC you are proposing is **NOT** a protocol, please use [this template](https://github.com/hyperledger/aries-rfcs/tree/master/0000-template-protocol.md) as a starting point.
+> If the RFC you are proposing is **NOT** a protocol, please use [this template](https://github.com/hyperledger/aries-rfcs/tree/master/0000-template.md) as a starting point.
 
 > When completing this template and before submitting as a PR, please remove the template text in sections (other than **Implementations**). The implementations section should remain as is.
 
@@ -26,7 +26,7 @@ outcome?
 
 Name and Version
 
-Specify the official name of the protocol and its version.
+Specify the official name of the protocol and its version, e.g., "My Protocol 0.9".
 
 Protocol names are conventionally lower_snake_case (especially in URIs), but are compared case-insensitively and ignoring punctuation. This means that all of the following protocol names are considered identical in comparison, and can be used interchangeably, depending on what's appropriate for a given context (a user-friendly doc vs. CSS vs. python class vs. java class):
 
@@ -37,11 +37,11 @@ Protocol names are conventionally lower_snake_case (especially in URIs), but are
 
 #### URI representation
 
-Message types and protocols are identified with special URIs that match certain conventions. See Message Type and Protocol Identifier URIs for more details.
+Message types and protocols are identified with special URIs that match certain conventions. See [Message Type and Protocol Identifier URIs](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0003-protocols/uris.md) for more details.
 
 #### Semver
 
-The version of a protocol is declared carefully. See Semver Rules for Protocols for details.
+The version of a protocol is declared carefully. See [Semver Rules for Protocols](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0003-protocols/semver.md) for details.
 
 ### Key Concepts
 
@@ -156,7 +156,7 @@ needs to be known about all message fields, this is where the data type,
 validation rules, and semantics of each field in each message type are
 details. Enumerating possible values, or providing ABNF or regexes is
 encouraged. Following conventions such as [those for date-
-and time-related fields](https://github.com/dhh1128/indy-hipe/blob/dd3005803decfb87c13117bc7566a4fc90e5fa16/text/0027-date-time-conventions/README.md)
+and time-related fields](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0074-didcomm-best-practices#date-time-conventions)
 can save a lot of time here.
 
 Each message type should be associated with one or more roles in the 
