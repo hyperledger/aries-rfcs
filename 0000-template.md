@@ -11,6 +11,8 @@
 
 One paragraph explanation of the feature.
 
+> NOTE: If you are creating a **protocol** RFC, please use [this template](https://github.com/hyperledger/aries-rfcs/blob/master/0000-template-protocl.md)instead.
+
 ## Motivation
 
 Why are we doing this? What use cases does it support? What is the expected
