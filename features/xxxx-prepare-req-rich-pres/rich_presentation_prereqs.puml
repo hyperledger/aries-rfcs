@@ -1,0 +1,23 @@
+@startuml
+
+title Rich Schema Presentation Prerequisites
+participant VDR as L
+actor Verifier as V
+actor Holder as H
+
+V -> V: check for local pres def
+
+alt if no local pres def
+V -> L: check for existing pres def
+
+else if no pres def
+V->V: create and store pres def
+
+opt
+V->L: anchor cred def
+end
+end
+
+V->H: request presentation\nusing pres def
+
+@enduml

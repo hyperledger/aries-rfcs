@@ -9,65 +9,45 @@
 
 ## Summary
 
-Describes the prerequisites an issuer must ensure are in place before issuing a
-rich credential.
+Describes the prerequisites an issuer must ensure are in place before requesting
+a rich presentation.
 
 ## Motivation
 
-To inform issuers of the steps they should take in order to make sure they have
-the necessary rich schema objects in place before they use them to issue
-credentials.
+To inform verifiers of the steps they should take in order to make sure they
+have the necessary rich schema objects in place before they use them to request
+proofs.
 
 ## Tutorial
 
-###Rich Schema Credential Workflow
+###Rich Schema Presentation Definition Workflow 
+1. The verifier checks his wallet or the ledger to see if the presentation
+definition already exists. (The verifier determines which attribute or
+predicates he needs a holder to present to satisfy the verifier's business
+rules. Presentation definitions specify desired attributes and predicates).
+   1. If not, the verifier creates a new presentation definition and stores the
+   presentation definition in his wallet locally and, optionally, anchors it to
+   the verifiable data registry. (Anchoring the presentation definition to the
+   verifiable data registry allows other verifiers to easily use it.)
+1. Using the presentation definition, request a presentation from the holder.
+The [Present Proof Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof)
+will be the model for another RFC containing minor modifications for presenting
+a proof based on verifiable credentials using the new rich schema objects.
 
-1. The issuer checks the ledger to see if the credential definition he wants to
-use is already present.
-   1. If not, the issuer checks the ledger to see if the mapping he wants to use
-   is already present.
-      1. If not, the issuer checks the ledger to see if the schemas he wants to
-      use are already present.
-         1. If not, anchor the context used by each schema to the ledger.
-         1. Anchor the schemas on the ledger. Schema objects may refer to one or
-         more context objects.
-      1. Anchor to the ledger the mapping object that associates each claim with
-      one or more encoding objects and a corresponding attribute. (The issuer
-      selects schema properties and associated encodings to be included as
-      claims in the credential. Encoding objects refer to transformation
-      algorithms, documentation, and code which implements the transformation.
-      The claim is the data; the attribute is the transformed data represented
-      as a 256 bit integer that is signed. The mapping object refers to the
-      schema objects and encoding objects.)
-   1. Anchor a credential definition that refers to a single mapping object. The
-   credential definition contains public keys for each attribute. The credential
-   definition refers to the issuer DID.
-1. Using the credential definition, mapping, and schema(s) issue to the holder a
-credential based on the credential definition and the supplied claim data. The
-[Issue Credential Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential)
-will be the model for another RFC containing minor modifications to issue a
-credential using the new rich schema objects. 
-
-Subsequent credentials may be issued by repeating only the last step.
-
-![](rich_credential_prereqs.png)
+![](rich_presentation_prereqs.png)
 
 ## Reference
 
 - [RFC 0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
 - [RFC 0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common)
-- [RFC 0249: Aries Rich Schema Contexts](https://github.com/hyperledger/aries-rfcs/tree/master/features/0249-rich-schema-contexts)
-- [RFC 0281: Aries Rich Schemas](https://github.com/hyperledger/aries-rfcs/tree/master/features/0281-rich-schemas)
-- [RFC XXXX: Aries Rich Schema Mappings](https://github.com/hyperledger/aries-rfcs/tree/master/features/XXXX-rich-schema-mappings)
-- [RFC XXXX: Aries Rich Schema Credential Definitions](https://github.com/hyperledger/aries-rfcs/tree/master/features/XXXX-rich-schema-cred-defs)
-- [RFC 0036: Issue Credential Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential)
+- [RFC XXXX: Aries Rich Schema Presentation Definitions](https://github.com/hyperledger/aries-rfcs/tree/master/features/XXXX-rich-schema-pres-defs)
+- [RFC 0037: Present Proof Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof)
 
 
 
 ## Unresolved questions
 
-RFCs for Rich Schema Mappings and Rich Schema Credential Definitions are 
-incomplete.
+The RFC for Rich Schema Presentation Definitions is incomplete.
    
 ## Implementations
 
