@@ -1,4 +1,4 @@
-# 0428: Prerequisites to Request Rich Presentation
+# 0429: Prerequisites to Request Rich Presentation
 - Authors: [Brent Zundel](<brent.zundel@evernym.com>), [Ken Ebert](<ken@sovrin.org>)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-02-21
