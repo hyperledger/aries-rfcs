@@ -526,9 +526,9 @@ name, if precision is required: `{"hello"}*(aes256)B` or
 
 With signing, usually the signer and sender are assumed to be identical,
 and the notation omits any clarification about the signer. However,
-this can be added after `#` to be explicit. Thus, `{msg#B}~C` would be
+this can be added after `#` to be explicit. Thus, `{msg#B}/C` would be
 a message with plaintext signed by B, anon-encrypted for C. Similarly,
-`{msg#(ring-rabin)BGJM}~A:C` would be a message with plaintext signed
+`{msg#(ring-rabin)BGJM}/A:C` would be a message with plaintext signed
 according to a Rabin ring signature algorithm, by B, G, J, and M, and
 then auth-encrypted by A for C.
 
