@@ -10,13 +10,13 @@
 
 ## Summary
 
-There are two layers of messages that combine to enable **interoperable** self-sovereign agent-to-agent communication. At the highest level are [Agent Plaintext Messages](https://github.com/hyperledger/indy-hipe/tree/master/text/0026-agent-file-format#agent-plaintext-messages-ap) - messages sent between identities to accomplish some shared goal (e.g., establishing a connection, issuing a verifiable credential, sharing a chat). Agent Plaintext Messages are delivered via the second, lower layer of messaging - Wire. An [Agent Wire Message](https://github.com/hyperledger/indy-hipe/tree/master/text/0026-agent-file-format#agent-wire-messages-aw) is a wrapper (envelope) around a plaintext message to permit secure sending and routing. A plaintext message going from its sender to its receiver passes through many agents, and a wire message envelope is used for each hop of the journey.
+There are two layers of messages that combine to enable **interoperable** self-sovereign agent-to-agent communication. At the highest level are [DIDComm Plaintext Messages](../0044-didcomm-file-and-mime-types/README.md#didcomm-messages-dm) - messages sent between identities to accomplish some shared goal (e.g., establishing a connection, issuing a verifiable credential, sharing a chat). DIDComm Plaintext Messages are delivered via the second, lower layer of messaging - DIDComm Encrypted Envelopes. A [DIDComm Encrypted Envelope](../0044-didcomm-file-and-mime-types/README.md#didcomm-encrypted-envelope-dee) is a wrapper (envelope) around a plaintext message to permit secure sending and routing. A plaintext message going from its sender to its receiver passes through many agents, and an encryption envelope is used for each hop of the journey.
 
-This HIPE describes the wire format and the functions in Aries SDK that implement it.
+This RFC describes the DIDComm Encrypted Envelope format and the `pack()` and `unpack()` functions that implement this format.
 
 # Motivation
 
-Wire messages use a standard format built on [JSON Web Encryption - RFC 7516](
+Encryption envelopes use a standard format built on [JSON Web Encryption - RFC 7516](
 https://tools.ietf.org/html/rfc7516). This format is not captive to Aries; it requires
 no special Aries worldview or Aries dependencies to implement. Rather, it is a
 general-purpose solution to the question of how to encrypt, decrypt, and route
@@ -24,8 +24,8 @@ messages as they pass over any transport(s). By documenting the format here, we
 hope to provide a point of interoperability for developers of agents inside and
 outside the Aries ecosystem.
 
-We also document how Aries SDK implements its support for wire format through the
-`pack()` and `unpack()` functions. For developers of Aries SDK, this is a sort of
+We also document how Aries implements its support for the DIDComm Encrypted Envelope format through the
+`pack()` and `unpack()` functions. For developers of Aries, this is a sort of
 design doc; for those who want to implement the format in other tech stacks, it
 may be a useful reference.
 
@@ -44,7 +44,7 @@ The assumptions can be made because either the message is being sent to an agent
 
 ## Example Scenario
 
-The example of Alice and Bob's [sovereign domains](https://docs.google.com/document/d/1gfIz5TT0cNp2kxGMLFXr19x1uoZsruUe_0glHst2fZ8/edit#heading=h.pufsrf9ucjvv) is used for illustrative purposes in defining this HIPE.
+The example of Alice and Bob's [sovereign domains](https://docs.google.com/document/d/1gfIz5TT0cNp2kxGMLFXr19x1uoZsruUe_0glHst2fZ8/edit#heading=h.pufsrf9ucjvv) is used for illustrative purposes in defining this RFC.
 
 ![Example Domains: Alice and Bob](domains.jpg)
 
@@ -60,26 +60,26 @@ In the diagram above:
   - 1 Routing agent - "3"
   - 1 Domain Endpoint - "9"
 
-For the purposes of this discussion we are defining the Wire Message agent message flow to be:
+For the purposes of this discussion we are defining the Encryption Envelope agent message flow to be:
 
 > 1 --> 2 --> 8 --> 9 --> 3 --> 4
 
 However, that flow is just one of several that could match this configuration. What we know for sure is that:
 
 - 1 is the Sender agent in this case and so must send the first or original message.
-- 9 is the Domain Endpoint of Bob's domain and so must receive the message as a wire message
+- 9 is the Domain Endpoint of Bob's domain and so must receive the message as an Encrypted Envelope.
 - 4 is the Receiver in this case and so must receive (and should be able to read) the first or original message.
 
-## Wire Messages
+## Encrypted Envelopes
 
-A wire wessage is used to transport any plaintext message from one agent directly to another. In our example message flow above, there are five wire messages sent, one for each hop in the flow. The process to send a wire message consists of the following steps:
+An encrypted envelope is used to transport any plaintext message from one agent directly to another. In our example message flow above, there are five encrypted envelopes sent, one for each hop in the flow. The process to send an encrypted envelope consists of the following steps:
 
-- Call the standard function `pack()` (implemented in the Aries-SDK) to wrap the plaintext message
-- Send the wire message using the transport protocol defined by the receiving endpoint
-- Receive the wire message
-- Call the standard function `unpack()` to retrieve the plaintext message (and possibly its provenance) from the wire message
+- Call the standard function `pack()` to wrap the plaintext message
+- Send the encrypted envelope using the transport protocol defined by the receiving endpoint
+- Receive the encrypted envelope
+- Call the standard function `unpack()` to retrieve the plaintext message (and possibly its provenance) from the encrypted envelope
 
-This is repeated with each hop, but the wire messages are nested, such that the plaintext is never visible until
+This is repeated with each hop, but the encrypted envelopes are nested, such that the plaintext is never visible until
 it reaches its final recipient.
 
 ## Implementation
@@ -97,8 +97,8 @@ in a formal [schema](schema.md).
 When packing and unpacking are done in a way that the sender is anonymous,
 we say that we are in __anoncrypt mode__. When the sender is revealed, we
 are in __authcrypt mode__. Authcrypt mode reveals the sender *to the recipient
-only*; it is not the same as a non-repudiable signature. See the [HIPE about
-signing](https://github.com/hyperledger/indy-hipe/pull/79), and [this
+only*; it is not the same as a non-repudiable signature. See the [RFC about
+non-repudiable signatures](../0066-non-repudiable-cryptographic-envelope/README.md), and [this
 discussion about the theory of non-repudiation](https://github.com/sovrin-foundation/protocol/blob/d1039cd793a801abdc5fdfdc25ef071778039075/janus/repudiation.md).
 
 ### Pack Message
@@ -110,7 +110,7 @@ packed_message = pack_message(wallet_handle, message, receiver_verkeys, sender_v
 #### pack_message() Params:
 
 - wallet_handle: handle to the wallet that contains the sender's secrets.
-- message: the message (plaintext, or nested wire message) as a string. If it's JSON object it should be in string format first
+- message: the message (plaintext, or nested encrypted envelope) as a string. If it's JSON object it should be in string format first
 - receiver_verkeys: a list of recipient verkeys as string containing a JSON array
 - sender_verkey: the sender's verkey as a string. This verkey is used to look up the sender's private key so the wallet can put supply it as input to the encryption algorithm. When an empty string ("") is passed in this parameter, anoncrypt mode is used
 
@@ -343,12 +343,12 @@ The [JWE](https://tools.ietf.org/html/rfc7516) family of encryption methods.
 
 # Unresolved questions
 
-- How transport protocols (https, zmq, etc.) will be be used to send Wire Messages?
-    - These will need to be defined using seperate HIPEs. For example, HTTP might POST a message and place it in the body of the HTTP POST.
-- How will the wire messages work with routing tables to pass a message through a domain, potentially over various transport protocols?
-    - There's not much certainty whether routing tables or some other mechanism will be used. This needs to be defined in another HIPE.
-- If the wire protocol fails, how is that failure passed back to those involved in the transmission?
-    - This should be handled using the error-reporting mechanism which is currently proposed HIPE #65 by Stephen Curran.
+- How transport protocols (https, zmq, etc.) will be be used to send Encrypted Envelopes?
+    - These will need to be defined using separate RFCs. For example, HTTP might POST a message and place it in the body of the HTTP POST.
+- How will the encrypted envelopes work with routing tables to pass a message through a domain, potentially over various transport protocols?
+    - There's not much certainty whether routing tables or some other mechanism will be used. This needs to be defined in another RFC.
+- If the encryption envelope protocol fails, how is that failure passed back to those involved in the transmission?
+    - This should be handled using the [Report Problem Protocol](../0035-report-problem/README.md) which is currently demonstrated RFC #35 by Stephen Curran.
 
 ## Implementations
 
