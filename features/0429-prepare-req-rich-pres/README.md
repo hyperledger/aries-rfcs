@@ -9,7 +9,7 @@
 
 ## Summary
 
-Describes the prerequisites an issuer must ensure are in place before requesting
+Describes the prerequisites a verifier must ensure are in place before requesting
 a rich presentation.
 
 ## Motivation
@@ -20,7 +20,7 @@ proofs.
 
 ## Tutorial
 
-###Rich Schema Presentation Definition Workflow 
+### Rich Schema Presentation Definition Workflow 
 1. The verifier checks his wallet or the ledger to see if the presentation
 definition already exists. (The verifier determines which attribute or
 predicates he needs a holder to present to satisfy the verifier's business
@@ -60,4 +60,3 @@ generate a list of all RFCs supported by an Aries implementation.
 Name / Link | Implementation Notes
 --- | ---
  | 
-
