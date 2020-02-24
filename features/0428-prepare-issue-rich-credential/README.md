@@ -20,7 +20,7 @@ credentials.
 
 ## Tutorial
 
-###Rich Schema Credential Workflow
+### Rich Schema Credential Workflow
 
 1. The issuer checks the ledger to see if the credential definition he wants to
 use is already present.
@@ -80,4 +80,3 @@ generate a list of all RFCs supported by an Aries implementation.
 Name / Link | Implementation Notes
 --- | ---
  | 
-
