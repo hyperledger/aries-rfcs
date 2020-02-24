@@ -86,6 +86,7 @@
 * [0351: Purpose Decorator](features/0351-purpose-decorator/README.md) (2019-12-16 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0360: did:key Usage](features/0360-use-did-key/README.md) (2019-12-17 &mdash; [`feature`](/tags.md#feature))
 * [0418: Aries Rich Schema Encoding Objects](features/0418-rich-schema-encoding/README.md) (2020-02-10 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
+* [0420: Rich Schema Objects Common](concepts/0420-rich-schemas-common/README.md) (2020-02-13 &mdash; [`feature`](/tags.md#feature))
 * [0429: Prerequisites to Request Rich Presentation](features/0429-prepare-req-rich-pres/README.md) (2020-02-21 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 
 ## [RETIRED](README.md#retired)
