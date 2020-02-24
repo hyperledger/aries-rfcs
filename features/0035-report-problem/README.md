@@ -33,7 +33,7 @@ address these challenges. It makes two key contributions:
 - A [protocol](../../concepts/0003-protocols/README.md) that helps an Agent report problems with appropriate
   context. We expect this to be a subprotocol of nearly every interesting application-level
   protocol; messages from it may even be [adopted into other protocols](
-  ../../concepts/0003-protocols/template.md#adopted-messages).
+  ../../0000-template-protocol.md#adopted-messages).
 - An inventory of problem categories and best practices for handling them.
 
 ## Tutorial
@@ -117,7 +117,7 @@ Reporting problems uses a simple one-step [notification protocol](
 
 The protocol includes the standard `notifier` and `notified` roles. It
 defines a single message type `problem-report`, introduced here.
-It also [adopts](../../concepts/0003-protocols/template.md#adopted-messages) the
+It also [adopts](../../0000-template-protocol.md#adopted-messages) the
 `ack` message from the [`ACK 1.0` protocol](../0015-acks/README.md),
 to accommodate the possibility that the [`~please_ack`](../0317-please-ack/README.md)
 [decorator]( ../../concepts/0011-decorators/README.md) may be used on the
@@ -363,5 +363,5 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | The `problem-report` message is [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by this protocol.
-[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | The `problem-report` message is [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by this protocol.
+[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | The `problem-report` message is [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol.
+[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | The `problem-report` message is [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol.
