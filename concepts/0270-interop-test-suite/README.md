@@ -89,7 +89,9 @@ The contract between the test suite and the agents it tests is:
 
     Packaging could take various convenient forms. Those testing an agent install the suite in an environment that they control, where their agent is already running, and then configure the suite to talk to their agent.
     
-2. *Evaluate* the **agent under test** by engaging in protocol interactions over a **frontchannel**, and *control* the interactions over a **backchannel**. Both channels use DIDComm over HTTP.
+2. *Evaluate* the **agent under test** by engaging in protocol interactions over a **frontchannel**, and *control* the interactions over a **backchannel**.
+
+    >Note: Initially, this doc stipulated that both channels should use DIDComm over HTTP. This has triggered some dissonance. If an agent doesn't want to talk HTTP, should it have to, just to be tested? If an agent wants to be controlled over a RESTful interface, shouldn't it be allowed to do that? Answers to the preceding two questions have been proposed (use a generic adapter to transform the protocol, but don't make the test suite talk on a different frontchannel; unless all agents expose the same RESTful interface, the only thing we can count on is that agents will have DIDComm support, and the only methdology we have for uniform specification is to describe a DIDComm-based protocol, so yes, backchannel should be DIDComm). These two incompatible opinions are both alive and well in the community, and we are not yet converging on a consensus. Therefore, the actual implementation of the frontchannel and backchannel remains a bit muddy right now. Perhaps matters will clarify as we think longer and/or as we gain experience with implementation.
 
     Over the frontchannel, the test suite and the agent under test look like ordinary agents in the ecosystem; any messages sent over this channel could occur in the wild, with no clue that either party is in testing mode.
     
