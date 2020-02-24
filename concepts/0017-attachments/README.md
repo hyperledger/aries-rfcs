@@ -36,7 +36,7 @@ data, and vice versa. After all, any data can be transmitted over
 DIDComm; doesn't that turn it into a message? And any message can
 be saved; doesn't that make it data?
 
-What it is true that messages and data are highly related,
+While it is true that messages and data are highly related,
 some semantic differences matter:
 
 * _Messages are primarily about communication_. Their meaning is tied
@@ -64,11 +64,10 @@ artifacts are data, whereas the information packets that arrange the
 transmission and provide a carrying mechanism for the artifacts are
 messages.
 
-* A DIDComm message can be used to [report an error](https://github.com/hyperledger/indy-hipe/blob/d6503aeb/text/error-reporting/README.md). Descriptive
+* A DIDComm message can be used to [report an error](../../features/0035-report-problem/README.md). Descriptive
 parameters that change how the error is processed are probably
 part of the message, whereas a log file that provides supporting
-information should be thought of as data rather than the message
-proper.
+information should be thought of as data rather than the message.
 
 * The protocol for issuing credentials consists of messages that flow
 through certain steps. One of the steps eventually delivers a credential.
@@ -84,7 +83,7 @@ venue, instructions about how to unlock the gate, pictures of certain
 resources, and so forth. This collateral is _data_, whereas the messages
 that signal progression through the steps of scheduling are not.
 
-* The [Connection Protocol](https://github.com/hyperledger/indy-hipe/blob/master/text/0031-connection-protocol/README.md)
+* The [Connection Protocol](../../features/0160-connection-protocol/README.md)
 exchanges messages to establish a connection between two parties. Part of
 what's exchanged is a DID Doc. The DID Doc is more like _data_ than it is
 like an ordinary _message_, since it has meaning at rest and outside the
@@ -92,7 +91,7 @@ protocol.
 
 The line between these two concepts may not be perfectly crisp in all cases,
 and that is okay. It is clear enough, most of the time, to provide context
-for the central question of this HIPE, which is:
+for the central question of this RFC, which is:
 
 >How do we send data through messages?
 
@@ -110,7 +109,7 @@ In __inlining__, data is directly assigned as the value paired with a JSON key
 in a DIDComm message. For example, [a DID Document is inlined as the
 value of the `did_doc` key in `connection_request` and
 `connection_response` messages in the Connection
-1.0 Protocol](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol#example):
+1.0 Protocol](../../features/0160-connection-protocol/README.md#example):
 
 [![inlined DID Doc](inlined.png)](connection-request.json)
 
@@ -132,7 +131,7 @@ can share common handling logic in agent code. The attachment descriptor structu
 describes the MIME type and other properties of the data, in much the
 same way that MIME headers and body describe and contain an attachment
 in an email message. Given an imaginary protocol that photographers could
-use to share a their favorite photo with friends, the embedded data might
+use to share their favorite photo with friends, the embedded data might
 manifest like this:
 
 [![embedded photo](embedded.png)](photo-share.json)
