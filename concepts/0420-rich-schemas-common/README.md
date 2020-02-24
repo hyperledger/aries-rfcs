@@ -15,7 +15,7 @@ W3C Verifiable Credentials and Presentations, and correspondingly rich presentat
 Please see [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas) 
 for high-level description.
 
-This HIPE provides more low-level description of Rich Schema objects defining how they are identified and referenced.
+This RFC provides more low-level description of Rich Schema objects defining how they are identified and referenced.
 It also defines a general template and common part for all Rich Schema objects. 
 
 ## Motivation
@@ -23,7 +23,7 @@ It also defines a general template and common part for all Rich Schema objects.
 Please see [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
 for use cases and high-level description of why Rich Schemas are needed.
 
-This HIPE serves as a low-level design of common parts between all Rich Schema objects, and can help developers to 
+This RFC serves as a low-level design of common parts between all Rich Schema objects, and can help developers to 
 properly implement Rich Schema transactions on the Ledger and the corresponding client API. 
 
 ## Tutorial: General Principles
