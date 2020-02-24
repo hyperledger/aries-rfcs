@@ -19,7 +19,7 @@ deliver messages only after decrypting an outer envelope to reveal
 a `forward` request. Many types of mediators may exist, but two important
 ones should be widely understood, as they commonly manifest in DID Docs:
 
-1. A service that hosts many cloud agents a single endpoint to provide herd
+1. A service that hosts many cloud agents at a single endpoint to provide herd
 privacy (an "agency") is a _mediator_.
 2. A cloud-based agent that routes between/among the edges of a sovereign
 domain is a _mediator_.

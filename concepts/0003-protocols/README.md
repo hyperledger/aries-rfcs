@@ -330,3 +330,4 @@ Name / Link | Implementation Notes
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | mature but proprietary protocols; community protocols in process
 [Verity](https://www.evernym.com/products/) | mature but proprietary protocols; community protocols in process
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 2 or 3 core protocols; active work to implement all that are ACCEPTED, since this tests conformance of other agents
+[Pico Labs](http://picolabs.io/) | [implemented](https://github.com/Picolab/G2S) protocols: connections, trust_ping, basicmessage, routing

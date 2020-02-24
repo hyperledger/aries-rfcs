@@ -1,4 +1,4 @@
-# Aries RFC 0035: JSON-LD Compatibility
+# Aries RFC 0047: JSON-LD Compatibility
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
