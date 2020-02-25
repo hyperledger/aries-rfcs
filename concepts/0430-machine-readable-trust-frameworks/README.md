@@ -187,7 +187,7 @@ We begin by noticing that KMK (KultusMinisterKonferenz), the accrediting body fo
 
 We posit an issuer, Faber College, that wants to issue credentials compliant with this trust framework. This means that Faber College wants the `issue-edu` privilege defined at http://kmk.org/tf/issue-edu (see the second item in the `privileges` array). It wants to create credentials that contain the following field: `"trust_framework": "http://https://kmk.org/uni-accred-trust-fw/v1/tf.json"` (see the `data_uri` field). It wants to have a credential from KMK proving its accreditation (see second item in the `rules` array).
 
-Faber is required by this trust framework to accept the terms of service published at http://kmk.org/tf/tos, because it can't get the `issue-edu` privilege without incurring that duty (see the `accept-kmk-tos` duty in the second item in the `rules` array). KMK by implication incurs the obligation to enforce these terms of service when it issues a credential to Faber.
+Faber is required by this trust framework to accept the terms of service published at http://kmk.org/tf/tos, because it can't get the `issue-edu` privilege without incurring that duty (see the `accept-kmk-tos` duty in the second item in the `rules` array). KMK by implication incurs the obligation to enforce these terms of service when it issues a credential attesting Faber's accreditation and compliance with the trust framework.
 
 Assuming that Faber proceeds and satisfies KMK, Faber is now considered a `school` as far as this trust framework is concerned.
 
