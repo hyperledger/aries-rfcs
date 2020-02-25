@@ -239,9 +239,9 @@ The point here is not the specifics in the UI we're positing. Different UX desig
 
 Trust framework data structures follow [semver rules](https://semver.org):
 
-* A major change is one that breaks established trust, or that makes application of updated trust to old relationships questionable. Examples include:
+* A major change is one that breaks the trust status of another party as a result of the change. Examples include:
 
-    * Altering the internal structure of the JSON in a breaking way.
+    * Altering the internal structure of the JSON in a breaking way, such that software can no longer process the structure. (Software is required to ignore fields in this structure that it doesn't understand, so simply adding things won't do this.)
     * Disallowing a formerly defined field.
     * Making a field required that used to be optional.
     * Removing a defined role or privilege, such that relationships built under an old version of the framework are no longer explainable in an updated version.
