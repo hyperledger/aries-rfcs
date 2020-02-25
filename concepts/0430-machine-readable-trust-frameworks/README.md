@@ -8,7 +8,7 @@
 
 ## Summary
 
-Explains how trust frameworks are embodied in formal data structures, so it's possible to react to them with software as opposed to human intelligence.
+Explains how trust frameworks are embodied in formal data structures, so it's possible to react to them with software, not just with human intelligence.
 
 ## Motivation
 
@@ -17,7 +17,7 @@ We need to be able to write software that reacts to arbitrary trust frameworks i
 
 ## Tutorial
 
-A __trust framework__ (also called a __governance framework__, especially when the connotation is more formal and institutional) is a set of rules that establish trust about process (and indirectly, about outcomes) in a given context. For example, the rules that bind buyers, merchants, vendors, and a global credit card company like Mastercard or Visa constitute a trust framework in a financial services context &mdash; and they have a corresponding trust mark to make the trust framework's relevance explicit. The rules by which certificate authorities are vetted and approved by browser manufacturers, and by which CAs issue derivative certificates, constitute a trust framework in a web context. Trust frameworks are like guy wires: they balance opposing forces to produce careful alignment and optimal behavior.
+A __trust framework__ (also called a __governance framework__, especially when the connotation is more formal and institutional) is a set of rules that establish trust about process (and indirectly, about outcomes) in a given context. For example, the rules that bind buyers, merchants, vendors, and a global credit card company like Mastercard or Visa constitute a trust framework in a financial services context &mdash; and they have a corresponding trust mark to make the trust framework's relevance explicit. The rules by which certificate authorities are vetted and accepted by browser manufacturers, and by which CAs issue derivative certificates, constitute a trust framework in a web context. Trust frameworks are like guy wires: they balance opposing forces to produce careful alignment and optimal behavior.
 
 [![guy wires: Stephen Edmonds, Flickr, CC-BY-SA 2.0](guy-wires.jpg)](https://www.flickr.com/photos/popcorncx/31899289874/)
 
