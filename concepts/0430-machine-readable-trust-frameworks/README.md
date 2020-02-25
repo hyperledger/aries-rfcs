@@ -17,7 +17,7 @@ We need to be able to write software that reacts to arbitrary trust frameworks i
 
 ## Tutorial
 
-A __trust framework__ is a set of rules that establish trust about process (and indirectly, about outcomes) in a given context. For example, the rules that bind buyers, merchants, vendors, and a global credit card company like Mastercard or Visa constitute a trust framework in a financial services context &mdash; and they have a corresponding trust mark to make the trust framework's relevance explicit. The rules by which certificate authorities are vetted and approved by browser manufacturers, and by which CAs issue derivative certificates, constitute a trust framework in a web context. Trust frameworks are like guy wires: they balance opposing forces to produce careful alignment and optimal behavior.
+A __trust framework__ (also called a __governance framework__, especially when the connotation is more formal and institutional) is a set of rules that establish trust about process (and indirectly, about outcomes) in a given context. For example, the rules that bind buyers, merchants, vendors, and a global credit card company like Mastercard or Visa constitute a trust framework in a financial services context &mdash; and they have a corresponding trust mark to make the trust framework's relevance explicit. The rules by which certificate authorities are vetted and approved by browser manufacturers, and by which CAs issue derivative certificates, constitute a trust framework in a web context. Trust frameworks are like guy wires: they balance opposing forces to produce careful alignment and optimal behavior.
 
 [![guy wires: Stephen Edmonds, Flickr, CC-BY-SA 2.0](guy-wires.jpg)](https://www.flickr.com/photos/popcorncx/31899289874/)
 
@@ -49,9 +49,9 @@ When we have good answers to this question, we can address feature requests like
 
 #### Sample Data Structure
 
-Trust Frameworks generally begin as human-friendly content. They have to be created, reviewed, and agreed upon by experts from various disciplines: legal, business, humanitarian, government, trade groups, advocacy groups, etc. Developers can facilitate by surfacing how rules are (or are not) susceptible to formal modeling.
+Trust frameworks generally begin as human-friendly content. They have to be created, reviewed, and agreed upon by experts from various disciplines: legal, business, humanitarian, government, trade groups, advocacy groups, etc. Developers can help by surfacing how rules are (or are not) susceptible to modeling in formal data structures. This can lead to an iterative process, where data structures and human conversations create refinement pressure on each other until the framework is ready for release.
 
-Each problem domain will probably have unique requirements. Therefore, a general trust framework recipe needs to be extensible. We use JSON-LD for this purpose. Here we present a simple example for the problem domain of university credentials in Germany. It manifests just the components of a trust framework that are common across all contexts; additional JSON-LD `@context` values can be added to introduce more structure as needed. 
+Each problem domain will probably have unique requirements. Therefore, we start with a general trust framework recipe, but plan for extension. We use JSON-LD for this purpose. Here we present a simple example for the problem domain of university credentials in Germany. It manifests just the components of a trust framework that are common across all contexts; additional JSON-LD `@context` values can be added to introduce more structure as needed. 
 
 ```jsonc
 {
@@ -181,76 +181,116 @@ Each problem domain will probably have unique requirements. Therefore, a general
 
 #### Using the Sample
 
-Let's look at how the above structure can be used to influence behavior of verifiable credential management software.
+Let's look at how the above structure can be used to influence behavior of verifiable credential management software, and the parties that use it.
 
 We begin by noticing that KMK (KultusMinisterKonferenz), the accrediting body for universities in Germany, has a privileged role in this trust framework. It is given the right to operate as "KMK" as long as it proves control of one of the two DIDs named in the `define` array. 
 
-We next posit an issuer, Faber College, that wants to issue credentials compliant with this trust framework. This means that Faber College wants the `issue-edu` privilege defined at http://kmk.org/tf/issue-edu (see the second item in the `privileges` array). It wants to create credentials that contain the following field: `"trust_framework": "http://https://kmk.org/uni-accred-trust-fw/v1/tf.json"` (see the `data_uri` field). It wants to have a credential from KMK proving its accreditation (see second item in the `rules` array).
+We posit an issuer, Faber College, that wants to issue credentials compliant with this trust framework. This means that Faber College wants the `issue-edu` privilege defined at http://kmk.org/tf/issue-edu (see the second item in the `privileges` array). It wants to create credentials that contain the following field: `"trust_framework": "http://https://kmk.org/uni-accred-trust-fw/v1/tf.json"` (see the `data_uri` field). It wants to have a credential from KMK proving its accreditation (see second item in the `rules` array).
 
 Faber is required by this trust framework to accept the terms of service published at http://kmk.org/tf/tos, because it can't get the `issue-edu` privilege without incurring that duty (see the `accept-kmk-tos` duty in the second item in the `rules` array). KMK by implication incurs the obligation to enforce these terms of service when it issues a credential to Faber.
 
 Assuming that Faber proceeds and satisfies KMK, Faber is now considered a `school` as far as this trust framework is concerned.
 
-Now, let us suppose that Alice, a student at Faber, wants to get a diploma as a verifiable credential. In addition to whatever else Faber does before it gives Alice a diploma, Faber is obligated by the trust framework to challenge Alice to prove she's a human being (see `when` in the third item of the `rules` array). Hopefully this is easy, and was done long before graduation. :-) It is also obligated to introduce Alice to the terms of service for KMK, since Alice will be acquiring the `graduate` role and this rule has the `accept-kmk-tos` duty.
+Now, let us suppose that Alice, a student at Faber, wants to get a diploma as a verifiable credential. In addition to whatever else Faber does before it gives Alice a diploma, Faber is obligated by the trust framework to challenge Alice to prove she's a human being (see `when` in the third item of the `rules` array). Hopefully this is easy, and was done long before graduation. :-) It is also obligated to introduce Alice to the terms of service for KMK, since Alice will be acquiring the `graduate` role and this rule has the `accept-kmk-tos` duty. How Faber does this is something that might be clarified in the terms of service that Faber already accepted; we'll narrate one possible approach.
 
-Alice is holding a mobile app that manages credentials for her. She clicked an invitation to receive a credential in some way. What she sees on her screen might look something like this:
+Alice is holding a mobile app that manages credentials for her. She clicks an invitation to receive a credential in some way. What she sees next on her screen might look something like this:
 
 ![possible trust rules acceptance screen](ux-accept-tf.png)
+
+Her app knew to display this message because the issuer, Faber College, communicated its reliance on this trust framework (by URI) as part of an early step in the issuance process (e.g., in the invitation or in the [`offer-credential` message](../../features/0036-issue-credential/README.md#propose-credential)). Notice how metadata from the trust framework &mdash; its title, version, topics, and descriptions &mdash; show up in the prompt. Notice as well that trust frameworks have reputations. This helps users determine whether the rules are legitimate and worth using. The "More Info" tab would link to the trust framework's `docs_uri` page.
+
+Alice doesn't have to re-accept the trust framework if she's already using it (e.g., if she already activated it in her mobile app because she's using it for another credential or two). As a person works regularly within a particular credential domain, decisions like these will become cached and seamless. However, we're showing the step here, for completeness.
+
+Suppose that Alice accepts the proposed rules. The trust framework requires that she also accept the KMK terms of service. These might require her to report any errors in her credential properly, and clarify that she has the right to appeal (see the `redress` section of the trust framework data structure). They might also discuss the KMK trust framework's requirement for random auditing (see the `audit` section).
+
+A natural way to introduce Alice to these topics might be to combine them with a normal "Accept terms of service" screen for Faber itself. Many issuers are likely to ask holders to agree to how they want to manage revocation, privacy, and GDPR compliance; including information about terms that Faber inherited from the trust framework would be an easy addition.
+
+Suppose, therefore, that Alice is next shown a "Terms of Service" screen like the following.
+
+![possible terms of service acceptance screen](tos.png)
+
+Note the hyperlink back to the trust framework; if Alice already accepted the trust framework in another context, this helps her know what trust framework is in effect for a given credential.
+
+After Alice accepts the terms, she now proceeds with the issuance workflow. For the most part, she can forget about the trust framework attached to her credential &mdash; but the software doesn't. Some of the screens it might show her, because of information that it reads in the trust framework, include things like:
+
+![issuer is behaving properly](issuer-ok.png)
+
+Or, alternatively:
+ 
+![issuer is NOT behaving properly](issuer-not-ok.png)
+
+In either case, proof of the issuer's qualifications was requested automatically, using canned criteria (see the second item in the trust framework's `rules` array).
+
+Trust framework knowledge can also be woven into other parts of a UI, as for example:
+
+![about diploma](about-diploma.png)
+
+And:
+
+![about trust framework](about-tf.png)
+
+And:
+
+![upgrade trust framework](ux-upgrade-tf.png)
+
+The point here is not the specifics in the UI we're positing. Different UX designers may may different choices. Rather, it's that by publishing a carefully versioned, machine-readable trust framework, such UIs become possible. The user's experience becomes less about individual circumstances, and more about general patterns that have known reputations, dependable safeguards, and so forth.
+
+#### Versioning
+
+Trust framework data structures follow [semver rules](https://semver.org):
+
+* A major change is one that breaks established trust, or that makes application of updated trust to old relationships questionable. Examples include:
+
+    * Altering the internal structure of the JSON in a breaking way.
+    * Disallowing a formerly defined field.
+    * Making a field required that used to be optional.
+    * Removing a defined role or privilege, such that relationships built under an old version of the framework are no longer explainable in an updated version.
+    * Changing how privileges are granted, in such a way that a party who had privileges before would lose them across the update.
+    * Substantive changes to terms of service.
+
+* A minor change adds precision or options to an existing trust framework, without invalidating trust built with proximate, preceding versions. For example:
+
+    * Adding new roles or privileges.
+    * Changing URIs or minor details of auditing, redress, or terms of service.
+    * Changing privilege grants such that existing parties with existing privileges get new privileges as well.
+    
+* Patch versions of trust frameworks are supported but generally not displayed. They should be safe to accept automatically. They include things like:
+
+    * Adding new topics (hash tags).
+    * Tweaking descriptions.
+    
+#### Localization
+
+Trust frameworks can offer localized alternatives of text using the same mechanism described in [RFC 0043: l10n](../../features/0043-l10n/README.md); treat the trust framework JSON as a DIDComm message and use decorators as it describes.
  
 ## Reference
 
-Provide guidance for implementers, procedures to inform testing,
-interface definitions, formal function prototypes, error codes,
-diagrams, and other technical details that might be looked up.
-Strive to guarantee that:
+See inline comments in the sample JSON above. All fields are optional except the trust framework's `name`, `version`, `data_uri`, and at least one `define` or `rules` item to confer some trust.
 
-- Interactions with other features are clear.
-- Implementation trajectory is well defined.
-- Corner cases are dissected by example.
+[Another sample trust framework](../0103-indirect-identity-control/guardianship-sample/trust-framework.md) (including the human documentation that would accompany the data structure) is [presented as part of the discussion of guardianship in RFC 0103](../0103-indirect-identity-control/README.md).
 
 ## Drawbacks
 
-Why should we *not* do this?
+#### Timing?
+It may be early in the evolution of the ecosystem to attempt to standardize trust framework structure. (On the other hand, if we don't standardize now, we may be running the risk of unwise divergence.)
+
+#### Overkill?
+Joe Andrieu has pointed out on W3C CCG mailing list discussions that some important use cases for delegation involve returning to the issuer of a directed capability to receive the intended privilege. This contrasts with the way verifiable credentials are commonly used (across trust domain boundaries).
+
+Joe notes that trust frameworks are unnecessary (and perhaps counterproductive) for the simpler, within-boundary case; if the issuer of a directed capability is also the arbiter of trust in the end, credentials may be overkill. To the extent that Joe's insight applies, it may suggest that formalizing trust framework data structures is also overkill in some use cases.
 
 ## Rationale and alternatives
 
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not
-choosing them?
-- What is the impact of not doing this?
+- We could leave trust frameworks as entirely human-consumable artifacts. This would cause developers to interpret each set of such artifacts into code in a unique way. Bespoke adaptation might result in more polished UX and impose less learning curve on users, but it would also create larger integration burdens and greater difficulty in assessing trust.
 
 ## Prior art
 
-Discuss prior art, both the good and the bad, in relation to this proposal.
-A few examples of what this can include are:
-
-- Does this feature exist in other SSI ecosystems and what experience have
-their community had?
-- For other teams: What lessons can we learn from other attempts?
-- Papers: Are there any published papers or great posts that discuss this?
-If you have some relevant papers to refer to, this can serve as a more detailed
-theoretical background.
-
-This section is intended to encourage you as an author to think about the
-lessons from other implementers, provide readers of your proposal with a
-fuller picture. If there is no prior art, that is fine - your ideas are
-interesting to us whether they are brand new or if they are an adaptation
-from other communities.
-
-Note that while precedent set by other communities is some motivation, it
-does not on its own motivate an enhancement proposal here. Please also take
-into consideration that Aries sometimes intentionally diverges from common
-identity features.
+Some of the work on consent receipts, both in the Kantara Initiative and here in [RFC 0167](../0167-data-consent-lifecycle/README.md), overlaps to a small degree. However, this effort and that one are mainly complementary rather than conflicting.
 
 ## Unresolved questions
 
-- What parts of the design do you expect to resolve through the
-enhancement proposal process before this gets merged?
-- What parts of the design do you expect to resolve through the
-implementation of this feature before stabilization?
-- What related issues do you consider out of scope for this 
-proposal that could be addressed in the future independently of the
-solution that comes out of this doc?
+* How do we enumerate canonical proof requests, and map them to circumstances appropriately?
+* How do we test whether those circumstances apply? 
    
 ## Implementations
 
