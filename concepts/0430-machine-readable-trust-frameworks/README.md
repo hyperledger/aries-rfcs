@@ -66,7 +66,7 @@ Each problem domain will probably have unique requirements. Therefore, we start 
     // version (semver rules apply)
     "1.0",
     // Something that can be displayed to a user.
-    "http://kmk.org/uni-accred-trust-fw/logo.png",
+    "logo": "http://kmk.org/uni-accred-trust-fw/logo.png",
     // Something that can be displayed to a user.
     "description": "Governs accredited colleges and universities in Germany.",
     // Where is this trust framework officially published, in human-
