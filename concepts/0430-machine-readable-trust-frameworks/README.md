@@ -69,10 +69,10 @@ Each problem domain will probably have unique requirements. Therefore, we start 
     "logo": "http://kmk.org/uni-accred-trust-fw/logo.png",
     // Something that can be displayed to a user.
     "description": "Governs accredited colleges and universities in Germany.",
-    // Where is this trust framework officially published, in human-
+    // Where is this trust framework officially published in human-
     // readable form? A human can browse here to learn more.
     "docs_uri": "http://https://kmk.org/uni-accred-trust-fw/v1",
-    // Where is this trust framework officially published, as a
+    // Where is this trust framework officially published as a
     // machine-readable data structure? A computer should be able to
     // GET this JSON (MIME type = application/json) at the specified
     // URI.
@@ -170,7 +170,7 @@ Each problem domain will probably have unique requirements. Therefore, we start 
             "probability": "0.01"
         },
         // Is there an authority to whom requests for redress can
-        // be made, if another party feels like another violates
+        // be made, if one party feels like another violates
         // the trust framework? 
         "redress": {
             "uri": "http://kmk.org/redress"
