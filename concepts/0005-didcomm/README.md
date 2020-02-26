@@ -182,4 +182,5 @@ Name / Link | Implementation Notes
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | Free mobile app from Evernym. Installed via app store on iOS and Android. 
 [Verity](https://www.evernym.com/products/) | Commercially licensed enterprise agent, SaaS or on-prem.
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 
+[Pico Labs](http://picolabs.io/) | [Pico Agents](https://github.com/Picolab/G2S) protocols: connections, trust_ping, basicmessage, routing
  
