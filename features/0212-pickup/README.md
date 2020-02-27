@@ -70,7 +70,7 @@ A message that contains multiple waiting messages.
 {
     "@id": "123456781",
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/batch",
-    "~attach": [
+    "messages~attach": [
         {
             "@id" : "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
             "message" : {
@@ -92,8 +92,6 @@ A request to read single or multiple messages with a message message id array.
 ```json=
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/single_pickup",
-    "message_id": "06ca25f6-d3c5-48ac-8eee-1a9e29120c31"
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/list_pickup",
     "message_ids": [
         "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
@@ -107,7 +105,7 @@ A response to query with message id list.
 ```json=
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/list-response",
-    "~attach": [
+    "messages~attach": [
         {
             "@id" : "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
             "message" : {
