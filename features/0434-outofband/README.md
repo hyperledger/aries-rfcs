@@ -329,14 +329,14 @@ Example URL encoded as a QR Code:
 
 #### URL Shortening
 
-It seems inevitable that the length of some out of band message will be too long to produce a useable QR code. Techniques to avoid unusable QR codes have been presented above, including using attachment links for requests, minimizing the routing of the response and eliminating unnecessary whitespace in the JSON. However, at some point an _sender_ may need generate a very long URL. In that case, a URL shortner redirection should be implemented by the sender as follows:
+It seems inevitable that the length of some out of band message will be too long to produce a useable QR code. Techniques to avoid unusable QR codes have been presented above, including using attachment links for requests, minimizing the routing of the response and eliminating unnecessary whitespace in the JSON. However, at some point an _sender_ may need generate a very long URL. In that case, a URL shortener redirection should be implemented by the sender as follows:
 
 - the sender should generate and track a GUID for the out of band message URL
-- The `c_i` field in the URL should replaced with the GUID, as follows:
-  - `http://example.com/ssi?c_i=5f0e3ffb-3f92-4648-9868-0d6f8889e6f3`
-- If a GUID is found in the `c_i` parameter, do an HTTP GET to retrieve the associated, encoded out of band message
+- The shortened version should be:
+  - `https://example.com/ssi?id=5f0e3ffb-3f92-4648-9868-0d6f8889e6f3`
+- On receipt of this form of message, the agent must do an HTTP GET to retrieve the associated, encoded out of band message
 
-With that shortening of the URL, a usable QR code will always be able to be generated.
+With the shortening of the URL, a usable QR code will always be able to be generated.
 
 #### Out of Band Message Publishing
 
