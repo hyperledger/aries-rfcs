@@ -11,7 +11,7 @@
 ## Summary
 
 Explains the goals of DID Communication with respect to JSON-LD,
-and how Indy proposes to accomplish them.
+and how Aries proposes to accomplish them.
 
 ## Motivation
 
@@ -96,7 +96,7 @@ understanding follows.
 
 #### `@type`
 
-The type of an DIDComm message, and its associated route or handler in dispatching code,
+The type of a DIDComm message, and its associated route or handler in dispatching code,
 is given by the JSON-LD `@type` property at the root of a message.
 [JSON-LD requires this value to be an IRI](https://w3c.github.io/json-ld-syntax/#typed-values).
 DIDComm DID references are [fully compliant](https://w3c-ccg.github.io/did-spec/#paths).
@@ -105,7 +105,7 @@ but no predefined relevance in DIDComm.
 
 #### `@id`
 
-The identifier for an DIDComm message is given by the JSON-LD `@id` property at the
+The identifier for a DIDComm message is given by the JSON-LD `@id` property at the
 root of a message. [JSON-LD requires this value to be an IRI](https://w3c.github.io/json-ld-syntax/#specifying-the-type).
 DIDComm message IDs are relative IRIs, and can be converted to absolute form as described in [RFC 0217: Linkable Message Paths](../0217-linkable-message-paths/README.md). Instances of `@id` on any node other than a message root
 have JSON-LD meaning, but no predefined relevance in DIDComm.
@@ -125,7 +125,7 @@ which focuses on how ordinary JSON can be intepreted as JSON-LD by communicating
 DIDComm messages communicate the context out of band by specifying it in the
 protocol definition (e.g., RFC) for the associated message type; thus, the
 value of `@type` indirectly gives the relevant `@context`. In advanced use cases,
-`@context` may appear in an DIDComm message, supplementing this behavior.
+`@context` may appear in a DIDComm message, supplementing this behavior.
 
 #### Ordering
 
@@ -157,7 +157,7 @@ is automatically imputed to every DIDComm message:
 
 ```JSON
 "@context": {
-  "@vocab": "https://github.com/hyperledger/aries-rfc/"
+  "@vocab": "https://github.com/hyperledger/aries-rfcs/"
 }
 ```
 
@@ -175,7 +175,7 @@ sophistication and library dependencies.
 
 The DIDComm community is not opposed to using LD Signatures for problems that
 need them, but has decided not to adopt the mechanism across the board.
-There is [another signing mechanism](https://github.com/hyperledger/indy-hipe/pull/79)
+There is [another signing mechanism](../../features/0234-signature-decorator/README.md)
 that is far simpler, and adequate for many scenarios. We’ll use whichever
 scheme is best suited to circumstances.
 
@@ -190,8 +190,8 @@ However, it is available on a message-type-definition basis (not ad hoc).
 
 #### Node References
 
-JSON-LD lets one field reference another. See [example 67](
- https://w3c.github.io/json-ld-syntax/#ex-67-referencing-node-objects) (note
+JSON-LD lets one field reference another. See [example 93](
+ https://w3c.github.io/json-ld-syntax/#example-93-referencing-node-objects) (note
  that the ref could have just been “#me” instead of the fully qualified IRI).
  We may need this construct at some point in DIDComm, but it is not in active
  use yet.

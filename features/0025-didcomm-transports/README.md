@@ -53,8 +53,8 @@ Websockets are an efficient way to transmit multiple messages without the overhe
 
 XMPP is an effective transport for incoming DID-Communication messages directly to mobile agents, like smartphones.
 
-- Incoming DID-Communication messages will arrive, even if the mobile agent is behind a firewalls and network-address-translation (NAT).
-- Incoming DID-Communication messages continue to arrive, even when the IP adress of the mobile agent changes (switching between, 3G, 4G, Wifi, roaming, ...).
+- Incoming DID-Communication messages will arrive, even if the mobile agent is behind a firewall and network-address-translation (NAT).
+- Incoming DID-Communication messages continue to arrive, even when the IP address of the mobile agent changes (switching between, 3G, 4G, Wifi, roaming, ...).
 - Independent of cloud agents and routing agents, as messages arrive directly at the mobile agent.
 - Well suited for direct consumer-to-consumer SSI transactions, from one mobile agent directly to another mobile agent without any DID-Communication intermediaries.
 - Simple encapsulation of DIDcom messages, getting trust from the DIDcom Encryption Envelope.
@@ -70,7 +70,7 @@ Other transports may be used for Agent messaging. As they are developed, this RF
 
 ### Message Routing
 
-The transports described here are used between two agents. In the case of [message routing](https://github.com/hyperledger/indy-hipe/tree/master/text/0022-cross-domain-messaging), a message will travel across multiple agent connections. Each intermediate agent (see [Mediators and Relays](../../concepts/0046-mediators-and-relays/README.md)) may use a different transport. These transport details are not made known to the sender, who only knows the keys of Mediators and the first endpoint of the route.
+The transports described here are used between two agents. In the case of [message routing](../../concepts/0094-cross-domain-messaging/README.md), a message will travel across multiple agent connections. Each intermediate agent (see [Mediators and Relays](../../concepts/0046-mediators-and-relays/README.md)) may use a different transport. These transport details are not made known to the sender, who only knows the keys of Mediators and the first endpoint of the route.
 
 ### Message Context
 
