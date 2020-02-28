@@ -9,7 +9,7 @@
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 - Protocol Name: Out of Band
 - Version: 1.0
-- URI: `http://didcomm.org/out_of_band/VER/MsgType`
+- URI: `http://didcomm.org/out-of-band/VER/MsgType`
 
 ## Summary
 
@@ -68,7 +68,7 @@ The agent that receives the out of band message and decides how to respond. Ther
 
 ### States
 
-The state machines for the sender and receiver are a bit odd for the out of band protocol because of it being a single message protocol with a response from a different protocol. In the following state machine diagrams we generically describe the response message from the *sender* as being a DIDComm message without associating the message with a specific protocol.
+The state machines for the sender and receiver are a bit odd for the out of band protocol because of it being a single message protocol with a response from a different protocol. In the following state machine diagrams we generically describe the response message from the *receiver* as being a DIDComm message without associating the message with a specific protocol.
 
 The *sender* state machine is as follows:
 
@@ -94,7 +94,7 @@ There are two messages in the out of band protocol. They are both sent by the *s
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
   "protocols": [
-      "https://didcomm.org/did-exchange/1.0",
+      "https://didcomm.org/didexchange/1.0",
       "https://didcomm.org/connections/1.0"
       ]
   "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
@@ -156,11 +156,11 @@ The following is an example of a two entry array, one of each form:
   "@type": "https://didcomm.org/outofband/VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College"
-  "protocols": ["https://didcomm.org/did-exchange/1.0"]
+  "protocols": ["https://didcomm.org/didexchange/1.0"]
   "service": [
       {
         "id": "#inline"
-        "type": "didcomm",
+        "type": "did-communication",
         "recipientKeys": ["did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"],
         "routingKeys": [],
         "serviceEndpoint": "https://example.com:5000"
@@ -172,8 +172,8 @@ The following is an example of a two entry array, one of each form:
 
 The processing rules for the service block are:
 
-- Use only entries where the `type` is equal to `didcomm`.
-  - Entries without a `type` are assumed to be "didcomm".
+- Use only entries where the `type` is equal to `did-communication`.
+  - Entries without a `type` are assumed to be "did-communication".
 - The sender **MUST** put the array into their order of preference, and, as such, the receiver **SHOULD** prefer the entries in order.
 
 The attributes in the inline form parallel the attributes of a DID Document for increased meaning. The `recipientKeys` and `routingKeys` within the inline block decorator must be [`did:key` references](https://digitalbazaar.github.io/did-method-key/).
@@ -192,7 +192,7 @@ The `problem_report` message **MAY** be adopted by the out of band protocol if t
 
 ### Constraints
 
-An existing connection can only be reused based on a public DID in an out of banc message. It would be nice to have a way to be able to reuse an existing connection to the same entity even if there is no public DID in the out of band message.
+An existing connection can only be reused based on a public DID in an out of band message. It would be nice to have a way to be able to reuse an existing connection to the same entity even if there is no public DID in the out of band message.
 
 ## Reference
 
@@ -296,7 +296,7 @@ Invitation:
   "@type": "https://didcomm.org/outofband/1.0/invitation",
   "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3",
   "label": "Alice",
-  "protocols": ["https://didcomm.org/did-exchange/1.0", https://didcomm.org/connections/1.0]
+  "protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"],
   "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
 }
 ```
@@ -304,19 +304,19 @@ Invitation:
 Whitespace removed:
 
 ```jsonc
-{ "@type": "https://didcomm.org/outofband/1.0/invitation", "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3", "label": "Alice", "protocols": ["https://didcomm.org/did-exchange/1.0", https://didcomm.org/connections/1.0] "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"] }
+{ "@type": "https://didcomm.org/outofband/1.0/invitation", "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3", "label": "Alice", "protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"], "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"] }
 ```
 
 Base 64 URL Encoded:
 
 ```text
-eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJBbGljZSIsICJwcm90b2NvbHMiOiBbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkLWV4Y2hhbmdlLzEuMCIsIGh0dHBzOi8vZGlkY29tbS5vcmcvY29ubmVjdGlvbnMvMS4wXSAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==
+eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJBbGljZSIsICJwcm90b2NvbHMiOiBbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwgImh0dHBzOi8vZGlkY29tbS5vcmcvY29ubmVjdGlvbnMvMS4wIl0sICJzZXJ2aWNlIjogWyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXSB9
 ```
 
 Example URL:
 
 ```text
-http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJBbGljZSIsICJwcm90b2NvbHMiOiBbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkLWV4Y2hhbmdlLzEuMCIsIGh0dHBzOi8vZGlkY29tbS5vcmcvY29ubmVjdGlvbnMvMS4wXSAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==
+http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJBbGljZSIsICJwcm90b2NvbHMiOiBbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwgImh0dHBzOi8vZGlkY29tbS5vcmcvY29ubmVjdGlvbnMvMS4wIl0sICJzZXJ2aWNlIjogWyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXSB9
 ```
 
 Out of band message URLs can be transferred via any method that can send text, including an email, SMS, posting on a website, or QR Code.
