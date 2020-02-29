@@ -19,6 +19,12 @@ Examples include the Connect Protocol and Challenge Protocols.
 
 The `~service` decorator on a message contains the service definition that you might expect to find in a DID Document. These values function the same way.
 
+The `~service` decorator may also be used for protocols which involve more than a simple request and response.  For example, using the `~service` decorator with the
+Present Proof Protocol allows a prover to present a proof to a verifier when the prover and verifier do not have a pre-existing connection or relationship.
+In this case, the `~service` decorator must be used on all messages of the Present Proof Protocol.
+
+More generally, if a `~service` decorator is used for any single message of a protocol, the `~service` decorator MUST be present on ALL messages of that protocol.
+
 ## Tutorial
 
 Usage looks like this, with the contents defined the [Service Endpoint section of the DID Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints):
