@@ -23,7 +23,7 @@ The `~service` decorator may also be used for protocols which involve more than 
 Present Proof Protocol allows a prover to present a proof to a verifier when the prover and verifier do not have a pre-existing connection or relationship.
 In this case, the `~service` decorator must be used on all messages of the Present Proof Protocol.
 
-More generally, if a `~service` decorator is used for any single message of a protocol, the `~service` decorator MUST be present on ALL messages of that protocol.
+More generally, when a `~service` decorator is used for any single message of a protocol, the `~service` decorator MUST be present on ALL messages of that protocol.
 
 ## Tutorial
 
