@@ -29,7 +29,7 @@ We need the ability to reuse a connection.
 
 ### Connection Establishment Versioning
 
-In the existing Connections and DID Exchange `invitation` handling, the _inviter_ dictates what connection establishment protocol all _invitee_'s will use. A more sustainable approach is for the _inviter_ to offer the _invitee_ a list of support protocols and allow the _invitee_ to use one that it supports. This pattern enables the community deprecation of protocol versions.
+In the existing Connections and DID Exchange `invitation` handling, the _inviter_ dictates what connection establishment protocol all _invitee_'s will use. A more sustainable approach is for the _inviter_ to offer the _invitee_ a list of support protocols and allow the _invitee_ to use one that it supports.
 
 ### Handling of all Out of Band Messages
 
