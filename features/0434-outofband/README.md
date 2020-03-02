@@ -9,7 +9,7 @@
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 - Protocol Name: Out of Band
 - Version: 1.0
-- URI: `http://didcomm.org/out-of-band/VER/MsgType`
+- URI: `http://didcomm.org/out-of-band/%VER/MsgType`
 
 ## Summary
 
@@ -33,11 +33,11 @@ In the existing Connections and DID Exchange `invitation` handling, the _inviter
 
 ### Handling of all Out of Band Messages
 
-We currently have two sets of out of band messages that cannot be delivered via DIDComm because there is no channel. We'd like to align those message into a single "out of band" protocol so that their handling can be centralized, and a common QR code handling mechanism can be used.
+We currently have two sets of out of band messages that cannot be delivered via DIDComm because there is no channel. We'd like to align those message into a single "out of band" protocol so that their handling can be harmonized inside an agent, and a common QR code handling mechanism can be used.
 
 ### URLs and QR Code Handling
 
-We'd like to have the specification of QR handling centralized into a single RFC (this one).
+We'd like to have the specification of QR handling harmonized into a single RFC (this one).
 
 ## Tutorial
 
@@ -86,11 +86,11 @@ Worth noting is the first event of the `done` state, where the receiver may rece
 
 There are two messages in the out of band protocol. They are both sent by the *sender*. Only one of the message types is ever used in an instance of the protocol.
 
-#### Message Type: `https://didcomm.org/outofband/VER/invitation`
+#### Message Type: `https://didcomm.org/outofband/%VER/invitation`
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/outofband/VER/invitation",
+  "@type": "https://didcomm.org/outofband/%VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
   "protocols": [
@@ -114,11 +114,11 @@ While the _receiver_ is expected to respond with an initiating message from the 
 > **To Do**: Can we expand this to be able to reuse an inline `service` entry?
 > **To Do**: Update the `did-exchange` (and perhaps `connection`) protocol to have a `continue` message to be used for this purpose.
 
-#### Message Type: `https://didcomm.org/outofband/VER/request`
+#### Message Type: `https://didcomm.org/outofband/%VER/request`
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/outofband/VER/request",
+  "@type": "https://didcomm.org/outofband/%VER/request",
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
   "request~attach" [
@@ -153,7 +153,7 @@ The following is an example of a two entry array, one of each form:
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/outofband/VER/invitation",
+  "@type": "https://didcomm.org/outofband/%VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College"
   "protocols": ["https://didcomm.org/didexchange/1.0"]
@@ -238,7 +238,7 @@ There is an optional courtesy error stemming from an out of band message that th
 
 ```jsonc
 {
-  "@type"            : "https://didcomm.org/outofband/VER/problem_report",
+  "@type"            : "https://didcomm.org/outofband/%VER/problem_report",
   "@id"              : "5678876542345",
   "~thread"          : { "pthid": "<@id of the OutofBand message>" },
   "description"      : {
@@ -323,9 +323,27 @@ Out of band message URLs can be transferred via any method that can send text, i
 
 Example URL encoded as a QR Code:
 
-> To Do: Update image
-
 ![Example QR Code](ExampleQRCode.png)
+
+Example Email Message:
+
+```email
+**To**: alice@alum.faber.edu
+**From**: studentrecords@faber.edu
+**Subject**: Your request to connect and receive your graduate verifiable credential
+
+Dear Alice,
+
+Click here to [connect](http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJBbGljZSIsICJwcm90b2NvbHMiOiBbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwgImh0dHBzOi8vZGlkY29tbS5vcmcvY29ubmVjdGlvbnMvMS4wIl0sICJzZXJ2aWNlIjogWyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXSB9), or paste the following into your browser:
+
+http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJBbGljZSIsICJwcm90b2NvbHMiOiBbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwgImh0dHBzOi8vZGlkY29tbS5vcmcvY29ubmVjdGlvbnMvMS4wIl0sICJzZXJ2aWNlIjogWyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXSB9
+
+If you don't have an agent, you will be given instructions on how you can get one.
+
+Thanks,
+
+Faber College
+```
 
 #### URL Shortening
 
