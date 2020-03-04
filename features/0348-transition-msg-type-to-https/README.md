@@ -88,6 +88,7 @@ The following table lists the status of various agent code bases and deployments
 Name / Link | Implementation Notes
 --- | ---
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | No steps completed
+[Aries Toolbox](https://github.com/hyperledger/aries-toolbox) | Completed Step 1 [code change](https://github.com/hyperledger/aries-toolbox/pull/155). 
 [Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | No steps completed
 [Streetcred.id](https://streetcred.id/) | No steps completed
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | No steps completed
