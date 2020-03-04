@@ -91,7 +91,7 @@ Name / Link | Implementation Notes
 [Aries Toolbox](https://github.com/hyperledger/aries-toolbox) | Completed Step 1 [code change](https://github.com/hyperledger/aries-toolbox/pull/155). 
 [Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | No steps completed
 [Streetcred.id](https://streetcred.id/) | No steps completed
-[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | No steps completed
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Completed Step 1 [code change](https://github.com/hyperledger/aries-cloudagent-python/pull/379)
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | No steps completed
 [Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | No steps completed
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | No steps completed
