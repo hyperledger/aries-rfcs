@@ -64,7 +64,7 @@ The agent that generates the out of band message and makes it available to the o
 
 #### receiver
 
-The agent that receives the out of band message and decides how to respond. There is no out of band protocol message with which the receiver will respond. Rather, if they respond, they will use a message from another protocol that the sender will understand.
+The agent that receives the out of band message and decides how to respond. There is no out of band protocol message with which the receiver will respond. Rather, if they respond, they will use a message from another protocol that the sender understands.
 
 ### States
 
@@ -93,6 +93,8 @@ There are two messages in the out of band protocol. They are both sent by the *s
   "@type": "https://didcomm.org/outofband/%VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
+  "purpose-cd": "issue-vc",
+  "purpose": "To issue a Faber College Graduate credential",
   "protocols": [
       "https://didcomm.org/didexchange/1.0",
       "https://didcomm.org/connections/1.0"
@@ -104,13 +106,18 @@ There are two messages in the out of band protocol. They are both sent by the *s
 The items in the message are:
 
 - `@type` - the DIDComm message type
-- `@id` - the unique ID of the message. The ID should be used as the **parent** thread ID (`pthid`) for the response message, rather than the more common thread ID (`thid`) of the response message. This enables multiple uses of a single `invitation` message.
-- `label` - a self-attested string that the receiver may want to display to the user.
+- `@id` - the unique ID of the message. The ID should be used as the **parent** thread ID (`pthid`) for the response message, rather than the more common thread ID (`thid`) of the response message. This enables multiple uses of a single out of band message.
+- `label` - [optional] a self-attested string that the receiver may want to display to the user, likely about who sent the out of band message.
+- `purpose-cd` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out of band message.
+- `purpose` - [optional] a self-attested string that the receiver may want to display to the user about the context-specific purpose of the out of band message.
 - `protocols` - array of protocols in the order of preference of the sender that the receiver can use in responding to the message. As implied by the message type of invitation, these are not arbitrary protocols but rather protocols that result in the establishment of a connection.
 - `service` - an item that is the equivalent of the service block of a DIDDoc that the receiver is to use in responding to the message. Additional details below.
 
-While the _receiver_ is expected to respond with an initiating message from the chosen protocol using a specified service, the receiver may respond by reusing an existing connection. Specifically, if a connection they have was created from an out of band `invitation` from the same public DID of a new `invitation`, the receiver **SHOULD** use the existing connection in responding to the `invitation`. The selected `protocol` being used by the receiver may have a specific message type to use for this purpose.
+Both the `purpose-cd` and `purpose` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out of band message. `purpose-cd` is to specify a generic, protocol level reason for the connection (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `purpose` provides context specific guidance, targeting mainly a person controlling the receiver's agent.
 
+While the _receiver_ is expected to respond with an initiating message from the chosen protocol using a specified service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out of band `invitation` from the same public DID of a new `invitation`, the receiver **SHOULD** use the existing connection in responding to the `invitation`. The selected `protocol` being used by the receiver may have a specific message type to use for this purpose.
+
+> **To Do**: Define the list of `purpose-cd`
 > **To Do**: Can we expand this to be able to reuse an inline `service` entry?
 > **To Do**: Update the `did-exchange` (and perhaps `connection`) protocol to have a `continue` message to be used for this purpose.
 
@@ -136,11 +143,17 @@ While the _receiver_ is expected to respond with an initiating message from the 
 
 The items in the message are:
 
-- `@type` - the DIDComm message type
-- `@id` - the unique ID of the message. The ID should be used as the **parent** thread ID (`pthid`) for the response message, rather than the more common thread ID (`thid`) of the response message. This enables multiple uses of a single `request` message.
-- `label` - a self-attested string that the receiver may want to display to the user.
+- `@type` - see `invitation`
+- `@id` - see `invitation`
+- `label` - see `invitation`
+- `purpose-cd` - see `invitation`
+- `purpose` - see `invitation`
 - `request~attach` - an attachment decorator containing an array of request messages associated with the out of band `request`. Any of the forms of an attachment can be used, including embedded or linked.
-- `service` - an item that is the equivalent of the service block of a DIDDoc that the receiver is to use in responding to the message. Additional details below.
+- `service` - see `invitation`
+
+See the note under the `invitation` message type about the `purpose-cd` and `purpose` fields.
+
+While the _receiver_ is expected to respond with a response message from the request protocol and using a specified service, the receiver may respond by reusing an existing connection. Specifically, if a connection they have was created from an out of band `invitation` from the same public DID of the `request`, the receiver **MAY** use the existing connection in responding.
 
 ##### The `service` Item
 
@@ -173,10 +186,10 @@ The following is an example of a two entry array, one of each form:
 The processing rules for the service block are:
 
 - Use only entries where the `type` is equal to `did-communication`.
-  - Entries without a `type` are assumed to be "did-communication".
+  - Entries without a `type` are assumed to be `did-communication`.
 - The sender **MUST** put the array into their order of preference, and, as such, the receiver **SHOULD** prefer the entries in order.
 
-The attributes in the inline form parallel the attributes of a DID Document for increased meaning. The `recipientKeys` and `routingKeys` within the inline block decorator must be [`did:key` references](https://digitalbazaar.github.io/did-method-key/).
+The attributes in the inline form parallel the attributes of a DID Document for increased meaning. The `recipientKeys` and `routingKeys` within the inline block decorator **MUST** be [`did:key` references](https://digitalbazaar.github.io/did-method-key/).
 
 As defined in the [DIDComm Cross Domain Messaging RFC](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0094-cross-domain-messaging), if `routingKeys` is present and non-empty, additional forwarding wrapping are necessary in the response message.
 
@@ -232,7 +245,7 @@ The out of band protocol has been completed. Note that if the out of band messag
 
 ### Errors
 
-There is an optional courtesy error stemming from an out of band message that the _sender_ could provide if they have sufficient recipient information. If the out of band message is a single use message and the sender receives multiple responses, all but the first may be answered with a `problem_report`. To do so, the sender must have a way to send a DIDComm message to the receiver, which may not be the case.
+There is an optional courtesy error message stemming from an out of band message that the _sender_ could provide if they have sufficient recipient information. If the out of band message is a single use message **and** the sender receives multiple responses **and** each receiver's response includes a way for the sender to respond with a DIDComm message, all but the first **MAY** be answered with a `problem_report`.
 
 #### Error Message Example
 
