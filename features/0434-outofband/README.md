@@ -93,7 +93,7 @@ There are two messages in the out of band protocol. They are both sent by the *s
   "@type": "https://didcomm.org/outofband/%VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
-  "goal-cd": "issue-vc",
+  "goal-code": "issue-vc",
   "goal": "To issue a Faber College Graduate credential",
   "protocols": [
       "https://didcomm.org/didexchange/1.0",
@@ -108,12 +108,12 @@ The items in the message are:
 - `@type` - the DIDComm message type
 - `@id` - the unique ID of the message. The ID should be used as the **parent** thread ID (`pthid`) for the response message, rather than the more common thread ID (`thid`) of the response message. This enables multiple uses of a single out of band message.
 - `label` - [optional] a self-attested string that the receiver may want to display to the user, likely about who sent the out of band message.
-- `goal-cd` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out of band message.
+- `goal-code` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out of band message.
 - `goal` - [optional] a self-attested string that the receiver may want to display to the user about the context-specific goal of the out of band message.
 - `protocols` - array of protocols in the order of preference of the sender that the receiver can use in responding to the message. As implied by the message type of invitation, these are not arbitrary protocols but rather protocols that result in the establishment of a connection.
 - `service` - an item that is the equivalent of the service block of a DIDDoc that the receiver is to use in responding to the message. Additional details below.
 
-Both the `goal-cd` and `goal` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out of band message. `goal-cd` is to specify a generic, protocol level outcome for sending the out of band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal-cd` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
+Both the `goal-code` and `goal` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out of band message. `goal-code` is to specify a generic, protocol level outcome for sending the out of band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal-code` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
 
 While the _receiver_ is expected to respond with an initiating message from the chosen protocol using a specified service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out of band `invitation` from the same public DID of a new `invitation`, the receiver **SHOULD** use the existing connection in responding to the `invitation`. The selected `protocol` being used by the receiver may have a specific message type to use for this purpose.
 
@@ -145,12 +145,12 @@ The items in the message are:
 - `@type` - see `invitation`
 - `@id` - see `invitation`
 - `label` - see `invitation`
-- `goal-cd` - see `invitation`
+- `goal-code` - see `invitation`
 - `goal` - see `invitation`
 - `request~attach` - an attachment decorator containing an array of request messages associated with the out of band `request`. Any of the forms of an attachment can be used, including embedded or linked.
 - `service` - see `invitation`
 
-See the note under the `invitation` message type about the `goal-cd` and `goal` fields.
+See the note under the `invitation` message type about the `goal-code` and `goal` fields.
 
 While the _receiver_ is expected to respond with a response message from the request protocol and using a specified service, the receiver may respond by reusing an existing connection. Specifically, if a connection they have was created from an out of band `invitation` from the same public DID of the `request`, the receiver **MAY** use the existing connection in responding.
 
@@ -214,13 +214,13 @@ The full description of the messages can be found in the [Tutorial](#messages) s
 
 ### Localization
 
-The `goal-cd` and `goal` fields should have localization applied. See the purpose of those fields in the [message type definitions](#messages) section and the [message catalog](#message-catalog) section (immediately below).
+The `goal-code` and `goal` fields should have localization applied. See the purpose of those fields in the [message type definitions](#messages) section and the [message catalog](#message-catalog) section (immediately below).
 
 ### Message Catalog
 
-#### `goal-cd`
+#### `goal-code`
 
-The following values are defined for the `goal-cd` field:
+The following values are defined for the `goal-code` field:
 
 Code (cd) | English (en)
 --- | ---
@@ -321,7 +321,7 @@ Invitation:
   "@type": "https://didcomm.org/outofband/1.0/invitation",
   "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3",
   "label": "Faber College",
-  "goal-cd": "issue-vc",
+  "goal-code": "issue-vc",
   "goal": "To issue a Faber College Graduate credential"
   "protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"],
   "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
@@ -331,19 +331,19 @@ Invitation:
 Whitespace removed:
 
 ```jsonc
-{ "@type": "https://didcomm.org/outofband/1.0/invitation", "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3", "label": "Faber College", "goal-cd": "issue-vc", "goal": "To issue a Faber College Graduate credential" "protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"], "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"] }
+{ "@type": "https://didcomm.org/outofband/1.0/invitation", "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3", "label": "Faber College", "goal-code": "issue-vc", "goal": "To issue a Faber College Graduate credential" "protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"], "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"] }
 ```
 
 Base 64 URL Encoded:
 
 ```text
-eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY2QiOiAiaXNzdWUtdmMiLCAiZ29hbCI6ICJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIgInByb3RvY29scyI6IFsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCAiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwgInNlcnZpY2UiOiBbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdIH0=
+eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY29kZSI6ICJpc3N1ZS12YyIsICJnb2FsIjogIlRvIGlzc3VlIGEgRmFiZXIgQ29sbGVnZSBHcmFkdWF0ZSBjcmVkZW50aWFsIiAicHJvdG9jb2xzIjogWyJodHRwczovL2RpZGNvbW0ub3JnL2RpZGV4Y2hhbmdlLzEuMCIsICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==
 ```
 
 Example URL:
 
 ```text
-http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY2QiOiAiaXNzdWUtdmMiLCAiZ29hbCI6ICJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIgInByb3RvY29scyI6IFsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCAiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwgInNlcnZpY2UiOiBbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdIH0=
+http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY29kZSI6ICJpc3N1ZS12YyIsICJnb2FsIjogIlRvIGlzc3VlIGEgRmFiZXIgQ29sbGVnZSBHcmFkdWF0ZSBjcmVkZW50aWFsIiAicHJvdG9jb2xzIjogWyJodHRwczovL2RpZGNvbW0ub3JnL2RpZGV4Y2hhbmdlLzEuMCIsICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==
 ```
 
 Out of band message URLs can be transferred via any method that can send text, including an email, SMS, posting on a website, or QR Code.
@@ -361,11 +361,11 @@ Subject: Your request to connect and receive your graduate verifiable credential
 
 Dear Alice,
 
-Click here to [connect](http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY2QiOiAiaXNzdWUtdmMiLCAiZ29hbCI6ICJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIgInByb3RvY29scyI6IFsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCAiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwgInNlcnZpY2UiOiBbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdIH0=), or paste the following into your browser:
+To receive your Faber College graduation certificate, click here to [connect](http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY29kZSI6ICJpc3N1ZS12YyIsICJnb2FsIjogIlRvIGlzc3VlIGEgRmFiZXIgQ29sbGVnZSBHcmFkdWF0ZSBjcmVkZW50aWFsIiAicHJvdG9jb2xzIjogWyJodHRwczovL2RpZGNvbW0ub3JnL2RpZGV4Y2hhbmdlLzEuMCIsICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==) with us, or paste the following into your browser:
 
-http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY2QiOiAiaXNzdWUtdmMiLCAiZ29hbCI6ICJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIgInByb3RvY29scyI6IFsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCAiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwgInNlcnZpY2UiOiBbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdIH0=
+http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY29kZSI6ICJpc3N1ZS12YyIsICJnb2FsIjogIlRvIGlzc3VlIGEgRmFiZXIgQ29sbGVnZSBHcmFkdWF0ZSBjcmVkZW50aWFsIiAicHJvdG9jb2xzIjogWyJodHRwczovL2RpZGNvbW0ub3JnL2RpZGV4Y2hhbmdlLzEuMCIsICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==
 
-If you don't have an agent, you will be given instructions on how you can get one.
+If you don't have an identity agent for holding credentials, you will be given instructions on how you can get one.
 
 Thanks,
 
