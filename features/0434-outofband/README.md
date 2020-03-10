@@ -1,4 +1,4 @@
-# Aries RFC 0434: Out of Band Protocol 1.0
+# Aries RFC 0434: Out of Band Protocols
 
 - Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, [Stephen Curran](swcurran@cloudcompass.ca), [Sam Curren](sam@sovrin.org), [George Aristy](george.aristy@securekey.com)
 - Status: [PROPOSED](/README.md#proposed)
@@ -7,13 +7,13 @@
 - Supersedes: Invitation Message in [0160-Connections](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0160-connection-protocol/README.md#0-invitation-to-connect) and Invitation Message in [0023-DID-Exchange](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0023-did-exchange/README.md#0-invitation-to-exchange).
 - Start Date: 2020-03-01
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
-- Protocol Name: Out of Band
-- Version: 1.0
-- URI: `http://didcomm.org/out-of-band/%VER/MsgType`
+- Protocol Name: Out-of-Band Invitation, Out-of-Band Request
+- Version: 1.0, 1.0
+- URI: `http://didcomm.org/oob-invitation/%VER`, `http://didcomm.org/oob-request/%VER`
 
 ## Summary
 
-The Out Of Band protocol is used when you wish to engage with another agent and you don't have a DIDComm connection to use for the interaction.
+Out Of Band protocols are used when you wish to engage with another agent and you don't have a DIDComm connection to use for the interaction.
 
 ## Motivation
 
@@ -29,11 +29,11 @@ We need the ability to reuse a connection.
 
 ### Connection Establishment Versioning
 
-In the existing Connections and DID Exchange `invitation` handling, the _inviter_ dictates what connection establishment protocol all _invitee_'s will use. A more sustainable approach is for the _inviter_ to offer the _invitee_ a list of support protocols and allow the _invitee_ to use one that it supports.
+In the existing Connections and DID Exchange `invitation` handling, the _inviter_ dictates what connection establishment protocol all _invitee_'s will use. A more sustainable approach is for the _inviter_ to offer the _invitee_ a list of supported protocols and allow the _invitee_ to use one that it supports.
 
 ### Handling of all Out of Band Messages
 
-We currently have two sets of out of band messages that cannot be delivered via DIDComm because there is no channel. We'd like to align those message into a single "out of band" protocol so that their handling can be harmonized inside an agent, and a common QR code handling mechanism can be used.
+We currently have two sets of out of band messages that cannot be delivered via DIDComm because there is no channel. We'd like to align those messages into a single "out of band" RFC so that their handling can be harmonized inside an agent, and a common QR code handling mechanism can be used.
 
 ### URLs and QR Code Handling
 
@@ -43,9 +43,11 @@ We'd like to have the specification of QR handling harmonized into a single RFC 
 
 ### Key Concepts
 
-The out of band protocol is used when you don't know if you have a connection with another user. This could be because you are trying to establish a new connection with that agent, you have connections but don't know who the other party is, or if you want to have a connection-less interaction. Since there is no DIDComm connection to use for the messages of this protocol, the messages are plaintext and sent out of band, such as via a QR code. Since the delivery of out of band messages will often be via QR codes, this RFC also covers the use of QR codes.
+There are currently two out-of-band (OOB) protocols: one for inviting someone to connect, and one for processing one-off "ephemeral" messages. They solve different problems, but their handling has so much in common that it's convenient to put them in the same RFC and describe them together. If we find other OOB use cases, we'll probably add them to this RFC as well. We nonetheless declare them as separate protocols so they can be versioned separately, queried separately in the Feature Discovery protocol, and so forth. 
+ 
+Out of band protocols are used when you don't know if you have a connection with another user. This could be because you are trying to establish a new connection with that agent, you have connections but don't know who the other party is, or if you want to have a connection-less interaction. Since there is no DIDComm connection to use for the messages of this protocol, the messages are plaintext and sent out of band, such as via a QR code. Since the delivery of out of band messages will often be via QR codes, this RFC also covers the use of QR codes.
 
-Two well known use cases for using the out of band protocol are:
+Two well known use cases for using an out of band protocol are:
 
 - A user on a web browser wants to execute a protocol (for example, to issue a verifiable credential) between the website operator's agent and a user's agent. To enable the execution of the protocol, the two agents must have a connection. An out-of-band message is used to trigger the creation of a new, or the reuse an existing, connection.
 - A website operator wants to request something from a user on their site where there is no (known) connection with the user.
@@ -56,7 +58,7 @@ Note that the website-to-agent model is not the only such interaction enabled by
 
 ### Roles
 
-The out of band protocol has two roles: __sender__ and __receiver__.
+Each out of band protocol has two roles: __sender__ and __receiver__.
 
 #### sender
 
@@ -68,7 +70,7 @@ The agent that receives the out of band message and decides how to respond. Ther
 
 ### States
 
-The state machines for the sender and receiver are a bit odd for the out of band protocol because of it being a single message protocol with a response from a different protocol. In the following state machine diagrams we generically describe the response message from the *receiver* as being a DIDComm message without associating the message with a specific protocol.
+The state machines for the sender and receiver are a bit odd for the out of band protocol because it consists of a single message that kicks of a co-protocol and ends when evidence of the co-protocol's launch is received, in the form of some response. In the following state machine diagrams we generically describe the response message from the *receiver* as being a DIDComm message without associating the message with a specific protocol.
 
 The *sender* state machine is as follows:
 
@@ -84,13 +86,13 @@ Worth noting is the first event of the `done` state, where the receiver may rece
 
 ### Messages
 
-There are two messages in the out of band protocol. They are both sent by the *sender*. Only one of the message types is ever used in an instance of the protocol.
+There are two out-of-band protocols, each consisting of a single message. In both cases, the message is emitted by the *sender*. 
 
-#### Message Type: `https://didcomm.org/outofband/%VER/invitation`
+#### Message Type: `https://didcomm.org/oob-invitation/%VER/invitation`
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/outofband/%VER/invitation",
+  "@type": "https://didcomm.org/oob-invitation/%VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
   "goal-code": "issue-vc",
@@ -120,11 +122,11 @@ While the _receiver_ is expected to respond with an initiating message from the 
 > **To Do**: Can we expand this to be able to reuse an inline `service` entry?
 > **To Do**: Update the `did-exchange` (and perhaps `connection`) protocol to have a `continue` message to be used for connection reuse.
 
-#### Message Type: `https://didcomm.org/outofband/%VER/request`
+#### Message Type: `https://didcomm.org/oob-request/%VER/request`
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/outofband/%VER/request",
+  "@type": "https://didcomm.org/oob-request/%VER/request",
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
   "request~attach" [
@@ -165,7 +167,7 @@ The following is an example of a two entry array, one of each form:
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/outofband/%VER/invitation",
+  "@type": "https://didcomm.org/oob-invitation/%VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College"
   "protocols": ["https://didcomm.org/didexchange/1.0"]
@@ -263,7 +265,7 @@ There is an optional courtesy error message stemming from an out of band message
 
 ```jsonc
 {
-  "@type"            : "https://didcomm.org/outofband/%VER/problem_report",
+  "@type"            : "https://didcomm.org/oob-invitation/%VER/problem_report",
   "@id"              : "5678876542345",
   "~thread"          : { "pthid": "<@id of the OutofBand message>" },
   "description"      : {
@@ -318,7 +320,7 @@ Invitation:
 
 ```json
 {
-  "@type": "https://didcomm.org/outofband/1.0/invitation",
+  "@type": "https://didcomm.org/oob-invitation/1.0/invitation",
   "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3",
   "label": "Faber College",
   "goal-code": "issue-vc",
@@ -331,19 +333,19 @@ Invitation:
 Whitespace removed:
 
 ```jsonc
-{ "@type": "https://didcomm.org/outofband/1.0/invitation", "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3", "label": "Faber College", "goal-code": "issue-vc", "goal": "To issue a Faber College Graduate credential" "protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"], "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"] }
+{"@type":"https://didcomm.org/oob-invitation/1.0/invitation","@id":"69212a3a-d068-4f9d-a2dd-4741bca89af3","label":"Faber College", "goal-code":"issue-vc","goal":"To issue a Faber College Graduate credential","protocols":["https://didcomm.org/didexchange/1.0","https://didcomm.org/connections/1.0"],"service":["did:sov:LjgpST2rjsoxYegQDRm7EL"]}
 ```
 
 Base 64 URL Encoded:
 
 ```text
-eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY29kZSI6ICJpc3N1ZS12YyIsICJnb2FsIjogIlRvIGlzc3VlIGEgRmFiZXIgQ29sbGVnZSBHcmFkdWF0ZSBjcmVkZW50aWFsIiAicHJvdG9jb2xzIjogWyJodHRwczovL2RpZGNvbW0ub3JnL2RpZGV4Y2hhbmdlLzEuMCIsICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==
+eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJwcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlIjpbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdfQ==
 ```
 
 Example URL:
 
 ```text
-http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY29kZSI6ICJpc3N1ZS12YyIsICJnb2FsIjogIlRvIGlzc3VlIGEgRmFiZXIgQ29sbGVnZSBHcmFkdWF0ZSBjcmVkZW50aWFsIiAicHJvdG9jb2xzIjogWyJodHRwczovL2RpZGNvbW0ub3JnL2RpZGV4Y2hhbmdlLzEuMCIsICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==
+http://example.com/ssi?c_i=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJwcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlIjpbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdfQ==
 ```
 
 Out of band message URLs can be transferred via any method that can send text, including an email, SMS, posting on a website, or QR Code.
@@ -361,9 +363,9 @@ Subject: Your request to connect and receive your graduate verifiable credential
 
 Dear Alice,
 
-To receive your Faber College graduation certificate, click here to [connect](http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY29kZSI6ICJpc3N1ZS12YyIsICJnb2FsIjogIlRvIGlzc3VlIGEgRmFiZXIgQ29sbGVnZSBHcmFkdWF0ZSBjcmVkZW50aWFsIiAicHJvdG9jb2xzIjogWyJodHRwczovL2RpZGNvbW0ub3JnL2RpZGV4Y2hhbmdlLzEuMCIsICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==) with us, or paste the following into your browser:
+To receive your Faber College graduation certificate, click here to [connect](http://example.com/ssi?c_i=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJwcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlIjpbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdfQ==) with us, or paste the following into your browser:
 
-http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY29kZSI6ICJpc3N1ZS12YyIsICJnb2FsIjogIlRvIGlzc3VlIGEgRmFiZXIgQ29sbGVnZSBHcmFkdWF0ZSBjcmVkZW50aWFsIiAicHJvdG9jb2xzIjogWyJodHRwczovL2RpZGNvbW0ub3JnL2RpZGV4Y2hhbmdlLzEuMCIsICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==
+http://example.com/ssi?c_i=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJwcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlIjpbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdfQ==
 
 If you don't have an identity agent for holding credentials, you will be given instructions on how you can get one.
 
