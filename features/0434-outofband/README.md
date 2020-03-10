@@ -1,4 +1,4 @@
-# Aries RFC 0434: Out of Band Protocol 1.0
+# Aries RFC 0434: Out of Band Protocols
 
 - Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, [Stephen Curran](swcurran@cloudcompass.ca), [Sam Curren](sam@sovrin.org), [George Aristy](george.aristy@securekey.com)
 - Status: [PROPOSED](/README.md#proposed)
@@ -7,13 +7,13 @@
 - Supersedes: Invitation Message in [0160-Connections](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0160-connection-protocol/README.md#0-invitation-to-connect) and Invitation Message in [0023-DID-Exchange](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0023-did-exchange/README.md#0-invitation-to-exchange).
 - Start Date: 2020-03-01
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
-- Protocol Name: Out of Band
-- Version: 1.0
+- Protocol Name: Out of Band Invitation, Out of Band Request
+- Version: 1.0, 1.0
 - URI: `http://didcomm.org/out-of-band/%VER/MsgType`
 
 ## Summary
 
-The Out Of Band protocol is used when you wish to engage with another agent and you don't have a DIDComm connection to use for the interaction.
+Out Of Band protocols are used when you wish to engage with another agent and you don't have a DIDComm connection to use for the interaction.
 
 ## Motivation
 
@@ -29,11 +29,11 @@ We need the ability to reuse a connection.
 
 ### Connection Establishment Versioning
 
-In the existing Connections and DID Exchange `invitation` handling, the _inviter_ dictates what connection establishment protocol all _invitee_'s will use. A more sustainable approach is for the _inviter_ to offer the _invitee_ a list of support protocols and allow the _invitee_ to use one that it supports.
+In the existing Connections and DID Exchange `invitation` handling, the _inviter_ dictates what connection establishment protocol all _invitee_'s will use. A more sustainable approach is for the _inviter_ to offer the _invitee_ a list of supported protocols and allow the _invitee_ to use one that it supports.
 
 ### Handling of all Out of Band Messages
 
-We currently have two sets of out of band messages that cannot be delivered via DIDComm because there is no channel. We'd like to align those message into a single "out of band" protocol so that their handling can be harmonized inside an agent, and a common QR code handling mechanism can be used.
+We currently have two sets of out of band messages that cannot be delivered via DIDComm because there is no channel. We'd like to align those messages into a single "out of band" RFC so that their handling can be harmonized inside an agent, and a common QR code handling mechanism can be used.
 
 ### URLs and QR Code Handling
 
@@ -43,9 +43,11 @@ We'd like to have the specification of QR handling harmonized into a single RFC 
 
 ### Key Concepts
 
-The out of band protocol is used when you don't know if you have a connection with another user. This could be because you are trying to establish a new connection with that agent, you have connections but don't know who the other party is, or if you want to have a connection-less interaction. Since there is no DIDComm connection to use for the messages of this protocol, the messages are plaintext and sent out of band, such as via a QR code. Since the delivery of out of band messages will often be via QR codes, this RFC also covers the use of QR codes.
+There are currently two out-of-band (OOB) protocols: one for inviting someone to connect, and one for processing one-off "ephemeral" messages. They solve different problems, but their handling has so much in common that it's convenient to put them in the same RFC and describe them together. If we find other OOB use cases, we'll probably add them to this RFC as well. We nonetheless declare them as separate protocols so they can be versioned separately, queried separately in the Feature Discovery protocol, and so forth. 
+ 
+Out of band protocols are used when you don't know if you have a connection with another user. This could be because you are trying to establish a new connection with that agent, you have connections but don't know who the other party is, or if you want to have a connection-less interaction. Since there is no DIDComm connection to use for the messages of this protocol, the messages are plaintext and sent out of band, such as via a QR code. Since the delivery of out of band messages will often be via QR codes, this RFC also covers the use of QR codes.
 
-Two well known use cases for using the out of band protocol are:
+Two well known use cases for using an out of band protocol are:
 
 - A user on a web browser wants to execute a protocol (for example, to issue a verifiable credential) between the website operator's agent and a user's agent. To enable the execution of the protocol, the two agents must have a connection. An out-of-band message is used to trigger the creation of a new, or the reuse an existing, connection.
 - A website operator wants to request something from a user on their site where there is no (known) connection with the user.
@@ -56,7 +58,7 @@ Note that the website-to-agent model is not the only such interaction enabled by
 
 ### Roles
 
-The out of band protocol has two roles: __sender__ and __receiver__.
+Each out of band protocol has two roles: __sender__ and __receiver__.
 
 #### sender
 
@@ -68,7 +70,7 @@ The agent that receives the out of band message and decides how to respond. Ther
 
 ### States
 
-The state machines for the sender and receiver are a bit odd for the out of band protocol because of it being a single message protocol with a response from a different protocol. In the following state machine diagrams we generically describe the response message from the *receiver* as being a DIDComm message without associating the message with a specific protocol.
+The state machines for the sender and receiver are a bit odd for the out of band protocol because it consists of a single message that kicks of a co-protocol and ends when evidence of the co-protocol's launch is received, in the form of some response. In the following state machine diagrams we generically describe the response message from the *receiver* as being a DIDComm message without associating the message with a specific protocol.
 
 The *sender* state machine is as follows:
 
@@ -84,7 +86,7 @@ Worth noting is the first event of the `done` state, where the receiver may rece
 
 ### Messages
 
-There are two messages in the out of band protocol. They are both sent by the *sender*. Only one of the message types is ever used in an instance of the protocol.
+There are two out-of-band protocols, each consisting of a single message. In both cases, the message is emitted by the *sender*. They use the same [PIURI](../../concepts/0003-protocols/uris.md) but potentially different version segments. (That is, for these one-message protocols, the version binds to the message type rather than to a larger construct.) 
 
 #### Message Type: `https://didcomm.org/outofband/%VER/invitation`
 
