@@ -52,7 +52,7 @@ Two well known use cases for using the out of band protocol are:
 
 In both cases, there is only a single out of band protocol message sent. The message responding to the out of band message is a DIDComm message from an appropriate protocol.
 
-Note that the website-to-agent model is not the only such interaction enabled by the out of band protocol, and a QR code is not the only delivery mechanism for out of band messages. They are useful as examples of the purpose of the protocol.
+Note that the website-to-agent model is not the only such interaction enabled by the out of band protocol, and a QR code is not the only delivery mechanism for out of band messages. However, they are useful as examples of the purpose of the protocol.
 
 ### Roles
 
@@ -93,8 +93,8 @@ There are two messages in the out of band protocol. They are both sent by the *s
   "@type": "https://didcomm.org/outofband/%VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
-  "purpose-cd": "issue-vc",
-  "purpose": "To issue a Faber College Graduate credential",
+  "goal-cd": "issue-vc",
+  "goal": "To issue a Faber College Graduate credential",
   "protocols": [
       "https://didcomm.org/didexchange/1.0",
       "https://didcomm.org/connections/1.0"
@@ -108,18 +108,17 @@ The items in the message are:
 - `@type` - the DIDComm message type
 - `@id` - the unique ID of the message. The ID should be used as the **parent** thread ID (`pthid`) for the response message, rather than the more common thread ID (`thid`) of the response message. This enables multiple uses of a single out of band message.
 - `label` - [optional] a self-attested string that the receiver may want to display to the user, likely about who sent the out of band message.
-- `purpose-cd` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out of band message.
-- `purpose` - [optional] a self-attested string that the receiver may want to display to the user about the context-specific purpose of the out of band message.
+- `goal-cd` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out of band message.
+- `goal` - [optional] a self-attested string that the receiver may want to display to the user about the context-specific goal of the out of band message.
 - `protocols` - array of protocols in the order of preference of the sender that the receiver can use in responding to the message. As implied by the message type of invitation, these are not arbitrary protocols but rather protocols that result in the establishment of a connection.
 - `service` - an item that is the equivalent of the service block of a DIDDoc that the receiver is to use in responding to the message. Additional details below.
 
-Both the `purpose-cd` and `purpose` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out of band message. `purpose-cd` is to specify a generic, protocol level reason for the connection (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `purpose` provides context specific guidance, targeting mainly a person controlling the receiver's agent.
+Both the `goal-cd` and `goal` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out of band message. `goal-cd` is to specify a generic, protocol level outcome for sending the out of band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal-cd` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
 
 While the _receiver_ is expected to respond with an initiating message from the chosen protocol using a specified service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out of band `invitation` from the same public DID of a new `invitation`, the receiver **SHOULD** use the existing connection in responding to the `invitation`. The selected `protocol` being used by the receiver may have a specific message type to use for this purpose.
 
-> **To Do**: Define the list of `purpose-cd`
 > **To Do**: Can we expand this to be able to reuse an inline `service` entry?
-> **To Do**: Update the `did-exchange` (and perhaps `connection`) protocol to have a `continue` message to be used for this purpose.
+> **To Do**: Update the `did-exchange` (and perhaps `connection`) protocol to have a `continue` message to be used for connection reuse.
 
 #### Message Type: `https://didcomm.org/outofband/%VER/request`
 
@@ -146,16 +145,16 @@ The items in the message are:
 - `@type` - see `invitation`
 - `@id` - see `invitation`
 - `label` - see `invitation`
-- `purpose-cd` - see `invitation`
-- `purpose` - see `invitation`
+- `goal-cd` - see `invitation`
+- `goal` - see `invitation`
 - `request~attach` - an attachment decorator containing an array of request messages associated with the out of band `request`. Any of the forms of an attachment can be used, including embedded or linked.
 - `service` - see `invitation`
 
-See the note under the `invitation` message type about the `purpose-cd` and `purpose` fields.
+See the note under the `invitation` message type about the `goal-cd` and `goal` fields.
 
 While the _receiver_ is expected to respond with a response message from the request protocol and using a specified service, the receiver may respond by reusing an existing connection. Specifically, if a connection they have was created from an out of band `invitation` from the same public DID of the `request`, the receiver **MAY** use the existing connection in responding.
 
-##### The `service` Item
+#### The `service` Item
 
 As mentioned in the description, the `service` item array is intended to be analogous to the `service` block of a DIDDoc. There are two forms of entries in the `service` item array:
 
@@ -195,7 +194,7 @@ As defined in the [DIDComm Cross Domain Messaging RFC](https://github.com/hyperl
 
 When considering routing and options for out of band messages, keep in mind that the more detail in the message, the longer the URL will be and (if used) the more dense (and harder to scan) the QR code will be.
 
-###### Service Endpoint
+##### Service Endpoint
 
 The service endpoint used to transmit the response is either present in the out of band message or available in the DID Document of a presented DID. If the endpoint is itself a DID, the `serviceEndpoint` in the DIDDoc of the resolved DID **MUST** be a URI, and the `recipientKeys` must contain a single key. That key is appended to the end of the list of `routingKeys` for processing. For more information about message forwarding and routing, see [RFC 0094 Cross Domain Messaging](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0094-cross-domain-messaging).
 
@@ -211,19 +210,32 @@ An existing connection can only be reused based on a public DID in an out of ban
 
 ### Messages Reference
 
-The full description of the messages can be found in the [Tutorial](#tutorial) section of this RFC.
+The full description of the messages can be found in the [Tutorial](#messages) section of this RFC.
 
 ### Localization
 
-N/A.
+The `goal-cd` and `goal` fields should have localization applied. See the purpose of those fields in the [message type definitions](#messages) section and the [message catalog](#message-catalog) section (immediately below).
 
 ### Message Catalog
 
-N/A
+#### `goal-cd`
+
+The following values are defined for the `goal-cd` field:
+
+Code (cd) | English (en)
+--- | ---
+issue-vc | To issue a credential
+request-proof | To request a proof
+create-account | To create an account with a service
+p2p-messaging | To establish a peer-to-peer messaging relationship
+
+#### `goal`
+
+The `goal` localization values are use case specific and localization is left to the agent implementor to enable using the techniques defined in the [~l10n RFC](../0043-l10n/README.md).
 
 ### Roles Reference
 
-The roles are defined in the [Tutorial](#tutorial) section of this RFC.
+The roles are defined in the [Tutorial](#roles) section of this RFC.
 
 ### States Reference
 
@@ -308,7 +320,9 @@ Invitation:
 {
   "@type": "https://didcomm.org/outofband/1.0/invitation",
   "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3",
-  "label": "Alice",
+  "label": "Faber College",
+  "goal-cd": "issue-vc",
+  "goal": "To issue a Faber College Graduate credential"
   "protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"],
   "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
 }
@@ -317,19 +331,19 @@ Invitation:
 Whitespace removed:
 
 ```jsonc
-{ "@type": "https://didcomm.org/outofband/1.0/invitation", "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3", "label": "Alice", "protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"], "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"] }
+{ "@type": "https://didcomm.org/outofband/1.0/invitation", "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3", "label": "Faber College", "goal-cd": "issue-vc", "goal": "To issue a Faber College Graduate credential" "protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"], "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"] }
 ```
 
 Base 64 URL Encoded:
 
 ```text
-eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJBbGljZSIsICJwcm90b2NvbHMiOiBbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwgImh0dHBzOi8vZGlkY29tbS5vcmcvY29ubmVjdGlvbnMvMS4wIl0sICJzZXJ2aWNlIjogWyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXSB9
+eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY2QiOiAiaXNzdWUtdmMiLCAiZ29hbCI6ICJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIgInByb3RvY29scyI6IFsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCAiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwgInNlcnZpY2UiOiBbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdIH0=
 ```
 
 Example URL:
 
 ```text
-http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJBbGljZSIsICJwcm90b2NvbHMiOiBbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwgImh0dHBzOi8vZGlkY29tbS5vcmcvY29ubmVjdGlvbnMvMS4wIl0sICJzZXJ2aWNlIjogWyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXSB9
+http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY2QiOiAiaXNzdWUtdmMiLCAiZ29hbCI6ICJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIgInByb3RvY29scyI6IFsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCAiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwgInNlcnZpY2UiOiBbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdIH0=
 ```
 
 Out of band message URLs can be transferred via any method that can send text, including an email, SMS, posting on a website, or QR Code.
@@ -341,21 +355,22 @@ Example URL encoded as a QR Code:
 Example Email Message:
 
 ```email
-**To**: alice@alum.faber.edu
-**From**: studentrecords@faber.edu
-**Subject**: Your request to connect and receive your graduate verifiable credential
+To: alice@alum.faber.edu
+From: studentrecords@faber.edu
+Subject: Your request to connect and receive your graduate verifiable credential
 
 Dear Alice,
 
-Click here to [connect](http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJBbGljZSIsICJwcm90b2NvbHMiOiBbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwgImh0dHBzOi8vZGlkY29tbS5vcmcvY29ubmVjdGlvbnMvMS4wIl0sICJzZXJ2aWNlIjogWyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXSB9), or paste the following into your browser:
+Click here to [connect](http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY2QiOiAiaXNzdWUtdmMiLCAiZ29hbCI6ICJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIgInByb3RvY29scyI6IFsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCAiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwgInNlcnZpY2UiOiBbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdIH0=), or paste the following into your browser:
 
-http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJBbGljZSIsICJwcm90b2NvbHMiOiBbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwgImh0dHBzOi8vZGlkY29tbS5vcmcvY29ubmVjdGlvbnMvMS4wIl0sICJzZXJ2aWNlIjogWyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXSB9
+http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY2QiOiAiaXNzdWUtdmMiLCAiZ29hbCI6ICJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIgInByb3RvY29scyI6IFsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCAiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwgInNlcnZpY2UiOiBbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdIH0=
 
 If you don't have an agent, you will be given instructions on how you can get one.
 
 Thanks,
 
 Faber College
+Knowledge is Good
 ```
 
 #### URL Shortening
