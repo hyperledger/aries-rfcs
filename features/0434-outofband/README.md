@@ -7,9 +7,9 @@
 - Supersedes: Invitation Message in [0160-Connections](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0160-connection-protocol/README.md#0-invitation-to-connect) and Invitation Message in [0023-DID-Exchange](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0023-did-exchange/README.md#0-invitation-to-exchange).
 - Start Date: 2020-03-01
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
-- Protocol Name: Out of Band Invitation, Out of Band Request
+- Protocol Name: Out-of-Band Invitation, Out-of-Band Request
 - Version: 1.0, 1.0
-- URI: `http://didcomm.org/out-of-band/%VER/MsgType`
+- URI: `http://didcomm.org/oob-invitation/%VER`, `http://didcomm.org/oob-request/%VER`
 
 ## Summary
 
@@ -86,13 +86,13 @@ Worth noting is the first event of the `done` state, where the receiver may rece
 
 ### Messages
 
-There are two out-of-band protocols, each consisting of a single message. In both cases, the message is emitted by the *sender*. They use the same [PIURI](../../concepts/0003-protocols/uris.md) but potentially different version segments. (That is, for these one-message protocols, the version binds to the message type rather than to a larger construct.) 
+There are two out-of-band protocols, each consisting of a single message. In both cases, the message is emitted by the *sender*. 
 
-#### Message Type: `https://didcomm.org/outofband/%VER/invitation`
+#### Message Type: `https://didcomm.org/oob-invitation/%VER/invitation`
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/outofband/%VER/invitation",
+  "@type": "https://didcomm.org/oob-invitation/%VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
   "goal-code": "issue-vc",
@@ -122,11 +122,11 @@ While the _receiver_ is expected to respond with an initiating message from the 
 > **To Do**: Can we expand this to be able to reuse an inline `service` entry?
 > **To Do**: Update the `did-exchange` (and perhaps `connection`) protocol to have a `continue` message to be used for connection reuse.
 
-#### Message Type: `https://didcomm.org/outofband/%VER/request`
+#### Message Type: `https://didcomm.org/oob-request/%VER/request`
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/outofband/%VER/request",
+  "@type": "https://didcomm.org/oob-request/%VER/request",
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
   "request~attach" [
@@ -167,7 +167,7 @@ The following is an example of a two entry array, one of each form:
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/outofband/%VER/invitation",
+  "@type": "https://didcomm.org/oob-invitation/%VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College"
   "protocols": ["https://didcomm.org/didexchange/1.0"]
@@ -265,7 +265,7 @@ There is an optional courtesy error message stemming from an out of band message
 
 ```jsonc
 {
-  "@type"            : "https://didcomm.org/outofband/%VER/problem_report",
+  "@type"            : "https://didcomm.org/oob-invitation/%VER/problem_report",
   "@id"              : "5678876542345",
   "~thread"          : { "pthid": "<@id of the OutofBand message>" },
   "description"      : {
@@ -320,7 +320,7 @@ Invitation:
 
 ```json
 {
-  "@type": "https://didcomm.org/outofband/1.0/invitation",
+  "@type": "https://didcomm.org/oob-invitation/1.0/invitation",
   "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3",
   "label": "Faber College",
   "goal-code": "issue-vc",
@@ -333,19 +333,19 @@ Invitation:
 Whitespace removed:
 
 ```jsonc
-{ "@type": "https://didcomm.org/outofband/1.0/invitation", "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3", "label": "Faber College", "goal-code": "issue-vc", "goal": "To issue a Faber College Graduate credential" "protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"], "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"] }
+{"@type":"https://didcomm.org/oob-invitation/1.0/invitation","@id":"69212a3a-d068-4f9d-a2dd-4741bca89af3","label":"Faber College", "goal-code":"issue-vc","goal":"To issue a Faber College Graduate credential","protocols":["https://didcomm.org/didexchange/1.0","https://didcomm.org/connections/1.0"],"service":["did:sov:LjgpST2rjsoxYegQDRm7EL"]}
 ```
 
 Base 64 URL Encoded:
 
 ```text
-eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY29kZSI6ICJpc3N1ZS12YyIsICJnb2FsIjogIlRvIGlzc3VlIGEgRmFiZXIgQ29sbGVnZSBHcmFkdWF0ZSBjcmVkZW50aWFsIiAicHJvdG9jb2xzIjogWyJodHRwczovL2RpZGNvbW0ub3JnL2RpZGV4Y2hhbmdlLzEuMCIsICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==
+eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJwcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlIjpbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdfQ==
 ```
 
 Example URL:
 
 ```text
-http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY29kZSI6ICJpc3N1ZS12YyIsICJnb2FsIjogIlRvIGlzc3VlIGEgRmFiZXIgQ29sbGVnZSBHcmFkdWF0ZSBjcmVkZW50aWFsIiAicHJvdG9jb2xzIjogWyJodHRwczovL2RpZGNvbW0ub3JnL2RpZGV4Y2hhbmdlLzEuMCIsICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==
+http://example.com/ssi?c_i=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJwcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlIjpbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdfQ==
 ```
 
 Out of band message URLs can be transferred via any method that can send text, including an email, SMS, posting on a website, or QR Code.
@@ -363,9 +363,9 @@ Subject: Your request to connect and receive your graduate verifiable credential
 
 Dear Alice,
 
-To receive your Faber College graduation certificate, click here to [connect](http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY29kZSI6ICJpc3N1ZS12YyIsICJnb2FsIjogIlRvIGlzc3VlIGEgRmFiZXIgQ29sbGVnZSBHcmFkdWF0ZSBjcmVkZW50aWFsIiAicHJvdG9jb2xzIjogWyJodHRwczovL2RpZGNvbW0ub3JnL2RpZGV4Y2hhbmdlLzEuMCIsICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==) with us, or paste the following into your browser:
+To receive your Faber College graduation certificate, click here to [connect](http://example.com/ssi?c_i=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJwcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlIjpbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdfQ==) with us, or paste the following into your browser:
 
-http://example.com/ssi?c_i=eyAiQHR5cGUiOiAiaHR0cHM6Ly9kaWRjb21tLm9yZy9vdXRvZmJhbmQvMS4wL2ludml0YXRpb24iLCAiQGlkIjogIjY5MjEyYTNhLWQwNjgtNGY5ZC1hMmRkLTQ3NDFiY2E4OWFmMyIsICJsYWJlbCI6ICJGYWJlciBDb2xsZWdlIiwgImdvYWwtY29kZSI6ICJpc3N1ZS12YyIsICJnb2FsIjogIlRvIGlzc3VlIGEgRmFiZXIgQ29sbGVnZSBHcmFkdWF0ZSBjcmVkZW50aWFsIiAicHJvdG9jb2xzIjogWyJodHRwczovL2RpZGNvbW0ub3JnL2RpZGV4Y2hhbmdlLzEuMCIsICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCAic2VydmljZSI6IFsiZGlkOnNvdjpMamdwU1Qycmpzb3hZZWdRRFJtN0VMIl0gfQ==
+http://example.com/ssi?c_i=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJwcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlIjpbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdfQ==
 
 If you don't have an identity agent for holding credentials, you will be given instructions on how you can get one.
 
