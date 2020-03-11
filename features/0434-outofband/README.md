@@ -439,9 +439,21 @@ For the out of band `invitation` message it is expected that the protocols liste
 
 > To do: Add a link to the `continue` message to be added to the DID Exchange message.
 
+##### Receiver Error Handling
+
+If the _receiver_ is unable to process the out of band message, the receiver may respond with a Problem Report identifying the problem using a DIDComm message. As with an response, the ~thread decorator of the `pthid` **MUST** be the `id` of the out of band message. The problem report **MUST** be in the protocol of an expected response. An example of an error that might come up is that the receiver is not able to handle any of the proposed protocols in the out of band message. The receiver **MAY** include in the problem report a service decorator that allows the sender to respond to the out of band message with a DIDComm message.
+
 #### Response processing
 
 The _sender_ **MAY** look up the corresponding out of band message identified in the response's `~thread.pthid` to determine whether it should accept the response. Information about the related  out of band message protocol may be required to provide the sender with context about processing the response and what to do after the protocol completes.
+
+##### Sender Error Handling
+
+If the _sender_ receives a problem report message from the receiver, the sender has several options for responding. The sender will receive the message as part of an offered protocol in the out of band message.
+
+If the receiver did not include a `~service` decorator in the response, the sender can only respond if it is still in session with the receiver. For example, if the sender is a website that displayed a QR code for the receiver to scan, the sender could create a new, presumably adjusted, out of band message, encode it and present it to the user in the same way as before.
+
+If the receiver included a `~service` decorator in the response, the sender can provide a new message to the receiver, even a new version of the original out of band message, and send it to the receiver. The new message **MUST** include a `~thread` decorator with the `thid` set to the `id` from the problem report message.
 
 ## Drawbacks
 
