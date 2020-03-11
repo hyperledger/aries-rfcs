@@ -43,8 +43,8 @@ We'd like to have the specification of QR handling harmonized into a single RFC 
 
 ### Key Concepts
 
-There are currently two out-of-band (OOB) protocols: one for inviting someone to connect, and one for processing one-off "ephemeral" messages. They solve different problems, but their handling has so much in common that it's convenient to put them in the same RFC and describe them together. If we find other OOB use cases, we'll probably add them to this RFC as well. We nonetheless declare them as separate protocols so they can be versioned separately, queried separately in the Feature Discovery protocol, and so forth. 
- 
+There are currently two out-of-band (OOB) protocols: one for inviting someone to connect, and one for processing one-off "ephemeral" messages. They solve different problems, but their handling has so much in common that it's convenient to put them in the same RFC and describe them together. If we find other OOB use cases, we'll probably add them to this RFC as well. We nonetheless declare them as separate protocols so they can be versioned separately, queried separately in the Feature Discovery protocol, and so forth.
+
 Out-of-band protocols are used when you don't know if you have a connection with another user. This could be because you are trying to establish a new connection with that agent, you have connections but don't know who the other party is, or if you want to have a connection-less interaction. Since there is no DIDComm connection to use for the messages of this protocol, the messages are plaintext and sent out of band, such as via a QR code. Since the delivery of out-of-band messages will often be via QR codes, this RFC also covers the use of QR codes.
 
 Two well known use cases for using an out-of-band protocol are:
@@ -86,7 +86,7 @@ Worth noting is the first event of the `done` state, where the receiver may rece
 
 ### Messages
 
-There are two out-of-band protocols, each consisting of a single message. In both cases, the message is emitted by the *sender*. 
+There are two out-of-band protocols, each consisting of a single message. In both cases, the message is emitted by the *sender*.
 
 #### Message Type: `https://didcomm.org/oob-invitation/%VER/invitation`
 
@@ -118,9 +118,6 @@ The items in the message are:
 Both the `goal-code` and `goal` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out-of-band message. `goal-code` is to specify a generic, protocol level outcome for sending the out-of-band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal-code` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
 
 While the _receiver_ is expected to respond with an initiating message from the chosen protocol using a specified service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation`, the receiver **SHOULD** use the existing connection in responding to the `invitation`. The selected `protocol` being used by the receiver may have a specific message type to use for this purpose.
-
-> **To Do**: Can we expand this to be able to reuse an inline `service` entry?
-> **To Do**: Update the `did-exchange` (and perhaps `connection`) protocol to have a `continue` message to be used for connection reuse.
 
 #### Message Type: `https://didcomm.org/oob-request/%VER/request`
 
@@ -436,8 +433,6 @@ The response message from the receiver is encoded according to the standards of 
 If an out-of-band message has a public DID in the `service` block, and the _receiver_ determines it has previously established a connection with that public DID, the receiver **SHOULD** send its response on the established connection.
 
 For the out-of-band `invitation` message it is expected that the protocols listed will have a message type that allows the receiver to reuse an existing connection.
-
-> To do: Add a link to the `continue` message to be added to the DID Exchange message.
 
 ##### Receiver Error Handling
 
