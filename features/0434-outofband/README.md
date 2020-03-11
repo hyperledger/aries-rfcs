@@ -299,10 +299,10 @@ The standard out of band message format is a URL with a Base64URLEncoded json ob
 The URL format is as follows, with some elements described below:
 
 ```text
-https://<domain>/<path>?c_i=<outofbandMessage>
+https://<domain>/<path>?oob=<outofbandMessage>
 ```
 
-`<domain>` and `<path>` should be kept as short as possible, and the full URL should return human readable instructions when loaded in a browser. This is intended to aid new users. The `c_i` query parameter is required and is reserved to contain the invitation string. Additional path elements or query parameters are allowed, and can be leveraged to provide coupons or other promise of payment for new users.
+`<domain>` and `<path>` should be kept as short as possible, and the full URL should return human readable instructions when loaded in a browser. This is intended to aid new users. The `oob` query parameter is required and is reserved to contain the out of band message string. Additional path elements or query parameters are allowed, and can be leveraged to provide coupons or other promise of payment for new users.
 
 > To do: We need to rationalize this approach `https://` approach with the use of a special protocol (e.g. `didcomm://`) that will enable handling of the URL on mobile devices to automatically invoke an installed app on both Android and iOS. A user must be able to process the out of band message on the device of the agent (e.g. when the mobile device can't scan the QR code because it is on a web page on device).
 
@@ -312,7 +312,7 @@ The `<outofbandMessage>` is an agent plaintext message (not a DIDComm message) t
 outofband_message = b64urlencode(<outofbandMessage>)
 ```
 
-During encoding, whitespace from the json string should be eliminated to keep the resulting invitation string as short as possible.
+During encoding, whitespace from the json string should be eliminated to keep the resulting out of band message string as short as possible.
 
 #### Example Out of Band Message Encoding
 
@@ -339,13 +339,13 @@ Whitespace removed:
 Base 64 URL Encoded:
 
 ```text
-eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJwcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlIjpbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdfQ==
+eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCJnb2FsLWNvZGUiOiJpc3N1ZS12YyIsImdvYWwiOiJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIicHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0=
 ```
 
 Example URL:
 
 ```text
-http://example.com/ssi?c_i=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJwcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlIjpbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdfQ==
+http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCJnb2FsLWNvZGUiOiJpc3N1ZS12YyIsImdvYWwiOiJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIicHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0=
 ```
 
 Out of band message URLs can be transferred via any method that can send text, including an email, SMS, posting on a website, or QR Code.
@@ -363,9 +363,9 @@ Subject: Your request to connect and receive your graduate verifiable credential
 
 Dear Alice,
 
-To receive your Faber College graduation certificate, click here to [connect](http://example.com/ssi?c_i=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJwcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlIjpbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdfQ==) with us, or paste the following into your browser:
+To receive your Faber College graduation certificate, click here to [connect](http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCJnb2FsLWNvZGUiOiJpc3N1ZS12YyIsImdvYWwiOiJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIicHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0=) with us, or paste the following into your browser:
 
-http://example.com/ssi?c_i=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJwcm90b2NvbHMiOlsiaHR0cHM6Ly9kaWRjb21tLm9yZy9kaWRleGNoYW5nZS8xLjAiLCJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMCJdLCJzZXJ2aWNlIjpbImRpZDpzb3Y6TGpncFNUMnJqc294WWVnUURSbTdFTCJdfQ==
+http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCJnb2FsLWNvZGUiOiJpc3N1ZS12YyIsImdvYWwiOiJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIicHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0=
 
 If you don't have an identity agent for holding credentials, you will be given instructions on how you can get one.
 
@@ -379,10 +379,11 @@ Knowledge is Good
 
 It seems inevitable that the length of some out of band message will be too long to produce a useable QR code. Techniques to avoid unusable QR codes have been presented above, including using attachment links for requests, minimizing the routing of the response and eliminating unnecessary whitespace in the JSON. However, at some point an _sender_ may need generate a very long URL. In that case, a URL shortener redirection should be implemented by the sender as follows:
 
-- the sender should generate and track a GUID for the out of band message URL
+- The sender should generate and track a GUID for the out of band message URL.
 - The shortened version should be:
   - `https://example.com/ssi?id=5f0e3ffb-3f92-4648-9868-0d6f8889e6f3`
-- On receipt of this form of message, the agent must do an HTTP GET to retrieve the associated, encoded out of band message
+  - Note the replacement of the query parameter `oob` with `id` when using shortened URL.
+- On receipt of this form of message, the agent must do an HTTP GET to retrieve the associated, encoded out of band message.
 
 With the shortening of the URL, a usable QR code will always be able to be generated.
 
@@ -394,7 +395,7 @@ The _sender_ will publish or transmit the out of band message URL in a manner av
 
 When they receiver receives the out of band message URL, there are two possible user flows, depending on whether the individual has an Aries agent. If the individual is new to Aries, they will likely load the URL in a browser. The resulting page should contain instructions on how to get started by installing an Aries agent. That install flow will transfer the Out of Band message to the newly installed software.
 
-A user that already has those steps accomplished will have the URL received by software directly. That software will base64URL decode the string and can read the Out of Band message directly out of the `c_i` query parameter, without loading the URL.
+A user that already has those steps accomplished will have the URL received by software directly. That software will base64URL decode the string and can read the Out of Band message directly out of the `oob` query parameter, without loading the URL.
 
 > **NOTE**: In receiving the out of band message, the base64url decode implementation used **MUST**
 > correctly decode padded and unpadded base64URL encoded data.
