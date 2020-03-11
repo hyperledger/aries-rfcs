@@ -59,7 +59,7 @@ Description of attributes:
 
 ### Request Presentation
 
-Request presentation is a message from a verifier to a prover that describes values that need to be revealed and predicates that need to be fulfilled. Schema:
+From a verifier to a prover, the `request-presentation` message describes values that need to be revealed and predicates that need to be fulfilled. Schema:
 
 ```json
 {
