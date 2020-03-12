@@ -475,15 +475,29 @@ The `pthid` is required in this message, even if present in the `request` method
 
 After a message is sent, the *invitee* in the `complete` state. Receipt of a message puts the *inviter* into the `complete` state.
 
-#### Connection Reuse
-
-The `complete` message may also be used to reuse existing connections. When an out of band invitation is received containing a public DID for which the _invitee_ already has a connection, the _invitee_ may jump directly to the `complete` message in the protocol sent over the existing connection. The `pthid` passed in the `complete` message allows the _inviter_ to correlate the invitation with the identified existing connection and then invoke any protocols desired based on that context.
-
-TODO: Should this message be called `continue` instead of complete? Does combining the ack for new connections and the continue for reuse make sense?
-
 #### Next Steps
 
 The exchange between the _inviter_ and the _invitee_ is now established. This relationship has no trust associated with it. The next step should be the exchange of proofs to build trust sufficient for the purpose of the relationship.
+
+## Exchange Reuse
+
+When an out of band invitation is received containing a public DID for which the _invitee_ already has a connection, the _invitee_ may use the `reuse` message in the protocol sent over the existing connection. The `pthid` passed in the `reuse` message allows the _inviter_ to correlate the invitation with the identified existing connection and then invoke any protocols desired based on that context.
+
+#### Example
+
+```json
+{
+  "@type": "https://didcomm.org/didexchange/1.0/reuse",
+  "@id": "12345678900987654321",
+  "~thread": {
+    "pthid": "<The Parent Thread ID of the Out Of Band Invitation>"
+  }
+}
+```
+
+The `pthid` is required in this message. It provides the context link for the _inviter_ to prompt additional protocol interactions.
+
+Sending or receiving this message does not change the state of the existing connection.
 
 #### Peer DID Maintenance
 
