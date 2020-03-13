@@ -1,5 +1,5 @@
 # Aries RFC 0418: Aries Rich Schema Encoding Objects
-- Author: [Ken Ebert](ken@sovrin.org), [Mike Lodder](mike@sovrin.org), [Brent Zundel](brent.zundel@evernym.com)
+- Author: [Ken Ebert](mailto:ken@sovrin.org), [Mike Lodder](mailto:mike@sovrin.org), [Brent Zundel](mailto:brent.zundel@evernym.com), [Alexander Shcherbakov](mailto:alexander.shcherbakov@evernym.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-02-10
 - Status Note: Part of proposed Rich Schema capabilities for credentials 
@@ -23,6 +23,9 @@ various sizes of canonical data encodings (256-bit, 384-bit, etc.). The
 transformation algorithms will allow for broader use of predicate proofs,
 and avoid hashed values as much as possible, as they do not support
 predicate proofs.
+
+Encoding objects are processed in a generic way defined in 
+[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common).
 
 ## Motivation
 
@@ -48,14 +51,16 @@ algorithm selected by the issuer.
 ## Tutorial
 
 
-### Intro to encoding objects
+### Intro to Encoding Objects
 Encoding objects are JSON objects that describe the input types,
 transformation algorithms, and output encodings. The encoding object
 is stored on the ledger.
 
 ### Properties
-An encoding object is identified by a DID, and is formatted as a DID
-Document. It contains the following properties:
+Encoding properties follow the generic template defined in 
+[Rich Schema Common](https://github.com/hyperledger/indy-hipe/tree/master/text/0120-rich-schemas-common#how-rich-schema-objects-are-stored-on-the-ledger).
+
+Encoding's `content` field is a JSON-serialized string with the following fields:
 
 #### id
 The DID which identifies the encoding object. The id-string of the
@@ -64,22 +69,8 @@ of the value of the data object of the content property. The
 canonicalization scheme we recommend is the IETF draft
 [JSON Canonicalization Scheme (JCS).](https://tools.ietf.org/id/draft-rundgren-json-canonicalization-scheme-16.html)
 
-#### name
-The name of the encoding object as a utf-8 string value. By convention,
-the name should be taken from the input and output encodings:
-<input>_<output>
-
-#### version
-The version of this named encoding object.
-
-#### hash_value
-The hash of the encoding object contained in the content block data 
-property.
-
-#### encoding
-The encoding object consists of:
 - `input`: a description of the input value.
-- `output`: a description of the output value
+- `output`: a description of the output value.
 - `algorithm`:
   - `documentation`: a URL which references a specific github commit of
   the documentation that fully describes the transformation algorithm.
@@ -94,41 +85,25 @@ transformation algorithm implementation is correct.
 
 
 ### Example Encoding
-- data (object)
-    The object with the encoding data
-  - `id`: The encoding's DID; the id-string of its DID is the base58
-  representation of the SHA2-256 hash of the canonical form of the value of
-  the encoding object,
-  - `content`: This property is used to hold immutable content:
-    - `type`: "enc",
-    - `name`: encoding's name string,
-    - `version`: schema's version string,
-    - `hash`:
-      - `type`: the type of hash,
-      - `value`: the hexadecimal value of the hash of the canonical form of
-      the data object,
-    - `data`: the encoding object
-
+An example of the `content` field of an Encoding object:
 ```
 {
-    "encoding": {
-        "input": {
-            "id": "DateRFC3339",
-            "type": "string"
-        },
-        "output": {
-            "id": "UnixTime",
-            "type": "256-bit integer"
-        },
-        "algorithm": {
-            "description": "This encoding transforms an
-                RFC3339-formatted datetime object into the number
-                of seconds since January 1, 1970 (the Unix epoch).",
-            "documentation": URL to specific github commit,
-            "implementation": URL to implementation
-        },
-        "test_vectors": URL to specific github commit
-    }
+    "input": {
+        "id": "DateRFC3339",
+        "type": "string"
+    },
+    "output": {
+        "id": "UnixTime",
+        "type": "256-bit integer"
+    },
+    "algorithm": {
+        "description": "This encoding transforms an
+            RFC3339-formatted datetime object into the number
+            of seconds since January 1, 1970 (the Unix epoch).",
+        "documentation": URL to specific github commit,
+        "implementation": URL to implementation
+    },
+    "test_vectors": URL to specific github commit
 }
 ```
 
@@ -208,59 +183,22 @@ dereferenced, will provide the file of test vectors. We recommend that the
 URL reference some immutable content, such as a specific github commit, an
 IPFS file, etc.
 
+### Data Registry Storage
+Aries will provide a means for writing contexts to and reading contexts
+from a verifiable data registry (such as a distributed ledger).
+
+An Encoding object will be written to the ledger in a generic way defined in 
+[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
+
 
 ### Aries Data Registry Interface
-We propose adding two Aries-Data-Registry-Interface methods for writing and
-reading context objects:
-- `write_encoding`: a method to write an encoding object to a data
-registry. 
-- `read_encoding`: a method to read an encoding object from a data
-registry.
+Aries Data Registry Interface methods for adding and retrieving an Encoding object from the
+ledger comply with the generic approach described in [Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#aries-data-registry-interface).
 
-#### write_encoding
-```
-Writes an encoding object to the ledger.
-
-#Params
-submitter: {
-    key: public key of the submitter,
-    keystore: key manager where private key is stored
-}, 
-data: {
-    id: identifier for the encoding object,
-    encoding: encoding object,
-    name: encoding name string,
-    version: encoding version string,
-    ver: version of the encoding object JSON format
-},
-registry: identifier for the registry
-
-#Returns
-registry_response: result as json,
-error: {
-    code: aries common error code,
-    description:  aries common error description
-}
-```
-#### read_encoding
-```
-Reads an encoding object from the ledger.
-
-#Params
-submitter (optional): {
-    key: public key of the submitter,
-    keystore: key manager where private key is stored
-}, 
-id: identifier for the encoding object,
-registry: identifier for the registry
-
-#Returns
-registry_response: encoding object,
-error: {
-    code: aries common error code,
-    description:  aries common error description
-}
-```
+This means the following methods can be used:
+- `write_rich_schema_object`
+- `read_rich_schema_object_by_id`
+- `read_rich_schema_object_by_metadata`
 
 ## Reference
 [reference]: #reference
@@ -270,6 +208,10 @@ The following is a
 Here is the paper that defines
 [Camenisch-Lysyanskaya signatures.][CL-signatures] 
 [CL-signatures]: (https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf)
+
+- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
+- [0420: Rich Schema Objects Common](https://github.com/hyperledger/indy-hipe/tree/master/text/0120-rich-schemas-common) 
+
 
 ## Drawbacks
 [drawbacks]: #drawbacks
@@ -304,6 +246,14 @@ this [jira ticket](https://jira.hyperledger.org/browse/IS-786) and
 What the prior effort lacked was a corresponding enhancement of schema
 infrastructure which would have provided the necessary typing of attribute
 values.
+
+## Unresolved questions
+
+- We are not defining Rich Schema objects as DID DOCs for now. We may re-consider this in future once DID DOC format
+is finalized.
+- It may make sense to extend DID specification to include using DID for referencing Rich Schema objects.
+- The proposed canonicalization form of a content to be used for DID's id-string generation is in a Draft version, so we 
+may find a better way to do it.
   
 ## Implementations
 
