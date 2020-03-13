@@ -1,5 +1,5 @@
 # 0420: Rich Schema Objects Common
-- Author: [Alexander Shcherbakov](alexander.shcherbakov@evernym.com), [Brent Zundel](brent.zundel@evernym.com)
+- Author: [Alexander Shcherbakov](mailto:alexander.shcherbakov@evernym.com), [Brent Zundel](mailto:brent.zundel@evernym.com), [Ken Ebert](mailto:ken@sovrin.org) 
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-02-13
 - Status Note: Part of proposed Rich Schema capabilities for credentials 
@@ -33,6 +33,20 @@ By Rich Schema objects we mean all objects related to Rich Schema concept
 
 Let's discuss a number of items common for all Rich Schema objects
 
+### Components and Repositories
+The complete architecture for every Rich Schema object involves three separate
+components:
+- `aries-dri`: This is the location of the `aries-data-registy-interface`.
+Changes to this code will enable users of any data registry with an
+`aries-dri`-compatible data manager to handle Rich Schema objects.
+- Specific Verifiable Data Registry implementation (for example, `indy-vdr`).
+It needs to comply with the interface described by the
+`aries-data-registry-interface` and is built to plug in to the aries
+ecosystem. It contains the code to communicate with a specific data registry (ledger).
+  
+- Specific Data Registry (Ledger) implementation (for example, `indy-node`). Changes to this code will enable a Rich Schema object
+to be written to and retrieved from a data registry.
+
 ### Immutability of Rich Schema Objects
 
 The following Rich Schema objects are immutable:
@@ -45,12 +59,15 @@ The following Rich Schema objects can be mutable:
 - Credential Definition
 - Presentation Definition
 
-Credential Definition is considered as a mutable object as the Issuer may rotate
+Credential Definition and Presentation Definition should be immutable in most of the cases,
+but some applications may consider them as mutable objects.
+
+Credential Definition can be considered as a mutable object since the Issuer may rotate
 keys present there.
 However, rotation of Issuer's keys should be done carefully as it will invalidate all
 credentials issued for this key.
 
-Presentation Definition is considered as a mutable object since restrictions to Issuers, Schemas and 
+Presentation Definition can be considered as a mutable object since restrictions to Issuers, Schemas and 
 Credential Definitions to be used in proof may evolve. 
 For example, Issuer's key for a given Credential Definition may be compromised, so 
 Presentation Definition can be updated to exclude this Credential Definition from the list
@@ -86,13 +103,34 @@ data registries (ledgers).
 
 ### Relationship
 - A credential definition refers to a single mapping object
-- A mapping object refers to 1 or more schema objects.
-Each attribute in a schema may be included in the mapping one or more times (it is possible to encode a single attribute 
+- A mapping object refers to a single schema object
+- If there is no existent single schema to be referenced by a mapping object,
+a new schema must be created potentially referencing or extending existing ones.
+- Each attribute in a schema may be included in the mapping one or more times (it is possible to encode a single attribute 
 in multiple ways). A mapping may map only a subset of the attributes of a schema.
-- A presentation definition refers to 1 or more schema and credential definition objects. A presentation definition may use only a
-subset of the attributes of a schema.  
-
+- A presentation definition refers to 1 or more schema, mapping or credential definition objects.
+ 
+A presentation definition may use only a subset of the attributes of a schema.  
+ 
 ![](relationship-diagram.png)
+
+### Usage of JSON-LD
+The following Rich Schema objects must be in JSON-LD format:
+- Schema
+- Mapping 
+- Presentation Definition
+
+Context object can also be in JSON-LD format.
+
+
+If a Rich Schema object is a JSON-LD object, the `content`'s `@id` field must be equal to the `id`.
+
+The only thing that we currently expect from json-ld processing is substitution of attributes by a fully-qualified ones.
+We may assume that contexts belonging to the current ledger only
+are resolved.
+We are not going to resolve other Indy Ledger's contexts, other blockchain's contexts, and Internet contexts.
+
+More details about JSON-LD usage may be found in the HIPES for specific rich schema objects.
 
 ### How Rich Schema objects are stored in the Data Registry
 
@@ -114,9 +152,10 @@ The `content` field must be serialized in the canonical form. The canonicalizati
 - `ver` defines the version of the format. It defines what fields and metadata are there, how `id` is generated, what hash function is used there, etc. 
 - Author's and Endorser's DIDs are also passed as a common metadata fields for any Request. 
 
+If a Rich Schema object is a JSON-LD object, the `content`'s `@id` field must be equal to the `id`.
 
 ### Querying Rich Schema objects from the Data Registry
-- Any Rich Schema object can be get from a Data Registry (Ledger) by its ID (DID).
+- Any Rich Schema object can be obtained from a Data Registry (Ledger) by its ID (DID).
 - It should be possible to get Rich Schema objects by metadata as well: `(rs_name, rs_version, rs_type)`.
 - Currently it's supposed that every Rich Schema object is queried individually, so it's up to clients and applications
 to get, query and cache all dependent Rich Schema objects.
@@ -147,17 +186,40 @@ Just two methods are sufficient to handle all Rich Schema types:
 
 
 ##### write_rich_schema_object
+
 ```
 Writes a Rich Schema object to the ledger.
 
 #Params
 submitter: information about submitter
 data: {
+    id: Rich Schema object's unique ID for example a DID with an id-string being
+        base58 representation of the SHA2-256 hash of the `content` field),
+    content: Rich Schema object as a JSON or JSON-LD string,
+    rs_name: Rich Schema object name,
+    rs_version: Rich Schema object version,
+    rs_type: Rich schema object type,
+    ver: the version of the generic object template
+},
+registry: identifier for the registry
+
+#Returns
+registry_response: result as json,
+error: {
+    code: aries common error code,
+    description:  aries common error description
+}
+```
+The combination of `rs_type`, `rs_name`, and `rs_version` must be unique among all rich schema objects on the ledger.
+
+##### read_rich_schema_object_by_id
+```
+Reads a Rich Schema object from the ledger by its unique ID.
+
+#Params
+submitter (optional): information about submitter
+data: {
     id: Rich Schema object's ID (as a DID for example),
-    content: Rich Schema object as JSON-LD string,
-    rs_name: Rich Schema object name
-    rs_version: Rich Schema object version
-    rs_type: Rich schema object type
     ver: the version of the generic object template
 },
 registry: identifier for the registry
@@ -170,14 +232,16 @@ error: {
 }
 ```
 
-##### read_rich_schema_object
+##### read_rich_schema_object_by_metadata
 ```
-Reads a Rich Schema object from the ledger.
+Reads a Rich Schema object from the ledger by its unique combination of (name, version, type)
 
 #Params
 submitter (optional): information about submitter
 data: {
-    id: Rich Schema object's ID (as a DID for example),
+    rs_name: Rich Schema object name,
+    rs_version: Rich Schema object version,
+    rs_type: Rich schema object type,
     ver: the version of the generic object template
 },
 registry: identifier for the registry
