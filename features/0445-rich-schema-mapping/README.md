@@ -86,7 +86,7 @@ be (or map to, via a context object) a URI.
 #### @context
 A Mapping may have a `@context` property. If present, the value of this
 property must be a
-[context object](../0138-rich-schema-context/README.md) or a URI which can
+[context object](../0249-rich-schema-contexts/README.md) or a URI which can
 be dereferenced to obtain a context object.
 
 #### schema
