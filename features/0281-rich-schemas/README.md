@@ -169,7 +169,7 @@ are one example. These can be used inform a verifier that a schema has
 changed, but do not provide access to the original version of the schema in
 the event the original schema has been updated.
 
-### Example schema
+### Example Schema
 An example of the `content` field of a Rich Schema object:
 ```
    "@id": "did:sov:2f9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",

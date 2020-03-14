@@ -58,16 +58,9 @@ is stored on the ledger.
 
 ### Properties
 Encoding properties follow the generic template defined in 
-[Rich Schema Common](https://github.com/hyperledger/indy-hipe/tree/master/text/0120-rich-schemas-common#how-rich-schema-objects-are-stored-on-the-ledger).
+[Rich Schema Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
 
 Encoding's `content` field is a JSON-serialized string with the following fields:
-
-#### id
-The DID which identifies the encoding object. The id-string of the
-DID is the base58 representation of the SHA2-256 hash of the canonical form
-of the value of the data object of the content property. The
-canonicalization scheme we recommend is the IETF draft
-[JSON Canonicalization Scheme (JCS).](https://tools.ietf.org/id/draft-rundgren-json-canonicalization-scheme-16.html)
 
 - `input`: a description of the input value.
 - `output`: a description of the output value.

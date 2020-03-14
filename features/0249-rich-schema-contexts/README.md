@@ -37,7 +37,7 @@ If the Context needs to be evolved, a new Context with a new version or name nee
 
 Context object may be stored in either JSON or JSON-LD format.
 
-### Example context
+### Example Context
 An example of the `content` field of a Context object:
 ```
 {
