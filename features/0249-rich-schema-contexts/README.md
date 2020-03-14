@@ -85,7 +85,7 @@ More information on `@context` from the JSON-LD specification may be found
 [here](https://w3c.github.io/json-ld-syntax/#advanced-context-usage).
 
 - [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
-- [0420: Rich Schema Objects Common](https://github.com/hyperledger/indy-hipe/tree/master/text/0120-rich-schemas-common) 
+- [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common) 
 
 ## Drawbacks
 

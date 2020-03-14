@@ -107,7 +107,7 @@ Rich Schema's `content` field is a JSON-LD-serialized string with the following 
 
 #### @id
 A rich schema must have an `@id` property. The value of this property must
-be equal to the `id` field which is a DID (see [Identification of Rich Schema Objects](https://github.com/hyperledger/indy-hipe/tree/master/text/0120-rich-schemas-common#identification-of-rich-schema-objects)). 
+be equal to the `id` field which is a DID (see [Identification of Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#identification-of-rich-schema-objects)). 
 
 A [rich schema](README.md) may refer to the `@id` of another rich schema to
 define a parent schema. A property of a rich schema may use the `@id` of
@@ -246,7 +246,7 @@ More information on the Verifiable Credential data model use of `schemas`
 may be found [here](https://w3c.github.io/vc-data-model/#data-schemas).
 
 - [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
-- [0420: Rich Schema Objects Common](https://github.com/hyperledger/indy-hipe/tree/master/text/0120-rich-schemas-common) 
+- [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common) 
 
 ## Drawbacks
 

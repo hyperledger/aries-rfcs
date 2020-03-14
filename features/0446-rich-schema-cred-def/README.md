@@ -10,8 +10,8 @@
 ## Summary
 
 Credential Definition can be used by the Issuer to set public keys for a particular
- [Rich Schema](https://github.com/hyperledger/indy-hipe/tree/master/text/0149-rich-schema-schema)
-  and [Mapping](https://github.com/hyperledger/indy-hipe/tree/master/text/0155-rich-schema-mapping).
+ [Rich Schema](../0281-rich-schemas/README.md)
+  and [Mapping](../0445-rich-schema-mapping/README.md).
 The public keys can be used for signing the credentials by the Issuer according to the order and encoding of attributes
 defined by the referenced Mapping.
 
@@ -112,7 +112,7 @@ Here is the paper that defines
 [CL-signatures]: (https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf)
 
 - [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
-- [0420: Rich Schema Objects Common](https://github.com/hyperledger/indy-hipe/tree/master/text/0120-rich-schemas-common) 
+- [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common) 
 
 
 ## Drawbacks
@@ -131,9 +131,7 @@ A possible alternative to this work has been presented by Workday.
 
 ## Prior art
 
-A description of a prior effort to add encodings to Indy may be found in
-this [jira ticket](https://jira.hyperledger.org/browse/IS-786) and 
-[pull request](https://github.com/hyperledger/indy-sdk/pull/1048).
+Indy already has a Credential Definition support. 
 
 What the prior effort lacked was a corresponding enhancement of schema
 infrastructure which would have provided the necessary typing of attribute
