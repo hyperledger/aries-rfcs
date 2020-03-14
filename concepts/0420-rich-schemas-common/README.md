@@ -299,6 +299,8 @@ We are not requiring to define Rich Schema objects as DID DOCs for now. We may r
 is finalized.
 
 ## Unresolved questions
+- Is the proposed interface generic enough to support other data
+registries?
 - We are not defining Rich Schema objects as DID DOCs for now. We may re-consider this in future 
 once aries-vdr interface for DID resolving is defined and DID DOC specification is finalized.
 - Whether we should extend DID to be a standard for Rich Schema object IDs.

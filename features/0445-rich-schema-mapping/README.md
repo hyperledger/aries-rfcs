@@ -219,7 +219,8 @@ Model specification.
 A possible alternative to this work has been presented by Workday.
 
 ## Unresolved questions
-
+- Is the proposed interface generic enough to support other data
+registries?
 - We are not defining Rich Schema objects as DID DOCs for now. We may re-consider this in future once DID DOC format
 is finalized.
 - It may make sense to extend DID specification to include using DID for referencing Rich Schema objects.

@@ -138,7 +138,8 @@ infrastructure which would have provided the necessary typing of attribute
 values.
 
 ## Unresolved questions
-
+- Is the proposed interface generic enough to support other data
+registries?
 - Of all the Rich Schema objects, the CredDef most closely fits the format of a DID DOC.
 - However, we are not defining Rich Schema objects as DID DOCs for now. We may re-consider this in future once DID DOC format
 is finalized.
