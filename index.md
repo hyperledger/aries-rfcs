@@ -41,7 +41,6 @@
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2019-09-27, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 
 ## [PROPOSED](README.md#proposed)
-* [: ](features/0418-rich-schema-encoding/README.md) (2020-02-10 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0013: Overlays](concepts/0013-overlays/README.md) (2019-05-20 &mdash; [`concept`](/tags.md#concept))
 * [0021: DIDComm Message Anatomy](concepts/0021-didcomm-message-anatomy/README.md) (2019-05-25 &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
 * [0023: DID Exchange Protocol 1.0](features/0023-did-exchange/README.md) (2019-05-27 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
@@ -85,7 +84,10 @@
 * [0347: Proof Negotiation](features/0347-proof-negotiation/README.md) (2019-12-13 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0351: Purpose Decorator](features/0351-purpose-decorator/README.md) (2019-12-16 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0360: did:key Usage](features/0360-use-did-key/README.md) (2019-12-17 &mdash; [`feature`](/tags.md#feature))
-* [0420: Rich Schema Objects Common](concepts/0420-rich-schemas-common/README.md) (2020-02-13 &mdash; [`feature`](/tags.md#feature))
+* [0420: Rich Schema Objects Common](concepts/0420-rich-schemas-common/README.md) (2020-02-13 &mdash; [`concept`](/tags.md#concept)) [`rich-schemas`](/tags.md#rich-schemas)
+* [0418: Aries Rich Schema Encoding Objects](features/0418-rich-schema-encoding/README.md) (2020-02-10 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas)
+* [0445: Aries Rich Schema Mapping](features/0445-rich-schema-mapping/README.md) (2020-03-16 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas)
+* [0446: Aries Rich Schema Credential Definition](features/0446-rich-schema-cred-def/README.md) (2020-03-16 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas)
 
 ## [RETIRED](README.md#retired)
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
