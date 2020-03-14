@@ -57,7 +57,7 @@ transformation algorithms, and output encodings. The encoding object
 is stored on the ledger.
 
 ### Properties
-Encoding properties follow the generic template defined in 
+Encoding's properties follow the generic template defined in 
 [Rich Schema Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
 
 Encoding's `content` field is a JSON-serialized string with the following fields:

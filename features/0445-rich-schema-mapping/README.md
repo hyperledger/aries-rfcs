@@ -70,7 +70,7 @@ the same requirements, a mapping object may not be necessary or a different
 mapping object may need to be defined.
 
 ### Properties
-Mapping properties follow the generic template defined in 
+Mapping's properties follow the generic template defined in 
 [Rich Schema Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
 
 Mapping's `content` field is a JSON-LD-serialized string with the following fields:
@@ -212,31 +212,11 @@ verifiying the accompanying verifiable presentations.
 
 ## Rationale and alternatives
 
-Encoding attribute values as integers is already part of using anonymous
-credentials, however the current method is implicit, and relies on use of a
-common implementation library for uniformity. If we do not include
-encodings as part of the Rich Schema effort, we will be left with an
-incomplete set of possible predicates, a lack of explicit mechanisms for
-issuers to specify which encoding methods they used, and a corresponding
-lack of verifiablity of signed attribute values.
+- A `schema` object is supported by the W3C Verifiable Credentials Data
+Model specification.
+- It supports rich schema capabilities for credentials.
 
-In another design that was considered, the encoding on the ledger was
-actually a function an end user could call, with the ledger nodes
-performing the transformation algorithm and returning the encoded value.
-The benefit of such a design would have been the guarantee of uniformity
-across encoded values. This design was rejected because of the
-unfeasibility of using the ledger nodes for such calculations and the
-privacy implications of submitting attribute values to a public ledger.
-
-## Prior art
-
-A description of a prior effort to add encodings to Indy may be found in
-this [jira ticket](https://jira.hyperledger.org/browse/IS-786) and 
-[pull request](https://github.com/hyperledger/indy-sdk/pull/1048).
-
-What the prior effort lacked was a corresponding enhancement of schema
-infrastructure which would have provided the necessary typing of attribute
-values.
+A possible alternative to this work has been presented by Workday.
 
 ## Unresolved questions
 
