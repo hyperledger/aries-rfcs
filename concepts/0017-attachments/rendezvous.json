@@ -1,0 +1,14 @@
+{
+  "@id": "5678876542345",
+  "@type": "https://didcomm.org/xrendezvous/1.0/request",
+  "comment": "Shall we discuss the merger?",
+  "candidate_locations": [
+    {
+      "name": "Rixos The Palm Dubai",
+      "position": [
+        25.1212,
+        55.1535
+      ]
+    }
+  ]
+}
