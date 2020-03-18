@@ -365,14 +365,14 @@ Sample JWS-signed attachment:
     "filename": "Garcia-inspection-March-25.pdf",
     "data": {
       "base64": "eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ... (bytes omitted to shorten)",
-			"jws": {
-				// payload: ...,  <-- omitted: refer to base64 content when validating
-				"header": {
-					"kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-				},
-				"protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-				"signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
-			}
+      "jws": {
+        // payload: ...,  <-- omitted: refer to base64 content when validating
+        "header": {
+          "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+        },
+        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      }
     }
   }
 }
