@@ -379,16 +379,17 @@ Sample JWS-signed attachment:
 ```
 
 Here, the JWS structure inlines a public key value in
-[did:key format](../../features/0360-use-did-key) within the unprotected header's
+[did:key format](../../features/0360-use-did-key/README.md) within the unprotected header's
 `kid` field. It may also use a DID URL to reference a key within a resolvable DIDDoc.
 Supported DID URLs should specify a timestamp and/or version for the containing
 document.
 
-The JWS protected header consists of at least the following parameter:
+The JWS protected header consists of at least the following parameter indicating
+an Edwards curve digital signature:
 
 ```jsonc
 {
-  "alg": "EdDSA",  // Edwards curve digital signature
+  "alg": "EdDSA"
 }
 ```
 
