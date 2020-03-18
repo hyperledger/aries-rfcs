@@ -62,6 +62,34 @@ Tracing is requested by decorating the JSON plaintext of an DIDComm message (whi
 
 [![example of ~trace](msg-with-trace.png)](msg-with-trace.json)
 
+```
+{
+  "@type": "did:sov:...",
+  "@id": "abc-def-...",
+  "msg": "U2Vl...",
+  "~trace": {
+    "target": "http://example.com/tracer",
+    "full_thread": true
+  }
+}
+```
+
+```
+{
+  "@type": "did:sov:...",
+  "@id": "abc-def-...",
+  "msg": "U2Vl...",
+  "~trace": {
+    "target": "message",
+    "full_thread": true,
+    "trace_reports": [{}, {}, ...]
+  }
+}
+```
+
+The `"target"` can refer to a url (as above) or the term `"message"`, which is a request to
+append trace information to the message itself.
+
 This example asks the handler of the message to perform an HTTP POST of a __trace report__
 about the message to the URI `http://example.com/tracer`.
 
@@ -86,6 +114,19 @@ even if it is expired or invalid. The rationale for this choice is:
 The body of the HTTP request (the _trace report_) is a JSON document that looks like this:
 
 [![trace report](trace-report.png)](trace-report.json)
+
+```
+{
+  "@type": "did:sov:.../1.0/trace_report",
+  "msg_id": {"id": "abc-def-...df", "seq": 1},
+  "thread_id": {"thid": "hij-klm-nop-...qr", "sender_order": 1},
+  "handler": "did:sov:1234abcd#3",
+  "ellapsed_milli": 27,
+  "traced_type": "did:sov:...",
+  "timestamp": "2018-03-27 18:23:45.123Z",
+  "outcome": "OK ..."
+}
+```
 
 ### Subtleties
 
