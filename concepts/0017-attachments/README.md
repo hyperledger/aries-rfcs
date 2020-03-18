@@ -344,7 +344,7 @@ needs to be signed even when it is removed from a messaging flow. Attachments ma
 also be signed by a party separate from the sender of the message, or using a different
 signing key when the sender is performing key rotation.
 
-Embedded and appended attachments support signatures by the addition of a `jws` field
+Embedded and appended attachments support signatures by the addition of a `data.jws` field
 containing a signature in [JWS (RFC 7515) format](https://tools.ietf.org/html/rfc7515)
 with [Detached Content](https://tools.ietf.org/html/rfc7515#appendix-F).
 The payload of the JWS is the raw data of the attachment, whether externally referenced
@@ -365,14 +365,14 @@ Sample JWS-signed attachment:
     "filename": "Garcia-inspection-March-25.pdf",
     "data": {
       "base64": "eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ... (bytes omitted to shorten)",
-    },
-    "jws": {
-      // payload: ...,  <-- omitted: refer to base64 content when validating
-      "header": {
-        "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-      },
-      "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-      "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+			"jws": {
+				// payload: ...,  <-- omitted: refer to base64 content when validating
+				"header": {
+					"kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+				},
+				"protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+				"signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+			}
     }
   }
 }
@@ -482,10 +482,10 @@ modified.
 reference instead of by value. Lets the receiver guess how expensive it will be,
 in time, bandwidth, and storage, to fully fetch the attachment.
 
-* `jws`: Optional. A JSON Web Signature over the content of the attachment.
-
 * `data`: A JSON object that gives access to the actual content of the
 attachment. Contains the following subfields:
+
+  * `jws`: A JSON Web Signature over the content of the attachment. Optional.
 
   * `sha256`: The hash of the content. Optional. Used as an integrity check if
   content is inlined. if content is only referenced, then including this field
@@ -496,6 +496,7 @@ attachment. Contains the following subfields:
   link is a form of proof of existence.
 
   * `links`: A list of zero or more locations at which the content may be fetched.
+  Optional.
   
   * `base64`: Base64-encoded data, when representing arbitrary content inline instead
   of via `links`. Optional. 
