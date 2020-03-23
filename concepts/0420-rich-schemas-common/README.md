@@ -137,11 +137,11 @@ More details about JSON-LD usage may be found in the HIPES for specific rich sch
 Any write request for Rich Schema object has the same fields:
 ```
 'id': <Rich Schema object's ID>                # DID string 
-'content': <Rich Schema object as JSON-LD>     # JSON-serialized string
+'content': <Rich Schema object as JSON>        # JSON-serialized string
 'rs_name': <rich schema object name>           # string
 'rs_version': <rich schema object version>     # string
-'rs_type': <rich schema object type>           # integer
-'ver': <format version>                        # integer                              
+'rs_type': <rich schema object type>           # string enum (currently one of `ctx`, `sch`, `map`, `enc`, `cdf`, `pdf`)
+'ver': <format version>                        # string                              
 ```
 - `id` is a unique ID (for example a DID with a id-string being base58 representation of the SHA2-256 hash of the `content` field)
 - The `content` field here contains a Rich Schema object in JSON-LD format (see [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)).
@@ -165,11 +165,11 @@ aries-vdr interface for DID resolving is defined and DID DOC specification is fi
 The following information is returned from the Ledger in a reply for any get request of a Rich Schema object:
 ```
 'id': <Rich Schema object's ID>              # DID string 
-'content': <Rich Schema object as JSON-LD>   # JSON-serialized string
+'content': <Rich Schema object as JSON>      # JSON-serialized string
 'rs_name': <rich schema object name>         # string
 'rs_version': <rich schema object version>   # string
-'rs_type': <rich schema object type>         # integer
-'ver': <format version>                      # integer
+'rs_type': <rich schema object type>         # string enum (currently one of `ctx`, `sch`, `map`, `enc`, `cdf`, `pdf`)
+'ver': <format version>                      # string
 'from': <author DID>,                        # DID string
 'endorser': <endorser DID>,                  # DID string
 ```
@@ -198,7 +198,7 @@ data: {
     content: Rich Schema object as a JSON or JSON-LD string,
     rs_name: Rich Schema object name,
     rs_version: Rich Schema object version,
-    rs_type: Rich schema object type,
+    rs_type: Rich schema object type's enum string (currently one of `ctx`, `sch`, `map`, `enc`, `cdf`, `pdf`),
     ver: the version of the generic object template
 },
 registry: identifier for the registry
@@ -241,7 +241,7 @@ submitter (optional): information about submitter
 data: {
     rs_name: Rich Schema object name,
     rs_version: Rich Schema object version,
-    rs_type: Rich schema object type,
+    rs_type: Rich schema object type's enum string (currently one of `ctx`, `sch`, `map`, `enc`, `cdf`, `pdf`),
     ver: the version of the generic object template
 },
 registry: identifier for the registry
