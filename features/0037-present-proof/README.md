@@ -41,8 +41,8 @@ Diagrams in this protocol were made in draw.io. To make changes:
 
 * request-sent
 * proposal-received
-* request-received
 * presentation-received
+* abandoning
 * done
 
 #### states for Prover
@@ -50,7 +50,7 @@ Diagrams in this protocol were made in draw.io. To make changes:
 * request-received
 * proposal-sent
 * presentation-sent
-* reject-sent
+* abandoning
 * done
 
 For the most part, these states map onto the transitions shown in the choreography diagram in obvious ways. However, a few subtleties are worth highlighting:
