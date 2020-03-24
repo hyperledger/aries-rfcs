@@ -452,19 +452,52 @@ Possible reasons:
 
 **response_processing_error**
 
-- unknown processing error## 3. Exchange Acknowledgement
+- unknown processing error
 
-After the Response is received, the exchange is technically complete. This remains unconfirmed to the *inviter* however. The *invitee* SHOULD send a message to the *inviter*. As any message will confirm the exchange, any message will do.
+## 3. Exchange Complete
 
-Frequently, the parties of the relationship will want to trade credentials to establish trust. In such a flow, those message will serve the function of acknowledging the exchange without an extra confirmation message.
+The exchange complete message is used to confirm the exchange to the _inviter_.  This message is required in the flow, as it marks the exchange complete. The _inviter_ may then invoke any protocols desired based on the context expressed via the `pthid` in the DID Exchange protocol.
 
-If no message is needed immediately, a trust ping can be used to allow both parties confirm the exchange.
+#### Example
+
+```json
+{
+  "@type": "https://didcomm.org/didexchange/1.0/complete",
+  "@id": "12345678900987654321",
+  "~thread": {
+    "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>",
+    "pthid": "<The Parent Thread ID of the Out Of Band Invitation>"
+  }
+}
+```
+
+The `pthid` is required in this message, even if present in the `request` method.
 
 After a message is sent, the *invitee* in the `complete` state. Receipt of a message puts the *inviter* into the `complete` state.
 
 #### Next Steps
 
 The exchange between the _inviter_ and the _invitee_ is now established. This relationship has no trust associated with it. The next step should be the exchange of proofs to build trust sufficient for the purpose of the relationship.
+
+## Exchange Reuse
+
+When an out of band invitation is received containing a public DID for which the _invitee_ already has a connection, the _invitee_ may use the `reuse` message in the protocol sent over the existing connection. The `pthid` passed in the `reuse` message allows the _inviter_ to correlate the invitation with the identified existing connection and then invoke any protocols desired based on that context.
+
+#### Example
+
+```json
+{
+  "@type": "https://didcomm.org/didexchange/1.0/reuse",
+  "@id": "12345678900987654321",
+  "~thread": {
+    "pthid": "<The Parent Thread ID of the Out Of Band Invitation>"
+  }
+}
+```
+
+The `pthid` is required in this message. It provides the context link for the _inviter_ to prompt additional protocol interactions.
+
+Sending or receiving this message does not change the state of the existing connection.
 
 #### Peer DID Maintenance
 
