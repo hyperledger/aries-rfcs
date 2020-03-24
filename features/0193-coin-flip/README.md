@@ -59,7 +59,7 @@ Note: This diagram was made in draw.io. To make changes:
 - submit a pull request.
 </blockquote>
 
-This diagram only depicts the so-called "happy path". It is possible to experience problems for various reasons. If either party detects such an event, they should abandon the protocol and emit a [`problem-report` message](../0035-report-problem/README.md) to the other party. The `problem-report` message is [adopted into this protocol](../../concepts/0003-protocols/template.md#adopted-messages) for that purpose. Some values of `code` that may be used in such messages include:
+This diagram only depicts the so-called "happy path". It is possible to experience problems for various reasons. If either party detects such an event, they should abandon the protocol and emit a [`problem-report` message](../0035-report-problem/README.md) to the other party. The `problem-report` message is [adopted into this protocol](../../0000-template-protocol.md#adopted-messages) for that purpose. Some values of `code` that may be used in such messages include:
 
 * `bad-message-sequence`: The message was sent out of order.
 * `bad-field-value`: The message contained a field with an invalid value. The offending fields are named in the `problem_items` array. 

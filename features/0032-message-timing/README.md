@@ -48,13 +48,19 @@ The meaning of these fields is:
 * `stale_time`: Ideally, the decorated message should be processed by the
   the specified timestamp. After that, the message may become irrelevant
   or less meaningful than intended. This is a hint only.
-* `expires_time`: The decorated message should be considered invalid or
-  expired if encountered after the specified timestamp. This is a much
-  stronger claim than the one for `stale_time`; it says that the receiver
-  should cancel attempts to process it once the deadline is past, because
-  the sender won't stand behind it any longer.
-* `delay_milli`: Wait at least this many milliseconds before processing
-  the message. This may be useful to defeat temporal correlation. It is recommended that agents supporting this field should not honor requests for delays longer than 10 minutes (600,000 milliseconds).
+* `expires_time`: The decorated message should be considered invalid or expired
+  if encountered after the specified timestamp. This is a much stronger claim
+  than the one for `stale_time`; it says that the receiver should cancel
+  attempts to process it once the deadline is past, because the sender won't
+  stand behind it any longer. While processing of the received message should
+  stop, the thread of the message should be retained as the sender may send an
+  updated/replacement message. In the case that the sender does not follow up,
+  the policy of the receiver agent related to abandoned threads would presumably
+  be used to eventually delete the thread.
+* `delay_milli`: Wait at least this many milliseconds before processing the
+  message. This may be useful to defeat temporal correlation. It is recommended
+  that agents supporting this field should not honor requests for delays longer
+  than 10 minutes (600,000 milliseconds).
 * `wait_until_time`: Wait until this time before processing the message.
 
 All information in these fields should be considered best-effort. That
@@ -63,6 +69,9 @@ receiver makes a best effort to use the information intelligently. In
 this respect, these values are like timestamps in email headers--they
 are generally useful, but not expected to be perfect. Receivers are not
 required to honor them exactly.
+
+An agent may ignore the `~timing` decorator entirely or implement the `~timing`
+decorator and silently ignore any of the fields it chooses not to support.
 
 ### Timing in Routing
 
