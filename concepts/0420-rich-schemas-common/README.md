@@ -36,12 +36,12 @@ Let's discuss a number of items common for all Rich Schema objects
 ### Components and Repositories
 The complete architecture for every Rich Schema object involves three separate
 components:
-- `aries-dri`: This is the location of the `aries-data-registy-interface`.
+- `aries-vdri`: This is the location of the `aries-verifiable-data-registy-interface`.
 Changes to this code will enable users of any data registry with an
-`aries-dri`-compatible data manager to handle Rich Schema objects.
+`aries-vdri`-compatible data manager to handle Rich Schema objects.
 - Specific Verifiable Data Registry implementation (for example, `indy-vdr`).
 It needs to comply with the interface described by the
-`aries-data-registry-interface` and is built to plug in to the aries
+`aries-verifiable-data-registry-interface` and is built to plug in to the aries
 ecosystem. It contains the code to communicate with a specific data registry (ledger).
   
 - Specific Data Registry (Ledger) implementation (for example, `indy-node`). Changes to this code will enable a Rich Schema object
