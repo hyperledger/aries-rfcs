@@ -1,4 +1,4 @@
-# Aries RFC 0000: Issue Credential Protocol 2.0
+# Aries RFC 0453: Issue Credential Protocol 2.0
 
 - Authors: Nikita Khateev, Stephen Klump, Stephen Curran
 - Status: [PROPOSED](/README.md#proposed)
