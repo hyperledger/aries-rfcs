@@ -122,13 +122,7 @@ The following Rich Schema objects must be in JSON-LD format:
 
 Context object can also be in JSON-LD format.
 
-
 If a Rich Schema object is a JSON-LD object, the `content`'s `@id` field must be equal to the `id`.
-
-The only thing that we currently expect from json-ld processing is substitution of attributes by a fully-qualified ones.
-We may assume that contexts belonging to the current ledger only
-are resolved.
-We are not going to resolve other Indy Ledger's contexts, other blockchain's contexts, and Internet contexts.
 
 More details about JSON-LD usage may be found in the HIPES for specific rich schema objects.
 
