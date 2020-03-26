@@ -57,7 +57,10 @@ Credential definition's properties follow the generic template defined in
 Credential Definition's `content` field is a JSON-serialized string with the following fields:
 
 #### signatureType
-Type of the ZKP signature. `CL` (Camenisch-Lysyanskaya) is the only supported type now. 
+Type of the signature. ZKP scheme `CL` (Camenisch-Lysyanskaya) is the only type currently
+supported in Indy. Other signature types, even those that do not support ZKPs, may still
+make use of the credential definition to link the issuer's public keys with the rich schema
+against which the verifiable credential was constructed.
 
 #### mapping
 An `id` of the corresponding Mapping
@@ -123,11 +126,9 @@ verifiying the accompanying verifiable presentations.
 
 ## Rationale and alternatives
 
-- A `schema` object is supported by the W3C Verifiable Credentials Data
+- A `credentialSchema` object is supported by the W3C Verifiable Credentials Data
 Model specification.
 - It supports rich schema capabilities for credentials.
-
-A possible alternative to this work has been presented by Workday.
 
 ## Prior art
 

@@ -219,8 +219,6 @@ verifiying the accompanying verifiable presentations.
 Model specification.
 - It supports rich schema capabilities for credentials.
 
-A possible alternative to this work has been presented by Workday.
-
 ## Unresolved questions
 - Is the proposed interface generic enough to support other data
 registries?

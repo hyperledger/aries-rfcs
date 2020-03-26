@@ -124,7 +124,7 @@ Context object can also be in JSON-LD format.
 
 If a Rich Schema object is a JSON-LD object, the `content`'s `@id` field must be equal to the `id`.
 
-More details about JSON-LD usage may be found in the HIPES for specific rich schema objects.
+More details about JSON-LD usage may be found in the RFCs for specific rich schema objects.
 
 ### How Rich Schema objects are stored in the Data Registry
 
