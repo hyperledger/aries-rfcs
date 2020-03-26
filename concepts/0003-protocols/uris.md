@@ -76,11 +76,11 @@ Some examples of valid MTURIs and PIURIs include:
 
 * `http://example.com/protocols?which=lets_do_lunch/1.0/` (PIURI with fully automated lookup of protocol docs)
 * `http://example.com/message_types?which=lets_do_lunch/1.0/proposal` (MTURI)
-* `https://github.com/hyperledger/indy-hipe/tree/d7879f5e/text:trust_ping/1.0/ping`
+* `https://github.com/hyperledger/aries-rfcs/tree/18c4f82:trust_ping/1.0/ping`
    (MTURI). Note that this URI returns a 404 error if followed directly--but
    per rules described above, the developer should browse to the doc root
-   ([https://github.com/hyperledger/indy-hipe/tree/d7879f5e/text](
-   https://github.com/hyperledger/indy-hipe/tree/d7879f5e/text
+   ([https://github.com/hyperledger/aries-rfcs/tree/18c4f82](
+   https://github.com/hyperledger/aries-rfcs/tree/18c4f82
    )) and look for documentation on the `trust_ping/1.0` protocol.
 * `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/trust_ping/1.0/ping` (MTURI) This
    uses a DID reference to look up an endpoint named `spec` that serves

@@ -35,6 +35,32 @@ Diagrams in this protocol were made in draw.io. To make changes:
 - export the picture and HTML to your local copy of this repo, and
 - submit a pull request.
 
+### States
+
+#### states for Verifier
+
+* request-sent
+* proposal-received
+* request-received
+* presentation-received
+* done
+
+#### states for Prover
+
+* request-received
+* proposal-sent
+* presentation-sent
+* reject-sent
+* done
+
+For the most part, these states map onto the transitions shown in the choreography diagram in obvious ways. However, a few subtleties are worth highlighting:
+
+* The final transitions for the Verifier (Send Presentation Reject, Send Presentation Ack, and Receive Presentation Reject) all result in a final `done` state, but this `done` may or may not be the Verifier's intended outcome. We may want to tweak this in a future version of the protocol.
+* A similar situation exists with the final transitions for the Prover and its final transitions (Send Presentation Reject, Receive Presentation Ack, and Receive Presentation Reject).
+* When a Prover makes a (counter-)proposal, it transitions to the `proposal-sent` state. This state is only present by implication in the choreography diagram; it essentially equates to the null or begin state in that the Prover does nothing until a presentation request arrives, triggering the leftmost transition for the Prover.
+
+Errors might occur in various places. For example, a Verifier might time out waiting for the Prover to supply a presentation. Errors trigger a `problem-report`. In this version of the protocol, all errors cause the state of both parties (the sender and the receiver of the `problem-report`) to revert to `null` (meaning it is no longer engaged in the protocol at all). Future versions of the protocol may allow more granular choices.
+
 ### Choreography Diagram:
 
 ![present proof](credential-presentation.png)
@@ -59,7 +85,7 @@ Description of attributes:
 
 ### Request Presentation
 
-Request presentation is a message from a verifier to a prover that describes values that need to be revealed and predicates that need to be fulfilled. Schema:
+From a verifier to a prover, the `request-presentation` message describes values that need to be revealed and predicates that need to be fulfilled. Schema:
 
 ```json
 {
