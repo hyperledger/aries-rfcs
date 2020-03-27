@@ -13,6 +13,10 @@
 Explains how one party can send acknowledgment
 messages (ACKs) to confirm receipt and clarify the status of complex processes.
 
+## Change log
+
+- Mar 25, 2020: In the ~thread decorator section of the sample in the [Explicit ACKs section](#explicit-acks), 'myindex' was changed to 'sender_order' and 'lrecs' to 'received_orders'. This is in accordance with the field names as defined in [RFC 0008](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading#threaded-messages).
+
 ## Motivation
 
 An __acknowledgment__ or __ACK__ is one of the most common procedures in protocols
@@ -182,7 +186,3 @@ Name / Link | Implementation Notes
 [RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | ACKs are [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol.
 [RFC 0193: Coin Flip Protocol](../0193-coin-flip/README.md) | ACKs are [adopted](../../0000-template-protocol.md#adopted-messages) as a subprotocol.
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the Government of British Columbia.
-
-## Change log
-
-- Mar 25, 2020: In the ~thread decorator section of the sample in the [Explicit ACKs section](#explicit-acks), 'myindex' was changed to 'sender_order' and 'lrecs' to 'received_orders'. This is in accordance with the field names as defined in [RFC 0008](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading#threaded-messages).
