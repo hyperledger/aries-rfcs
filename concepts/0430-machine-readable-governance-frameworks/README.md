@@ -51,31 +51,21 @@ When we have good answers to this question, we can address feature requests like
 
 Trust frameworks generally begin as human-friendly content. They have to be created, reviewed, and agreed upon by experts from various disciplines: legal, business, humanitarian, government, trade groups, advocacy groups, etc. Developers can help by surfacing how rules are (or are not) susceptible to modeling in formal data structures. This can lead to an iterative process, where data structures and human conversations create refinement pressure on each other until the framework is ready for release.
 
-Each problem domain will probably have unique requirements. Therefore, we start with a general governance framework recipe, but plan for extension. We use JSON-LD for this purpose. Here we present a simple example for the problem domain of university credentials in Germany. It manifests just the components of a governance framework that are common across all contexts; additional JSON-LD `@context` values can be added to introduce more structure as needed. 
+Each problem domain will probably have unique requirements. Therefore, we start with a general governance framework recipe, but plan for extension. We use JSON-LD for this purpose. Here we present a simple example for the problem domain of university credentials in Germany. It manifests just the components of a governance framework that are common across all contexts; additional JSON-LD `@context` values can be added to introduce more structure as needed. (See [Field Details](#field-details) for explanatory comments.)
 
 ```jsonc
 {
     "@context": [
-        // The first context must be this RFC. It defines core properties.
-        "https://github.com/hyperledger/aries-rfcs/concepts/0430-machine-readable-trust-frameworks", 
+        // The first context must be this RFC's context. It defines core properties.
+        "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/context.jsonld", 
         // Additional contexts can be added to extend.
         "https://kmk.org/uni-accred-trust-fw"
     ],
-    // name
     "name": "Universitätsakkreditierung"
-    // version (semver rules apply)
-    "1.0",
-    // Something that can be displayed to a user.
+    "version": "1.0",
     "logo": "http://kmk.org/uni-accred-trust-fw/logo.png",
-    // Something that can be displayed to a user.
     "description": "Governs accredited colleges and universities in Germany.",
-    // Where is this governance framework officially published in human-
-    // readable form? A human can browse here to learn more.
     "docs_uri": "http://https://kmk.org/uni-accred-trust-fw/v1",
-    // Where is this governance framework officially published as a
-    // machine-readable data structure? A computer should be able to
-    // GET this JSON (MIME type = application/json) at the specified
-    // URI.
     "data_uri": "http://https://kmk.org/uni-accred-trust-fw/v1/tf.json",
     // In which problem domains is this governance framework relevant?
     // Think of these like hash tags; they constitute a loose,
@@ -265,7 +255,61 @@ Trust frameworks can offer localized alternatives of text using the same mechani
  
 ## Reference
 
-See inline comments in the sample JSON above. All fields are optional except the governance framework's `name`, `version`, `data_uri`, and at least one `define` or `rules` item to confer some trust.
+We've tried to make the sample JSON above self-describing. All fields are optional except the governance framework's `name`, `version`, `data_uri`, and at least one `define` or `rules` item to confer some trust.
+
+### Field Details 
+
+#### `name`
+A short descriptive string that explains the governance framework's purpose and focus. Extends http://schema.org/name.
+
+#### `version`
+A semver-formatted value. Typically only major and minor segments are used, but patch should also be supported if present. Extends http://schema.org/version with the major/minor semantics discussed under [Versioning](#versioning) above.
+
+#### `logo`
+A URI that references something visually identifying for this framework, suitable for display to a user. Extends http://schema.org/logo.
+
+#### `description`
+Longer explanatory comment about the purpose and scope of the framework. Extends http://schema.org/description.
+
+#### `docs_uri`
+Where is this governance framework officially published in human-readable form? A human should be able to browse here to learn more. Extends http://schema.org/url.
+
+#### `data_uri`
+Where is this governance framework officially published as a machine-readable data structure? A computer should be able to GET this JSON (MIME type = application/json) at the specified URI.
+
+#### `topics`
+In which problem domains is this governance framework relevant? Think of these like hash tags; they constitute a loose, overlapping topic cloud rather than a normative taxonomy; the purpose is to facilitate search.
+
+#### `geos`
+In which geographies is this governance framework relevant? May be redundant with jurisdictions in many cases.
+    
+#### `jurisdictions`
+In which legal jurisdictions is this governance framework relevant?
+Values here should use ISO 639-2 or 3 language code, possibly
+narrowed to a standard province and even county/city using `>` as
+the narrowing character, plus standard abbreviations where
+useful: `us>tx>houston` for "Houston, Texas, USA" or `ca>qc` for
+the province of Quebec in Canada.
+
+#### `roles`
+Names all the roles that are significant to understanding interactions in this governance framework. These map to X in rules like "X can do Y if Z."
+
+#### `privileges`
+Names all the privileges that are significant to understanding
+interactions in this governance framework. These map to Y in rules
+like "X can do Y if Z." Each privilege is defined for humans
+at the specified URI, so a person can understand what it
+entails.
+
+#### `duties`
+Name all the duties that are significant to understanding interactions in this governance framework. Each duty is defined for humans at the specified URI, so a person can understand what it entails.
+
+#### `define`
+Uses an array of `{"name":x, "id": did value}` objects to define key participants in the ecosystem.
+
+#### `rules`
+Uses [SGL](https://pypi.org/project/sgl/) syntax to describe role-based rules of behavior like "X can do Y if Z," where Z is a criterion following "when". 
+
 
 [Another sample governance framework](../0103-indirect-identity-control/guardianship-sample/trust-framework.md) (including the human documentation that would accompany the data structure) is [presented as part of the discussion of guardianship in RFC 0103](../0103-indirect-identity-control/README.md).
 
