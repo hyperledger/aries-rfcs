@@ -52,6 +52,9 @@ Mapping is a JSON-LD object following the same structure (attributes and graph p
 as the corresponding Rich Schema.
 A Mapping may contain only a subset of the original Rich Schema's attributes.
 
+Every Mapping must have two default attributes required by any W3C compatible credential
+ (see [W3C verifiable credential specification](https://www.w3.org/TR/vc-data-model)): `issuer` and `issuanceDate`.
+ 
 The value of every schema attribute in a Mapping object is an array of the following pairs:
 - encoding object (referenced by its `id`) to be used for representation of the attribute as an integer
 - rank of the attribute to define the order in which the attribute is signed by the Issuer.
@@ -95,8 +98,14 @@ An `id` of the corresponding Rich Schema
 
 #### attributes
 A dict of all the schema attributes the Mapping object is going to map to encodings and use in credentials.
-An attribute may have nested attributes matching the schema structure. 
-Every leaf attribute's value is an array of the following pairs:
+An attribute may have nested attributes matching the schema structure.
+
+In addition to the schema attributes, it must contain the following default attributes required by any W3C compatible
+verifiable credential: 
+ - `issuer`
+ - `issuanceDate`
+ 
+Every leaf attribute's value (including the default `issuer` and `issuanceDate` ones) is an array of the following pairs:
 
 - `enc` (string): Encoding object (referenced by its `id`) to be used for representation of the attribute as an integer. 
 - `rank` (int): Rank of the attribute to define the order in which the attribute is signed by the Issuer. It is important that no two `rank` values may be identical.
@@ -138,6 +147,14 @@ It is important that no two `rank` values may be identical.
     '@type': "rdfs:Class",
     "schema": "did:sov:4e9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
     "attribuites" : {
+        "issuer": [{
+            "enc": "did:sov:9x9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
+            "rank": 9
+        }],
+        "issuanceDate": [{
+            "enc": "did:sov:119F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
+            "rank": 10
+        }],
         "driver": [{
             "enc": "did:sov:1x9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
             "rank": 5
