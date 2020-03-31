@@ -54,6 +54,7 @@ A Mapping may contain only a subset of the original Rich Schema's attributes.
 
 Every Mapping must have two default attributes required by any W3C compatible credential
  (see [W3C verifiable credential specification](https://www.w3.org/TR/vc-data-model)): `issuer` and `issuanceDate`.
+ This allows to selectively disclose these attributes in the same way as other attributes from the schema. 
  
 The value of every schema attribute in a Mapping object is an array of the following pairs:
 - encoding object (referenced by its `id`) to be used for representation of the attribute as an integer
