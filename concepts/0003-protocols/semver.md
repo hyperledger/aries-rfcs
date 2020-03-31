@@ -11,7 +11,7 @@ An individual message type can add new optional fields, or deprecate
 existing fields, [with only a change to its protocol's minor
 version](https://semver.org/#spec-item-7).
 Similarly, a protocol can add new message types (or [adopted
-ones](template.md#adopted-messages)) with only a change
+ones](../../0000-template-protocol.md#adopted-messages)) with only a change
 to the minor version. It can announce deprecated fields. It can add additional
 semantics around optional decorators. These are all backwards-compatible
 changes, also requiring only a minor version update.
