@@ -149,11 +149,11 @@ It is important that no two `rank` values may be identical.
     "attribuites" : {
         "issuer": [{
             "enc": "did:sov:9x9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
-            "rank": 9
+            "rank": 1
         }],
         "issuanceDate": [{
             "enc": "did:sov:119F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
-            "rank": 10
+            "rank": 2
         }],
         "driver": [{
             "enc": "did:sov:1x9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
@@ -170,11 +170,11 @@ It is important that no two `rank` values may be identical.
         "licenseNumber": [
             {
                 "enc": "did:sov:4x9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
-                "rank": 1
+                "rank": 9
             },
             {
                 "enc": "did:sov:5x9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
-                "rank": 2
+                "rank": 10
             },
         ],
         "categoriesOfVehicles": {
