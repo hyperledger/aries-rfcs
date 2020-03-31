@@ -222,7 +222,7 @@ Here is the paper that defines
 
 - [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
 - [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common) 
-
+- [W3C verifiable credential specification](https://www.w3.org/TR/vc-data-model)
 
 ## Drawbacks
 [drawbacks]: #drawbacks
