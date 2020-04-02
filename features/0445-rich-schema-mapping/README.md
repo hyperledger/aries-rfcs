@@ -54,8 +54,11 @@ A Mapping may contain only a subset of the original Rich Schema's attributes.
 
 Every Mapping must have two default attributes required by any W3C compatible credential
  (see [W3C verifiable credential specification](https://www.w3.org/TR/vc-data-model)): `issuer` and `issuanceDate`.
- This allows to selectively disclose these attributes in the same way as other attributes from the schema. 
- 
+ Additionally, any other attributes that are considered optional by the
+[W3C verifiable credential specification](https://www.w3.org/TR/vc-data-model) that will be included in the
+issued credential must be included in the Mapping. For example, `credentialStatus` or `expirationDate`.
+This allows the holder to selectively disclose these attributes in the same way as other attributes from the schema.
+  
 The value of every schema attribute in a Mapping object is an array of the following pairs:
 - encoding object (referenced by its `id`) to be used for representation of the attribute as an integer
 - rank of the attribute to define the order in which the attribute is signed by the Issuer.
@@ -101,10 +104,12 @@ An `id` of the corresponding Rich Schema
 A dict of all the schema attributes the Mapping object is going to map to encodings and use in credentials.
 An attribute may have nested attributes matching the schema structure.
 
-In addition to the schema attributes, it must contain the following default attributes required by any W3C compatible
-verifiable credential: 
+It must also contain the following default attributes required by any W3C compatible
+verifiable credential (plus any additional attributes that may have been included from the
+W3C verifiable credentials data model): 
  - `issuer`
  - `issuanceDate`
+ - any additional attributes
  
 Every leaf attribute's value (including the default `issuer` and `issuanceDate` ones) is an array of the following pairs:
 
@@ -156,6 +161,10 @@ It is important that no two `rank` values may be identical.
             "enc": "did:sov:119F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
             "rank": 2
         }],
+        "expirationDate": [{
+            "enc": "did:sov:119F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
+            "rank": 11
+        }],        
         "driver": [{
             "enc": "did:sov:1x9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
             "rank": 5
