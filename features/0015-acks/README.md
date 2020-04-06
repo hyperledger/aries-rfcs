@@ -13,6 +13,10 @@
 Explains how one party can send acknowledgment
 messages (ACKs) to confirm receipt and clarify the status of complex processes.
 
+## Change log
+
+- Mar 25, 2020: In the ~thread decorator section of the sample in the [Explicit ACKs section](#explicit-acks), 'myindex' was changed to 'sender_order' and 'lrecs' to 'received_orders'. This is in accordance with the field names as defined in [RFC 0008](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading#threaded-messages).
+
 ## Motivation
 
 An __acknowledgment__ or __ACK__ is one of the most common procedures in protocols
@@ -73,8 +77,8 @@ this:
   "status": "OK",
   "~thread": {
     "thid": "b271c889-a306-4737-81e6-6b2f2f8062ae",
-    "myindex": 4,
-    "lrecs": {"2fQvCXfgvxz4dtBDDwcj2PJdG5qDrEsrQVjvWRhg9uhd": 3}
+    "sender_order": 4,
+    "received_orders": {"did:sov:abcxyz": 3}
   }
 }
 ```
@@ -166,7 +170,7 @@ None identified.
 
 ## Prior art
 
-See notes above about the [implicit ACK mechanism in `~thread.lrecs`](#implicit-acks).
+See notes above about the [implicit ACK mechanism in `~thread.received_orders`](#implicit-acks).
 
 ## Unresolved questions
 
