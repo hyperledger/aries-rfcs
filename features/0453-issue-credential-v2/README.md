@@ -12,8 +12,12 @@
 
 ### 2.0/propose-credential and identifiers
 
-Version 2.0 of the propose-credential message replaces the (indy-specific) filtration criteria with a generalized filter attachment. The previous version is [1.1/propose-credential](../0036-issue-credential/README.md).
+Version 2.0 of the protocol is introduced because of a breaking changes in the propose-credential message, replacing the (indy-specific) filtration criteria with a generalized filter attachment to align with the rest of the messages in the protocol. The previous version is [1.1/propose-credential](../0036-issue-credential/README.md).
 Version 2.0 also uses &lt;angle brackets&gt; explicitly to mark all values that may vary between instances, such as identifiers and comments.
+
+The "formats" field is added to all the messages to enable the linking the specific attachment IDs with the the format (credential format and version) of the attachment.
+
+The details that are part of each message type about the different attachment formats serves as a registry of the known formats and versions.
 
 ## Summary
 
@@ -70,9 +74,11 @@ In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-
 
 This protocol is about the messages that must be exchanged to issue verifiable credentials, NOT about the specifics of particular verifiable credential schemes. [DIDComm attachments](../../concepts/0017-attachments/README.md) are deliberately used in messages to isolate the protocol flow/semantics from the credential artifacts themselves as separate constructs. Attachments allow credential formats and this protocol to evolve through versioning milestones independently instead of in lockstep. Links are provided in the message descriptions below, to describe how the protocol adapts to specific verifiable credential implementations.
 
-The attachment items in the messages are arrays. The arrays are provided to support the issuing of different credential formats (e.g. ZKP, JSON-LD JWT, or other) containing the same data (claims). The arrays are not to be used for issuing credentials with different claims. The `@id` field of each attachment identifies the format of the attachment (format and version). A registry of attachments is included in this RFC.
+The attachment items in the messages are arrays. The arrays are provided to support the issuing of different credential formats (e.g. ZKP, JSON-LD JWT, or other) containing the same data (claims). The arrays are not to be used for issuing credentials with different claims. The `formats` field of each message associates each attachment with the format (and version) of the attachment.
 
-As noted in this section of the [0017-attachments RFC](../../concepts/0017-attachments/README.md#json) embedded inline attachments can be either `base64` or `json`. In the examples below, `base64` is used in most cases, but JSON can always be used instead.
+A registry of attachment formats is provided in this RFC within the message type sections. A sub-section should be added for each attachment format type (and optionally, each version). Updates to the attachment type formats does **NOT** impact the versioning of the Issue Credential protocol. Formats are flexibly defined. For example, the first definitions are for `hlindy-zkp-v1.0`, assuming that all Hyperledger Indy implementations and ledgers will use a common format. However, if a specific instance of Indy uses a different format, another format value can be documented as a new registry entry.
+
+As noted in this section of the [0017-attachments RFC](../../concepts/0017-attachments/README.md#json) embedded inline attachments can be either `base64` or `json`. In the examples below, `base64` is used in most cases, but JSON can always be used instead, and implementations MUST expect either.
 
 > Question: Could `links` format be used?
 
@@ -113,6 +119,12 @@ Message format:
     "@id": "<uuid of propose-message>",
     "comment": "<some comment>",
     "credential_proposal": <json-ld object>,
+    "formats" : [
+        {
+            "attachId" : "<attach@id value>",
+            "format" : "<format-and-version>",
+        }
+    ]
     "filter~attach": [
         {
             "@id": "<attachment identifier>",
@@ -129,15 +141,18 @@ Description of attributes:
 
 * `comment` -- an optional field that provides human readable information about this Credential Proposal, so the proposal can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credential_proposal` -- an optional JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential).
+* `formats` -- contains an entry for each `filter~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `filter~attach` -- an array of attachments that further define the credential being proposed. This might be used to clarify which formats or format versions are wanted.
 
-##### Propose Attachment - Hyperledger Indy
+##### Propose Attachment Registry
 
-For Hyperledger Indy The following `@id` values may be used:
+###### Hyperledger Indy
+
+For Hyperledger Indy the following `format` values may be used:
 
 - `hlindy-zkp-v1.0` -- The Indy ZKP Verifiable Credentials Model v1.0.
 
-The v1.0 filter attachment is a JSON object including one or more of the following:
+The Hyperledger Indy v1.0 filter attachment is a JSON object including one or more of the following:
 
 * `schema_issuer_did` -- optional filter to request credential based on a particular Schema issuer DID.
 * `schema_id` -- optional filter to request credential based on a particular Schema. This might be helpful when requesting a version 1 passport instead of a version 2 passport, for example.
@@ -151,7 +166,7 @@ The following is an example v1.0 Indy attachment:
 ```jsonc
 [
     {
-        "@id": "hlindy-zkp-v1.0",
+        "@id": "1234-1234-1325-5423",
         "mime-type": "application/json",
         "data": {
             "json": {
@@ -176,6 +191,12 @@ Message Format:
     "@id": "<uuid of offer message>",
     "comment": "<some comment>",
     "credential_preview": <json-ld object>,
+    "formats" : [
+        {
+            "attachId" : "<attach@id value>",
+            "format" : "<format-and-version>",
+        }
+    ]
     "offers~attach": [
         {
             "@id": "<attachment identifier>",
@@ -192,19 +213,22 @@ Description of fields:
 
 * `comment` -- an optional field that provides human readable information about this Credential Offer, so the offer can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview-credential);
+* `formats` -- contains an entry for each `offers~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `offers~attach` -- an array of attachments that further define the credential being offered. This might be used to clarify which formats or format versions will be issued.
 
 The Issuer may add a [`~payment-request` decorator](../0075-payment-decorators/README.md#payment_request) to this message to convey the need for payment before issuance. See the [payment section below](#payments-during-credential-exchange) for more details.
 
 It is possible for an Issuer to add a [`~timing.expires_time` decorator](../0032-message-timing/README.md#tutorial) to this message to convey the idea that the offer will expire at a particular point in the future. Such behavior is not a special part of this protocol, and support for it is not a requirement of conforming implementations; the `~timing` decorator is simply a general possibility for any DIDComm message. We mention it here just to note that the protocol can be enriched in composable ways.
 
-##### Offer Attachment - Hyperledger Indy
+##### Offer Attachment Registry
 
-For Hyperledger Indy, the following `@id` values may be used:
+###### Hyperledger Indy
+
+For Hyperledger Indy, the following `format` values may be used:
 
 - `hlindy-zkp-v1.0` -- The Indy ZKP Verifiable Credentials Model v1.0.
 
-The v1.0 filter attachment is a JSON object that includes a nonce and key correctness proof to facilitate integrity checks as returned from [`indy_issuer_create_credential_offer()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
+The Hyperledger Indy v1.0 offer attachment is a JSON object that includes a nonce and key correctness proof to facilitate integrity checks as returned from [`indy_issuer_create_credential_offer()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
 
 #### Request Credential
 
@@ -217,6 +241,12 @@ Message Format:
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/%VER/request-credential",
     "@id": "<uuid of request message>",
     "comment": "<some comment>",
+    "formats" : [
+        {
+            "attachId" : "<attach@id value>",
+            "format" : "<format-and-version>",
+        }
+    ]
     "requests~attach": [
         {
             "@id": "<attachment identifier>",
@@ -232,21 +262,24 @@ Message Format:
 Description of Fields:
 
 * `comment` -- an optional field that provides human readable information about this Credential Request, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
+* `formats` -- contains an entry for each `requests~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `requests~attach` -- an array of [attachments](../../concepts/0017-attachments/README.md) defining the requested formats for the credential.
 
 This message may have a [`~payment-receipt` decorator](../0075-payment-decorators/README.md#payment_receipt) to prove to the Issuer that the potential Holder has satisfied a payment requirement. See the [payment section below](#payments-during-credential-exchange).
 
-##### Request Attachment - Hyperledger Indy
+##### Request Attachment Registry
 
-For Hyperledger Indy, the following `@id` values may be used:
+###### Hyperledger Indy
+
+For Hyperledger Indy, the following `format` values may be used:
 
 - `hlindy-zkp-v1.0` -- The Indy ZKP Verifiable Credentials Model v1.0.
 
-The v1.0 filter attachment is a JSON object that is the data returned from [`indy_prover_create_credential_req()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
+The Hyperledger Indy v1.0 request attachment is a JSON object that is the data returned from [`indy_prover_create_credential_req()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
 
 #### Issue Credential
 
-This message contains as [attached payload](../../concepts/0017-attachments/README.md) the credentials being issued and is sent in response to a valid Request Credential message.
+This message contains as an [attached payload](../../concepts/0017-attachments/README.md) the credential being issued. It is sent in response to a valid Request Credential message.
 
 Message Format:
 
@@ -255,6 +288,12 @@ Message Format:
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/%VER/issue-credential",
     "@id": "<uuid of issue message>",
     "comment": "<some comment>",
+    "formats" : [
+        {
+            "attachId" : "<attach@id value>",
+            "format" : "<format-and-version>",
+        }
+    ]
     "credentials~attach": [
         {
             "@id": "<attachment-id>",
@@ -270,19 +309,22 @@ Message Format:
 Description of fields:
 
 * `comment` -- an optional field that provides human readable information about the issued credential, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
-* `credentials~attach` -- an array of attachments containing the issued credentials.
+* `formats` -- contains an entry for each `credentials~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
+* * `credentials~attach` -- an array of attachments containing the issued credentials.
   
 If the issuer wants an acknowledgement that the issued credential was accepted, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0317: Please ACK Decorator](../0317-please-ack/README.md).
 
-##### Issue Attachment - Hyperledger Indy
+##### Credentials Attachment Registry
 
-For Hyperledger Indy, the following `@id` value(s) may be used for the attachment:
+###### Hyperledger Indy
+
+For Hyperledger Indy, the following `format` value(s) may be used for the attachment:
 
 - `hlindy-zkp-v1.0` -- The Indy ZKP Verifiable Credentials Model v1.0.
 
-The v1.0 filter attachment is a JSON object that is returned from [indy_issuer_create_credential()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
+The Hyperledger Indy v1.0 credentials attachment is a JSON object that is returned from [indy_issuer_create_credential()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
 
-###### Encoding Claims for Indy-based Verifiable Credentials
+**Encoding Claims for Indy-based Verifiable Credentials**
 
 Claims in Hyperledger Indy-based verifiable credentials are put into the credential in two forms, `raw` and `encoded`. `raw` is the actual data value, and `encoded` is the (possibly derived) integer value that is used in presentations. At this time, Indy does not take an opinion on the method used for encoding the raw value. This will change with the Rich Schema work that is underway in the Indy/Aries community, where the encoding method will be part of the credential metadata available from the public ledger.
 
@@ -377,7 +419,7 @@ See [RFC 0036 Issue Credential, v1.x](../0036-issue-credential/README.md).
 ## Unresolved questions
 
 - References to the expected Ack and Problem Report messages should be added.
-- The ['~please-ack` decorator](../0317-please-ack/README.md) needs to move to Accepted.
+- The ['~please-ack` decorator](../0317-please-ack/README.md) needs to move to Accepted so that it is appropriate to be referenced here.
 - We might need to propose a new MIME type for credential (the same way as .docx is not processed as generic xml). See [this issue](https://github.com/w3c/vc-data-model/issues/421) against the W3C/vc-data-model.
 - It is a common practice when changing some attributes in credential to revoke the old credential and issue a new one. It might be useful to have an element in the `offer-credential` message to indicate a connection between a now revoked credential and the new credential being offered.
 
