@@ -126,13 +126,42 @@ Sample messages that are presented in the narrative should also be checked
 in next to the markdown of the RFC, in [DIDComm Plaintext format](
 https://github.com/hyperledger/aries-rfcs/tree/master/features/0044-didcomm-file-and-mime-types#didcomm-messages-dm).
 
-#### Adoption Messages
+##### Adopted Messages
+
+Many protocols should use general-purpose messages such as [`ack`](
+https://github.com/hyperledger/indy-hipe/pull/77) and [`problem-report`](
+https://github.com/hyperledger/indy-hipe/pull/65)) at certain points in
+an interaction. This reuse is strongly encouraged because it helps us avoid
+defining redundant message types--and the code to handle them--over and
+over again (see [DRY principle](https://en.wikipedia.org/wiki/Don't_repeat_yourself)).
+
+However, using messages with generic values of `@type` (e.g., `"@type":
+"https://didcomm.org/notification/1.0/ack"`)
+introduces a challenge for agents as they route messages to their internal
+routines for handling. We expect internal handlers to be organized around
+protocols, since a protocol is a discrete unit of business value as well
+as a unit of testing in our agent test suite. Early work on agents has
+gravitated towards pluggable, routable protocols as a unit of code
+encapsulation and dependency as well. Thus the natural routing question
+inside an agent, when it sees a message, is "Which protocol handler should
+I route this message to, based on its @type?" A generic `ack` can't be
+routed this way.
+
+Therefore, we allow a protocol to __adopt__ messages into its namespace.
+This works very much like python's `from module import symbol` syntax.
+It changes the `@type` attribute of the adopted message. Suppose a `rendezvous`
+protocol is identified by the URI `https://didcomm.org/rendezvous/2.0`,
+and its definition announces that it has adopted generic 1.x `ack`
+messages. When such `ack` messages are sent, the `@type` should now use
+the alias defined inside the namespace of the `rendezvous` protocol:
+
+![diff on @type caused by adoption](concepts/0003-protocols/adoption.png)
 
 Adoption should be declared in an "Adopted" subsection of "Messages" in
 a protocol RFC. When adoption is specified, it should include a __minimum
 adopted version__ of the adopted message type: "This protocol adopts
 `ack` with version >= 1.4". All versions of the adopted message that share
-the same major number should be compatible, given the [semver rules](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/semver.md)
+the same major number should be compatible, given the [semver rules](concepts/0003-protocols/semver.md)
 that apply to protocols.
 
 ### Constraints

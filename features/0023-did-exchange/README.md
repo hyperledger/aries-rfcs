@@ -258,13 +258,17 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
   "@type": "https://didcomm.org/didexchange/1.0/request",
   "~thread": { "pthid": "<id of invitation>" },
   "label": "Bob",
-  "connection": {
-    "did": "B.did@B:A",
-    "did_doc": {
-        "@context": "https://w3id.org/did/v1"
-      	// DID Doc contents here.
-    }
-  }
+  "did": "B.did@B:A",
+  "did_doc~attach": {
+     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+     "jws": {
+        "header": {
+           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+        },
+        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      }
+   }
 }
 ```
 
@@ -275,9 +279,8 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
   * It MUST include the ID of the parent thread (`pthid`) such that the `request` can be correlated to the corresponding `invitation`. More on correlation [below](#correlating-requests-to-invitations).
   * It MAY include the `thid` property. In doing so, implementations MUST set its value to that of `@id` on the same request message. In other words, the values of `@id` and `~thread.thid` MUST be equal.
 * The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute.
-* The `connection` attribute contains the `did` and `did_doc` attributes. This format maintains consistency with the Response message where this attribute is signed.
 * The `did` indicates the DID being exchanged.
-* The `did_doc` contains the DID Doc associated with the DID. If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc` attribute is optional.
+* The `did_doc~attach` contains the DID Doc associated with the DID as a [signed attachment](../../concepts/0017-attachments/README.md). If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
 
 #### Correlating requests to invitations
 
@@ -298,13 +301,17 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
   "@type": "https://didcomm.org/didexchange/1.0/request",
   "~thread": { "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" },
   "label": "Bob",
-  "connection": {
-    "did": "B.did@B:A",
-    "did_doc": {
-        "@context": "https://w3id.org/did/v1"
-        // DID Doc contents here.
-    }
-  }
+  "did": "B.did@B:A",
+  "did_doc~attach": {
+     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+     "jws": {
+        "header": {
+           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+        },
+        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      }
+   }
 }
 ```
 
@@ -316,13 +323,17 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
   "@type": "https://didcomm.org/didexchange/1.0/request",
   "~thread": { "pthid": "did:example:21tDAKCERh95uGgKbJNHYp#invitation" },
   "label": "Bob",
-  "connection": {
-    "did": "B.did@B:A",
-    "did_doc": {
-        "@context": "https://w3id.org/did/v1"
-        // DID Doc contents here.
-    }
-  }
+  "did": "B.did@B:A",
+  "did_doc~attach": {
+     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+     "jws": {
+        "header": {
+           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+        },
+        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      }
+   }
 }
 ```
 
@@ -381,47 +392,28 @@ The exchange response message is used to complete the exchange. This message is 
   "~thread": {
     "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>"
   },
-  "connection": {
-    "did": "A.did@B:A",
-    "did_doc": {
-      "@context": "https://w3id.org/did/v1"
-      // DID Doc contents here.
-    }
-  }
+  "did": "B.did@B:A",
+  "did_doc~attach": {
+     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+     "jws": {
+        "header": {
+           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+        },
+        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      }
+   }
 }
 ```
 
-The above message is required to be signed as described in [RFC0234](../0234-signature-decorator/README.md). The `connection` attribute above will be base64URL encoded and included as part of the `sig_data` attribute of the signed field. Using the `ed25519Sha512_single` signature scheme, the result looks like this:
-
-```json
-{
-  "@type": "https://didcomm.org/didexchange/1.0/response",
-  "@id": "12345678900987654321",
-  "~thread": {
-    "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>"
-  },
-  "connection~sig": {
-    "@type":"https://didcomm.org/signature/1.0/ed25519Sha512_single",
-    "signature": "base64URL(ed25519 signature)",
-    "sig_data": "base64URL(64bit_integer_from_unix_epoch|msg)",
-    "signers": "base64URL(inlined_ed25519_signing_verkey)""
-  }
-}
-```
-
-The [`signature-decorator`](../0234-signature-decorator/README.md) is the normative reference for the example shown above and takes precedence whenever examples in this RFC diverge from the specifications contained in it.
-
-Upon receipt, the signed attribute will be automatically unpacked and the signature verified. Signature information will be stored as message context, and the `connection` attribute will be replaced in it's original format before processing continues.
-
-The signature data must be used to verify against the invitation's `recipientKeys` for continuity.
+The key used in the signed attachment must be verified against the invitation's `recipientKeys` for continuity.
 
 #### Attributes
 
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
 * The `~thread` block contains a `thid` reference to the `@id` of the request message.
-* The `connection` attribute contains the `did` and `did_doc` attributes to enable simpler signing.
 * The `did` attribute is a required string value and denotes DID in use by the _inviter_. Note that this may not be the same DID used in the invitation.
-* The `did_doc` attribute contains the associated DID Doc. If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc` attribute is optional.
+* The `did_doc~attach` contains the DID Doc associated with the DID as a [signed attachment](../../concepts/0017-attachments/README.md). If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
 
 In addition to a new DID, the associated DID Doc might contain a new endpoint. This new DID and endpoint are to be used going forward in the relationship.
 
@@ -452,19 +444,52 @@ Possible reasons:
 
 **response_processing_error**
 
-- unknown processing error## 3. Exchange Acknowledgement
+- unknown processing error
 
-After the Response is received, the exchange is technically complete. This remains unconfirmed to the *inviter* however. The *invitee* SHOULD send a message to the *inviter*. As any message will confirm the exchange, any message will do.
+## 3. Exchange Complete
 
-Frequently, the parties of the relationship will want to trade credentials to establish trust. In such a flow, those message will serve the function of acknowledging the exchange without an extra confirmation message.
+The exchange complete message is used to confirm the exchange to the _inviter_.  This message is required in the flow, as it marks the exchange complete. The _inviter_ may then invoke any protocols desired based on the context expressed via the `pthid` in the DID Exchange protocol.
 
-If no message is needed immediately, a trust ping can be used to allow both parties confirm the exchange.
+#### Example
+
+```json
+{
+  "@type": "https://didcomm.org/didexchange/1.0/complete",
+  "@id": "12345678900987654321",
+  "~thread": {
+    "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>",
+    "pthid": "<The Parent Thread ID of the Out Of Band Invitation>"
+  }
+}
+```
+
+The `pthid` is required in this message, even if present in the `request` method.
 
 After a message is sent, the *invitee* in the `complete` state. Receipt of a message puts the *inviter* into the `complete` state.
 
 #### Next Steps
 
 The exchange between the _inviter_ and the _invitee_ is now established. This relationship has no trust associated with it. The next step should be the exchange of proofs to build trust sufficient for the purpose of the relationship.
+
+## Exchange Reuse
+
+When an out of band invitation is received containing a public DID for which the _invitee_ already has a connection, the _invitee_ may use the `reuse` message in the protocol sent over the existing connection. The `pthid` passed in the `reuse` message allows the _inviter_ to correlate the invitation with the identified existing connection and then invoke any protocols desired based on that context.
+
+#### Example
+
+```json
+{
+  "@type": "https://didcomm.org/didexchange/1.0/reuse",
+  "@id": "12345678900987654321",
+  "~thread": {
+    "pthid": "<The Parent Thread ID of the Out Of Band Invitation>"
+  }
+}
+```
+
+The `pthid` is required in this message. It provides the context link for the _inviter_ to prompt additional protocol interactions.
+
+Sending or receiving this message does not change the state of the existing connection.
 
 #### Peer DID Maintenance
 
