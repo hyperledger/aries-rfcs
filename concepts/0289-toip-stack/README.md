@@ -145,19 +145,23 @@ The purpose of Layer Two is to enable peers to form secure DID-to-DID connection
 2. Access the Layer One cryptographic data structures needed to issue and verify these credentials regardless of the public utility used by the issuer.
 3. Migrate and port ToIP data between agents, wallets, and  encrypted data stores without restriction. This data portability is critical to the broad adoption and interoperability of ToIP.
 
-## Layer Three: Verifiable Credential Exchange
+## Layer Three: Data Exchange Protocols
 
 Layer One and Layer Two together enable the establishment of *cryptographic trust* (also called *technical trust*) between peers. By contrast, the purpose of Layers Three and Four is to establish *human trust* between peers—trust between real-world individuals and organizations and the things with which they interact (devices, sensors, appliances, vehicles, buildings, cities, etc.)
 
+Part of the power of the DIDComm protocol at Layer Two is that it lays the foundation for secure, private agent-to-agent connections that can now "speak" any number of data exchange protocols. From the standpoint of the ToIP stack, the most important of these are those that support the exchange of *verifiable credentials*.
+
 ### The Verifiable Credentials Data Model
 
-Layer Three is currently the most advanced in terms of open standards. After several years of incubation led by Manu Sporny, David Longley, and other members of the W3C Credentials Community Group, the W3C Verifiable Claims Working Group (VCWG) was formed in 2017 and produced the [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/) which became a W3C Recommendation in September 2019 [14].
+After several years of incubation led by Manu Sporny, David Longley, and other members of the W3C Credentials Community Group, the W3C Verifiable Claims Working Group (VCWG) was formed in 2017 and produced the [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/) which became a W3C Recommendation in September 2019 [14].
 
 Figure 4 is a diagram of the three core roles in verifiable credential exchange—often called the "trust triangle". For more information see the [Verifiable Credentials Primer](https://github.com/WebOfTrustInfo/rwot8-barcelona/blob/master/topics-and-advance-readings/verifiable-credentials-primer.md) [15].
 
 ![Figure 4: The three primary roles in the W3C Verifiable Credentials Data Model](./img/fig-4-vc-trust-triangle.png)
 
 **Figure 4: The three primary roles in the W3C Verifiable Credentials Data Model**
+
+The core goal of the Verifiable Credentials standard is to enable us to finally have the digital equivalent of the physical credentials we store in our physical wallets to provide proof of our identity and authorizations every day. This is why the presentation of a verifiable credential to a verified is call a *proof*—it is both a cryptographic proof and a proof of some set of attributes or relationships a verifier needs to make a trust decision.
 
 ### Credential Proof Types
 
@@ -181,7 +185,7 @@ To support all three of these credential proof types in the ToIP stack means:
 
 ### Credential Exchange Protocols
 
-At Layer Three, the exchange of verifiable credentials is performed by agents using extensions of the DIDComm protocol. Extension protocol specifications are being published as part of the DIDComm suite [10]. Extension protocols are unique to each credential proof type because the request and response formats are different. The goal of the ToIP stack is to standardize all supported credential exchange protocols so that any ToIP-compatible agent, wallet, and encrypted data store can work with any other agent, wallet, and encrypted data store.
+At Layer Three, the exchange of verifiable credentials is performed by agents using data exchange protocols layered over the DIDComm protocol. These data exchange protocol specifications are being published as part of the DIDComm suite [10]. Credential exchange protocols are unique to each credential proof type because the request and response formats are different. The goal of the ToIP stack is to standardize all supported credential exchange protocols so that any ToIP-compatible agent, wallet, and encrypted data store can work with any other agent, wallet, and encrypted data store.
 
 With fully interoperable verifiable credentials, any issuer may issue any set of claims to any holder who can then prove them to any verifier. This is a fully decentralized system that uses the same trust triangle as the physical credentials we carry in our physical wallets today. This simple, universal trust model can be adapted to any set of requirements from any trust community. Even better, in most cases it does not require new “trust infrastructure”, rather it simply enables existing physical credentials to be transformed into a more flexible and useful digital format.
 
