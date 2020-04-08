@@ -121,7 +121,7 @@ Message format:
     "credential_proposal": <json-ld object>,
     "formats" : [
         {
-            "attachId" : "<attach@id value>",
+            "attach_id" : "<attach@id value>",
             "format" : "<format-and-version>",
         }
     ]
@@ -193,7 +193,7 @@ Message Format:
     "credential_preview": <json-ld object>,
     "formats" : [
         {
-            "attachId" : "<attach@id value>",
+            "attach_id" : "<attach@id value>",
             "format" : "<format-and-version>",
         }
     ]
@@ -243,7 +243,7 @@ Message Format:
     "comment": "<some comment>",
     "formats" : [
         {
-            "attachId" : "<attach@id value>",
+            "attach_id" : "<attach@id value>",
             "format" : "<format-and-version>",
         }
     ]
@@ -290,7 +290,7 @@ Message Format:
     "comment": "<some comment>",
     "formats" : [
         {
-            "attachId" : "<attach@id value>",
+            "attach_id" : "<attach@id value>",
             "format" : "<format-and-version>",
         }
     ]
