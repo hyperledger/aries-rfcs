@@ -74,19 +74,6 @@ Tracing is requested by decorating the JSON plaintext of an DIDComm message (whi
 }
 ```
 
-```
-{
-  "@type": "did:sov:...",
-  "@id": "abc-def-...",
-  "msg": "U2Vl...",
-  "~trace": {
-    "target": "message",
-    "full_thread": true,
-    "trace_reports": [{}, {}, ...]
-  }
-}
-```
-
 The `"target"` can refer to a url (as above) or the term `"message"`, which is a request to
 append trace information to the message itself.
 
@@ -118,12 +105,13 @@ The body of the HTTP request (the _trace report_) is a JSON document that looks 
 ```
 {
   "@type": "did:sov:.../1.0/trace_report",
-  "msg_id": {"id": "abc-def-...df", "seq": 1},
-  "thread_id": {"thid": "hij-klm-nop-...qr", "sender_order": 1},
+  "msg_id": "abc-def-...df",
+  "thread_id": "hij-klm-nop-...qr",
   "handler": "did:sov:1234abcd#3",
   "ellapsed_milli": 27,
   "traced_type": "did:sov:...",
-  "timestamp": "2018-03-27 18:23:45.123Z",
+  "str_time": "2018-03-27 18:23:45.123Z",
+  "timestamp": "1234567890.123456",
   "outcome": "OK ..."
 }
 ```
