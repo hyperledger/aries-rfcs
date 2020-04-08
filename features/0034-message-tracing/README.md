@@ -74,8 +74,8 @@ Tracing is requested by decorating the JSON plaintext of an DIDComm message (whi
 }
 ```
 
-The `"target"` can refer to a url (as above) or the term `"message"`, which is a request to
-append trace information to the message itself.
+The `"target"` can refer to a url (as above) or the term `"log"`, which is a request to
+append trace information to the standard log file.
 
 This example asks the handler of the message to perform an HTTP POST of a __trace report__
 about the message to the URI `http://example.com/tracer`.
