@@ -211,7 +211,7 @@ The ToIP stack no more  limits the applications that can be built on it than the
 
 ### Ecosystem Governance Frameworks
 
-Layer Four is where humans will directly experience the ToIP Governance Stack—specifically the trust marks and policy promises of ecosystem governance frameworks. These specify the prupose, principes, and policies that apply to all  governance authorities and governance frameworks operating within that ecosystem—at all four levels of the ToIP stack.
+Layer Four is where humans will directly experience the ToIP Governance Stack—specifically the trust marks and policy promises of ecosystem governance frameworks. These specify the purpose, principes, and policies that apply to all  governance authorities and governance frameworks operating within that ecosystem—at all four levels of the ToIP stack.
 
 The ToIP Governance Stack will specify standard roles for an ecosystem governance framework (EGF) including:
 
