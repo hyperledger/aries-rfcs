@@ -148,8 +148,8 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 
 An invitation is presented in one of two forms:
 
-* An explicit invitation with its own `@id` as seen in the three examples [above](#invitation-message-with-public-invitation-did).
-* An [implicit](#implicit-invitation) invitation contained in a DID document's [`service`](https://w3c-ccg.github.io/did-spec/#service-endpoints) attribute.
+* An explicit out-of-band invitation with its own `@id`.
+* An implicit invitation contained in a DID document's [`service`](https://w3c-ccg.github.io/did-spec/#service-endpoints) attribute.
 
 When a `request` responds to an explicit invitation, its `~thread.pthid` MUST be equal to the `@id` property of the invitation.
 
