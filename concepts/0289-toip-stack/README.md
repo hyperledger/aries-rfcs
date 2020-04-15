@@ -115,9 +115,9 @@ This also means that, once formed, DID-to-DID connections can be used for any ty
 
 ### Agents and Wallets
 
-At Layer Two, every agent is paired with a *digital wallet*—or more accurately a KMS (key management system). This KMS can be anything from a very simple static file on an embedded device to a highly sophisticated enterprise-grade key server. Regardless of the complexity, the job of the KMS is to safeguards sensitive data: key pairs, zero-knowledge proof blinded secrets, verifiable credentials, and the other cryptographic material needed to establish and maintain technical trust.
+At Layer Two, every agent is paired with a *digital wallet*—or more accurately a KMS (key management system). This KMS can be anything from a very simple static file on an embedded device to a highly sophisticated enterprise-grade key server. Regardless of the complexity, the job of the KMS is to safeguards sensitive data: key pairs, zero-knowledge proof blinded secrets, verifiable credentials, and any other cryptographic material needed to establish and maintain technical trust.
 
-This job includes the difficult challenge of recovery after a device is lost or stolen or a KMS is hacked or corrupted. This is the province of decentralized key management. For more details, see the [Decentralized Key Management System (DKMS) Design and Architecture document](http://bit.ly/dkms-v4) [12], and Dr. Sam Smith's paper on [KERI (Key Event Receipt Infrastructure)](https://arxiv.org/abs/1907.02143) [13].
+This job includes the difficult challenge of recovery after a device is lost or stolen or a KMS is hacked or corrupted. This is the province of *decentralized key management*. For more details, see the [Decentralized Key Management System (DKMS) Design and Architecture document](http://bit.ly/dkms-v4) [12], and Dr. Sam Smith's paper on [KERI (Key Event Receipt Infrastructure)](https://arxiv.org/abs/1907.02143) [13].
 
 ### Encrypted Data Stores
 
@@ -127,7 +127,13 @@ Agents may also be paired with an *encrypted data store*—a database with three
 2. All the data is encrypted with private keys in the subject’s KMS.
 3. If a DID controller has more than one encrypted data store, the set of stores can be automatically synchronized according to the owner’s preferences.
 
-Work on standardizing encrypted data stores is proceeding in several projects in addition to Hyperledger Aries—primarily at the [Decentralized Identity Foundation](http://identity.foundation/) (DIF) and the [W3C Credentials Community Group](https://www.w3.org/community/credentials/). Work is currently underway to form an Encrypted Data Store Working Group at DIF.
+Work on standardizing encrypted data stores is proceeding in several projects in addition to Hyperledger Aries—primarily at the [Decentralized Identity Foundation](http://identity.foundation/) (DIF) and the [W3C Credentials Community Group](https://www.w3.org/community/credentials/). Work is currently underway to form a Secure Data Store (SDS) Working Group at DIF.
+
+### Guardianship and Guardian Agents/Wallets
+
+The ToIP stack cannot become a universal layer for digital trust if it ignores the one-third of the world's population that does not have Internet access, smartphones, or the physical, mental, or economic capacity to use ToIP-enabled dgital agents, wallets, and encrypted data stores. This underscores the need for the ToIP layer to robustly support the concept of *digital guardianship*—the combination of a hosted cloud agent/wallet service and an individual or organization willing to take legal responsibility for managing that cloud agent/wallet on behalf of the person under guardianship, called the *dependent*.
+
+For more about all aspects of digital guardianship, see the Sovrin Foundation white paper [On Guardianship in Self-Sovereign Identity](https://sovrin.org/guardianship/) [14].
 
 ### Provider Governance Frameworks
 
@@ -135,13 +141,13 @@ The need for governance at Layer Two is security, privacy, data protection, and 
 
 * **Hardware Developers:** provide ToIP-compliant hardware, e.g., secure enclaves, trusted execution environments, HSMs
 * **Software Developers:** provide ToIP-compliant agents, wallets, encrypted data stores, etc.
-* **Agencies:** host ToIP-compliant cloud agents
+* **Agencies:** host ToIP-compliant cloud agents for individuals, organizations, and guardians
 
 ### Layer Two Support for Higher Layers
 
 The purpose of Layer Two is to enable peers to form secure DID-to-DID connections so they can:
 
-1. Issue, exchange, and verify credentials over these connections at Layer Three.
+1. Issue, exchange, and verify credentials over these connections using the data exchange protocols at Layer Three.
 2. Access the Layer One cryptographic data structures needed to issue and verify these credentials regardless of the public utility used by the issuer.
 3. Migrate and port ToIP data between agents, wallets, and  encrypted data stores without restriction. This data portability is critical to the broad adoption and interoperability of ToIP.
 
@@ -149,13 +155,13 @@ The purpose of Layer Two is to enable peers to form secure DID-to-DID connection
 
 Layer One and Layer Two together enable the establishment of *cryptographic trust* (also called *technical trust*) between peers. By contrast, the purpose of Layers Three and Four is to establish *human trust* between peers—trust between real-world individuals and organizations and the things with which they interact (devices, sensors, appliances, vehicles, buildings, cities, etc.)
 
-Part of the power of the DIDComm protocol at Layer Two is that it lays the foundation for secure, private agent-to-agent connections that can now "speak" any number of data exchange protocols. From the standpoint of the ToIP stack, the most important of these are those that support the exchange of *verifiable credentials*.
+Part of the power of the DIDComm protocol at Layer Two is that it lays the foundation for secure, private agent-to-agent connections that can now "speak" any number of data exchange protocols. From the standpoint of the ToIP stack, the most important of these are protocols that support the exchange of *verifiable credentials*.
 
 ### The Verifiable Credentials Data Model
 
-After several years of incubation led by Manu Sporny, David Longley, and other members of the W3C Credentials Community Group, the W3C Verifiable Claims Working Group (VCWG) was formed in 2017 and produced the [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/) which became a W3C Recommendation in September 2019 [14].
+After several years of incubation led by Manu Sporny, David Longley, and other members of the W3C Credentials Community Group, the W3C Verifiable Claims Working Group (VCWG) was formed in 2017 and produced the [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/) which became a W3C Recommendation in September 2019 [15].
 
-Figure 4 is a diagram of the three core roles in verifiable credential exchange—often called the "trust triangle". For more information see the [Verifiable Credentials Primer](https://github.com/WebOfTrustInfo/rwot8-barcelona/blob/master/topics-and-advance-readings/verifiable-credentials-primer.md) [15].
+Figure 4 is a diagram of the three core roles in verifiable credential exchange—often called the "trust triangle". For more information see the [Verifiable Credentials Primer](https://github.com/WebOfTrustInfo/rwot8-barcelona/blob/master/topics-and-advance-readings/verifiable-credentials-primer.md) [16].
 
 ![Figure 4: The three primary roles in the W3C Verifiable Credentials Data Model](./img/fig-4-vc-trust-triangle.png)
 
@@ -187,7 +193,7 @@ To support all three of these credential proof types in the ToIP stack means:
 
 At Layer Three, the exchange of verifiable credentials is performed by agents using data exchange protocols layered over the DIDComm protocol. These data exchange protocol specifications are being published as part of the DIDComm suite [10]. Credential exchange protocols are unique to each credential proof type because the request and response formats are different. The goal of the ToIP stack is to standardize all supported credential exchange protocols so that any ToIP-compatible agent, wallet, and encrypted data store can work with any other agent, wallet, and encrypted data store.
 
-With fully interoperable verifiable credentials, any issuer may issue any set of claims to any holder who can then prove them to any verifier. This is a fully decentralized system that uses the same trust triangle as the physical credentials we carry in our physical wallets today. This simple, universal trust model can be adapted to any set of requirements from any trust community. Even better, in most cases it does not require new “trust infrastructure”, rather it simply enables existing physical credentials to be transformed into a more flexible and useful digital format.
+With fully interoperable verifiable credentials, any issuer may issue any set of claims to any holder who can then prove them to any verifier. This is a fully decentralized system that uses the same trust triangle as the physical credentials we carry in our physical wallets today. This simple, universal trust model can be adapted to any set of requirements from any trust community. Even better, in most cases it does not require new trust relationships or policies, rather it simply requires transforming existing physical credentials into a more flexible and useful digital format.
 
 ### Credential Governance Frameworks
 
@@ -241,7 +247,7 @@ This of course is exactly how Mastercard and Visa—two of the world’s largest
 
 With the ToIP stack, this governance architecture can be applied to any set of roles and/or credentials, for any trust community, of any size, in any jurisdiction.
 
-As an historical note, some facets of the ToIP governance stack are inspired by the [Sovrin Governance Framework (SGF)](https://sovrin.org/governance-framework/) [16] developed starting in 2017 by the [Sovrin Foundation](https://www.sovrin.org), the governance authority for the Sovrin public ledger for self-sovereign identity (SSI).
+As an historical note, some facets of the ToIP governance stack are inspired by the [Sovrin Governance Framework (SGF)](https://sovrin.org/governance-framework/) [17] developed starting in 2017 by the [Sovrin Foundation](https://www.sovrin.org), the governance authority for the Sovrin public ledger for self-sovereign identity (SSI).
 
 ### Defining a Governance Framework
 
@@ -293,10 +299,10 @@ This RFC will be updated to track the evolution of the ToIP stack as it is furth
 11. Daniel Hardman et al, [Peer DID Method 1.0 Specification](https://openssi.github.io/peer-did-method-spec/), July 2019; accessed July 6, 2019.
 12. Drummond Reed, Jason Law, Daniel Hardman, Mike Lodder, [DKMS Design and Architecture V4](http://bit.ly/dkms-v4), March 2019; accessed November 2, 2019.
 13. Samuel M. Smith, [Key Event Receipt Infrastructure (KERI)](https://arxiv.org/abs/1907.02143) , July 2019, accessed February 4, 2020.
-14. Manu Sporny, Grant Noble, Dave Longley, Daniel C. Burnett, Brent Zundel, [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/), September 2019; accessed November 2, 2019.
-15. Manu Sporny, [Verifiable Credentials Primer](https://github.com/WebOfTrustInfo/rwot8-barcelona/blob/master/topics-and-advance-readings/verifiable-credentials-primer.md), February 2019; accessed July 6, 2019.
-16. Sovrin Governance Framework Working Group, [Sovrin Governance Framework V2](https://sovrin.org/governance-framework/), March 2019; accessed July 6, 2019.
-17. Sovrin Governance Framework Working Group, [Home Page](https://docs.google.com/document/d/1aJskOztz8NP8tI-9eaKaaOypF0Fm__SCLKR-U8ptSII/edit?usp=sharing), October 2017; accessed November 2, 2019.
+14. Sovrin Governance Framework Working Group, [On Guardianship in Self-Sovereign Identity](https://sovrin.org/guardianship/), December 2019, accessed April 10, 2020.
+15. Manu Sporny, Grant Noble, Dave Longley, Daniel C. Burnett, Brent Zundel, [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/), September 2019; accessed November 2, 2019.
+16. Manu Sporny, [Verifiable Credentials Primer](https://github.com/WebOfTrustInfo/rwot8-barcelona/blob/master/topics-and-advance-readings/verifiable-credentials-primer.md), February 2019; accessed July 6, 2019.
+17. Sovrin Foundation, [Sovrin Governance Framework V2](https://sovrin.org/governance-framework/), March 2019; accessed December 21, 2019.
 18. DIACC, [Pan-Canadian Trust Framework](https://diacc.ca/pan-canadian-trust-framework/), May 2019; accessed July 6, 2019.
 19. Governments of British Columbia, Ontario, and Canada, [Verifiable Organizations Network (VON)](https://vonx.io/),June 2019; accessed July 6, 2019.
 
