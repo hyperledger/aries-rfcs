@@ -155,6 +155,8 @@ When a `request` responds to an explicit invitation, its `~thread.pthid` MUST be
 
 When a `request` responds to an implicit invitation, its `~thread.pthid` MUST contain a [DID URL](https://w3c-ccg.github.io/did-spec/#dfn-did-url) that resolves to the specific `service` on a DID document that contains the invitation.
 
+_Note: The `request` message referred to above is the request message of the protocol used such as Connections or DID Exchange, NOT an Out-of-Band `request` message._
+
 **Example referencing an explicit invitation**
 
 ```json
@@ -320,7 +322,7 @@ The exchange complete message is used to confirm the exchange to the _inviter_. 
   "@id": "12345678900987654321",
   "~thread": {
     "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>",
-    "pthid": "<The Parent Thread ID of the Out-of-Band message>"
+    "pthid": "<The Parent Thread ID of the Out-of-Band invitation>"
   }
 }
 ```
@@ -335,7 +337,7 @@ The exchange between the _inviter_ and the _invitee_ is now established. This re
 
 ## Exchange Reuse
 
-When an Out-of-Band Invitation (`oob-invitation`) or Request (`oob-request`) is received containing a public DID for which the _invitee_ already has a connection, the _invitee_ may use the `reuse` message in the protocol sent over the existing connection. The `pthid` passed in the `reuse` message allows the _inviter_ to correlate the invitation with the identified existing connection and then invoke any protocols desired based on that context.
+When an Out-of-Band Invitation (`oob-invitation`)  is received containing a public DID for which the _invitee_ already has a connection, the _invitee_ may use the `reuse` message in the protocol sent over the existing connection. The `pthid` passed in the `reuse` message allows the _inviter_ to correlate the invitation with the identified existing connection and then invoke any protocols desired based on that context.
 
 #### Reuse Example
 
@@ -344,7 +346,7 @@ When an Out-of-Band Invitation (`oob-invitation`) or Request (`oob-request`) is 
   "@type": "https://didcomm.org/didexchange/1.0/reuse",
   "@id": "12345678900987654321",
   "~thread": {
-    "pthid": "<The Parent Thread ID of the Out-of-Band message>"
+    "pthid": "<The Parent Thread ID of the Out-of-Band invitation>"
   }
 }
 ```
