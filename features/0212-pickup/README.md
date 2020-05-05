@@ -2,7 +2,7 @@
 - Authors: [Sam Curren](telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-03
-- Status Note: Initial version 
+- Status Note: Initial version
 - Start Date: 2019-09-03
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
@@ -73,16 +73,16 @@ A message that contains multiple waiting messages.
     "messages~attach": [
         {
             "@id" : "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
-            "message" : {
+            "message" : "{
                 ...
-            }
+            }"
         },
-        
+
         {
             "@id" : "344a51cf-379f-40ab-ab2c-711dab3f53a9a",
-            "message" : {
+            "message" : "{
                 ...
-            }
+            }"
         }
     ]
 }
@@ -108,15 +108,15 @@ A response to query with message id list.
     "messages~attach": [
         {
             "@id" : "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
-            "message" : {
+            "message" : "{
                 ...
-            }
-        },        
+            }"
+        },
         {
             "@id" : "344a51cf-379f-40ab-ab2c-711dab3f53a9a",
-            "message" : {
+            "message" : "{
                 ...
-            }
+            }"
         }
     ]
 }
@@ -138,11 +138,11 @@ Concepts here borrow heavily from a [document](https://hackmd.io/@8VtAqKThQ6mKa9
 ## Unresolved questions
 
 - We are using multiple roles to indicate which portions of the protocol are supported by each party. This is a new thing we have not done before. Is this ok?
-  
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name / Link | Implementation Notes
 --- | ---
- |  | 
+ |  |
