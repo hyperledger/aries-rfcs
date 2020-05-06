@@ -1,4 +1,4 @@
-# Aries RFC 0470: Role Request 0.1
+# Aries RFC 0474: Role Request 0.1
 - Authors: [Sam Curren](telegramsam@gmail.com)
 - Since: 2020-05-06
 - Status Note: initial proposal
