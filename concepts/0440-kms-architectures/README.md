@@ -5,7 +5,7 @@
 - Status Note: Proposed
 - Supersedes: [Wallets](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0050-wallets/README.md), uses concepts from [LOX](https://github.com/hyperledger/aries-rfcs/blob/master/features/0042-lox/README.md)
 - Start Date: 2019-12-02
-- Tags: concepts
+- Tags: concept
 
 ## Summary
 
