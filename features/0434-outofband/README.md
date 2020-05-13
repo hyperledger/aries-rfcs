@@ -104,7 +104,7 @@ The out-of-band protocol a single message that is sent by the *sender*.
         "@id": "request-0",
         "mime-type": "application/json",
         "data": {
-            "base64": "<bytes for base64>"
+            "json": "<json of protocol message>"
         }
     }
   ],
