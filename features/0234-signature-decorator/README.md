@@ -2,7 +2,7 @@
 - Authors: [Kyle Den Hartog](kyle.denhartog@evernym.com)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-09-27
-- Status Note: Retroactive port of [this HIPE](https://github.com/kdenhartog/indy-hipe/blob/d421fc77bae87c780aad346d15c0c49939adc281/text/digital-signatures/README.md) (never merged) on which the `did-exchange` and `connection` protocols depend
+- Status Note: Retroactive port of [this HIPE](https://github.com/kdenhartog/indy-hipe/blob/d421fc77bae87c780aad346d15c0c49939adc281/text/digital-signatures/README.md) (never merged) on which the `connection` protocol depends
 - Supersedes: [this HIPE](https://github.com/kdenhartog/indy-hipe/blob/d421fc77bae87c780aad346d15c0c49939adc281/text/digital-signatures/README.md) (never merged)
 - Start Date: 2019-01-07
 - Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
