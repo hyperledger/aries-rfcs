@@ -67,55 +67,26 @@ Each problem domain will probably have unique requirements. Therefore, we start 
     "description": "Governs accredited colleges and universities in Germany.",
     "docs_uri": "http://https://kmk.org/uni-accred-trust-fw/v1",
     "data_uri": "http://https://kmk.org/uni-accred-trust-fw/v1/tf.json",
-    // In which problem domains is this governance framework relevant?
-    // Think of these like hash tags; they constitute a loose,
-    // overlapping topic cloud rather than a normative taxonomy;
-    // the purpose is to facilitate search.
     "topics": ["education"],
-    // In which legal jurisdictions is this governance framework relevant?
-    // Values here should use ISO 639-2 or 3 language code, possibly
-    // narrowed to a standard province and even county/city using > as
-    // the narrowing character, plus standard abbreviations where
-    // useful: us>tx>houston for "Houston, Texas, USA" or ca>qc for
-    // the province of Quebec in Canada.
     "jurisdictions": ["de", "eu"],
-    // In which geographies is this governance framework relevant? May be
-    // redundant with jurisdictions in many cases.
     "geos": ["Deutschland"],
-    // Name all the roles that are significant to understanding
-    // interactions in this governance framework. These map to X in rules
-    // like "X can do Y if Z."
     "roles": ["accreditor", "school", "graduate", "anyone"],
-    // Name all the privileges that are significant to understanding
-    // interactions in this governance framework. These map to Y in rules
-    // like "X can do Y if Z." Each privilege is defined for humans
-    // at the specified URI, so a person can understand what it
-    // entails.
     "privileges": [
         {"name": "accredit", "uri": "http://kmk.org/tf/accredit"},
         {"name": "issue-edu", "uri": "http://kmk.org/tf/issue-edu"},
         {"name": "hold-edu", "uri": "http://kmk.org/tf/hold-edu"},
         {"name": "request-proof", "uri", "http://kmk.org/tf/request-proof"
     ],
-    // Name all the duties that are significant to understanding
-    // interactions in this governance framework. Each duty is defined for humans
-    // at the specified URI, so a person can understand what it
-    // entails.
     "duties": [
         {"name": "safe-accredit", "uri": "http://kmk.org/tf/responsible-accredit"},
         {"name": "GDPR-dat-control", "uri": "http://europa.eu/gdpr/trust-fw/gdpr-data-controller"}
         {"name": "GDPR-edu-verif", "uri": "http://kmk.org/tf/gdpr-verif"}
         {"name": "accept-kmk-tos", "uri": "http://kmk.org/tf/tos"}
     ],
-    // Use DIDs to define key participants in the ecosystem. KMK is
-    // the accreditation authority for higher education in Germany.
-    // Here we show it using two different DIDs.
     "define": [
         {"name": "KMK": "id": "did:example:abc123"},
         {"name": "KMK": "id": "did:anotherexample:def456"},
     ], 
-    // Describe role-based rules of behavior like "X can do Y if Z,"
-    // where Z is a criterion following "when".
     "rules": [
         {"grant": ["accredit"], "when": {"name": "KMK"},
             "duties": ["safe-accredit"]},
