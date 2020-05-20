@@ -89,6 +89,8 @@
 * [0420: Rich Schema Objects Common](concepts/0420-rich-schemas-common/README.md) (2020-02-13 &mdash; [`concept`](/tags.md#concept) [`rich-schemas`](/tags.md#rich-schemas))
 * [0430: Machine-Readable Governance Frameworks](concepts/0430-machine-readable-governance-frameworks/README.md) (2020-02-24 &mdash; [`concept`](/tags.md#concept))
 * [0434: Out-of-Band Protocols](features/0434-outofband/README.md) (2020-03-01 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0440: KMS Architectures ](concepts/0440-kms-architectures/README.md) (2020-03-06 &mdash; [`concept`](/tags.md#concept))
+* [0453: Issue Credential Protocol 2.0](features/0453-issue-credential-v2/README.md) (2020-03-23 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 
 ## [RETIRED](README.md#retired)
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
