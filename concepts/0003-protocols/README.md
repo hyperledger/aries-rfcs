@@ -16,7 +16,46 @@ and shows how they should be designed and documented.
 
 [![protocol](protocol.png)](https://docs.google.com/presentation/d/15UAkh_2WfDk7wlto7pSL7YU9NJr_XVMgGAOeNIRbzK8/edit#slide=id.p)
 
+## Table of Contents<!-- omit in toc -->
 
+- [Aries RFC 0003: Protocols](#aries-rfc-0003-protocols)
+  - [Summary](#summary)
+  - [Motivation](#motivation)
+  - [Tutorial](#tutorial)
+    - [What is an Aries protocol?](#what-is-an-aries-protocol)
+    - [Relationship to APIs](#relationship-to-apis)
+    - [Decentralized](#decentralized)
+    - [Types of Protocols](#types-of-protocols)
+    - [Agent Design](#agent-design)
+    - [Composable](#composable)
+    - [Message Types](#message-types)
+    - [Ingredients](#ingredients)
+    - [How to define a protocol or message family](#how-to-define-a-protocol-or-message-family)
+    - [Security Considerations](#security-considerations)
+      - [Replay attacks](#replay-attacks)
+  - [Reference](#reference)
+    - [Message Type and Protocol Identifier URIs](#message-type-and-protocol-identifier-uris)
+      - [MTURI](#mturi)
+      - [PIURI](#piuri)
+    - [Semver Rules for Protocols](#semver-rules-for-protocols)
+    - [State Details and State Machines](#state-details-and-state-machines)
+      - [State machines](#state-machines)
+      - [Processing Points](#processing-points)
+    - [Roles, Participants, Parties, and Controllers](#roles-participants-parties-and-controllers)
+      - [Roles](#roles)
+      - [Participants](#participants)
+      - [Parties](#parties)
+      - [Controllers](#controllers)
+    - [Instructions for Protocol RFCs](#instructions-for-protocol-rfcs)
+  - [Drawbacks](#drawbacks)
+  - [Rationale and alternatives](#rationale-and-alternatives)
+  - [Prior art](#prior-art)
+    - [BPMN](#bpmn)
+    - [WSDL](#wsdl)
+    - [Swagger / OpenAPI](#swagger--openapi)
+    - [Other](#other)
+  - [Unresolved questions](#unresolved-questions)
+  - [Implementations](#implementations)
 
 ## Motivation
 
@@ -26,9 +65,9 @@ We also need to show how a protocol is defined, so the analog to defining a Swag
 
 ## Tutorial
 
-#### What is a protocol?
+### What is an Aries protocol?
 
-A __protocol__ is a recipe for a stateful interaction. Protocols are all
+An Aries __protocol__ is a recipe for a stateful interaction. Protocols are all
 around us, and are so ordinary that we take them for granted. Each of the
 following interactions is stateful, and has conventions that constitute
 a sort of "recipe":
@@ -40,7 +79,7 @@ a sort of "recipe":
 * Going through security at the airport when we fly
 * Applying for a loan
 
-In the context of decentralized identity, protocols manifest at many different levels of the stack: at the lowest levels of networking, in cryptographic algorithms like Diffie Helman, in the management of DIDs, in the conventions of [DIDComm](../0005-didcomm/README.md), and in higher-level interactions that solve problems for people with only minimal interest in the technology they're using. However, this RFC focuses on the last of these layers, where use cases and personas are transformed into features with obvious social value like:
+In the context of decentralized identity, protocols manifest at many different levels of the stack: at the lowest levels of networking, in cryptographic algorithms like Diffie Hellman, in the management of DIDs, in the conventions of [DIDComm](../0005-didcomm/README.md), and in higher-level interactions that solve problems for people with only minimal interest in the technology they're using. However, this RFC focuses on the last of these layers, where use cases and personas are transformed into features with obvious social value like:
 
 * [Connecting with one another](../../features/0023-did-exchange/README.md)
 * [Requesting and issuing credentials](../../features/0036-issue-credential/README.md)
@@ -56,9 +95,9 @@ In the context of decentralized identity, protocols manifest at many different l
 * Reporting errors
 * Cooperative debugging
 
-When "protocol" is used in an Aries context without any qualifying adjective, it is referencing a recipe for a high-level interaction like these. Lower-level protocols are usually described more specifically and possibly with other verbiage: "cryptographic algorithms", "DID management procedures", "DIDComm conventions", "wire-level message exchange", "transports", and so forth. This helps us focus "protocol" on the place where application developers that consume Aries do most of the work that creates value.
+When "protocol" is used in an Aries context without any qualifying adjective, it is referencing a recipe for a high-level interaction like these. Lower-level protocols are usually described more specifically and possibly with other verbiage: "cryptographic algorithms", "DID management procedures", "DIDComm conventions", "transports", and so forth. This helps us focus "protocol" on the place where application developers that consume Aries do most of the work that creates value.
 
-#### Relationship to APIs
+### Relationship to APIs
 
 The familiar world of web APIs is a world of protocols, but it comes with constraints antithetical to decentralized identity:
 
@@ -69,7 +108,7 @@ The familiar world of web APIs is a world of protocols, but it comes with constr
 
 Protocols impose none of these constraints. Web APIs can easily be modeled as protocols where the transport is HTTP and the payload is a message, and the Aries community actively does this. We are not opposed to APIs. We just want to describe and standardize the higher level abstraction so we don't have a web solution and a BlueTooth solution that are diverged for no good reason.
 
-#### Decentralized
+### Decentralized
 
 As used in the agent/DIDComm world, protocols are _decentralized_. This means
 there is not an overseer for the protocol, guaranteeing information flow,
@@ -77,40 +116,39 @@ enforcing behaviors, and ensuring a coherent view. It is a [subtle but
 important divergence from API-centric approaches](https://www.reactivemanifesto.org/glossary#Protocol), where a server holds
 state against which all other parties (clients) operate. Instead, all
 parties are peers, and they interact by mutual consent and with a (hopefully)
-shared understanding of the rules and goals. Protocols are like a dance--not one
+shared understanding of the rules and goals. Protocols are like a dance&mdash;not one
 that's choreographed or directed, but one where the parties make dynamic
 decisions and react to them.
 
 ![dance](dance.jpg)
 
-#### Types of Protocols
+### Types of Protocols
 
-The most common protocol style in DID Communication is __request-response__.
-This style involve two *parties*, with the `requester` making the first move,
-and the `responder` completing the interaction. The [Discover Features Protocol](
-../../features/0031-discover-features/README.md) uses this style.
-
-![request-response](request-response.png)
-
-A second common pattern that's also important is __notification__. This style also
+The simplest protocol style in Aries is __notification__. This style 
 involves two parties, but it is one-way: the `notifier` emits a message,
-and the protocol ends when the `notified` receives it. The [ACK Protocol](
-../../features/0015-acks/README.md) and the [Report Problem
-Protocol](../../features/0035-report-problem/README.md) use this style.
+and the protocol ends when the `notified` receives it. The [basic message protocol](../../features/0095-basic-message/README.md) uses this style.
 
 ![notification](notification.png)
 
+Slightly more complex is the __request-response__ protocol style.
+This style involve two parties, with the `requester` making the first move,
+and the `responder` completing the interaction. The [Discover Features Protocol](
+../../features/0031-discover-features/README.md) uses this style. Note that
+with Aries protocols (and unlike an HTTP request), the request-response messages are
+asynchronous.
+
+![request-response](request-response.png)
+
 However, more complex protocols exist. The [Introduce Protocol](
 ../../features/0028-introduce/README.md) involves three parties,
-not two. When the [DID Exchange Protocol](
-../../features/0023-did-exchange/README.md) includes organizations, it
-may involve dozens of *participants*, and it has cycles and other complex
-state evolution.
+not two. The [issue credential protocol](../../feature/../features/0036-issue-credential/README.md)
+includes up to six message types (including `ack` and `problem_report`), two of which (`proposal` and `offer`)
+can be used to interactively negotiate details of the elements of the subsequent messages in the protocol.
 
->See [this note](roles-participants-etc.md) for definitions of the terms
+>See [this subsection](#roles-participants-parties-and-controllers) for definitions of the terms
 "role", "participant", and "party".
 
-#### Agent Design
+### Agent Design
 
 Protocols are *the* key unit of interoperable extensibility in agents and agent-like things. To add a
 new interoperable feature to an agent, give it the ability to handle a
@@ -120,17 +158,16 @@ When agents receive messages, they map the messages to a __protocol handler__
 and possibly to an __interaction state__ that was previously persisted. This is the analog to routes, route handlers, and sessions in web APIs, and could actually be implemented as such if the transport for the protocol is HTTP. The
 protocol handler is code that knows the rules of a particular protocol; the
 interaction state tracks progress through an interaction. For more information,
-see the [agents explainer -- RFC 0004](../0004-agents/README.md#general-patterns)
-and the [DIDComm explainer -- RFC 0005](
-../0005-didcomm/README.md).
+see the [agents explainer&mdash;RFC 0004](../0004-agents/README.md#general-patterns)
+and the [DIDComm explainer&mdash;RFC 0005](../0005-didcomm/README.md).
 
-#### Composable
+### Composable
 
 Protocols are *composable*--meaning that you can build complex ones from simple ones.
 The protocol for asking someone to repeat their last sentence can be part of
-the protocol for ordering food at a restaurant. The protocols for
-reporting an error or arranging payment can be part of a protocol for
-issuing credentials.
+the protocol for ordering food at a restaurant. The protocol for
+proving the claims from some credentials (using the [present proof](../../features/0037-present-proof/README.md) protocol)
+can be part of an instance of the [issue credential](../../features/0036-issue-credential/README.md) protocol.
 
 When we run one protocol _inside_ another, we call the inner protocol a
 __subprotocol__, and the outer protocol a __superprotocol__. A given protocol
@@ -141,13 +178,14 @@ a superprotocol from another (as when protocols are nested at least 3 deep).
 ![super- and subprotocols](super-sub.png)
 
 Commonly, protocols wait for subprotocols to complete, and then they continue.
-A good example of this is [ACKs](../../features/0015-acks/README.md),
-which are often used as a discrete step in a larger flow.
+A good example of this is mentioned above&mdash;starting an issue credential flow,
+but requiring the presentation of a proof before completing the process.
 
 In other cases, a protocol B is not "contained" inside protocol A.
 Rather, A triggers B, then continues in parallel,
-without waiting for B to complete. This __coprotocol__ relationship is analogous to relationship between [coroutines in computer science](https://en.wikipedia.org/wiki/Coroutine). In the [Introduce Protocol](
-../../features/0028-introduce/README.md),
+without waiting for B to complete. This __coprotocol__ relationship is analogous to
+relationship between [coroutines in computer science](https://en.wikipedia.org/wiki/Coroutine).
+In the [Introduce Protocol](../../features/0028-introduce/README.md),
 the final step is to begin a connection protocol between the two introducees--
 but [the introduction coprotocol completes when the connect coprotocol
 *starts*, not when it *completes*](
@@ -155,28 +193,22 @@ but [the introduction coprotocol completes when the connect coprotocol
 
 ![co-protocols](co-protocols.png)
 
-#### Message Families
+### Message Types
 
-A message family is a collection of messages that share a common theme, goal, or
-usage pattern. The messages used by a protocol may be a subset of a particular
-message family; for example, the [DID Exchange Protocol](
-../../features/0023-did-exchange/README.md)
-uses one subset of the messages in the
-`connections` message family, and the [sync connection protocol](
-../../features/0030-sync-connection/README.md)
-uses a different subset.
+A protocol includes a number of message types that enable the execution of an instance of a protocol.
+Collectively, the message types of a protocol become the skeleton of its _interface_. Most of the message
+types are defined with the protocol, but several key message types, notably [acks](../../features/0015-acks/README.md)
+and [problem reports](../../features/0035-report-problem/README.md) are defined in separate RFCs and `adopted` into
+a protocol. This ensures that the structure of such messages is standardized, but used in the context of the
+protocol adopting the message types.
 
-Collectively, the message types of a protocol become the skeleton of its _interface_. Each protocol
-has a primary message family, and the name of the protocol is often the name of the
-primary message family.
-
-#### Ingredients
+### Ingredients
 
 A protocol has the following ingredients:
 
 * [_Name_](../../0000-template-protocol.md#name-and-version) and [semver-compatible
-  version](semver.md)
-* [_URI_ that uniquely identifies it](uris.md)
+  version](#semver-rules-for-protocols)
+* [_URI_ that uniquely identifies it](#message-type-and-protocol-identifier-uris)
 * [_Messages (primary message family)_](../../0000-template-protocol.md#messages)
 * [_Adopted messages_](../../0000-template-protocol.md#adopted-messages)
 * [_Roles_](../../0000-template-protocol.md#roles)
@@ -185,29 +217,263 @@ A protocol has the following ingredients:
 _timeouts_, and other things
 * _Constraints that provide trust and incentives_
 
-
-#### How to define a protocol or message family
+### How to define a protocol or message family
 
 To define a protocol, write an RFC. Specific instructions for
 protocol RFCs, and a discussion about the theory behind detailed
-protocol concepts, are given in the [Instructions for Protocol RFCs](
-instructions.md) and in the [Protocol RFC Template](../../0000-template-protocol.md). The [tictactoe protocol](tictactoe/README.md) is
-also attached to this RFC as an example.
+protocol concepts, are given in the [instructions for protocol RFCs](#instructions-for-protocol-rfcs)
+and in the [protocol RFC template](../../0000-template-protocol.md).
+
+The [tictactoe protocol](tictactoe/README.md) is attached to this RFC as an example.
 
 [![tictactoe protocol](tictactoe/tile.png)](tictactoe/README.md)
 
-#### Security Considerations
+### Security Considerations
 
-##### Replay attacks
+#### Replay attacks
 
-It should be noted that when defining a protocol that has domain specific requirements around preventing replay attacks an `@id` property SHOULD be required. Given the `@id` field is most commonly set to be a UUID, it usually provides sufficient randomness that a nonce would in preventing replay attacks. This means that sufficient care will be needed in processing of the `@id` field however, to make sure the `@id` field hasn't been used before. In some cases, nonces require being unpredictable as well. In this case, greater review should be taken as to how the `@id` field should be used in the domain specific protocol. Additionally, in the event where the `@id` field is not adequate, it's recommended that an additional `nonce` field be required by the domain specific protocol specification.
+It should be noted that when defining a protocol that has domain specific requirements around preventing replay attacks, an `@id` property SHOULD be required. Given an `@id` field is most commonly set to be a UUID, it should provide randomness comparable to that of a nonce in preventing replay attacks. However, this means that care will be needed in processing of the `@id` field to make sure its value has not been used before. In some cases, nonces require being unpredictable as well. In this case, greater review should be taken as to how the `@id` field should be used in the domain specific protocol. In the event where the `@id` field is not adequate for preventing replay attacks, it's recommended that an additional `nonce` field be required by the domain specific protocol specification.
 
 ## Reference
 
-* [Message Type and Protocol Identifier URIs](uris.md)
-* [Semver Rules for Protocols](semver.md)
-* [State Details and State Machines](state-details.md)
-* [Roles, Participants, Parties, and Controllers](roles-participants-etc.md)
+### Message Type and Protocol Identifier URIs
+
+Message types and protocols are identified with URIs that match certain
+conventions.
+
+#### MTURI
+
+A __message type URI__ (MTURI) identifies message types unambiguously.
+Standardizing its format is important because it is parsed by agents that
+will map messages to handlers--basically, code will look at this string and
+say, "Do I have something that can handle this message type inside protocol
+*X* version *Y*?" When that analysis happens, it must do more than compare
+the string for exact equality; it may need to check for semver compatibility.
+
+The URI MUST be composed as follows:
+
+![MTURI structure](mturi-structure.png)
+
+```ABNF
+message-type-uri  = doc-uri delim protocol-name 
+    "/" protocol-version "/" message-type-name
+delim             = "?" / "/" / "&" / ":" / ";" / "="
+protocol-name     = identifier
+protocol-version  = semver
+message-type-name = identifier
+identifier        = alpha *(*(alphanum / "_" / "-" / ".") alphanum)
+```
+
+It can be loosely matched and parsed with the following regex:
+
+```regex
+    (.*?)([a-z0-9._-]+)/(\d[^/]*)/([a-z0-9._-]+)$
+```
+
+A match will have captures groups of (1) = `doc-uri`, (2) = `protocol-name`,
+(3) = `protocol-version`, and (4) = `message-type-name`.
+
+The goals of this URI are, in descending priority:
+
+* Code can use the URI to route messages to protocol
+handlers using [semver rules](#semver-rules-for-protocols).
+
+* The definition of a protocol should be tied to the URI such
+that it is semantically stable. This means that once version 1.0
+of a protocol is defined, its definition [should not change in ways that would break implementations](#semver-rules-for-protocols).
+
+* Developers can discover information about novel protocols, using
+the URI to browse or search the web.
+
+The `doc-uri` portion is any URI that exposes documentation about
+protocols. A developer should be able to browse to that URI and use human intelligence
+to look up the named and versioned protocol. Optionally and preferably, the
+full URI may produce a page of documentation about the specific message type,
+with no human mediation involved.
+
+#### PIURI
+
+A shorter URI that follows the same conventions but lacks the
+`message-type-name` portion is called a __protocol identifier URI__
+(PIURI).
+
+![PIURI structure](piuri-structure.png)
+
+```ABNF
+protocol-identifier-uri  = doc-uri delim protocol-name
+    "/" semver
+```
+
+Its loose matcher regex is:
+
+```regex
+    (.*?)([a-z0-9._-]+)/(\d[^/]*)/?$
+```
+
+The following are examples of valid MTURIs and PIURIs:
+
+* MTURI `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.1/credential-offer`
+  * This is the soon-to-be-deprecated URI for an Aries core protocol message type
+* MTURI: `http://didcomm/issue-credential/1.1/credential-offer`
+  * This is a future URI for an Aries core protocol message type (following a [community transition](../../features/0348-transition-msg-type-to-https/README.md))
+* PIURI `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.1`
+* PURI: `http://didcomm/issue-credential/1.1`
+
+As can be seen from the examples above, the `doc-uri` portion of the URIs enable protocol namespacing,
+allowing anyone to publish and use their own protocols. The ones above use the namespaces claimed for
+core Aries protocols. More on namespacing and the use of these URIs to find protocols specifications
+can be found in the [message types RFC](../0020-message-types/README.md).
+
+### Semver Rules for Protocols
+
+[Semver](https://semver.org) rules apply to protocols, with the version of a protocol is expressed
+in the `semver` portion of its [identifying URI](#message-type-and-protocol-identifier-uris).
+The ["ingredients"](#ingredients) of a protocol combine to form a
+[public API in the semver sense](https://semver.org/#spec-item-1). Core Aries protocols
+specify only major and minor elements in a version; the patch component is not used.
+
+The major and minor versions of protocols match semvar semantics:
+
+- Clarification updates that do not change the "public API" of the protocol can be made
+with community support _without_ changing the minor version of the protocol.
+- An individual message type can add new optional fields, or deprecate
+existing fields, [with only a change to its protocol's minor
+version](https://semver.org/#spec-item-7). Similarly, a protocol can
+add new or deprecate message types with only a change to the minor version.
+- Changes that remove fields or message types, that make formerly optional
+things required, or that alter the state machine in incompatible
+ways, must result in an [increase of the major version of the protocol/primary
+message family](https://semver.org/#spec-item-8).
+
+Within a given major version of a protocol, an agent should:
+
+- specify a minimum minor version supported, defaulting to "0"
+- specify a current minor version that is fully supported and used by default
+
+This leads to the following received message handling rules:
+
+- message types received with a minor versions below the minimum may be answered with a `report-problem` with code `version-not-supported`
+- message types received with a minor version at or higher than the minimum supported and less than the current minor version are processed, ideally with a response using the same minor version of the received message
+  - The recipient may want to send a warning `report-problem` with code `version-with-degraded-features`
+- message types received with a minor version higher than the current minor version are processed with any unrecognized fields ignored
+  - The recipient may want to send a warning `report-problem` with code `fields-ignored-due-to-version-mismatch` 
+
+As documented in the semvar documentation, these requirements may not apply when
+major version 0 is used. Specific rules associated each v0 protocol are left to
+the discretion of the community.
+
+Agents may support multiple major versions and select which major version to
+use when initiating an instance of the protocol.
+
+The [discover features](../../features/0031-discover-features/README.md) protocol
+can be used by one agent to query the versions of protocols supported by another agent,
+informing the selection of which version of a protocol to use in initiating an
+instance of a protocol. Agent receiving a discover features request may respond with a list of
+preferred protocols they support, as described in that protocol.
+
+An agent should reject messages from protocols or unsupported protocol major versions with
+a `report-problem` with code `version-not-supported`. Agents that receive such a
+`report-problem` message may use the [discover features protocol](../../features/0031-discover-features/README.md)
+to resolve the mismatch.
+
+### State Details and State Machines
+
+While some protocols have only one sequence of states to manage, in most
+different roles perceive the interaction differently. The sequence of states
+for each role needs to be described with care in the RFC.
+
+#### State machines
+
+By convention, protocol state and sequence rules are described using the
+concept of state machines, and we encourage developers who implement
+protocols to build them that way.
+
+Among other benefits, this helps with error handling: when one agent
+sends a [`report-problem`](../../features/0035-report-problem/README.md)
+message to another, the message can make it crystal clear which state it
+has fallen back to as a result of the error.
+
+Many developers will have encountered a formal of definition of state machines as
+they wrote parsers or worked on other highly demanding tasks, and may worry
+that state machines are heavy and intimidating. But as they are used in
+Aries protocols, state machines are straightforward and elegant. They
+cleanly encapsulate logic that would otherwise be a bunch of conditionals
+scattered throughout agent code. The [tictactoe example protocol](tictactoe/README.md)
+example includes a complete state machine in less than 50
+lines of [python code](tictactoe/state_machine.py), with [tests](tictactoe/test_state_machine.py).
+
+For an extended discussion of how state machines can be used, including in nested
+protocols, and with hooks that let custom processing happen at each point in
+a flow, see [https://github.com/dhh1128/distributed-state-machine](
+https://github.com/dhh1128/distributed-state-machine/blob/master/README.md).
+
+#### Processing Points
+
+A protocol definition describes key points in the flow where business logic
+can attach. Some of these __processing points__ are obvious, because the
+protocol makes calls for decisions to be made. Others are implicit. Some examples
+include:
+
+* The _beginning_ and _end_.
+* The _launch of a subprotocol_.
+* The _completion of a subprotocol_, or the _subprotocol changing state_.
+* _Sending a message_. (For each send, the sender could choose to go silent
+and abandon the interaction instead, though many
+protocols would ask for notification to be emitted as best practice.)
+* (Receiving a message_. (Requires validation, then integration
+with policy and processes internal to the agent and its sovereign domain,
+to move the interaction forward.)
+
+### Roles, Participants, Parties, and Controllers
+
+#### Roles
+
+The __roles__ in a protocol are the perspectives (responsibilities, privileges) that parties take i an
+interaction.
+
+This perspective is manifested in three general ways:
+
+ * by the expectations that a party takes on in a protocol (ex. a role may be expected to do something to start a protocol).
+ * by the messages that a party can and does use in the course of the protocol (some messages may be reserved for a single role, while other may used by some if not all roles).
+ * by the state and the transition rules
+
+Like parties, roles are normally known at the start of the protocol but this is not a requirement.
+
+#### Participants
+
+The __participants__ in a protocol are the agents that send and/or receive
+[plaintext application-level messages](../../concepts/../features/0044-didcomm-file-and-mime-types/README.md)
+that embody the protocol's interaction.
+
+#### Parties
+
+The __parties__ to a protocol are the entities directly responsible for achieving the protocol's goals.
+When a protocol is high-level, parties are typically people or organizations; as protocols become lower-level,
+parties may be specific agents delegated with the detail work.
+
+Often, parties are known at the start of a protocol; however, that is not a requirement. Some protocols might commence
+with some parties not yet known or assigned.
+
+For many protocols, there are only two parties, and they are in a pairwise relationship. Other protocols
+are more complex. Introductions involves three; an auction protocol may involve many.
+
+#### Controllers
+
+The __controllers__ in a protocol are entities that make decisions. They may or may not be direct parties. Controller supplies the business logic or rules that drive each specific instance of a protocol. They provide the personality of the agent suitable for the use case it implements.
+
+With protocols, that means the controller decides when to initiate a protocol (often
+based on some external event), and how to respond to an
+event that occurred related to the instance of a protocol&mdash;the receipt of a message
+or perhaps a timeout waiting on a reply to a sent message.
+
+### Instructions for Protocol RFCs
+
+A protocol RFC conforms to general RFC patterns, but includes some specific substructure.
+
+[![template sections](template-sections.png)](
+https://docs.google.com/presentation/d/15UAkh_2WfDk7wlto7pSL7YU9NJr_XVMgGAOeNIRbzK8/edit#slide=id.g5609c67f13_0_113)
+
+Please see the [special protocol RFC template](../../0000-template-protocol.md) for details.
 
 ## Drawbacks
 
@@ -217,8 +483,8 @@ of a protocol author than the familiar world of RESTful [Swagger/OpenAPI](
 https://swagger.io/docs/specification/about/).
 
 The extra complexity is justified by the greater demands that agent-to-agent
-communications place on the protocol definition. (See notes in [Prior Art](#prior-art)
-section for details.)
+communications place on the protocol definition. See notes in [Prior Art](#swagger--openapi)
+section for details.
 
 ## Rationale and alternatives
 
@@ -229,13 +495,13 @@ interop.
 
 ## Prior art
 
-#### BPMN
+### BPMN
 
 [BPMN](https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation) (Business Process Model and Notation) is a
 graphical language for modeling flows of all types (plus things less like
 our protocols as well). BPMN is a mature standard sponsored by [OMG](
 https://en.wikipedia.org/wiki/Object_Management_Group)(Object Management Group). It has a nice
-[tool ecosystem](https://camunda.com/bpmn/tool/). It also has an XML file
+tool ecosystem (such as [this](https://camunda.com/bpmn/tool/)). It also has an XML file
 format, so the visual diagrams have a two-way transformation to and from
 formal written language. And it has a code generation mode, where BPMN
 can be used to drive executable behavior if diagrams are sufficiently
@@ -255,13 +521,13 @@ company.
 BPMN 2.0 introduced the notion of a [choreography](
 https://www.visual-paradigm.com/guide/bpmn/bpmn-orchestration-vs-choreography-vs-collaboration/#bpmn-choreography),
 which is much closer to the concept of an A2A protocol, and which has quite
-an elegent and intuitive visual representation. However, even a BPMN
+an elegant and intuitive visual representation. However, even a BPMN
 choreography doesn't have a way to discuss interactions with decorators,
 adoption of generic messages, and other A2A-specific concerns. Thus, we may
 lean on BPMN for some diagramming tasks, but it is not a substitute for the
 RFC definition procedure described here.
 
-#### WSDL
+### WSDL
 
 [WSDL](https://www.w3.org/TR/2001/NOTE-wsdl-20010315) (Web Services Description Language) is a web-centric
 evolution of earlier, RPC-style interface definition languages like
@@ -274,10 +540,10 @@ present, as being too heavy, [too fragile](
 https://codecraft.co/2008/07/29/decoupling-interfaces-as-versions-evolve-part-1/),
 or poorly supported by current tools.
 
-#### Swagger / OpenAPI
+### Swagger / OpenAPI
 
 [Swagger / OpenAPI](https://swagger.io/docs/specification/about/) overlaps
- about 60% with the concerns of protocol definition in agent-to-agent
+with some of the concerns of protocol definition in agent-to-agent
  interactions. We like the tools and the convenience of the paradigm
  offered by OpenAPI, but where these two do not overlap, we have impedance.
 
@@ -297,7 +563,7 @@ or poorly supported by current tools.
  Agent-to-agent protocols are nestable, while
  RESTful web services don't provide any special support for that construct.
 
-#### Other
+### Other
 
 * [Pdef (Protocol Definition Language)](https://github.com/pdef/pdef): An alternative to Swagger.
 * [JSON RPC](https://www.jsonrpc.org/specification): Defines how invocation of
@@ -309,11 +575,10 @@ or poorly supported by current tools.
  than OpenAPI. However, it is C++ only, and intended for use within browser
  plugins.
 
-# Unresolved questions
+## Unresolved questions
 
 - Should we write a Swagger translator?
 - If not swagger, what formal definition format should we use in the future?
-
 
 ## Implementations
 
