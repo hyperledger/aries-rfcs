@@ -67,7 +67,7 @@ We also need to show how a protocol is defined, so the analog to defining a Swag
 
 ### What is an Aries protocol?
 
-An Aries __protocol__ is a recipe for a stateful interaction. Protocols are all
+A __protocol__ is a recipe for a stateful interaction. Protocols are all
 around us, and are so ordinary that we take them for granted. Each of the
 following interactions is stateful, and has conventions that constitute
 a sort of "recipe":
@@ -124,7 +124,7 @@ decisions and react to them.
 
 ### Types of Protocols
 
-The simplest protocol style in Aries is __notification__. This style 
+The simplest protocol style is __notification__. This style 
 involves two parties, but it is one-way: the `notifier` emits a message,
 and the protocol ends when the `notified` receives it. The [basic message protocol](../../features/0095-basic-message/README.md) uses this style.
 
@@ -134,7 +134,7 @@ Slightly more complex is the __request-response__ protocol style.
 This style involve two parties, with the `requester` making the first move,
 and the `responder` completing the interaction. The [Discover Features Protocol](
 ../../features/0031-discover-features/README.md) uses this style. Note that
-with Aries protocols (and unlike an HTTP request), the request-response messages are
+with protocols as Aries models them (and unlike an HTTP request), the request-response messages are
 asynchronous.
 
 ![request-response](request-response.png)
@@ -165,9 +165,10 @@ and the [DIDComm explainer&mdash;RFC 0005](../0005-didcomm/README.md).
 
 Protocols are *composable*--meaning that you can build complex ones from simple ones.
 The protocol for asking someone to repeat their last sentence can be part of
-the protocol for ordering food at a restaurant. The protocol for
-proving the claims from some credentials (using the [present proof](../../features/0037-present-proof/README.md) protocol)
-can be part of an instance of the [issue credential](../../features/0036-issue-credential/README.md) protocol.
+the protocol for ordering food at a restaurant. It's common to ask a potential
+driver's license holder to prove their street address before issuing the license.
+In protocol terms, this is nicely modeled as the [present proof](../../features/0037-present-proof/README.md)
+being invoked in the middle of an [issue credential](../../features/0036-issue-credential/README.md) protocol.
 
 When we run one protocol _inside_ another, we call the inner protocol a
 __subprotocol__, and the outer protocol a __superprotocol__. A given protocol
@@ -179,7 +180,8 @@ a superprotocol from another (as when protocols are nested at least 3 deep).
 
 Commonly, protocols wait for subprotocols to complete, and then they continue.
 A good example of this is mentioned above&mdash;starting an issue credential flow,
-but requiring the presentation of a proof before completing the process.
+but requiring the potential issuer and/or the potential holder to prove something
+to one another before completing the process.
 
 In other cases, a protocol B is not "contained" inside protocol A.
 Rather, A triggers B, then continues in parallel,
@@ -247,8 +249,15 @@ A __message type URI__ (MTURI) identifies message types unambiguously.
 Standardizing its format is important because it is parsed by agents that
 will map messages to handlers--basically, code will look at this string and
 say, "Do I have something that can handle this message type inside protocol
-*X* version *Y*?" When that analysis happens, it must do more than compare
-the string for exact equality; it may need to check for semver compatibility.
+*X* version *Y*?" 
+
+When this analysis happens, strings should be compared for byte-wise equality
+in all segments except version. This means that case, unicode normalization,
+and punctuation differences all matter. It is thus best practice to avoid
+protocol and message names that differ only in subtle, easy-to-mistake ways.
+
+Comparison of the version segment of an MTURI or PIURI should follow semver
+rules and is discussed in the [semver section](#semver-rules-for-protocols) of this document.
 
 The URI MUST be composed as follows:
 
@@ -332,7 +341,7 @@ The ["ingredients"](#ingredients) of a protocol combine to form a
 [public API in the semver sense](https://semver.org/#spec-item-1). Core Aries protocols
 specify only major and minor elements in a version; the patch component is not used.
 
-The major and minor versions of protocols match semvar semantics:
+The major and minor versions of protocols match semver semantics:
 
 - Clarification updates that do not change the "public API" of the protocol can be made
 with community support _without_ changing the minor version of the protocol.
@@ -352,15 +361,14 @@ Within a given major version of a protocol, an agent should:
 
 This leads to the following received message handling rules:
 
-- message types received with a minor versions below the minimum may be answered with a `report-problem` with code `version-not-supported`
+- message types received with a minor versions below the minimum may be answered with a `report-problem` message with code `version-not-supported`
 - message types received with a minor version at or higher than the minimum supported and less than the current minor version are processed, ideally with a response using the same minor version of the received message
-  - The recipient may want to send a warning `report-problem` with code `version-with-degraded-features`
+  - The recipient may want to send a warning `report-problem` message with code `version-with-degraded-features`
 - message types received with a minor version higher than the current minor version are processed with any unrecognized fields ignored
-  - The recipient may want to send a warning `report-problem` with code `fields-ignored-due-to-version-mismatch` 
+  - The recipient may want to send a warning `report-problem` message with code `fields-ignored-due-to-version-mismatch` 
 
-As documented in the semvar documentation, these requirements may not apply when
-major version 0 is used. Specific rules associated each v0 protocol are left to
-the discretion of the community.
+As documented in the semver documentation, these requirements are not applied when
+major version 0 is used. In that case, minor version increments are considered breaking.
 
 Agents may support multiple major versions and select which major version to
 use when initiating an instance of the protocol.
@@ -372,7 +380,7 @@ instance of a protocol. Agent receiving a discover features request may respond 
 preferred protocols they support, as described in that protocol.
 
 An agent should reject messages from protocols or unsupported protocol major versions with
-a `report-problem` with code `version-not-supported`. Agents that receive such a
+a `report-problem` message with code `version-not-supported`. Agents that receive such a
 `report-problem` message may use the [discover features protocol](../../features/0031-discover-features/README.md)
 to resolve the mismatch.
 
@@ -389,8 +397,8 @@ concept of state machines, and we encourage developers who implement
 protocols to build them that way.
 
 Among other benefits, this helps with error handling: when one agent
-sends a [`report-problem`](../../features/0035-report-problem/README.md)
-message to another, the message can make it crystal clear which state it
+sends a [`report-problem` message](../../features/0035-report-problem/README.md)
+to another, the message can make it crystal clear which state it
 has fallen back to as a result of the error.
 
 Many developers will have encountered a formal of definition of state machines as
@@ -428,7 +436,7 @@ to move the interaction forward.)
 
 #### Roles
 
-The __roles__ in a protocol are the perspectives (responsibilities, privileges) that parties take i an
+The __roles__ in a protocol are the perspectives (responsibilities, privileges) that parties take in an
 interaction.
 
 This perspective is manifested in three general ways:
@@ -459,7 +467,7 @@ are more complex. Introductions involves three; an auction protocol may involve 
 
 #### Controllers
 
-The __controllers__ in a protocol are entities that make decisions. They may or may not be direct parties. Controller supplies the business logic or rules that drive each specific instance of a protocol. They provide the personality of the agent suitable for the use case it implements.
+The __controllers__ in a protocol are entities that make decisions. They may or may not be direct parties. Controllers provide the business logic or rules that drive each specific instance of a protocol. They provide the personality of the agent suitable for the use case it implements.
 
 With protocols, that means the controller decides when to initiate a protocol (often
 based on some external event), and how to respond to an
