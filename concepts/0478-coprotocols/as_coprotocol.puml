@@ -1,0 +1,27 @@
+@startuml
+skinparam EntityBorderColor #505050
+
+title Simplified Coprotocol Interface
+autonumber 5
+hide footbox
+entity "Caller" as caller #red
+actor "Payee" as payee
+caller --> payee: invoke(amount, currency, bill_of_sale)\npayee state => requested
+alt continue or not
+    autonumber 6.1
+    payee --> payee: state =>\nwaiting for commit
+    payee --> caller: preauth(code)
+    alt commit or not
+        autonumber 6.3.1
+        caller --> payee: proceed(continue = true)\npayee state => finalizing
+        payee --> caller: return(confirmation_code)
+    else
+        autonumber 6.3.0
+        caller --x payee: proceed(continue = false)
+        end alt
+else
+    autonumber 6.0
+    caller --x payee: proceed(continue = false)
+end alt
+
+@enduml

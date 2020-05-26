@@ -1,0 +1,30 @@
+@startuml
+skinparam EntityBorderColor #505050
+
+title Imagined Payment Protocol: Gateway + Smart Contract
+autonumber
+hide footbox
+actor "Payee" as payee
+actor "Payer" as payer
+entity "Gateway" as gate #green
+entity "Blockchain" as chain #blue
+payee -> payer: Payment Request\n(payee state=requested\npayer state=requested)
+alt reject or cooperate
+  autonumber 2.0
+  payer -x payee: Reject\n(payer state=rejected\npayee state=abandoned)
+else
+  autonumber 2.1
+  payer --> gate: Payment Config\n(payer state=configured)
+  gate --> chain: give desired txn info\nto smart contract
+  chain --> chain: validate
+  chain --> gate: handle to pending txn
+  gate --> payer: handle to pending txn\n(payer state=pending)
+  payer --> gate: commit\n(payer state=committed)
+  gate --> chain: commit
+  chain -> chain: transfer via\nsmart contract
+  chain -> gate: txn hash
+  gate -> payer: txn hash\n(payer state=done)
+  payer -> payee: txn hash\n(payee state=done)
+end alt
+
+@enduml
