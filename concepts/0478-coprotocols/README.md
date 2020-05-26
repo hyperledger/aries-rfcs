@@ -74,13 +74,13 @@ Unfortunately, this approach looks less attractive after study:
 
 What we want, instead, is a formal declaration of something a bit like a coprotocol's "function signature." It needs to describe the inputs that launch the protocol, and the outputs and/or errors emitted as it finishes. It should hide implementation details and remain stable across irrelevant internal changes. 
 
-We need to bind compatible coprotocols to one another using the metadata in these declarations. And since coprotocols will have to satisfy a remote party, not just a local one, our binding needs to work well dynamically, and late, and with optional, possibly overlapping plugins providing implementations. This suggests that our declarations must be rich and flexible about binding criteria &mdash; it must be possible to match on something more than just a coprotocol name and/or arg count+type.
+We need to bind compatible coprotocols to one another using the metadata in these declarations. And since coprotocol discovery may have to satisfy a remote party, not just a local one, our binding needs to work well dynamically, and late, and with optional, possibly overlapping plugins providing implementations. This suggests that our declarations must be rich and flexible about binding criteria &mdash; it must be possible to match on something more than just a coprotocol name and/or arg count+type.
 
 An interesting divergence from the function signature parallel is that we may have to describe inputs and outputs (and errors) at multiple __interaction points__, not just the coprotocol's initial invocation. 
 
 Another subtlety is that protocol interfaces need to be partitioned by role; the experience of a payer and a payee with respect to a payment protocol may be quite different. The interface offered by a coprotocol must vary by which role the invoked coprotocol instance embodies.
 
-Given all these considerations, we choose to describe coprotocol interfaces using a _set_ of function signatures, not just _one_. However, we use an function-like notation to make them as terse and intuitive as possible for developers.
+Given all these considerations, we choose to describe coprotocol interfaces using a _set_ of function-like signatures, not just _one_. We use a function-like notation to make them as terse and intuitive as possible for developers.
 
 #### Example
 
@@ -106,11 +106,11 @@ In plain English, the declared coprotocol semantics are:
 
 ##### Simplified description only
 
-It's important to understand that this interface is NOT the same as the protocol's direct interface (the message family and state machine that a protocol impl must provide to implement the protocol as documented). It is, instead, a simplified encapuslation -- just like a function signature is a simplified encapsulation of a coroutine. A function impl can rename its args for internal use. It can have steps that the caller doesn't know about. The same is true for protocols: their role names, state names, message names, and field names in messages don't need to be exposed directly in a coprotocol interface; they just need a mapping that the protocol understands internally. The specific payment protocol implementation might look like this:
+It's important to understand that this interface is NOT the same as the protocol's direct interface (the message family and state machine that a protocol impl must provide to implement the protocol as documented). It is, instead, a simplified encapuslation -- just like a function signature is a simplified encapsulation of a coroutine. A function impl can rename its args for internal use. It can have steps that the caller doesn't know about. The same is true for protocols: their role names, state names, message types and versions, and field names in messages don't need to be exposed directly in a coprotocol interface; they just need a mapping that the protocol understands internally. The specific payment protocol implementation might look like this (don't worry about details; the point is just that some might exist):
 
 ![a specific payment protocol that uses a gateway + smart contracts](payment_protocol.png)
 
-But when we describe it as a coprotocol, we omit most of the details, and we change some verbiage. The existence of the `payee`, `gateway` and `blockchain` roles is suppressed, as is the role of smart contracts. The concept of `handle to pending txn` is mapped to the coprotocol's `preauth` construct, and `txn hash` is mapped to the coprotocol's `confirmation_code`. As a coprotocol, the payee can interact according to a far simpler understanding, where the caller asks the payee to engage in a payment protocol, expose some simple hooks, and notify on completion:
+When we describe this as a coprotocol, we omit most of its details, and we change some verbiage. The existence of the `payee`, `gateway` and `blockchain` roles is suppressed (though we now have an implicit new role -- the __caller__ of the coprotocol that gives what the protocol gets, and gets what the protocol gives). Smart contracts disappear.The concept of `handle to pending txn` is mapped to the coprotocol's `preauth` construct, and `txn hash` is mapped to the coprotocol's `confirmation_code`. As a coprotocol, the payee can interact according to a far simpler understanding, where the caller asks the payee to engage in a payment protocol, expose some simple hooks, and notify on completion:
 
 ![when viewed as a coprotocol](as_coprotocol.png)
 
