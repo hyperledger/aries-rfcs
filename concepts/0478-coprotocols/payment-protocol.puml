@@ -10,11 +10,8 @@ entity "Gateway" as gate #green
 entity "Blockchain" as chain #blue
 payee -> payer: Payment Request\n(payee state=requested\npayer state=requested)
 alt reject or cooperate
-  autonumber 2.0
-  payer -x payee: Reject\n(payer state=rejected\npayee state=abandoned)
-else
   autonumber 2.1
-  payer --> gate: Payment Config\n(payer state=configured)
+  payer -> gate: Payment Config\n(payer state=configured)
   gate --> chain: give desired txn info\nto smart contract
   chain --> chain: validate
   chain --> gate: handle to pending txn
@@ -25,6 +22,9 @@ else
   chain -> gate: txn hash
   gate -> payer: txn hash\n(payer state=done)
   payer -> payee: txn hash\n(payee state=done)
+else
+  autonumber 2.0
+  payer [#gray]-x payee: Reject\n(payer state=rejected\npayee state=abandoned)
 end alt
 
 @enduml

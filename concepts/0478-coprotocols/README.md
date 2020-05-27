@@ -2,9 +2,9 @@
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-05-19
-- Status Note: Socialized on Aries community call in Feb 2020, using [these slides](https://docs.google.com/presentation/d/17hk6QqLW5M9E4TBPZwXIUBu9eEinMNXReceyZTF4LpA/edit). Discussed again in May 2020. Source files for graphics are either checked in or are published at https://j.mp/2XgyjH3.
+- Status Note: [Aries RFC 0482](../../features/0482-coprotocol-protocol/README.md), which documents a specific protocol to facilitate protocol interactions. Socialized on Aries community call in Feb 2020, using [these slides](https://docs.google.com/presentation/d/17hk6QqLW5M9E4TBPZwXIUBu9eEinMNXReceyZTF4LpA/edit). Discussed again in May 2020. Source files for graphics are either checked in or are published at https://j.mp/2XgyjH3.
 - Start Date: 2020-02-03
-- Tags: feature, protocol
+- Tags: concept, protocol
 
 [![icon](icon.png)](https://j.mp/2XgyjH3)
 
@@ -88,7 +88,7 @@ Suppose we are writing a credential issuance protocol, and we want to use coprot
 
 We do a little research and discover that many DIDComm-based payment protocols exist. Three of them advertise support for the same coprotocol interface:
 
-```yaml
+```text
 goal: make-payment
 version: 1.0
 payee:
@@ -110,23 +110,30 @@ It's important to understand that this interface is NOT the same as the protocol
 
 ![a specific payment protocol that uses a gateway + smart contracts](payment_protocol.png)
 
-When we describe this as a coprotocol, we omit most of its details, and we change some verbiage. The existence of the `payee`, `gateway` and `blockchain` roles is suppressed (though we now have an implicit new role -- the __caller__ of the coprotocol that gives what the protocol gets, and gets what the protocol gives). Smart contracts disappear.The concept of `handle to pending txn` is mapped to the coprotocol's `preauth` construct, and `txn hash` is mapped to the coprotocol's `confirmation_code`. As a coprotocol, the payee can interact according to a far simpler understanding, where the caller asks the payee to engage in a payment protocol, expose some simple hooks, and notify on completion:
+When we describe this as a coprotocol, we omit most of its details, and we change some verbiage. The existence of the `payee`, `gateway` and `blockchain` roles is suppressed (though we now have an implicit new role -- the __caller__ of the coprotocol that gives what the protocol gets, and gets what the protocol gives). Smart contracts disappear. The concept of `handle to pending txn` is mapped to the coprotocol's `preauth` construct, and `txn hash` is mapped to the coprotocol's `confirmation_code`. As a coprotocol, the payee can interact according to a far simpler understanding, where the caller asks the payee to engage in a payment protocol, expose some simple hooks, and notify on completion:
 
 ![when viewed as a coprotocol](as_coprotocol.png)
 
+##### Calling Convention
 
+More details are needed to understand exactly how the caller and the coprotocol communicate. There are two sources of such details:
 
+1. Proprietary methods
+2. Standard Aries-style DIDComm protocol
+
+Proprietary methods allow aggressive optimization. They may be appropriate when it's known that the caller and the coprotocol will share the same process space on a single device, and the code for both will come from a single codebase. In such cases, there is no need to use DIDComm to communicate.
+
+Answer 2 may be more chatty, but is better when the coprotocol might be invoked remotely (e.g., Acme's server A is in the middle of issuance and wants to invoke payment to run on server B), or where the codebases for each party to the interaction need some independence.
+
+The expectation is that co-protocols share a compatible trust domain; that is, coprotocol interactions occur *within* the scope of one identity rather than across identity boundaries. Thus, interoperability is not a strong requirement. Nonetheless, approaching this question as a standard protocol problem leads to a clean, loosely couple architecture with little incremental cost in an agent. Therefore, a protocol for coprotocol coordination has been developed. This is the subject of sister document [Aries RFC 0482: Coprotocol Protocol](../../features/0482-coprotocol-protocol/README.md).
 
 ## Reference
 
-Provide guidance for implementers, procedures to inform testing,
-interface definitions, formal function prototypes, error codes,
-diagrams, and other technical details that might be looked up.
-Strive to guarantee that:
+More about optional fields and syntax in a coprotocol declaration.
 
-- Interactions with other features are clear.
-- Implementation trajectory is well defined.
-- Corner cases are dissected by example.
+How to add a coprotocol decl to a protocol.
+
+Where to declare a goal.
 
 ## Drawbacks
 

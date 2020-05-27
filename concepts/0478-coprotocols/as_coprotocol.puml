@@ -17,11 +17,11 @@ alt continue or not
         payee --> caller: return(confirmation_code)
     else
         autonumber 6.3.0
-        caller --x payee: proceed(continue = false)
+        caller [#gray]--x payee: proceed(continue = false)
         end alt
 else
     autonumber 6.0
-    caller --x payee: proceed(continue = false)
+    caller [#gray]--x payee: proceed(continue = false)
 end alt
 
 @enduml
