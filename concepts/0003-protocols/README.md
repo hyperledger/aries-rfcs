@@ -22,7 +22,7 @@ and shows how they should be designed and documented.
   - [Summary](#summary)
   - [Motivation](#motivation)
   - [Tutorial](#tutorial)
-    - [What is an Aries protocol?](#what-is-an-aries-protocol)
+    - [What is a protocol?](#what-is-a-protocol)
     - [Relationship to APIs](#relationship-to-apis)
     - [Decentralized](#decentralized)
     - [Types of Protocols](#types-of-protocols)
@@ -38,6 +38,9 @@ and shows how they should be designed and documented.
       - [MTURI](#mturi)
       - [PIURI](#piuri)
     - [Semver Rules for Protocols](#semver-rules-for-protocols)
+    - [Semver Examples](#semver-examples)
+      - [Initiator](#initiator)
+      - [Recipient Rules](#recipient-rules)
     - [State Details and State Machines](#state-details-and-state-machines)
       - [State machines](#state-machines)
       - [Processing Points](#processing-points)
@@ -65,7 +68,7 @@ We also need to show how a protocol is defined, so the analog to defining a Swag
 
 ## Tutorial
 
-### What is an Aries protocol?
+### What is a protocol?
 
 A __protocol__ is a recipe for a stateful interaction. Protocols are all
 around us, and are so ordinary that we take them for granted. Each of the
@@ -321,17 +324,21 @@ Its loose matcher regex is:
 
 The following are examples of valid MTURIs and PIURIs:
 
-* MTURI `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.1/credential-offer`
-  * This is the soon-to-be-deprecated URI for an Aries core protocol message type
-* MTURI: `http://didcomm/issue-credential/1.1/credential-offer`
-  * This is a future URI for an Aries core protocol message type (following a [community transition](../../features/0348-transition-msg-type-to-https/README.md))
-* PIURI `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.1`
-* PURI: `http://didcomm/issue-credential/1.1`
-
-As can be seen from the examples above, the `doc-uri` portion of the URIs enable protocol namespacing,
-allowing anyone to publish and use their own protocols. The ones above use the namespaces claimed for
-core Aries protocols. More on namespacing and the use of these URIs to find protocols specifications
-can be found in the [message types RFC](../0020-message-types/README.md).
+* `http://example.com/protocols?which=lets_do_lunch/1.0/` (PIURI with fully automated lookup of protocol docs)
+* `http://example.com/message_types?which=lets_do_lunch/1.0/proposal` (MTURI)
+* `https://github.com/hyperledger/aries-rfcs/tree/18c4f82:trust_ping/1.0/ping`
+   (MTURI). Note that this URI returns a 404 error if followed directly--but
+   per rules described above, the developer should browse to the doc root
+   ([https://github.com/hyperledger/aries-rfcs/tree/18c4f82](
+   https://github.com/hyperledger/aries-rfcs/tree/18c4f82
+   )) and look for documentation on the `trust_ping/1.0` protocol.
+* `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/trust_ping/1.0/ping` (MTURI) This
+   uses a DID reference to look up an endpoint named `spec` that serves
+   information about protocols. (The exact syntax of DID references--URIs
+   where the DID functions like a domain name, and additional info is
+   fetched from a DID Doc in much the same way IP address and hostname
+   definitions are fetched from a DNS record--is still being finalized.
+   See the latest [DID Spec](https://w3c-ccg.github.io/did-spec/) for details.)
 
 ### Semver Rules for Protocols
 
@@ -339,7 +346,8 @@ can be found in the [message types RFC](../0020-message-types/README.md).
 in the `semver` portion of its [identifying URI](#message-type-and-protocol-identifier-uris).
 The ["ingredients"](#ingredients) of a protocol combine to form a
 [public API in the semver sense](https://semver.org/#spec-item-1). Core Aries protocols
-specify only major and minor elements in a version; the patch component is not used.
+specify only major and minor elements in a version; the patch component is not used. Non-core
+protocols may choose to use the patch element.
 
 The major and minor versions of protocols match semver semantics:
 
@@ -356,8 +364,8 @@ message family](https://semver.org/#spec-item-8).
 
 Within a given major version of a protocol, an agent should:
 
-- specify a minimum minor version supported, defaulting to "0"
-- specify a current minor version that is fully supported and used by default
+- respond to a minimum supported minor version, defaulting to "0"
+- respond with or initiate a protocol instance the current fully supported minor version
 
 This leads to the following received message handling rules:
 
@@ -373,16 +381,68 @@ major version 0 is used. In that case, minor version increments are considered b
 Agents may support multiple major versions and select which major version to
 use when initiating an instance of the protocol.
 
-The [discover features](../../features/0031-discover-features/README.md) protocol
-can be used by one agent to query the versions of protocols supported by another agent,
-informing the selection of which version of a protocol to use in initiating an
-instance of a protocol. Agent receiving a discover features request may respond with a list of
-preferred protocols they support, as described in that protocol.
-
 An agent should reject messages from protocols or unsupported protocol major versions with
 a `report-problem` message with code `version-not-supported`. Agents that receive such a
 `report-problem` message may use the [discover features protocol](../../features/0031-discover-features/README.md)
 to resolve the mismatch.
+
+### Semver Examples
+
+#### Initiator
+
+Unless Alice's agent (the initiator of a protocol) knows from prior history
+that it should do something different, it should begin a protocol using the
+highest version number that it supports. For example, if A.1
+supports versions 2.0 through 2.2 of protocol X, it should use 2.2 as the
+version in the message type of its first message.
+
+#### Recipient Rules
+
+Agents for Bob (the recipient) should reject messages from protocols with major
+versions different from those they support. For major version 0, they should also
+reject protocols with minor versions they don't support, since semver stipulates
+that [features are not stable before 1.0](https://semver.org/#spec-item-4). For
+example, if B.1 supports only versions 2.0 and 2.1 of protocol X, it should reject
+any messages from version 3 or version 1 or 0. In most cases, rejecting a message
+means sending a `problem-report` that the message is unsupported. The `code` field
+in such messages should be `version-not-supported`. Agents that receive such a
+`problem-report` can then use the [Discover Features Protocol](
+../../features/0031-discover-features/README.md) to resolve version problems.
+
+Recipient agents should accept messages that differ from their own supported version
+of a protocol only in the patch, prerelease, and/or build fields, whether these
+differences make the message earlier or later than the version the recipient prefers.
+These messages will be robustly compatible.
+
+For major version >= 1, recipients should also accept messages that differ only in that
+the message's minor version is earlier than their own preference. In such a case, the
+recipient should degrade gracefully to use the earlier version of the protocol. If the
+earlier version lacks important features, the recipient may optionally choose to send,
+in addition to a response, a `problem-report` with code `version-with-degraded-features`.
+
+If a recipient supports protocol X version 1.0, it should tentatively
+accept messages with later minor versions (e.g., 1.2). Message types that
+differ in only in minor version are guaranteed to be compatible *for the
+feature set of the earlier version*. That is, a 1.0-capable agent can support
+1.0 features using a 1.2 message, though of course it will lose any features
+that 1.2 added. Thus, accepting such a message could have two possible outcomes:
+
+1. The message at version 1.2 might look and behave exactly like it did at version
+1.0, in which case the message will process without any trouble.
+
+2. The message might contain some fields that are unrecognized and need to be ignored.
+
+In case 2, it is best practice for the recipient to send a `problem-report` that
+is a *warning*, not an *error*, announcing that some fields could not be processed
+(code = `fields-ignored-due-to-version-mismatch`). Such a message is *in addition
+to* any response that the protocol demands of the recipient.
+
+If the recipient of a protocol's initial message generates a response, the response
+should use the latest major.minor protocol version that both parties support and
+know about. Generally, all messages after the first use only major.minor
+
+[![version negotiation matrix](version-negotiation-matrix.png)](
+https://docs.google.com/spreadsheets/d/1W5KYOqCCqmTeU4Z7XZQH9_6_0TeP5Vf5TtsOZmioyB0/edit#gid=0)
 
 ### State Details and State Machines
 
@@ -436,7 +496,7 @@ to move the interaction forward.)
 
 #### Roles
 
-The __roles__ in a protocol are the perspectives (responsibilities, privileges) that parties take in an
+The __roles__ in a protocol are the perspectives (responsibilities, privileges) that parties take i an
 interaction.
 
 This perspective is manifested in three general ways:
@@ -447,32 +507,73 @@ This perspective is manifested in three general ways:
 
 Like parties, roles are normally known at the start of the protocol but this is not a requirement.
 
+In an auction protocol, there are only two roles&mdash;_auctioneer_ and _bidder_&mdash;even though there may be many parties involved.
+
 #### Participants
 
 The __participants__ in a protocol are the agents that send and/or receive
 [plaintext application-level messages](../../concepts/../features/0044-didcomm-file-and-mime-types/README.md)
-that embody the protocol's interaction.
+that embody the protocol's interaction. Alice, Bob, and
+Carol may each have a cloud agent, a laptop, and a phone; if they engage in an
+introduction protocol using phones, then the agents on their phones are the participants.
+If the phones talk directly over Bluetooth, this is particularly clear--but even if the
+phones leverage push notifications and HTTP such that cloud agents help with routing,
+only the phone agents are participants, because only they maintain state for the
+interaction underway. (The cloud agents would be __facilitators__, and the laptops would
+be __bystanders__). When a protocol is complete, the participant agents know about the
+outcome; they may need to synchronize or replicate their state before other agents of the
+parties are aware.
 
 #### Parties
 
 The __parties__ to a protocol are the entities directly responsible for achieving the protocol's goals.
 When a protocol is high-level, parties are typically people or organizations; as protocols become lower-level,
-parties may be specific agents delegated with the detail work.
+parties may be specific agents tasked with detail work through delegation.
+
+Imagine a situation where Alice wants a vacation. She engages with a travel agent named Bob. Together, they
+begin an "arrange a vacation" protocol. Alice is responsible for expressing her parameters and proving her willingness to
+pay; Bob is responsible for running a bunch of subprotocols to work out the details. Alice and Bob--not software
+agents they use--are parties to this high-level protocol, since they share responsibility for its goals.
+
+As soon as Alice has provided enough direction and hangs up the phone, Bob begins a sub-protocol with a hotel to book
+a room for Alice. This sub-protocol has related but different goals--it is about booking a particular hotel room, not
+about the vacation as a whole. We can see the difference when we consider that Bob could abandon the booking and choose
+a different hotel entirely, without affecting the overarching "arrange a vacation" protocol.
+
+With the change in goal, the parties have now changed, too. Bob and a hotel concierge are the ones responsible
+for making the "book a hotel room" protocol progress. Alice is an approver and indirect stakeholder, but she is
+not doing the work. (In [RACI terms](https://en.wikipedia.org/wiki/Responsibility_assignment_matrix),
+Alice is an "accountable" or "approving" entity, but only Bob and the concierge are "responsible" parties.)
+
+Now, as part of the hotel reservation, Bob tells the concierge that the guest would like access to a waverunner
+to play in the ocean on day 2. The concierge engages in a sub-sub-protocol to reserve the waverunner. The
+goal of this sub-sub-protocol is to reserve the equipment, not to book a hotel or arrange a vacation. The parties to this
+sub-sub-protocol are the concierge and the person or automated system that manages waverunners.
 
 Often, parties are known at the start of a protocol; however, that is not a requirement. Some protocols might commence
 with some parties not yet known or assigned.
 
 For many protocols, there are only two parties, and they are in a pairwise relationship. Other protocols
-are more complex. Introductions involves three; an auction protocol may involve many.
+are more complex. Introductions involves three; an auction may involve many.
+
+Normally, the parties that are involved in a protocol also participate in the interaction but this is not always the
+case. Consider a gossip protocol, two parties may be talking about a third party. In this case, the third party would
+not even know that the protocol was happening and would definitely not participate.
 
 #### Controllers
 
-The __controllers__ in a protocol are entities that make decisions. They may or may not be direct parties. Controllers provide the business logic or rules that drive each specific instance of a protocol. They provide the personality of the agent suitable for the use case it implements.
+The __controllers__ in a protocol are entities that make decisions. They may or may not be direct parties.
 
-With protocols, that means the controller decides when to initiate a protocol (often
-based on some external event), and how to respond to an
-event that occurred related to the instance of a protocol&mdash;the receipt of a message
-or perhaps a timeout waiting on a reply to a sent message.
+Imagine a remote chess game between Bob and Carol, conducted with software agents. The chess protocol isn't
+technically about _how to select a wise chess move_; it's about _communicating the moves_ so parties achieve
+the shared goal of running a game to completion. Yet choices about moves are clearly made as the protocol
+unfolds. These choices are made by controllers--Bob and Carol--while the agents responsible for the work of
+moving the game forward wait with the protocol suspended.
+
+In this case, Bob and Carol could be analyzed as parties to the protocol, as well as controllers. But in other
+cases, the concepts are distinct. For example, in a protocol to issue credentials, the issuing institution
+might use an AI and/or business automation as a controller.
+
 
 ### Instructions for Protocol RFCs
 

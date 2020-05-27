@@ -74,14 +74,18 @@ Its loose matcher regex is:
 
 The following are examples of valid MTURIs and PIURIs:
 
-* MTURI `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.1/credential-offer`
-  * This is the soon-to-be-deprecated URI for an Aries core protocol message type
-* MTURI: `http://didcomm/issue-credential/1.1/credential-offer`
-  * This is a future URI for an Aries core protocol message type (following a [community transition](../../features/0348-transition-msg-type-to-https/README.md))
-* PIURI `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.1`
-* PURI: `http://didcomm/issue-credential/1.1`
-
-As can be seen from the examples above, the `doc-uri` portion of the URIs enable protocol namespacing,
-allowing anyone to publish and use their own protocols. The ones above use the namespaces claimed for
-core Aries protocols. More on namespacing and the use of these URIs to find protocols specifications
-can be found in the [message types RFC](../0020-message-types/README.md).
+* `http://example.com/protocols?which=lets_do_lunch/1.0/` (PIURI with fully automated lookup of protocol docs)
+* `http://example.com/message_types?which=lets_do_lunch/1.0/proposal` (MTURI)
+* `https://github.com/hyperledger/aries-rfcs/tree/18c4f82:trust_ping/1.0/ping`
+   (MTURI). Note that this URI returns a 404 error if followed directly--but
+   per rules described above, the developer should browse to the doc root
+   ([https://github.com/hyperledger/aries-rfcs/tree/18c4f82](
+   https://github.com/hyperledger/aries-rfcs/tree/18c4f82
+   )) and look for documentation on the `trust_ping/1.0` protocol.
+* `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/trust_ping/1.0/ping` (MTURI) This
+   uses a DID reference to look up an endpoint named `spec` that serves
+   information about protocols. (The exact syntax of DID references--URIs
+   where the DID functions like a domain name, and additional info is
+   fetched from a DID Doc in much the same way IP address and hostname
+   definitions are fetched from a DNS record--is still being finalized.
+   See the latest [DID Spec](https://w3c-ccg.github.io/did-spec/) for details.)
