@@ -274,8 +274,10 @@ Holders often need to verify that a credential was requested by an authoritative
 
 1. **DID Documents.** The governance authority can publish the list of their DIDs in a DID document on one or more public utilities of its choice.
 2. **Member Directories.** A governance authority can publish a "whitelist" of DIDs via a whitelisting service available at a standard service endpoint published in the governance authority’s own DID document.
-3. **Credential registries.** If search and discovery of authoritative issuers is desired, a governance authority can publish verifiable credentials containing both the DID and additional attributes for each authoritative issuer in a credential registry.  Note that in this case the credential registry serves as a *separate, cryptographically-verifiable holder of the credential*—a holder that is not the subject of the credential, but which can independently prove the validity of the credential.
-4. **Verifiable credentials.** As shown in Figure 5, the governance authority (or its designated auditors) can issue verifiable credentials to the authoritative issuers, which they in turn can provide directly to verifiers or indirectly via credential holders.
+3. **Credential registries.** If search and discovery of authoritative verifiers is desired, a governance authority can publish verifiable credentials containing both the DID and additional attributes for each authoritative verifiers in a credential registry.  Note that in this case the credential registry serves as a *separate, cryptographically-verifiable holder of the credential*—a holder that is not the subject of the credential, but which can independently prove the validity of the credential.
+4. **Verifiable credentials.** Similar to Figure 5, the governance authority (or its designated auditors) can issue verifiable credentials to the authoritative verifiers, which they in turn can provide directly to holders or indirectly via the authorized credential verifier, holding that verifiable credential.
+
+NOTE: The terms "verifier" and "holder" are getting confusing here. Party A may be holder of credential X, and Party B may request a verifiable presentation of credential X. However, before Party A (or its agent) surrenders the requested verifiable presentation, it may request Party B to provide proof of being an authorized verifier. For the latter case, Party A is actually the verifier, and Party B the holder.
 
 ### Interoperability with Other Governance Frameworks
 
