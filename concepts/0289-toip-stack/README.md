@@ -270,7 +270,7 @@ Verifiers often need to verify that a credential was issued by an authoritative 
 
 ### Verification of Authoritative Verifiers
 
-Holders often need to verify that a credential was requested by an authoritative verifier. The ToIP stack will give governance authorities multiple mechanisms for designating their set of authoritative verifiers (these options are non-exclusive—they can each be used independently or in any combination):
+Holders often need to verify that a credential was requested by an authoritative verifier, e.g. as part of a ‘machine readable governance framework’. The ToIP stack will give governance authorities multiple mechanisms for designating their set of authoritative verifiers (these options are non-exclusive—they can each be used independently or in any combination):
 
 1. **DID Documents.** The governance authority can publish the list of their DIDs in a DID document on one or more public utilities of its choice.
 2. **Member Directories.** A governance authority can publish a "whitelist" of DIDs via a whitelisting service available at a standard service endpoint published in the governance authority’s own DID document.
