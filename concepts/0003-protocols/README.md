@@ -63,7 +63,7 @@ When "protocol" is used in an Aries context without any qualifying adjective, it
 The familiar world of web APIs is a world of protocols, but it comes with constraints antithetical to decentralized identity:
 
 * It assumes all interactions are between a client and a server--either two parties, or N parties mediated by a central server. Thus, the server is a natural locus for surveillance and hacking.
-* It assumes security is assymetric--not using DIDs, but driven by certs on a server and by a session for the client.
+* It assumes security is asymmetric--not using DIDs, but driven by certs on a server and by a session for the client.
 * It assumes the transport is HTTP. This is problematic for pure mobile-to-mobile, or for use cases where the transport is complex or asymmetric.
 * Because the server can never initiate an interaction, it requires at least one party to be continuously online.
 
@@ -174,13 +174,13 @@ primary message family.
 
 A protocol has the following ingredients:
 
-* [_Name_](template.md#name-and-version-under-tutorial) and [semver-compatible
+* [_Name_](../../0000-template-protocol.md#name-and-version) and [semver-compatible
   version](semver.md)
 * [_URI_ that uniquely identifies it](uris.md)
-* [_Messages (primary message family)_](template.md#messages-under-tutorial)
-* [_Adopted messages_](template.md#adopted-messages)
-* [_Roles_](template.md#roles-under-tutorial)
-* [_State_ and _sequencing rules_](template.md#states-under-tutorial)
+* [_Messages (primary message family)_](../../0000-template-protocol.md#messages)
+* [_Adopted messages_](../../0000-template-protocol.md#adopted-messages)
+* [_Roles_](../../0000-template-protocol.md#roles)
+* [_State_ and _sequencing rules_](../../0000-template-protocol.md#states)
 * _Events that can change state_ -- notably, _messages_, but also _errors_,
 _timeouts_, and other things
 * _Constraints that provide trust and incentives_
@@ -190,8 +190,8 @@ _timeouts_, and other things
 
 To define a protocol, write an RFC. Specific instructions for
 protocol RFCs, and a discussion about the theory behind detailed
-protocol concepts, are given in the [Template for Protocol RFCs](
-template.md). The [tictactoe protocol](tictactoe/README.md) is
+protocol concepts, are given in the [Instructions for Protocol RFCs](
+instructions.md) and in the [Protocol RFC Template](../../0000-template-protocol.md). The [tictactoe protocol](tictactoe/README.md) is
 also attached to this RFC as an example.
 
 [![tictactoe protocol](tictactoe/tile.png)](tictactoe/README.md)

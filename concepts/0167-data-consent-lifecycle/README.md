@@ -2,7 +2,7 @@
 
 - Authors: Jan Lindquist, Dativa; Paul Knowles, Dativa; Mark Lizar, OpenConsent; Harshvardhan J. Pandit, ADAPT Centre, Trinity College Dublin
 - Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-08-07 (updated 2019-10-03)
+- Since: 2019-08-07 (updated 2019-03-16)
 - Status Note: This RFC is under development. The reference implementation was recently added.
 - Supersedes: [Indy HIPE PR #55: Consent Receipt](https://github.com/hyperledger/indy-hipe/pull/55)
 - Start Date: 2018-11-08
@@ -40,17 +40,15 @@
 
 ## Summary
 
-This RFC describes a reference implementation for data privacy agreements, in
-which people initiate personal information sharing with the use of DLT
-and privacy rights as defined in the GDPR--thus leveraging the GDPR to
-innovate beyond compliance, to personal data control and explicit
-consent.
+This  RFC illustrates a reference implementation for generating a consent proof for use with DLT (Distributed Ledger Technology).  Presenting a person controlled consent proof data control architecture and supply chain permissions, that is linked to the single consent proof.
 
-It takes advantage of advances in standards and privacy that
-operationally begins with privacy by design and default. From this
-technical context in the design of DLT, this RFC splits apart personal
-data protection processing and modularizes information overlays process,
-in order to separate the components to be used with the Hyperledger Aries framework.
+The objective of this RFC is to move this  reference implementation, once comments are processed, to a working implementation RFC, demonstrating a proof of consent for DLT.
+
+This RFC  breaks down key components to generate an explicit consent directive with the use of a personal data processing notice (PDP-N) specification which is provided with this RFC as a template for smart privacy.  Appendix - PDP - Notice Spec (DLC Extension for CR v2)
+
+This reference RFC utilises a unified legal data control vocabulary for notification and consent records and receipts  (see Appendix A), maintained by the W3C Data Privacy Vocabulary Control Community Group (DPV), where the unified data control vocabulary is actively being maintained.
+
+This RFC modularizes data capture to make the mappings interchangeable with overlays  (OCA -Ref), to facilitate scale of data control sets across contexts, domains and jurisdictions.
 
 ## Motivation
 

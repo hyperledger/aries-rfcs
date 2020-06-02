@@ -115,7 +115,7 @@ semantics.
     traditional URI here, such as http://example.com/spec/tictactoe/1.0.
     If that sort of URI is used, it is best practice for it to reference
     immutable content, as with a link to specific commit on github:
-      https://github.com/hyperledger/indy-hipe/blob/4a17a845/text/protocols/tictactoe-1.0/README.md#messages
+      https://github.com/hyperledger/aries-rfcs/blob/ab7a04f/concepts/0003-protocols/tictactoe/README.md#messages
 </blockquote>
     
 ##### `move` message
@@ -125,7 +125,7 @@ to the other. It looks like this:
 
 [![move 1](move-1.png)](move-1.json)
 
-`@id` is required here, as it establishes a [message thread](https://github.com/hyperledger/indy-hipe/pull/30)
+`@id` is required here, as it establishes a [message thread](../../0008-message-id-and-threading/README.md)
 that will govern the rest of the game.
 
 `me` tells which mark (X or O) the sender is placing.
@@ -142,8 +142,7 @@ with columns A, B, and C, and rows 1, 2, and 3.
 
 `comment` is optional and probably not used much, but could be a way
 for players to razz one another or chat as they play. It follows the
-conventions of [localized messages](
-https://github.com/hyperledger/indy-hipe/pull/64).
+conventions of [localized messages](../../../features/0043-l10n/README.md).
 
 Other decorators could be placed on tic-tac-toe messages, such as those
 to enable [message timing](../../../features/0032-message-timing/README.md)
@@ -159,7 +158,7 @@ accurately reflect the role of the message sender; it thus alternates
 values between `X` and `O`.
 
 Subsequent messages in the game use the [message threading](
-https://github.com/hyperledger/indy-hipe/pull/30) mechanism where the
+../../0008-message-id-and-threading/README.md) mechanism where the
 `@id` of the first `move` becomes the `~thread.thid` for the duration
 of the game.
 
@@ -191,8 +190,7 @@ The state of the game at any given point of time is fully captured by
 the moves, regardless of the order in which they were made.
 
 If a player makes an illegal move or another error occurs, the other
-player can complain using a [problem-report](
-https://github.com/hyperledger/indy-hipe/blob/6a5e4fe2d7e14953cd8e3aed07d886176332e696/text/error-handling/README.md#the-problem-report-message-type)
+player can complain using a [problem-report](../../../features/0035-report-problem/README.md)
 message, with `explain.@l10n.code` set to one of the values defined
 in the Message Catalog section (see below).
 
@@ -269,8 +267,7 @@ message must be decorated with `~l10n.locale` to make automated translation
 possible.
 
 There is one other way that localization is relevant to this protocol: in error
-messages. Errors are communicated through the general [problem-report](
-https://github.com/hyperledger/indy-hipe/blob/6a5e4fe2d7e14953cd8e3aed07d886176332e696/text/error-handling/README.md#the-problem-report-message-type)
+messages. Errors are communicated through the general [problem-report](../../../features/0035-report-problem/README.md#the-problem-report-message-type)
 message type rather than through a special message type that's part of the
 `tictactoe` family. However, we define a catalog of tictactoe-specific error codes
 below to make this protocol's specific error strings localizable. 
@@ -286,8 +283,8 @@ RFC as [~l10n.json](~l10n.json), for easy machine parsing.
 Individual messages can use the `~l10n` decorator to supplement or override
 these settings.
 
-For more information about localization concepts, see the [HIPE about localized
-messages](https://github.com/hyperledger/indy-hipe/blob/569357c6/text/localized-messages/README.md#message-codes-and-catalogs).
+For more information about localization concepts, see the [RFC about localized
+messages](../../../features/0043-l10n/README.md#message-codes-and-catalogs).
 
 ### Message Catalog
 
@@ -306,8 +303,7 @@ as [catalog.json](catalog.json), for easy machine parsing. The catalog
 currently contains localized alternatives only for English. Other language
 contributions would be welcome.
 
-For more information, see the [Message Catalog section of the localization HIPE](
-https://github.com/hyperledger/indy-hipe/blob/569357c6/text/localized-messages/README.md#message-codes-and-catalogs
+For more information, see the [Message Catalog section of the localization HIPE](../../../features/0043-l10n/README.md#message-codes-and-catalogs
 ).
 
 ## Implementations
