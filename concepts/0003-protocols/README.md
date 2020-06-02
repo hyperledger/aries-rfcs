@@ -3,7 +3,7 @@
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-04-01
-- Status Note: standards track and beginning to influence many mental models, but not yet [ADOPTED](/README.md#rfc-lifecycle). 
+- Status Note: standards track and beginning to influence many mental models, but not yet [ADOPTED](/README.md#rfc-lifecycle).
 - Supersedes: [Indy PR #69]( https://github.com/hyperledger/indy-hipe/pull/69)
 - Start Date: 2018-12-28
 - Tags: [concept](/tags.md#concept)
@@ -22,7 +22,7 @@ and shows how they should be designed and documented.
   - [Summary](#summary)
   - [Motivation](#motivation)
   - [Tutorial](#tutorial)
-    - [What is a protocol?](#what-is-a-protocol)
+    - [What is a Protocol?](#what-is-a-protocol)
     - [Relationship to APIs](#relationship-to-apis)
     - [Decentralized](#decentralized)
     - [Types of Protocols](#types-of-protocols)
@@ -30,19 +30,19 @@ and shows how they should be designed and documented.
     - [Composable](#composable)
     - [Message Types](#message-types)
     - [Ingredients](#ingredients)
-    - [How to define a protocol or message family](#how-to-define-a-protocol-or-message-family)
+    - [How to Define a Protocol](#how-to-define-a-protocol)
     - [Security Considerations](#security-considerations)
-      - [Replay attacks](#replay-attacks)
+      - [Replay Attacks](#replay-attacks)
   - [Reference](#reference)
     - [Message Type and Protocol Identifier URIs](#message-type-and-protocol-identifier-uris)
       - [MTURI](#mturi)
       - [PIURI](#piuri)
     - [Semver Rules for Protocols](#semver-rules-for-protocols)
-    - [Semver Examples](#semver-examples)
-      - [Initiator](#initiator)
-      - [Recipient Rules](#recipient-rules)
+      - [Semver Examples](#semver-examples)
+        - [Initiator](#initiator)
+        - [Recipient Rules](#recipient-rules)
     - [State Details and State Machines](#state-details-and-state-machines)
-      - [State machines](#state-machines)
+      - [State Machines](#state-machines)
       - [Processing Points](#processing-points)
     - [Roles, Participants, Parties, and Controllers](#roles-participants-parties-and-controllers)
       - [Roles](#roles)
@@ -68,7 +68,7 @@ We also need to show how a protocol is defined, so the analog to defining a Swag
 
 ## Tutorial
 
-### What is a protocol?
+### What is a Protocol?
 
 A __protocol__ is a recipe for a stateful interaction. Protocols are all
 around us, and are so ordinary that we take them for granted. Each of the
@@ -127,7 +127,7 @@ decisions and react to them.
 
 ### Types of Protocols
 
-The simplest protocol style is __notification__. This style 
+The simplest protocol style is __notification__. This style
 involves two parties, but it is one-way: the `notifier` emits a message,
 and the protocol ends when the `notified` receives it. The [basic message protocol](../../features/0095-basic-message/README.md) uses this style.
 
@@ -222,7 +222,7 @@ A protocol has the following ingredients:
 _timeouts_, and other things
 * _Constraints that provide trust and incentives_
 
-### How to define a protocol or message family
+### How to Define a Protocol
 
 To define a protocol, write an RFC. Specific instructions for
 protocol RFCs, and a discussion about the theory behind detailed
@@ -235,7 +235,7 @@ The [tictactoe protocol](tictactoe/README.md) is attached to this RFC as an exam
 
 ### Security Considerations
 
-#### Replay attacks
+#### Replay Attacks
 
 It should be noted that when defining a protocol that has domain specific requirements around preventing replay attacks, an `@id` property SHOULD be required. Given an `@id` field is most commonly set to be a UUID, it should provide randomness comparable to that of a nonce in preventing replay attacks. However, this means that care will be needed in processing of the `@id` field to make sure its value has not been used before. In some cases, nonces require being unpredictable as well. In this case, greater review should be taken as to how the `@id` field should be used in the domain specific protocol. In the event where the `@id` field is not adequate for preventing replay attacks, it's recommended that an additional `nonce` field be required by the domain specific protocol specification.
 
@@ -252,7 +252,7 @@ A __message type URI__ (MTURI) identifies message types unambiguously.
 Standardizing its format is important because it is parsed by agents that
 will map messages to handlers--basically, code will look at this string and
 say, "Do I have something that can handle this message type inside protocol
-*X* version *Y*?" 
+*X* version *Y*?"
 
 When this analysis happens, strings should be compared for byte-wise equality
 in all segments except version. This means that case, unicode normalization,
@@ -267,7 +267,7 @@ The URI MUST be composed as follows:
 ![MTURI structure](mturi-structure.png)
 
 ```ABNF
-message-type-uri  = doc-uri delim protocol-name 
+message-type-uri  = doc-uri delim protocol-name
     "/" protocol-version "/" message-type-name
 delim             = "?" / "/" / "&" / ":" / ";" / "="
 protocol-name     = identifier
@@ -373,7 +373,7 @@ This leads to the following received message handling rules:
 - message types received with a minor version at or higher than the minimum supported and less than the current minor version are processed, ideally with a response using the same minor version of the received message
   - The recipient may want to send a warning `report-problem` message with code `version-with-degraded-features`
 - message types received with a minor version higher than the current minor version are processed with any unrecognized fields ignored
-  - The recipient may want to send a warning `report-problem` message with code `fields-ignored-due-to-version-mismatch` 
+  - The recipient may want to send a warning `report-problem` message with code `fields-ignored-due-to-version-mismatch`
 
 As documented in the semver documentation, these requirements are not applied when
 major version 0 is used. In that case, minor version increments are considered breaking.
@@ -386,9 +386,9 @@ a `report-problem` message with code `version-not-supported`. Agents that receiv
 `report-problem` message may use the [discover features protocol](../../features/0031-discover-features/README.md)
 to resolve the mismatch.
 
-### Semver Examples
+#### Semver Examples
 
-#### Initiator
+##### Initiator
 
 Unless Alice's agent (the initiator of a protocol) knows from prior history
 that it should do something different, it should begin a protocol using the
@@ -396,7 +396,7 @@ highest version number that it supports. For example, if A.1
 supports versions 2.0 through 2.2 of protocol X, it should use 2.2 as the
 version in the message type of its first message.
 
-#### Recipient Rules
+##### Recipient Rules
 
 Agents for Bob (the recipient) should reject messages from protocols with major
 versions different from those they support. For major version 0, they should also
@@ -450,7 +450,7 @@ While some protocols have only one sequence of states to manage, in most
 different roles perceive the interaction differently. The sequence of states
 for each role needs to be described with care in the RFC.
 
-#### State machines
+#### State Machines
 
 By convention, protocol state and sequence rules are described using the
 concept of state machines, and we encourage developers who implement
@@ -501,9 +501,9 @@ interaction.
 
 This perspective is manifested in three general ways:
 
- * by the expectations that a party takes on in a protocol (ex. a role may be expected to do something to start a protocol).
- * by the messages that a party can and does use in the course of the protocol (some messages may be reserved for a single role, while other may used by some if not all roles).
- * by the state and the transition rules
+* by the expectations that a party takes on in a protocol (ex. a role may be expected to do something to start a protocol).
+* by the messages that a party can and does use in the course of the protocol (some messages may be reserved for a single role, while other may used by some if not all roles).
+* by the state and the transition rules
 
 Like parties, roles are normally known at the start of the protocol but this is not a requirement.
 
@@ -573,7 +573,6 @@ moving the game forward wait with the protocol suspended.
 In this case, Bob and Carol could be analyzed as parties to the protocol, as well as controllers. But in other
 cases, the concepts are distinct. For example, in a protocol to issue credentials, the issuing institution
 might use an AI and/or business automation as a controller.
-
 
 ### Instructions for Protocol RFCs
 

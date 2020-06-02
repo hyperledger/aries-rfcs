@@ -105,13 +105,13 @@ All of the following challenges need to be addressed.
   process payment reset the interaction to the very beginning of the protocol, or
   just back to the previous step, where payment was requested? This requires problems
   to be [matched in a formal way to the state machine](
-   ../../concepts/0003-protocols/state-details.md#state-machines) of a protocol underway.
+   ../../concepts/0003-protocols/README.md#state-machines) of a protocol underway.
 
 ### The `report-problem` protocol
 
 Reporting problems uses a simple one-step [notification protocol](
 ../../concepts/0003-protocols/README.md#types-of-protocols). Its official [PIURI](
-../../concepts/0003-protocols/uris.md#piuri) is:
+../../concepts/0003-protocols/README.md#piuri) is:
 
     did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/report-problem/1.0
 
