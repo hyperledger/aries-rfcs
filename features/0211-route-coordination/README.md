@@ -24,7 +24,7 @@ Use of the forward message in the Routing Protocol requires an exchange of infor
 
 **Version**: 1.0
 
-**Base URI**: `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/coordinatemediation/1.0/`
+**Base URI**: `https://didcomm.org/coordinatemediation/1.0/`
 
 ### Roles
 
