@@ -85,7 +85,7 @@ as the most common use case:
 
 Authentication Service Agents (ASAs) are licensed by the Government of
 India to pass the verification request via secure channels to the Unique
-Identification Authority of India (UIDAI) data centre where IBVs are retireved and matched
+Identification Authority of India (UIDAI) data centre where IBVs are retrieved and matched
 to incoming CBVs from Authentication User Agencies (AUA) that broker
 user authentication sessions from point-of-sale (PoS) terminals:
 
@@ -144,17 +144,17 @@ where the IBV is persisted and where the match must occur:
 
 ![bsp_2x2](images/bsp_2x2.png)
 
-**Mobile-Mobile**: If the IBV is stored on the mobile device and the
-match with the CBV occurs on the mobile device, then
+**Mobile-Mobile**: The IBV is stored on the mobile device and the
+match with the CBV occurs on the mobile device
 
-**Mobile-Server**: If the IBV is stored on the mobile device, but the
-match occurs on a server,
+**Mobile-Server**: The IBV is stored on the mobile device, but the
+match occurs on a server
 
-**Server-Mobile**: If the IBV is stored on a server, but the match
-occurs on a mobile device,
+**Server-Mobile**: The IBV is stored on a server, but the match
+occurs on a mobile device
 
-**Server-Server**: Finally, if the IBV is stored on a server and the
-match occurs on a server, then
+**Server-Server**: The IBV is stored on a server and the
+match occurs on a server
 
 ### Use case 1: Identity Proofing
 
@@ -169,13 +169,13 @@ match occurs on a server, then
 The NIST 800-63-3 publications are *guidelines* that establish levels
 of assurance (LOA) for identity proofing (Volume A), authentication
 (Volume B), and federation (Volume C).  The Biometric Service Provider
-(BSP) specification deals primarily with ientity proofing and
+(BSP) specification deals primarily with identity proofing and
 authentication.
 
 A common misconception is that a biometric is like a password, but
 cannot be replaced upon loss or compromise.  A biometric is *private
 but not secret*, whereas a password is *secret and private*.  Used
-correctly, biomtrics require *presentation attack detection* (PAD), also
+correctly, biometrics require *presentation attack detection* (PAD), also
 called *liveness*, to ensure that the sensor is presented with a live
 face, fingerprints, etc. of a subject rather than a spoof, i.e., a
 photo, fake fingertips, etc.  Indeed, NIST 800-63-3B requires presence
@@ -210,24 +210,24 @@ general, some simple rules of thumb include:
 
 * Should define biometric verifiable credential schema(s)
 * Biometric modality agnostic
- * Accommodate Biometric shards
- * Integrate with Ursa crypto
- * Integrate with service endpoint model
+  * Accommodate Biometric shards
+  * Integrate with Ursa crypto
+  * Integrate with service endpoint model
 * Allows Issuers, Verifiers, and Holder wallets & agents to invoke services like:
- * Registration 
- * Matching
- * Deduplication
- * Verification
+  * Registration 
+  * Matching
+  * Deduplication
+  * Verification
 * Provides new services
- * Fuzzy matching
- * Shard management (for DKMS) including Horcrux-based storage options
- * Holder-specific biometric matching “machine” (using ZK-STARKs)
+  * Fuzzy matching
+  * Shard management (for DKMS) including Horcrux-based storage options
+  * Holder-specific biometric matching “machine” (using ZK-STARKs)
 * Compatible with trust relationships
- * Supports DID connections/Trust relationships (Holder ⟷ BSP ⟷ Verifier)
+  * Supports DID connections/Trust relationships (Holder ⟷ BSP ⟷ Verifier)
 
 ## Drawbacks
 
-Biometrics are explicity required in many global regulations including
+Biometrics are explicitly required in many global regulations including
 NIST (USA), Aadhaar (India), INE (Mexico), and RENIEC (Peru) but also
 standardized by international organizations for travel (IATA) and
 finance (FATF).
@@ -241,21 +241,21 @@ credentialing and authentication processes.
 ## Prior art
 
 Several biometric standards exist that provide frameworks for
-biometric services including the FIDO family of stanfards and IEEE
+biometric services including the FIDO family of standards and IEEE
 2410.  Within each biometric modality, standards exist to encode
 representations of biometric information.  For example, fingerprints
 can be captured as raw images in JPEG or PNG format but also
-represented as vectors of minutae encoded in the WSQ format.
+represented as vectors of minutiae encoded in the WSQ format.
 
 ## Unresolved questions
 
 * What is the threat model?
 * Alignment with other RFCs
- * Distributed Key Management RFC (Open Issues and Future Work section)
- * Credential Fraud RFC (Threat model, Patterns & Anti-Patterns)
+  * Distributed Key Management RFC (Open Issues and Future Work section)
+  * Credential Fraud RFC (Threat model, Patterns & Anti-Patterns)
 * Relation to
- * IEEE 2410 (BOPS)
- * FIDO and new FIDO IDWG (Identity Verification)
+  * IEEE 2410 (BOPS)
+  * FIDO and new FIDO IDWG (Identity Verification)
 
 ## Implementations
 
