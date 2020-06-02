@@ -28,7 +28,7 @@ rules. Presentation definitions specify desired attributes and predicates).
    1. If not, the verifier creates a new presentation definition and stores the
    presentation definition in his wallet locally and, optionally, anchors it to
    the verifiable data registry. (Anchoring the presentation definition to the
-   verifiable data registry allows other verifiers to easily use it.)
+   verifiable data registry allows other verifiers to easily use it. It can be done by writing the full presentation definition's content to the ledger, or just writing a digital fingerprint/hash of the content.)
 1. Using the presentation definition, request a presentation from the holder.
 The [Present Proof Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof)
 will be the model for another RFC containing minor modifications for presenting

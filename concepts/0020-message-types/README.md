@@ -22,9 +22,9 @@ A "Message Type" is a required attribute of all communications sent between part
 
 Types are specified within a message using the `@type` attribute:
 
-```json
+```jsonc
 {
-    `@type`:<message type string>,
+    "@type": "<message type string>",
     // other attributes
 }
 ```
@@ -61,7 +61,7 @@ did:sov:123456789abcdefghi1234;spec/exampleprotocol/1.0/exampletype
 
 This example DID document shows a service endpoint that includes a name property (emphasized) whose purpose is to enable creation of DID references that can deterministically select that service in order to have an algorithmic transformation into a concrete URI.
 
-```json
+```jsonc
 {
   "@context": "https://w3id.org/did/v1",
   "id": "did:example:123456789abcdefghi",
@@ -120,9 +120,9 @@ The following agent message is received with a type not known to the developer:
 
 ```json
 {
-    '@type': 'did:sov:123456789abcdefghi1234;spec/exampleprotocol/1.0/exampletype',
-    'attr_a': 5,
-    'attr_b': 'Gouda'
+    "@type": "did:sov:123456789abcdefghi1234;spec/exampleprotocol/1.0/exampletype",
+    "attr_a": 5,
+    "attr_b": "Gouda"
 }
 ```
 
@@ -142,13 +142,15 @@ The developer would then be able to load this URL in a browser to discover the m
 
 ### Aries Core Message Namespace
 
+> The Aries community is currently in the process of changing the prefix for protocol message types that currently use the did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/ to use https://didcomm.org/. This proces is described in RFC 0348 [Transition Message Type to HTTPs](../../features/0348-transition-msg-type-to-https/README.md).
+
 `did:sov:BzCbsNYhMrjHiqZDTUASHg` will be used to namespace protocols defined by the community as "core protocols" or protocols that agents should minimally support.
 
 This DID is currently held by Daniel Hardman. Ownership will be transferred to the correct entity as soon as possible.
 
 ### Protocols
 
-Protocols provide a logical grouping for message types. These protocols, along with each type belonging to that protocol, are to be defined in future HIPEs or through means appropriate to subprojects.
+Protocols provide a logical grouping for message types. These protocols, along with each type belonging to that protocol, are to be defined in future RFCs or through means appropriate to subprojects.
 
 #### Protocol Versioning
 
@@ -177,7 +179,7 @@ Be consistent with attribute names between the different types within a protocol
 
 #### Nest Attributes only when useful
 
-Attributes do not need to be nested under a top level attribute, but can be to organize related attributes. Nesting all message attributes under one top level attribute is not usually a good idea.
+Attributes do not need to be nested under a top level attribute, but can be to organize related attributes. Nesting all message attributes under one top level attribute is usually not a good idea.
 
 ### Design Examples
 
@@ -216,9 +218,9 @@ Suggestions: Ambiguous names, unnecessary nesting, symbols in names.
 - [Drummond Reed's presentation on using DIDs as message type specifiers](https://docs.google.com/document/d/1t-AsCPjvERBZq9l-iXn2xffJwlNfFoQhktfIaMFjN-c/edit#heading=h.x1wbqftasrx2)
 - [Daniel Hardman's Agent Summit Notes](https://docs.google.com/document/d/1TP_7MKfuIrlY3rz4cz_tuuCFi7hdUWifeKwr5h-QTYM/edit)
 - [Stephen Curran's presentation summarizing the Agent Summit](https://docs.google.com/presentation/d/1l-po2IKVhXZHKlgpLba2RGq0Md9Rf19lDLEXMKwLdco/edit)
-- [DID Spec](https://w3c-ccg.github.io/did-spec/)
+- [DID Spec](https://w3c.github.io/did-core/)
 - [Semantic Versioning](../0003-protocols/semver.md)
-- [Core Message Structure](https://github.com/hyperledger/indy-hipe/pull/17)
+- [DIDComm Message Anatomy](../0021-didcomm-message-anatomy/README.md)
 
 ## Implementations
 
