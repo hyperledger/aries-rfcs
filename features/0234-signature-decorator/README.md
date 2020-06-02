@@ -61,7 +61,7 @@ When an Agent receives a DIDComm message with a field decorated with `~sig`, it 
 
 In general, the steps to construct a `~sig` are:
 
-1. Choose a [signature scheme](#signature-schemes). This determines the `~sig` decorator's [message type URI](../../concepts/0003-protocols/uris.md#mturi) (the `@type` seen above) and the signature algorithm.
+1. Choose a [signature scheme](#signature-schemes). This determines the `~sig` decorator's [message type URI](../../concepts/0003-protocols/README.md#mturi) (the `@type` seen above) and the signature algorithm.
 2. Serialize the JSON object to be authenticated to a sequence of bytes (`msg` in the example above). This will be the plaintext input to the signature scheme.
 3. Construct the contents of the new `~sig` object according to the chosen signature scheme with the plaintext as input.
 4. Replace the original object (`msg` in the example above) with the new `~sig` object. The new object's label MUST be equal to the label of the original object appended with "~sig".
