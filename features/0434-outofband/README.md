@@ -93,7 +93,7 @@ The out-of-band protocol a single message that is sent by the *sender*.
   "@type": "https://didcomm.org/out-of-band/%VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
-  "goal-code": "issue-vc",
+  "goal_code": "issue-vc",
   "goal": "To issue a Faber College Graduate credential",
   "handshake_protocols": [
       "https://didcomm.org/didexchange/1.0",
@@ -117,7 +117,7 @@ The items in the message are:
 - `@type` - the DIDComm message type
 - `@id` - the unique ID of the message. The ID should be used as the **parent** thread ID (`pthid`) for the response message, rather than the more common thread ID (`thid`) of the response message. This enables multiple uses of a single out-of-band message.
 - `label` - [optional] a self-attested string that the receiver may want to display to the user, likely about who sent the out-of-band message.
-- `goal-code` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out-of-band message.
+- `goal_code` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out-of-band message.
 - `goal` - [optional] a self-attested string that the receiver may want to display to the user about the context-specific goal of the out-of-band message.
 - `handshake_protocols` - [optional] an array of protocols in the order of preference of the sender that the receiver can use in responding to the message in order to create or reuse a connection with the sender. These are not arbitrary protocols but rather protocols that result in the establishment of a connection. One or both of `handshake_protocols` and `request~attach` MUST be included in the message.
 - `request~attach` - [optional] an attachment decorator containing an array of request messages in order of preference that the receiver can using in responding to the message. One or both of `handshake_protocols` and `request~attach` MUST be included in the message.
@@ -130,7 +130,7 @@ If only the `request~attach` item is included, no new connection is expected to 
 
 If both the `handshake_protocols` and `request~attach` items are included in the message, the receiver should first establish a connection and then respond (using that connection) to one of the messages in the `request~attach` message. If a connection already exists between the parties, the receiver may respond immediately to the `request-attach` message using the established connection.
 
-Both the `goal-code` and `goal` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out-of-band message. `goal-code` is to specify a generic, protocol level outcome for sending the out-of-band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal-code` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
+Both the `goal_code` and `goal` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out-of-band message. `goal_code` is to specify a generic, protocol level outcome for sending the out-of-band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal_code` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
 
 While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `request~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the receiver **SHOULD** use the existing connection in responding to the `invitation`. If a selected `handshake_protocols` item is used by the receiver, it may have a specific "reuse this connection" message type.
 
@@ -194,13 +194,13 @@ The full description of the message in this protocol can be found in the [Tutori
 
 ### Localization
 
-The `goal-code` and `goal` fields should have localization applied. See the purpose of those fields in the [message type definitions](#messages) section and the [message catalog](#message-catalog) section (immediately below).
+The `goal_code` and `goal` fields should have localization applied. See the purpose of those fields in the [message type definitions](#messages) section and the [message catalog](#message-catalog) section (immediately below).
 
 ### Message Catalog
 
-#### `goal-code`
+#### `goal_code`
 
-The following values are defined for the `goal-code` field:
+The following values are defined for the `goal_code` field:
 
 Code (cd) | English (en)
 --- | ---
@@ -299,7 +299,7 @@ Invitation:
   "@type": "https://didcomm.org/out-of-band/1.0/invitation",
   "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3",
   "label": "Faber College",
-  "goal-code": "issue-vc",
+  "goal_code": "issue-vc",
   "goal": "To issue a Faber College Graduate credential"
   "handshake_protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"],
   "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
@@ -309,19 +309,19 @@ Invitation:
 Whitespace removed:
 
 ```jsonc
-{"@type":"https://didcomm.org/out-of-band/1.0/invitation","@id":"69212a3a-d068-4f9d-a2dd-4741bca89af3","label":"Faber College", "goal-code":"issue-vc","goal":"To issue a Faber College Graduate credential","handshake_protocols":["https://didcomm.org/didexchange/1.0","https://didcomm.org/connections/1.0"],"service":["did:sov:LjgpST2rjsoxYegQDRm7EL"]}
+{"@type":"https://didcomm.org/out-of-band/1.0/invitation","@id":"69212a3a-d068-4f9d-a2dd-4741bca89af3","label":"Faber College", "goal_code":"issue-vc","goal":"To issue a Faber College Graduate credential","handshake_protocols":["https://didcomm.org/didexchange/1.0","https://didcomm.org/connections/1.0"],"service":["did:sov:LjgpST2rjsoxYegQDRm7EL"]}
 ```
 
 Base 64 URL Encoded:
 
 ```text
-eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJoYW5kc2hha2VfcHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0
+eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbF9jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJoYW5kc2hha2VfcHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0
 ```
 
 Example URL:
 
 ```text
-http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJoYW5kc2hha2VfcHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0
+http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbF9jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJoYW5kc2hha2VfcHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0
 ```
 
 Out-of-band message URLs can be transferred via any method that can send text, including an email, SMS, posting on a website, or QR Code.
@@ -339,9 +339,9 @@ Subject: Your request to connect and receive your graduate verifiable credential
 
 Dear Alice,
 
-To receive your Faber College graduation certificate, click here to [connect](http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJoYW5kc2hha2VfcHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0) with us, or paste the following into your browser:
+To receive your Faber College graduation certificate, click here to [connect](http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbF9jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJoYW5kc2hha2VfcHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0) with us, or paste the following into your browser:
 
-http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbC1jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJoYW5kc2hha2VfcHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0
+http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbF9jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJoYW5kc2hha2VfcHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0
 
 If you don't have an identity agent for holding credentials, you will be given instructions on how you can get one.
 
@@ -360,9 +360,9 @@ It seems inevitable that the length of some out-of-band message will be too long
   - `https://example.com/ssi?id=5f0e3ffb-3f92-4648-9868-0d6f8889e6f3`
   - Note the replacement of the query parameter `oob` with `id` when using shortened URL.
 - On receipt of this form of message, the agent must do an HTTP GET to retrieve the associated, encoded out-of-band message.
-  - A sender may want to make the redirection of the shortened URL to the full length form dynamic, so a single QR code can be used for distinct (perhaps by changing the message `@id`) out of band messages.
+  - A sender may want to wait to generate the full invitation until the redirection event of the shortened URL to the full length form dynamic, so a single QR code can be used for distinct out of band messages.
 
-With the shortening of the URL, a usable QR code will always be able to be generated.
+A usable QR code will always be able to be generated from the shortened form of the URL.
 
 #### Out-of-Band Message Publishing
 
