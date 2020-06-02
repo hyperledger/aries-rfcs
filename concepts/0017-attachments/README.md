@@ -497,13 +497,13 @@ attachment. Contains the following subfields:
 
   * `links`: A list of zero or more locations at which the content may be fetched.
   Optional.
-  
+
   * `base64`: Base64-encoded data, when representing arbitrary content inline instead
-  of via `links`. Optional. 
-  
+  of via `links`. Optional.
+
   * `json`: Directly embedded JSON data, when representing content inline instead of
-  via `links`, and when the content is natively conveyable as JSON. Optional. 
-  
+  via `links`, and when the content is natively conveyable as JSON. Optional.
+
 
 ## Drawbacks
 
@@ -541,4 +541,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 Name / Link | Implementation Notes
 --- | ---
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | in credential exchange
-
+[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET
