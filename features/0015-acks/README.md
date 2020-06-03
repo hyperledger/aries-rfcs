@@ -13,6 +13,10 @@
 Explains how one party can send acknowledgment
 messages (ACKs) to confirm receipt and clarify the status of complex processes.
 
+## Change log
+
+- Mar 25, 2020: In the ~thread decorator section of the sample in the [Explicit ACKs section](#explicit-acks), 'myindex' was changed to 'sender_order' and 'lrecs' to 'received_orders'. This is in accordance with the field names as defined in [RFC 0008](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading#threaded-messages).
+
 ## Motivation
 
 An __acknowledgment__ or __ACK__ is one of the most common procedures in protocols
@@ -73,8 +77,8 @@ this:
   "status": "OK",
   "~thread": {
     "thid": "b271c889-a306-4737-81e6-6b2f2f8062ae",
-    "myindex": 4,
-    "lrecs": {"2fQvCXfgvxz4dtBDDwcj2PJdG5qDrEsrQVjvWRhg9uhd": 3}
+    "sender_order": 4,
+    "received_orders": {"did:sov:abcxyz": 3}
   }
 }
 ```
@@ -85,7 +89,7 @@ It may also be appropriate to send an ack at other key points in an interaction
 ### Adopting acks
 
 As discussed in [0003: Protocols](../../concepts/0003-protocols/README.md), a protocol can [adopt the ack message into
-its own namespace](../../concepts/0003-protocols/template.md#adopted-messages).
+its own namespace](../../0000-template-protocol.md#adopted-messages).
 This allows the type of an ack to change from:
     `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack`
 to something like:
@@ -166,7 +170,7 @@ None identified.
 
 ## Prior art
 
-See notes above about the [implicit ACK mechanism in `~thread.lrecs`](#implicit-acks).
+See notes above about the [implicit ACK mechanism in `~thread.received_orders`](#implicit-acks).
 
 ## Unresolved questions
 
@@ -178,7 +182,7 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | ACKs are [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by this protocol.
-[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | ACKs are [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by this protocol.
-[RFC 0193: Coin Flip Protocol](../0193-coin-flip/README.md) | ACKs are [adopted](../../concepts/0003-protocols/template.md#adopted-messages) as a subprotocol.
+[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | ACKs are [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol.
+[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | ACKs are [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol.
+[RFC 0193: Coin Flip Protocol](../0193-coin-flip/README.md) | ACKs are [adopted](../../0000-template-protocol.md#adopted-messages) as a subprotocol.
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Contributed by the Government of British Columbia.

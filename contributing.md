@@ -29,7 +29,7 @@ is a good sign that you're on the right track.
     If it is about a specific protocol or decorator or feature, its parent
     should be /features; if it is about a concept that will be used in many
     different features, its parent should be /concepts.
-  - Create the folder and copy `0000-template.md` to `<parent>/<your folder name>/README.md`.
+  - Create the folder and copy either `0000-template.md` or `0000-template-protocol.md` (if your RFC is for a protocol) to `<parent>/<your folder name>/README.md`.
   - Fill in the RFC. [Use MUST and SHOULD per standard conventions](https://tools.ietf.org/html/rfc2119). Put care into the details: RFCs that do not present
     convincing motivation, demonstrate an understanding of the impact of the
     design, or are disingenuous about the drawbacks or alternatives tend to be

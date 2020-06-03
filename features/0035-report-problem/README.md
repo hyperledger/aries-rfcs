@@ -3,7 +3,7 @@
 - Authors: [Stephen Curran](swcurran@cloudcompass.ca), [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-04-01
-- Status Note: Implemented in several codebases. Not yet fully harmonized. 
+- Status Note: Implemented in several codebases. Not yet fully harmonized.
 - Supersedes: [Indy HIPE PR #65]( https://github.com/hyperledger/indy-hipe/pull/65)
 - Start Date: 2018-11-26
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
@@ -33,7 +33,7 @@ address these challenges. It makes two key contributions:
 - A [protocol](../../concepts/0003-protocols/README.md) that helps an Agent report problems with appropriate
   context. We expect this to be a subprotocol of nearly every interesting application-level
   protocol; messages from it may even be [adopted into other protocols](
-  ../../concepts/0003-protocols/template.md#adopted-messages).
+  ../../0000-template-protocol.md#adopted-messages).
 - An inventory of problem categories and best practices for handling them.
 
 ## Tutorial
@@ -105,19 +105,19 @@ All of the following challenges need to be addressed.
   process payment reset the interaction to the very beginning of the protocol, or
   just back to the previous step, where payment was requested? This requires problems
   to be [matched in a formal way to the state machine](
-   ../../concepts/0003-protocols/state-details.md#state-machines) of a protocol underway.
+   ../../concepts/0003-protocols/README.md#state-machines) of a protocol underway.
 
 ### The `report-problem` protocol
 
 Reporting problems uses a simple one-step [notification protocol](
 ../../concepts/0003-protocols/README.md#types-of-protocols). Its official [PIURI](
-../../concepts/0003-protocols/uris.md#piuri) is:
+../../concepts/0003-protocols/README.md#piuri) is:
 
     did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/report-problem/1.0
 
 The protocol includes the standard `notifier` and `notified` roles. It
 defines a single message type `problem-report`, introduced here.
-It also [adopts](../../concepts/0003-protocols/template.md#adopted-messages) the
+It also [adopts](../../0000-template-protocol.md#adopted-messages) the
 `ack` message from the [`ACK 1.0` protocol](../0015-acks/README.md),
 to accommodate the possibility that the [`~please_ack`](../0317-please-ack/README.md)
 [decorator]( ../../concepts/0011-decorators/README.md) may be used on the
@@ -363,5 +363,6 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | The `problem-report` message is [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by this protocol.
-[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | The `problem-report` message is [adopted](../../concepts/0003-protocols/template.md#adopted-messages) by this protocol.
+[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | The `problem-report` message is [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol.
+[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | The `problem-report` message is [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol.
+[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET

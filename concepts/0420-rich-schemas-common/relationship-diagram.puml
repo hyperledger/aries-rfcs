@@ -1,0 +1,34 @@
+@startuml
+object "Presentation definition" as pres_def {
+}
+object "Presentation" as pres {
+}
+object "Mapping" as map {
+}
+object "Encoding" as enc {
+}
+object "Credential definition" as cred_def {
+}
+object "Verifiable credential" as verif_cred {
+}
+object "Rich Schema" as rich_schema {
+}
+
+pres "<b>1" --> "<b>0..n" pres_def
+pres "<b>1..n" --> "<b>0..n" verif_cred
+
+pres_def "\n<b>0..n" --> "<b>0..n" rich_schema
+pres_def "<b>0..n" --> "<b>0..n" map
+pres_def "<b>0..n" --> "<b>0..n" cred_def
+
+verif_cred "<b>1" --> "<b>0..n" cred_def
+verif_cred "<b>1" --> "<b>0..n" rich_schema
+
+cred_def "<b>1" --> "<b>0..n" map
+
+map "<b>1" --> "<b>0..n" rich_schema
+map "<b>1..n" --> "<b>0..n" enc
+
+rich_schema "<b>0..n" -up-> rich_schema
+
+@enduml
