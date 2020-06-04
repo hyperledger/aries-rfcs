@@ -12,11 +12,9 @@
 
 ### 2.0 - Alignment with [RFC 0434 Issue Credential](../0453-issue-credential-v2/README.md)
 
-The "formats" field is added to all the messages to link the specific attachment IDs with the verifiable presentation format and version of the attachment.
-
-The details that are part of each message type about the different attachment formats serves as a registry of the known formats and versions.
-
-Version 2.0 uses &lt;angle brackets&gt; explicitly to mark all values that may vary between instances, such as identifiers and comments.
+- The "formats" field is added to all the messages to link the specific attachment IDs with the verifiable presentation format and version of the attachment.
+- The details that are part of each message type about the different attachment formats serves as a registry of the known formats and versions.
+- Version 2.0 uses &lt;angle brackets&gt; explicitly to mark all values that may vary between instances, such as identifiers and comments.
 
 ## Summary
 
@@ -49,20 +47,20 @@ The roles are `verifier` and `prover`.  The `verifier` requests the presentation
 
 ### States
 
-#### states for Verifier
+#### States for Verifier
 
 * request-sent
 * proposal-received
-* request-received
 * presentation-received
+* abandoned
 * done
 
-#### states for Prover
+#### States for Prover
 
 * request-received
 * proposal-sent
 * presentation-sent
-* reject-sent
+* abandoned
 * done
 
 For the most part, these states map onto the transitions shown in the choreography diagram in obvious ways. However, a few subtleties are worth highlighting:
