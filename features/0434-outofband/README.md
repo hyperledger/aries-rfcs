@@ -136,7 +136,9 @@ While the _receiver_ is expected to respond with an initiating message from a `h
 
 #### The `service` Item
 
-As mentioned in the description, the `service` item array is intended to be analogous to the `service` block of a DIDDoc. There are two forms of entries in the `service` item array:
+As mentioned in the description above, the `service` item array is intended to be analogous to the `service` block of a DIDDoc. When not reusing an existing connection, the receiver scans the array and selects (according to the rules described below) a service entry to use for the response to the out-of-band message.
+
+There are two forms of entries in the `service` item array:
 
 - a public DID that is resolved to retrieve it's DIDDoc service block, and
 - an inline service block.
