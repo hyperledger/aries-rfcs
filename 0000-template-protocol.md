@@ -1,4 +1,5 @@
 # Aries RFC 0000: Your Protocol 0.9
+
 - Authors: [your name](you@github-email) -- email is optional
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-12-26 (date you submit your PR)
@@ -17,8 +18,7 @@ One paragraph explanation of the feature.
 
 ## Motivation
 
-Why are we doing this? What use cases does it support? What is the expected
-outcome?
+Why are we doing this? What use cases does it support? What is the expected outcome?
 
 ## Tutorial
 
@@ -28,12 +28,7 @@ Name and Version
 
 Specify the official name of the protocol and its version, e.g., "My Protocol 0.9".
 
-Protocol names are conventionally lower_snake_case (especially in URIs), but are compared case-insensitively and ignoring punctuation. This means that all of the following protocol names are considered identical in comparison, and can be used interchangeably, depending on what's appropriate for a given context (a user-friendly doc vs. CSS vs. python class vs. java class):
-
-- Let's Do Lunch!
-- lets-do-lunch
-- lets_do_lunch
-- LetsDoLunch
+Protocol names are often either lower_snake_case or kebob-case. The non-version components of the protocol named are matched exactly.
 
 URI: https://didcomm.org/lets_do_lunch/<version>/<messageType>
 
@@ -70,8 +65,7 @@ an agent doesn't just claim that it supports a protocol; it makes a claim about
 which *roles* in the protocol it supports. An agent that supports credential
 issuance and an agent that supports credential holding may have very different
 features, but they both use the _credential-issuance_ protocol. By convention,
-role names use lower-kebab-case but are compared case-insensitively and ignoring
-punctuation.
+role names use lower-kebab-case and are compared case-sensitively.
 
 ### States
 
@@ -104,17 +98,16 @@ arrived at because of the problem. This helps other participants
 to react to errors with confidence. Formal state names are also used in the
 agent test suite, in log messages, and so forth.
 
-By convention, state names use lower-kebab-case but are compared
-case-insensitively and ignoring punctuation.
+By convention, state names use lower-kebab-case. They are compared
+case-sensitively.
 
 State management in protocols is a deep topic. For more information, please
 see [State Details and State Machines](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/state-details.md).
 
 ### Messages
 
-If there is a message family associated with this protocol, this
-section describes each member of it. It should also note the names and
-versions of messages from other message families that are used by the
+This section describes each message in the protocol. It should also note the names and
+versions of messages from other message families that are adopted by the
 protocol (e.g., an [`ack`](https://github.com/hyperledger/aries-rfcs/tree/master/features/0015-acks)
 or a [`problem-report`](https://github.com/hyperledger/aries-rfcs/tree/master/features/0035-report-problem)).
 Typically this section is written as a narrative, showing each message
@@ -126,7 +119,11 @@ Sample messages that are presented in the narrative should also be checked
 in next to the markdown of the RFC, in [DIDComm Plaintext format](
 https://github.com/hyperledger/aries-rfcs/tree/master/features/0044-didcomm-file-and-mime-types#didcomm-messages-dm).
 
-##### Adopted Messages
+The _message_ element of a message type URI are typically lower_camel_case or lower-kebab-case, matching
+the style of the protocol. JSON items in messages are lower_camel_case and inconsistency in the
+application of a style within a message is frowned upon by the community.
+
+#### Adopted Messages
 
 Many protocols should use general-purpose messages such as [`ack`](
 https://github.com/hyperledger/indy-hipe/pull/77) and [`problem-report`](
@@ -157,8 +154,8 @@ the alias defined inside the namespace of the `rendezvous` protocol:
 
 ![diff on @type caused by adoption](concepts/0003-protocols/adoption.png)
 
-Adoption should be declared in an "Adopted" subsection of "Messages" in
-a protocol RFC. When adoption is specified, it should include a __minimum
+Adoption should be declared in an "Adopted" subsection of "Messages".
+When adoption is specified, it should include a __minimum
 adopted version__ of the adopted message type: "This protocol adopts
 `ack` with version >= 1.4". All versions of the adopted message that share
 the same major number should be compatible, given the [semver rules](concepts/0003-protocols/semver.md)
@@ -175,7 +172,10 @@ these, explain them here. If not, the section can be omitted.
 
 ## Reference
 
-### Messages
+All of the sections of reference are optional. If none are needed, the
+"Reference" section can be deleted.
+
+### Messages Details
 
 Unless the "Messages" section under "Tutorial" covered everything that
 needs to be known about all message fields, this is where the data type,
@@ -188,6 +188,9 @@ can save a lot of time here.
 Each message type should be associated with one or more roles in the 
 protocol. That is, it should be clear which roles can send and receive
 which message types.
+
+If the "Tutorial" section covers everything about the messages, this
+section should be deleted.
 
 ### Examples
 
@@ -210,7 +213,7 @@ described here and checked in with the RFC. See ["Decorators at Message
 Type Scope"](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0011-decorators#decorator-scope)
 in the [Localization RFC](https://github.com/hyperledger/aries-rfcs/tree/master/features/0043-l10n).
 
-### Message Catalog
+### Codes Catalog
 
 If the protocol has a formally defined catalog of codes (e.g., for errors
 or for statuses), define them in this section. See ["Message Codes and
@@ -260,10 +263,10 @@ implementation of this feature before stabilization?
 - What related issues do you consider out of scope for this 
 proposal that could be addressed in the future independently of the
 solution that comes out of this doc?
-   
+
 ## Implementations
 
-> NOTE: This section should remain in the RFC as is on first release. Remove this note and leave the rest of the text as is. Template text in all other sections should be replace.
+> NOTE: This section should remain in the RFC as is on first release. Remove this note and leave the rest of the text as is. Template text in all other sections should be removed before submitting your Pull Request.
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
@@ -271,5 +274,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- | 
-
+ |
