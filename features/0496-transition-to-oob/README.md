@@ -6,7 +6,7 @@
 - Status Note: In step 0 - community is reviewing the proposed approach. **Target Completion Date: 2020.06.15**
 - Supersedes:
 - Start Date: 2020-06-07
-- Tags: feature, community-update, [test-anomaly](/tags.md#test-anomaly)
+- Tags: feature, community-update
 
 ## Summary
 
@@ -247,14 +247,4 @@ The following table lists the status of various agent code bases and deployments
 
 Name / Link | Implementation Notes
 --- | ---
-[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | No steps completed
-[Aries Toolbox](https://github.com/hyperledger/aries-toolbox) | No steps completed
-[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | No steps completed
-[Streetcred.id](https://streetcred.id/) | No steps completed
-[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | No steps completed
-[Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | No steps completed
-[Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | No steps completed
-[Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | No steps completed
-[Verity](https://www.evernym.com/products/) | No steps completed
-[Pico Labs](http://picolabs.io/) | No steps completed
-[Libvcx](https://github.com/hyperledger/indy-sdk) | No steps completed
+ |
