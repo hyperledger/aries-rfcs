@@ -1,7 +1,7 @@
 # Aries RFC 0496: Transition to the Out of Band Protocol
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca)
-- Status: [Proposed](/README.md#proposed)
+- Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-06-10
 - Status Note: In step 0 - community is reviewing the proposed approach. **Target Completion Date: 2020.06.15**
 - Supersedes:
