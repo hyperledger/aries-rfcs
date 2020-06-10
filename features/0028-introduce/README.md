@@ -145,7 +145,7 @@ to an introduction proposal would be:
     "@id": "12345678900987654321",
     "label": "Robert",
     "goal": "To issue a Faber College Graduate credential",
-    "goal-code": "issue-vc",
+    "goal_code": "issue-vc",
     "handshake_protocols": [
       "https://didcomm.org/didexchange/1.0",
       "https://didcomm.org/connections/1.0"

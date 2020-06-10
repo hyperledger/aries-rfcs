@@ -104,7 +104,7 @@ The *invitee* sends the *inviter* a `complete` message that confirms the respons
 
 ## Out-of-Band Invitation
 
-The DID Exchange Protocol is proceeded by either knowledge of a resolvable DID, or by a `oob-invitation/%VER/invitation` or `oob-request/%VER/request` message from the [Out Of Band Protocols RFC](../0434-outofband/README.md). The information from either the resolved DID Document or the `service` attribute of the `invitation` or `request` message is used to construct the `request` message to start the protocol.
+The DID Exchange Protocol is proceeded by either knowledge of a resolvable DID, or by a `out-of-band/%VER/invitation` message from the [Out Of Band Protocols RFC](../0434-outofband/README.md). The information from either the resolved DID Document or the `service` attribute of the `invitation` message is used to construct the `request` message to start the protocol.
 
 ## 1. Exchange Request
 
@@ -148,14 +148,12 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 
 An invitation is presented in one of two forms:
 
-* An explicit out-of-band invitation or request with its own `@id`.
-* An implicit invitation contained in a DID document's [`service`](https://w3c-ccg.github.io/did-spec/#service-endpoints) attribute that conforms to the [DIDComm conventions](../0067-didcomm-diddoc-conventions/README.md#service-conventions).
+* An explicit [out-of-band invitation](../../features/0434-outofband/README.md#messages) with its own `@id`.
+* An implicit invitation contained in a DID document's [`service`](https://w3c-ccg.github.io/did-spec/#service-endpoints) attribute that conforms to the [DIDComm conventions](../../features/0067-didcomm-diddoc-conventions/README.md#service-conventions).
 
-When a `request` responds to an explicit invitation, its `~thread.pthid` MUST be equal to the `@id` property of the invitation.
+When a `request` responds to an explicit invitation, its `~thread.pthid` MUST be equal to the `@id` property of the invitation [as described in the out-of-band RFC](../../features/0434-outofband/README.md#correlating-responses-to-out-of-band-messages).
 
 When a `request` responds to an implicit invitation, its `~thread.pthid` MUST contain a [DID URL](https://w3c-ccg.github.io/did-spec/#dfn-did-url) that resolves to the specific `service` on a DID document that contains the invitation.
-
-_Note: The `request` message referred to above is the request message of the protocol used such as Connections or DID Exchange, NOT an Out-of-Band `request` message._
 
 **Example referencing an explicit invitation**
 
@@ -163,7 +161,10 @@ _Note: The `request` message referred to above is the request message of the pro
 {
   "@id": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
   "@type": "https://didcomm.org/didexchange/1.0/request",
-  "~thread": { "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" },
+  "~thread": { 
+      "thid": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
+      "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" 
+  },
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
@@ -185,7 +186,10 @@ _Note: The `request` message referred to above is the request message of the pro
 {
   "@id": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
   "@type": "https://didcomm.org/didexchange/1.0/request",
-  "~thread": { "pthid": "did:example:21tDAKCERh95uGgKbJNHYp#didcomm" },
+  "~thread": { 
+      "thid": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
+      "pthid": "did:example:21tDAKCERh95uGgKbJNHYp#didcomm" 
+  },
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
@@ -322,12 +326,12 @@ The exchange complete message is used to confirm the exchange to the _inviter_. 
   "@id": "12345678900987654321",
   "~thread": {
     "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>",
-    "pthid": "<The Parent Thread ID of the Out-of-Band invitation>"
+    "pthid": "<pthid used in request message>"
   }
 }
 ```
 
-The `pthid` is required in this message, even if present in the `request` method.
+The `pthid` is required in this message, and must be identical to the `pthid` used in the `request` message.
 
 After a message is sent, the *invitee* in the `complete` state. Receipt of a message puts the *inviter* into the `complete` state.
 
@@ -337,7 +341,7 @@ The exchange between the _inviter_ and the _invitee_ is now established. This re
 
 ## Exchange Reuse
 
-When an Out-of-Band Invitation (`oob-invitation`)  is received containing a public DID for which the _invitee_ already has a connection, the _invitee_ may use the `reuse` message in the protocol sent over the existing connection. The `pthid` passed in the `reuse` message allows the _inviter_ to correlate the invitation with the identified existing connection and then invoke any protocols desired based on that context.
+When an Out-of-Band Invitation (`invitation`)  is received containing a public DID for which the _invitee_ already has a connection, the _invitee_ may use the `reuse` message in the protocol sent over the existing connection. The `pthid` passed in the `reuse` message allows the _inviter_ to correlate the invitation with the identified existing connection and then invoke any protocols desired based on that context.
 
 #### Reuse Example
 
@@ -346,7 +350,7 @@ When an Out-of-Band Invitation (`oob-invitation`)  is received containing a publ
   "@type": "https://didcomm.org/didexchange/1.0/reuse",
   "@id": "12345678900987654321",
   "~thread": {
-    "pthid": "<The Parent Thread ID of the Out-of-Band invitation>"
+    "pthid": "<The @id of the Out-of-Band invitation>"
   }
 }
 ```
@@ -364,7 +368,7 @@ When the _inviter_ receives the `reuse` message, they must respond with a `reuse
   "@type": "https://didcomm.org/didexchange/1.0/reuse-accepted",
   "@id": "12345678900987654321",
   "~thread": {
-    "thid": "<The Message ID of the reuse message>"
+    "thid": "<The Message @id of the reuse message>"
   }
 }
 ```
