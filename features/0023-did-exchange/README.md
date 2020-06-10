@@ -118,7 +118,10 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 {
   "@id": "5678876542345",
   "@type": "https://didcomm.org/didexchange/1.0/request",
-  "~thread": { "pthid": "<id of invitation>" },
+  "~thread": { 
+      "thid": "5678876542345",
+      "pthid": "<id of invitation>"
+  },
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
@@ -350,7 +353,8 @@ When an Out-of-Band Invitation (`invitation`)  is received containing a public D
   "@type": "https://didcomm.org/didexchange/1.0/reuse",
   "@id": "12345678900987654321",
   "~thread": {
-    "pthid": "<The @id of the Out-of-Band invitation>"
+      "thid": "12345678900987654321",
+      "pthid": "<The @id of the Out-of-Band invitation>"
   }
 }
 ```
