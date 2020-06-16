@@ -409,13 +409,17 @@ Example referencing an explicit invitation:
   "@type": "https://didcomm.org/didexchange/1.0/request",
   "~thread": { "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" },
   "label": "Bob",
-  "connection": {
-    "did": "B.did@B:A",
-    "did_doc": {
-        "@context": "https://w3id.org/did/v1"
-        // DID Doc contents here.
-    }
-  }
+  "did": "B.did@B:A",
+  "did_doc~attach": {
+     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+     "jws": {
+        "header": {
+           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+        },
+        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      }
+   }
 }
 ```
 
