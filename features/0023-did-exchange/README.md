@@ -97,7 +97,7 @@ No errors are sent in timeout situations. If the inviter or invitee wishes to re
 
 ### Flow Overview
 
-The _inviter_ gives provisional information to the _invitee_ using an `invitation` message from the `oob-invitation` protocol.
+The _inviter_ gives provisional information to the _invitee_ using an `invitation` message from the `out-of-band` protocol.
 The _invitee_ uses provisional information to send a DID and DID Doc to the _inviter_ in a `request` message.
 The _inviter_ uses sent DID Doc information to send a DID and DID Doc to the _invitee_ in a `response` message.
 The *invitee* sends the *inviter* a `complete` message that confirms the response was received.
