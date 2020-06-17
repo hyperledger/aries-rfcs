@@ -130,9 +130,22 @@ If only the `request~attach` item is included, no new connection is expected to 
 
 If both the `handshake_protocols` and `request~attach` items are included in the message, the receiver should first establish a connection and then respond (using that connection) to one of the messages in the `request~attach` message. If a connection already exists between the parties, the receiver may respond immediately to the `request-attach` message using the established connection.
 
-Both the `goal_code` and `goal` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out-of-band message. `goal_code` is to specify a generic, protocol level outcome for sending the out-of-band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal_code` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
-
 While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `request~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the receiver **SHOULD** use the existing connection in responding to the `invitation`. If a selected `handshake_protocols` item is used by the receiver, it may have a specific "reuse this connection" message type.
+
+The following table summarizes the different forms of the out-of-band `invitation` message depending on the presence (or not) of the `handshake_protocols` item, the `request~attach` item and whether or not a connection between the agents already exists.
+
+`handshake_protocols` Present? | `request~attach` Present? | Existing connection? | Receiver action(s)
+--- | --- | --- | ---
+No | No | No | Impossible
+Yes | No | No | Uses the first supported protocol from `handshake_protocols` to make a new connection using the first supported `service` entry.
+No | Yes | No | Send a response to the first supported request message using the first supported `service` entry. Include a `~service` decorator if the sender is expected to respond.
+No | No | Yes | Impossible
+Yes | Yes | No | Use the first supported protocol from `handshake_protocols` to make a new connection using the first supported `service` entry, and then send a response message to the first supported attachment message using the new connection.
+Yes | No | Yes | Send a `reuse` message (if available) from the first supported protocol using the existing connection. Since the [RFC 160 Connection](../0160-connection-protocol/README.md) protocol does not have a `reuse` message, execute the `connections` protocol.
+No | Yes | Yes | Send a response message to the first supported request message using the existing connection.
+Yes | Yes | Yes | Send a response message to the first supported request message using the existing connection.
+
+Both the `goal_code` and `goal` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out-of-band message. `goal_code` is to specify a generic, protocol level outcome for sending the out-of-band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal_code` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
 
 #### The `service` Item
 
@@ -396,13 +409,17 @@ Example referencing an explicit invitation:
   "@type": "https://didcomm.org/didexchange/1.0/request",
   "~thread": { "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" },
   "label": "Bob",
-  "connection": {
-    "did": "B.did@B:A",
-    "did_doc": {
-        "@context": "https://w3id.org/did/v1"
-        // DID Doc contents here.
-    }
-  }
+  "did": "B.did@B:A",
+  "did_doc~attach": {
+     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+     "jws": {
+        "header": {
+           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+        },
+        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      }
+   }
 }
 ```
 
