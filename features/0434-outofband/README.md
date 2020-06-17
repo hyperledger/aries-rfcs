@@ -86,7 +86,7 @@ Worth noting is the first event of the `done` state, where the receiver may rece
 
 The out-of-band protocol a single message that is sent by the *sender*.
 
-#### Message Type: `https://didcomm.org/out-of-band/%VER/invitation`
+#### Invitation: `https://didcomm.org/out-of-band/%VER/invitation`
 
 ```jsonc
 {
@@ -130,7 +130,57 @@ If only the `request~attach` item is included, no new connection is expected to 
 
 If both the `handshake_protocols` and `request~attach` items are included in the message, the receiver should first establish a connection and then respond (using that connection) to one of the messages in the `request~attach` message. If a connection already exists between the parties, the receiver may respond immediately to the `request-attach` message using the established connection.
 
-While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `request~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the receiver **SHOULD** use the existing connection in responding to the `invitation`. If a selected `handshake_protocols` item is used by the receiver, it may have a specific "reuse this connection" message type.
+### Reuse Messages
+
+While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `request~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the receiver **MAY** use the existing connection in responding to the `invitation`. This is accomplished using the `reuse` and `reuse-accepted` messages.
+
+#### Reuse: `https://didcomm.org/out-of-band/%VER/reuse`
+
+```jsonc
+{
+  "@type": "https://didcomm.org/out-of-band/%VER/reuse",
+  "@id": "<id>",
+  "~thread": {
+      "thid": "<same as @id>",
+      "pthid": "<The @id of the Out-of-Band invitation>"
+  }
+}
+```
+
+The items in the message are:
+
+- `@type` - the DIDComm message type
+- `@id` - the unique ID of the message. 
+- `pthid` - the @id of the invitation message. This provides the context link for the _inviter_ to prompt additional protocol interactions.
+
+Sending or receiving this message does not change the state of the existing connection.
+
+When the _inviter_ receives the `reuse` message, they **MUST** respond with a `reuse-accepted` message to notify that _invitee_ that the request to reuse the existing connection is successful.
+
+#### Reuse Accepted:  `https://didcomm.org/out-of-band/%VER/reuse-accepted`
+
+```json
+{
+  "@type": "https://didcomm.org/out-of-band/%VER/reuse-accepted",
+  "@id": "<id>",
+  "~thread": {
+    "thid": "<The Message @id of the reuse message>",
+    "pthid": "<The @id of the Out-of-Band invitation>"
+  }
+}
+```
+
+The items in the message are:
+
+- `@type` - the DIDComm message type
+- `@id` - the unique ID of the message. 
+- `pthid` - the @id of the invitation message. This and the `thid` provides context for the _invitee_ to know the reuse attempt succeeded.
+
+If this message is not received by the _invitee_, they should use the regular process. This message is a mechanism by which the _invitee_ can detect a situation where the _inviter_ no longer has a record of the connection and is unable to decrypt and process the `reuse` message.
+
+After sending this message, the _inviter_ may continue any desired protocol interactions based on the context matched by the `pthid` present in the `reuse` message.
+
+### Responses
 
 The following table summarizes the different forms of the out-of-band `invitation` message depending on the presence (or not) of the `handshake_protocols` item, the `request~attach` item and whether or not a connection between the agents already exists.
 
@@ -141,7 +191,7 @@ Yes | No | No | Uses the first supported protocol from `handshake_protocols` to 
 No | Yes | No | Send a response to the first supported request message using the first supported `service` entry. Include a `~service` decorator if the sender is expected to respond.
 No | No | Yes | Impossible
 Yes | Yes | No | Use the first supported protocol from `handshake_protocols` to make a new connection using the first supported `service` entry, and then send a response message to the first supported attachment message using the new connection.
-Yes | No | Yes | Send a `reuse` message (if available) from the first supported protocol using the existing connection. Since the [RFC 160 Connection](../0160-connection-protocol/README.md) protocol does not have a `reuse` message, execute the `connections` protocol.
+Yes | No | Yes | Send a `reuse` message. 
 No | Yes | Yes | Send a response message to the first supported request message using the existing connection.
 Yes | Yes | Yes | Send a response message to the first supported request message using the existing connection.
 
