@@ -132,13 +132,15 @@ If both the `handshake_protocols` and `request~attach` items are included in the
 
 ### Reuse Messages
 
-While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `request~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the receiver **MAY** use the existing connection in responding to the `invitation`. This is accomplished using the `reuse` and `reuse-accepted` messages.
+While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `request~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the connection **MAY** be reused. The receiver may choose to not reuse the existing connection for privacy purposes and repeat a handshake protocol to receive a redundant connection. If the receiver desires to reuse the existing connection, they **SHOULD** attempt to do so with the `reuse` and `reuse-accepted` messages.
 
-#### Reuse: `https://didcomm.org/out-of-band/%VER/reuse`
+While the `invitation` message is passed unencrypted and out of band, both the `handshake-reuse` and `handshake-reuse-accepted` messages MUST be encrypted and transmitted as normal DIDComm messages.
+
+#### Reuse: `https://didcomm.org/out-of-band/%VER/handshake-reuse`
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/out-of-band/%VER/reuse",
+  "@type": "https://didcomm.org/out-of-band/%VER/handshake-reuse",
   "@id": "<id>",
   "~thread": {
       "thid": "<same as @id>",
@@ -155,13 +157,13 @@ The items in the message are:
 
 Sending or receiving this message does not change the state of the existing connection.
 
-When the _inviter_ receives the `reuse` message, they **MUST** respond with a `reuse-accepted` message to notify that _invitee_ that the request to reuse the existing connection is successful.
+When the _inviter_ receives the `handshake-reuse` message, they **MUST** respond with a `handshake-reuse-accepted` message to notify that _invitee_ that the request to reuse the existing connection is successful.
 
-#### Reuse Accepted:  `https://didcomm.org/out-of-band/%VER/reuse-accepted`
+#### Reuse Accepted:  `https://didcomm.org/out-of-band/%VER/handshake-reuse-accepted`
 
 ```json
 {
-  "@type": "https://didcomm.org/out-of-band/%VER/reuse-accepted",
+  "@type": "https://didcomm.org/out-of-band/%VER/handshake-reuse-accepted",
   "@id": "<id>",
   "~thread": {
     "thid": "<The Message @id of the reuse message>",
@@ -176,9 +178,9 @@ The items in the message are:
 - `@id` - the unique ID of the message. 
 - `pthid` - the @id of the invitation message. This and the `thid` provides context for the _invitee_ to know the reuse attempt succeeded.
 
-If this message is not received by the _invitee_, they should use the regular process. This message is a mechanism by which the _invitee_ can detect a situation where the _inviter_ no longer has a record of the connection and is unable to decrypt and process the `reuse` message.
+If this message is not received by the _invitee_, they should use the regular process. This message is a mechanism by which the _invitee_ can detect a situation where the _inviter_ no longer has a record of the connection and is unable to decrypt and process the `handshake-reuse` message.
 
-After sending this message, the _inviter_ may continue any desired protocol interactions based on the context matched by the `pthid` present in the `reuse` message.
+After sending this message, the _inviter_ may continue any desired protocol interactions based on the context matched by the `pthid` present in the `handshake-reuse` message.
 
 ### Responses
 
@@ -479,7 +481,7 @@ The response message from the receiver is encoded according to the standards of 
 
 ##### Reusing Connections
 
-If an out-of-band invitation has a public DID in the `service` block, and the _receiver_ determines it has previously established a connection with that public DID, the receiver **SHOULD** send its response on the established connection. It is expected that the provided `handshake_protocols` will have a message type that allows the receiver to reuse an existing connection.
+If an out-of-band invitation has a public DID in the `service` block, and the _receiver_ determines it has previously established a connection with that public DID, the receiver **MAY** send its response on the established connection. See [Reuse Messages](#reuse-messages) for details.
 
 ##### Receiver Error Handling
 
