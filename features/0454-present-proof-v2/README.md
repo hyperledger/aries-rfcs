@@ -116,7 +116,7 @@ An optional message sent by the prover to the verifier to initiate a proof prese
             "@id": "<attachment identifier>",
             "mime-type": "application/json",
             "data": {
-                "json": "<bytes for json>"
+                "json": "<json>"
             }
         }
     ]
@@ -143,63 +143,7 @@ For Hyperledger Indy the following `format` values may be used:
 
 - `hlindy-zkp-v1.0` -- The Indy ZKP Verifiable Credentials Model v1.0.
 
-The Hyperledger Indy v1.0 propose filter attachment schema is as follows:
-
-```jsonc
-{
-    "@id": "1234-1234-1325-5423",
-    "attributes": [
-        {
-            "name": "<attribute_name>",
-            "cred_def_id": "<cred_def_id>",
-            "mime-type": "<type>",
-            "value": "<value>",
-            "referent": "<referent>"
-        },
-        // more attributes
-    ],
-    "predicates": [
-        {
-            "name": "<attribute_name>",
-            "cred_def_id": "<cred_def_id>",
-            "predicate": "<predicate>",
-            "threshold": <threshold>
-        },
-        // more predicates
-    ]
-}
-```
-
-> To Do: Is this structure sufficient to achieve the desired level of negotiation?
-
-The structure identifies attributes and predicates that the holder might be able to present.
-
-The `attributes` key maps to a list (possibly empty to propose a presentation with no attributes) of specifications, one per attribute. Each such specification proposes its attribute's characteristics for creation within a presentation.
-
-* `name` key maps to the name of the attribute.
-* `cred_def_id` (optional) key maps to the credential definition identifier of the credential with the current attribute. Note that since it is the holder who creates the preview and the holder possesses the corresponding credential, the holder must know its credential definition identifier.
-* `mime-type` (optional) advises the verifier how to render a binary attribute, to judge its content for applicability before accepting a presentation containing it. Its value parses case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045). If `mime-type` is missing, its value is null.
-* `value` (optional) holds the value of the attribute to reveal in presentation:
-  * if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
-  * if `mime-type` is not null, then `value` is always a base64-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64-decoding.
-
-An attribute specification must specify a `value`, a `cred_def_id`, or both:
-
-* if `value` is present and `cred_def_id` is absent, the preview proposes a self-attested attribute;
-* if `value` and `cred_def_id` are both present, the preview proposes a verifiable claim to reveal in the presentation;
-* if `value` is absent and `cred_def_id` is present, the preview proposes a verifiable claim not to reveal in the presentation.
-
-The optional `referent` can be useful in specifying multiple-credential presentations. Its value indicates which credential
-will supply the attribute in the presentation. Sharing a `referent` value between multiple attribute specifications indicates that the holder's same credential supplies the attribute.
-
-Any attribute specification using a `referent` must also have a `cred_def_id`; any attribute specifications sharing a common `referent` value must all have the same `cred_def_id` value.
-
-The mandatory `predicates` key maps to a list (possibly empty to propose a presentation with no predicates) of predicate specifications, one per predicate. Each such specification proposes its predicate's characteristics for creation within a presentation.
-
-* `name` is the name of the attribute.
-* `cred_def_id` is the credential definition identifier of the credential with the current attribute. Note that since it is the holder who creates the proposal and the holder possesses the corresponding credential, the holder must know its credential definition identifier.
-* `predicate` is the predicate operator, one of `"<"`, `"<="`, `">="`, `">"`.
-* `threshold` is the threshold value for the predicate.
+The Hyperledger Indy v1.0 proposal attachment contains an Indy presentation request. The structure is the same as used in the Indy attachment to the `request-presentation` message. The structure comes directly from libindy and is base64-encoded. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
 
 ### Request Presentation
 
@@ -342,4 +286,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- |  |
+ |
