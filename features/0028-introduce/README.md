@@ -141,12 +141,12 @@ to an introduction proposal would be:
   "~thread": {"thid": "df3b699d-3aa9-4fd0-bb67-49594da545bd"},
   "approve": true,
   "oob-message": {
-    "@type": "https://didcomm.org/oob-invitation/1.0/invitation",
+    "@type": "https://didcomm.org/out-of-band/1.0/invitation",
     "@id": "12345678900987654321",
     "label": "Robert",
     "goal": "To issue a Faber College Graduate credential",
-    "goal-code": "issue-vc",
-    "protocols": [
+    "goal_code": "issue-vc",
+    "handshake_protocols": [
       "https://didcomm.org/didexchange/1.0",
       "https://didcomm.org/connections/1.0"
     ],
