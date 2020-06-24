@@ -3,10 +3,10 @@
 - Authors: Daniel Hardman
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-05-01
-- Status Note: Reached FCP status in Indy. Implemented in at least two codebases. 
+- Status Note: Reached FCP status in Indy. Implemented in at least two codebases.
 - Supersedes: [Indy RFC PR #73](https://github.com/hyperledger/indy-hipe/pull/73)
 - Start Date: 2018-12-17
-- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -240,4 +240,5 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 
+[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET [MISSING test results](/tags.md#test-anomaly)
+[Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) |

@@ -16,12 +16,12 @@ This is not strictly required, but it is good hygiene.
 ### Name and Version
 
 This RFC defines the `abandon_connection` protocol, version 1.x, as identified by the
-following [PIURI](../../../concepts/0003-protocols/uris.md#piuri):
+following [PIURI](../../../concepts/0003-protocols/README.md#piuri):
 
     did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/abandon_connection/1.0
 
 Of course, subsequent evolutions of the protocol will replace `1.0` with
-an appropriate update per [semver](../../../concepts/0003-protocols/semver.md)
+an appropriate update per [semver](../../../concepts/0003-protocols/README.md#semver-rules-for-protocols)
 rules.
 
 ### Roles

@@ -73,7 +73,7 @@ In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-
 <blockquote>
 Note: This diagram was made in draw.io. To make changes:
 
-- upload the drawing HTML from this folder to the [draw.io](https://draw.io) site (Import From...GitHub), 
+- upload the drawing HTML from this folder to the [draw.io](https://draw.io) site (Import From...GitHub),
 - make changes,
 - export the picture and HTML to your local copy of this repo, and
 - submit a pull request.
@@ -94,7 +94,7 @@ The offer and proposal messages are part of an optional negotiation phase and ma
 An optional message sent by the potential Holder to the Issuer to initiate the protocol or in response to a `offer-credential` message when the Holder wants some adjustments made to the credential data offered by Issuer.
 
 >Note: In Hyperledger Indy, where the `request-credential` message can **only** be sent in response to an `offer-credential` message, the `propose-credential` message is the only way for a potential Holder to initiate the workflow.
- 
+
  Schema:
 
 ```json
@@ -217,7 +217,7 @@ Description of fields:
 * `comment` -- an optional field that provides human readable information about the issued credential, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credentials~attach` -- an array of attachments containing the issued credentials.
   * For Indy, the attachment contains data from libindy about credential to be issued, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
-  
+
 If the issuer wants an acknowledgement that the issued credential was accepted, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0317: Please ACK Decorator](../0317-please-ack/README.md).
 
 ##### Encoding Claims for Indy-based Verifiable Credentials
@@ -332,4 +332,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- |  |
+[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET [MISSING test results](/tags.md#test-anomaly)
