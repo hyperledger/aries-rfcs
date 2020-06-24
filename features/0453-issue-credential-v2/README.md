@@ -189,6 +189,7 @@ Message Format:
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/%VER/offer-credential",
     "@id": "<uuid of offer message>",
+    "replacement_id": "<issuer unique id>",
     "comment": "<some comment>",
     "credential_preview": <json-ld object>,
     "formats" : [
@@ -211,6 +212,7 @@ Message Format:
 
 Description of fields:
 
+* `replacement_id` -- an optional field to help coordinate credential replacement. When this is present and matches the `replacement_id` of a previously issued credential, it may be used to inform the recipient that the offered credential is considered to be a replacement to the previous credential. This value is unique to the issuer. It must not be used in a credential presentation.
 * `comment` -- an optional field that provides human readable information about this Credential Offer, so the offer can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview-credential);
 * `formats` -- contains an entry for each `offers~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
@@ -240,6 +242,7 @@ Message Format:
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/%VER/request-credential",
     "@id": "<uuid of request message>",
+    "replacement_id": "<issuer unique id>",
     "comment": "<some comment>",
     "formats" : [
         {
@@ -287,6 +290,7 @@ Message Format:
 {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/%VER/issue-credential",
     "@id": "<uuid of issue message>",
+    "replacement_id": "<issuer unique id>",
     "comment": "<some comment>",
     "formats" : [
         {
@@ -308,10 +312,11 @@ Message Format:
 
 Description of fields:
 
+* `replacement_id` -- an optional field that provides an identifier used to manage credential replacement. When this value is present and matches the `replacement_id` of a previously issued credential, this credential may be considered as a replacement for that credential. This value is unique to the issuer. It must not be used in a credential presentation.
 * `comment` -- an optional field that provides human readable information about the issued credential, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `formats` -- contains an entry for each `credentials~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
-* * `credentials~attach` -- an array of attachments containing the issued credentials.
-  
+* `credentials~attach` -- an array of attachments containing the issued credentials.
+
 If the issuer wants an acknowledgement that the issued credential was accepted, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0317: Please ACK Decorator](../0317-please-ack/README.md).
 
 ##### Credentials Attachment Registry
@@ -421,7 +426,6 @@ See [RFC 0036 Issue Credential, v1.x](../0036-issue-credential/README.md).
 - References to the expected Ack and Problem Report messages should be added.
 - The ['~please-ack` decorator](../0317-please-ack/README.md) needs to move to Accepted so that it is appropriate to be referenced here.
 - We might need to propose a new MIME type for credential (the same way as .docx is not processed as generic xml). See [this issue](https://github.com/w3c/vc-data-model/issues/421) against the W3C/vc-data-model.
-- It is a common practice when changing some attributes in credential to revoke the old credential and issue a new one. It might be useful to have an element in the `offer-credential` message to indicate a connection between a now revoked credential and the new credential being offered.
 
 ## Implementations
 
