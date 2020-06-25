@@ -51,6 +51,8 @@ When we have good answers to this question, we can address feature requests like
 
 Trust frameworks generally begin as human-friendly content. They have to be created, reviewed, and agreed upon by experts from various disciplines: legal, business, humanitarian, government, trade groups, advocacy groups, etc. Developers can help by surfacing how rules are (or are not) susceptible to modeling in formal data structures. This can lead to an iterative process, where data structures and human conversations create refinement pressure on each other until the framework is ready for release.
 
+[TODO: The following blurb of JSON is one way to embody what we're after. I can imagine other approaches but haven't thought them through in detail. I'm less interested in the details of the JSON, for now, than in the concepts we're trying to communicate and automate. So have a conversation about whether this format works for us, or should be tweaked/replaced.]
+
 Each problem domain will probably have unique requirements. Therefore, we start with a general governance framework recipe, but plan for extension. We use JSON-LD for this purpose. Here we present a simple example for the problem domain of university credentials in Germany. It manifests just the components of a governance framework that are common across all contexts; additional JSON-LD `@context` values can be added to introduce more structure as needed. (See [Field Details](#field-details) for explanatory comments.)
 
 ```jsonc
@@ -70,7 +72,7 @@ Each problem domain will probably have unique requirements. Therefore, we start 
     "topics": ["education"],
     "jurisdictions": ["de", "eu"],
     "geos": ["Deutschland"],
-    "roles": ["accreditor", "school", "graduate", "anyone"],
+    "roles": ["accreditor", "school", "graduate", "safe-verifier"],
     "privileges": [
         {"name": "accredit", "uri": "http://kmk.org/tf/accredit"},
         {"name": "issue-edu", "uri": "http://kmk.org/tf/issue-edu"},
@@ -102,7 +104,7 @@ Each problem domain will probably have unique requirements. Therefore, we start 
         },
         {"grant": "hold-edu", "when": {
                 // Proof request specifying that holder is a human.
-                // The presence of this item in the TF means that
+                // The presence of this item in the GF means that
                 // conforming issuers are supposed to verify
                 // humanness before issuing. Issuers can impose
                 // additional criteria; this is just the base
@@ -114,10 +116,18 @@ Each problem domain will probably have unique requirements. Therefore, we start 
             "duties": ["accept-kmk-tos"]
         },
         // In this governance framework, anyone can request proof based
-        // on credentials. No criteria are tested to map an entity
-        // to the "anyone" role.
+        // on credentials, as long as they demonstrate that they possess
+        // an "approved verifier" credential.
         {
-            "grant": "request-proof", "thus": "anyone",
+            "grant": "request-proof", "when": {
+                // Proof request specifying that the party must possess
+                // a credential that makes them an approved verifier.
+                // The presence of this item in the GF means that
+                // provers should, at a minimum, verify the verifiers
+                // in this way before sharing proof. Provers can impose
+                // additional criteria of their own; this is just the
+                // base requirement.
+            }, "thus": "safe-verifier",
             "duties": ["GDPR-edu-verif", "accept-kmk-tos"]
         },
         // Is there an authority that audits interactions?
@@ -181,6 +191,14 @@ Or, alternatively:
 ![issuer is NOT behaving properly](issuer-not-ok.png)
 
 In either case, proof of the issuer's qualifications was requested automatically, using canned criteria (see the second item in the governance framework's `rules` array).
+
+A similar kind of check can be performed on verifiers:
+
+![verifier is behaving properly](verifier-ok.png)
+
+Or, alternatively:
+ 
+![verifier is NOT behaving properly](verifier-not-ok.png)
 
 Trust framework knowledge can also be woven into other parts of a UI, as for example:
 
