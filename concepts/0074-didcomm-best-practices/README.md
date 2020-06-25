@@ -35,7 +35,7 @@ RFCs about protocols and DIDComm behaviors follow commonly understood convention
 
 Names show up in lots of places in our work. We name RFCs, concepts
 defined in those RFCs, [protocols](../0003-protocols/README.md),
-[message types](../0003-protocols/uris.md#mturi), keys in JSON, and
+[message types](../0003-protocols/README.md#mturi), keys in JSON, and
 much more.
 
 The two most important best practices with names are:
@@ -105,7 +105,7 @@ RFCs that define a protocol should be named in the form `<do something>-protocol
 be clear; a protocol name like "connection" is [too vague because you can do lots of things
 with connections](https://docs.google.com/presentation/d/11UVwJ2xqMmXyXr2BVsjz53S-tbMUhD1tmkhzfN7KMRw/edit#slide=id.g5b1be5d0c1_0_66).
 
-Protocol RFCs need to be [versioned thoughtfully](../../concepts/0003-protocols/semver.md).
+Protocol RFCs need to be [versioned thoughtfully](../../concepts/0003-protocols/README.md#semver-rules-for-protocols).
 However, we do not put version numbers in a protocl RFC's folder name. Rather, the RFC
 folder contains all versions of the protocol, with the latest version documented in
 README.md, and earlier versions documented in subdocs named according to version, as

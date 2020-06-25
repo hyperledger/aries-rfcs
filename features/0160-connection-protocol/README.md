@@ -386,7 +386,7 @@ The connection response message is used to complete the connection. This message
 }
 ```
 
-The above message is required to be signed as described in HIPE ???. The `connection` attribute above will be base64URL encoded and included as part of the `sig_data` attribute of the signed field. The result looks like this:
+The above message is required to be signed as described in [RFC 0234 Signature Decorator](../../features/0234-signature-decorator/README.md). The `connection` attribute above will be base64URL encoded and included as part of the `sig_data` attribute of the signed field. The result looks like this:
 
 ```json
 {
