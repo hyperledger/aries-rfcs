@@ -65,16 +65,14 @@ The roles are `verifier` and `prover`.  The `verifier` requests the presentation
 
 For the most part, these states map onto the transitions shown in the choreography diagram in obvious ways. However, a few subtleties are worth highlighting:
 
-* The final transitions for the verifier (Send Presentation Reject, Send Presentation Ack, and Receive Presentation Reject) all result in a final `done` state, but this `done` may or may not be the verifiers intended outcome. We may want to tweak this in a future version of the protocol.
+* The final transitions for the verifier (Send Presentation Reject, Send Presentation Ack, and Receive Presentation Reject) all result in a final `done` state, but this `done` may or may not be the verifier's intended outcome. We may want to tweak this in a future version of the protocol.
 
 > To Do: Should the previous sentence be addressed? Removed?
 
 * A similar situation exists with the final transitions for the Prover and its final transitions (Send Presentation Reject, Receive Presentation Ack, and Receive Presentation Reject).
 * When a Prover makes a (counter-)proposal, it transitions to the `proposal-sent` state. This state is only present by implication in the choreography diagram; it essentially equates to the null or begin state in that the Prover does nothing until a presentation request arrives, triggering the leftmost transition for the Prover.
 
-Errors might occur in various places. For example, a Verifier might time out waiting for the Prover to supply a presentation. Errors trigger a `problem-report`. In this version of the protocol, all errors cause the state of both parties (the sender and the receiver of the `problem-report`) to revert to `null` (meaning it is no longer engaged in the protocol at all). Future versions of the protocol may allow more granular choices.
-
-> To Do: Should the previous sentence be addressed in this version? Should it be removed?
+Errors might occur in various places. For example, a Verifier might time out waiting for the Prover to supply a presentation. Errors trigger a `problem-report`. In this version of the protocol, all errors cause the state of both parties (the sender and the receiver of the `problem-report`) to transition to `abandoned` (meaning it is no longer engaged in the protocol at all).
 
 ### Choreography Diagram
 
@@ -92,7 +90,7 @@ The present proof protocol consists of these messages:
 
 In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-report-problem/README.md) messages are adopted into the protocol for confirmation and error handling.
 
-The messages that include `~attach` attachments may use either form of the embedded attachment&mdash;`base64` or `json`. In the examples below, one or the other is arbitrarily used.
+The messages that include `~attach` attachments may use any form of the embedded attachment. In the examples below, the forms of the attachment are arbitrary.
 
 The `~attach` array is to be used to enable a single presentation to be requested/delivered in different verifiable presentation formats. The ability to have multiple attachments must not be used to request/deliver multiple different presentations in a single instance of the protocol.
 
@@ -102,7 +100,7 @@ An optional message sent by the prover to the verifier to initiate a proof prese
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/%VER/propose-presentation",
+    "@type": "http://didcomm.org/present-proof/%VER/propose-presentation",
     "@id": "<uuid-propose-presentation>",
     "comment": "some comment",
     "formats" : [
@@ -151,7 +149,7 @@ From a verifier to a prover, the `request-presentation` message describes values
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/%VER/request-presentation",
+    "@type": "http://didcomm.org/present-proof/%VER/request-presentation",
     "@id": "<uuid-request>",
     "comment": "some comment",
     "formats" : [
@@ -194,7 +192,7 @@ This message is a response to a Presentation Request message and contains signed
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/%VER/presentation",
+    "@type": "http://didcomm.org/present-proof/%VER/presentation",
     "@id": "<uuid-presentation>",
     "comment": "some comment",
     "formats" : [
@@ -208,7 +206,8 @@ This message is a response to a Presentation Request message and contains signed
             "@id": "<attachment identifier>",
             "mime-type": "application/json",
             "data": {
-                "base64": "<bytes for base64>"
+                "sha256": "f8dca1d901d18c802e6a8ce1956d4b0d17f03d9dc5e4e1f618b6a022153ef373",
+                "links": ["https://ibb.co/TtgKkZY"]
             }
         }
     ]
@@ -251,7 +250,7 @@ A gist of test value pairs can be found [here](https://gist.github.com/swcurran/
 
 ### Present Proof Ack
 
-A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](../0015-acks/README.md). The definition of "successful" from a business sense is up to the verifier.
+A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](../0015-acks/README.md). The definition of "successful" from a business sense is up to the verifier
 
 ### Present Proof Problem Report
 
