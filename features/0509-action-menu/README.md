@@ -209,8 +209,6 @@ is a viable solution
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-*Implementation Notes* [may need to include a link to test results](README.md#accepted).
-
 Name / Link | Implementation Notes
 --- | ---
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | [MISSING test results](/tags.md#test-anomaly)
