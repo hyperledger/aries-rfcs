@@ -38,7 +38,7 @@ Whilst the protocol is defined here as uni-directional (i.e `requester` to `resp
 
 There are two roles in the action-menu protocol: `requester` and `responder`.
 
-The `requester` asks the `responder` for menu definitions, presents them to a user, and intitates subsequent action items from the menu through further requests to the `responder`.
+The `requester` asks the `responder` for menu definitions, presents them to a user, and initiates subsequent action items from the menu through further requests to the `responder`.
 
 The `responder` presents an initial menu definition containing actionable elements to a `requestor` and then responds to subsequent action requests from the menu.  
 
