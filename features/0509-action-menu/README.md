@@ -1,12 +1,16 @@
-# Aries RFC 0509: Action Menu Protocol 0.9
+# Aries RFC 0509: Action Menu Protocol
 
-- Authors: [Andrew Whitehead],[Stephen Curran]
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-12-26 (date you submit your PR)
-- Status Note: (explanation of current status)  
+- Authors: [Andrew Whitehead],[Stephen Curran],[John Court]
+- Status: [DEMONSTRATED](/README.md#demonstrated)
+- Since: 2020-07-02 
+- Status Note: Implemented and demonstrated in the [Aries Cloud Agent Python](https://github.com/hyperledger/aries-cloudagent-python) code base 
 - Supersedes: 
-- Start Date: 2020-06-24 (date you started working on this idea)
+- Start Date: 2020-06-24
 - Tags: [feature](/tags.md#feature)
+- Protocol Name: action-menu
+- Version: 1.0
+- URI: `https://didcomm.org/action-menu/%VER`
+
 
 ## Summary
 
@@ -17,6 +21,10 @@ The action-menu protocol allows one Agent to present a set of heirarchical menus
 Discovery of a peer Agent's capabilities or service offerings is currently reliant on knowledge obtained out-of-band.  There is no in-band DIDComm supported protocol for querying a peer to obtain a human freindly menu of their capabilities or service offerings. Whilst this protocol doesn't offer ledger wide discovery capabilities, it will allow one User Agent connected to another, to present a navigable menu and request offered services. The protocol also provides an interface definition language to define action menu display, selection and request submission.
 
 ## Tutorial
+
+### Name and Version
+
+`action-menu`, version 1.0
 
 ### Key Concepts
 
@@ -64,7 +72,7 @@ A `requestor` is expected to display only one active _menu_ per connection when 
 
 ```jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/action-menu/1.0/menu",
+  "@type": "https://didcomm.org/action-menu/%VER/menu",
   "@id": "5678876542344",
   "title": "Welcome to IIWBook",
   "description": "IIWBook facilitates connections between attendees by verifying attendance and distributing connection invitations.",
@@ -103,7 +111,7 @@ Menu options may define a form property, which would direct the `requester` user
 
 ```jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/action-menu/1.0/menu",
+  "@type": "https://didcomm.org/action-menu/%VER/menu",
   "@id": "5678876542347",
   "~thread": {
     "thid": "5678876542344"
@@ -149,7 +157,7 @@ In addition to menus being pushed by the `responder`, the root menu can be re-re
 
 ```jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/action-menu/1.0/menu-request",
+  "@type": "https://didcomm.org/action-menu/%VER/menu-request",
   "@id": "5678876542345"
 }
 ```
@@ -162,7 +170,7 @@ The response to a _perform_ message can be any type of agent message, including 
 
 ```jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/action-menu/1.0/perform",
+  "@type": "https://didcomm.org/action-menu/%VER/perform",
   "@id": "5678876542346",
   "~thread": {
     "thid": "5678876542344"
@@ -179,14 +187,11 @@ The response to a _perform_ message can be any type of agent message, including 
 
 ## Drawbacks
 
-Why should we *not* do this?
+N/A 
 
 ## Rationale and alternatives
 
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not
-choosing them?
-- What is the impact of not doing this?
+N/A 
 
 ## Prior art
 
