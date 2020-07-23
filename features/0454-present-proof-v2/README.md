@@ -47,6 +47,8 @@ The roles are `verifier` and `prover`.  The `verifier` requests the presentation
 
 ### States
 
+The following states are defined and included in the state transition table below.
+
 #### States for Verifier
 
 * request-sent
@@ -63,22 +65,23 @@ The roles are `verifier` and `prover`.  The `verifier` requests the presentation
 * abandoned
 * done
 
-For the most part, these states map onto the transitions shown in the choreography diagram in obvious ways. However, a few subtleties are worth highlighting:
+[![state machine matrix](present-proof-states.png)](https://docs.google.com/spreadsheets/d/1XThILA0_ZiH3voBv5M8-GIt1We9t_Rlg0xaY5jmNVIA/edit)
 
-* The final transitions for the verifier (Send Presentation Reject, Send Presentation Ack, and Receive Presentation Reject) all result in a final `done` state, but this `done` may or may not be the verifier's intended outcome. We may want to tweak this in a future version of the protocol.
+For the most part, these states map onto the transitions shown in both the state transition table above, and in the choreography diagram ([below](#choreography-diagram)) in obvious ways. However, a few subtleties are worth highlighting:
 
-> To Do: Should the previous sentence be addressed? Removed?
+* The final states for both the prover and verifier are `done` or `abandoned`, and once reached, no further updates to the protocol instance are expected.
 
-* A similar situation exists with the final transitions for the Prover and its final transitions (Send Presentation Reject, Receive Presentation Ack, and Receive Presentation Reject).
+* The `presentation-ack` is sent or not based on the value of `will_confirm` in the `request-presentation`.
+
+* The `presentation-ack` message should reflect the business validation of the proof (does the proof satisfy the business need?) not just the cryptographic verification. Ideally, those are as tightly aligned as possible.
+
 * When a Prover makes a (counter-)proposal, it transitions to the `proposal-sent` state. This state is only present by implication in the choreography diagram; it essentially equates to the null or begin state in that the Prover does nothing until a presentation request arrives, triggering the leftmost transition for the Prover.
 
-Errors might occur in various places. For example, a Verifier might time out waiting for the Prover to supply a presentation. Errors trigger a `problem-report`. In this version of the protocol, all errors cause the state of both parties (the sender and the receiver of the `problem-report`) to transition to `abandoned` (meaning it is no longer engaged in the protocol at all).
+* Errors might occur in various places. For example, a Prover might decide not to respond to a `presentation-request` or a verifier may time out waiting for the Prover to supply a `presentation`. Errors should trigger a `problem-report`. In this version of the protocol, all errors cause the state of both parties (the sender and the receiver of the `problem-report`) to transition to the terminal `abandoned` state (meaning it is no longer engaged in the protocol at all).
 
 ### Choreography Diagram
 
-![present proof](credential-presentation.png)
-
-> To Do: Should the Ack or Problem Report be **required** to transition the state to "done"? This is not done in v1.0, and not done in the connection-less presentation use of the v1.0 protocol.
+![present proof](presentation-choreography.png)
 
 ## Messages
 
@@ -152,6 +155,7 @@ From a verifier to a prover, the `request-presentation` message describes values
     "@type": "http://didcomm.org/present-proof/%VER/request-presentation",
     "@id": "<uuid-request>",
     "comment": "some comment",
+    "will_confirm": "true",
     "formats" : [
         {
             "attach_id" : "<attach@id value>",
@@ -173,6 +177,7 @@ From a verifier to a prover, the `request-presentation` message describes values
 Description of fields:
 
 * `comment` -- a field that provides some human readable information about this request for a presentation.
+* `will_confirm` -- an optional field that defaults to `"false"` to indicate that the verifier will or will not send a post-presentation confirmation `ack` message
 * `formats` -- contains an entry for each `request_presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation request format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
 * `request_presentations~attach` -- an array of attachments containing the acceptable verifiable presentation requests.
 
@@ -220,6 +225,8 @@ Description of fields:
 * `formats` -- contains an entry for each `presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
 * `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
 
+A prover may include the [`~please_ack` decorator](../0015-acks/README.md#requesting_acks) to request a `presentation-ack` if the verifier has not indicated they will send a `presentation-ack`.
+
 #### Presentations Attachment Registry
 
 ##### Hyperledger Indy Presentation Attachment
@@ -248,13 +255,13 @@ An example implementation in Python can be found [here](https://github.com/hyper
 
 A gist of test value pairs can be found [here](https://gist.github.com/swcurran/78e5a9e8d11236f003f6a6263c6619a6).
 
-### Present Proof Ack
+### Presentation Ack
 
-A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](../0015-acks/README.md). The definition of "successful" from a business sense is up to the verifier
+A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](../0015-acks/README.md). The definition of "successful" from a business sense is up to the verifier.
 
-### Present Proof Problem Report
+### Problem Report
 
-A message from the verifier to the prover that follows the `presentation` message to indicate that the `Present Proof` protocol was completed unsuccessfully and is now in the `done` state. The message is an adopted `problem-report` from the [RFC 0015 report-problem protocol](../0035-report-problem/README.md). The definition of "unsuccessful" from a business sense is up to the verifier. The elements of the `problem-report` message can provide information to the prover about why the protocol instance was unsuccessful.
+A message from the verifier to the prover that follows the `presentation` message to indicate that the `Present Proof` protocol was completed unsuccessfully and is now in the `abandoned` state. The message is an adopted `problem-report` from the [RFC 0015 report-problem protocol](../0035-report-problem/README.md). The definition of "unsuccessful" from a business sense is up to the verifier. The elements of the `problem-report` message can provide information to the prover about why the protocol instance was unsuccessful.
 
 Either party may send a `problem-report` message earlier in the flow to terminate the protocol before it's normal conclusion.
 
