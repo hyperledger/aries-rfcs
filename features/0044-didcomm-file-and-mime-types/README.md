@@ -138,7 +138,7 @@ The default action for DIDComm Messages should be to
 `Sign to *.dse`, and `Find definition of protocol`.
 
 As a general rule, DIDComm messages that are being sent in production use cases of DID communication should be stored
-in encrypted form (`*.dee`) at rest. There are cases where this might not be preferred, e.g., providing documentation of the
+in encrypted form (`*.dee`) at least. There are cases where this might not be preferred, e.g., providing documentation of the
 format of message or during a debugging scenario using
 [message tracing](../0034-message-tracing/README.md).
 However, these are exceptional cases. Storing meaningful `*.dm` files
