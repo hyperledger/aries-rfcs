@@ -342,45 +342,6 @@ After a message is sent, the *invitee* in the `complete` state. Receipt of a mes
 
 The exchange between the _inviter_ and the _invitee_ is now established. This relationship has no trust associated with it. The next step should be the exchange of proofs to build trust sufficient for the purpose of the relationship.
 
-## Exchange Reuse
-
-When an Out-of-Band Invitation (`invitation`)  is received containing a public DID for which the _invitee_ already has a connection, the _invitee_ may use the `reuse` message in the protocol sent over the existing connection. The `pthid` passed in the `reuse` message allows the _inviter_ to correlate the invitation with the identified existing connection and then invoke any protocols desired based on that context.
-
-#### Reuse Example
-
-```json
-{
-  "@type": "https://didcomm.org/didexchange/1.0/reuse",
-  "@id": "12345678900987654321",
-  "~thread": {
-      "thid": "12345678900987654321",
-      "pthid": "<The @id of the Out-of-Band invitation>"
-  }
-}
-```
-
-The `pthid` is required in this message. It provides the context link for the _inviter_ to prompt additional protocol interactions.
-
-Sending or receiving this message does not change the state of the existing connection.
-
-When the _inviter_ receives the `reuse` message, they must respond with a `reuse-accepted` message to notify that _invitee_ that the request to reuse the existing connection is successful.
-
-#### Reuse Accepted Example
-
-```json
-{
-  "@type": "https://didcomm.org/didexchange/1.0/reuse-accepted",
-  "@id": "12345678900987654321",
-  "~thread": {
-    "thid": "<The Message @id of the reuse message>"
-  }
-}
-```
-
-If this message is not received by the _invitee_, they should use the regular exchange flow described above. This message is a mechanism by which the _invitee_ can detect a situation where the _inviter_ no longer has a record of the connection and is unable to decrypt and process the `reuse` message.
-
-After sending this message, the _inviter_ may continue any desired protocol interactions based on the context matched by the `pthid` present in the `reuse` message.
-
 #### Peer DID Maintenance
 
 When Peer DIDs are used in an exchange, it is likely that both Alice and Bob will want to perform some relationship maintenance such as key rotations. Future RFC updates will add these maintenance features.
