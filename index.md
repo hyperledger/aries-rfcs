@@ -95,6 +95,7 @@
 * [0445: Aries Rich Schema Credential Definition](features/0446-rich-schema-cred-def/README.md) (2020-03-16 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0445: Aries Rich Schema Mapping](features/0445-rich-schema-mapping/README.md) (2020-03-16 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0453: Issue Credential Protocol 2.0](features/0453-issue-credential-v2/README.md) (2020-03-23 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
+* [0509: Action Menu Protocol 0.9](features/0509-action-menu/README.md) (2019-12-26 (date you submit your PR), [1 impl](features/0509-action-menu/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 
 ## [RETIRED](README.md#retired)
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
