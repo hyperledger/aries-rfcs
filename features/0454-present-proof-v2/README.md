@@ -217,7 +217,7 @@ Description of fields:
 * `formats` -- contains an entry for each `presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
 * `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
 
-A prover may include the [`~please_ack` decorator](../0015-acks/README.md#requesting_acks) to request a `ack-presentation` if the verifier has not indicated they will send a `ack-presentation`.
+A prover may include the [`~please_ack` decorator](../0015-acks/README.md#requesting-acks) to request a `ack-presentation` if the verifier has not indicated they will send a `ack-presentation`.
 
 #### Presentations Attachment Registry
 
