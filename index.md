@@ -40,6 +40,7 @@
 * [0051: Decentralized Key Management](concepts/0051-dkms/README.md) (2019-03-29, [2 impls](concepts/0051-dkms/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0113: Question Answer Protocol 0.9](features/0113-question-answer/README.md) (2019-07-05, [2 impls](features/0113-question-answer/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2019-09-27, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
+* [0509: Action Menu Protocol](features/0509-action-menu/README.md) (2020-07-02 , [1 impl](features/0509-action-menu/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 
 ## [PROPOSED](README.md#proposed)
 * [0013: Overlays](concepts/0013-overlays/README.md) (2019-05-20 &mdash; [`concept`](/tags.md#concept))
@@ -92,10 +93,9 @@
 * [0430: Machine-Readable Governance Frameworks](concepts/0430-machine-readable-governance-frameworks/README.md) (2020-02-24 &mdash; [`concept`](/tags.md#concept))
 * [0434: Out-of-Band Protocols](features/0434-outofband/README.md) (2020-03-01 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0440: KMS Architectures ](concepts/0440-kms-architectures/README.md) (2020-03-06 &mdash; [`concept`](/tags.md#concept))
-* [0445: Aries Rich Schema Credential Definition](features/0446-rich-schema-cred-def/README.md) (2020-03-16 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0445: Aries Rich Schema Mapping](features/0445-rich-schema-mapping/README.md) (2020-03-16 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
+* [0445: Aries Rich Schema Credential Definition](features/0446-rich-schema-cred-def/README.md) (2020-03-16 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0453: Issue Credential Protocol 2.0](features/0453-issue-credential-v2/README.md) (2020-03-23 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
-* [0509: Action Menu Protocol 0.9](features/0509-action-menu/README.md) (2019-12-26 (date you submit your PR), [1 impl](features/0509-action-menu/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 
 ## [RETIRED](README.md#retired)
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
