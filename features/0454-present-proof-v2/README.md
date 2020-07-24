@@ -71,9 +71,9 @@ For the most part, these states map onto the transitions shown in both the state
 
 * The final states for both the prover and verifier are `done` or `abandoned`, and once reached, no further updates to the protocol instance are expected.
 
-* The `presentation-ack` is sent or not based on the value of `will_confirm` in the `request-presentation`.
+* The `ack-presentation` is sent or not based on the value of `will_confirm` in the `request-presentation`. A verifier may send an `ack-presentation` message in response to the prover including the `~please_ack` decorator in the `presentation` message.
 
-* The `presentation-ack` message should reflect the business validation of the proof (does the proof satisfy the business need?) not just the cryptographic verification. Ideally, those are as tightly aligned as possible.
+* The `ack-presentation` message should reflect the business validation of the proof (does the proof satisfy the business need?) not just the cryptographic verification. Ideally, those are as tightly aligned as possible.
 
 * When a Prover makes a (counter-)proposal, it transitions to the `proposal-sent` state. This state is only present by implication in the choreography diagram; it essentially equates to the null or begin state in that the Prover does nothing until a presentation request arrives, triggering the leftmost transition for the Prover.
 
@@ -138,13 +138,9 @@ Negotiation prior to the delivery of the presentation can be done using the `pro
 
 #### Propose Attachment Registry
 
-##### Hyperledger Indy Proposal Attachment
-
-For Hyperledger Indy the following `format` values may be used:
-
-- `hlindy-zkp-v1.0` -- The Indy ZKP Verifiable Credentials Model v1.0.
-
-The Hyperledger Indy v1.0 proposal attachment contains an Indy presentation request. The structure is the same as used in the Indy attachment to the `request-presentation` message. The structure comes directly from libindy and is base64-encoded. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
+Presentation Format | Format Value | Link to Attachment Format | Comment |
+--- | --- | --- | --- | 
+Hyperledger Indy | hlindy-zkp-v1.0 | [Libindy Presentation Request API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214) | _To Do_: Change link to point to Indy Docs
 
 ### Request Presentation
 
@@ -183,13 +179,9 @@ Description of fields:
 
 #### Presentation Request Attachment Registry
 
-##### Hyperledger Indy Presentation Request Attachment
-
-For Hyperledger Indy, the following `format` values may be used:
-
-- `hlindy-zkp-v1.0` -- The Indy ZKP Verifiable Credentials Model v1.0.
-
-The Hyperledger Indy v1.0 presentation request attachment contains data from libindy about the presentation request, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
+Presentation Format | Format Value | Link to Attachment Format | Comment |
+--- | --- | --- | --- | 
+Hyperledger Indy | hlindy-zkp-v1.0 | [Libindy Presentation Request API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214) | _To Do_: Change link to point to Indy Docs
 
 ### Presentation
 
@@ -225,37 +217,15 @@ Description of fields:
 * `formats` -- contains an entry for each `presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
 * `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
 
-A prover may include the [`~please_ack` decorator](../0015-acks/README.md#requesting_acks) to request a `presentation-ack` if the verifier has not indicated they will send a `presentation-ack`.
+A prover may include the [`~please_ack` decorator](../0015-acks/README.md#requesting_acks) to request a `ack-presentation` if the verifier has not indicated they will send a `ack-presentation`.
 
 #### Presentations Attachment Registry
 
-##### Hyperledger Indy Presentation Attachment
+Presentation Format | Format Value | Link to Attachment Format | Comment |
+--- | --- | --- | --- | 
+Hyperledger Indy | hlindy-zkp-v1.0 | [Libindy Presentation API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404) | _To Do_: Change link to point to Indy Docs, including claim encoding
 
-For Hyperledger Indy, the following `format` values may be used:
-
-- `hlindy-zkp-v1.0` -- The Indy ZKP Verifiable Credentials Model v1.0.
-
-The Hyperledger Indy v1.0 presentation attachment contains data from libindy that is the presentation, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404).
-
-###### Claim Encoding in Hyperledger Indy
-
-Claims in Hyperledger Indy-based verifiable credentials are put into the credential in two forms, `raw` and `encoded`. `raw` is the actual data value, and `encoded` is the (possibly derived) integer value that is used in presentations. At this time, Indy does not take an opinion on the method used for encoding the raw value. This will change with the Rich Schema work that is underway in the Indy/Aries community, where the encoding method will be part of the credential metadata available from the public ledger.
-
-Until the Rich Schema mechanism is deployed, the Aries issuers and verifiers must agree on an encoding method so that the verifier can check that the `raw` value returned in a presentation corresponds to the proven `encoded` value. The following is the encoding algorithm that MUST be used by Issuers when creating credentials and SHOULD be verified by Verifiers receiving presentations:
-
-- keep any 32-bit integer as is
-- for data of any other type:
-  - convert to string (use string "None" for null)
-  - encode via utf-8 to bytes
-  - apply SHA-256 to digest the bytes
-  - convert the resulting digest bytes, big-endian, to integer
-  - stringify the integer as a decimal.
-
-An example implementation in Python can be found [here](https://github.com/hyperledger/aries-cloudagent-python/blob/0000f924a50b6ac5e6342bff90e64864672ee935/aries_cloudagent/messaging/util.py#L106).
-
-A gist of test value pairs can be found [here](https://gist.github.com/swcurran/78e5a9e8d11236f003f6a6263c6619a6).
-
-### Presentation Ack
+### Ack Presentation
 
 A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](../0015-acks/README.md). The definition of "successful" from a business sense is up to the verifier.
 
@@ -273,7 +243,7 @@ Details are covered in the [Tutorial](#tutorial) section.
 
 The Indy format of the proposal attachment as proposed above does not allow nesting of logic along the lines of "A and either B or C if D, otherwise A and B", nor cross-credential options such as proposing a legal name issued by either (for example) a specific financial institution or government entity.
 
-The verifiable presentation standardization work being conducted in parallel to this in DIF and the W3C Credentials Community Group (CCG) should be included in at least the `Registry` sections of this document, and ideally used to eliminate the need for presentation format-specific options.
+The verifiable presentation standardization work being conducted in parallel to this in DIF and the W3C Credentials Community Group (CCG) should be included in at least the `Registry` tables of this document, and ideally used to eliminate the need for presentation format-specific options.
 
 ## Rationale and alternatives
 
@@ -284,7 +254,6 @@ The existing [RFC 0036 Present Proof](../0037-present-proof/README.md) protocol 
 ## Unresolved questions
 
 - There might need to be a way to associate a payment with the present proof protocol.
-- A number of `To Do` items are embedded in the content of the RFC.
 
 ## Implementations
 
