@@ -132,7 +132,11 @@ If both the `handshake_protocols` and `request~attach` items are included in the
 
 ### Reuse Messages
 
-While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `request~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the connection **MAY** be reused. The receiver may choose to not reuse the existing connection for privacy purposes and repeat a handshake protocol to receive a redundant connection. If the receiver desires to reuse the existing connection, they **SHOULD** attempt to do so with the `reuse` and `reuse-accepted` messages.
+While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `request~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the connection **MAY** be reused. The receiver may choose to not reuse the existing connection for privacy purposes and repeat a handshake protocol to receive a redundant connection. 
+
+If the receiver desires to reuse the existing connection and a `request~attach` message is present, the receiver should respond to the attached message using the existing connection.
+
+If the receiver desires to reuse the existing connection and no request~attach message is present, the receiver **SHOULD** attempt to do so with the `reuse` and `reuse-accepted` messages. This will notify the _inviter_ that the existing connection should be used, along with the context that can be used for follow-on interactions.
 
 While the `invitation` message is passed unencrypted and out of band, both the `handshake-reuse` and `handshake-reuse-accepted` messages MUST be encrypted and transmitted as normal DIDComm messages.
 
@@ -193,7 +197,7 @@ Yes | No | No | Uses the first supported protocol from `handshake_protocols` to 
 No | Yes | No | Send a response to the first supported request message using the first supported `service` entry. Include a `~service` decorator if the sender is expected to respond.
 No | No | Yes | Impossible
 Yes | Yes | No | Use the first supported protocol from `handshake_protocols` to make a new connection using the first supported `service` entry, and then send a response message to the first supported attachment message using the new connection.
-Yes | No | Yes | Send a `reuse` message. 
+Yes | No | Yes | Send a `handshake-reuse` message. 
 No | Yes | Yes | Send a response message to the first supported request message using the existing connection.
 Yes | Yes | Yes | Send a response message to the first supported request message using the existing connection.
 
