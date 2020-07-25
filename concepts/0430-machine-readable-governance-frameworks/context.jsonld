@@ -1,0 +1,17 @@
+{
+  "@context": {
+    "name": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#name",
+    "version": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#version",
+    "logo": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#logo",
+    "description": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#description",
+    "docs_uri": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#docs_uri",
+    "topics": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#topics",
+    "geos": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#geos",
+    "jurisdictions": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#jurisdictions",
+    "roles": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#roles",
+    "privileges": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#privileges",
+    "duties": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#duties",
+    "define": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#define",
+    "rules": "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/README.md#rules"
+  }
+}

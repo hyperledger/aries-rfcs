@@ -57,14 +57,14 @@ do with her invitation after that is not under her control, and is outside
 the scope of the introduction.
 
 This suggests an important insight about the relationship between the
-introduce protocol and the [DID exchange protocol](
-../0023-did-exchange/README.md):
+introduce protocol and the [Out-Of-Band protocols](
+../0434-outofband/README.md):
 *they overlap*. The invitation to form a relationship, which
-begins the DID Exchange protocol, is also the final step in an
+begins the Out-Of-Band protocols, is also the final step in an
 introduction.
 
 Said differently, *the goal of the introduce protocol is to start the
-DID Exchange protocol*.
+Out-Of-Band* protocols.
 
 ##### Transferring Trust
 
@@ -85,7 +85,7 @@ are both __introducees__.
 ### States
 
 In a successful introduction, the introducer state progresses from
-`[start] -> arranging -> delivering -> confirming (optional) -> [done]`. Confirming is accomplished with an ACK to an introducee to let them know that their invitation was forwarded.
+`[start] -> arranging -> delivering -> confirming (optional) -> [done]`. Confirming is accomplished with an ACK to an introducee to let them know that their out-of-band message was forwarded.
 
 Meanwhile, each introducee progresses from `[start] -> deciding -> waiting
 -> [done]`.
@@ -140,13 +140,17 @@ to an introduction proposal would be:
   "@id": "283e15b5-a3f7-43e7-bac8-b75e4e7a0a25",
   "~thread": {"thid": "df3b699d-3aa9-4fd0-bb67-49594da545bd"},
   "approve": true,
-  "invitation": {
-    "@type": "https://didcomm.org/connections/1.0/invitation",
+  "oob-message": {
+    "@type": "https://didcomm.org/out-of-band/1.0/invitation",
     "@id": "12345678900987654321",
     "label": "Robert",
-    "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
-    "serviceEndpoint": "https://example.com/endpoint",
-    "routingKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"]
+    "goal": "To issue a Faber College Graduate credential",
+    "goal_code": "issue-vc",
+    "handshake_protocols": [
+      "https://didcomm.org/didexchange/1.0",
+      "https://didcomm.org/connections/1.0"
+    ],
+    "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
   }
 }
 ```
@@ -163,24 +167,22 @@ A simpler response, also valid, might look like this:
 ```
 
 The difference between the two forms is whether the response contains
-a valid `didexchange/../invitation` message. Normally, it should--but sometimes,
-an introducee may not be able to (or may not want to) share a DIDComm
-endpoint to facilitate the introduction. In such cases, the stripped-down
-variant may be the right choice. See the [Advanced Use Cases](#advanced-use-cases)
-section for more details.
+a valid out-of-band message (see [RFC 0434](../0434-outofband/README.md)).
+Normally, it should--but sometimes, an introducee may not be able to (or may
+not want to) share a DIDComm endpoint to facilitate the introduction. In such
+cases, the stripped-down variant may be the right choice. See the
+[Advanced Use Cases](#advanced-use-cases) section for more details.
 
 At least one of the more complete variants must be received by an
 introducer to successfully complete the introduction, because the final step in
-the protocol is to begin the [DID Exchange protocol](
-../../features/0023-did-exchange/README.md)
-by forwarding the `invitation` message from one introducee
-to the other.
+the protocol is to begin one of the [Out-Of-Band protocols](../0434-outofband/README.md)
+by forwarding the message from one introducee to the other.
 
-##### `didexchange/invitation`
+###### Note on the ouf-of-band messages
 
-This message is not a member of the `introductions/1.0` protocol;
-it is not even adopted. It belongs to the `didexchange/1.0` protocol, and
-is no different from the message that two parties would generate when one
+These messages are not a member of the `introductions/1.0` protocol;
+they are not even adopted. They belong to the out-of-band protocols, and
+are no different from the message that two parties would generate when one
 invites the other with no intermediary, except that:
 
 * It is delivered by the introducer, not by either of the introducees.
@@ -188,11 +190,11 @@ invites the other with no intermediary, except that:
 its parent thread.
 * If introducees already have DIDComm capabilities, it can be delivered over
 standard DIDComm channels. If one of the introducees does NOT have a DID-based
-channel with the introducer, then the invitation must be delivered to that
-introducee/invitee, using the non-DIDComm channel. [TODO: is there a way for
+channel with the introducer, then the message must be delivered to that
+introducee using the non-DIDComm channel. [TODO: is there a way for
 the introducer, rather than the other introducee, to "sponsor" the introducee
 that needs SSI onboarding?]
-* If the invitation is delivered over a DIDComm channel, it is unusual
+* If the message is delivered over a DIDComm channel, it is unusual
 in that it is from a party other than the one that owns the channel.
 
 ##### `request`
@@ -236,8 +238,8 @@ Some specific examples follow.
 
 #### One introducee can't do DIDComm
 
-The [DID Exchange Protocol]( ../../features/0023-did-exchange/README.md)
-allows the invited party to be onboarded (acquire software and an agent)
+The [Out-Of-Band Protocols]( ../0434-outofband/README.md)
+allow the invited party to be onboarded (acquire software and an agent)
 as part of the workflow.
 
 ![diagram](uneven.png)
@@ -246,14 +248,14 @@ Introductions support this use case, too. In such a case, the introducer
 sends a standard `proposal` to the introducee that DOES have DIDComm
 capabilities, but conveys the equivalent of a `proposal` over a
 non-DIDComm channel to the other introducee. The `response` from the
-DIDComm-capable introducee must include a `didexchange/invitation` with
+DIDComm-capable introducee must include an out-of-band message with
 a deep link for onboarding, and this is sent to the introducee that needs
 onboarding.
 
 #### Neither introducee can do DIDComm
 
-In this case, the introducer first goes through onboarding via the
-DID Exchange protocol with one introducee. Once that introducee can do DIDComm,
+In this case, the introducer first goes through onboarding via one of the
+Out-Of-Band protocols with one introducee. Once that introducee can do DIDComm,
 the previous workflow is used.
 
 #### Introducer doesn't have DIDComm capabilities
@@ -268,7 +270,7 @@ other that way.
 In this case, the introducer conveys the same information that a
 `proposal` would contain, using non-DIDComm channels. As long as one
 of the introducees sends back some kind of response that includes
-approval and a `didexchange/invitation`, the invitation can be
+approval and an out-of-band message, the message can be
 delivered. The entire interaction is DIDComm-less.
 
 #### One introducee has a public DID with a standing invitation

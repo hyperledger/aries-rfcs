@@ -1,26 +1,24 @@
-# Roles, Participants, Parties, and Controllers
+### Roles, Participants, Parties, and Controllers
 
-## Roles
+#### Roles
 
-The __roles__ in a protocol are the perspectives (responsibilities, privileges) that parties take on an
-interaction. 
+The __roles__ in a protocol are the perspectives (responsibilities, privileges) that parties take i an
+interaction.
 
 This perspective is manifested in three general ways:
 
  * by the expectations that a party takes on in a protocol (ex. a role may be expected to do something to start a protocol).
  * by the messages that a party can and does use in the course of the protocol (some messages may be reserved for a single role, while other may used by some if not all roles).
  * by the state and the transition rules
- 
+
 Like parties, roles are normally known at the start of the protocol but this is not a requirement.
 
-In an auction protocol, there are only two roles--*auctioneer*
-and *bidder*--even though there may be many parties involved.
+In an auction protocol, there are only two roles&mdash;_auctioneer_ and _bidder_&mdash;even though there may be many parties involved.
 
-## Participants
+#### Participants
 
-The __participants__ in a protocol are the agents that consume and/or emit
-[plaintext application-level messages](
-https://github.com/hyperledger/indy-hipe/tree/master/text/0026-agent-file-format#agent-plaintext-messages-ap)
+The __participants__ in a protocol are the agents that send and/or receive
+[plaintext application-level messages](../../concepts/../features/0044-didcomm-file-and-mime-types/README.md)
 that embody the protocol's interaction. Alice, Bob, and
 Carol may each have a cloud agent, a laptop, and a phone; if they engage in an
 introduction protocol using phones, then the agents on their phones are the participants.
@@ -32,7 +30,7 @@ be __bystanders__). When a protocol is complete, the participant agents know abo
 outcome; they may need to synchronize or replicate their state before other agents of the
 parties are aware.
 
-## Parties
+#### Parties
 
 The __parties__ to a protocol are the entities directly responsible for achieving the protocol's goals.
 When a protocol is high-level, parties are typically people or organizations; as protocols become lower-level,
@@ -68,7 +66,7 @@ Normally, the parties that are involved in a protocol also participate in the in
 case. Consider a gossip protocol, two parties may be talking about a third party. In this case, the third party would
 not even know that the protocol was happening and would definitely not participate.
 
-## Controllers
+#### Controllers
 
 The __controllers__ in a protocol are entities that make decisions. They may or may not be direct parties.
 

@@ -22,7 +22,7 @@ We need a way to perform these workflows with DIDComm.
 
 ### Name and version
 
-This is the "Help Me Discover" protocol, version 1.0. It is uniquely identified by the following [PIURI](../../concepts/0003-protocols/uris.md#piuri):
+This is the "Help Me Discover" protocol, version 1.0. It is uniquely identified by the following [PIURI](../../concepts/0003-protocols/README.md#piuri):
 
     https://didcomm.org/help-me-discover/1.0
 
