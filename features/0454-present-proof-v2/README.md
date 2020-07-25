@@ -22,7 +22,7 @@ A protocol supporting a general purpose verifiable presentation exchange regardl
 
 ## Motivation
 
-We need a standard protocol for a verifier to request a presentation from a prover, and for the prover to respond by presenting a proof to the verifier. We doing that exchange, we want to provide a mechanism for the participants to negotiate the underlying format and content of the proof.
+We need a standard protocol for a verifier to request a presentation from a prover, and for the prover to respond by presenting a proof to the verifier. When doing that exchange, we want to provide a mechanism for the participants to negotiate the underlying format and content of the proof.
 
 ## Tutorial
 
@@ -103,7 +103,7 @@ An optional message sent by the prover to the verifier to initiate a proof prese
 
 ```json
 {
-    "@type": "http://didcomm.org/present-proof/%VER/propose-presentation",
+    "@type": "https://didcomm.org/present-proof/%VER/propose-presentation",
     "@id": "<uuid-propose-presentation>",
     "comment": "some comment",
     "formats" : [
@@ -148,7 +148,7 @@ From a verifier to a prover, the `request-presentation` message describes values
 
 ```json
 {
-    "@type": "http://didcomm.org/present-proof/%VER/request-presentation",
+    "@type": "https://didcomm.org/present-proof/%VER/request-presentation",
     "@id": "<uuid-request>",
     "comment": "some comment",
     "will_confirm": "true",
@@ -189,7 +189,7 @@ This message is a response to a Presentation Request message and contains signed
 
 ```json
 {
-    "@type": "http://didcomm.org/present-proof/%VER/presentation",
+    "@type": "https://didcomm.org/present-proof/%VER/presentation",
     "@id": "<uuid-presentation>",
     "comment": "some comment",
     "formats" : [
