@@ -146,6 +146,12 @@ Description of attributes:
 
 ##### Propose Attachment Registry
 
+Credential Format | Format Value | Link to Attachment Format | Comment |
+--- | --- | --- | --- | 
+DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`propose-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#propose-credential-attachment-format) | 
+
+> TODO substitute the section on Indy below for a new row in the registry table above
+
 ###### Hyperledger Indy
 
 For Hyperledger Indy the following `format` values may be used:
@@ -224,6 +230,12 @@ It is possible for an Issuer to add a [`~timing.expires_time` decorator](../0032
 
 ##### Offer Attachment Registry
 
+Credential Format | Format Value | Link to Attachment Format | Comment |
+--- | --- | --- | --- | 
+DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`offer-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#offer-credential-attachment-format) | 
+
+> TODO substitute the section on Indy below for a new row in the registry table above
+
 ###### Hyperledger Indy
 
 For Hyperledger Indy, the following `format` values may be used:
@@ -271,6 +283,12 @@ Description of Fields:
 This message may have a [`~payment-receipt` decorator](../0075-payment-decorators/README.md#payment_receipt) to prove to the Issuer that the potential Holder has satisfied a payment requirement. See the [payment section below](#payments-during-credential-exchange).
 
 ##### Request Attachment Registry
+
+Credential Format | Format Value | Link to Attachment Format | Comment |
+--- | --- | --- | --- | 
+DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`request-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#request-credential-attachment-format) | 
+
+> TODO substitute the section on Indy below for a new row in the registry table above
 
 ###### Hyperledger Indy
 
@@ -320,6 +338,11 @@ Description of fields:
 If the issuer wants an acknowledgement that the issued credential was accepted, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0317: Please ACK Decorator](../0317-please-ack/README.md).
 
 ##### Credentials Attachment Registry
+
+Credential Format | Format Value | Link to Attachment Format | Comment |
+--- | --- | --- | --- | 
+
+> TODO substitute the section on Indy below for a new row in the registry table above
 
 ###### Hyperledger Indy
 
