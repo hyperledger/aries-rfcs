@@ -60,8 +60,6 @@ Tracing is requested by decorating the JSON plaintext of an DIDComm message (whi
  and handled at its final destination) with the
 `~trace` attribute. Here is the simplest possible example:
 
-[![example of ~trace](msg-with-trace.png)](msg-with-trace.json)
-
 ```
 {
   "@type": "did:sov:BzCBs...;spec/routing/1.0/forward",
@@ -100,8 +98,6 @@ even if it is expired or invalid. The rationale for this choice is:
 ### Trace Reports
 
 The body of the HTTP request (the _trace report_) is a JSON document that looks like this:
-
-[![trace report](trace-report.png)](trace-report.json)
 
 ```
 {
