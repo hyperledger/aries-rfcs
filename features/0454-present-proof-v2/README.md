@@ -141,6 +141,7 @@ Negotiation prior to the delivery of the presentation can be done using the `pro
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 Hyperledger Indy | hlindy-zkp-v1.0 | [Libindy Presentation Request API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214) | _To Do_: Change link to point to Indy Docs
+DIF Presentation Exchange | `dif/presentation-exchange/definitions@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#propose-presentation-attachment-format) | 
 
 ### Request Presentation
 
@@ -182,6 +183,7 @@ Description of fields:
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 Hyperledger Indy | hlindy-zkp-v1.0 | [Libindy Presentation Request API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214) | _To Do_: Change link to point to Indy Docs
+DIF Presentation Exchange | `dif/presentation-exchange/definitions@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#request-presentation-attachment-format) | 
 
 ### Presentation
 
@@ -224,6 +226,7 @@ A prover may include the [`~please_ack` decorator](../0015-acks/README.md#reques
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 Hyperledger Indy | hlindy-zkp-v1.0 | [Libindy Presentation API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404) | _To Do_: Change link to point to Indy Docs, including claim encoding
+DIF Presentation Exchange | `dif/presentation-exchange/submission@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#presentation-attachment-format) | 
 
 ### Ack Presentation
 
