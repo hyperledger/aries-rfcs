@@ -64,7 +64,7 @@ Tracing is requested by decorating the JSON plaintext of an DIDComm message (whi
 
 ```
 {
-  "@type": "did:sov:...",
+  "@type": "did:sov:BzCBs...;spec/routing/1.0/forward",
   "@id": "abc-def-...",
   "msg": "U2Vl...",
   "~trace": {
@@ -75,7 +75,8 @@ Tracing is requested by decorating the JSON plaintext of an DIDComm message (whi
 ```
 
 The `"target"` can refer to a url (as above) or the term `"log"`, which is a request to
-append trace information to the standard log file.
+append trace information to the standard log file.  (Information can then be manually
+collated from agents.)
 
 This example asks the handler of the message to perform an HTTP POST of a __trace report__
 about the message to the URI `http://example.com/tracer`.
@@ -104,12 +105,12 @@ The body of the HTTP request (the _trace report_) is a JSON document that looks 
 
 ```
 {
-  "@type": "did:sov:.../1.0/trace_report",
+  "@type": "did:sov:BzCBs...;spec/1.0/trace_report",
   "msg_id": "abc-def-...df",
   "thread_id": "hij-klm-nop-...qr",
   "handler": "did:sov:1234abcd#3",
   "ellapsed_milli": 27,
-  "traced_type": "did:sov:...",
+  "traced_type": "did:sov:BzCBs...;spec/routing/1.0/forward",
   "str_time": "2018-03-27 18:23:45.123Z",
   "timestamp": "1234567890.123456",
   "outcome": "OK ..."
@@ -126,7 +127,7 @@ connection when the reports are analyzed together.
 
 ![tracing unrelated messages](trace-xyz.png)
 
-To solve this problem, traced messages use an ID convention that permits ordering.
+To solve this problem, traced messages *may* use an ID convention that permits ordering.
 Assume that the inner application message has a base ID, _X_. Containing
 messages (e.g., `forward` messages) have IDs in the form _X_.1, _X_.2, _X_.3,
 and so forth -- where numbers represent the order in
@@ -216,8 +217,9 @@ plaintext of the report, as utf8.
 * `@type`: Should always be `"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tracing/1.0/trace_report"`,
    or some evolved version thereof. Required for version control and to support trace sinks
    that process other HTTP payloads as well.
-* `for_id`: The ID of the message that the handler is looking at when it composes the
+* `msg_id`: The ID of the message that the handler is looking at when it composes the
    trace report. Required.
+* `thread_id`: The ID of the protocol thread.  Required.
 * `handler`: A string that identifies the handler in a way that's useful for troubleshooting purposes.
    For example, it might identify a particular agent by DID+keyref, or it might be a friendly
    string like "iPhone" or "AgentsRUs Cloud Agent, geocaching extension v1.3.7". Optional but
@@ -226,9 +228,10 @@ plaintext of the report, as utf8.
    the trace report? If the same handler emits more than one trace report, how long has it
    been since the last trace was composed? Optional but encouraged.
 * `traced_type`: What was the message type of the traced message? Optional but encouraged.
-* `report_time`: What was the UTC timestamp of the system clock of the handler
+* `str_time`: What was the UTC timestamp of the system clock of the handler
    when the handler composed the trace report? ISO 8601 format with millisecond precision.
    Optional but encouraged.
+* `timestamp`: Value fo the `str_time` field in milliseconds (UNIX time format).
 * `outcome`: A string that describes the outcome of the message handling. The string MUST
   begin with one of the following tokens: `"OK"` (meaning the handler completed its processing
   successfully; `"ERR"` (the handler failed), or `"PEND"` (the handler is still working on the
