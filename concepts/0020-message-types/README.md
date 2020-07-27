@@ -29,7 +29,7 @@ Types are specified within a message using the `@type` attribute:
 }
 ```
 
-Message types are URIs that resolve to developer documentation for the message type, as described in [Protocol URIs](../0003-protocols/uris.md).
+Message types are URIs that resolve to developer documentation for the message type, as described in [Protocol URIs](../0003-protocols/README.md#message-type-and-protocol-identifier-uris).
 
 We recommend that message types are ledger resolvable DIDs with an endpoint specifier and path. This allows for the document locations to be updated to a new location for a stable definition.
 
@@ -219,7 +219,7 @@ Suggestions: Ambiguous names, unnecessary nesting, symbols in names.
 - [Daniel Hardman's Agent Summit Notes](https://docs.google.com/document/d/1TP_7MKfuIrlY3rz4cz_tuuCFi7hdUWifeKwr5h-QTYM/edit)
 - [Stephen Curran's presentation summarizing the Agent Summit](https://docs.google.com/presentation/d/1l-po2IKVhXZHKlgpLba2RGq0Md9Rf19lDLEXMKwLdco/edit)
 - [DID Spec](https://w3c.github.io/did-core/)
-- [Semantic Versioning](../0003-protocols/semver.md)
+- [Semantic Versioning](../0003-protocols/README.md#semver-rules-for-protocols)
 - [DIDComm Message Anatomy](../0021-didcomm-message-anatomy/README.md)
 
 ## Implementations

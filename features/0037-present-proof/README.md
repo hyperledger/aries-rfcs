@@ -3,7 +3,7 @@
 - Authors: Nikita Khateev
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-05-28
-- Status Note:  See [RFC 0036](../0036-issue-credential/README.md) for the issue credential part of the same Indy HIPE PR.
+- Status Note:  This v1.x version of the protocol will be replaced by version v2 defined in [RFC 454](../0454-present-proof-v2/README.md).
 - Supersedes: [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md); also [Credential Exchange 0.1 -- IIW 2019](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view)
 - Start Date: 2019-01-30
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
@@ -30,7 +30,7 @@ This protocol is about the messages to support the presentation of verifiable cl
 
 Diagrams in this protocol were made in draw.io. To make changes:
 
-- upload the drawing HTML from this folder to the [draw.io](https://draw.io) site (Import From...GitHub), 
+- upload the drawing HTML from this folder to the [draw.io](https://draw.io) site (Import From...GitHub),
 - make changes,
 - export the picture and HTML to your local copy of this repo, and
 - submit a pull request.
@@ -209,7 +209,7 @@ The optional `value`, when present, holds the value of the attribute to reveal i
 * if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
 * if `mime-type` is not null, then `value` is always a base64-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64-decoding.
 
-An attribute specification must specify a `value`, a `cred_def_id`, or both: 
+An attribute specification must specify a `value`, a `cred_def_id`, or both:
 
 * if `value` is present and `cred_def_id` is absent, the preview proposes a self-attested attribute;
 * if `value` and `cred_def_id` are both present, the preview proposes a verifiable claim to reveal in the presentation;
@@ -217,7 +217,7 @@ An attribute specification must specify a `value`, a `cred_def_id`, or both:
 
 ##### Referent
 
-The optional `referent` can be useful in specifying multiple-credential presentations. Its value indicates which credential 
+The optional `referent` can be useful in specifying multiple-credential presentations. Its value indicates which credential
 will supply the attribute in the presentation. Sharing a `referent` value between multiple attribute specifications indicates that the holder's same credential supplies the attribute.
 
 Any attribute specification using a `referent` must also have a `cred_def_id`; any attribute specifications sharing a common `referent` value must all have the same `cred_def_id` value (see [Credential Definition Identifier](#credential-definition-identifier) above).
@@ -262,7 +262,7 @@ The mandatory `"cred_def_id"` key maps to the credential definition identifier o
 
 ##### Predicate
 
-The mandatory `"predicate"` key maps to the predicate operator: `"<"`, `"<="`, `">="`, `">"`. 
+The mandatory `"predicate"` key maps to the predicate operator: `"<"`, `"<="`, `">="`, `">"`.
 
 ##### Threshold Value
 
@@ -307,4 +307,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- |  |
+[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET [MISSING test results](/tags.md#test-anomaly)

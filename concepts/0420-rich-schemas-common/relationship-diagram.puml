@@ -22,11 +22,11 @@ pres_def "<b>0..n" --> "<b>0..n" map
 pres_def "<b>0..n" --> "<b>0..n" cred_def
 
 verif_cred "<b>1" --> "<b>0..n" cred_def
-verif_cred "<b>1..n" --> "<b>0..n" rich_schema
+verif_cred "<b>1" --> "<b>0..n" rich_schema
 
 cred_def "<b>1" --> "<b>0..n" map
 
-map "<b>1..n" --> "<b>0..n" rich_schema
+map "<b>1" --> "<b>0..n" rich_schema
 map "<b>1..n" --> "<b>0..n" enc
 
 rich_schema "<b>0..n" -up-> rich_schema

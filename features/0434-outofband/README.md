@@ -9,11 +9,11 @@
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 - Protocol Name: Out-of-Band Invitation, Out-of-Band Request
 - Version: 1.0, 1.0
-- URI: `http://didcomm.org/oob-invitation/%VER`, `http://didcomm.org/oob-request/%VER`
+- URI: `http://didcomm.org/out-of-band/%VER`
 
 ## Summary
 
-Out-of-band protocols are used when you wish to engage with another agent and you don't have a DIDComm connection to use for the interaction.
+The Out-of-band protocol is used when you wish to engage with another agent and you don't have a DIDComm connection to use for the interaction.
 
 ## Motivation
 
@@ -33,7 +33,7 @@ In the existing Connections and DID Exchange `invitation` handling, the _inviter
 
 ### Handling of all Out-of-Band Messages
 
-We currently have two sets of out-of-band messages that cannot be delivered via DIDComm because there is no channel. We'd like to align those messages into a single "out of band" RFC so that their handling can be harmonized inside an agent, and a common QR code handling mechanism can be used.
+We currently have two sets of out-of-band messages that cannot be delivered via DIDComm because there is no channel. We'd like to align those messages into a single "out of band" protocol so that their handling can be harmonized inside an agent, and a common QR code handling mechanism can be used.
 
 ### URLs and QR Code Handling
 
@@ -43,14 +43,12 @@ We'd like to have the specification of QR handling harmonized into a single RFC 
 
 ### Key Concepts
 
-There are currently two out-of-band (OOB) protocols: one for inviting someone to connect, and one for processing one-off "ephemeral" messages. They solve different problems, but their handling has so much in common that it's convenient to put them in the same RFC and describe them together. If we find other OOB use cases, we'll probably add them to this RFC as well. We nonetheless declare them as separate protocols so they can be versioned separately, queried separately in the Feature Discovery protocol, and so forth.
-
-Out-of-band protocols are used when you don't know if you have a connection with another user. This could be because you are trying to establish a new connection with that agent, you have connections but don't know who the other party is, or if you want to have a connection-less interaction. Since there is no DIDComm connection to use for the messages of this protocol, the messages are plaintext and sent out of band, such as via a QR code. Since the delivery of out-of-band messages will often be via QR codes, this RFC also covers the use of QR codes.
+The Out-of-band protocol are used when an agent doesn't know if it has a connection with another agent. This could be because you are trying to establish a new connection with that agent, you have connections but don't know who the other party is, or if you want to have a connection-less interaction. Since there is no DIDComm connection to use for the messages of this protocol, the messages are plaintext and sent out of band, such as via a QR code, in an email message or any other available channel. Since the delivery of out-of-band messages will often be via QR codes, this RFC also covers the use of QR codes.
 
 Two well known use cases for using an out-of-band protocol are:
 
-- A user on a web browser wants to execute a protocol (for example, to issue a verifiable credential) between the website operator's agent and a user's agent. To enable the execution of the protocol, the two agents must have a connection. An out-of-band message is used to trigger the creation of a new, or the reuse an existing, connection.
-- A website operator wants to request something from a user on their site where there is no (known) connection with the user.
+- A user on a web browser wants to execute a protocol (for example, to issue a verifiable credential) between the website operator's agent and a user's agent. To enable the execution of the protocol, the two agents must first have a connection. An out-of-band message is used to trigger the creation of a new, or the reuse an existing, connection.
+- A website operator wants to request something from a user on their site where there is no (known) connection with the user's agent, and there is no need to create a connection.
 
 In both cases, there is only a single out-of-band protocol message sent. The message responding to the out-of-band message is a DIDComm message from an appropriate protocol.
 
@@ -58,7 +56,7 @@ Note that the website-to-agent model is not the only such interaction enabled by
 
 ### Roles
 
-Each out-of-band protocol has two roles: __sender__ and __receiver__.
+The out-of-band protocol has two roles: __sender__ and __receiver__.
 
 #### sender
 
@@ -70,7 +68,7 @@ The agent that receives the out-of-band message and decides how to respond. Ther
 
 ### States
 
-The state machines for the sender and receiver are a bit odd for the out-of-band protocol because it consists of a single message that kicks of a co-protocol and ends when evidence of the co-protocol's launch is received, in the form of some response. In the following state machine diagrams we generically describe the response message from the *receiver* as being a DIDComm message without associating the message with a specific protocol.
+The state machines for the sender and receiver are a bit odd for the out-of-band protocol because it consists of a single message that kicks off a co-protocol and ends when evidence of the co-protocol's launch is received, in the form of some response. In the following state machine diagrams we generically describe the response message from the *receiver* as being a DIDComm message.
 
 The *sender* state machine is as follows:
 
@@ -82,25 +80,34 @@ The *receiver* state machine is as follows:
 
 [![receiver state machine google doc](state-machine-receiver.png)](https://docs.google.com/spreadsheets/d/1o1szGCMx6FzrxfAKV76IEYmeKRJqvV3gd1r3Qfv1Q9o/edit#gid=10874521)
 
-Worth noting is the first event of the `done` state, where the receiver may receive the message multiple times. This represents, for example, an agent returning to the same website and being greeted with the same QR code each time.
+Worth noting is the first event of the `done` state, where the receiver may receive the message multiple times. This represents, for example, an agent returning to the same website and being greeted with instances of the same QR code each time.
 
 ### Messages
 
-There are two out-of-band protocols, each consisting of a single message. In both cases, the message is emitted by the *sender*.
+The out-of-band protocol a single message that is sent by the *sender*.
 
-#### Message Type: `https://didcomm.org/oob-invitation/%VER/invitation`
+#### Invitation: `https://didcomm.org/out-of-band/%VER/invitation`
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/oob-invitation/%VER/invitation",
+  "@type": "https://didcomm.org/out-of-band/%VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
-  "goal-code": "issue-vc",
+  "goal_code": "issue-vc",
   "goal": "To issue a Faber College Graduate credential",
-  "protocols": [
+  "handshake_protocols": [
       "https://didcomm.org/didexchange/1.0",
       "https://didcomm.org/connections/1.0"
-      ]
+      ],
+  "request~attach": [
+    {
+        "@id": "request-0",
+        "mime-type": "application/json",
+        "data": {
+            "json": "<json of protocol message>"
+        }
+    }
+  ],
   "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
 }
 ```
@@ -110,52 +117,97 @@ The items in the message are:
 - `@type` - the DIDComm message type
 - `@id` - the unique ID of the message. The ID should be used as the **parent** thread ID (`pthid`) for the response message, rather than the more common thread ID (`thid`) of the response message. This enables multiple uses of a single out-of-band message.
 - `label` - [optional] a self-attested string that the receiver may want to display to the user, likely about who sent the out-of-band message.
-- `goal-code` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out-of-band message.
+- `goal_code` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out-of-band message.
 - `goal` - [optional] a self-attested string that the receiver may want to display to the user about the context-specific goal of the out-of-band message.
-- `protocols` - array of protocols in the order of preference of the sender that the receiver can use in responding to the message. As implied by the message type of invitation, these are not arbitrary protocols but rather protocols that result in the establishment of a connection.
+- `handshake_protocols` - [optional] an array of protocols in the order of preference of the sender that the receiver can use in responding to the message in order to create or reuse a connection with the sender. These are not arbitrary protocols but rather protocols that result in the establishment of a connection. One or both of `handshake_protocols` and `request~attach` MUST be included in the message.
+- `request~attach` - [optional] an attachment decorator containing an array of request messages in order of preference that the receiver can using in responding to the message. One or both of `handshake_protocols` and `request~attach` MUST be included in the message.
+  - While the JSON form of the attachment is used in the example above, the sender could choose to use the base64 form.
 - `service` - an item that is the equivalent of the service block of a DIDDoc that the receiver is to use in responding to the message. Additional details below.
 
-Both the `goal-code` and `goal` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out-of-band message. `goal-code` is to specify a generic, protocol level outcome for sending the out-of-band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal-code` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
+If only the `handshake_protocols` item is included, the initial interaction will complete with the establishment (or reuse) of the connection. Either side may then use that connection for any purpose. A common use case (but not required) would be for the sender to initiate another protocol after the connection is established to accomplish some shared goal.
 
-While the _receiver_ is expected to respond with an initiating message from the chosen protocol using a specified service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation`, the receiver **SHOULD** use the existing connection in responding to the `invitation`. The selected `protocol` being used by the receiver may have a specific message type to use for this purpose.
+If only the `request~attach` item is included, no new connection is expected to be created, although one could be used if the receiver knows such a connection already exists. The receiver responds to one of the messages in the `request~attach` array. The `request~attach` item might include the first message of a protocol from the sender, or might be a [please-play-the-role](#) message requesting the receiver initiate a protocol. If the protocol requires a further response from the sender to the receiver, the receiver must include a [`~service` decorator](../0056-service-decorator/README.md) for the sender to use in responding.
 
-#### Message Type: `https://didcomm.org/oob-request/%VER/request`
+If both the `handshake_protocols` and `request~attach` items are included in the message, the receiver should first establish a connection and then respond (using that connection) to one of the messages in the `request~attach` message. If a connection already exists between the parties, the receiver may respond immediately to the `request-attach` message using the established connection.
+
+### Reuse Messages
+
+While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `request~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the connection **MAY** be reused. The receiver may choose to not reuse the existing connection for privacy purposes and repeat a handshake protocol to receive a redundant connection. 
+
+If the receiver desires to reuse the existing connection and a `request~attach` message is present, the receiver should respond to the attached message using the existing connection.
+
+If the receiver desires to reuse the existing connection and no request~attach message is present, the receiver **SHOULD** attempt to do so with the `reuse` and `reuse-accepted` messages. This will notify the _inviter_ that the existing connection should be used, along with the context that can be used for follow-on interactions.
+
+While the `invitation` message is passed unencrypted and out of band, both the `handshake-reuse` and `handshake-reuse-accepted` messages MUST be encrypted and transmitted as normal DIDComm messages.
+
+#### Reuse: `https://didcomm.org/out-of-band/%VER/handshake-reuse`
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/oob-request/%VER/request",
-  "@id": "<id used for context as pthid>",
-  "label": "Faber College",
-  "request~attach" [
-    {
-        "@id": "request-0",
-        "mime-type": "application/json",
-        "data": {
-            "base64": "<bytes for base64>"
-        }
-    }
-  ]
-  "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
+  "@type": "https://didcomm.org/out-of-band/%VER/handshake-reuse",
+  "@id": "<id>",
+  "~thread": {
+      "thid": "<same as @id>",
+      "pthid": "<The @id of the Out-of-Band invitation>"
+  }
 }
 ```
 
 The items in the message are:
 
-- `@type` - see `invitation`
-- `@id` - see `invitation`
-- `label` - see `invitation`
-- `goal-code` - see `invitation`
-- `goal` - see `invitation`
-- `request~attach` - an attachment decorator containing an array of request messages associated with the out-of-band `request`. Any of the forms of an attachment can be used, including embedded or linked.
-- `service` - see `invitation`
+- `@type` - the DIDComm message type
+- `@id` - the unique ID of the message. 
+- `pthid` - the @id of the invitation message. This provides the context link for the _inviter_ to prompt additional protocol interactions.
 
-See the note under the `invitation` message type about the `goal-code` and `goal` fields.
+Sending or receiving this message does not change the state of the existing connection.
 
-While the _receiver_ is expected to respond with a response message from the request protocol and using a specified service, the receiver may respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of the `request`, the receiver **MAY** use the existing connection in responding.
+When the _inviter_ receives the `handshake-reuse` message, they **MUST** respond with a `handshake-reuse-accepted` message to notify that _invitee_ that the request to reuse the existing connection is successful.
+
+#### Reuse Accepted:  `https://didcomm.org/out-of-band/%VER/handshake-reuse-accepted`
+
+```json
+{
+  "@type": "https://didcomm.org/out-of-band/%VER/handshake-reuse-accepted",
+  "@id": "<id>",
+  "~thread": {
+    "thid": "<The Message @id of the reuse message>",
+    "pthid": "<The @id of the Out-of-Band invitation>"
+  }
+}
+```
+
+The items in the message are:
+
+- `@type` - the DIDComm message type
+- `@id` - the unique ID of the message. 
+- `pthid` - the @id of the invitation message. This and the `thid` provides context for the _invitee_ to know the reuse attempt succeeded.
+
+If this message is not received by the _invitee_, they should use the regular process. This message is a mechanism by which the _invitee_ can detect a situation where the _inviter_ no longer has a record of the connection and is unable to decrypt and process the `handshake-reuse` message.
+
+After sending this message, the _inviter_ may continue any desired protocol interactions based on the context matched by the `pthid` present in the `handshake-reuse` message.
+
+### Responses
+
+The following table summarizes the different forms of the out-of-band `invitation` message depending on the presence (or not) of the `handshake_protocols` item, the `request~attach` item and whether or not a connection between the agents already exists.
+
+`handshake_protocols` Present? | `request~attach` Present? | Existing connection? | Receiver action(s)
+--- | --- | --- | ---
+No | No | No | Impossible
+Yes | No | No | Uses the first supported protocol from `handshake_protocols` to make a new connection using the first supported `service` entry.
+No | Yes | No | Send a response to the first supported request message using the first supported `service` entry. Include a `~service` decorator if the sender is expected to respond.
+No | No | Yes | Impossible
+Yes | Yes | No | Use the first supported protocol from `handshake_protocols` to make a new connection using the first supported `service` entry, and then send a response message to the first supported attachment message using the new connection.
+Yes | No | Yes | Send a `handshake-reuse` message. 
+No | Yes | Yes | Send a response message to the first supported request message using the existing connection.
+Yes | Yes | Yes | Send a response message to the first supported request message using the existing connection.
+
+Both the `goal_code` and `goal` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out-of-band message. `goal_code` is to specify a generic, protocol level outcome for sending the out-of-band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal_code` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
 
 #### The `service` Item
 
-As mentioned in the description, the `service` item array is intended to be analogous to the `service` block of a DIDDoc. There are two forms of entries in the `service` item array:
+As mentioned in the description above, the `service` item array is intended to be analogous to the `service` block of a DIDDoc. When not reusing an existing connection, the receiver scans the array and selects (according to the rules described below) a service entry to use for the response to the out-of-band message.
+
+There are two forms of entries in the `service` item array:
 
 - a public DID that is resolved to retrieve it's DIDDoc service block, and
 - an inline service block.
@@ -164,10 +216,10 @@ The following is an example of a two entry array, one of each form:
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/oob-invitation/%VER/invitation",
+  "@type": "https://didcomm.org/out-of-band/%VER/invitation",
   "@id": "<id used for context as pthid>",
   "label": "Faber College"
-  "protocols": ["https://didcomm.org/didexchange/1.0"]
+  "handshake_protocols": ["https://didcomm.org/didexchange/1.0"]
   "service": [
       {
         "id": "#inline"
@@ -203,23 +255,23 @@ The `problem_report` message **MAY** be adopted by the out-of-band protocol if t
 
 ### Constraints
 
-An existing connection can only be reused based on a public DID in an out-of-band message. It would be nice to have a way to be able to reuse an existing connection to the same entity even if there is no public DID in the out-of-band message.
+An existing connection can only be reused based on a public DID in an out-of-band message.
 
 ## Reference
 
 ### Messages Reference
 
-The full description of the messages can be found in the [Tutorial](#messages) section of this RFC.
+The full description of the message in this protocol can be found in the [Tutorial](#messages) section of this RFC.
 
 ### Localization
 
-The `goal-code` and `goal` fields should have localization applied. See the purpose of those fields in the [message type definitions](#messages) section and the [message catalog](#message-catalog) section (immediately below).
+The `goal_code` and `goal` fields should have localization applied. See the purpose of those fields in the [message type definitions](#messages) section and the [message catalog](#message-catalog) section (immediately below).
 
 ### Message Catalog
 
-#### `goal-code`
+#### `goal_code`
 
-The following values are defined for the `goal-code` field:
+The following values are defined for the `goal_code` field:
 
 Code (cd) | English (en)
 --- | ---
@@ -262,24 +314,22 @@ There is an optional courtesy error message stemming from an out-of-band message
 
 ```jsonc
 {
-  "@type"            : "https://didcomm.org/oob-invitation/%VER/problem_report",
+  "@type"            : "https://didcomm.org/out-of-band/%VER/problem_report",
   "@id"              : "5678876542345",
   "~thread"          : { "pthid": "<@id of the OutofBand message>" },
   "description"      : {
-                          "en": "The request has expired.",
-                          "code": "expired-request"
+                          "en": "The invitation has expired.",
+                          "code": "expired-invitation"
                        },
   "impact"           : "thread"
 }
 ```
 
-An equivalent "expired-invitation" problem-code is also required.
-
 See the [problem-report](https://github.com/hyperledger/aries-rfcs/tree/master/features/0035-report-problem) protocol for details on the items in the example.
 
 ### Flow Overview
 
-In an out-of-band message the _sender_ gives information to the _receiver_ about the kind of DIDComm protocol response messages it can handle and how to deliver the response. The receiver uses that information to determine what DIDComm protocol/message to use in responding to the sender, and (from the service item) how to deliver the response to the sender.
+In an out-of-band message the _sender_ gives information to the _receiver_ about the kind of DIDComm protocol response messages it can handle and how to deliver the response. The receiver uses that information to determine what DIDComm protocol/message to use in responding to the sender, and (from the service item or an existing connection) how to deliver the response to the sender.
 
 The handling of the response is specified by the protocol used.
 
@@ -317,12 +367,12 @@ Invitation:
 
 ```json
 {
-  "@type": "https://didcomm.org/oob-invitation/1.0/invitation",
+  "@type": "https://didcomm.org/out-of-band/1.0/invitation",
   "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3",
   "label": "Faber College",
-  "goal-code": "issue-vc",
+  "goal_code": "issue-vc",
   "goal": "To issue a Faber College Graduate credential"
-  "protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"],
+  "handshake_protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"],
   "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
 }
 ```
@@ -330,19 +380,19 @@ Invitation:
 Whitespace removed:
 
 ```jsonc
-{"@type":"https://didcomm.org/oob-invitation/1.0/invitation","@id":"69212a3a-d068-4f9d-a2dd-4741bca89af3","label":"Faber College", "goal-code":"issue-vc","goal":"To issue a Faber College Graduate credential","protocols":["https://didcomm.org/didexchange/1.0","https://didcomm.org/connections/1.0"],"service":["did:sov:LjgpST2rjsoxYegQDRm7EL"]}
+{"@type":"https://didcomm.org/out-of-band/1.0/invitation","@id":"69212a3a-d068-4f9d-a2dd-4741bca89af3","label":"Faber College", "goal_code":"issue-vc","goal":"To issue a Faber College Graduate credential","handshake_protocols":["https://didcomm.org/didexchange/1.0","https://didcomm.org/connections/1.0"],"service":["did:sov:LjgpST2rjsoxYegQDRm7EL"]}
 ```
 
 Base 64 URL Encoded:
 
 ```text
-eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCJnb2FsLWNvZGUiOiJpc3N1ZS12YyIsImdvYWwiOiJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIicHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0=
+eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbF9jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJoYW5kc2hha2VfcHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0
 ```
 
 Example URL:
 
 ```text
-http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCJnb2FsLWNvZGUiOiJpc3N1ZS12YyIsImdvYWwiOiJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIicHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0=
+http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbF9jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJoYW5kc2hha2VfcHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0
 ```
 
 Out-of-band message URLs can be transferred via any method that can send text, including an email, SMS, posting on a website, or QR Code.
@@ -360,9 +410,9 @@ Subject: Your request to connect and receive your graduate verifiable credential
 
 Dear Alice,
 
-To receive your Faber College graduation certificate, click here to [connect](http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCJnb2FsLWNvZGUiOiJpc3N1ZS12YyIsImdvYWwiOiJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIicHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0=) with us, or paste the following into your browser:
+To receive your Faber College graduation certificate, click here to [connect](http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbF9jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJoYW5kc2hha2VfcHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0) with us, or paste the following into your browser:
 
-http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb29iLWludml0YXRpb24vMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCJnb2FsLWNvZGUiOiJpc3N1ZS12YyIsImdvYWwiOiJUbyBpc3N1ZSBhIEZhYmVyIENvbGxlZ2UgR3JhZHVhdGUgY3JlZGVudGlhbCIicHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0=
+http://example.com/ssi?oob=eyJAdHlwZSI6Imh0dHBzOi8vZGlkY29tbS5vcmcvb3V0LW9mLWJhbmQvMS4wL2ludml0YXRpb24iLCJAaWQiOiI2OTIxMmEzYS1kMDY4LTRmOWQtYTJkZC00NzQxYmNhODlhZjMiLCJsYWJlbCI6IkZhYmVyIENvbGxlZ2UiLCAiZ29hbF9jb2RlIjoiaXNzdWUtdmMiLCJnb2FsIjoiVG8gaXNzdWUgYSBGYWJlciBDb2xsZWdlIEdyYWR1YXRlIGNyZWRlbnRpYWwiLCJoYW5kc2hha2VfcHJvdG9jb2xzIjpbImh0dHBzOi8vZGlkY29tbS5vcmcvZGlkZXhjaGFuZ2UvMS4wIiwiaHR0cHM6Ly9kaWRjb21tLm9yZy9jb25uZWN0aW9ucy8xLjAiXSwic2VydmljZSI6WyJkaWQ6c292OkxqZ3BTVDJyanNveFllZ1FEUm03RUwiXX0
 
 If you don't have an identity agent for holding credentials, you will be given instructions on how you can get one.
 
@@ -374,15 +424,16 @@ Knowledge is Good
 
 #### URL Shortening
 
-It seems inevitable that the length of some out-of-band message will be too long to produce a useable QR code. Techniques to avoid unusable QR codes have been presented above, including using attachment links for requests, minimizing the routing of the response and eliminating unnecessary whitespace in the JSON. However, at some point an _sender_ may need generate a very long URL. In that case, a URL shortener redirection should be implemented by the sender as follows:
+It seems inevitable that the length of some out-of-band message will be too long to produce a useable QR code. Techniques to avoid unusable QR codes have been presented above, including using attachment links for requests, minimizing the routing of the response and eliminating unnecessary whitespace in the JSON. However, at some point a _sender_ may need generate a very long URL. In that case, a URL shortener redirection should be implemented by the sender as follows:
 
 - The sender should generate and track a GUID for the out-of-band message URL.
 - The shortened version should be:
   - `https://example.com/ssi?id=5f0e3ffb-3f92-4648-9868-0d6f8889e6f3`
   - Note the replacement of the query parameter `oob` with `id` when using shortened URL.
 - On receipt of this form of message, the agent must do an HTTP GET to retrieve the associated, encoded out-of-band message.
+  - A sender may want to wait to generate the full invitation until the redirection event of the shortened URL to the full length form dynamic, so a single QR code can be used for distinct out of band messages.
 
-With the shortening of the URL, a usable QR code will always be able to be generated.
+A usable QR code will always be able to be generated from the shortened form of the URL.
 
 #### Out-of-Band Message Publishing
 
@@ -399,7 +450,7 @@ A user that already has those steps accomplished will have the URL received by s
 
 If the receiver wants to respond to the out-of-band message, they will use the information in the message to prepare the request, including:
 
-- the `protocols` or `request~attach` to determine the acceptable response messages, and
+- the `handshake_protocols` or `request~attach` to determine the acceptable response messages, and
 - the `service` block to determine how to get the response to the sender.
 
 #### Correlating responses to Out-of-Band messages
@@ -414,41 +465,43 @@ Example referencing an explicit invitation:
   "@type": "https://didcomm.org/didexchange/1.0/request",
   "~thread": { "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" },
   "label": "Bob",
-  "connection": {
-    "did": "B.did@B:A",
-    "did_doc": {
-        "@context": "https://w3id.org/did/v1"
-        // DID Doc contents here.
-    }
-  }
+  "did": "B.did@B:A",
+  "did_doc~attach": {
+     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+     "jws": {
+        "header": {
+           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+        },
+        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      }
+   }
 }
 ```
 
 #### Response Transmission
 
-The response message from the receiver is encoded according to the standards of the DIDComm encryption envelope, using the `service` block present in (or resolved from) the out-of-band message.
+The response message from the receiver is encoded according to the standards of the DIDComm encryption envelope, using the `service` block present in (or resolved from) the out-of-band invitation.
 
 ##### Reusing Connections
 
-If an out-of-band message has a public DID in the `service` block, and the _receiver_ determines it has previously established a connection with that public DID, the receiver **SHOULD** send its response on the established connection.
-
-For the out-of-band `invitation` message it is expected that the protocols listed will have a message type that allows the receiver to reuse an existing connection.
+If an out-of-band invitation has a public DID in the `service` block, and the _receiver_ determines it has previously established a connection with that public DID, the receiver **MAY** send its response on the established connection. See [Reuse Messages](#reuse-messages) for details.
 
 ##### Receiver Error Handling
 
-If the _receiver_ is unable to process the out-of-band message, the receiver may respond with a Problem Report identifying the problem using a DIDComm message. As with an response, the ~thread decorator of the `pthid` **MUST** be the `id` of the out-of-band message. The problem report **MUST** be in the protocol of an expected response. An example of an error that might come up is that the receiver is not able to handle any of the proposed protocols in the out-of-band message. The receiver **MAY** include in the problem report a service decorator that allows the sender to respond to the out-of-band message with a DIDComm message.
+If the _receiver_ is unable to process the out-of-band message, the receiver may respond with a [Problem Report](../0035-report-problem/README.md) identifying the problem using a DIDComm message. As with any response, the ~thread decorator of the `pthid` **MUST** be the `@id` of the out-of-band message. The problem report **MUST** be in the protocol of an expected response. An example of an error that might come up is that the receiver is not able to handle any of the proposed protocols in the out-of-band message. The receiver **MAY** include in the problem report a [`~service` decorator](../0056-service-decorator/README.md) that allows the sender to respond to the out-of-band message with a DIDComm message.
 
 #### Response processing
 
-The _sender_ **MAY** look up the corresponding out-of-band message identified in the response's `~thread.pthid` to determine whether it should accept the response. Information about the related  out-of-band message protocol may be required to provide the sender with context about processing the response and what to do after the protocol completes.
+The _sender_ **MAY** look up the corresponding out-of-band message identified in the response's `~thread.pthid` to determine whether it should accept the response. Information about the related out-of-band message protocol may be required to provide the sender with context about processing the response and what to do after the protocol completes.
 
 ##### Sender Error Handling
 
-If the _sender_ receives a problem report message from the receiver, the sender has several options for responding. The sender will receive the message as part of an offered protocol in the out-of-band message.
+If the _sender_ receives a [Problem Report](../0035-report-problem/README.md) message from the receiver, the sender has several options for responding. The sender will receive the message as part of an offered protocol in the out-of-band message.
 
 If the receiver did not include a `~service` decorator in the response, the sender can only respond if it is still in session with the receiver. For example, if the sender is a website that displayed a QR code for the receiver to scan, the sender could create a new, presumably adjusted, out-of-band message, encode it and present it to the user in the same way as before.
 
-If the receiver included a `~service` decorator in the response, the sender can provide a new message to the receiver, even a new version of the original out-of-band message, and send it to the receiver. The new message **MUST** include a `~thread` decorator with the `thid` set to the `id` from the problem report message.
+If the receiver included a [`~service` decorator](../0056-service-decorator/README.md) in the response, the sender can provide a new message to the receiver, even a new version of the original out-of-band message, and send it to the receiver. The new message **MUST** include a `~thread` decorator with the `thid` set to the `@id` from the problem report message.
 
 ## Drawbacks
 

@@ -11,9 +11,8 @@
 
 Describes a general approach to key management in a decentralized,
 self-sovereign world. We expect Aries to embody the principles
-described here, although this doc is likely to color numerous
-protocols and ecosystem features, not just to a single narrow
-problem.
+described here; this doc is likely to color numerous protocols 
+and ecosystem features.
 
 ## Motivation
 
@@ -31,12 +30,12 @@ this vital nexus of topics.
 
 >The bulk of the content for this RFC is located in the [official architecture
 documentation -- dkms-v4.md](dkms-v4.md); readers are encouraged to go there to learn more. Here
-we present only the highest-level background context, for those who may but unaware
+we present only the highest-level background context, for those who may be unaware
 of some basics.
 
-#### Background Concepts
+### Background Concepts
 
-##### Key Types
+#### Key Types
 
 DKMS uses the following key types:
 1. **Master keys**: Keys that are not cryptographically protected. They are distributed manually or
@@ -48,15 +47,15 @@ The keys at one level are used to protect items at a lower level. Consequently, 
 are used to protect master keys, including severely limiting access and use, hardware protection,
 and providing access to the key only under shared control.
 
-##### Key Loss
+#### Key Loss
 
 Key loss means the owner no longer controls the key and it can assume there is no further risk of compromise. For example devices unable to function due to water, electricity, breaking, fire, hardware failure, acts of God, etc.
 
-##### Compromise
+#### Compromise
 
 Key compromise means that private keys and/or master keys have become or can become known either passively or actively.
 
-##### Recovery
+#### Recovery
 
 In decentralized identity management, recovery is important since identity owners have no “higher authority”
 to turn to for recovery.
@@ -69,7 +68,7 @@ These methods are not exclusive and should be combined with key rotation and rev
 ## Reference
 
 1. [Design and architecture](dkms-v4.md)
-2. **Public Registry for Agent Authorization Policy**. An identity owner create a policy on the ledger that defines its agents and their authorizations.
+2. **Public Registry for Agent Authorization Policy**. An identity owner creates a policy on the ledger that defines its agents and their authorizations.
    Agents while acting on the behalf of the identity owner need to prove that they are authorised. [More details](pdf/aap.pdf)
 3. [Shamir Secret](shamir_secret.md)
 4. [Trustee Protocols](trustee_protocols.md)
