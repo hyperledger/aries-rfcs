@@ -100,7 +100,7 @@ Occasionally, goal codes may have meaning only within the context of a specific 
 More commonly, however, a protocol will *accomplish* one or more goals (e.g., when the protocol is fulfilling a co-protocol interface), or will require a participant to *identify* a goal at one or more points in a protocol flow. In such cases, the goal codes are probably declared external to the protocol. If they can be enumerated, they should still be referenced (hyperlinked to their respective definitions) in the protocol RFC.
 
 #### In Governance Frameworks
-Goal codes can also be (re-)declared in a [machine-readable governance framework](../0430/machine-readable-governance-framework/README.md). 
+Goal codes can also be (re-)declared in a [machine-readable governance framework](../0430-machine-readable-governance-frameworks/README.md). 
 
 ## Reference
 
@@ -141,7 +141,7 @@ solution that comes out of this doc?
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-*Implementation Notes* [may need to include a link to test results](README.md#accepted).
+*Implementation Notes* [may need to include a link to test results](/README.md#accepted).
 
 Name / Link | Implementation Notes
 --- | ---
