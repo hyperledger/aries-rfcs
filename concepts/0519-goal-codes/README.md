@@ -51,7 +51,7 @@ It is conceivable that this would lead to parallel branchs of a goal ontology th
 
 ### Goals for others
 
-Related to directionality, it may occasionally be desirable to propose goals to others, rather than adovcating your own: "Let &lt;parties = us = Alice, Bob, and Carol> &lt;goal = hold an auction&gt; -- I nominate Carol to be the &lt;role = auctioneer&gt; and get us started." The difference between a normal message and an unusual one like this is not visible in the goal code; it should be exposed in additional fields that associate the goal with a particular DID+role pair. Essentially, you are proposing a goal to another party, and these extra fields clarify who should receive the proposal, and what role/perspective they might take with respect to the goal.
+Related to directionality, it may occasionally be desirable to propose goals to others, rather than adovcating your own: "Let &lt;parties = us = Alice, Bob, and Carol> &lt;goal = hold an auction&gt; -- I nominate Carol to be the &lt;role = auctioneer&gt; and get us started." The difference between a normal message and an unusual one like this is not visible in the goal code; it should be exposed in additional fields that associate the goal with a particular identifier+role pair. Essentially, you are proposing a goal to another party, and these extra fields clarify who should receive the proposal, and what role/perspective they might take with respect to the goal.
 
 Making proposals like this may be a feature in some protocols. Where it is, the protocols determine the message field names for the goal code, the role, and the DID associated with the role and goal.
 
@@ -127,16 +127,6 @@ Create, maintain, or end something that humans would consider a relationship. Th
 ##### `aries.rel.build`
 Create a relationship. Carries the meaning implied today by a LinkedIn invitation to connect or a Facebook "Friend" request.
 
-## Unresolved questions
-
-- What parts of the design do you expect to resolve through the
-enhancement proposal process before this gets merged?
-- What parts of the design do you expect to resolve through the
-implementation of this feature before stabilization?
-- What related issues do you consider out of scope for this 
-proposal that could be addressed in the future independently of the
-solution that comes out of this doc?
-   
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.

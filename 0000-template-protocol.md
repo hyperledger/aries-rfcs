@@ -104,22 +104,6 @@ case-sensitively.
 State management in protocols is a deep topic. For more information, please
 see [State Details and State Machines](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/state-details.md).
 
-### Goal Codes
-
-If your protocol defines any [goal codes](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0519-goal-codes/README.md), or if it uses goal codes defined elsewhere, and you can enumerate them, define or link them here. Use markup as shown in the sample block below.
-
-##### `aries.sell.goods.consumer`
-Specializes [`aries.sell`](http://example.com/where-aries-sell-is-defined). Intent is to sell tangible goods of interest to general consumers.
-##### `aries.sell.services.consumer`
-Intent is to sell services of interest to general consumers.
-##### `aries.sell.services.enterprise`
-Intent is to sell services of interest to enterprises.
-##### `aries.sell.services.org`
-Alias for `aries.sell.services.enterprise`.
-##### `aries.buy`
-As defined in the [`aries.buy` Goal Codes RFC](http://example.com/where-aries-buy-is-defined).
-
-
 ### Messages
 
 This section describes each message in the protocol. It should also note the names and

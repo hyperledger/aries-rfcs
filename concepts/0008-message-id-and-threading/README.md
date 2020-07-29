@@ -62,7 +62,7 @@ Message threading will be implemented as a [decorator](../0011-decorators/README
         "pthid": "1e513ad4-48c9-444e-9e7e-5b8b45c5e325",
         "sender_order": 3,
         "received_orders": {"did:sov:abcxyz":1},
-        "goal_code": "aries.credx.issue"
+        "goal_code": "aries.vc.issue"
     },
     "example_attribute": "example_value"
 }
