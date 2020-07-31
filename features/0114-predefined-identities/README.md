@@ -29,7 +29,7 @@ did:sov:BzCbsNYhMrjHiqZDTUASHg -- verkey = 6zJ9dboyug451A8dtLgsjmjyguQcmq823y7vH
 
 This DID is currently allocated, but not actually registered on Sovrin's mainnet.
 You will see this DID in a number of RFCs, as the basis of a [PIURI](
- ../../concepts/0003-protocols/uris.md#piuri) that identifies
+ ../../concepts/0003-protocols/README.md#piuri) that identifies
 a community-defined protocol. You DO NOT have to actually resolve this DID or relate
 to a Sovrin identity to use Aries or its RFCs; think of this more like the opaque
 URNs that are sometimes used in XML namespacing. At some point it may be registered,

@@ -2,7 +2,7 @@
 - Authors: [Sam Curren](telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-03
-- Status Note: Initial version 
+- Status Note: Initial version
 - Start Date: 2019-09-03
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
@@ -36,7 +36,7 @@ Sent by the _recipient_ to the _message_holder_ to request a `status` message.
 ```json=
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/status_request"
+    "@type": "https://didcomm.org/messagepickup/1.0/status-request"
 }
 ```
 ### Status
@@ -44,7 +44,7 @@ Status details about pending messages
 ```json=
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/status",
+    "@type": "https://didcomm.org/messagepickup/1.0/status",
     "message_count": 7,
     "duration_waited": 3600,
     "last_added_time": "2019-05-01 12:00:00Z",
@@ -59,7 +59,7 @@ A request to have multiple waiting messages sent inside a `batch` message.
 ```json=
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/batch_pickup",
+    "@type": "https://didcomm.org/messagepickup/1.0/batch-pickup",
     "batch_size": 10
 }
 ```
@@ -69,8 +69,56 @@ A message that contains multiple waiting messages.
 ```json=
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/batch",
-    "messages": []
+    "@type": "https://didcomm.org/messagepickup/1.0/batch",
+    "messages~attach": [
+        {
+            "@id" : "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
+            "message" : "{
+                ...
+            }"
+        },
+
+        {
+            "@id" : "344a51cf-379f-40ab-ab2c-711dab3f53a9a",
+            "message" : "{
+                ...
+            }"
+        }
+    ]
+}
+```
+### Message Query With Message Id List
+A request to read single or multiple messages with a message message id array.
+```json=
+{
+    "@id": "123456781",
+    "@type": "https://didcomm.org/messagepickup/1.0/list-pickup",
+    "message_ids": [
+        "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
+        "344a51cf-379f-40ab-ab2c-711dab3f53a9a"
+        ]
+}
+```
+`message_ids` message id array for picking up messages. Any message id in `message_ids` could be delivered via several ways to the recipient (Push notification or with an envoloped message).
+### Message List Query Response
+A response to query with message id list.
+```json=
+{
+    "@type": "https://didcomm.org/messagepickup/1.0/list-response",
+    "messages~attach": [
+        {
+            "@id" : "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
+            "message" : "{
+                ...
+            }"
+        },
+        {
+            "@id" : "344a51cf-379f-40ab-ab2c-711dab3f53a9a",
+            "message" : "{
+                ...
+            }"
+        }
+    ]
 }
 ```
 ### Noop
@@ -78,7 +126,7 @@ Used to receive another message implicitly. This message has no expected behavio
 ```json=
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/messagepickup/1.0/noop"
+    "@type": "https://didcomm.org/messagepickup/1.0/noop"
 }
 ```
 
@@ -90,11 +138,11 @@ Concepts here borrow heavily from a [document](https://hackmd.io/@8VtAqKThQ6mKa9
 ## Unresolved questions
 
 - We are using multiple roles to indicate which portions of the protocol are supported by each party. This is a new thing we have not done before. Is this ok?
-  
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name / Link | Implementation Notes
 --- | ---
- |  | 
+ |  |

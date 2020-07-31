@@ -1,5 +1,5 @@
 # Aries RFC 0281: Aries Rich Schemas
-- Authors: [Brent Zundel](<brent.zundel@evernym.com>), [Ken Ebert](<ken@sovrin.org>)
+- Authors: [Brent Zundel](mailto:brent.zundel@evernym.com), [Ken Ebert](mailto:ken@sovrin.org), [Alexander Shcherbakov](mailto:alexander.shcherbakov@evernym.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-10-30
 - Status Note: Part of proposed Rich Schema capabilities for credentials 
@@ -17,6 +17,9 @@ They support explicitly typed properties and semantic inheritance. A schema
 may include other schemas as property types, or extend another schema with
 additional properties. For example a schema for "employee" may inherit from
 the schema for "person."
+
+Schema objects are processed in a generic way defined in 
+[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common).
 
 ## Motivation
 [motivation]: #motivation
@@ -85,24 +88,26 @@ of schemas.
 ## Tutorial
 [tutorial]: #tutorial
 
-### Intro to schemas
+### Intro to Schemas
 `schema` objects are used to enforce structure and semantic meaning on a
 set of data. They allow Issuers to assert, and Holders and Verifiers to
 understand, a particular semantic meaning for the properties in a
 credential.
 
 Rich schemas are JSON-LD objects. Examples of the type of schemas supported
-here may be found at https://schema.org/docs/schemas.html. At this time we
+here may be found at [schema.org](https://schema.org/docs/schemas.html). At this time we
 do not support other schema representations such as RDFS, JSON Schema, XML
 Schema, OWL, etc.
 
 ### Properties
+Rich Schema properties follow the generic template defined in
+[Rich Schema Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
+
+Rich Schema's `content` field is a JSON-LD-serialized string with the following fields:
 
 #### @id
 A rich schema must have an `@id` property. The value of this property must
-be (or map to, via a context object) a URI. It is expected that rich
-schemas stored in a verifiable data registry will be assigned a DID or
-other identifier for identification within and resolution by that registry. 
+be equal to the `id` field which is a DID (see [Identification of Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#identification-of-rich-schema-objects)). 
 
 A [rich schema](README.md) may refer to the `@id` of another rich schema to
 define a parent schema. A property of a rich schema may use the `@id` of
@@ -132,19 +137,19 @@ included as part of the verifiable credential's `credentialSubject`
 property, as well as the types of the property values.
 
 The `@id` of a rich schema may be used as an additional value of the 
-[type property](https://www.w3.org/TR/vc-data-model/#types) property of a
+[type property](https://www.w3.org/TR/vc-data-model#types) property of a
 verifiable credential. Because the `type` values of a verifiable credential
 are not required to be dereferenced, in order for the rich schema to
 support assertion of the structure and semantic meaning of the claims in
 the credential, an additional reference to the rich schema should be made
 through the 
-[credentialSchema](https://www.w3.org/TR/vc-data-model/#data-schemas)
+[credentialSchema](https://www.w3.org/TR/vc-data-model#data-schemas)
 property. This may be done as a direct reference to the rich schema `@id`,
 or via another rich schema object which references the rich schema `@id`
 such as a 
 [credential definition](../../concepts/0250-rich-schemas/README.md#credential-definitions) 
 as would 
-[be the case](https://www.w3.org/TR/vc-data-model/#zero-knowledge-proofs) 
+[be the case](https://www.w3.org/TR/vc-data-model#zero-knowledge-proofs) 
 for anonymous credentials, as discussed in the
 [mapping section](../../concepts/0250-rich-schemas/README.md#mappings) of
 the rich schema overview RFC.
@@ -164,9 +169,11 @@ are one example. These can be used inform a verifier that a schema has
 changed, but do not provide access to the original version of the schema in
 the event the original schema has been updated.
 
-### Example schema
+### Example Schema
+An example of the `content` field of a Rich Schema object:
 ```
-"schema": {
+   "@id": "did:sov:2f9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
+   "@type": "rdfs:Class",
    "@context": {
     "schema": "http://schema.org/",
     "bibo": "http://purl.org/ontology/bibo/",
@@ -211,71 +218,39 @@ the event the original schema has been updated.
       }
     }
   ]
- }
 ```
 recipeIngredient schema from 
 [schema.org](https://schema.org/recipeIngredient.jsonld).
 
+### Data Registry Storage
+Aries will provide a means for writing contexts to and reading contexts
+from a verifiable data registry (such as a distributed ledger).
+
+A Schema will be written to the ledger in a generic way defined in 
+[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
+
+
 ### Aries Data Registry Interface
-We propose adding two Aries-Data-Registry-Interface methods for writing and
-reading `schema` objects:
-- `write_schema`: a method to write a `schema` object to a data registry. 
-- `read_schema`: a method to read a `schema` object from a data registry.
+Aries Data Registry Interface methods for adding and retrieving a Schema from the
+ledger comply with the generic approach described in [Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#aries-data-registry-interface).
 
-#### write_schema
-```
-Writes a schema to a data registry.
-
-#Params
-submitter: {
-    key: public key of the submitter,
-    keystore: key manager where private key is stored
-}, 
-data: {
-    id: identifier for the schema,
-    schema: schema object,
-    name: schema name string,
-    version: schema version string,
-    ver: version of the schema JSON format
-},
-registry: identifier for the registry
-
-#Returns
-registry_response: result as json,
-error: {
-    code: aries common error code,
-    description:  aries common error description
-}
-```
-#### read_schema
-```
-Reads a schema from a data registry.
-
-#Params
-submitter (optional): {
-    key: public key of the submitter,
-    keystore: key manager where private key is stored
-}, 
-id: identifier for the schema,
-registry: identifier for the registry
-
-#Returns
-registry_response: schema object,
-error: {
-    code: aries common error code,
-    description:  aries common error description
-}
-```
+This means the following methods can be used:
+- `write_rich_schema_object`
+- `read_rich_schema_object_by_id`
+- `read_rich_schema_object_by_metadata`
 
 ## Reference
 [reference]: #reference
 
 More information on the Verifiable Credential data model use of `schemas`
-may be found [here](https://w3c.github.io/vc-data-model/#data-schemas)
+may be found [here](https://w3c.github.io/vc-data-model/#data-schemas).
+
+- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
+- [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common) 
 
 ## Drawbacks
 
-There are no known drawbacks. 
+Rich schema objects introduce more complexity.
 
 ## Rationale and alternatives
 
@@ -283,14 +258,19 @@ There are no known drawbacks.
 Model specification.
 - It supports rich schema capabilities for credentials.
 
-A possible alternative to this work has been presented by Workday
-
 ## Unresolved questions
 
 - Is the proposed interface generic enough to support other data
 registries?
-- 
-   
+- We are not defining Rich Schema objects as DID DOCs for now. We may re-consider this in future once DID DOC format
+is finalized.
+- It may make sense to extend DID specification to include using DID for referencing Rich Schema objects.
+- The proposed canonicalization form of a content to be used for DID's id-string generation is in a Draft version, so we 
+may find a better way to do it.
+- We don't check if the specified `@context` is valid by resolving all external links.
+- We may introduce more discovery features in future.
+- Future work may include methods for anchoring to Indy a Rich Schema which is immutably stored elsewhere.
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a
