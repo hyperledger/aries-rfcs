@@ -122,6 +122,8 @@ Participate in some form of VC-based interaction.
 Issue a verifiable credential. 
 ##### `aries.vc.verify`
 Verify or validate VC-based assertions.
+##### `aries.vc.revoke`
+Revoke a VC.
 ##### `aries.rel`
 Create, maintain, or end something that humans would consider a relationship. This should not to be confused with building a DIDComm channel. (Building a DIDComm channel is a low-level procedure, not a high-level goal.)
 ##### `aries.rel.build`
