@@ -2,7 +2,7 @@
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-05-19
-- Status Note: [Aries RFC 0482](../../features/0482-coprotocol-protocol/README.md), which documents a specific protocol to facilitate protocol interactions. Socialized on Aries community call in Feb 2020, using [these slides](https://docs.google.com/presentation/d/17hk6QqLW5M9E4TBPZwXIUBu9eEinMNXReceyZTF4LpA/edit). Discussed again in May 2020. Source files for graphics are either checked in or are published at https://j.mp/2XgyjH3.
+- Status Note: Sister RFC to [Aries RFC 0482](../../features/0482-coprotocol-protocol/README.md), which documents a specific protocol to facilitate protocol interactions. Socialized on Aries community call in Feb 2020, using [these slides](https://docs.google.com/presentation/d/17hk6QqLW5M9E4TBPZwXIUBu9eEinMNXReceyZTF4LpA/edit). Discussed again in May 2020. Source files for graphics are either checked in or are published at https://j.mp/2XgyjH3.
 - Start Date: 2020-02-03
 - Tags: concept, protocol
 
@@ -20,7 +20,7 @@ It's common for complex business workflows to be composed from smaller, configur
 
 A [protocol is any recipe for a stateful interaction](../0003-protocols/README.md). [DIDComm](../0005-didcomm/README.md) itself is a protocol, as are many primitives atop which it is built, such as HTTP, Diffie-Hellman key exchange, and so forth. However, when we talk about protocols in decentralized identity, without any qualifiers, we usually mean application-level interactions like [credential issuance](../../features/0036-issue-credential/README.md), [feature discovery](../../features/0031-discover-features/README.md), [third-party introductions](../../features/0028-introduce/README.md), and so forth. These protocols are message-based interactions that use DIDComm.
 
-We want these protocols to be __composable__. In the middle of issuing credentials, we want to challenge the potential holder for proof -- and in the middle of challenging for proof, maybe we want to negotiate payment. We could build proving into issuing, and payment into proving, but this runs counter to the [DRY principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) and to general best practice in encapsulation. A good developer writing a script to issue credentials would probably isolate payment and proving logic in separate functions or libraries, and would strive for [loose coupling](https://en.wikipedia.org/wiki/Loose_coupling) so each could evolve independently.
+We want these protocols to be __composable__. In the middle of issuing credentials, we may want to challenge the potential holder for proof -- and in the middle of challenging for proof, maybe we want to negotiate payment. We could build proving into issuing, and payment into proving, but this runs counter to the [DRY principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) and to general best practice in encapsulation. A good developer writing a script to issue credentials would probably isolate payment and proving logic in separate functions or libraries, and would strive for [loose coupling](https://en.wikipedia.org/wiki/Loose_coupling) so each could evolve independently.
 
 Agents that run protocols have goals like those of the script developer. How we achieve them is the subject of this RFC.
 
@@ -66,7 +66,7 @@ Unfortunately, this approach looks less attractive after study:
 
 * It doesn't explain how the payment protocol emits output that its caller can consume. Individual agents could code proprietary answers to this question, but interoperability would be lost.
 
-* It doesn't offer a signalling mechanism that would let the two protocols proceed in parallel, syncing up ony when necessary.
+* It doesn't offer a signalling mechanism that would let the two protocols proceed in parallel, syncing up only when necessary.
 
 * It doesn't explain how errors propagate, or how to decide what they mean for the calling protocol.
 
@@ -90,7 +90,6 @@ We do a little research and discover that many DIDComm-based payment protocols e
 
 ```text
 goal: make-payment
-version: 1.0
 payee:
   get:
       - invoke(amount: float, currency: str, bill_of_sale: str) @ null
