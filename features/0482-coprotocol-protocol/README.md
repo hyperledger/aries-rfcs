@@ -24,11 +24,11 @@ The name of this protocol is "Coprotocol Protocol 0.5" It is identified by the P
 
 ### Key Concepts
 
-Please make sure you are familiar with the general concept of coprotocols, as set forth in Aries RFC 0478: Coprotocols. A working knowledge of the terminology and mental model explained there are foundational.
+Please make sure you are familiar with the general concept of coprotocols, as set forth in [Aries RFC 0478](../../concepts/0478-coprotocols/README.md). A working knowledge of the terminology and mental model explained there are foundational.
 
 ### Roles
 
-The `caller` role is played by the entity giving input and getting output. The `coprotocol` is the entity getting input and giving output.
+The `caller` role is played by the entity giving input and getting output. The `called` is the entity getting input and giving output.
 
 ### States
 
@@ -40,14 +40,18 @@ The coprotocols normal state progression is `null` -> `attached` -> `done`.
 
 ### Messages
 
-The protocol consists of 5 messages: `bind`, `attach`, `input`, `output`, `detach` and the adopted `problem-report` (for propagating errors). The protocol begins with a `bind` message that might look like this: 
+>Note: the discussion below is about how to launch and interact with *any* coprotocol. However, for concreteness we frame the walkthru in terms of a co-protocol that makes a payment. You can see an [example definition of such a coprotocol in RFC 0478](../../concepts/0478-coprotocols/README.md#example).
+
+The protocol consists of 5 messages: `bind`, `attach`, `input`, `output`, `detach` and the adopted `problem-report` (for propagating errors).
+
+The protocol begins with a `bind` message sent from `caller` to `called`. This message basically says, "I would like to interact with a new coprotocol instance having the following characteristics and the following mapping of identifiers to roles." It might look like this: 
 
 ```jsonc
 {
     "@id": "4d116a88-1314-4af5-9b3c-848456b8b3dd",
     "@type": "https://didcomm.org/coprotocol/1.0/bind",
-    "goal": "make-payment",
-    "version": ">=1.0",
+    "goal_code": "aries.buy.make-payment",
+    "co_binding_id": null,
     "cast": [
         // Recipient of the bind message (id = null) should be payee.
         {"role": "payee", "id": null},
@@ -57,7 +61,7 @@ The protocol consists of 5 messages: `bind`, `attach`, `input`, `output`, `detac
 }
 ```
 
-When an agent receives this message, is should discover what protocol implementations are available that match the criteria, and sort the candidates by preference. (Note that additional criteria can be added besides those shown here; see the Reference section.) This could involve enumerating not-yet-loaded plugins. It could also involve negotiating a protocol with the remote party (e.g., the DID playing the role of `payer` in the example above) by querying its capabilities using the [Discover Features Protocol](../0031-discover-features/README.md). Of course, the capabilities of remote parties could also be cached to avoid this delay, or they could be predicted without confirmation, if circumstances suggest that's the best tradeoff. Once the candidates are sorted by preference, the best match should be selected, and the agent should generate an `attach` message that tells the caller how to interact:
+When a `called` agent receives this message, it should discover what protocol implementations are available that match the criteria, and sort the candidates by preference. (Note that additional criteria can be added besides those shown here; see the [Reference section](#reference).) This could involve enumerating not-yet-loaded plugins. It could also involve negotiating a protocol with the remote party (e.g., the DID playing the role of `payer` in the example above) by querying its capabilities using the [Discover Features Protocol](../0031-discover-features/README.md). Of course, the capabilities of remote parties could also be cached to avoid this delay, or they could be predicted without confirmation, if circumstances suggest that's the best tradeoff. Once the candidates are sorted by preference, the best match should be selected. The coprotocol is NOT launched, but it is awaiting launch. The `called` agent should now generate an `attach` message that acknowledges the request to bind and tells the `caller` how to interact:
 
 ```jsonc
 {
@@ -69,7 +73,7 @@ When an agent receives this message, is should discover what protocol implementa
 }
 ```
 
-The `@id` of the `bind` message (also the `~thread.pthid` of the `attach` response) becomes a permanent identifier for the __coprotocol binding__. Both the caller and the coprotocol instance code can use it to lookup state as needed. The caller can now kick off/invoke the protocol with an `input` message:
+The `@id` of the `bind` message (also the `~thread.pthid` of the `attach` response) becomes a permanent identifier for the __coprotocol binding__. Both the caller and the coprotocol instance code can use it to lookup state as needed. The `caller` can now kick off/invoke the protocol with an `input` message:
 
 ```jsonc
 {
@@ -87,25 +91,23 @@ The `@id` of the `bind` message (also the `~thread.pthid` of the `attach` respon
 }
 ```
 
-This allows the caller to invoke the bound coprotocol instance, and to pass it any number of named inputs. When the coprotocol instance wants to emit an output, it uses an `output` message:
+This allows the `caller` to invoke the bound coprotocol instance, and to pass it any number of named inputs.
+
+Later, when the coprotocol instance wants to emit an output from `called` to `caller`, it uses an `output` message (in this case, one matching the `preauth` interaction point declared in the [sample coprotocol definition in RFC 0478](../../concepts/0478-coprotocols/README.md#example)):
 
 ```jsonc
 {
     "@id": "9b3c56b8-6a88-f513-4a14-4d118484b3dd",
     "@type": "https://didcomm.org/coprotocol/1.0/output",
     "~thread": { "pthid": "4d116a88-1314-4af5-9b3c-848456b8b3dd"},
-    "interaction_point": "invoke",
+    "interaction_point": "preauth",
     "data": [
-        "amount": 1.23,
-        "currency": "INR",
-        "bill_of_sale": {
-            // describes what's being purchased
-        }
+        "code": "6a884d11-13149b3c",
     ]
 }
 ```
 
-If a caller wants to detach, it uses a detach message:
+If a `caller` wants to detach, it uses a `detach` message. This leaves the coprotocol running on `called`; all inputs that it emits are sent to the bitbucket, and it advances on its normal state trajectory as if it were a wholly independent protocol:
 
 ```jsonc
 {
@@ -115,7 +117,7 @@ If a caller wants to detach, it uses a detach message:
 }
 ```
 
-A caller can re-attach by sending a new attach message. This is also the way a caller can attach to an already-running protocol (e.g., to debug it or to begin interacting with it long after it was invoked).
+A `caller` can re-attach by sending a new `bind` message; this time, the `co_binding_id` field should have the coprotocol binding id from the original `attach` message. Other fields in the message are optional; if present, they constitute a check that the binding in question has the properties the caller expects. The reattachment is confrimed by a new `attach` message.
 
 ## Reference
 
@@ -125,9 +127,8 @@ A caller can re-attach by sending a new attach message. This is also the way a c
     "@id": "4d116a88-1314-4af5-9b3c-848456b8b3dd",
     "@type": "https://didcomm.org/coprotocol/1.0/bind",
     // I'd like to be bound to a coprotocol that achieves this goal.
-    "goal": "make-payment",
-    // Specifies a version of the stated goal.
-    "version": ">=1.0",
+    "goal_code": "aries.buy.make-payment",
+    "co_binding_id": 
     // What is the intent about who plays which roles?
     "cast": [
         // Recipient of the bind message (id = null) should be payee.
@@ -171,42 +172,12 @@ A caller can re-attach by sending a new attach message. This is also the way a c
 }
 ```
 
-### Constraints
-
-Many protocols have constraints that help parties build trust.
-For example, in buying a house, the protocol includes such things as
-commission paid to realtors to guarantee their incentives, title insurance,
-earnest money, and a phase of the process where a home inspection takes
-place. If you are documenting a protocol that has attributes like
-these, explain them here. If not, the section can be omitted.
-
-### Examples
-
-This section is optional. It can be used to show alternate flows through
-the protocol.
-
 ### Collateral
 
 This section is optional. It could be used to reference files, code,
 relevant standards, oracles, test suites, or other artifacts that would
 be useful to an implementer. In general, collateral should be checked in
 with the RFC.
-
-### Localization
-
-If communication in the protocol involves humans, then localization of
-message content may be relevant. Default settings for localization of
-all messages in the protocol can be specified in an `l10n.json` file
-described here and checked in with the RFC. See ["Decorators at Message
-Type Scope"](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0011-decorators#decorator-scope)
-in the [Localization RFC](https://github.com/hyperledger/aries-rfcs/tree/master/features/0043-l10n).
-
-### Message Catalog
-
-If the protocol has a formally defined catalog of codes (e.g., for errors
-or for statuses), define them in this section. See ["Message Codes and
-Catalogs"](https://github.com/hyperledger/aries-rfcs/blob/master/features/0043-l10n/README.md#message-codes-and-catalogs)
-in the [Localization RFC](https://github.com/hyperledger/aries-rfcs/blob/master/features/0043-l10n).
 
 ## Drawbacks
 

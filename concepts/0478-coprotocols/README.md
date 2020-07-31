@@ -89,7 +89,7 @@ Suppose we are writing a credential issuance protocol, and we want to use coprot
 We do a little research and discover that many DIDComm-based payment protocols exist. Three of them advertise support for the same coprotocol interface:
 
 ```text
-goal: make-payment
+goal: aries.buy.make-payment
 payee:
   get:
       - invoke(amount: float, currency: str, bill_of_sale: str) @ null
@@ -101,7 +101,7 @@ payee:
 
 In plain English, the declared coprotocol semantics are:
 
->This is a coprotocol interface for protocols that facilitate the 'make-payment' goal version 1.0. The `payee` role in this coprotocol gets input at two interaction points, "invoke" and "proceed". Invoke happens when state is null (at launch); "proceed" happens when state is "requested" or "waiting-for-commit." At invoke, the caller of the co-protocol provides 3 inputs: an amount, a currency, and a bill of sale. At proceed, the caller decides whether to continue. Implementations of this coprotocol interface also give output at two interaction points, "preauth" and "return." At preauth, the output is a string that's a preauth code; at return, the output is a confirmation code.
+>This is a coprotocol interface for protocols that facilitate the `aries.buy.make-payment` [goal code](https://github.com/hyperledger/aries-rfcs/blob/2aba468a9a4daae69e42ba764124ab602dd66982/concepts/0519-goal-codes/README.md). The `payee` role in this coprotocol gets input at two interaction points, "invoke" and "proceed". Invoke happens when state is null (at launch); "proceed" happens when state is "requested" or "waiting-for-commit." At invoke, the caller of the co-protocol provides 3 inputs: an amount, a currency, and a bill of sale. At proceed, the caller decides whether to continue. Implementations of this coprotocol interface also give output at two interaction points, "preauth" and "return." At preauth, the output is a string that's a preauth code; at return, the output is a confirmation code.
 
 ##### Simplified description only
 
@@ -132,8 +132,6 @@ More about optional fields and syntax in a coprotocol declaration.
 
 How to add a coprotocol decl to a protocol.
 
-Where to declare a goal.
-
 ## Drawbacks
 
 Why should we *not* do this?
@@ -147,26 +145,7 @@ choosing them?
 
 ## Prior art
 
-Discuss prior art, both the good and the bad, in relation to this proposal.
-A few examples of what this can include are:
-
-- Does this feature exist in other SSI ecosystems and what experience have
-their community had?
-- For other teams: What lessons can we learn from other attempts?
-- Papers: Are there any published papers or great posts that discuss this?
-If you have some relevant papers to refer to, this can serve as a more detailed
-theoretical background.
-
-This section is intended to encourage you as an author to think about the
-lessons from other implementers, provide readers of your proposal with a
-fuller picture. If there is no prior art, that is fine - your ideas are
-interesting to us whether they are brand new or if they are an adaptation
-from other communities.
-
-Note that while precedent set by other communities is some motivation, it
-does not on its own motivate an enhancement proposal here. Please also take
-into consideration that Aries sometimes intentionally diverges from common
-identity features.
+Coroutines &mdash; the computer science scaffolding against which coprotocols are modeled &mdash; are extensively discussed in the literature of various compiler developer communities. The discussion about adding support for this feature in Rust is particularly good background reading: https://users.rust-lang.org/t/coroutines-and-rust/9058
 
 ## Unresolved questions
 
