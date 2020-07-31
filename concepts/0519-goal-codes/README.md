@@ -77,21 +77,30 @@ Thus, we follow the same general approach that's used in java's packaging system
 
 The `aries` namespace alias is reserved for goal codes defined in Aries RFCs. The URI aliased by this name is TBD. See the [Reference section](#reference) for more details.
 
+### Versioning
+
+Semver-style semantics don't map to goals in an simple way; it is not obvious what constitutes a "major" versus a "minor" difference in a goal, or a difference that's not worth tracking at all. The content of a goal &mdash; the only thing that might vary across versions &mdash; is simply its free-form description, and that varies according to human judgment. Many different versions of a protocol are likely to share the goal to make a payment or to introduce two strangers. A goal is likely to be far more stable than the details of how it is accomplished.
+
+Because of these considerations, goal codes do not impose an explicit versioning mechanism. However, one is reserved for use, in the unusual cases where it may be helpful. It is to append `-v` plus a numeric suffix: `my-goal-code-v1`, `my-goal-code-v2`, etc. Goal codes that vary only by this suffix should be understood as ordered-by-numeric-suffix evolutions of one another, and goal codes that do not intend to express versioning should not use this convention for something else. A variant of the goal code without any version suffix is equivalent to a variant with the `-v1` suffix. This allows human intuition about the relatedness of different codes, and it allows useful wildcard matching across versions. It also treats all version-like changes to a goal as breaking (semver "major") changes, which is probably a safe default.
+
+Families of goal codes are free to use this convention if they need it, or to invent a non-conflicting one of their own. However, we repeat our observation that versioning in goal codes is often inappropriate and unnecessary.
+
 ### Declaring goal codes
 
 #### Standalone RFCs or Similar Sources
 
-Any URI-referencable document can declare famlies or ontologies of goal codes. In the context of Aries, we encourage standalone RFCs for this purpose if the goals seem likely to be relevant in many contexts. Other communities may of course document goal codes in their own specs -- either dedicated to goal codes, or as part of larger topics. The following block is a sample of how we recommend that such goal codes be declared. Note that each code is individually hyperlink-able.
+Any URI-referencable document can declare famlies or ontologies of goal codes. In the context of Aries, we encourage standalone RFCs for this purpose if the goals seem likely to be relevant in many contexts. Other communities may of course document goal codes in their own specs -- either dedicated to goal codes, or as part of larger topics. The following block is a sample of how we recommend that such goal codes be declared. Note that each code is individually hyperlink-able, and each is associated with a brief human-friendly description in one or more languages. This description may be used in menuing mechanisms such as the one described in [Action Menu Protocol](../../features/0509-action-menu/README.md).
 
 >#### goal codes
 >##### `aries.sell`
->Sell something. Assumes two parties (buyer/seller)
+>__en__: Sell something. Assumes two parties (buyer/seller).
+>__es__: Vender algo. Asume que dos partes participan (comprador/vendedor).
 >##### `aries.sell.goods.consumer`
->Sell tangible goods of interest to general consumers.
+>en: Sell tangible goods of interest to general consumers.
 >##### `aries.sell.services.consumer`
->Sell services of interest to general consumers.
+>en: Sell services of interest to general consumers.
 >##### `aries.sell.services.enterprise`
->Sell services of interest to enterprises.
+>en: Sell services of interest to enterprises.
 
 #### In DIDComm-based Protocol Specs
 
