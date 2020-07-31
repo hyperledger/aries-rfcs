@@ -46,7 +46,7 @@ If we want to choose one conceptual parallel for how protocols relate to one ano
 
 ![diagram of payment as a coprotocol](payment-coprotocol.png)
 
-Similarly, a handshake protocol like [DID Exchange](../../features/0023-did-exchange/README.md) or [Connection](../../features/0160/connection-protocol/README.md) is best framed as a coprotocol of [Introduce](../../features/0028-introduce/README.md); this makes it easy for Introduce to complete as soon as the handshake begins, instead of waiting for the handshake to finish as if it were a subroutine.
+Similarly, a handshake protocol like [DID Exchange](../../features/0023-did-exchange/README.md) or [Connection](../../features/0160-connection-protocol/README.md) is best framed as a coprotocol of [Introduce](../../features/0028-introduce/README.md); this makes it easy for Introduce to complete as soon as the handshake begins, instead of waiting for the handshake to finish as if it were a subroutine.
  
 By thinking of cross-protocol interactions like coroutine interactions, we get the best of both worlds: where the interaction is just subroutine-like, the model lets us simplify; where we need more flexibility and power, the model still fits.
  
@@ -161,7 +161,7 @@ solution that comes out of this doc?
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-*Implementation Notes* [may need to include a link to test results](README.md#accepted).
+*Implementation Notes* [may need to include a link to test results](/README.md#accepted).
 
 Name / Link | Implementation Notes
 --- | ---
