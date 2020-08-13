@@ -75,7 +75,7 @@ The `abandoned` and `completed` states are terminal states and there is no expec
 
 ### Errors
 
-After receiving an explicit invitation, the _requester_ may send a `problem-report` to the _responder_ using the information in the invitation to either restart the invitation process (returning to the `start` state) or to abandon the protocol. The `problem-report` may be an `Out of Band` protocol message or a DID Exchange protocol message.
+After receiving an explicit invitation, the _requester_ may send a `problem-report` to the _responder_ using the information in the invitation to either restart the invitation process (returning to the `start` state) or to abandon the protocol. The `problem-report` may be an adopted  `Out of Band` protocol message or an adopted `DID Exchange` protocol message, depending on where in the processing of the invitation the error was detected.
 
 During the `request` / `response` part of the protocol, there are two protocol-specific error messages possible: one for an active rejection and one for an unknown error. These errors are sent using a **problem_report** message type specific to the DID Exchange Protocol. These errors do not transition the protocol to the `abandoned` state. The following list details `problem-code`s that may be sent in these cases:
 
