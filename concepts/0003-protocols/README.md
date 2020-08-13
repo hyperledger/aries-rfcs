@@ -29,6 +29,7 @@ and shows how they should be designed and documented.
     - [Agent Design](#agent-design)
     - [Composable](#composable)
     - [Message Types](#message-types)
+      - [Handling Unrecognized Items in Messages](#handling-unrecognized-items-in-messages)
     - [Ingredients](#ingredients)
     - [How to Define a Protocol](#how-to-define-a-protocol)
     - [Security Considerations](#security-considerations)
@@ -207,6 +208,15 @@ and [problem reports](../../features/0035-report-problem/README.md) are defined 
 a protocol. This ensures that the structure of such messages is standardized, but used in the context of the
 protocol adopting the message types.
 
+#### Handling Unrecognized Items in Messages
+
+In the [semver](#semver-rules-for-protocols) section of this document there is discussion of the handling of mismatches in minor versions
+supported and received. Notably, a recipient that supports a given minor version of a protocol less than that of a
+received protocol message should ignore any unrecognized fields in the message. Such handling of unrecognized data items applies more generally than
+just minor version mismatches. A recipient of a message from a supported major version of a protocol should ignore **any** unrecognized items
+in a received message, even if the supported and minor versions are the same. When items from the message are ignored, the recipient may want
+to send a warning `problem-report` message with code `fields-ignored`.
+
 ### Ingredients
 
 A protocol has the following ingredients:
@@ -369,11 +379,11 @@ Within a given major version of a protocol, an agent should:
 
 This leads to the following received message handling rules:
 
-- message types received with a minor versions below the minimum may be answered with a `report-problem` message with code `version-not-supported`
+- message types received with a minor versions below the minimum may be answered with a `problem-report` message with code `version-not-supported`
 - message types received with a minor version at or higher than the minimum supported and less than the current minor version are processed, ideally with a response using the same minor version of the received message
-  - The recipient may want to send a warning `report-problem` message with code `version-with-degraded-features`
+  - The recipient may want to send a warning `problem-report` message with code `version-with-degraded-features`
 - message types received with a minor version higher than the current minor version are processed with any unrecognized fields ignored
-  - The recipient may want to send a warning `report-problem` message with code `fields-ignored-due-to-version-mismatch`
+  - The recipient may want to send a warning `problem-report` message with code `fields-ignored-due-to-version-mismatch`
 
 As documented in the semver documentation, these requirements are not applied when
 major version 0 is used. In that case, minor version increments are considered breaking.
@@ -382,8 +392,8 @@ Agents may support multiple major versions and select which major version to
 use when initiating an instance of the protocol.
 
 An agent should reject messages from protocols or unsupported protocol major versions with
-a `report-problem` message with code `version-not-supported`. Agents that receive such a
-`report-problem` message may use the [discover features protocol](../../features/0031-discover-features/README.md)
+a `problem-report` message with code `version-not-supported`. Agents that receive such a
+`problem-report` message may use the [discover features protocol](../../features/0031-discover-features/README.md)
 to resolve the mismatch.
 
 #### Semver Examples
@@ -457,7 +467,7 @@ concept of state machines, and we encourage developers who implement
 protocols to build them that way.
 
 Among other benefits, this helps with error handling: when one agent
-sends a [`report-problem` message](../../features/0035-report-problem/README.md)
+sends a [`problem-report` message](../../features/0035-report-problem/README.md)
 to another, the message can make it crystal clear which state it
 has fallen back to as a result of the error.
 
