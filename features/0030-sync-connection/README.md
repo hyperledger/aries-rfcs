@@ -70,7 +70,7 @@ A related, minor protocol is also defined in subdocs of this RFC:
 ### Roles
 
 The only role defined in this protocol is `peer`. However, see [this note in the
-peer DID method spec](https://dhh1128.github.io/peer-did-method-spec/#roles-and-agents)
+peer DID method spec](https://identity.foundation/peer-did-method-spec/#roles-and-agents-in-protocols)
 for some subtleties.
 
 ### States
