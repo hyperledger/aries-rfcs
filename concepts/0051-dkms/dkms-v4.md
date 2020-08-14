@@ -317,7 +317,7 @@ The protocols associated with microledgers include:
 * A protocol to update and synchronize DID Documents.
 * A protocol to query DID Documents.
 
-Today, the only known example of this approach is the [`did:peer` method](https://dhh1128.github.io/peer-did-method-spec/index.html).
+Today, the only known example of this approach is the [`did:peer` method](https://identity.foundation/peer-did-method-spec/index.html).
 It is possible that alternative implementations will emerge.
 
 # 5. Key Management Architecture
