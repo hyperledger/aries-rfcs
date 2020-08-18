@@ -14,7 +14,7 @@ A number of RFCs that have been defined reference what amounts to a "naked" publ
 
 > To Do: Update link DID Key Method link (above) from Digital Bazaar to W3C repositories when they are created and populated.
 
-While it is well known in the Aries community that `did:key` is fundamentally different from the [did:peer](https://dhh1128.github.io/peer-did-method-spec/index.html) method that is the basis of Aries protocols, it must be re-emphasized here. This RFC does **NOT** imply any changes to the use of `did:peer` in Aries, nor does it change the content of a `did:peer` DIDDoc. This RFC only changes references to plain public keys in the JSON of some RFCs to use `did:key` in place of a plain text string.
+While it is well known in the Aries community that `did:key` is fundamentally different from the [did:peer](https://identity.foundation/peer-did-method-spec/index.html) method that is the basis of Aries protocols, it must be re-emphasized here. This RFC does **NOT** imply any changes to the use of `did:peer` in Aries, nor does it change the content of a `did:peer` DIDDoc. This RFC only changes references to plain public keys in the JSON of some RFCs to use `did:key` in place of a plain text string.
 
 Should this RFC be [ACCEPTED](/README.md#accepted), a [community coordinated update](../../concepts/0345-community-coordinated-update/README.md) will be used to apply updates to the agent code bases and impacted RFCs.
 
