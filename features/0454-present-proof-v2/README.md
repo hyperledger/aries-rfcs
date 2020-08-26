@@ -10,7 +10,7 @@
 
 ## Version Change Log
 
-### 2.0 - Alignment with [RFC 0434 Issue Credential](../0453-issue-credential-v2/README.md)
+### 2.0 - Alignment with [RFC 0453 Issue Credential](../0453-issue-credential-v2/README.md)
 
 - The "formats" field is added to all the messages to link the specific attachment IDs with the verifiable presentation format and version of the attachment.
 - The details that are part of each message type about the different attachment formats serves as a registry of the known formats and versions.

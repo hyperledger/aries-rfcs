@@ -71,7 +71,7 @@ The term "DIDDoc" is used in this RFC as it is defined in the [DID Specification
 - associated with a DID, and
 - used for a relationship.
 
-A DID can be resolved to get its corresponding DIDDoc by any Agent that needs access to the DIDDoc. This is true whether talking about a DID on a Public Ledger, or a pairwise DID (using the [did:peer method](https://dhh1128.github.io/peer-did-method-spec/index.html)) persisted only to the parties of the relationship. In the case of pairwise DIDs, it's the (implementation specific) domain's responsibility to ensure such resolution is available to all Agents requiring it within the domain.
+A DID can be resolved to get its corresponding DIDDoc by any Agent that needs access to the DIDDoc. This is true whether talking about a DID on a Public Ledger, or a pairwise DID (using the [did:peer method](https://identity.foundation/peer-did-method-spec/index.html)) persisted only to the parties of the relationship. In the case of pairwise DIDs, it's the (implementation specific) domain's responsibility to ensure such resolution is available to all Agents requiring it within the domain.
 
 #### Messages are Private
 
