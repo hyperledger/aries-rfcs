@@ -1,4 +1,4 @@
-# Aries RFC 0445: Aries Rich Schema Credential Definition
+# Aries RFC 0446: Aries Rich Schema Credential Definition
 - Author: [Alexander Shcherbakov](mailto:alexander.shcherbakov@evernym.com), [Ken Ebert](mailto:ken@sovrin.org), [Brent Zundel](mailto:brent.zundel@evernym.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-03-16
