@@ -1,9 +1,9 @@
 # Aries RFC 0348: Transition Message Type to HTTPs
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca)
-- Status: [ACCEPTED](/README.md#accepted)
-- Since: 2020-01-30
-- Status Note: In step 1 - community is updating implementations to accept old and new formats. **Target Completion Date: 2020.02.29** 
+- Status: [ADOPTED](/README.md#adopted)
+- Since: 2020-08-26
+- Status Note: In step 2 - community is updating implementations to send new formats. **Target Completion Date: 2020.10.15** 
 - Supersedes:
 - Start Date: 2019-12-13
 - Tags: feature, community-update
@@ -27,9 +27,9 @@ The transition from the old to new formats will occur in four steps:
 - **DONE Pre-work**: where we agree on the transition plan outlined in this RFC.
   - Any RFC updates related to this transition needed before starting the transition are completed.
   - > To Do: Identify if there any prerequisite RFC changes to be made.
-- **IN PROGRESS Step 1: Agent builders MUST update all agent code bases and deployments to accept incoming message types in the old (did) and new (https) formats. During this step, agents MUST default to sending out messages in the old format.**
+- **DONE Step 1: Agent builders MUST update all agent code bases and deployments to accept incoming message types in the old (did) and new (https) formats. During this step, agents MUST default to sending out messages in the old format.**
   - Each agent builder SHOULD notify the community they have completed Step 1 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
-- **Step 2**: Agent builders MUST update all agent code bases and deployments to send out all messages using the new (https) format. The old (did) format is deprecated but will still be accepted. An agent deployment MAY send out an old format message type upon receipt of a message containing an old format message type.
+- **IN PROGRESS Step 2**: Agent builders MUST update all agent code bases and deployments to send out all messages using the new (https) format. The old (did) format is deprecated but will still be accepted. An agent deployment MAY send out an old format message type upon receipt of a message containing an old format message type.
   - Each agent builder SHOULD notify the community they have completed Step 2 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
 - **Step 3**: Agent builders SHOULD update their deployments to remove all support for receiving the old format and MUST NOT send out messages using the old message type format.
 
