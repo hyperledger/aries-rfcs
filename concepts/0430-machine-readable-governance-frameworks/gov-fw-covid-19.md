@@ -1,7 +1,7 @@
 ```jsonc
 {
     "@context": [
-        "https://github.com/hyperledger/aries-rfcs/concepts/0430-machine-readable-trust-frameworks", 
+        "https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0430-machine-readable-governance-frameworks", 
         "https://fightthevirus.org/covid19-fw"
     ],
     "name": "COVID-19 Creds"
@@ -16,7 +16,7 @@
         {"name": "travel", "uri": "http://ftv.org/tf/travel"},
         {"name": "receive-healthcare", "uri": "http://ftv.org/tf/be-patient"},
         {"name": "tlc-fragile", "uri": "http://ftv.org/tf/tlc"},
-        {"name": "visit-hot-zone", "uri", "http://ftv.org/tf/visit"
+        {"name": "visit-hot-zone", "uri": "http://ftv.org/tf/visit"}
     ],
     // Name all the duties that are significant to understanding
     // interactions in this governance framework. Each duty is defined for humans
@@ -70,22 +70,22 @@
             "grant": "request-proof", "thus": "anyone",
             "duties": ["GDPR-edu-verif", "accept-kmk-tos"]
         },
-        // Is there an authority that audits interactions?
-        "audit": {
-            // Where should reports be submitted via http POST?
-            "uri": "http://kmk.org/audit",
-            // How likely is it that a given interaction needs to
-            // be audited? Each party in the interaction picks a
-            // random number between 0 and 1, inclusive; if the number
-            // is <= this number, then that party submits a report about it.
-            "probability": "0.01"
-        },
-        // Is there an authority to whom requests for redress can
-        // be made, if one party feels like another violates
-        // the governance framework? 
-        "redress": {
-            "uri": "http://kmk.org/redress"
-        }
-    }    
-}
+    ],
+    // Is there an authority that audits interactions?
+    "audit": {
+        // Where should reports be submitted via http POST?
+        "uri": "http://kmk.org/audit",
+        // How likely is it that a given interaction needs to
+        // be audited? Each party in the interaction picks a
+        // random number between 0 and 1, inclusive; if the number
+        // is <= this number, then that party submits a report about it.
+        "probability": "0.01"
+    },
+    // Is there an authority to whom requests for redress can
+    // be made, if one party feels like another violates
+    // the governance framework? 
+    "redress": {
+        "uri": "http://kmk.org/redress"
+    }
+}   
 ```
