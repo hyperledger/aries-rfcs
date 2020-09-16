@@ -1,4 +1,4 @@
-# 0534: Email Access Governance Framework
+# 0535: Email Access Governance Framework
 - Authors: [Sam Curren](telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-09-16
