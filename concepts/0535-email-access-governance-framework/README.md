@@ -20,6 +20,16 @@ To facilitate the verification of email access between two parties over DIDComm 
 
 ## Details
 
+### Goal Codes
+
+This Governance framework satisfies the following goal code(s):
+
+`aries.receive.verifiable.identifier`
+
+### Protocols
+
+`https://didcomm.org/present-proof/2.0/`
+
 ### Roles
 
 **issuer**: Responsible for issuing credentials according to the requirements of this governance framework.
