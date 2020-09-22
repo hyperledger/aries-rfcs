@@ -23,6 +23,9 @@ throughout the transition.
 ### `credentials`
 Relates to [verifiable credentials](https://www.w3.org/TR/vc-data-model/).
 
+### `biometrics`
+Relates to biometrics, typically as used with verifiable credentials or over protocols.
+
 ### `rich-schemas`
 Relates to next-generation schemas, such as those used by [https://schema.org](schema.org), as used in verifiable credentials.
 

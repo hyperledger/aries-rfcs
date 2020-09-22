@@ -5,12 +5,13 @@
 - Since: 2019-09-24
 - Status Note: Proposed for now based on authors joint work
 - Start Date: 2019-06-01
-- Tags: [concept](/tags.md#concept)
+- Tags: [concept](/tags.md#concept), [biometrics](/tags.md#biometrics)
 
 ## Summary
 
-Biometric services for Identity Verification, Authentication, Recovery
-and other use cases referred to in Aries RFCs including DKMS.
+Explains the mental model underpinning biometric services for Identity Verification, Authentication, Recovery and other use cases referred to in Aries RFCs including DKMS.
+
+Concrete protocols implemented between biometric service providers and their clients are specified in [RFC 0528: Biometric Enrollment Protocol](../../features/0528-biometric-enrollment-protocol) and [RFC 0529: Biometric Verification Protocol](../../features/0529-biometric-verification-protocol).
 
 ## Motivation
 
@@ -24,7 +25,7 @@ know-your-customer (KYC) and anti-money laundering (AML) laws require
 some form of biometric(s) when establishing accounts.
 
 In this specification, we characterize the functions and schema that
-biometric service providers (BSPs) must implement to ensure a uniform
+__biometric service providers__ (__BSPs__) must implement to ensure a uniform
 interface to clients: wallets and agents.  For example, current
 Automated Biometric Information Systems (ABIS) and other standards
 (IEEE 2410, FIDO) provide a subset of services but often require
@@ -38,7 +39,7 @@ modalities.
 
 ## Tutorial
 
-One goal of the Biometric Service Provider (BSP) specification is to
+One goal of the Biometric Service Provider specification is to
 allow for self-sovereign biometric credentials in a holder's wallet or
 cloud agent trusted by issuers and verifiers:
 
@@ -55,8 +56,8 @@ functions for comparison to authoritative databases.
 
 In general, biometrics are collected during registration from a person
 and stored for later comparisons.  The registration data is called the
-Initial Biometric Vector (IBV).  During subsequent sessions, a
-biometric reading is taken called the Candidate Biometric Vector (CBV)
+__Initial Biometric Vector__ (__IBV__).  During subsequent sessions, a
+biometric reading is taken called the __Candidate Biometric Vector__ (__CBV__)
 and "matched" to the IBV:
 
 ![bsp_arch2](images/bsp_arch2.png)
