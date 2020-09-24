@@ -27,7 +27,7 @@ We'll use the following message as an example:
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/example/1.0/test_message",
+    "@type": "https://didcomm.org/example/1.0/test_message",
     "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
     "msg": {
         "text": "Hello World!",
@@ -40,10 +40,10 @@ Digitally signing the `msg` object with the `ed25519sha256_single` scheme result
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/example/1.0/test_message",
+    "@type": "https://didcomm.org/example/1.0/test_message",
     "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
     "msg~sig": {
-      "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
+      "@type": "https://didcomm.org/signature/1.0/ed25519Sha512_single",
       "sig_data": "base64URL(64bit_integer_from_unix_epoch|msg_object)",
       "signature": "base64URL(digital signature function output)",
       "signer": "base64URL(inlined_signing_verkey)"

@@ -29,7 +29,7 @@ The cloud agent registration invite looks like below
 
 ```JSON
 {​
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/cloudagentregistrationinvitation",​
+    "@type": "https://didcomm.org/didexchange/1.0/cloudagentregistrationinvitation",​
     "@id": "12345678900987654321",​
     "label": "CloudAgentA",​
     "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],​
@@ -56,7 +56,7 @@ It then packs this message by Bob's recipient key and then creates another json 
 
 ```JSON
 {​
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward",​
+    "@type": "https://didcomm.org/routing/1.0/forward",​
     "@id": "12345678900987654321",​
     "msg": "<Encrypted message for Bob here>",
     "to": "<Service endpoint of Bob>"​
@@ -71,7 +71,7 @@ For example, say the next random cloud agent that it chooses is Cloud Agent "C".
 
 ```JSON
 {​
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward",​
+    "@type": "https://didcomm.org/routing/1.0/forward",​
     "@id": "12345678900987654321",​
     "msg": "<Encrypted message for Cloud Agent A>",
     "to": "<Service endpoint of Cloud Agent A>"​

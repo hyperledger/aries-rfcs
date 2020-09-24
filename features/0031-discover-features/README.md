@@ -27,7 +27,7 @@ This RFC introduces a protocol for discussing the protocols an agent
 can handle. The identifier for the message family used by this protocol is
 `discover-features`, and the fully qualified URI for its definition is:
 
-    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0
+    https://didcomm.org/discover-features/1.0
 
 ### Roles
 
@@ -50,9 +50,9 @@ A `discover-features/query` message looks like this:
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0/query",
+  "@type": "https://didcomm.org/discover-features/1.0/query",
   "@id": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU",
-  "query": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.*",
+  "query": "https://didcomm.org/tictactoe/1.*",
   "comment": "I'm wondering if we can play tic-tac-toe..."
 }
 ```
@@ -80,11 +80,11 @@ A `discover-features/disclose` message looks like this:
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0/disclose",
+  "@type": "https://didcomm.org/discover-features/1.0/disclose",
   "~thread": { "thid": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU" },
   "protocols": [
     {
-      "pid": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.0",
+      "pid": "https://didcomm.org/tictactoe/1.0",
       "roles": ["player"]
     }
   ]
@@ -94,7 +94,7 @@ A `discover-features/disclose` message looks like this:
 The `protocols` field is a JSON array of __protocol support descriptor__
 objects that match the query. Each descriptor has a `pid` that contains
 a protocol version (fully qualified message family identifier such as
-`did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.0`), plus a `roles`
+`https://didcomm.org/tictactoe/1.0`), plus a `roles`
 array that enumerates the roles the responding agent
 can play in the associated protocol.
 
@@ -108,10 +108,10 @@ response is probably just as good:
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0/disclose",
+  "@type": "https://didcomm.org/discover-features/1.0/disclose",
   "~thread": { "thid": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU" },
   "protocols": [
-    {"pid": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.0"}
+    {"pid": "https://didcomm.org/tictactoe/1.0"}
   ]
 }
 ```

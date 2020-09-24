@@ -199,7 +199,7 @@ This message should be used as an accompaniment to an [issue credential message]
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/evidence_exchange/1.0/evidence_request",
+  "@type": "https://didcomm.org/evidence_exchange/1.0/evidence_request",
   "@id": "6a4986dd-f50e-4ed5-a389-718e61517207",
   "for": "did:peer:1-F1220479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",
   "as_of_time": "2019-07-23 18:05:06.123Z",
@@ -221,7 +221,7 @@ This message is required for an Issuer Agent in response to an ```evidence_reque
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/evidence_exchange/1.0/evidence_response",
+  "@type": "https://didcomm.org/evidence_exchange/1.0/evidence_response",
   "@id": "1517207d-f50e-4ed5-a389-6a4986d718e6",
   "~thread": { "thid": "6a4986dd-f50e-4ed5-a389-718e61517207" },
   "for": "did:peer:1-F1220479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",
@@ -438,7 +438,7 @@ Upon the successful processing of a [credential proof presentation message](http
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/evidence_exchange/1.0/evidence_access_request",
+  "@type": "https://didcomm.org/evidence_exchange/1.0/evidence_access_request",
   "@id": "7c3f991836-4ed5-f50e-7207-718e6151a389",
   "for": "did:peer:1-F1220479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",
   "as_of_time": "2019-07-23 18:05:06.123Z",
@@ -465,7 +465,7 @@ This message is required for a Holder Agent in response to an ```evidence_access
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/evidence_exchange/1.0/evidence_access_response",
+  "@type": "https://didcomm.org/evidence_exchange/1.0/evidence_access_response",
   "@id": "1517207d-f50e-4ed5-a389-6a4986d718e6",
   "~thread": { "thid": "7c3f991836-4ed5-f50e-7207-718e6151a389" },
   "for": "did:peer:1-F1220479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",

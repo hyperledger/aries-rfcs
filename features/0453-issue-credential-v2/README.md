@@ -113,7 +113,7 @@ Message format:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/%VER/propose-credential",
+    "@type": "https://didcomm.org/issue-credential/%VER/propose-credential",
     "@id": "<uuid of propose-message>",
     "comment": "<some comment>",
     "credential_proposal": <json-ld object>,
@@ -157,7 +157,7 @@ Message Format:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/%VER/offer-credential",
+    "@type": "https://didcomm.org/issue-credential/%VER/offer-credential",
     "@id": "<uuid of offer message>",
     "replacement_id": "<issuer unique id>",
     "comment": "<some comment>",
@@ -207,7 +207,7 @@ Message Format:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/%VER/request-credential",
+    "@type": "https://didcomm.org/issue-credential/%VER/request-credential",
     "@id": "<uuid of request message>",
     "replacement_id": "<issuer unique id>",
     "comment": "<some comment>",
@@ -252,7 +252,7 @@ Message Format:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/%VER/issue-credential",
+    "@type": "https://didcomm.org/issue-credential/%VER/issue-credential",
     "@id": "<uuid of issue message>",
     "replacement_id": "<issuer unique id>",
     "comment": "<some comment>",
@@ -295,7 +295,7 @@ This is not a message but an inner object for other messages in this protocol. I
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/%VER/credential-preview",
+    "@type": "https://didcomm.org/issue-credential/%VER/credential-preview",
     "attributes": [
         {
             "name": "<attribute name>",
