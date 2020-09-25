@@ -35,7 +35,7 @@ Message types are URIs that may resolve to developer documentation for the messa
 
 `https://didcomm.org/` is used to namespace protocols defined by the community as "core protocols" or protocols that agents should minimally support.
 
-The `didcomm.org` [DNS entry](https://whois.whoisxmlapi.com/lookup-report/zjRXrYwV5r) is currently controlled by Daniel Hardman.
+The `didcomm.org` [DNS entry](https://whois.whoisxmlapi.com/lookup-report/zjRXrYwV5r) is currently controlled by the [Decentralized Identity Foundation (DIF)](https://identity.foundation) based on their role in standardizing the [DIDComm Messaging specification](https://identity.foundation/didcomm-messaging/spec/).
 
 ### Protocols
 
