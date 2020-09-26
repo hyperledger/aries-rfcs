@@ -1,0 +1,24 @@
+@startuml
+title Verify Protocol
+entity client #b6d7a8
+actor individual #e0e0e0
+boundary scanner #f0f000
+control BSP #a4c2f4ff
+
+individual -[#c0c0c0]-> client: access services
+client -[#c0c0c0]-> individual: proof request
+individual -[#c0c0c0]-> client: proof
+client -[#green]-> client: extract EI or IBV
+client -[#c0c0c0]-> individual: ask for scan\n(human, not DIDComm)
+client -[#blue]-> scanner: request scan\n(hardware or BSP API)
+scanner -[#blue]-> client: return raw data\n(hardware or BSP API)
+client --> BSP: request verification against raw data + EI/IBV
+BSP -[#blue]-> BSP: convert raw data to CBV
+alt pocket pattern
+BSP -[#blue]-> BSP: 2a. compare CBV to IBV
+else BSP-enforced uniqueness
+BSP -[#blue]-> BSP: lookup EI to get IBV
+BSP -[#blue]-> BSP: 2a. compare CBV to IBV
+end
+BSP --> client: assertion about match
+@enduml

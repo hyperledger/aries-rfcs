@@ -1,0 +1,23 @@
+@startuml
+title Enroll Protocol
+entity client
+actor individual #e0e0e0
+boundary scanner #f0f000
+control BSP #a4c2f4ff
+
+client -[#c0c0c0]-> individual: ask for scan\n(human, not DIDComm)
+client -[#blue]-> scanner: request scan\n(hardware or BSP API)
+scanner -[#blue]-> client: return raw data\n(hardware or BSP API)
+client --> BSP: 1, request enroll with raw data (DIDComm)
+BSP -[#blue]-> BSP: convert raw data to IBV
+alt pocket pattern
+BSP -> client: 2a. return IBV
+else BSP-enforced uniqueness
+BSP -[#blue]-> BSP: 1:n match
+BSP -[#blue]-> BSP: generate EI
+BSP -[#blue]-> BSP: store EI + IBV
+BSP -> client: 2b. return EI
+end
+client -[#c0c0c0]-> individual: issue credential (DIDComm,\nbut other protocol. Contains\nIBV if pocket pattern, else EI.)
+
+@enduml
