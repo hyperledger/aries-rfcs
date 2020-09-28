@@ -40,7 +40,7 @@ The `revoke` message sent by the `issuer` to the `holder` is as follows:
 
 ```JSON
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/revocation_notification/1.0/revoke",
+  "@type": "https://didcomm.org/revocation_notification/1.0/revoke",
   "@id": "<uuid-revocation-notification>",
   "credential_id": "<uuid-credential>",
   "comment": "Some comment"

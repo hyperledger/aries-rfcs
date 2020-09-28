@@ -1,6 +1,6 @@
 
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/problem-report",
+  "@type": "https://didcomm.org/notification/1.0/problem-report",
   "explain": "Unable to route to specified agent",
   "explain~l10n": {
     "code": "cant-route-to-agent",

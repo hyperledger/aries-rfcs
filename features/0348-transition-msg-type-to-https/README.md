@@ -11,7 +11,7 @@
 ## Summary
 
 Per issue [#225](https://github.com/hyperledger/aries-rfcs/issues/225), the
-Aries community has agreed to change the prefix for protocol message types that currently use the
+Aries community has agreed to change the prefix for protocol message types that currently use
 `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/` to use `https://didcomm.org/`. Examples of the two message types forms are:
 
 - Before: `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack`

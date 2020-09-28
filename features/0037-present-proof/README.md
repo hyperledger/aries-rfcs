@@ -71,7 +71,7 @@ An optional message sent by the Prover to the verifier to initiate a proof prese
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/propose-presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/propose-presentation",
     "@id": "<uuid-propose-presentation>",
     "comment": "some comment",
     "presentation_proposal": <json-ld object>
@@ -89,7 +89,7 @@ From a verifier to a prover, the `request-presentation` message describes values
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/request-presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/request-presentation",
     "@id": "<uuid-request>",
     "comment": "some comment",
     "request_presentations~attach": [
@@ -116,7 +116,7 @@ This message is a response to a Presentation Request message and contains signed
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation",
     "@id": "<uuid-presentation>",
     "comment": "some comment",
     "presentations~attach": [
@@ -161,7 +161,7 @@ This is not a message but an inner object for other messages in this protocol. I
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
     "attributes": [
         {
             "name": "<attribute_name>",
@@ -226,7 +226,7 @@ For example, a holder with multiple account credentials could use a presentation
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
     "attributes": [
         {
             "name": "account",

@@ -79,7 +79,7 @@ No errors are sent in timeout situations. If the inviter or invitee wishes to re
 
 ```jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/problem_report",
+  "@type": "https://didcomm.org/connections/1.0/problem_report",
   "@id": "5678876542345",
   "~thread": { "thid": "<@id of message related to problem>" },
   "~i10n": { "locale": "en"},
@@ -135,7 +135,7 @@ Invitation Message with Public Invitation DID:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation",
+    "@type": "https://didcomm.org/connections/1.0/invitation",
     "@id": "12345678900987654321",
     "label": "Alice",
     "did": "did:sov:QmWbsNYhMrjHiqZDTUTEJs"
@@ -146,7 +146,7 @@ Invitation Message with Keys and URL endpoint:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation",
+    "@type": "https://didcomm.org/connections/1.0/invitation",
     "@id": "12345678900987654321",
     "label": "Alice",
     "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
@@ -159,7 +159,7 @@ Invitation Message with Keys and DID Service Endpoint Reference:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation",
+    "@type": "https://didcomm.org/connections/1.0/invitation",
     "label": "Alice",
     "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
     "serviceEndpoint": "did:sov:A2wBhNYhMrjHiqZDTUYH7u;routeid",
@@ -209,7 +209,7 @@ Invitation:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation",
+    "@type": "https://didcomm.org/connections/1.0/invitation",
     "@id": "12345678900987654321",
     "label": "Alice",
     "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
@@ -267,7 +267,7 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 ```jsonc
 {
   "@id": "5678876542345",
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/request",
+  "@type": "https://didcomm.org/connections/1.0/request",
   "label": "Bob",
   "connection": {
     "DID": "B.did@B:A",
@@ -371,7 +371,7 @@ The connection response message is used to complete the connection. This message
 
 ```jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/response",
+  "@type": "https://didcomm.org/connections/1.0/response",
   "@id": "12345678900987654321",
   "~thread": {
     "thid": "<@id of request message>"
@@ -390,13 +390,13 @@ The above message is required to be signed as described in [RFC 0234 Signature D
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/response",
+  "@type": "https://didcomm.org/connections/1.0/response",
   "@id": "12345678900987654321",
   "~thread": {
     "thid": "<@id of request message>"
   },
   "connection~sig": {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
+    "@type": "https://didcomm.org/signature/1.0/ed25519Sha512_single",
     "signature": "<digital signature function output>",
     "sig_data": "<base64URL(64bit_integer_from_unix_epoch||connection_attribute)>",
     "signers": "<signing_verkey>"

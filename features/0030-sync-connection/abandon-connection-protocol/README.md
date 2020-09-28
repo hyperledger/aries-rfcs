@@ -18,7 +18,7 @@ This is not strictly required, but it is good hygiene.
 This RFC defines the `abandon_connection` protocol, version 1.x, as identified by the
 following [PIURI](../../../concepts/0003-protocols/README.md#piuri):
 
-    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/abandon_connection/1.0
+    https://didcomm.org/abandon_connection/1.0
 
 Of course, subsequent evolutions of the protocol will replace `1.0` with
 an appropriate update per [semver](../../../concepts/0003-protocols/README.md#semver-rules-for-protocols)
@@ -50,7 +50,7 @@ An `announce` message from Alice to Bob looks like this:
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/abandon_connection/1.0/announce",
+  "@type": "https://didcomm.org/abandon_connection/1.0/announce",
   "@id": "c17147d2-ada6-4d3c-a489-dc1e1bf778ab",
   "~please_ack": {}
 }
@@ -77,7 +77,7 @@ The [`ack` message](../../0015-acks/README.md#explicit-acks) is [adopted](
 
 ```json
 {
-"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/abandon_connection/1.0/ack",
+"@type": "https://didcomm.org/abandon_connection/1.0/ack",
 "~thread": { "thid": "c17147d2-ada6-4d3c-a489-dc1e1bf778ab" }
 }
 ```
