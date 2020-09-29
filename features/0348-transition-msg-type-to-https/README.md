@@ -96,6 +96,7 @@ Name / Link | Implementation Notes
 [Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | No steps completed
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | No steps completed
 [Verity](https://www.evernym.com/products/) | No steps completed
-[Pico Labs](http://picolabs.io/) | Completed Step 1 [code change](https://github.com/picolab/G2S) and notifying known owner/operators of Pico Agents
+[Pico Labs](http://picolabs.io/) | Completed Step 2 even though [deprecated](https://github.com/picolab/G2S)
 [IBM](https://github.com/IBM-Blockchain-Identity/unknown) | Completed Step 1 [code change](https://github.com/hyperledger/indy-sdk/pull/2136)
 IBM Agent | Completed Step 1
+Aries Cloud Agent - Pico | Completed Step 2 [code change](https://github.com/Picolab/aries-cloudagent-pico/commit/2fb4b5f714f32a300ec6ae2655cf9319c0ff3703)
