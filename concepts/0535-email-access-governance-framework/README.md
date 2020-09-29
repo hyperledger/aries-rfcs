@@ -36,11 +36,11 @@ This Governance framework satisfies the following goal code(s):
 
 ### Schemas
 
-<schemas listed here>
+_TODO: schemas listed here_
 
 ### Issuers
 
-<list of issuers here>
+BCGov (DID?)
 
 ### Issue Requirements
 
@@ -75,16 +75,11 @@ Located [here](data.json).
 
 ## Unresolved questions
 
-- Should redundant information be maintained between this human readable document and the machine readable file that accompanies it? More effort, but also more clear.
-- Naming? Ownership/Control/Access?
 - Which networks?
 - Need Schemas and Issuers
-- Does the Impl section below make sense for a governance framework?
-## Implementations
+## Uses
 
-The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
-
-*Implementation Notes* [may need to include a link to test results](README.md#accepted).
+The following libraries or applications use this Governance Framework.
 
 Name / Link | Implementation Notes
 --- | ---
