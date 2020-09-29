@@ -65,7 +65,7 @@ The following is the out-of-band `invitation` message equivalent to an RFC 0160 
 The constraints on this form of the out-of-band `invitation` sent during Step 2 are:
 
 - `goal_code` and `goal` are ignored.
-- `handshake_protocol` MUST have exactly one entry and that entry must be `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation`.
+- `handshake_protocols` MUST have exactly one entry and that entry must be `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation`.
 - `request~attach` MUST NOT be present.
 - `service` MUST have exactly one entry and be in the form above or be a single DID (but not both).
 
@@ -159,7 +159,7 @@ The most common connection-less form being used in production is the `request-pr
 The constraints on this form of the out-of-band `invitation` sent during Step 2 are:
 
 - `goal_code` is ignored and `goal` is used as the `comment`.
-- `handshake_protocol` MUST NOT be present.
+- `handshake_protocols` MUST NOT be present.
 - `request~attach` MUST have exactly one entry and that entry must be a `request-presentation` message.
 - `service` MUST have exactly one entry and be in the form above or be a single DID (but not both).
 
