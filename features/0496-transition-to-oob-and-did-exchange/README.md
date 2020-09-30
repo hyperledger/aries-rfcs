@@ -1,9 +1,9 @@
-# Aries RFC 0496: Transition to the Out of Band Protocol
+# Aries RFC 0496: Transition to the Out of Band and DID Exchange Protocols
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca)
 - Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-06-10
-- Status Note: In step 0 - community is reviewing the proposed approach. **Target Completion Date: 2020.06.15**
+- Since: 2020-09-30
+- Status Note: In step 0 - community is reviewing the proposed approach. **Target Completion Date: 2020.12.31**
 - Supersedes:
 - Start Date: 2020-06-07
 - Tags: feature, community-update
@@ -11,7 +11,7 @@
 ## Summary
 
 The Aries community has agreed to transition from using the `invitation` messages in [RFC 0160 Connections](../0160-connection-protocol/README.md)
-and [RFC 0023 DID Exchange](../0023-did-exchange/README.md) to using the plaintext `invitation` message in [RFC 0434 Out of Band](../0434-outofband/README.md).
+and [RFC 0023 DID Exchange](../0023-did-exchange/README.md) to using the plaintext `invitation` message in [RFC 0434 Out of Band](../0434-outofband/README.md) and from using RFC 0160 to RFC 0023 for establishing agent-to-agent connections.
 As well, the community has agreed to transition from using [RFC 0056 Service Decorator](../0056-service-decorator/README.md) to execute connection-less instances of the [RFC 0037 Present Proof](../0037-present-proof/README.md) protocol to using the out-of-band invitation message.
 
 This RFC follows the guidance in [RFC 0345](../../concepts/0345-community-coordinated-update/README.md) about
