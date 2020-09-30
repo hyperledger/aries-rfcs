@@ -29,7 +29,7 @@ This can be sent unsolicited or in response to a `policy_share_request`.
 ```json=
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/transferpolicy/1.0/policy",
+    "@type": "https://didcomm.org/transferpolicy/1.0/policy",
     "queue_max_duration": 86400,
     "message_count_limit": 1000,
     "message_size_limit": 65536,
@@ -46,7 +46,7 @@ Used to ask for a `policy` message to be sent.
 
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/transferpolicy/1.0/policy_share_request"
+    "@type": "https://didcomm.org/transferpolicy/1.0/policy_share_request"
 }
 ```
 
@@ -57,7 +57,7 @@ Sent to request a policy change. The expected response is a `policy` message.
 
 {
     "@id": "123456781",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/transferpolicy/1.0/policy_change_request",
+    "@type": "https://didcomm.org/transferpolicy/1.0/policy_change_request",
         "queue_max_duration": 86400,
     "message_count_limit": 1000,
     "message_size_limit": 65536,

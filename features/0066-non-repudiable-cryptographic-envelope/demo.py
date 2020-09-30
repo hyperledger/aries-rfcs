@@ -51,7 +51,7 @@ async def run():
     # build payload json structure
     payload = {}
     payload['@id'] = "123456780"
-    payload['@type'] = "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0/message"
+    payload['@type'] = "https://didcomm.org/basicmessage/1.0/message"
     payload['~l10n'] = {"locale": "en"}
     payload['sent_time'] = "2019-01-15 18:42:01Z"
     payload['content'] = "Your hovercraft is full of eels."

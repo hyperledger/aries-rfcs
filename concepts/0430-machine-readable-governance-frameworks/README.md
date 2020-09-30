@@ -51,13 +51,15 @@ When we have good answers to this question, we can address feature requests like
 
 Trust frameworks generally begin as human-friendly content. They have to be created, reviewed, and agreed upon by experts from various disciplines: legal, business, humanitarian, government, trade groups, advocacy groups, etc. Developers can help by surfacing how rules are (or are not) susceptible to modeling in formal data structures. This can lead to an iterative process, where data structures and human conversations create refinement pressure on each other until the framework is ready for release.
 
+[TODO: The following blurb of JSON is one way to embody what we're after. I can imagine other approaches but haven't thought them through in detail. I'm less interested in the details of the JSON, for now, than in the concepts we're trying to communicate and automate. So have a conversation about whether this format works for us, or should be tweaked/replaced.]
+
 Each problem domain will probably have unique requirements. Therefore, we start with a general governance framework recipe, but plan for extension. We use JSON-LD for this purpose. Here we present a simple example for the problem domain of university credentials in Germany. It manifests just the components of a governance framework that are common across all contexts; additional JSON-LD `@context` values can be added to introduce more structure as needed. (See [Field Details](#field-details) for explanatory comments.)
 
 ```jsonc
 {
     "@context": [
         // The first context must be this RFC's context. It defines core properties.
-        "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/context.jsonld", 
+        "https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0430-machine-readable-governance-frameworks/context.jsonld", 
         // Additional contexts can be added to extend.
         "https://kmk.org/uni-accred-trust-fw"
     ],
@@ -67,55 +69,26 @@ Each problem domain will probably have unique requirements. Therefore, we start 
     "description": "Governs accredited colleges and universities in Germany.",
     "docs_uri": "http://https://kmk.org/uni-accred-trust-fw/v1",
     "data_uri": "http://https://kmk.org/uni-accred-trust-fw/v1/tf.json",
-    // In which problem domains is this governance framework relevant?
-    // Think of these like hash tags; they constitute a loose,
-    // overlapping topic cloud rather than a normative taxonomy;
-    // the purpose is to facilitate search.
     "topics": ["education"],
-    // In which legal jurisdictions is this governance framework relevant?
-    // Values here should use ISO 639-2 or 3 language code, possibly
-    // narrowed to a standard province and even county/city using > as
-    // the narrowing character, plus standard abbreviations where
-    // useful: us>tx>houston for "Houston, Texas, USA" or ca>qc for
-    // the province of Quebec in Canada.
     "jurisdictions": ["de", "eu"],
-    // In which geographies is this governance framework relevant? May be
-    // redundant with jurisdictions in many cases.
     "geos": ["Deutschland"],
-    // Name all the roles that are significant to understanding
-    // interactions in this governance framework. These map to X in rules
-    // like "X can do Y if Z."
-    "roles": ["accreditor", "school", "graduate", "anyone"],
-    // Name all the privileges that are significant to understanding
-    // interactions in this governance framework. These map to Y in rules
-    // like "X can do Y if Z." Each privilege is defined for humans
-    // at the specified URI, so a person can understand what it
-    // entails.
+    "roles": ["accreditor", "school", "graduate", "safe-verifier"],
     "privileges": [
         {"name": "accredit", "uri": "http://kmk.org/tf/accredit"},
         {"name": "issue-edu", "uri": "http://kmk.org/tf/issue-edu"},
         {"name": "hold-edu", "uri": "http://kmk.org/tf/hold-edu"},
         {"name": "request-proof", "uri", "http://kmk.org/tf/request-proof"
     ],
-    // Name all the duties that are significant to understanding
-    // interactions in this governance framework. Each duty is defined for humans
-    // at the specified URI, so a person can understand what it
-    // entails.
     "duties": [
         {"name": "safe-accredit", "uri": "http://kmk.org/tf/responsible-accredit"},
         {"name": "GDPR-dat-control", "uri": "http://europa.eu/gdpr/trust-fw/gdpr-data-controller"}
         {"name": "GDPR-edu-verif", "uri": "http://kmk.org/tf/gdpr-verif"}
         {"name": "accept-kmk-tos", "uri": "http://kmk.org/tf/tos"}
     ],
-    // Use DIDs to define key participants in the ecosystem. KMK is
-    // the accreditation authority for higher education in Germany.
-    // Here we show it using two different DIDs.
     "define": [
         {"name": "KMK": "id": "did:example:abc123"},
         {"name": "KMK": "id": "did:anotherexample:def456"},
     ], 
-    // Describe role-based rules of behavior like "X can do Y if Z,"
-    // where Z is a criterion following "when".
     "rules": [
         {"grant": ["accredit"], "when": {"name": "KMK"},
             "duties": ["safe-accredit"]},
@@ -131,7 +104,7 @@ Each problem domain will probably have unique requirements. Therefore, we start 
         },
         {"grant": "hold-edu", "when": {
                 // Proof request specifying that holder is a human.
-                // The presence of this item in the TF means that
+                // The presence of this item in the GF means that
                 // conforming issuers are supposed to verify
                 // humanness before issuing. Issuers can impose
                 // additional criteria; this is just the base
@@ -143,10 +116,18 @@ Each problem domain will probably have unique requirements. Therefore, we start 
             "duties": ["accept-kmk-tos"]
         },
         // In this governance framework, anyone can request proof based
-        // on credentials. No criteria are tested to map an entity
-        // to the "anyone" role.
+        // on credentials, as long as they demonstrate that they possess
+        // an "approved verifier" credential.
         {
-            "grant": "request-proof", "thus": "anyone",
+            "grant": "request-proof", "when": {
+                // Proof request specifying that the party must possess
+                // a credential that makes them an approved verifier.
+                // The presence of this item in the GF means that
+                // provers should, at a minimum, verify the verifiers
+                // in this way before sharing proof. Provers can impose
+                // additional criteria of their own; this is just the
+                // base requirement.
+            }, "thus": "safe-verifier",
             "duties": ["GDPR-edu-verif", "accept-kmk-tos"]
         },
         // Is there an authority that audits interactions?
@@ -187,9 +168,9 @@ Alice is holding a mobile app that manages credentials for her. She clicks an in
 
 ![possible trust rules acceptance screen](ux-accept-tf.png)
 
-Her app knew to display this message because the issuer, Faber College, communicated its reliance on this governance framework (by referencing its `data_uri`) as part of an early step in the issuance process (e.g., in the invitation or in the [`offer-credential` message](../../features/0036-issue-credential/README.md#propose-credential)). Notice how metadata from the governance framework &mdash; its title, version, topics, and descriptions &mdash; show up in the prompt. Notice as well that governance frameworks have reputations. This helps users determine whether the rules are legitimate and worth using. The "More Info" tab would link to the governance framework's `docs_uri` page.
+Her app knew to display this message because the issuer, Faber College, communicated its reliance on this governance framework (by referencing its `data_uri`) as part of an early step in the issuance process (e.g., in the invitation or in the [`offer-credential` message](../../features/0036-issue-credential/README.md#offer-credential)). Notice how metadata from the governance framework &mdash; its title, version, topics, and descriptions &mdash; show up in the prompt. Notice as well that governance frameworks have reputations. This helps users determine whether the rules are legitimate and worth using. The "More Info" tab would link to the governance framework's `docs_uri` page.
 
-Alice doesn't have to re-accept the governance framework if she's already using it (e.g., if she already activated it in her mobile app because she's it's relevant to other credentials she holds). As a person works regularly within a particular credential domain, decisions like these will become cached and seamless. However, we're showing the step here, for completeness.
+Alice doesn't have to re-accept the governance framework if she's already using it (e.g., if she already activated it in her mobile app because it's relevant to other credentials she holds). As a person works regularly within a particular credential domain, decisions like these will become cached and seamless. However, we're showing the step here, for completeness.
 
 Suppose that Alice accepts the proposed rules. The governance framework requires that she also accept the KMK terms of service. These might require her to report any errors in her credential promptly, and clarify that she has the right to appeal under certain conditions (see the `redress` section of the governance framework data structure). They might also discuss the KMK governance framework's requirement for random auditing (see the `audit` section).
 
@@ -211,6 +192,14 @@ Or, alternatively:
 
 In either case, proof of the issuer's qualifications was requested automatically, using canned criteria (see the second item in the governance framework's `rules` array).
 
+A similar kind of check can be performed on verifiers:
+
+![verifier is behaving properly](verifier-ok.png)
+
+Or, alternatively:
+ 
+![verifier is NOT behaving properly](verifier-not-ok.png)
+
 Trust framework knowledge can also be woven into other parts of a UI, as for example:
 
 ![about diploma](about-diploma.png)
@@ -223,7 +212,7 @@ And:
 
 ![upgrade governance framework](ux-upgrade-tf.png)
 
-The point here is not the specifics in the UI we're positing. Different UX designers may may different choices. Rather, it's that by publishing a carefully versioned, machine-readable governance framework, such UIs become possible. The user's experience becomes less about individual circumstances, and more about general patterns that have known reputations, dependable safeguards, and so forth.
+The point here is not the specifics in the UI we're positing. Different UX designers may make different choices. Rather, it's that by publishing a carefully versioned, machine-readable governance framework, such UIs become possible. The user's experience becomes less about individual circumstances, and more about general patterns that have known reputations, dependable safeguards, and so forth.
 
 #### Versioning
 

@@ -3,7 +3,7 @@
 - Authors: Nikita Khateev
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-05-28
-- Status Note:  See [RFC 0036](../0036-issue-credential/README.md) for the issue credential part of the same Indy HIPE PR.
+- Status Note:  This v1.x version of the protocol will be replaced by version v2 defined in [RFC 454](../0454-present-proof-v2/README.md).
 - Supersedes: [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md); also [Credential Exchange 0.1 -- IIW 2019](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view)
 - Start Date: 2019-01-30
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
@@ -71,7 +71,7 @@ An optional message sent by the Prover to the verifier to initiate a proof prese
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/propose-presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/propose-presentation",
     "@id": "<uuid-propose-presentation>",
     "comment": "some comment",
     "presentation_proposal": <json-ld object>
@@ -89,7 +89,7 @@ From a verifier to a prover, the `request-presentation` message describes values
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/request-presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/request-presentation",
     "@id": "<uuid-request>",
     "comment": "some comment",
     "request_presentations~attach": [
@@ -116,7 +116,7 @@ This message is a response to a Presentation Request message and contains signed
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation",
     "@id": "<uuid-presentation>",
     "comment": "some comment",
     "presentations~attach": [
@@ -161,7 +161,7 @@ This is not a message but an inner object for other messages in this protocol. I
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
     "attributes": [
         {
             "name": "<attribute_name>",
@@ -226,7 +226,7 @@ For example, a holder with multiple account credentials could use a presentation
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
     "attributes": [
         {
             "name": "account",

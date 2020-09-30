@@ -39,7 +39,7 @@ There are many useful features of user messaging systems that we will not be add
 
 ## Reference
 
-**Protocol**: did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0/
+**Protocol**: https://didcomm.org/basicmessage/1.0/
 
 **message**
 
@@ -52,7 +52,7 @@ Example:
 ```json
 {
     "@id": "123456780",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0/message",
+    "@type": "https://didcomm.org/basicmessage/1.0/message",
     "~l10n": { "locale": "en" },
     "sent_time": "2019-01-15 18:42:01Z",
     "content": "Your hovercraft is full of eels."

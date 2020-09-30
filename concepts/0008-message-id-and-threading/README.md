@@ -61,7 +61,8 @@ Message threading will be implemented as a [decorator](../0011-decorators/README
         "thid": "98fd8d72-80f6-4419-abc2-c65ea39d0f38",
         "pthid": "1e513ad4-48c9-444e-9e7e-5b8b45c5e325",
         "sender_order": 3,
-        "received_orders": {"did:sov:abcxyz":1}
+        "received_orders": {"did:sov:abcxyz":1},
+        "goal_code": "aries.vc.issue"
     },
     "example_attribute": "example_value"
 }
@@ -81,6 +82,7 @@ A thread object has the following fields discussed below:
   from other sender(s) on the thread. (This value is often missing if it
   is the first message in an interaction, but should be used otherwise,
   as it provides an implicit ACK.)
+* `goal_code`: Optional. See [RFC 0519: Goal Codes](../0519-goal-codes/README.md).
 
 #### Thread ID (`thid`)
 

@@ -1,10 +1,10 @@
 
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/trace/1.0/trace_report",
+  "@type": "https://didcomm.org/trace/1.0/trace_report",
   "for_id": "98fd8d72-80f6-4419-abc2-c65ea39d0f38.1",
   "handler": "did:sov:1234abcd#3",
   "elapsed_milli": 27,
-  "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/route/1.0/forward",
+  "traced_type": "https://didcomm.org/route/1.0/forward",
   "report_time": "2018-05-27 18:23:16.123Z",
   "outcome": "OK (forwarded to did:sov:1234abcd#4)"
 }

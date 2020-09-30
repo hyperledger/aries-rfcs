@@ -99,7 +99,7 @@ An optional message sent by the potential Holder to the Issuer to initiate the p
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.1/propose-credential",
+    "@type": "https://didcomm.org/issue-credential/1.1/propose-credential",
     "@id": "<uuid-of-propose-message>",
     "comment": "some comment",
     "credential_proposal": <json-ld object>,
@@ -131,7 +131,7 @@ Schema:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential",
+    "@type": "https://didcomm.org/issue-credential/1.0/offer-credential",
     "@id": "<uuid-of-offer-message>",
     "comment": "some comment",
     "credential_preview": <json-ld object>,
@@ -166,7 +166,7 @@ Schema:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/request-credential",
+    "@type": "https://didcomm.org/issue-credential/1.0/request-credential",
     "@id": "<uuid-of-request-message>",
     "comment": "some comment",
     "requests~attach": [
@@ -197,7 +197,7 @@ Schema:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/issue-credential",
+    "@type": "https://didcomm.org/issue-credential/1.0/issue-credential",
     "@id": "<uuid-of-issue-message>",
     "comment": "some comment",
     "credentials~attach": [
@@ -244,7 +244,7 @@ This is not a message but an inner object for other messages in this protocol. I
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+    "@type": "https://didcomm.org/issue-credential/1.0/credential-preview",
     "attributes": [
         {
             "name": "<attribute name>",

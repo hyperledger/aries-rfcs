@@ -1,16 +1,16 @@
 # Aries RFC 0023: DID Exchange Protocol 1.0
 
-- Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org)
+- Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org), [Stephen Curran](swcurran@cloudcompass.ca), [George Aristy](george.aristy@securekey.com)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-05-27
-- Status Note: This RFC is a work in progress designed to replace the [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md) after all necessary changes have been made. This RFC is likely to change as discussions continue, and should not yet be built into production code.
+- Status Note: This RFC is a work in progress (nearing completion) designed to replace the [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md) after all necessary changes have been made.
 - Supersedes: [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md)
 - Start Date: 2018-06-29
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 
-This HIPE describes the protocol to exchange DIDs between agents when establishing a DID based relationship.
+This RFC describes the protocol to exchange DIDs between agents when establishing a DID based relationship.
 
 ## Motivation
 
@@ -22,61 +22,78 @@ We will explain how DIDs are exchanged, with the roles, states, and messages req
 
 ### Roles
 
-The DID Exchange Protocol uses two roles: __inviter__ and __invitee__.
+The DID Exchange Protocol uses two roles: _requester_ and _responder_.
 
-The _inviter_ is the party that initiates the protocol with an `invitation` message. This party
-must already have an agent and be capable of creating DIDs and endpoints
-at which they are prepared to interact. It is desirable but not strictly required that inviters
-have the ability to help the invitee with the process and/or costs associated with acquiring
-an agent capable of participating in the ecosystem. For example, inviters may often be sponsoring institutions. The inviter sends a `exchange-response` message at the end of the _share_ phase.
+The _requester_ is the party that initiates this protocol after receiving an `invitation` message
+(using [RFC 0434 Out of Band](../0434-outofband/README.md)) or by using an implied invitation from a public DID. For
+example, a verifier might get the DID of the issuer of a credential they are verifying, and use information in the
+DIDDoc for that DID as the basis for initiating an instance of this protocol.
 
-The _invitee_ has less preconditions; the only requirement is that this party be capable of
-receiving invitations over traditional communication channels of some type, and acting on
-it in a way that leads to successful interaction. The invitee sends a `exchange-request` message at the beginning of the _share_ phase.
+Since the _requester_ receiving an explicit invitation may not have an Aries agent, it is desirable, but not strictly,
+required that sender of the invitation (who has the _responder_ role in this protocol)
+have the ability to help the _requester_ with the process and/or costs associated with acquiring
+an agent capable of participating in the ecosystem. For example, the sender of an invitation may often be sponsoring institutions.
 
-In cases where both parties already possess SSI capabilities, deciding who plays the role of inviter and invitee might be a casual matter of whose phone is handier.
+The _responder_, who is the sender of an explicit invitation or the publisher of a DID with an implicit invitation, must have
+an agent capable of interacting with other agents via DIDComm.
+
+In cases where both parties already possess SSI capabilities, deciding who plays the role of _requester_ and _responder_  might be a casual matter of whose phone is handier.
 
 ### States
 
-#### null
+#### Requester
 
-No exchange exists or is in progress
+The _requester_ goes through the following states per the State Machine Tables below
 
-#### invited
+* start
+* invitation-received
+* request-sent
+* response-received
+* abandoned
+* completed
 
-The invitation has been shared with the intended _invitee_(s), and they have not yet sent a _exchange_request_.
+#### Responder
 
-#### requested
+The _responder_ goes through the following states per the State Machine Tables below
 
-A _exchange_request_ has been sent by the _invitee_ to the _inviter_ based on the information in the _invitation_.
+* start
+* invitation-sent
+* request-received
+* response-sent
+* abandoned
+* completed
 
-#### responded
+#### State Machine Tables
 
-A _exchange_response_ has been sent by the _inviter_ to the _invitee_ based on the information in the _exchange_request_.
+The following are the _requester_ and _responder_ state machines.
 
-#### complete
+The `invitation-sent` and `invitation-received` are technically outside this protocol, but are useful to show in the state machine as the invitation is the trigger to start the protocol and is referenced from the protocol as the parent thread (`pthid`).  This is discussed in more detail below.
 
-The exchange has been completed.
+The `abandoned` and `completed` states are terminal states and there is no expectation that the protocol can be continued (or even referenced) after reaching those states.
 
-![State Machine Tables](chrome_2019-01-29_07-59-38.png)
+[![State Machine Tables](did-exchange-states.png)](https://docs.google.com/spreadsheets/d/1NKfEdyebJWQGinRIAPtpXA1BVm8jgG8_i1RyeoNzzKE/edit?usp=sharing)
 
 ### Errors
 
-There are no errors in this protocol during the invitation phase. For the request and response, there are two error messages possible for each phase: one for an active rejection and one for an unknown error. These errors are sent using a **problem_report** message type specific to the DID Exchange Protocol. The following list details `problem-code`s that may be sent:
+After receiving an explicit invitation, the _requester_ may send a `problem-report` to the _responder_ using the information in the invitation to either restart the invitation process (returning to the `start` state) or to abandon the protocol. The `problem-report` may be an adopted  `Out of Band` protocol message or an adopted `DID Exchange` protocol message, depending on where in the processing of the invitation the error was detected.
 
-**request_not_accepted** - The error indicates that the request has been rejected for a reason listed in the error_report. Typical reasons include not accepting the method of the provided DID, unknown endpoint protocols, etc. The request can be resent _after_ the appropriate corrections have been made.
+During the `request` / `response` part of the protocol, there are two protocol-specific error messages possible: one for an active rejection and one for an unknown error. These errors are sent using a **problem_report** message type specific to the DID Exchange Protocol. These errors do not transition the protocol to the `abandoned` state. The following list details `problem-code`s that may be sent in these cases:
 
-**request_processing_error** - This error is sent when the inviter was processing the request with the intent to accept the request, but some processing error occurred. This error indicates that the request should be resent as-is.
+**request_not_accepted** - The error indicates that the `request` message has been rejected for a reason listed in the `error_report`. Typical reasons include not accepting the method of the provided DID, unknown endpoint protocols, etc. The `request` can be resent _after_ the appropriate corrections have been made.
 
-**response_not_accepted** - The error indicates that the response has been rejected for a reason listed in the error_report. Typical reasons include not accepting the method of the provided DID, unknown endpoint protocols, invalid signature, etc. The response can be resent _after_ the appropriate corrections have been made.
+**request_processing_error** - This error is sent when the _responder_ was processing the request with the intent to accept the request, but some processing error occurred. This error indicates that the `request` should be resent as-is.
 
-**response_processing_error** - This error is sent when the invitee was processing the response with the intent to accept the response, but some processing error occurred. This error indicates that the response should be resent as-is.
+**response_not_accepted** - The error indicates that the `response` has been rejected for a reason listed in the `error_report`. Typical reasons include not accepting the method of the provided DID, unknown endpoint protocols, invalid signature, etc. The `response` can be resent _after_ the appropriate corrections have been made.
 
-No errors are sent in timeout situations. If the inviter or invitee wishes to retract the messages they sent, they record so locally and return a `request_not_accepted` or `response_not_accepted` error when the other party sends a request or response .
+**response_processing_error** - This error is sent when the _requester_ was processing the `response` with the intent to accept the response, but some processing error occurred. This error indicates that the `response` should be resent as-is.
+
+If other errors occur, the corresponding party may send a `problem-report` to inform the other party they are abandoning the protocol.
+
+No errors are sent in timeout situations. If the _requester_ or _responder_ wishes to retract the messages they sent, they record so locally and return a `request_not_accepted` or `response_not_accepted` error when the other party sends a `request` or `response`.
 
 #### Error Message Example
 
-```
+``` jsonc
 {
   "@type": "https://didcomm.org/didexchange/1.0/problem_report",
   "@id": "5678876542345",
@@ -97,166 +114,32 @@ No errors are sent in timeout situations. If the inviter or invitee wishes to re
 
 ### Flow Overview
 
-The _inviter_ gives provisional information to the _invitee_ using a `~service` decorator.
-The _invitee_ uses provisional information to send a DID and DID Doc to the _inviter_.
-The _inviter_ uses sent DID Doc information to send a DID and DID Doc to the _invitee_.
-The *invitee* sends the *inviter* an ack or any other message that confirms the response was received.
+- The _responder_ gives provisional information to the _requester_ using an explicit `invitation` message from the [`out-of-band` protocol](../0434-outofband/README.md) or an implicit invitation in a DID the _responder_ publishes.
+  - In the `out-of-band` protocol, the _responder_ is called the _sender_, and the _requester_ is called the _receiver_.
+- The _requester_ uses the provisional information to send a DID and DID Doc to the _responder_ in a `request` message.
+- The _responder_ uses sent DID Doc information to send a DID and DID Doc to the _requester_ in a `response` message.
+- The _requester_ sends the _responder_ a `complete` message that confirms the `response` message was received.
 
-## 0. Invitation to Exchange
+## Implicit and Explicit Invitations
 
-An invitation to exchange may be transferred using any method that can reliably transmit text. The result
-must be the essential data necessary to initiate an [Exchange Request](#1-exchange-request) message. A exchange
-invitation is an agent message with agent plaintext format, but is an **out-of-band communication** and therefore
-not communicated using wire level encoding or encryption. It is also contained within its own
-[thread](../../concepts/0008-message-id-and-threading/README.md#threaded-messages) and all subsequent messages are
-exchanged in new threads spawned from this one.
-
-The necessary data that an invitation to exchange must result in is:
-
-* suggested label
-* publicly resolvable did
-
-  OR
-
-* suggested label
-* `~service` decorator block that contains a serviceEndpoint, recipientKeys, and optionally routingKeys.
-
-This information is used by the _invitee_ to send an exchange response message to the _inviter_.
-
-These attributes were chosen to parallel the attributes of a DID Document for increased meaning. It is worth noting that `recipientKeys` and `routingKeys` within the `~service` decorator must be inline keys, not DID key references when contained in an invitation. As in the DID Document with `Ed25519VerificationKey2018` key types, the key must be base58 encoded.
-
-When considering routing and options for invitations, keep in mind that the more detail is in the invitation, the longer the URL will be and (if used) the more dense the QR code will be. Dense QR codes can be harder to scan.
-
-The _inviter_ will either use an existing invitation DID, or provision a new one according to the did method spec. They will then create the invitation message in one of the following forms.
-
-### Invitation Message with Public Invitation DID
-```json
-{
-    "@type": "https://didcomm.org/didexchange/1.0/invitation",
-    "@id": "12345678900987654321",
-    "label": "Alice",
-    "did": "did:sov:QmWbsNYhMrjHiqZDTUTEJs"
-}
-```
-### Invitation Message with Keys and URL endpoint
-```json
-{
-    "@type": "https://didcomm.org/didexchange/1.0/invitation",
-    "@id": "12345678900987654321",
-    "label": "Alice",
-    "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
-    "serviceEndpoint": "https://example.com/endpoint",
-    "routingKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"]
-}
-```
-### Invitation Message with Keys and DID Service Endpoint Reference
-
-```json
-{
-    "@type": "https://didcomm.org/didexchange/1.0/invitation",
-     "@id": "12345678900987654321",
-    "label": "Alice",
-    "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
-    "serviceEndpoint": "did:sov:A2wBhNYhMrjHiqZDTUYH7u;service=routeid",
-    "routingKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"]
-}
-```
-
-##### Implicit Invitation
-
-Any Public DID that expresses support for DIDComm by defining a  [`service`](https://w3c.github.io/did-core/#service-endpoints) that follows the [DIDComm conventions](../0067-didcomm-diddoc-conventions/README.md#service-conventions) serves as an implicit invitation. If an _invitee_ wishes to connect to any Public DID, They designate their own label and skip to the end of the Invitation Processing step. There is no need to encode the invitation or transmit the invitation.
-
-##### Routing Keys
-
-If `routingKeys` is present and non-empty, additional forwarding wrapping will be necessary for the request message. See the explanation in the Request section.
-
-##### Agency Endpoint
-
-The endpoint used to transmit the exchange request is either present in the invitation or available in the DID Document of a presented DID. If the endpoint is not a URI but a DID itself, that DID refers to an Agency.
-
-In that case, the `serviceEndpoint` of the DID must be a URI, and the `recipientKeys` must contain a single key. That key is appended to the end of the list of `routingKeys` for processing. For more information about message forwarding and routing, see [HIPE 22](https://github.com/hyperledger/indy-hipe/tree/master/text/0022-cross-domain-messaging).
-
-#### Standard Invitation Encoding
-
-Using a standard invitation encoding allows for easier interoperability between multiple projects and software platforms. Using a URL for that standard encoding provides a built in fallback flow for users who are unable to automatically process the invitation. Those new users will load the URL in a browser as a default behavior, and will be presented with instructions on how to install software capable of processing the invitation. Already onboarded users will be able to process the invitation without loading in a browser via mobile app URL capture, or via capability detection after being loaded in a browser.
-
-The standard invitation format is a URL with a Base64URLEncoded json object as a query parameter.
-
-The Invitation URL format is as follows, with some elements described below:
-
-```text
-https://<domain>/<path>?c_i=<invitationstring>
-```
-
-`<domain>` and `<path>` should be kept as short as possible, and the full URL should return human readable instructions when loaded in a browser. This is intended to aid new users. The `c_i` query parameter is required and is reserved to contain the invitation string. Additional path elements or query parameters are allowed, and can be leveraged to provide coupons or other promise of payment for new users.
-
-The `<invitationstring>` is an agent plaintext message (not a wire level message) that has been base64 url encoded. For brevity, the json encoding should minimize unnecessary white space.
-
-```javascript
-invitation_string = b64urlencode(<invitation_message>)
-```
-
-During encoding, whitespace from the json string should be eliminated to keep the resulting invitation string as short as possible.
-
-##### Example Invitation Encoding
-
-Invitation:
-
-```json
-{
-    "@type": "https://didcomm.org/didexchange/1.0/invitation",
-    "@id": "12345678900987654321",
-    "label": "Alice",
-    "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
-    "serviceEndpoint": "https://example.com/endpoint",
-    "routingKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"]
-}
-```
-
-Base 64 URL Encoded, with whitespace removed:
-
-```text
-eyJAdHlwZSI6ImRpZDpzb3Y6QnpDYnNOWWhNcmpIaXFaRFRVQVNIZztzcGVjL2Nvbm5lY3Rpb25zLzEuMC9pbnZpdGF0aW9uIiwiQGlkIjoiMTIzNDU2Nzg5MDA5ODc2NTQzMjEiLCJsYWJlbCI6IkFsaWNlIiwicmVjaXBpZW50S2V5cyI6WyI4SEg1Z1lFZU5jM3o3UFlYbWQ1NGQ0eDZxQWZDTnJxUXFFQjNuUzdaZnU3SyJdLCJzZXJ2aWNlRW5kcG9pbnQiOiJodHRwczovL2V4YW1wbGUuY29tL2VuZHBvaW50Iiwicm91dGluZ0tleXMiOlsiOEhINWdZRWVOYzN6N1BZWG1kNTRkNHg2cUFmQ05ycVFxRUIzblM3WmZ1N0siXX0=
-```
-Example URL:
-```text
-http://example.com/ssi?c_i=eyJAdHlwZSI6ImRpZDpzb3Y6QnpDYnNOWWhNcmpIaXFaRFRVQVNIZztzcGVjL2Nvbm5lY3Rpb25zLzEuMC9pbnZpdGF0aW9uIiwiQGlkIjoiMTIzNDU2Nzg5MDA5ODc2NTQzMjEiLCJsYWJlbCI6IkFsaWNlIiwicmVjaXBpZW50S2V5cyI6WyI4SEg1Z1lFZU5jM3o3UFlYbWQ1NGQ0eDZxQWZDTnJxUXFFQjNuUzdaZnU3SyJdLCJzZXJ2aWNlRW5kcG9pbnQiOiJodHRwczovL2V4YW1wbGUuY29tL2VuZHBvaW50Iiwicm91dGluZ0tleXMiOlsiOEhINWdZRWVOYzN6N1BZWG1kNTRkNHg2cUFmQ05ycVFxRUIzblM3WmZ1N0siXX0=
-```
-
-Invitation URLs can be transferred via any method that can send text, including an email, SMS, posting on a website, or via a QR Code.
-
-Example URL encoded as a QR Code:
-
-![exampleqr](exampleqr.png)
-
-
-#### Invitation Publishing
-
-The _inviter_ will then publish or transmit the invitation URL in a manner available to the intended _invitee_. After publishing, we have entered the _invited_ state.
-
-#### Invitation Processing
-
-When they _invitee_ receives the invitation URL, there are two possible user flows that depend on the SSI preparedness of the individual. If the individual is new to the SSI universe, they will likely load the URL in a browser. The resulting page will contain instructions on how to get started by installing software or a mobile app. That install flow will transfer the invitation message to the newly installed software.
-A user that already has those steps accomplished will have the URL received by software directly. That software will base64URL decode the string and can read the invitation message directly out of the `c_i` query parameter, without loading the URL.
-
-> **NOTE**: In receiving the invitation, the base64url decode implementation used **MUST**
-> correctly decode padded and unpadded base64URL encoded data.
-
-If the _invitee_ wants to accept the invitation, they will use the information present in the invitation message to prepare the request
+The DID Exchange Protocol is preceded by either knowledge of a resolvable DID (an implicit invitation), or by a `out-of-band/%VER/invitation` message from the [Out Of Band Protocols RFC](../0434-outofband/README.md). The information from either the resolved DID Document or the `service` element of the `handshake_protocols` attribute of the `invitation` message is used to construct the `request` message to start the protocol.
 
 ## 1. Exchange Request
 
-The exchange request message is used to communicate the DID document of the _invitee_ to the _inviter_ using the provisional service information present in the _invitation_ message.
+The `request` message is used to communicate the DID document of the _requester_ to the _responder_ using the provisional service information present in the (implicit or explicit) invitation.
 
-The _invitee_ will provision a new DID according to the DID method spec. For a Peer DID, this involves creating a matching peer DID and key. The newly provisioned DID and DID Doc is presented in the exchange_request message as follows:
+The _requester_ may provision a new DID according to the DID method spec. For a Peer DID, this involves creating a matching peer DID and key. The newly provisioned DID and DID Doc is presented in the `request` message as follows:
 
 #### Example
 
-```json
+```jsonc
 {
   "@id": "5678876542345",
   "@type": "https://didcomm.org/didexchange/1.0/request",
-  "~thread": { "pthid": "<id of invitation>" },
+  "~thread": { 
+      "thid": "5678876542345",
+      "pthid": "<id of invitation>"
+  },
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
@@ -276,8 +159,8 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
 * The [`~thread`](../../concepts/0008-message-id-and-threading/README.md#thread-object) decorator MUST be included:
-  * It MUST include the ID of the parent thread (`pthid`) such that the `request` can be correlated to the corresponding `invitation`. More on correlation [below](#correlating-requests-to-invitations).
-  * It MAY include the `thid` property. In doing so, implementations MUST set its value to that of `@id` on the same request message. In other words, the values of `@id` and `~thread.thid` MUST be equal.
+  * It MUST include the ID of the parent thread (`pthid`) such that the `request` can be correlated to the corresponding (implicit or explicit) `invitation`. More on correlation [below](#correlating-requests-to-invitations).
+  * It SHOULD include the `thid` property. In doing so, implementations MUST set its value to that of `@id` on the same `request` message. In other words, the values of `@id` and `~thread.thid` MUST be equal.
 * The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute.
 * The `did` indicates the DID being exchanged.
 * The `did_doc~attach` contains the DID Doc associated with the DID as a [signed attachment](../../concepts/0017-attachments/README.md). If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
@@ -286,20 +169,23 @@ The _invitee_ will provision a new DID according to the DID method spec. For a P
 
 An invitation is presented in one of two forms:
 
-* An explicit invitation with its own `@id` as seen in the three examples [above](#invitation-message-with-public-invitation-did).
-* An [implicit](#implicit-invitation) invitation contained in a DID document's [`service`](https://w3c-ccg.github.io/did-spec/#service-endpoints) attribute.
+* An explicit [out-of-band invitation](../../features/0434-outofband/README.md#messages) with its own `@id`.
+* An implicit invitation contained in a DID document's [`service`](https://w3c-ccg.github.io/did-spec/#service-endpoints) attribute that conforms to the [DIDComm conventions](../../features/0067-didcomm-diddoc-conventions/README.md#service-conventions).
 
-When a `request` responds to an explicit invitation, its `~thread.pthid` MUST be equal to the `@id` property of the invitation.
+When a `request` responds to an explicit invitation, its `~thread.pthid` MUST be equal to the `@id` property of the invitation [as described in the out-of-band RFC](../../features/0434-outofband/README.md#correlating-responses-to-out-of-band-messages).
 
 When a `request` responds to an implicit invitation, its `~thread.pthid` MUST contain a [DID URL](https://w3c-ccg.github.io/did-spec/#dfn-did-url) that resolves to the specific `service` on a DID document that contains the invitation.
 
 **Example referencing an explicit invitation**
 
-```json
+```jsonc
 {
   "@id": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
   "@type": "https://didcomm.org/didexchange/1.0/request",
-  "~thread": { "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" },
+  "~thread": { 
+      "thid": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
+      "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" 
+  },
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
@@ -317,11 +203,14 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
 
 **Example referencing an implicit invitation**
 
-```json
+```jsonc
 {
   "@id": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
   "@type": "https://didcomm.org/didexchange/1.0/request",
-  "~thread": { "pthid": "did:example:21tDAKCERh95uGgKbJNHYp#invitation" },
+  "~thread": { 
+      "thid": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
+      "pthid": "did:example:21tDAKCERh95uGgKbJNHYp#didcomm" 
+  },
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
@@ -337,16 +226,15 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
 }
 ```
 
-
 #### Request Transmission
 
-The Request message is encoded according to the standards of the Encryption Envelope, using the `recipientKeys` present in the invitation.
+The `request` message is encoded according to the standards of the Encryption Envelope, using the `recipientKeys` present in the invitation.
 
 If the `routingKeys` attribute was present and non-empty in the invitation, each key must be used to wrap the message in a forward request, then encoded in an Encryption Envelope. This processing is in order of the keys in the list, with the last key in the list being the one for which the `serviceEndpoint` possesses the private key.
 
 The message is then transmitted to the `serviceEndpoint`.
 
-We are now in the `requested` state.
+The _requester_ is in the `request-sent` state. When received, the _responder_ is in the `request-received` state.
 
 #### Request processing
 
@@ -421,7 +309,7 @@ In addition to a new DID, the associated DID Doc might contain a new endpoint. T
 
 The message should be packaged in the encrypted envelope format, using the keys from the request, and the new keys presented in the internal did doc.
 
-When the message is transmitted, we are now in the `responded` state.
+When the message is sent, the _responder_ are now in the `response-sent` state. On receipt, the _requester_ is in the `response-received` state.
 
 #### Response Processing
 
@@ -448,70 +336,32 @@ Possible reasons:
 
 ## 3. Exchange Complete
 
-The exchange complete message is used to confirm the exchange to the _inviter_.  This message is required in the flow, as it marks the exchange complete. The _inviter_ may then invoke any protocols desired based on the context expressed via the `pthid` in the DID Exchange protocol.
+The exchange `complete` message is used to confirm the exchange to the _responder_. This message is **required** in the flow, as it marks the exchange complete. The _responder_ may then invoke any protocols desired based on the context expressed via the `pthid` in the DID Exchange protocol.
 
 #### Example
 
-```json
+```jsonc
 {
   "@type": "https://didcomm.org/didexchange/1.0/complete",
   "@id": "12345678900987654321",
   "~thread": {
     "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>",
-    "pthid": "<The Parent Thread ID of the Out Of Band Invitation>"
+    "pthid": "<pthid used in request message>"
   }
 }
 ```
 
-The `pthid` is required in this message, even if present in the `request` method.
+The `pthid` is required in this message, and must be identical to the `pthid` used in the `request` message.
 
-After a message is sent, the *invitee* in the `complete` state. Receipt of a message puts the *inviter* into the `complete` state.
+After a `complete` message is sent, the *requester* is in the `completed` terminal state. Receipt of the message puts the *responder* into the `completed` state.
 
 #### Next Steps
 
-The exchange between the _inviter_ and the _invitee_ is now established. This relationship has no trust associated with it. The next step should be the exchange of proofs to build trust sufficient for the purpose of the relationship.
-
-## Exchange Reuse
-
-When an out of band invitation is received containing a public DID for which the _invitee_ already has a connection, the _invitee_ may use the `reuse` message in the protocol sent over the existing connection. The `pthid` passed in the `reuse` message allows the _inviter_ to correlate the invitation with the identified existing connection and then invoke any protocols desired based on that context.
-
-#### Reuse Example
-
-```json
-{
-  "@type": "https://didcomm.org/didexchange/1.0/reuse",
-  "@id": "12345678900987654321",
-  "~thread": {
-    "pthid": "<The Parent Thread ID of the Out Of Band Invitation>"
-  }
-}
-```
-
-The `pthid` is required in this message. It provides the context link for the _inviter_ to prompt additional protocol interactions.
-
-Sending or receiving this message does not change the state of the existing connection.
-
-When the _inviter_ receives the `reuse` message, they must respond with a `reuse-accepted` message to notify that _invitee_ that the request to reuse the existing connection is successful.
-
-#### Reuse Accepted Example
-
-```json
-{
-  "@type": "https://didcomm.org/didexchange/1.0/reuse-accepted",
-  "@id": "12345678900987654321",
-  "~thread": {
-    "thid": "<The Message ID of the reuse message>"
-  }
-}
-```
-
-If this message is not received by the _invitee_, they should use the regular exchange flow described above. This message is a mechanism by which the _invitee_ can detect a situation where the _inviter_ no longer has a record of the connection and is unable to decrypt and process the `reuse` message.
-
-After sending this message, the _inviter_ may continue any desired protocol interactions based on the context matched by the `pthid` present in the `reuse` message.
+The exchange between the _requester_ and the _responder_ has been completed. This relationship has no trust associated with it. The next step should be the exchange of proofs to build trust sufficient for the purpose of the relationship.
 
 #### Peer DID Maintenance
 
-When Peer DIDs are used in an exchange, it is likely that both Alice and Bob will want to perform some relationship maintenance such as key rotations. Future HIPE updates will add these maintenance features.
+When Peer DIDs are used in an exchange, it is likely that both the _requester_ and _responder_ will want to perform some relationship maintenance such as key rotations. Future RFC updates will add these maintenance features.
 
 ## Reference
 
@@ -519,11 +369,10 @@ When Peer DIDs are used in an exchange, it is likely that both Alice and Bob wil
 * [Agent to Agent Communication Video](https://drive.google.com/file/d/1PHAy8dMefZG9JNg87Zi33SfKkZvUvXvx/view)
 * [Agent to Agent Communication Presentation](https://docs.google.com/presentation/d/1H7KKccqYB-2l8iknnSlGt7T_sBPLb9rfTkL-waSCux0/edit#slide=id.p)
 * Problem_report message adopted into message family, following form defined by the [Problem Report HIPE](https://github.com/hyperledger/indy-hipe/blob/6a5e4fe2d7e14953cd8e3aed07d886176332e696/text/error-handling/README.md)
-* Useful QR Code Generator: https://zxing.appspot.com/generator/
 
 ## Drawbacks
 
-* Public invitations (say, a slide at the end of a presentation) all use the same DID. This is not a problem for public institutions, and only provides a minor increase in correlation over sharing an endpoint, key, and routing information in a way that is observable by multiple parties.
+ N/A at this time
 
 ## Prior art
 
@@ -531,8 +380,7 @@ When Peer DIDs are used in an exchange, it is likely that both Alice and Bob wil
 
 ## Unresolved questions
 
-- `c_i` should be updated to use something universal to DID Communication.
-- the `connection` message attribute is used by in request and response messages to bundle the DID or DID and DID Document. How do updated signatures correct
+- N/A at this time
 
 ## Implementations
 
@@ -540,4 +388,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET [MISSING test results](/tags.md#test-anomaly)
+trinsic.id | Commercial mobile and web app built using Aries Framework - .NET [MISSING test results](/tags.md#test-anomaly)
