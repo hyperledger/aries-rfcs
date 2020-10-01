@@ -72,7 +72,7 @@ this:
 
 ``` jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack",
+  "@type": "https://didcomm.org/notification/1.0/ack",
   "@id": "06d474e0-20d3-4cbf-bea6-6ba7e1891240",
   "status": "OK",
   "~thread": {
@@ -91,9 +91,9 @@ It may also be appropriate to send an ack at other key points in an interaction
 As discussed in [0003: Protocols](../../concepts/0003-protocols/README.md), a protocol can [adopt the ack message into
 its own namespace](../../0000-template-protocol.md#adopted-messages).
 This allows the type of an ack to change from:
-    `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack`
+    `https://didcomm.org/notification/1.0/ack`
 to something like:
-    `did:sov:protocolOwnersDID;spec/otherProtocol/2.0/ack`.
+    `https://didcomm.org/otherProtocol/2.0/ack`.
 Thus, message routing
 logic can see the ack as part of the other protocol, and send it to the relevant
 handler--but still have all the standardization of generic acks.

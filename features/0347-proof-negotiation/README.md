@@ -35,7 +35,7 @@ Example of a proof presentation request (from verifier):
 
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/request-presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/request-presentation",
     "@id": "98fd8d82-81a6-4409-acc2-c35ea39d0f28",
     "comment": "some comment",
     "request_presentations~attach": [
@@ -52,7 +52,7 @@ Example of a proof presentation request (from verifier):
 The base64-encoded content above decodes to the following data structure, a presentation preview:
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
 	"@context": "https://path.to/schemas/credentials",
 	"comment":"some comment",
 	"~thread": {
@@ -193,7 +193,7 @@ The following data structure is an example for a valid answer to the above crede
 Valid proof presentation:
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/proof-presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/proof-presentation",
     "@id": "98fd8d82-81a6-4409-acc2-c35ea39d0f28",
     "comment": "some comment",
     "presentations~attach": [
@@ -210,7 +210,7 @@ Valid proof presentation:
 The base64-encoded content above would decode to this data:
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
 	"@context": "https://path.to/schemas/credentials"
 	"comment":"some comment",
 	"~thread": {

@@ -44,7 +44,7 @@ invokes another DID Resolver via a "remote" binding (such as HTTP(S) or DIDComm)
 This defines the `did_resolution` protocol, version 0.1, as identified by the
 following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/uris.md#piuri):
 
-    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1
+    https://didcomm.org/did_resolution/0.1
 
 ### Key Concepts
 
@@ -87,7 +87,7 @@ resolving DIDs for at least one DID method.
 ### Messages
 
 All messages in this protocol are part of the "did_resolution 0.1" message
-family uniquely identified by this DID reference: `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1`
+family uniquely identified by this DID reference: `https://didcomm.org/did_resolution/0.1`
 
 ##### `resolve` message
 
@@ -95,7 +95,7 @@ The protocol begins when the `requester` sends a `resolve` message
 to the `resolver`. It looks like this:
 
 	{
-		"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1/resolve",
+		"@type": "https://didcomm.org/did_resolution/0.1/resolve",
 		"@id": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t",
 		"did": "did:sov:WRfXPg8dantKVubE3HX8pw",
 		"input_options": {
@@ -122,7 +122,7 @@ It represents the result of the [DID Resolution](https://w3c-ccg.github.io/did-r
 It looks like this:
 
 	{
-		"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1/resolve_result",
+		"@type": "https://didcomm.org/did_resolution/0.1/resolve_result",
 		"~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
 		"did_document": {
 			"@context": "https://w3id.org/did/v0.11",
@@ -145,7 +145,7 @@ If the `input_options` field of the `resolve` message contains an entry `result_
 which includes a DID Document plus additional metadata:
 
 	{
-		"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1/resolve_result",
+		"@type": "https://didcomm.org/did_resolution/0.1/resolve_result",
 		"~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
 		"did_document": {
 			"@context": "https://w3id.org/did/v0.11",

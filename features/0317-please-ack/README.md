@@ -123,7 +123,7 @@ following ack on receipt:
 
 ``` jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack",
+  "@type": "https://didcomm.org/notification/1.0/ack",
   "@id": "06d474e0-20d3-4cbf-bea6-6ba7e1891240",
   "status": "PENDING",
   "deny": ["6h"],
@@ -212,7 +212,7 @@ message from Bob is decorated with `~please_ack`:
 
 ``` jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/problem-report",
+  "@type": "https://didcomm.org/notification/1.0/problem-report",
   "@id": "06d474e0-20d3-4cbf-bea6-6ba7e1891240",
   "~thread": {
     "thid": "abc123",
@@ -233,7 +233,7 @@ credential. I'm working on it." Such an `ack` would look like this:
 
 ``` jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack",
+  "@type": "https://didcomm.org/notification/1.0/ack",
   "@id": "a7e174e0-032d-bf4c-a6eb-9126b84006d4",
   "status": "PENDING",
   "~thread": {
@@ -275,7 +275,7 @@ documents the outcome as far as it is concerned:
 
 ``` jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack",
+  "@type": "https://didcomm.org/notification/1.0/ack",
   "@id": "a7e174e0-032d-bf4c-a6eb-9126b84006d4",
   "status": "OK",
   "~thread": {

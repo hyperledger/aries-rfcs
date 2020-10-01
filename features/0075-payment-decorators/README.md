@@ -257,7 +257,7 @@ credential under discussion.
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue_credential/1.0/offer_credential",
+    "@type": "https://didcomm.org/issue_credential/1.0/offer_credential",
     "@id": "5bc1989d-f5c1-4eb1-89dd-21fd47093d96",
     "cred_def_id": "KTwaKJkvyjKKf55uc6U8ZB:3:CL:59:tag1",
     "~payment_request": {
@@ -294,7 +294,7 @@ This Credential Request is sent to the issuer, indicating that they have paid th
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue_credential/1.0/request_credential",
+    "@type": "https://didcomm.org/issue_credential/1.0/request_credential",
     "@id": "94af9be9-5248-4a65-ad14-3e7a6c3489b6",
     "~thread": { "thid": "5bc1989d-f5c1-4eb1-89dd-21fd47093d96" },
     "cred_def_id": "KTwaKJkvyjKKf55uc6U8ZB:3:CL:59:tag1",

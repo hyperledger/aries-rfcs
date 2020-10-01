@@ -113,7 +113,7 @@ Reporting problems uses a simple one-step [notification protocol](
 ../../concepts/0003-protocols/README.md#types-of-protocols). Its official [PIURI](
 ../../concepts/0003-protocols/README.md#piuri) is:
 
-    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/report-problem/1.0
+    https://didcomm.org/report-problem/1.0
 
 The protocol includes the standard `notifier` and `notified` roles. It
 defines a single message type `problem-report`, introduced here.
@@ -139,7 +139,7 @@ of the following:
 
 ```jsonc
 {
-  "@type"            : "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/report-problem/1.0/problem-report",
+  "@type"            : "https://didcomm.org/report-problem/1.0/problem-report",
   "@id"              : "an identifier that can be used to discuss this error message",
   "~thread"          : "info about the threading context in which the error occurred (if any)",
   "description"      : { "en": "localized message", "code": "symbolic-name-for-error" },
@@ -215,13 +215,13 @@ Each item in the list must be a tagged pair (a JSON {key:value}, where the key n
 
 ``` jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/problem-report",
+  "@type": "https://didcomm.org/notification/1.0/problem-report",
   "@id": "7c9de639-c51c-4d60-ab95-103fa613c805",
   "~thread": {
     "pthid": "1e513ad4-48c9-444e-9e7e-5b8b45c5e325",
     "sender_order": 1
   },
-  "~l10n"            : {"catalog": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/error-codes"},
+  "~l10n"            : {"catalog": "https://didcomm.org/error-codes"},
   "description"      : "Unable to find a route to the specified recipient.",
   "description~l10n" : {"code": "cant-find-route" },
   "problem_items"    : [
