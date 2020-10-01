@@ -1,6 +1,6 @@
 # Aries RFC 0528: Biometric Enrollment Protocol 0.9
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](daniel.hardman@gmail.com), [Tiara Johnson](tiaramary@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-08-19
 - Status Note: Under review by community and biometrics experts. Builds on concepts in [RFC 0231: Biometric Service Provider](../../concepts/0231-biometric-service-provider/READMe.md). Sister protocol to [RFC 0529: Biometric Verification Protocol](../0529-biometric-verification-protocol/README.md)
