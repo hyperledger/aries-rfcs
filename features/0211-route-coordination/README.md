@@ -12,7 +12,7 @@ A protocol to coordinate mediation configuration between a mediating agent and t
 
 ## Application Scope
 
-This protocol is needed when using an edge agent and a mediator agent from different vendors. Edge agents and mediator agents from the same vendor may use whatever protocol they wish without sacrificing interoperability. 
+This protocol is needed when using an edge agent and a mediator agent from different vendors. Edge agents and mediator agents from the same vendor may use whatever protocol they wish without sacrificing interoperability.
 
 ## Motivation
 
@@ -20,11 +20,11 @@ Use of the forward message in the Routing Protocol requires an exchange of infor
 
 ## Protocol
 
-**Name**: coordinatemediation
+**Name**: coordinate-mediation
 
 **Version**: 1.0
 
-**Base URI**: `https://didcomm.org/coordinatemediation/1.0/`
+**Base URI**: `https://didcomm.org/coordinate-mediation/1.0/`
 
 ### Roles
 
@@ -42,7 +42,7 @@ The `keylist_update` and `keylist_query` methods are used over time to identify 
 
 ### Terms
 
-The protocol allows for term agreement between the _mediator_ and _recipient_. 
+The protocol allows for term agreement between the _mediator_ and _recipient_.
 
 **mediator_terms** indicate terms that the _mediator_ requires the _recipient_ to agree to.
 
@@ -85,7 +85,7 @@ A route grant message is a signal from the mediator to the recipient that permis
     "@type": "<baseuri>/mediate-grant",
     "endpoint": "",
     "routing_keys": []
-    
+
 }
 ```
 Questions:
@@ -96,7 +96,7 @@ Used to notify the _mediator_ of keys in use by the _recipient_.
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "<baseuri>/keylist_update",
+    "@type": "<baseuri>/keylist-update",
     "updates":[
         {
             "recipient_key": "",
@@ -110,7 +110,7 @@ Confirmation of requested keylist updates.
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "<baseuri>/keylist_update_response",
+    "@type": "<baseuri>/keylist-update-response",
     "updated": [
         {
             "recipient_key": "",
@@ -127,7 +127,7 @@ Questions:
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "<baseuri>/key_list_query",
+    "@type": "<baseuri>/keylist-query",
     "filter":{
         "": ["",""]
     }
@@ -145,23 +145,21 @@ Questions:
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "<baseuri>/key_list",
+    "@type": "<baseuri>/keylist",
     "keys": [
         {
             "recipient_key": ""
         }
     ]
     "pagination": {
-    
+
     }
-    
 }
 ```
 
 ## Prior art
 
 There was an Indy HIPE that never made it past the PR process that described a similar approach. That HIPE led to a partial implementation of this inside the Aries Cloud Agent Python
-
 
 
 ## Unresolved questions
@@ -172,11 +170,11 @@ There was an Indy HIPE that never made it past the PR process that described a s
 - Should key ownership be proved when registered? Is there a risk of people requesting other people's keys?
 - We are missing a way to check a single key (or a few keys) without doing a full list.
 - Additional questions in each section
-  
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name / Link | Implementation Notes
 --- | ---
- |  | 
+ |  |
