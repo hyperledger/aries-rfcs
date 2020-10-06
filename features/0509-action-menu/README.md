@@ -6,7 +6,7 @@
 - Status Note: Implemented and demonstrated in the [Aries Cloud Agent Python](https://github.com/hyperledger/aries-cloudagent-python) code base 
 - Supersedes: 
 - Start Date: 2020-06-24
-- Tags: [feature](/tags.md#feature)
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 - Protocol Name: action-menu
 - Version: 1.0
 - URI: `https://didcomm.org/action-menu/%VER`

@@ -5,7 +5,7 @@
 - Status Note: implementation is being explored by SecureKey  
 - Supersedes:
 - Start Date: 2019-11-26
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 

@@ -5,7 +5,7 @@
 - Status Note: implementation is being explored by SecureKey
 - Supersedes:
 - Start Date: 2019-12-05
-- Tags: feature, decorator
+- Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
 
 ## Summary
 

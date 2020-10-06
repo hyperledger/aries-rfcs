@@ -6,7 +6,7 @@
 - Status Note: Deprecated, but in common use in existing deployments of Aries agents. See [Implementations](#implementations) 
 - Supersedes: [HackMD Document](https://hackmd.io/oWSw18DLTYCmHi_ty_gYvg?view)
 - Start Date: 2019-03-13
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 

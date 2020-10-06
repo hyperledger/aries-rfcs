@@ -6,7 +6,8 @@
 - Status Note: (explanation of current status)  
 - Supersedes: (link to anything this RFC supersedes)
 - Start Date: 2018-12-26 (date you started working on this idea)
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
+- URI: https://didcomm.org/your_protocol_name/%VER
 
 ## Summary
 
@@ -32,9 +33,9 @@ Protocol names are often either lower_snake_case or kebob-case. The non-version 
 
 URI: https://didcomm.org/lets_do_lunch/<version>/<messageType>
 
-Message types and protocols are identified with special URIs that match certain conventions. See [Message Type and Protocol Identifier URIs](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0003-protocols/uris.md) for more details.
+Message types and protocols are identified with special URIs that match certain conventions. See [Message Type and Protocol Identifier URIs](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/README.md#message-type-and-protocol-identifier-uris) for more details.
 
-The version of a protocol is declared carefully. See [Semver Rules for Protocols](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0003-protocols/semver.md) for details.
+The version of a protocol is declared carefully. See [Semver Rules for Protocols](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/README.md#semver-rules-for-protocols) for details.
 
 ### Key Concepts
 
@@ -152,7 +153,7 @@ and its definition announces that it has adopted generic 1.x `ack`
 messages. When such `ack` messages are sent, the `@type` should now use
 the alias defined inside the namespace of the `rendezvous` protocol:
 
-![diff on @type caused by adoption](concepts/0003-protocols/adoption.png)
+[![diff on @type caused by adoption](concepts/0003-protocols/adoption.png)](https://docs.google.com/presentation/d/15UAkh_2WfDk7wlto7pSL7YU9NJr_XVMgGAOeNIRbzK8/edit#slide=id.g9e66a1f72d_0_0)
 
 Adoption should be declared in an "Adopted" subsection of "Messages".
 When adoption is specified, it should include a __minimum
