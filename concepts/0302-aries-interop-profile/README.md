@@ -6,7 +6,7 @@
 - Status Note: This RFC defines an Aries Interop Profile process and Aries Interop Profile v1.0
 - Supersedes:
 - Start Date: 2019-11-06
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

@@ -6,7 +6,7 @@
 - Status Note: Initial proposal after discussion on rocketchat
 - Supersedes: 
 - Start Date: 2019-09-09
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 

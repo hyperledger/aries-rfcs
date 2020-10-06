@@ -6,7 +6,7 @@
 - Status Note: Socialized with mixed support; did:key method is a [W3C CCG work item](https://w3c-ccg.github.io/community/work_items.html)
 - Supersedes:
 - Start Date: 2019-12-17
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 ## Summary
 

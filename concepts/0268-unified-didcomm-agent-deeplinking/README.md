@@ -4,7 +4,7 @@
 - Since: 2019-10-23 
 - Status Note: Proposed  
 - Start Date: 2018-10-04
-- Tags: concept, agents, mobile
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

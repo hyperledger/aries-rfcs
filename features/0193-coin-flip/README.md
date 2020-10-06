@@ -3,7 +3,7 @@
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com), [Patrick Stürmlinger](patrick@mindf.org)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-08-19
-- Status Note: recently proposed  
+- Status Note: minor update in late 2020 
 - Start Date: 2019-08-19
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 

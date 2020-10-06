@@ -6,7 +6,7 @@
 - Status Note: In step 0 - community is reviewing the proposed approach. **Target Completion Date: 2020.12.31**
 - Supersedes:
 - Start Date: 2020-06-07
-- Tags: feature, community-update
+- Tags: [feature](/tags.md#feature), [community-update](/tags.md#community-update)
 
 ## Summary
 

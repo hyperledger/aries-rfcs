@@ -4,7 +4,7 @@
 - Since: 2019-11-04
 - Status Note: Initial Proposal
 - Start Date: 2019-01-01
-- Tags: concept, stack, trust layer, governance framework
+- Tags: [concept](/tags.md#concept), stack, trust layer, governance framework
 
 ## Summary
 

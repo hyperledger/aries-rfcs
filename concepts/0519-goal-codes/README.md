@@ -4,7 +4,7 @@
 - Since: 2020-07-24
 - Status Note: surfaces thinking first used in [0434 OOB Protocol](../../features/0434-outofband/README.md) and in [Co-protocols](https://docs.google.com/presentation/d/17hk6QqLW5M9E4TBPZwXIUBu9eEinMNXReceyZTF4LpA/edit)
 - Start Date: 2020-01-01
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
