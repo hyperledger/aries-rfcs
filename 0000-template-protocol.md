@@ -6,7 +6,8 @@
 - Status Note: (explanation of current status)  
 - Supersedes: (link to anything this RFC supersedes)
 - Start Date: 2018-12-26 (date you started working on this idea)
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
+- URI: https://didcomm.org/your_protocol_name/%VER
 
 ## Summary
 
@@ -32,9 +33,9 @@ Protocol names are often either lower_snake_case or kebob-case. The non-version 
 
 URI: https://didcomm.org/lets_do_lunch/<version>/<messageType>
 
-Message types and protocols are identified with special URIs that match certain conventions. See [Message Type and Protocol Identifier URIs](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0003-protocols/uris.md) for more details.
+Message types and protocols are identified with special URIs that match certain conventions. See [Message Type and Protocol Identifier URIs](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/README.md#message-type-and-protocol-identifier-uris) for more details.
 
-The version of a protocol is declared carefully. See [Semver Rules for Protocols](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0003-protocols/semver.md) for details.
+The version of a protocol is declared carefully. See [Semver Rules for Protocols](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/README.md#semver-rules-for-protocols) for details.
 
 ### Key Concepts
 
