@@ -153,7 +153,7 @@ and its definition announces that it has adopted generic 1.x `ack`
 messages. When such `ack` messages are sent, the `@type` should now use
 the alias defined inside the namespace of the `rendezvous` protocol:
 
-![diff on @type caused by adoption](concepts/0003-protocols/adoption.png)
+[![diff on @type caused by adoption](concepts/0003-protocols/adoption.png)](https://docs.google.com/presentation/d/15UAkh_2WfDk7wlto7pSL7YU9NJr_XVMgGAOeNIRbzK8/edit#slide=id.g9e66a1f72d_0_0)
 
 Adoption should be declared in an "Adopted" subsection of "Messages".
 When adoption is specified, it should include a __minimum
