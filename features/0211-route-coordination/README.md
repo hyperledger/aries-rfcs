@@ -32,13 +32,13 @@ Use of the forward message in the Routing Protocol requires an exchange of infor
 **recipient** - The agent for whom the `forward` message payload is intended.
 
 ### Flow
-A recipient may discover an agent capable of routing using the Feature Discovery Protocol. If protocol is supported with the _mediator_ role, a _recipient_ may send a `route_request` to initiate a routing relationship.
+A recipient may discover an agent capable of routing using the Feature Discovery Protocol. If protocol is supported with the _mediator_ role, a _recipient_ may send a `mediate-request` to initiate a routing relationship.
 
-First, the _recipient_ sends a `route_request` message to the _mediator_. If the _mediator_ is willing to route messages, it will respond with a `route_grant` message. The _recipient_ will share the routing information in the grant message with other contacts.
+First, the _recipient_ sends a `mediate-request` message to the _mediator_. If the _mediator_ is willing to route messages, it will respond with a `mediate-grant` message. The _recipient_ will share the routing information in the grant message with other contacts.
 
-When a new key is used by the _recipient_, it must be registered with the _mediator_ to enable route identification. This is done with a `keylist_update` message.
+When a new key is used by the _recipient_, it must be registered with the _mediator_ to enable route identification. This is done with a `keylist-update` message.
 
-The `keylist_update` and `keylist_query` methods are used over time to identify and remove keys that are no longer in use by the _recipient_.
+The `keylist-update` and `keylist-query` methods are used over time to identify and remove keys that are no longer in use by the _recipient_.
 
 ### Terms
 
