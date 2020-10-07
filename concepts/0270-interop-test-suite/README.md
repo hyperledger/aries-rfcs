@@ -5,7 +5,7 @@
 - Status Note: Codifies some thinking about scope and mental model that are already socialized. Provides some new thinking as well.
 - Supersedes: Partially, and in some ways, [Indy HIPE 0015](https://github.com/hyperledger/indy-hipe/blob/master/text/0015-agent-test-suite-interface/README.md) and [Indy HIPE 0016](https://github.com/hyperledger/indy-hipe/blob/master/text/0016-agent-test-suite-v1/README.md). Also, represents answers to questions that the community first posed in [this HackMD doc](https://hackmd.io/JW5b9xYCRGKqyqhVevTZ_g) and first attempted to answer in the [indy-agent repo](https://github.com/hyperledger/indy-agent).
 - Start Date: 2018-10-25
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

@@ -5,13 +5,13 @@
 - Status Note: (explanation of current status)  
 - Supersedes: (link to anything this RFC supersedes)
 - Start Date: 2018-12-26 (date you started working on this idea)
-- Tags: feature, protocol
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
 One paragraph explanation of the feature.
 
-> NOTE: If you are creating a **protocol** RFC, please use [this template](https://github.com/hyperledger/aries-rfcs/blob/master/0000-template-protocol.md)instead.
+> NOTE: If you are creating a **protocol** RFC, please use [this template](https://github.com/hyperledger/aries-rfcs/blob/master/0000-template-protocol.md) instead.
 
 ## Motivation
 

@@ -4,7 +4,7 @@
 - Since: 2019-12-26 (date you submit your PR)
 - Status Note: Initial Draft
 - Start Date: 2019-12-06
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 

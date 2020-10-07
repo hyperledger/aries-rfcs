@@ -6,7 +6,7 @@
 - Status Note: In step 2 - community is updating implementations to send new formats. **Target Completion Date: 2020.10.15** 
 - Supersedes:
 - Start Date: 2019-12-13
-- Tags: feature, community-update
+- Tags: [feature](/tags.md#feature), [community-update](/tags.md#community-update)
 
 ## Summary
 

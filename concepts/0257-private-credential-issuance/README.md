@@ -4,7 +4,7 @@
 - Since: 2019-10-16
 - Status Note: under study  
 - Start Date: 2019-08-26
-- Tags: concept, protocol
+- Tags: [concept](/tags.md#concept), [protocol](/tags.md#protocol)
 
 ## Summary
 
