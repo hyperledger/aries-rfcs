@@ -55,7 +55,7 @@ The protocol has two roles: `inviter` and `invitee`.
 
 ### States
 
-The `inviter` sends a message inviting the `invitee` to take an action. The message may include an advanced [`~please_ack` decorator](../0317-please-ack/README.md) that invites [ACKs](../0317-please-ack/README.md#advanced-features-experimental) to be sent back from `invitee` to `inviter`, either at the time the invitation is accepted or at the time out outcome for the action is known, or both.
+The `inviter` sends a message inviting the `invitee` to take an action. The message may include an advanced [`~please_ack` decorator](../0317-please-ack/README.md) that invites [ACKs](../0317-please-ack/README.md#advanced-features-experimental) to be sent back from `invitee` to `inviter`, either at the time the invitation is accepted or at the time an outcome for the action is known, or both.
 
 The `inviter` state machine looks like this:
 
@@ -64,6 +64,8 @@ The `inviter` state machine looks like this:
 The `invitee` state machine looks like this:
 
 [![invitee states](invitee_states.png)](invitee_states.puml)
+
+During the time the `invitee` is in a `pending` state, a DIDComm protocol or coprotocol can be run, either to completion or to some desired status, depending on the semantics of the goal code. In such cases, the state of the `invitee` with respect to the protocol or coprotocol evolves, but the state of the `invitee` with respect to Invite Action remains `pending`. Unlike Co-protocol Protocol, the Invite Action does not support ongoing yielding of intermediate outputs, and there is no contract binding the `invitee` to expose the internals of its process or to cooperate with a `~please-ack` request at all. Complying with an ACK request is a courtesy, not a mandated behavior.
 
 
 ### Messages
