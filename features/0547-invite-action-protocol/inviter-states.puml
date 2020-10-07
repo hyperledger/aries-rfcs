@@ -1,0 +1,9 @@
+@startuml
+scale 350 width
+[*] --> [*]: req no acks
+[*] --> awaiting_ack_at_pending: req ack\nat pending
+[*] --> awaiting_ack_at_outcome: req only ack\nat outcome
+awaiting_ack_at_pending --> awaiting_ack_at_outcome: receive ack\nat pending
+awaiting_ack_at_pending --> [*]: receive ack\nat outcome
+awaiting_ack_at_outcome --> [*]: receive ack at outcome
+@enduml
