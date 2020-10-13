@@ -372,6 +372,18 @@ The `pthid` is required in this message, and must be identical to the `pthid` us
 
 After a `complete` message is sent, the *requester* is in the `completed` terminal state. Receipt of the message puts the *responder* into the `completed` state.
 
+#### Complete Errors
+
+See [Error Section](#errors) above for message format details.
+
+##### Complete Rejected
+
+This is unlikely to occur with other than an unknown processing error (covered below), so no possible reasons are listed. As experience is gained with the protocol, possible reasons may be added.
+
+##### Complete Processing Error
+
+- unknown processing error
+
 ## Next Steps
 
 The exchange between the _requester_ and the _responder_ has been completed. This relationship has no trust associated with it. The next step should be to increase the trust to a sufficient level for the purpose of the relationship, such as through an exchange of proofs.
