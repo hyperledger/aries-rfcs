@@ -1,6 +1,7 @@
 # Aries RFCs by Status
 
 ## [ADOPTED](README.md#adopted)
+* [0348: Transition Message Type to HTTPs](features/0348-transition-msg-type-to-https/README.md) (2020-08-26, [13 impls](features/0348-transition-msg-type-to-https/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`community-update`](/tags.md#community-update))
 
 ## [ACCEPTED](README.md#accepted)
 * [0003: Protocols](concepts/0003-protocols/README.md) (2019-04-01, [10 impls](concepts/0003-protocols/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
@@ -27,7 +28,6 @@
 * [0160: Connection Protocol](features/0160-connection-protocol/README.md) (2019-08-06, [5 impls](features/0160-connection-protocol/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`test-anomaly`](/tags.md#test-anomaly))
 * [0250: Rich Schema Objects](concepts/0250-rich-schemas/README.md) (2019-10-08 &mdash; [`concept`](/tags.md#concept) [`rich-schemas`](/tags.md#rich-schemas))
 * [0302: Aries Interop Profile](concepts/0302-aries-interop-profile/README.md) (2020-01-30 &mdash; [`concept`](/tags.md#concept))
-* [0348: Transition Message Type to HTTPs](features/0348-transition-msg-type-to-https/README.md) (2020-01-30, [12 impls](features/0348-transition-msg-type-to-https/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`community-update`](/tags.md#community-update))
 
 ## [DEMONSTRATED](README.md#demonstrated)
 * [0015: ACKs](features/0015-acks/README.md) (2019-12-26, [4 impls](features/0015-acks/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
@@ -40,7 +40,7 @@
 * [0051: Decentralized Key Management](concepts/0051-dkms/README.md) (2019-03-29, [2 impls](concepts/0051-dkms/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0113: Question Answer Protocol 0.9](features/0113-question-answer/README.md) (2019-07-05, [2 impls](features/0113-question-answer/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2019-09-27, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
-* [0509: Action Menu Protocol](features/0509-action-menu/README.md) (2020-07-02 , [1 impl](features/0509-action-menu/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
+* [0509: Action Menu Protocol](features/0509-action-menu/README.md) (2020-07-02 , [1 impl](features/0509-action-menu/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 ## [PROPOSED](README.md#proposed)
 * [0013: Overlays](concepts/0013-overlays/README.md) (2019-05-20 &mdash; [`concept`](/tags.md#concept))
@@ -72,7 +72,7 @@
 * [0231: Biometric Service Provider](concepts/0231-biometric-service-provider/README.md) (2019-09-24 &mdash; [`concept`](/tags.md#concept))
 * [0249: Aries Rich Schema Contexts](features/0249-rich-schema-contexts/README.md) (2019-10-08 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0257: Private Credential Issuance](concepts/0257-private-credential-issuance/README.md) (2019-10-16 &mdash; [`concept`](/tags.md#concept) [`protocol`](/tags.md#protocol))
-* [0268: Unified DIDCOMM Deeplinking](concepts/0268-unified-didcomm-agent-deeplinking/README.md) (2019-10-23  &mdash; [`concept`](/tags.md#concept) [`agents`](/tags.md#agents) [`mobile`](/tags.md#mobile))
+* [0268: Unified DIDCOMM Deeplinking](concepts/0268-unified-didcomm-agent-deeplinking/README.md) (2019-10-23  &mdash; [`concept`](/tags.md#concept))
 * [0270: Interop Test Suite](concepts/0270-interop-test-suite/README.md) (2019-10-25 &mdash; [`concept`](/tags.md#concept))
 * [0281: Aries Rich Schemas](features/0281-rich-schemas/README.md) (2019-10-30 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0289: The Trust Over IP Stack](concepts/0289-toip-stack/README.md) (2019-11-04 &mdash; [`concept`](/tags.md#concept) [`stack`](/tags.md#stack) [`trust layer`](/tags.md#trust layer) [`governance framework`](/tags.md#governance framework))
@@ -82,7 +82,7 @@
 * [0334: JWE envelope 1.0](features/0334-jwe-envelope/README.md) (2019-11-28 &mdash; [`feature`](/tags.md#feature))
 * [0335: HTTP Over DIDComm](features/0335-http-over-didcomm/README.md) (2019-12-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0345: Community Coordinated Update](concepts/0345-community-coordinated-update/README.md) (2019-12-26 (date you submit your PR) &mdash; [`concept`](/tags.md#concept))
-* [0346: DIDCOMM BETWEEN TWO MOBILE AGENTS USING CLOUD AGENT MEDIATOR](concepts/0346-didcomm-between-two-mobile-agents/README.md) (2019-06-23 &mdash; [`concept`](/tags.md#concept))
+* [0346: DIDComm Between Two Mobile Agents Using Cloud Agent Mediator](concepts/0346-didcomm-between-two-mobile-agents/README.md) (2019-06-23 &mdash; [`concept`](/tags.md#concept))
 * [0347: Proof Negotiation](features/0347-proof-negotiation/README.md) (2019-12-13 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0351: Purpose Decorator](features/0351-purpose-decorator/README.md) (2019-12-16 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0360: did:key Usage](features/0360-use-did-key/README.md) (2019-12-17 &mdash; [`feature`](/tags.md#feature))
@@ -99,6 +99,7 @@
 * [0454: Present Proof Protocol 2.0](features/0454-present-proof-v2/README.md) (2020-05-27 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 * [0478: Coprotocols](concepts/0478-coprotocols/README.md) (2020-05-19 &mdash; [`concept`](/tags.md#concept) [`protocol`](/tags.md#protocol))
 * [0482: Coprotocol Protocol 0.5](features/0482-coprotocol-protocol/README.md) (2020-05-19 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0496: Transition to the Out of Band and DID Exchange Protocols](features/0496-transition-to-oob-and-did-exchange/README.md) (2020-09-30 &mdash; [`feature`](/tags.md#feature) [`community-update`](/tags.md#community-update))
 * [0510: Presentation-Exchange Attachment format for requesting and presenting proofs](features/0510-dif-pres-exch-attach/README.md) (2020-07-21 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 * [0511: Credential-Manifest Attachment format for requesting and presenting credentials](features/0511-dif-cred-manifest-attach/README.md) (2020-07-22 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 * [0519: Goal Codes](concepts/0519-goal-codes/README.md) (2020-07-24 &mdash; [`concept`](/tags.md#concept))
