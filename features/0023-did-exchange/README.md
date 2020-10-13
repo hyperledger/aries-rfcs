@@ -143,13 +143,17 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
-     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
-     "jws": {
-        "header": {
-           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-        },
-        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      "@id": "B.did@B:A",
+      "mime-type": "application/json",
+      "data": {
+         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+         "jws": {
+            "header": {
+               "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+            },
+            "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+            "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+            }
       }
    }
 }
@@ -189,13 +193,17 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
-     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
-     "jws": {
-        "header": {
-           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-        },
-        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      "@id": "B.did@B:A",
+      "mime-type": "application/json",
+      "data": {
+         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+         "jws": {
+            "header": {
+               "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+            },
+            "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+            "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+            }
       }
    }
 }
@@ -214,13 +222,17 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
-     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
-     "jws": {
-        "header": {
-           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-        },
-        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      "@id": "B.did@B:A",
+      "mime-type": "application/json",
+      "data": {
+         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+         "jws": {
+            "header": {
+               "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+            },
+            "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+            "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+            }
       }
    }
 }
@@ -306,6 +318,7 @@ The key used in the signed attachment must be verified against the invitation's 
 * The `~thread` block contains a `thid` reference to the `@id` of the request message.
 * The `did` attribute is a required string value and denotes DID in use by the responder. Note that this MAY NOT be the same DID used in the invitation.
 * The `did_doc~attach` contains the DID Doc associated with the DID as a [signed attachment](../../concepts/0017-attachments/README.md). If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
+  * If the DID and DIDDoc being conveyed is different from that conveyed in the initial contact with the requester, the DIDDoc attachment should be signed by the earlier key. For example, if the requester sent the request to a DID service endpoint from a public DID or an out-of-band invitation, the signature on the DIDDoc should use the key from that interaction.
 
 In addition to a new DID, the associated DID Doc might contain a new endpoint. This new DID and endpoint are to be used going forward in the relationship.
 
@@ -317,7 +330,7 @@ When the message is sent, the _responder_ are now in the `response-sent` state. 
 
 #### Response Processing
 
-When the requester receives the `response` message, they will verify the `change_sig` provided. After validation, they will update their wallet with the new information. If the endpoint was changed, they may wish to execute a Trust Ping to verify that new endpoint.
+When the requester receives the `response` message, they will verify the signature on the DID Doc attachment. After validation, they will update their wallet with the new information, and use that information in sending the `complete` message.
 
 #### Response Errors
 
@@ -361,7 +374,7 @@ After a `complete` message is sent, the *requester* is in the `completed` termin
 
 ## Next Steps
 
-The exchange between the _requester_ and the _responder_ has been completed. This relationship has no trust associated with it. The next step should be the exchange of proofs to build trust sufficient for the purpose of the relationship.
+The exchange between the _requester_ and the _responder_ has been completed. This relationship has no trust associated with it. The next step should be to increase the trust to a sufficient level for the purpose of the relationship, such as through an exchange of proofs.
 
 ## Peer DID Maintenance
 
