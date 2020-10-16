@@ -142,10 +142,6 @@ If a query could match multiple features, then occasionally you might add some m
 
 How you ask questions may also be fingerprintable.
 
-## Unresolved questions
-
-- Do we want to support the discovery of features that are not protocol-related?
-
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
