@@ -2,7 +2,7 @@
 - Authors: [Stephen Klump](stephen.klump@becker-carroll.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-10-31
-- Status Note:  See [RFC 0037](../0037-present-proof/README.md) for the Present Proof protocol.
+- Status Note:  See [RFC 0037](../../concepts/0037-present-proof/README.md) for the Present Proof protocol.
 - Start Date: 2020-10-31
 - Tags: [concept](/tags.md#concept), [credentials](/tags.md#credentials)
 
@@ -116,3 +116,7 @@ A presentation may include a timestamp outside of a the non-revocation interval 
 - the earliest timestamp from the ledger for a presented credential's revocation registry may postdate the non-revocation interval: in this case, creation of proof is not possible and so its inclusion evinces tampering.
 
 Hence, the verifier MUST log and continue the proof verification process in the case of a (non-suspicious) timestamp predating its non-revocation interval in the presentation request, but MUST reject the presentation on a timestamp postdating the interval.
+
+## Reference
+
+See [RFC 0037](../../features/0037-present-proof/README.md) for the Present Proof protocol.
