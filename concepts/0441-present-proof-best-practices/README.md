@@ -68,7 +68,7 @@ This section prescribes verifier best practices concerning a received presentati
 
 #### Suspicious Timestamp
 
-Any timestamp in the future evinces tampering: the verifier MUST reject a presentation with a future timestamp. Similarly, any timestamp predating the registration of its corresponding credential's definition on the ledger evinces tampering: the verifier MUST reject a presentation with such a timestamp.
+Any timestamp in the future evinces tampering: the verifier MUST reject a presentation with a future timestamp. Similarly, any timestamp predating the creation of its corresponding credential's revocation registry on the ledger evinces tampering: the verifier MUST reject a presentation with such a timestamp.
 
 #### Superfluous Timestamp
 
