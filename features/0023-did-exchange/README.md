@@ -143,7 +143,7 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
-      "@id": "B.did@B:A",
+      "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
       "mime-type": "application/json",
       "data": {
          "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
@@ -193,7 +193,7 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
-      "@id": "B.did@B:A",
+      "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
       "mime-type": "application/json",
       "data": {
          "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
@@ -222,7 +222,7 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
-      "@id": "B.did@B:A",
+      "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
       "mime-type": "application/json",
       "data": {
          "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
@@ -294,7 +294,7 @@ The exchange response message is used to complete the exchange. This message is 
   },
   "did": "B.did@B:A",
   "did_doc~attach": {
-      "@id": "B.did@B:A",
+      "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
       "mime-type": "application/json",
       "data": {
          "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
