@@ -42,6 +42,8 @@ A non-revocation interval specifically applicable to a requested item overrides 
 
 The following subsections outline a prover's best practices in matching a credential to a requested item. Note that where a prover selects a revocable credential for inclusion, the prover MUST create a corresponding sub-proof of non-revocation at a timestamp within the non-revocation interval applicable to the requested item (insofar as possible; see [below](#timestamp-outside-non-revocation-interval)).
 
+> **Question:** Should the prover prefer a credential that is revocable but not revoked if there is a choice between revocable credentials satisfying an applicable non-revocation interval, if the prover has a choice between credentials that are revoked and not?  Is it ever a use case to present a revoked credential to make the proof verify as false?
+
 ###### Requested Item Has Specifically Applicable Non-Revocation Interval
 
 Where a presentation request includes a non-revocation interval specifically applicable to a requested item, the prover MUST select a revocable credential if possible. If no such revocable credential resides in the wallet, the prover MUST reject the presentation request.
@@ -116,6 +118,8 @@ A presentation may include a timestamp outside of a the non-revocation interval 
 - the earliest timestamp from the ledger for a presented credential's revocation registry may postdate the non-revocation interval: in this case, creation of proof is not possible and so its inclusion evinces tampering.
 
 Hence, the verifier MUST log and continue the proof verification process in the case of a (non-suspicious) timestamp predating its non-revocation interval in the presentation request, but MUST reject the presentation on a timestamp postdating the interval.
+
+> **Question:**  What does logging entail, from a standards point of view?
 
 ## Reference
 
