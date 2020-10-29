@@ -38,6 +38,46 @@ Within a presentation request, a top-level non-revocation interval is **generall
 
 A non-revocation interval specifically applicable to a requested item overrides any generally applicable non-revocation interval: no requested item may have both.
 
+For example, in the following (indy) proof request
+
+```json
+{
+    "name": "proof-request",
+    "version": "1.0",
+    "nonce": "1234567890",
+    "requested_attributes": {
+        "legalname": {
+            "name": "legalName",
+            "restrictions": [
+                {
+                    "issuer_did": "WgWxqztrNooG92RXvxSTWv"
+                }
+            ]
+        },
+        "regdate": {
+            "name": "regDate",
+            "restrictions": [
+                {
+                    "issuer_did": "WgWxqztrNooG92RXvxSTWv"
+                }
+            ],
+            "non_revoked": {
+                "from": 1600001000,
+                "to": 1600001000
+            }
+        }
+    },
+    "requested_predicates: {
+    },
+    "non_revoked": {
+        "from": 1600000000,
+        "to": 1600000000
+    }
+}
+```
+
+the non-revocation interval on 1600000000 is **generally applicable** to the referent `"legalname"` while the non-revocation interval on 1600001000 **specifically applicable** to referent `"regdate"`.
+
 ##### Credential Selection Best Practices
 
 The following subsections outline a prover's best practices in matching a credential to a requested item. Note that where a prover selects a revocable credential for inclusion, the prover MUST create a corresponding sub-proof of non-revocation at a timestamp within the non-revocation interval applicable to the requested item (insofar as possible; see [below](#timestamp-outside-non-revocation-interval)).
@@ -46,11 +86,17 @@ The following subsections outline a prover's best practices in matching a creden
 
 ###### Requested Item Has Specifically Applicable Non-Revocation Interval
 
-Where a presentation request includes a non-revocation interval specifically applicable to a requested item, the prover MUST select a revocable credential if possible. If no such revocable credential resides in the wallet, the prover MUST reject the presentation request.
+Where a presentation request includes a non-revocation interval specifically applicable to a requested item, the prover MAY select an irrevocable credential or a revocable credential. If no such credential resides in the wallet, the prover MUST reject the presentation request.
+
+> **Question:** Which is better: revocable (because the presentation request specifically asks regarding the item), or irrevocable (because it can never be revoked and hence is the most direct proof)?
+
+Note that selecting an irrevocable credential for presentation may lead to a superfluous non-revocation interval at the verifier (see [below](#superfluous-non-revocation-interval)).
 
 ###### Requested Item Has Generally Applicable Non-Revocation Interval
 
-Where a presentation request includes a non-revocation interval generally applicable to a requested item, the prover MUST select a revocable credential if possible. If the wallet holds only irrevocable credentials satisfying the requested item, the prover MUST select an irrevocable credential.
+Where a presentation request includes a non-revocation interval generally applicable to a requested item, the prover MAY select an irrevocable credential or a revocable credential.
+
+> **Question:** Which is better: revocable (because the presentation request specifically asks regarding the item), or irrevocable (because it can never be revoked and hence is the most direct proof)?
 
 Note that if the presentation request includes only a generally applicable non-revocation interval but the wallet has exclusively irrevocable credentials to satisfy all requested items, the presentation requests's non-revocation interval becomes superfluous to the presentation (see [below](#superfluous-non-revocation-interval)).
 
@@ -58,9 +104,9 @@ Note that if the presentation request includes only a generally applicable non-r
 
 Where a presentation request's non-revocation intervals are all inapplicable to a requested item (including the case where the presentation request has no non-revocation intervals at all), the prover MUST select a matching irrevocable credential if possible. If the wallet contains only revocable credentials matching the requested item, the prover MUST reject the presentation request.
 
-> Counterpoint: Consider a presentation request with one requested item having a specifically applicable non-revocation interval and one with only inapplicable non-revocation intervals. If the prover may choose a revocable credential to satisfy the requested item with no applicable non-revocation interval, the proof will include a non-revocation subproof on that credential. However, if a presentation request has no non-revocation intervals at all, and the prover may select revocable credentials to satisfy its requested items, the presentation will not include a non-revocation subproof and in this way the prover may present a revoked credential to appear as valid as an irrevocable credential in a proof.
+> **Counterpoint:** Consider a presentation request with one requested item having a specifically applicable non-revocation interval and one with only inapplicable non-revocation intervals. If the prover may choose a revocable credential to satisfy the requested item with no applicable non-revocation interval, the proof will include a non-revocation subproof on that credential. However, if a presentation request has no non-revocation intervals at all, and the prover may select revocable credentials to satisfy its requested items, the presentation will not include a non-revocation subproof and in this way the prover may present a revoked credential to appear as valid as an irrevocable credential in a proof.
 
-> Would it be better to choose a default (maximally inclusive, to jibe with any other items having applicable non-revocation intervals that the revocable credential may satisfy) non-revocation interval for items having only revocable credentials but only inapplicable non-revocation intervals in the presentation?
+> **Question:** Would it be better to choose a default (maximally inclusive, to jibe with any other items having applicable non-revocation intervals that the revocable credential may satisfy) non-revocation interval for items having only revocable credentials but only inapplicable non-revocation intervals in the presentation? _I think not, every default behaviour opens  an avenue for untraceable tampering._
 
 > **Question:** Is it ever appropriate to interpolate a default non-revocation interval, or does the absence of any specifically or generally applicable non-revocation interval signify an explicit expectation of an irrevocable credential? Note that any item may carry restrictions by credential definition for precise formulation.
 
