@@ -67,7 +67,7 @@ For example, in the following (indy) proof request
             }
         }
     },
-    "requested_predicates: {
+    "requested_predicates": {
     },
     "non_revoked": {
         "from": 1600000000,
