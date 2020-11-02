@@ -24,7 +24,7 @@ In fulfilment of the [RFC0037](../../features/0037-present-proof/README.md) Pres
 
 #### With Presentation Proposal
 
-If prover initiated the protocol with a presentation proposal specifying a value (or predicate threshold) for an attribute, the prover MUST select a credential matching the presentation proposal, in addition to following the best practices below regarding the presentation request.
+If prover initiated the protocol with a presentation proposal specifying a value (or predicate threshold) for an attribute, and the presentation request does not require a different value for it, then the prover MUST select a credential matching the presentation proposal, in addition to following the best practices below regarding the presentation request.
 
 #### Presentation Request
 
@@ -84,31 +84,83 @@ The following subsections outline a prover's best practices in matching a creden
 
 > **Question:** Should the prover prefer a credential that is revocable but not revoked if there is a choice between revocable credentials satisfying an applicable non-revocation interval, if the prover has a choice between credentials that are revoked and not?  Is it ever a use case to present a revoked credential to make the proof verify as false?
 
+> ** Working Hypothesis:** Provers should always prefer irrevocable credentials to revocable credentials. Presentation of an irrevocable credential constitutes proof of non-revocation.
+
 ###### Requested Item Has Specifically Applicable Non-Revocation Interval
 
-Where a presentation request includes a non-revocation interval specifically applicable to a requested item, the prover MAY select an irrevocable credential or a revocable credential. If no such credential resides in the wallet, the prover MUST reject the presentation request.
+Where a presentation request includes a non-revocation interval specifically applicable to a requested item, the prover MUST select an irrevocable credential if one satisfies; otherwise, the prover MUST select an irrevocable credential if one satisfies. If no such credential resides in the wallet, the prover MUST reject the presentation request.
 
 > **Question:** Which is better: revocable (because the presentation request specifically asks regarding the item), or irrevocable (because it can never be revoked and hence is the most direct proof)?
+
+> ** Working Hypothesis:** Provers should always prefer irrevocable credentials to revocable credentials. Presentation of an irrevocable credential constitutes proof of non-revocation.
 
 Note that selecting an irrevocable credential for presentation may lead to a superfluous non-revocation interval at the verifier (see [below](#superfluous-non-revocation-interval)).
 
 ###### Requested Item Has Generally Applicable Non-Revocation Interval
 
-Where a presentation request includes a non-revocation interval generally applicable to a requested item, the prover MAY select an irrevocable credential or a revocable credential.
+Where a presentation request includes a non-revocation interval generally applicable to a requested item, the prover MUST select an irrevocable credential if one satisfies; otherwise, the prover MUST select an irrevocable credential if one satisfies. If no such credential resides in the wallet, the prover MUST reject the presentation request.
 
 > **Question:** Which is better: revocable (because the presentation request specifically asks regarding the item), or irrevocable (because it can never be revoked and hence is the most direct proof)?
 
-Note that if the presentation request includes only a generally applicable non-revocation interval but the wallet has exclusively irrevocable credentials to satisfy all requested items, the presentation requests's non-revocation interval becomes superfluous to the presentation (see [below](#superfluous-non-revocation-interval)).
+> ** Working Hypothesis:** Provers should always prefer irrevocable credentials to revocable credentials. Presentation of an irrevocable credential constitutes proof of non-revocation.
+
+Note that if the presentation request includes only a generally applicable non-revocation interval but the presentation includes exclusively irrevocable credentials to satisfy all requested items, the presentation requests's non-revocation interval becomes superfluous to the presentation (see [below](#superfluous-non-revocation-interval)).
 
 ###### All Non-Revocation Intervals are Inapplicable to Requested Item
 
 Where a presentation request's non-revocation intervals are all inapplicable to a requested item (including the case where the presentation request has no non-revocation intervals at all), the prover MUST select a matching irrevocable credential if possible. If the wallet contains only revocable credentials matching the requested item, the prover MUST reject the presentation request.
 
+For example, consider:
+```json
+{
+    "name": "proof-request",
+    "version": "1.0",
+    "nonce": "1234567890",
+    "requested_attributes": {
+        "legalname": {
+            "name": "legalName",
+            "restrictions": [
+                {
+                    "issuer_did": "WgWxqztrNooG92RXvxSTWv"
+                }
+            ]
+        },
+        "regdate": {
+            "name": "regDate",
+            "restrictions": [
+                {
+                    "issuer_did": "WgWxqztrNooG92RXvxSTWv"
+                }
+            ],
+            "non_revoked": {
+                "from": 1600001000,
+                "to": 1600001000
+            }
+        }
+    },
+    "requested_predicates": {
+    },
+}
+```
+
+for which the prover must select an irrevocable credential to satisfy requested attribute `"legalName"` and a revocable credential to satisfy requested attribute `"regdate"`.
+
 > **Counterpoint:** Consider a presentation request with one requested item having a specifically applicable non-revocation interval and one with only inapplicable non-revocation intervals. If the prover may choose a revocable credential to satisfy the requested item with no applicable non-revocation interval, the proof will include a non-revocation subproof on that credential. However, if a presentation request has no non-revocation intervals at all, and the prover may select revocable credentials to satisfy its requested items, the presentation will not include a non-revocation subproof and in this way the prover may present a revoked credential to appear as valid as an irrevocable credential in a proof.
 
-> **Question:** Would it be better to choose a default (maximally inclusive, to jibe with any other items having applicable non-revocation intervals that the revocable credential may satisfy) non-revocation interval for items having only revocable credentials but only inapplicable non-revocation intervals in the presentation? _I think not, every default behaviour opens  an avenue for untraceable tampering._
+> **Question:** Would it be better to choose a default (maximally inclusive, to jibe with any other items having applicable non-revocation intervals that the revocable credential may satisfy) non-revocation interval for items having only revocable credentials but only inapplicable non-revocation intervals in the presentation?
+
+> ** Working Hypothesis:** To minimize the available surface for tamperning, provers should never assume default behaviour for non-revocation intervals beyond
+
+   ```json
+  {
+      "from": 0,
+      "to": <current epoch>
+  }
+  ```
 
 > **Question:** Is it ever appropriate to interpolate a default non-revocation interval, or does the absence of any specifically or generally applicable non-revocation interval signify an explicit expectation of an irrevocable credential? Note that any item may carry restrictions by credential definition for precise formulation.
+
+> ** Working Hypothesis:** To minimize the available surface for tamperning, provers should never assume default behaviour for non-revocation intervals as above. Since provers must prefer revocable credentials where they can, the absence of a non-revocation interval on a presentation request signifies a requirement for irrevocable credentials.
 
 ### Verifiers and Presentations
 
