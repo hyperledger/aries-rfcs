@@ -108,7 +108,7 @@ Where a presentation request includes a non-revocation interval specifically app
 
 > **Working Hypothesis:** Provers should always prefer irrevocable credentials to revocable credentials. Presentation of an irrevocable credential constitutes proof of non-revocation.
 
-Note that selecting an irrevocable credential for presentation may lead to a superfluous non-revocation interval at the verifier (see [below](#superfluous-non-revocation-interval)).
+Note that selecting an irrevocable credential for presentation may lead to a missing timestamp at the verifier (see [below](#missing-timestamp)).
 
 ###### Requested Item Has Generally Applicable Non-Revocation Interval
 
@@ -118,7 +118,7 @@ Where a presentation request includes a non-revocation interval generally applic
 
 > **Working Hypothesis:** Provers should always prefer irrevocable credentials to revocable credentials. Presentation of an irrevocable credential constitutes proof of non-revocation.
 
-Note that if the presentation request includes only a generally applicable non-revocation interval but the presentation includes exclusively irrevocable credentials to satisfy all requested items, the presentation requests's non-revocation interval becomes superfluous to the presentation (see [below](#superfluous-non-revocation-interval)).
+Note that if the presentation request includes only a generally applicable non-revocation interval but the presentation includes exclusively irrevocable credentials to satisfy all requested items, the presentation will be missing timestamps (see [below](#missing-timestamp)).
 
 ###### All Non-Revocation Intervals are Inapplicable to Requested Item
 
@@ -186,7 +186,7 @@ This section outlines verifier best practices given timestamps superfluous to a 
 
 A presentation's inclusion of a timestamp pertaining to an irrevocable credential evinces tampering: the verifier MUST reject such a presentation.
 
-##### Superfluous Timestamp
+##### Timestamp for Requested Item with No Applicable Non-Revocation Interval
 
 A verifier MUST reject a presentation including a timestamp pertaining to a revocable credential to satisfy a requested item with no applicable non-revocation interval. Any such presentation evinces tampering since, as per credential selection best practices [above](#credential-selection-best-practices), the prover MUST choose an irrevocable credential to fulfill a requested item with no applicable non-revocation interval.
 
@@ -242,7 +242,7 @@ against a proof presentation on a single credential
 
 is incorrect: no single (revocable) credential can satisfy both `"legalname"` and `"regdate"` requested attributes as the presentation request specifies them.
 
-#### Missing Timestamps
+#### Missing Timestamp
 
 A presentation with no timestamp for a revocable credential purporting to satisfy a requested item in the corresponding presentation request, where the requested item has an applicable non-revocation interval, evinces tampering: the verifier MUST reject such a presentation.
 
