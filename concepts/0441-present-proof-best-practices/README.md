@@ -8,7 +8,7 @@
 
 ## Summary
 
-This work prescribes best practices for provers in credential selection (toward proof presentation), and for verifiers in proof acceptance, in fulfilment of the Present Proof protocol [RFC0037](../../features/0037-present-proof/README.md). Of particular instance is behaviour against presentation requests and presentations in their various non-revocation interval profiles.
+This work prescribes best practices for provers in credential selection (toward proof presentation), for verifiers in proof acceptance, and for both regarding non-revocation interval semantics in fulfilment of the Present Proof protocol [RFC0037](../../features/0037-present-proof/README.md). Of particular instance is behaviour against presentation requests and presentations in their various non-revocation interval profiles.
 
 ## Motivation
 
