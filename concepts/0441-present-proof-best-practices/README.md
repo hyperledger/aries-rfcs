@@ -18,6 +18,20 @@ Agents should behave consistently in automatically selecting credentials and pro
 
 The subsections below outline best practices for provers and verifiers.
 
+### Presentation Requests and Non-Revocation Intervals
+
+This section prescribes best practices in formulating and interpreting non-revocation intervals on proof requests.
+
+A non-revocation interval contains `"from"` and `"to"` (integer) EPOCH times. For historical reasons, any timestamp within this interval is technically acceptable in a non-revocation subproof. However, these semantics allow for ambiguity in cases where revocation occurs within the interval, and in cases where the ledger supports reinstatement. These best practices obviate this equivocation, fostering deterministic outcomes.
+
+#### Verifier Non-Revocation Interval Formulation
+
+The verifier MUST specify, as current [INDY-HIPE 11](https://github.com/hyperledger/indy-hipe/blob/master/text/0011-cred-revocation/README.md) notes, the same integer EPOCH time for both ends of the interval. In effect, where the presentation request specifies a non-revocation interval, the verifier MUST request a non-revocation instant.
+
+#### Prover Non-Revocation Interval Processing
+
+In querying the nodes for revocation status, given a revocation interval on a single instant (i.e., on `"from"` and `"to"` the same), the prover MUST query the ledger for all germane revocation updates from registry creation through that instant (i.e., from zero through `"to"` value): if the credential has been revoked prior to the instant, the revocation necessarily will appear in the aggregate delta.
+
 ### Provers, Presentation Proposals, and Presentation Requests
 
 In fulfilment of the [RFC0037](../../features/0037-present-proof/README.md) Present Proof protocol, provers may initiate with a presentation proposal or verifiers may initiate with a presentation request. In the former case, the prover has both a presentation proposal and a presentation request; in the latter case, the prover has only a presentation request.
@@ -84,7 +98,7 @@ The following subsections outline a prover's best practices in matching a creden
 
 > **Question:** Should the prover prefer a credential that is revocable but not revoked if there is a choice between revocable credentials satisfying an applicable non-revocation interval, if the prover has a choice between credentials that are revoked and not?  Is it ever a use case to present a revoked credential to make the proof verify as false?
 
-> ** Working Hypothesis:** Provers should always prefer irrevocable credentials to revocable credentials. Presentation of an irrevocable credential constitutes proof of non-revocation.
+> **Working Hypothesis:** Provers should always prefer irrevocable credentials to revocable credentials. Presentation of an irrevocable credential constitutes proof of non-revocation.
 
 ###### Requested Item Has Specifically Applicable Non-Revocation Interval
 
@@ -92,7 +106,7 @@ Where a presentation request includes a non-revocation interval specifically app
 
 > **Question:** Which is better: revocable (because the presentation request specifically asks regarding the item), or irrevocable (because it can never be revoked and hence is the most direct proof)?
 
-> ** Working Hypothesis:** Provers should always prefer irrevocable credentials to revocable credentials. Presentation of an irrevocable credential constitutes proof of non-revocation.
+> **Working Hypothesis:** Provers should always prefer irrevocable credentials to revocable credentials. Presentation of an irrevocable credential constitutes proof of non-revocation.
 
 Note that selecting an irrevocable credential for presentation may lead to a superfluous non-revocation interval at the verifier (see [below](#superfluous-non-revocation-interval)).
 
@@ -102,7 +116,7 @@ Where a presentation request includes a non-revocation interval generally applic
 
 > **Question:** Which is better: revocable (because the presentation request specifically asks regarding the item), or irrevocable (because it can never be revoked and hence is the most direct proof)?
 
-> ** Working Hypothesis:** Provers should always prefer irrevocable credentials to revocable credentials. Presentation of an irrevocable credential constitutes proof of non-revocation.
+> **Working Hypothesis:** Provers should always prefer irrevocable credentials to revocable credentials. Presentation of an irrevocable credential constitutes proof of non-revocation.
 
 Note that if the presentation request includes only a generally applicable non-revocation interval but the presentation includes exclusively irrevocable credentials to satisfy all requested items, the presentation requests's non-revocation interval becomes superfluous to the presentation (see [below](#superfluous-non-revocation-interval)).
 
@@ -150,11 +164,11 @@ for which the prover must select an irrevocable credential to satisfy requested 
 
 > **Question:** Would it be better to choose a default (maximally inclusive, to jibe with any other items having applicable non-revocation intervals that the revocable credential may satisfy) non-revocation interval for items having only revocable credentials but only inapplicable non-revocation intervals in the presentation?
 
-> ** Working Hypothesis:** To minimize the available surface for tamperning, provers should never assume default behaviour for non-revocation intervals beyond their `"from"` and `"to"` components (0 and present epoch respectively).
+> **Working Hypothesis:** To minimize the available surface for tamperning, provers should never assume default behaviour for non-revocation intervals beyond their `"from"` and `"to"` components (0 and present epoch respectively).
 
 > **Question:** Is it ever appropriate to interpolate a default non-revocation interval, or does the absence of any specifically or generally applicable non-revocation interval signify an explicit expectation of an irrevocable credential? Note that any item may carry restrictions by credential definition for precise formulation.
 
-> ** Working Hypothesis:** To minimize the available surface for tamperning, provers should never assume default behaviour for non-revocation intervals as above. Since provers must prefer revocable credentials where they can, the absence of a non-revocation interval on a presentation request signifies a requirement for irrevocable credentials.
+> **Working Hypothesis:** To minimize the available surface for tamperning, provers should never assume default behaviour for non-revocation intervals as above. Since provers must prefer revocable credentials where they can, the absence of a non-revocation interval on a presentation request signifies a requirement for irrevocable credentials.
 
 ### Verifiers and Presentations
 
@@ -232,27 +246,11 @@ is incorrect: no single (revocable) credential can satisfy both `"legalname"` an
 
 A presentation with no timestamp for a revocable credential purporting to satisfy a requested item in the corresponding presentation request, where the requested item has an applicable non-revocation interval, evinces tampering: the verifier MUST reject such a presentation.
 
-It is licit for a presentation to have no timestamp for an irrevocable credential: the corresponding non-revocation interval is superfluous in the presentation request; see [below](#superfluous-non-revocation-interval).
+It is licit for a presentation to have no timestamp for an irrevocable credential: the corresponding non-revocation interval is superfluous in the presentation request.
 
 > **Question:** Does the presentation of an irrevocable credential constitute proof of non-revocation over any possible non-revocation interval?
 
-> ** Working Hypothesis:** Yes.
-
-#### Superfluous Non-Revocation Interval
-
-As noted above, a presentation with no timestamp for a revocable credential purporting to satisfy a requested item in the corresponding presentation request, where the requested item has an applicable non-revocation interval, evinces tampering: the verifier MUST reject such a presentation.
-
-However, *ceteris paribus*, if the credential is irrevocable, its presentation (without timestamp) constitutes proof of non-revocation over any non-revocation interval: the verifier MUST ignore the non-revocation interval for the requested item.
-
-> **Question, as above:** Does the presentation of an irrevocable credential constitute proof of non-revocation over any possible non-revocation interval?
-
-> ** Working Hypothesis:** Yes.
-
-#### Missing Non-Revocation Interval
-
-A presentation request's requested item having no applicable non-revocation interval, where the presentation cites a revocable credential with a timestamp to satisfy, evinces tampering: the verifier MUST reject such a presentation.
-
-Note that this condition is another way of stating a superfluous timestamp as [above](#superfluous-timestamp).
+> **Working Hypothesis:** Yes.
 
 #### Timestamp Outside Non-Revocation Interval
 
@@ -262,8 +260,9 @@ In all other cases where a presented timestamp falls outside the applicable non-
 
 > **Question:**  What does logging entail, from a standards point of view?
 
-> ** Working Hypothesis:** Leave it underspecified and leave it to the implementation.
+> **Working Hypothesis:** Leave it underspecified and leave it to the implementation.
 
 ## Reference
 
-See [RFC 0037](../../features/0037-present-proof/README.md) for the Present Proof protocol.
+* [RFC 0037](../../features/0037-present-proof/README.md): Present Proof protocol
+* [INDY-HIPE 11](https://github.com/hyperledger/indy-hipe/blob/master/text/0011-cred-revocation/README.md): Indy revocation.
