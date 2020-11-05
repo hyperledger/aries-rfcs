@@ -239,7 +239,7 @@ should be used per attachment.
 
 This content encoding is an obvious choice for any content different than JSON.
 You can embed content of any type using this method. Examples are plentiful
-throughout the document. Note that this encoding is always [base64url encoding, not plain base64](https://tools.ietf.org/html/rfc4648#section-5), and that padding is not required. 
+throughout the document. Note that this encoding is always [base64url encoding, not plain base64](https://tools.ietf.org/html/rfc4648#section-5), and that padding is not required. Code that reads this encoding SHOULD tolerate the presence or absence of padding equally well, but code that writes this encoding SHOULD omit the padding to guarantee alignment with with encoding rules in the JOSE (JW*) family of specs.
 
 #### json
 
