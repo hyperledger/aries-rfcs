@@ -364,7 +364,7 @@ https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC).
 
 ### Blobs
 
-In general, blobs are encoded as base64 strings in DIDComm.
+In general, blobs are [encoded as base64url](https://tools.ietf.org/html/rfc4648#section-5) strings in DIDComm.
 
 ### Unicode
 

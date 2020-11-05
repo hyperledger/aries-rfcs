@@ -237,7 +237,7 @@ this (note the snake_case since we are not matching a W3C spec):
 and that the transfer relates to this payment request instead of another. This might be a ledger's transaction ID,
 for example.
 
-**proof**: Optional. A base64-encoded blob that contains directly verifiable proof that the
+**proof**: Optional. A base64url-encoded blob that contains directly verifiable proof that the
 transaction took place. This might be useful for payments enacted by a [triple-signed receipt](
 http://opentransactions.org/wiki/index.php/Triple-Signed_Receipts)
 mechanism, for example. When this is present, `transaction_id` becomes optional. For ledgers
