@@ -17,7 +17,7 @@ This RFC is complementary to official terms like the ones curated in the [TOIP C
 
 ## Motivation
 
-All technical materials in our ecosystem hinge on fundamental concepts of self-sovereign identity such as controllers, keys, DIDs, and agents. We need a standard, documented notation to refer to such things, so we can use it consistently, and so we can link to the notation's spec for definitive usage.
+All technical materials in our ecosystem hinge on fundamental concepts of self-sovereign identity such as controllers, keys, [DIDs](https://www.w3.org/TR/did-core/), and [agents](../0004-agents/README.md). We need a standard, documented notation to refer to such things, so we can use it consistently, and so we can link to the notation's spec for definitive usage.
 
 ## Tutorial
 
@@ -70,17 +70,17 @@ Identity subjects that are not self-controlled are referenced in our notation us
   subject = self / controlled
 ```
 
-The set of devices, keys, endpoints, data, and other resources through which a controller manifests identity for a given subject is called the subject's __identity domain__ (or just __domain__ for short). When the controller is a self, the domain is __sovereign__; otherwise, the domain is __controlled__. Either way, the domain of an identity subject is like its private universe, so the name or symbol of a subject is often used to denote its domain as well; context eliminates ambiguity. You will see examples of this below.
+The set of devices, keys, endpoints, data, and other resources controlled by or for a given subject is called the subject's __identity domain__ (or just __domain__ for short). When the controller is a self, the domain is __self-sovereign__; otherwise, the domain is __controlled__. Either way, the domain of an identity subject is like its private universe, so the name or symbol of a subject is often used to denote its domain as well; context eliminates ambiguity. You will see examples of this below.
 
 #### Association
 
-Elements associated with a domain must be named in a way that makes their association clear, using a `name@context` pattern familiar from email addresses: `1@A` (“one at A”) is agent 1 in A’s sovereign domain. (Note how we use an erstwhile identity owner symbol, `A`, to reference a domain here, but there is no ambiguity.) This fully qualified form of a subject reference is useful for clarification but is often not necessary.
+Elements associated with a domain are named in a way that makes their association clear, using a `name@context` pattern familiar from email addresses: `1@A` (“one at A”) is agent 1 in A’s sovereign domain. (Note how we use an erstwhile identity owner symbol, `A`, to reference a domain here, but there is no ambiguity.) This fully qualified form of a subject reference is useful for clarification but is often not necessary.
 
 In addition to domains, this same associating notation may be used where a _relationship_ is the context, because sometimes the association is to the relationship rather than to a participant. See the DID example in the next section.
 
 #### Agents
 
-Agents are not subjects. They neither control or own a domain. They live and act with in a domain. They are always owned and controlled by Entity and live within the their domain. Agents are the first example of elements associated with an identity subject. Despite this, agents are the primary focus of interactions within SSI ecosystems.
+Agents are not subjects. They neither control or own a domain; rather, they live and act within it. They take instructions from the domain's controller. Agents ([and hubs, and other things like them](../0004-agents/README.md#the-agent-ness-continuum)) are the first example of elements associated with an identity subject. Despite this, agent-ish things are the primary focus of interactions within SSI ecosystems.
 
 Additionally, agents are distinct from devices, even though we often (and inaccurately) used them interchangeably. We may say things like "Alice's iPhone sends a message" when we more precisely mean "the agent on Alice's iPhone sends a message." In reality, there may be zero, one, or more than one agents running on a particular device.
 
@@ -104,7 +104,7 @@ Devices are another element inside a subject's domain. They are represented with
 
 #### Short Form (more common)
 
-Alice’s pairwise relationship with Bob is represented with colon notation: `A:B`. This is read aloud as “A to B” (preferred because it’s short; alternatives such as “the A B relationship” or “A colon B” or “A with respect to B” are also valid). When written in the other order, it represents the same relationship as seen from Bob’s point of view. Note that IoT things may also participate in relationships: `A:bobs_car`. (Contrast [Intra-Domain Relationships](#intra-domain-relationships) below.)
+Alice’s pairwise relationship with Bob is represented with colon notation: `A:B`. This is read aloud as “A to B” (preferred because it’s short; alternatives such as “the A B relationship” or “A colon B” or “A with respect to B” are also valid). When written in the other order, it represents the same relationship as seen from Bob’s point of view. Note that passive subjects may also participate in relationships: `A:bobs_car`. (Contrast [Intra-Domain Relationships](#intra-domain-relationships) below.)
 
 N-wise relationships (e.g., doctor, hospital, patient) are written with the perspective-governing subject's identifier, a single colon, then by all other identifiers for members of the relationship, in alphabetical order, separated by `+`: `A:B+C`, `B:A+C`. This is read aloud as in "A to B plus C."
 
@@ -115,22 +115,11 @@ N-wise relationships (e.g., doctor, hospital, patient) are written with the pers
 
 #### Long Form
 
-Short form is convenient and brief, but it is inconsistent because each
-party to the relationship describes it differently. Sometimes this may
-be undesirable, so a long and consistent form is also supported. The long
-form of both pairwise and N-way relationships lists all participants to
-the right of the colon, in alphabetical order. Thus the long forms of the
-Alice to Bob relationship might be `A:A+B` (for Alice's view of this
-relationship) and `B:A+B` (for Bob's view). For a doctor, hospital,
-patient relationship, we might have `D:D+H+P`, `H:D+H+P`, and `P:D+H+P`.
-Note how the enumeration of parties to the right of the colon is consistent.
+Short form is convenient and brief, but it is inconsistent because each party to the relationship describes it differently. Sometimes this may be undesirable, so a long and consistent form is also supported. The long form of both pairwise and N-way relationships lists all participants to the right of the colon, in alphabetical order. Thus the long forms of the Alice to Bob relationship might be `A:A+B` (for Alice's view of this relationship) and `B:A+B` (for Bob's view). For a doctor, hospital, patient relationship, we might have `D:D+H+P`, `H:D+H+P`, and `P:D+H+P`. Note how the enumeration of parties to the right of the colon is consistent.
 
-Long form and short form are allowed to vary freely; any tools that parses
-this notation should treat them as synonyms and stylistic choices only.
+Long form and short form are allowed to vary freely; any tools that parses this notation should treat them as synonyms and stylistic choices only.
 
-The ABNF for long form is identical to short form, except that we are
-guaranteed that after the colon, we will see at least two parties and
-one `+` character:
+The ABNF for long form is identical to short form, except that we are guaranteed that after the colon, we will see at least two parties and one `+` character:
 
   ```ABNF
   long-relationship = subject ":" subject 1*next-subject
@@ -138,16 +127,10 @@ one `+` character:
 
 #### Generalized Relationships
 
-Some models for SSI emphasize the concept of __personas__. These are
-essentially "masks" that an identity owner assumes, exposing a limited
-subset of self to a generalized audience. For example, Alice might assume
-one persona in her employment relationships, another for government
-interactions, another for friends, and another when she's a customer.
-(The wisdom of personas versus pairwise relationships is a matter of
-some debate.)
+##### Contexts
+Some models for SSI emphasize the concept of __personas__ or __contexts__. These are essentially "masks" that an identity controller enables, exposing a limited subset of the subject's identity to an audience that shares that context. For example, Alice might assume one persona in her employment relationships, another for government interactions, another for friends, and another when she's a customer.
 
-Personas can be modeled as a relationship with a generalized audience:
-`A:Work`, `A:Friends`.
+Contexts or personas can be modeled as a relationship with a generalized audience: `A:Work`, `A:Friends`.
 
   ```ABNF
   general-audience = ucase-alpha 1*name-other-char
@@ -155,59 +138,27 @@ Personas can be modeled as a relationship with a generalized audience:
   relationship = short-relationship / long-relationship / general-relationship
   ```
 
-The concept of public DIDs suggests that someone may think about a
-relationship as unbounded, or as not varying no matter who the other
-subject is. For example, a company may create a public DID and advertise
-it to the world, intending for this connection point to begin relationships
-with customers, partners, and vendors alike. While best practice suggests
-that such relationships be used with care, and that they primarily serve to
-bootstrap pairwise relationships, the notation still needs to represent the
-possibility.
+##### Any
 
-The [token `Any` is reserved](#reserved-tokens) for these semantics. If Acme Corp
-is represented as `A`, then Acme's public persona could be denoted with
-`A:Any`. When `Any` is used, it is never the subject whose perspective is
-captured; it is always a faceless "other". This means that `Any` appears
-only on the right side of a colon in a relationship, and it probably doesn't
-make sense to combine it with other participants since it would subsume them
-all.
+The concept of public DIDs suggests that someone may think about a relationship as unbounded, or as not varying no matter who the other subject is. For example, a company may create a public DID and advertise it to the world, intending for this connection point to begin relationships with customers, partners, and vendors alike. While best practice suggests that such relationships be used with care, and that they primarily serve to bootstrap pairwise relationships, the notation still needs to represent the possibility.
+
+The [token `Any` is reserved](#reserved-tokens) for these semantics. If Acme Corp is represented as `A`, then Acme's public persona could be denoted with `A:Any`. When `Any` is used, it is never the subject whose perspective is captured; it is always a faceless "other". This means that `Any` appears only on the right side of a colon in a relationship, and it probably doesn't make sense to combine it with other participants since it would subsume them all.
+
+##### Self
+
+It is sometimes useful to model a relationship with onesself. This is done with the reserved token `Self`.
 
 ### Intra-Domain Relationships
 
-Within a domain, relationships among agents or devices may be interesting. Such
-relationships use the `~` (tilde) character. Thus, the intra-domain relationship
-between Alice's agent 1 and agent 2 could be written `1~2` and read as "one tilde two".
+Within a domain, relationships among agents or devices is sometimes interesting. Such relationships use the `~` (tilde) character. Thus, the intra-domain relationship between Alice's agent 1 and agent 2 is written `1~2` and read as "one tilde two".
 
+### Constituents
 
-### Association
+Items that belong to a domain rather than having independent identity of their own (for example, data, money, keys) use dot notation for containment or ownership: `A.ls`, (A’s link secret), `A.policy`, etc.
 
-Entities associated with a domain may be named in a way that
-makes that association clear, using a `name@context` pattern familiar
-from email addresses: `1@A` (“one at A”) is agent 1 in A’s sovereign domain.
-(Note how we use an erstwhile identity owner symbol, `A`, to reference a
-domain here, but there is no ambiguity.) This fully qualified form of an
-subject reference is useful for clarification but is often not necessary.
+Names for constituents use the same rules as names for agents and devices.
 
-In addition to domains, this same associating notation may be used where
-a _relationship_ is the context, because sometimes the association is
-to the relationship rather than to a participant. See the DID
-example in the next section.
-
-### Inert Items
-
-In contrast to entities that may be capable of independent action
-and that may have identities in an II or SSI sense, inert or passive
-constituents of a sovereign domain (for example, data, money, keys)
-use dot notation for ownership: `A.ls`, (A’s link secret), `A.policy`,
-etc.
-
-Names for inert things use the same rules as names for agents and devices.
-
-Alice’s DID for her relationship with Bob is inert and therefore owned, but
-it is properly associated with the relationship rather than just Alice. It is
-thus represented with `A.did@A:B`. (The [token `did` is reserved](#reserved-tokens)
-for DIDs). This is read as “A’s DID at A to B”. Bob’s complementary DID would
-be `B.did@B:A`.
+Alice’s DID for her relationship with Bob is an inert constituent datum, but it is properly associated with the relationship rather than just Alice. It is thus represented with `A.did@A:B`. (The [token `did` is reserved](#reserved-tokens) for DIDs). This is read as “A’s DID at A to B”. Bob’s complementary DID would be `B.did@B:A`.
 
   ```ABNF
   inert = name-start-char 1*name-other-char
@@ -218,29 +169,15 @@ be `B.did@B:A`.
   associated = subject 0*nested "@" associated-to
   ```
 
-If `A` has a cloud agent `2`, then the public key (verification key or verkey)
-and private, secret key (signing key or sigkey) used by
-`2` in `A:B` would be: `2.pk@A:B` and `2.sk@A:B`. This is read as “2
-dot P K at A to B” and “2 dot S K at A to B”. Here, `2` is known to
-belong to `A` because it takes `A`’s perspective on `A:B`--it would
-be equivalent but unnecessary to write `A.2.pk@A:B`.
+If `A` has a cloud agent `2`, then the public key (verification key or verkey) and private, secret key (signing key or sigkey) used by `2` in `A:B` would be: `2.pk@A:B` and `2.sk@A:B`. This is read as “2 dot P K at A to B” and “2 dot S K at A to B”. Here, `2` is known to belong to `A` because it takes `A`’s perspective on `A:B`--it would be equivalent but unnecessary to write `A.2.pk@A:B`.
 
 ### DID Docs and DID References
 
-The mention of keys belonging to agents naturally raises the question of DID
-Docs and the things they contain. How do they relate to our notaiton?
-[DIDs are designed to be URIs](
-https://w3c-ccg.github.io/did-spec/#generic-did-syntax), and items that carry
-an `id` property within a DID Doc [can be referenced with standard URI fragment
-notation]( https://w3c-ccg.github.io/did-spec/#fragments). This allows someone, for example,
-to refer to the first public key used by one of the agents owned by Alice with
-a notation like: `did:sov:VUrvFeWW2cPv9hkNZ2ms2a;#key1`.
+The mention of keys belonging to agents naturally raises the question of DID docs and the things they contain. How do they relate to our notation?
+ 
+[DIDs are designed to be URIs]( https://w3c-ccg.github.io/did-spec/#generic-did-syntax), and items that carry an `id` property within a DID Doc [can be referenced with standard URI fragment notation]( https://w3c-ccg.github.io/did-spec/#fragments). This allows someone, for example, to refer to the first public key used by one of the agents owned by Alice with a notation like: `did:sov:VUrvFeWW2cPv9hkNZ2ms2a;#key1`.
 
-This notation is important and useful, but it is somewhat orthogonal to the concerns
-of this RFC. In the context of SSI notation, we are not DID-centric; we are
-owner centric, and owners are identified by a single capital alpha instead of
-by their DID. This helps with brevity. It lets us ignore the specific DID value
-and instead focus on the higher level semantics; compare:
+This notation is important and useful, but it is somewhat orthogonal to the concerns of this RFC. In the context of SSI notation, we are not DID-centric; we are subject centric, and subject are identified by a single capital alpha instead of by their DID. This helps with brevity. It lets us ignore the specific DID value and instead focus on the higher level semantics; compare:
 
 <blockquote><code>{A.did@A:B}/B --> B</code></blockquote>
 
@@ -252,26 +189,15 @@ and instead focus on the higher level semantics; compare:
 using the agent possessing <code>did:sov:PXqKt8sVsDu9T7BpeNqBfe;#key1</code>
 to encrypt with the corresponding signing key.</blockquote>
 
-We expect DID reference notation (the verbose text above) to be relevant for
-concrete communication between computers, and SSI notation (the terse equivalent
-shown first) to be more convenient for symbolic, higher
-level discussions between human beings. Occasionally, we may get very specific
-and map SSI notation into DID notation (e.g., `A.1.vk = did:sov:PXqKt8sVsDu9T7BpeNqBfe;#key1`).
+We expect DID reference notation (the verbose text above) to be relevant for concrete communication between computers, and SSI notation (the terse equivalent shown first) to be more convenient for symbolic, higher level discussions between human beings. Occasionally, we may get very specific and map SSI notation into DID notation (e.g., `A.1.vk = did:sov:PXqKt8sVsDu9T7BpeNqBfe;#key1`).
 
 ### Counting and Iteration
 
-Sometimes, a concept or value evolves over time. For example, a given discussion
-might need to describe a DID Doc or an endpoint or a key across multiple
-state changes. In mathematical notation, this would typically be modeled with
-subscripts. In our notation, we use square brackets, and we number beginning
-from zero. `A.pk[0]@A:B` would be the first pubkey used by A in the `A:B`
-relationship; `A.pk[1]@A:B` would be the second pubkey, and so on. Likewise, a
-sequence of messages could be represented with `msg[0]`, `msg[1]`, and `msg[2]`.
+Sometimes, a concept or value evolves over time. For example, a given discussion might need to describe a DID Doc or an endpoint or a key across multiple state changes. In mathematical notation, this would typically be modeled with subscripts. In our notation, we use square brackets, and we number beginning from zero. `A.pk[0]@A:B` would be the first pubkey used by A in the `A:B` relationship; `A.pk[1]@A:B` would be the second pubkey, and so on. Likewise, a sequence of messages could be represented with `msg[0]`, `msg[1]`, and `msg[2]`.
 
 ### Messages
 
-Messages are represented as quoted string literals, or with the [reserved token](#reserved-tokens)
-`msg`, or with kebab-case names that explain their semantics, as in `cred-offer`:
+Messages are represented as quoted string literals, or with the [reserved token](#reserved-tokens) `msg`, or with kebab-case names that explain their semantics, as in `cred-offer`:
 
 ```ABNF
 string-literal = %x22 c-literal %x22
@@ -281,81 +207,27 @@ kebab-msg = 1*kebab-char *kebab-suffix
 message = "msg" / string-literal / kebab-msg
 ```
 
-### Negotiation Patterns
-
-A common interaction pattern in SSI ecosystems is negotiation. It involves
-sequences like this:
-
-![negotiation pattern](negotiation-pattern.png)
-
-Credential issuance follows this pattern: credential offer (step 1a) is either
-followed by an incompatible credential request (1b)--and this pair of messages
-repeats as needed--or by a compatible credential request (2). A credential is
-then issued (3). Possibly the holder of the credential acknowledges receipt (4).
-
-Proving follows this pattern (though it nearly always begins with a request).
-Connections follow this pattern. Price negotiations follow this pattern.
-
-The notation [reserves standard kebab suffixes](#reserved-tokens) on messages to
-make this pattern obvious and consistent: `-offer` (step 1a), `-req` (step 1b
-or 2), and `-receipt` (step 4). Step 3 is typically named without a suffix.
-Thus: `proof-offer`, `proof-request`, `proof` (no suffix), `proof-receipt`.
-
 ### Payments
 
-Economic activity is part of rich SSI ecosystems, and requires notation. A
-__payment address__ is denoted with the [`pay` reserved token](#reserved-tokens);
-`A.pay[4]` would be A's fifth payment address.
-The public key and secret key for a payment address use the
-[`ppk` and `psk` reserved token](#reserved-tokens), respectively. Thus, one way to reference
-the payment keys for that payment address would be `A.pay[4].ppk` and
-`A.pay[4].psk`. (Keys are normally held by agents, not by people--and every
-agent has its own keys. Thus, another notation for the public key
-pertaining to this address might be `A.1.pay[4].ppk`. This is an area of
-clumsiness that needs further study.)
+Economic activity is part of rich SSI ecosystems, and requires notation. A __payment address__ is denoted with the [`pay` reserved token](#reserved-tokens); `A.pay[4]` would be A's fifth payment address. The public key and secret key for a payment address use the [`ppk` and `psk` reserved token](#reserved-tokens), respectively. Thus, one way to reference the payment keys for that payment address would be `A.pay[4].ppk` and `A.pay[4].psk`. (Keys are normally held by agents, not by people--and every agent has its own keys. Thus, another notation for the public key pertaining to this address might be `A.1.pay[4].ppk`. This is an area of clumsiness that needs further study.)
 
 ### Encryption
 
-Encryption deserves special consideration in the SSI world. It often figures
-prominently in discussions about security and privacy, and our notation needs
-to be able to represent it carefully.
+Encryption deserves special consideration in the SSI world. It often figures prominently in discussions about security and privacy, and our notation needs to be able to represent it carefully.
 
-The following crypto operations are recognized by the notation, without
-making a strong claim about how the operations are implemented. (For
-example, inline Diffie Helman and an ephemeral symmetric key might be
-used for the *_crypt algorithms. What is interesting to the notation
-isn't the low-level details, but the general semantics achieved.)
+The following crypto operations are recognized by the notation, without making a strong claim about how the operations are implemented. (For example, inline Diffie Helman and an ephemeral symmetric key might be used for the *_crypt algorithms. What is interesting to the notation isn't the low-level details, but the general semantics achieved.)
 
-* `anon_crypt(msg, recipient_pubkey)` -- Encrypt
-only for recipient, achieving confidentiality. Sender is anonymous.
-Parties may have had no prior contact, though sender must discover
-recipient's pubkey. The message is tamper evident.
-* `auth_crypt(msg, recipient_pubkey, sender_privkey)` -- Encrypt
-only for recipient, achieving confidentiality. Recipient
-learns sender’s pubkey but can’t prove to anybody else who the sender
-is (making the message repudiable). Parties may have had no prior contact,
-though sender must discover recipient's pubkey.
-The message is tamper evident.
-* `sign(msg, signer_privkeys)` -- Associate a signature with a
-message, making the message [non-repudiable](
-https://github.com/sovrin-foundation/protocol/blob/master/janus/repudiation.md).
-This also makes the message tamper-evident. A signature does not
-automatically encrypt and therefore is not a way to achieve
-confidentiality. Note that complex signature schemes (multisig, M of N, ring)
-use this operation as well.
-* `verify(msg, signature, signer_pubkeys)` -- Verify a signature over a
-message with select keys. Note that complex verification schemes
-(multiverify, M of N, ring) use this operation as well.
-* `sym_crypt(msg, sym_key)` -- Symmetrically encrypt for anyone
-who has the symmetric key, achieving a limited form of confidentiality.
-Key must be shared in advance with both parties. Likely tamper
-evident. If multiple parties know the symmetric key, the sender is
-not knowable to the recipient.
+* `anon_crypt(msg, recipient_pubkey)` -- Encrypt only for recipient, achieving confidentiality. Sender is anonymous. Parties may have had no prior contact, though sender must discover recipient's pubkey. The message is tamper evident.
 
-The notation for these crypto primitives uses curly braces around the
-message, with suffixes to clarify semantics. Generally,
-it identifies a recipient as an identity owner or thing, without clarifying
-the key that's used--the pairwise key for their DID is assumed.
+* `auth_crypt(msg, recipient_pubkey, sender_privkey)` -- Encrypt only for recipient, achieving confidentiality. Recipient learns sender’s pubkey but can’t prove to anybody else who the sender is (making the message repudiable). Parties may have had no prior contact, though sender must discover recipient's pubkey. The message is tamper evident.
+
+* `sign(msg, signer_privkeys)` -- Associate a signature with a message, making the message [non-repudiable](../0049-repudiation/README.md). This also makes the message tamper-evident. A signature does not automatically encrypt and therefore is not a way to achieve confidentiality. Note that complex signature schemes (multisig, M of N, ring) use this operation as well.
+
+* `verify(msg, signature, signer_pubkeys)` -- Verify a signature over a message with select keys. Note that complex verification schemes (multiverify, M of N, ring) use this operation as well.
+
+* `sym_crypt(msg, sym_key)` -- Symmetrically encrypt for anyone who has the symmetric key, achieving a limited form of confidentiality. Key must be shared in advance with both parties. Likely tamper evident. If multiple parties know the symmetric key, the sender is not knowable to the recipient.
+
+The notation for these crypto primitives uses curly braces around the message, with suffixes to clarify semantics. Generally, it identifies a recipient as an identity owner or thing, without clarifying the key that's used--the pairwise key for their DID is assumed.
 
 ```ABNF
 asymmetric   = "/"                                   ; suffix
@@ -374,122 +246,73 @@ sym-crypt    = "{" message "}" symmetric subject           ; e.g., {"hi"}*B
 verify       = "{" message "}" verify subject              ; e.g., {"hi"}?B
 ```
 
-The relative order of suffixes reflects whether encryption or
-signing takes place first: `{"hello"}*B#` says that symmetric
-encryption happens first, and then a signature is computed over
-the cypertext; `{"hello"#}*B` says that plaintext is signed, and
-then both the plaintext and the signature are encrypted. (The
-`{"hello"}#*B` variant is nonsensical because it splits the
-encryption notation in half).
+The relative order of suffixes reflects whether encryption or signing takes place first: `{"hello"}*B#` says that symmetric encryption happens first, and then a signature is computed over the cypertext; `{"hello"#}*B` says that plaintext is signed, and then both the plaintext and the signature are encrypted. (The `{"hello"}#*B` variant is nonsensical because it splits the encryption notation in half).
 
-All suffixes can be further decorated with a parenthesized algorithm
-name, if precision is required: `{"hello"}*(aes256)B` or
-`{"hello"}/(rsa1024)A:B` or `{"hello"#(ecdsa)}/B`.
+All suffixes can be further decorated with a parenthesized algorithm name, if precision is required: `{"hello"}*(aes256)B` or `{"hello"}/(rsa1024)A:B` or `{"hello"#(ecdsa)}/B`.
 
-With signing, usually the signer and sender are assumed to be identical,
-and the notation omits any clarification about the signer. However,
-this can be added after `#` to be explicit. Thus, `{msg#B}/C` would be
-a message with plaintext signed by B, anon-encrypted for C. Similarly,
-`{msg#(ring-rabin)BGJM}/A:C` would be a message with plaintext signed
-according to a Rabin ring signature algorithm, by B, G, J, and M, and
-then auth-encrypted by A for C.
+With signing, usually the signer and sender are assumed to be identical, and the notation omits any clarification about the signer. However, this can be added after `#` to be explicit. Thus, `{msg#B}/C` would be a message with plaintext signed by B, anon-encrypted for C. Similarly, `{msg#(ring-rabin)BGJM}/A:C` would be a message with plaintext signed according to a Rabin ring signature algorithm, by B, G, J, and M, and then auth-encrypted by A for C.
 
-Signing verification would be over the corresponding message and which
-entities perform the action. `{msg#A}?B` would be a message with plaintext
-signed by A verified by B. `{msg#(threshold-sig)ABC}?DE` would be a plaintext
-message signed according to a threshold signature algorithm by A, B, C
-and then verified by D and E.
+Signing verification would be over the corresponding message and which entities perform the action. `{msg#A}?B` would be a message with plaintext signed by A verified by B. `{msg#(threshold-sig)ABC}?DE` would be a plaintext message signed according to a threshold signature algorithm by A, B, C and then verified by D and E.
 
-Multiplexed asymmetric encryption is noted above, but has not yet been
-described. This is a technique whereby a message body is encrypted with
-an ephemeral symmetric key, and then the ephemeral key is encrypted
-asymmetrically for multiple potential recipients (each of which has a unique
-but tiny payload [the key] to decrypt, which in turn unlocks the main payload). The
-notation for this looks like `{msg}%BCDE` for multiplexed anon\_crypt (sender
-is anonymous), and like `{msg}%A:BCDE` for multiplexed auth\_crypt (sender
-is authenticated by their private key).
+Multiplexed asymmetric encryption is noted above, but has not yet been described. This is a technique whereby a message body is encrypted with an ephemeral symmetric key, and then the ephemeral key is encrypted asymmetrically for multiple potential recipients (each of which has a unique but tiny payload [the key] to decrypt, which in turn unlocks the main payload). The notation for this looks like `{msg}%BCDE` for multiplexed anon\_crypt (sender is anonymous), and like `{msg}%A:BCDE` for multiplexed auth\_crypt (sender is authenticated by their private key).
 
 ### Other punctuation
 
-Message sending is represented with arrows: `->` is most common, though `<-`
-is also reasonable in some cases. Message content and notes about sending
-can be embedded in the hyphens of sending arrow, as in this example, where
-the notation says an unknown party uses http to transmit "hello", anon-enrcypted
-for Alice:
+Message sending is represented with arrows: `->` is most common, though `<-` is also reasonable in some cases. Message content and notes about sending can be embedded in the hyphens of sending arrow, as in this example, where the notation says an unknown party uses http to transmit "hello", anon-enrcypted for Alice:
 
   ```<unknown> -- http: {"hello"}/A --> 1```
 
-Parentheses have traditional meaning (casual usage in written language, plus
-grouping and precedence).
+Parentheses have traditional meaning (casual usage in written language, plus grouping and precedence).
 
-Angle braces `<` and `>` are for placeholders; any
-reasonable explanatory text may appear inside the angle braces, so to
-represent Alice's relationship with a not-yet-known subject, the notation
-might show something like `A:<TBD>`.
+Angle braces `<` and `>` are for placeholders; any reasonable explanatory text may appear inside the angle braces, so to represent Alice's relationship with a not-yet-known subject, the notation might show something like `A:<TBD>`.
 
 ## Reference
 
 ### Examples
 
-* `A`: an identity owner like Alice or Acme Corp.
-* `alices_pixel@A` or `bobs_alexa@B`: a device or IoT thing
+* `A`: a self (sovereign identity subject) like Alice or Acme Corp.
+* `alices_pixel@A` or `bobs_alexa@B`: an object in a given domain
 * `7@A`: an agent, arbitrarily assigned number 7
-* `A:B` or `A:A+B`: The Alice to Bob relationship, as seen from Alice's perspective (short form, then long form).
-  Bob's view of this relationship would be `B:A` or `B:A+B`.
+* `A:B` or `A:A+B`: The Alice to Bob relationship, as seen from Alice's perspective (short form, then long form). Bob's view of this relationship would be `B:A` or `B:A+B`.
 * `B:ACD` or `B:A+B+C+D`: The 4-way relationship between A, B, C, and D, as seen from B's perspective (short form, then long form)
 * `A:Dating`: Alice's dating persona
 * `A.pay[3].ppk`: The public payment key for the fourth payment address belonging to A.
 * `F.did@F:Any`: Faber's public DID.
 * `C.ls`: Carol's link secret.
 * `D.padr`: Doug's policy address.
-* `F.micro@F:A`: F's microledger for the F:A relationship.
+* `F.state@F:A`: F's state for the F:A relationship.
 * `A.uri@A:B`: Alice's URI (endpoint of DID doc) in the Alice to Bob relationship.
 * `F.uri@F:Any`: The endpoint where the DID doc for Faber's public DID is hosted.
-* `escrow-offer`: A message that represents step 1a in a standard negotiation about escrow.
-  (The escrow concept is unknown to the notation, and we don't know the format of
-  its messages, but we know they are used in a standard way because of the `-offer`
-  kebab suffix).
+* `escrow-offer`: A message that represents step 1a in a standard negotiation about escrow. (The escrow concept is unknown to the notation, and we don't know the format of its messages, but we know they are used in a standard way because of the `-offer` kebab suffix).
 * `{msg}/A`: A message anon-encrypted for A.
 * `{"hello"}/A:B`: A message auth-encrypted for B by A.
-* `{bail-req#(p2sh)DF}/(rsa)B`: A message that represents step 1b or step 2 in a standard negotiaion
-  about bail. This message was signed as plaintext using the p2sh multisig algorithm
-  by D and F, and was then anon-encrypted for B using an RSA algorithm.
-* `{advice-receipt}*A`: A message that that represents step 4 in a
-  standard negotiaion about advice. The message was symmetrically encrypted
-  and sent to A.
-* `{msg[4]}%C:1+2`: A message (5th in sequence) that was multiplex-encrypted by
-  C for agents 1 and 2.
+* `{bail-req#(p2sh)DF}/(rsa)B`: A message that represents step 1b or step 2 in a standard negotiaion about bail. This message was signed as plaintext using the p2sh multisig algorithm by D and F, and was then anon-encrypted for B using an RSA algorithm.
+* `{advice-receipt}*A`: A message that that represents step 4 in a standard negotiaion about advice. The message was symmetrically encrypted and sent to A.
+* `{msg[4]}%C:1+2`: A message (5th in sequence) that was multiplex-encrypted by C for agents 1 and 2.
 
 ### Reserved Tokens
 
-* `Any`: The name for the public side of a relationship between a
-  specific subject and the public.
+* `Any`: The name for the public side of a relationship between a specific subject and the public.
+* `Self`: The name for one's one identity in a self relationship.
 * `did`: The DID belonging to an subject in a given relationship, as in `A.did@A:B`
 * `ipk` and `isk`: Issuer public (verification) key and issuer secret key.
 * `key`: A symmetric key.
 * `ls`: The link secret belonging to an subject, as in `A.ls`.
-* `micro`: The microledger belonging to an subject in a given relationship, as in `A.micro@A:B`
+* `state`: The state belonging to an subject in a given relationship, as in `A.state@A:B`
 * `msg`: A generic message.
 * `-offer`: kebab suffix for messages that express willingness to give
-   something. Step 1a in a [negotiation pattern](#negotiation-patterns).
+   something. Step 1a in a negotiation pattern.
 * `padr`: a policy address, as in `F.padr`.
 * `pay`: A payment address belonging to an identity owner, as in `C.pay`.
 * `ppk` and `psk`: Payment address public (verification) and secret key (control
    cryptocurrency).
-* `pk`: The public verification key (verkey) portion of an asymmetric
-  keypair. The more specific form, `vk`, is only recommended if elliptic
-  curve crypto is specifically intended.
-* `-receipt`: kebab suffix for messages that formally acknowledge receipt after
-  receiving a delivered item. Step 4 in a [negotiation pattern](#negotiation-patterns).
-* `-req`: kebab suffix for messages that formally request something. Step 1b or
-  step 2 in a [negotiation pattern](#negotiation-patterns).
+* `pk`: The public verification key (verkey) portion of an asymmetric keypair. The more specific form, `vk`, is only recommended if elliptic curve crypto is specifically intended.
+* `-receipt`: kebab suffix for messages that formally acknowledge receipt after receiving a delivered item. Step 4 in a [negotiation pattern](#negotiation-patterns).
+* `-req`: kebab suffix for messages that formally request something. Step 1b or step 2 in a [negotiation pattern](#negotiation-patterns).
 * `rpk` and `rsk`: Revocation public (verification) and secret key.
-* `sk`: The private key (privkey, sigkey) portion of an asymmetric
-  keypair.
+* `sk`: The private key (privkey, sigkey) portion of an asymmetric keypair.
 * `uri`: An endpoint for a relationship, as in `B.uri@A:B`
-* `vk`: The public verification key (verkey) portion of an asymmetric
-  keypair. The more generic form, `pk`, is recommended instead, unless elliptic
-  curve crypto is specifically intended.
+* `vk`: The public verification key (verkey) portion of an asymmetric keypair. The more generic form, `pk`, is recommended instead, unless elliptic curve crypto is specifically intended.
 * `wallet`: An identity wallet belonging to an subject.
 
 ### ABNF
@@ -543,15 +366,12 @@ sym-crypt    = "{" message "}" symmetric subject           ; e.g., {"hi"}*B
 
 ## Drawbacks
 
-* Creates one more formalism to learn. SSI is already a dense topic with a steep
-  learning curve.
+* Creates one more formalism to learn. SSI is already a dense topic with a steep learning curve.
 * Creates something that needs to be version-controlled.
 
 ## Rationale and alternatives
 
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not choosing them?
-- What is the impact of not doing this?
+- Could use informal verbiage instead. However, it would be inconsistent and poorly documented.
 
 ## Prior art
 
