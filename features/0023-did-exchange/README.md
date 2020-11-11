@@ -122,7 +122,13 @@ No errors are sent in timeout situations. If the _requester_ or _responder_ wish
 
 ## Implicit and Explicit Invitations
 
-The DID Exchange Protocol is preceded by either knowledge of a resolvable DID (an implicit invitation), or by a `out-of-band/%VER/invitation` message from the [Out Of Band Protocols RFC](../0434-outofband/README.md). The information from either the resolved DID Document or the `service` element of the `handshake_protocols` attribute of the `invitation` message is used to construct the `request` message to start the protocol.
+The DID Exchange Protocol is preceded by 
+- either knowledge of a resolvable DID (an implicit invitation) 
+- or by a `out-of-band/%VER/invitation` message from the [Out Of Band Protocols RFC](../0434-outofband/README.md). 
+
+The information needed to construct the `request` message to start the protocol is used
+- either from the resolved DID Document 
+- or the `service` element of the `handshake_protocols` attribute of the `invitation`.
 
 ## 1. Exchange Request
 
@@ -130,7 +136,7 @@ The `request` message is used to communicate the DID document of the _requester_
 
 The _requester_ may provision a new DID according to the DID method spec. For a Peer DID, this involves creating a matching peer DID and key. The newly provisioned DID and DID Doc is presented in the `request` message as follows:
 
-#### Example
+### Request Message Example
 
 ```jsonc
 {
@@ -143,19 +149,23 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
-     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
-     "jws": {
-        "header": {
-           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-        },
-        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
+      "mime-type": "application/json",
+      "data": {
+         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+         "jws": {
+            "header": {
+               "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+            },
+            "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+            "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+            }
       }
    }
 }
 ```
 
-#### Attributes
+#### Request Message Attributes
 
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
 * The [`~thread`](../../concepts/0008-message-id-and-threading/README.md#thread-object) decorator MUST be included:
@@ -176,7 +186,7 @@ When a `request` responds to an explicit invitation, its `~thread.pthid` MUST be
 
 When a `request` responds to an implicit invitation, its `~thread.pthid` MUST contain a [DID URL](https://w3c-ccg.github.io/did-spec/#dfn-did-url) that resolves to the specific `service` on a DID document that contains the invitation.
 
-**Example referencing an explicit invitation**
+##### Example Referencing an Explicit Invitation
 
 ```jsonc
 {
@@ -189,19 +199,23 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
-     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
-     "jws": {
-        "header": {
-           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-        },
-        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
+      "mime-type": "application/json",
+      "data": {
+         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+         "jws": {
+            "header": {
+               "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+            },
+            "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+            "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+            }
       }
    }
 }
 ```
 
-**Example referencing an implicit invitation**
+##### Example Referencing an Implicit Invitation
 
 ```jsonc
 {
@@ -214,13 +228,17 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
-     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
-     "jws": {
-        "header": {
-           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-        },
-        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
+      "mime-type": "application/json",
+      "data": {
+         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+         "jws": {
+            "header": {
+               "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+            },
+            "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+            "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+            }
       }
    }
 }
@@ -238,21 +256,21 @@ The _requester_ is in the `request-sent` state. When received, the _responder_ i
 
 #### Request processing
 
-After receiving the exchange request, the _inviter_ evaluates the provided DID and DID Doc according to the DID Method Spec.
+After receiving the exchange request, the _responder_ evaluates the provided DID and DID Doc according to the DID Method Spec.
 
-The _inviter_ should check the information presented with the keys used in the wire-level message transmission to ensure they match.
+The responder should check the information presented with the keys used in the wire-level message transmission to ensure they match.
 
-The _inviter_ MAY look up the corresponding invitation identified in the request's `~thread.pthid` to determine whether it should accept this exchange request.
+The responder MAY look up the corresponding invitation identified in the request's `~thread.pthid` to determine whether it should accept this exchange request.
 
-If the _inviter_ wishes to continue the exchange, they will persist the received information in their wallet. They will then either update the provisional service information to rotate the key, or provision a new DID entirely. The choice here will depend on the nature of the DID used in the invitation.
+If the responder wishes to continue the exchange, they will persist the received information in their wallet. They will then either update the provisional service information to rotate the key, or provision a new DID entirely. The choice here will depend on the nature of the DID used in the invitation.
 
-The _inviter_ will then craft an exchange response using the newly updated or provisioned information.
+The responder will then craft an exchange response using the newly updated or provisioned information.
 
 #### Request Errors
 
 See [Error Section](#errors) above for message format details.
 
-**request_rejected**
+##### Request Rejected
 
 Possible reasons:
 
@@ -263,7 +281,7 @@ Possible reasons:
 - Unsupported endpoint protocol
 - Missing reference to invitation
 
-**request_processing_error**
+##### Request Processing Error
 
 - unknown processing error
 
@@ -271,7 +289,7 @@ Possible reasons:
 
 The exchange response message is used to complete the exchange. This message is required in the flow, as it updates the provisional information presented in the invitation.
 
-#### Example
+### Response Message Example
 
 ```json
 {
@@ -282,13 +300,17 @@ The exchange response message is used to complete the exchange. This message is 
   },
   "did": "B.did@B:A",
   "did_doc~attach": {
-     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
-     "jws": {
-        "header": {
-           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-        },
-        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+      "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
+      "mime-type": "application/json",
+      "data": {
+         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+         "jws": {
+            "header": {
+               "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+            },
+            "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+            "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+            }
       }
    }
 }
@@ -296,12 +318,13 @@ The exchange response message is used to complete the exchange. This message is 
 
 The key used in the signed attachment must be verified against the invitation's `recipientKeys` for continuity.
 
-#### Attributes
+#### Response Message Attributes
 
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
 * The `~thread` block contains a `thid` reference to the `@id` of the request message.
-* The `did` attribute is a required string value and denotes DID in use by the _inviter_. Note that this may not be the same DID used in the invitation.
+* The `did` attribute is a required string value and denotes DID in use by the responder. Note that this MAY NOT be the same DID used in the invitation.
 * The `did_doc~attach` contains the DID Doc associated with the DID as a [signed attachment](../../concepts/0017-attachments/README.md). If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
+  * If the DID and DIDDoc being conveyed is different from that conveyed in the initial contact with the requester, the DIDDoc attachment should be signed by the earlier key. For example, if the requester sent the request to a DID service endpoint from a public DID or an out-of-band invitation, the signature on the DIDDoc should use the key from that interaction.
 
 In addition to a new DID, the associated DID Doc might contain a new endpoint. This new DID and endpoint are to be used going forward in the relationship.
 
@@ -313,13 +336,13 @@ When the message is sent, the _responder_ are now in the `response-sent` state. 
 
 #### Response Processing
 
-When the _invitee_ receives the `response` message, they will verify the `change_sig` provided. After validation, they will update their wallet with the new information. If the endpoint was changed, they may wish to execute a Trust Ping to verify that new endpoint.
+When the requester receives the `response` message, they will verify the signature on the DID Doc attachment. After validation, they will update their wallet with the new information, and use that information in sending the `complete` message.
 
 #### Response Errors
 
 See [Error Section](#errors) above for message format details.
 
-**response_rejected**
+##### Response Rejected
 
 Possible reasons:
 
@@ -330,7 +353,7 @@ Possible reasons:
 - Unsupported endpoint protocol
 - Invalid Signature
 
-**response_processing_error**
+##### Response Processing Error
 
 - unknown processing error
 
@@ -338,7 +361,7 @@ Possible reasons:
 
 The exchange `complete` message is used to confirm the exchange to the _responder_. This message is **required** in the flow, as it marks the exchange complete. The _responder_ may then invoke any protocols desired based on the context expressed via the `pthid` in the DID Exchange protocol.
 
-#### Example
+### Complete Message Example
 
 ```jsonc
 {
@@ -355,11 +378,23 @@ The `pthid` is required in this message, and must be identical to the `pthid` us
 
 After a `complete` message is sent, the *requester* is in the `completed` terminal state. Receipt of the message puts the *responder* into the `completed` state.
 
-#### Next Steps
+#### Complete Errors
 
-The exchange between the _requester_ and the _responder_ has been completed. This relationship has no trust associated with it. The next step should be the exchange of proofs to build trust sufficient for the purpose of the relationship.
+See [Error Section](#errors) above for message format details.
 
-#### Peer DID Maintenance
+##### Complete Rejected
+
+This is unlikely to occur with other than an unknown processing error (covered below), so no possible reasons are listed. As experience is gained with the protocol, possible reasons may be added.
+
+##### Complete Processing Error
+
+- unknown processing error
+
+## Next Steps
+
+The exchange between the _requester_ and the _responder_ has been completed. This relationship has no trust associated with it. The next step should be to increase the trust to a sufficient level for the purpose of the relationship, such as through an exchange of proofs.
+
+## Peer DID Maintenance
 
 When Peer DIDs are used in an exchange, it is likely that both the _requester_ and _responder_ will want to perform some relationship maintenance such as key rotations. Future RFC updates will add these maintenance features.
 
