@@ -301,14 +301,14 @@ Angle braces `<` and `>` are for placeholders; any reasonable explanatory text m
 * `state`: The state belonging to an subject in a given relationship, as in `A.state@A:B`
 * `msg`: A generic message.
 * `-offer`: kebab suffix for messages that express willingness to give
-   something. Step 1a in a negotiation pattern.
+   something.
 * `padr`: a policy address, as in `F.padr`.
 * `pay`: A payment address belonging to an identity owner, as in `C.pay`.
 * `ppk` and `psk`: Payment address public (verification) and secret key (control
    cryptocurrency).
 * `pk`: The public verification key (verkey) portion of an asymmetric keypair. The more specific form, `vk`, is only recommended if elliptic curve crypto is specifically intended.
-* `-receipt`: kebab suffix for messages that formally acknowledge receipt after receiving a delivered item. Step 4 in a [negotiation pattern](#negotiation-patterns).
-* `-req`: kebab suffix for messages that formally request something. Step 1b or step 2 in a [negotiation pattern](#negotiation-patterns).
+* `-receipt`: kebab suffix for messages that formally acknowledge receipt after receiving a delivered item.
+* `-req`: kebab suffix for messages that formally request something.
 * `rpk` and `rsk`: Revocation public (verification) and secret key.
 * `sk`: The private key (privkey, sigkey) portion of an asymmetric keypair.
 * `uri`: An endpoint for a relationship, as in `B.uri@A:B`
