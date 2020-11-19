@@ -6,7 +6,7 @@
 - Start Date: 2020-10-27
 - Tags: concept
 
-In the fully realized world of Self Soverign Identity, credential holders are equipped with capable agents to helpa them manage credentials and other SSI interactions. Before we arrive in that world, systems that facilitate the transition from the old model of centralized systems to the new decentralized models will be necessary and useful.
+In the fully realized world of Self Soverign Identity, credential holders are equipped with capable agents to help them manage credentials and other SSI interactions. Before we arrive in that world, systems that facilitate the transition from the old model of centralized systems to the new decentralized models will be necessary and useful.
 
 One of the common points for a transition system is the issuance of credentials. Today's centralized systems contain information within an information silo. Issuing credentials requires the recipient to have an agent capable of receiving and managing the credential. Until the SSI transition is complete, some users will not have an agent of their own.
 
