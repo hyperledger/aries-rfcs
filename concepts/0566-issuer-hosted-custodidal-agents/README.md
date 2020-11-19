@@ -66,7 +66,7 @@ The following best practices should be followed to ensure proper operation and c
 Most of these practices depend upon and support one another.
 
 ### Defend the SSI architecture
-When issuers host custodial agents, care must be taken to avoid shortcuts that would violate SSI architecture. Deviations will frequently frequently lead to incompatibilities.
+When issuers host custodial agents, care must be taken to avoid shortcuts that would violate SSI architecture. Deviations will frequently lead to incompatibilities.
 
 ### DIDComm Protocol based Integration
 Communication between hosted agents and credential issuing agent must be based on published DIDComm protocols. Any communication which eliminates the use of a DID must be avoided. Whenever possible, these should be well adopted community protocols. If the case a new protocol is needed for a particular interaction, this must be fully documented and published, to allow other agents to become compatible by adopting the new protocol.
