@@ -39,7 +39,6 @@
 * [0043: l10n (Locali[s|z]ation)](features/0043-l10n/README.md) (2019-04-01, [4 impls](features/0043-l10n/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0051: Decentralized Key Management](concepts/0051-dkms/README.md) (2019-03-29, [2 impls](concepts/0051-dkms/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0113: Question Answer Protocol 0.9](features/0113-question-answer/README.md) (2019-07-05, [2 impls](features/0113-question-answer/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
-* [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2019-09-27, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0509: Action Menu Protocol](features/0509-action-menu/README.md) (2020-07-02 , [1 impl](features/0509-action-menu/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 ## [PROPOSED](README.md#proposed)
@@ -103,8 +102,12 @@
 * [0510: Presentation-Exchange Attachment format for requesting and presenting proofs](features/0510-dif-pres-exch-attach/README.md) (2020-07-21 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 * [0511: Credential-Manifest Attachment format for requesting and presenting credentials](features/0511-dif-cred-manifest-attach/README.md) (2020-07-22 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 * [0519: Goal Codes](concepts/0519-goal-codes/README.md) (2020-07-24 &mdash; [`concept`](/tags.md#concept))
+* [0557: Discover Features Protocol v2.x](features/0557-discover-features-v2/README.md) (2020-10-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`test-anomaly`](/tags.md#test-anomaly))
+* [0559: Privacy-Preserving Proof of Uniqueness](concepts/0559-pppu/README.md) (2020-10-21 &mdash; [`concept`](/tags.md#concept))
+* [0566: Issuer-Hosted Custodial Agents](concepts/0566-issuer-hosted-custodidal-agents/README.md) (2020-11-16 &mdash; [`concept`](/tags.md#concept))
 
 ## [RETIRED](README.md#retired)
+* [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2020-10-14, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 
