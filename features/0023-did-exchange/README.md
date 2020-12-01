@@ -122,7 +122,13 @@ No errors are sent in timeout situations. If the _requester_ or _responder_ wish
 
 ## Implicit and Explicit Invitations
 
-The DID Exchange Protocol is preceded by either knowledge of a resolvable DID (an implicit invitation), or by a `out-of-band/%VER/invitation` message from the [Out Of Band Protocols RFC](../0434-outofband/README.md). The information from either the resolved DID Document or the `service` element of the `handshake_protocols` attribute of the `invitation` message is used to construct the `request` message to start the protocol.
+The DID Exchange Protocol is preceded by 
+- either knowledge of a resolvable DID (an implicit invitation) 
+- or by a `out-of-band/%VER/invitation` message from the [Out Of Band Protocols RFC](../0434-outofband/README.md). 
+
+The information needed to construct the `request` message to start the protocol is used
+- either from the resolved DID Document 
+- or the `service` element of the `handshake_protocols` attribute of the `invitation`.
 
 ## 1. Exchange Request
 
