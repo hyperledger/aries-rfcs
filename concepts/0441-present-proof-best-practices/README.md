@@ -113,7 +113,9 @@ In fulfilment of the [RFC0037](../../features/0037-present-proof/README.md) Pres
 
 #### Credential Selection Best Practices
 
-This section specifies a prover's best practices in matching a credential to a requested item. Note that where a prover selects a revocable credential for inclusion in response to a requested item with a non-revocation interval in the presentation request, the prover MUST create a corresponding sub-proof of non-revocation at a timestamp within that non-revocation interval (insofar as possible; see [below](#timestamp-outside-non-revocation-interval)).
+This section specifies a prover's best practices in matching a credential to a requested item. The specification pertains to automated credential selection: obviously, a human user may select any credential in response to a presentation request; it is up to the verifier to verify the resulting presentation as satisfactory or not.
+
+Note that where a prover selects a revocable credential for inclusion in response to a requested item with a non-revocation interval in the presentation request, the prover MUST create a corresponding sub-proof of non-revocation at a timestamp within that non-revocation interval (insofar as possible; see [below](#timestamp-outside-non-revocation-interval)).
 
 ##### With Presentation Proposal
 
