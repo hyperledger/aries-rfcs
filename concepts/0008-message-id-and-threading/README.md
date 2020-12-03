@@ -90,8 +90,8 @@ Because multiple interactions can happen simultaneously, it's important to
 differentiate between them. This is done with a Thread ID or `thid`.
 
 If the Thread object is defined and a `thid` is given, the Thread ID is the value
-given there. But if the Thread object is not defined in a message, the Thread ID should 
-implicitly be defined as the Message ID (`@id`) of the given message and that message is
+given there. But if the Thread object is not defined in a message, the Thread ID is 
+implicitly defined as the Message ID (`@id`) of the given message and that message is
 the first message of a new thread.
 
 #### Sender Order (`sender_order`)
