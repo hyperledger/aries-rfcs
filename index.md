@@ -92,6 +92,7 @@
 * [0430: Machine-Readable Governance Frameworks](concepts/0430-machine-readable-governance-frameworks/README.md) (2020-02-24 &mdash; [`concept`](/tags.md#concept))
 * [0434: Out-of-Band Protocols](features/0434-outofband/README.md) (2020-03-01 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0440: KMS Architectures ](concepts/0440-kms-architectures/README.md) (2020-03-06 &mdash; [`concept`](/tags.md#concept))
+* [0441: Prover and Verifier Best Practices for Proof Presentation](concepts/0441-present-proof-best-practices/README.md) (2020-10-31 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
 * [0445: Aries Rich Schema Mapping](features/0445-rich-schema-mapping/README.md) (2020-03-16 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0446: Aries Rich Schema Credential Definition](features/0446-rich-schema-cred-def/README.md) (2020-03-16 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0453: Issue Credential Protocol 2.0](features/0453-issue-credential-v2/README.md) (2020-03-23 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
