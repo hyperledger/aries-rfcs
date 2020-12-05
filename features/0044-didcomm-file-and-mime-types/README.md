@@ -164,7 +164,7 @@ encrypted| `application/didcomm-enc-env`<br>DIDComm V1 Encrypted Envelope<br>*.d
 signed| `application/didcomm-sig-env`<br>DIDComm V1 Signed Envelope<br>*.dse | `application/didcomm-signed+json`<br>DIDComm Signed Message<br>*.dcsm
 plaintext| `application/json`<br>DIDComm V1 Message<br>*.dm | `application/didcomm-plain+json`<br>DIDComm Plaintext Message<br>*.dcpm
 
-It is also recommended that agents implementing [Discover Features Protocol v2](../0557-discover-features-v2/README.md) respond to [queries about supported DIDComm versions](../0557-discover-features-v2/README.me#queries-message-type) using the `didcomm-version` feature name. This allows queries about what an agent is willing to support, whereas the media type mechanism describes what is in active use. The values that should be returned from such a query are URIs that tell where DIDComm versions are developed:
+It is also recommended that agents implementing [Discover Features Protocol v2](../0557-discover-features-v2/README.md) respond to [queries about supported DIDComm versions](../0557-discover-features-v2/README.md#queries-message-type) using the `didcomm-version` feature name. This allows queries about what an agent is willing to support, whereas the media type mechanism describes what is in active use. The values that should be returned from such a query are URIs that tell where DIDComm versions are developed:
 
 Version | URI
 --- | ---
@@ -173,7 +173,7 @@ V2 | https://github.com/decentralized-identity/didcomm-messaging
 
 ### What it means to "implement" this RFC
 
-For the purposes of [Aries Interop Profiles](../../concepts/0302-aries-interop-profile), an agent "implements" this RFC when:
+For the purposes of [Aries Interop Profiles](../../concepts/0302-aries-interop-profile/README.md), an agent "implements" this RFC when:
 
 * If it encounters references to DIDComm V1 media types (e.g., in HTTP headers, in attachments, or in the fields of DIDComm messages where a media type is expected), it imputes the meaning documented here.
 * If it characterizes DIDComm V1 content in its own outbound communication or UI, it does so with the media type strings, friendly names, and file extensions documented here.
