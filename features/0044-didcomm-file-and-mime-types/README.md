@@ -152,7 +152,7 @@ Object format might be a bean. In C++, it might be a `std::map<std::string, vari
 There can be more than one Native Object representation for a given programming language.
 
 Native Object forms are never rendered directly to files; rather, they are serialized to DIDComm Plaintext Format
-and then persisted (likely after also encrypting to DIDComm Wire Format).
+and then persisted (likely after also encrypting to DIDComm V1 Encrypted Envelope).
 
 ### Detecting DIDComm Versions
 
