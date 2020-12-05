@@ -3,7 +3,7 @@
 - Authors: Daniel Hardman, Kyle Den Hartog
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-05-28
-- Status Note: Socialized and accepted within Indy community, and used in several implementations of protocols that want to associate a media (MIME) type with an HTTP payload. However, the Aries version of the spec changes the type names of types slightly from Indy, the status was reset from ACCEPTED to PROPOSED. Updated in Dec 2020 to include [information about detecting DIDComm v2](#detecting-didcomm-versions).
+- Status Note: Socialized and accepted within Indy community, and used in several implementations of protocols that want to associate a media (MIME) type with an HTTP payload. However, the Aries version of the spec changes the type names of types slightly from Indy, so the status was reset from ACCEPTED to PROPOSED. Updated in Dec 2020 to include [information about detecting DIDComm v2](#detecting-didcomm-versions).
 - Supersedes: [Indy HIPE 0026]( https://github.com/hyperledger/indy-hipe/blob/master/text/0026-agent-file-format/README.md)
 - Start Date: 2018-11-13
 - Tags: [feature](/tags.md#feature)
@@ -168,7 +168,7 @@ It is also recommended that agents implementing [Discover Features Protocol v2](
 
 Version | URI
 --- | ---
-V1 | `https://github.com/hyperledger/aries-rfcs
+V1 | https://github.com/hyperledger/aries-rfcs
 V2 | https://github.com/decentralized-identity/didcomm-messaging
 
 ### What it means to "implement" this RFC
