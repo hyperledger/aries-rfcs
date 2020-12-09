@@ -33,7 +33,7 @@ In the existing Connections and DID Exchange `invitation` handling, the _inviter
 
 ### Handling of all Out-of-Band Messages
 
-We currently have two sets of out-of-band messages that cannot be delivered via DIDComm because there is no channel. We'd like to align those messages into a single "out of band" protocol so that their handling can be harmonized inside an agent, and a common QR code handling mechanism can be used.
+We currently have two sets of out-of-band messages that cannot be delivered via DIDComm because there is no channel. We'd like to align those messages into a single "out-of-band" protocol so that their handling can be harmonized inside an agent, and a common QR code handling mechanism can be used.
 
 ### URLs and QR Code Handling
 
@@ -43,7 +43,7 @@ We'd like to have the specification of QR handling harmonized into a single RFC 
 
 ### Key Concepts
 
-The Out-of-band protocol are used when an agent doesn't know if it has a connection with another agent. This could be because you are trying to establish a new connection with that agent, you have connections but don't know who the other party is, or if you want to have a connection-less interaction. Since there is no DIDComm connection to use for the messages of this protocol, the messages are plaintext and sent out of band, such as via a QR code, in an email message or any other available channel. Since the delivery of out-of-band messages will often be via QR codes, this RFC also covers the use of QR codes.
+The Out-of-band protocol are used when an agent doesn't know if it has a connection with another agent. This could be because you are trying to establish a new connection with that agent, you have connections but don't know who the other party is, or if you want to have a connection-less interaction. Since there is no DIDComm connection to use for the messages of this protocol, the messages are plaintext and sent out-of-band, such as via a QR code, in an email message or any other available channel. Since the delivery of out-of-band messages will often be via QR codes, this RFC also covers the use of QR codes.
 
 Two well known use cases for using an out-of-band protocol are:
 
@@ -96,16 +96,16 @@ The out-of-band protocol a single message that is sent by the *sender*.
   "goal_code": "issue-vc",
   "goal": "To issue a Faber College Graduate credential",
   "handshake_protocols": [
-      "https://didcomm.org/didexchange/1.0",
-      "https://didcomm.org/connections/1.0"
-      ],
+    "https://didcomm.org/didexchange/1.0",
+    "https://didcomm.org/connections/1.0"
+  ],
   "request~attach": [
     {
-        "@id": "request-0",
-        "mime-type": "application/json",
-        "data": {
-            "json": "<json of protocol message>"
-        }
+      "@id": "request-0",
+      "mime-type": "application/json",
+      "data": {
+        "json": "<json of protocol message>"
+      }
     }
   ],
   "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
@@ -138,7 +138,7 @@ If the receiver desires to reuse the existing connection and a `request~attach` 
 
 If the receiver desires to reuse the existing connection and no request~attach message is present, the receiver **SHOULD** attempt to do so with the `reuse` and `reuse-accepted` messages. This will notify the _inviter_ that the existing connection should be used, along with the context that can be used for follow-on interactions.
 
-While the `invitation` message is passed unencrypted and out of band, both the `handshake-reuse` and `handshake-reuse-accepted` messages MUST be encrypted and transmitted as normal DIDComm messages.
+While the `invitation` message is passed unencrypted and out-of-band, both the `handshake-reuse` and `handshake-reuse-accepted` messages MUST be encrypted and transmitted as normal DIDComm messages.
 
 #### Reuse: `https://didcomm.org/out-of-band/%VER/handshake-reuse`
 
@@ -147,8 +147,8 @@ While the `invitation` message is passed unencrypted and out of band, both the `
   "@type": "https://didcomm.org/out-of-band/%VER/handshake-reuse",
   "@id": "<id>",
   "~thread": {
-      "thid": "<same as @id>",
-      "pthid": "<The @id of the Out-of-Band invitation>"
+    "thid": "<same as @id>",
+    "pthid": "<The @id of the Out-of-Band invitation>"
   }
 }
 ```
@@ -218,17 +218,17 @@ The following is an example of a two entry array, one of each form:
 {
   "@type": "https://didcomm.org/out-of-band/%VER/invitation",
   "@id": "<id used for context as pthid>",
-  "label": "Faber College"
-  "handshake_protocols": ["https://didcomm.org/didexchange/1.0"]
+  "label": "Faber College",
+  "handshake_protocols": ["https://didcomm.org/didexchange/1.0"],
   "service": [
-      {
-        "id": "#inline"
-        "type": "did-communication",
-        "recipientKeys": ["did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"],
-        "routingKeys": [],
-        "serviceEndpoint": "https://example.com:5000"
-      },
-      "did:sov:LjgpST2rjsoxYegQDRm7EL"
+    {
+      "id": "#inline",
+      "type": "did-communication",
+      "recipientKeys": ["did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"],
+      "routingKeys": [],
+      "serviceEndpoint": "https://example.com:5000"
+    },
+    "did:sov:LjgpST2rjsoxYegQDRm7EL"
   ]
 }
 ```
@@ -273,12 +273,12 @@ The `goal_code` and `goal` fields should have localization applied. See the purp
 
 The following values are defined for the `goal_code` field:
 
-Code (cd) | English (en)
---- | ---
-issue-vc | To issue a credential
-request-proof | To request a proof
-create-account | To create an account with a service
-p2p-messaging | To establish a peer-to-peer messaging relationship
+| Code (cd)       | English (en)                                        |
+| --------------- | ----------------------------------------------------|
+| issue-vc        | To issue a credential                               |
+| request-proof   | To request a proof                                  |
+| create-account  | To create an account with a service                 |
+| p2p-messaging   | To establish a peer-to-peer messaging relationship  |
 
 #### `goal`
 
@@ -314,14 +314,14 @@ There is an optional courtesy error message stemming from an out-of-band message
 
 ```jsonc
 {
-  "@type"            : "https://didcomm.org/out-of-band/%VER/problem_report",
-  "@id"              : "5678876542345",
-  "~thread"          : { "pthid": "<@id of the OutofBand message>" },
-  "description"      : {
-                          "en": "The invitation has expired.",
-                          "code": "expired-invitation"
-                       },
-  "impact"           : "thread"
+  "@type": "https://didcomm.org/out-of-band/%VER/problem_report",
+  "@id": "5678876542345",
+  "~thread": { "pthid": "<@id of the OutofBand message>" },
+  "description": {
+    "en": "The invitation has expired.",
+    "code": "expired-invitation"
+  },
+  "impact": "thread"
 }
 ```
 
@@ -371,7 +371,7 @@ Invitation:
   "@id": "69212a3a-d068-4f9d-a2dd-4741bca89af3",
   "label": "Faber College",
   "goal_code": "issue-vc",
-  "goal": "To issue a Faber College Graduate credential"
+  "goal": "To issue a Faber College Graduate credential",
   "handshake_protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"],
   "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
 }
@@ -380,7 +380,7 @@ Invitation:
 Whitespace removed:
 
 ```jsonc
-{"@type":"https://didcomm.org/out-of-band/1.0/invitation","@id":"69212a3a-d068-4f9d-a2dd-4741bca89af3","label":"Faber College", "goal_code":"issue-vc","goal":"To issue a Faber College Graduate credential","handshake_protocols":["https://didcomm.org/didexchange/1.0","https://didcomm.org/connections/1.0"],"service":["did:sov:LjgpST2rjsoxYegQDRm7EL"]}
+{"@type":"https://didcomm.org/out-of-band/1.0/invitation","@id":"69212a3a-d068-4f9d-a2dd-4741bca89af3","label":"Faber College","goal_code":"issue-vc","goal":"To issue a Faber College Graduate credential","handshake_protocols":["https://didcomm.org/didexchange/1.0","https://didcomm.org/connections/1.0"],"service":["did:sov:LjgpST2rjsoxYegQDRm7EL"]}
 ```
 
 Base 64 URL Encoded:
@@ -427,11 +427,11 @@ Knowledge is Good
 It seems inevitable that the length of some out-of-band message will be too long to produce a useable QR code. Techniques to avoid unusable QR codes have been presented above, including using attachment links for requests, minimizing the routing of the response and eliminating unnecessary whitespace in the JSON. However, at some point a _sender_ may need generate a very long URL. In that case, a URL shortener redirection should be implemented by the sender as follows:
 
 - The sender should generate and track a GUID for the out-of-band message URL.
-- The shortened version should be:
+- The shortened version should be of the form:
   - `https://example.com/ssi?id=5f0e3ffb-3f92-4648-9868-0d6f8889e6f3`
   - Note the replacement of the query parameter `oob` with `id` when using shortened URL.
-- On receipt of this form of message, the agent must do an HTTP GET to retrieve the associated, encoded out-of-band message.
-  - A sender may want to wait to generate the full invitation until the redirection event of the shortened URL to the full length form dynamic, so a single QR code can be used for distinct out of band messages.
+- On receipt of this form of message, the agent must do an HTTP GET to retrieve the associated out-of-band message. The agent should include an `Accept` header requesting the `application/json` MIME type, and the sender must include a `Content-Type` header specifying `application/json; charset=utf-8`. The sender must return the invitation in JSON format.
+  - A sender may decide to wait to generate the full invitation until the redirection event of the shortened URL to the full length form dynamic, so a single QR code can be used for distinct out-of-band messages.
 
 A usable QR code will always be able to be generated from the shortened form of the URL.
 
@@ -467,15 +467,15 @@ Example referencing an explicit invitation:
   "label": "Bob",
   "did": "B.did@B:A",
   "did_doc~attach": {
-     "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
-     "jws": {
-        "header": {
-           "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-        },
-        "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-        "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
-      }
-   }
+    "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
+    "jws": {
+      "header": {
+        "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+      },
+      "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+      "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+    }
+  }
 }
 ```
 
