@@ -28,6 +28,8 @@ The presence of a non-revocation interval applicable to a requested item (see [b
 
 The absence of any non-revocation interval applicable to a requested item signifies that the verifier has no interest in its credential's non-revocation status.
 
+A revocable or non-revocable credential may satisfy a presentation request with or without a non-revocation interval. The presence of a non-revocation interval conveys that if the prover presents a revocable credential, the presentation must include proof of non-revocation. Its presence does not convey any restriction on the revocability of the credential to present: in many cases the verifier cannot know whether a prover's credential is revocable or not.
+
 #### Non-Revocation Interval Applicability to Requested Items
 
 A **requested item** in a presentation request is an attribute or a predicate, proof of which the verifier requests presentation. A non-revocation interval within a presentation request is **specifically applicable**, **generally applicable**, or **inapplicable** to a requested item.
@@ -78,7 +80,7 @@ the non-revocation interval on 1600000000 is **generally applicable** to the ref
 
 #### Semantics of Non-Revocation Interval Endpoints
 
-A non-revocation interval contains `"from"` and `"to"` (integer) EPOCH times. For historical reasons, any timestamp within this interval is technically acceptable in a non-revocation subproof. However, these semantics allow for ambiguity in cases where revocation occurs within the interval, and in cases where the ledger supports reinstatement. These best practices obviate this equivocation, fostering deterministic outcomes.
+A non-revocation interval contains `"from"` and `"to"` (integer) EPOCH times. For historical reasons, any timestamp within this interval is technically acceptable in a non-revocation subproof. However, these semantics allow for ambiguity in cases where revocation occurs within the interval, and in cases where the ledger supports reinstatement. These best practices require the `"from"` value, should the prover specify it, to equal the `"to"` value: this approach fosters deterministic outcomes.
 
 A missing `"from"` specification defaults to the same value as the interval's `"to"` value. In other words, the non-revocation intervals
 
