@@ -43,7 +43,7 @@ We'd like to have the specification of QR handling harmonized into a single RFC 
 
 ### Key Concepts
 
-The Out-of-band protocol are used when an agent doesn't know if it has a connection with another agent. This could be because you are trying to establish a new connection with that agent, you have connections but don't know who the other party is, or if you want to have a connection-less interaction. Since there is no DIDComm connection to use for the messages of this protocol, the messages are plaintext and sent out-of-band, such as via a QR code, in an email message or any other available channel. Since the delivery of out-of-band messages will often be via QR codes, this RFC also covers the use of QR codes.
+The Out-of-band protocol is used when an agent doesn't know if it has a connection with another agent. This could be because you are trying to establish a new connection with that agent, you have connections but don't know who the other party is, or if you want to have a connection-less interaction. Since there is no DIDComm connection to use for the messages of this protocol, the messages are plaintext and sent out-of-band, such as via a QR code, in an email message or any other available channel. Since the delivery of out-of-band messages will often be via QR codes, this RFC also covers the use of QR codes.
 
 Two well known use cases for using an out-of-band protocol are:
 
