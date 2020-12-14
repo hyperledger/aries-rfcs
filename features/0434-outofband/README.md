@@ -31,6 +31,13 @@ We need the ability to reuse a connection.
 
 In the existing Connections and DID Exchange `invitation` handling, the _inviter_ dictates what connection establishment protocol all _invitee_'s will use. A more sustainable approach is for the _inviter_ to offer the _invitee_ a list of supported protocols and allow the _invitee_ to use one that it supports.
 
+### JWE Envelope Parameters
+
+With two JWE envelope formats at the time of this writing ([RFC0019](../0019-encryption-envelope/README.md) and
+[RFC0334](../0334-jwe-envelope/README.md)), a mechanism that allows agents to transition from one to the other has become
+necessary. Having the sender of an invitation include the JWE parameters that it supports allows the recipient to
+select the preferred set to then use with the handshake protocol.
+
 ### Handling of all Out-of-Band Messages
 
 We currently have two sets of out-of-band messages that cannot be delivered via DIDComm because there is no channel. We'd like to align those messages into a single "out of band" protocol so that their handling can be harmonized inside an agent, and a common QR code handling mechanism can be used.
@@ -98,7 +105,11 @@ The out-of-band protocol a single message that is sent by the *sender*.
   "handshake_protocols": [
       "https://didcomm.org/didexchange/1.0",
       "https://didcomm.org/connections/1.0"
-      ],
+  ],
+  "jwe_suite": [
+      "JWM/1.0_Authcrypt",
+      "didcomm-envelope-enc_X25519_ECDH-1PU+A256KW_XC20P"
+  ],
   "request~attach": [
     {
         "@id": "request-0",
@@ -120,6 +131,7 @@ The items in the message are:
 - `goal_code` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out-of-band message.
 - `goal` - [optional] a self-attested string that the receiver may want to display to the user about the context-specific goal of the out-of-band message.
 - `handshake_protocols` - [optional] an array of protocols in the order of preference of the sender that the receiver can use in responding to the message in order to create or reuse a connection with the sender. These are not arbitrary protocols but rather protocols that result in the establishment of a connection. One or both of `handshake_protocols` and `request~attach` MUST be included in the message.
+- `jwe_suite` - [optional] a set of identifiers for JWE suites in the order of preference of the sender. Defaults to `["JWM/1.0"]`. See the full [registry](#jwe-encryption-parameters-registry) below.
 - `request~attach` - [optional] an attachment decorator containing an array of request messages in order of preference that the receiver can using in responding to the message. One or both of `handshake_protocols` and `request~attach` MUST be included in the message.
   - While the JSON form of the attachment is used in the example above, the sender could choose to use the base64 form.
 - `service` - an item that is the equivalent of the service block of a DIDDoc that the receiver is to use in responding to the message. Additional details below.
@@ -129,6 +141,23 @@ If only the `handshake_protocols` item is included, the initial interaction will
 If only the `request~attach` item is included, no new connection is expected to be created, although one could be used if the receiver knows such a connection already exists. The receiver responds to one of the messages in the `request~attach` array. The `request~attach` item might include the first message of a protocol from the sender, or might be a [please-play-the-role](#) message requesting the receiver initiate a protocol. If the protocol requires a further response from the sender to the receiver, the receiver must include a [`~service` decorator](../0056-service-decorator/README.md) for the sender to use in responding.
 
 If both the `handshake_protocols` and `request~attach` items are included in the message, the receiver should first establish a connection and then respond (using that connection) to one of the messages in the `request~attach` message. If a connection already exists between the parties, the receiver may respond immediately to the `request-attach` message using the established connection.
+
+##### JWE Encryption Parameters Registry
+
+JWE Suite|Description
+---------|-----------
+`JWM/1.0`|Full support for [RFC0019](../0019-encryption-envelope/README.md).
+`JWM/1.0_Authcrypt`|Support `alg=Authcrypt` as defined in [RFC0019](../0019-encryption-envelope/README.md).
+`JWM/1.0_Anoncrypt`|Support `alg=Anoncrypt` as defined in [RFC0019](../0019-encryption-envelope/README.md).
+`didcomm-envelope-enc`|Full support for [RFC0334](../0334-jwe-envelope/README.md).
+`didcomm-envelope-enc_X25519_ECDH-1PU+A256KW_XC20P`|Curve `X25519` with `ECDH-1PU+A256KW` key encryption algorithm and `XC20P` as the content encryption algorithm, as defined in [RFC0334](../0334-jwe-envelope/README.md).
+`didcomm-envelope-enc_X25519_ECDH-1PU+A256KW_A256GCM`|Curve `X25519` with `ECDH-1PU+A256KW` key encryption algorithm and `A256GCM` as the content encryption algorithm, as defined in [RFC0334](../0334-jwe-envelope/README.md).
+`didcomm-envelope-enc_P256_ECDH-1PU+A256KW_XC20P`|Curve `P256` with `ECDH-1PU+A256KW` key encryption algorithm and `XC20P` as the content encryption algorithm, as defined in [RFC0334](../0334-jwe-envelope/README.md).
+`didcomm-envelope-enc_P256_ECDH-1PU+A256KW_A256GCM`|Curve `P256` with `ECDH-1PU+A256KW` key encryption algorithm and `A256GCM` as the content encryption algorithm, as defined in [RFC0334](../0334-jwe-envelope/README.md).
+`didcomm-envelope-enc_X25519_ECDH-ES+A256KW_XC20P`|Curve `X25519` with `ECDH-ES+A256KW` key encryption algorithm and `XC20P` as the content encryption algorithm, as defined in [RFC0334](../0334-jwe-envelope/README.md).
+`didcomm-envelope-enc_X25519_ECDH-ES+A256KW_A256GCM`|Curve `X25519` with `ECDH-ES+A256KW` key encryption algorithm and `A256GCM` as the content encryption algorithm, as defined in [RFC0334](../0334-jwe-envelope/README.md).
+`didcomm-envelope-enc_P256_ECDH-ES+A256KW_XC20P`|Curve `P256` with `ECDH-ES+A256KW` key encryption algorithm and `XC20P` as the content encryption algorithm, as defined in [RFC0334](../0334-jwe-envelope/README.md).
+`didcomm-envelope-enc_P256_ECDH-ES+A256KW_A256GCM`|Curve `P256` with `ECDH-ES+A256KW` key encryption algorithm and `A256GCM` as the content encryption algorithm, as defined in [RFC0334](../0334-jwe-envelope/README.md).
 
 ### Reuse Messages
 
