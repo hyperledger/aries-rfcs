@@ -119,8 +119,8 @@ The items in the message are:
 - `label` - [optional] a self-attested string that the receiver may want to display to the user, likely about who sent the out-of-band message.
 - `goal_code` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out-of-band message.
 - `goal` - [optional] a self-attested string that the receiver may want to display to the user about the context-specific goal of the out-of-band message.
-- `handshake_protocols` - [optional] an array of protocols in the order of preference of the sender that the receiver can use in responding to the message in order to create or reuse a connection with the sender. These are not arbitrary protocols but rather protocols that result in the establishment of a connection. One or both of `handshake_protocols` and `request~attach` MUST be included in the message.
-- `request~attach` - [optional] an attachment decorator containing an array of request messages in order of preference that the receiver can using in responding to the message. One or both of `handshake_protocols` and `request~attach` MUST be included in the message.
+- `handshake_protocols` - [optional] an array of protocols in the order of preference of the sender that the receiver can use in responding to the message in order to create or reuse a connection with the sender. These are not arbitrary protocols but rather protocols that result in the establishment of a connection. One or both of `handshake_protocols` and `request~attach` **MUST** be included in the message.
+- `request~attach` - [optional] an attachment decorator containing an array of request messages in order of preference that the receiver can using in responding to the message. One or both of `handshake_protocols` and `request~attach` **MUST** be included in the message.
   - While the JSON form of the attachment is used in the example above, the sender could choose to use the base64 form.
 - `service` - an item that is the equivalent of the service block of a DIDDoc that the receiver is to use in responding to the message. Additional details below.
 
@@ -134,11 +134,11 @@ If both the `handshake_protocols` and `request~attach` items are included in the
 
 While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `request~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the connection **MAY** be reused. The receiver may choose to not reuse the existing connection for privacy purposes and repeat a handshake protocol to receive a redundant connection. 
 
-If the receiver desires to reuse the existing connection and a `request~attach` message is present, the receiver should respond to the attached message using the existing connection.
+If the receiver desires to reuse the existing connection and a `request~attach` message is present, the receiver **SHOULD** respond to the attached message using the existing connection.
 
-If the receiver desires to reuse the existing connection and no request~attach message is present, the receiver **SHOULD** attempt to do so with the `reuse` and `reuse-accepted` messages. This will notify the _inviter_ that the existing connection should be used, along with the context that can be used for follow-on interactions.
+If the receiver desires to reuse the existing connection and no `request~attach` message is present, the receiver **SHOULD** attempt to do so with the `reuse` and `reuse-accepted` messages. This will notify the _inviter_ that the existing connection should be used, along with the context that can be used for follow-on interactions.
 
-While the `invitation` message is passed unencrypted and out-of-band, both the `handshake-reuse` and `handshake-reuse-accepted` messages MUST be encrypted and transmitted as normal DIDComm messages.
+While the `invitation` message is passed unencrypted and out-of-band, both the `handshake-reuse` and `handshake-reuse-accepted` messages **MUST** be encrypted and transmitted as normal DIDComm messages.
 
 #### Reuse: `https://didcomm.org/out-of-band/%VER/handshake-reuse`
 
@@ -201,7 +201,7 @@ Yes | No | Yes | Send a `handshake-reuse` message.
 No | Yes | Yes | Send a response message to the first supported request message using the existing connection.
 Yes | Yes | Yes | Send a response message to the first supported request message using the existing connection.
 
-Both the `goal_code` and `goal` fields should be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out-of-band message. `goal_code` is to specify a generic, protocol level outcome for sending the out-of-band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal_code` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
+Both the `goal_code` and `goal` fields **SHOULD** be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out-of-band message. `goal_code` is to specify a generic, protocol level outcome for sending the out-of-band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal_code` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
 
 #### The `service` Item
 
@@ -247,7 +247,7 @@ When considering routing and options for out-of-band messages, keep in mind that
 
 ##### Service Endpoint
 
-The service endpoint used to transmit the response is either present in the out-of-band message or available in the DID Document of a presented DID. If the endpoint is itself a DID, the `serviceEndpoint` in the DIDDoc of the resolved DID **MUST** be a URI, and the `recipientKeys` must contain a single key. That key is appended to the end of the list of `routingKeys` for processing. For more information about message forwarding and routing, see [RFC 0094 Cross Domain Messaging](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0094-cross-domain-messaging).
+The service endpoint used to transmit the response is either present in the out-of-band message or available in the DID Document of a presented DID. If the endpoint is itself a DID, the `serviceEndpoint` in the DIDDoc of the resolved DID **MUST** be a URI, and the `recipientKeys` **MUST** contain a single key. That key is appended to the end of the list of `routingKeys` for processing. For more information about message forwarding and routing, see [RFC 0094 Cross Domain Messaging](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0094-cross-domain-messaging).
 
 ### Adoption Messages
 
@@ -265,7 +265,7 @@ The full description of the message in this protocol can be found in the [Tutori
 
 ### Localization
 
-The `goal_code` and `goal` fields should have localization applied. See the purpose of those fields in the [message type definitions](#messages) section and the [message catalog](#message-catalog) section (immediately below).
+The `goal_code` and `goal` fields **SHOULD** have localization applied. See the purpose of those fields in the [message type definitions](#messages) section and the [message catalog](#message-catalog) section (immediately below).
 
 ### Message Catalog
 
@@ -349,7 +349,7 @@ The URL format is as follows, with some elements described below:
 https://<domain>/<path>?oob=<outofbandMessage>
 ```
 
-`<domain>` and `<path>` should be kept as short as possible, and the full URL should return human readable instructions when loaded in a browser. This is intended to aid new users. The `oob` query parameter is required and is reserved to contain the out-of-band message string. Additional path elements or query parameters are allowed, and can be leveraged to provide coupons or other promise of payment for new users.
+`<domain>` and `<path>` should be kept as short as possible, and the full URL **SHOULD** return human readable instructions when loaded in a browser. This is intended to aid new users. The `oob` query parameter is required and is reserved to contain the out-of-band message string. Additional path elements or query parameters are allowed, and can be leveraged to provide coupons or other promise of payment for new users.
 
 > To do: We need to rationalize this approach `https://` approach with the use of a special protocol (e.g. `didcomm://`) that will enable handling of the URL on mobile devices to automatically invoke an installed app on both Android and iOS. A user must be able to process the out-of-band message on the device of the agent (e.g. when the mobile device can't scan the QR code because it is on a web page on device).
 
@@ -359,7 +359,7 @@ The `<outofbandMessage>` is an agent plaintext message (not a DIDComm message) t
 outofband_message = b64urlencode(<outofbandMessage>)
 ```
 
-During encoding, whitespace from the json string should be eliminated to keep the resulting out-of-band message string as short as possible.
+During encoding, whitespace from the JSON string **SHOULD** be eliminated to keep the resulting out-of-band message string as short as possible.
 
 #### Example Out-of-Band Message Encoding
 
@@ -426,12 +426,12 @@ Knowledge is Good
 
 It seems inevitable that the length of some out-of-band message will be too long to produce a useable QR code. Techniques to avoid unusable QR codes have been presented above, including using attachment links for requests, minimizing the routing of the response and eliminating unnecessary whitespace in the JSON. However, at some point a _sender_ may need generate a very long URL. In that case, a URL shortener redirection should be implemented by the sender as follows:
 
-- The sender should generate and track a GUID for the out-of-band message URL.
-- The shortened version should be of the form:
+- The sender generates and tracks a GUID for each out-of-band message URL.
+- The shortened URL **MUST** include an `id` query parameter, for example:
   - `https://example.com/ssi?id=5f0e3ffb-3f92-4648-9868-0d6f8889e6f3`
   - Note the replacement of the query parameter `oob` with `id` when using shortened URL.
-- On receipt of this form of message, the agent must do an HTTP GET to retrieve the associated out-of-band message. The agent should include an `Accept` header requesting the `application/json` MIME type, and the sender must include a `Content-Type` header specifying `application/json; charset=utf-8`. The sender must return the invitation in JSON format.
-  - A sender may decide to wait to generate the full invitation until the redirection event of the shortened URL to the full length form dynamic, so a single QR code can be used for distinct out-of-band messages.
+- On receipt of this form of message, the agent **MUST** perform an HTTP GET to retrieve the associated out-of-band message. The agent **SHOULD** include an `Accept` header requesting the `application/json` MIME type, and the sender **MUST** include a `Content-Type` header specifying `application/json; charset=utf-8`. The sender **MUST** return the invitation in JSON format.
+  - A sender may decide to wait to generate the full invitation until the redirection event of the shortened URL to the full length form dynamic, so that a single QR code can be used for distinct out-of-band messages.
 
 A usable QR code will always be able to be generated from the shortened form of the URL.
 
@@ -441,7 +441,7 @@ The _sender_ will publish or transmit the out-of-band message URL in a manner av
 
 #### Out-of-Band Message Processing
 
-When they receiver receives the out-of-band message URL, there are two possible user flows, depending on whether the individual has an Aries agent. If the individual is new to Aries, they will likely load the URL in a browser. The resulting page should contain instructions on how to get started by installing an Aries agent. That install flow will transfer the out-of-band message to the newly installed software.
+When they receiver receives the out-of-band message URL, there are two possible user flows, depending on whether the individual has an Aries agent. If the individual is new to Aries, they will likely load the URL in a browser. The resulting page **SHOULD** contain instructions on how to get started by installing an Aries agent. That install flow will transfer the out-of-band message to the newly installed software.
 
 A user that already has those steps accomplished will have the URL received by software directly. That software will base64URL decode the string and can read the out-of-band message directly out of the `oob` query parameter, without loading the URL.
 
