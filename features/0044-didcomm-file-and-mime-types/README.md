@@ -3,19 +3,14 @@
 - Authors: Daniel Hardman, Kyle Den Hartog
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-05-28
-- Status Note: Socialized and accepted within Indy community, and used in several implementations of protocols that want to associate a MIME type with an HTTP payload. However, this version of the spec changes the type names of types slightly to genericize, so we're resetting the status.
+- Status Note: Socialized and accepted within Indy community, and used in several implementations of protocols that want to associate a media (MIME) type with an HTTP payload. However, the Aries version of the spec changes the type names of types slightly from Indy, so the status was reset from ACCEPTED to PROPOSED. Updated in Dec 2020 to include [information about detecting DIDComm v2](#detecting-didcomm-versions).
 - Supersedes: [Indy HIPE 0026]( https://github.com/hyperledger/indy-hipe/blob/master/text/0026-agent-file-format/README.md)
 - Start Date: 2018-11-13
 - Tags: [feature](/tags.md#feature)
 
-[![message in envelope](small-msg-in-envelope.png)](msg-in-envelope.png)
- 
 ## Summary
 
-Define a file format and MIME type that holds [DIDComm](
- ../../concepts/0005-didcomm/README.md)
-content--messages--as well as the encrypted and signed
-envelopes that contain them.
+Defines the media (MIME) types and file types that hold [DIDComm]( ../../concepts/0005-didcomm/README.md) messages in encrypted, signed, and plaintext forms. Covers DIDComm V1, plus a little of [V2](https://identity.foundation/didcomm-messaging/spec/) to clarify [how DIDComm versions are detected](#detecting-didcomm-versions).
 
 ## Motivation
 
@@ -30,12 +25,11 @@ distributed file systems like IPFS, can be inserted in an object store or
 in content-addressable storage, can be viewed and modified in editors, and
 support a million other uses.
 
-We need to define how files can contain DIDComm messages, and what the
+We need to define how files and attachments can contain DIDComm messages, and what the
 semantics of processing such files will be.
-
 ## Tutorial
 
-### DIDComm Encrypted Envelope (*.dee)
+### DIDComm v1 Encrypted Envelope (*.dee)
 
 [![dee icon](dee-small.png)](dee-big.png)
 
@@ -47,12 +41,10 @@ its type reliably.
 
 The file extension associated with this filetype is `dee`, giving a globbing pattern
  of `*.dee`; this should be be read as "STAR DOT D E E" or as "D E E" files.
-If a format evolution takes place, a subsequent version could be
-noted by appending a digit, as in `*.dee2` for second-generation `dee` files.
-
-The name of this file format is "DIDComm Encrypted Envelope." We expect people to say,
-"I am looking at a DIDComm Encrypted Envelope", or "This file is in DIDComm Encrypted Envelope format", or
-"Does my editor have a DIDComm Encrypted Envelope plugin?"
+ 
+The name of this file format is "DIDComm V1 Encrypted Envelope." We expect people to say,
+"I am looking at a DIDComm V1 Encrypted Envelope", or "This file is in DIDComm V1 Encrypted Envelope format", or
+"Does my editor have a DIDComm V1 Encrypted Envelope plugin?"
 
 Although the format of encrypted envelopes is derived from JSON and the JWT/JWE family
 of specs, no useful processing of these files will take place by viewing them as
@@ -65,13 +57,15 @@ a choice similar to the one that views `*.docx` files primarily as
 place, the version could become a parameter as [described in RFC 1341](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html):
 `application/didcomm-enc-env;v=2`.
 
-The default action for DIDComm Encrypted Envelopes (what happens when a user double-clicks one)
+The default action for DIDComm V1 Encrypted Envelopes (what happens when a user double-clicks one)
 should be `Handle` (that is, process the message as if it had just arrived by some other transport),
 if the software handling the message is an agent. In other types of software,
 the default action might be to view the file. Other useful actions might include
 `Send`, `Attach` (to email, chat, etc), `Open with agent`, and `Decrypt to *.dp`.
 
-### DIDComm Signed Envelopes (*.dse)
+>NOTE: The analog to this content type in DIDComm v2 is called a "DIDComm Encrypted Message." Its format is slightly different. For more info, see [Detecting DIDComm Versions](#detecting-didcomm-versions) below.
+
+### DIDComm V1 Signed Envelopes (*.dse)
 
 [![dse icon](dse-small.png)](dse-big.png)
 
@@ -86,22 +80,22 @@ in combination with signing, the DSE goes inside the DEE.
 
 The file extension associated with this filetype is `dse`, giving a globbing pattern
  of `*.dse`; this should be be read as "STAR DOT D S E" or as "D S E" files.
-Format evolution can add digits as with *.dee files.
 
-The name of this file format is "DIDComm Signed Envelope." We expect people to say,
-"I am looking at a DIDComm Signed Envelope", or "This file is in DIDComm Signed Envelope format", or
-"Does my editor have a DIDComm Signed Envelope plugin?"
+The name of this file format is "DIDComm V1 Signed Envelope." We expect people to say,
+"I am looking at a DIDComm V1 Signed Envelope", or "This file is in DIDComm V1 Signed Envelope format", or
+"Does my editor have a DIDComm V1 Signed Envelope plugin?"
 
 As with *.dee files, the best way to hande *.dse files is to map them to a custom
 MIME type. The recommendation is
 `application/didcomm-sig-env`, with `application/jws` as a fallback, and
 `application/json` as an even less desirable fallback.
 
-The default action for DIDComm Signed Envelopes (what happens when a user double-clicks one)
+The default action for DIDComm V1 Signed Envelopes (what happens when a user double-clicks one)
 should be `Validate` (that is, process the signature to see if it is valid.
 
+>NOTE: The analog to this content type in DIDComm v2 is called a "DIDComm Signed Message." Its format is slightly different. For more info, see [Detecting DIDComm Versions](#detecting-didcomm-versions) below.
 
-### DIDComm Messages (*.dm)
+### DIDComm V1 Messages (*.dm)
 
 [![dm icon](dm-small.png)](dm-big.png)
 
@@ -123,19 +117,19 @@ The file extension associated with this filetype is `*.dm`, and should be read a
 "STAR DOT D M" or "D M" files. If a format evolution takes place, a subsequent version could be
 noted by appending a digit, as in `*.dm2` for second-generation `dm` files.
 
-The name of this file format is "DIDComm Message." We expect people to say,
-"I am looking at a DIDComm Message", or "This file is in DIDComm Message", or
-"Does my editor have a DIDComm Message plugin?" For extra clarity, it is acceptable
-to add the adjective "plaintext", as in "DIDComm Plaintext Message."
+The name of this file format is "DIDComm V1 Message." We expect people to say,
+"I am looking at a DIDComm V1 Message", or "This file is in DIDComm V1 Message format", or
+"Does my editor have a DIDComm V1 Message plugin?" For extra clarity, it is acceptable
+to add the adjective "plaintext", as in "DIDComm V1 Plaintext Message."
 
 The MIME type of *.dm files is `application/json`--or, if further discrimination is needed,
-`application/json;flavor=didcomm-msg`. If format evolution takes place, the version could
-become a parameter as [described in RFC 1341](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html):
-`application/json;flavor=didcomm-msg;v=2`.
+`application/json;flavor=didcomm-msg`.
 
-The default action for DIDComm Messages should be to
+The default action for DIDComm V1 Messages should be to
 `View` or `Validate` them. Other interesting actions might be `Encrypt to *.dee`,
 `Sign to *.dse`, and `Find definition of protocol`.
+
+>NOTE: The analog to this content type in DIDComm v2 is called a "DIDComm Plaintext Message." Its format is slightly different. For more info, see [Detecting DIDComm Versions](#detecting-didcomm-versions) below.
 
 As a general rule, DIDComm messages that are being sent in production use cases of DID communication should be stored
 in encrypted form (`*.dee`) at rest. There are cases where this might not be preferred, e.g., providing documentation of the
@@ -158,12 +152,36 @@ Object format might be a bean. In C++, it might be a `std::map<std::string, vari
 There can be more than one Native Object representation for a given programming language.
 
 Native Object forms are never rendered directly to files; rather, they are serialized to DIDComm Plaintext Format
-and then persisted (likely after also encrypting to DIDComm Wire Format).
+and then persisted (likely after also encrypting to DIDComm V1 Encrypted Envelope).
+
+### Detecting DIDComm Versions
+
+Because media types differ from DIDComm V1 to V2, and because media types are easy to communicate in headers and message fields, they are a convenient way to detect which version of DIDComm applies in a given context:
+
+Nature of Content | V1 | V2
+--- | --- | ---
+encrypted| `application/didcomm-enc-env`<br>DIDComm V1 Encrypted Envelope<br>*.dee | `application/didcomm-encrypted+json`<br>DIDComm Encrypted Message<br>*.dcem
+signed| `application/didcomm-sig-env`<br>DIDComm V1 Signed Envelope<br>*.dse | `application/didcomm-signed+json`<br>DIDComm Signed Message<br>*.dcsm
+plaintext| `application/json`<br>DIDComm V1 Message<br>*.dm | `application/didcomm-plain+json`<br>DIDComm Plaintext Message<br>*.dcpm
+
+It is also recommended that agents implementing [Discover Features Protocol v2](../0557-discover-features-v2/README.md) respond to [queries about supported DIDComm versions](../0557-discover-features-v2/README.md#queries-message-type) using the `didcomm-version` feature name. This allows queries about what an agent is willing to support, whereas the media type mechanism describes what is in active use. The values that should be returned from such a query are URIs that tell where DIDComm versions are developed:
+
+Version | URI
+--- | ---
+V1 | https://github.com/hyperledger/aries-rfcs
+V2 | https://github.com/decentralized-identity/didcomm-messaging
+
+### What it means to "implement" this RFC
+
+For the purposes of [Aries Interop Profiles](../../concepts/0302-aries-interop-profile/README.md), an agent "implements" this RFC when:
+
+* If it encounters references to DIDComm V1 media types (e.g., in HTTP headers, in attachments, or in the fields of DIDComm messages where a media type is expected), it imputes the meaning documented here.
+* If it characterizes DIDComm V1 content in its own outbound communication or UI, it does so with the media type strings, friendly names, and file extensions documented here.
 
 ## Reference
 
 The file extensions and MIME types described here are also accompanied by suggested graphics.
-[Vector forms of these graphics are available as well](
+[Vector forms of these graphics are available](
 https://docs.google.com/presentation/d/1QmKxuMz8KnqYbdGUEOaNqLtZSCZryQrwj9RRXMN4uAk/edit#slide=id.p).
 
 ## Implementations
