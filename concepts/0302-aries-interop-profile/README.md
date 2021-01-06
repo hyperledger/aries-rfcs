@@ -2,8 +2,8 @@
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [John Jordan](mailto:john.jordan@gov.bc.ca) Province of British Columbia
 - Status: [ACCEPTED](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#accepted)
-- Since: 2020-01-30
-- Status Note: This RFC defines an Aries Interop Profile process and Aries Interop Profile v1.0
+- Since: 2021-01-06
+- Status Note: This RFC defines an Aries Interop Profile process and Aries Interop Profile versions
 - Supersedes:
 - Start Date: 2019-11-06
 - Tags: [concept](/tags.md#concept)
@@ -17,7 +17,7 @@ This RFC defines the process for the community of Aries agent builders to:
 
 "Agent builders" are organizations or teams that are developing open source code upon which agents can be built (e.g. [aries-framework-dotnet](https://github.com/hyperledger/aries-framework-dotnet)), or deployable agents (e.g. [OSMA Mobile App](https://github.com/mattrglobal/osma)), or commercially available agents.
 
-An Aries Interop Profile (AIP) version provides a clearly defined set of RFCs for Aries agent builders to target their agent implementation when they wish it to be interoperable with other agents supporting the same Aries Interop Profile version. The Aries Interop Profile versioning process is intended to provide clarity and predictability for Aries agent builders and others in the broader Aries community. The process is not concerned with proposing new, or evolving existing, RFCs, nor with the development of Aries code bases.
+An Aries Interop Profile (AIP) version provides a clearly defined set of versions of RFCs for Aries agent builders to target their agent implementation when they wish it to be interoperable with other agents supporting the same Aries Interop Profile version. The Aries Interop Profile versioning process is intended to provide clarity and predictability for Aries agent builders and others in the broader Aries community. The process is not concerned with proposing new, or evolving existing, RFCs, nor with the development of Aries code bases.
 
 At all times, the [Reference](#reference) section of this RFC defines one or more current Aries Interop Profile versions -- a number and set of links to specific commits of concept and features RFCs, along with a list of all previous Aries Interop Profile versions. Several current Aries Interop Profile versions can coexist during periods when multiple major Aries Interop Profile versions are in active use (e.g. 1.x and 2.x). Each entry in the previous versions list includes a link to the commit of this RFC associated with that Aries Interop Profile version. The [Reference](#reference) section MAY include one "<major>.next" version for each existing current major Aries Interop Profile versions. Such "next" versions are proposals for what is to be included in the next minor AIP version.
 
@@ -91,9 +91,68 @@ Feature | [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree
 Feature | [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/4fae574c03f9f1013db30bf2c0c676b1122f7149/features/0037-present-proof)
 Feature | [0056-service-decorator](https://github.com/hyperledger/aries-rfcs/tree/527849ec3aa2a8fd47a7bb6c57f918ff8bcb5e8c/features/0056-service-decorator)
 
-#### Test Suite
+#### AIP v1.0 Test Suite
 
 > To Do: Link(s) to version(s) of the test suite/test cases applicable to this Aries Interop Profile version.
+
+### Aries Interop Profile Version: 2.0
+
+The following are the goals used in selecting RFC versions for inclusion in AIP 2.0, adn the RFCs added as a result of each goal:
+
+- From AIP 1.0: Aries Agents must be able to establish connections, exchange credentials and complete a connection-less proof-request/proof transaction.
+- Aries agents must be able to reuse connections.
+  - RFCs 0434, 0023, 0519, 0360
+- Enable access to actionable information in Mobile Agents to enable improvements in the user experience (vs. AIP 1.0-based mobile agents).
+  - RFCs 0183, 0095, 0557
+- Improve support for credential revocation use cases, independent of the revocation mechanism being used.
+  - RFCs 0183, 0441 (Indy AnonCreds specific)
+- Improve the low-level messaging cryptography and enable a transition to DIDComm 2.0 to improve the security of the communication paths between agents.
+  - RFCs 0044, 0360, 0334
+- Use protocols and standards that support multiple ledger types and verifiable credential formats.
+  - RFCs 0434, 0023, 0453, 0454
+- Where appropriate, enable standard mediator coordination capabilities for mobile agents and multi-tenant agencies.
+  - RFC 0211
+
+ RFC Type | RFC/Link to RFC Version | Note
+--- | --- | ---
+Concept | [0003-protocols](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0003-protocols) | AIP V1.0, Updated
+Concept | [0004-agents](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0004-agents) | AIP V1.0, Updated
+Concept | [0005-didcomm](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0005-didcomm) | AIP V1.0, Updated
+Concept | [0008-message-id-and-threading](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0008-message-id-and-threading) | AIP V1.0, Updated
+Concept | [0011-decorators](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0011-decorators) | AIP V1.0, Updated
+Concept | [0017-attachments](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0017-attachments) | AIP V1.0, Updated
+Concept | [0020-message-types](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0020-message-types) | AIP V1.0, Updated
+Concept | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0044-didcomm-file-and-mime-types) | :question: **Under Consideration**
+Concept | [0046-mediators-and-relays](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0046-mediators-and-relays) | AIP V1.0, Updated
+Concept | [0047-json-LD-compatibility](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0047-json-ld-compatibility) | AIP V1.0, Updated
+Concept | [0050-wallets](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0050-wallets) | AIP V1.0, Unchanged
+Concept | [0094-cross-domain messaging](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0094-cross-domain-messaging) | AIP V1.0, Updated
+Concept | [0519-goal-codes](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0519-goal-codes) | :new:
+Concept | [0441-present-proof-best-practices](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0441-present-proof-best-practices) | :question: **Under Consideration**<br>Indy AnonCreds specific
+Feature | [0015-acks](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0015-acks) | AIP V1.0, Updated
+Feature | [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0019-encryption-envelope) | AIP V1.0, Updated
+Feature | [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0023-did-exchange) | :new:
+Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0025-didcomm-transports) | AIP V1.0, Updated
+Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0035-report-problem) | AIP V1.0, Updated
+Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0048-trust-ping) | :new:
+Feature | [0095-basic-message](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0095-basic-message) | :question: **Under Consideration**
+Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0183-revocation-notification) | :question: **Under Consideration**
+Feature | [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0211-route-coordination) | :new:<br>Optional: Open Mediators and Clients
+Feature | [0360-use-did-key](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0360-use-did-key) | :question: **Under Consideration**
+Feature | [0334-jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0334-jwe-envelope) | :question: **Under Consideration**
+Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0434-outofband) | :new:
+Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0453-issue-credential-v2) | AIP V1.0, **Update to V2**
+&nbsp; | Format: Indy AnonCreds | AIP V1.0, Updated
+&nbsp; | Format: LD Signatures | :question: **Under Consideration**
+&nbsp; | Format: BBS+ Signatures | :question: **Under Consideration**
+Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0454-present-proof-v2) | AIP V1.0, **Update to V2**
+&nbsp; | Format: Indy AnonCreds | AIP V1.0, Updated
+&nbsp; | Format: DIF Presentation Exchange | :question: **Under Consideration**
+Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0557-discover-features-v2) | :new:
+
+#### AIP v2.0 Test Suite
+
+The [Aries Agent Test Harness](https://github.com/hyperledger/aries-agent-test-harness) has a set of tests tagged to exercise AIP 1.0 and will be adding tests and tags to exercise the AIP 2.0 capabilities.
 
 ### Previous Versions
 
