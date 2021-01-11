@@ -47,6 +47,7 @@ The following curves are supported:
  :--------------------------------------------------------- | :-----------------
  X25519 (aka Curve25519)                                    | X25519 (default)
  NIST P256 (aka SECG secp256r1 and ANSI X9.62 prime256v1, ref [here](https://tools.ietf.org/search/rfc4492#appendix-A))   | P-256
+ NIST P384 (aka SECG secp384r1, ref [here](https://tools.ietf.org/search/rfc4492#appendix-A)) | P-384
 
 Other curves are optional.
 
