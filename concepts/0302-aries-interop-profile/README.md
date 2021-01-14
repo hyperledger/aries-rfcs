@@ -122,7 +122,6 @@ Concept | [0008-message-id-and-threading](https://github.com/hyperledger/aries-r
 Concept | [0011-decorators](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0011-decorators) | AIP V1.0, Updated
 Concept | [0017-attachments](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0017-attachments) | AIP V1.0, Updated
 Concept | [0020-message-types](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0020-message-types) | AIP V1.0, Updated
-Concept | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0044-didcomm-file-and-mime-types) | :question: **Under Consideration**
 Concept | [0046-mediators-and-relays](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0046-mediators-and-relays) | AIP V1.0, Updated
 Concept | [0047-json-LD-compatibility](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0047-json-ld-compatibility) | AIP V1.0, Updated
 Concept | [0050-wallets](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0050-wallets) | AIP V1.0, Unchanged
@@ -134,6 +133,7 @@ Feature | [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/t
 Feature | [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0023-did-exchange) | :new:
 Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0025-didcomm-transports) | AIP V1.0, Updated
 Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0035-report-problem) | AIP V1.0, Updated
+Features | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0044-didcomm-file-and-mime-types) | :question: **Under Consideration**
 Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0048-trust-ping) | :new:
 Feature | [0095-basic-message](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0095-basic-message) | :question: **Under Consideration**
 Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0183-revocation-notification) | :question: **Under Consideration**
