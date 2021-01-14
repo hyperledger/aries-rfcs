@@ -103,7 +103,7 @@ The offer and proposal messages are part of an optional negotiation phase and ma
 
 #### Propose Credential
 
-An optional message sent by the potential Holder to the Issuer to initiate the protocol or in response to a `offer-credential` message when the Holder wants some adjustments made to the credential data offered by Issuer.
+An optional message sent by the potential Holder to the Issuer to initiate the protocol or in response to an `offer-credential` message when the Holder wants some adjustments made to the credential data offered by Issuer.
 
 <blockquote>
 Note: In Hyperledger Indy, where the `request-credential` message can **only** be sent in response to an `offer-credential` message, the `propose-credential` message is the only way for a potential Holder to initiate the workflow.
@@ -201,7 +201,7 @@ Hyperledger Indy Credential Offer | hlindy-zkp-v1.0 | [`indy_issuer_create_crede
 
 #### Request Credential
 
-This is a message sent by the potential Holder to the Issuer, to request the issuance of a credential. Where circumstances do not require a preceding Offer Credential message (e.g., there is no cost to issuance that the Issuer needs to explain in advance, and there is no need for cryptographic negotiation), this message initiates the protocol. In Hyperledger Indy, this message can only be sent in response to an Offer Credential message.
+This is a message sent by the potential Holder to the Issuer, to request the issuance of a credential. Where circumstances do not require a preceding Offer Credential message (e.g., there is no cost to issuance that the Issuer needs to explain in advance, and there is no need for cryptographic negotiation), this message initiates the protocol. In Hyperledger Indy, this message can only be sent in response to an `offer-credential` message.
 
 Message Format:
 
@@ -231,6 +231,7 @@ Message Format:
 
 Description of Fields:
 
+* `replacement_id` -- an optional field to help coordinate credential replacement. When this is present and matches the `replacement_id` of a previously issued credential, it may be used to inform the recipient that the offered credential is considered to be a replacement to the previous credential. If the message is in response to an `offer-credential` message, the `replacement_id` MAY match that of the offer. This value is unique to the issuer. It must not be used in a credential presentation.
 * `comment` -- an optional field that provides human readable information about this Credential Request, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `formats` -- contains an entry for each `requests~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `requests~attach` -- an array of [attachments](../../concepts/0017-attachments/README.md) defining the requested formats for the credential.
