@@ -252,7 +252,7 @@ The verifiable presentation standardization work being conducted in parallel to 
 
 ## Prior art
 
-The existing [RFC 0036 Present Proof](../0037-present-proof/README.md) protocol and implementations.
+The existing [RFC 0037 Present Proof](../0037-present-proof/README.md) protocol and implementations.
 
 ## Unresolved questions
 
