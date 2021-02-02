@@ -9,7 +9,7 @@
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 - Protocol Name: Out-of-Band Invitation, Out-of-Band Request
 - Version: 1.0, 1.0
-- URI: `http://didcomm.org/out-of-band/%VER`
+- URI: `https://didcomm.org/out-of-band/%VER`
 
 ## Summary
 
