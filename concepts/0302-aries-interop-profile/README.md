@@ -47,7 +47,7 @@ The establishment of Aries Interop Profile versions defined by the Aries agent b
 
 This RFC MUST contain the current Aries Interop Profile versions as defined by a version number and a set of links to concept and feature RFCs which have been agreed to by a community of Aries agent builders. "Agreement" is defined as when the community agrees to merge a Pull Request (PR) to this RFC that affects an Aries Interop Profile version number and/or any of the links to concept and feature RFCs. PRs that do not impact the Aries Interop Profile version number or links can (in general) be merged with less community scrutiny.
 
-Each link to a concept or feature RFCs MUST be to a specific commit of that RFC. RFCs in the list MAY be flagged as deprecated.
+Each link to a concept or feature RFCs MUST be to a specific commit of that RFC. RFCs in the list MAY be flagged as deprecated. Linked RFCs that reference external specs or standards MUST refer to as specific a version of the external resource as possible. 
 
 Aries Interop Profile versions SHOULD have a link (or links) to a version (specific commit) of a test suite (or test cases) which SHOULD be used to verify compliance with the corresponding version of Aries Interop Profile. Aries agent builders MAY self-report their test results as part of their entries in the list of agents.
 
@@ -60,6 +60,36 @@ version that have changed since the AIP version was set. For script usage inform
 run the following from the root of the repo:
 
 `python code/aipUpdates.py --help`
+
+### Sub-targets
+
+AIP 2.0 is organized into a set of base requirements, and additional optional targets. These requirements are listed below. When indicating levels of support for AIP 2.0, subtargets are indicated in this format: `AIP 2.0/INDYCREDS/MEDIATE` with the subtargets listed in any order.
+
+Any RFCs within a single AIP Version and it's subtargets MUST refer to the exact same version of the RFC.
+
+### Discover Features Usage
+
+AIP Targets can be disclosed in the discover_features protocol, using the `feature-type` of `aip`. The feature's `id` is `AIP<major>.<minor>` for base compatibility, and `AIP<major>.<minor>/<subtarget>` for subtargets, each subtarget being included individually.
+
+Example:
+
+```json
+{
+  "@type": "https://didcomm.org/discover-features/2.0/disclosures",
+  "disclosures": [
+    {
+      "feature-type": "aip",
+      "id": "AIP2.0",
+    },
+    {
+      "feature-type": "aip",
+      "id": "AIP2.0/INDYCRED"
+    }
+  ]
+}
+```
+
+
 
 ## Reference
 
@@ -120,7 +150,7 @@ The following are the goals used in selecting RFC versions for inclusion in AIP 
   - RFC 0211
   
 
-AIP 2.0 is organized into a set of base requirements, and additional optional targets. These requirements are listed below. When indicating levels of support for AIP 2.0, subtargets are indicated in this format: `AIP 2.0/INDYCREDS/MEDIATE` with the subtargets listed in any order.
+
 
 ## Base Requirements
 
