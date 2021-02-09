@@ -1,4 +1,4 @@
-# Aries RFC 0585: Sign Attachment - "Please Sign This" Protocol 2.0
+# Aries RFC 0586: Sign Attachment - "Please Sign This" Protocol 2.0
 
 - Authors: Andrew Whitehead / Ian Costanzo / [Sam Curren](telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
