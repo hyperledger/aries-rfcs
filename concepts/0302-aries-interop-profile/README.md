@@ -178,6 +178,9 @@ Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/be4ad
 Feature | [0360-use-did-key](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0360-use-did-key) | :question: **Under Consideration**
 Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0434-outofband) | :new:
 Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0557-discover-features-v2) | :new:
+Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0183-revocation-notification) | :question: **Under Consideration**
+Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0453-issue-credential-v2) | AIP V1.0, **Update to V2**
+Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0454-present-proof-v2) | AIP V1.0, **Update to V2**
 
 #### MEDIATE: Mediator Coordination
  RFC Type | RFC/Link to RFC Version | Note
@@ -189,27 +192,28 @@ Feature | [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/tr
 --- | --- | ---
 &nbsp; | Format: Indy AnonCreds | AIP V1.0, Updated
 Concept | [0441-present-proof-best-practices](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0441-present-proof-best-practices) | :question: **Under Consideration**<br>Indy AnonCreds specific
-Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0183-revocation-notification) | :question: **Under Consideration**
-Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0453-issue-credential-v2) | AIP V1.0, **Update to V2**
-Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0454-present-proof-v2) | AIP V1.0, **Update to V2**
+
 
 #### LDCRED: JSON-LD Based Credentials
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
 &nbsp; | Format: LD Signatures | :question: **Under Consideration**
-Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0183-revocation-notification) | :question: **Under Consideration**
-Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0453-issue-credential-v2) | AIP V1.0, **Update to V2**
-Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0454-present-proof-v2) | AIP V1.0, **Update to V2**
+
 
 #### BBSCRED: BBS+ Based Credentials
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
 &nbsp; | Format: BBS+ Signatures | :question: **Under Consideration**
-Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0183-revocation-notification) | :question: **Under Consideration**
-Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0453-issue-credential-v2) | AIP V1.0, **Update to V2**
-Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0454-present-proof-v2) | AIP V1.0, **Update to V2**
 
-#### DIF: DIF Presentation Exchange Support
+#### DIFCM: Credential Manifest Support / attachment Offer format
+
+ RFC Type | RFC/Link to RFC Version | Note
+--- | --- | ---
+&nbsp; | Format: ? | :question: **Under Consideration**
+
+
+#### DIFPX: DIF Presentation Exchange Support
+
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
 &nbsp; | Format: DIF Presentation Exchange | :question: **Under Consideration**
