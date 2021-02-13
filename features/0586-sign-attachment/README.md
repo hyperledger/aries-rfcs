@@ -38,12 +38,12 @@ Attachment to sign - may be any format recognizable to all parties.
 Though this protocol can be used to gather signatures from multiple parties, each interaction is only between two parties. Multiple signatures are gathered by invoking the protocol once for each signer.
 
 ```plantuml
-Coordinater --> Coordinater: Prepare Attachment
-Coordinater -> Signer1: Signature Request
-Signer1 -> Coordinater: Signature Response
+Coordinator --> Coordinator: Prepare Attachment
+Coordinator -> Signer1: Signature Request
+Signer1 -> Coordinator: Signature Response
 group Additional Signers
-    Coordinater -> SignerN: Signature Request
-    SignerN -> Coordinater: Signature Response
+    Coordinator -> SignerN: Signature Request
+    SignerN -> Coordinator: Signature Response
 end
 ```
 
@@ -67,7 +67,7 @@ Requested -> [*] : Response (Declined)
 
 ### Signature Request
 
-This message represents a request from a "coordinator" to a "signer" to provide a signature for the attachment(s) included in the request.  The request will indicate the attached message type as well as the requested signature type, and "goal codes" will be included to indicate the "goal" of the coordinator, and stated goal of the signer.
+This message represents a request from a "coordinator" to a "signer" to provide a signature for the attachment(s) included in the request.  The request will indicate the attached message type as well as the requested signature type, and "goal codes" will be included to indicate the stated goal of the coordinator, and suggested goal of the signer.
 
 The message attachment will follow the structure defined in Aries RFC 0017 and *may* be signed (using a JWS signature, outside of the attachment itself).
 
@@ -77,8 +77,8 @@ The message attachment will follow the structure defined in Aries RFC 0017 and *
   "@id": "fce30ed1-96f8-44c9-95cf-b274288009dc",
   "comment": "some comment",
   "signature_request": [{
-      "attachment": "#1",
-      "context": "did:sov", //why context?
+      "attachment": "1",
+      "context": "did:sov",
       "method": "add-signature",
       "signature_type": "<requested signature type>",
       "signer_goal_code": "transaction.endorse",
@@ -124,10 +124,10 @@ This message represents the response from the *signer* to the *coordinator* cont
     "thid": "fce30ed1-96f8-44c9-95cf-b274288009dc"
   },
   "signature_response": [{
-      "message_id": "143c458d-1b1c-40c7-ab85-4d16808ddf0a",
+      "id": "143c458d-1b1c-40c7-ab85-4d16808ddf0a",
       "context": "did:sov",
       "method": "add-signature",
-      "signer_goal_code": "transaction.endorse" # or "transaction.refuse",
+      "signer_goal_code": "transaction.endorse" // or "transaction.refuse",
       "signature_type": "<requested signature type>",
       "signature": { ... structure determined by signature type ... }
   }]
@@ -138,7 +138,7 @@ This message represents the response from the *signer* to the *coordinator* cont
 - **context**: same as in request
 - **method**: same as in request
 - **signer_goal_code**: the same as the `signer_goal_code` of the request. If the signature is refused, a different suitable goal code should be used. 
-- **signature_type"**: requested signature type
+- **signature_type**: requested signature type
 - **signature**: a structure, determined by the signature type.
 
 
@@ -156,14 +156,14 @@ This message presents gathered signatures to the message recipient, along with t
     "thid": "fce30ed1-96f8-44c9-95cf-b274288009dc"
   },
   "signatures": [{
-      "message_id": "143c458d-1b1c-40c7-ab85-4d16808ddf0a",
+      "id": "143c458d-1b1c-40c7-ab85-4d16808ddf0a",
       "context": "did:sov",
       "method": "add-signature",
       "signer_goal_code": "transaction.endorse" # or "transaction.refuse",
       "signature_type": "<requested signature type>",
       "signature": { ... structure determined by signature type ... }
   }],
-  "messages~attach": [{
+  "~attach": [{
     "@id": "143c458d-1b1c-40c7-ab85-4d16808ddf0a",
     "mime-type": "application/json",
     "data": {
@@ -179,8 +179,8 @@ This message presents gathered signatures to the message recipient, along with t
 - **context**: same as in request
 - **method**: same as in request
 - **signer_goal_code**: the same as the `signer_goal_code` of the request. If the signature is refused, a different suitable goal code should be used. 
-- **signature_type"**: requested signature type
-- **messages~attach** - list of messages requesting a signature
+- **signature_type**: requested signature type
+- **~attach** - list of messages requesting a signature
 
 In the case of an error, a problem report *should* be returned to the requesting agent instead of an endorsement response message.  (However if the endorser declines to endorse, they will return a response with that goal code.)
 
@@ -204,9 +204,8 @@ This protocol was first proposed as a general way to gather signatures required 
 
 ## Unresolved questions
 
-- This protocol does not address the role of an observer, including the signers if they wish to observe the gathered signatures.
-- The name 'author' in the `author_goal_code` attribute is unfortunate, as it implies the attachment author is the same as the party requesting the signature. This complicates situations where the signature is being requested from a different party than the attachment author. This also forces the role of `author` even though another name may be more accurate.
-- Why is signature_request a list?
+- Why two goals? Shouldn't the signer's goal be evident from the coordinator's goal?
+- Do the attachments need to be sent back with the signatures? Should this be optional?
 
 ## Implementations
 
