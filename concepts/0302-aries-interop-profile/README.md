@@ -148,9 +148,6 @@ The following are the goals used in selecting RFC versions for inclusion in AIP 
 - Where appropriate, enable standard mediator coordination capabilities for mobile agents and multi-tenant agencies.
   
   - RFC 0211
-  
-
-
 
 ## Base Requirements
 
@@ -183,56 +180,52 @@ Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/t
 Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0454-present-proof-v2) | AIP V1.0, **Update to V2**
 
 #### MEDIATE: Mediator Coordination
+
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
 Feature | [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0211-route-coordination) | :new: 
 
 #### INDYCRED: Indy Based Credentials
+
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-&nbsp; | Format: Indy AnonCreds | AIP V1.0, Updated
+Feature | [0xxx-indy-anoncreds-credential-exchange-attachments](#) | Added from AIP V1.0
 Concept | [0441-present-proof-best-practices](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0441-present-proof-best-practices) | :question: **Under Consideration**<br>Indy AnonCreds specific
 
-
 #### LDCRED: JSON-LD Based Credentials
+
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
+Feature | [0xxx-json-ld-ld-siognatures-credential-exchange-attachments](#) | :new:
 &nbsp; | Format: LD Signatures | :question: **Under Consideration**
 
-
 #### BBSCRED: BBS+ Based Credentials
+
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
+Feature | [0xxx-bbs+-signature-credential-exchange-attachments](#) | :new:
 &nbsp; | Format: BBS+ Signatures | :question: **Under Consideration**
-
-#### DIFCM: Credential Manifest Support / attachment Offer format
-
- RFC Type | RFC/Link to RFC Version | Note
---- | --- | ---
-&nbsp; | Format: ? | :question: **Under Consideration**
-
 
 #### DIFPX: DIF Presentation Exchange Support
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-&nbsp; | Format: DIF Presentation Exchange | :question: **Under Consideration**
+Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0510-dif-pres-exch-attach) | :question: **Under Consideration**
 
 #### DIDCOMMV2PREP: DIDComm v2 Prep
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
 Feature | [0334-jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0334-jwe-envelope) | :question: **Under Consideration**
+Feature | [PR 0587-jwe-authcrypt](https://github.com/hyperledger/aries-rfcs/pull/587) | :question: **Under Consideration**
 
 #### CHAT: Chat related features
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
 Feature | [0095-basic-message](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0095-basic-message) | :question: **Under Consideration**
 
-
-
 #### AIP v2.0 Test Suite
 
-The [Aries Agent Test Harness](https://github.com/hyperledger/aries-agent-test-harness) has a set of tests tagged to exercise AIP 1.0 and will be adding tests and tags to exercise the AIP 2.0 capabilities.
+The [Aries Agent Test Harness](https://github.com/hyperledger/aries-agent-test-harness) has a set of tests tagged to exercise AIP 1.0, and tests and tags are being added to exercise the AIP 2.0 capabilities.
 
 ### Previous Versions
 
