@@ -52,7 +52,7 @@ The latter category may also act as an __identity controller__ -- something that
 
 When an identity controller controls its own identity, we say that it has __self sovereignty__ -- and we call it a __self__. (The term __identity owner__ was originally used for an identity controller managing itself, but this hid some of the nuance and introduced [legal concepts of ownership that are problematic](https://medium.com/@hackylawyER/do-we-really-want-to-sell-ourselves-the-risks-of-a-property-law-paradigm-for-data-ownership-b217e42edffa), so we'll avoid it here.)
  
-In our notation, selves are denoted with a single *upper-case* ASCII alpha, often corresponding to a first initial of their human-friendly name. For example, Alice might be represented as `A`. By preference, the first half of the alphabet is used (because "x", "y", and "z" tend to have other ad-hoc meanings). When reading aloud, the spoken form of a symbol like this is the name of the letter. The relevant [ABNF]( https://tools.ietf.org/html/rfc5234) fragment is:
+In our notation, selves (or identity controllers) are denoted with a single *upper-case* ASCII alpha, often corresponding to a first initial of their human-friendly name. For example, Alice might be represented as `A`. By preference, the first half of the alphabet is used (because "x", "y", and "z" tend to have other ad-hoc meanings). When reading aloud, the spoken form of a symbol like this is the name of the letter. The relevant [ABNF]( https://tools.ietf.org/html/rfc5234) fragment is:
 
  ```ABNF
   ucase-alpha    = %x41-5A            ; A-Z
