@@ -1,6 +1,6 @@
 # Aries RFC 0453: Issue Credential Protocol 2.0
 
-- Authors: Nikita Khateev, Stephen Klump, Stephen Curran
+- Authors: Nikita Khateev, Stephen Klump, Stephen Curran, Timo Glastra
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-03-23
 - Status Note:  See [RFC 0454](../0454-present-proof-v2/README.md) for the presentation part of using credentials.
@@ -10,6 +10,19 @@
 
 ## Version Change Log
 
+### 2.1/credential-preview
+
+In version 2.1 of the credential-preview message, the message is extended to allow for nested attribute objects to better support the W3C Verifiable Credentials Data Model.
+
+The credential-preview message now allows to specify MIME types of attributes embedded into the value as data URLs in addition to the original `mime-type` key.
+
+The pervious version is [2.0](https://github.com/hyperledger/aries-rfcs/tree/881a87cd55e38005516085954c3989072992cb69/features/0453-issue-credential-v2)
+
+### 2.1/credential-request
+
+In version 2.1 of the credential-request message, the credential-preview message is added as an parameter to the credential-request message. It was already possible for a holder to initiate the protocol with a credential-request message, however now it can also include a credential-preview with proposed attributes.
+
+The pervious version is [2.0](https://github.com/hyperledger/aries-rfcs/tree/881a87cd55e38005516085954c3989072992cb69/features/0453-issue-credential-v2)
 ### 2.0/propose-credential and identifiers
 
 Version 2.0 of the protocol is introduced because of a breaking changes in the propose-credential message, replacing the (indy-specific) filtration criteria with a generalized filter attachment to align with the rest of the messages in the protocol. The previous version is [1.1/propose-credential](../0036-issue-credential/README.md).
@@ -138,7 +151,7 @@ Message format:
 Description of attributes:
 
 * `comment` -- an optional field that provides human readable information about this Credential Proposal, so the proposal can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
-* `credential_preview` -- an optional JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential).
+* `credential_preview` -- an optional JSON-LD object that represents the credential data that Holder wants to receive. It matches the schema of [Credential Preview](#preview-credential).
 * `formats` -- contains an entry for each `filters~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `filters~attach` -- an array of attachments that further define the credential being proposed. This might be used to clarify which formats or format versions are wanted.
 
@@ -210,6 +223,7 @@ Message Format:
     "@type": "https://didcomm.org/issue-credential/%VER/request-credential",
     "@id": "<uuid of request message>",
     "comment": "<some comment>",
+    "credential_preview": <json-ld object>
     "formats" : [
         {
             "attach_id" : "<attach@id value>",
@@ -231,6 +245,7 @@ Message Format:
 Description of Fields:
 
 * `comment` -- an optional field that provides human readable information about this Credential Request, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
+* `credential_preview` -- an optional JSON-LD object that represents the credential data that Holder wants to receive. It matches the schema of [Credential Preview](#preview-credential).
 * `formats` -- contains an entry for each `requests~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `requests~attach` -- an array of [attachments](../../concepts/0017-attachments/README.md) defining the requested formats for the credential.
 
@@ -301,6 +316,16 @@ This is not a message but an inner object for other messages in this protocol. I
             "mime-type": "<type>",
             "value": "<value>"
         },
+        {
+            "name": "<attribute name>",
+            "attributes": [
+                {
+                    "name": "<attribute name>",
+                    "mime-type": "<type>",
+                    "value": "<value>"
+                }
+            ]
+        }
         // more attributes
     ]
 }
@@ -312,14 +337,31 @@ The main element is `attributes`. It is an array of (object) attribute specifica
 
 The mandatory `"name"` key maps to the attribute name as a string.
 
+##### Attributes
+
+To allow for nested attribute structures each attribute object can contain a nested array of attribute objects. `value` and `mime-type` should be omitted if `attributes` is used.
+
 ##### MIME Type and Value
 
 The optional `mime-type` advises the issuer how to render a binary attribute, to judge its content for applicability before issuing a credential containing it. Its value parses case-insensitively in keeping with MIME type semantics of [RFC 2045](https://tools.ietf.org/html/rfc2045). If `mime-type` is missing, its value is null.
 
-The mandatory `value` holds the attribute value:
+`value` holds the attribute value, and is required if `attributes` is not present:
 
-* if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
 * if `mime-type` is not null, then `value` is always a base64-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64-decoding.
+* if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON. The `mime-type` MAY be embedded into the attribute value as an data URL as specified in [RFC 2397](https://tools.ietf.org/html/rfc2397). This allows the MIME type of the value to be discoverable outside the context of Aries.
+
+Example of attribute with embedded MIME type:
+
+```jsonc
+// ...
+"attributes": [
+    {
+        "name": "attribute name>",
+        // example of using embedded mime-type
+        "value": "data:image/png;base64,iVBORw0KGgoAAAANSUh...."
+    }
+]
+```
 
 ## Threading
 
