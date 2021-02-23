@@ -103,7 +103,7 @@ The offer and proposal messages are part of an optional negotiation phase and ma
 
 #### Propose Credential
 
-An optional message sent by the potential Holder to the Issuer to initiate the protocol or in response to a `offer-credential` message when the Holder wants some adjustments made to the credential data offered by Issuer.
+An optional message sent by the potential Holder to the Issuer to initiate the protocol or in response to an `offer-credential` message when the Holder wants some adjustments made to the credential data offered by Issuer.
 
 <blockquote>
 Note: In Hyperledger Indy, where the `request-credential` message can **only** be sent in response to an `offer-credential` message, the `propose-credential` message is the only way for a potential Holder to initiate the workflow.
@@ -116,14 +116,14 @@ Message format:
     "@type": "https://didcomm.org/issue-credential/%VER/propose-credential",
     "@id": "<uuid of propose-message>",
     "comment": "<some comment>",
-    "credential_proposal": <json-ld object>,
+    "credential_preview": <json-ld object>,
     "formats" : [
         {
             "attach_id" : "<attach@id value>",
             "format" : "<format-and-version>",
         }
-    ]
-    "filter~attach": [
+    ],
+    "filters~attach": [
         {
             "@id": "<attachment identifier>",
             "mime-type": "application/json",
@@ -138,9 +138,9 @@ Message format:
 Description of attributes:
 
 * `comment` -- an optional field that provides human readable information about this Credential Proposal, so the proposal can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
-* `credential_proposal` -- an optional JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential).
-* `formats` -- contains an entry for each `filter~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
-* `filter~attach` -- an array of attachments that further define the credential being proposed. This might be used to clarify which formats or format versions are wanted.
+* `credential_preview` -- an optional JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential).
+* `formats` -- contains an entry for each `filters~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
+* `filters~attach` -- an array of attachments that further define the credential being proposed. This might be used to clarify which formats or format versions are wanted.
 
 ##### Propose Attachment Registry
 
@@ -167,7 +167,7 @@ Message Format:
             "attach_id" : "<attach@id value>",
             "format" : "<format-and-version>",
         }
-    ]
+    ],
     "offers~attach": [
         {
             "@id": "<attachment identifier>",
@@ -201,7 +201,7 @@ Hyperledger Indy Credential Offer | hlindy-zkp-v1.0 | [`indy_issuer_create_crede
 
 #### Request Credential
 
-This is a message sent by the potential Holder to the Issuer, to request the issuance of a credential. Where circumstances do not require a preceding Offer Credential message (e.g., there is no cost to issuance that the Issuer needs to explain in advance, and there is no need for cryptographic negotiation), this message initiates the protocol. In Hyperledger Indy, this message can only be sent in response to an Offer Credential message.
+This is a message sent by the potential Holder to the Issuer, to request the issuance of a credential. Where circumstances do not require a preceding Offer Credential message (e.g., there is no cost to issuance that the Issuer needs to explain in advance, and there is no need for cryptographic negotiation), this message initiates the protocol. In Hyperledger Indy, this message can only be sent in response to an `offer-credential` message.
 
 Message Format:
 
@@ -209,14 +209,13 @@ Message Format:
 {
     "@type": "https://didcomm.org/issue-credential/%VER/request-credential",
     "@id": "<uuid of request message>",
-    "replacement_id": "<issuer unique id>",
     "comment": "<some comment>",
     "formats" : [
         {
             "attach_id" : "<attach@id value>",
             "format" : "<format-and-version>",
         }
-    ]
+    ],
     "requests~attach": [
         {
             "@id": "<attachment identifier>",
@@ -261,7 +260,7 @@ Message Format:
             "attach_id" : "<attach@id value>",
             "format" : "<format-and-version>",
         }
-    ]
+    ],
     "credentials~attach": [
         {
             "@id": "<attachment-id>",
@@ -293,7 +292,7 @@ Hyperledger Indy Credential | hlindy-zkp-v1.0 | [indy_issuer_create_credential()
 
 This is not a message but an inner object for other messages in this protocol. It is used construct a preview of the data for the credential that is to be issued. Its schema follows:
 
-```json
+```jsonc
 {
     "@type": "https://didcomm.org/issue-credential/%VER/credential-preview",
     "attributes": [
