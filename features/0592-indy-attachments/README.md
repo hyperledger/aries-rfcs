@@ -10,7 +10,7 @@
 
 ## Summary
 
-This RFC registers attachment formats used with Hyperledger Indy-style ZKP-oriented credentials in [Issue Credential Protocol 2.0](../0453-issue-credential-v2/README.md) and [Present Proof Protocol 2.0](../0454-present-proof-v2/README.md).
+This RFC registers attachment formats used with Hyperledger Indy-style ZKP-oriented credentials in [Issue Credential Protocol 2.0](../0453-issue-credential-v2/README.md) and [Present Proof Protocol 2.0](../0454-present-proof-v2/README.md). These formats are generally considered v2 formats, as they align with the "anoncreds2" work in Hyperledger Ursa and are a second generation implementation. They began to be used in production in 2018 and are in active deployment in 2021.
 
 
 ## Motivation
@@ -131,27 +131,22 @@ This format is used to formally request a verifiable presenation (proof) derived
 
 The identifier for this format is: `hlindy/proof-req@v2.0` It is a base64-encoded version of the data returned from [indy_prover_search_credentials_for_proof_req()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
 
-Its JSON looks like this:
+Here is a sample proof request that embodies the following: "Using a government-issued ID, disclose the credential holder’s name and height, hide the credential holder’s sex, get them to self-attest their phone number, and prove that their age is > 18":
 
 ```jsonc
 {
-    "name": string,
-    "version": string,
-    "nonce": string,
-    // set of requested attributes
-    "requested_attributes": { 
-      "<attr_referent>": <attr_info>,
-      ...,
+    "nonce": “2934823091873049823740198370q23984710239847”, 
+    "name":"proof_req_1",
+    "version":"0.1",
+    "requested_attributes":{
+        "attr1_referent": {"name":"name"},
+        "attr2_referent": {"name":"sex"},
+        "attr3_referent": {"name":"phone"},
+        "attr4_referent": {"names": ["name", "height"]}
     },
-    // set of requested predicates
-    "requested_predicates": {
-      "<predicate_referent>": <predicate_info>,
-      ...,
-    },
-    // If specified prover must proof non-revocation
-    // for date in this interval for each attribute
-    // (can be overridden on attribute level)
-    "non_revoked": Optional<<non_revoc_interval>>
+    "requested_predicates":{
+        "predicate1_referent":{"name":"age","p_type":">=","p_value":18}
+    }
 }
 ```
 
@@ -159,7 +154,116 @@ Its JSON looks like this:
 
 This is the format of an Indy-style ZKP. It plays the same role as a W3C-style verifiable presentation (VP) and can be [mapped to one](https://docs.google.com/document/d/1ntLZGMah8iJ_TWQdbrNNW9OVwPbIWkkCMiid7Be1PrA/edit#heading=h.vw0mboesl528).
 
-This is the format emitted by libindy's [indy_prover_create_proof()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404)) function.
+This is the format emitted by libindy's [indy_prover_create_proof()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404)) function. A proof that responds to the [previous proof request sample](#proof-request-format) looks like this:
+
+```jsonc
+{
+  "proof":{
+    "proofs":[
+      {
+        "primary_proof":{
+          "eq_proof":{
+            "revealed_attrs":{
+              "height":"175",
+              "name":"1139481716457488690172217916278103335"
+            },
+            "a_prime":"5817705...096889",
+            "e":"1270938...756380",
+            "v":"1138...39984052",
+            "m":{
+              "master_secret":"375275...0939395",
+              "sex":"3511483...897083518",
+              "age":"13430...63372249"
+            },
+            "m2":"1444497...2278453"
+          },
+          "ge_proofs":[
+            {
+              "u":{
+                "1":"152500...3999140",
+                "2":"147748...2005753",
+                "0":"8806...77968",
+                "3":"10403...8538260"
+              },
+              "r":{
+                "2":"15706...781609",
+                "3":"343...4378642",
+                "0":"59003...702140",
+                "DELTA":"9607...28201020",
+                "1":"180097...96766"
+              },
+              "mj":"134300...249",
+              "alpha":"827896...52261",
+              "t":{
+                "2":"7132...47794",
+                "3":"38051...27372",
+                "DELTA":"68025...508719",
+                "1":"32924...41082",
+                "0":"74906...07857"
+              },
+              "predicate":{
+                "attr_name":"age",
+                "p_type":"GE",
+                "value":18
+              }
+            }
+          ]
+        },
+        "non_revoc_proof":null
+      }
+    ],
+    "aggregated_proof":{
+      "c_hash":"108743...92564",
+      "c_list":[ 6 arrays of 257 numbers between 0 and 255]
+    }
+  },
+  "requested_proof":{
+    "revealed_attrs":{
+      "attr1_referent":{
+        "sub_proof_index":0,
+        "raw":"Alex",
+        "encoded":"1139481716457488690172217916278103335"
+      }
+    },
+    "revealed_attr_groups":{
+      "attr4_referent":{
+        "sub_proof_index":0,
+        "values":{
+          "name":{
+            "raw":"Alex",
+            "encoded":"1139481716457488690172217916278103335"
+          },
+          "height":{
+            "raw":"175",
+            "encoded":"175"
+          }
+        }
+      }
+    },
+    "self_attested_attrs":{
+      "attr3_referent":"8-800-300"
+    },
+    "unrevealed_attrs":{
+      "attr2_referent":{
+        "sub_proof_index":0
+      }
+    },
+    "predicates":{
+      "predicate1_referent":{
+        "sub_proof_index":0
+      }
+    }
+  },
+  "identifiers":[
+    {
+      "schema_id":"NcYxiDXkpYi6ov5FcYDi1e:2:gvt:1.0",
+      "cred_def_id":"NcYxi...cYDi1e:2:gvt:1.0:TAG_1",
+      "rev_reg_id":null,
+      "timestamp":null
+    }
+  ]
+}
+```
 
 
 ## Implementations
