@@ -127,31 +127,40 @@ An exhaustive description of the format is out of scope here; it is more complet
 
 ### proof request format
 
-This format is used to formally request a verifiable presenation (proof) derived from an Indy-style ZKP-oriented credential.
+This format is used to formally request a verifiable presenation (proof) derived from an Indy-style ZKP-oriented credential. It can also be used by a holder to _propose_ a presentation.
 
 The identifier for this format is: `hlindy/proof-req@v2.0` It is a base64-encoded version of the data returned from [indy_prover_search_credentials_for_proof_req()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
 
-Its JSON might look like this:
+Its JSON looks like this:
 
 ```jsonc
 {
     "name": string,
     "version": string,
     "nonce": string,
-    "requested_attributes": { // set of requested attributes
-      "<attr_referent>": <attr_info>, // see below
+    // set of requested attributes
+    "requested_attributes": { 
+      "<attr_referent>": <attr_info>,
       ...,
     },
-    "requested_predicates": { // set of requested predicates
-      "<predicate_referent>": <predicate_info>, // see below
+    // set of requested predicates
+    "requested_predicates": {
+      "<predicate_referent>": <predicate_info>,
       ...,
     },
-    "non_revoked": Optional<<non_revoc_interval>>, // see below,
-                // If specified prover must proof non-revocation
-                // for date in this interval for each attribute
-               // (can be overridden on attribute level)
+    // If specified prover must proof non-revocation
+    // for date in this interval for each attribute
+    // (can be overridden on attribute level)
+    "non_revoked": Optional<<non_revoc_interval>>
 }
 ```
+
+### proof format
+
+This is the format of an Indy-style ZKP. It plays the same role as a W3C-style verifiable presentation (VP) and can be [mapped to one](https://docs.google.com/document/d/1ntLZGMah8iJ_TWQdbrNNW9OVwPbIWkkCMiid7Be1PrA/edit#heading=h.vw0mboesl528).
+
+This is the format emitted by libindy's [indy_prover_create_proof()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404)) function.
+
 
 ## Implementations
 
