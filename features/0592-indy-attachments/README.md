@@ -100,11 +100,11 @@ A complete [`request-credential` message from the Issue Credential protocol 2.0]
 }
 ```
 
-### `issue-credential` attachment format
+### credential format
 
 A concrete, issued Indy credential may be transmitted over many protocols, but is specifically expected as the final message in [Issuance Protocol 2.0](../0453-issue-credential-v2/README.md). The identifier for its format is `hlindy/cred@v2.0`, and its media (MIME) type is `application/indy-cl-anoncred2`.
 
-This is a credential that's designed to be _held_ but not _shared directly_. It is stored in the holder's wallet and used to derive a novel ZKP or W3C-compatible verifiable presentation just in time for each sharing of credential material.
+This is a credential that's designed to be _held_ but not _shared directly_. It is stored in the holder's wallet and used to [derive a novel ZKP](https://youtu.be/bnbNtjsKb4k?t=1280) or [W3C-compatible verifiable presentation](https://docs.google.com/document/d/1ntLZGMah8iJ_TWQdbrNNW9OVwPbIWkkCMiid7Be1PrA/edit#heading=h.vw0mboesl528) just in time for each sharing of credential material.
 
 This is the format emitted by libindy's [indy_issuer_create_credential()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L383) function. It is JSON-based and might look like this:
 
@@ -123,7 +123,35 @@ This is the format emitted by libindy's [indy_issuer_create_credential()](https:
 }
 ```
 
-An exhaustive description of the format is out of scope here; it is more completely documented in whitepapers and other Indy materials.
+An exhaustive description of the format is out of scope here; it is more completely documented in whitepapers, source code, and other Indy materials.
+
+### proof request format
+
+This format is used to formally request a verifiable presenation (proof) derived from an Indy-style ZKP-oriented credential.
+
+The identifier for this format is: `hlindy/proof-req@v2.0` It is a base64-encoded version of the data returned from [indy_prover_search_credentials_for_proof_req()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
+
+Its JSON might look like this:
+
+```jsonc
+{
+    "name": string,
+    "version": string,
+    "nonce": string,
+    "requested_attributes": { // set of requested attributes
+      "<attr_referent>": <attr_info>, // see below
+      ...,
+    },
+    "requested_predicates": { // set of requested predicates
+      "<predicate_referent>": <predicate_info>, // see below
+      ...,
+    },
+    "non_revoked": Optional<<non_revoc_interval>>, // see below,
+                // If specified prover must proof non-revocation
+                // for date in this interval for each attribute
+               // (can be overridden on attribute level)
+}
+```
 
 ## Implementations
 

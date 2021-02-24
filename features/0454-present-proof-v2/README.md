@@ -140,7 +140,7 @@ Negotiation prior to the delivery of the presentation can be done using the `pro
 
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-Hyperledger Indy | hlindy-zkp-v1.0 | [Libindy Presentation Request API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214) | _To Do_: Change link to point to Indy Docs
+Hyperledger Indy Proof Req| hlindy/proof-req@v2.0 | [Libindy Presentation Request API](../0592-indy-attachments/README.md#proof-request-format) |
 DIF Presentation Exchange | `dif/presentation-exchange/definitions@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#propose-presentation-attachment-format) | 
 
 ### Request Presentation

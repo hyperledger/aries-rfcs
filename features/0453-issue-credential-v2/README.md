@@ -147,7 +147,7 @@ Description of attributes:
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`propose-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#propose-credential-attachment-format) | 
-Hyperledger Indy Credential Abstract | `hlindy/cred-abstract@v1.0` | [`cred abstract` format](../0592-indy-attachments/README.md#cred-abstract-format)|
+Hyperledger Indy Credential Abstract | `hlindy/cred-abstract@v2.0` | [`cred abstract` format](../0592-indy-attachments/README.md#cred-abstract-format)|
 
 #### Offer Credential
 
@@ -197,7 +197,7 @@ It is possible for an Issuer to add a [`~timing.expires_time` decorator](../0032
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`offer-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#offer-credential-attachment-format) | 
-Hyperledger Indy Credential Abstract | `hlindy/cred-abstract@v1.0` | [`cred abstract` format](../0592-indy-attachments/README.md#cred-abstract-format)|
+Hyperledger Indy Credential Abstract | `hlindy/cred-abstract@v2.0` | [`cred abstract` format](../0592-indy-attachments/README.md#cred-abstract-format)|
 
 #### Request Credential
 
@@ -241,8 +241,7 @@ This message may have a [`~payment-receipt` decorator](../0075-payment-decorator
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`request-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#request-credential-attachment-format) | 
-Hyperledger Indy Credential Abstract | `hlindy/cred-req@v1.0` | [`cred request` format](../0592-indy-attachments/README.md#cred-request-format)|
-Hyperledger Indy Credential Request | hlindy-zkp-v1.0 | [`indy_prover_create_credential_req()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658) | _To Do_: Change link to point to Indy Docs
+Hyperledger Indy Credential Request | `hlindy/cred-req@v2.0` | [`cred request` format](../0592-indy-attachments/README.md#cred-request-format)|
 
 #### Issue Credential
 
@@ -287,7 +286,7 @@ If the issuer wants an acknowledgement that the issued credential was accepted, 
 
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-Hyperledger Indy Credential | hlindy-zkp-v1.0 | [indy_issuer_create_credential()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338) | _To Do_: Change link to point to Indy Docs, including section on Claim Encoding.
+Hyperledger Indy Credential | `hlindy/cred@v2.0` | [credendtial format](../0592-indy-attachments/README.md#credential-format)|
 
 #### Preview Credential
 
