@@ -81,7 +81,7 @@ Format identifier: `aries/ld-proof-vc-detail@v1.0`
 
 This format is used to formally offer or request a credential. It should contain the credential as it is going to be issued, omitting properties that are only available after issuance.
 
-```json
+```jsonc
 {
   "@id": "7293daf0-ed47-4295-8cc4-5beb513e500f",
   "@type": "https://didcomm.org/issue-credential/%VER/request-credential",
