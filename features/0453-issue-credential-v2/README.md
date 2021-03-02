@@ -148,6 +148,7 @@ Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`propose-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#propose-credential-attachment-format) | 
 Hyperledger Indy Credential Abstract | `hlindy/cred-abstract@v2.0` | [`cred abstract` format](../0592-indy-attachments/README.md#cred-abstract-format)|
+Linked Data Proof VC Proposal  | `aries/ld-proof-vc-proposal@v1.0` | [`ld-proof-vc-proposal` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-proposal-attachment-format) |
 
 #### Offer Credential
 
@@ -198,6 +199,7 @@ Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`offer-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#offer-credential-attachment-format) | 
 Hyperledger Indy Credential Abstract | `hlindy/cred-abstract@v2.0` | [`cred abstract` format](../0592-indy-attachments/README.md#cred-abstract-format)|
+Linked Data Proof VC Detail  | `aries/ld-proof-vc-detail@v1.0` | [`ld-proof-vc-detail` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format) |
 
 #### Request Credential
 
@@ -242,6 +244,7 @@ Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`request-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#request-credential-attachment-format) | 
 Hyperledger Indy Credential Request | `hlindy/cred-req@v2.0` | [`cred request` format](../0592-indy-attachments/README.md#cred-request-format)|
+Linked Data Proof VC Detail  | `aries/ld-proof-vc-detail@v1.0` | [`ld-proof-vc-detail` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format) |
 
 #### Issue Credential
 
@@ -287,6 +290,7 @@ If the issuer wants an acknowledgement that the issued credential was accepted, 
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 Hyperledger Indy Credential | `hlindy/cred@v2.0` | [credendtial format](../0592-indy-attachments/README.md#credential-format)|
+Linked Data Proof VC  | `aries/ld-proof-vc@v1.0` | [`ld-proof-vc` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-attachment-format) |
 
 #### Preview Credential
 

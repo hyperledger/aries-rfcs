@@ -12,7 +12,7 @@
 
 This RFC registers an attachment format for use in the [issue-credential V2](../0453-issue-credential-v2/README.md) protocol based on JSON-LD credentials with [Linked Data Proofs](https://w3c-ccg.github.io/ld-proofs/) from the [VC Data Model](https://www.w3.org/TR/vc-data-model/#linked-data-proofs).
 
-It defines a minimal set of parameters needed to create a common understanding of the verifiable credential to issue.
+It defines a minimal set of parameters needed to create a common understanding of the verifiable credential to issue. It is based on version [1.0 of the Data Model](https://www.w3.org/TR/vc-data-model/) which is a W3C recommendation since 19 November 2019.
 
 ## Motivation
 
@@ -24,41 +24,47 @@ Complete examples of messages are provided in the [reference section](#reference
 
 ## Reference
 
-### `propose-credential` attachment format
+### `ld-proof-vc-proposal` attachment format
 
-Format identifier: `aries/vc-ld-proof@v1.0`
+Format identifier: `aries/ld-proof-vc-proposal@v1.0`
 
-Complete message example:
+The credential proposal allows the holder to initiate a credential exchange without fully specifying the contents of the credential. If all properties of the credential are already known, the protocol can also be initiated with a credential request. While the credential detail requires all fields to be present, the proposal allows for fields to be omitted.
+
+The below `propose-credential` message shows an example of a credential proposal with the `@context`, `type`, `credentialSubject` and `credentialSubject` present. The issuer can then send a credential detail in a credential offer message adding extra properties required for issuance such as `issuer`, `credentialStatus.type`, `proofType`, etc..
 
 ```json
 {
-  "@id": "64f6518b-fede-43a7-ba45-4ba7e7af0e7b",
+  "@id": "257363ab-a3f9-4bba-ad3f-9f69501135f5",
   "@type": "https://didcomm.org/issue-credential/%VER/propose-credential",
   "comment": "<some comment>",
   "formats": [
     {
-      "attach_id": "64a11985-79a9-4daa-b0e3-0ae0531e7a14",
+      "attach_id": "35054fa5-112e-4ef7-93ab-7778f59eb4e3",
       "format": "aries/vc-ld-proof@v1.0"
     }
   ],
   "filter~attach": [
     {
-      "@id": "64a11985-79a9-4daa-b0e3-0ae0531e7a14",
-      "mime-type": "application/json",
+      "@id": "35054fa5-112e-4ef7-93ab-7778f59eb4e3",
+      "mime-type": "application/ld+json",
       "data": {
         "json": {
           "@context": [
             "https://www.w3.org/2018/credentials/v1",
             "https://www.w3.org/2018/credentials/examples/v1"
           ],
-          "type": ["VerifiableCredential", "AlumniCredential"],
-          "issuer": "did:key:z6MkodKV3mnjQQMB9jhMZtKD9Sm75ajiYq51JDLuRSPZTXrr",
-          "credentialStatusType": ["CredentialStatusList2017"],
+          "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+          "credentialSubject": {
+            "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
+            "degree": {
+              "type": "BachelorDegree",
+              "name": "Bachelor of Science and Arts"
+            }
+          },
           "credentialSchema": {
             "id": "https://example.org/examples/degree.json",
             "type": "JsonSchemaValidator2018"
-          },
-          "proofType": ["Ed25519Signature2018", "BbsBlsSignature2020"]
+          }
         }
       }
     }
@@ -66,69 +72,14 @@ Complete message example:
 }
 ```
 
-Description of fields:
+- `credentialStatus.id` -- Credential Status may be omitted completely, but if present should contain the `type` property to indicate which mechanism to use. As the id can be closely tied to the issuance process the property is not required for the credential proposal.
+- `proofType` -- This is not a property defined by the VC data model, but indicates the proof types the holder proposes for the credential. Entries match the `type` property of the [Proofs](https://www.w3.org/TR/vc-data-model/#proofs-signatures) object. Multiple entries indicate the holder proposes multiple proofs for the credential.
 
-- `@context` -- An optional array of contexts indicating the contexts proposed by the holder to use for the credential. See [Contexts](https://www.w3.org/TR/vc-data-model/#contexts). The first context MUST always be `"https://www.w3.org/2018/credentials/v1"` per the VC data model.
-- `type` -- An optional array of types indicating the types proposed by the holder to use for the credential. See [Types](https://www.w3.org/TR/vc-data-model/#types). The array MUST always contain `"VerifiableCredential"` per the VC data model.
-- `issuer` -- An optional URI indicating the issuer id proposed by the holder to use for the credential. See [Issuer](https://www.w3.org/TR/vc-data-model/#issuer). Only the issuer URI (id) is supported at the moment.
-- `credentialStatusType` -- An optional array of strings that indicates the credential status types the holder is willing to accept. See [Status](https://www.w3.org/TR/vc-data-model/#status). If no `credentialStatusType` is present it means no preference on the credential status mechanism is given by the holder. However, an empty array indicates the holder proposes a credential without credential status, i.e. the credential is not revocable.
-- `credentialSchema` -- An optional object indicating the proposed schema to use for the credential. It matches the `credentialSchema` from [Data Schemas](https://www.w3.org/TR/vc-data-model/#data-schemas).
-- `proofType` -- An optional array of strings indicating the proof types the holder is willing to accept. Entries match the `type` property of the [Proofs](https://www.w3.org/TR/vc-data-model/#proofs-signatures) object.
+### `ld-proof-vc-detail` attachment format
 
-### `offer-credential` attachment format
+Format identifier: `aries/ld-proof-vc-detail@v1.0`
 
-Format identifier: `aries/vc-ld-proof@v1.0`
-
-Complete message example:
-
-```jsonc
-{
-  "@id": "2570ed16-91e7-49e7-bc61-b562d1ac2f18",
-  "@type": "https://didcomm.org/issue-credential/%VER/offer-credential",
-  "comment": "<some comment>",
-  "formats": [
-    {
-      "attach_id": "d60c05ac-35c2-484c-af3e-8ef7f21baf0a",
-      "format": "aries/vc-ld-proof@v1.0"
-    }
-  ],
-  "offers~attach": [
-    {
-      "@id": "d60c05ac-35c2-484c-af3e-8ef7f21baf0a",
-      "mime-type": "application/json",
-      "data": {
-        "json": {
-          "@context": [
-            "https://www.w3.org/2018/credentials/v1",
-            "https://www.w3.org/2018/credentials/examples/v1"
-          ],
-          "type": ["VerifiableCredential", "AlumniCredential"],
-          "issuer": "did:key:z6MkodKV3mnjQQMB9jhMZtKD9Sm75ajiYq51JDLuRSPZTXrr",
-          "credentialStatusType": "CredentialStatusList2017",
-          "credentialSchema": {
-            "id": "https://example.org/examples/degree.json",
-            "type": "JsonSchemaValidator2018"
-          },
-          "proofType": ["Ed25519Signature2018", "BbsBlsSignature2020"]
-        }
-      }
-    }
-  ]
-}
-```
-
-Description of fields:
-
-- `@context` -- An array of contexts indicating the contexts the issuer will use for the credential. See [Contexts](https://www.w3.org/TR/vc-data-model/#contexts). The first context MUST always be `"https://www.w3.org/2018/credentials/v1"` per the VC data model.
-- `type` -- An array of types indicating the types the issuer will use for the credential. See [Types](https://www.w3.org/TR/vc-data-model/#types). The array MUST always contain `"VerifiableCredential"` per the VC data model.
-- `issuer` -- An URI indicating the issuer id the issuer will use for the credential. See [Issuer](https://www.w3.org/TR/vc-data-model/#issuer). Only the issuer URI (id) is supported at the moment.
-- `credentialStatusType` -- An optional string that indicates the credential status type the issuer will use for the credential. See [Status](https://www.w3.org/TR/vc-data-model/#status). If no `credentialStatusType` is present it means no `credentialStatus` will be included in the credential, i.e. the credential is not revocable.
-- `credentialSchema` -- An optional object indicating the proposed schema to use for the credential. It matches the `credentialSchema` from [Data Schemas](https://www.w3.org/TR/vc-data-model/#data-schemas). If no `credentialSchema` is present it means no `credentialSchema` will be included in the credential.
-- `proofType` -- An array of strings indicating the proof types the issuer will use for the credential. Entries match the `type` property of the [Proofs](https://www.w3.org/TR/vc-data-model/#proofs-signatures) object. Multiple entries indicate the issuer will attach multiple proofs to the credential.
-
-### `request-credential` attachment format
-
-Format identifier: `aries/vc-ld-proof@v1.0`
+This format is used to formally offer or request a credential. It should contain the credential as it is going to be issued, omitting properties that are only available after issuance.
 
 ```json
 {
@@ -138,13 +89,13 @@ Format identifier: `aries/vc-ld-proof@v1.0`
   "formats": [
     {
       "attach_id": "13a3f100-38ce-4e96-96b4-ea8f30250df9",
-      "format": "aries/vc-ld-proof@v1.0"
+      "format": "aries/vc-ld-proof-req@v1.0"
     }
   ],
   "requests~attach": [
     {
       "@id": "13a3f100-38ce-4e96-96b4-ea8f30250df9",
-      "mime-type": "application/json",
+      "mime-type": "application/ld+json",
       "data": {
         "json": {
           "@context": [
@@ -152,8 +103,16 @@ Format identifier: `aries/vc-ld-proof@v1.0`
             "https://www.w3.org/2018/credentials/examples/v1"
           ],
           "type": ["VerifiableCredential", "AlumniCredential"],
+          "credentialSubject": {
+            "id": "did:key:z6MkodKV3mnjQQMB9jhMZtKD9Sm75ajiYq51JDLuRSPZTXrr"
+            // other attributes
+          },
           "issuer": "did:key:z6MkodKV3mnjQQMB9jhMZtKD9Sm75ajiYq51JDLuRSPZTXrr",
-          "credentialStatusType": "CredentialStatusList2017",
+          "issuanceDate": "2020-01-01T19:23:24Z",
+          "expirationDate": "2020-01-01T19:23:24Z",
+          "credentialStatus": {
+            "type": "CredentialStatusList2017"
+          },
           "credentialSchema": {
             "id": "https://example.org/examples/degree.json",
             "type": "JsonSchemaValidator2018"
@@ -166,20 +125,18 @@ Format identifier: `aries/vc-ld-proof@v1.0`
 }
 ```
 
-Description of fields:
+An exhaustive description of the fields is out of scope here. Most fields are directly taken from the Verifiable Credential Data Model, and properties should align with the criteria described in the data model. A couple exceptions are made from the standard model:
 
-- `@context` -- An array of contexts indicating the contexts the holder requests for the credential. See [Contexts](https://www.w3.org/TR/vc-data-model/#contexts). The first context MUST always be `"https://www.w3.org/2018/credentials/v1"` per the VC data model.
-- `type` -- An array of types indicating the types the holder requests for the credential. See [Types](https://www.w3.org/TR/vc-data-model/#types). The array MUST always contain `"VerifiableCredential"` per the VC data model.
-- `issuer` -- An URI indicating the issuer id the holder requests for the credential. See [Issuer](https://www.w3.org/TR/vc-data-model/#issuer). Only the issuer URI (id) is supported at the moment.
-- `credentialStatusType` -- An optional string that indicates the credential status type holder requests for the credential. It must match the value of `credentialStatus.type` in the issued credential. See [Status](https://www.w3.org/TR/vc-data-model/#status). If no `credentialStatusType` is present it means no `credentialStatus` will be included in the credential, i.e. the credential is not revocable.
-- `credentialSchema` -- An optional object indicating the requested schema to use for the credential. It matches the `credentialSchema` from [Data Schemas](https://www.w3.org/TR/vc-data-model/#data-schemas). If no `credentialSchema` is present it means no `credentialSchema` will be included in the credential.
-- `proofType` -- An array of strings indicating the proof types the holder requests for the credential. Entries match the `type` property of the [Proofs](https://www.w3.org/TR/vc-data-model/#proofs-signatures) object. Multiple entries indicate the holder requests multiple proofs for the credential.
+- `id` -- May be omitted in credential detail, but this doesn't mean the issued credential won't include an identifier.
+- `issuanceDate` -- Required in issued credential, but may be omitted in the credential detail. If present in the credential request it means the value will be used, otherwise a value will be picked by the issuer (most probably the current time).
+- `credentialStatus.id` -- Credential Status may be omitted completely, but if present the `id` property is required in the issued credential. As the id can be closely tied to the issuance process the property is not required for the credential request. `credentialStatus.type` is required if the credential is revocable.
+- `proofType` -- This is not a property defined by the VC data model, but indicates the proof types the holder requests for the credential. Entries match the `type` property of the [Proofs](https://www.w3.org/TR/vc-data-model/#proofs-signatures) object. Multiple entries indicate that the credential will contain multiple proofs.
 
-### `issue-credential` attachment format
+### `ld-proof-vc` attachment format
 
-Format identifier: `aries/vc-ld-proof@v1.0`
+Format identifier: `aries/ld-proof-vc@v1.0`
 
-The contents of the attachment is a standard JSON-LD Verifiable Credential object with linked data proof.
+This format is used to transmit a verifiable credential with linked data proof. The contents of the attachment is a standard JSON-LD Verifiable Credential object with linked data proof. The exact contents of the attachments match the properties from the [Verifiable Credential Data Model](https://www.w3.org/TR/vc-data-model) and the [Linked Data Proofs](https://w3c-ccg.github.io/ld-proofs) specification.
 
 ```json
 {
@@ -195,7 +152,7 @@ The contents of the attachment is a standard JSON-LD Verifiable Credential objec
   "requests~attach": [
     {
       "@id": "5b38af88-d36f-4f77-bb7a-2f04ab806eb8",
-      "mime-type": "application/json+ld",
+      "mime-type": "application/ld+json",
       "data": {
         "json": {
           "@context": "https://www.w3.org/2018/credentials/v1",
