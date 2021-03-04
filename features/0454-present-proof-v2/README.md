@@ -152,7 +152,7 @@ From a verifier to a prover, the `request-presentation` message describes values
     "@type": "https://didcomm.org/present-proof/%VER/request-presentation",
     "@id": "<uuid-request>",
     "comment": "some comment",
-    "will_confirm": "true",
+    "will_confirm": true,
     "formats" : [
         {
             "attach_id" : "<attach@id value>",
@@ -174,7 +174,7 @@ From a verifier to a prover, the `request-presentation` message describes values
 Description of fields:
 
 * `comment` -- a field that provides some human readable information about this request for a presentation.
-* `will_confirm` -- an optional field that defaults to `"false"` to indicate that the verifier will or will not send a post-presentation confirmation `ack` message
+* `will_confirm` -- an optional field that defaults to `false` to indicate that the verifier will or will not send a post-presentation confirmation `ack` message
 * `formats` -- contains an entry for each `request_presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation request format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
 * `request_presentations~attach` -- an array of attachments containing the acceptable verifiable presentation requests.
 
@@ -236,7 +236,7 @@ A message from the verifier to the prover that the `Present Proof` protocol was 
 
 A message from the verifier to the prover that follows the `presentation` message to indicate that the `Present Proof` protocol was completed unsuccessfully and is now in the `abandoned` state. The message is an adopted `problem-report` from the [RFC 0015 report-problem protocol](../0035-report-problem/README.md). The definition of "unsuccessful" from a business sense is up to the verifier. The elements of the `problem-report` message can provide information to the prover about why the protocol instance was unsuccessful.
 
-Either party may send a `problem-report` message earlier in the flow to terminate the protocol before it's normal conclusion.
+Either party may send a `problem-report` message earlier in the flow to terminate the protocol before its normal conclusion.
 
 ## Reference
 
