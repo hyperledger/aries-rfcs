@@ -1,6 +1,6 @@
 # Aries RFC 0593: JSON-LD Credential Attachment format for requesting and presenting credentials
 
-- Authors: Timo Glastra (Animo Solutions)
+- Authors: Timo Glastra (Animo Solutions), George Aristy (SecureKey Technologies)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2021-02-24
 - Status Note:
@@ -30,7 +30,7 @@ Format identifier: `aries/ld-proof-vc-proposal@v1.0`
 
 The credential proposal allows the holder to initiate a credential exchange without fully specifying the contents of the credential. If all properties of the credential are already known, the protocol can also be initiated with a credential request. While the credential detail requires all fields to be present, the proposal allows for fields to be omitted.
 
-The below `propose-credential` message shows an example of a credential proposal with the `@context`, `type`, `credentialSubject` and `credentialSubject` present. The issuer can then send a credential detail in a credential offer message adding extra properties required for issuance such as `issuer`, `credentialStatus.type`, `proofType`, etc..
+The below `propose-credential` message shows an example of an credential proposal with the `@context`, `type`, `credentialSubject` and `options.credentialStatus` present. The issuer can then send a credential detail in an `offer-credential` message adding extra properties required for issuance such as `issuer` and `options.proofType`.
 
 ```json
 {
@@ -49,21 +49,24 @@ The below `propose-credential` message shows an example of a credential proposal
       "mime-type": "application/ld+json",
       "data": {
         "json": {
-          "@context": [
-            "https://www.w3.org/2018/credentials/v1",
-            "https://www.w3.org/2018/credentials/examples/v1"
-          ],
-          "type": ["VerifiableCredential", "UniversityDegreeCredential"],
-          "credentialSubject": {
-            "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
-            "degree": {
-              "type": "BachelorDegree",
-              "name": "Bachelor of Science and Arts"
+          "credential": {
+            "@context": [
+              "https://www.w3.org/2018/credentials/v1",
+              "https://www.w3.org/2018/credentials/examples/v1"
+            ],
+            "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+            "credentialSubject": {
+              "id": "did:key:z6MkodKV3mnjQQMB9jhMZtKD9Sm75ajiYq51JDLuRSPZTXrr",
+              "degree": {
+                "type": "BachelorDegree",
+                "name": "Bachelor of Science and Arts"
+              }
             }
           },
-          "credentialSchema": {
-            "id": "https://example.org/examples/degree.json",
-            "type": "JsonSchemaValidator2018"
+          "options": {
+            "credentialStatus": {
+              "type": "CredentialStatusList2017"
+            }
           }
         }
       }
@@ -72,8 +75,22 @@ The below `propose-credential` message shows an example of a credential proposal
 }
 ```
 
-- `credentialStatus.id` -- Credential Status may be omitted completely, but if present should contain the `type` property to indicate which mechanism to use. As the id can be closely tied to the issuance process the property is not required for the credential proposal.
-- `proofType` -- This is not a property defined by the VC data model, but indicates the proof types the holder proposes for the credential. Entries match the `type` property of the [Proofs](https://www.w3.org/TR/vc-data-model/#proofs-signatures) object. Multiple entries indicate the holder proposes multiple proofs for the credential.
+- `credential` - Required. JSON-LD Credential as proposed by the holder. Properties should align with the criteria described in the [Verifiable Credential Data Model](https://www.w3.org/TR/vc-data-model). The properties listed below are formally supported, but additional properties MAY be included if it conforms with the data model. A note indicates the property deviates from the criteria as defined by the data model.
+
+  - `@context`
+  - `type`
+  - `id`
+  - `issuer` - Optional
+  - `issuanceDate` - Optional
+  - `expirationDate`
+  - `credentialSubject` - Optional. Allows the holder to propose a credential without specifying the claims.
+  - `credentialSchema`
+
+- `options` - Additional options for the credential.
+
+  - `proofType` - Optional list of proof types proposed by the holder to use for the linked data proof. Entries should match suites registered in the [Linked Data Cryptographic Suite Registry](https://w3c-ccg.github.io/ld-cryptosuite-registry/).
+  - `credentialStatus` - Optional object defining the credential status mechanism proposed by the holder to use for the credential. MAY contain additional properties if required for the status method.
+    - `type` - Credential status type proposed by the holder to use for the credential. Required if `credentialStatus` object is present.
 
 ### `ld-proof-vc-detail` attachment format
 
@@ -98,26 +115,29 @@ This format is used to formally offer or request a credential. It should contain
       "mime-type": "application/ld+json",
       "data": {
         "json": {
-          "@context": [
-            "https://www.w3.org/2018/credentials/v1",
-            "https://www.w3.org/2018/credentials/examples/v1"
-          ],
-          "type": ["VerifiableCredential", "AlumniCredential"],
-          "credentialSubject": {
-            "id": "did:key:z6MkodKV3mnjQQMB9jhMZtKD9Sm75ajiYq51JDLuRSPZTXrr"
-            // other attributes
+          "credential": {
+            "@context": [
+              "https://www.w3.org/2018/credentials/v1",
+              "https://www.w3.org/2018/credentials/examples/v1"
+            ],
+            "type": ["VerifiableCredential", "AlumniCredential"],
+            "credentialSubject": {
+              "id": "did:key:z6MkodKV3mnjQQMB9jhMZtKD9Sm75ajiYq51JDLuRSPZTXrr",
+              "degree": {
+                "type": "BachelorDegree",
+                "name": "Bachelor of Science and Arts"
+              }
+            },
+            "issuer": "did:key:z6MkodKV3mnjQQMB9jhMZtKD9Sm75ajiYq51JDLuRSPZTXrr",
+            "issuanceDate": "2020-01-01T19:23:24Z",
+            "expirationDate": "2021-01-01T19:23:24Z"
           },
-          "issuer": "did:key:z6MkodKV3mnjQQMB9jhMZtKD9Sm75ajiYq51JDLuRSPZTXrr",
-          "issuanceDate": "2020-01-01T19:23:24Z",
-          "expirationDate": "2020-01-01T19:23:24Z",
-          "credentialStatus": {
-            "type": "CredentialStatusList2017"
-          },
-          "credentialSchema": {
-            "id": "https://example.org/examples/degree.json",
-            "type": "JsonSchemaValidator2018"
-          },
-          "proofType": ["Ed25519Signature2018", "BbsBlsSignature2020"]
+          "options": {
+            "credentialStatus": {
+              "type": "CredentialStatusList2017"
+            },
+            "proofType": ["Ed25519Signature2018", "BbsBlsSignature2020"]
+          }
         }
       }
     }
@@ -125,18 +145,28 @@ This format is used to formally offer or request a credential. It should contain
 }
 ```
 
-An exhaustive description of the fields is out of scope here. Most fields are directly taken from the Verifiable Credential Data Model, and properties should align with the criteria described in the data model. A couple exceptions are made from the standard model:
+- `credential` - Required. Detail of the JSON-LD Credential that will be issued. Properties should align with the criteria described in the [Verifiable Credential Data Model](https://www.w3.org/TR/vc-data-model). The properties listed below are formally supported, but additional properties MAY be included if it conforms with the data model. A note indicates the property deviates from the criteria as defined by the data model.
 
-- `id` -- May be omitted in credential detail, but this doesn't mean the issued credential won't include an identifier.
-- `issuanceDate` -- Required in issued credential, but may be omitted in the credential detail. If present in the credential request it means the value will be used, otherwise a value will be picked by the issuer (most probably the current time).
-- `credentialStatus.id` -- Credential Status may be omitted completely, but if present the `id` property is required in the issued credential. As the id can be closely tied to the issuance process the property is not required for the credential request. `credentialStatus.type` is required if the credential is revocable.
-- `proofType` -- This is not a property defined by the VC data model, but indicates the proof types the holder requests for the credential. Entries match the `type` property of the [Proofs](https://www.w3.org/TR/vc-data-model/#proofs-signatures) object. Multiple entries indicate that the credential will contain multiple proofs.
+  - `@context`
+  - `type`
+  - `id`
+  - `issuer`
+  - `issuanceDate` - Optional. If specified the value from the credential detail must be used for the issued credential. If omitted the value will be set at time of issuance
+  - `expirationDate`
+  - `credentialSubject`
+  - `credentialSchema`
+
+- `options` - Required object defining additional options on how the credential is created.
+
+  - `proofType` - Required list of proof types indicating the proof types to use for the linked data proof. Entries should match suites registered in the [Linked Data Cryptographic Suite Registry](https://w3c-ccg.github.io/ld-cryptosuite-registry/). Multiple entries indicate that the credential will contain multiple proofs.
+  - `credentialStatus` - Optional object defining the credential status mechanism to use for the credential. MAY contain additional properties if required for the status method. Omitting the property indicates the issued credential will not include a credential status.
+    - `type` - Credential status method type to use for the credential. Required if `credentialStatus` object is present.
 
 ### `ld-proof-vc` attachment format
 
 Format identifier: `aries/ld-proof-vc@v1.0`
 
-This format is used to transmit a verifiable credential with linked data proof. The contents of the attachment is a standard JSON-LD Verifiable Credential object with linked data proof. The exact contents of the attachments match the properties from the [Verifiable Credential Data Model](https://www.w3.org/TR/vc-data-model) and the [Linked Data Proofs](https://w3c-ccg.github.io/ld-proofs) specification.
+This format is used to transmit a verifiable credential with linked data proof. The contents of the attachment is a standard JSON-LD Verifiable Credential object with linked data proof as defined by the [Verifiable Credential Data Model](https://www.w3.org/TR/vc-data-model) and the [Linked Data Proofs](https://w3c-ccg.github.io/ld-proofs) specification.
 
 ```json
 {
@@ -155,24 +185,29 @@ This format is used to transmit a verifiable credential with linked data proof. 
       "mime-type": "application/ld+json",
       "data": {
         "json": {
-          "@context": "https://www.w3.org/2018/credentials/v1",
-          "id": "https://eu.com/claims/DriversLicense",
-          "type": ["EUDriversLicense"],
-          "issuer": "did:foo:123",
-          "issuanceDate": "2010-01-01T19:73:24Z",
+          "@context": [
+            "https://www.w3.org/2018/credentials/v1",
+            "https://www.w3.org/2018/credentials/examples/v1"
+          ],
+          "id": "http://example.gov/credentials/3732",
+          "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+          "issuer": {
+            "id": "did:web:vc.transmute.world"
+          },
+          "issuanceDate": "2020-03-10T04:24:12.164Z",
           "credentialSubject": {
             "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
-            "license": {
-              "number": "34DGE352",
-              "dob": "07/13/80"
+            "degree": {
+              "type": "BachelorDegree",
+              "name": "Bachelor of Science and Arts"
             }
           },
           "proof": {
-            "type": "RsaSignature2018",
-            "created": "2017-06-18T21:19:10Z",
+            "type": "JsonWebSignature2020",
+            "created": "2020-03-21T17:51:48Z",
+            "verificationMethod": "did:web:vc.transmute.world#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
             "proofPurpose": "assertionMethod",
-            "verificationMethod": "https://example.edu/issuers/keys/1",
-            "jws": "..."
+            "jws": "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJFZERTQSJ9..OPxskX37SK0FhmYygDk-S4csY_gNhCUgSOAaXFXDTZx86CmI5nU9xkqtLWg-f4cqkigKDdMVdtIqWAvaYx2JBA"
           }
         }
       }
