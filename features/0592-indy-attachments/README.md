@@ -110,16 +110,18 @@ This is the format emitted by libindy's [indy_issuer_create_credential()](https:
 
 ```jsonc
 {
-"schema_id": "4RW6QK2HZhHxa2tg7t1jqt:2:bcgov-mines-act-permit.bcgov-mines-permitting:0.2.0",
-"cred_def_id": "4RW6QK2HZhHxa2tg7t1jqt:3:CL:58160:default",
-"rev_reg_def_id", "EyN78DDGHyok8qw6W96UBY:4:EyN78DDGHyok8qw6W96UBY:3:CL:56389:CardossierOrgPerson:CL_ACCUM:1-1000",
-"values": {
-    "attr1" : {"raw": "value1", "encoded": "value1_as_int" },
-    "attr2" : {"raw": "value1", "encoded": "value1_as_int" }
-},
-// Fields below can depend on Cred Def type
-"signature": <signature>,
-"signature_correctness_proof": <signature_correctness_proof>
+    "schema_id": "4RW6QK2HZhHxa2tg7t1jqt:2:bcgov-mines-act-permit.bcgov-mines-permitting:0.2.0",
+    "cred_def_id": "4RW6QK2HZhHxa2tg7t1jqt:3:CL:58160:default",
+    "rev_reg_id", "EyN78DDGHyok8qw6W96UBY:4:EyN78DDGHyok8qw6W96UBY:3:CL:56389:CardossierOrgPerson:CL_ACCUM:1-1000",
+    "values": {
+        "attr1" : {"raw": "value1", "encoded": "value1_as_int" },
+        "attr2" : {"raw": "value1", "encoded": "value1_as_int" }
+    },
+    // Fields below can depend on Cred Def type
+    "signature": <signature>,
+    "signature_correctness_proof": <signature_correctness_proof>
+    "rev_reg": <revocation registry state>
+    "witness": <witness>
 }
 ```
 
@@ -131,7 +133,7 @@ This format is used to formally request a verifiable presenation (proof) derived
 
 The identifier for this format is: `hlindy/proof-req@v2.0` It is a base64-encoded version of the data returned from [indy_prover_search_credentials_for_proof_req()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
 
-Here is a sample proof request that embodies the following: "Using a government-issued ID, disclose the credential holder’s name and height, hide the credential holder’s sex, get them to self-attest their phone number, and prove that their age is > 18":
+Here is a sample proof request that embodies the following: "Using a government-issued ID, disclose the credential holder’s name and height, hide the credential holder’s sex, get them to self-attest their phone number, and prove that their age is at least 18":
 
 ```jsonc
 {
@@ -139,10 +141,9 @@ Here is a sample proof request that embodies the following: "Using a government-
     "name":"proof_req_1",
     "version":"0.1",
     "requested_attributes":{
-        "attr1_referent": {"name":"name"},
-        "attr2_referent": {"name":"sex"},
-        "attr3_referent": {"name":"phone"},
-        "attr4_referent": {"names": ["name", "height"]}
+        "attr1_referent": {"name":"sex"},
+        "attr2_referent": {"name":"phone"},
+        "attr3_referent": {"names": ["name", "height"], "restrictions": <restrictions specifying government-issued ID>}
     },
     "requested_predicates":{
         "predicate1_referent":{"name":"age","p_type":">=","p_value":18}
