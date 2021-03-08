@@ -115,7 +115,7 @@ This is the format emitted by libindy's [indy_issuer_create_credential()](https:
     "rev_reg_id", "EyN78DDGHyok8qw6W96UBY:4:EyN78DDGHyok8qw6W96UBY:3:CL:56389:CardossierOrgPerson:CL_ACCUM:1-1000",
     "values": {
         "attr1" : {"raw": "value1", "encoded": "value1_as_int" },
-        "attr2" : {"raw": "value1", "encoded": "value1_as_int" }
+        "attr2" : {"raw": "value2", "encoded": "value2_as_int" }
     },
     // Fields below can depend on Cred Def type
     "signature": <signature>,
