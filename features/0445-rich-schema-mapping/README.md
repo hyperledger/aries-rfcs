@@ -225,7 +225,9 @@ This means the following methods can be used:
 [reference]: #reference
 
 The following is a 
-[reference implementation of various transformation algorithms](https://github.com/sovrin-foundation/aries-credx-framework-rs/blob/master/src/encoding/mod.rs). [Here](https://www.researchgate.net/publication/220922101_A_Signature_Scheme_with_Efficient_Protocols) is the paper that defines Camenisch-Lysyanskaya signatures.
+[reference implementation of various transformation algorithms](https://github.com/sovrin-foundation/aries-credx-framework-rs/blob/master/src/encoding/mod.rs).
+
+[Here](https://www.researchgate.net/publication/220922101_A_Signature_Scheme_with_Efficient_Protocols) is the paper that defines Camenisch-Lysyanskaya signatures.
 
 - [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
 - [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common) 
