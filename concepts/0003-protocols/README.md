@@ -502,7 +502,7 @@ to move the interaction forward.)
 
 #### Roles
 
-The __roles__ in a protocol are the perspectives (responsibilities, privileges) that parties take i an
+The __roles__ in a protocol are the perspectives (responsibilities, privileges) that parties take in an
 interaction.
 
 This perspective is manifested in three general ways:
