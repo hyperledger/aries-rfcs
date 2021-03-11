@@ -20,9 +20,59 @@ Allows Indy-style credentials to be used with credential-related protocols that 
 
 ## Reference
 
+### cred filter format
+
+The potential holder uses this format to propose criteria for a potential credential for the issuer to offer.
+
+The identifier for this format is: `hlindy/cred-filter@v2.0` It is a base64-encoded version of the data structure specifying zero or more criteria from the following (non-base64-encoded) structure:
+
+```jsonc
+{
+    "schema_issuer_did": "<schema_issuer_did>",
+    "schema_name": "<schema_name>",
+    "schema_version": "<schema_version>",
+    "schema_id": "<schema_identifier>",
+    "issuer_did": "<issuer_did>",
+    "cred_def_id": "<credential_definition_identifier>"
+}
+```
+
+The potential holder may not know, and need not specify, all of these criteria. For example, the holder might only know the schema name and the (credential) issuer DID. Recall that the potential holder may specify target attribute values and MIME types in the [credential preview](../0453-issue-credential-v2/README.md#preview-credential).
+
+For example, the JSON (non-base64-encoded) structure might look like this:
+
+```json
+{
+    "schema_issuer_did": "did:sov:4RW6QK2HZhHxa2tg7t1jqt",
+    "schema_name": "bcgov-mines-act-permit.bcgov-mines-permitting",
+    "issuer_did": "did:sov:4RW6QK2HZhHxa2tg7t1jqt"
+}
+```
+
+A complete [`propose-credential` message from the Issue Credential protocol 2.0](../0453-issue-credential-v2/README.md#propose-credential) embeds this format at `/filters~attach/data/base64`:
+
+```json
+{
+    "@id": "<uuid of propose message>",
+    "@type": "https://didcomm.org/issue-credential/%VER/propose-credential",
+    "comment": "<some comment>",
+    "formats" : [{
+        "attach_id": "<attachment identifier>",
+        "format": "hlindy/cred-filter@v2.0"
+    }],
+    "filters~attach": [{
+        "@id": "<attachment identifier>",
+        "mime-type": "application/json",
+        "data": {
+            "base64": "ewogICAgInNjaGVtYV9pc3N1ZXJfZGlkIjogImRpZDpzb3Y... (clipped)... LMkhaaEh4YTJ0Zzd0MWpxdCIKfQ=="
+        }
+    }]
+}
+```
+
 ### cred abstract format
 
-This format is used to clarify the structure and semantics (but not the concrete data values) of a potential credential -- both in proposals sent from potential holder to issuer, and in offers sent from issuer to potential holder.
+This format is used to clarify the structure and semantics (but not the concrete data values) of a potential credential, in offers sent from issuer to potential holder.
 
 The identifier for this format is: `hlindy/cred-abstract@v2.0` It is a base64-encoded version of the data returned from [`indy_issuer_create_credential_offer()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
 
@@ -37,24 +87,30 @@ The JSON (non-base64-encoded) structure might look like this:
 }
 ```
 
-A complete [`propose-credential` message from the Issue Credential protocol 2.0](../0453-issue-credential-v2/README.md#propose-credential) embeds this format at `/filters~attach/data/base64`:
+A complete [`offer-credential` message from the Issue Credential protocol 2.0](../0453-issue-credential-v2/README.md#offer-credential) embeds this format at `/offers~attach/data/base64`:
 
 ```json
 {
-    "@id": "8639505e-4ec5-41b9-bb31-ac6a7b800fe7",
-    "@type": "https://didcomm.org/issue-credential/%VER/propose-credential",
+    "@type": "https://didcomm.org/issue-credential/%VER/offer-credential",
+    "@id": "<uuid of offer message>",
+    "replacement_id": "<issuer unique id>",
     "comment": "<some comment>",
-    "formats" : [{
-        "attach_id": "b45ca1bc-5b3c-4672-a300-84ddf6fbbaea",
-        "format": "hlindy/cred-abstract@v2.0"
-    }],
-    "filters~attach": [{
-        "@id": "b45ca1bc-5b3c-4672-a300-84ddf6fbbaea",
-        "mime-type": "application/indy-cred-abstract",
-        "data": {
-            "base64": "ewogICAgInNjaGVtYV9pZCI6ICI0Ulc2UUsySFpoS... (clipped)... jb3JyZWN0bmVzc19wcm9vZj4KfQ=="
+    "credential_preview": <json-ld object>,
+    "formats" : [
+        {
+            "attach_id" : "<attach@id value>",
+            "format": "hlindy/cred-abstract@v2.0"
         }
-    }]
+    ],
+    "offers~attach": [
+        {
+            "@id": "<attach@id value>",
+            "mime-type": "application/json",
+            "data": {
+                "base64": "ewogICAgInNjaGVtYV9pZCI6ICI0Ulc2UUsySFpoS... (clipped)... jb3JyZWN0bmVzc19wcm9vZj4KfQ=="
+            }
+        }
+    ]
 }
 ```
 
@@ -92,7 +148,7 @@ A complete [`request-credential` message from the Issue Credential protocol 2.0]
     }],
     "requests~attach": [{
         "@id": "7cd11894-838a-45c0-a9ec-13e2d9d125a1",
-        "mime-type": "application/indy-cred-req",
+        "mime-type": "application/json",
         "data": {
             "base64": "ewogICAgInByb3Zlcl9kaWQiIDogImRpZDpzb3Y6YWJjeHl.. (clipped)... DAtNTdhNi00ZjA4LWFjZTAtOWM1MjEwZTE2YzMyIgp9"
         }
@@ -102,7 +158,7 @@ A complete [`request-credential` message from the Issue Credential protocol 2.0]
 
 ### credential format
 
-A concrete, issued Indy credential may be transmitted over many protocols, but is specifically expected as the final message in [Issuance Protocol 2.0](../0453-issue-credential-v2/README.md). The identifier for its format is `hlindy/cred@v2.0`, and its media (MIME) type is `application/indy-cl-anoncred2`.
+A concrete, issued Indy credential may be transmitted over many protocols, but is specifically expected as the final message in [Issuance Protocol 2.0](../0453-issue-credential-v2/README.md). The identifier for its format is `hlindy/cred@v2.0`.
 
 This is a credential that's designed to be _held_ but not _shared directly_. It is stored in the holder's wallet and used to [derive a novel ZKP](https://youtu.be/bnbNtjsKb4k?t=1280) or [W3C-compatible verifiable presentation](https://docs.google.com/document/d/1ntLZGMah8iJ_TWQdbrNNW9OVwPbIWkkCMiid7Be1PrA/edit#heading=h.vw0mboesl528) just in time for each sharing of credential material.
 
