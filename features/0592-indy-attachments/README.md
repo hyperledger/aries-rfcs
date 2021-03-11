@@ -57,11 +57,11 @@ A complete [`propose-credential` message from the Issue Credential protocol 2.0]
     "@type": "https://didcomm.org/issue-credential/%VER/propose-credential",
     "comment": "<some comment>",
     "formats" : [{
-        "attach_id": "<attachment identifier>",
+        "attach_id": "<attach@id value>",
         "format": "hlindy/cred-filter@v2.0"
     }],
     "filters~attach": [{
-        "@id": "<attachment identifier>",
+        "@id": "<attach@id value>",
         "mime-type": "application/json",
         "data": {
             "base64": "ewogICAgInNjaGVtYV9pc3N1ZXJfZGlkIjogImRpZDpzb3Y... (clipped)... LMkhaaEh4YTJ0Zzd0MWpxdCIKfQ=="
