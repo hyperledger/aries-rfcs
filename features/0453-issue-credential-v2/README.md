@@ -146,7 +146,7 @@ Description of attributes:
 
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-DIF Credential Manifest | `dif@v1.0` | [`propose-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#propose-credential-attachment-format) | 
+DIF Credential Manifest | `dif/cred-manifest@v1.0` | [`propose-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#propose-credential-attachment-format) | 
 Hyperledger Indy Credential Abstract | `hlindy@v2.0` | [`cred filter` format](../0592-indy-attachments/README.md#cred-filter-format)|
 
 #### Offer Credential
@@ -196,7 +196,7 @@ It is possible for an Issuer to add a [`~timing.expires_time` decorator](../0032
 
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-DIF Credential Manifest | `dif@v1.0` | [`offer-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#offer-credential-attachment-format) | 
+DIF Credential Manifest | `dif/cred-manifest@v1.0` | [`offer-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#offer-credential-attachment-format) | 
 Hyperledger Indy Credential Abstract | `hlindy@v2.0` | [`cred abstract` format](../0592-indy-attachments/README.md#cred-abstract-format)|
 
 #### Request Credential
@@ -240,7 +240,7 @@ This message may have a [`~payment-receipt` decorator](../0075-payment-decorator
 
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-DIF Credential Manifest | `dif@v1.0` | [`request-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#request-credential-attachment-format) | 
+DIF Credential Manifest | `dif/cred-manifest@v1.0` | [`request-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#request-credential-attachment-format) | 
 Hyperledger Indy Credential Request | `hlindy@v2.0` | [`cred request` format](../0592-indy-attachments/README.md#cred-request-format)|
 
 #### Issue Credential

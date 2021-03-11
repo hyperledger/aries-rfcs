@@ -141,7 +141,7 @@ Negotiation prior to the delivery of the presentation can be done using the `pro
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 Hyperledger Indy Proof Req| hlindy@v2.0 | [proof request format](../0592-indy-attachments/README.md#proof-request-format) | Used to propose as well as request proofs.
-DIF Presentation Exchange | `dif@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#propose-presentation-attachment-format) | 
+DIF Presentation Exchange | `dif/pres-exch@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#propose-presentation-attachment-format) | 
 
 ### Request Presentation
 
@@ -183,7 +183,7 @@ Description of fields:
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 Hyperledger Indy Proof Req| hlindy@v2.0 | [proof request format](../0592-indy-attachments/README.md#proof-request-format) | Used to propose as well as request proofs.
-DIF Presentation Exchange | `dif@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#request-presentation-attachment-format) | 
+DIF Presentation Exchange | `dif/pres-exch@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#request-presentation-attachment-format) | 
 
 ### Presentation
 
@@ -226,7 +226,7 @@ A prover may include the [`~please_ack` decorator](../0015-acks/README.md#reques
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 Hyperledger Indy Proof | hlindy@v2.0 | [proof format](../0592-indy-attachments/README.md#proof-format) |
-DIF Presentation Exchange | `dif@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#presentation-attachment-format) | 
+DIF Presentation Exchange | `dif/pres-exch@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#presentation-attachment-format) | 
 
 ### Ack Presentation
 
