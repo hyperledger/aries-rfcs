@@ -76,7 +76,7 @@ This protocol is about the messages that must be exchanged to issue verifiable c
 
 The attachment items in the messages are arrays. The arrays are provided to support the issuing of different credential formats (e.g. ZKP, JSON-LD JWT, or other) containing the same data (claims). The arrays are not to be used for issuing credentials with different claims. The `formats` field of each message associates each attachment with the format (and version) of the attachment.
 
-A registry of attachment formats is provided in this RFC within the message type sections. A sub-section should be added for each attachment format type (and optionally, each version). Updates to the attachment type formats does **NOT** impact the versioning of the Issue Credential protocol. Formats are flexibly defined. For example, the first definitions are for `hlindy`, assuming that all Hyperledger Indy implementations and ledgers will use a common format. However, if a specific instance of Indy uses a different format, another format value can be documented as a new registry entry.
+A registry of attachment formats is provided in this RFC within the message type sections. A sub-section should be added for each attachment format type (and optionally, each version). Updates to the attachment type formats does **NOT** impact the versioning of the Issue Credential protocol. Formats are flexibly defined. For example, the first definitions are for `hlindy/cred-abstract@v2.0` et al., assuming that all Hyperledger Indy implementations and ledgers will use a common format. However, if a specific instance of Indy uses a different format, another format value can be documented as a new registry entry.
 
 Any of the [0017-attachments RFC](../../concepts/0017-attachments/README.md#json) embedded inline attachments can be used. In the examples below, `base64` is used in most cases, but implementations MUST expect any of the formats.
 
@@ -146,8 +146,8 @@ Description of attributes:
 
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-DIF Credential Manifest | `dif/cred-manifest@v1.0` | [`propose-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#propose-credential-attachment-format) | 
-Hyperledger Indy Credential Abstract | `hlindy@v2.0` | [`cred filter` format](../0592-indy-attachments/README.md#cred-filter-format)|
+DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`propose-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#propose-credential-attachment-format) | 
+Hyperledger Indy Credential Abstract | `hlindy@cred-filter@v2.0` | [`cred filter` format](../0592-indy-attachments/README.md#cred-filter-format)|
 
 #### Offer Credential
 
@@ -196,8 +196,8 @@ It is possible for an Issuer to add a [`~timing.expires_time` decorator](../0032
 
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-DIF Credential Manifest | `dif/cred-manifest@v1.0` | [`offer-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#offer-credential-attachment-format) | 
-Hyperledger Indy Credential Abstract | `hlindy@v2.0` | [`cred abstract` format](../0592-indy-attachments/README.md#cred-abstract-format)|
+DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`offer-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#offer-credential-attachment-format) | 
+Hyperledger Indy Credential Abstract | `hlindy/cred-abstract@v2.0` | [`cred abstract` format](../0592-indy-attachments/README.md#cred-abstract-format)|
 
 #### Request Credential
 
@@ -240,8 +240,8 @@ This message may have a [`~payment-receipt` decorator](../0075-payment-decorator
 
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-DIF Credential Manifest | `dif/cred-manifest@v1.0` | [`request-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#request-credential-attachment-format) | 
-Hyperledger Indy Credential Request | `hlindy@v2.0` | [`cred request` format](../0592-indy-attachments/README.md#cred-request-format)|
+DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`request-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#request-credential-attachment-format) | 
+Hyperledger Indy Credential Request | `hlindy/cred-req@v2.0` | [`cred request` format](../0592-indy-attachments/README.md#cred-request-format)|
 
 #### Issue Credential
 
@@ -286,7 +286,7 @@ If the issuer wants an acknowledgement that the issued credential was accepted, 
 
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-Hyperledger Indy Credential | `hlindy@v2.0` | [credendtial format](../0592-indy-attachments/README.md#credential-format)|
+Hyperledger Indy Credential | `hlindy/cred@v2.0` | [credential format](../0592-indy-attachments/README.md#credential-format)|
 
 #### Preview Credential
 

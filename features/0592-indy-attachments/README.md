@@ -24,7 +24,7 @@ Allows Indy-style credentials to be used with credential-related protocols that 
 
 The potential holder uses this format to propose criteria for a potential credential for the issuer to offer.
 
-The identifier for this format is `hlindy@v2.0` in the context of a Propose Credential message. It is a base64-encoded version of the data structure specifying zero or more criteria from the following (non-base64-encoded) structure:
+The identifier for this format is `hlindy/cred-filter@v2.0`. It is a base64-encoded version of the data structure specifying zero or more criteria from the following (non-base64-encoded) structure:
 
 ```jsonc
 {
@@ -58,7 +58,7 @@ A complete [`propose-credential` message from the Issue Credential protocol 2.0]
     "comment": "<some comment>",
     "formats" : [{
         "attach_id": "<attach@id value>",
-        "format": "hlindy@v2.0"
+        "format": "hlindy/cred-filter@v2.0"
     }],
     "filters~attach": [{
         "@id": "<attach@id value>",
@@ -74,7 +74,7 @@ A complete [`propose-credential` message from the Issue Credential protocol 2.0]
 
 This format is used to clarify the structure and semantics (but not the concrete data values) of a potential credential, in offers sent from issuer to potential holder.
 
-The identifier for this format is `hlindy@v2.0` in the context of an Offer Credential message. It is a base64-encoded version of the data returned from [`indy_issuer_create_credential_offer()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
+The identifier for this format is `hlindy/cred-abstract@v2.0`. It is a base64-encoded version of the data returned from [`indy_issuer_create_credential_offer()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
 
 The JSON (non-base64-encoded) structure might look like this:
 
@@ -99,7 +99,7 @@ A complete [`offer-credential` message from the Issue Credential protocol 2.0](.
     "formats" : [
         {
             "attach_id" : "<attach@id value>",
-            "format": "hlindy@v2.0"
+            "format": "hlindy/cred-abstract@v2.0"
         }
     ],
     "offers~attach": [
@@ -120,7 +120,7 @@ The same structure can be embedded at `/offers~attach/data/base64` in an [`offer
 
 This format is used to formally request a credential. It differs from the credential abstract above in that it contains a cryptographic commitment to a link secret; an issuer can therefore use it to bind a concrete instance of an issued credential to the appropriate holder. (In contrast, the credential abstract describes the schema and cred def, but not enough information to actually issue to a specific holder.)
 
-The identifier for this format is `hlindy@v2.0` in the context of a Request Credential message. It is a base64-encoded version of the data returned from [indy_prover_create_credential_req()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
+The identifier for this format is `hlindy/cred-req@v2.0`. It is a base64-encoded version of the data returned from [indy_prover_create_credential_req()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
 
 The JSON (non-base64-encoded) structure might look like this:
 
@@ -158,7 +158,7 @@ A complete [`request-credential` message from the Issue Credential protocol 2.0]
 
 ### credential format
 
-A concrete, issued Indy credential may be transmitted over many protocols, but is specifically expected as the final message in [Issuance Protocol 2.0](../0453-issue-credential-v2/README.md). The identifier for its format is `hlindy@v2.0` in the context of an Issue Credential message.
+A concrete, issued Indy credential may be transmitted over many protocols, but is specifically expected as the final message in [Issuance Protocol 2.0](../0453-issue-credential-v2/README.md). The identifier for its format is `hlindy/cred@v2.0`.
 
 This is a credential that's designed to be _held_ but not _shared directly_. It is stored in the holder's wallet and used to [derive a novel ZKP](https://youtu.be/bnbNtjsKb4k?t=1280) or [W3C-compatible verifiable presentation](https://docs.google.com/document/d/1ntLZGMah8iJ_TWQdbrNNW9OVwPbIWkkCMiid7Be1PrA/edit#heading=h.vw0mboesl528) just in time for each sharing of credential material.
 
@@ -187,7 +187,7 @@ An exhaustive description of the format is out of scope here; it is more complet
 
 This format is used to formally request a verifiable presenation (proof) derived from an Indy-style ZKP-oriented credential. It can also be used by a holder to _propose_ a presentation.
 
-The identifier for this format is `hlindy@v2.0` in the context of a Propose Presentation or Request Presentation message. It is a base64-encoded version of the data returned from [indy_prover_search_credentials_for_proof_req()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
+The identifier for this format is `hlindy/proof-req@v2.0`. It is a base64-encoded version of the data returned from [indy_prover_search_credentials_for_proof_req()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
 
 Here is a sample proof request that embodies the following: "Using a government-issued ID, disclose the credential holder’s name and height, hide the credential holder’s sex, get them to self-attest their phone number, and prove that their age is at least 18":
 
@@ -211,7 +211,7 @@ Here is a sample proof request that embodies the following: "Using a government-
 
 This is the format of an Indy-style ZKP. It plays the same role as a W3C-style verifiable presentation (VP) and can be [mapped to one](https://docs.google.com/document/d/1ntLZGMah8iJ_TWQdbrNNW9OVwPbIWkkCMiid7Be1PrA/edit#heading=h.vw0mboesl528).
 
-The identifier for this format is `hlindy@v2.0` in the context of a Presentation message. It is the base64-encoded version of the data emitted by libindy's [indy_prover_create_proof()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404)) function. A (non-base64-encoded) proof that responds to the [previous proof request sample](#proof-request-format) looks like this:
+The identifier for this format is `hlindy/proof@v2.0`. It is a version of the (JSON-based) data emitted by libindy's [indy_prover_create_proof()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404)) function. A proof that responds to the [previous proof request sample](#proof-request-format) looks like this:
 
 ```jsonc
 {
