@@ -1,7 +1,7 @@
 # Aries RFC 0044: DIDComm File and MIME Types
 
 - Authors: Daniel Hardman, Kyle Den Hartog
-- Status: [Accepted](/README.md#accepted)
+- Status: [ACCEPTED](/README.md#accepted)
 - Since: 2021-03-15
 - Status Note: Socialized and accepted within Indy community, and used in several implementations of protocols that want to associate a media (MIME) type with an HTTP payload. Updated in Dec 2020 to include [information about detecting DIDComm v2](#detecting-didcomm-versions).
 - Supersedes: [Indy HIPE 0026]( https://github.com/hyperledger/indy-hipe/blob/master/text/0026-agent-file-format/README.md)
