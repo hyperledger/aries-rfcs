@@ -1,9 +1,9 @@
 # Aries RFC 0035: Report Problem Protocol 1.0
 
 - Authors: [Stephen Curran](swcurran@cloudcompass.ca), [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-04-01
-- Status Note: Implemented in several codebases. Not yet fully harmonized.
+- Status: [Approved](/README.md#approved)
+- Since: 2021-03-15
+- Status Note: Implemented in multiple codebases.
 - Supersedes: [Indy HIPE PR #65]( https://github.com/hyperledger/indy-hipe/pull/65)
 - Start Date: 2018-11-26
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
