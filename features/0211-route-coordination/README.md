@@ -1,8 +1,8 @@
 # 0211: Mediator Coordination Protocol
 - Authors: [Sam Curren](telegramsam@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-09-03
-- Status Note: Initial version, still under discussion. Previously named `Route Coordination Protocol`.
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-03-15
+- Status Note: Discussed and implemented and part of AIP 2.0.
 - Start Date: 2019-09-03
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
@@ -88,11 +88,15 @@ A route grant message is a signal from the mediator to the recipient that permis
 
 }
 ```
+
 Questions:
+
 - What about multiple endpoint options? http and ws?
 
 ### Keylist Update
+
 Used to notify the _mediator_ of keys in use by the _recipient_.
+
 ```jsonc
 {
     "@id": "123456781",
@@ -105,8 +109,11 @@ Used to notify the _mediator_ of keys in use by the _recipient_.
     ]
 }
 ```
+
 ### Keylist Update Response
+
 Confirmation of requested keylist updates.
+
 ```jsonc
 {
     "@id": "123456781",
@@ -120,8 +127,11 @@ Confirmation of requested keylist updates.
     ]
 }
 ```
+
 Questions:
+
 - What types of errors are possible here?
+
 ### Key List Query
 
 ```jsonc
@@ -137,7 +147,9 @@ Questions:
     }
 }
 ```
+
 Questions:
+
 - Filters feels odd here. Asking to see if a key is registered makes sense, but what else to filter on?
 
 ### Key List
@@ -166,7 +178,6 @@ All keys are encoded using the [`did:key`](https://w3c-ccg.github.io/did-method-
 
 There was an Indy HIPE that never made it past the PR process that described a similar approach. That HIPE led to a partial implementation of this inside the Aries Cloud Agent Python
 
-
 ## Unresolved questions
 
 - Still considering alternatives to convey the right meaning.
@@ -182,4 +193,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- |  |
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python/blob/main/Mediation.md) | Added in ACA-Py 0.6.0

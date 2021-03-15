@@ -1,0 +1,36 @@
+Aries Interop Profile: 1.0
+>>>>>>>> Changed protocol: concepts/0003-protocols, latest commit to protocol: 89e5e73235299c5d32d4c7cbee28567672c82672
+>>>>>>>> Changed protocol: concepts/0004-agents, latest commit to protocol: 5f350d4a2687f846df8f11d2b1afe563a0284f3c
+>>>>>>>> Changed protocol: concepts/0005-didcomm, latest commit to protocol: f7f13bd92a702eeacff7de1aee2feac2cca8a92a
+>>>>>>>> Changed protocol: concepts/0008-message-id-and-threading, latest commit to protocol: 6c037391fc986a454dc3f0737aff8e856ac100d3
+>>>>>>>> Changed protocol: concepts/0011-decorators, latest commit to protocol: 139136275370b92c90a0d2fb775719d0c7f0cb9e
+>>>>>>>> Changed protocol: concepts/0017-attachments, latest commit to protocol: fb0808025188c7dd785c3067c282c1753541494d
+>>>>>>>> Changed protocol: concepts/0020-message-types, latest commit to protocol: 745f8d0644a30034fb77aaf8e3d78b75c2c17594
+>>>>>>>> Changed protocol: concepts/0046-mediators-and-relays, latest commit to protocol: 720bdab50e2d0437fda03028c1b17c69781bdd69
+>>>>>>>> Changed protocol: concepts/0047-json-ld-compatibility, latest commit to protocol: 1e9439c2db6b8f78f63dbcda9c9a008923e8e084
+>>>>>>>> Changed protocol: concepts/0094-cross-domain-messaging, latest commit to protocol: 6509b84abaf5760a8ba1744c8078d513f28456db
+>>>>>>>> Changed protocol: features/0015-acks, latest commit to protocol: 6509b84abaf5760a8ba1744c8078d513f28456db
+>>>>>>>> Changed protocol: features/0019-encryption-envelope, latest commit to protocol: f256ab07a23df65b3f5a0e56fcad0e9e55d57e33
+>>>>>>>> Changed protocol: features/0160-connection-protocol, latest commit to protocol: 6509b84abaf5760a8ba1744c8078d513f28456db
+>>>>>>>> Changed protocol: features/0025-didcomm-transports, latest commit to protocol: eab90f87a2a18d7b04e1b4e20a85a7c3a297ab70
+>>>>>>>> Changed protocol: features/0035-report-problem, latest commit to protocol: 6509b84abaf5760a8ba1744c8078d513f28456db
+>>>>>>>> Changed protocol: features/0036-issue-credential, latest commit to protocol: 6509b84abaf5760a8ba1744c8078d513f28456db
+>>>>>>>> Changed protocol: features/0037-present-proof, latest commit to protocol: 6509b84abaf5760a8ba1744c8078d513f28456db
+Aries Interop Profile: 2.0
+>>>>>>>> Changed protocol: concepts/0003-protocols, latest commit to protocol: 89e5e73235299c5d32d4c7cbee28567672c82672
+>>>>>>>> Changed protocol: concepts/0004-agents, latest commit to protocol: 5f350d4a2687f846df8f11d2b1afe563a0284f3c
+>>>>>>>> Changed protocol: concepts/0005-didcomm, latest commit to protocol: f7f13bd92a702eeacff7de1aee2feac2cca8a92a
+>>>>>>>> Changed protocol: concepts/0008-message-id-and-threading, latest commit to protocol: 6c037391fc986a454dc3f0737aff8e856ac100d3
+>>>>>>>> Changed protocol: concepts/0011-decorators, latest commit to protocol: 139136275370b92c90a0d2fb775719d0c7f0cb9e
+>>>>>>>> Changed protocol: concepts/0017-attachments, latest commit to protocol: fb0808025188c7dd785c3067c282c1753541494d
+>>>>>>>> Changed protocol: concepts/0020-message-types, latest commit to protocol: 745f8d0644a30034fb77aaf8e3d78b75c2c17594
+>>>>>>>> Changed protocol: concepts/0046-mediators-and-relays, latest commit to protocol: 720bdab50e2d0437fda03028c1b17c69781bdd69
+>>>>>>>> Changed protocol: concepts/0047-json-ld-compatibility, latest commit to protocol: 1e9439c2db6b8f78f63dbcda9c9a008923e8e084
+>>>>>>>> Changed protocol: concepts/0094-cross-domain-messaging, latest commit to protocol: 6509b84abaf5760a8ba1744c8078d513f28456db
+>>>>>>>> Changed protocol: features/0015-acks, latest commit to protocol: 6509b84abaf5760a8ba1744c8078d513f28456db
+>>>>>>>> Changed protocol: features/0019-encryption-envelope, latest commit to protocol: f256ab07a23df65b3f5a0e56fcad0e9e55d57e33
+>>>>>>>> Changed protocol: features/0160-connection-protocol, latest commit to protocol: 6509b84abaf5760a8ba1744c8078d513f28456db
+>>>>>>>> Changed protocol: features/0025-didcomm-transports, latest commit to protocol: eab90f87a2a18d7b04e1b4e20a85a7c3a297ab70
+>>>>>>>> Changed protocol: features/0035-report-problem, latest commit to protocol: 6509b84abaf5760a8ba1744c8078d513f28456db
+>>>>>>>> Changed protocol: features/0036-issue-credential, latest commit to protocol: 6509b84abaf5760a8ba1744c8078d513f28456db
+>>>>>>>> Changed protocol: features/0037-present-proof, latest commit to protocol: 6509b84abaf5760a8ba1744c8078d513f28456db
