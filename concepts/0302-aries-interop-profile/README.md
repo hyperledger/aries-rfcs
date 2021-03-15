@@ -153,75 +153,75 @@ The following are the goals used in selecting RFC versions for inclusion in AIP 
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Concept | [0003-protocols](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0003-protocols) | AIP V1.0, Updated
-Concept | [0004-agents](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0004-agents) | AIP V1.0, Updated
-Concept | [0005-didcomm](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0005-didcomm) | AIP V1.0, Updated
-Concept | [0008-message-id-and-threading](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0008-message-id-and-threading) | AIP V1.0, Updated
-Concept | [0011-decorators](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0011-decorators) | AIP V1.0, Updated
-Concept | [0017-attachments](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0017-attachments) | AIP V1.0, Updated
-Concept | [0020-message-types](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0020-message-types) | AIP V1.0, Updated
-Concept | [0046-mediators-and-relays](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0046-mediators-and-relays) | AIP V1.0, Updated
-Concept | [0047-json-LD-compatibility](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0047-json-ld-compatibility) | AIP V1.0, Updated
-Concept | [0050-wallets](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0050-wallets) | AIP V1.0, Unchanged
-Concept | [0094-cross-domain messaging](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0094-cross-domain-messaging) | AIP V1.0, Updated
-Concept | [0519-goal-codes](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0519-goal-codes) | :new:
-Feature | [0015-acks](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0015-acks) | AIP V1.0, Updated
-Feature | [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0019-encryption-envelope) | AIP V1.0, Updated
-Feature | [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0023-did-exchange) | :new:
-Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0025-didcomm-transports) | AIP V1.0, Updated
-Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0035-report-problem) | AIP V1.0, Updated
-Features | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0044-didcomm-file-and-mime-types) | :question: **Under Consideration**
-Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0048-trust-ping) | :new:
-Feature | [0360-use-did-key](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0360-use-did-key) | :question: **Under Consideration**
-Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0434-outofband) | :new:
-Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0557-discover-features-v2) | :new:
-Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0183-revocation-notification) | :question: **Under Consideration**
-Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0453-issue-credential-v2) | AIP V1.0, **Update to V2**
-Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0454-present-proof-v2) | AIP V1.0, **Update to V2**
+Concept | [0003-protocols](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0003-protocols) | AIP V1.0, Updated
+Concept | [0004-agents](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0004-agents) | AIP V1.0, Updated
+Concept | [0005-didcomm](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0005-didcomm) | AIP V1.0, Updated
+Concept | [0008-message-id-and-threading](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0008-message-id-and-threading) | AIP V1.0, Updated
+Concept | [0011-decorators](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0011-decorators) | AIP V1.0, Updated
+Concept | [0017-attachments](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0017-attachments) | AIP V1.0, Updated
+Concept | [0020-message-types](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0020-message-types) | AIP V1.0, Updated
+Concept | [0046-mediators-and-relays](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0046-mediators-and-relays) | AIP V1.0, Updated
+Concept | [0047-json-LD-compatibility](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0047-json-ld-compatibility) | AIP V1.0, Updated
+Concept | [0050-wallets](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0050-wallets) | AIP V1.0, Unchanged
+Concept | [0094-cross-domain messaging](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0094-cross-domain-messaging) | AIP V1.0, Updated
+Concept | [0519-goal-codes](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0519-goal-codes) | :new:
+Feature | [0015-acks](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0015-acks) | AIP V1.0, Updated
+Feature | [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0019-encryption-envelope) | AIP V1.0, Updated
+Feature | [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0023-did-exchange) | :new:
+Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0025-didcomm-transports) | AIP V1.0, Updated
+Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0035-report-problem) | AIP V1.0, Updated
+Features | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0044-didcomm-file-and-mime-types) | :question: **Under Consideration**
+Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0048-trust-ping) | :new:
+Feature | [0360-use-did-key](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0360-use-did-key) | :question: **Under Consideration**
+Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0434-outofband) | :new:
+Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0557-discover-features-v2) | :new:
+Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0183-revocation-notification) | :question: **Under Consideration**
+Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0453-issue-credential-v2) | AIP V1.0, **Update to V2**
+Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0454-present-proof-v2) | AIP V1.0, **Update to V2**
 
 #### MEDIATE: Mediator Coordination
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0211-route-coordination) | :new: 
+Feature | [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0211-route-coordination) | :new: 
 
 #### INDYCRED: Indy Based Credentials
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0xxx-indy-anoncreds-credential-exchange-attachments](#) | Added from AIP V1.0
-Concept | [0441-present-proof-best-practices](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/concepts/0441-present-proof-best-practices) | :question: **Under Consideration**<br>Indy AnonCreds specific
+Feature | [0592-indy-attachments](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0592-indy-attachments) | Added from AIP V1.0
+Concept | [0441-present-proof-best-practices](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/concepts/0441-present-proof-best-practices) | :new
 
 #### LDCRED: JSON-LD Based Credentials
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0xxx-json-ld-ld-siognatures-credential-exchange-attachments](#) | :new:
-&nbsp; | Format: LD Signatures | :question: **Under Consideration**
+Feature | [PR: 0593-json-ld-cred-attach](https://github.com/hyperledger/aries-rfcs/pull/593) | :new:
+Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0510-dif-pres-exch-attach) | :new
 
 #### BBSCRED: BBS+ Based Credentials
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
 Feature | [0xxx-bbs+-signature-credential-exchange-attachments](#) | :new:
-&nbsp; | Format: BBS+ Signatures | :question: **Under Consideration**
+Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0510-dif-pres-exch-attach) | :new
 
 #### DIFPX: DIF Presentation Exchange Support
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0510-dif-pres-exch-attach) | :question: **Under Consideration**
+Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0510-dif-pres-exch-attach) | :new
 
 #### DIDCOMMV2PREP: DIDComm v2 Prep
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0334-jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0334-jwe-envelope) | :question: **Under Consideration**
-Feature | [PR 0587-jwe-authcrypt](https://github.com/hyperledger/aries-rfcs/pull/587) | :question: **Under Consideration**
+Feature | [0334-jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0334-jwe-envelope) | :question: **Under Consideration**
+Feature | [0587-encryption-envelope-v2](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0587-encryption-envelope-v2) | :new
 
 #### CHAT: Chat related features
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0095-basic-message](https://github.com/hyperledger/aries-rfcs/tree/be4ad0a6fb2823bb1fc109364c96f077d5d8dffa/features/0095-basic-message) | :question: **Under Consideration**
+Feature | [0095-basic-message](https://github.com/hyperledger/aries-rfcs/tree/9363159d517afa3c17a79b5d8394e933c652de84/features/0095-basic-message) | :question: **Under Consideration**
 
 #### AIP v2.0 Test Suite
 
