@@ -4,7 +4,7 @@
 - Since: 2021-03-15
 - Status Note: Discussed and implemented and part of AIP 2.0.
 - Start Date: 2019-09-03
-- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -193,4 +193,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python/blob/main/Mediation.md) | Added in ACA-Py 0.6.0
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python/blob/main/Mediation.md) | Added in ACA-Py 0.6.0 [MISSING test results](/tags.md#test-anomaly)
