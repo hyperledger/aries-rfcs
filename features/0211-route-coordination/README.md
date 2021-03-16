@@ -1,10 +1,10 @@
 # 0211: Mediator Coordination Protocol
-- Authors: [Sam Curren](telegramsam@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-09-03
-- Status Note: Initial version, still under discussion. Previously named `Route Coordination Protocol`.
+- Authors: [Sam Curren](telegramsam@gmail.com), [Daniel Bluhm](daniel@indicio.tech), [Adam Burdett](burdettadam@gmail.com)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-03-15
+- Status Note: Discussed and implemented and part of AIP 2.0.
 - Start Date: 2019-09-03
-- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -54,14 +54,19 @@ If the _mediator_ requires the _recipient_  to agree to terms prior to service, 
 
 ### Mediation Request
 This message serves as a request from the _recipient_ to the _mediator_, asking for the permission (and routing information) to publish the endpoint as a mediator.
+
+Each term array entry is a string containing a URI to a document containing the terms required by the mediator or recipient (respectively) must agree to. If the mediator does not agree to the recipient_terms, or requires agreement not present in the mediator_terms, a `mediate_deny` message should be sent indicating acceptable terms. Sending a `mediate-grant` message signals that the terms have been accepted. If the list is empty, no terms agreement is required.
+
 ```jsonc
 {
     "@id": "123456781",
     "@type": "<baseuri>/mediate-request",
-    "mediator_terms": [],
-    "recipient_terms": []
+    "mediator_terms": ["http://example.com/mediator/terms"],
+    "recipient_terms": ["http://example.com/recipient/terms"]
 }
 ```
+
+`mediator_terms` and `recipient_terms` are optional.
 
 ### Mediation Deny
 
@@ -71,10 +76,12 @@ A mediator may require agreements prior to granting route coordination. If the a
 {
     "@id": "123456781",
     "@type": "<baseuri>/mediate-deny",
-    "mediator_terms": [],
-    "recipient_terms": []
+    "mediator_terms": ["http://example.com/mediator/terms"],
+    "recipient_terms": ["http://example.com/recipient/terms"]
 }
 ```
+
+`mediator_terms` and `recipient_terms` are optional.
 
 ### Mediation Grant
 
@@ -83,64 +90,81 @@ A route grant message is a signal from the mediator to the recipient that permis
 {
     "@id": "123456781",
     "@type": "<baseuri>/mediate-grant",
-    "endpoint": "",
-    "routing_keys": []
-
+    "endpoint": "http://mediators-r-us.com",
+    "routing_keys": ["did:key:z6Mkfriq1MqLBoPWecGoDLjguo1sB9brj6wT3qZ5BxkKpuP6"]
 }
 ```
-Questions:
-- What about multiple endpoint options? http and ws?
+
+`endpoint`: The endpoint reported to mediation client connections.
+
+`routing_keys`: List of keys in intended routing order. Key used as recipient of forward messages.
+
 
 ### Keylist Update
+
 Used to notify the _mediator_ of keys in use by the _recipient_.
+
 ```jsonc
 {
     "@id": "123456781",
     "@type": "<baseuri>/keylist-update",
     "updates":[
         {
-            "recipient_key": "",
-            "action": "" // "add" or "remove"
+            "recipient_key": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
+            "action": "add"
         }
     ]
 }
 ```
+
+`recipient_key`: Key subject of the update.
+
+`action`: One of `add` or `remove`.
+
 ### Keylist Update Response
+
 Confirmation of requested keylist updates.
+
 ```jsonc
 {
     "@id": "123456781",
     "@type": "<baseuri>/keylist-update-response",
     "updated": [
         {
-            "recipient_key": "",
+            "recipient_key": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
             "action": "" // "add" or "remove"
             "result": "" // [client_error | server_error | no_change | success]
         }
     ]
 }
 ```
-Questions:
-- What types of errors are possible here?
+
+`recipient_key`: Key subject of the update.
+
+`action`: One of `add` or `remove`.
+
+`result`: One of `client_error`, `server_error`, `no_change`, `success`; describes the resulting state of the keylist update.
+
 ### Key List Query
+
+Query mediator for a list of keys registered for this connection.
 
 ```jsonc
 {
     "@id": "123456781",
     "@type": "<baseuri>/keylist-query",
-    "filter":{
-        "": ["",""]
-    }
     "paginate": {
         "limit": 30,
         "offset": 0
     }
 }
 ```
-Questions:
-- Filters feels odd here. Asking to see if a key is registered makes sense, but what else to filter on?
+
+`paginate` is optional.
 
 ### Key List
+
+Response to key list query, containing retrieved keys.
 
 ```jsonc
 {
@@ -148,14 +172,18 @@ Questions:
     "@type": "<baseuri>/keylist",
     "keys": [
         {
-            "recipient_key": ""
+            "recipient_key": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
         }
     ]
     "pagination": {
-
+        "count": 30,
+        "offset": 30,
+        "remaining": 100
     }
 }
 ```
+
+`pagination` is optional.
 
 ### Encoding of keys
 
@@ -166,15 +194,15 @@ All keys are encoded using the [`did:key`](https://w3c-ccg.github.io/did-method-
 
 There was an Indy HIPE that never made it past the PR process that described a similar approach. That HIPE led to a partial implementation of this inside the Aries Cloud Agent Python
 
+## Future Considerations
+- Should we allow listing keys by date? You could query keys in use by date?
+- We are missing a way to check a single key (or a few keys) without doing a full list.
+- Mediation grant supports only one endpoint. What can be done to support multiple endpoint options i.e. http, ws, etc.
+- Requiring proof of key ownership (with a signature) would prevent an edge case where a malicious party registers a key for another party at the same mediator, and before the other party.
 
 ## Unresolved questions
 
-- Still considering alternatives to convey the right meaning.
-- Should we allow listing keys by date? You could query keys in use by date?
-- How might payment be coordinated?
-- Should key ownership be proved when registered? Is there a risk of people requesting other people's keys?
-- We are missing a way to check a single key (or a few keys) without doing a full list.
-- Additional questions in each section
+- None
 
 ## Implementations
 
@@ -182,4 +210,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- |  |
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python/blob/main/Mediation.md) | Added in ACA-Py 0.6.0 [MISSING test results](/tags.md#test-anomaly)****
