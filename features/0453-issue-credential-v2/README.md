@@ -148,7 +148,7 @@ Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`propose-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#propose-credential-attachment-format) | 
 Hyperledger Indy Credential Abstract | `hlindy/cred-abstract@v2.0` | [`cred abstract` format](../0592-indy-attachments/README.md#cred-abstract-format)|
-Linked Data Proof VC Proposal  | `aries/ld-proof-vc-proposal@v1.0` | [`ld-proof-vc-proposal` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-proposal-attachment-format) |
+Linked Data Proof VC Detail  | `hlaries/ld-proof-vc-detail@v1.0` | [`ld-proof-vc-detail` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format) |
 
 #### Offer Credential
 
