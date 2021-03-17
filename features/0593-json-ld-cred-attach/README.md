@@ -75,7 +75,7 @@ A complete [`request credential` message form the Issue Credential protocol 2.0]
   "formats": [
     {
       "attach_id": "13a3f100-38ce-4e96-96b4-ea8f30250df9",
-      "format": "aries/vc-ld-proof-req@v1.0"
+      "format": "aries/ld-proof-vc-detail@v1.0"
     }
   ],
   "requests~attach": [
@@ -90,7 +90,7 @@ A complete [`request credential` message form the Issue Credential protocol 2.0]
 }
 ```
 
-- `credential` - Required. Detail of the JSON-LD Credential that will be issued. Properties should align with the [Verifiable Credentials Data Model](https://www.w3.org/TR/vc-data-model). The properties listed below are formally supported, but additional properties MAY be included if it conforms with the data model.
+- `credential` - Required. Detail of the JSON-LD Credential that will be issued. Properties MUST align with the [Verifiable Credentials Data Model](https://www.w3.org/TR/vc-data-model). This also means all properties required by the data model MUST be present. The properties listed below are formally supported, but additional properties MAY be included if it conforms with the data model.
 
   - `@context`
   - `id`
@@ -162,7 +162,7 @@ A complete [`issue-credential` message form the Issue Credential protocol 2.0](.
   "formats": [
     {
       "attach_id": "5b38af88-d36f-4f77-bb7a-2f04ab806eb8",
-      "format": "aries/vc-ld-proof@v1.0"
+      "format": "aries/ld-proof-vc@v1.0"
     }
   ],
   "credentials~attach": [
