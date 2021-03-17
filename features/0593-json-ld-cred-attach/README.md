@@ -81,7 +81,7 @@ A complete [`request credential` message form the Issue Credential protocol 2.0]
   "requests~attach": [
     {
       "@id": "13a3f100-38ce-4e96-96b4-ea8f30250df9",
-      "mime-type": "application/ld+json",
+      "mime-type": "application/json",
       "data": {
         "base64": "ewogICJjcmVkZW50aWFsIjogewogICAgIkBjb250...(clipped)...IkVkMjU1MTlTaWduYXR1cmUyMDE4IgogIH0KfQ=="
       }
@@ -105,7 +105,7 @@ A complete [`request credential` message form the Issue Credential protocol 2.0]
   - `proofType` - Required string. The proof type used for the proof. Should match suites registered in the [Linked Data Cryptographic Suite Registry](https://w3c-ccg.github.io/ld-cryptosuite-registry/#signature-suites).
   - `proofPurpose` - Optional string, default `assertionMethod`. The proof purpose used for the proof. Should match proof purposes registered in the [Linked Data Proofs Specification](https://w3c-ccg.github.io/ld-proofs/#proof-purpose).
   - `created` - Optional string, default current system time. The date and time of the proof (with a maximum accuracy in seconds).
-  - `challenge` - Optional string. A challenge to include in the proof. SHOUlD be provided by the requesting party of the credential (=holder).
+  - `challenge` - Optional string. A challenge to include in the proof. SHOULD be provided by the requesting party of the credential (=holder).
   - `domain` - Optional string. The intended domain of validity for the proof.
   - `credentialStatus` - Optional object. The credential status mechanism to use for the credential. Omitting the property indicates the issued credential will not include a credential status.
     - `type` - Required string. Credential status method type to use for the credential. Should match status method registered in the [Verifiable Credential Extension Registry](https://w3c-ccg.github.io/vc-extension-registry/#status-methods)
