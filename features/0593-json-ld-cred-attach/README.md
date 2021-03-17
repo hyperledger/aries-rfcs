@@ -12,7 +12,7 @@
 
 This RFC registers an attachment format for use in the [issue-credential V2](../0453-issue-credential-v2/README.md) protocol based on JSON-LD credentials with [Linked Data Proofs](https://w3c-ccg.github.io/ld-proofs/) from the [VC Data Model](https://www.w3.org/TR/vc-data-model/#linked-data-proofs).
 
-It defines a minimal set of parameters needed to create a common understanding of the verifiable credential to issue. It is based on version [1.0 of the Verifiable Credential Data Model](https://www.w3.org/TR/vc-data-model/) which is a W3C recommendation since 19 November 2019.
+It defines a minimal set of parameters needed to create a common understanding of the verifiable credential to issue. It is based on version [1.0 of the Verifiable Credentials Data Model](https://www.w3.org/TR/vc-data-model/) which is a W3C recommendation since 19 November 2019.
 
 ## Motivation
 
@@ -90,7 +90,7 @@ A complete [`request credential` message form the Issue Credential protocol 2.0]
 }
 ```
 
-- `credential` - Required. Detail of the JSON-LD Credential that will be issued. Properties should align with the [Verifiable Credential Data Model](https://www.w3.org/TR/vc-data-model). The properties listed below are formally supported, but additional properties MAY be included if it conforms with the data model.
+- `credential` - Required. Detail of the JSON-LD Credential that will be issued. Properties should align with the [Verifiable Credentials Data Model](https://www.w3.org/TR/vc-data-model). The properties listed below are formally supported, but additional properties MAY be included if it conforms with the data model.
 
   - `@context`
   - `id`
@@ -110,16 +110,16 @@ A complete [`request credential` message form the Issue Credential protocol 2.0]
   - `credentialStatus` - Optional object. The credential status mechanism to use for the credential. Omitting the property indicates the issued credential will not include a credential status.
     - `type` - Required string. Credential status method type to use for the credential. Should match status method registered in the [Verifiable Credential Extension Registry](https://w3c-ccg.github.io/vc-extension-registry/#status-methods)
 
-The format is closely related to the [Verifiable Credential HTTP API](https://w3c-ccg.github.io/vc-http-api/), but diverts on some places. The main differences are:
+The format is closely related to the [Verifiable Credentials HTTP API](https://w3c-ccg.github.io/vc-http-api/), but diverts on some places. The main differences are:
 
-- The types in the VC HTTP API are more restrictive (.e.g. `@context` must be array of strings). This format allows all fields to use the full syntax ass described by the verifiable credential data model.
+- The types in the VC HTTP API are more restrictive (.e.g. `@context` must be array of strings). This format allows all fields to use the full syntax ass described by the verifiable credentials data model.
 - Instead of specifying the exact `verificationMethod`, the `proofType` that will be used for the credential can be specified.
 
 ### `ld-proof-vc` attachment format
 
 Format identifier: `aries/ld-proof-vc@v1.0`
 
-This format is used to transmit a verifiable credential with linked data proof. The contents of the attachment is a standard JSON-LD Verifiable Credential object with linked data proof as defined by the [Verifiable Credential Data Model](https://www.w3.org/TR/vc-data-model) and the [Linked Data Proofs](https://w3c-ccg.github.io/ld-proofs) specification.
+This format is used to transmit a verifiable credential with linked data proof. The contents of the attachment is a standard JSON-LD Verifiable Credential object with linked data proof as defined by the [Verifiable Credentials Data Model](https://www.w3.org/TR/vc-data-model) and the [Linked Data Proofs](https://w3c-ccg.github.io/ld-proofs) specification.
 
 The JSON structure might look like this:
 
