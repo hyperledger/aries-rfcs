@@ -122,8 +122,8 @@ The name of this file format is "DIDComm V1 Message." We expect people to say,
 "Does my editor have a DIDComm V1 Message plugin?" For extra clarity, it is acceptable
 to add the adjective "plaintext", as in "DIDComm V1 Plaintext Message."
 
-The MIME type of *.dm files is `application/json`--or, if further discrimination is needed,
-`application/json;flavor=didcomm-msg`.
+The most specific MIME type of *.dm files is `application/json;flavor=didcomm-msg`--or, if more generic handling is appropriate, just 
+`application/json`.
 
 The default action for DIDComm V1 Messages should be to
 `View` or `Validate` them. Other interesting actions might be `Encrypt to *.dee`,
@@ -162,7 +162,7 @@ Nature of Content | V1 | V2
 --- | --- | ---
 encrypted| `application/didcomm-enc-env`<br>DIDComm V1 Encrypted Envelope<br>*.dee | `application/didcomm-encrypted+json`<br>DIDComm Encrypted Message<br>*.dcem
 signed| `application/didcomm-sig-env`<br>DIDComm V1 Signed Envelope<br>*.dse | `application/didcomm-signed+json`<br>DIDComm Signed Message<br>*.dcsm
-plaintext| `application/json`<br>DIDComm V1 Message<br>*.dm | `application/didcomm-plain+json`<br>DIDComm Plaintext Message<br>*.dcpm
+plaintext| `application/json;flavor=didcomm-msg`<br>DIDComm V1 Message<br>*.dm | `application/didcomm-plain+json`<br>DIDComm Plaintext Message<br>*.dcpm
 
 It is also recommended that agents implementing [Discover Features Protocol v2](../0557-discover-features-v2/README.md) respond to [queries about supported DIDComm versions](../0557-discover-features-v2/README.md#queries-message-type) using the `didcomm-version` feature name. This allows queries about what an agent is willing to support, whereas the media type mechanism describes what is in active use. The values that should be returned from such a query are URIs that tell where DIDComm versions are developed:
 
