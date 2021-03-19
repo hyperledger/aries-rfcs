@@ -147,7 +147,7 @@ Description of attributes:
 Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`propose-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#propose-credential-attachment-format) | 
-Hyperledger Indy Credential Abstract | `hlindy@cred-filter@v2.0` | [`cred filter` format](../0592-indy-attachments/README.md#cred-filter-format)|
+Hyperledger Indy Credential Abstract | `hlindy/cred-filter@v2.0` | [`cred filter` format](../0592-indy-attachments/README.md#cred-filter-format)|
 
 #### Offer Credential
 
