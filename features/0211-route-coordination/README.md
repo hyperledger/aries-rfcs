@@ -157,6 +157,11 @@ Questions:
 }
 ```
 
+### Encoding of keys
+
+All keys are encoded using the [`did:key`](https://w3c-ccg.github.io/did-method-key/) method as per
+[RFC0360](../0360-use-did-key/README.md).
+
 ## Prior art
 
 There was an Indy HIPE that never made it past the PR process that described a similar approach. That HIPE led to a partial implementation of this inside the Aries Cloud Agent Python
