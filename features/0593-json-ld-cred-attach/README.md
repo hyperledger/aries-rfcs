@@ -1,4 +1,4 @@
-# Aries RFC 0593: JSON-LD Credential Attachment format for requesting and presenting credentials
+# Aries RFC 0593: JSON-LD Credential Attachment format for requesting and issuing credentials
 
 - Authors: Timo Glastra (Animo Solutions), George Aristy (SecureKey Technologies)
 - Status: [PROPOSED](/README.md#proposed)
