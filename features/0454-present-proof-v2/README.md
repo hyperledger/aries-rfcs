@@ -112,7 +112,7 @@ An optional message sent by the prover to the verifier to initiate a proof prese
             "format" : "<format-and-version>",
         }
     ],
-    "proposal~attach": [
+    "proposals~attach": [
         {
             "@id": "<attachment identifier>",
             "mime-type": "application/json",
@@ -128,9 +128,9 @@ Description of fields:
 
 * `comment` -- a field that provides some human readable information about the proposed presentation.
 * `formats` -- contains an entry for each `filter~attach` array entry, including an optional value of the attachment `@id` (if attachments are present) and the verifiable presentation format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
-* `proposal~attach` -- an optional array of attachments that further define the presentation request being proposed. This might be used to clarify which formats or format versions are wanted.
+* `proposals~attach` -- an optional array of attachments that further define the presentation request being proposed. This might be used to clarify which formats or format versions are wanted.
 
-If the `proposal~attach` is not provided, the `attach_id` item in the `formats` array should not be provided. That form of the `propose-presentation` message is to indicate the presentation formats supported by the prover, independent of the verifiable presentation request content.
+If the `proposals~attach` is not provided, the `attach_id` item in the `formats` array should not be provided. That form of the `propose-presentation` message is to indicate the presentation formats supported by the prover, independent of the verifiable presentation request content.
 
 #### Negotiation and Preview
 
