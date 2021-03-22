@@ -49,10 +49,14 @@ For situations where the envelopes should be anonymous, we use a newly minted DI
 The newly minted DID is used once and then discarded.
 This approach matches the DIDComm Messaging mechanism.
 
-## Mime Type
+## Media Type
 
-The mime type associated to this envelope is `application/didcomm-encrypted+json`.
-[RFC 0044](../0044-didcomm-file-and-mime-types/README.md) provides a general discussion of mime types.
+The media type associated to this envelope is `application/didcomm-encrypted+json`.
+[RFC 0044](../0044-didcomm-file-and-mime-types/README.md) provides a general discussion of media (aka mime) types.
+
+The media type of the envelope MUST be set in the `typ` [property](https://tools.ietf.org/html/rfc7516#section-4.1.11) of the JWE and the media type of the payload MUST be set in the `cty` [property](https://tools.ietf.org/html/rfc7516#section-4.1.12) of the JWE.
+
+ For example, following the guidelines of [RFC 0044](../0044-didcomm-file-and-mime-types/README.md), an encrypted envelope with a plaintext DIDComm v1 payload contains the `typ` property with the value `application/didcomm-encrypted+json` and `cty` property with the value `application/json;flavor=didcomm-msg`.
 
 ## DIDComm v2 Transition
 
@@ -61,7 +65,7 @@ These payloads can be distinguished based on the `cty` [property](https://tools.
 
 As discussed in [RFC 0044](../0044-didcomm-file-and-mime-types/README.md), the content type for the plaintext DIDComm v1 message is `application/json;flavor=didcomm-msg`.
 When the `cty` property contains `application/json;flavor=didcomm-msg`, the payload is treated as DIDComm v1.
-[DIDComm Messaging](https://identity.foundation/didcomm-messaging/spec) will specify appropriate mime types for DIDComm v2.
+[DIDComm Messaging](https://identity.foundation/didcomm-messaging/spec) will specify appropriate media types for DIDComm v2.
 
 ## Drawbacks
 

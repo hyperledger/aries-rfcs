@@ -99,7 +99,7 @@ The out-of-band protocol a single message that is sent by the *sender*.
     "https://didcomm.org/didexchange/1.0",
     "https://didcomm.org/connections/1.0"
   ],
-  "request~attach": [
+  "requests~attach": [
     {
       "@id": "request-0",
       "mime-type": "application/json",
@@ -108,7 +108,7 @@ The out-of-band protocol a single message that is sent by the *sender*.
       }
     }
   ],
-  "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
+  "services": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
 }
 ```
 
@@ -119,24 +119,24 @@ The items in the message are:
 - `label` - [optional] a self-attested string that the receiver may want to display to the user, likely about who sent the out-of-band message.
 - `goal_code` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out-of-band message.
 - `goal` - [optional] a self-attested string that the receiver may want to display to the user about the context-specific goal of the out-of-band message.
-- `handshake_protocols` - [optional] an array of protocols in the order of preference of the sender that the receiver can use in responding to the message in order to create or reuse a connection with the sender. These are not arbitrary protocols but rather protocols that result in the establishment of a connection. One or both of `handshake_protocols` and `request~attach` **MUST** be included in the message.
-- `request~attach` - [optional] an attachment decorator containing an array of request messages in order of preference that the receiver can using in responding to the message. One or both of `handshake_protocols` and `request~attach` **MUST** be included in the message.
+- `handshake_protocols` - [optional] an array of protocols in the order of preference of the sender that the receiver can use in responding to the message in order to create or reuse a connection with the sender. These are not arbitrary protocols but rather protocols that result in the establishment of a connection. One or both of `handshake_protocols` and `requests~attach` **MUST** be included in the message.
+- `requests~attach` - [optional] an attachment decorator containing an array of request messages in order of preference that the receiver can using in responding to the message. One or both of `handshake_protocols` and `requests~attach` **MUST** be included in the message.
   - While the JSON form of the attachment is used in the example above, the sender could choose to use the base64 form.
-- `service` - an item that is the equivalent of the service block of a DIDDoc that the receiver is to use in responding to the message. Additional details below.
+- `services` - an array of union types that the receiver uses when responding to the message. Each item is either a DIDComm `service` object (as per [RFC0067](../0067-didcomm-diddoc-conventions/README.md#service-conventions)) or a DID (as per [Decentralized Identifiers v1.0](https://w3c.github.io/did-core/#did-syntax)). Additional details below.
 
 If only the `handshake_protocols` item is included, the initial interaction will complete with the establishment (or reuse) of the connection. Either side may then use that connection for any purpose. A common use case (but not required) would be for the sender to initiate another protocol after the connection is established to accomplish some shared goal.
 
-If only the `request~attach` item is included, no new connection is expected to be created, although one could be used if the receiver knows such a connection already exists. The receiver responds to one of the messages in the `request~attach` array. The `request~attach` item might include the first message of a protocol from the sender, or might be a [please-play-the-role](#) message requesting the receiver initiate a protocol. If the protocol requires a further response from the sender to the receiver, the receiver must include a [`~service` decorator](../0056-service-decorator/README.md) for the sender to use in responding.
+If only the `requests~attach` item is included, no new connection is expected to be created, although one could be used if the receiver knows such a connection already exists. The receiver responds to one of the messages in the `requests~attach` array. The `requests~attach` item might include the first message of a protocol from the sender, or might be a [please-play-the-role](#) message requesting the receiver initiate a protocol. If the protocol requires a further response from the sender to the receiver, the receiver must include a [`~service` decorator](../0056-service-decorator/README.md) for the sender to use in responding.
 
-If both the `handshake_protocols` and `request~attach` items are included in the message, the receiver should first establish a connection and then respond (using that connection) to one of the messages in the `request~attach` message. If a connection already exists between the parties, the receiver may respond immediately to the `request-attach` message using the established connection.
+If both the `handshake_protocols` and `requests~attach` items are included in the message, the receiver should first establish a connection and then respond (using that connection) to one of the messages in the `requests~attach` message. If a connection already exists between the parties, the receiver may respond immediately to the `request-attach` message using the established connection.
 
 ### Reuse Messages
 
-While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `request~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the connection **MAY** be reused. The receiver may choose to not reuse the existing connection for privacy purposes and repeat a handshake protocol to receive a redundant connection. 
+While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `requests~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the connection **MAY** be reused. The receiver may choose to not reuse the existing connection for privacy purposes and repeat a handshake protocol to receive a redundant connection. 
 
-If the receiver desires to reuse the existing connection and a `request~attach` message is present, the receiver **SHOULD** respond to the attached message using the existing connection.
+If the receiver desires to reuse the existing connection and a `requests~attach` message is present, the receiver **SHOULD** respond to the attached message using the existing connection.
 
-If the receiver desires to reuse the existing connection and no `request~attach` message is present, the receiver **SHOULD** attempt to do so with the `reuse` and `reuse-accepted` messages. This will notify the _inviter_ that the existing connection should be used, along with the context that can be used for follow-on interactions.
+If the receiver desires to reuse the existing connection and no `requests~attach` message is present, the receiver **SHOULD** attempt to do so with the `reuse` and `reuse-accepted` messages. This will notify the _inviter_ that the existing connection should be used, along with the context that can be used for follow-on interactions.
 
 While the `invitation` message is passed unencrypted and out-of-band, both the `handshake-reuse` and `handshake-reuse-accepted` messages **MUST** be encrypted and transmitted as normal DIDComm messages.
 
@@ -188,26 +188,26 @@ After sending this message, the _inviter_ may continue any desired protocol inte
 
 ### Responses
 
-The following table summarizes the different forms of the out-of-band `invitation` message depending on the presence (or not) of the `handshake_protocols` item, the `request~attach` item and whether or not a connection between the agents already exists.
+The following table summarizes the different forms of the out-of-band `invitation` message depending on the presence (or not) of the `handshake_protocols` item, the `requests~attach` item and whether or not a connection between the agents already exists.
 
-`handshake_protocols` Present? | `request~attach` Present? | Existing connection? | Receiver action(s)
+`handshake_protocols` Present? | `requests~attach` Present? | Existing connection? | Receiver action(s)
 --- | --- | --- | ---
 No | No | No | Impossible
-Yes | No | No | Uses the first supported protocol from `handshake_protocols` to make a new connection using the first supported `service` entry.
-No | Yes | No | Send a response to the first supported request message using the first supported `service` entry. Include a `~service` decorator if the sender is expected to respond.
+Yes | No | No | Uses the first supported protocol from `handshake_protocols` to make a new connection using the first supported `services` entry.
+No | Yes | No | Send a response to the first supported request message using the first supported `services` entry. Include a `~service` decorator if the sender is expected to respond.
 No | No | Yes | Impossible
-Yes | Yes | No | Use the first supported protocol from `handshake_protocols` to make a new connection using the first supported `service` entry, and then send a response message to the first supported attachment message using the new connection.
+Yes | Yes | No | Use the first supported protocol from `handshake_protocols` to make a new connection using the first supported `services` entry, and then send a response message to the first supported attachment message using the new connection.
 Yes | No | Yes | Send a `handshake-reuse` message. 
 No | Yes | Yes | Send a response message to the first supported request message using the existing connection.
 Yes | Yes | Yes | Send a response message to the first supported request message using the existing connection.
 
 Both the `goal_code` and `goal` fields **SHOULD** be used with the [localization service decorator](../0043-l10n/README.md). The two fields are to enable both human and machine handling of the out-of-band message. `goal_code` is to specify a generic, protocol level outcome for sending the out-of-band message (e.g. issue verifiable credential, request proof, etc.) that is suitable for machine handling and possibly human display, while `goal` provides context specific guidance, targeting mainly a person controlling the receiver's agent. The list of `goal_code` values is provided in the [Message Catalog](#message-catalog) section of this RFC.
 
-#### The `service` Item
+#### The `services` Item
 
-As mentioned in the description above, the `service` item array is intended to be analogous to the `service` block of a DIDDoc. When not reusing an existing connection, the receiver scans the array and selects (according to the rules described below) a service entry to use for the response to the out-of-band message.
+As mentioned in the description above, the `services` item array is intended to be analogous to the `service` block of a DIDDoc. When not reusing an existing connection, the receiver scans the array and selects (according to the rules described below) a service entry to use for the response to the out-of-band message.
 
-There are two forms of entries in the `service` item array:
+There are two forms of entries in the `services` item array:
 
 - a public DID that is resolved to retrieve it's DIDDoc service block, and
 - an inline service block.
@@ -220,7 +220,7 @@ The following is an example of a two entry array, one of each form:
   "@id": "<id used for context as pthid>",
   "label": "Faber College",
   "handshake_protocols": ["https://didcomm.org/didexchange/1.0"],
-  "service": [
+  "services": [
     {
       "id": "#inline",
       "type": "did-communication",
@@ -233,7 +233,7 @@ The following is an example of a two entry array, one of each form:
 }
 ```
 
-The processing rules for the service block are:
+The processing rules for the `services` block are:
 
 - Use only entries where the `type` is equal to `did-communication`.
   - Entries without a `type` are assumed to be `did-communication`.
@@ -373,14 +373,14 @@ Invitation:
   "goal_code": "issue-vc",
   "goal": "To issue a Faber College Graduate credential",
   "handshake_protocols": ["https://didcomm.org/didexchange/1.0", "https://didcomm.org/connections/1.0"],
-  "service": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
+  "services": ["did:sov:LjgpST2rjsoxYegQDRm7EL"]
 }
 ```
 
 Whitespace removed:
 
 ```jsonc
-{"@type":"https://didcomm.org/out-of-band/1.0/invitation","@id":"69212a3a-d068-4f9d-a2dd-4741bca89af3","label":"Faber College","goal_code":"issue-vc","goal":"To issue a Faber College Graduate credential","handshake_protocols":["https://didcomm.org/didexchange/1.0","https://didcomm.org/connections/1.0"],"service":["did:sov:LjgpST2rjsoxYegQDRm7EL"]}
+{"@type":"https://didcomm.org/out-of-band/1.0/invitation","@id":"69212a3a-d068-4f9d-a2dd-4741bca89af3","label":"Faber College","goal_code":"issue-vc","goal":"To issue a Faber College Graduate credential","handshake_protocols":["https://didcomm.org/didexchange/1.0","https://didcomm.org/connections/1.0"],"services":["did:sov:LjgpST2rjsoxYegQDRm7EL"]}
 ```
 
 Base 64 URL Encoded:
@@ -450,8 +450,8 @@ A user that already has those steps accomplished will have the URL received by s
 
 If the receiver wants to respond to the out-of-band message, they will use the information in the message to prepare the request, including:
 
-- the `handshake_protocols` or `request~attach` to determine the acceptable response messages, and
-- the `service` block to determine how to get the response to the sender.
+- the `handshake_protocols` or `requests~attach` to determine the acceptable response messages, and
+- the `services` block to determine how to get the response to the sender.
 
 #### Correlating responses to Out-of-Band messages
 
@@ -485,7 +485,7 @@ The response message from the receiver is encoded according to the standards of 
 
 ##### Reusing Connections
 
-If an out-of-band invitation has a public DID in the `service` block, and the _receiver_ determines it has previously established a connection with that public DID, the receiver **MAY** send its response on the established connection. See [Reuse Messages](#reuse-messages) for details.
+If an out-of-band invitation has a public DID in the `services` block, and the _receiver_ determines it has previously established a connection with that public DID, the receiver **MAY** send its response on the established connection. See [Reuse Messages](#reuse-messages) for details.
 
 ##### Receiver Error Handling
 
