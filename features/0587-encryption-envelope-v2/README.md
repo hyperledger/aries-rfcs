@@ -58,6 +58,18 @@ The media type of the envelope MUST be set in the `typ` [property](https://tools
 
  For example, following the guidelines of [RFC 0044](../0044-didcomm-file-and-mime-types/README.md), an encrypted envelope with a plaintext DIDComm v1 payload contains the `typ` property with the value `application/didcomm-encrypted+json` and `cty` property with the value `application/json;flavor=didcomm-msg`.
 
+ As specified in [IETF RFC 7515](https://tools.ietf.org/html/rfc7515) and referenced in [IETF RFC 7516](https://tools.ietf.org/html/rfc7516), implementations
+ MUST also support media types that omit `application/`.
+ For example, `didcomm-encrypted+json` and `application/didcomm-encrypted+json` are treated as equivalent media types.
+
+As discussed in [RFC 0434](../0434-outofband/README.md) and [RFC 0067](../0067-didcomm-diddoc-conventions/README.md), the `accept` property is used to advertise supported media types.
+The `accept` property may contain an envelope media type or a combination of the envelope media type and the content media type.
+In cases where the content media type is not present, the expectation is that the appropriate content media type can be inferred.
+For example, `application/didcomm-enc-env` indicates both Envelope v1 and DIDComm v1 and `application/didcomm-encrypted+json` indicates both Envelope v2 and DIDComm v2.
+However, some agents may choose to support Envelope v2 with a DIDComm v1 message payload.
+
+In case the `accept` property is set in both the DID service block and the out-of-band message, the out-of-band property takes precedence.
+
 ## DIDComm v2 Transition
 
 As this RFC specifies the same envelope format as will be used in DIDComm v2, an implementor should detect if the payload contains DIDComm v1 content or the JWM from DIDComm v2.
@@ -66,6 +78,11 @@ These payloads can be distinguished based on the `cty` [property](https://tools.
 As discussed in [RFC 0044](../0044-didcomm-file-and-mime-types/README.md), the content type for the plaintext DIDComm v1 message is `application/json;flavor=didcomm-msg`.
 When the `cty` property contains `application/json;flavor=didcomm-msg`, the payload is treated as DIDComm v1.
 [DIDComm Messaging](https://identity.foundation/didcomm-messaging/spec) will specify appropriate media types for DIDComm v2.
+To advertise the combination of Envelope v2 with a DIDComm v1 message, the media type is `application/didcomm-encrypted+json;cty=application/json`.
+
+## Additional AIP impacts
+
+Implementors supporting an AIP sub-target that contains this RFC (e.g., `DIDCOMMV2PREP`) MAY choose to only support Envelope v2 without support for the original envelope declared in [RFC 0019](https://github.com/hyperledger/aries-rfcs/tree/master/features/0019-encryption-envelope). In these cases, the `accept` property will not contain `application/didcomm-enc-env` media type.
 
 ## Drawbacks
 
