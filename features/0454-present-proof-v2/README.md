@@ -45,6 +45,10 @@ Diagrams in this protocol were made in draw.io. To make changes:
 
 The roles are `verifier` and `prover`.  The `verifier` requests the presentation of a proof and verifies the presentation, while the `prover` prepares the proof and presents it to the verifier. Optionally, although unlikely from a business sense, the `prover` may initiate an instance of the protocol using the `propose-presentation` message.
 
+### Goals
+
+When the goals of each role are not available because of context, goal codes may be specifically included in protocol messages. This is particularly helpful to differentiate between credentials passed between the same parties for several different reasons. A goal code included should be considered to apply to the entire thread and is not necessary to be repeated on each message. Changing the goal code may be done by including the new code in a message. All goal codes are optional, and without default. 
+
 ### States
 
 The following states are defined and included in the state transition table below.
@@ -105,6 +109,7 @@ An optional message sent by the prover to the verifier to initiate a proof prese
 {
     "@type": "https://didcomm.org/present-proof/%VER/propose-presentation",
     "@id": "<uuid-propose-presentation>",
+    "goal_code": "<goal-code>",
     "comment": "some comment",
     "formats" : [
         {
@@ -126,6 +131,7 @@ An optional message sent by the prover to the verifier to initiate a proof prese
 
 Description of fields:
 
+* `goal_code` -- optional field that indicates the goal of the message sender. 
 * `comment` -- a field that provides some human readable information about the proposed presentation.
 * `formats` -- contains an entry for each `filter~attach` array entry, including an optional value of the attachment `@id` (if attachments are present) and the verifiable presentation format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `proposals~attach` -- an optional array of attachments that further define the presentation request being proposed. This might be used to clarify which formats or format versions are wanted.
@@ -151,6 +157,7 @@ From a verifier to a prover, the `request-presentation` message describes values
 {
     "@type": "https://didcomm.org/present-proof/%VER/request-presentation",
     "@id": "<uuid-request>",
+    "goal_code": "<goal-code>",
     "comment": "some comment",
     "will_confirm": true,
     "formats" : [
@@ -173,6 +180,7 @@ From a verifier to a prover, the `request-presentation` message describes values
 
 Description of fields:
 
+* `goal_code` -- optional field that indicates the goal of the message sender. 
 * `comment` -- a field that provides some human readable information about this request for a presentation.
 * `will_confirm` -- an optional field that defaults to `false` to indicate that the verifier will or will not send a post-presentation confirmation `ack` message
 * `formats` -- contains an entry for each `request_presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation request format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
@@ -193,6 +201,7 @@ This message is a response to a Presentation Request message and contains signed
 {
     "@type": "https://didcomm.org/present-proof/%VER/presentation",
     "@id": "<uuid-presentation>",
+    "goal_code": "<goal-code>",
     "comment": "some comment",
     "formats" : [
         {
@@ -216,6 +225,7 @@ This message is a response to a Presentation Request message and contains signed
 Description of fields:
 
 * `comment` -- a field that provides some human readable information about this presentation.
+* `goal_code` -- optional field that indicates the goal of the message sender. 
 * `formats` -- contains an entry for each `presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
 * `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
 
