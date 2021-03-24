@@ -35,6 +35,10 @@ There are two roles in this protocol: Issuer and Holder. Technically, the latter
 
 >Note: When a holder of credentials turns around and uses those credentials to prove something, they become a Prover. In the sister RFC to this one, [0454: Present Proof Protocol 2.0](../0454-present-proof-v2/README.md), the Holder is therefore renamed to Prover. Sometimes in casual conversation, the Holder role here might be called "Prover" as well, but more formally, "Holder" is the right term at this phase of the credential lifecycle.
 
+### Goals
+
+When the goals of each role are not available because of context, goal codes may be specifically included in protocol messages. This is particularly helpful to differentiate between credentials passed between the same parties for several different reasons. A goal code included should be considered to apply to the entire thread and is not necessary to be repeated on each message. Changing the goal code may be done by including the new code in a message. All goal codes are optional, and without default. 
+
 ### States
 
 The choreography diagram [below](#choreography-diagram) details how state evolves in this protocol, in a "happy path." The states include
@@ -115,6 +119,7 @@ Message format:
 {
     "@type": "https://didcomm.org/issue-credential/%VER/propose-credential",
     "@id": "<uuid of propose-message>",
+    "goal_code": "<goal-code>",
     "comment": "<some comment>",
     "credential_preview": <json-ld object>,
     "formats" : [
@@ -137,6 +142,7 @@ Message format:
 
 Description of attributes:
 
+* `goal_code` -- optional field that indicates the goal of the message sender. 
 * `comment` -- an optional field that provides human readable information about this Credential Proposal, so the proposal can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credential_preview` -- an optional JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential).
 * `formats` -- contains an entry for each `filters~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
@@ -160,6 +166,7 @@ Message Format:
 {
     "@type": "https://didcomm.org/issue-credential/%VER/offer-credential",
     "@id": "<uuid of offer message>",
+    "goal_code": "<goal-code>",
     "replacement_id": "<issuer unique id>",
     "comment": "<some comment>",
     "credential_preview": <json-ld object>,
@@ -183,6 +190,7 @@ Message Format:
 
 Description of fields:
 
+* `goal_code` -- optional field that indicates the goal of the message sender. 
 * `replacement_id` -- an optional field to help coordinate credential replacement. When this is present and matches the `replacement_id` of a previously issued credential, it may be used to inform the recipient that the offered credential is considered to be a replacement to the previous credential. This value is unique to the issuer. It must not be used in a credential presentation.
 * `comment` -- an optional field that provides human readable information about this Credential Offer, so the offer can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview-credential);
@@ -211,6 +219,7 @@ Message Format:
 {
     "@type": "https://didcomm.org/issue-credential/%VER/request-credential",
     "@id": "<uuid of request message>",
+    "goal_code": "<goal-code>",
     "comment": "<some comment>",
     "formats" : [
         {
@@ -232,6 +241,7 @@ Message Format:
 
 Description of Fields:
 
+* `goal_code` -- optional field that indicates the goal of the message sender. 
 * `comment` -- an optional field that provides human readable information about this Credential Request, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `formats` -- contains an entry for each `requests~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `requests~attach` -- an array of [attachments](../../concepts/0017-attachments/README.md) defining the requested formats for the credential.
@@ -256,6 +266,7 @@ Message Format:
 {
     "@type": "https://didcomm.org/issue-credential/%VER/issue-credential",
     "@id": "<uuid of issue message>",
+    "goal_code": "<goal-code>",
     "replacement_id": "<issuer unique id>",
     "comment": "<some comment>",
     "formats" : [

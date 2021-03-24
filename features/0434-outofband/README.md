@@ -1,4 +1,4 @@
-# Aries RFC 0434: Out-of-Band Protocols
+# Aries RFC 0434: Out-of-Band Protocol 1.1
 
 - Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, [Stephen Curran](swcurran@cloudcompass.ca), [Sam Curren](sam@sovrin.org), [George Aristy](george.aristy@securekey.com)
 - Status: [PROPOSED](/README.md#proposed)
@@ -7,8 +7,6 @@
 - Supersedes: Invitation Message in [0160-Connections](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0160-connection-protocol/README.md#0-invitation-to-connect) and Invitation Message in [0023-DID-Exchange](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0023-did-exchange/README.md#0-invitation-to-exchange).
 - Start Date: 2020-03-01
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
-- Protocol Name: Out-of-Band Invitation, Out-of-Band Request
-- Version: 1.0, 1.0
 - URI: `https://didcomm.org/out-of-band/%VER`
 
 ## Summary
@@ -95,6 +93,10 @@ The out-of-band protocol a single message that is sent by the *sender*.
   "label": "Faber College",
   "goal_code": "issue-vc",
   "goal": "To issue a Faber College Graduate credential",
+  "accept": [
+    "application/didcomm-encrypted+json",
+    "application/didcomm-enc-env"
+  ],
   "handshake_protocols": [
     "https://didcomm.org/didexchange/1.0",
     "https://didcomm.org/connections/1.0"
@@ -119,6 +121,9 @@ The items in the message are:
 - `label` - [optional] a self-attested string that the receiver may want to display to the user, likely about who sent the out-of-band message.
 - `goal_code` - [optional] a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the out-of-band message.
 - `goal` - [optional] a self-attested string that the receiver may want to display to the user about the context-specific goal of the out-of-band message.
+- `accept` - [optional] an array of media (aka mime) types in the order of preference of the sender that the receiver can use in responding to the message.
+If `accept` is not specified, the receiver uses its preferred choice to respond to the message.
+[RFC 0044](../0044-didcomm-file-and-mime-types/README.md) provides a general discussion of media types.
 - `handshake_protocols` - [optional] an array of protocols in the order of preference of the sender that the receiver can use in responding to the message in order to create or reuse a connection with the sender. These are not arbitrary protocols but rather protocols that result in the establishment of a connection. One or both of `handshake_protocols` and `requests~attach` **MUST** be included in the message.
 - `requests~attach` - [optional] an attachment decorator containing an array of request messages in order of preference that the receiver can using in responding to the message. One or both of `handshake_protocols` and `requests~attach` **MUST** be included in the message.
   - While the JSON form of the attachment is used in the example above, the sender could choose to use the base64 form.
