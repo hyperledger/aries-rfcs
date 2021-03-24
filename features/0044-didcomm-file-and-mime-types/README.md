@@ -57,6 +57,9 @@ a choice similar to the one that views `*.docx` files primarily as
 place, the version could become a parameter as [described in RFC 1341](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html):
 `application/didcomm-enc-env;v=2`.
 
+A recipient using the media type value MUST treat it as if `“application/”` were prepended to any `"typ"` or `"cty"` value not containing a ‘/’ in compliance 
+with the [JWE](https://tools.ietf.org/html/rfc7516) /[JWS](https://tools.ietf.org/html/rfc7515)  family of specs.
+
 The default action for DIDComm V1 Encrypted Envelopes (what happens when a user double-clicks one)
 should be `Handle` (that is, process the message as if it had just arrived by some other transport),
 if the software handling the message is an agent. In other types of software,
@@ -89,6 +92,9 @@ As with *.dee files, the best way to hande *.dse files is to map them to a custo
 MIME type. The recommendation is
 `application/didcomm-sig-env`, with `application/jws` as a fallback, and
 `application/json` as an even less desirable fallback.
+
+A recipient using the media type value MUST treat it as if `“application/”` were prepended to any `"typ"` or `"cty"` value not containing a ‘/’ in compliance 
+with the [JWE](https://tools.ietf.org/html/rfc7516) /[JWS](https://tools.ietf.org/html/rfc7515) family of specs.
 
 The default action for DIDComm V1 Signed Envelopes (what happens when a user double-clicks one)
 should be `Validate` (that is, process the signature to see if it is valid.
@@ -124,6 +130,9 @@ to add the adjective "plaintext", as in "DIDComm V1 Plaintext Message."
 
 The most specific MIME type of *.dm files is `application/json;flavor=didcomm-msg`--or, if more generic handling is appropriate, just 
 `application/json`.
+
+A recipient using the media type value MUST treat it as if `“application/”` were prepended to any `"typ"` or `"cty"` value not containing a ‘/’ in compliance 
+with the [JWE](https://tools.ietf.org/html/rfc7516) /[JWS](https://tools.ietf.org/html/rfc7515) family of specs.
 
 The default action for DIDComm V1 Messages should be to
 `View` or `Validate` them. Other interesting actions might be `Encrypt to *.dee`,
