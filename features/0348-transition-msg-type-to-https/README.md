@@ -93,7 +93,7 @@ Name / Link | Implementation Notes
 [Trinsic](https://trinsic.id/) | No steps completed
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Completed Step 1 [code change](https://github.com/hyperledger/aries-cloudagent-python/pull/379)
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | No steps completed
-[Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | No steps completed
+[Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | Completed Step 2
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | No steps completed
 [Verity](https://www.evernym.com/products/) | No steps completed
 [Pico Labs](http://picolabs.io/) | Completed Step 2 even though [deprecated](https://github.com/picolab/G2S)
