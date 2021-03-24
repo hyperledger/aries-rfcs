@@ -37,6 +37,10 @@ When a DID document wishes to express support for DID communications, the follow
     "priority" : 0,
     "recipientKeys" : [ "did:example:123456789abcdefghi#1" ],
     "routingKeys" : [ "did:example:123456789abcdefghi#1" ],
+    "accept": [
+      "application/didcomm-encrypted+json",
+      "application/didcomm-enc-env"
+    ],
     "serviceEndpoint": "https://agent.example.com/"
   }]
 }
@@ -47,6 +51,9 @@ When a DID document wishes to express support for DID communications, the follow
 - priority : This represents the priority of the service endpoint, used for distinction when multiple `did-communication` service endpoints are present in a single DID document. It is mandatory that this field is set to an unsigned integer with the default value of `0`.
 - recipientKeys : This is an array of [did key references](https://w3c-ccg.github.io/did-spec/#public-keys) used to denote the default recipients of an endpoint. (*note-1*)
 - routingKeys: This is an array of [did key references](https://w3c-ccg.github.io/did-spec/#public-keys), ordered from most destward to most srcward, used to denote the individual routing hops in between the sender and recipients. See [TBC]() for more information on how routing is intended to operate.
+- `accept` - [optional] an array of media types in the order of preference for sending a message to the endpoint.
+ If `accept` is not specified, the sender uses its preferred choice for sending a message to the endpoint.
+ [RFC 0044](../0044-didcomm-file-and-mime-types/README.md) provides a general discussion of media types.
 - serviceEndpoint : Required by the [Service Endpoints Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints). This URL based endpoint is used to declare how the message should be sent. DID communication is transport agnostic, and therefore leverages existing application level transport protocols. However for each transport defined, which is identified by the URL scheme e.g `http`, a set of transport specific considerations are defined see [transports](../0025-didcomm-transports/README.md) for more details.
 
 >Notes
