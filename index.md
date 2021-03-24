@@ -106,6 +106,9 @@
 * [0557: Discover Features Protocol v2.x](features/0557-discover-features-v2/README.md) (2020-10-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`test-anomaly`](/tags.md#test-anomaly))
 * [0559: Privacy-Preserving Proof of Uniqueness](concepts/0559-pppu/README.md) (2020-10-21 &mdash; [`concept`](/tags.md#concept))
 * [0566: Issuer-Hosted Custodial Agents](concepts/0566-issuer-hosted-custodidal-agents/README.md) (2020-11-16 &mdash; [`concept`](/tags.md#concept))
+* [0587: Encryption Envelope v2](features/0587-encryption-envelope-v2/README.md) (2021-02-10 &mdash; [`feature`](/tags.md#feature))
+* [0592: Indy Attachment Formats for Requesting and Presenting Credentials](features/0592-indy-attachments/README.md) (2021-02-23 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
+* [0593: JSON-LD Credential Attachment format for requesting and issuing credentials](features/0593-json-ld-cred-attach/README.md) (2021-03-16 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 
 ## [RETIRED](README.md#retired)
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2020-10-14, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))

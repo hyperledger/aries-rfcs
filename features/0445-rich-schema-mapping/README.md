@@ -21,7 +21,7 @@ Mapping objects are processed in a generic way defined in
 ## Motivation
 
 Rich schemas are complex, hierarchical, and possibly nested objects. The
-[Camenisch-Lysyanskaya signature][CL-signatures] scheme used by Indy
+[Camenisch-Lysyanskaya signature](https://www.researchgate.net/publication/220922101_A_Signature_Scheme_with_Efficient_Protocols) scheme used by Indy
 requires the attributes to be represented by an array of 256-bit integers.
 Converting data specified by a rich schema into a flat array of integers
 requires a mapping object.
@@ -70,7 +70,7 @@ with different encodings.
 
 
 Note: The anonymous credential signature scheme currently used by Indy is
-[Camenisch-Lysyanskaya signatures][CL-signatures]. It is the use of this
+[Camenisch-Lysyanskaya signatures](https://www.researchgate.net/publication/220922101_A_Signature_Scheme_with_Efficient_Protocols). It is the use of this
 signature scheme in combination with rich schema objects that necessitates
 a mapping object. If another signature scheme is used which does not have
 the same requirements, a mapping object may not be necessary or a different
@@ -152,7 +152,7 @@ It is important that no two `rank` values may be identical.
     '@context': "did:sov:2f9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
     '@type': "rdfs:Class",
     "schema": "did:sov:4e9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
-    "attribuites" : {
+    "attributes" : {
         "issuer": [{
             "enc": "did:sov:9x9F8ZmxuvDqRiqqY29x6dx9oU4qwFTkPbDpWtwGbdUsrCD",
             "rank": 1
@@ -225,10 +225,9 @@ This means the following methods can be used:
 [reference]: #reference
 
 The following is a 
-[reference implementation of various transformation algorithms](https://github.com/sovrin-foundation/aries-credx-framework-rs/blob/master/src/encoding/mod.rs)
-Here is the paper that defines
-[Camenisch-Lysyanskaya signatures.][CL-signatures] 
-[CL-signatures]: (https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf)
+[reference implementation of various transformation algorithms](https://github.com/sovrin-foundation/aries-credx-framework-rs/blob/master/src/encoding/mod.rs).
+
+[Here](https://www.researchgate.net/publication/220922101_A_Signature_Scheme_with_Efficient_Protocols) is the paper that defines Camenisch-Lysyanskaya signatures.
 
 - [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
 - [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common) 
