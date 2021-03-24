@@ -172,7 +172,7 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
   * It MUST include the ID of the parent thread (`pthid`) such that the `request` can be correlated to the corresponding (implicit or explicit) `invitation`. More on correlation [below](#correlating-requests-to-invitations).
   * It SHOULD include the `thid` property. In doing so, implementations MUST set its value to that of `@id` on the same `request` message. In other words, the values of `@id` and `~thread.thid` MUST be equal.
 * The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute.
-* The `did` indicates the DID being exchanged.
+* The `did` attribute MUST be included. It indicates the DID being exchanged.
 * The `did_doc~attach` contains the DID Doc associated with the DID as a [signed attachment](../../concepts/0017-attachments/README.md). If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
 
 #### Correlating requests to invitations
@@ -321,8 +321,8 @@ The key used in the signed attachment must be verified against the invitation's 
 #### Response Message Attributes
 
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
-* The `~thread` block contains a `thid` reference to the `@id` of the request message.
-* The `did` attribute is a required string value and denotes DID in use by the responder. Note that this MAY NOT be the same DID used in the invitation.
+* The `~thread` decorator MUST be included. It contains a `thid` reference to the `@id` of the request message.
+* The `did` attribute MUST be included. It denotes the DID in use by the responder. Note that this MAY NOT be the same DID used in the invitation.
 * The `did_doc~attach` contains the DID Doc associated with the DID as a [signed attachment](../../concepts/0017-attachments/README.md). If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
   * If the DID and DIDDoc being conveyed is different from that conveyed in the initial contact with the requester, the DIDDoc attachment should be signed by the earlier key. For example, if the requester sent the request to a DID service endpoint from a public DID or an out-of-band invitation, the signature on the DIDDoc should use the key from that interaction.
 
