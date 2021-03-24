@@ -117,7 +117,7 @@ An optional message sent by the prover to the verifier to initiate a proof prese
             "format" : "<format-and-version>",
         }
     ],
-    "proposal~attach": [
+    "proposals~attach": [
         {
             "@id": "<attachment identifier>",
             "mime-type": "application/json",
@@ -134,9 +134,9 @@ Description of fields:
 * `goal_code` -- optional field that indicates the goal of the message sender. 
 * `comment` -- a field that provides some human readable information about the proposed presentation.
 * `formats` -- contains an entry for each `filter~attach` array entry, including an optional value of the attachment `@id` (if attachments are present) and the verifiable presentation format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
-* `proposal~attach` -- an optional array of attachments that further define the presentation request being proposed. This might be used to clarify which formats or format versions are wanted.
+* `proposals~attach` -- an optional array of attachments that further define the presentation request being proposed. This might be used to clarify which formats or format versions are wanted.
 
-If the `proposal~attach` is not provided, the `attach_id` item in the `formats` array should not be provided. That form of the `propose-presentation` message is to indicate the presentation formats supported by the prover, independent of the verifiable presentation request content.
+If the `proposals~attach` is not provided, the `attach_id` item in the `formats` array should not be provided. That form of the `propose-presentation` message is to indicate the presentation formats supported by the prover, independent of the verifiable presentation request content.
 
 #### Negotiation and Preview
 
@@ -159,7 +159,7 @@ From a verifier to a prover, the `request-presentation` message describes values
     "@id": "<uuid-request>",
     "goal_code": "<goal-code>",
     "comment": "some comment",
-    "will_confirm": "true",
+    "will_confirm": true,
     "formats" : [
         {
             "attach_id" : "<attach@id value>",
@@ -182,7 +182,7 @@ Description of fields:
 
 * `goal_code` -- optional field that indicates the goal of the message sender. 
 * `comment` -- a field that provides some human readable information about this request for a presentation.
-* `will_confirm` -- an optional field that defaults to `"false"` to indicate that the verifier will or will not send a post-presentation confirmation `ack` message
+* `will_confirm` -- an optional field that defaults to `false` to indicate that the verifier will or will not send a post-presentation confirmation `ack` message
 * `formats` -- contains an entry for each `request_presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation request format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
 * `request_presentations~attach` -- an array of attachments containing the acceptable verifiable presentation requests.
 
@@ -246,7 +246,7 @@ A message from the verifier to the prover that the `Present Proof` protocol was 
 
 A message from the verifier to the prover that follows the `presentation` message to indicate that the `Present Proof` protocol was completed unsuccessfully and is now in the `abandoned` state. The message is an adopted `problem-report` from the [RFC 0015 report-problem protocol](../0035-report-problem/README.md). The definition of "unsuccessful" from a business sense is up to the verifier. The elements of the `problem-report` message can provide information to the prover about why the protocol instance was unsuccessful.
 
-Either party may send a `problem-report` message earlier in the flow to terminate the protocol before it's normal conclusion.
+Either party may send a `problem-report` message earlier in the flow to terminate the protocol before its normal conclusion.
 
 ## Reference
 
@@ -262,7 +262,7 @@ The verifiable presentation standardization work being conducted in parallel to 
 
 ## Prior art
 
-The existing [RFC 0036 Present Proof](../0037-present-proof/README.md) protocol and implementations.
+The existing [RFC 0037 Present Proof](../0037-present-proof/README.md) protocol and implementations.
 
 ## Unresolved questions
 
