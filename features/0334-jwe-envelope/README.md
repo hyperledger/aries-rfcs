@@ -48,6 +48,7 @@ The following curves are supported:
  X25519 (aka Curve25519)                                    | X25519 (default)
  NIST P256 (aka SECG secp256r1 and ANSI X9.62 prime256v1, ref [here](https://tools.ietf.org/search/rfc4492#appendix-A))   | P-256
  NIST P384 (aka SECG secp384r1, ref [here](https://tools.ietf.org/search/rfc4492#appendix-A)) | P-384
+ NIST P521 (aka SECG secp521r1, ref [here](https://tools.ietf.org/search/rfc4492#appendix-A)) | P-521
 
 Other curves are optional.
 
@@ -77,6 +78,8 @@ The Proposed [JWE Formats](#jwe-formats) below lists a combination of content en
 - All new algorithm identifiers should be registered at IANA.
   - XC20P
   - ECDH-1PU+A256KW (already in IETF draft)
+  - ECDH-ES+XC20PKW
+  - ECDH-1PU+XC20PKW
 - Security Considerations of [ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) (Section 4)
 - X25519 is not yet part of SP 800-56A. See [NIST post](https://csrc.nist.gov/News/2017/Transition-Plans-for-Key-Establishment-Schemes) for more information.
 
@@ -101,19 +104,20 @@ Another prior effort towards enhancing JWE compliance is to use XChacha20Poly130
   "recipients": [
     {
       "header": {
-        "kid": base64url(recipient KID), // e.g: base64url("urn:123")
+        "kid": base64url(recipient KID), // e.g: base64url("urn:123") or base64url(jwk thumbprint)
         "alg": "ECDH-ES+A256KW",
-        "epk": { // defining X25519 key as an example JWK, but this can be AES-GCM 256-bit key as well 
+        "epk": { // defining X25519 key as an example JWK, but this can be EC key as well 
           "kty": "OKP",
           "crv": "X25519",
           "x": "-3bLMSHYDG3_LVNh-MJvoYs_a2sAEPr4jwFfFjTrmUo" // sender's ephemeral public key value base64url encoded
         },
-        "apu": epk.x value above,
-        "apv": base64url(recipient.kid)
+        "apu": base64url(epk.x value above),
+        "apv": base64url(recipients[*].header.kid)
       },
       "encrypted_key": "Sls6zrMW335GJsJe0gJU4x1HYC4TRBZS1kTS1GATEHfH_xGpNbrYLg"
     }
   ],
+  "aad": "base64url(sha256(concat('.',sort([recipients[0].kid, ..., recipients[n].kid])))))",
   "iv": "K0PfgxVxLiW0Dslx",
   "ciphertext": "Sg",
   "tag": "PP31yGbQGBz9zgq9kAxhCA"
@@ -134,25 +138,26 @@ Another prior effort towards enhancing JWE compliance is to use XChacha20Poly130
     {
       "header": {
         "kid": base64url(recipient KID),
-        "alg": "ECDH-ES+A256KW",
+        "alg": "ECDH-ES+XC20PKW", // or "ECDH-ES+A256KW"
         "epk": {
           "kty": "OKP",
           "crv": "X25519",
           "x": "aOH-76BRwkHf0nbGokaBsO6shW9McEs6jqVXaF0GNn4" // sender's ephemeral public key value base64url encoded
         },
-        "apu": epk.x value above,
-        "apv": base64url(recipient.kid)
+        "apu": base64url(epk.x value above),
+        "apv": base64url(recipients[*].header.kid)
       },
       "encrypted_key": "wXzKi-XXb6fj_KSY5BR5hTUsZIiAQKrxblTo3d50B1KIeFwBR98fzQ"
     }
   ],
+  "aad": "base64url(sha256(concat('.',sort([recipients[0].kid, ..., recipients[n].kid])))))",
   "iv": "9yjR8zvgeQDZFbIS",
   "ciphertext": "EvIk_Rr6Nd-0PqQ1LGimSqbKyx_qZjGnmt6nBDdCWUcd15yp9GTeYqN_q_FfG7hsO8c",
   "tag": "9wP3dtNyJERoR7FGBmyF-w"
 }
 ```
 
-In the above two examples, `apu` is the encode ephemeral key used to encrypt the cek stored in `encrypted_key` and `apv` is the key id of the static public key of the recipient. Both are base64Url encoded.
+In the above two examples, `apu` is the encoded ephemeral key used to encrypt the cek stored in `encrypted_key` and `apv` is the encoded key id of the static public key of the recipient. Both are base64Url encoded.
 `kid` is the value of a key ID in a DID document that should be resolvable to fetch the raw public key used.
 
 ### Authcrypt using ECDH-1PU key wrapping mode
@@ -169,14 +174,16 @@ In the above two examples, `apu` is the encode ephemeral key used to encrypt the
             "encrypted_key": "base64url(encrypted CEK)",
             "header": {
                 "kid": base64url(recipient KID),
-                "alg": "ECDH-1PU+A256KW",
+                "alg": "ECDH-1PU+A256KW", // or "ECDH-1pu+XC20P"
                 "enc": "A256GCM",
-                "apu": base64url(senderID),
-                "apv": base64url(recipientID),
+                "apu": base64url(sender KID),
+                "apv": base64url(recipients[*].header.kid),
                 "epk": {
-                  "kty": "OKP",
-                  "crv": "X25519",
-                  "x": "aOH-76BRwkHf0nbGokaBsO6shW9McEs6jqVXaF0GNn4"
+                  "use": "enc",
+                  "kty": "EC",
+                  "crv": "P-256",
+                  "x": "gfdM68LgZWhHwdVyMAPh1oWqV_NcYGR4k7Bjk8uBGx8",
+                  "y": "Gwtgz-Bl_2BQYdh4f8rd7y85LE7fyfdnb0cWyYCrAb4"
                 },
             }
         },
@@ -192,6 +199,10 @@ In the above two examples, `apu` is the encode ephemeral key used to encrypt the
 With the recipients headers representing an ephemeral key that can be used to derive the key to be used for AEAD decryption of the CEK following the [ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) encryption scheme.
 
 The function `XC20P` in the example above is defined as the XChahcha20Poly1035 cipher function. This can be replaced by the A256GCM cipher function.
+
+### Concrete examples
+
+See concrete [anoncrypt](anoncrypt-examples.md) and [authcrypt](authcrypt-examples.md) examples
 
 ## JWE detached mode nested envelopes
 
@@ -265,7 +276,7 @@ Second Mediator receives:
   BASE64URL(JWE Ciphertext for Receiver)
 ```
 
-Finally the Receiver has a normal JWE (as usual):
+Finally, the Receiver has a normal JWE (as usual):
 ```
   BASE64URL(UTF8(JWE Protected Header for Receiver)) || '.' ||
   BASE64URL(JWE Encrypted Key for Receiver) || '.' ||
@@ -301,4 +312,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 | ----------- | -------------------- |
 |             |                      |
 
-Note: [Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) will soon work on a first draft implementation of this RFC.
+Note: [Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) is almost done with a first draft implementation of this RFC.
