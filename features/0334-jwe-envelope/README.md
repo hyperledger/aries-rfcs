@@ -14,7 +14,7 @@ Agents need to use a common set of algorithms when exchanging and persisting dat
 
 ## Motivation
 
-The goal of this RFC is define ciphersuites for Anoncrypt and Authcrypt such that we can achieve better compatability with JOSE. We also aim to supply both a compliant suite and a constrained device suite. The compliant suite is suitable for implementations that contain AES hardware acceleration or desire to use NIST / FIPS algorithms (where possible).
+The goal of this RFC is to define cipher suites for Anoncrypt and Authcrypt such that we can achieve better compatibility with JOSE. We also aim to supply both a compliant suite and a constrained device suite. The compliant suite is suitable for implementations that contain AES hardware acceleration or desire to use NIST / FIPS algorithms (where possible).
 
 ## Encryption Algorithms
 
@@ -104,12 +104,12 @@ Another prior effort towards enhancing JWE compliance is to use XChacha20Poly130
   "recipients": [
     {
       "header": {
-        "kid": base64url(recipient KID), // e.g: base64url("urn:123") or base64url(jwk thumbprint)
+        "kid": base64url(recipient KID), // e.g: base64url("urn:123") or base64url(jwk thumbprint as KID)
         "alg": "ECDH-ES+A256KW",
         "epk": { // defining X25519 key as an example JWK, but this can be EC key as well 
           "kty": "OKP",
           "crv": "X25519",
-          "x": "-3bLMSHYDG3_LVNh-MJvoYs_a2sAEPr4jwFfFjTrmUo" // sender's ephemeral public key value base64url encoded
+          "x": "-3bLMSHYDG3_LVNh-MJvoYs_a2sAEPr4jwFfFjTrmUo" // sender's ephemeral public key value raw (no padding) base64url encoded
         },
         "apu": base64url(epk.x value above),
         "apv": base64url(recipients[*].header.kid)
@@ -138,11 +138,11 @@ Another prior effort towards enhancing JWE compliance is to use XChacha20Poly130
     {
       "header": {
         "kid": base64url(recipient KID),
-        "alg": "ECDH-ES+XC20PKW", // or "ECDH-ES+A256KW"
+        "alg": "ECDH-ES+XC20PKW", // or "ECDH-ES+A256KW" with "epk" as EC key
         "epk": {
           "kty": "OKP",
           "crv": "X25519",
-          "x": "aOH-76BRwkHf0nbGokaBsO6shW9McEs6jqVXaF0GNn4" // sender's ephemeral public key value base64url encoded
+          "x": "aOH-76BRwkHf0nbGokaBsO6shW9McEs6jqVXaF0GNn4" // sender's ephemeral public key value raw (no padding) base64url encoded
         },
         "apu": base64url(epk.x value above),
         "apv": base64url(recipients[*].header.kid)
@@ -157,7 +157,7 @@ Another prior effort towards enhancing JWE compliance is to use XChacha20Poly130
 }
 ```
 
-In the above two examples, `apu` is the encoded ephemeral key used to encrypt the cek stored in `encrypted_key` and `apv` is the encoded key id of the static public key of the recipient. Both are base64Url encoded.
+In the above two examples, `apu` is the encoded ephemeral key used to encrypt the cek stored in `encrypted_key` and `apv` is the encoded key id of the static public key of the recipient. Both are raw (no padding) base64Url encoded.
 `kid` is the value of a key ID in a DID document that should be resolvable to fetch the raw public key used.
 
 ### Authcrypt using ECDH-1PU key wrapping mode
@@ -174,7 +174,7 @@ In the above two examples, `apu` is the encoded ephemeral key used to encrypt th
             "encrypted_key": "base64url(encrypted CEK)",
             "header": {
                 "kid": base64url(recipient KID),
-                "alg": "ECDH-1PU+A256KW", // or "ECDH-1pu+XC20P"
+                "alg": "ECDH-1PU+A256KW", // or "ECDH-1pu+XC20P" with "epk" as X25519 key
                 "enc": "A256GCM",
                 "apu": base64url(sender KID),
                 "apv": base64url(recipients[*].header.kid),
@@ -250,7 +250,7 @@ This solution has the following characteristics:
 
 The extracted ciphertext serialization format should have additional thought for both compact and JSON modes. As a starting point:
 
-- Compact mode: Each extracted ciphertext is appended to the end of the serialized "final" JWE (using dot seperation). These extracted cipher texts are ordered according to the nesting (from innermost to outermost).
+- Compact mode: Each extracted ciphertext is appended to the end of the serialized "final" JWE (using dot separation). These extracted cipher texts are ordered according to the nesting (from innermost to outermost).
 - JSON mode: The extracted ciphertext are placed into a JSON array. These extracted cipher texts are ordered according to the nesting (from innermost to outermost). The array is appended to the "final" JWE object as the `detached_ciphertext` field.
 
 For illustration, the following compact serialization represents nesting due to two mediators (the second mediator being closest to the Receiver).
@@ -302,7 +302,12 @@ This illustration extends the serialization shown in [RFC 7516](https://tools.ie
 ## Unresolved questions
 
 - What fields should Key identifiers in ES and 1PU key wrapping modes use? `kid` vs `id` (vs `skid` introduced in [ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) IETF document) or any other combination of fields. There is a discussion about this [here](https://github.com/w3c/did-core/issues/131).
-- What kind of keys to include in the JWE envelope? `Encryption` or `signing` keys? Currently the existing Aries agents include `signing` keys for the sender and recipients and convert them to encryption keys for encryption/decryption operations only. The drawback is the envelope transmitted by the agent contains signing keys. The aries-framework-go repo includes (an experimental) JWE implementation that expects `signing` keys from the API user and then fetches the corresponding `encryption` keys from the wallet (KMS) to build the envelope. `Signing` keys are not included in the envelope in this implementation. There is a need to separate them from `encryption` keys in the current Aries implementations as well.
+  - **Update**:
+  The answer to this question is to keep `kid` definition as per the JWE/JWS family of specification definitions and use `skid` in the JWE protected header as defined in [ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) to represent a resolvable sender key id.
+
+- What kind of keys to include in the JWE envelope? `Encryption` or `signing` keys? Currently, the existing Aries agents include `signing` (ED25519) keys for the sender and recipients and convert them to encryption (X25519) keys for encryption/decryption operations only. The drawback of this approach is the envelope transmitted by the agent contains signing public keys. There is a need to separate them from `encryption` keys. 
+  - **Update**:  
+  The best way to separate the two keys is to use the DID document's [KeyAgreement](https://www.w3.org/TR/did-core/#key-agreement) verification method in full description to store the `encryption` key so that it can be sent in the JWE envelope independently of the signing (DID authentication) key.
 
 ## Implementations
 
