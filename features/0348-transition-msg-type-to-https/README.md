@@ -93,10 +93,11 @@ Name / Link | Implementation Notes
 [Trinsic](https://trinsic.id/) | No steps completed
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Completed Step 1 [code change](https://github.com/hyperledger/aries-cloudagent-python/pull/379)
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | No steps completed
-[Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | No steps completed
+[Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | Completed Step 2
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | No steps completed
 [Verity](https://www.evernym.com/products/) | No steps completed
 [Pico Labs](http://picolabs.io/) | Completed Step 2 even though [deprecated](https://github.com/picolab/G2S)
 [IBM](https://github.com/IBM-Blockchain-Identity/unknown) | Completed Step 1 [code change](https://github.com/hyperledger/indy-sdk/pull/2136)
 IBM Agent | Completed Step 1
 [Aries Cloud Agent - Pico](https://github.com/Picolab/aries-cloudagent-pico) | Completed Step 2 [code change](https://github.com/Picolab/aries-cloudagent-pico/commit/2fb4b5f714f32a300ec6ae2655cf9319c0ff3703)
+[Aries Framework JavaScript](https://github.com/hyperledger/aries-framework-javascript) | Completed Step 2 [code change](https://github.com/hyperledger/aries-framework-javascript/pull/213)
