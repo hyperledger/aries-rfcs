@@ -40,52 +40,40 @@ When a new key is used by the _recipient_, it must be registered with the _media
 
 The `keylist-update` and `keylist-query` methods are used over time to identify and remove keys that are no longer in use by the _recipient_.
 
-### Terms
-
-The protocol allows for term agreement between the _mediator_ and _recipient_.
-
-**mediator_terms** indicate terms that the _mediator_ requires the _recipient_ to agree to.
-
-**recipient_terms** indicate terms that the _recipient_ requires the _mediator_ to agree to.
-
-If the _mediator_ requires the _recipient_  to agree to terms prior to service, a `mediate_deny` message will be returned listing the URIs of terms that the user must agree to. Term agreement is indicated by including the same URIs in the `mediator_terms` attribute of the `route_request` message. The *mediator* may indicate which user terms they support in the `recipient_terms` attribute of the `mediate_deny` message.
-
 ## Reference
+
+> **Note on terms:** Early versions of this protocol included the concept of
+> terms for mediation.  This concept has been removed from this version due to a
+> need for further discussion on representing terms in DIDComm in general and
+> lack of use of these terms in current implementations.
+
 
 ### Mediation Request
 This message serves as a request from the _recipient_ to the _mediator_, asking for the permission (and routing information) to publish the endpoint as a mediator.
-
-Each term array entry is a string containing a URI to a document containing the terms required by the mediator or recipient (respectively) must agree to. If the mediator does not agree to the recipient_terms, or requires agreement not present in the mediator_terms, a `mediate_deny` message should be sent indicating acceptable terms. Sending a `mediate-grant` message signals that the terms have been accepted. If the list is empty, no terms agreement is required.
 
 ```jsonc
 {
     "@id": "123456781",
     "@type": "<baseuri>/mediate-request",
-    "mediator_terms": ["http://example.com/mediator/terms"],
-    "recipient_terms": ["http://example.com/recipient/terms"]
 }
 ```
 
-`mediator_terms` and `recipient_terms` are optional.
-
 ### Mediation Deny
 
-A mediator may require agreements prior to granting route coordination. If the agreements present in the request are not sufficient, a route deny message may be used to indicate which agreements are required.
+This message serves as notification of the mediator denying the recipient's
+request for mediation.
 
 ```jsonc
 {
     "@id": "123456781",
     "@type": "<baseuri>/mediate-deny",
-    "mediator_terms": ["http://example.com/mediator/terms"],
-    "recipient_terms": ["http://example.com/recipient/terms"]
 }
 ```
-
-`mediator_terms` and `recipient_terms` are optional.
 
 ### Mediation Grant
 
 A route grant message is a signal from the mediator to the recipient that permission is given to distribute the included information as an inbound route.
+
 ```jsonc
 {
     "@id": "123456781",
@@ -199,6 +187,7 @@ There was an Indy HIPE that never made it past the PR process that described a s
 - We are missing a way to check a single key (or a few keys) without doing a full list.
 - Mediation grant supports only one endpoint. What can be done to support multiple endpoint options i.e. http, ws, etc.
 - Requiring proof of key ownership (with a signature) would prevent an edge case where a malicious party registers a key for another party at the same mediator, and before the other party.
+- How do we express terms and conditions for mediation?
 
 ## Unresolved questions
 
