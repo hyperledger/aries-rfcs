@@ -331,6 +331,20 @@ If the decision is to retry, it would be good to have support in areas covered b
 
 Excessive retrying can exacerbate an existing system issue. If the reason for the timeout is because there is a "too many messages to be processed" situation, then sending retries simply makes the problem worse. As such, a reasonable backoff strategy should be used (e.g. exponentially increasing times between retries). As well, a [strategy used at Uber](https://eng.uber.com/reliable-reprocessing/) is to flag and handle retries differently from regular messages. The analogy with Uber is not pure - that is a single-vendor system - but the notion of flagging retries such that retry messages can be handled differently is a good approach.
 
+### Caveat: Problem Report Loops
+
+Implementers should consider and mitigate the risk of an endless loop of error messages. For example:
+
+- Alice sends a message to Bob that Bob doesn't recognize. Bob sends a `Problem Report` message to Alice.
+- Alice doesn't understand the message from Bob and sends a `Problem Report` to Bob.
+- Bob doesn't understand the message from Alice and sends a `Problem Report` to Alice. And so on...
+
+#### Recommended Handling
+
+How agents mitigate the risk of this problem is implementation specific, balancing loop-tracking overhead versus the likelihood of occurrence.
+For example, an agent implementation might have a counter on a connection object that is incremented when certain types of `Problem Report` messages are sent on that connection,
+and reset when any other message is sent. The agent could stop sending those types of `Problem Report` messages after the counter reaches a given value.
+
 ## Reference
 
 TBD
