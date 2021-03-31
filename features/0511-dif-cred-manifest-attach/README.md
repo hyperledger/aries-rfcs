@@ -56,7 +56,7 @@ Complete message example:
         "attach_id": "b45ca1bc-5b3c-4672-a300-84ddf6fbbaea",
         "format": "dif/credential-manifest@v1.0"
     }],
-    "filter~attach": [{
+    "filters~attach": [{
         "@id": "b45ca1bc-5b3c-4672-a300-84ddf6fbbaea",
         "mime-type": "application/json",
         "data": {

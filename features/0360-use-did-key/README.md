@@ -60,6 +60,8 @@ The following currently implemented RFCs would be affected by acceptance of this
 - [0028-introduce](https://github.com/hyperledger/aries-rfcs/tree/master/features/0028-introduce)
 - [0056-service-decorator](https://github.com/hyperledger/aries-rfcs/tree/master/features/0056-service-decorator)
 - [0160-connection-protocol](https://github.com/hyperledger/aries-rfcs/tree/master/features/0160-connection-protocol)
+- [0434-out-of-band-protocols](https://github.com/hyperledger/aries-rfcs/blob/master/features/0434-outofband/README.md)
+- [0211-mediator-coordination-protocol](https://github.com/hyperledger/aries-rfcs/blob/master/features/0211-route-coordination/README.md)
 
 Service entries in `did:peer` DIDDocs (such as in RFCs
 [0094-cross-domain-messaging](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0094-cross-domain-messaging)
