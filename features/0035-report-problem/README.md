@@ -1,12 +1,12 @@
 # Aries RFC 0035: Report Problem Protocol 1.0
 
 - Authors: [Stephen Curran](swcurran@cloudcompass.ca), [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-04-01
-- Status Note: Implemented in several codebases. Not yet fully harmonized.
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-03-15
+- Status Note: Implemented in multiple codebases.
 - Supersedes: [Indy HIPE PR #65]( https://github.com/hyperledger/indy-hipe/pull/65)
 - Start Date: 2018-11-26
-- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -331,6 +331,20 @@ If the decision is to retry, it would be good to have support in areas covered b
 
 Excessive retrying can exacerbate an existing system issue. If the reason for the timeout is because there is a "too many messages to be processed" situation, then sending retries simply makes the problem worse. As such, a reasonable backoff strategy should be used (e.g. exponentially increasing times between retries). As well, a [strategy used at Uber](https://eng.uber.com/reliable-reprocessing/) is to flag and handle retries differently from regular messages. The analogy with Uber is not pure - that is a single-vendor system - but the notion of flagging retries such that retry messages can be handled differently is a good approach.
 
+### Caveat: Problem Report Loops
+
+Implementers should consider and mitigate the risk of an endless loop of error messages. For example:
+
+- Alice sends a message to Bob that Bob doesn't recognize. Bob sends a `Problem Report` message to Alice.
+- Alice doesn't understand the message from Bob and sends a `Problem Report` to Bob.
+- Bob doesn't understand the message from Alice and sends a `Problem Report` to Alice. And so on...
+
+#### Recommended Handling
+
+How agents mitigate the risk of this problem is implementation specific, balancing loop-tracking overhead versus the likelihood of occurrence.
+For example, an agent implementation might have a counter on a connection object that is incremented when certain types of `Problem Report` messages are sent on that connection,
+and reset when any other message is sent. The agent could stop sending those types of `Problem Report` messages after the counter reaches a given value.
+
 ## Reference
 
 TBD
@@ -363,6 +377,6 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | The `problem-report` message is [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol.
-[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | The `problem-report` message is [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol.
-[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET
+[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | The `problem-report` message is [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol. [MISSING test results](/tags.md#test-anomaly)
+[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | The `problem-report` message is [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol. [MISSING test results](/tags.md#test-anomaly)
+[Trinsic.id](https://trinsic.id/) | Commercial mobile and web app built using Aries Framework - .NET [MISSING test results](/tags.md#test-anomaly)
