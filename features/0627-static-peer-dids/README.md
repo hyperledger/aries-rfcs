@@ -34,7 +34,7 @@ This Aries RFC targets Layers 1 and 2. That is, code that complies with this RFC
 
 Support for Layer 3 (dynamic peer DIDs that have updatable state and that synchronize that state using [Sync Connection Protocol as documented in Aries RFC 0030](../0030-sync-connection/README.md)) is NOT required by this RFC. However, if there is an intent to support dynamic updates in the future, use of `numalgo` Method 1 is encouraged, as this allows static peer DIDs to acquire new state when dynamic support is added. (See next section.)
 
-### Targeted Methods (`numalgo`)
+### Targeted Generation Methods (`numalgo`)
 
 Peer DIDs can use several different algorithms to generate the entropy that constitutes their _numeric basis_. See https://identity.foundation/peer-did-method-spec/#generation-method for details.
 
