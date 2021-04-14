@@ -82,7 +82,7 @@ To advertise the combination of Envelope v2 with a DIDComm v1 message, the media
 
 ## Additional AIP impacts
 
-Implementors supporting an AIP sub-target that contains this RFC (e.g., `DIDCOMMV2PREP`) MAY choose to only support Envelope v2 without support for the original envelope declared in [RFC 0019](https://github.com/hyperledger/aries-rfcs/tree/master/features/0019-encryption-envelope). In these cases, the `accept` property will not contain `application/didcomm-enc-env` media type.
+Implementors supporting an AIP sub-target that contains this RFC (e.g., `DIDCOMMV2PREP`) MAY choose to only support Envelope v2 without support for the original envelope declared in [RFC 0019](https://github.com/hyperledger/aries-rfcs/tree/master/features/0019-encryption-envelope). In these cases, the `accept` property will not contain `didcomm/aip2;env=rfc19` media type.
 
 ## Drawbacks
 
