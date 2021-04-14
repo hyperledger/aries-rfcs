@@ -173,7 +173,8 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
   * It SHOULD include the `thid` property. In doing so, implementations MUST set its value to that of `@id` on the same `request` message. In other words, the values of `@id` and `~thread.thid` MUST be equal.
 * The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute.
 * The `did` attribute MUST be included. It indicates the DID being exchanged.
-* The `did_doc~attach` contains the DID Doc associated with the DID as a [signed attachment](../../concepts/0017-attachments/README.md). If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
+* The `did_doc~attach` contains the DID Doc associated with the DID.
+  * If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
 
 #### Correlating requests to invitations
 
@@ -316,15 +317,15 @@ The exchange response message is used to complete the exchange. This message is 
 }
 ```
 
-The key used in the signed attachment must be verified against the invitation's `recipientKeys` for continuity.
+The invitation's `recipientKeys` should be dedicated to envelopes authenticated encryption throughout the exchange. These keys are usually defined in the `KeyAgreement` DID verification relationship.
 
 #### Response Message Attributes
 
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
 * The `~thread` decorator MUST be included. It contains a `thid` reference to the `@id` of the request message.
 * The `did` attribute MUST be included. It denotes the DID in use by the responder. Note that this MAY NOT be the same DID used in the invitation.
-* The `did_doc~attach` contains the DID Doc associated with the DID as a [signed attachment](../../concepts/0017-attachments/README.md). If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
-  * If the DID and DIDDoc being conveyed is different from that conveyed in the initial contact with the requester, the DIDDoc attachment should be signed by the earlier key. For example, if the requester sent the request to a DID service endpoint from a public DID or an out-of-band invitation, the signature on the DIDDoc should use the key from that interaction.
+* The `did_doc~attach` contains the DID Doc associated with the DID.
+  * If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
 
 In addition to a new DID, the associated DID Doc might contain a new endpoint. This new DID and endpoint are to be used going forward in the relationship.
 
@@ -336,7 +337,7 @@ When the message is sent, the _responder_ are now in the `response-sent` state. 
 
 #### Response Processing
 
-When the requester receives the `response` message, they will verify the signature on the DID Doc attachment. After validation, they will update their wallet with the new information, and use that information in sending the `complete` message.
+When the requester receives the `response` message, they will decrypt the authenticated envelope which confirms the source's authenticity. After decryption validation, they will update their wallet with the new information, and use that information in sending the `complete` message.
 
 #### Response Errors
 
