@@ -38,8 +38,8 @@ When a DID document wishes to express support for DID communications, the follow
     "recipientKeys" : [ "did:example:123456789abcdefghi#1" ],
     "routingKeys" : [ "did:example:123456789abcdefghi#1" ],
     "accept": [
-      "application/didcomm-encrypted+json",
-      "application/didcomm-enc-env"
+      "didcomm/aip2;env=rfc587",
+      "didcomm/aip2;env=rfc19"
     ],
     "serviceEndpoint": "https://agent.example.com/"
   }]

@@ -94,8 +94,8 @@ The out-of-band protocol a single message that is sent by the *sender*.
   "goal_code": "issue-vc",
   "goal": "To issue a Faber College Graduate credential",
   "accept": [
-    "application/didcomm-encrypted+json",
-    "application/didcomm-enc-env"
+    "didcomm/aip2;env=rfc587",
+    "didcomm/aip2;env=rfc19"
   ],
   "handshake_protocols": [
     "https://didcomm.org/didexchange/1.0",
