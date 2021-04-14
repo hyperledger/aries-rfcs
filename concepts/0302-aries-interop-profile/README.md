@@ -159,7 +159,7 @@ Concept | [0005-didcomm](https://github.com/hyperledger/aries-rfcs/tree/b982c24b
 Concept | [0008-message-id-and-threading](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0008-message-id-and-threading) | AIP V1.0, Updated
 Concept | [0011-decorators](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0011-decorators) | AIP V1.0, Updated
 Concept | [0017-attachments](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0017-attachments) | AIP V1.0, Updated
-Concept | [0020-message-types](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0020-message-types) | AIP V1.0, Updated
+Concept | [0020-message-types](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0020-message-types) | AIP V1.0, Updated<br>Mandates message prefix `https://didcomm.org` for Aries Protocol messages.
 Concept | [0046-mediators-and-relays](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0046-mediators-and-relays) | AIP V1.0, Updated
 Concept | [0047-json-LD-compatibility](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0047-json-ld-compatibility) | AIP V1.0, Updated
 Concept | [0050-wallets](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0050-wallets) | AIP V1.0, Unchanged
@@ -172,12 +172,13 @@ Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tr
 Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0035-report-problem) | AIP V1.0, Updated
 Features | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0044-didcomm-file-and-mime-types) | :new:
 Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0048-trust-ping) | :new:
+Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0183-revocation-notification) | :new:
 Feature | [0360-use-did-key](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0360-use-did-key) | :new:
 Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0434-outofband) | :new:
-Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0557-discover-features-v2) | :new:
-Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0183-revocation-notification) | :new:
 Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0453-issue-credential-v2) | Update to V2 Protocol
 Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0454-present-proof-v2) | Update to V2 Protocol
+Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0557-discover-features-v2) | :new:
+Feature | [0627-static-peer-dids](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0627-static-peer-dids)  | :new:
 
 #### MEDIATE: Mediator Coordination
 
