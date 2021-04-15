@@ -1,8 +1,8 @@
 # Aries RFC 0454: Present Proof Protocol 2.0
 
 - Authors: Nikita Khateev, Stephen Curran
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-05-27
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
 - Status Note:  See [RFC 0453](../0453-issue-credential-v2/README.md) for the corresponding issue credential protocol.
 - Supersedes: [RFC 0037](../0037-present-proof/README.md)
 - Start Date: 2020-05-27
