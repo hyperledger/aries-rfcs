@@ -90,7 +90,7 @@ Name / Link | Implementation Notes
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | No steps completed
 [Aries Toolbox](https://github.com/hyperledger/aries-toolbox) | Completed Step 1 [code change](https://github.com/hyperledger/aries-toolbox/pull/155). 
 [Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | Completed Step 1 [code change](https://github.com/hyperledger/aries-framework-dotnet/pull/116)
-[Trinsic](https://trinsic.id/) | No steps completed
+[Trinsic.id](https://trinsic.id/) | No steps completed
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Completed Step 1 [code change](https://github.com/hyperledger/aries-cloudagent-python/pull/379)
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | No steps completed
 [Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | Completed Step 2
