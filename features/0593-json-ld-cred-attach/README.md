@@ -1,9 +1,9 @@
 # Aries RFC 0593: JSON-LD Credential Attachment format for requesting and issuing credentials
 
 - Authors: Timo Glastra (Animo Solutions), George Aristy (SecureKey Technologies)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2021-03-16
-- Status Note:
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Included as part of the JSON-LD verifiable credentials subtarget of [AIP v2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Supersedes:
 - Start Date: 2021-02-17
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
