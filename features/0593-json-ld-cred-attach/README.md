@@ -112,7 +112,7 @@ A complete [`request credential` message form the Issue Credential protocol 2.0]
 
 The format is closely related to the [Verifiable Credentials HTTP API](https://w3c-ccg.github.io/vc-http-api/), but diverts on some places. The main differences are:
 
-- The types in the VC HTTP API are more restrictive (.e.g. `@context` must be array of strings). This format allows all fields to use the full syntax ass described by the verifiable credentials data model.
+- The types in the VC HTTP API are more restrictive (.e.g. `@context` must be array of strings). This format allows all fields to use the full syntax as described by the verifiable credentials data model.
 - Instead of specifying the exact `verificationMethod`, the `proofType` that will be used for the credential can be specified.
 
 ### `ld-proof-vc` attachment format
@@ -152,7 +152,7 @@ The JSON structure might look like this:
 }
 ```
 
-A complete [`issue-credential` message form the Issue Credential protocol 2.0](../0453-issue-credential-v2/README.md#issue-credential) might look like this:
+A complete [`issue-credential` message from the Issue Credential protocol 2.0](../0453-issue-credential-v2/README.md#issue-credential) might look like this:
 
 ```json
 {
