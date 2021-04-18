@@ -27,7 +27,12 @@ support a million other uses.
 
 We need to define how files and attachments can contain DIDComm messages, and what the
 semantics of processing such files will be.
+
 ## Tutorial
+
+### Media Types
+
+ Media types are based on the conventions of [RFC6838](https://tools.ietf.org/html/rfc6838). Similar to [RFC7515](https://tools.ietf.org/html/rfc7515#section-4.1.9), the `application/` prefix MAY be omitted and the recipient MUST treat media types not containing `/` as having the `application/` prefix present.
 
 ### DIDComm v1 Encrypted Envelope (*.dee)
 
@@ -56,6 +61,9 @@ a choice similar to the one that views `*.docx` files primarily as
 `application/msword` instead of `application/xml`.) If format evolution takes
 place, the version could become a parameter as [described in RFC 1341](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html):
 `application/didcomm-enc-env;v=2`.
+
+A recipient using the media type value MUST treat it as if `“application/”` were prepended to any `"typ"` or `"cty"` value not containing a ‘/’ in compliance 
+with the [JWE](https://tools.ietf.org/html/rfc7516) /[JWS](https://tools.ietf.org/html/rfc7515)  family of specs.
 
 The default action for DIDComm V1 Encrypted Envelopes (what happens when a user double-clicks one)
 should be `Handle` (that is, process the message as if it had just arrived by some other transport),
@@ -90,6 +98,9 @@ MIME type. The recommendation is
 `application/didcomm-sig-env`, with `application/jws` as a fallback, and
 `application/json` as an even less desirable fallback.
 
+A recipient using the media type value MUST treat it as if `“application/”` were prepended to any `"typ"` or `"cty"` value not containing a ‘/’ in compliance 
+with the [JWE](https://tools.ietf.org/html/rfc7516) /[JWS](https://tools.ietf.org/html/rfc7515) family of specs.
+
 The default action for DIDComm V1 Signed Envelopes (what happens when a user double-clicks one)
 should be `Validate` (that is, process the signature to see if it is valid.
 
@@ -122,8 +133,11 @@ The name of this file format is "DIDComm V1 Message." We expect people to say,
 "Does my editor have a DIDComm V1 Message plugin?" For extra clarity, it is acceptable
 to add the adjective "plaintext", as in "DIDComm V1 Plaintext Message."
 
-The MIME type of *.dm files is `application/json`--or, if further discrimination is needed,
-`application/json;flavor=didcomm-msg`.
+The most specific MIME type of *.dm files is `application/json;flavor=didcomm-msg`--or, if more generic handling is appropriate, just 
+`application/json`.
+
+A recipient using the media type value MUST treat it as if `“application/”` were prepended to any `"typ"` or `"cty"` value not containing a ‘/’ in compliance 
+with the [JWE](https://tools.ietf.org/html/rfc7516) /[JWS](https://tools.ietf.org/html/rfc7515) family of specs.
 
 The default action for DIDComm V1 Messages should be to
 `View` or `Validate` them. Other interesting actions might be `Encrypt to *.dee`,
@@ -154,6 +168,28 @@ There can be more than one Native Object representation for a given programming 
 Native Object forms are never rendered directly to files; rather, they are serialized to DIDComm Plaintext Format
 and then persisted (likely after also encrypting to DIDComm V1 Encrypted Envelope).
 
+### Negotiating Compatibility
+
+When parties want to communicate via DIDComm, a number of mechanisms must align. These include:
+
+1. The type of service endpoint used by each party
+2. The key types used for encryption and/or signing
+3. The format of the encryption and/or signing envelopes
+4. The encoding of plaintext messages
+5. The protocol used to forward and route
+6. The protocol embodied in the plaintext messages
+
+Although DIDComm allows flexibility in each of these choices, it is not expected that a given DIDComm implementation will support many permutations. Rather, we expect a few sets of choices that commonly go together. We call a set of choices that work well together a __profile__. Profiles are identified by a string that matches the conventions of IANA media types, but they express choices about plaintext, encryption, signing, and routing in a single value. The following profile identifiers are defined in this version of the RFC:
+
+### Defined Profiles
+
+- `didcomm/aip1`: The encryption envelope, signing mechanism, plaintext conventions, and routing algorithms embodied in Aries AIP 1.0, circa 2020.
+- `didcomm/aip2;env=rfc19`: The signing mechanism, plaintext conventions, and routing algorithms embodied in Aries AIP 2.0, circa 2021 -- with the old-style encryption envelope from Aries RFC 0019. This legal variant of AIP 2.0 minimizes differences with codebases that shipped AIP 1.0 support.
+- `didcomm/aip2;env=rfc587`: The signing mechanism, plaintext conventions, and routing algorithms embodied in Aries AIP 2.0, circa 2021 -- with the new-style encryption envelope from Aries RFC 0587. This legal variant of AIP 2.0 lays the foundation for DIDComm v2 support by anticipating the eventual envelope change.
+- `didcomm/v2`: The encryption envelope, signing mechanism, plaintext conventions, and routing algorithms embodied in the DIDComm messaging spec.
+
+Profiles are named in the `accept` section of a DIDComm service endpoint and in an out-of-band message. When Alice declares that she accepts `didcomm/aip2;env=rfc19`, she is making a declaration about more than her own endpoint. She is saying that all publicly visible steps in an inbound route to her will use the `didcomm/aip2;env=rfc19` profile, such that a sender only has to use `didcomm/aip2;env=rfc19` choices to get the message from Alice's outermost mediator to Alice's edge. It is up to Alice to select and configure mediators and internal routing in such a way that this is true for the sender.
+
 ### Detecting DIDComm Versions
 
 Because media types differ from DIDComm V1 to V2, and because media types are easy to communicate in headers and message fields, they are a convenient way to detect which version of DIDComm applies in a given context:
@@ -162,7 +198,7 @@ Nature of Content | V1 | V2
 --- | --- | ---
 encrypted| `application/didcomm-enc-env`<br>DIDComm V1 Encrypted Envelope<br>*.dee | `application/didcomm-encrypted+json`<br>DIDComm Encrypted Message<br>*.dcem
 signed| `application/didcomm-sig-env`<br>DIDComm V1 Signed Envelope<br>*.dse | `application/didcomm-signed+json`<br>DIDComm Signed Message<br>*.dcsm
-plaintext| `application/json`<br>DIDComm V1 Message<br>*.dm | `application/didcomm-plain+json`<br>DIDComm Plaintext Message<br>*.dcpm
+plaintext| `application/json;flavor=didcomm-msg`<br>DIDComm V1 Message<br>*.dm | `application/didcomm-plain+json`<br>DIDComm Plaintext Message<br>*.dcpm
 
 It is also recommended that agents implementing [Discover Features Protocol v2](../0557-discover-features-v2/README.md) respond to [queries about supported DIDComm versions](../0557-discover-features-v2/README.md#queries-message-type) using the `didcomm-version` feature name. This allows queries about what an agent is willing to support, whereas the media type mechanism describes what is in active use. The values that should be returned from such a query are URIs that tell where DIDComm versions are developed:
 
