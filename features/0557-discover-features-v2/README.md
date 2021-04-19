@@ -1,9 +1,9 @@
 # Aries RFC 0557: Discover Features Protocol v2.x
 
 - Authors: Daniel Hardman
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-10-15
-- Status Note: Update to version 2.0 proposed in conjunction with DIDComm v2 efforts at DIF, where it became clear that we need to discover more than just protocol support of other agents.
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Update to version 2.0 proposed in conjunction with DIDComm v2 efforts at DIF, where it became clear that we need to discover more than just protocol support of other agents. Included in [AIP v2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Supersedes: [version 1.0 of this protocol in RFC 0031](../0031-discover-features/README.md), which was widely referenced in the Aries eocsystem in 2018 and 2019.
 - Start Date: 2018-12-17
 - URI: https://didcomm.org/discover-features/%VER

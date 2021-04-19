@@ -1,9 +1,9 @@
 # Aries RFC 0587: Encryption Envelope v2
 
 - Authors: [Baha A. Shaaban](mailto:baha.shaaban@securekey.com) (SecureKey Technologies Inc.), [Troy Ronda](mailto:troy.ronda@securekey.com) (SecureKey Technologies Inc.)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2021-02-10
-- Status Note:
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Included as part of the "prepare for DIDComm v2" subtarget of [AIP 2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Supersedes:
 - Start Date: 2021-02-10
 - Tags: [feature](/tags.md#feature)
