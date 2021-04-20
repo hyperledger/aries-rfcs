@@ -127,7 +127,7 @@ Feature | [0056-service-decorator](https://github.com/hyperledger/aries-rfcs/tre
 
 ### Aries Interop Profile Version: 2.0
 
-The following are the goals used in selecting RFC versions for inclusion in AIP 2.0, adn the RFCs added as a result of each goal:
+The following are the goals used in selecting RFC versions for inclusion in AIP 2.0, and the RFCs added as a result of each goal:
 
 - From AIP 1.0: Aries Agents must be able to establish connections, exchange credentials and complete a connection-less proof-request/proof transaction.
 
@@ -170,7 +170,7 @@ Feature | [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/t
 Feature | [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0023-did-exchange) | :new:
 Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0025-didcomm-transports) | AIP V1.0, Updated
 Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0035-report-problem) | AIP V1.0, Updated
-Features | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0044-didcomm-file-and-mime-types) | :new:
+Feature | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0044-didcomm-file-and-mime-types) | :new:
 Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0048-trust-ping) | :new:
 Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0183-revocation-notification) | :new:
 Feature | [0360-use-did-key](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0360-use-did-key) | :new:
@@ -204,7 +204,7 @@ Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0xxx-bbs+-signature-credential-exchange-attachments](#) | :new:
+Feature | [0xxx-bbs+-signature-credential-exchange-attachments](https://hackmd.io/@animo/B15BDxv8d) | :new:
 Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0510-dif-pres-exch-attach) | :new:
 
 #### DIFPX: DIF Presentation Exchange Support
