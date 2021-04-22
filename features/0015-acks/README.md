@@ -1,10 +1,9 @@
 # Aries RFC 0015: ACKs
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-12-26
-- Status Note: Broadly socialized and beginning to be implemented. Several protocols assume ACK behavior. May be nearing the maturity and uptake appropriate for ACCEPTED status. Note: this RFC 
-- Supersedes: [Indy HIPE PR #77](https://github.com/hyperledger/indy-hipe/pull/77)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Broadly implemented, adopted into many protocols and part of [AIP 1 and 2](../../concepts/0302-aries-interop-profile/README.md).
 - Start Date: 2018-12-26
 - Tags: [feature](/tags.md#feature)
 

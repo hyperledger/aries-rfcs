@@ -1,10 +1,9 @@
 # Aries RFC 0360: did:key Usage
 
 - Authors: [Tobias Looker](tobias.looker@mattr.global), [Stephen Curran](mailto:swcurran@cloudcompass.ca)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-12-17
-- Status Note: Socialized with mixed support; did:key method is a [W3C CCG work item](https://w3c-ccg.github.io/community/work_items.html)
-- Supersedes:
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Referenced in a number of Aries RFCs and formalized as part of [AIP 2.0](../../concepts/0302-aries-interop-profile/README.md) did:key method is a [W3C CCG work item](https://w3c-ccg.github.io/community/work_items.html)
 - Start Date: 2019-12-17
 - Tags: [feature](/tags.md#feature)
 
@@ -60,6 +59,8 @@ The following currently implemented RFCs would be affected by acceptance of this
 - [0028-introduce](https://github.com/hyperledger/aries-rfcs/tree/master/features/0028-introduce)
 - [0056-service-decorator](https://github.com/hyperledger/aries-rfcs/tree/master/features/0056-service-decorator)
 - [0160-connection-protocol](https://github.com/hyperledger/aries-rfcs/tree/master/features/0160-connection-protocol)
+- [0434-out-of-band-protocols](https://github.com/hyperledger/aries-rfcs/blob/master/features/0434-outofband/README.md)
+- [0211-mediator-coordination-protocol](https://github.com/hyperledger/aries-rfcs/blob/master/features/0211-route-coordination/README.md)
 
 Service entries in `did:peer` DIDDocs (such as in RFCs
 [0094-cross-domain-messaging](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0094-cross-domain-messaging)
