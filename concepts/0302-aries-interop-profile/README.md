@@ -138,7 +138,7 @@ The following are the goals used in selecting RFC versions for inclusion in AIP 
   - RFCs 0183, 0095, 0557
 
 - Improve support for credential revocation use cases, independent of the revocation mechanism being used.
-  - RFCs 0183, 0441 (Indy AnonCreds specific)
+  - RFCs 0183
 
 - Improve the low-level messaging cryptography and enable a transition to DIDComm 2.0 to improve the security of the communication paths between agents.
   - RFCs 0044, 0360, 0334, 0587
@@ -153,75 +153,75 @@ The following are the goals used in selecting RFC versions for inclusion in AIP 
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Concept | [0003-protocols](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0003-protocols) | AIP V1.0, Updated
-Concept | [0004-agents](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0004-agents) | AIP V1.0, Updated
-Concept | [0005-didcomm](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0005-didcomm) | AIP V1.0, Updated
-Concept | [0008-message-id-and-threading](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0008-message-id-and-threading) | AIP V1.0, Updated
-Concept | [0011-decorators](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0011-decorators) | AIP V1.0, Updated
-Concept | [0017-attachments](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0017-attachments) | AIP V1.0, Updated
-Concept | [0020-message-types](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0020-message-types) | AIP V1.0, Updated<br>Mandates message prefix `https://didcomm.org` for Aries Protocol messages.
-Concept | [0046-mediators-and-relays](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0046-mediators-and-relays) | AIP V1.0, Updated
-Concept | [0047-json-LD-compatibility](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0047-json-ld-compatibility) | AIP V1.0, Updated
-Concept | [0050-wallets](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0050-wallets) | AIP V1.0, Unchanged
-Concept | [0094-cross-domain messaging](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0094-cross-domain-messaging) | AIP V1.0, Updated
-Concept | [0519-goal-codes](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0519-goal-codes) | :new:
-Feature | [0015-acks](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0015-acks) | AIP V1.0, Updated
-Feature | [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0019-encryption-envelope) | AIP V1.0, Updated<br>See envelope note below
-Feature | [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0023-did-exchange) | :new:
-Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0025-didcomm-transports) | AIP V1.0, Updated
-Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0035-report-problem) | AIP V1.0, Updated
-Feature | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0044-didcomm-file-and-mime-types) | :new:
-Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0048-trust-ping) | :new:
-Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0183-revocation-notification) | :new:
-Feature | [0360-use-did-key](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0360-use-did-key) | :new:
-Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0434-outofband) | :new:
-Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0453-issue-credential-v2) | Update to V2 Protocol
-Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0454-present-proof-v2) | Update to V2 Protocol
-Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0557-discover-features-v2) | :new:
-Feature | [0627-static-peer-dids](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0627-static-peer-dids)  | :new:
+Concept | [0003-protocols](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0003-protocols) | AIP V1.0, Updated
+Concept | [0004-agents](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0004-agents) | AIP V1.0, Updated
+Concept | [0005-didcomm](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0005-didcomm) | AIP V1.0, Updated
+Concept | [0008-message-id-and-threading](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0008-message-id-and-threading) | AIP V1.0, Updated
+Concept | [0011-decorators](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0011-decorators) | AIP V1.0, Updated
+Concept | [0017-attachments](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0017-attachments) | AIP V1.0, Updated
+Concept | [0020-message-types](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0020-message-types) | AIP V1.0, Updated<br>Mandates message prefix `https://didcomm.org` for Aries Protocol messages.
+Concept | [0046-mediators-and-relays](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0046-mediators-and-relays) | AIP V1.0, Updated
+Concept | [0047-json-LD-compatibility](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0047-json-ld-compatibility) | AIP V1.0, Updated
+Concept | [0050-wallets](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0050-wallets) | AIP V1.0, Unchanged
+Concept | [0094-cross-domain messaging](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0094-cross-domain-messaging) | AIP V1.0, Updated
+Concept | [0519-goal-codes](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0519-goal-codes) | :new:
+Feature | [0015-acks](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0015-acks) | AIP V1.0, Updated
+Feature | [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0019-encryption-envelope) | AIP V1.0, Updated<br>See envelope note below
+Feature | [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0023-did-exchange) | :new:
+Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0025-didcomm-transports) | AIP V1.0, Updated
+Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0035-report-problem) | AIP V1.0, Updated
+Feature | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0044-didcomm-file-and-mime-types) | :new:
+Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0048-trust-ping) | :new:
+Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0183-revocation-notification) | :new:
+Feature | [0360-use-did-key](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0360-use-did-key) | :new:
+Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0434-outofband) | :new:
+Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0453-issue-credential-v2) | Update to V2 Protocol
+Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0454-present-proof-v2) | Update to V2 Protocol
+Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0557-discover-features-v2) | :new:
+Feature | [0627-static-peer-dids](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0627-static-peer-dids)  | :new:
 
 #### MEDIATE: Mediator Coordination
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0211-route-coordination) | :new:
+Feature | [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0211-route-coordination) | :new:
 
 #### INDYCRED: Indy Based Credentials
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0592-indy-attachments](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0592-indy-attachments) | :new: Evolved from AIP V1.0
-Concept | [0441-present-proof-best-practices](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/concepts/0441-present-proof-best-practices) | :new:
+Feature | [0592-indy-attachments](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0592-indy-attachments) | :new: Evolved from AIP V1.0
+Concept | [0441-present-proof-best-practices](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/concepts/0441-present-proof-best-practices) | :new:
 
 #### LDCRED: JSON-LD Based Credentials
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [PR: 0593-json-ld-cred-attach](https://github.com/hyperledger/aries-rfcs/pull/593) | :new:
-Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0510-dif-pres-exch-attach) | :new:
+Feature | [0593-json-ld-cred-attach](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0593-json-ld-cred-attach) | :new:
+Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0510-dif-pres-exch-attach) | :new:
 
 #### BBSCRED: BBS+ Based Credentials
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
 Feature | [0xxx-bbs+-signature-credential-exchange-attachments](https://hackmd.io/@animo/B15BDxv8d) | :new:
-Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0510-dif-pres-exch-attach) | :new:
+Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0510-dif-pres-exch-attach) | :new:
 
 #### DIFPX: DIF Presentation Exchange Support
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0510-dif-pres-exch-attach) | :new:
+Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0510-dif-pres-exch-attach) | :new:
 
 #### DIDCOMMV2PREP: DIDComm v2 Prep
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0587-encryption-envelope-v2](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0587-encryption-envelope-v2) | :new:<br>See envelope note below
+Feature | [0587-encryption-envelope-v2](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0587-encryption-envelope-v2) | :new:<br>See envelope note below
 
 #### CHAT: Chat related features
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0095-basic-message](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0095-basic-message) | :new:
+Feature | [0095-basic-message](https://github.com/hyperledger/aries-rfcs/tree/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0095-basic-message) | :new:
 
 #### AIP v2.0 Test Suite
 
@@ -231,8 +231,8 @@ The [Aries Agent Test Harness](https://github.com/hyperledger/aries-agent-test-h
 
 AIP 2.0 contains two RFCs that reference envelopes 0019-encryption-envelope and 0587-encryption-envelope-v2 (links above).
 The important feature that Aries implementers should understand to differentiate which envelope format can or is being used by an agent is the
-`accept` element of the DIDComm service endpoint. If the `accept` element is not present in the agents service endpoint, the
-agent can only use the RFC 0019-encryption-envelope present. If it is present, the agent is indicating the envelope format(s)
+`accept` element of the DIDComm service endpoint and the out-of-band `invitation` message. If the `accept` element is not present, the
+agent can only use the RFC 0019-encryption-envelope present. If it is present, the values indicate the envelope format(s)
 the agent does support. See the RFCs for additional details.
 
 ### Previous Versions
