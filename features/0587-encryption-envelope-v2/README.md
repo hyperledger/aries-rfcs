@@ -19,7 +19,13 @@ The ciphersuites defined in this RFC are a subset of the definitions in [Aries R
 
 ## Encryption Algorithms
 
-[ECDH-1PU draft 03](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) defines the JWE structure. The following sections summarize the supported algorithms.
+DIDComm defines both the concept of authenticated sender encryption (aka `Authcrypt`) and anonymous sender encryption (aka `Anoncrypt`).
+In general, Aries RFCs and protocols use `Authcrypt` to exchange messages.
+In some limited scenarios (e.g., mediator and relays), an Aries RFC or protocol may define usage of `Anoncrypt`.
+
+[ECDH-1PU draft 03](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) defines the JWE structure for `Authcrypt`.
+`ECDH-ES` from [RFC 7518](https://tools.ietf.org/html/rfc7518#section-4.6) defines the JWE structure for `Anoncrypt`.
+The following sections summarize the supported algorithms.
 
 ### Curves
 
@@ -39,9 +45,10 @@ DIDComm Messaging (and this RFC) requires support for both `XC20P` and `A256GCM`
 
 ### Key Wrapping Algorithms
 
-DIDComm Messaging (and this RFC) requires support for `ECDH-1PU+A256KW`.
+DIDComm Messaging (and this RFC) requires support for `ECDH-1PU+A256KW` and `ECDH-ES+A256KW`.
 
 - ECDH-1PU+A256KW (defined in [ECDH-1PU draft 03](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03#section-2.2))
+- ECDH-ES+A256KW (defined in [RFC 7518](https://tools.ietf.org/html/rfc7518#section-4.6))
 
 ## Key IDs `kid` and `skid` headers references in the DID document
 
@@ -105,12 +112,6 @@ When the `skid` cannot be revealed in a plain-text JWE header (to avoid potentia
 For applications that don't require this protection, they MAY use `skid` protected header directly without any additional recipient headers.
 
 Applications MUST use either `skid` protected header or `encrypted_skid` recipients header but not both in the same envelope.
-
-## Anoncrypt equivalent
-
-For situations where the envelopes should be anonymous, we use a newly minted DID rather than a different Anoncrypt mechanism.
-The newly minted DID is used once and then discarded.
-This approach matches the DIDComm Messaging mechanism.
 
 ## Media Type
 
