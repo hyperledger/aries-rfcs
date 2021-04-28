@@ -1,12 +1,12 @@
 # Aries RFC 0023: DID Exchange Protocol 1.0
 
 - Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org), [Stephen Curran](swcurran@cloudcompass.ca), [George Aristy](george.aristy@securekey.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-05-27
-- Status Note: This RFC is a work in progress (nearing completion) designed to replace the [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md) after all necessary changes have been made.
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Replaces [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md) and is a part of [AIP 2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Supersedes: [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md)
 - Start Date: 2018-06-29
-- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -170,10 +170,11 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
 * The [`~thread`](../../concepts/0008-message-id-and-threading/README.md#thread-object) decorator MUST be included:
   * It MUST include the ID of the parent thread (`pthid`) such that the `request` can be correlated to the corresponding (implicit or explicit) `invitation`. More on correlation [below](#correlating-requests-to-invitations).
-  * It SHOULD include the `thid` property. In doing so, implementations MUST set its value to that of `@id` on the same `request` message. In other words, the values of `@id` and `~thread.thid` MUST be equal.
+  * It MAY include the `thid` property. This works according to the [`thid`](../../concepts/0008-message-id-and-threading/README.md#thread-id-thid) property in the thread decorator, meaning that if `thid` is not defined it is implicitly defined as the `@id` on the same `request` message.
 * The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute.
-* The `did` indicates the DID being exchanged.
-* The `did_doc~attach` contains the DID Doc associated with the DID as a [signed attachment](../../concepts/0017-attachments/README.md). If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
+* The `did` attribute MUST be included. It indicates the DID being exchanged.
+* The `did_doc~attach` contains the DID Doc associated with the DID.
+  * If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
 
 #### Correlating requests to invitations
 
@@ -316,15 +317,15 @@ The exchange response message is used to complete the exchange. This message is 
 }
 ```
 
-The key used in the signed attachment must be verified against the invitation's `recipientKeys` for continuity.
+The invitation's `recipientKeys` should be dedicated to envelopes authenticated encryption throughout the exchange. These keys are usually defined in the `KeyAgreement` DID verification relationship.
 
 #### Response Message Attributes
 
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
-* The `~thread` block contains a `thid` reference to the `@id` of the request message.
-* The `did` attribute is a required string value and denotes DID in use by the responder. Note that this MAY NOT be the same DID used in the invitation.
-* The `did_doc~attach` contains the DID Doc associated with the DID as a [signed attachment](../../concepts/0017-attachments/README.md). If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
-  * If the DID and DIDDoc being conveyed is different from that conveyed in the initial contact with the requester, the DIDDoc attachment should be signed by the earlier key. For example, if the requester sent the request to a DID service endpoint from a public DID or an out-of-band invitation, the signature on the DIDDoc should use the key from that interaction.
+* The `~thread` decorator MUST be included. It contains a `thid` reference to the `@id` of the request message.
+* The `did` attribute MUST be included. It denotes the DID in use by the responder. Note that this MAY NOT be the same DID used in the invitation.
+* The `did_doc~attach` contains the DID Doc associated with the DID.
+  * If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
 
 In addition to a new DID, the associated DID Doc might contain a new endpoint. This new DID and endpoint are to be used going forward in the relationship.
 
@@ -336,7 +337,7 @@ When the message is sent, the _responder_ are now in the `response-sent` state. 
 
 #### Response Processing
 
-When the requester receives the `response` message, they will verify the signature on the DID Doc attachment. After validation, they will update their wallet with the new information, and use that information in sending the `complete` message.
+When the requester receives the `response` message, they will decrypt the authenticated envelope which confirms the source's authenticity. After decryption validation, they will update their wallet with the new information, and use that information in sending the `complete` message.
 
 #### Response Errors
 
@@ -423,4 +424,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-trinsic.id | Commercial mobile and web app built using Aries Framework - .NET [MISSING test results](/tags.md#test-anomaly)
+[Trinsic.id](https://trinsic.id/) | Commercial mobile and web app built using Aries Framework - .NET [MISSING test results](/tags.md#test-anomaly)
