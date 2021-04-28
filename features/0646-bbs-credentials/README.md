@@ -2,11 +2,11 @@
 
 - Authors: [Timo Glastra](mailto:timo@animo.id) (Animo Solutions), [Brent Zundel](mailto:brent.zundel@evernym.com) (Evernym)
 - Status: [PROPOSED](/README.md#proposed)
-- Since:
+- Since: 2021-04-28
 - Status Note:
 - Supersedes:
 - Start Date: 2021-04-15
-- Tags: [concept](/tags.md#concept)
+- Tags: [feature](/tags.md#feature)
 
 ## Summary
 
