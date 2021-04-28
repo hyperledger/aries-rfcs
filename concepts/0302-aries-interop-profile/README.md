@@ -89,8 +89,6 @@ Example:
 }
 ```
 
-
-
 ## Reference
 
 The Aries Interop Profile version number and links to other RFCs in this section SHOULD only be updated with the agreement of the Aries agent builder community. There MAY be multiple active major Aries Interop Profile versions. A list of previous versions of Aries Interop Profile are [listed after](#previous-versions) the current version(s).
@@ -149,7 +147,7 @@ The following are the goals used in selecting RFC versions for inclusion in AIP 
 - Where appropriate, enable standard mediator coordination capabilities for mobile agents and multi-tenant agencies.
   - RFC 0211
 
-## Base Requirements
+#### Base Requirements
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
@@ -204,13 +202,8 @@ Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
+Feature | [0593-json-ld-cred-attach](https://github.com/hyperledger/aries-rfcs/tree/d50fe1e38c9720344123146c31fbf7ad8e78b345/features/0593-json-ld-cred-attach) | :new:
 Feature | [PR 0646-bbs-credentials](https://github.com/hyperledger/aries-rfcs/pull/646) | :new:
-Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/d50fe1e38c9720344123146c31fbf7ad8e78b345/features/0510-dif-pres-exch-attach) | :new:
-
-#### DIFPX: DIF Presentation Exchange Support
-
- RFC Type | RFC/Link to RFC Version | Note
---- | --- | ---
 Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/d50fe1e38c9720344123146c31fbf7ad8e78b345/features/0510-dif-pres-exch-attach) | :new:
 
 #### DIDCOMMV2PREP: DIDComm v2 Prep
