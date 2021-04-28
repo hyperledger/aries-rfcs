@@ -32,7 +32,7 @@ Aries currently supports credential formats used by Indy (Anoncreds based on JSO
 
 ### Issuing Credentials
 
-This section highlights the process of issuing credentials with BBS+ signatures. The first section ([Creating BBS+ Credentials](#Creating-BBS-Credentials)) highlights the process of **creating** credentials with BBS+ signatures, while the next section focusses on the the process of **exchanging** credentials with BBS+ signatures ([Exchanging BBS+ Credentials](#Exchanging-BBS-Credentials)).
+This section highlights the process of issuing credentials with BBS+ signatures. The first section ([Creating BBS+ Credentials](#creating-bbs-credentials)) highlights the process of **creating** credentials with BBS+ signatures, while the next section focusses on the the process of **exchanging** credentials with BBS+ signatures ([Exchanging BBS+ Credentials](#exchanging-bbs-credentials)).
 
 #### Creating BBS+ Credentials
 
@@ -40,7 +40,7 @@ The process to create verifiable credentials with BBS+ signatures is mostly cove
 
 Aries implementations MUST use the [BBS+ Signature Suite 2020](https://w3c-ccg.github.io/ldp-bbs2020/#the-bbs-signature-suite-2020) to create verifiable credentials with BBS+ signatures, identified by the `BbsBlsSignature2020` proof type.
 
-> NOTE: Once the signature suites for bound signatures (private holder binding) are defined in the [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020) spec, the use of the `BbsBlsSignature2020` suite will be deprecated and superseded by the `BbsBlsBoundSignature2020` signature suite. See [Private Holder Binding](#Private-Holder-Binding) below for more information.
+> NOTE: Once the signature suites for bound signatures (private holder binding) are defined in the [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020) spec, the use of the `BbsBlsSignature2020` suite will be deprecated and superseded by the `BbsBlsBoundSignature2020` signature suite. See [Private Holder Binding](#private-holder-binding) below for more information.
 
 ##### Identifiers in Issued Credentials
 
@@ -101,7 +101,7 @@ Below is a complete example of a Verifiable Credential with BBS+ linked data pro
 
 #### Exchanging BBS+ Credentials
 
-While the process of creating credentials with BBS+ signatures is defined in specifications outside of Aries, the process of exchanging credentials with BBS+ signatures is defined wihtin Aries.
+While the process of creating credentials with BBS+ signatures is defined in specifications outside of Aries, the process of exchanging credentials with BBS+ signatures is defined within Aries.
 
 Credentials with BBS+ signatures can be exchanged by following [RFC 0453: Issue Credential Protocol 2.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0453-issue-credential-v2). The Issue Credential 2.0 provides a registry of attachment formats that can be used for credential exchange. Currently, agents are expected to use the format as described in RFC 0593 (see below).
 
@@ -111,7 +111,7 @@ Credentials with BBS+ signatures can be exchanged by following [RFC 0453: Issue 
 
 [RFC 0593: JSON-LD Credential Attachment format for requesting and issuing credentials](https://github.com/hyperledger/aries-rfcs/blob/master/features/0593-json-ld-cred-attach/README.md) defines a very simple, feature-poor attachment format for issuing JSON-LD credentials.
 
-The only requirement for exchanging BBS+ credentials, in addition to the requirements as specified in [Creating BBS+ Credentials](#Creating-BBS-Credentials) and [RFC 0593](https://github.com/hyperledger/aries-rfcs/blob/master/features/0593-json-ld-cred-attach/README.md), is the `options.proofType` in the [`ld-proof-vc-detail`](https://github.com/hyperledger/aries-rfcs/blob/master/features/0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format) MUST be `BbsBlsSignature2020`.
+The only requirement for exchanging BBS+ credentials, in addition to the requirements as specified in [Creating BBS+ Credentials](#creating-bbs-credentials) and [RFC 0593](https://github.com/hyperledger/aries-rfcs/blob/master/features/0593-json-ld-cred-attach/README.md), is the `options.proofType` in the [`ld-proof-vc-detail`](https://github.com/hyperledger/aries-rfcs/blob/master/features/0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format) MUST be `BbsBlsSignature2020`.
 
 ### Presenting Derived Credentials
 
@@ -125,7 +125,7 @@ Deriving credentials should be done according to the [BBS+ Signature Proof Suite
 
 > A verifiable presentation MUST NOT leak information that would enable the verifier to correlate the holder across multiple verifiable presentations.
 
-The above section from the VC Data Model may give the impression that it is allowed to omit required properties from a derived credential if this prevents correlation. However things the holder chooses to reveal are in a different category than things the holder MUST reveal. Dervived credentials MUST disclose required properties, even if it can correlate them.
+The above section from the VC Data Model may give the impression that it is allowed to omit required properties from a derived credential if this prevents correlation. However things the holder chooses to reveal are in a different category than things the holder MUST reveal. Derived credentials MUST disclose required properties, even if it can correlate them.
 
 E.g. an credential with `issuanceDate` of `2017-12-05T14:27:42Z` could create a correlating factor. However it is against the VC Data Model to not include the property. Take this into account when issuing credentials.
 
@@ -147,9 +147,9 @@ The [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020) does not define the 
 
 > This section will be removed once [Issue 10](https://github.com/w3c-ccg/ldp-bbs2020/issues/10) in the LD Proof BBS+ spec is resolved.
 
-Transforming the blank node identifiers into actual node identifiers in the dervied credential means the verfication data will be different from the verification data at issuance, invalidating the signature. Thefore the blank node identifier placeholders should be transformed back into blank node identifiers before verification.
+Transforming the blank node identifiers into actual node identifiers in the derived credential means the verification data will be different from the verification data at issuance, invalidating the signature. Therefore the blank node identifier placeholders should be transformed back into blank node identifiers before verification.
 
-Same as with [Transforming Blank Node Identifiers](#Transforming-Blank-Node-Identifiers), current implementations use the mechanism as described in this [Issue Comment](https://github.com/w3c-ccg/ldp-bbs2020/issues/10#issuecomment-616216278). Some reference implementations:
+Same as with [Transforming Blank Node Identifiers](#transforming-blank-node-identifiers), current implementations use the mechanism as described in this [Issue Comment](https://github.com/w3c-ccg/ldp-bbs2020/issues/10#issuecomment-616216278). Some reference implementations:
 
 - [Aries Framework Go](https://github.com/hyperledger/aries-framework-go/blob/b1b076db898fe8c922c6dc093d3fa52d448f0c30/pkg/doc/signature/verifier/public_key_verifier.go#L434)
 - [JSON-LD Signatures BBS](https://github.com/mattrglobal/jsonld-signatures-bbs/blob/01000b4bf48932a47d7c8c889d2201f8e8085d46/src/BbsBlsSignatureProof2020.ts#L254-L267)
@@ -163,7 +163,7 @@ Presentation of credentials with BBS+ signatures can be exchanged by following [
 
 [RFC 0510: Presentation-Exchange Attachment format for requesting and presenting proofs](https://github.com/hyperledger/aries-rfcs/blob/master/features/0510-dif-pres-exch-attach/README.md) defines an attachment format based on the [DIF Presentation Exchange](https://identity.foundation/presentation-exchange/) specification.
 
-The following part of this section describes the requirements of exchanging dervied credentials using the Presentation Exchange Attachment format, in addition to the requirements as specified above and in [RFC 0510](https://github.com/hyperledger/aries-rfcs/blob/master/features/0510-dif-pres-exch-attach/README.md).
+The following part of this section describes the requirements of exchanging derived credentials using the Presentation Exchange Attachment format, in addition to the requirements as specified above and in [RFC 0510](https://github.com/hyperledger/aries-rfcs/blob/master/features/0510-dif-pres-exch-attach/README.md).
 
 The Presentation Exchange MUST include the `ldp_vp` [Claim Format Designation](https://identity.foundation/presentation-exchange/#claim-format-designations). In turn the `proof_type` property of the `ldp_vp` claim format designation MUST include the `BbsBlsSignatureProof2020` proof type.
 
@@ -174,8 +174,7 @@ The Presentation Exchange MUST include the `ldp_vp` [Claim Format Designation](h
   "@context": [
     "https://www.w3.org/2018/credentials/v1",
     "https://w3id.org/citizenship/v1",
-    "https://w3id.org/security/bbs/v1",
-    BBS + Context
+    "https://w3id.org/security/bbs/v1" // BBS + Context
   ],
   "id": "https://issuer.oidp.uscis.gov/credentials/83627465",
   "type": ["PermanentResidentCard", "VerifiableCredential"],
@@ -208,8 +207,8 @@ The Presentation Exchange MUST include the `ldp_vp` [Claim Format Designation](h
 Private Holder Binding is an evolution of CL Signatures Linked Secrets.
 
 - `id` properties are always disclosed in derived credentials due to how JSON-LD works.
-- Required proeprties from the VC Data Model MUST be disclosed in derived credentials.
-- BBS+ credentials SHOULD not be used in conjuction with non-ZKP signature as this removes the privacy features of BBS.
+- Required properties from the VC Data Model MUST be disclosed in derived credentials.
+- BBS+ credentials SHOULD not be used in conjunction with non-ZKP signature as this removes the privacy features of BBS.
 
 ## Reference
 
@@ -233,14 +232,14 @@ A Verifier will send a proof request for the formats that they choose to support
 - `requiredRevealStatements` will be removed ([Issue 50](https://github.com/w3c-ccg/ldp-bbs2020/issues/50))
 - `proofValue` and `nonce` must be base64 encoded ([Issue 51](https://github.com/w3c-ccg/ldp-bbs2020/issues/51))
 - `signature` must be updated to `proofValue` for the `BbsBlsSignature2020` suite ([Issue 52](https://github.com/w3c-ccg/ldp-bbs2020/issues/52))
-- The apllication of blank node identifiers ([Issue 10](https://github.com/w3c-ccg/ldp-bbs2020/issues/10))
+- The application of blank node identifiers ([Issue 10](https://github.com/w3c-ccg/ldp-bbs2020/issues/10))
 - Private holder binding ([Issue 37](https://github.com/w3c-ccg/ldp-bbs2020/issues/37))
 
 ## Drawbacks
 
 Existing implementations of BBS+ Signatures do not support ZKP Proof Predicates, but it is theoretically possible to support numeric date predicates. ZKP Proof Predicates are considered a key feature of CL Signatures, and a migration to BBS+ LD-Proofs will lose this capability. The Indy Maintainers consider this a reasonable trade-off to get the other benefits of BBS+ LD-Proofs. A mechanism to support predicates can hopefully be added in future work.
 
-As mentioned in the [Private Holder Binding](#Private-Holder-Binding) section, the [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020/) specification does not define a mechanism for private holder binding yet. This means implementing this RFC does not provide all privacy-enabling features that should be incorporated until the `BbsBlsBoundSignature2020` and `BbsBlsBoundSignatureProof2020` signature suites are formally defined.
+As mentioned in the [Private Holder Binding](#private-holder-binding) section, the [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020/) specification does not define a mechanism for private holder binding yet. This means implementing this RFC does not provide all privacy-enabling features that should be incorporated until the `BbsBlsBoundSignature2020` and `BbsBlsBoundSignatureProof2020` signature suites are formally defined.
 
 ## Rationale and alternatives
 
@@ -260,7 +259,7 @@ It was then further refined by
 [Camenisch, Drijvers, and Lehmann in section 4.3 of this paper from 2016](https://eprint.iacr.org/2016/663.pdf).
 
 In 2019, Evernym and Sovrin proposed [BBS+ Signatures as the foundation for Indy Anoncreds 2.0](https://github.com/hyperledger/ursa-docs/tree/main/specs/anoncreds2),
-which in conjuntion with [Rich Schemas](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
+which in conjunction with [Rich Schemas](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
 addressed a similar set of goals and capabilities as those addressed here, but were ultimately too heavy a solution.
 
 In 2020, Mattr provided [a draft specification for BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020/) that comply with [the Linked Data proof specification](https://w3c-ccg.github.io/ld-proofs/) in the W3C Credentials Community Group. The authors acknowledged that their approach did not support two key Anoncreds features: proof predicates and link secrets.
