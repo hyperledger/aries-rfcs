@@ -1,9 +1,9 @@
 # Aries RFC 0593: JSON-LD Credential Attachment format for requesting and issuing credentials
 
 - Authors: Timo Glastra (Animo Solutions), George Aristy (SecureKey Technologies)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2021-03-16
-- Status Note:
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Included as part of the JSON-LD verifiable credentials subtarget of [AIP v2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Supersedes:
 - Start Date: 2021-02-17
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
@@ -112,7 +112,7 @@ A complete [`request credential` message form the Issue Credential protocol 2.0]
 
 The format is closely related to the [Verifiable Credentials HTTP API](https://w3c-ccg.github.io/vc-http-api/), but diverts on some places. The main differences are:
 
-- The types in the VC HTTP API are more restrictive (.e.g. `@context` must be array of strings). This format allows all fields to use the full syntax ass described by the verifiable credentials data model.
+- The types in the VC HTTP API are more restrictive (.e.g. `@context` must be array of strings). This format allows all fields to use the full syntax as described by the verifiable credentials data model.
 - Instead of specifying the exact `verificationMethod`, the `proofType` that will be used for the credential can be specified.
 
 ### `ld-proof-vc` attachment format
@@ -152,7 +152,7 @@ The JSON structure might look like this:
 }
 ```
 
-A complete [`issue-credential` message form the Issue Credential protocol 2.0](../0453-issue-credential-v2/README.md#issue-credential) might look like this:
+A complete [`issue-credential` message from the Issue Credential protocol 2.0](../0453-issue-credential-v2/README.md#issue-credential) might look like this:
 
 ```json
 {

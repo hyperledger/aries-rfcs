@@ -1,12 +1,12 @@
 # Aries RFC 0023: DID Exchange Protocol 1.0
 
 - Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org), [Stephen Curran](swcurran@cloudcompass.ca), [George Aristy](george.aristy@securekey.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-05-27
-- Status Note: This RFC is a work in progress (nearing completion) designed to replace the [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md) after all necessary changes have been made.
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Replaces [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md) and is a part of [AIP 2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Supersedes: [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md)
 - Start Date: 2018-06-29
-- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -170,7 +170,7 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
 * The [`~thread`](../../concepts/0008-message-id-and-threading/README.md#thread-object) decorator MUST be included:
   * It MUST include the ID of the parent thread (`pthid`) such that the `request` can be correlated to the corresponding (implicit or explicit) `invitation`. More on correlation [below](#correlating-requests-to-invitations).
-  * It SHOULD include the `thid` property. In doing so, implementations MUST set its value to that of `@id` on the same `request` message. In other words, the values of `@id` and `~thread.thid` MUST be equal.
+  * It MAY include the `thid` property. This works according to the [`thid`](../../concepts/0008-message-id-and-threading/README.md#thread-id-thid) property in the thread decorator, meaning that if `thid` is not defined it is implicitly defined as the `@id` on the same `request` message.
 * The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute.
 * The `did` attribute MUST be included. It indicates the DID being exchanged.
 * The `did_doc~attach` contains the DID Doc associated with the DID.

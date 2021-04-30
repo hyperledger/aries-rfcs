@@ -1,8 +1,8 @@
 # 0441: Prover and Verifier Best Practices for Proof Presentation
 - Authors: [Stephen Klump](stephen.klump@becker-carroll.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-10-31
-- Status Note:  See [RFC 0037](../../features/0037-present-proof/README.md) for the Present Proof protocol.
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Interoperability guidance when using Indy AnonCreds Present Proof. An element of the Indy AnonCreds subtarget for [AIP v2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Start Date: 2020-10-31
 - Tags: [concept](/tags.md#concept), [credentials](/tags.md#credentials)
 
