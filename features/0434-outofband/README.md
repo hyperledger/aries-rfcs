@@ -139,6 +139,8 @@ If both the `handshake_protocols` and `requests~attach` items are included in th
 
 While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `requests~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same `services` DID of a new `invitation` message, the connection **MAY** be reused. The receiver may choose to not reuse the existing connection for privacy purposes and repeat a handshake protocol to receive a redundant connection. 
 
+If a message has a service block instead of a DID in the `services` list, you may enable reuse by encoding the key and endpoint of the service block in a [Peer DID numalgo 2](https://identity.foundation/peer-did-method-spec/#generation-method) and using that DID instead of a service block.
+
 If the receiver desires to reuse the existing connection and a `requests~attach` message is present, the receiver **SHOULD** respond to the attached message using the existing connection.
 
 If the receiver desires to reuse the existing connection and no `requests~attach` message is present, the receiver **SHOULD** attempt to do so with the `reuse` and `reuse-accepted` messages. This will notify the _inviter_ that the existing connection should be used, along with the context that can be used for follow-on interactions.
