@@ -182,7 +182,7 @@ which includes a DID Document plus additional metadata:
 			"attrResponse": { ... }
 		}
 	}
-##### `resolve_result` failure message
+##### `problem-report` failure message
 
 The `resolve_result` will also report failure messages in case of impossibility to resolve a DID.
 It represents the problem report indicating that the resolver could not resolve the DID, and the reason of the failure.
