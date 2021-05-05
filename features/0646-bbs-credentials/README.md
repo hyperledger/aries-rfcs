@@ -227,7 +227,7 @@ A verifier can send a proof request for the formats that they choose to support.
 - The holder wallet can provide the credential that fulfills that proof restriction. This allows old credentials to continue being used without being reissued.
 - The verifier may accept credentials of multiple formats.
 
-### Issues with the [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020/) specification
+### Issues with the BBS+ LD-Proofs specification
 
 - `requiredRevealStatements` will be removed ([Issue 50](https://github.com/w3c-ccg/ldp-bbs2020/issues/50))
 - `proofValue` and `nonce` must be base64 encoded ([Issue 51](https://github.com/w3c-ccg/ldp-bbs2020/issues/51))
