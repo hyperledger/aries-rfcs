@@ -432,11 +432,18 @@ Knowledge is Good
 It seems inevitable that the length of some out-of-band message will be too long to produce a useable QR code. Techniques to avoid unusable QR codes have been presented above, including using attachment links for requests, minimizing the routing of the response and eliminating unnecessary whitespace in the JSON. However, at some point a _sender_ may need generate a very long URL. In that case, a URL shortener redirection should be implemented by the sender as follows:
 
 - The sender generates and tracks a GUID for each out-of-band message URL.
-- The shortened URL **MUST** include an `id` query parameter, for example:
+- The shortened URL **MAY** include an `id` query parameter, for example:
   - `https://example.com/ssi?id=5f0e3ffb-3f92-4648-9868-0d6f8889e6f3`
   - Note the replacement of the query parameter `oob` with `id` when using shortened URL.
-- On receipt of this form of message, the agent **MUST** perform an HTTP GET to retrieve the associated out-of-band message. The agent **SHOULD** include an `Accept` header requesting the `application/json` MIME type, and the sender **MUST** include a `Content-Type` header specifying `application/json; charset=utf-8`. The sender **MUST** return the invitation in JSON format.
+- The shortened URL **MAY** embed the GUID in the path, for example:
+  - `https://example.com/8E6nEcJ26TTE`
+  - `https://example.com/sky/event/8DcnUW2h8m4jcfPdQ2uMN7/work-laptop-bag/s/u`
+  - Note that these examples match Trinsic and ACA-Pico formats respectively
+- On receipt of this form of message, the agent **MUST** perform an HTTP GET to retrieve the associated out-of-band message. The agent **SHOULD** include an `Accept` header requesting the `application/json` MIME type.
+- The sender **MAY** include a `Content-Type` header specifying `application/json; charset=utf-8`. If so, the sender **MUST** return the invitation in JSON format.
   - A sender may decide to wait to generate the full invitation until the redirection event of the shortened URL to the full length form dynamic, so that a single QR code can be used for distinct out-of-band messages.
+- The sender **MAY** respond with a `status_code` of `301` or `302` and a `Location` header specifying the long out-of-band message URL.
+  - This option operates like many commercial URL shorteners. A sender **SHOULD NOT** use a commercial URL shortener unless it supports removal, so that out-of-band URL messages may be withdrawn when they no longer apply.
 
 A usable QR code will always be able to be generated from the shortened form of the URL.
 
