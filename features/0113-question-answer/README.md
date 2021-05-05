@@ -75,7 +75,7 @@ The response message is then sent using the ~sig message decorator:
   "response~sig": {
     "@type": "https://didcomm.org/signature/1.0/ed25519Sha512_single"
     "signature": "<digital signature function output>",
-    "sig_data": "<base64(HASH("Alice, are you on the phone with Bob?"+"Yes, it's me"+"<nonce>"))>",
+    "sig_data": "<base64url(HASH("Alice, are you on the phone with Bob?"+"Yes, it's me"+"<nonce>"))>",
     "signers": ["<responder_key>"],
     }
   "~timing": {

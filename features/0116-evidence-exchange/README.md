@@ -271,7 +271,7 @@ Description of attributes:
         "technology": "api"
       },
       "ipsp_did": "~3d5nh7900fn4",
-      "ipsp_claim": <base64 of the file>,
+      "ipsp_claim": <base64url(file)>,
       "ipsp_claim_sig": "3vvvb68b53d5nh7900fn499040cd9e89fg3kkh0f099c0021233728cf67945faf",
       "examinerSignature": "f67945faf9e89fg3kkh3vvvb68b53d5nh7900fn499040cd3728c0f099c002123"
     }
@@ -306,7 +306,7 @@ Description of attributes:
         "technology": "barcode"
       },
       "data": {
-        "base64": <base64 of the file>
+        "base64": <base64url(file)>
       },
       "examinerSignature": "f67945faf9e89fg3kkh3vvvb68b53d5nh7900fn499040cd3728c0f099c002123"
     },
@@ -321,7 +321,7 @@ Description of attributes:
         "technology": "human-visual"
       },
       "data": {
-        "base64": <base64 of the file>
+        "base64": <base64url(file)>
       },
       "examinerSignature": "945faf9e8999040cd3728c0f099c002123f67fg3kkh3vvvb68b53d5nh7900fn4"
     },
@@ -337,7 +337,7 @@ Description of attributes:
       },
       "data": {
         "sha256": "1d9eb668b53d99c002123f1ffa4db0cd3728c0f0945faf525c5ee4a2d4289904",
-        "base64": <base64 of the file>
+        "base64": <base64url(file)>
       },
       "examinerSignature": "5nh7900fn499040cd3728c0f0945faf9e89kkh3vvvb68b53d99c002123f67fg3"
     }

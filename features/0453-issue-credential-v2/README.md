@@ -334,7 +334,7 @@ The optional `mime-type` advises the issuer how to render a binary attribute, to
 The mandatory `value` holds the attribute value:
 
 * if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
-* if `mime-type` is not null, then `value` is always a base64-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64-decoding.
+* if `mime-type` is not null, then `value` is always a base64url-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64url-decoding.
 
 ## Threading
 
