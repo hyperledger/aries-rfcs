@@ -229,7 +229,7 @@ Description of fields:
 * `formats` -- contains an entry for each `presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
 * `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
 
-A prover may include the [`~please_ack` decorator](../0015-acks/README.md#requesting-acks) to request a `ack-presentation` if the verifier has not indicated they will send a `ack-presentation`.
+If the prover wants an acknowledgement that the presentation was accepted, this message may be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. This is not necessary if the verifier has indicated it will send an `ack-presentation` using the `will_confirm` property. Outcome in the context of this protocol is the definition of "successful" as described in [Ack Presentation](#ack-presentation). Note that this is different from the default behavior as described in [0317: Please ACK Decorator](../0317-please-ack/README.md). It is then best practice for the new Verifier to respond with an explicit `ack` message as described in the please ack decorator RFC.
 
 #### Presentations Attachment Registry
 
@@ -240,7 +240,7 @@ DIF Presentation Exchange | `dif/presentation-exchange/submission@v1.0` | [`prop
 
 ### Ack Presentation
 
-A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](../0015-acks/README.md). The definition of "successful" from a business sense is up to the verifier.
+A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](../0015-acks/README.md). The definition of "successful" in this protocol means the acceptance of the presentation in whole, i.e. the proof is verified and the contents of the proof are acknowledged.
 
 ### Problem Report
 

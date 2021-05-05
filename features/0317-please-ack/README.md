@@ -13,7 +13,7 @@ Explains how one party can request an acknowledgment to and clarify the status o
 
 ## Motivation
 
-An __acknowledgment__ or __ACK__ is one of the most common procedures in protocols
+An **acknowledgment** or **ACK** is one of the most common procedures in protocols
 of all types. The ACK message is defined in Aries RFC [0015-acks](../0015-acks/README.md) and is adopted into other protocols for use at explicit points in the execution of a protocol. In addition to receiving ACKs at predefined places in a protocol, agents also need the ability to request additional ACKs at other points in an instance of a protocol. Such requests may or may not be answered by the other party, hence the "please" in the name of decorator.
 
 ## Tutorial
@@ -45,13 +45,12 @@ organically to see the effect. But if she's bidding on a high-value item and
 is about to put her phone in airplane mode because her plane's ready to take off,
 she may want an immediate ACK that the bid was accepted.
 
-The dynamic need for acks is expressed with the `~please_ack` message [decorator](
-../../concepts/0011-decorators/README.md). An example of the decorator looks like this:
+The dynamic need for acks is expressed with the `~please_ack` message [decorator](../../concepts/0011-decorators/README.md). An example of the decorator looks like this:
 
-``` json
+```json
 {
   "~please_ack": {
-    "on": "RECEIPT"
+    "on": ["RECEIPT"]
   }
 }
 ```
@@ -73,7 +72,7 @@ request:
 ```json
 {
   "~please_ack": {
-    "on": "RECEIPT"
+    "on": ["RECEIPT"]
   }
 }
 ```
@@ -82,31 +81,44 @@ Bob honors this request and returns an `ack` as soon as he receives it and store
 
 #### On Outcome
 
-Same as with the previous example, AliceCorp an acknowledgement from Bob. However, in contrast to the previous example that just requests an acknowledgement on receipt of message, this time AliceCorp wants to know for sure Bob acknowledges the contents of the credential. To do this AliceCorp decorates the `issue-credential` message with an ack request for the `OUTCOME`.
+Same as with the previous example, AliceCorp wants an acknowledgement from Bob. However, in contrast to the previous example that just requests an acknowledgement on receipt of message, this time AliceCorp wants to know for sure Bob verified the validity of the credential. To do this AliceCorp decorates the `issue-credential` message with an ack request for the `OUTCOME`.
 
 ```json
 {
   "~please_ack": {
-    "on": "OUTCOME"
+    "on": ["OUTCOME"]
   }
 }
 ```
 
-Bob honors this request and returns an `ack` as soon as he has verified the contents of the issued credential.
+Bob honors this request and returns an `ack` as soon as he has verified the validity of the issued credential.
+
 ## Reference
 
 ### `~please_ack` decorator
 
-#### __`on`__
+#### **`on`**
 
-The only field for the please ack decorator. Required. Describes the circumstances under which an ack is desired. Possible values include `RECEIPT` and `OUTCOME`.
+The only field for the please ack decorator. Required array. Describes the circumstances under which an ack is desired. Possible values in this array include `RECEIPT` and `OUTCOME`.
 
-- `RECEIPT` - Request that an ack is sent on receipt of the message. This way of requesting an ack is to verify whether the other agent successfully received the message
-- `OUTCOME` - Request that an ack is sent on outcome of the message. This way of requesting an ack is to verify whether the other agent acknowledges the outcome of the received message.
+If both values are present, it means an acknowledgement is requested for both the receipt and outcome of the message
+
+##### `RECEIPT`
+
+The `RECEIPT` acknowledgement is the easiest ack mechanism and requests that an ack is sent on receipt of the message. This way of requesting an ack is to verify whether the other agent successfully received the message. It implicitly means the agent was able to unpack the message, to see
+
+##### `OUTCOME`
+
+The `OUTCOME` acknowledgement is the more advanced ack mechanism and requests that an ack is sent on outcome of the message. By default outcome means the message has been handled and processed without business logic playing a role in the decision.
+
+In the context of the issue credential protocol, by default, this would mean an ack is requested as soon as the received credentials is verified to be valid. It doesn't mean the actual contents of the credential are acknowledged. For the issue credential protocol it makes more sense to send the acknowledgement after the contents of the credential have also been verified.
+
+Therefore protocols can override the definition of outcome in the context of that protocol. Examples of protocols overriding this behavior are [Issue Credential Protocol 2.0](../0453-issue-credential-v2/README.md), [Present Proof Protocol 2.0](../0454-present-proof-v2/README.md) and [Revocation Notification Protocol 1.0](../0183-revocation-notification/README.md)
 
 ## Drawbacks
 
 None specified.
+
 ## Rationale and alternatives
 
 The first version of this RFC was a lot more advanced, but also introduced a lot of complexities. A lot of complex features have been removed so it could be included in AIP 2.0 in a simpler form. More advanced features [from the initial RFC](https://github.com/hyperledger/aries-rfcs/blob/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0317-please-ack/README.md) can be added back in when needed.
