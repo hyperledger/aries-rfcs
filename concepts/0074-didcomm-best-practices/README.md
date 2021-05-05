@@ -43,7 +43,8 @@ The two most important best practices with names are:
 * Pick descriptive and accurate names. [Thoughtfully chosen names can
 save enormous amounts of commenting and documentation](
 https://codecraft.co/2012/08/28/good-code-is-named-right/).
-* Be consistent.
+* Be consistent. Particularly within an RFC and especially within the JSON for a set of related messages.
+  * For example, don't mix snake_case and other conventions within a single family of DIDComm messages.
 
 These are so common-sense that we won't argue them. But a few other
 points are worthy of comment.
@@ -74,6 +75,11 @@ The main rule to follow with respect to case is: Use the same convention as the 
 of the code around you, and in JSON that's intended to be interoperable,
 use snake_case unless you have a good reason not to. Definitely use the same case conventions
 as the other keys in the same JSON schema.
+
+#### Pluralization
+
+The names of JSON items that represent arrays should be pluralized whenever possible,
+while singleton items should not.
 
 #### Terminology and Notation
 

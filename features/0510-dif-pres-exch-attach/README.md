@@ -63,7 +63,7 @@ Complete message example:
 
 ```json
 {
-    "@type": "http://didcomm.org/present-proof/%VER/propose-presentation",
+    "@type": "https://didcomm.org/present-proof/%VER/propose-presentation",
     "@id": "fce30ed1-96f8-44c9-95cf-b274288009dc",
     "comment": "some comment",
     "formats" : [{

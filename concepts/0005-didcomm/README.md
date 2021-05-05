@@ -13,6 +13,8 @@
 Explain the basics of __DID communication__ (__DIDComm__) at a
 high level, and link to other RFCs to promote deeper exploration.
 
+>NOTE: The version of DIDComm collectively defined in Aries RFCs is known by the label "DIDComm V1." A [newer version of DIDComm](https://identity.foundation/didcomm-messaging/spec/) ("DIDComm V2") is now being [incubated](https://github.com/decentralized-identity/didcomm-messaging) at DIF. Many concepts are the same between the two versions, but there are some differences in the details. For information about detecting V1 versus V2, see [Detecting DIDComm Versions](../../features/0044-didcomm-file-and-mime-types/README.md#detecting-didcomm-versions).
+
 ## Motivation
 
 The DID communication between [agents](../0004-agents/README.md) and [agent-like things](../0004-agents/README.md#the-agent-ness-continuum) is a rich subject with a lot of tribal
