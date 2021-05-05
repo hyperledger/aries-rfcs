@@ -14,19 +14,19 @@ This RFC describes how the Hyperledger Aries community should use [BBS+ Signatur
 
 Key features include:
 
-- Zero-knowledge proofs (ZKPs),
+- zero-knowledge proofs (ZKPs),
 - selective disclosure,
 - private holder binding,
 - signature blinding,
-- and compatibility with privacy preserving revocation.
+- compatibility with privacy preserving revocation.
 
 This RFC sets guidelines for their safe usage and describes privacy-enabling features that should be incorporated.
 
-Usage of zero-knowledge proofs, selective disclosure and signature blinding are already supported using the specifications as described in this document. Support for private holder binding and privacy preserving revocation will be added in the future.
+The usage of zero-knowledge proofs, selective disclosure and signature blinding are already supported using the specifications as described in this document. Support for private holder binding and privacy preserving revocation will be added in the future.
 
 ## Motivation
 
-Aries currently supports credential formats used by Indy (Anoncreds based on JSON) and Aries-Framework-Go. BBS+ signatures with JSON-LD Proofs provides a unified credential format that includes strong privacy protecting anti-correlation features and wide interoperability with verifiable credentials outside the Aries ecosystem.
+Aries currently supports credential formats used by Indy (Anoncreds based on JSON) and Aries-Framework-Go. BBS+ signatures with JSON-LD Proofs provide a unified credential format that includes strong privacy protecting anti-correlation features and wide interoperability with verifiable credentials outside the Aries ecosystem.
 
 ## Tutorial
 
@@ -36,7 +36,7 @@ This section highlights the process of issuing credentials with BBS+ signatures.
 
 #### Creating BBS+ Credentials
 
-The process to create verifiable credentials with BBS+ signatures is mostly covered by the [VC Data Model](https://www.w3.org/TR/vc-data-model) and [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020) specifications. However the BBS+ LD-Proofs is missing some documentation required to fully
+The process to create verifiable credentials with BBS+ signatures is mostly covered by the [VC Data Model](https://www.w3.org/TR/vc-data-model) and [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020) specifications. At the date of writing this RFC, the BBS+ LD-Proofs specification still has some unresolved issues. The issues are documented in the [Issues with the BBS+ LD-Proofs specification](#issues-with-the-bbs-ld-proofs-specification) section below.
 
 Aries implementations MUST use the [BBS+ Signature Suite 2020](https://w3c-ccg.github.io/ldp-bbs2020/#the-bbs-signature-suite-2020) to create verifiable credentials with BBS+ signatures, identified by the `BbsBlsSignature2020` proof type.
 
@@ -44,13 +44,13 @@ Aries implementations MUST use the [BBS+ Signature Suite 2020](https://w3c-ccg.g
 
 ##### Identifiers in Issued Credentials
 
-It is important to note that due to limitations of the underlying RDF Canoicalization scheme, which is used by [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020/), issued credentials SHOULD NOT have any `id` properties, as the value of these properties will be revealed during the RDF canonicalization process, regardless of whether or not the holder chooses to disclose them.
+It is important to note that due to limitations of the underlying RDF canonicalization scheme, which is used by [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020/), issued credentials SHOULD NOT have any `id` properties, as the value of these properties will be revealed during the RDF canonicalization process, regardless of whether or not the holder chooses to disclose them.
 
 Credentials can make use of other identifier properties to create selectively disclosable identifiers. An example of this is the `identifier` property from the [Citizenship Vocabulary](https://w3c-ccg.github.io/citizenship-vocab/#identifier)
 
 ##### Private Holder Binding
 
-Private holder binding allows the holder of a credential to authenticate itself without disclosing a correlating identifier (such as a DID) to the verifier. The current [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020/) does not describe a mechanism yet to do private holder binding, but it is expected this will be done using two new signature suites: `BbsBlsBoundSignature2020` and `BbsBlsBoundSignatureProof2020`. Both suites feature a commitment to a private key held by the credential holder, for which they prove knowledge of when deriving proofs without ever directly revealing the private key, nor a unique identifier linked to the private key (e.g its complementary public pair).
+A private holder binding allows the holder of a credential to authenticate itself without disclosing a correlating identifier (such as a DID) to the verifier. The current [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020/) specification does not describe a mechanism yet to do private holder binding, but it is expected this will be done using two new signature suites: `BbsBlsBoundSignature2020` and `BbsBlsBoundSignatureProof2020`. Both suites feature a commitment to a private key held by the credential holder, for which they prove knowledge of when deriving proofs without ever directly revealing the private key, nor a unique identifier linked to the private key (e.g its complementary public pair).
 
 ##### Usage of Credential Schema
 
@@ -127,19 +127,19 @@ Deriving credentials should be done according to the [BBS+ Signature Proof Suite
 
 The above section from the VC Data Model may give the impression that it is allowed to omit required properties from a derived credential if this prevents correlation. However things the holder chooses to reveal are in a different category than things the holder MUST reveal. Derived credentials MUST disclose required properties, even if it can correlate them.
 
-E.g. an credential with `issuanceDate` of `2017-12-05T14:27:42Z` could create a correlating factor. However it is against the VC Data Model to not include the property. Take this into account when issuing credentials.
+E.g. a credential with `issuanceDate` of `2017-12-05T14:27:42Z` could create a correlating factor. However it is against the VC Data Model to not include the property. Take this into account when issuing credentials.
 
 ##### Transforming Blank Node Identifiers
 
 > This section will be removed once [Issue 10](https://github.com/w3c-ccg/ldp-bbs2020/issues/10) in the LD Proof BBS+ spec is resolved.
 
-For the verifier to be able to verify the signature on a derived credential it should be able to deterministically normalize the credentials statements for verification. RDF Data Set Normalisation defines a way in which to allocate identifiers for blank nodes deterministically for normalization, however the algorithm does not guarantee that the same blank node identifiers will be allocated in the event of modifications to the graph. Because selective disclosure of signed statements modifies the graph as presented to the verifier, the blank node identifiers must be transformed into actual node identifiers when presented to the verifier.
+For the verifier to be able to verify the signature of a derived credential it should be able to deterministically normalize the credentials statements for verification. RDF Dataset Canonicalization defines a way in which to allocate identifiers for blank nodes deterministically for normalization. However, the algorithm does not guarantee that the same blank node identifiers will be allocated in the event of modifications to the graph. Because selective disclosure of signed statements modifies the graph as presented to the verifier, the blank node identifiers must be transformed into actual node identifiers when presented to the verifier.
 
-The [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020) does not define the mechanism to transform blank node identifiers into actual identifiers. Current implementations use the mechanism as described in this [Issue Comment](https://github.com/w3c-ccg/ldp-bbs2020/issues/10#issuecomment-616216278). Some reference implementations:
+The [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020) specification does not define a mechanism to transform blank node identifiers into actual identifiers. Current implementations use the mechanism as described in this [Issue Comment](https://github.com/w3c-ccg/ldp-bbs2020/issues/10#issuecomment-616216278). Some reference implementations:
 
 - [Aries Framework Go](https://github.com/hyperledger/aries-framework-go/blob/d83e137/pkg/doc/signature/jsonld/processor.go#L451-L452)
 - [JSON-LD Signatures BBS](https://github.com/mattrglobal/jsonld-signatures-bbs/blob/01000b4bf48932a47d7c8c889d2201f8e8085d46/src/BbsBlsSignatureProof2020.ts#L116-L132)
-- [Aries Cloud Agent Python](https://github.com/animo/aries-cloudagent-python/blob/cwu-bbs-main/aries_cloudagent/vc/ld_proofs/suites/BbsBlsSignatureProof2020.py#L310-L341)
+- [Aries Cloud Agent Python](https://github.com/hyperledger/aries-cloudagent-python/blob/eb3fd94ffaf623e4207ec1c8cb140345a489599d/aries_cloudagent/vc/ld_proofs/suites/BbsBlsSignatureProof2020.py#L314-L345)
 
 #### Verifying Presented Derived Credentials
 
@@ -153,11 +153,11 @@ Same as with [Transforming Blank Node Identifiers](#transforming-blank-node-iden
 
 - [Aries Framework Go](https://github.com/hyperledger/aries-framework-go/blob/b1b076db898fe8c922c6dc093d3fa52d448f0c30/pkg/doc/signature/verifier/public_key_verifier.go#L434)
 - [JSON-LD Signatures BBS](https://github.com/mattrglobal/jsonld-signatures-bbs/blob/01000b4bf48932a47d7c8c889d2201f8e8085d46/src/BbsBlsSignatureProof2020.ts#L254-L267)
-- [Aries Cloud Agent Python](https://github.com/animo/aries-cloudagent-python/blob/cwu-bbs-main/aries_cloudagent/vc/ld_proofs/suites/BbsBlsSignatureProof2020.py#L343-L377)
+- [Aries Cloud Agent Python](https://github.com/hyperledger/aries-cloudagent-python/blob/main/aries_cloudagent/vc/ld_proofs/suites/BbsBlsSignatureProof2020.py#L347-L381)
 
 #### Exchanging Derived Credentials
 
-Presentation of credentials with BBS+ signatures can be exchanged by following [RFC 0454: Present Proof Protocol 2.0](https://github.com/hyperledger/aries-rfcs/blob/master/features/0454-present-proof-v2). The Present Proof Protocol 2.0 provides a registry of attachment formats that can be used for presentation exchange. Although agents can use any attachment format they want, agents are expected to use the format as described in RFC 0510 (see below).
+The presentation of credentials with BBS+ signatures can be exchanged by following [RFC 0454: Present Proof Protocol 2.0](https://github.com/hyperledger/aries-rfcs/blob/master/features/0454-present-proof-v2). The Present Proof Protocol 2.0 provides a registry of attachment formats that can be used for presentation exchange. Although agents can use any attachment format they want, agents are expected to use the format as described in RFC 0510 (see below).
 
 ##### 0510: Presentation-Exchange Attachment format
 
@@ -214,20 +214,20 @@ Private Holder Binding is an evolution of CL Signatures Linked Secrets.
 
 ### Interoperability with Existing Credential Formats
 
-We expect that many Issuers will choose to shift exclusively to BBS+
+We expect that many issuers will choose to shift exclusively to BBS+
 credentials for the benefits described here. Accessing these benefits will
 require reissuing credentials that were previously in a different format.
 
-An Issuer can issue duplicate credentials with both signature formats.
+An issuer can issue duplicate credentials with both signature formats.
 
-A Holder can hold both types of credentials. The holder wallet could display the two credentials as a single entry in their credential list if the data is the same (it’s “enhanced” with both credential formats).
+A holder can hold both types of credentials. The holder wallet could display the two credentials as a single entry in their credential list if the data is the same (it’s “enhanced” with both credential formats).
 
-A Verifier will send a proof request for the formats that they choose to support.
+A verifier can send a proof request for the formats that they choose to support.
 
 - The holder wallet can provide the credential that fulfills that proof restriction. This allows old credentials to continue being used without being reissued.
-- The Verifier may accept credentials of multiple formats.
+- The verifier may accept credentials of multiple formats.
 
-### Issues with the [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020/) specification
+### Issues with the BBS+ LD-Proofs specification
 
 - `requiredRevealStatements` will be removed ([Issue 50](https://github.com/w3c-ccg/ldp-bbs2020/issues/50))
 - `proofValue` and `nonce` must be base64 encoded ([Issue 51](https://github.com/w3c-ccg/ldp-bbs2020/issues/51))
@@ -237,7 +237,7 @@ A Verifier will send a proof request for the formats that they choose to support
 
 ## Drawbacks
 
-Existing implementations of BBS+ Signatures do not support ZKP Proof Predicates, but it is theoretically possible to support numeric date predicates. ZKP Proof Predicates are considered a key feature of CL Signatures, and a migration to BBS+ LD-Proofs will lose this capability. The Indy Maintainers consider this a reasonable trade-off to get the other benefits of BBS+ LD-Proofs. A mechanism to support predicates can hopefully be added in future work.
+Existing implementations of BBS+ Signatures do not support ZKP proof predicates, but it is theoretically possible to support numeric date predicates. ZKP proof predicates are considered a key feature of CL signatures, and a migration to BBS+ LD-Proofs will lose this capability. The Indy maintainers consider this a reasonable trade-off to get the other benefits of BBS+ LD-Proofs. A mechanism to support predicates can hopefully be added in future work.
 
 As mentioned in the [Private Holder Binding](#private-holder-binding) section, the [BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020/) specification does not define a mechanism for private holder binding yet. This means implementing this RFC does not provide all privacy-enabling features that should be incorporated until the `BbsBlsBoundSignature2020` and `BbsBlsBoundSignatureProof2020` signature suites are formally defined.
 
@@ -245,7 +245,7 @@ As mentioned in the [Private Holder Binding](#private-holder-binding) section, t
 
 BBS+ LD-Proofs is a reasonable evolution of CL Signatures, as it supports most of the same features (with the exception of ZKP Proof Predicates), while producing smaller credentials that require less computation resources to validate (a key requirement for mobile use cases).
 
-BBS+ LD-Proofs are receiving broad support across the Verifiable Credentials implementation community, so supporting this signature format will be strategic for interoperability and allow Aries to promote the privacy preserving capabilities such as Zero Knowledge Proofs and Private Holder Binding.
+BBS+ LD-Proofs are receiving broad support across the verifiable credentials implementation community, so supporting this signature format will be strategic for interoperability and allow Aries to promote the privacy preserving capabilities such as zero knowledge proofs and private holder binding.
 
 ## Prior art
 
@@ -264,11 +264,11 @@ addressed a similar set of goals and capabilities as those addressed here, but w
 
 In 2020, Mattr provided [a draft specification for BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020/) that comply with [the Linked Data proof specification](https://w3c-ccg.github.io/ld-proofs/) in the W3C Credentials Community Group. The authors acknowledged that their approach did not support two key Anoncreds features: proof predicates and link secrets.
 
-[Aries RFC 593](https://github.com/hyperledger/aries-rfcs/tree/master/features/0593-json-ld-cred-attach) describes the JSON-LD Credential Format.
+[Aries RFC 593](https://github.com/hyperledger/aries-rfcs/tree/master/features/0593-json-ld-cred-attach) describes the JSON-LD credential format.
 
 ## Unresolved questions
 
-See the above note in [the Drawbacks Section](#drawbacks) about ZKP Predicates.
+See the above note in [the Drawbacks Section](#drawbacks) about ZKP predicates.
 
 ## Implementations
 
