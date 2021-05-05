@@ -43,13 +43,13 @@ Example of a proof presentation request (from verifier):
             "@id": "libindy-request-presentation-0",
             "mime-type": "application/json",
             "data":  {
-                "base64": "<yaml-formatted string describing attachments, base64-encoded because of libindy>"
+                "base64": "<yaml-formatted string describing attachments, base64url-encoded because of libindy>"
             }
         }
     ]
 }
 ```
-The base64-encoded content above decodes to the following data structure, a presentation preview:
+The base64url-encoded content above decodes to the following data structure, a presentation preview:
 ```
 {
     "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
@@ -88,7 +88,7 @@ The base64-encoded content above decodes to the following data structure, a pres
 			"name": "routing_number",
 			"group": ["A"],
 			"cred_def_id": "<cred_def_id>",
-			// "mime-type": "<mime-type>" is missing, so this defaults to a json-formatted string; if it was non-null, 'value' would be interpreted as a base64-encoded string representing a binary BLOB with mime-type telling how to interpret it after base64-decoding
+			// "mime-type": "<mime-type>" is missing, so this defaults to a json-formatted string; if it was non-null, 'value' would be interpreted as a base64url-encoded string representing a binary BLOB with mime-type telling how to interpret it after base64url-decoding
 			"value": {
 				"type": "string",
 				"maxLength": 9
@@ -201,13 +201,13 @@ Valid proof presentation:
             "@id": "libindy-presentation-0",
             "mime-type": "application/json",
             "data": {
-                "base64": "<yaml-formatted string describing attachments, base64-encoded because of libindy>"
+                "base64": "<yaml-formatted string describing attachments, base64url-encoded because of libindy>"
             }
         }
     ]
 }
 ```
-The base64-encoded content above would decode to this data:
+The base64url-encoded content above would decode to this data:
 ```
 {
     "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
