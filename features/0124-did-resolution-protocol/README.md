@@ -85,6 +85,17 @@ resolving DIDs for at least one DID method.
 | resolving            |                 | *new interaction*                    | transition to "done"       |
 | done                 |                 |                                      |                            |
 
+
+##### States for `requester` role in a failure scenario
+
+|                      | EVENTS:         | send `resolve`                      | receive `resolve_result` |
+| -------------------- | --------------- | ------------------------------------ | -------------------------- |
+| **STATES**           |                 |                                      |                            |
+| preparing-request    |                 | transition to "awaiting-response"    | *different interaction*    |
+| awaiting-response    |                 | *impossible*                         | error reporting       |
+| problem reported                 |                 |                                      |                            |
+
+
 ##### States for `resolver` role in a failure scenario
 
 |                      | EVENTS:         | receive `resolve`                   | send `resolve_result`    |
