@@ -173,8 +173,9 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
   * It MAY include the `thid` property. This works according to the [`thid`](../../concepts/0008-message-id-and-threading/README.md#thread-id-thid) property in the thread decorator, meaning that if `thid` is not defined it is implicitly defined as the `@id` on the same `request` message.
 * The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute.
 * The `did` attribute MUST be included. It indicates the DID being exchanged.
-* The `did_doc~attach` contains the DID Doc associated with the DID.
-  * If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
+* The `did_doc~attach` optional, contains the DIDDoc associated with the `did`, if required.
+  * If the `did` is resolvable (either an inline `peer:did` or a publicly resolvable DID), the `did_doc~attach` attribute should not be included.
+  * If the DID is a `did:peer` DID, the DIDDoc must be as outlined in [RFC 0627 Static Peer DIDs](../0627-static-peer-dids/README.md).
 
 #### Correlating requests to invitations
 
@@ -324,8 +325,9 @@ The invitation's `recipientKeys` should be dedicated to envelopes authenticated 
 * The `@type` attribute is a required string value that denotes that the received message is an exchange request.
 * The `~thread` decorator MUST be included. It contains a `thid` reference to the `@id` of the request message.
 * The `did` attribute MUST be included. It denotes the DID in use by the responder. Note that this MAY NOT be the same DID used in the invitation.
-* The `did_doc~attach` contains the DID Doc associated with the DID.
-  * If the DID method for the presented DID is not a peer method and the DID Doc is resolvable on a ledger, the `did_doc~attach` attribute is optional.
+* The `did_doc~attach` optional, contains the DID Doc associated with the `did`, if required.
+  * If the `did` is resolvable (either an inline `peer:did` or a publicly resolvable DID), the `did_doc~attach` attribute should not be included.
+  * If the DID is a `did:peer` identifier, the DIDDoc must be as outlined in [RFC 0627 Static Peer DIDs](../0627-static-peer-dids/README.md).
 
 In addition to a new DID, the associated DID Doc might contain a new endpoint. This new DID and endpoint are to be used going forward in the relationship.
 
