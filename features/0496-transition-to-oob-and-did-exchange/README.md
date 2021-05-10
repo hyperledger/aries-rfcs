@@ -31,6 +31,7 @@ The transition from the old to new messages will occur in four steps:
 - **Step 2**: Agent builders update all agent code bases and deployments to send out out-of-band invitations equivalent to the current invitation and connection-less protocol messages, and Agent builders add full out-of-band and did-exchange ([RFC 0023](../0023-did-exchange/README.md)) protocol support to all agent code bases and deployments.
   - Messages from existing RFCs being replaced by the out-of-band protocol are marked as `deprecated`.
   - Full out-of-band support is **NOT** required&mdash;just support for the out-of-band equivalents of the old `invitation` messages.
+  - When sending or receiving `did:peer` DIDs, the DIDs MUST conform to [RFC 627 Static Peer DIDs](../0627-static-peer-dids/README.md).
   - Each agent builder SHOULD notify the community they have completed Step 2 by submitting a PR to update their entry in the [implementations](#implementations) section.
 - **Step 3**: Support for the current invitation and connection-less protocol messages can be removed from all implementations and deployments, and all out-of-band `invitation` capabilities that align with the then current Aries Interop Profile (AIP) may be offered.
 
@@ -146,7 +147,7 @@ The most common connection-less form being used in production is the `request-pr
   ],
   "service": [
       {
-        "id": "#inline"
+        "id": "#inline",
         "type": "did-communication",
         "recipientKeys": ["did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"],
         "routingKeys": [],
