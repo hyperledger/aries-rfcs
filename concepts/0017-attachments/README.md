@@ -235,11 +235,11 @@ in a schema.
 There are multiple ways to include content in an attachment. Only one method
 should be used per attachment.
 
-#### base64
+#### base64url
 
 This content encoding is an obvious choice for any content different than JSON.
 You can embed content of any type using this method. Examples are plentiful
-throughout the document. Note that this encoding is always [base64url encoding, not plain base64](https://tools.ietf.org/html/rfc4648#section-5), and that padding is not required. 
+throughout the document. Note that this encoding is always [base64url encoding, not plain base64](https://tools.ietf.org/html/rfc4648#section-5), and that padding is not required. When decoding, all Aries software should accept content that is base64 or base64url encoded, padded or unpadded.
 
 #### json
 
@@ -283,6 +283,7 @@ with S3 (showing just the `data` fragment now):
 ```
 
 Or on an ordinary HTTP/FTP site or CDN:
+
 ```JSON
 "data": {
   "links": ["https://github.com/sovrin-foundation/launch/raw/master/sovrin-keygen.zip"]
@@ -290,6 +291,7 @@ Or on an ordinary HTTP/FTP site or CDN:
 ```
 
 Or on BitTorrent:
+
 ```JSON
 "byte_count": 192834724,
 "data": {
@@ -298,6 +300,7 @@ Or on BitTorrent:
 ```
 
 Or via double indirection (URI for a BitTorrent):
+
 ```JSON
 "data": {
   "links": ["torrent@http://example.com/mycontent.torrent"]
@@ -320,6 +323,7 @@ a subsequent DIDComm message:
   "links": ["didcomm://fetch"]
 }
 ```
+
 [TODO: how does the message that actually delivers this content refer back
 to the promise made earlier, to claim it has been fulfilled?]
 
@@ -500,7 +504,6 @@ attachment. Contains the following subfields:
 
   * `json`: Directly embedded JSON data, when representing content inline instead of
   via `links`, and when the content is natively conveyable as JSON. Optional.
-
 
 ## Drawbacks
 
