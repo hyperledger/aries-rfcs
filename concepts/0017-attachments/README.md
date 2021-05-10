@@ -136,7 +136,7 @@ manifest like this:
 
 Embedding is a less direct mechanism than inlining, because the data is no
 longer readable by a human inspecting the message; it is
-base64-encoded instead. A benefit of this approach is that the data
+base64url-encoded instead. A benefit of this approach is that the data
 can be any MIME type instead of just JSON, and that the data comes
 with useful metadata that can facilitate saving it as a separate
 file.
@@ -237,9 +237,9 @@ should be used per attachment.
 
 #### base64
 
-Base64 content encoding is an obvious choice for any content different than JSON.
+This content encoding is an obvious choice for any content different than JSON.
 You can embed content of any type using this method. Examples are plentiful
-throughout the document.
+throughout the document. Note that this encoding is always [base64url encoding, not plain base64](https://tools.ietf.org/html/rfc4648#section-5), and that padding is not required. 
 
 #### json
 
@@ -346,10 +346,7 @@ signing key when the sender is performing key rotation.
 
 Embedded and appended attachments support signatures by the addition of a `data.jws` field
 containing a signature in [JWS (RFC 7515) format](https://tools.ietf.org/html/rfc7515)
-with [Detached Content](https://tools.ietf.org/html/rfc7515#appendix-F).
-The payload of the JWS is the raw data of the attachment, whether externally referenced
-or encoded in base64 format, and is not contained within the signature itself.
-Signatures over inlined JSON attachments are not currently defined as this
+with [Detached Content](https://tools.ietf.org/html/rfc7515#appendix-F). The payload of the JWS is the raw bytes of the attachment, appropriately base64url-encoded per JWS rules. If these raw bytes are incorporated by value in the DIDComm message, they are already base64url-encoded in `data.base64` and are thus directly substitutable for the suppressed `data.jws.payload` field; if they are externally referenced, then the bytes must be fetched via the URI in `data.links` and base64url-encoded before the JWS can be fully reconstituted. Signatures over inlined JSON attachments are not currently defined as this
 depends upon a canonical serialization for the data.
 
 Sample JWS-signed attachment:
@@ -498,7 +495,7 @@ attachment. Contains the following subfields:
   * `links`: A list of zero or more locations at which the content may be fetched.
   Optional.
 
-  * `base64`: Base64-encoded data, when representing arbitrary content inline instead
+  * `base64`: Base64url-encoded data, when representing arbitrary content inline instead
   of via `links`. Optional.
 
   * `json`: Directly embedded JSON data, when representing content inline instead of
