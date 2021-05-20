@@ -147,6 +147,8 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
       "pthid": "<id of invitation>"
   },
   "label": "Bob",
+  "goal_code": "aries.rel.build",
+  "goal": "To create a relationship",
   "did": "B.did@B:A",
   "did_doc~attach": {
       "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
@@ -172,8 +174,10 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
   * It MUST include the ID of the parent thread (`pthid`) such that the `request` can be correlated to the corresponding (implicit or explicit) `invitation`. More on correlation [below](#correlating-requests-to-invitations).
   * It MAY include the `thid` property. This works according to the [`thid`](../../concepts/0008-message-id-and-threading/README.md#thread-id-thid) property in the thread decorator, meaning that if `thid` is not defined it is implicitly defined as the `@id` on the same `request` message.
 * The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute.
+* The `goal_code` (optional) is a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the request message. The goal code might be used particulaly when the request is sent to a resolvable DID without reference to a partiuclar invitation.
+* The goal (optional) is a self-attested string that the receiver may want to display to the user about the context-specific goal of the request message.
 * The `did` attribute MUST be included. It indicates the DID being exchanged.
-* The `did_doc~attach` optional, contains the DIDDoc associated with the `did`, if required.
+* The `did_doc~attach` (optional), contains the DIDDoc associated with the `did`, if required.
   * If the `did` is resolvable (either an inline `peer:did` or a publicly resolvable DID), the `did_doc~attach` attribute should not be included.
   * If the DID is a `did:peer` DID, the DIDDoc must be as outlined in [RFC 0627 Static Peer DIDs](../0627-static-peer-dids/README.md).
 
@@ -199,6 +203,8 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
       "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" 
   },
   "label": "Bob",
+  "goal_code": "aries.rel.build",
+  "goal": "To create a relationship",
   "did": "B.did@B:A",
   "did_doc~attach": {
       "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
@@ -228,6 +234,8 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
       "pthid": "did:example:21tDAKCERh95uGgKbJNHYp#didcomm" 
   },
   "label": "Bob",
+  "goal_code": "aries.rel.build",
+  "goal": "To create a relationship",
   "did": "B.did@B:A",
   "did_doc~attach": {
       "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
@@ -407,6 +415,7 @@ When Peer DIDs are used in an exchange, it is likely that both the _requester_ a
 * [Agent to Agent Communication Video](https://drive.google.com/file/d/1PHAy8dMefZG9JNg87Zi33SfKkZvUvXvx/view)
 * [Agent to Agent Communication Presentation](https://docs.google.com/presentation/d/1H7KKccqYB-2l8iknnSlGt7T_sBPLb9rfTkL-waSCux0/edit#slide=id.p)
 * Problem_report message adopted into message family, following form defined by the [Problem Report HIPE](https://github.com/hyperledger/indy-hipe/blob/6a5e4fe2d7e14953cd8e3aed07d886176332e696/text/error-handling/README.md)
+* [RFC0519 Goal Codes](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0519-goal-codes/README.md)
 
 ## Drawbacks
 
