@@ -183,13 +183,16 @@ Following are the [Linked Data proof](https://w3c-ccg.github.io/ld-proofs/) type
 that MUST be supported for compliance with this RFC. All suites listed in the following table MUST be registered in the
 [Linked Data Cryptographic Suite Registry](https://w3c-ccg.github.io/ld-cryptosuite-registry/):
 
-Suite|Spec|Enables Selective disclosure?|Enables Zero-knowledge proofs?
------|----|-----------------------------|------------------------------
-Ed25519Signature2018|[Link](https://w3c-ccg.github.io/lds-ed25519-2018/)|No|No
-BbsBlsSignature2020**|[Link](https://w3c-ccg.github.io/ldp-bbs2020/)|Yes|No
+Suite|Spec|Enables Selective disclosure?|Enables Zero-knowledge proofs?|Optional
+-----|----|-----------------------------|------------------------------|----------
+Ed25519Signature2018|[Link](https://w3c-ccg.github.io/lds-ed25519-2018/)|No|No|No
+BbsBlsSignature2020**|[Link](https://w3c-ccg.github.io/ldp-bbs2020/)|Yes|No|No
+JsonWebSignature2020***|[Link](https://w3c-ccg.github.io/lds-jws2020/)|No|No|Yes
 
 > ** Note: see [RFC0646](../0646-bbs-credentials/README.md) for details on how BBS+ signatures are to be produced and
 > consumed by Aries agents.
+
+> *** Note: P-256 and P-384 curves are supported.
 
 ## Drawbacks
 
