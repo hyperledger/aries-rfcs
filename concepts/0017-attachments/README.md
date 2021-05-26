@@ -235,11 +235,11 @@ in a schema.
 There are multiple ways to include content in an attachment. Only one method
 should be used per attachment.
 
-#### base64
+#### base64url
 
 This content encoding is an obvious choice for any content different than JSON.
 You can embed content of any type using this method. Examples are plentiful
-throughout the document. Note that this encoding is always [base64url encoding, not plain base64](https://tools.ietf.org/html/rfc4648#section-5), and that padding is not required. 
+throughout the document. Note that this encoding is always [base64url encoding, not plain base64](https://tools.ietf.org/html/rfc4648#section-5), and that padding is not required. When decoding, all Aries software should accept content that is base64 or base64url encoded, padded or unpadded.
 
 #### json
 
@@ -262,7 +262,7 @@ attachment's bytes are directly inlined in the message in some way. This
 is a useful mode of data delivery, but it is not the only mode.
 
 Another way that attachment data can be incorporated is *by reference*. For
-example, you can link to the content on IPFS by replacing `data.base64`
+example, you can link to the content on a web server by replacing `data.base64`
 or `data.json` with `data.links` in an attachment descriptor:
 
 [![links example](crime-scene-links.png)](crime-scene-links.json)
@@ -272,69 +272,27 @@ message and an attachment that can be fetched separately. This makes it possible
 to send brief descriptors of attachments and to make the downloading of the heavy
 content optional (or parallelizable) for the recipient.
 
-IPFS is not the only option for attaching by reference. You can do the same
-with S3 (showing just the `data` fragment now):
-
-```JSON
-"data": {
-  "sha256": "1d4db525c5ee4a2d42899040cd3728c0f0945faf9eb668b53d99c002123f1ffa",
-  "links": ["s3://mybucket/mykeyoyHw8T7Afe4DbWFcJYocef5"]
-}
-```
-
-Or on an ordinary HTTP/FTP site or CDN:
-```JSON
-"data": {
-  "links": ["https://github.com/sovrin-foundation/launch/raw/master/sovrin-keygen.zip"]
-}
-```
-
-Or on BitTorrent:
-```JSON
-"byte_count": 192834724,
-"data": {
-  "links": ["torrent://content of a .torrent file as a data URI"]
-}
-```
-
-Or via double indirection (URI for a BitTorrent):
-```JSON
-"data": {
-  "links": ["torrent@http://example.com/mycontent.torrent"]
-}
-```
-
-Or as content already attached to a previous DIDComm message:
-
-```JSON
-"data": {
-  "links": ["didcomm://my-previous-message-id.~attach#id"]
-}
-```
-
-Or even via a promise to supply the content at some point in the future, in
-a subsequent DIDComm message:
-
-```JSON
-"data": {
-  "links": ["didcomm://fetch"]
-}
-```
-[TODO: how does the message that actually delivers this content refer back
-to the promise made earlier, to claim it has been fulfilled?]
-
-The set of supported URI types in an attachment link is not static, and
-recipients of attachments that are incorporated by reference are not required to
-support all of them. However, they should at least recognize the meaning of each
-of the variants listed above, so they can perform intelligent error handling and
-communication about the ones they don't support.
-
 The `links` field is plural (an array) to allow multiple locations to be
 offered for the same content. This allows an agent to fetch attachments using
 whichever mechanism(s) are best suited to its individual needs and capabilities.
 
-[TODO: discuss sending an empty message with just attachments, and how to
-request a send of an attachment, or an alternate download method for it]
+##### Supported URI Types
+
+The set of supported URI types in an attachment link is limited to:
+
+- HTTP
+- HTTPS
+
+Additional URI types may be added via updates to this RFC.
+
+If an attachment link with an unsupported URI is received, the agent SHOULD
+respond with a [Problem Report](../../features/0035-report-problem/README.md)
+indicated the problem.
+
+An ecosystem (coordinating set of agents working in a specific business area)
+may agree to support other URI types within that ecosystem. As such, implementing a
+mechanism to easily add support for other attachment link URI types might be useful,
+but is not required.
 
 ### Signing Attachments
 
@@ -501,7 +459,6 @@ attachment. Contains the following subfields:
   * `json`: Directly embedded JSON data, when representing content inline instead of
   via `links`, and when the content is natively conveyable as JSON. Optional.
 
-
 ## Drawbacks
 
 By providing 3 different choices, we impose additional complexity on
@@ -528,8 +485,7 @@ However, they are an inspiration for what we are showing here.
 
 # Unresolved questions
 
-- What additional clarity do we need to provide for the URIs used
-to fetch attachment content later?
+- N/A
 
 ## Implementations
 
