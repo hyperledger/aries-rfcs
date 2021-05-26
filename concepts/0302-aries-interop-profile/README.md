@@ -183,6 +183,7 @@ Feature | [0627-static-peer-dids](https://github.com/hyperledger/aries-rfcs/tree
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
 Feature | [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/tree/d50fe1e38c9720344123146c31fbf7ad8e78b345/features/0211-route-coordination) | :new:
+Feature | [0092-transport-return-route](https://github.com/hyperledger/aries-rfcs/tree/d50fe1e38c9720344123146c31fbf7ad8e78b345/features/0092-transport-return-route) | :new:
 
 #### INDYCRED: Indy Based Credentials
 
