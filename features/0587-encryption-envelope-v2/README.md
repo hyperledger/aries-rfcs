@@ -23,7 +23,7 @@ DIDComm defines both the concept of authenticated sender encryption (aka `Authcr
 In general, Aries RFCs and protocols use `Authcrypt` to exchange messages.
 In some limited scenarios (e.g., mediator and relays), an Aries RFC or protocol may define usage of `Anoncrypt`.
 
-[ECDH-1PU draft 03](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) defines the JWE structure for `Authcrypt`.
+[ECDH-1PU draft 04](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-04) defines the JWE structure for `Authcrypt`.
 `ECDH-ES` from [RFC 7518](https://tools.ietf.org/html/rfc7518#section-4.6) defines the JWE structure for `Anoncrypt`.
 The following sections summarize the supported algorithms.
 
@@ -47,7 +47,7 @@ DIDComm Messaging (and this RFC) requires support for both `XC20P` and `A256GCM`
 
 DIDComm Messaging (and this RFC) requires support for `ECDH-1PU+A256KW` and `ECDH-ES+A256KW`.
 
-- ECDH-1PU+A256KW (defined in [ECDH-1PU draft 03](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03#section-2.2))
+- ECDH-1PU+A256KW (defined in [ECDH-1PU draft 04](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-04#section-2))
 - ECDH-ES+A256KW (defined in [RFC 7518](https://tools.ietf.org/html/rfc7518#section-4.6))
 
 ## Key IDs `kid` and `skid` headers references in the DID document
