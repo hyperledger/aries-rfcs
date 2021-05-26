@@ -331,7 +331,7 @@ Feature|Notes
 `presentation_definition.input_descriptors.constraints.limit_disclosure`|`preferred` or `required` as defined in [the spec](https://identity.foundation/presentation-exchange/#input-descriptor-object) and as supported by the Holder and Verifier proof mechanisms.<br>Note that the Holder MUST have credentials with cryptographic proof suites that are capable of selective disclosure in order to respond to a request with `limit_disclosure: "required"`.<br/>See [RFC0593](../0593-json-ld-cred-attach/README.md) for appropriate crypto suites.
 `presentation_definition.input_descriptors.constraints.is_holder`|`preferred` or `required` as defined in [the spec](https://identity.foundation/presentation-exchange/#input-descriptor-object).<br>Note that this feature allows the Holder to present credentials with a different subject identifier than the DID used to establish the DIDComm connection with the Verifier.
 `presentation_definition.format`|For JSONLD-based credentials: `ldp_vc` and `ldp_vp`.
-`presentation_definition.format.proof_type`|For JSONLD-based credentials: `Ed25519Signature2018`, `BbsBlsSignature2020`, and `JsonWebSignature2020`.
+`presentation_definition.format.proof_type`|For JSONLD-based credentials: `Ed25519Signature2018`, `BbsBlsSignature2020`, and `JsonWebSignature2020`. When specifying `ldp_vc`, `BbsBlsSignatureProof2020` may also be used.
 
 ### Proof Formats
 
