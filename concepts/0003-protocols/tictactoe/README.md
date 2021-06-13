@@ -78,7 +78,7 @@ but it would be an error on the part of the other player, and would
 trigger a `problem-report` message as described above, leaving the
 state unchanged.
 
-In the `receive-move` state, `send move` is an impossible event for a
+In the `their-move` state, `send move` is an impossible event for a
 properly behaving player. All 3 of the other events could occur, causing
 a state transition.
 
