@@ -24,10 +24,11 @@ The next two sub-sections describe the encryption algorithms that must be suppor
 
 The following table defines the supported content encryption algorithms for DIDComm JWE envelopes:
 
- Content Encryption   | Encryption Algorithm identifier
- :------------------  | :-------------------
- AES-GCM (256 bit)    | A256GCM
- XChacha20Poly1305    | XC20P
+ Content Encryption      | Encryption Algorithm identifier   | Authcrypt/Anoncrypt |  Reference  |
+ :---------------------  | :------------------------------   |  :----------------- | :---------  |
+ A256CBC-HS512 (512 bit) | AES_256_CBC_HMAC_SHA_512 | Authcrypt/Anoncrypt | [ECDH-1PU section 2.1](https://datatracker.ietf.org/doc/html/draft-madden-jose-ecdh-1pu-04#section-2.1) and [RFC 7518 section 5.2.5](https://datatracker.ietf.org/doc/html/rfc7518#section-5.2.5) |
+ AES-GCM (256 bit)       | A256GCM | Anoncrypt | [RFC7518 section 5.1](https://tools.ietf.org/html/rfc7518#section-5.1) and more specifically [RFC7518 section 5.3](https://tools.ietf.org/html/rfc7518#section-5.3) |
+ XChacha20Poly1305       | XC20P | Anoncrypt | [xchacha draft 03](https://tools.ietf.org/html/draft-irtf-cfrg-xchacha-03) |
 
 ### Key Encryption Algorithms
 
@@ -54,7 +55,7 @@ Other curves are optional.
 
 #### Security Consideration for Curves
 
-As noted in the ECDH-1PU [IETF draft](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03#section-4) security considerations section, all implementations must ensure the following:
+As noted in the ECDH-1PU [IETF draft](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-04#section-4) security considerations section, all implementations must ensure the following:
 ```text
 When performing an ECDH key agreement between a static private key
 and any untrusted public key, care should be taken to ensure that the
@@ -166,26 +167,24 @@ In the above two examples, `apu` is the encoded ephemeral key used to encrypt th
 {
     "protected": base64url({
         "typ": "didcomm-envelope-enc",
-        "enc":"XC20P", // or "A256GCM"
+        "enc":"A256CBC-HS512", // or one of: "A128CBC-HS256", "A192CBC-HS384"
         "skid": base64url(sender KID),
+        "alg": "ECDH-1PU+A256KW", // or "ECDH-1PU+XC20P" with "epk" as X25519 key
+        "apu": base64url("skid" header value),
+        "apv": base64url(sha256(concat('.',sort([recipients[0].kid, ..., recipients[n].kid]))))),
+        "epk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "gfdM68LgZWhHwdVyMAPh1oWqV_NcYGR4k7Bjk8uBGx8",
+            "y": "Gwtgz-Bl_2BQYdh4f8rd7y85LE7fyfdnb0cWyYCrAb4"
+        }
     }),
     "recipients": [
         {
-            "encrypted_key": "base64url(encrypted CEK)",
             "header": {
-                "kid": base64url(recipient KID),
-                "alg": "ECDH-1PU+A256KW", // or "ECDH-1pu+XC20P" with "epk" as X25519 key
-                "enc": "A256GCM",
-                "apu": base64url(sender KID),
-                "apv": base64url(recipients[*].header.kid),
-                "epk": {
-                  "use": "enc",
-                  "kty": "EC",
-                  "crv": "P-256",
-                  "x": "gfdM68LgZWhHwdVyMAPh1oWqV_NcYGR4k7Bjk8uBGx8",
-                  "y": "Gwtgz-Bl_2BQYdh4f8rd7y85LE7fyfdnb0cWyYCrAb4"
-                },
-            }
+                "kid": base64url(recipient KID)
+            },
+            "encrypted_key": "base64url(encrypted CEK)"
         },
        ...
     ],
@@ -196,9 +195,9 @@ In the above two examples, `apu` is the encoded ephemeral key used to encrypt th
 }
 ```
 
-With the recipients headers representing an ephemeral key that can be used to derive the key to be used for AEAD decryption of the CEK following the [ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) encryption scheme.
+With the recipients headers representing an ephemeral key that can be used to derive the key to be used for AEAD decryption of the CEK following the [ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-04) encryption scheme.
 
-The function `XC20P` in the example above is defined as the XChahcha20Poly1035 cipher function. This can be replaced by the A256GCM cipher function.
+The function `XC20P` in the example above is defined as the XChahcha20Poly1035 cipher function. This can be replaced by the AES-CBC+HMAC_SHA family of cipher functions for authcrypt or AES-GCM cipher function for anoncrypt.
 
 ### Concrete examples
 
