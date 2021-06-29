@@ -149,6 +149,18 @@ A presentation may include a timestamp outside of a the non-revocation interval 
 
 Any timestamp in the future (relative to the instant of presentation proof, with a reasonable allowance for clock skew) evinces tampering: the verifier MUST reject a presentation with a future timestamp. Similarly, any timestamp predating the creation of its corresponding credential's revocation registry on the ledger evinces tampering: the verifier MUST reject a presentation with such a timestamp.
 
+### Dates and Predicates
+
+This section prescribes issuer and verifier best practices concerning representing dates for use in predicate proofs (eg proving Alice is over 21 without revealing her birth date).
+
+#### Dates in Credentials
+
+In order for dates to be used in a predicate proof they MUST be expressed as an Int32. While unix timestamps could work for this, it has several drawbacks including: can't represent dates outside of the years 1901-2038, isn't human readable, and contains more specific information than is needed since birth time with time zone is generally not needed for an age check. To address these issues, dates attributes SHOULD be represented as integers in the form YYYYMMDD. In order to make it clear that this format is being used the attribute name SHOULD have the suffix `_dateint`.
+
+#### Dates in Presentations
+
+When constructing a proof request, the verifier SHOULD express the minimum/maximum date as an integer in the form YYYYMMDD. For example if today is Jan 1, 2021 then the verifier would request that `bithdate_dateint` is before or equal to Jan 1 2000 so `<= 20000101`. The holder MUST construct a predicate proof with a YYYYMMDD represented birth date less than that value to satisfy the proof request.
+
 ## Reference
 
 * [RFC 0037](../../features/0037-present-proof/README.md): Present Proof protocol
