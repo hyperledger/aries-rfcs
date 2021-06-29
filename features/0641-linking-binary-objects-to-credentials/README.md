@@ -48,7 +48,7 @@ This example shows the prefix of `hl:` indicating that it is a hashlink and the 
 
 The hashlink also allows for opional metadata, such as; a list of URLs where the attachment is hosted and a MIME-type. These metadata values are encoded in the CBOR data format using the specified algortihm from section 3.1.2 in the [IETF: Cryptographic Hyperlinks](https://tools.ietf.org/html/draft-sporny-hashlink-06).
 
-The list of URLs SHOULD NOT be used as it introduces the phone home problem, however the MIME-type MAY be used to infer the file type before downloading it.
+When a holder receives a credential with hosted attachments, the holder MUST rehost these attachments. This is done in order to prevent the phone-home problem.
 
 ### Inlined Attachments as a Credential Attribute
 
@@ -175,7 +175,7 @@ The last method of adding a binary object in a credential is by using the attach
 
 ### Matching
 
-Now that a link has been made between the attachment in the attachments decorator, it is possible to match the two together. When a credential is received and a value of an attribute starts with `hl:` it means that there is a linked attachment. To find the linked attachment to the credential attribute to following steps SHOULD done:
+Now that a link has been made between the attachment in the attachments decorator, it is possible to match the two together. When a credential is received and a value of an attribute starts with `hl:` it means that there is a linked attachment. To find the linked attachment to the credential attribute to following steps SHOULD be done:
 
 1. Extract the multihash from the credential attribute value
 2. Extract the first 64 characters of this multihash
