@@ -42,7 +42,7 @@ Each message sent should use the ~transport decorator as follows. This has been 
 
 ```json=
 "~transport": {
-    turn_route": "thread"
+    turn_route": "all"
 }
 ```
 
@@ -81,11 +81,11 @@ Status details about pending messages
 
 `message_count` is the only required attribute. The others may be present if offered by the _message_holder_.
 
-`duration waited` is in seconds, and is the longest  delay of any message in the queue.
+`duration_waited` is in seconds, and is the longest  delay of any message in the queue.
 
 `total_size` is in bytes.
 
-If a `recipient_key` was specified in the status-request message, the matching value should be specified in the `recipient_key` attribute of the status message.
+If a `recipient_key` was specified in the status-request message, the matching value MUST be specified in the `recipient_key` attribute of the status message.
 
 `live_delivery` state is also indicated in the status message. 
 
@@ -171,9 +171,9 @@ If sent with `live_delivery` set to `true` on a connection incapable of live del
 
 Version 1.0 of this protocol served as the main inspiration for this version. Version 1.0 suffered from not being very explicit, and an incomplete model of message delivery signaling.
 
-## Unresolved questions
+## Alternatives
 
-- An alternative to deriving a message ID is to wrap each message in a delivery wrapper. This would enable the mediator to include a mediator managed id and metadata along with the message itself, but carries the downside of 
+- An alternative to deriving a message ID is to wrap each message in a delivery wrapper. This would enable the mediator to include a mediator managed id and metadata along with the message itself, but carries the downside of double encrypting messages and extra processing.
 
 ## Implementations
 
