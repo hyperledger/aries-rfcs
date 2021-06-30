@@ -42,7 +42,7 @@ Each message sent should use the ~transport decorator as follows. This has been 
 
 ```json=
 "~transport": {
-    turn_route": "all"
+    "return_route": "all"
 }
 ```
 
