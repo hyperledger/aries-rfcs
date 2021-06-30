@@ -32,7 +32,7 @@
 * [0160: Connection Protocol](features/0160-connection-protocol/README.md) (2019-08-06, [5 impls](features/0160-connection-protocol/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`test-anomaly`](/tags.md#test-anomaly))
 * [0211: Mediator Coordination Protocol](features/0211-route-coordination/README.md) (2021-03-15, [1 impl](features/0211-route-coordination/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`test-anomaly`](/tags.md#test-anomaly))
 * [0250: Rich Schema Objects](concepts/0250-rich-schemas/README.md) (2019-10-08 &mdash; [`concept`](/tags.md#concept) [`rich-schemas`](/tags.md#rich-schemas))
-* [0302: Aries Interop Profile](concepts/0302-aries-interop-profile/README.md) (2020-01-30 &mdash; [`concept`](/tags.md#concept))
+* [0302: Aries Interop Profile](concepts/0302-aries-interop-profile/README.md) (2021-01-06 &mdash; [`concept`](/tags.md#concept))
 * [0360: did:key Usage](features/0360-use-did-key/README.md) (2021-04-15 &mdash; [`feature`](/tags.md#feature))
 * [0441: Prover and Verifier Best Practices for Proof Presentation](concepts/0441-present-proof-best-practices/README.md) (2021-04-15 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
 * [0453: Issue Credential Protocol 2.0](features/0453-issue-credential-v2/README.md) (2021-04-15 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
