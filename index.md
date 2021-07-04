@@ -34,6 +34,7 @@
 * [0250: Rich Schema Objects](concepts/0250-rich-schemas/README.md) (2019-10-08 &mdash; [`concept`](/tags.md#concept) [`rich-schemas`](/tags.md#rich-schemas))
 * [0302: Aries Interop Profile](concepts/0302-aries-interop-profile/README.md) (2021-01-06 &mdash; [`concept`](/tags.md#concept))
 * [0360: did:key Usage](features/0360-use-did-key/README.md) (2021-04-15 &mdash; [`feature`](/tags.md#feature))
+* [0434: Out-of-Band Protocol 1.1](features/0434-outofband/README.md) (2020-03-01 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0441: Prover and Verifier Best Practices for Proof Presentation](concepts/0441-present-proof-best-practices/README.md) (2021-04-15 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
 * [0453: Issue Credential Protocol 2.0](features/0453-issue-credential-v2/README.md) (2021-04-15 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 * [0454: Present Proof Protocol 2.0](features/0454-present-proof-v2/README.md) (2021-04-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
@@ -43,6 +44,7 @@
 * [0587: Encryption Envelope v2](features/0587-encryption-envelope-v2/README.md) (2021-04-15 &mdash; [`feature`](/tags.md#feature))
 * [0592: Indy Attachment Formats for Requesting and Presenting Credentials](features/0592-indy-attachments/README.md) (2021-04-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 * [0593: JSON-LD Credential Attachment format for requesting and issuing credentials](features/0593-json-ld-cred-attach/README.md) (2021-04-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
+* [0627: Static Peer DIDs](features/0627-static-peer-dids/README.md) (2021-04-07 &mdash; [`feature`](/tags.md#feature))
 * [0646: W3C Credential Exchange using BBS+ Signatures](features/0646-bbs-credentials/README.md) (2021-04-28 &mdash; [`feature`](/tags.md#feature))
 
 ## [DEMONSTRATED](README.md#demonstrated)
@@ -100,7 +102,6 @@
 * [0428: Prerequisites to Issue Rich Credential](features/0428-prepare-issue-rich-credential/README.md) (2020-02-20 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0429: Prerequisites to Request Rich Presentation](features/0429-prepare-req-rich-pres/README.md) (2020-02-21 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0430: Machine-Readable Governance Frameworks](concepts/0430-machine-readable-governance-frameworks/README.md) (2020-02-24 &mdash; [`concept`](/tags.md#concept))
-* [0434: Out-of-Band Protocol 1.1](features/0434-outofband/README.md) (2020-03-01 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0440: KMS Architectures ](concepts/0440-kms-architectures/README.md) (2020-03-06 &mdash; [`concept`](/tags.md#concept))
 * [0445: Aries Rich Schema Mapping](features/0445-rich-schema-mapping/README.md) (2020-03-16 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
 * [0446: Aries Rich Schema Credential Definition](features/0446-rich-schema-cred-def/README.md) (2020-03-16 &mdash; [`feature`](/tags.md#feature) [`rich-schemas`](/tags.md#rich-schemas))
@@ -110,7 +111,6 @@
 * [0511: Credential-Manifest Attachment format for requesting and presenting credentials](features/0511-dif-cred-manifest-attach/README.md) (2020-07-22 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 * [0559: Privacy-Preserving Proof of Uniqueness](concepts/0559-pppu/README.md) (2020-10-21 &mdash; [`concept`](/tags.md#concept))
 * [0566: Issuer-Hosted Custodial Agents](concepts/0566-issuer-hosted-custodidal-agents/README.md) (2020-11-16 &mdash; [`concept`](/tags.md#concept))
-* [0627: Static Peer DIDs](features/0627-static-peer-dids/README.md) (2021-04-07 &mdash; [`feature`](/tags.md#feature))
 
 ## [RETIRED](README.md#retired)
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2020-10-14, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
