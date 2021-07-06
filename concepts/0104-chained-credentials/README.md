@@ -119,7 +119,7 @@ The first entity in the provenance chain for authority (Ur Wheels National, in o
 
 A chained credential delivers these features by obeying some special conventions over and above the core requirements of an ordinary VC:
 
-1. It contains a special field named `schema` that is a base64-encoded representation of *its own schema*. This makes the credential self-contained in the sense that it doesn't depend on a schema or credential definition defined by an external authority (though it could optionally embody one). This field is always disclosed in presentations.
+1. It contains a special field named `schema` that is a base64url-encoded representation of *its own schema*. This makes the credential self-contained in the sense that it doesn't depend on a schema or credential definition defined by an external authority (though it could optionally embody one). This field is always disclosed in presentations.
 
 2. It contains a special field named `provenanceProofs`. The field is an array, where each member of the array is a tuple (also a JSON array). The first member of each tuple is a list of field names; the second member of each tuple is an embedded W3C verifiable presentation that proves the provenance of the values in those fields. In the case of delegate credentials, `provenanceProofs` is proving the provenance of a field named `authorization`.
 

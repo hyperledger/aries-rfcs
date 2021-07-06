@@ -1,0 +1,11 @@
+@startuml
+scale 350 width
+hide empty description
+state mode <<fork>>
+state finish <<join>>
+[*] --> mode: normal or short-circuit?
+mode --> awaiting_disclosures: normal: send\nqueries
+mode --> finish: short-circuit:\nreceive\ndisclosures
+awaiting_disclosures --> finish: receive disclosures
+finish --> [*]: process\ndisclosures
+@enduml

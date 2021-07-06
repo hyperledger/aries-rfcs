@@ -1,8 +1,8 @@
 # 0519: Goal Codes
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-07-24
-- Status Note: surfaces thinking first used in [0434 OOB Protocol](../../features/0434-outofband/README.md) and in [Co-protocols](https://docs.google.com/presentation/d/17hk6QqLW5M9E4TBPZwXIUBu9eEinMNXReceyZTF4LpA/edit)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Used in several protocols that are part of [AIP 2.0](../0302-aries-interop-profile/README.md), such as the [Out-of-Band](../../features/0434-outofband/README.md) protocol.
 - Start Date: 2020-01-01
 - Tags: [concept](/tags.md#concept)
 
