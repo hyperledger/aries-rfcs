@@ -204,7 +204,7 @@ Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
 Feature | [0593-json-ld-cred-attach](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0593-json-ld-cred-attach) | :new:
-Feature | [PR 0646-bbs-credentials](https://github.com/hyperledger/aries-rfcs/blob/b3a3942ef052039e73cd23d847f42947f8287da2/features/0646-bbs-credentials/README.md) | :new:
+Feature | [0646-bbs-credentials](https://github.com/hyperledger/aries-rfcs/blob/b3a3942ef052039e73cd23d847f42947f8287da2/features/0646-bbs-credentials/README.md) | :new:
 Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0510-dif-pres-exch-attach) | :new:
 
 #### DIDCOMMV2PREP: DIDComm v2 Prep
