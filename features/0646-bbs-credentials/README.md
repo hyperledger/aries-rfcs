@@ -1,7 +1,7 @@
 # 0646: W3C Credential Exchange using BBS+ Signatures
 
 - Authors: [Timo Glastra](mailto:timo@animo.id) (Animo Solutions), [Brent Zundel](mailto:brent.zundel@evernym.com) (Evernym)
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [ACCEPTED](/README.md#accepted)
 - Since: 2021-04-28
 - Status Note:
 - Supersedes:
