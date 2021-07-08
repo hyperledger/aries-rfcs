@@ -1,6 +1,6 @@
 # 0641: Linking binary objects to credentials using hash based references
 
-- Authors: [Berend Sliedrecht](mailto:berend@animo.id)
+- Authors: [Berend Sliedrecht](mailto:berend@animo.id) (Animo Solutions)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2021-04-22
 - Status Note: Proposal
