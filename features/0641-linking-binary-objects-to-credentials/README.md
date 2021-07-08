@@ -190,7 +190,7 @@ When an issuer creates a value in a credential attribute with a prefix of `hl:`,
 
 When a holder receives a credential with externally hosted attachments, the holder SHOULD rehost the attachments herself as to prevent the phone home issue.
 
-When DIDcomm V2 is implemented the attachment decorator will not contain the `sha256` tag anymore and it will be replaced by `hash` to allow for any algorithm. [DIDcomm messaging pull request 161](https://github.com/decentralized-identity/didcomm-messaging/pull/161)
+When DIDcomm V2 is implemented the attachment decorator will not contain the `sha256` tag anymore and it will be replaced by `hash` to allow for any algorithm. [DIDcomm messaging Attachments](https://identity.foundation/didcomm-messaging/spec/#reference-2)
 
 ## Drawbacks
 
