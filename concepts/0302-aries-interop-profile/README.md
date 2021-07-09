@@ -204,7 +204,7 @@ Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
 Feature | [0593-json-ld-cred-attach](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0593-json-ld-cred-attach) | :new:
-Feature | [0646-bbs-credentials](https://github.com/hyperledger/aries-rfcs/blob/b3a3942ef052039e73cd23d847f42947f8287da2/features/0646-bbs-credentials/README.md) | :new:
+Feature | [0646-bbs-credentials](https://github.com/hyperledger/aries-rfcs/blob/7a44f650d3cebf5b3047c1680618978393a497d5/features/0646-bbs-credentials/README.md) | :new:
 Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/7a44f650d3cebf5b3047c1680618978393a497d5/features/0510-dif-pres-exch-attach) | :new:
 
 #### DIDCOMMV2PREP: DIDComm v2 Prep
@@ -240,7 +240,8 @@ The following clarifications have been made to RFCs that make up AIP 2.0:
 - RFC 0434 Out of Band: The RFC status was changed to "Accepted."
 - RFC 0627 Static Peer DIDs: The RFC status was changed to "Accepted."
 - RFC 0441 Present Proof Best Practices: A convention for representing dates to enable simple "older than" predicates was added.
-- RFC 0501 DIF Presentation Exchange Attachment: The RFC Status was changed to "Accepted."
+- RFC 0510 DIF Presentation Exchange Attachment: The RFC Status was changed to "Accepted."
+- RFC 0646 BBS Credentials: The RFC Status was changed to "Accepted."
 
 ### Previous Versions
 
