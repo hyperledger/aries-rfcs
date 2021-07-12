@@ -17,9 +17,9 @@ Many use cases, such as a rental agreement or medical data in a verifiable crede
 
 ## Tutorial
 
-It is already possible to issue and verify base64-encoded attachments in credentials. When a credential is getting larger and larger, it becomes more and more impractical as it has to be signed, which is time consuming and resource intensive. A solution for this is to use the attachments decorator. This decorator creates a way to externalize the attachment from the credential attributes. By allowing this, the singing will be faster and more consistent. However, DIDComm messages SHOULD stay small, like with SMTP or Bluetooth, as specified in [0017: Attachments](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0017-attachments). In the attachments decorator it is also possible to specify a list of URLs where the attachment might be located for download. This list of URLs is accompanied by a `sha256` tag that is a checksum over the file to maintain integrity. This `sha256` tag can only contain a sha256 hash and if another algorithm is preferred then the hashlink MUST be used as the checksum.
+It is already possible to issue and verify base64-encoded attachments in credentials. When a credential is getting larger and larger, it becomes more and more impractical as it has to be signed, which is time consuming and resource intensive. A solution for this is to use the attachments decorator. This decorator creates a way to externalize the attachment from the credential attributes. By allowing this, the signing will be faster and more consistent. However, DIDComm messages SHOULD stay small, like with SMTP or Bluetooth, as specified in [0017: Attachments](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0017-attachments). In the attachments decorator it is also possible to specify a list of URLs where the attachment might be located for download. This list of URLs is accompanied by a `sha256` tag that is a checksum over the file to maintain integrity. This `sha256` tag can only contain a sha256 hash and if another algorithm is preferred then the hashlink MUST be used as the checksum.
 
-When issuing and verifying a credential, messages have to be send between the holder, issuer and verifier. In order to circumvent additional complexity, such as looking at previously sent credentials for the attachment, the attachments decorator, when containing an attachment, MUST be sent at all of the following steps:
+When issuing and verifying a credential, messages have to be sent between the holder, issuer and verifier. In order to circumvent additional complexity, such as looking at previously sent credentials for the attachment, the attachments decorator, when containing an attachment, MUST be sent at all of the following steps:
 
 **Issue Credential V1 & V2**
 
@@ -30,9 +30,9 @@ When issuing and verifying a credential, messages have to be send between the ho
 
 **Present Proof V1 & V2**
 
-1. Presentation
+1. Presentation Proposal
 2. Presentation Request
-3. Present Proposal
+3. Presentation
 
 ### Linking
 
@@ -48,7 +48,7 @@ This example shows the prefix of `hl:` indicating that it is a hashlink and the 
 
 The hashlink also allows for opional metadata, such as; a list of URLs where the attachment is hosted and a MIME-type. These metadata values are encoded in the CBOR data format using the specified algortihm from section 3.1.2 in the [IETF: Cryptographic Hyperlinks](https://tools.ietf.org/html/draft-sporny-hashlink-06).
 
-When a holder receives a credential with hosted attachments, the holder MUST rehost these attachments. This is done in order to prevent the phone-home problem.
+When a holder receives a credential with hosted attachments, the holder MAY rehost these attachments. A holder would do this in order to prevent the phone-home problem. If a holder does not care about this issue, this is use case specific, this can be left out but should be considered.
 
 ### Inlined Attachments as a Credential Attribute
 
@@ -187,8 +187,6 @@ Now that a link has been made between the attachment in the attachments decorato
 ## Reference
 
 When an issuer creates a value in a credential attribute with a prefix of `hl:`, but there is no attachment, a warning SHOULD be thrown.
-
-When a holder receives a credential with externally hosted attachments, the holder SHOULD rehost the attachments herself as to prevent the phone home issue.
 
 When DIDcomm V2 is implemented the attachment decorator will not contain the `sha256` tag anymore and it will be replaced by `hash` to allow for any algorithm. [DIDcomm messaging Attachments](https://identity.foundation/didcomm-messaging/spec/#reference-2)
 
