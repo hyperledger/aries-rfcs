@@ -38,10 +38,11 @@ DIDComm Messaging (and this RFC) requires support for `X25519`, `P-256`, and `P-
 
 ### Content Encryption Algorithms
 
-DIDComm Messaging (and this RFC) requires support for both `XC20P` and `A256GCM`.
+DIDComm Messaging (and this RFC) requires support for both `XC20P` and `A256GCM` for Anoncrypt only and `A256CBC-HS512` for both Authcrypt and Anoncrypt.
 
 - XC20P (XChaCha20Poly1305 - reference in [xchacha draft 03](https://tools.ietf.org/html/draft-irtf-cfrg-xchacha-03))
-- A256GCM (AES-GCM with a 256 bit key - reference in [RFC7518](https://tools.ietf.org/html/rfc7518#section-5.1))
+- A256GCM (AES-GCM with a 256 bits key - reference in [RFC7518 section 5.1](https://tools.ietf.org/html/rfc7518#section-5.1) and more specifically [RFC7518 section 5.3](https://tools.ietf.org/html/rfc7518#section-5.3))
+- A256CBC-HS512 (AES256-CBC+HMAC-SHA512 with a 512 bits key - reference in [ECDH-1PU section 2.1](https://datatracker.ietf.org/doc/html/draft-madden-jose-ecdh-1pu-04#section-2.1) and [RFC 7518 section 5.2.5](https://datatracker.ietf.org/doc/html/rfc7518#section-5.2.5)) 
 
 ### Key Wrapping Algorithms
 
@@ -112,6 +113,21 @@ When the `skid` cannot be revealed in a plain-text JWE header (to avoid potentia
 For applications that don't require this protection, they MAY use `skid` protected header directly without any additional recipient headers.
 
 Applications MUST use either `skid` protected header or `encrypted_skid` recipients header but not both in the same envelope.
+
+## ECDH-1PU key wrapping and common protected headers
+When using authcrypt, the 1PU draft [requires](https://datatracker.ietf.org/doc/html/draft-madden-jose-ecdh-1pu-04#section-2.1) mandates the use of AES_CBC_HMAC_SHA family of content encryption algorithms. To meet this requirement, JWE messages MUST use common `epk`, `apu`, `apv` and `alg` headers for all recipients. They MUST be set in the `protected` headers JWE section.
+
+As per this requirement, the JWE building must first encrypt the payload then use the resulting `tag` as part of the key derivation process when wrapping the `cek`.
+
+To meet this requirement, the above headers must be defined as follows:
+* `epk`: generated once for all recipients. It MUST be of the same type and curve as all recipient keys since kdf with the sender key must be on the same curve.
+ - Example: `"epk": {"kty": "EC","crv": "P-256","x": "BVDo69QfyXAdl6fbK6-QBYIsxv0CsNMtuDDVpMKgDYs","y": "G6bdoO2xblPHrKsAhef1dumrc0sChwyg7yTtTcfygHA"}`
+* `apu`: similar to `skid`, this is the producer (sender) identifier, it MUST contain the `skid` value base64 RawURL (no padding) encoded. Note: this is base64URL(`skid` value).
+ - Example for `skid` mentioned in an earlier [section](#key-ids-kid-and-skid-headers-references-in-the-did-document) above: `ZGlkOmV4YW1wbGU6MTIzNDU2Nzg5YWJjZGVmZ2hpI2tleXMtMQ`
+* `apv`: this represents the recipients' `kid` list. The list must be alphanumerically sorted, `kid` values will then be concatenated with a `.` and the final result MUST be base64 URL (no padding) encoding of the SHA256 hash of concatenated list.
+* `alg`: this is the key wrapping algorithm, ie: `ECDH-1PU+A256KW`.
+
+A final note about `skid` header: since the 1PU draft [does not require](https://datatracker.ietf.org/doc/html/draft-madden-jose-ecdh-1pu-04#section-2.2.1) this header, authcrypt implementations MUST be able to resolve the sender kid from the `APU` header if `skid` is not set.
 
 ## Media Type
 
