@@ -34,11 +34,9 @@ Message delivery is confirmed with a `message_received` acknowledgement, at whic
 
 When live delivery is enabled, messages that arrive when an existing connection exists are delivered over the connection immediately.
 
-
-
 ## Reference
 
-Each message sent should use the ~transport decorator as follows. This has been ommitted from the examples for brevity.
+Each message sent should use the ~transport decorator as follows. This has been omitted from the examples for brevity.
 
 ```json=
 "~transport": {
@@ -71,10 +69,10 @@ Status details about pending messages
     "@type": "https://didcomm.org/messagepickup/2.0/status",
     "recipient_key": "<key for messages>",
     "message_count": 7,
-    "duration_waited": 3600,
-    "newest_time": "2019-05-01 12:00:00Z",
-    "oldest_time": "2019-05-01 12:00:01Z",
-    "total_size": 8096,
+    "longest_waited_seconds": 3600,
+    "newest_received_time": "2019-05-01 12:00:00Z",
+    "oldest_received_time": "2019-05-01 12:00:01Z",
+    "total_bytes": 8096,
     "live_delivery": false
 }
 ```
@@ -129,12 +127,16 @@ After receiving messages, the Recipient sends an ack message like this:
 }
 ```
 
-`message_tag_list` identifiers are tags of each message received, extracted from the encrypted form of each message.
+`message_tag_list` identifiers are tags of each message received. The tag of each message is present in the encrypted form of the message as an artifact of encryption, and is indexed by the mediator. The tag is sufficiently unique within the scope of a recipient to uniquely identify the message.
 
 Upon receipt of this message, the `Mediator` knows that the messages have been received, and can remove them from the collection of queued messages with confidence. The mediator should send an updated `status` message reflecting the changes to the queue.
 
+### Multiple Recipients
+
+If a message arrives at a mediator addressed to multiple recipients, the message should be queued for each recipient independently. If one of the addressed recipients retrieves a message and indicates it has been received, that message must still be held and then removed by the other addressed recipients.
+
 ## Live Mode
-Live mode is the practice of delivering newly arriving messages directly to a connected _Recipient_. It is disabled by default and only activated by the _Recipient_. Messages that arrive when Live Mode is off MUST be stored in the queue for retrieval as described above.
+Live mode is the practice of delivering newly arriving messages directly to a connected _Recipient_. It is disabled by default and only activated by the _Recipient_. Messages that arrive when Live Mode is off MUST be stored in the queue for retrieval as described above. If live mode is active, and the connection is broken, a new inbound connection starts with live mode off.
 
 Live mode must only be enabled when a persistent transport is used, such as websockets.
 
