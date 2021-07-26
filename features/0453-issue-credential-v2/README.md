@@ -75,13 +75,9 @@ For the most part, these states map onto the transitions shown in the choreograp
 
 * The Issuer may indicate in the `offer-credential` message that multiple verifiable credentials are available to be issued.
 * If multiple verifiable credentials are available, the Issuer may indicate in the `issue-credential` message that one or more verifiable credentials are still to be issued.
-* If in the `issue-credential` message the Issuer indicates that one or more verifiable credentials are still to be issued, the Holder must send a `request-credential` message to trigger the sending of the next credential.
-
-> WIP: The following is against what is currently stated in the protocol. If we include this, I think this becomes a major change to the protocol. Further discussion is needed.
-
-> * The Issuer may include multiple verifiable credentials of each requested (by the Holder) format with different content in the `issue-credential` message.
->    * The sending of multiple different verifiable credentials in one `issue-credential` message may not be possible for some verifiable credential formats that require a per request per verifiable credential issued in order to properly cryptographically prepare the verifiable credentials being issued.
-* A Holder may indicate it is not interested in being issued more verifiable credentials by sending a `problem-report` in response to an `issue-credential` message with an indicator that more verifiable credentials are available to be issued.
+* If in the `issue-credential` message the Issuer indicates that one or more verifiable credentials are still to be issued:
+  * The Holder may send a `request-credential` message to trigger the sending of the next credential.
+  * The Holder may indicate it is not interested in being issued more verifiable credentials by sending a `problem-report` to indicate the end of the protocol.
 * The final states for both the prover and verifier is `done` and once reached, no further updates to the protocol instance are expected.
 
 ### Messages
@@ -99,8 +95,6 @@ In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-
 
 This protocol is about the messages that must be exchanged to issue verifiable credentials, NOT about the specifics of particular verifiable credential schemes. [DIDComm attachments](../../concepts/0017-attachments/README.md) are deliberately used in messages to isolate the protocol flow/semantics from the credential artifacts themselves as separate constructs. Attachments allow credential formats and this protocol to evolve through versioning milestones independently instead of in lockstep. Links are provided in the message descriptions below, to describe how the protocol adapts to specific verifiable credential implementations.
 
-> WIP: If we are going to allow issuing multiple verifiable credentials in a single `issue-credential` message, the following paragraph needs to be changed.
-
 The attachment items in the messages are arrays. The arrays are provided to support the issuing of different credential formats (e.g. ZKP, JSON-LD JWT, or other) containing the same data (claims). The arrays are not to be used for issuing credentials with different claims. The `formats` field of each message associates each attachment with the format (and version) of the attachment.
 
 A registry of attachment formats is provided in this RFC within the message type sections. A sub-section should be added for each attachment format type (and optionally, each version). Updates to the attachment type formats does **NOT** impact the versioning of the Issue Credential protocol. Formats are flexibly defined. For example, the first definitions are for `hlindy/cred-abstract@v2.0` et al., assuming that all Hyperledger Indy implementations and ledgers will use a common format. However, if a specific instance of Indy uses a different format, another format value can be documented as a new registry entry.
@@ -110,12 +104,14 @@ Any of the [0017-attachments RFC](../../concepts/0017-attachments/README.md#json
 #### Choreography Diagram
 
 <blockquote>
+
 Note: This diagram was made in draw.io. To make changes:
 
 - upload the drawing HTML from this folder to the [draw.io](https://draw.io) site (Import From...GitHub), 
 - make changes,
 - export the picture and HTML to your local copy of this repo, and
 - submit a pull request.
+
 </blockquote>
 
 The protocol has 3 alternative beginnings:
@@ -192,7 +188,7 @@ Message Format:
     "goal_code": "<goal-code>",
     "replacement_id": "<issuer unique id>",
     "comment": "<some comment>",
-    "multiple_available": true,
+    "multiple_available": "<count>",
     "credential_preview": <json-ld object>,
     "formats" : [
         {
@@ -217,7 +213,7 @@ Description of fields:
 * `goal_code` -- optional field that indicates the goal of the message sender. 
 * `replacement_id` -- an optional field to help coordinate credential replacement. When this is present and matches the `replacement_id` of a previously issued credential, it may be used to inform the recipient that the offered credential is considered to be a replacement to the previous credential. This value is unique to the issuer. It must not be used in a credential presentation.
 * `comment` -- an optional field that provides human readable information about this Credential Offer, so the offer can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
-* `multiple-available` -- an optional field defaulting to false (if absent) indicating that the Issuer has more than one verifiable credential of the indicated type available to the Holder.
+* `multiple-available` -- an optional positive integer field defaulting to 1 (if absent) indicating that the Issuer has `<count>` verifiable credentials of the indicated type available for issuance to the Holder.
 * `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview-credential);
 * `formats` -- contains an entry for each `offers~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `offers~attach` -- an array of attachments that further define the credential being offered. This might be used to clarify which formats or format versions will be issued.
@@ -238,7 +234,7 @@ Linked Data Proof VC Detail  | `aries/ld-proof-vc-detail@v1.0` | [`ld-proof-vc-d
 
 This is a message sent by the potential Holder to the Issuer, to request the issuance of a credential. Where circumstances do not require a preceding Offer Credential message (e.g., there is no cost to issuance that the Issuer needs to explain in advance, and there is no need for cryptographic negotiation), this message initiates the protocol. When using the Hyperledger Indy AnonCreds verifiable credential format, this message can only be sent in response to an `offer-credential` message.
 
-This message can also be used by the Holder after a `issue-credential` message is received where the Issuer has set the `more_available` field to `true`, indicating that the Issuer has more credentials of the same type available to isssue to the Holder.
+This message can also be used by the Holder after a `issue-credential` message is received where the Issuer has set the `more_available` field to a positive integer, indicating that the Issuer has more credentials of the same type available to issue to the Holder.
 
 Message Format:
 
@@ -289,7 +285,7 @@ Linked Data Proof VC Detail  | `aries/ld-proof-vc-detail@v1.0` | [`ld-proof-vc-d
 
 #### Issue Credential
 
-This message contains as an [attached payload](../../concepts/0017-attachments/README.md) the credential being issued. It is sent in response to a valid Request Credential message.
+This message contains verifiable credential being issued as an [attached payload](../../concepts/0017-attachments/README.md). It is sent in response to a valid Request Credential message.
 
 Message Format:
 
@@ -300,7 +296,7 @@ Message Format:
     "goal_code": "<goal-code>",
     "replacement_id": "<issuer unique id>",
     "comment": "<some comment>",
-    "more_available": false,
+    "more_available": "<count>",
     "formats" : [
         {
             "attach_id" : "<attach@id value>",
@@ -323,18 +319,15 @@ Description of fields:
 
 * `replacement_id` -- an optional field that provides an identifier used to manage credential replacement. When this value is present and matches the `replacement_id` of a previously issued credential, this credential may be considered as a replacement for that credential. This value is unique to the issuer. It must not be used in a credential presentation.
 * `comment` -- an optional field that provides human readable information about the issued credential, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
-* `more_available` -- an optional field, defaulting to `false` if not specified, that when `true` signals that the Issuer has more instances of the verifiable credential type for the Holder that the Issuer is willing to issue. The field should not be included if the `request-credential` message indicates that the Holder is using the 2.0 version of the protocol.
+* `more_available` -- an optional field, defaulting to 0 if not specified, that when a positive integer signals that the Issuer has "<count>" more instances of the verifiable credential type for the Holder that the Issuer is willing to issue. The field MUST NOT be included if the `request-credential` message indicates that the Holder is using the 2.0 version of the protocol.
   * If the `offer-credential` message was not used in the protocol instance, receipt of this field is the first indication to the Holder that this is a multiple credential issuance execution of the protocol.
-  * If set to true, the Issuer will move to the `offer-sent` state while it waits on a `request-credential` message from the Holder.
-  * When the Holder receives this message with the field set to `true`, they will move to the `offer-received` state.
+  * If set to a positive integer, the Issuer will move to the `offer-sent` state while it waits on a `request-credential` message from the Holder, and the `~please-ack` decorator MUST NOT be included in the message.
+  * If not present or set to 0, the Issuer will move to the `credential-issued` or `done` state, depending on whether or not the `~please-ack` decorator is included in the message (per the note below).
+  * When the Holder receives this message with the field set to a positive integer, the Holder's state moves to the `offer-received` state.
 * `formats` -- contains an entry for each `credentials~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
-* `credentials~attach` -- an array of attachments containing the issued credentials.
+* `credentials~attach` -- an array of attachments containing the issued credential in the format(s) requested by the Holder.
 
-> WIP: Update the `credentials~attach` field with a note about issuing multiple credentials of the same type(s) in a single message.
-
-> WIP: Does Hyperledger Indy AnonCreds require a new `offer-credential` message be sent? In that case, the next message in the sequence must be an `offer-credential` message from the Issuer.
-
-If the issuer wants an acknowledgement that he issued credential was accepted, this message must be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. Outcome in the context of this protocol means the acceptance of the credential in whole, i.e. the credential is verified and the contents of the credential are acknowledged. Note that this is different from the default behavior as described in [0317: Please ACK Decorator](../0317-please-ack/README.md). It is then best practice for the new Holder to respond with an explicit `ack` message as described in the please ack decorator RFC.
+If the issuer wants an acknowledgement that the last issued credential was accepted, this message must be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. Outcome in the context of this protocol means the acceptance of the credential in whole, i.e. the credential is verified and the contents of the credential are acknowledged. Note that this is different from the default behavior as described in [0317: Please ACK Decorator](../0317-please-ack/README.md). It is then best practice for the new Holder to respond with an explicit `ack` message as described in the please ack decorator RFC. 
 
 ##### Credentials Attachment Registry
 
@@ -425,7 +418,6 @@ See [RFC 0036 Issue Credential, v1.x](../0036-issue-credential/README.md).
 
 ## Unresolved questions
 
-- References to the expected Ack and Problem Report messages should be added.
 - We might need to propose a new MIME type for credential (the same way as .docx is not processed as generic xml). See [this issue](https://github.com/w3c/vc-data-model/issues/421) against the W3C/vc-data-model.
 
 ## Implementations
