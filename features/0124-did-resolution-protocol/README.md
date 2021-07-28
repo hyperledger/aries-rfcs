@@ -1,6 +1,7 @@
 # Aries RFC 0124: DID Resolution Protocol 0.9
 
-- Authors: [Markus Sabadello](markus@danubetech.com)
+- Authors: [Markus Sabadello](markus@danubetech.com), 
+  [Luis Gómez Alonso](luis.gomezalonso@sicpa.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-07-13
 - Status Note: Not implemented, but has been discussed as part of the [Aries DID Resolution](https://github.com/hyperledger/aries-rfcs/issues/101) work.
@@ -83,6 +84,26 @@ resolving DIDs for at least one DID method.
 | awaiting-request     |                 | transition to "resolving"            | *impossible*               |
 | resolving            |                 | *new interaction*                    | transition to "done"       |
 | done                 |                 |                                      |                            |
+
+
+##### States for `requester` role in a failure scenario
+
+|                      | EVENTS:         | send `resolve`                      | receive `resolve_result` |
+| -------------------- | --------------- | ------------------------------------ | -------------------------- |
+| **STATES**           |                 |                                      |                            |
+| preparing-request    |                 | transition to "awaiting-response"    | *different interaction*    |
+| awaiting-response    |                 | *impossible*                         | error reporting       |
+| problem reported                 |                 |                                      |                            |
+
+
+##### States for `resolver` role in a failure scenario
+
+|                      | EVENTS:         | receive `resolve`                   | send `resolve_result`    |
+| -------------------- | --------------- | ------------------------------------ | -------------------------- |
+| **STATES**           |                 |                                      |                            |
+| awaiting-request     |                 | transition to "resolving"            | *impossible*               |
+| resolving            |                 | *new interaction*                    | error reporting       |
+| problem reported                |                 |                                      |                            |
 
 ### Messages
 
@@ -172,6 +193,19 @@ which includes a DID Document plus additional metadata:
 			"attrResponse": { ... }
 		}
 	}
+##### `problem-report` failure message
+
+The `resolve_result` will also report failure messages in case of impossibility to resolve a DID.
+It represents the problem report indicating that the resolver could not resolve the DID, and the reason of the failure.
+It looks like this:
+
+	{
+		"@type": "https://didcomm.org/did_resolution/0.1/resolve_result",
+		"~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
+		"explain_ltxt": "Could not resolve DID did:sov:WRfXPg8dantKVubE3HX8pw not found by resolver xxx",
+            ...
+	}
+
 
 ## Reference
 
