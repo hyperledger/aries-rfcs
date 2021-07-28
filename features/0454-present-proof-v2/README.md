@@ -10,6 +10,11 @@
 
 ## Version Change Log
 
+### 2.1 - Add ability to request multiple presentations
+
+A minor update to add mechanism for a Verifier to request the Prover submit multiple presentations in the "presentation" message(s), each presentation sourced from different credentials that satisfy the presentation request.
+An example use of this capability is an employer (Verifier) requesting multiple "proof of employment" presentations from a job application (Prover), each satisfying the one presentation request.
+
 ### 2.0 - Alignment with [RFC 0453 Issue Credential](../0453-issue-credential-v2/README.md)
 
 - The "formats" field is added to all the messages to link the specific attachment IDs with the verifiable presentation format and version of the attachment.
@@ -28,7 +33,7 @@ We need a standard protocol for a verifier to request a presentation from a prov
 
 ### Name and Version
 
-`present-proof`, version 2.0
+`present-proof`, version 2.1
 
 ### Key Concepts
 
@@ -73,6 +78,9 @@ The following states are defined and included in the state transition table belo
 
 For the most part, these states map onto the transitions shown in both the state transition table above, and in the choreography diagram ([below](#choreography-diagram)) in obvious ways. However, a few subtleties are worth highlighting:
 
+* The Verifier may indicate in the `request-presentation` message that the Prover may provide multiple Presentations (in one or more `presentation` messages). In that case, the Verifier stays in the `request-state` if the Prover indicates in `presentation` messages that additional
+`presentation` messages will be sent. See the messages (below) for how the Verifier and Prover indicate how multiple presentations are to be handled.
+
 * The final states for both the prover and verifier are `done` or `abandoned`, and once reached, no further updates to the protocol instance are expected.
 
 * The `ack-presentation` is sent or not based on the value of `will_confirm` in the `request-presentation`. A verifier may send an `ack-presentation` message in response to the prover including the `~please_ack` decorator in the `presentation` message. Whether an `ack-presentation` is expected or not determines whether the states `presentation-sent` and `presentation-received` are used at all in a protocol instance.
@@ -93,7 +101,7 @@ The present proof protocol consists of these messages:
 
 * `propose-presentation` - Prover to Verifier (optional) - propose a presentation or send a counter-proposal in response to a `request-presentation` message
 * `request-presentation` - Verifier to Prover - request a presentation
-* `presentation` - Prover to Verifier - provide a presentation in response to a request
+* `presentation` - Prover to Verifier - provide a presentation(s) in response to a request
 
 In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-report-problem/README.md) messages are adopted into the protocol for confirmation and error handling.
 
@@ -160,6 +168,7 @@ From a verifier to a prover, the `request-presentation` message describes values
     "goal_code": "<goal-code>",
     "comment": "some comment",
     "will_confirm": true,
+    "present_multiple": false,
     "formats" : [
         {
             "attach_id" : "<attach@id value>",
@@ -182,9 +191,15 @@ Description of fields:
 
 * `goal_code` -- optional field that indicates the goal of the message sender. 
 * `comment` -- a field that provides some human readable information about this request for a presentation.
-* `will_confirm` -- an optional field that defaults to `false` to indicate that the verifier will or will not send a post-presentation confirmation `ack` message
+* `will_confirm` -- an optional field that defaults to `false` to indicate that the Verifier will or will not send a post-presentation confirmation `ack` message.
+* `present_multiple` -- an optional field that defaults to `false` to indicate that the Verifier would like the Prover to send multiple presentations that satisfy the presentation request from different verifiable credentials.
 * `formats` -- contains an entry for each `request_presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation request format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
 * `request_presentations~attach` -- an array of attachments containing the acceptable verifiable presentation requests.
+
+While the `present_multiple` value can be set to true in any instance of the protocol, Verifiers are recommended to use the capability with care
+if the `presentation-request` includes presenting claims from multiple verifiable credential types. Such scenarios can get overly complicated for the Prover
+if they hold multiple instances of each of the requested credential. For example, an employer asking for multiple presentations for a single request for claims
+from both employment and education verifiable credentials held by the Prover.
 
 #### Presentation Request Attachment Registry
 
@@ -203,6 +218,7 @@ This message is a response to a Presentation Request message and contains signed
     "@id": "<uuid-presentation>",
     "goal_code": "<goal-code>",
     "comment": "some comment",
+    "last_presentation": true,
     "formats" : [
         {
             "attach_id" : "<attach@id value>",
@@ -224,12 +240,15 @@ This message is a response to a Presentation Request message and contains signed
 
 Description of fields:
 
+* `goal_code` -- optional field that indicates the goal of the message sender.
 * `comment` -- a field that provides some human readable information about this presentation.
-* `goal_code` -- optional field that indicates the goal of the message sender. 
+* `last_presentation` -- an optional field that defaults to `true` to indicate this is the last presentation message to be sent in satisfying the presentation request. If the value is `false`, the Prover MUST send another presentation message with an additional presentation(s). The Prover's last `presentation` message MUST have a `last_presentation` value of `false` (explicitly or by default). If the `present_multiple` field is absent or `false` in the `request_presentation` message from the Verifier, the `last_presentation` field on the first/only `presentation` message MUST be true (explicitly or by default).
 * `formats` -- contains an entry for each `presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
-* `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
+* `presentations~attach` -- an array of attachments containing the presentation in the requested format(s). If the `present_multiple` field is `true` in the `request_presentation` message from the Verifier, the Prover MAY include multiple presentations of the same format that satisfy the Presentation request from the Verifier.
 
-A prover may include the [`~please_ack` decorator](../0015-acks/README.md#requesting-acks) to request a `ack-presentation` if the verifier has not indicated they will send a `ack-presentation`.
+If the `last_presentation` field is `false`, the Verifier's state SHOULD remain in the `request-sent` state (barring an error), with the expectation that additional `presentation` messages will be coming from the prover. If the `last_presentation` value is `true` (explicitly or by default) the Verifier MUST transition to their next appropriate state.
+
+If the Prover wants an acknowledgement that the presentation was accepted, this message may be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. This is not necessary if the Verifier has indicated it will send an `ack-presentation` using the `will_confirm` property. Outcome in the context of this protocol is the definition of "successful" as described in [Ack Presentation](#ack-presentation). Note that this is different from the default behavior as described in [0317: Please ACK Decorator](../0317-please-ack/README.md). It is then best practice for the new Verifier to respond with an explicit `ack` message as described in the please ack decorator RFC.
 
 #### Presentations Attachment Registry
 
@@ -240,7 +259,7 @@ DIF Presentation Exchange | `dif/presentation-exchange/submission@v1.0` | [`prop
 
 ### Ack Presentation
 
-A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](../0015-acks/README.md). The definition of "successful" from a business sense is up to the verifier.
+A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](../0015-acks/README.md). The definition of "successful" in this protocol means the acceptance of the presentation in whole, i.e. the proof is verified and the contents of the proof are acknowledged. The `ack` message MUST NOT be sent until a `last_presentation` value is `true` (explicitly or by default) in the `presentation` message from the Prover.
 
 ### Problem Report
 
@@ -254,15 +273,13 @@ Details are covered in the [Tutorial](#tutorial) section.
 
 ## Drawbacks
 
-The Indy format of the proposal attachment as proposed above does not allow nesting of logic along the lines of "A and either B or C if D, otherwise A and B", nor cross-credential options such as proposing a legal name issued by either (for example) a specific financial institution or government entity.
-
-The verifiable presentation standardization work being conducted in parallel to this in DIF and the W3C Credentials Community Group (CCG) should be included in at least the `Registry` tables of this document, and ideally used to eliminate the need for presentation format-specific options.
+- None currently noted
 
 ## Rationale and alternatives
 
 ## Prior art
 
-The existing [RFC 0037 Present Proof](../0037-present-proof/README.md) protocol and implementations.
+The previous major version of this protocol is [RFC 0037 Present Proof](../0037-present-proof/README.md) protocol and implementations.
 
 ## Unresolved questions
 

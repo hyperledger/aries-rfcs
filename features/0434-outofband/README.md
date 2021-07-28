@@ -1,12 +1,12 @@
 # Aries RFC 0434: Out-of-Band Protocol 1.1
 
 - Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, [Stephen Curran](swcurran@cloudcompass.ca), [Sam Curren](sam@sovrin.org), [George Aristy](george.aristy@securekey.com)
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [ACCEPTED](/README.md#accepted)
 - Since: 2020-03-01
 - Status Note: This RFC extracts the `invitation` messages from the [DID Exchange](../../features/0023-did-exchange/README.md) protocol (and perhaps [Connection](../../features/0160-connection-protocol/README.md)), and replaces the combined `present_proof/1.0/request` combined with the `~service` decorator to define an ephemeral (connection-less) challenge.
 - Supersedes: Invitation Message in [0160-Connections](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0160-connection-protocol/README.md#0-invitation-to-connect) and Invitation Message in [0023-DID-Exchange](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0023-did-exchange/README.md#0-invitation-to-exchange).
 - Start Date: 2020-03-01
-- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 - URI: `https://didcomm.org/out-of-band/%VER`
 
 ## Summary
@@ -137,7 +137,9 @@ If both the `handshake_protocols` and `requests~attach` items are included in th
 
 ### Reuse Messages
 
-While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `requests~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same public DID of a new `invitation` message, the connection **MAY** be reused. The receiver may choose to not reuse the existing connection for privacy purposes and repeat a handshake protocol to receive a redundant connection. 
+While the _receiver_ is expected to respond with an initiating message from a `handshake_protocols` or `requests~attach` item using an offered service, the receiver may be able to respond by reusing an existing connection. Specifically, if a connection they have was created from an out-of-band `invitation` from the same `services` DID of a new `invitation` message, the connection **MAY** be reused. The receiver may choose to not reuse the existing connection for privacy purposes and repeat a handshake protocol to receive a redundant connection. 
+
+If a message has a service block instead of a DID in the `services` list, you may enable reuse by encoding the key and endpoint of the service block in a [Peer DID numalgo 2](https://identity.foundation/peer-did-method-spec/#generation-method) and using that DID instead of a service block.
 
 If the receiver desires to reuse the existing connection and a `requests~attach` message is present, the receiver **SHOULD** respond to the attached message using the existing connection.
 
@@ -214,7 +216,7 @@ As mentioned in the description above, the `services` item array is intended to 
 
 There are two forms of entries in the `services` item array:
 
-- a public DID that is resolved to retrieve it's DIDDoc service block, and
+- a DID that is resolved to retrieve it's DIDDoc service block, and
 - an inline service block.
 
 The following is an example of a two entry array, one of each form:
@@ -260,7 +262,7 @@ The `problem_report` message **MAY** be adopted by the out-of-band protocol if t
 
 ### Constraints
 
-An existing connection can only be reused based on a public DID in an out-of-band message.
+An existing connection can only be reused based on a DID in the `services` list in an out-of-band message.
 
 ## Reference
 
@@ -340,7 +342,7 @@ The handling of the response is specified by the protocol used.
 
 > To Do: Make sure that the following remains in the DID Exchange/Connections RFCs
 >
-> Any Public DID that expresses support for DIDComm by defining a  [`service`](https://w3c.github.io/did-core/#service-endpoints) that follows the [DIDComm conventions](../0067-didcomm-diddoc-conventions/README.md#service-conventions) serves as an implicit invitation. If an _invitee_ wishes to connect to any Public DID, they need not wait for an out-of-band invitation message. Rather, they can designate their own label and initiate the appropriate protocol (e.g. [0160-Connections](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0160-connection-protocol/README.md#0-invitation-to-connect) or [0023-DID-Exchange](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0023-did-exchange/README.md#0-invitation-to-exchange)) for establishing a connection.
+> Any Published DID that expresses support for DIDComm by defining a  [`service`](https://w3c.github.io/did-core/#service-endpoints) that follows the [DIDComm conventions](../0067-didcomm-diddoc-conventions/README.md#service-conventions) serves as an implicit invitation. If an _invitee_ wishes to connect to any Published DID, they need not wait for an out-of-band invitation message. Rather, they can designate their own label and initiate the appropriate protocol (e.g. [0160-Connections](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0160-connection-protocol/README.md#0-invitation-to-connect) or [0023-DID-Exchange](https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0023-did-exchange/README.md#0-invitation-to-exchange)) for establishing a connection.
 
 ### Standard Out-of-Band Message Encoding
 
@@ -429,14 +431,21 @@ Knowledge is Good
 
 #### URL Shortening
 
-It seems inevitable that the length of some out-of-band message will be too long to produce a useable QR code. Techniques to avoid unusable QR codes have been presented above, including using attachment links for requests, minimizing the routing of the response and eliminating unnecessary whitespace in the JSON. However, at some point a _sender_ may need generate a very long URL. In that case, a URL shortener redirection should be implemented by the sender as follows:
+It seems inevitable that the length of some out-of-band message will be too long to produce a useable QR code. Techniques to avoid unusable QR codes have been presented above, including using attachment links for requests, minimizing the routing of the response and eliminating unnecessary whitespace in the JSON. However, at some point a _sender_ may need generate a very long URL. In that case, a DIDComm specific URL shortener redirection should be implemented by the sender as follows:
 
-- The sender generates and tracks a GUID for each out-of-band message URL.
-- The shortened URL **MUST** include an `id` query parameter, for example:
+- The sender generates a unique URL for each shortened out-of-band message.
+- The unique URL often includes a unique id component as part of the path or in a query parameter.
+- The following URLs are valid examples:
   - `https://example.com/ssi?id=5f0e3ffb-3f92-4648-9868-0d6f8889e6f3`
-  - Note the replacement of the query parameter `oob` with `id` when using shortened URL.
-- On receipt of this form of message, the agent **MUST** perform an HTTP GET to retrieve the associated out-of-band message. The agent **SHOULD** include an `Accept` header requesting the `application/json` MIME type, and the sender **MUST** include a `Content-Type` header specifying `application/json; charset=utf-8`. The sender **MUST** return the invitation in JSON format.
+  - `https://example.com/8E6nEcJ26TTE`
+  - `https://example.com/sky/event/8DcnUW2h8m4jcfPdQ2uMN7/work-laptop-bag/s/u`
+- On receipt of this form of message, the agent **MUST** perform an HTTP GET to retrieve the associated out-of-band message. The agent **SHOULD** include an `Accept` header requesting the `application/json` MIME type.
+- The sender **MAY** include a `Content-Type` header specifying `application/json; charset=utf-8`. If so, the sender **MUST** return the invitation in JSON format.
   - A sender may decide to wait to generate the full invitation until the redirection event of the shortened URL to the full length form dynamic, so that a single QR code can be used for distinct out-of-band messages.
+- The sender **MAY** respond with a `status_code` of `301` or `302` and a `Location` header specifying the long out-of-band message URL.
+  - This redirect option operates like many commercial URL shorteners. 
+- The sender **MUST** invalidate the URL after message retrieval or after an expiration time to prevent unintended parties from retrieving a copy of the message.
+  - A sender **MUST NOT** use a commercial URL shortener unless it supports invalidating the URL.
 
 A usable QR code will always be able to be generated from the shortened form of the URL.
 
@@ -490,7 +499,7 @@ The response message from the receiver is encoded according to the standards of 
 
 ##### Reusing Connections
 
-If an out-of-band invitation has a public DID in the `services` block, and the _receiver_ determines it has previously established a connection with that public DID, the receiver **MAY** send its response on the established connection. See [Reuse Messages](#reuse-messages) for details.
+If an out-of-band invitation has a DID in the `services` block, and the _receiver_ determines it has previously established a connection with that DID, the receiver **MAY** send its response on the established connection. See [Reuse Messages](#reuse-messages) for details.
 
 ##### Receiver Error Handling
 
@@ -510,7 +519,7 @@ If the receiver included a [`~service` decorator](../0056-service-decorator/READ
 
 ## Drawbacks
 
-- Public out-of-band messages (say, a slide at the end of a presentation) all use the same DID. This is not a problem for public institutions, and only provides a minor increase in correlation over sharing an endpoint, key, and routing information in a way that is observable by multiple parties.
+- Publicly displayed out-of-band messages (say, a slide at the end of a presentation) all use the same DID. This is not a problem for institutions, and only provides a minor increase in correlation over sharing an endpoint, key, and routing information in a way that is observable by multiple parties.
 
 ## Prior art
 
@@ -520,7 +529,7 @@ If the receiver included a [`~service` decorator](../0056-service-decorator/READ
 
 ## Unresolved questions
 
-- It would be nice if an existing connection could be reused even if it was not started by an agent with a public DID.
+- None
 
 ## Implementations
 

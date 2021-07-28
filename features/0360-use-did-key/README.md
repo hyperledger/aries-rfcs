@@ -45,7 +45,9 @@ Thus, `8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K` becomes `did:key:z6MkmjY8Gn
 - Start with the original (presumably) base58 ed25519 public key
   - Since we have only a naked public key, we must assume the format
 - Base58 decode the public key to get the hex version
-- Multicodec: Prefix with the algorithm type. In this case, `ED01` as the key type is ed25519.
+- Multicodec: Prefix with the unsigned varint of the algorithm type. In this case, that means prefixing the string with `unsigned_varint(0xed)` (which is `0xed 0x01`) for the key type of ed25519,
+  - the `0xed` is per the [multicodec table](https://github.com/multiformats/multicodec/blob/master/table.csv) (search for  `ed25519`).
+  - Note that unsigned varint handling varies by key type prefix, so don't just assume the same handling (e.g. `code+0x01`) for other key type prefixes. For a broader discussion of this see this [issue comment](https://github.com/w3c-ccg/did-method-key/issues/29#issuecomment-786039356) in the `did:key` repo.
 - Multibase: Base58 encode the result and prefix that with "z" to indicate base58 encoding
 - DID: Prefix that with the DID Method prefix `did:key:`
 

@@ -294,7 +294,7 @@ Description of fields:
 * `formats` -- contains an entry for each `credentials~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `credentials~attach` -- an array of attachments containing the issued credentials.
 
-If the issuer wants an acknowledgement that the issued credential was accepted, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0317: Please ACK Decorator](../0317-please-ack/README.md).
+If the issuer wants an acknowledgement that he issued credential was accepted, this message must be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. Outcome in the context of this protocol means the acceptance of the credential in whole, i.e. the credential is verified and the contents of the credential are acknowledged. Note that this is different from the default behavior as described in [0317: Please ACK Decorator](../0317-please-ack/README.md). It is then best practice for the new Holder to respond with an explicit `ack` message as described in the please ack decorator RFC.
 
 ##### Credentials Attachment Registry
 
@@ -334,7 +334,7 @@ The optional `mime-type` advises the issuer how to render a binary attribute, to
 The mandatory `value` holds the attribute value:
 
 * if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
-* if `mime-type` is not null, then `value` is always a base64-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64-decoding.
+* if `mime-type` is not null, then `value` is always a base64url-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64url-decoding.
 
 ## Threading
 
@@ -371,7 +371,7 @@ None documented
 ## Rationale and alternatives
 
 - Attention should be paid by the Aries community to other credential issuance protocols being proposed/used in other communities to ensure this RFC could support those protocols.
-  - Digital Bazaar has proposed the [Credential Handler API (CHAPI)](https://w3c-ccg.github.io/credential-handler-api/) protocol that is being considered by the [W3C Credentials Community Group](https://www.w3.org/community/credentials/).
+- Digital Bazaar has proposed the [Credential Handler API (CHAPI)](https://w3c-ccg.github.io/credential-handler-api/) protocol that is being considered by the [W3C Credentials Community Group](https://www.w3.org/community/credentials/).
 
 ## Prior art
 
@@ -380,7 +380,6 @@ See [RFC 0036 Issue Credential, v1.x](../0036-issue-credential/README.md).
 ## Unresolved questions
 
 - References to the expected Ack and Problem Report messages should be added.
-- The ['~please-ack` decorator](../0317-please-ack/README.md) needs to move to Accepted so that it is appropriate to be referenced here.
 - We might need to propose a new MIME type for credential (the same way as .docx is not processed as generic xml). See [this issue](https://github.com/w3c/vc-data-model/issues/421) against the W3C/vc-data-model.
 
 ## Implementations
