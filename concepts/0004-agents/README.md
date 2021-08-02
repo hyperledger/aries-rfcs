@@ -503,4 +503,4 @@ Name / Link | Implementation Notes
 [Verity](https://www.evernym.com/products/) | Commercially licensed enterprise agent, SaaS or on-prem.
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 
 [Pico Labs](http://picolabs.io/) | [Pico Agents](https://github.com/Picolab/G2S) protocols: connections, trust_ping, basicmessage, routing
- 
+[Rust Agent](https://github.com/tatmanblue/rust-aries-agent) | Rust implementation of a framework for building agents of all types
