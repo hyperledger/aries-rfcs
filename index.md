@@ -111,6 +111,7 @@
 * [0511: Credential-Manifest Attachment format for requesting and presenting credentials](features/0511-dif-cred-manifest-attach/README.md) (2020-07-22 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 * [0559: Privacy-Preserving Proof of Uniqueness](concepts/0559-pppu/README.md) (2020-10-21 &mdash; [`concept`](/tags.md#concept))
 * [0566: Issuer-Hosted Custodial Agents](concepts/0566-issuer-hosted-custodidal-agents/README.md) (2020-11-16 &mdash; [`concept`](/tags.md#concept))
+* [0641: Linking binary objects to credentials using hash based references](features/0641-linking-binary-objects-to-credentials/README.md) (2021-04-22 &mdash; [`feature`](/tags.md#feature) [`credentials`](/tags.md#credentials))
 
 ## [RETIRED](README.md#retired)
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2020-10-14, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
