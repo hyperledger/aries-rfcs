@@ -1,4 +1,4 @@
-# 0696: Forget Me
+# 0697: Forget Me
 
 - Authors: [Sam Curren](telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
