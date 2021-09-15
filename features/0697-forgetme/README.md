@@ -18,9 +18,9 @@ Legislation requires businesses and organizations to forget personal details of 
 There are limits to what must be deleted - discussion of such is outside the scope of this protocol. 
 
 ## Scope
-There a wide variety of compliant 'forget me' flows. This one is intended to be simple. A request to forget is a request to forget all data completely, rather than a nuanced approach. It is the expectation that after executing this protocol, all data will be deleted (see details below) and the relationship fully terminated.
+There a wide variety of compliant 'forget me' flows. This one is intended to be simple. A request to forget is a request to forget all data completely, rather than a nuanced approach. It is the expectation that after executing this protocol, all data will be deleted (see details below) and the relationship fully terminated. Any  Peer DIDs are deleted. The interaction history with any Ledger based DIDs is also deleted.
 
-More nuanced needs should produce a new version of this protocol or a new protocol.
+More nuanced needs should produce a new version of this protocol or a new protocol. See Unresolved Questions and Future Work below for more discussion.
 
 
 ## Tutorial
@@ -28,6 +28,7 @@ More nuanced needs should produce a new version of this protocol or a new protoc
 ### Roles
 
 **Data Holder** - The agent that has data related to the _subject_.
+
 **Subject** - The agent who is picking up messages.
 
 ### Flow
@@ -48,7 +49,7 @@ Sent by the _subject_ to the _data_holder_ to request a `status` message.
 }
 ```
 
-**legal_basis**: String. Must be one of [GDPR, CCPA]
+**legal_basis**: String. Must be one of [GDPR, CCPA, VOLUNTARY]
 (others may be added by updating this protocol)
 
 ### Removal Receipt
@@ -75,9 +76,13 @@ Sent by _data_holder_ to confirm the forget me request.
 }
 ```
 **removed**: List of strings, each the name of an item removed
+
 **remaining**: List of items not yet removed, with details about future removal.
+
 **removal_strategy**: String, one of ["at_date","at_condition"].
+
 **removal_date**: Datestring, in UTC format YYYYMMDD. Required when _removal_strategy_ is `at_date`.
+
 **removal_condition**: Human readable description of the removal condition. Required when _removal_strategy_ is `at_condition`.
 
 The _removal_date_ and _removal_condition_ should only be included when required, and should be ignored by the message recipient if inappropriately included.
@@ -86,9 +91,13 @@ The _removal_date_ and _removal_condition_ should only be included when required
 
 None
 
-## Unresolved questions
+## Unresolved Questions and Future Work
 
-- 
+The issues and questions here were discussed in the creation of this protocol, but left here as future work. The tradeoff is a simpler protocol that is much easier to implement. The following issues can be addressed in a future version of this protocol or another protocol entirely.
+
+- How should multi-party relationships handle a Forget Me request? What nuances are important in this situation?
+- What about removal strategies where the information can not be deleted for a valid legal reason?
+- What happens when the data holder ignores the `removal_request`?
 
 ## Implementations
 
