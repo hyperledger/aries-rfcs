@@ -1,4 +1,4 @@
-# Aries RFC 0698: Push Notifications Protocol 1.0
+# Aries RFC 0699: Push Notifications Protocol 1.0
 
 - Authors: [Timo Glastra](mailto:timo@animo.id) (Animo Solutions) & [Berend Sliedrecht](mailto:berend@animo.id) (Animo Solutions)
 - Status: [PROPOSED](/README.md#proposed)
