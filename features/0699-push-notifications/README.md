@@ -62,7 +62,7 @@ When a notification-receiver wants to receive push notifications from the notifi
 
 Message to set the device info using the native device token for push notifications.
 
-```jsonc
+```json
 {
   "@type": "https://didcomm.org/push-notifications-native/1.0/set-device-info",
   "@id": "<UUID>",
@@ -82,7 +82,7 @@ It is important to note that the set device info message can be used to set, upd
 
 When a notification-receiver wants to get their push-notification configuration, they can send the following message:
 
-```jsonc
+```json
 {
   "@type": "https://didcomm.org/push-notifications-native/1.0/get-device-info",
   "@id": "<UUID>"
@@ -93,7 +93,7 @@ When a notification-receiver wants to get their push-notification configuration,
 
 Response to the get device info:
 
-```jsonc
+```json
 {
   "@type": "https://didcomm.org/push-notifications-native/1.0/device-info",
   "device_token": "<DEVICE_TOKEN>",
@@ -112,11 +112,12 @@ In addition, the [`ack`](https://github.com/hyperledger/aries-rfcs/blob/08653f21
 
 ### Sending Push Notifications
 
-When an agent wants to send a push notification to another agent, the payload of the push notifications MUST include the `@type` property to indicate the message is sent by the notification-sender. Guidelines on notification messages are not defined.
+When an agent wants to send a push notification to another agent, the payload of the push notifications MUST include the `@type` property, and COULD include the `message_tag` property, to indicate the message is sent by the notification-sender. Guidelines on notification messages are not defined.
 
-```jsonc
+```json
 {
   "@type": "https://didcomm.org/push-notifications-native",
+  "message_tag": "<MESSAGE_TAG>",
   ...
 }
 ```
@@ -124,6 +125,7 @@ When an agent wants to send a push notification to another agent, the payload of
 Description of the fields:
 
 - `@type` -- Indicator of what kind of notification it is. (This could help the notification-receiver with parsing if a notification comes from another agent, for example)
+- `message_tag` -- Optional field to connect the push notification to a DIDcomm message. As defined in [0334: jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0334-jwe-envelope) or [0019: encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope).
 
 ## Drawbacks
 
