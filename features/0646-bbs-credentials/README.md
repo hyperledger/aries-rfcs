@@ -103,15 +103,15 @@ Below is a complete example of a Verifiable Credential with BBS+ linked data pro
 
 While the process of creating credentials with BBS+ signatures is defined in specifications outside of Aries, the process of exchanging credentials with BBS+ signatures is defined within Aries.
 
-Credentials with BBS+ signatures can be exchanged by following [RFC 0453: Issue Credential Protocol 2.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0453-issue-credential-v2). The Issue Credential 2.0 provides a registry of attachment formats that can be used for credential exchange. Currently, agents are expected to use the format as described in RFC 0593 (see below).
+Credentials with BBS+ signatures can be exchanged by following [RFC 0453: Issue Credential Protocol 2.0](https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2). The Issue Credential 2.0 provides a registry of attachment formats that can be used for credential exchange. Currently, agents are expected to use the format as described in RFC 0593 (see below).
 
-> NOTE: Once [Credential Manifest](https://identity.foundation/credential-manifest/) v1.0 is released, RFC 0593 is expected to be deprecated and replaced by an updated version of [RFC 0511: Credential-Manifest Attachment format](https://github.com/hyperledger/aries-rfcs/blob/master/features/0511-dif-cred-manifest-attach/README.md)
+> NOTE: Once [Credential Manifest](https://identity.foundation/credential-manifest/) v1.0 is released, RFC 0593 is expected to be deprecated and replaced by an updated version of [RFC 0511: Credential-Manifest Attachment format](https://github.com/hyperledger/aries-rfcs/blob/main/features/0511-dif-cred-manifest-attach/README.md)
 
 ##### 0593: JSON-LD Credential Attachment format
 
-[RFC 0593: JSON-LD Credential Attachment format for requesting and issuing credentials](https://github.com/hyperledger/aries-rfcs/blob/master/features/0593-json-ld-cred-attach/README.md) defines a very simple, feature-poor attachment format for issuing JSON-LD credentials.
+[RFC 0593: JSON-LD Credential Attachment format for requesting and issuing credentials](https://github.com/hyperledger/aries-rfcs/blob/main/features/0593-json-ld-cred-attach/README.md) defines a very simple, feature-poor attachment format for issuing JSON-LD credentials.
 
-The only requirement for exchanging BBS+ credentials, in addition to the requirements as specified in [Creating BBS+ Credentials](#creating-bbs-credentials) and [RFC 0593](https://github.com/hyperledger/aries-rfcs/blob/master/features/0593-json-ld-cred-attach/README.md), is the `options.proofType` in the [`ld-proof-vc-detail`](https://github.com/hyperledger/aries-rfcs/blob/master/features/0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format) MUST be `BbsBlsSignature2020`.
+The only requirement for exchanging BBS+ credentials, in addition to the requirements as specified in [Creating BBS+ Credentials](#creating-bbs-credentials) and [RFC 0593](https://github.com/hyperledger/aries-rfcs/blob/main/features/0593-json-ld-cred-attach/README.md), is the `options.proofType` in the [`ld-proof-vc-detail`](https://github.com/hyperledger/aries-rfcs/blob/main/features/0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format) MUST be `BbsBlsSignature2020`.
 
 ### Presenting Derived Credentials
 
@@ -157,13 +157,13 @@ Same as with [Transforming Blank Node Identifiers](#transforming-blank-node-iden
 
 #### Exchanging Derived Credentials
 
-The presentation of credentials with BBS+ signatures can be exchanged by following [RFC 0454: Present Proof Protocol 2.0](https://github.com/hyperledger/aries-rfcs/blob/master/features/0454-present-proof-v2). The Present Proof Protocol 2.0 provides a registry of attachment formats that can be used for presentation exchange. Although agents can use any attachment format they want, agents are expected to use the format as described in RFC 0510 (see below).
+The presentation of credentials with BBS+ signatures can be exchanged by following [RFC 0454: Present Proof Protocol 2.0](https://github.com/hyperledger/aries-rfcs/blob/main/features/0454-present-proof-v2). The Present Proof Protocol 2.0 provides a registry of attachment formats that can be used for presentation exchange. Although agents can use any attachment format they want, agents are expected to use the format as described in RFC 0510 (see below).
 
 ##### 0510: Presentation-Exchange Attachment format
 
-[RFC 0510: Presentation-Exchange Attachment format for requesting and presenting proofs](https://github.com/hyperledger/aries-rfcs/blob/master/features/0510-dif-pres-exch-attach/README.md) defines an attachment format based on the [DIF Presentation Exchange](https://identity.foundation/presentation-exchange/) specification.
+[RFC 0510: Presentation-Exchange Attachment format for requesting and presenting proofs](https://github.com/hyperledger/aries-rfcs/blob/main/features/0510-dif-pres-exch-attach/README.md) defines an attachment format based on the [DIF Presentation Exchange](https://identity.foundation/presentation-exchange/) specification.
 
-The following part of this section describes the requirements of exchanging derived credentials using the Presentation Exchange Attachment format, in addition to the requirements as specified above and in [RFC 0510](https://github.com/hyperledger/aries-rfcs/blob/master/features/0510-dif-pres-exch-attach/README.md).
+The following part of this section describes the requirements of exchanging derived credentials using the Presentation Exchange Attachment format, in addition to the requirements as specified above and in [RFC 0510](https://github.com/hyperledger/aries-rfcs/blob/main/features/0510-dif-pres-exch-attach/README.md).
 
 The Presentation Exchange MUST include the `ldp_vp` [Claim Format Designation](https://identity.foundation/presentation-exchange/#claim-format-designations). In turn the `proof_type` property of the `ldp_vp` claim format designation MUST include the `BbsBlsSignatureProof2020` proof type.
 
@@ -259,12 +259,12 @@ It was then further refined by
 [Camenisch, Drijvers, and Lehmann in section 4.3 of this paper from 2016](https://eprint.iacr.org/2016/663.pdf).
 
 In 2019, Evernym and Sovrin proposed [BBS+ Signatures as the foundation for Indy Anoncreds 2.0](https://github.com/hyperledger/ursa-docs/tree/main/specs/anoncreds2),
-which in conjunction with [Rich Schemas](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
+which in conjunction with [Rich Schemas](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas)
 addressed a similar set of goals and capabilities as those addressed here, but were ultimately too heavy a solution.
 
 In 2020, Mattr provided [a draft specification for BBS+ LD-Proofs](https://w3c-ccg.github.io/ldp-bbs2020/) that comply with [the Linked Data proof specification](https://w3c-ccg.github.io/ld-proofs/) in the W3C Credentials Community Group. The authors acknowledged that their approach did not support two key Anoncreds features: proof predicates and link secrets.
 
-[Aries RFC 593](https://github.com/hyperledger/aries-rfcs/tree/master/features/0593-json-ld-cred-attach) describes the JSON-LD credential format.
+[Aries RFC 593](https://github.com/hyperledger/aries-rfcs/tree/main/features/0593-json-ld-cred-attach) describes the JSON-LD credential format.
 
 ## Unresolved questions
 

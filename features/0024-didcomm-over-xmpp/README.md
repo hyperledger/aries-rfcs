@@ -4,7 +4,7 @@
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-06-14
 - Status Note:  , moving from Indy to Aries.
-- Supersedes: [Indy DIDComm-over-XMPP](https://github.com/Oskar-van-Deventer/indy-hipe/tree/master/text/didcom-over-xmpp)
+- Supersedes: [Indy DIDComm-over-XMPP](https://github.com/Oskar-van-Deventer/indy-hipe/tree/main/text/didcom-over-xmpp)
 - Start Date: 2019-04-23
 - Tags: [feature](/tags.md#feature)
 
@@ -40,7 +40,7 @@ The DIDComm-over-XMPP feature provides an architecture for the transport of DIDC
 
 ### DIDComm
 
-The DIDComm wire message format is specified in [HIPE 0028-wire-message-format](https://github.com/hyperledger/indy-hipe/tree/master/text/0028-wire-message-format). It can carry among others the DIDComm connection protocol, as specified in [Hyperledger Indy Hipe 0031](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol). The purpose of the latter protocol is to set up a trusted electronic relationship between two parties (natural person, legal person, ...). Technically, the trust relationship involves the following
+The DIDComm wire message format is specified in [HIPE 0028-wire-message-format](https://github.com/hyperledger/indy-hipe/tree/main/text/0028-wire-message-format). It can carry among others the DIDComm connection protocol, as specified in [Hyperledger Indy Hipe 0031](https://github.com/hyperledger/indy-hipe/tree/main/text/0031-connection-protocol). The purpose of the latter protocol is to set up a trusted electronic relationship between two parties (natural person, legal person, ...). Technically, the trust relationship involves the following
 
 - Univocal identification of the parties within the context of the relationship
 - Secure exchange of keys to encrypt and verify messages between agents of the parties
@@ -128,7 +128,7 @@ The disadvantage of this method is that it creates a strong correlation point, w
 
 *Editor's note: More advantages or disadvantages?*
 
-A typical application of Method 1 is when there is an ongoing human-to-human (or human-to-bot) chat session that uses XMPP and the two parties what to set up a pairwise DID relationship. One can skip Step 0 "Invitation to Connect" ([HIPE 0031](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol)) and immediately perform Step 1 "Connection Request".
+A typical application of Method 1 is when there is an ongoing human-to-human (or human-to-bot) chat session that uses XMPP and the two parties what to set up a pairwise DID relationship. One can skip Step 0 "Invitation to Connect" ([HIPE 0031](https://github.com/hyperledger/indy-hipe/tree/main/text/0031-connection-protocol)) and immediately perform Step 1 "Connection Request".
 
 **Method 2: Random userpart**
 
