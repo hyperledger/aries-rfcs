@@ -20,7 +20,7 @@ To guarantee fairness, it is often important to pick one party in a protocol to 
 ### Name and Version
 
 This defines the `coinflip` protocol, version 1.x, as identified by the
-following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/uris.md#piuri):
+following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/uris.md#piuri):
 
     https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0
     

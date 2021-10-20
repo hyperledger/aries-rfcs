@@ -62,7 +62,7 @@ The most important concepts to introduce about these conventions are the followi
 #### Message Type
 
 Every message contains a message type which allows the context of the message to be established and therefore process the content,
-see [here](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0020-message-types/README.md) for more information. It is also important to
+see [here](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0020-message-types/README.md) for more information. It is also important to
 note that in DIDComm, the message identification does not just identify the message, the message type also identifies the associated protocol. These
 protocols are essentially a group of related messages that are together required to achieve some form of multi-step flow see [here](../0003-protocols/README.md) for more information.
 

@@ -4,7 +4,7 @@
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-05-04
 - Status Note:  
-- Supersedes: [INDY 0028 Wire Level Format](https://github.com/hyperledger/indy-hipe/tree/master/text/0028-wire-message-format)
+- Supersedes: [INDY 0028 Wire Level Format](https://github.com/hyperledger/indy-hipe/tree/main/text/0028-wire-message-format)
 - Start Date: 2018-07-10 (approximate, backdated)
 - Tags: [feature](/tags.md#feature)
 
