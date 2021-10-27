@@ -57,7 +57,7 @@ Sent by the _recipient_ to the _mediator_ to request a `status` message.
 }
 ```
 
-- `recipient_key` is optional. When specified only return status related to that recipient key. This allows the _Recipient_ to discover if any messages are in the queue that were sent to a specific key.
+- `recipient_key` is optional. When specified only return status related to that recipient key. This allows the _Recipient_ to discover if any messages are in the queue that were sent to a specific key. You can find more details about `recipient_key` and how it's managed in [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/blob/master/features/0211-route-coordination/README.md).
 
 ### Status
 
