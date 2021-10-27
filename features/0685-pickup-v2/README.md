@@ -21,22 +21,29 @@ This protocol is the explicit companion to the implicit method of picking up mes
 
 ### Roles
 
-**Mediator** - The agent that has messages waiting for pickup by the _recipient_.
+**Mediator** - The agent that has messages waiting for pickup by the _Recipient_.
+
 **Recipient** - The agent who is picking up messages.
 
 ### Flow
 
-`status` can be used to see how many messages are waiting. The Recipient sends a `status-request` message to the Mediator to request that a status is sent.
+The `status-request` message is sent by the _Recipient_ to the _Mediator_ to query how many messages are pending.
 
-Messages are retrieved when the Recipient  sends a `delivery_request` message to the Mediator.
+The `status` message is the response to `status-request` to communicate the state of the message queue.
 
-Message delivery is confirmed with a `message_received` acknowledgement, at which point the message can be removed from the mediator's queue.
+The `delivery-request` message is sent by the _Recipient_ to request delivery of pending messages.
 
-When live delivery is enabled, messages that arrive when an existing connection exists are delivered over the connection immediately.
+The `message-received` message is sent by the _Recipient_ to confirm receipt of delivered messages, 
+prompting the _Mediator_ to clear messages from the queue.
+
+The `live-delivery-change` message is used to set the state of `live_delivery`. 
+
+- When Live Mode is enabled, messages that arrive when an existing connection exists are delivered over the connection immediately, 
+rather than being pushed to the queue. See [Live Mode](#live-mode) for more details.
 
 ## Reference
 
-Each message sent should use the ~transport decorator as follows, which has been adopted from [RFC 0092 transport return route](/features/0092-transport-return-route/README.md) protocol. This has been omitted from the examples for brevity.
+Each message sent MUST use the `~transport` decorator as follows, which has been adopted from [RFC 0092 transport return route](/features/0092-transport-return-route/README.md) protocol. This has been omitted from the examples for brevity.
 
 ```json=
 "~transport": {
@@ -44,10 +51,12 @@ Each message sent should use the ~transport decorator as follows, which has been
 }
 ```
 
+## Message Types
 
 ### StatusRequest
 
-Sent by the _recipient_ to the _mediator_ to request a `status` message.
+Sent by the _Recipient_ to the _Mediator_ to request a `status` message.
+#### Example:
 
 ```json=
 {
@@ -57,11 +66,13 @@ Sent by the _recipient_ to the _mediator_ to request a `status` message.
 }
 ```
 
-- `recipient_key` is optional. When specified only return status related to that recipient key. This allows the _Recipient_ to discover if any messages are in the queue that were sent to a specific key. You can find more details about `recipient_key` and how it's managed in [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/blob/master/features/0211-route-coordination/README.md).
+`recipient_key` is optional. When specified, the _Mediator_ MUST only return status related to that recipient key. This allows the _Recipient_ to discover if any messages are in the queue that were sent to a specific key. You can find more details about `recipient_key` and how it's managed in [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/blob/master/features/0211-route-coordination/README.md).
 
 ### Status
 
-Status details about waiting messages
+Status details about waiting messages.
+
+#### Example:
 
 ```json=
 {
@@ -77,20 +88,27 @@ Status details about waiting messages
 }
 ```
 
-`message_count` is the only required attribute. The others may be present if offered by the _message_holder_.
+`message_count` is the only REQUIRED attribute. The others MAY be present if offered by the _Mediator_.
 
 `longest_waited_seconds` is in seconds, and is the longest delay of any message in the queue.
 
 `total_bytes` represents the total size of all messages.
 
-If a `recipient_key` was specified in the status-request message, the matching value MUST be specified in the `recipient_key` attribute of the status message.
+If a `recipient_key` was specified in the `status-request` message, the matching value MUST be specified 
+in the `recipient_key` attribute of the status message.
 
 `live_delivery` state is also indicated in the status message. 
 
-### Delivery Request
+> Note: due to the potential for confusing what the actual state of the message queue
+> is, a status message MUST NOT be put on the pending message queue and MUST only
+> be sent when the _Recipient_ is actively connected (HTTP request awaiting
+> response, WebSocket, etc.).
+
+### DeliveryRequest
 
 A request from the _Recipient_ to the _Mediator_ to have waiting messages delivered. 
-Examples:
+
+#### Examples:
 
 ```json=
 {
@@ -109,17 +127,24 @@ Examples:
 ```
 
 
-After receipt of this message, the mediator should deliver up to the limit indicated. 
+`limit` is a REQUIRED attribute, and after receipt of this message, the _Mediator_ SHOULD deliver up to the `limit` indicated. 
 
-`recipient_key` is optional. When specified only return messages sent to that recipient key.
+> Note: due to the nature of HTTP, the _Mediator_ is only able to send a single message at a time, if the `delivery-request` is sent over HTTP.
+> If the _Recipient_ requests more than one message over HTTP, the _Mediator_ will only be able to send one message in response. 
+> This has the potential to result in seemingly unexpected behavior and is something to be aware of.
 
-If no messages are available to be sent, a status message MUST be sent immediately.
+`recipient_key` is optional. When specified, the _Mediator_ MUST only return messages sent to that recipient key.
 
-Delivered messages MUST not be deleted until delivery is acknowledged by a `messages-received` message.
+If no messages are available to be sent, a `status` message MUST be sent immediately.
 
+Delivered messages MUST NOT be deleted until delivery is acknowledged by a `messages-received` message.
 
-### Message Received
-After receiving messages, the Recipient sends an ack message like this:
+### MessagesReceived
+After receiving messages, the _Recipient_ sends an ack message indiciating 
+which messages are safe to clear from the queue.
+
+#### Example:
+
 ```json=
 {
     "@type": "https://didcomm.org/messagepickup/2.0/messages-received",
@@ -127,29 +152,32 @@ After receiving messages, the Recipient sends an ack message like this:
 }
 ```
 
-`message_tag_list` identifiers are tags of each message received. The tag of each message is present in the encrypted form of the message as an artifact of encryption, and is indexed by the mediator. The tag is sufficiently unique within the scope of a recipient to uniquely identify the message.
+`message_tag_list` is a list of tags of each message received. The tag of each message is present in the encrypted form of the message as an artifact of encryption, and is indexed by the mediator. The tag is sufficiently unique within the scope of a recipient to uniquely identify the message.
 
-Upon receipt of this message, the `Mediator` knows that the messages have been received, and can remove them from the collection of queued messages with confidence. The mediator should send an updated `status` message reflecting the changes to the queue.
+Upon receipt of this message, the _Mediator_ knows which messages have been received, and can remove them from the collection of queued messages with confidence. The mediator SHOULD send an updated `status` message reflecting the changes to the queue.
 
 ### Multiple Recipients
 
-If a message arrives at a mediator addressed to multiple recipients, the message should be queued for each recipient independently. If one of the addressed recipients retrieves a message and indicates it has been received, that message must still be held and then removed by the other addressed recipients.
+If a message arrives at a _Mediator_ addressed to multiple _Recipients_, the message MUST be queued for each _Recipient_ independently. If one of the addressed _Recipients_ retrieves a message and indicates it has been received, that message MUST still be held and then removed by the other addressed _Recipients_.
 
 ## Live Mode
-Live mode is the practice of delivering newly arriving messages directly to a connected _Recipient_. It is disabled by default and only activated by the _Recipient_. Messages that arrive when Live Mode is off MUST be stored in the queue for retrieval as described above. If live mode is active, and the connection is broken, a new inbound connection starts with live mode off.
+Live mode is the practice of delivering newly arriving messages directly to a connected _Recipient_. It is disabled by default and only activated by the _Recipient_. Messages that arrive when Live Mode is off MUST be stored in the queue for retrieval as described above. If Live Mode is active, and the connection is broken, a new inbound connection starts with Live Mode disabled.
 
-Messages already in the queue are not affected by live mode - they must still be requested with `delivery-request` messages.
+Messages already in the queue are not affected by Live Mode - they must still be requested with `delivery-request` messages.
 
-Live mode must only be enabled when a persistent transport is used, such as websockets.
+Live mode MUST only be enabled when a persistent transport is used, such as WebSockets.
 
 _Recipients_ have three modes of possible operation for message delivery with various abilities and level of development complexity:
 
 1. Never activate live mode. Poll for new messages with a `status_request` message, and retrieve them when available.
 2. Retrieve all messages from queue, and then activate Live Mode. This simplifies message processing logic in the _Recipient_.
-3. Activate Live Mode immediately upon connecting to the _Mediator_. Retrieve messages from the queue as possible. When receiving a message delivered live, the Queue may be queried for any waiting messages delivered to the same key for processing.
+3. Activate Live Mode immediately upon connecting to the _Mediator_. Retrieve messages from the queue as possible. When receiving a message delivered live, the queue may be queried for any waiting messages delivered to the same key for processing.
 
 ### Live Mode Change
-Live Mode is changed with a `live-delivery-change` message as follows:
+Live Mode is changed with a `live-delivery-change` message.
+
+#### Example:
+
 ```json=
 {
     "@type": "https://didcomm.org/messagepickup/2.0/live-delivery-change",
