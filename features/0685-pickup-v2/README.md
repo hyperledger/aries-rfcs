@@ -26,7 +26,7 @@ This protocol is the explicit companion to the implicit method of picking up mes
 
 ### Flow
 
-status can be used to see how many messages are pending. The Recipient sends a StatusRequest message to the Mediator.
+`status` can be used to see how many messages are waiting. The Recipient sends a `status-request` message to the Mediator to request that a status is sent.
 
 Messages are retrieved when the Recipient  sends a `delivery_request` message to the Mediator.
 
@@ -61,7 +61,7 @@ Sent by the _recipient_ to the _mediator_ to request a `status` message.
 
 ### Status
 
-Status details about pending messages
+Status details about waiting messages
 
 ```json=
 {
@@ -138,16 +138,18 @@ If a message arrives at a mediator addressed to multiple recipients, the message
 ## Live Mode
 Live mode is the practice of delivering newly arriving messages directly to a connected _Recipient_. It is disabled by default and only activated by the _Recipient_. Messages that arrive when Live Mode is off MUST be stored in the queue for retrieval as described above. If live mode is active, and the connection is broken, a new inbound connection starts with live mode off.
 
+Messages already in the queue are not affected by live mode - they must still be requested with `delivery-request` messages.
+
 Live mode must only be enabled when a persistent transport is used, such as websockets.
 
 _Recipients_ have three modes of possible operation for message delivery with various abilities and level of development complexity:
 
 1. Never activate live mode. Poll for new messages with a `status_request` message, and retrieve them when available.
 2. Retrieve all messages from queue, and then activate Live Mode. This simplifies message processing logic in the _Recipient_.
-3. Activate Live Mode immediately upon connecting to the _Mediator_. Retrieve messages from the queue as possible. When receiving a message delivered live, the Queue may be queried for any pending messages delivered to the same key for processing.
+3. Activate Live Mode immediately upon connecting to the _Mediator_. Retrieve messages from the queue as possible. When receiving a message delivered live, the Queue may be queried for any waiting messages delivered to the same key for processing.
 
 ### Live Mode Change
-Live Mode is changed with a `live_delivery_change` message as follows:
+Live Mode is changed with a `live-delivery-change` message as follows:
 ```json=
 {
     "@type": "https://didcomm.org/messagepickup/2.0/live-delivery-change",
