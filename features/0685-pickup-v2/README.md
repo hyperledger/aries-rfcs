@@ -81,7 +81,7 @@ Status details about pending messages
 
 `longest_waited_seconds` is in seconds, and is the longest delay of any message in the queue.
 
-`total_size` is in bytes.
+`total_bytes` represents the total size of all messages.
 
 If a `recipient_key` was specified in the status-request message, the matching value MUST be specified in the `recipient_key` attribute of the status message.
 
