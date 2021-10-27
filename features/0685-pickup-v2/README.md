@@ -79,7 +79,7 @@ Status details about pending messages
 
 `message_count` is the only required attribute. The others may be present if offered by the _message_holder_.
 
-`duration_waited` is in seconds, and is the longest  delay of any message in the queue.
+`longest_waited_seconds` is in seconds, and is the longest delay of any message in the queue.
 
 `total_size` is in bytes.
 
