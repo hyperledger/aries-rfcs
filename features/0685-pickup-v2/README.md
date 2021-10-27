@@ -150,7 +150,7 @@ _Recipients_ have three modes of possible operation for message delivery with va
 Live Mode is changed with a `live_delivery_change` message as follows:
 ```json=
 {
-    "@type": "https://didcomm.org/messagepickup/2.0/live_delivery_change",
+    "@type": "https://didcomm.org/messagepickup/2.0/live-delivery-change",
     "live_delivery": true
 }
 ```
