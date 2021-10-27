@@ -36,7 +36,7 @@ When live delivery is enabled, messages that arrive when an existing connection 
 
 ## Reference
 
-Each message sent should use the ~transport decorator as follows. This has been omitted from the examples for brevity.
+Each message sent should use the ~transport decorator as follows, which has been adopted from [RFC 0092 transport return route](/features/0092-transport-return-route/README.md) protocol. This has been omitted from the examples for brevity.
 
 ```json=
 "~transport": {
