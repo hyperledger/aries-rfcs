@@ -53,7 +53,7 @@ Each message sent MUST use the `~transport` decorator as follows, which has been
 
 ## Message Types
 
-### StatusRequest
+### Status Request
 
 Sent by the _Recipient_ to the _Mediator_ to request a `status` message.
 #### Example:
@@ -104,7 +104,7 @@ in the `recipient_key` attribute of the status message.
 > be sent when the _Recipient_ is actively connected (HTTP request awaiting
 > response, WebSocket, etc.).
 
-### DeliveryRequest
+### Delivery Request
 
 A request from the _Recipient_ to the _Mediator_ to have waiting messages delivered. 
 
@@ -139,7 +139,7 @@ If no messages are available to be sent, a `status` message MUST be sent immedia
 
 Delivered messages MUST NOT be deleted until delivery is acknowledged by a `messages-received` message.
 
-### MessagesReceived
+### Messages Received
 After receiving messages, the _Recipient_ sends an ack message indiciating 
 which messages are safe to clear from the queue.
 
