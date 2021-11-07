@@ -106,7 +106,7 @@ in the `recipient_key` attribute of the status message.
 
 ### Delivery Request
 
-A request from the _Recipient_ to the _Mediator_ to have waiting messages delivered. 
+A request from the _Recipient_ to the _Mediator_ to have pending messages delivered. 
 
 #### Examples:
 
