@@ -16,10 +16,10 @@ to resolve DIDs and dereference DID URLs.
 ## Motivation
 
 DID Resolution is an important feature of Aries. It is a prerequisite for the `unpack()` function in
-[DIDComm](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0005-didcomm), especially in
+[DIDComm](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0005-didcomm), especially in
 [Cross-Domain Messaging](../../concepts/0094-cross-domain-messaging/README.md), since cryptographic
 keys must be discovered from DIDs in order to enable trusted communication between the
-[agents](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0004-agents) associated with DIDs.
+[agents](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0004-agents) associated with DIDs.
 DID Resolution is also required for other operations, e.g. for verifying credentials or for discovering
 [DIDComm service endpoints](../../features/0067-didcomm-diddoc-conventions/README.md).
 
@@ -43,7 +43,7 @@ invokes another DID Resolver via a "remote" binding (such as HTTP(S) or DIDComm)
 ### Name and Version
 
 This defines the `did_resolution` protocol, version 0.1, as identified by the
-following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/uris.md#piuri):
+following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/uris.md#piuri):
 
     https://didcomm.org/did_resolution/0.1
 

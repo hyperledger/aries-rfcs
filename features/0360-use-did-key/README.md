@@ -27,7 +27,7 @@ Note that simply knowing the key type is not necessarily sufficient to be able t
 
 ## Tutorial
 
-An example of the use of the replacement of a verkey with `did:key` can be found in the [~service decorator RFC](https://github.com/hyperledger/aries-rfcs/tree/master/features/0056-service-decorator). Notably in the example at the beginning of the [tutorial](https://github.com/hyperledger/aries-rfcs/tree/master/features/0056-service-decorator#tutorial) section, the verkeys in the `recipientKeys` and `routingKeys` items would be changed from native keys to use `did:key` as follows:
+An example of the use of the replacement of a verkey with `did:key` can be found in the [~service decorator RFC](https://github.com/hyperledger/aries-rfcs/tree/main/features/0056-service-decorator). Notably in the example at the beginning of the [tutorial](https://github.com/hyperledger/aries-rfcs/tree/main/features/0056-service-decorator#tutorial) section, the verkeys in the `recipientKeys` and `routingKeys` items would be changed from native keys to use `did:key` as follows:
 
 ``` jsonc
 {
@@ -57,17 +57,17 @@ The `did:key` method uses the strings that are the DID, public key and key type 
 
 The following currently implemented RFCs would be affected by acceptance of this RFC. In these RFCs, the JSON items that currently contain naked public keys (mostly the items `recipientKeys` and `routingKeys`) would be changed to use `did:key` references where applicable. Note that in these items public DIDs could also be used if applicable for a given use case.
 
-- [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/master/features/0023-did-exchange) - Invitation Message
-- [0028-introduce](https://github.com/hyperledger/aries-rfcs/tree/master/features/0028-introduce)
-- [0056-service-decorator](https://github.com/hyperledger/aries-rfcs/tree/master/features/0056-service-decorator)
-- [0160-connection-protocol](https://github.com/hyperledger/aries-rfcs/tree/master/features/0160-connection-protocol)
-- [0434-out-of-band-protocols](https://github.com/hyperledger/aries-rfcs/blob/master/features/0434-outofband/README.md)
-- [0211-mediator-coordination-protocol](https://github.com/hyperledger/aries-rfcs/blob/master/features/0211-route-coordination/README.md)
+- [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/main/features/0023-did-exchange) - Invitation Message
+- [0028-introduce](https://github.com/hyperledger/aries-rfcs/tree/main/features/0028-introduce)
+- [0056-service-decorator](https://github.com/hyperledger/aries-rfcs/tree/main/features/0056-service-decorator)
+- [0160-connection-protocol](https://github.com/hyperledger/aries-rfcs/tree/main/features/0160-connection-protocol)
+- [0434-out-of-band-protocols](https://github.com/hyperledger/aries-rfcs/blob/main/features/0434-outofband/README.md)
+- [0211-mediator-coordination-protocol](https://github.com/hyperledger/aries-rfcs/blob/main/features/0211-route-coordination/README.md)
 
 Service entries in `did:peer` DIDDocs (such as in RFCs
-[0094-cross-domain-messaging](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0094-cross-domain-messaging)
+[0094-cross-domain-messaging](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0094-cross-domain-messaging)
 and
-[0067-didcomm-diddoc-conventions](https://github.com/hyperledger/aries-rfcs/tree/master/features/0067-didcomm-diddoc-conventions))
+[0067-didcomm-diddoc-conventions](https://github.com/hyperledger/aries-rfcs/tree/main/features/0067-didcomm-diddoc-conventions))
 should **NOT** use a `did:key` public key representation. Instead, service
 entries in the DIDDoc should reference keys defined internally in the DIDDoc
 where appropriate.

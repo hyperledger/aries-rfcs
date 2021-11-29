@@ -41,7 +41,7 @@ An issuer needs to register a credential definition and a revocation registry on
 
 ### Delegatable credentials as a tool
 
-[Delegatable Credentials](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0104-delegatable-credentials) are a useful tool that we can use to solve this problem. They function like special Object Capabilities (OCAP) tokens, and may offer the beginnings of a solution. They definitely address the delegation use cases, at least. Their properties include:
+[Delegatable Credentials](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0104-delegatable-credentials) are a useful tool that we can use to solve this problem. They function like special Object Capabilities (OCAP) tokens, and may offer the beginnings of a solution. They definitely address the delegation use cases, at least. Their properties include:
 
 * A root issuer that is willing to go through setup and maintenance hassle creates a normal Indy credential and issues it to a normal Indy holder.
 

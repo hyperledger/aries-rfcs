@@ -4,7 +4,7 @@
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-02-01
 - Status Note: Numerous implementations. 
-- Supersedes: [Indy HIPE 0032](https://github.com/hyperledger/indy-hipe/tree/master/text/0032-trust-ping)
+- Supersedes: [Indy HIPE 0032](https://github.com/hyperledger/indy-hipe/tree/main/text/0032-trust-ping)
 - Start Date: 2018-12-11
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
@@ -110,7 +110,7 @@ messages are encrypted with suitable algorithms and keys.
 
 2. Messages may be targeted at any known agent in the other party's sovereign
 domain, using [cross-domain routing conventions](
-https://github.com/hyperledger/indy-hipe/blob/master/text/0022-cross-domain-messaging/README.md),
+https://github.com/hyperledger/indy-hipe/blob/main/text/0022-cross-domain-messaging/README.md),
 and may be encrypted and
 packaged to expose exactly and only the information desired, at each hop
 along the way. This allows two parties to evaluate the completeness of
