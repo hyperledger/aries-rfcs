@@ -28,14 +28,14 @@ We need a standard high-level reference.
 >This discussion assumes that you have a reasonable grasp on topics like
 [self-sovereign identity](https://medium.com/evernym/the-three-models-of-digital-identity-relationships-ca0727cb5186),
 [DIDs and DID docs](https://w3c-ccg.github.io/did-spec/), and [agents](
-https://github.com/hyperledger/indy-hipe/pull/86). If you find yourself
+https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0004-agents/README.md). If you find yourself
 lost, please review that material for background and starting assumptions.
 
 Agent-like things have to interact with one another to get work done. How they
 talk in general is DIDComm, the subject of this RFC. The specific interactions enabled by
 DIDComm--connecting and maintaining relationships, issuing credentials,
 providing proof, etc.--are called __protocols__; they are described [elsewhere](
-https://github.com/hyperledger/indy-hipe/pull/69).
+https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md).
 
 ### Rough Overview
 

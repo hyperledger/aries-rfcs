@@ -398,7 +398,7 @@ to make the content as useful as possible:
 with (possibly) many documents.
 * Hyperlinks from one RFC to another should be in relative form (`../features/my-rfc/README.md`),
 not in absolute form (`/features/my-rfc/README.md`) or external form
-(`https://github.com/hyperledger/aries-rfcs/blob/master/features/my-rfc/README.md`).
+(`https://github.com/hyperledger/aries-rfcs/blob/main/features/my-rfc/README.md`).
 This lets us move or embed the content, and it prevents branch names from
 cluttering the hyperlink.
 

@@ -30,7 +30,7 @@ rules. Presentation definitions specify desired attributes and predicates).
    the verifiable data registry. (Anchoring the presentation definition to the
    verifiable data registry allows other verifiers to easily use it. It can be done by writing the full presentation definition's content to the ledger, or just writing a digital fingerprint/hash of the content.)
 1. Using the presentation definition, request a presentation from the holder.
-The [Present Proof Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof)
+The [Present Proof Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/main/features/0037-present-proof)
 will be the model for another RFC containing minor modifications for presenting
 a proof based on verifiable credentials using the new rich schema objects.
 
@@ -38,10 +38,10 @@ a proof based on verifiable credentials using the new rich schema objects.
 
 ## Reference
 
-- [RFC 0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
-- [RFC 0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common)
-- [RFC XXXX: Aries Rich Schema Presentation Definitions](https://github.com/hyperledger/aries-rfcs/tree/master/features/XXXX-rich-schema-pres-defs)
-- [RFC 0037: Present Proof Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof)
+- [RFC 0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas)
+- [RFC 0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common)
+- [RFC XXXX: Aries Rich Schema Presentation Definitions](https://github.com/hyperledger/aries-rfcs/tree/main/features/XXXX-rich-schema-pres-defs)
+- [RFC 0037: Present Proof Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/main/features/0037-present-proof)
 
 
 
