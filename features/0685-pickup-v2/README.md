@@ -139,6 +139,28 @@ If no messages are available to be sent, a `status` message MUST be sent immedia
 
 Delivered messages MUST NOT be deleted until delivery is acknowledged by a `messages-received` message.
 
+### Message Delivery
+
+Messages delivered from the queue must be delivered in a batch `delivery` message as attachments. The ID of each attachment is used to confirm receipt. The ID is an opaque value, and the _Recipient_ should not infer anything from the value.
+
+```json=
+{
+    "@id": "123456781",
+    "~thread": {
+        "thid": "<message id of delivery-request message>"
+      },
+    "@type": "https://didcomm.org/messagepickup/2.0/delivery",
+    "~attach": [{
+    	"@id": "<messageid>",
+    	"data": {
+    		"base64": ""
+    	}
+    }]
+}
+```
+
+This method of delivery does incur an encoding cost, but is much simpler to implement and a more robust interaction.
+
 ### Messages Received
 After receiving messages, the _Recipient_ sends an ack message indiciating 
 which messages are safe to clear from the queue.
@@ -148,11 +170,11 @@ which messages are safe to clear from the queue.
 ```json=
 {
     "@type": "https://didcomm.org/messagepickup/2.0/messages-received",
-    "message_tag_list": ["123","456"]
+    "message_id_list": ["123","456"]
 }
 ```
 
-`message_tag_list` is a list of tags of each message received. The tag of each message is present in the encrypted form of the message as an artifact of encryption, and is indexed by the mediator. The tag is sufficiently unique within the scope of a recipient to uniquely identify the message.
+`message_id_list` is a list of ids of each message received. The id of each message is present in the attachment descriptor of each attached message of a `delivery` message.
 
 Upon receipt of this message, the _Mediator_ knows which messages have been received, and can remove them from the collection of queued messages with confidence. The mediator SHOULD send an updated `status` message reflecting the changes to the queue.
 
