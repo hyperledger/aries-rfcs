@@ -133,7 +133,7 @@ A request from the _Recipient_ to the _Mediator_ to have pending messages delive
 > If the _Recipient_ requests more than one message over HTTP, the _Mediator_ will only be able to send one message in response. 
 > This has the potential to result in seemingly unexpected behavior and is something to be aware of.
 
-`recipient_key` is optional. When specified, the _Mediator_ MUST only return messages sent to that recipient key.
+`recipient_key` is optional. When [specified](), the _Mediator_ MUST only return messages sent to that recipient key.
 
 If no messages are available to be sent, a `status` message MUST be sent immediately.
 
@@ -143,6 +143,10 @@ Delivered messages MUST NOT be deleted until delivery is acknowledged by a `mess
 
 Messages delivered from the queue must be delivered in a batch `delivery` message as attachments. The ID of each attachment is used to confirm receipt. The ID is an opaque value, and the _Recipient_ should not infer anything from the value.
 
+The ONLY valid type of attachment for this message is a DIDComm Message in encrypted form.
+
+The `recipient_key` attribute is only included when responding to a `delivery-request` message that indicates a `recipient_key`.
+
 ```json=
 {
     "@id": "123456781",
@@ -150,6 +154,7 @@ Messages delivered from the queue must be delivered in a batch `delivery` messag
         "thid": "<message id of delivery-request message>"
       },
     "@type": "https://didcomm.org/messagepickup/2.0/delivery",
+    "recipient_key": "<key for messages>",
     "~attach": [{
     	"@id": "<messageid>",
     	"data": {
