@@ -1,12 +1,12 @@
 # Aries RFC 0496: Transition to the Out of Band and DID Exchange Protocols
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-09-30
-- Status Note: In step 0 - community is reviewing the proposed approach. **Target Completion Date: 2020.12.31**
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-11-24
+- Status Note: In step 1 - update all implementations to accept Connection and OOB Invitations. **Target Completion Date: 2021.12.31**
 - Supersedes:
 - Start Date: 2020-06-07
-- Tags: [feature](/tags.md#feature), [community-update](/tags.md#community-update)
+- Tags: [feature](/tags.md#feature), [community-update](/tags.md#community-update), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -27,7 +27,7 @@ The transition from the old to new messages will occur in four steps:
     - Connection-less Present Proof protocol instances using the service decorator
   - See the section below on [Step 1 out-of-band messages](#step-1-out-of-band-messages)
   - During Step 1, all agents should continue to send the current invitation and connection-less protocol messages.
-  - Each agent builder SHOULD notify the community they have completed Step 1 by submitting a PR to update their entry in the [implementations](#implementations) section.
+  - Each agent builder SHOULD notify the community they have completed Step 1 by submitting a PR to update their entry in the [implementations](#implementations) section of this RFC.
 - **Step 2**: Agent builders update all agent code bases and deployments to send out out-of-band invitations equivalent to the current invitation and connection-less protocol messages, and Agent builders add full out-of-band and did-exchange ([RFC 0023](../0023-did-exchange/README.md)) protocol support to all agent code bases and deployments.
   - Messages from existing RFCs being replaced by the out-of-band protocol are marked as `deprecated`.
   - Full out-of-band support is **NOT** required&mdash;just support for the out-of-band equivalents of the old `invitation` messages.
@@ -199,7 +199,6 @@ During Step 2 [URL Shortening](../0434-outofband/README.md#url-shortening) as de
 The community coordination triggers between the steps above will be as follows:
 
 - **Pre-work to Step 1** - a PR to this RFC is merged that sets the RFC status to [ACCEPTED](/README.md#accepted).
-  - The [ACCEPTED](/README.md#accepted) version of this RFC is included in a new [Aries Interop Profile](/concepts/0302-aries-interop-profile/README.md) version.
 - **Step 1 to Step 2** - the community agrees that the majority of the deployed agents have completed Step 1. A PR to this RFC is merged that sets the RFC status to [ADOPTED](/README.md#adopted).
   - Agent builders indicate completion of Step 1 by updating the [Implementations](#implementations) section of this RFC.
   - A PR to RFC 0160 Connections and RFC 0023 DID Exchange marks the `invitation` messages as deprecated.
@@ -228,7 +227,7 @@ None identified.
 
 ## Rationale and alternatives
 
-This approach balances the speed of adoption with the need for independent deployment and interoperability.
+This approach balances the speed of adoption with the need for independent deployment and ongoing interoperability.
 
 ## Prior art
 
@@ -245,7 +244,7 @@ use this approach in Aries. Adjustments to the transition plan will be made as n
 
 ## Implementations
 
-The following table lists the status of various agent code bases and deployments with respect to the steps of this transition. Agent builders MUST update this table as they complete steps of the transition.
+The following table lists the status of various agent code bases and deployments with respect to **Step 1** of this transition. Agent builders MUST update this table as they complete steps of the transition.
 
 Name / Link | Implementation Notes
 --- | ---
