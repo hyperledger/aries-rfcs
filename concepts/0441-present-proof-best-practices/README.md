@@ -1,8 +1,8 @@
 # 0441: Prover and Verifier Best Practices for Proof Presentation
 - Authors: [Stephen Klump](stephen.klump@becker-carroll.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-10-31
-- Status Note:  See [RFC 0037](../../features/0037-present-proof/README.md) for the Present Proof protocol.
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Interoperability guidance when using Indy AnonCreds Present Proof. An element of the Indy AnonCreds subtarget for [AIP v2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Start Date: 2020-10-31
 - Tags: [concept](/tags.md#concept), [credentials](/tags.md#credentials)
 
@@ -103,7 +103,7 @@ are semantically equivalent.
 
 ##### Verifier Non-Revocation Interval Formulation
 
-The verifier MUST specify, as current [INDY-HIPE 11](https://github.com/hyperledger/indy-hipe/blob/master/text/0011-cred-revocation/README.md) notes, the same integer EPOCH time for both ends of the interval, or else omit the `"from"` key and value. In effect, where the presentation request specifies a non-revocation interval, the verifier MUST request a non-revocation instant.
+The verifier MUST specify, as current [INDY-HIPE 11](https://github.com/hyperledger/indy-hipe/blob/main/text/0011-cred-revocation/README.md) notes, the same integer EPOCH time for both ends of the interval, or else omit the `"from"` key and value. In effect, where the presentation request specifies a non-revocation interval, the verifier MUST request a non-revocation instant.
 
 ##### Prover Non-Revocation Interval Processing
 
@@ -149,10 +149,22 @@ A presentation may include a timestamp outside of a the non-revocation interval 
 
 Any timestamp in the future (relative to the instant of presentation proof, with a reasonable allowance for clock skew) evinces tampering: the verifier MUST reject a presentation with a future timestamp. Similarly, any timestamp predating the creation of its corresponding credential's revocation registry on the ledger evinces tampering: the verifier MUST reject a presentation with such a timestamp.
 
+### Dates and Predicates
+
+This section prescribes issuer and verifier best practices concerning representing dates for use in predicate proofs (eg proving Alice is over 21 without revealing her birth date).
+
+#### Dates in Credentials
+
+In order for dates to be used in a predicate proof they MUST be expressed as an Int32. While unix timestamps could work for this, it has several drawbacks including: can't represent dates outside of the years 1901-2038, isn't human readable, and is overly precise in that birth time down to the second is generally not needed for an age check. To address these issues, date attributes SHOULD be represented as integers in the form YYYYMMDD (eg 19991231). This addresses the issues with unix timestamps (or any seconds-since-epoch system) while still allowing date values to be compared with < > operators. Note that this system won't work for any general date math (eg adding or subtracting days), but it will work for predicate proofs which just require comparisons. In order to make it clear that this format is being used, the attribute name SHOULD have the suffix `_dateint`. Since most datetime libraries don't include this format, [here](https://github.com/kiva/protocol-common/blob/main/src/date.conversion.ts) are some examples of helper functions written in typescript.
+
+#### Dates in Presentations
+
+When constructing a proof request, the verifier SHOULD express the minimum/maximum date as an integer in the form YYYYMMDD. For example if today is Jan 1, 2021 then the verifier would request that `bithdate_dateint` is before or equal to Jan 1 2000 so `<= 20000101`. The holder MUST construct a predicate proof with a YYYYMMDD represented birth date less than that value to satisfy the proof request.
+
 ## Reference
 
 * [RFC 0037](../../features/0037-present-proof/README.md): Present Proof protocol
-* [INDY-HIPE 11](https://github.com/hyperledger/indy-hipe/blob/master/text/0011-cred-revocation/README.md): Indy revocation.
+* [INDY-HIPE 11](https://github.com/hyperledger/indy-hipe/blob/main/text/0011-cred-revocation/README.md): Indy revocation.
 
 ## Implementations
 

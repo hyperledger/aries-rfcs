@@ -4,7 +4,7 @@
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-05-24
 - Status Note:  
-- Supersedes: [HIPE 0021 Message Types](https://github.com/hyperledger/indy-hipe/tree/master/text/0021-message-types)
+- Supersedes: [HIPE 0021 Message Types](https://github.com/hyperledger/indy-hipe/tree/main/text/0021-message-types)
 - Start Date: 2018-07-06
 - Tags: [concept](/tags.md#concept)
 

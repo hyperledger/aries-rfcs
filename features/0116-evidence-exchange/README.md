@@ -13,7 +13,7 @@ The goal of this protocol is to allow Holders to provider an inquiring Verifier 
 
 ## Motivation
 
-During the identity verification process, an entity *may* require access to the genesis documents used to establish digital credentials issued by a credential issuing entity or [Credential Service Provider (CSP)](./eep_glossary.md).  In support of the transition from existing business verification processes to emerging business processes that rely on digitally verified credentials using protocols such as [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential) and [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof), we need to establish a protocol that allow entities to make this transition while remaining compliant with business and regulatory requirements. Therefore, **we need a mechanism for Verifiers to obtain access to vetted evidence (physical or digital information or documentation) without requiring a relationship or interaction with the Issuer**.
+During the identity verification process, an entity *may* require access to the genesis documents used to establish digital credentials issued by a credential issuing entity or [Credential Service Provider (CSP)](./eep_glossary.md).  In support of the transition from existing business verification processes to emerging business processes that rely on digitally verified credentials using protocols such as [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/main/features/0036-issue-credential) and [0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/main/features/0037-present-proof), we need to establish a protocol that allow entities to make this transition while remaining compliant with business and regulatory requirements. Therefore, **we need a mechanism for Verifiers to obtain access to vetted evidence (physical or digital information or documentation) without requiring a relationship or interaction with the Issuer**.
 
 >While this protocol *should* be supported by all persona, its relevance to decentralized identity ecosystems is highly dependent on the business policies of a market segment of Verifiers. For more details see the [Persona](#persona) section.
 
@@ -180,7 +180,7 @@ These forms of *Identity Evidence* are examples of trusted credentials that an E
 
 ## Tutorial
 
-The evidence exchange protocol builds on the attachment decorator within DIDComm using the the [Inlining Method](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#inlining) for *Digital Assertions* and the [Appending Method](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#appending) for *Original Documents*.
+The evidence exchange protocol builds on the attachment decorator within DIDComm using the the [Inlining Method](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#inlining) for *Digital Assertions* and the [Appending Method](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#appending) for *Original Documents*.
 
 The protocol is comprised of the following messages and associated actions:
 
@@ -195,7 +195,7 @@ The protocol is comprised of the following messages and associated actions:
 
 ### Request Evidence Message
 
-This message should be used as an accompaniment to an [issue credential message](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential#issue-credential). Upon receipt and storage of a credential the Holder should compose an ```evidence_request``` for each credential received from the Issuer. The Holder may use this message to get an update for new and existing credentials from the Issuer.
+This message should be used as an accompaniment to an [issue credential message](https://github.com/hyperledger/aries-rfcs/tree/main/features/0036-issue-credential#issue-credential). Upon receipt and storage of a credential the Holder should compose an ```evidence_request``` for each credential received from the Issuer. The Holder may use this message to get an update for new and existing credentials from the Issuer.
 
 ```json
 {
@@ -271,7 +271,7 @@ Description of attributes:
         "technology": "api"
       },
       "ipsp_did": "~3d5nh7900fn4",
-      "ipsp_claim": <base64 of the file>,
+      "ipsp_claim": <base64url(file)>,
       "ipsp_claim_sig": "3vvvb68b53d5nh7900fn499040cd9e89fg3kkh0f099c0021233728cf67945faf",
       "examinerSignature": "f67945faf9e89fg3kkh3vvvb68b53d5nh7900fn499040cd3728c0f099c002123"
     }
@@ -306,7 +306,7 @@ Description of attributes:
         "technology": "barcode"
       },
       "data": {
-        "base64": <base64 of the file>
+        "base64": <base64url(file)>
       },
       "examinerSignature": "f67945faf9e89fg3kkh3vvvb68b53d5nh7900fn499040cd3728c0f099c002123"
     },
@@ -321,7 +321,7 @@ Description of attributes:
         "technology": "human-visual"
       },
       "data": {
-        "base64": <base64 of the file>
+        "base64": <base64url(file)>
       },
       "examinerSignature": "945faf9e8999040cd3728c0f099c002123f67fg3kkh3vvvb68b53d5nh7900fn4"
     },
@@ -337,7 +337,7 @@ Description of attributes:
       },
       "data": {
         "sha256": "1d9eb668b53d99c002123f1ffa4db0cd3728c0f0945faf525c5ee4a2d4289904",
-        "base64": <base64 of the file>
+        "base64": <base64url(file)>
       },
       "examinerSignature": "5nh7900fn499040cd3728c0f0945faf9e89kkh3vvvb68b53d99c002123f67fg3"
     }
@@ -345,7 +345,7 @@ Description of attributes:
 }
 ```
 
-This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) with the following additions:
+This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#base64) with the following additions:
 
 * `mime-type`: Describes the MIME type of the attached content. Optional but recommended.
 * `filename`: A hint about the name that might be used if this attachment is persisted as a file. It is not required, and need not be unique. If this field is present and mime-type is not, the extension on the filename may be used to infer a MIME type.
@@ -424,7 +424,7 @@ This message adheres to the attribute [content formats outlined in the Aries Att
 }
 ```
 
-This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) and builds on the [By Value Attachments](#by-value-attachments) with the following additions:
+This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#base64) and builds on the [By Value Attachments](#by-value-attachments) with the following additions:
 
 * `links`: A list of zero or more locations at which the content may be fetched.
   * `url`: Link to the external document.
@@ -434,7 +434,7 @@ Upon completion of the Evidence Request and Response exchange, the Holder's Agen
 
 ### Evidence Access Request Message
 
-Upon the successful processing of a [credential proof presentation message](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof#presentation), a Verifier may desire to request supporting evidence for the processed credential. This ```evidence_access_request``` message is built by the Verifier and sent to the  Holder's agent. Similar to the ```request_evidence``` message, the Verifier may use this message to get an update for new and existing credentials associated with the Holder. The intent of this message is for the Verifier to establish trust by obtaining a copy of the available evidence and performing the necessary content validation.
+Upon the successful processing of a [credential proof presentation message](https://github.com/hyperledger/aries-rfcs/tree/main/features/0037-present-proof#presentation), a Verifier may desire to request supporting evidence for the processed credential. This ```evidence_access_request``` message is built by the Verifier and sent to the  Holder's agent. Similar to the ```request_evidence``` message, the Verifier may use this message to get an update for new and existing credentials associated with the Holder. The intent of this message is for the Verifier to establish trust by obtaining a copy of the available evidence and performing the necessary content validation.
 
 ```json
 {
@@ -457,7 +457,7 @@ Description of attributes:
 
 ![verify-workflow](./img/verify_cred_flow.png)
 
-This protocol is intended to be flexible and applicable to a variety of use cases. While our discussion has circulated around the use of the protocol as follow-up to the processing of a credential proof presentment flow, the fact is that the protocol can be used at any point after a Pair-wise DID Exchange has been successfully established and is therefore in the [complete state](https://github.com/hyperledger/aries-rfcs/tree/master/features/0023-did-exchange#complete) as defined by the DID Exchange Protocol. An `IssuerDID` (or DID of the an entity that is one of the two parties in a private pair-wise relationship) is assumed to be known under all possible conditions once the relationship is in the complete state.
+This protocol is intended to be flexible and applicable to a variety of use cases. While our discussion has circulated around the use of the protocol as follow-up to the processing of a credential proof presentment flow, the fact is that the protocol can be used at any point after a Pair-wise DID Exchange has been successfully established and is therefore in the [complete state](https://github.com/hyperledger/aries-rfcs/tree/main/features/0023-did-exchange#complete) as defined by the DID Exchange Protocol. An `IssuerDID` (or DID of the an entity that is one of the two parties in a private pair-wise relationship) is assumed to be known under all possible conditions once the relationship is in the complete state.
 
 ### Evidence Access Response Message
 
@@ -492,7 +492,7 @@ This message is required for a Holder Agent in response to an ```evidence_access
 }
 ```
 
-This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#base64) and leverages the same [Evidence Response Message](#evidence-response-message) attribute descriptions.
+This message adheres to the attribute [content formats outlined in the Aries Attachments RFC ](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#base64) and leverages the same [Evidence Response Message](#evidence-response-message) attribute descriptions.
 
 ## Reference
 
@@ -517,7 +517,7 @@ As noted in the [references](#reference) section, there are a number of trending
 
 ## Prior art
 
-This protocol builds on the foundational capabilities of DIDComm messages, most notable being the [attachment decorator](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md) within DIDComm.
+This protocol builds on the foundational capabilities of DIDComm messages, most notable being the [attachment decorator](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md) within DIDComm.
 
 ## Unresolved questions
 

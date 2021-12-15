@@ -4,7 +4,7 @@
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-01-15
 - Status Note: On a standards track and beginning to influence many mental models, but not yet [ADOPTED](/README.md#rfc-lifecycle). 
-- Supersedes: [Indy HIPE 0002](https://github.com/hyperledger/indy-hipe/tree/master/text/0002-agents)
+- Supersedes: [Indy HIPE 0002](https://github.com/hyperledger/indy-hipe/tree/main/text/0002-agents)
 - Start Date: 2017-11-01 (approx, backdated)
 - Tags: [concept](/tags.md#concept)
 
@@ -169,7 +169,7 @@ Here are some thought questions to clarify intent:
 We said it's hard to provide a recipe for an agent without specifics.
 However, the majority of agents _do_ have two things in common:
 they listen to and process A2A messages, and they use a [wallet](
-https://github.com/hyperledger/indy-hipe/blob/master/text/0013-wallets/README.md)
+https://github.com/hyperledger/indy-hipe/blob/main/text/0013-wallets/README.md)
 to manage keys, credentials, and other sensitive material. Unless you have
 uses cases that involve IoT, cron jobs, or web hooks, your agent is
 likely to fit this mold.
@@ -236,7 +236,7 @@ in the DID Doc of the recipient, and finding an intersection
 between transports they use, and transports the sender can
 speak. Line 3 requires the keys of the sender, which would
 normally be held in a [wallet](
-https://github.com/hyperledger/indy-hipe/blob/master/text/0013-wallets/README.md).
+https://github.com/hyperledger/indy-hipe/blob/main/text/0013-wallets/README.md).
 
 If you are building this sort of code using Aries technology, you
 will certainly want to use [Aries Agent SDK](
@@ -253,7 +253,7 @@ or in its Getting Started Guide.
 
 * Hang out and ask questions on `#aries` on [chat.hyperledger.org](https://chat.hyperledger.org).
 * Use the mailing list: [aries@lists.hyperledger.org](mailto:aries@lists.hyperledger.org)
-* Follow the Aries Cloud Agent - Python [Getting Started Guide (for developers)](https://github.com/hyperledger/aries-cloudagent-python/tree/master/docs/GettingStartedAriesDev)
+* Follow the Aries Cloud Agent - Python [Getting Started Guide (for developers)](https://github.com/hyperledger/aries-cloudagent-python/tree/main/docs/GettingStartedAriesDev)
 * Study the [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) |
 * Study the sample mobile agent at [github.com/sovrin-foundation/connector-app](https://github.com/sovrin-foundation/connector-app).
 * Browse other [RFCs](../../index.md).
@@ -365,7 +365,7 @@ that gap.
 ###### Identity Wallets
 
 "Identity wallet" is a term that's [carefully defined](
-https://github.com/hyperledger/indy-hipe/blob/master/text/0013-wallets/README.md#what-is-an-identity-wallet)
+https://github.com/hyperledger/indy-hipe/blob/main/text/0013-wallets/README.md#what-is-an-identity-wallet)
 in our ecosystem, and in strict, technical usage it maps to a
 concept much closer to "database" than "agent". This is because
 it is an inert storage container, not an active interacter. However, in
@@ -398,7 +398,7 @@ A cron job that runs once a night at Faber, scanning a database
 and revoking credentials that have changes status during the day,
 is an agent for Faber. This is true even though it doesn't listen
 for incoming messages (it only talks [revocation protocol](
-https://github.com/hyperledger/indy-hipe/tree/master/text/0011-cred-revocation) to the ledger). In order to
+https://github.com/hyperledger/indy-hipe/tree/main/text/0011-cred-revocation) to the ledger). In order to
 talk that protocol, it must hold keys delegated by Faber, and it
 is surely Faber's fiduciary.
 
@@ -503,4 +503,4 @@ Name / Link | Implementation Notes
 [Verity](https://www.evernym.com/products/) | Commercially licensed enterprise agent, SaaS or on-prem.
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | 
 [Pico Labs](http://picolabs.io/) | [Pico Agents](https://github.com/Picolab/G2S) protocols: connections, trust_ping, basicmessage, routing
- 
+[Rust Agent](https://github.com/tatmanblue/rust-aries-agent) | Rust implementation of a framework for building agents of all types

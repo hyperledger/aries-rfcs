@@ -1,7 +1,7 @@
 ```jsonc
 {
     "@context": [
-        "https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0430-machine-readable-governance-frameworks", 
+        "https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0430-machine-readable-governance-frameworks", 
         "https://fightthevirus.org/covid19-fw"
     ],
     "name": "COVID-19 Creds"

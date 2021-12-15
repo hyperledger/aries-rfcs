@@ -1,9 +1,9 @@
 # Aries RFC 0587: Encryption Envelope v2
 
 - Authors: [Baha A. Shaaban](mailto:baha.shaaban@securekey.com) (SecureKey Technologies Inc.), [Troy Ronda](mailto:troy.ronda@securekey.com) (SecureKey Technologies Inc.)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2021-02-10
-- Status Note:
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Included as part of the "prepare for DIDComm v2" subtarget of [AIP 2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Supersedes:
 - Start Date: 2021-02-10
 - Tags: [feature](/tags.md#feature)
@@ -15,11 +15,17 @@ This RFC proposes that we support the definition of envelopes from [DIDComm Mess
 ## Motivation
 
 This RFC defines ciphersuites for envelopes such that we can achieve better compatability with DIDComm Messaging being specified at DIF.
-The ciphersuites defined in this RFC are a subset of the definitions in [Aries RFC 0334-jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/master/features/0334-jwe-envelope).
+The ciphersuites defined in this RFC are a subset of the definitions in [Aries RFC 0334-jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0334-jwe-envelope).
 
 ## Encryption Algorithms
 
-[ECDH-1PU draft 03](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) defines the JWE structure. The following sections summarize the supported algorithms.
+DIDComm defines both the concept of authenticated sender encryption (aka `Authcrypt`) and anonymous sender encryption (aka `Anoncrypt`).
+In general, Aries RFCs and protocols use `Authcrypt` to exchange messages.
+In some limited scenarios (e.g., mediator and relays), an Aries RFC or protocol may define usage of `Anoncrypt`.
+
+[ECDH-1PU draft 04](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-04) defines the JWE structure for `Authcrypt`.
+`ECDH-ES` from [RFC 7518](https://tools.ietf.org/html/rfc7518#section-4.6) defines the JWE structure for `Anoncrypt`.
+The following sections summarize the supported algorithms.
 
 ### Curves
 
@@ -27,27 +33,101 @@ DIDComm Messaging (and this RFC) requires support for `X25519`, `P-256`, and `P-
 
 - P-256 (reference in [RFC4492](https://tools.ietf.org/search/rfc4492#appendix-A))
 - P-384 (reference in [RFC4492](https://tools.ietf.org/search/rfc4492#appendix-A))
-- P-521 (reference in [RFC4492](https://tools.ietf.org/search/rfc4492#appendix-A))
+- P-521 (optional, reference in [RFC4492](https://tools.ietf.org/search/rfc4492#appendix-A))
 - X25519 (reference in [RFC7748](https://tools.ietf.org/html/rfc7748#section-5))
 
 ### Content Encryption Algorithms
 
-DIDComm Messaging (and this RFC) requires support for both `XC20P` and `A256GCM`.
+DIDComm Messaging (and this RFC) requires support for both `XC20P` and `A256GCM` for Anoncrypt only and `A256CBC-HS512` for both Authcrypt and Anoncrypt.
 
 - XC20P (XChaCha20Poly1305 - reference in [xchacha draft 03](https://tools.ietf.org/html/draft-irtf-cfrg-xchacha-03))
-- A256GCM (AES-GCM with a 256 bit key - reference in [RFC7518](https://tools.ietf.org/html/rfc7518#section-5.1))
+- A256GCM (AES-GCM with a 256 bits key - reference in [RFC7518 section 5.1](https://tools.ietf.org/html/rfc7518#section-5.1) and more specifically [RFC7518 section 5.3](https://tools.ietf.org/html/rfc7518#section-5.3))
+- A256CBC-HS512 (AES256-CBC+HMAC-SHA512 with a 512 bits key - reference in [ECDH-1PU section 2.1](https://datatracker.ietf.org/doc/html/draft-madden-jose-ecdh-1pu-04#section-2.1) and [RFC 7518 section 5.2.5](https://datatracker.ietf.org/doc/html/rfc7518#section-5.2.5)) 
 
 ### Key Wrapping Algorithms
 
-DIDComm Messaing (and this RFC) requires support for `ECDH-1PU+A256KW`.
+DIDComm Messaging (and this RFC) requires support for `ECDH-1PU+A256KW` and `ECDH-ES+A256KW`.
 
-- ECDH-1PU+A256KW (defined in [ECDH-1PU draft 03](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03#section-2.2))
+- ECDH-1PU+A256KW (defined in [ECDH-1PU draft 04](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-04#section-2))
+- ECDH-ES+A256KW (defined in [RFC 7518](https://tools.ietf.org/html/rfc7518#section-4.6))
 
-## Anoncrypt equivalent
+## Key IDs `kid` and `skid` headers references in the DID document
 
-For situations where the envelopes should be anonymous, we use a newly minted DID rather than a different Anoncrypt mechanism.
-The newly minted DID is used once and then discarded.
-This approach matches the DIDComm Messaging mechanism.
+Keys used by DIDComm envelopes MUST be sourced from the DIDs exchanged between two agents. Specifically, both sender and recipients keys MUST be retrieved from the DID document's `KeyAgreement` verification section as per the [DID Document Keys](https://identity.foundation/didcomm-messaging/spec/#did-document-keys) definition.
+
+When Alice is preparing an envelope intended for Bob, the packing process should use a key from both hers and Bob's DID document's `KeyAgreement` section.
+
+Assuming Alice has a DID Doc with the following `KeyAgreement` definition (source: [DID V1 Example 17](https://www.w3.org/TR/did-core/#example-17-key-agreement-property-containing-two-verification-methods)):
+```jsonc
+{
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:example:123456789abcdefghi",
+  ...
+  "keyAgreement": [
+    // this method can be used to perform key agreement as did:...fghi
+    "did:example:123456789abcdefghi#keys-1",
+    // this method is *only* approved for key agreement usage, it will not
+    // be used for any other verification relationship, so its full description is
+    // embedded here rather than using only a reference
+    {
+      "id": "did:example:123#zC9ByQ8aJs8vrNXyDhPHHNNMSHPcaSgNpjjsBYpMMjsTdS",
+      "type": "X25519KeyAgreementKey2019", // external (property value)
+      "controller": "did:example:123",
+      "publicKeyBase58": "9hFgmPVfmBZwRvFEyniQDBkz9LmV7gDEqytWyGZLmDXE"
+    }
+  ],
+  ...
+}
+```
+
+The envelope packing process should set the `skid` header with value `did:example:123456789abcdefghi#keys-1` in the envelope's protected headers and fetch the underlying key to execute ECDH-1PU key derivation for content key wrapping.
+
+Assuming she also has Bob's DID document which happens to include the following `KeyAgreement` section:
+
+```jsonc
+{
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:example:jklmnopqrstuvwxyz1",
+  ...
+  "keyAgreement": [
+    {
+      "id": "did:example:jklmnopqrstuvwxyz1#key-1",
+      "type": "X25519KeyAgreementKey2019", // external (property value)
+      "controller": "did:example:jklmnopqrstuvwxyz1",
+      "publicKeyBase58": "9hFgmPVfmBZwRvFEyniQDBkz9LmV7gDEqytWyGZLmDXE"
+    }
+  ],
+  ...
+}
+```
+
+There should be only 1 entry in the recipients of the envelope, representing Bob. The corresponding `kid` header for this recipient MUST have `did:example:jklmnopqrstuvwxyz1#key-1` as value. The packing process MUST extract the public key bytes found in `publicKeyBase58` of Bob's DID Doc `KeyAgreement[0]` to execute the ECDH-1PU key derivation for content key wrapping.
+
+When Bob receives the envelope, the unpacking process on his end MUST resolve the `skid` protected header value using Alice's DID doc's `KeyAgreement[0]` in order to extract her public key. In Alice's DID Doc example above, `KeyAgreement[0]` is a reference id, it MUST be resolved from the main `VerificationMethod[]` of Alice's DID document (not shown in the example).
+
+Once resolved, the unpacker will then execute ECDH-1PU key derivation using this key and Bob's own recipient key found in the envelope's `recipients[0]` to unwrap the content encryption key.
+
+## Protecting the `skid` header
+When the `skid` cannot be revealed in a plain-text JWE header (to avoid potentially leaking sender's key id), the `skid` MAY be encrypted for each recipient. In this case, instead of having a `skid` protected header in the envelope, each recipient MAY include an `encrypted_skid` header with a value based on the encryption of `skid` using ECDH-ES `Z` computation of the `epk` and the recipient's key as the encryption key.
+
+For applications that don't require this protection, they MAY use `skid` protected header directly without any additional recipient headers.
+
+Applications MUST use either `skid` protected header or `encrypted_skid` recipients header but not both in the same envelope.
+
+## ECDH-1PU key wrapping and common protected headers
+When using authcrypt, the 1PU draft [requires](https://datatracker.ietf.org/doc/html/draft-madden-jose-ecdh-1pu-04#section-2.1) mandates the use of AES_CBC_HMAC_SHA family of content encryption algorithms. To meet this requirement, JWE messages MUST use common `epk`, `apu`, `apv` and `alg` headers for all recipients. They MUST be set in the `protected` headers JWE section.
+
+As per this requirement, the JWE building must first encrypt the payload then use the resulting `tag` as part of the key derivation process when wrapping the `cek`.
+
+To meet this requirement, the above headers must be defined as follows:
+* `epk`: generated once for all recipients. It MUST be of the same type and curve as all recipient keys since kdf with the sender key must be on the same curve.
+ - Example: `"epk": {"kty": "EC","crv": "P-256","x": "BVDo69QfyXAdl6fbK6-QBYIsxv0CsNMtuDDVpMKgDYs","y": "G6bdoO2xblPHrKsAhef1dumrc0sChwyg7yTtTcfygHA"}`
+* `apu`: similar to `skid`, this is the producer (sender) identifier, it MUST contain the `skid` value base64 RawURL (no padding) encoded. Note: this is base64URL(`skid` value).
+ - Example for `skid` mentioned in an earlier [section](#key-ids-kid-and-skid-headers-references-in-the-did-document) above: `ZGlkOmV4YW1wbGU6MTIzNDU2Nzg5YWJjZGVmZ2hpI2tleXMtMQ`
+* `apv`: this represents the recipients' `kid` list. The list must be alphanumerically sorted, `kid` values will then be concatenated with a `.` and the final result MUST be base64 URL (no padding) encoding of the SHA256 hash of concatenated list.
+* `alg`: this is the key wrapping algorithm, ie: `ECDH-1PU+A256KW`.
+
+A final note about `skid` header: since the 1PU draft [does not require](https://datatracker.ietf.org/doc/html/draft-madden-jose-ecdh-1pu-04#section-2.2.1) this header, authcrypt implementations MUST be able to resolve the sender kid from the `APU` header if `skid` is not set.
 
 ## Media Type
 
@@ -82,7 +162,7 @@ To advertise the combination of Envelope v2 with a DIDComm v1 message, the media
 
 ## Additional AIP impacts
 
-Implementors supporting an AIP sub-target that contains this RFC (e.g., `DIDCOMMV2PREP`) MAY choose to only support Envelope v2 without support for the original envelope declared in [RFC 0019](https://github.com/hyperledger/aries-rfcs/tree/master/features/0019-encryption-envelope). In these cases, the `accept` property will not contain `didcomm/aip2;env=rfc19` media type.
+Implementors supporting an AIP sub-target that contains this RFC (e.g., `DIDCOMMV2PREP`) MAY choose to only support Envelope v2 without support for the original envelope declared in [RFC 0019](https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope). In these cases, the `accept` property will not contain `didcomm/aip2;env=rfc19` media type.
 
 ## Drawbacks
 
@@ -97,9 +177,9 @@ Aries agents currently use the envelope described in [RFC0019](/features/0019-en
 ## Prior art
 
 - The [JWE](https://tools.ietf.org/html/rfc7518) family of encryption methods.
-- [Aries RFC 0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/master/features/0019-encryption-envelope) suggested envelope formats will be superseded by this RFC.
-- [Aries RFC 0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/master/features/0025-didcomm-transports#reference) for the content type used in the proposed envelopes.
-- [Aries RFC 0334-jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/master/features/0334-jwe-envelope).
+- [Aries RFC 0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope) suggested envelope formats will be superseded by this RFC.
+- [Aries RFC 0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/main/features/0025-didcomm-transports#reference) for the content type used in the proposed envelopes.
+- [Aries RFC 0334-jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0334-jwe-envelope).
 - [DIDComm Messaging](https://identity.foundation/didcomm-messaging/spec).
 - [minimal-cipher](https://github.com/digitalbazaar/minimal-cipher) implementation
 - [Public Key Authenticated Encryption for JOSE: ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03)

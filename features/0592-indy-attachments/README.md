@@ -1,8 +1,9 @@
 # Aries RFC 0592: Indy Attachment Formats for Requesting and Presenting Credentials
+
 - Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2021-02-23
-- Status Note:
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Formalizes the Indy AnonCreds attachments for issuing credentials and presenting proofs. A part of the Indy AnonCreds subtarget of [AIP v2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Supersedes: less formally documented Indy attachment formats documented in [Aries RFC 0036](../0036-issue-credential/README.md), [Aries RFC 0037](../0037-present-proof/README.md), etc.
 - Start Date: 2017-01-01
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)

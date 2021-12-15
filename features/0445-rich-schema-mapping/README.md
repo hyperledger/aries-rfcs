@@ -16,7 +16,7 @@ claim in a mapping has a reference to an encoding, and those encodings are
 defined in encoding objects.
 
 Mapping objects are processed in a generic way defined in 
-[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common).
+[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common).
 
 ## Motivation
 
@@ -78,13 +78,13 @@ mapping object may need to be defined.
 
 ### Properties
 Mapping's properties follow the generic template defined in 
-[Rich Schema Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
+[Rich Schema Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
 
 Mapping's `content` field is a JSON-LD-serialized string with the following fields:
 
 #### @id
 A Mapping must have an `@id` property. The value of this property must
-be equal to the `id` field which is a DID (see [Identification of Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#identification-of-rich-schema-objects)). 
+be equal to the `id` field which is a DID (see [Identification of Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#identification-of-rich-schema-objects)). 
 
 #### @type
 A Mapping must have a `@type` property. The value of this property must
@@ -209,12 +209,12 @@ Aries will provide a means for writing contexts to and reading contexts
 from a verifiable data registry (such as a distributed ledger).
 
 A Mapping object will be written to the ledger in a generic way defined in 
-[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
+[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
 
 
 ### Aries Data Registry Interface
 Aries Data Registry Interface methods for adding and retrieving a Mapping object from the
-ledger comply with the generic approach described in [Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#aries-data-registry-interface).
+ledger comply with the generic approach described in [Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#aries-data-registry-interface).
 
 This means the following methods can be used:
 - `write_rich_schema_object`
@@ -229,8 +229,8 @@ The following is a
 
 [Here](https://www.researchgate.net/publication/220922101_A_Signature_Scheme_with_Efficient_Protocols) is the paper that defines Camenisch-Lysyanskaya signatures.
 
-- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
-- [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common) 
+- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas)
+- [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common) 
 - [W3C verifiable credential specification](https://www.w3.org/TR/vc-data-model)
 
 ## Drawbacks

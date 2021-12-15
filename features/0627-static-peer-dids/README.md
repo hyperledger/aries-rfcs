@@ -1,6 +1,6 @@
 # Aries RFC 0627: Static Peer DIDs
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [ACCEPTED](/README.md#accepted)
 - Since: 2021-04-07
 - Status Note: formally freezes a set of features that have been relatively stable for about 18 months
 - Start Date: 2021-03-24
@@ -38,9 +38,7 @@ Support for Layer 3 (dynamic peer DIDs that have updatable state and that synchr
 
 Peer DIDs can use several different algorithms to generate the entropy that constitutes their _numeric basis_. See https://identity.foundation/peer-did-method-spec/#generation-method for details.
 
-This RFC targets Method 0 (inception key without doc) and Method 1 (genesis doc). Code that complies with this RFC, and that intends to accept static DIDs at Layer 2a, MUST accept peer DIDs that use either method. Code that intends to give peer DIDs (Layer 2b) MUST give peer DIDs that use at least one of these two methods.
-
-Method 2 is a promising feature of peer DIDs and will likely play a strong role in DIDComm v2, but is not a requirement for compliance with this RFC.
+This RFC targets Method 0 (inception key without doc), Method 1 (genesis doc), and Method 2 (multiple inception keys). Code that complies with this RFC, and that intends to accept static DIDs at Layer 2a, MUST accept peer DIDs that use any of these methods. Code that intends to give peer DIDs (Layer 2b) MUST give peer DIDs that use at least one of these three methods.
 
 ## Implementations
 
