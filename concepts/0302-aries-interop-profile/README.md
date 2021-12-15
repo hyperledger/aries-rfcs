@@ -1,7 +1,7 @@
 # 0302: Aries Interop Profile
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [John Jordan](mailto:john.jordan@gov.bc.ca) Province of British Columbia
-- Status: [ACCEPTED](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#accepted)
+- Status: [ACCEPTED](https://github.com/hyperledger/aries-rfcs/blob/main/README.md#accepted)
 - Since: 2021-01-06
 - Status Note: This RFC defines an Aries Interop Profile process and Aries Interop Profile versions
 - Supersedes:
@@ -289,7 +289,7 @@ This is a typical approach to creating an early protocol certification program.
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-_Implementation Notes_ [may need to include a link to test results](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#accepted).
+_Implementation Notes_ [may need to include a link to test results](https://github.com/hyperledger/aries-rfcs/blob/main/README.md#accepted).
 
 
 Name / Link | Implementation Notes

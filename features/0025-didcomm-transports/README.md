@@ -58,7 +58,7 @@ XMPP is an effective transport for incoming DID-Communication messages directly 
 - Independent of cloud agents and routing agents, as messages arrive directly at the mobile agent.
 - Well suited for direct consumer-to-consumer SSI transactions, from one mobile agent directly to another mobile agent without any DID-Communication intermediaries.
 - Simple encapsulation of DIDcom messages, getting trust from the DIDcom Encryption Envelope.
-- Specified in [Aries RFC 0024: DIDCom-over-XMPP](https://github.com/hyperledger/aries-rfcs/tree/master/features/0024-didcomm-over-xmpp)
+- Specified in [Aries RFC 0024: DIDCom-over-XMPP](https://github.com/hyperledger/aries-rfcs/tree/main/features/0024-didcomm-over-xmpp)
 
 #### Known Implementations
 

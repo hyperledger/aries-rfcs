@@ -129,11 +129,11 @@ A chained credential delivers these features by obeying some special conventions
     
     When a presentation is created from a chained credential, `provenanceProofs` is either disclosed (for non-ZKP proofs), or is used as evidence to prove the same thing (for ZKPs).
     
-3. It is associated (through a name in its `type` field array and through a URI in its `trustFrameworkURI` field) with a [trust framework](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0103-indirect-identity-control/README.md#proxy-trust-framework) that describes provenancing rules. For general chained credentials, this is optional; for delegate credentails, it is required. The trust framework may partially describe the semantics of some schema variants for a family of chained credentials, as well as how provenance is attenuated or categorized. For example, a trust framework jointly published by Ur Wheelz and other car rental companies might describe delegate credential schemas for car owners, car rental offices, drivers, insurers, maintenance staff, and guest users of cars. It might specify that the permissions delegatable in these credentials include `drive`, `maintain`, `rent`, `sell`, `retire`, `delegate-further`, and so forth. The trust framework would do more than enumerate these values; it would define exactly what they mean, how they interact with one another, and what permissions are expected to be in force in various circumstances.
+3. It is associated (through a name in its `type` field array and through a URI in its `trustFrameworkURI` field) with a [trust framework](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0103-indirect-identity-control/README.md#proxy-trust-framework) that describes provenancing rules. For general chained credentials, this is optional; for delegate credentails, it is required. The trust framework may partially describe the semantics of some schema variants for a family of chained credentials, as well as how provenance is attenuated or categorized. For example, a trust framework jointly published by Ur Wheelz and other car rental companies might describe delegate credential schemas for car owners, car rental offices, drivers, insurers, maintenance staff, and guest users of cars. It might specify that the permissions delegatable in these credentials include `drive`, `maintain`, `rent`, `sell`, `retire`, `delegate-further`, and so forth. The trust framework would do more than enumerate these values; it would define exactly what they mean, how they interact with one another, and what permissions are expected to be in force in various circumstances.
 
 4. The reputation of non-root holders in a provenance chain become irrelevant as far as credential trust is concerned--trust is based on an unbroken chain back to a root public attester, not on published, permanent characteristics of secondary issuers. Only the root attester needs to have a public DID. Other issuer keys and DIDs can be private and pairwise.
 
-5. If it is a delegate credential, it also meets all the requirements to be a __proxy credential__ as described in [Aries RFC 0103: Indirect Identity Control](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0103-indirect-identity-control/README.md#proxy-credential). Specifically:
+5. If it is a delegate credential, it also meets all the requirements to be a __proxy credential__ as described in [Aries RFC 0103: Indirect Identity Control](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0103-indirect-identity-control/README.md#proxy-credential). Specifically:
 
     * It uses `credentialSubject.holder.*` fields to bind it to a particular holder, if applicable.
     
@@ -159,7 +159,7 @@ Here is JSON that might embody credentials C1, C2, and C3 from our use case. Not
 
 ```jsonc
 {
-    "@context": ["https://w3.org/2018/credentials/v1", "https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0104-delegatable-credentials"],
+    "@context": ["https://w3.org/2018/credentials/v1", "https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0104-delegatable-credentials"],
     "type": ["VerifiableCredential", "Proxy.D/CarRentalTF/1.0/subsidiary"],
     "schema": "WwogICJAY29udGV4dCIsIC8vSlN... (clipped for brevity) ...ob2x",
     "provenanceProofs": [

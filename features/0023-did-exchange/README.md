@@ -415,7 +415,7 @@ When Peer DIDs are used in an exchange, it is likely that both the _requester_ a
 * [Agent to Agent Communication Video](https://drive.google.com/file/d/1PHAy8dMefZG9JNg87Zi33SfKkZvUvXvx/view)
 * [Agent to Agent Communication Presentation](https://docs.google.com/presentation/d/1H7KKccqYB-2l8iknnSlGt7T_sBPLb9rfTkL-waSCux0/edit#slide=id.p)
 * Problem_report message adopted into message family, following form defined by the [Problem Report HIPE](https://github.com/hyperledger/indy-hipe/blob/6a5e4fe2d7e14953cd8e3aed07d886176332e696/text/error-handling/README.md)
-* [RFC0519 Goal Codes](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0519-goal-codes/README.md)
+* [RFC0519 Goal Codes](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0519-goal-codes/README.md)
 
 ## Drawbacks
 

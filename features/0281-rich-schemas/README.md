@@ -19,7 +19,7 @@ additional properties. For example a schema for "employee" may inherit from
 the schema for "person."
 
 Schema objects are processed in a generic way defined in 
-[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common).
+[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common).
 
 ## Motivation
 [motivation]: #motivation
@@ -101,13 +101,13 @@ Schema, OWL, etc.
 
 ### Properties
 Rich Schema properties follow the generic template defined in
-[Rich Schema Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
+[Rich Schema Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
 
 Rich Schema's `content` field is a JSON-LD-serialized string with the following fields:
 
 #### @id
 A rich schema must have an `@id` property. The value of this property must
-be equal to the `id` field which is a DID (see [Identification of Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#identification-of-rich-schema-objects)). 
+be equal to the `id` field which is a DID (see [Identification of Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#identification-of-rich-schema-objects)). 
 
 A [rich schema](README.md) may refer to the `@id` of another rich schema to
 define a parent schema. A property of a rich schema may use the `@id` of
@@ -227,12 +227,12 @@ Aries will provide a means for writing contexts to and reading contexts
 from a verifiable data registry (such as a distributed ledger).
 
 A Schema will be written to the ledger in a generic way defined in 
-[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
+[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
 
 
 ### Aries Data Registry Interface
 Aries Data Registry Interface methods for adding and retrieving a Schema from the
-ledger comply with the generic approach described in [Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#aries-data-registry-interface).
+ledger comply with the generic approach described in [Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#aries-data-registry-interface).
 
 This means the following methods can be used:
 - `write_rich_schema_object`
@@ -245,8 +245,8 @@ This means the following methods can be used:
 More information on the Verifiable Credential data model use of `schemas`
 may be found [here](https://w3c.github.io/vc-data-model/#data-schemas).
 
-- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
-- [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common) 
+- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas)
+- [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common) 
 
 ## Drawbacks
 
