@@ -8,14 +8,14 @@ This scheme computes a single [ed25519](https://ed25519.cr.yp.to/) digital signa
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
+    "@type": "https://didcomm.org/signature/1.0/ed25519Sha512_single",
     "sig_data": "base64URL(64bit_integer_from_unix_epoch|msg)",
     "signature": "base64URL(ed25519 signature)",
     "signer": "base64URL(inlined_ed25519_signing_verkey)"
 }
 ```
 
-* `@type` MUST be `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single`
+* `@type` MUST be `https://didcomm.org/signature/1.0/ed25519Sha512_single`
 * `sig_data` MUST be the base64URL encoding of a 64-bit integer prepended to the message
 * `signature` MUST be the base64URL encoding of the resulting ed25519 digital signature over `sig_data`
 * `signer` MUST be the base64URL encoding of the corresponding ed25519 public key used to sign `sig_data`

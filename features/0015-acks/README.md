@@ -1,10 +1,9 @@
 # Aries RFC 0015: ACKs
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-12-26
-- Status Note: Broadly socialized and beginning to be implemented. Several protocols assume ACK behavior. May be nearing the maturity and uptake appropriate for ACCEPTED status. Note: this RFC 
-- Supersedes: [Indy HIPE PR #77](https://github.com/hyperledger/indy-hipe/pull/77)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Broadly implemented, adopted into many protocols and part of [AIP 1 and 2](../../concepts/0302-aries-interop-profile/README.md).
 - Start Date: 2018-12-26
 - Tags: [feature](/tags.md#feature)
 
@@ -72,7 +71,7 @@ this:
 
 ``` jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack",
+  "@type": "https://didcomm.org/notification/1.0/ack",
   "@id": "06d474e0-20d3-4cbf-bea6-6ba7e1891240",
   "status": "OK",
   "~thread": {
@@ -91,9 +90,9 @@ It may also be appropriate to send an ack at other key points in an interaction
 As discussed in [0003: Protocols](../../concepts/0003-protocols/README.md), a protocol can [adopt the ack message into
 its own namespace](../../0000-template-protocol.md#adopted-messages).
 This allows the type of an ack to change from:
-    `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack`
+    `https://didcomm.org/notification/1.0/ack`
 to something like:
-    `did:sov:protocolOwnersDID;spec/otherProtocol/2.0/ack`.
+    `https://didcomm.org/otherProtocol/2.0/ack`.
 Thus, message routing
 logic can see the ack as part of the other protocol, and send it to the relevant
 handler--but still have all the standardization of generic acks.

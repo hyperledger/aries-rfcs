@@ -27,7 +27,7 @@ The Revocation Notification protocol is a very simple protocol consisting of a s
 
 This simple protocol allows an issuer to choose to notify a holder that a previously issued credential has been revoked.
 
-It is the issuer's prerogative whether or not to notify the holder that a credential has been revoked.
+It is the issuer's prerogative whether or not to notify the holder that a credential has been revoked.  It is not a security risk if the issuer does not notify the holder that the credential has been revoked, nor if the message is lost.  The holder will still be unable to use a revoked credential without this notification.
 
 ### Roles
 
@@ -40,21 +40,27 @@ The `revoke` message sent by the `issuer` to the `holder` is as follows:
 
 ```JSON
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/revocation_notification/1.0/revoke",
+  "@type": "https://didcomm.org/revocation_notification/1.0/revoke",
   "@id": "<uuid-revocation-notification>",
-  "credential_id": "<uuid-credential>",
+  "~please_ack": ["RECEIPT","OUTCOME"],
+  "thread_id": "<thread_id>",
   "comment": "Some comment"
 }
 ```
 
 Description of fields:
 
-* `credential_id` -- identifies the credential which is being revoked.  This is the <uuid-credential> value as sent in the [issue-credential](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential#issue-credential) message.
-* `comment`       -- a field that provides some human readable information about the revocation notification.  This is typically the reason for the revocation as deemed appropriate by the issuer.
+* `~please_ack` (optional) -- as described by the [Please ACK Decorator RFC](https://github.com/hyperledger/aries-rfcs/tree/main/features/0317-please-ack).  If `OUTCOME` is specified, the `holder` should send an ack when the holder's agent has successfully notified the holder of the revocation.
+
+* `thread_id` (required) -- the [thread ID](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0008-message-id-and-threading#thread-id-thid) of the [issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2) protocol which was used to issue one or more credentials that have been revoked by the issuer.  If multiple credentials were issued, each credential has a different credential format but contains the same claims as described [here](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0453-issue-credential-v2#message-attachments); therefore, this message notifies the holder that all of these credentials have been revoked.
+
+* `comment` (optional) -- a field that provides some human readable information about the revocation notification.  This is typically the reason for the revocation as deemed appropriate by the issuer.
 
 ## Reference
 
-* See the [issue-credential](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential#issue-credential) protocol.
+* See the [issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2) protocol.
+* See the [thread ID](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0008-message-id-and-threading#thread-id-thid) description.
+* See the [Please ACK Decorator RFC](https://github.com/hyperledger/aries-rfcs/tree/main/features/0317-please-ack).
 
 ## Drawbacks
 

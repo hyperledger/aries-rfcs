@@ -4,7 +4,7 @@
 - Since: 2019-12-26 (date you submit your PR)
 - Status Note: Initial Draft
 - Start Date: 2019-12-06
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
@@ -58,7 +58,7 @@ This step is formalized by writing an RFC detailing which changes are expected i
 
 ## Reference
 
-This process should only be used for changes that are not detectable via the [Discover Features protocol](https://github.com/hyperledger/aries-rfcs/blob/master/features/0031-discover-features/README.md), either because the Discover Features Protocol cannot yet be run or the Discover Features Protocol does not reveal the change.
+This process should only be used for changes that are not detectable via the [Discover Features protocol](https://github.com/hyperledger/aries-rfcs/blob/main/features/0031-discover-features/README.md), either because the Discover Features Protocol cannot yet be run or the Discover Features Protocol does not reveal the change.
 
 #### Changes NOT applicable to this process
 
@@ -89,7 +89,7 @@ This process was discussed in [Issue 318](https://github.com/hyperledger/aries-r
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-*Implementation Notes* [may need to include a link to test results](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#accepted).
+*Implementation Notes* [may need to include a link to test results](https://github.com/hyperledger/aries-rfcs/blob/main/README.md#accepted).
 
 Name / Link | Implementation Notes
 --- | ---

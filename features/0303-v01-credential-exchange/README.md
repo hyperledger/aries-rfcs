@@ -6,7 +6,7 @@
 - Status Note: Deprecated, but in common use in existing deployments of Aries agents. See [Implementations](#implementations) 
 - Supersedes: [HackMD Document](https://hackmd.io/oWSw18DLTYCmHi_ty_gYvg?view)
 - Start Date: 2019-03-13
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 
@@ -47,7 +47,7 @@ Acknowledgments and Errors should be signalled via adopting the standard `ack` a
 
 ```jsonld
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/credential-issuance/0.1/credential-offer",
+    "@type": "https://didcomm.org/credential-issuance/0.1/credential-offer",
     "@id": "<uuid-offer>",
     "comment": "some comment",
     "credential_preview": <json-ld object>,
@@ -59,7 +59,7 @@ Acknowledgments and Errors should be signalled via adopting the standard `ack` a
 
 ```jsonld
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/credential-issuance/0.1/credential-request",
+    "@type": "https://didcomm.org/credential-issuance/0.1/credential-request",
     "@id": "<uuid-request>",
     "comment": "some comment",
     "request": <libindy json string>
@@ -70,7 +70,7 @@ Acknowledgments and Errors should be signalled via adopting the standard `ack` a
 
 ``` jsonld
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/credential-issuance/0.1/credential-issue",
+    "@type": "https://didcomm.org/credential-issuance/0.1/credential-issue",
     "@id": "<uuid-credential>",
     "issue": <libindy json string>
 }
@@ -84,7 +84,7 @@ The message family to initiate a presentation. The verifier initiates the proces
 
 ```jsonld
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/credential-presentation/0.1/presentation-request",
+    "@type": "https://didcomm.org/credential-presentation/0.1/presentation-request",
     "@id": "<uuid-request>",
     "comment": "some comment",
     "request": <libindy json string>
@@ -95,7 +95,7 @@ The message family to initiate a presentation. The verifier initiates the proces
 
 ```jsonld
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/credential-presentation/0.1/credential-presentation",
+    "@type": "https://didcomm.org/credential-presentation/0.1/credential-presentation",
     "@id": "<uuid-presentation>",
     "comment": "some comment",
     "presentation": <libindy json string>

@@ -1,9 +1,7 @@
-# 0346: DIDCOMM BETWEEN TWO MOBILE AGENTS USING CLOUD AGENT MEDIATOR
+# 0346: DIDComm Between Two Mobile Agents Using Cloud Agent Mediator
 - Author: [Sukalpo Mitra](sukalpomitra@gmail.com)
 - Start Date: 2019-06-23
-- Tags: concept
-
-## Status
+- Tags: [concept](/tags.md#concept)
 - Status: [PROPOSED](/README.md#proposed)
 - Status Date: 2019-06-23
 - Status Note: ???
@@ -29,7 +27,7 @@ The cloud agent registration invite looks like below
 
 ```JSON
 {​
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0/cloudagentregistrationinvitation",​
+    "@type": "https://didcomm.org/didexchange/1.0/cloudagentregistrationinvitation",​
     "@id": "12345678900987654321",​
     "label": "CloudAgentA",​
     "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],​
@@ -40,7 +38,7 @@ The cloud agent registration invite looks like below
 }​
 ```
 
-The registration data is base64 encrypted and is added to alink as part of the c_a_r query param. The recipient key is the public key of "Cloud Agent A". The service endpoint is where the edge agent should send the message to. Response endpoint is where a response that is being sent to Alice should be sent to. For example, if Bob wants to send a message to Alice, then Bob should send the message to the response endpoint. Consumer endpoint is where Alice's edge agent should consume the messages that are sent to her. The "Consumer" is an identifier to identify Alice's edge agent by the cloud agent "A". This identifier is different with each cloud agent and hence provides low correlation risk. Each time an invitation QR code is generated, a new consumer id is generated. No acknowledgment is required to be sent to the cloud agent or vice versa as the consumer-generated is never repeated.
+The registration data is base64url-encoded and is added to alink as part of the c_a_r query param. The recipient key is the public key of "Cloud Agent A". The service endpoint is where the edge agent should send the message to. Response endpoint is where a response that is being sent to Alice should be sent to. For example, if Bob wants to send a message to Alice, then Bob should send the message to the response endpoint. Consumer endpoint is where Alice's edge agent should consume the messages that are sent to her. The "Consumer" is an identifier to identify Alice's edge agent by the cloud agent "A". This identifier is different with each cloud agent and hence provides low correlation risk. Each time an invitation QR code is generated, a new consumer id is generated. No acknowledgment is required to be sent to the cloud agent or vice versa as the consumer-generated is never repeated.
 
 All the endpoint data and the public key of the cloud agents are then stored as non secret records in Alice's wallet with a tag "cloud-agent"
 
@@ -56,7 +54,7 @@ It then packs this message by Bob's recipient key and then creates another json 
 
 ```JSON
 {​
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward",​
+    "@type": "https://didcomm.org/routing/1.0/forward",​
     "@id": "12345678900987654321",​
     "msg": "<Encrypted message for Bob here>",
     "to": "<Service endpoint of Bob>"​
@@ -71,7 +69,7 @@ For example, say the next random cloud agent that it chooses is Cloud Agent "C".
 
 ```JSON
 {​
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward",​
+    "@type": "https://didcomm.org/routing/1.0/forward",​
     "@id": "12345678900987654321",​
     "msg": "<Encrypted message for Cloud Agent A>",
     "to": "<Service endpoint of Cloud Agent A>"​
@@ -109,7 +107,7 @@ In other suggested message formatting protocol Alice would provide a list of rou
 
 # Related art
 [related-art] #prior-art
-Aries-rfc [Aries RFC 0046: Mediators and Relays](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0046-mediators-and-relays)
+Aries-rfc [Aries RFC 0046: Mediators and Relays](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0046-mediators-and-relays)
 
 # Prior art
 [prior-art]: #prior-art
@@ -124,7 +122,7 @@ Can a cloud agent have their own army of servers that just basically looks into 
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-*Implementation Notes* [may need to include a link to test results](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#accepted).
+*Implementation Notes* [may need to include a link to test results](https://github.com/hyperledger/aries-rfcs/blob/main/README.md#accepted).
 
 Name / Link | Implementation Notes
 --- | ---

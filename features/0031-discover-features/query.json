@@ -1,8 +1,8 @@
 
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0/query",
+  "@type": "https://didcomm.org/discover-features/1.0/query",
   "@id": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU",
-  "query": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.*",
+  "query": "https://didcomm.org/tictactoe/1.*",
   "comment": "I'm wondering if we can play tic-tac-toe..."
 }
 

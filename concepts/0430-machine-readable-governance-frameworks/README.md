@@ -59,7 +59,7 @@ Each problem domain will probably have unique requirements. Therefore, we start 
 {
     "@context": [
         // The first context must be this RFC's context. It defines core properties.
-        "https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0430-machine-readable-governance-frameworks/context.jsonld", 
+        "https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0430-machine-readable-governance-frameworks/context.jsonld", 
         // Additional contexts can be added to extend.
         "https://kmk.org/uni-accred-trust-fw"
     ],

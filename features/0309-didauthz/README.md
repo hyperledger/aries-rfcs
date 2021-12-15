@@ -5,7 +5,7 @@
 - Status Note: This RFC is under development.
 - Supersedes:
 - Start Date: 2019-09-27
-- Tags: feature, credentials
+- Tags: [feature](/tags.md#feature), [credentials](/tags.md#credentials)
 
 ## Summary
 

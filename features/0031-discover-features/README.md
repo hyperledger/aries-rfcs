@@ -1,10 +1,10 @@
 # Aries RFC 0031: Discover Features Protocol 1.0
 
 - Authors: Daniel Hardman
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ACCEPTED](/README.md#accepted) (may be RETIRED when [v2.0](README.md) of the protocol has enough gravitas)
 - Since: 2019-05-01
-- Status Note: Reached FCP status in Indy. Implemented in at least two codebases.
-- Supersedes: [Indy RFC PR #73](https://github.com/hyperledger/indy-hipe/pull/73)
+- Status Note: One of our earliest DIDComm protocols; reached FCP (standards track) status in Indy, and implemented in at least two codebases there. Converted to an Aries RFC Implemented in a handful of Aries codebases. With the advent of DIDComm v2 at DIF, it became clear that we wanted to discover features beyond just protocol support, so this version of the protocol is now superseded by [v2.0 in RFC 0557](../0557-discover-features-v2/README.md).
+- Supersedes: [Indy HIPE PR #73](https://github.com/hyperledger/indy-hipe/pull/73).
 - Start Date: 2018-12-17
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
@@ -27,7 +27,9 @@ This RFC introduces a protocol for discussing the protocols an agent
 can handle. The identifier for the message family used by this protocol is
 `discover-features`, and the fully qualified URI for its definition is:
 
-    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0
+    https://didcomm.org/discover-features/1.0
+    
+>This protocol is now superseded by [v2.0 in RFC 0557](../0557-discover-features-v2/README.md). Prefer the new version where practical.  
 
 ### Roles
 
@@ -50,9 +52,9 @@ A `discover-features/query` message looks like this:
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0/query",
+  "@type": "https://didcomm.org/discover-features/1.0/query",
   "@id": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU",
-  "query": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.*",
+  "query": "https://didcomm.org/tictactoe/1.*",
   "comment": "I'm wondering if we can play tic-tac-toe..."
 }
 ```
@@ -80,11 +82,11 @@ A `discover-features/disclose` message looks like this:
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0/disclose",
+  "@type": "https://didcomm.org/discover-features/1.0/disclose",
   "~thread": { "thid": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU" },
   "protocols": [
     {
-      "pid": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.0",
+      "pid": "https://didcomm.org/tictactoe/1.0",
       "roles": ["player"]
     }
   ]
@@ -94,7 +96,7 @@ A `discover-features/disclose` message looks like this:
 The `protocols` field is a JSON array of __protocol support descriptor__
 objects that match the query. Each descriptor has a `pid` that contains
 a protocol version (fully qualified message family identifier such as
-`did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.0`), plus a `roles`
+`https://didcomm.org/tictactoe/1.0`), plus a `roles`
 array that enumerates the roles the responding agent
 can play in the associated protocol.
 
@@ -108,10 +110,10 @@ response is probably just as good:
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/discover-features/1.0/disclose",
+  "@type": "https://didcomm.org/discover-features/1.0/disclose",
   "~thread": { "thid": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU" },
   "protocols": [
-    {"pid": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tictactoe/1.0"}
+    {"pid": "https://didcomm.org/tictactoe/1.0"}
   ]
 }
 ```

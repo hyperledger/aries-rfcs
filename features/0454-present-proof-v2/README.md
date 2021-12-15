@@ -1,14 +1,19 @@
 # Aries RFC 0454: Present Proof Protocol 2.0
 
 - Authors: Nikita Khateev, Stephen Curran
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-05-27
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
 - Status Note:  See [RFC 0453](../0453-issue-credential-v2/README.md) for the corresponding issue credential protocol.
 - Supersedes: [RFC 0037](../0037-present-proof/README.md)
 - Start Date: 2020-05-27
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
 
 ## Version Change Log
+
+### 2.1 - Add ability to request multiple presentations
+
+A minor update to add mechanism for a Verifier to request the Prover submit multiple presentations in the "presentation" message(s), each presentation sourced from different credentials that satisfy the presentation request.
+An example use of this capability is an employer (Verifier) requesting multiple "proof of employment" presentations from a job application (Prover), each satisfying the one presentation request.
 
 ### 2.0 - Alignment with [RFC 0453 Issue Credential](../0453-issue-credential-v2/README.md)
 
@@ -28,7 +33,7 @@ We need a standard protocol for a verifier to request a presentation from a prov
 
 ### Name and Version
 
-`present-proof`, version 2.0
+`present-proof`, version 2.1
 
 ### Key Concepts
 
@@ -44,6 +49,10 @@ Diagrams in this protocol were made in draw.io. To make changes:
 ### Roles
 
 The roles are `verifier` and `prover`.  The `verifier` requests the presentation of a proof and verifies the presentation, while the `prover` prepares the proof and presents it to the verifier. Optionally, although unlikely from a business sense, the `prover` may initiate an instance of the protocol using the `propose-presentation` message.
+
+### Goals
+
+When the goals of each role are not available because of context, goal codes may be specifically included in protocol messages. This is particularly helpful to differentiate between credentials passed between the same parties for several different reasons. A goal code included should be considered to apply to the entire thread and is not necessary to be repeated on each message. Changing the goal code may be done by including the new code in a message. All goal codes are optional, and without default. 
 
 ### States
 
@@ -69,6 +78,9 @@ The following states are defined and included in the state transition table belo
 
 For the most part, these states map onto the transitions shown in both the state transition table above, and in the choreography diagram ([below](#choreography-diagram)) in obvious ways. However, a few subtleties are worth highlighting:
 
+* The Verifier may indicate in the `request-presentation` message that the Prover may provide multiple Presentations (in one or more `presentation` messages). In that case, the Verifier stays in the `request-state` if the Prover indicates in `presentation` messages that additional
+`presentation` messages will be sent. See the messages (below) for how the Verifier and Prover indicate how multiple presentations are to be handled.
+
 * The final states for both the prover and verifier are `done` or `abandoned`, and once reached, no further updates to the protocol instance are expected.
 
 * The `ack-presentation` is sent or not based on the value of `will_confirm` in the `request-presentation`. A verifier may send an `ack-presentation` message in response to the prover including the `~please_ack` decorator in the `presentation` message. Whether an `ack-presentation` is expected or not determines whether the states `presentation-sent` and `presentation-received` are used at all in a protocol instance.
@@ -89,7 +101,7 @@ The present proof protocol consists of these messages:
 
 * `propose-presentation` - Prover to Verifier (optional) - propose a presentation or send a counter-proposal in response to a `request-presentation` message
 * `request-presentation` - Verifier to Prover - request a presentation
-* `presentation` - Prover to Verifier - provide a presentation in response to a request
+* `presentation` - Prover to Verifier - provide a presentation(s) in response to a request
 
 In addition, the [`ack`](../0015-acks/README.md) and [`problem-report`](../0035-report-problem/README.md) messages are adopted into the protocol for confirmation and error handling.
 
@@ -105,6 +117,7 @@ An optional message sent by the prover to the verifier to initiate a proof prese
 {
     "@type": "https://didcomm.org/present-proof/%VER/propose-presentation",
     "@id": "<uuid-propose-presentation>",
+    "goal_code": "<goal-code>",
     "comment": "some comment",
     "formats" : [
         {
@@ -112,7 +125,7 @@ An optional message sent by the prover to the verifier to initiate a proof prese
             "format" : "<format-and-version>",
         }
     ],
-    "proposal~attach": [
+    "proposals~attach": [
         {
             "@id": "<attachment identifier>",
             "mime-type": "application/json",
@@ -126,11 +139,12 @@ An optional message sent by the prover to the verifier to initiate a proof prese
 
 Description of fields:
 
+* `goal_code` -- optional field that indicates the goal of the message sender. 
 * `comment` -- a field that provides some human readable information about the proposed presentation.
 * `formats` -- contains an entry for each `filter~attach` array entry, including an optional value of the attachment `@id` (if attachments are present) and the verifiable presentation format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
-* `proposal~attach` -- an optional array of attachments that further define the presentation request being proposed. This might be used to clarify which formats or format versions are wanted.
+* `proposals~attach` -- an optional array of attachments that further define the presentation request being proposed. This might be used to clarify which formats or format versions are wanted.
 
-If the `proposal~attach` is not provided, the `attach_id` item in the `formats` array should not be provided. That form of the `propose-presentation` message is to indicate the presentation formats supported by the prover, independent of the verifiable presentation request content.
+If the `proposals~attach` is not provided, the `attach_id` item in the `formats` array should not be provided. That form of the `propose-presentation` message is to indicate the presentation formats supported by the prover, independent of the verifiable presentation request content.
 
 #### Negotiation and Preview
 
@@ -140,7 +154,7 @@ Negotiation prior to the delivery of the presentation can be done using the `pro
 
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-Hyperledger Indy | hlindy-zkp-v1.0 | [Libindy Presentation Request API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214) | _To Do_: Change link to point to Indy Docs
+Hyperledger Indy Proof Req| hlindy/proof-req@v2.0 | [proof request format](../0592-indy-attachments/README.md#proof-request-format) | Used to propose as well as request proofs.
 DIF Presentation Exchange | `dif/presentation-exchange/definitions@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#propose-presentation-attachment-format) | 
 
 ### Request Presentation
@@ -151,8 +165,10 @@ From a verifier to a prover, the `request-presentation` message describes values
 {
     "@type": "https://didcomm.org/present-proof/%VER/request-presentation",
     "@id": "<uuid-request>",
+    "goal_code": "<goal-code>",
     "comment": "some comment",
-    "will_confirm": "true",
+    "will_confirm": true,
+    "present_multiple": false,
     "formats" : [
         {
             "attach_id" : "<attach@id value>",
@@ -173,16 +189,23 @@ From a verifier to a prover, the `request-presentation` message describes values
 
 Description of fields:
 
+* `goal_code` -- optional field that indicates the goal of the message sender. 
 * `comment` -- a field that provides some human readable information about this request for a presentation.
-* `will_confirm` -- an optional field that defaults to `"false"` to indicate that the verifier will or will not send a post-presentation confirmation `ack` message
+* `will_confirm` -- an optional field that defaults to `false` to indicate that the Verifier will or will not send a post-presentation confirmation `ack` message.
+* `present_multiple` -- an optional field that defaults to `false` to indicate that the Verifier would like the Prover to send multiple presentations that satisfy the presentation request from different verifiable credentials.
 * `formats` -- contains an entry for each `request_presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation request format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
 * `request_presentations~attach` -- an array of attachments containing the acceptable verifiable presentation requests.
+
+While the `present_multiple` value can be set to true in any instance of the protocol, Verifiers are recommended to use the capability with care
+if the `presentation-request` includes presenting claims from multiple verifiable credential types. Such scenarios can get overly complicated for the Prover
+if they hold multiple instances of each of the requested credential. For example, an employer asking for multiple presentations for a single request for claims
+from both employment and education verifiable credentials held by the Prover.
 
 #### Presentation Request Attachment Registry
 
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-Hyperledger Indy | hlindy-zkp-v1.0 | [Libindy Presentation Request API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214) | _To Do_: Change link to point to Indy Docs
+Hyperledger Indy Proof Req| hlindy/proof-req@v2.0 | [proof request format](../0592-indy-attachments/README.md#proof-request-format) | Used to propose as well as request proofs.
 DIF Presentation Exchange | `dif/presentation-exchange/definitions@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#request-presentation-attachment-format) | 
 
 ### Presentation
@@ -193,7 +216,9 @@ This message is a response to a Presentation Request message and contains signed
 {
     "@type": "https://didcomm.org/present-proof/%VER/presentation",
     "@id": "<uuid-presentation>",
+    "goal_code": "<goal-code>",
     "comment": "some comment",
+    "last_presentation": true,
     "formats" : [
         {
             "attach_id" : "<attach@id value>",
@@ -215,28 +240,32 @@ This message is a response to a Presentation Request message and contains signed
 
 Description of fields:
 
+* `goal_code` -- optional field that indicates the goal of the message sender.
 * `comment` -- a field that provides some human readable information about this presentation.
+* `last_presentation` -- an optional field that defaults to `true` to indicate this is the last presentation message to be sent in satisfying the presentation request. If the value is `false`, the Prover MUST send another presentation message with an additional presentation(s). The Prover's last `presentation` message MUST have a `last_presentation` value of `false` (explicitly or by default). If the `present_multiple` field is absent or `false` in the `request_presentation` message from the Verifier, the `last_presentation` field on the first/only `presentation` message MUST be true (explicitly or by default).
 * `formats` -- contains an entry for each `presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
-* `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
+* `presentations~attach` -- an array of attachments containing the presentation in the requested format(s). If the `present_multiple` field is `true` in the `request_presentation` message from the Verifier, the Prover MAY include multiple presentations of the same format that satisfy the Presentation request from the Verifier.
 
-A prover may include the [`~please_ack` decorator](../0015-acks/README.md#requesting-acks) to request a `ack-presentation` if the verifier has not indicated they will send a `ack-presentation`.
+If the `last_presentation` field is `false`, the Verifier's state SHOULD remain in the `request-sent` state (barring an error), with the expectation that additional `presentation` messages will be coming from the prover. If the `last_presentation` value is `true` (explicitly or by default) the Verifier MUST transition to their next appropriate state.
+
+If the Prover wants an acknowledgement that the presentation was accepted, this message may be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. This is not necessary if the Verifier has indicated it will send an `ack-presentation` using the `will_confirm` property. Outcome in the context of this protocol is the definition of "successful" as described in [Ack Presentation](#ack-presentation). Note that this is different from the default behavior as described in [0317: Please ACK Decorator](../0317-please-ack/README.md). It is then best practice for the new Verifier to respond with an explicit `ack` message as described in the please ack decorator RFC.
 
 #### Presentations Attachment Registry
 
 Presentation Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
-Hyperledger Indy | hlindy-zkp-v1.0 | [Libindy Presentation API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404) | _To Do_: Change link to point to Indy Docs, including claim encoding
+Hyperledger Indy Proof | hlindy/proof@v2.0 | [proof format](../0592-indy-attachments/README.md#proof-format) |
 DIF Presentation Exchange | `dif/presentation-exchange/submission@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#presentation-attachment-format) | 
 
 ### Ack Presentation
 
-A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](../0015-acks/README.md). The definition of "successful" from a business sense is up to the verifier.
+A message from the verifier to the prover that the `Present Proof` protocol was completed successfully and is now in the `done` state. The message is an adopted `ack` from the [RFC 0015 acks protocol](../0015-acks/README.md). The definition of "successful" in this protocol means the acceptance of the presentation in whole, i.e. the proof is verified and the contents of the proof are acknowledged. The `ack` message MUST NOT be sent until a `last_presentation` value is `true` (explicitly or by default) in the `presentation` message from the Prover.
 
 ### Problem Report
 
 A message from the verifier to the prover that follows the `presentation` message to indicate that the `Present Proof` protocol was completed unsuccessfully and is now in the `abandoned` state. The message is an adopted `problem-report` from the [RFC 0015 report-problem protocol](../0035-report-problem/README.md). The definition of "unsuccessful" from a business sense is up to the verifier. The elements of the `problem-report` message can provide information to the prover about why the protocol instance was unsuccessful.
 
-Either party may send a `problem-report` message earlier in the flow to terminate the protocol before it's normal conclusion.
+Either party may send a `problem-report` message earlier in the flow to terminate the protocol before its normal conclusion.
 
 ## Reference
 
@@ -244,15 +273,13 @@ Details are covered in the [Tutorial](#tutorial) section.
 
 ## Drawbacks
 
-The Indy format of the proposal attachment as proposed above does not allow nesting of logic along the lines of "A and either B or C if D, otherwise A and B", nor cross-credential options such as proposing a legal name issued by either (for example) a specific financial institution or government entity.
-
-The verifiable presentation standardization work being conducted in parallel to this in DIF and the W3C Credentials Community Group (CCG) should be included in at least the `Registry` tables of this document, and ideally used to eliminate the need for presentation format-specific options.
+- None currently noted
 
 ## Rationale and alternatives
 
 ## Prior art
 
-The existing [RFC 0036 Present Proof](../0037-present-proof/README.md) protocol and implementations.
+The previous major version of this protocol is [RFC 0037 Present Proof](../0037-present-proof/README.md) protocol and implementations.
 
 ## Unresolved questions
 

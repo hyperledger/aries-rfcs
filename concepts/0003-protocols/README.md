@@ -342,13 +342,9 @@ The following are examples of valid MTURIs and PIURIs:
    ([https://github.com/hyperledger/aries-rfcs/tree/18c4f82](
    https://github.com/hyperledger/aries-rfcs/tree/18c4f82
    )) and look for documentation on the `trust_ping/1.0` protocol.
-* `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/trust_ping/1.0/ping` (MTURI) This
-   uses a DID reference to look up an endpoint named `spec` that serves
-   information about protocols. (The exact syntax of DID references--URIs
-   where the DID functions like a domain name, and additional info is
-   fetched from a DID Doc in much the same way IP address and hostname
-   definitions are fetched from a DNS record--is still being finalized.
-   See the latest [DID Spec](https://w3c-ccg.github.io/did-spec/) for details.)
+* `https://didcomm.org/trust_ping/1.0/ping` (MTURI) This
+   uses an https reference that could serve
+   information about protocols.
 
 ### Semver Rules for Protocols
 
@@ -506,7 +502,7 @@ to move the interaction forward.)
 
 #### Roles
 
-The __roles__ in a protocol are the perspectives (responsibilities, privileges) that parties take i an
+The __roles__ in a protocol are the perspectives (responsibilities, privileges) that parties take in an
 interaction.
 
 This perspective is manifested in three general ways:
