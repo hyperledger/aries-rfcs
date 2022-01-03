@@ -125,7 +125,7 @@ Another prior effort towards enhancing JWE compliance is to use XChacha20Poly130
 }
 ```
 
-`typ` header field is the DIDComm Transports value as mentioned in [RFC-0025](https://github.com/hyperledger/aries-rfcs/tree/master/features/0025-didcomm-transports#reference). This RFC states the prefix `application/` but according to [IANA Media types](https://www.iana.org/assignments/media-types/media-types.xhtml#application) the prefix is implied therefore not needed here.
+`typ` header field is the DIDComm Transports value as mentioned in [RFC-0025](https://github.com/hyperledger/aries-rfcs/tree/main/features/0025-didcomm-transports#reference). This RFC states the prefix `application/` but according to [IANA Media types](https://www.iana.org/assignments/media-types/media-types.xhtml#application) the prefix is implied therefore not needed here.
 
 ### Anoncrypt using ECDH-ES key wrapping mode and A256GCM content encryption
 
@@ -205,7 +205,7 @@ See concrete [anoncrypt](anoncrypt-examples.md) and [authcrypt](authcrypt-exampl
 
 ## JWE detached mode nested envelopes
 
-There are situations in DIDComm messaging where an envelope could be nested inside another envelope -- particularly [RFC 46: Mediators and Relays](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0046-mediators-and-relays). Normally nesting envelopes implies that the envelope payloads will incur additional encryption and encoding operations at each parent level in the nesting. This section describes a mechanism to extract the nested payloads outside the nesting structure to avoid these additional operations.
+There are situations in DIDComm messaging where an envelope could be nested inside another envelope -- particularly [RFC 46: Mediators and Relays](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0046-mediators-and-relays). Normally nesting envelopes implies that the envelope payloads will incur additional encryption and encoding operations at each parent level in the nesting. This section describes a mechanism to extract the nested payloads outside the nesting structure to avoid these additional operations.
 
 ### Detached mode
 
@@ -289,8 +289,8 @@ This illustration extends the serialization shown in [RFC 7516](https://tools.ie
 ## Prior art
 
 - The [JWE](https://tools.ietf.org/html/rfc7518) family of encryption methods.
-- [Aries RFC 0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/master/features/0019-encryption-envelope) suggested envelope formats will be superseded by this RFC.
-- [Aries RFC 0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/master/features/0025-didcomm-transports#reference) for the content type used in the proposed envelopes.
+- [Aries RFC 0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope) suggested envelope formats will be superseded by this RFC.
+- [Aries RFC 0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/main/features/0025-didcomm-transports#reference) for the content type used in the proposed envelopes.
 - [minimal-cipher](https://github.com/digitalbazaar/minimal-cipher) implementation
 - [Aries-Framework-Go](https://github.com/hyperledger/aries-framework-go/) has an experimental (X)Chacha20Poly1305 Packer implementation based on Aries-RFCs [issue-133](https://github.com/hyperledger/aries-rfcs/issues/133#issuecomment-535199768)
 - [IANA Media Types](https://www.iana.org/assignments/media-types/media-types.xhtml#application)

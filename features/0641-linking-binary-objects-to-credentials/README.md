@@ -9,7 +9,7 @@
 
 ## Summary
 
-This RFC provides a solution for issuing and presenting credentials with external binary objects, after referred to as attachments. It is compatible with [0036: Issue Credential Protocol V1](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential), [0453: Issue Credential Protocol V2](https://github.com/hyperledger/aries-rfcs/tree/master/features/0453-issue-credential-v2), [0037: Present Proof V1 protocol](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof) and [0454: Present Proof V2 Protocol](https://github.com/hyperledger/aries-rfcs/tree/master/features/0454-present-proof-v2). These external attachments could consist of images, PDFs, zip files, movies, etc. Through the use of `DIDComm attachments`, [0017: Attachments](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0017-attachments), the data can be embedded directly into the attachment or externally hosted. In order to maintain integrity over these attachments, hashlinks are used as the checksum.
+This RFC provides a solution for issuing and presenting credentials with external binary objects, after referred to as attachments. It is compatible with [0036: Issue Credential Protocol V1](https://github.com/hyperledger/aries-rfcs/tree/main/features/0036-issue-credential), [0453: Issue Credential Protocol V2](https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2), [0037: Present Proof V1 protocol](https://github.com/hyperledger/aries-rfcs/tree/main/features/0037-present-proof) and [0454: Present Proof V2 Protocol](https://github.com/hyperledger/aries-rfcs/tree/main/features/0454-present-proof-v2). These external attachments could consist of images, PDFs, zip files, movies, etc. Through the use of `DIDComm attachments`, [0017: Attachments](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0017-attachments), the data can be embedded directly into the attachment or externally hosted. In order to maintain integrity over these attachments, hashlinks are used as the checksum.
 
 ## Motivation
 
@@ -17,7 +17,7 @@ Many use cases, such as a rental agreement or medical data in a verifiable crede
 
 ## Tutorial
 
-It is already possible to issue and verify base64-encoded attachments in credentials. When a credential is getting larger and larger, it becomes more and more impractical as it has to be signed, which is time consuming and resource intensive. A solution for this is to use the attachments decorator. This decorator creates a way to externalize the attachment from the credential attributes. By allowing this, the signing will be faster and more consistent. However, DIDComm messages SHOULD stay small, like with SMTP or Bluetooth, as specified in [0017: Attachments](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0017-attachments). In the attachments decorator it is also possible to specify a list of URLs where the attachment might be located for download. This list of URLs is accompanied by a `sha256` tag that is a checksum over the file to maintain integrity. This `sha256` tag can only contain a sha256 hash and if another algorithm is preferred then the hashlink MUST be used as the checksum.
+It is already possible to issue and verify base64-encoded attachments in credentials. When a credential is getting larger and larger, it becomes more and more impractical as it has to be signed, which is time consuming and resource intensive. A solution for this is to use the attachments decorator. This decorator creates a way to externalize the attachment from the credential attributes. By allowing this, the signing will be faster and more consistent. However, DIDComm messages SHOULD stay small, like with SMTP or Bluetooth, as specified in [0017: Attachments](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0017-attachments). In the attachments decorator it is also possible to specify a list of URLs where the attachment might be located for download. This list of URLs is accompanied by a `sha256` tag that is a checksum over the file to maintain integrity. This `sha256` tag can only contain a sha256 hash and if another algorithm is preferred then the hashlink MUST be used as the checksum.
 
 When issuing and verifying a credential, messages have to be sent between the holder, issuer and verifier. In order to circumvent additional complexity, such as looking at previously sent credentials for the attachment, the attachments decorator, when containing an attachment, MUST be sent at all of the following steps:
 
@@ -66,7 +66,7 @@ Attachments can be inlined in the credential attribute as a base64-encoded strin
 
 When the attachments decorator is used to issue a credential with a binary object, a link has to be made between the credential value and the corresponding attachment. This link MUST be a hash, specifically a hashlink based on the checksum of the attachment.
 
-As stated in [0008: message id and threading](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0008-message-id-and-threading/README.md), the `@id` tag of the attachment MUST NOT contain a colon and MUST NOT be longer than 64 characters. because of this, the `@id` can not contain a hashlink and MUST contain the multihash with a maximum length of 64 characters. When a hash is longer than 64 character, use the first 64 characters.
+As stated in [0008: message id and threading](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0008-message-id-and-threading/README.md), the `@id` tag of the attachment MUST NOT contain a colon and MUST NOT be longer than 64 characters. because of this, the `@id` can not contain a hashlink and MUST contain the multihash with a maximum length of 64 characters. When a hash is longer than 64 character, use the first 64 characters.
 
 ```json
 {
@@ -203,8 +203,8 @@ The Identity Foundation is currently working on confidential storage, a way to a
 
 ## Prior art
 
-- [0017: Attachments](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0017-attachments) discusses the attachments in DIDcomm messaging and formulates the attachment decorator.
-- [HIPE-0139: Image As Attribute Via Aries-0036 Issue-Credential Protocol](https://github.com/hyperledger/indy-hipe/blob/master/text/0139-image-as-cred-attr/README.md) has been written for the support of images in credentials. It points out that the attachment RFC and the issue credential RFC are separate and could drift apart.
+- [0017: Attachments](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0017-attachments) discusses the attachments in DIDcomm messaging and formulates the attachment decorator.
+- [HIPE-0139: Image As Attribute Via Aries-0036 Issue-Credential Protocol](https://github.com/hyperledger/indy-hipe/blob/main/text/0139-image-as-cred-attr/README.md) has been written for the support of images in credentials. It points out that the attachment RFC and the issue credential RFC are separate and could drift apart.
 - [Linking and Exchanging Attachments with Verifiable Credentials](https://sovrin.org/interoperability-series-linking-and-exchanging-attachments-with-verifiable-credentials/) describes the linking between the attachment the credential based on the `@id` tag.
 
 ## Unresolved questions
