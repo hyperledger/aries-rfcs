@@ -1,7 +1,7 @@
 # 0302: Aries Interop Profile
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [John Jordan](mailto:john.jordan@gov.bc.ca) Province of British Columbia
-- Status: [ACCEPTED](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#accepted)
+- Status: [ACCEPTED](https://github.com/hyperledger/aries-rfcs/blob/main/README.md#accepted)
 - Since: 2021-01-06
 - Status Note: This RFC defines an Aries Interop Profile process and Aries Interop Profile versions
 - Supersedes:
@@ -177,6 +177,7 @@ Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/t
 Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0454-present-proof-v2) | Update to V2 Protocol
 Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0557-discover-features-v2) | :new:
 Feature | [0627-static-peer-dids](https://github.com/hyperledger/aries-rfcs/tree/4739fbf6de07a54c3fee072bd85741422730b3cd/features/0627-static-peer-dids)  | :new:
+Feature | [0317-please-ack](https://github.com/hyperledger/aries-rfcs/tree/9ff2cab45487a1f6f74254abc9134419f2ad5858/features/0317-please-ack)  | :new:
 
 #### MEDIATE: Mediator Coordination
 
@@ -242,6 +243,7 @@ The following clarifications have been made to RFCs that make up AIP 2.0:
 - RFC 0441 Present Proof Best Practices: A convention for representing dates to enable simple "older than" predicates was added.
 - RFC 0510 DIF Presentation Exchange Attachment: The RFC Status was changed to "Accepted."
 - RFC 0646 BBS Credentials: The RFC Status was changed to "Accepted."
+- RFC 0317 Please Ack: The RFC Status was changed to "Accepted" and added to the AIP 2.0 base requirements list. Original discussion included the please ack decorator, but it wasn't added to the AIP 2.0 list before releasing AIP 2.0.
 
 ### Previous Versions
 
@@ -287,7 +289,7 @@ This is a typical approach to creating an early protocol certification program.
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-_Implementation Notes_ [may need to include a link to test results](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#accepted).
+_Implementation Notes_ [may need to include a link to test results](https://github.com/hyperledger/aries-rfcs/blob/main/README.md#accepted).
 
 
 Name / Link | Implementation Notes

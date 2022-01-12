@@ -29,7 +29,7 @@ capture 3 cells of the grid in a straight line.
 ### Name and Version
 
 This defines the `tictactoe` protocol, version 1.x, as identified by the
-following [PIURI](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0003-protocols#message-type-and-protocol-identifier-uris):
+following [PIURI](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0003-protocols#message-type-and-protocol-identifier-uris):
 
     did:sov:SLfEi9esrjzybysFxQZbfq;spec/tictactoe/1.0
 

@@ -43,7 +43,7 @@ The following requirements do not change this simple framework, but they introdu
 * It is desirable that criteria should be expressed in a way that harmonizes with proof requests, which also need a criteria language. 
 * It must be possible for the responder to give partial answers: "I do know a good mechanic, but not one that lives close to you."
 * It must be possible for the responder to give compound answers: "Here's an item that satisfies critiera 1 and 3, and here's a different itme that satisfies criteria 2 and 4."
-* It must be possible for this protocol to precede another protocol (e.g., [RFC 0028 Introduce Protocol](https://github.com/hyperledger/aries-rfcs/blob/master/features/0028-introduce/README.md)) in such a way that what follows can refer back to items in this protocol in an unambiguous way, as in "Here's an introduction to the party that I just told you about, that satisfies criteria 3 and 4 from the 'Help Me Discover' request you recently made."
+* It must be possible for this protocol to precede another protocol (e.g., [RFC 0028 Introduce Protocol](https://github.com/hyperledger/aries-rfcs/blob/main/features/0028-introduce/README.md)) in such a way that what follows can refer back to items in this protocol in an unambiguous way, as in "Here's an introduction to the party that I just told you about, that satisfies criteria 3 and 4 from the 'Help Me Discover' request you recently made."
 
 ### Messages
 

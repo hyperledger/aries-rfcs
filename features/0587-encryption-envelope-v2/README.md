@@ -15,7 +15,7 @@ This RFC proposes that we support the definition of envelopes from [DIDComm Mess
 ## Motivation
 
 This RFC defines ciphersuites for envelopes such that we can achieve better compatability with DIDComm Messaging being specified at DIF.
-The ciphersuites defined in this RFC are a subset of the definitions in [Aries RFC 0334-jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/master/features/0334-jwe-envelope).
+The ciphersuites defined in this RFC are a subset of the definitions in [Aries RFC 0334-jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0334-jwe-envelope).
 
 ## Encryption Algorithms
 
@@ -162,7 +162,7 @@ To advertise the combination of Envelope v2 with a DIDComm v1 message, the media
 
 ## Additional AIP impacts
 
-Implementors supporting an AIP sub-target that contains this RFC (e.g., `DIDCOMMV2PREP`) MAY choose to only support Envelope v2 without support for the original envelope declared in [RFC 0019](https://github.com/hyperledger/aries-rfcs/tree/master/features/0019-encryption-envelope). In these cases, the `accept` property will not contain `didcomm/aip2;env=rfc19` media type.
+Implementors supporting an AIP sub-target that contains this RFC (e.g., `DIDCOMMV2PREP`) MAY choose to only support Envelope v2 without support for the original envelope declared in [RFC 0019](https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope). In these cases, the `accept` property will not contain `didcomm/aip2;env=rfc19` media type.
 
 ## Drawbacks
 
@@ -177,9 +177,9 @@ Aries agents currently use the envelope described in [RFC0019](/features/0019-en
 ## Prior art
 
 - The [JWE](https://tools.ietf.org/html/rfc7518) family of encryption methods.
-- [Aries RFC 0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/master/features/0019-encryption-envelope) suggested envelope formats will be superseded by this RFC.
-- [Aries RFC 0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/master/features/0025-didcomm-transports#reference) for the content type used in the proposed envelopes.
-- [Aries RFC 0334-jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/master/features/0334-jwe-envelope).
+- [Aries RFC 0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope) suggested envelope formats will be superseded by this RFC.
+- [Aries RFC 0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/main/features/0025-didcomm-transports#reference) for the content type used in the proposed envelopes.
+- [Aries RFC 0334-jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0334-jwe-envelope).
 - [DIDComm Messaging](https://identity.foundation/didcomm-messaging/spec).
 - [minimal-cipher](https://github.com/digitalbazaar/minimal-cipher) implementation
 - [Public Key Authenticated Encryption for JOSE: ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03)

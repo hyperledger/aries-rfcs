@@ -1,7 +1,7 @@
 # Aries RFC 0317: Please ACK Decorator
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com), [Timo Glastra](mailto:timo@animo.id)
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-12-26
 - Status Note: Separated from the ACK protocol. A lot of complex features were removed for inclusion in AIP 2.0 (see note at bottom)
 - Start Date: 2018-12-26
@@ -137,6 +137,6 @@ None specified.
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name / Link | Implementation Notes
---- | ---
- | 
+| Name / Link | Implementation Notes |
+| ----------- | -------------------- |
+|  |

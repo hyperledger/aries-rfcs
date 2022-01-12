@@ -107,7 +107,7 @@ In other suggested message formatting protocol Alice would provide a list of rou
 
 # Related art
 [related-art] #prior-art
-Aries-rfc [Aries RFC 0046: Mediators and Relays](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0046-mediators-and-relays)
+Aries-rfc [Aries RFC 0046: Mediators and Relays](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0046-mediators-and-relays)
 
 # Prior art
 [prior-art]: #prior-art
@@ -122,7 +122,7 @@ Can a cloud agent have their own army of servers that just basically looks into 
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-*Implementation Notes* [may need to include a link to test results](https://github.com/hyperledger/aries-rfcs/blob/master/README.md#accepted).
+*Implementation Notes* [may need to include a link to test results](https://github.com/hyperledger/aries-rfcs/blob/main/README.md#accepted).
 
 Name / Link | Implementation Notes
 --- | ---
