@@ -20,15 +20,16 @@ Agent Messaging is designed to be transport independent, including message encry
 
 Standardized transport methods are detailed here.
 
-### HTTP(S)
+### HTTPS
 
-HTTP(S) is the first transport for DID Communication that has received heavy attention.
+HTTPS is the first, and preferred, transport for DID Communication that has received heavy attention. 
 
-- Messages are transported via HTTP POST.
+- Messages are transported via HTTPS POST.
 - The MIME Type for the POST request is `application/didcomm-envelope-enc`; see [RFC 0044: DIDComm File and MIME Types](../0044-didcomm-file-and-mime-types/README.md) for more details.
 - A received message should be responded to with a 202 Accepted status code. This indicates that the request was received, but not necessarily processed. Accepting a 200 OK status code is allowed.
 - POST requests are considered transmit only by default. No agent messages will be returned in the response. This behavior may be modified with additional signaling.
 - Using HTTPS with TLS 1.2 or greater with a forward secret cipher will provide Perfect Forward Secrecy (PFS) on the transmission leg.
+- HTTP is an option for transport but is discouraged.
 
 #### Known Implementations
 
