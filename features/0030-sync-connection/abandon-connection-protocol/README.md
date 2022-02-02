@@ -27,7 +27,7 @@ rules.
 ### Roles
 
 This is a [classic one-step notification](
-https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/README.md#types-of-protocols),
+https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md#types-of-protocols),
 so it uses the predefined roles of `notifier` and `notified`.
 
 ![request-response pattern](../../../concepts/0003-protocols/notification.png)

@@ -103,7 +103,7 @@ are semantically equivalent.
 
 ##### Verifier Non-Revocation Interval Formulation
 
-The verifier MUST specify, as current [INDY-HIPE 11](https://github.com/hyperledger/indy-hipe/blob/master/text/0011-cred-revocation/README.md) notes, the same integer EPOCH time for both ends of the interval, or else omit the `"from"` key and value. In effect, where the presentation request specifies a non-revocation interval, the verifier MUST request a non-revocation instant.
+The verifier MUST specify, as current [INDY-HIPE 11](https://github.com/hyperledger/indy-hipe/blob/main/text/0011-cred-revocation/README.md) notes, the same integer EPOCH time for both ends of the interval, or else omit the `"from"` key and value. In effect, where the presentation request specifies a non-revocation interval, the verifier MUST request a non-revocation instant.
 
 ##### Prover Non-Revocation Interval Processing
 
@@ -164,7 +164,7 @@ When constructing a proof request, the verifier SHOULD express the minimum/maxim
 ## Reference
 
 * [RFC 0037](../../features/0037-present-proof/README.md): Present Proof protocol
-* [INDY-HIPE 11](https://github.com/hyperledger/indy-hipe/blob/master/text/0011-cred-revocation/README.md): Indy revocation.
+* [INDY-HIPE 11](https://github.com/hyperledger/indy-hipe/blob/main/text/0011-cred-revocation/README.md): Indy revocation.
 
 ## Implementations
 

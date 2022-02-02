@@ -200,3 +200,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 Name / Link | Implementation Notes
 --- | ---
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python/blob/main/Mediation.md) | Added in ACA-Py 0.6.0 [MISSING test results](/tags.md#test-anomaly)****
+[DIDComm mediator](https://github.com/Sirius-social/didcomm-mediator) | Open source cloud-based mediator.
