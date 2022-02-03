@@ -16,6 +16,10 @@ A minor update to add a mechanism for an Issuer to indicate to the Holder that m
 
 An example use of this capability is a University (Issuer) offering multiple "proof of diploma" credentials to an alumni (Holder) with multiple degrees. A second example is a Bank (Issuer) offering a customer (Holder) a series of "bank account" verifiable credentials, one per bank account the customer has with the bank.
 
+As with all DIDComm protocols and as described in [RFC 0003 Protocols](../../concepts/0003-protocols/README.md#semver-examples), an agent should accept and process any `2.x` version of this protocol by ignoring any unrecognized parameters and
+responding with messages that explicit state the minor version of the protocol supported by the agent. An agent supporting a later version of the protocol may have to compensate. Specific places in this protocol where the agent needs
+to detect the minor version of the other agent and respond accordingly are called out in the [Messages](#messages) section of this RFC.
+
 ### 2.0/propose-credential and identifiers
 
 Version 2.0 of the protocol is introduced because of a breaking changes in the propose-credential message, replacing the (indy-specific) filtration criteria with a generalized filter attachment to align with the rest of the messages in the protocol. The previous version is [1.1/propose-credential](../0036-issue-credential/README.md).
@@ -271,9 +275,9 @@ Description of Fields:
 
 This message may have a [`~payment-receipt` decorator](../0075-payment-decorators/README.md#payment_receipt) to prove to the Issuer that the potential Holder has satisfied a payment requirement. See the [payment section below](#payments-during-credential-exchange).
 
-If the protocol version of this message is `2.0` from the Holder, an Issuer that supports the 2.1 version of the protocol SHOULD NOT indicate that additional credentials are available (setting `more_available` to `true` in the `issue-credential` message) since the Holder is not capable of processing that information and requesting further credentials.
+If the protocol version of this message is `2.0` from the Holder, an Issuer that supports the 2.1 version of the protocol SHOULD NOT indicate that additional credentials are available (as they would by setting `more_available` to `true` in the `issue-credential` message) since the Holder is not capable of processing that information and requesting further credentials.
 
-See the note in the section of this protocol on [`problem-report` adoption](#adopted-problem-report) about how a Holder can use a `problem-report` to end the protocol instance while the Issuer has more verifiable credentials to issue to the Holder.
+If the holder does support the `2.1` version, see the note in the section of this protocol on [`problem-report` adoption](#adopted-problem-report) for guidance on how a Holder can use a `problem-report` to end the protocol instance while the Issuer has more verifiable credentials to issue to the Holder.
 
 ##### Request Attachment Registry
 
