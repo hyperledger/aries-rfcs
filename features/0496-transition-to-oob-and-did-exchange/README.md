@@ -3,7 +3,7 @@
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2021-11-24
-- Status Note: In step 1 - update all implementations to accept Connection and OOB Invitations. **Target Completion Date: 2021.12.31**
+- Status Note: In step 1 - update all implementations to accept Connection and OOB Invitations. **Target Completion Date: 2022-03-31**
 - Supersedes:
 - Start Date: 2020-06-07
 - Tags: [feature](/tags.md#feature), [community-update](/tags.md#community-update), [test-anomaly](/tags.md#test-anomaly)
