@@ -26,7 +26,7 @@ HTTP(S) is the first, and most used transport for DID Communication that has rec
 
 While it is recognized that all DIDComm messages are secured through strong encryption, making HTTPS somewhat redundant, it will likely cause issues with mobile clients because venders (Apple and Google) are limiting application access to the HTTP protocol. For example, on iOS 9 or above where [ATS])(https://developer.apple.com/documentation/bundleresources/information_property_list/nsapptransportsecurity) is in effect, any URLs using HTTP must have an exception hard coded in the application prior to uploading to the iTunes Store. This makes DIDComm unreliable as the agent initiating the the request provides an endpoint for communication that the mobile client must use. If the agent provides a URL using the HTTP protocol it will likely be unusable due to low level operating system limitations.
 
-As a best practice, when HTTP is used in situations where a mobile client (iOS or Android) may be involved is is highly recommended to use the HTTPS protocol, specifically TLS 1.2 or above. 
+As a best practice, when HTTP is used in situations where a mobile client (iOS or Android) may be involved it is highly recommended to use the HTTPS protocol, specifically TLS 1.2 or above. 
 
 Other important notes on the subject of using HTTP(S) include:
 
