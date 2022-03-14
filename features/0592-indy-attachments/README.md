@@ -163,6 +163,8 @@ A concrete, issued Indy credential may be transmitted over many protocols, but i
 
 This is a credential that's designed to be _held_ but not _shared directly_. It is stored in the holder's wallet and used to [derive a novel ZKP](https://youtu.be/bnbNtjsKb4k?t=1280) or [W3C-compatible verifiable presentation](https://docs.google.com/document/d/1ntLZGMah8iJ_TWQdbrNNW9OVwPbIWkkCMiid7Be1PrA/edit#heading=h.vw0mboesl528) just in time for each sharing of credential material.
 
+The encoded values of the credential MUST follow the encoding algorithm as described in [Encoding Claims](#encoding-claims).
+
 This is the format emitted by libindy's [indy_issuer_create_credential()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L383) function. It is JSON-based and might look like this:
 
 ```jsonc
@@ -211,6 +213,8 @@ Here is a sample proof request that embodies the following: "Using a government-
 ### proof format
 
 This is the format of an Indy-style ZKP. It plays the same role as a W3C-style verifiable presentation (VP) and can be [mapped to one](https://docs.google.com/document/d/1ntLZGMah8iJ_TWQdbrNNW9OVwPbIWkkCMiid7Be1PrA/edit#heading=h.vw0mboesl528).
+
+The raw values encoded in the presentation SHOULD be verified against the encoded values using the encoding algorithm as described below in [Encoding Claims](#encoding-claims).
 
 The identifier for this format is `hlindy/proof@v2.0`. It is a version of the (JSON-based) data emitted by libindy's [indy_prover_create_proof()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404)) function. A proof that responds to the [previous proof request sample](#proof-request-format) looks like this:
 
@@ -323,6 +327,24 @@ The identifier for this format is `hlindy/proof@v2.0`. It is a version of the (J
 }
 ```
 
+
+### Encoding Claims
+
+Claims in Hyperledger Indy-based verifiable credentials are put into the credential in two forms, `raw` and `encoded`. `raw` is the actual data value, and `encoded` is the (possibly derived) integer value that is used in presentations. At this time, Indy does not take an opinion on the method used for encoding the raw value.
+
+Aries issuers and verifiers must agree on the encoding method so that the verifier can check that the `raw` value returned in a presentation corresponds to the proven `encoded` value. The following is the encoding algorithm that MUST be used by Issuers when creating credentials and SHOULD be verified by Verifiers receiving presentations:
+
+- keep any 32-bit integer as is
+- for data of any other type:
+  - convert to string (use string "None" for null)
+  - encode via utf-8 to bytes
+  - apply SHA-256 to digest the bytes
+  - convert the resulting digest bytes, big-endian, to integer
+  - stringify the integer as a decimal.
+
+An example implementation in Python can be found [here](https://github.com/hyperledger/aries-cloudagent-python/blob/0000f924a50b6ac5e6342bff90e64864672ee935/aries_cloudagent/messaging/util.py#L106).
+
+A gist of test value pairs can be found [here](https://gist.github.com/swcurran/78e5a9e8d11236f003f6a6263c6619a6).
 
 ## Implementations
 
