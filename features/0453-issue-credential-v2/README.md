@@ -275,7 +275,7 @@ Description of Fields:
 
 This message may have a [`~payment-receipt` decorator](../0075-payment-decorators/README.md#payment_receipt) to prove to the Issuer that the potential Holder has satisfied a payment requirement. See the [payment section below](#payments-during-credential-exchange).
 
-If the protocol version of this message is `2.0` from the Holder, an Issuer that supports the 2.1 version of the protocol SHOULD NOT indicate that additional credentials are available (as they would by setting `more_available` to `true` in the `issue-credential` message) since the Holder is not capable of processing that information and requesting further credentials.
+If the protocol version of this message is `2.0` from the Holder, an Issuer that supports the 2.1 version of the protocol SHOULD NOT indicate that additional credentials are available (as they would by setting `more_available` to a positive integer in the `issue-credential` message) since the Holder is not capable of processing that information and requesting further credentials.
 
 If the holder does support the `2.1` version, see the note in the section of this protocol on [`problem-report` adoption](#adopted-problem-report) for guidance on how a Holder can use a `problem-report` to end the protocol instance while the Issuer has more verifiable credentials to issue to the Holder.
 
@@ -323,7 +323,7 @@ Description of fields:
 
 * `replacement_id` -- an optional field that provides an identifier used to manage credential replacement. When this value is present and matches the `replacement_id` of a previously issued credential, this credential may be considered as a replacement for that credential. This value is unique to the issuer. It must not be used in a credential presentation.
 * `comment` -- an optional field that provides human readable information about the issued credential, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
-* `more_available` -- an optional field, defaulting to 0 if not specified, that when a positive integer signals that the Issuer has "<count>" more instances of the verifiable credential type for the Holder that the Issuer is willing to issue. The field MUST NOT be included if the `request-credential` message indicates that the Holder is using the 2.0 version of the protocol.
+* `more_available` -- an optional field, defaulting to 0 if not specified, that when is a positive integer signals that the Issuer has "<count>" more instances of the verifiable credential type for the Holder that the Issuer is willing to issue. The field MUST NOT be included if the `request-credential` message indicates that the Holder is using the 2.0 version of the protocol.
   * If the `offer-credential` message was not used in the protocol instance, receipt of this field is the first indication to the Holder that this is a multiple credential issuance execution of the protocol.
   * If set to a positive integer, the Issuer will move to the `offer-sent` state while it waits on a `request-credential` message from the Holder, and the `~please-ack` decorator MUST NOT be included in the message.
   * If not present or set to 0, the Issuer will move to the `credential-issued` or `done` state, depending on whether or not the `~please-ack` decorator is included in the message (per the note below).
@@ -344,7 +344,7 @@ Hyperledger Indy Credential | `hlindy/cred@v2.0` | [credential format](../0592-i
 
 The [`problem-report message is adopted](../0035-report-problem/README.md) by this protocol. `problem-report` messages can be used by either party to indicate an error in the protocol.
 
-If the Issuer has indicated in the messages (`offer-credential` and/or `issue-credential`) that multiple credentials are available, the Holder may send a `problem-report` message in place of a `request-credential` to indicate it wants to end the protocol without further issuances. This provides the Holder with the ability to end a multiple issuance sequence. The Issuer may end such a sequence by issuing a credential with the `more_available` field set to `false` (implicitly or explicitly).
+If the Issuer has indicated in the messages (`offer-credential` and/or `issue-credential`) that multiple credentials are available, the Holder may send a `problem-report` message in place of a `request-credential` to indicate it wants to end the protocol without further issuances. This provides the Holder with the ability to end a multiple issuance sequence. The Issuer may end such a sequence by issuing a credential with the `more_available` field set to `0` (implicitly or explicitly).
 
 #### Preview Credential
 
