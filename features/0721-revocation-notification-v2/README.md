@@ -36,7 +36,9 @@ The `issuer` sends the `revoke` message to the `holder`.
 
 ### Messages
 
-The `revoke` message sent by the `issuer` to the `holder` is as follows:
+The `revoke` message sent by the `issuer` to the `holder`. The holder should verify that the `revoke` message came from the connection that was originally used to issue the credential.
+
+Message format:
 
 ```JSON
 {
