@@ -190,7 +190,7 @@ Feature | [0092-transport-return-route](https://github.com/hyperledger/aries-rfc
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0592-indy-attachments](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0592-indy-attachments) | :new: Evolved from AIP V1.0
+Feature | [0592-indy-attachments](https://github.com/hyperledger/aries-rfcs/tree/26344513082af4d76c77b8b4f5064e72d0a83b58/features/0592-indy-attachments) | :new: Evolved from AIP V1.0
 Concept | [0441-present-proof-best-practices](https://github.com/hyperledger/aries-rfcs/tree/910d79aa72a9e656f0003b4eab5d49549cca361e/concepts/0441-present-proof-best-practices) | :new:
 
 #### LDCRED: JSON-LD Based Credentials
@@ -244,6 +244,7 @@ The following clarifications have been made to RFCs that make up AIP 2.0:
 - RFC 0510 DIF Presentation Exchange Attachment: The RFC Status was changed to "Accepted."
 - RFC 0646 BBS Credentials: The RFC Status was changed to "Accepted."
 - RFC 0317 Please Ack: The RFC Status was changed to "Accepted" and added to the AIP 2.0 base requirements list. Original discussion included the please ack decorator, but it wasn't added to the AIP 2.0 list before releasing AIP 2.0.
+- RFC 0592 Indy Attachment Format: The encoding algorithm used for credential attributes was added from RFC 0036.
 
 ### Previous Versions
 
