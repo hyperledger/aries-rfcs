@@ -104,7 +104,7 @@ The following represents a request-presentation message with an attached libindy
             "mime-type": "application/json",
             "data":  {
                 "base64": "<base64 data>"
-            },
+            }
         }
     ],
     "device_binding~attach": [
@@ -172,7 +172,9 @@ The following represents a presentation message with an attached libindy present
             "data": {
                 "base64": "<bytes for base64>"
             }
-        },
+        }
+    ], 
+    "device_binding~attach": [
         {
             "@id": "device-binding-response-0",
             "mime-type": "application/json",
