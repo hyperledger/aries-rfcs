@@ -152,7 +152,7 @@ Description of attributes:
     - `path` -- JsonPath to raw value of hardware bound public key within the attached presentation of the VC represented as did:key
     - `jws` -- Nonce from [device-binding-challenge](#device-binding-challenge) signed with the corresponding private key as a Json Web Signature object
 
-The `device-binding-response` must be attached to the `presentations~attach` array of the `presentation` message defined by [RFC-0037](https://github.com/hyperledger/aries-rfcs/blob/main/features/0037-present-proof/README.md#presentation) and [RFC-0454](https://github.com/hyperledger/aries-rfcs/tree/main/features/0454-present-proof-v2#presentation).
+The `device-binding-response` must be attached to the `device_binding~attach` array of a `presentation` message defined by [RFC-0037](https://github.com/hyperledger/aries-rfcs/blob/main/features/0037-present-proof/README.md#presentation) or [RFC-0454](https://github.com/hyperledger/aries-rfcs/tree/main/features/0454-present-proof-v2#presentation).
 
 ### Example presentation messages
 
