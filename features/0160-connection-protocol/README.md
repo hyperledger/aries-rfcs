@@ -453,7 +453,7 @@ Possible reasons:
 
 [3-connection-ack]: #3-connection-ack
 
-After the Response is received, the connection is technically complete. This remains unconfirmed to the *inviter* however. The *invitee* MUST send a message to the *inviter*. As any message will confirm the connection, any message will do. 
+After the Response is received, the connection is technically complete. This remains unconfirmed to the *inviter* however. The *invitee* MUST send a message to the *inviter*. As any message will confirm the connection, any message will do. The agents MUST also handle the *invitee* not sending a message to the *inviter* as it was previously a SHOULD. NOTE: The motivation for changing the SHOULD to a MUST is to avoid interesting race conditions that occur when the *invitee* does not send a message to the *inviter*. These race conditions can involve out of order message processing, which may result in messages not being processed by the *invitee*.
 
 Frequently, the parties of the connection will want to trade credentials to establish trust. In such a flow, those message will serve the function of acknowledging the connection without an extra confirmation message.
 
