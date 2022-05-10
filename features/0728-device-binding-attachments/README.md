@@ -12,11 +12,11 @@ Extends existing present-proof protocols to allow proofing the control of a hard
 
 ## Motivation
 
-To enable use-cases which require a high level of assurance a verifier must reach a high degree of confidence that a verifiable credential (VC) can only be used by the person it was issued for. One way to enforce this requirement is that the issuer additionally binds the VC to a hardware bound public key and therefore binding the credential to the device, as discussed in the [DIF Wallet Security WG](https://github.com/decentralized-identity/wallet-security). The issaunce process, including the attestation of the wallet and the hardware bound key is off-scope for this Aries RFC. A valid presentation of the VC then requires an additional challenge which proofs that the presenter is in control of the corresponding private key.
-
-Since the proof of control must be part of legitimate presentation it makes sense to extend all current `present-proof` protocols.
+To enable use-cases which require a high level of assurance a verifier must reach a high degree of confidence that a verifiable credential (VC) can only be used by the person it was issued for. One way to enforce this requirement is that the issuer additionally binds the VC to a hardware bound public key and therefore binding the credential to the device, as discussed in the [DIF Wallet Security WG](https://github.com/decentralized-identity/wallet-security). The issaunce process, including the attestation of the wallet and the hardware bound key is off-scope for this Aries RFC. A valid presentation of the VC then requires an additional challenge which proofs that the presenter is in control of the corresponding private key. Since the proof of control must be part of legitimate presentation it makes sense to extend all current `present-proof` protocols.
 
 Note: The focus so far has been on AnonCreds, we will also look into device binding of W3C VC, however this is currently lacking in the examples.
+
+Warning: **This concept is primarily meant for regulated, high-security usecases**. Please review the drawbacks before considering using this.
 
 ## Tutorial
 
@@ -222,11 +222,11 @@ The following represents a presentation message with an attached libindy present
 ```
 
 ## Reference
-
+- [DIF Wallet Security Github Page](https://github.com/decentralized-identity/wallet-security)
 
 ## Drawbacks
 
-Tbd
+Including a hardware-bound public key (as an attribute) into a Verifiable Credential/AnonCred is necessary for this concept but introduces a globally unique and therefore trackable identifier. As this public key is revealed to the verifier, there is a higher risk of correlation. The Issuer must always use a hardware-bound key for a single credential and the Wallet should enforce to never reuse the key. Additionally, the holder should ideally be informed about the increased correlation risk by the wallet UX.
 
 
 ## Rationale and alternatives
@@ -238,7 +238,7 @@ This proposal tries to extend existing protocols to reduce the implementation ef
 
 ## Prior art
 
-
+None to our knowledge.
 
 ## Unresolved questions
 
@@ -247,7 +247,7 @@ This proposal tries to extend existing protocols to reduce the implementation ef
     * Can we just reference the hardware key within the request object?
     * Is it required to explicitly define the accepted signing algorithm within the `device-binding-challenge` object?
 * What kind of key encoding do we choose?
-    * Is it good enough to rely on did:key and the cababilities from a did:key did document?
+    * did:key, base64-encoded JWK and did:jwk in discussion
    
 ## Implementations
 
