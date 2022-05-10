@@ -115,6 +115,7 @@
 * [0641: Linking binary objects to credentials using hash based references](features/0641-linking-binary-objects-to-credentials/README.md) (2021-04-22 &mdash; [`feature`](/tags.md#feature) [`credentials`](/tags.md#credentials))
 * [0693: Cross-Platform Credential Representation](features/0693-credential-representation/README.md) (2021-07-06 &mdash; [`feature`](/tags.md#feature))
 * [0700: Out-of-Band through redirect](concepts/0700-oob-through-redirect/README.md) (2021-10-08 &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
+* [0721: Revocation Notification 2.0](features/0721-revocation-notification-v2/README.md) (2022-02-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0728: Device Binding Attachments](features/0728-device-binding-attachments/README.md) (2022-04-07 &mdash; [`feature`](/tags.md#feature))
 
 ## [RETIRED](README.md#retired)
