@@ -450,6 +450,13 @@ It seems inevitable that the length of some out-of-band message will be too long
 
 A usable QR code will always be able to be generated from the shortened form of the URL.
 
+
+### URL Shortening Cavets
+
+It is known that some languages do not have libraries that currently support or have a working method to stop redirects from occuring on reception of a `301` or `302`, in this instance the redirect is automatically followed and will result in a response that **MAY** have a status of `200` and **MAY** contain a URL that can be processed as a normal `Out-of-Band` message.
+
+If the agent performs a HTTP GET with the `Accept` header requesting `application/json` MIME type the response can either contain the message in `json` or result in a redirect, processing of the response should attempt to determine which response type is received and process the message accordingly.
+
 #### Out-of-Band Message Publishing
 
 The _sender_ will publish or transmit the out-of-band message URL in a manner available to the intended _receiver_. After publishing, the sender is in the _await-response_ state, will the receiver is in the _prepare-response_ state.
