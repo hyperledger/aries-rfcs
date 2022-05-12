@@ -8,6 +8,7 @@
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 > Note: This protocol is currently written to support native push notifications for iOS.
+> For the implementation for Android, please refer to [0734: Push Notifications Android](../0734-push-notifications-android/README.md)
 
 ## Summary
 
