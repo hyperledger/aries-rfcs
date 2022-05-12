@@ -1,4 +1,4 @@
-# Aries RFC 0699: Push Notifications iOS Protocol 1.0
+# Aries RFC 0699: Push Notifications apns Protocol 1.0
 
 - Authors: [Timo Glastra](mailto:timo@animo.id) (Animo Solutions) & [Berend Sliedrecht](mailto:berend@animo.id) (Animo Solutions)
 - Status: [PROPOSED](/README.md#proposed)
@@ -7,8 +7,8 @@
 - Start Date: 2021-05-05
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
-> Note: This protocol is currently written to support native push notifications for iOS.
-> For the implementation for Android, please refer to [0734: Push Notifications Android](../0734-push-notifications-android/README.md)
+> Note: This protocol is currently written to support native push notifications for iOS via [Apple Push Notification Service](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns/).
+> For the implementation for Android (using fcm), please refer to [0734: Push Notifications fcm](../0734-push-notifications-fcm/README.md)
 
 ## Summary
 
@@ -22,9 +22,9 @@ This protocol would give an agent enough information to send push notifications 
 
 ### Name and Version
 
-URI: `https://didcomm.org/push-notifications-ios/1.0`
+URI: `https://didcomm.org/push-notifications-apns/1.0`
 
-Protocol Identifier: `push-notifications-ios`
+Protocol Identifier: `push-notifications-apns`
 
 Version: `1.0`
 
@@ -46,7 +46,7 @@ The **notification-sender** is an agent who will send the **notification-receive
 
 ### Services
 
-This RFC focusses on configuring the data necessary for pushing notifications to Android, via [apns](https://developer.apple.com/notifications/).
+This RFC focusses on configuring the data necessary for pushing notifications to iOS, via [apns](https://developer.apple.com/notifications/).
 
 In order to implement this protocol, the [set-device-info](#set-device-info) and [get-device-info](#get-device-info) messages MUST be implemented by the **notification-sender** and [device-info](#device-info) message MUST be implemented by the **notification-receiver**.
 
@@ -66,7 +66,7 @@ Message to set the device info using the native iOS device token for push notifi
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-ios/1.0/set-device-info",
+  "@type": "https://didcomm.org/push-notifications-apns/1.0/set-device-info",
   "@id": "<UUID>",
   "device_token": "<DEVICE_TOKEN>"
 }
@@ -84,7 +84,7 @@ When a notification-receiver wants to get their push-notification configuration,
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-ios/1.0/get-device-info",
+  "@type": "https://didcomm.org/push-notifications-apns/1.0/get-device-info",
   "@id": "<UUID>"
 }
 ```
@@ -95,7 +95,7 @@ Response to the get device info:
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-ios/1.0/device-info",
+  "@type": "https://didcomm.org/push-notifications-apns/1.0/device-info",
   "device_token": "<DEVICE_TOKEN>",
   "~thread": {
     "thid": "<GET_DEVICE_INFO_UUID>"
@@ -115,7 +115,7 @@ When an agent wants to send a push notification to another agent, the payload of
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-ios",
+  "@type": "https://didcomm.org/push-notifications-apns",
   "message_tag": "<MESSAGE_TAG>",
   ...
 }
