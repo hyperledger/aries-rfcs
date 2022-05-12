@@ -116,7 +116,7 @@
 * [0693: Cross-Platform Credential Representation](features/0693-credential-representation/README.md) (2021-07-06 &mdash; [`feature`](/tags.md#feature))
 * [0700: Out-of-Band through redirect](concepts/0700-oob-through-redirect/README.md) (2021-10-08 &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
 * [0721: Revocation Notification 2.0](features/0721-revocation-notification-v2/README.md) (2022-02-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
-* [0734: Push Notifications Android Protocol 1.0](features/0734-push-notifications-android/README.md) (2022-05-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0734: Push Notifications fcm Android Protocol 1.0](features/0734-push-notifications-fcm-android/README.md) (2022-05-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 ## [RETIRED](README.md#retired)
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2020-10-14, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))

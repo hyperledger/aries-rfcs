@@ -1,4 +1,4 @@
-# Aries RFC 0734: Push Notifications Android Protocol 1.0
+# Aries RFC 0734: Push Notifications fcm Android Protocol 1.0
 
 - Authors: [Timo Glastra](mailto:timo@animo.id) (Animo Solutions) & [Berend Sliedrecht](mailto:berend@animo.id) (Animo Solutions)
 - Status: [PROPOSED](/README.md#proposed)
@@ -8,7 +8,7 @@
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 > Note: This protocol is currently written to support native push notifications for Android.
-> For the implementation for iOS, please refer to [0699: Push Notifications iOS](../0699-push-notifications-ios/README.md)
+> For the implementation for iOS (via apns), please refer to [0699: Push Notifications apns](../0699-push-notifications-apns/README.md)
 
 ## Summary
 
@@ -22,11 +22,13 @@ This protocol would give an agent enough information to send push notifications 
 
 ### Name and Version
 
-URI: `https://didcomm.org/push-notifications-android/1.0`
+URI: `https://didcomm.org/push-notifications-fcm-android/1.0`
 
-Protocol Identifier: `push-notifications-android`
+Protocol Identifier: `push-notifications-fcm-android`
 
 Version: `1.0`
+
+The protocol identifier has a prefix of `android` here to indicate that implementing this rfc only supports using fcm for android and not for iOS. This will allow for easy detection with feature discovery whether a specific service is supported and which platforms, if multiple, are supported.
 
 ### Key Concepts
 
@@ -66,7 +68,7 @@ Message to set the device info using the native Android device token for push no
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-android/1.0/set-device-info",
+  "@type": "https://didcomm.org/push-notifications-fcm-android/1.0/set-device-info",
   "@id": "<UUID>",
   "device_token": "<DEVICE_TOKEN>"
 }
@@ -84,7 +86,7 @@ When a notification-receiver wants to get their push-notification configuration,
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-android/1.0/get-device-info",
+  "@type": "https://didcomm.org/push-notifications-fcm-android/1.0/get-device-info",
   "@id": "<UUID>"
 }
 ```
@@ -95,7 +97,7 @@ Response to the get device info:
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-android/1.0/device-info",
+  "@type": "https://didcomm.org/push-notifications-fcm-android/1.0/device-info",
   "device_token": "<DEVICE_TOKEN>",
   "~thread": {
     "thid": "<GET_DEVICE_INFO_UUID>"
@@ -115,7 +117,7 @@ When an agent wants to send a push notification to another agent, the payload of
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-android",
+  "@type": "https://didcomm.org/push-notifications-fcm-android",
   "message_tag": "<MESSAGE_TAG>",
   ...
 }
