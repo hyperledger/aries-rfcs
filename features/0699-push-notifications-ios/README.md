@@ -33,6 +33,8 @@ When an agent would like to receive push notifications at record event changes, 
 
 This protocol only defines how an agent would get the token which is necessary for push notifications.
 
+Each platform is has its own protocol so that we can easily use [0031: Discover Features 1.0](https://github.com/hyperledger/aries-rfcs/blob/main/features/0031-discover-features/README.md) and [0557: Discover Features 2.X](https://github.com/hyperledger/aries-rfcs/blob/main/features/0557-discover-features-v2/README.md) to see which specific services are supported by the other agent.
+
 ### Roles
 
 **notification-sender**
