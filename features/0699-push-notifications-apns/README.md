@@ -28,6 +28,8 @@ Protocol Identifier: `push-notifications-apns`
 
 Version: `1.0`
 
+Since apns only supports iOS, no `-ios` or `-android` is required as it is implicit.
+
 ### Key Concepts
 
 When an agent would like to receive push notifications at record event changes, e.g. incoming credential offer, incoming connection request, etc., the agent could initiate the protocol by sending a message to the other agent.
