@@ -1,4 +1,4 @@
-# Aries RFC 0699: Native Push Notifications Protocol 1.0
+# Aries RFC 0699: Push Notifications iOS Protocol 1.0
 
 - Authors: [Timo Glastra](mailto:timo@animo.id) (Animo Solutions) & [Berend Sliedrecht](mailto:berend@animo.id) (Animo Solutions)
 - Status: [PROPOSED](/README.md#proposed)
@@ -7,7 +7,7 @@
 - Start Date: 2021-05-05
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
-> Note: This protocol is currently written to support native push notifications for Android and iOS. PRs for macOS, Windows, Linux and other platforms are welcome.
+> Note: This protocol is currently written to support native push notifications for iOS.
 
 ## Summary
 
@@ -15,15 +15,15 @@ A protocol to coordinate a push notification configuration between two agents.
 
 ## Motivation
 
-This protocol would give an agent enough information to send push notifications about specific events to a mobile device. This would be of great benefit for mobile wallets, as a holder can be notified when new messages are pending at the mediator. Mobile applications, such as wallets, are often killed and can not receive messages from the mediator anymore. Push notifications would resolve this problem.
+This protocol would give an agent enough information to send push notifications about specific events to an iOS device. This would be of great benefit for mobile wallets, as a holder can be notified when new messages are pending at the mediator. Mobile applications, such as wallets, are often killed and can not receive messages from the mediator anymore. Push notifications would resolve this problem.
 
 ## Tutorial
 
 ### Name and Version
 
-URI: `https://didcomm.org/push-notifications-native/1.0`
+URI: `https://didcomm.org/push-notifications-ios/1.0`
 
-Protocol Identifier: `push-notifications-native`
+Protocol Identifier: `push-notifications-ios`
 
 Version: `1.0`
 
@@ -31,7 +31,7 @@ Version: `1.0`
 
 When an agent would like to receive push notifications at record event changes, e.g. incoming credential offer, incoming connection request, etc., the agent could initiate the protocol by sending a message to the other agent.
 
-This protocol only defines how an agent would get the token and platform which is necessary for push notifications.
+This protocol only defines how an agent would get the token which is necessary for push notifications.
 
 ### Roles
 
@@ -43,7 +43,7 @@ The **notification-sender** is an agent who will send the **notification-receive
 
 ### Services
 
-This RFC focusses on configuring the data necessary for pushing notifications to Android, via [fcm](https://firebase.google.com/docs/cloud-messaging), and iOS via [apns](https://developer.apple.com/notifications/).
+This RFC focusses on configuring the data necessary for pushing notifications to Android, via [apns](https://developer.apple.com/notifications/).
 
 In order to implement this protocol, the [set-device-info](#set-device-info) and [get-device-info](#get-device-info) messages MUST be implemented by the **notification-sender** and [device-info](#device-info) message MUST be implemented by the **notification-receiver**.
 
@@ -52,7 +52,6 @@ In order to implement this protocol, the [set-device-info](#set-device-info) and
 The protocol currently supports the following push notification services
 
 - [apns](https://developer.apple.com/notifications/) for iOS devices
-- [fcm](https://firebase.google.com/docs/cloud-messaging) for Android devices
 
 ### Messages
 
@@ -60,21 +59,19 @@ When a notification-receiver wants to receive push notifications from the notifi
 
 #### Set Device Info
 
-Message to set the device info using the native device token for push notifications.
+Message to set the device info using the native iOS device token for push notifications.
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-native/1.0/set-device-info",
+  "@type": "https://didcomm.org/push-notifications-ios/1.0/set-device-info",
   "@id": "<UUID>",
-  "device_token": "<DEVICE_TOKEN>",
-  "device_platform": "<DEVICE_PLATFORM>"
+  "device_token": "<DEVICE_TOKEN>"
 }
 ```
 
 Description of the fields:
 
 - `device_token` -- The token that is required by the notification provider (string, null)
-- `device_platform` -- The platform for the device ('android', 'ios', null, string)
 
 It is important to note that the set device info message can be used to set, update and remove the device info. To set, and update, these values the normal messages as stated above can be used. To remove yourself from receiving push notifications, you can send the same message where all values MUST be `null`. If either value is `null` a `problem-report` MAY be sent back with `missing-value`.
 
@@ -84,7 +81,7 @@ When a notification-receiver wants to get their push-notification configuration,
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-native/1.0/get-device-info",
+  "@type": "https://didcomm.org/push-notifications-ios/1.0/get-device-info",
   "@id": "<UUID>"
 }
 ```
@@ -95,16 +92,15 @@ Response to the get device info:
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-native/1.0/device-info",
+  "@type": "https://didcomm.org/push-notifications-ios/1.0/device-info",
   "device_token": "<DEVICE_TOKEN>",
-  "device_platform": "<DEVICE_PLATFORM>",
   "~thread": {
     "thid": "<GET_DEVICE_INFO_UUID>"
   }
 }
 ```
 
-This message can be used by the notification-receiver to receive their device info, e.g., `device_token` and `device_platform`. If the notification-sender does not have these fields for that connection, a `problem-report` MAY be used as a response with `not-registered-for-push-notifications`.
+This message can be used by the notification-receiver to receive their device info, e.g. `device_token`. If the notification-sender does not have this field for that connection, a `problem-report` MAY be used as a response with `not-registered-for-push-notifications`.
 
 #### Adopted messages
 
@@ -116,7 +112,7 @@ When an agent wants to send a push notification to another agent, the payload of
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-native",
+  "@type": "https://didcomm.org/push-notifications-ios",
   "message_tag": "<MESSAGE_TAG>",
   ...
 }
@@ -129,7 +125,7 @@ Description of the fields:
 
 ## Drawbacks
 
-The RFC currently doesn't account for browser push notifications using the [Push Manager API](https://developer.mozilla.org/en-US/docs/Web/API/PushManager), sending push notifications to desktop devices, or other push notification services. Each service, device or platform requires a considerable amount of domain knowledge. The RFC can be extended with new services over time. The `device_platform` deliberately also supports a generic string parameter, so the protocol can be extended with new platforms without introducing a new major protocol version.
+Each service requires a considerable amount of domain knowledge. The RFC can be extended with new services over time.
 
 The `@type` property in the push notification payload currently doesn't indicate which agent the push notification came from. In e.g. the instance of using multiple mediators, this means the notification-receiver does not know which mediator to retrieve the message from.
 
