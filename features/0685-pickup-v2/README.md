@@ -129,10 +129,6 @@ A request from the _Recipient_ to the _Mediator_ to have pending messages delive
 
 `limit` is a REQUIRED attribute, and after receipt of this message, the _Mediator_ SHOULD deliver up to the `limit` indicated. 
 
-> Note: due to the nature of HTTP, the _Mediator_ is only able to send a single message at a time, if the `delivery-request` is sent over HTTP.
-> If the _Recipient_ requests more than one message over HTTP, the _Mediator_ will only be able to send one message in response. 
-> This has the potential to result in seemingly unexpected behavior and is something to be aware of.
-
 `recipient_key` is optional. When [specified](), the _Mediator_ MUST only return messages sent to that recipient key.
 
 If no messages are available to be sent, a `status` message MUST be sent immediately.
