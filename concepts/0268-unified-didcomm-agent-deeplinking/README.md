@@ -69,6 +69,7 @@ Furthermore, messages must also be base64 encoded serialized jsons, stripped of 
 
 This puts extra work on wallet developers to ensure a good experience. 
 
+On iOS only one app can be registered to handle `didcomm://` at a time; the first one to be installed will prevent others from using this custom scheme.
 
 ## Rationale and alternatives
 
