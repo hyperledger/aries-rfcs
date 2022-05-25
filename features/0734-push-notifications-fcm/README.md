@@ -1,4 +1,4 @@
-# Aries RFC 0734: Push Notifications fcm Android Protocol 1.0
+# Aries RFC 0734: Push Notifications fcm Protocol 1.0
 
 - Authors: [Timo Glastra](mailto:timo@animo.id) (Animo Solutions) & [Berend Sliedrecht](mailto:berend@animo.id) (Animo Solutions)
 - Status: [PROPOSED](/README.md#proposed)
@@ -7,7 +7,7 @@
 - Start Date: 2022-05-12
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
-> Note: This protocol is currently written to support native push notifications for Android.
+> Note: This protocol is currently written to support native push notifications using fcm.
 > For the implementation for iOS (via apns), please refer to [0699: Push Notifications apns](../0699-push-notifications-apns/README.md)
 
 ## Summary
@@ -16,27 +16,25 @@ A protocol to coordinate a push notification configuration between two agents.
 
 ## Motivation
 
-This protocol would give an agent enough information to send push notifications about specific events to an Android device. This would be of great benefit for mobile wallets, as a holder can be notified when new messages are pending at the mediator. Mobile applications, such as wallets, are often killed and can not receive messages from the mediator anymore. Push notifications would resolve this problem.
+This protocol would give an agent enough information to send push notifications about specific events to a device that supports fcm. This would be of great benefit for mobile wallets, as a holder can be notified when new messages are pending at the mediator. Mobile applications, such as wallets, are often killed and can not receive messages from the mediator anymore. Push notifications would resolve this problem.
 
 ## Tutorial
 
 ### Name and Version
 
-URI: `https://didcomm.org/push-notifications-fcm-android/1.0`
+URI: `https://didcomm.org/push-notifications-fcm/1.0`
 
-Protocol Identifier: `push-notifications-fcm-android`
+Protocol Identifier: `push-notifications-fcm`
 
 Version: `1.0`
-
-The protocol identifier has a prefix of `android` here to indicate that implementing this rfc only supports using fcm for android and not for iOS. This will allow for easy detection with feature discovery whether a specific service is supported and which platforms, if multiple, are supported.
 
 ### Key Concepts
 
 When an agent would like to receive push notifications at record event changes, e.g. incoming credential offer, incoming connection request, etc., the agent could initiate the protocol by sending a message to the other agent.
 
-This protocol only defines how an agent would get the token which is necessary for push notifications.
+This protocol only defines how an agent would get the token that is necessary for push notifications.
 
-Each platform is has its own protocol so that we can easily use [0031: Discover Features 1.0](https://github.com/hyperledger/aries-rfcs/blob/main/features/0031-discover-features/README.md) and [0557: Discover Features 2.X](https://github.com/hyperledger/aries-rfcs/blob/main/features/0557-discover-features-v2/README.md) to see which specific services are supported by the other agent.
+Each platform has its own protocol so that we can easily use [0031: Discover Features 1.0](https://github.com/hyperledger/aries-rfcs/blob/main/features/0031-discover-features/README.md) and [0557: Discover Features 2.X](https://github.com/hyperledger/aries-rfcs/blob/main/features/0557-discover-features-v2/README.md) to see which specific services are supported by the other agent.
 
 ### Roles
 
@@ -48,7 +46,7 @@ The **notification-sender** is an agent who will send the **notification-receive
 
 ### Services
 
-This RFC focusses on configuring the data necessary for pushing notifications to Android, via [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging).
+This RFC focuses on configuring the data necessary for pushing notifications via [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging).
 
 In order to implement this protocol, the [set-device-info](#set-device-info) and [get-device-info](#get-device-info) messages MUST be implemented by the **notification-sender** and [device-info](#device-info) message MUST be implemented by the **notification-receiver**.
 
@@ -56,7 +54,7 @@ In order to implement this protocol, the [set-device-info](#set-device-info) and
 
 The protocol currently supports the following push notification services
 
-- [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging) for Android devices
+- [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)
 
 ### Messages
 
@@ -64,11 +62,11 @@ When a notification-receiver wants to receive push notifications from the notifi
 
 #### Set Device Info
 
-Message to set the device info using the native Android device token for push notifications.
+Message to set the device info using the fcm device token for push notifications.
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-fcm-android/1.0/set-device-info",
+  "@type": "https://didcomm.org/push-notifications-fcm/1.0/set-device-info",
   "@id": "<UUID>",
   "device_token": "<DEVICE_TOKEN>"
 }
@@ -78,7 +76,7 @@ Description of the fields:
 
 - `device_token` -- The token that is required by the notification provider (string, null)
 
-It is important to note that the set device info message can be used to set, update and remove the device info. To set, and update, these values the normal messages as stated above can be used. To remove yourself from receiving push notifications, you can send the same message where all values MUST be `null`. If either value is `null` a `problem-report` MAY be sent back with `missing-value`.
+It is important to note that the set device info message can be used to set, update and remove the device info. To set, and update, these values the normal messages as stated above can be used. To remove yourself from receiving push notifications, you can send the same message where all values MUST be `null`. If either value is `null`, a `problem-report` MAY be sent back with `missing-value`.
 
 #### Get Device Info
 
@@ -86,7 +84,7 @@ When a notification-receiver wants to get their push-notification configuration,
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-fcm-android/1.0/get-device-info",
+  "@type": "https://didcomm.org/push-notifications-fcm/1.0/get-device-info",
   "@id": "<UUID>"
 }
 ```
@@ -97,7 +95,7 @@ Response to the get device info:
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-fcm-android/1.0/device-info",
+  "@type": "https://didcomm.org/push-notifications-fcm/1.0/device-info",
   "device_token": "<DEVICE_TOKEN>",
   "~thread": {
     "thid": "<GET_DEVICE_INFO_UUID>"
@@ -117,7 +115,7 @@ When an agent wants to send a push notification to another agent, the payload of
 
 ```json
 {
-  "@type": "https://didcomm.org/push-notifications-fcm-android",
+  "@type": "https://didcomm.org/push-notifications-fcm",
   "message_tag": "<MESSAGE_TAG>",
   ...
 }
