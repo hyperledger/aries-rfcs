@@ -451,13 +451,13 @@ It seems inevitable that the length of some out-of-band message will be too long
 A usable QR code will always be able to be generated from the shortened form of the URL.
 
 
-### URL Shortening Cavets
+#### URL Shortening Caveats
 
 Some HTTP libraries don't support stopping redirects from occuring on reception of a `301` or `302`, in this instance the redirect is automatically followed and will result in a response that **MAY** have a status of `200` and **MAY** contain a URL that can be processed as a normal `Out-of-Band` message.
 
 If the agent performs a HTTP GET with the `Accept` header requesting `application/json` MIME type the response can either contain the message in `json` or result in a redirect, processing of the response should attempt to determine which response type is received and process the message accordingly.
 
-When scanning a QR code the resulting URL should be treated the same as any other `Out-of-Band` message with an attempt to decode the message then on failure of decoding process it as a shortend URL.
+When scanning a QR code the resulting URL will be received by the software directly. The URL will then be base64 URL decode the string and can read the `out-of-band` message directly out of the `oob` query parameter of the URL, without having to load the URL, if this process fails then the software should attempt the above steps to receive a shortened URL.
 
 #### Out-of-Band Message Publishing
 
