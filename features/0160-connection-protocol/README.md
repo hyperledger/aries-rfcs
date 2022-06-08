@@ -399,7 +399,7 @@ The above message is required to be signed as described in [RFC 0234 Signature D
     "@type": "https://didcomm.org/signature/1.0/ed25519Sha512_single",
     "signature": "<digital signature function output>",
     "sig_data": "<base64URL(64bit_integer_from_unix_epoch||connection_attribute)>",
-    "signers": "<signing_verkey>"
+    "signer": "<signing_verkey>"
   }
 }
 ```
