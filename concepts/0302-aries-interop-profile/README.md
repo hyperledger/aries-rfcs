@@ -162,10 +162,10 @@ Since approval of the AIP 2.0 profile, the following RFCs have been clarified by
 - 2022-03: RFC 0004 Agents, RFC 0005 DIDComm, RFC 0046 Mediators and Relays, RFC 0211 Route Coordination
   - Note: In this update, a number of RFCs were changed solely for the purpose
     of changing a link in the RFC to reference the "main" branch.
-  - Pull request: https://github.com/hyperledger/aries-rfcs/pull/724
+  - Pull request: [#724](https://github.com/hyperledger/aries-rfcs/pull/724)
 
 - 2022-06: RFC 0023 DID Exchange, RFC 0025 DIDComm Transports, RFC 0434 Out of Band
-  - Pull request: 
+  - Pull request: [#739](https://github.com/hyperledger/aries-rfcs/pull/739)
 
 #### Base Requirements
 
