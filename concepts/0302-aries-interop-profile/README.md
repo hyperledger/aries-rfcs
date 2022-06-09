@@ -155,6 +155,18 @@ The following are the goals used in selecting RFC versions for inclusion in AIP 
 - Where appropriate, enable standard mediator coordination capabilities for mobile agents and multi-tenant agencies.
   - RFC 0211
 
+### AIP 2.0 Clarification Changelog
+
+Since approval of the AIP 2.0 profile, the following RFCs have been clarified by updating the commit in the link to the RFC:
+
+- 2022-03: RFC 0004 Agents, RFC 0005 DIDComm, RFC 0046 Mediators and Relays, RFC 0211 Route Coordination
+  - Note: In this update, a number of RFCs were changed solely for the purpose
+    of changing a link in the RFC to reference the "main" branch.
+  - Pull request: https://github.com/hyperledger/aries-rfcs/pull/724
+
+- 2022-06: RFC 0023 DID Exchange, RFC 0025 DIDComm Transports, RFC 0434 Out of Band
+  - Pull request: 
+
 #### Base Requirements
 
  RFC Type | RFC/Link to RFC Version | Note
@@ -173,14 +185,14 @@ Concept | [0094-cross-domain messaging](https://github.com/hyperledger/aries-rfc
 Concept | [0519-goal-codes](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/concepts/0519-goal-codes) | :new:
 Feature | [0015-acks](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0015-acks) | [AIP V1.0, Updated](https://gist.github.com/swcurran/81af391bfd79539edec530150045fe51/revisions?diff=unified)
 Feature | [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0019-encryption-envelope) | [AIP V1.0, Updated](https://gist.github.com/swcurran/c652dfd39706e50be4145568797e667a/revisions?diff=unified)<br>See envelope note below
-Feature | [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0023-did-exchange) | :new:
-Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0025-didcomm-transports) | [AIP V1.0, Minimally Updated](https://gist.github.com/swcurran/1e64cba5f6c524d38ad596209df090df/revisions?diff=unified)
+Feature | [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/bf3d796cc33ce78ed7cde7f5422b10719a68be21/features/0023-did-exchange) | :new:
+Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/f39481e92ad1a10dbc499cd4931a08c3497cee3f/features/0025-didcomm-transports) | [AIP V1.0, Minimally Updated](https://gist.github.com/swcurran/1e64cba5f6c524d38ad596209df090df/revisions?diff=unified)
 Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0035-report-problem) | [AIP V1.0, Updated](https://gist.github.com/swcurran/d9432abc436e6a069d6ffcd41dc86060/revisions?diff=unified)
 Feature | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0044-didcomm-file-and-mime-types) | :new:
 Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0048-trust-ping) | :new:
 Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0183-revocation-notification) | :new:
 Feature | [0360-use-did-key](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0360-use-did-key) | :new:
-Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/bed4989dd6517f7a9de3696800e57e4c6ef49231/features/0434-outofband) | :new:
+Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/2bc7db66d15a55d70ce5bd16b2513a853c9d5749/features/0434-outofband) | :new:
 Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0453-issue-credential-v2) | Update to V2 Protocol
 Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0454-present-proof-v2) | Update to V2 Protocol
 Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0557-discover-features-v2) | :new:
