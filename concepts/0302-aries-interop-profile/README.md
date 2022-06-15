@@ -231,7 +231,7 @@ Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/
 #### DIDCOMMV2PREP: DIDComm v2 Prep
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0587-encryption-envelope-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0587-encryption-envelope-v2) | :new:<br>See envelope note below
+Feature | [0587-encryption-envelope-v2](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0587-encryption-envelope-v2) | :new:<br>See envelope note below
 
 #### CHAT: Chat related features
  RFC Type | RFC/Link to RFC Version | Note
