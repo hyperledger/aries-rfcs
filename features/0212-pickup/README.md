@@ -1,5 +1,5 @@
 # 0212: Pickup Protocol
-- Authors: [Sam Curren](telegramsam@gmail.com)
+- Authors: [Sam Curren](telegramsam@gmail.com), [Pavel Minenkov](minikspb@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-03
 - Status Note: Initial version
@@ -60,9 +60,18 @@ A request to have multiple waiting messages sent inside a `batch` message.
 {
     "@id": "123456781",
     "@type": "https://didcomm.org/messagepickup/1.0/batch-pickup",
-    "batch_size": 10
+    "batch_size": 10,
+    "pending_timeout": 3
 }
 ```
+
+`batch_size` is count of messages that **recipient** wants to retrieve
+
+`pending_timeout` *(optional)* is timeout in seconds **recipient** will await. 
+Available values:
+   - `0` *(default)*: **message_holder** will response immediately almost queue is empty
+   - `>0` *(in seconds)*: **message_holder** will wait until **queue size** reached `batch_size` value or `pending_timeout` occurred
+   - `null`: **message_holder** will wait until **queue size** reached `batch_size`
 
 ### Batch
 A message that contains multiple waiting messages.
@@ -126,10 +135,32 @@ Used to receive another message implicitly. This message has no expected behavio
 ```json=
 {
     "@id": "123456781",
-    "@type": "https://didcomm.org/messagepickup/1.0/noop"
+    "@type": "https://didcomm.org/messagepickup/1.0/noop",
+    "pending_timeout": 5
 }
 ```
+It is useful to work with [Mediation flow](https://github.com/Sirius-social/didcomm-mediator/blob/main/docs/Mediation.md)
+in cases when **recipient** and **batch_recipient** are same entity. **recipient** may declare it with set [`serviceEndpoint`: `didcomm:transport/queue`](https://github.com/decentralized-identity/didcomm-messaging/blob/main/extensions/return_route/main.md#queue-transport)
 
+`pending_timeout` *(optional)* is timeout in seconds **recipient** will await another message is in queue to send. 
+  Available values:
+   - `0` *(default)*: **message_holder** will send queued message immediately or **problem-report** if queue is empty
+   - `>0` *(in seconds)*: **message_holder** will wait until **queue size** is not empty. If `pending_timeout` occurred will send **problem-report** 
+   - `null`: **message_holder** will wait until forwarded message is ready to send
+
+### Problem reports & problem codes
+```json=
+{
+    "@id": "123456781",
+    "@type": "https://didcomm.org/messagepickup/1.0/problem_report",
+    "problem-code": "empty_queue",
+    "explain": "Message queue is empty, pending_timeout occured"
+}
+```
+problem codes:
+ - **empty_queue**: **message_holder** can't fill response with messages cause of message queue is empty. 
+  typically raised in scenarios if `pending_timeout` is set
+ - **invalid_request**: unexpected request type
 
 ## Prior art
 
@@ -145,4 +176,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- |  |
+ [DIDComm mediator](https://github.com/Sirius-social/didcomm-mediator/blob/main/docs/Mediation.md#using-a-mediator) | Open source cloud-based mediator.
