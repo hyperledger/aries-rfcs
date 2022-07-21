@@ -1,5 +1,5 @@
 # 0212: Pickup Protocol
-- Authors: [Sam Curren](telegramsam@gmail.com)[Pavel Minenkov](minikspb@gmail.com)
+- Authors: [Sam Curren](telegramsam@gmail.com), [Pavel Minenkov](minikspb@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-03
 - Status Note: Initial version
@@ -64,8 +64,11 @@ A request to have multiple waiting messages sent inside a `batch` message.
     "pending_timeout": 3
 }
 ```
+
 `batch_size` is count of messages that **recipient** wants to retrieve
-`pending_timeout` *(optional)* is timeout in seconds **recipient** will await. Available values:
+
+`pending_timeout` *(optional)* is timeout in seconds **recipient** will await. 
+Available values:
    - `0` *(default)*: **message_holder** will response immediately almost queue is empty
    - `>0` *(in seconds)*: **message_holder** will wait until **queue size** reached `batch_size` value or `pending_timeout` occurred
    - `null`: **message_holder** will wait until **queue size** reached `batch_size`
