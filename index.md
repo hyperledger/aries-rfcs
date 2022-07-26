@@ -118,6 +118,7 @@
 * [0700: Out-of-Band through redirect](concepts/0700-oob-through-redirect/README.md) (2021-10-08 &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
 * [0721: Revocation Notification 2.0](features/0721-revocation-notification-v2/README.md) (2022-02-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0728: Device Binding Attachments](features/0728-device-binding-attachments/README.md) (2022-04-07 &mdash; [`feature`](/tags.md#feature))
+* [0746: Shorten URL Protocol 1.0](features/0746-shorten-url/README.md) (2022-07-26 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 ## [RETIRED](README.md#retired)
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2020-10-14, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
