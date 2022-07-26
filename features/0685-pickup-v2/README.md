@@ -1,4 +1,4 @@
-# 0212: Pickup Protocol 2.0
+# 0685: Pickup Protocol 2.0
 
 - Authors: [Sam Curren](telegramsam@gmail.com), [James Ebert](james.ebert@indicio.tech)
 - Status: [PROPOSED](/README.md#proposed)
