@@ -315,7 +315,19 @@ Message Format:
                 "base64": "<bytes for base64>"
             }
         }
-    ]
+    ],
+    "issuer_credentials" : [
+        {
+            "@id": "<attachment-id>"
+        }
+    ],
+    "hashlink_data": [
+        {
+            "@id": "<attachment-id>",
+            "field": "<fieldname>"
+        }
+    ],
+    "~attach" : [] //attachments referred to in message attributes       
 }
 ```
 
@@ -330,6 +342,9 @@ Description of fields:
   * When the Holder receives this message with the field set to a positive integer, the Holder's state moves to the `offer-received` state.
 * `formats` -- contains an entry for each `credentials~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `credentials~attach` -- an array of attachments containing the issued credential in the format(s) requested by the Holder.
+* `issuer_credentials` -- an array of references to credentials related to the issuer.
+* `hashlink_data` -- an array linking attachments to the appropriate credential attribute with a hashlink.
+* `~attach` -- attachments related to the issued credential. Each attachment should be represented in the appropriate message attributes and referenced by attachment id.
 
 If the issuer wants an acknowledgement that the last issued credential was accepted, this message must be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. Outcome in the context of this protocol means the acceptance of the credential in whole, i.e. the credential is verified and the contents of the credential are acknowledged. Note that this is different from the default behavior as described in [0317: Please ACK Decorator](../0317-please-ack/README.md). It is then best practice for the new Holder to respond with an explicit `ack` message as described in the please ack decorator RFC. 
 
