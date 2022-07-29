@@ -316,15 +316,18 @@ Message Format:
             }
         }
     ],
-    "issuer_credentials" : [
+    "supplements": [
         {
-            "@id": "<attachment-id>"
-        }
-    ],
-    "hashlink_data": [
+            "type": "hashlink_data",
+            "@id": "<attachment_id>",
+            "attrs": {
+                "key": "field",
+                "value": "<fieldname>"
+            }
+        },
         {
-            "@id": "<attachment-id>",
-            "field": "<fieldname>"
+            "type": "issuer_credential",
+            "@id": "<attachment_id>",
         }
     ],
     "~attach" : [] //attachments referred to in message attributes       
@@ -342,11 +345,42 @@ Description of fields:
   * When the Holder receives this message with the field set to a positive integer, the Holder's state moves to the `offer-received` state.
 * `formats` -- contains an entry for each `credentials~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `credentials~attach` -- an array of attachments containing the issued credential in the format(s) requested by the Holder.
-* `issuer_credentials` -- an array of references to credentials related to the issuer.
-* `hashlink_data` -- an array linking attachments to the appropriate credential attribute with a hashlink.
-* `~attach` -- attachments related to the issued credential. Each attachment should be represented in the appropriate message attributes and referenced by attachment id.
+*  `supplements` -- an array of attachment descriptors detailing credential supplements. See the Supplements Section for details.
+* `~attach` -- attachments related to the issued credential. Each attachment should be detailed in a `supplements` entry, referenced by attachment id.
 
 If the issuer wants an acknowledgement that the last issued credential was accepted, this message must be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. Outcome in the context of this protocol means the acceptance of the credential in whole, i.e. the credential is verified and the contents of the credential are acknowledged. Note that this is different from the default behavior as described in [0317: Please ACK Decorator](../0317-please-ack/README.md). It is then best practice for the new Holder to respond with an explicit `ack` message as described in the please ack decorator RFC. 
+
+##### Supplements
+Supplements are used to provide information related to credentials. Each supplement must be included as a message attachment in the `~attach` array, and have a descriptor contained in the `supplements` array with the following structure:
+
+```json
+{
+    "type": "<supplement_type>",
+    "@id": "<attachment_id>",
+    "attrs": [
+        {
+            "key": "<attr_key>",
+            "value": "<attr_value>"
+        }
+    ]
+}
+```
+- `type` SHOULD be from the following list. Compliance with this RFC indicates support of the official listed supplement types below.
+- `@id` is the id of the attachment within the `~attach` list.
+- `attrs` is a list of key/value pairs, used with supplement types that need additional information for processing. If no key/value pairs are needed, `attrs` may be omitted.
+
+
+Official Supplement Types:
+- `issuer_credential`
+    - Contains a credential related to the Issuer of the credential being presented.
+- `hashlink_data` 
+    - Contains binary data who's hashlink is contained within a presented credential.
+    - This binary data MUST only be transmitted if the associated credential attribute containing the hashlink is also transmitted.
+    - An attr key value pair of "field", and value of the attribute name must be sent in the attrs structure.
+
+Holder Behavior
+
+It is expected that a holder retain supplements provided during issuance, and present them as appropriate during presentation. Some supplements (such as `hashlink_data`) require understanding of when to include, as noted in the Supplment details. Supplements of an unknown type SHOULD NOT be automatically be presented
 
 ##### Credentials Attachment Registry
 
