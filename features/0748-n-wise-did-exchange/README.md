@@ -97,7 +97,7 @@ It is NOT ALLOWED to reuse DID from other relationships.
 
 The process of adding a new participant is shown in the figure below
 
-![](../../../n-wise/add_participant.png)
+![](add_participant.png)
 
 #### Updating DID Document
 
