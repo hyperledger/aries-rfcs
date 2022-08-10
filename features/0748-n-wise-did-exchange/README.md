@@ -1,6 +1,6 @@
 # Aries RFC 0748: N-wise DID Exchange Protocol 1.0
 
-- Authors: [Mikhail Lytaev](mikelytaev@gmail.com)
+- Authors: [Mikhail Lytaev](mikelytaev@gmail.com), [Pavel Minenkov](minikspb@gmail.com)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2022-08-03
 - Status Note: Under research
