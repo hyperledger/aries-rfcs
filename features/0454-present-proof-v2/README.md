@@ -10,6 +10,10 @@
 
 ## Version Change Log
 
+### 2.2 - Addition of Supplements
+
+An optional mechanism for providing credential supplements during presentation.
+
 ### 2.1 - Add ability to request multiple presentations
 
 A minor update to add mechanism for a Verifier to request the Prover submit multiple presentations in the "presentation" message(s), each presentation sourced from different credentials that satisfy the presentation request.

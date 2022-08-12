@@ -10,6 +10,10 @@
 
 ## Version Change Log
 
+### 2.2 - Addition of Supplements
+
+An optional mechanism for providing credential supplements during issuance. Supplements are also used in credential presentation.
+
 ### 2.1 - Add ability to issue multiple credentials
 
 A minor update to add a mechanism for an Issuer to indicate to the Holder that multiple credentials of the same type but with different claim values are available to be issued as part of the execution of the protocol instance.
@@ -330,7 +334,7 @@ Message Format:
             "@id": "<attachment_id>",
         }
     ],
-    "~attach" : [] //attachments referred to in message attributes       
+    "~attach" : [] //attachments referred to in supplements       
 }
 ```
 
