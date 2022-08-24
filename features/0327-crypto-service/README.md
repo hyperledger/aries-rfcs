@@ -6,7 +6,7 @@
 - Status Note: RFC under development
 - Supersedes:
 - Start Date: 2019-11-01
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 

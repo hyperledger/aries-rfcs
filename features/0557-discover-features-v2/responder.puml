@@ -1,0 +1,6 @@
+@startuml
+scale 350 width
+hide empty description
+[*] --> preparing_disclosures: receive queries\nor\nshort-circuit
+preparing_disclosures --> [*]: send\ndisclosures
+@enduml

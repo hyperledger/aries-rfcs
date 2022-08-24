@@ -1,10 +1,10 @@
 # 0211: Mediator Coordination Protocol
-- Authors: [Sam Curren](telegramsam@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-09-03
-- Status Note: Initial version, still under discussion. Previously named `Route Coordination Protocol`.
+- Authors: [Sam Curren](telegramsam@gmail.com), [Daniel Bluhm](daniel@indicio.tech), [Adam Burdett](burdettadam@gmail.com)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-03-15
+- Status Note: Discussed and implemented and part of AIP 2.0.
 - Start Date: 2019-09-03
-- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
@@ -12,7 +12,7 @@ A protocol to coordinate mediation configuration between a mediating agent and t
 
 ## Application Scope
 
-This protocol is needed when using an edge agent and a mediator agent from different vendors. Edge agents and mediator agents from the same vendor may use whatever protocol they wish without sacrificing interoperability. 
+This protocol is needed when using an edge agent and a mediator agent from different vendors. Edge agents and mediator agents from the same vendor may use whatever protocol they wish without sacrificing interoperability.
 
 ## Motivation
 
@@ -20,11 +20,11 @@ Use of the forward message in the Routing Protocol requires an exchange of infor
 
 ## Protocol
 
-**Name**: coordinatemediation
+**Name**: coordinate-mediation
 
 **Version**: 1.0
 
-**Base URI**: `https://didcomm.org/coordinatemediation/1.0/`
+**Base URI**: `https://didcomm.org/coordinate-mediation/1.0/`
 
 ### Roles
 
@@ -32,151 +32,172 @@ Use of the forward message in the Routing Protocol requires an exchange of infor
 **recipient** - The agent for whom the `forward` message payload is intended.
 
 ### Flow
-A recipient may discover an agent capable of routing using the Feature Discovery Protocol. If protocol is supported with the _mediator_ role, a _recipient_ may send a `route_request` to initiate a routing relationship.
+A recipient may discover an agent capable of routing using the Feature Discovery Protocol. If protocol is supported with the _mediator_ role, a _recipient_ may send a `mediate-request` to initiate a routing relationship.
 
-First, the _recipient_ sends a `route_request` message to the _mediator_. If the _mediator_ is willing to route messages, it will respond with a `route_grant` message. The _recipient_ will share the routing information in the grant message with other contacts.
+First, the _recipient_ sends a `mediate-request` message to the _mediator_. If the _mediator_ is willing to route messages, it will respond with a `mediate-grant` message. The _recipient_ will share the routing information in the grant message with other contacts.
 
-When a new key is used by the _recipient_, it must be registered with the _mediator_ to enable route identification. This is done with a `keylist_update` message.
+When a new key is used by the _recipient_, it must be registered with the _mediator_ to enable route identification. This is done with a `keylist-update` message.
 
-The `keylist_update` and `keylist_query` methods are used over time to identify and remove keys that are no longer in use by the _recipient_.
-
-### Terms
-
-The protocol allows for term agreement between the _mediator_ and _recipient_. 
-
-**mediator_terms** indicate terms that the _mediator_ requires the _recipient_ to agree to.
-
-**recipient_terms** indicate terms that the _recipient_ requires the _mediator_ to agree to.
-
-If the _mediator_ requires the _recipient_  to agree to terms prior to service, a `mediate_deny` message will be returned listing the URIs of terms that the user must agree to. Term agreement is indicated by including the same URIs in the `mediator_terms` attribute of the `route_request` message. The *mediator* may indicate which user terms they support in the `recipient_terms` attribute of the `mediate_deny` message.
+The `keylist-update` and `keylist-query` methods are used over time to identify and remove keys that are no longer in use by the _recipient_.
 
 ## Reference
 
+> **Note on terms:** Early versions of this protocol included the concept of
+> terms for mediation.  This concept has been removed from this version due to a
+> need for further discussion on representing terms in DIDComm in general and
+> lack of use of these terms in current implementations.
+
+
 ### Mediation Request
 This message serves as a request from the _recipient_ to the _mediator_, asking for the permission (and routing information) to publish the endpoint as a mediator.
+
 ```jsonc
 {
     "@id": "123456781",
     "@type": "<baseuri>/mediate-request",
-    "mediator_terms": [],
-    "recipient_terms": []
 }
 ```
 
 ### Mediation Deny
 
-A mediator may require agreements prior to granting route coordination. If the agreements present in the request are not sufficient, a route deny message may be used to indicate which agreements are required.
+This message serves as notification of the mediator denying the recipient's
+request for mediation.
 
 ```jsonc
 {
     "@id": "123456781",
     "@type": "<baseuri>/mediate-deny",
-    "mediator_terms": [],
-    "recipient_terms": []
 }
 ```
 
 ### Mediation Grant
 
 A route grant message is a signal from the mediator to the recipient that permission is given to distribute the included information as an inbound route.
+
 ```jsonc
 {
     "@id": "123456781",
     "@type": "<baseuri>/mediate-grant",
-    "endpoint": "",
-    "routing_keys": []
-    
+    "endpoint": "http://mediators-r-us.com",
+    "routing_keys": ["did:key:z6Mkfriq1MqLBoPWecGoDLjguo1sB9brj6wT3qZ5BxkKpuP6"]
 }
 ```
-Questions:
-- What about multiple endpoint options? http and ws?
+
+`endpoint`: The endpoint reported to mediation client connections.
+
+`routing_keys`: List of keys in intended routing order. Key used as recipient of forward messages.
+
 
 ### Keylist Update
+
 Used to notify the _mediator_ of keys in use by the _recipient_.
+
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "<baseuri>/keylist_update",
+    "@type": "<baseuri>/keylist-update",
     "updates":[
         {
-            "recipient_key": "",
-            "action": "" // "add" or "remove"
+            "recipient_key": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
+            "action": "add"
         }
     ]
 }
 ```
+
+`recipient_key`: Key subject of the update.
+
+`action`: One of `add` or `remove`.
+
 ### Keylist Update Response
+
 Confirmation of requested keylist updates.
+
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "<baseuri>/keylist_update_response",
+    "@type": "<baseuri>/keylist-update-response",
     "updated": [
         {
-            "recipient_key": "",
+            "recipient_key": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH",
             "action": "" // "add" or "remove"
             "result": "" // [client_error | server_error | no_change | success]
         }
     ]
 }
 ```
-Questions:
-- What types of errors are possible here?
+
+`recipient_key`: Key subject of the update.
+
+`action`: One of `add` or `remove`.
+
+`result`: One of `client_error`, `server_error`, `no_change`, `success`; describes the resulting state of the keylist update.
+
 ### Key List Query
+
+Query mediator for a list of keys registered for this connection.
 
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "<baseuri>/key_list_query",
-    "filter":{
-        "": ["",""]
-    }
+    "@type": "<baseuri>/keylist-query",
     "paginate": {
         "limit": 30,
         "offset": 0
     }
 }
 ```
-Questions:
-- Filters feels odd here. Asking to see if a key is registered makes sense, but what else to filter on?
+
+`paginate` is optional.
 
 ### Key List
+
+Response to key list query, containing retrieved keys.
 
 ```jsonc
 {
     "@id": "123456781",
-    "@type": "<baseuri>/key_list",
+    "@type": "<baseuri>/keylist",
     "keys": [
         {
-            "recipient_key": ""
+            "recipient_key": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
         }
     ]
     "pagination": {
-    
+        "count": 30,
+        "offset": 30,
+        "remaining": 100
     }
-    
 }
 ```
+
+`pagination` is optional.
+
+### Encoding of keys
+
+All keys are encoded using the [`did:key`](https://w3c-ccg.github.io/did-method-key/) method as per
+[RFC0360](../0360-use-did-key/README.md).
 
 ## Prior art
 
 There was an Indy HIPE that never made it past the PR process that described a similar approach. That HIPE led to a partial implementation of this inside the Aries Cloud Agent Python
 
-
+## Future Considerations
+- Should we allow listing keys by date? You could query keys in use by date?
+- We are missing a way to check a single key (or a few keys) without doing a full list.
+- Mediation grant supports only one endpoint. What can be done to support multiple endpoint options i.e. http, ws, etc.
+- Requiring proof of key ownership (with a signature) would prevent an edge case where a malicious party registers a key for another party at the same mediator, and before the other party.
+- How do we express terms and conditions for mediation?
 
 ## Unresolved questions
 
-- Still considering alternatives to convey the right meaning.
-- Should we allow listing keys by date? You could query keys in use by date?
-- How might payment be coordinated?
-- Should key ownership be proved when registered? Is there a risk of people requesting other people's keys?
-- We are missing a way to check a single key (or a few keys) without doing a full list.
-- Additional questions in each section
-  
+- None
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
 Name / Link | Implementation Notes
 --- | ---
- |  | 
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python/blob/main/Mediation.md) | Added in ACA-Py 0.6.0 [MISSING test results](/tags.md#test-anomaly)****
+[DIDComm mediator](https://github.com/Sirius-social/didcomm-mediator) | Open source cloud-based mediator.

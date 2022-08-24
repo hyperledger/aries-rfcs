@@ -1,12 +1,11 @@
 # Aries RFC 0360: did:key Usage
 
 - Authors: [Tobias Looker](tobias.looker@mattr.global), [Stephen Curran](mailto:swcurran@cloudcompass.ca)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-12-17
-- Status Note: Socialized with mixed support; did:key method is a [W3C CCG work item](https://w3c-ccg.github.io/community/work_items.html)
-- Supersedes:
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2021-04-15
+- Status Note: Referenced in a number of Aries RFCs and formalized as part of [AIP 2.0](../../concepts/0302-aries-interop-profile/README.md) did:key method is a [W3C CCG work item](https://w3c-ccg.github.io/community/work_items.html)
 - Start Date: 2019-12-17
-- Tags: feature
+- Tags: [feature](/tags.md#feature)
 
 ## Summary
 
@@ -14,7 +13,7 @@ A number of RFCs that have been defined reference what amounts to a "naked" publ
 
 > To Do: Update link DID Key Method link (above) from Digital Bazaar to W3C repositories when they are created and populated.
 
-While it is well known in the Aries community that `did:key` is fundamentally different from the [did:peer](https://dhh1128.github.io/peer-did-method-spec/index.html) method that is the basis of Aries protocols, it must be re-emphasized here. This RFC does **NOT** imply any changes to the use of `did:peer` in Aries, nor does it change the content of a `did:peer` DIDDoc. This RFC only changes references to plain public keys in the JSON of some RFCs to use `did:key` in place of a plain text string.
+While it is well known in the Aries community that `did:key` is fundamentally different from the [did:peer](https://identity.foundation/peer-did-method-spec/index.html) method that is the basis of Aries protocols, it must be re-emphasized here. This RFC does **NOT** imply any changes to the use of `did:peer` in Aries, nor does it change the content of a `did:peer` DIDDoc. This RFC only changes references to plain public keys in the JSON of some RFCs to use `did:key` in place of a plain text string.
 
 Should this RFC be [ACCEPTED](/README.md#accepted), a [community coordinated update](../../concepts/0345-community-coordinated-update/README.md) will be used to apply updates to the agent code bases and impacted RFCs.
 
@@ -28,7 +27,7 @@ Note that simply knowing the key type is not necessarily sufficient to be able t
 
 ## Tutorial
 
-An example of the use of the replacement of a verkey with `did:key` can be found in the [~service decorator RFC](https://github.com/hyperledger/aries-rfcs/tree/master/features/0056-service-decorator). Notably in the example at the beginning of the [tutorial](https://github.com/hyperledger/aries-rfcs/tree/master/features/0056-service-decorator#tutorial) section, the verkeys in the `recipientKeys` and `routingKeys` items would be changed from native keys to use `did:key` as follows:
+An example of the use of the replacement of a verkey with `did:key` can be found in the [~service decorator RFC](https://github.com/hyperledger/aries-rfcs/tree/main/features/0056-service-decorator). Notably in the example at the beginning of the [tutorial](https://github.com/hyperledger/aries-rfcs/tree/main/features/0056-service-decorator#tutorial) section, the verkeys in the `recipientKeys` and `routingKeys` items would be changed from native keys to use `did:key` as follows:
 
 ``` jsonc
 {
@@ -46,7 +45,9 @@ Thus, `8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K` becomes `did:key:z6MkmjY8Gn
 - Start with the original (presumably) base58 ed25519 public key
   - Since we have only a naked public key, we must assume the format
 - Base58 decode the public key to get the hex version
-- Multicodec: Prefix with the algorithm type. In this case, `ED01` as the key type is ed25519.
+- Multicodec: Prefix with the unsigned varint of the algorithm type. In this case, that means prefixing the string with `unsigned_varint(0xed)` (which is `0xed 0x01`) for the key type of ed25519,
+  - the `0xed` is per the [multicodec table](https://github.com/multiformats/multicodec/blob/master/table.csv) (search for  `ed25519`).
+  - Note that unsigned varint handling varies by key type prefix, so don't just assume the same handling (e.g. `code+0x01`) for other key type prefixes. For a broader discussion of this see this [issue comment](https://github.com/w3c-ccg/did-method-key/issues/29#issuecomment-786039356) in the `did:key` repo.
 - Multibase: Base58 encode the result and prefix that with "z" to indicate base58 encoding
 - DID: Prefix that with the DID Method prefix `did:key:`
 
@@ -56,15 +57,17 @@ The `did:key` method uses the strings that are the DID, public key and key type 
 
 The following currently implemented RFCs would be affected by acceptance of this RFC. In these RFCs, the JSON items that currently contain naked public keys (mostly the items `recipientKeys` and `routingKeys`) would be changed to use `did:key` references where applicable. Note that in these items public DIDs could also be used if applicable for a given use case.
 
-- [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/master/features/0023-did-exchange) - Invitation Message
-- [0028-introduce](https://github.com/hyperledger/aries-rfcs/tree/master/features/0028-introduce)
-- [0056-service-decorator](https://github.com/hyperledger/aries-rfcs/tree/master/features/0056-service-decorator)
-- [0160-connection-protocol](https://github.com/hyperledger/aries-rfcs/tree/master/features/0160-connection-protocol)
+- [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/main/features/0023-did-exchange) - Invitation Message
+- [0028-introduce](https://github.com/hyperledger/aries-rfcs/tree/main/features/0028-introduce)
+- [0056-service-decorator](https://github.com/hyperledger/aries-rfcs/tree/main/features/0056-service-decorator)
+- [0160-connection-protocol](https://github.com/hyperledger/aries-rfcs/tree/main/features/0160-connection-protocol)
+- [0434-out-of-band-protocols](https://github.com/hyperledger/aries-rfcs/blob/main/features/0434-outofband/README.md)
+- [0211-mediator-coordination-protocol](https://github.com/hyperledger/aries-rfcs/blob/main/features/0211-route-coordination/README.md)
 
 Service entries in `did:peer` DIDDocs (such as in RFCs
-[0094-cross-domain-messaging](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0094-cross-domain-messaging)
+[0094-cross-domain-messaging](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0094-cross-domain-messaging)
 and
-[0067-didcomm-diddoc-conventions](https://github.com/hyperledger/aries-rfcs/tree/master/features/0067-didcomm-diddoc-conventions))
+[0067-didcomm-diddoc-conventions](https://github.com/hyperledger/aries-rfcs/tree/main/features/0067-didcomm-diddoc-conventions))
 should **NOT** use a `did:key` public key representation. Instead, service
 entries in the DIDDoc should reference keys defined internally in the DIDDoc
 where appropriate.

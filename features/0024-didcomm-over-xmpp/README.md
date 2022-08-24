@@ -4,7 +4,7 @@
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-06-14
 - Status Note:  , moving from Indy to Aries.
-- Supersedes: [Indy DIDComm-over-XMPP](https://github.com/Oskar-van-Deventer/indy-hipe/tree/master/text/didcom-over-xmpp)
+- Supersedes: [Indy DIDComm-over-XMPP](https://github.com/Oskar-van-Deventer/indy-hipe/tree/main/text/didcom-over-xmpp)
 - Start Date: 2019-04-23
 - Tags: [feature](/tags.md#feature)
 
@@ -40,14 +40,14 @@ The DIDComm-over-XMPP feature provides an architecture for the transport of DIDC
 
 ### DIDComm
 
-The DIDComm wire message format is specified in [HIPE 0028-wire-message-format](https://github.com/hyperledger/indy-hipe/tree/master/text/0028-wire-message-format). It can carry among others the DIDComm connection protocol, as specified in [Hyperledger Indy Hipe 0031](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol). The purpose of the latter protocol is to set up a trusted electronic relationship between two parties (natural person, legal person, ...). Technically, the trust relationship involves the following
+The DIDComm wire message format is specified in [HIPE 0028-wire-message-format](https://github.com/hyperledger/indy-hipe/tree/main/text/0028-wire-message-format). It can carry among others the DIDComm connection protocol, as specified in [Hyperledger Indy Hipe 0031](https://github.com/hyperledger/indy-hipe/tree/main/text/0031-connection-protocol). The purpose of the latter protocol is to set up a trusted electronic relationship between two parties (natural person, legal person, ...). Technically, the trust relationship involves the following
 
 - Univocal identification of the parties within the context of the relationship
 - Secure exchange of keys to encrypt and verify messages between agents of the parties
 - Secure exchange of service end points to be reachable at in the future
 - Secure exchange of verifiable credentials and other messages that require secure exchange
 
-W3C specifies [Data Model and Syntaxes for Decentralized Identifiers (DIDs)](https://w3c-ccg.github.io/did-spec/). This specification introduces Decentralized Identifiers, DIDs, for identification. A DID can be resolved into a DID Document that contains the associated keys and service endpoints, see also W3C's [A Primer for Decentralized Identifiers](https://w3c-ccg.github.io/did-primer/). W3C provides a [DID Method Registry](https://w3c-ccg.github.io/did-method-registry/) for a complete list of all known DID Method specifications. Many of the DID methods use an unambiguous source of truth to resolve a DID Document, e.g. a well governed public blockchain. An exception is the [Peer DID method](https://dhh1128.github.io/peer-did-method-spec/index.html) that relies on the peers, i.e. parties in the trusted electronic relationship to maintain the DID Document.
+W3C specifies [Data Model and Syntaxes for Decentralized Identifiers (DIDs)](https://w3c-ccg.github.io/did-spec/). This specification introduces Decentralized Identifiers, DIDs, for identification. A DID can be resolved into a DID Document that contains the associated keys and service endpoints, see also W3C's [A Primer for Decentralized Identifiers](https://w3c-ccg.github.io/did-primer/). W3C provides a [DID Method Registry](https://w3c-ccg.github.io/did-method-registry/) for a complete list of all known DID Method specifications. Many of the DID methods use an unambiguous source of truth to resolve a DID Document, e.g. a well governed public blockchain. An exception is the [Peer DID method](https://identity.foundation/peer-did-method-spec/index.html) that relies on the peers, i.e. parties in the trusted electronic relationship to maintain the DID Document.
 
 ### XMPP
 
@@ -128,7 +128,7 @@ The disadvantage of this method is that it creates a strong correlation point, w
 
 *Editor's note: More advantages or disadvantages?*
 
-A typical application of Method 1 is when there is an ongoing human-to-human (or human-to-bot) chat session that uses XMPP and the two parties what to set up a pairwise DID relationship. One can skip Step 0 "Invitation to Connect" ([HIPE 0031](https://github.com/hyperledger/indy-hipe/tree/master/text/0031-connection-protocol)) and immediately perform Step 1 "Connection Request".
+A typical application of Method 1 is when there is an ongoing human-to-human (or human-to-bot) chat session that uses XMPP and the two parties what to set up a pairwise DID relationship. One can skip Step 0 "Invitation to Connect" ([HIPE 0031](https://github.com/hyperledger/indy-hipe/tree/main/text/0031-connection-protocol)) and immediately perform Step 1 "Connection Request".
 
 **Method 2: Random userpart**
 

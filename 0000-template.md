@@ -5,13 +5,13 @@
 - Status Note: (explanation of current status)  
 - Supersedes: (link to anything this RFC supersedes)
 - Start Date: 2018-12-26 (date you started working on this idea)
-- Tags: feature, protocol
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
 One paragraph explanation of the feature.
 
-> NOTE: If you are creating a **protocol** RFC, please use [this template](https://github.com/hyperledger/aries-rfcs/blob/master/0000-template-protocol.md)instead.
+> NOTE: If you are creating a **protocol** RFC, please use [this template](https://github.com/hyperledger/aries-rfcs/blob/main/0000-template-protocol.md) instead.
 
 ## Motivation
 
@@ -93,7 +93,7 @@ solution that comes out of this doc?
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-*Implementation Notes* [may need to include a link to test results](README.md#accepted).
+*Implementation Notes* [may need to include a link to test results](/README.md#accepted).
 
 Name / Link | Implementation Notes
 --- | ---

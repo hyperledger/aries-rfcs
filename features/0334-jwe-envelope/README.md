@@ -14,7 +14,7 @@ Agents need to use a common set of algorithms when exchanging and persisting dat
 
 ## Motivation
 
-The goal of this RFC is define ciphersuites for Anoncrypt and Authcrypt such that we can achieve better compatability with JOSE. We also aim to supply both a compliant suite and a constrained device suite. The compliant suite is suitable for implementations that contain AES hardware acceleration or desire to use NIST / FIPS algorithms (where possible).
+The goal of this RFC is to define cipher suites for Anoncrypt and Authcrypt such that we can achieve better compatibility with JOSE. We also aim to supply both a compliant suite and a constrained device suite. The compliant suite is suitable for implementations that contain AES hardware acceleration or desire to use NIST / FIPS algorithms (where possible).
 
 ## Encryption Algorithms
 
@@ -24,10 +24,11 @@ The next two sub-sections describe the encryption algorithms that must be suppor
 
 The following table defines the supported content encryption algorithms for DIDComm JWE envelopes:
 
- Content Encryption   | Encryption Algorithm identifier
- :------------------  | :-------------------
- AES-GCM (256 bit)    | A256GCM
- XChacha20Poly1305    | XC20P
+ Content Encryption      | Encryption Algorithm identifier   | Authcrypt/Anoncrypt |  Reference  |
+ :---------------------  | :------------------------------   |  :----------------- | :---------  |
+ A256CBC-HS512 (512 bit) | AES_256_CBC_HMAC_SHA_512 | Authcrypt/Anoncrypt | [ECDH-1PU section 2.1](https://datatracker.ietf.org/doc/html/draft-madden-jose-ecdh-1pu-04#section-2.1) and [RFC 7518 section 5.2.5](https://datatracker.ietf.org/doc/html/rfc7518#section-5.2.5) |
+ AES-GCM (256 bit)       | A256GCM | Anoncrypt | [RFC7518 section 5.1](https://tools.ietf.org/html/rfc7518#section-5.1) and more specifically [RFC7518 section 5.3](https://tools.ietf.org/html/rfc7518#section-5.3) |
+ XChacha20Poly1305       | XC20P | Anoncrypt | [xchacha draft 03](https://tools.ietf.org/html/draft-irtf-cfrg-xchacha-03) |
 
 ### Key Encryption Algorithms
 
@@ -47,12 +48,14 @@ The following curves are supported:
  :--------------------------------------------------------- | :-----------------
  X25519 (aka Curve25519)                                    | X25519 (default)
  NIST P256 (aka SECG secp256r1 and ANSI X9.62 prime256v1, ref [here](https://tools.ietf.org/search/rfc4492#appendix-A))   | P-256
+ NIST P384 (aka SECG secp384r1, ref [here](https://tools.ietf.org/search/rfc4492#appendix-A)) | P-384
+ NIST P521 (aka SECG secp521r1, ref [here](https://tools.ietf.org/search/rfc4492#appendix-A)) | P-521
 
 Other curves are optional.
 
 #### Security Consideration for Curves
 
-As noted in the ECDH-1PU [IETF draft](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03#section-4) security considerations section, all implementations must ensure the following:
+As noted in the ECDH-1PU [IETF draft](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-04#section-4) security considerations section, all implementations must ensure the following:
 ```text
 When performing an ECDH key agreement between a static private key
 and any untrusted public key, care should be taken to ensure that the
@@ -76,6 +79,8 @@ The Proposed [JWE Formats](#jwe-formats) below lists a combination of content en
 - All new algorithm identifiers should be registered at IANA.
   - XC20P
   - ECDH-1PU+A256KW (already in IETF draft)
+  - ECDH-ES+XC20PKW
+  - ECDH-1PU+XC20PKW
 - Security Considerations of [ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) (Section 4)
 - X25519 is not yet part of SP 800-56A. See [NIST post](https://csrc.nist.gov/News/2017/Transition-Plans-for-Key-Establishment-Schemes) for more information.
 
@@ -100,26 +105,27 @@ Another prior effort towards enhancing JWE compliance is to use XChacha20Poly130
   "recipients": [
     {
       "header": {
-        "kid": base64url(recipient KID), // e.g: base64url("urn:123")
+        "kid": base64url(recipient KID), // e.g: base64url("urn:123") or base64url(jwk thumbprint as KID)
         "alg": "ECDH-ES+A256KW",
-        "epk": { // defining X25519 key as an example JWK, but this can be AES-GCM 256-bit key as well 
+        "epk": { // defining X25519 key as an example JWK, but this can be EC key as well 
           "kty": "OKP",
           "crv": "X25519",
-          "x": "-3bLMSHYDG3_LVNh-MJvoYs_a2sAEPr4jwFfFjTrmUo" // sender's ephemeral public key value base64url encoded
+          "x": "-3bLMSHYDG3_LVNh-MJvoYs_a2sAEPr4jwFfFjTrmUo" // sender's ephemeral public key value raw (no padding) base64url encoded
         },
-        "apu": epk.x value above,
-        "apv": base64url(recipient.kid)
+        "apu": base64url(epk.x value above),
+        "apv": base64url(recipients[*].header.kid)
       },
       "encrypted_key": "Sls6zrMW335GJsJe0gJU4x1HYC4TRBZS1kTS1GATEHfH_xGpNbrYLg"
     }
   ],
+  "aad": "base64url(sha256(concat('.',sort([recipients[0].kid, ..., recipients[n].kid])))))",
   "iv": "K0PfgxVxLiW0Dslx",
   "ciphertext": "Sg",
   "tag": "PP31yGbQGBz9zgq9kAxhCA"
 }
 ```
 
-`typ` header field is the DIDComm Transports value as mentioned in [RFC-0025](https://github.com/hyperledger/aries-rfcs/tree/master/features/0025-didcomm-transports#reference). This RFC states the prefix `application/` but according to [IANA Media types](https://www.iana.org/assignments/media-types/media-types.xhtml#application) the prefix is implied therefore not needed here.
+`typ` header field is the DIDComm Transports value as mentioned in [RFC-0025](https://github.com/hyperledger/aries-rfcs/tree/main/features/0025-didcomm-transports#reference). This RFC states the prefix `application/` but according to [IANA Media types](https://www.iana.org/assignments/media-types/media-types.xhtml#application) the prefix is implied therefore not needed here.
 
 ### Anoncrypt using ECDH-ES key wrapping mode and A256GCM content encryption
 
@@ -133,25 +139,26 @@ Another prior effort towards enhancing JWE compliance is to use XChacha20Poly130
     {
       "header": {
         "kid": base64url(recipient KID),
-        "alg": "ECDH-ES+A256KW",
+        "alg": "ECDH-ES+XC20PKW", // or "ECDH-ES+A256KW" with "epk" as EC key
         "epk": {
           "kty": "OKP",
           "crv": "X25519",
-          "x": "aOH-76BRwkHf0nbGokaBsO6shW9McEs6jqVXaF0GNn4" // sender's ephemeral public key value base64url encoded
+          "x": "aOH-76BRwkHf0nbGokaBsO6shW9McEs6jqVXaF0GNn4" // sender's ephemeral public key value raw (no padding) base64url encoded
         },
-        "apu": epk.x value above,
-        "apv": base64url(recipient.kid)
+        "apu": base64url(epk.x value above),
+        "apv": base64url(recipients[*].header.kid)
       },
       "encrypted_key": "wXzKi-XXb6fj_KSY5BR5hTUsZIiAQKrxblTo3d50B1KIeFwBR98fzQ"
     }
   ],
+  "aad": "base64url(sha256(concat('.',sort([recipients[0].kid, ..., recipients[n].kid])))))",
   "iv": "9yjR8zvgeQDZFbIS",
   "ciphertext": "EvIk_Rr6Nd-0PqQ1LGimSqbKyx_qZjGnmt6nBDdCWUcd15yp9GTeYqN_q_FfG7hsO8c",
   "tag": "9wP3dtNyJERoR7FGBmyF-w"
 }
 ```
 
-In the above two examples, `apu` is the encode ephemeral key used to encrypt the cek stored in `encrypted_key` and `apv` is the key id of the static public key of the recipient. Both are base64Url encoded.
+In the above two examples, `apu` is the encoded ephemeral key used to encrypt the cek stored in `encrypted_key` and `apv` is the encoded key id of the static public key of the recipient. Both are raw (no padding) base64Url encoded.
 `kid` is the value of a key ID in a DID document that should be resolvable to fetch the raw public key used.
 
 ### Authcrypt using ECDH-1PU key wrapping mode
@@ -160,24 +167,24 @@ In the above two examples, `apu` is the encode ephemeral key used to encrypt the
 {
     "protected": base64url({
         "typ": "didcomm-envelope-enc",
-        "enc":"XC20P", // or "A256GCM"
+        "enc":"A256CBC-HS512", // or one of: "A128CBC-HS256", "A192CBC-HS384"
         "skid": base64url(sender KID),
+        "alg": "ECDH-1PU+A256KW", // or "ECDH-1PU+XC20P" with "epk" as X25519 key
+        "apu": base64url("skid" header value),
+        "apv": base64url(sha256(concat('.',sort([recipients[0].kid, ..., recipients[n].kid]))))),
+        "epk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "gfdM68LgZWhHwdVyMAPh1oWqV_NcYGR4k7Bjk8uBGx8",
+            "y": "Gwtgz-Bl_2BQYdh4f8rd7y85LE7fyfdnb0cWyYCrAb4"
+        }
     }),
     "recipients": [
         {
-            "encrypted_key": "base64url(encrypted CEK)",
             "header": {
-                "kid": base64url(recipient KID),
-                "alg": "ECDH-1PU+A256KW",
-                "enc": "A256GCM",
-                "apu": base64url(senderID),
-                "apv": base64url(recipientID),
-                "epk": {
-                  "kty": "OKP",
-                  "crv": "X25519",
-                  "x": "aOH-76BRwkHf0nbGokaBsO6shW9McEs6jqVXaF0GNn4"
-                },
-            }
+                "kid": base64url(recipient KID)
+            },
+            "encrypted_key": "base64url(encrypted CEK)"
         },
        ...
     ],
@@ -188,13 +195,17 @@ In the above two examples, `apu` is the encode ephemeral key used to encrypt the
 }
 ```
 
-With the recipients headers representing an ephemeral key that can be used to derive the key to be used for AEAD decryption of the CEK following the [ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) encryption scheme.
+With the recipients headers representing an ephemeral key that can be used to derive the key to be used for AEAD decryption of the CEK following the [ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-04) encryption scheme.
 
-The function `XC20P` in the example above is defined as the XChahcha20Poly1035 cipher function. This can be replaced by the A256GCM cipher function.
+The function `XC20P` in the example above is defined as the XChahcha20Poly1035 cipher function. This can be replaced by the AES-CBC+HMAC_SHA family of cipher functions for authcrypt or AES-GCM cipher function for anoncrypt.
+
+### Concrete examples
+
+See concrete [anoncrypt](anoncrypt-examples.md) and [authcrypt](authcrypt-examples.md) examples
 
 ## JWE detached mode nested envelopes
 
-There are situations in DIDComm messaging where an envelope could be nested inside another envelope -- particularly [RFC 46: Mediators and Relays](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0046-mediators-and-relays). Normally nesting envelopes implies that the envelope payloads will incur additional encryption and encoding operations at each parent level in the nesting. This section describes a mechanism to extract the nested payloads outside the nesting structure to avoid these additional operations.
+There are situations in DIDComm messaging where an envelope could be nested inside another envelope -- particularly [RFC 46: Mediators and Relays](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0046-mediators-and-relays). Normally nesting envelopes implies that the envelope payloads will incur additional encryption and encoding operations at each parent level in the nesting. This section describes a mechanism to extract the nested payloads outside the nesting structure to avoid these additional operations.
 
 ### Detached mode
 
@@ -238,7 +249,7 @@ This solution has the following characteristics:
 
 The extracted ciphertext serialization format should have additional thought for both compact and JSON modes. As a starting point:
 
-- Compact mode: Each extracted ciphertext is appended to the end of the serialized "final" JWE (using dot seperation). These extracted cipher texts are ordered according to the nesting (from innermost to outermost).
+- Compact mode: Each extracted ciphertext is appended to the end of the serialized "final" JWE (using dot separation). These extracted cipher texts are ordered according to the nesting (from innermost to outermost).
 - JSON mode: The extracted ciphertext are placed into a JSON array. These extracted cipher texts are ordered according to the nesting (from innermost to outermost). The array is appended to the "final" JWE object as the `detached_ciphertext` field.
 
 For illustration, the following compact serialization represents nesting due to two mediators (the second mediator being closest to the Receiver).
@@ -264,7 +275,7 @@ Second Mediator receives:
   BASE64URL(JWE Ciphertext for Receiver)
 ```
 
-Finally the Receiver has a normal JWE (as usual):
+Finally, the Receiver has a normal JWE (as usual):
 ```
   BASE64URL(UTF8(JWE Protected Header for Receiver)) || '.' ||
   BASE64URL(JWE Encrypted Key for Receiver) || '.' ||
@@ -278,8 +289,8 @@ This illustration extends the serialization shown in [RFC 7516](https://tools.ie
 ## Prior art
 
 - The [JWE](https://tools.ietf.org/html/rfc7518) family of encryption methods.
-- [Aries RFC 0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/master/features/0019-encryption-envelope) suggested envelope formats will be superseded by this RFC.
-- [Aries RFC 0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/master/features/0025-didcomm-transports#reference) for the content type used in the proposed envelopes.
+- [Aries RFC 0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope) suggested envelope formats will be superseded by this RFC.
+- [Aries RFC 0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/main/features/0025-didcomm-transports#reference) for the content type used in the proposed envelopes.
 - [minimal-cipher](https://github.com/digitalbazaar/minimal-cipher) implementation
 - [Aries-Framework-Go](https://github.com/hyperledger/aries-framework-go/) has an experimental (X)Chacha20Poly1305 Packer implementation based on Aries-RFCs [issue-133](https://github.com/hyperledger/aries-rfcs/issues/133#issuecomment-535199768)
 - [IANA Media Types](https://www.iana.org/assignments/media-types/media-types.xhtml#application)
@@ -290,7 +301,12 @@ This illustration extends the serialization shown in [RFC 7516](https://tools.ie
 ## Unresolved questions
 
 - What fields should Key identifiers in ES and 1PU key wrapping modes use? `kid` vs `id` (vs `skid` introduced in [ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) IETF document) or any other combination of fields. There is a discussion about this [here](https://github.com/w3c/did-core/issues/131).
-- What kind of keys to include in the JWE envelope? `Encryption` or `signing` keys? Currently the existing Aries agents include `signing` keys for the sender and recipients and convert them to encryption keys for encryption/decryption operations only. The drawback is the envelope transmitted by the agent contains signing keys. The aries-framework-go repo includes (an experimental) JWE implementation that expects `signing` keys from the API user and then fetches the corresponding `encryption` keys from the wallet (KMS) to build the envelope. `Signing` keys are not included in the envelope in this implementation. There is a need to separate them from `encryption` keys in the current Aries implementations as well.
+  - **Update**:
+  The answer to this question is to keep `kid` definition as per the JWE/JWS family of specification definitions and use `skid` in the JWE protected header as defined in [ECDH-1PU](https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03) to represent a resolvable sender key id.
+
+- What kind of keys to include in the JWE envelope? `Encryption` or `signing` keys? Currently, the existing Aries agents include `signing` (ED25519) keys for the sender and recipients and convert them to encryption (X25519) keys for encryption/decryption operations only. The drawback of this approach is the envelope transmitted by the agent contains signing public keys. There is a need to separate them from `encryption` keys. 
+  - **Update**:  
+  The best way to separate the two keys is to use the DID document's [KeyAgreement](https://www.w3.org/TR/did-core/#key-agreement) verification method in full description to store the `encryption` key so that it can be sent in the JWE envelope independently of the signing (DID authentication) key.
 
 ## Implementations
 
@@ -300,4 +316,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 | ----------- | -------------------- |
 |             |                      |
 
-Note: [Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) will soon work on a first draft implementation of this RFC.
+Note: [Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) is almost done with a first draft implementation of this RFC.

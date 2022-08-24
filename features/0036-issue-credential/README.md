@@ -99,7 +99,7 @@ An optional message sent by the potential Holder to the Issuer to initiate the p
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.1/propose-credential",
+    "@type": "https://didcomm.org/issue-credential/1.1/propose-credential",
     "@id": "<uuid-of-propose-message>",
     "comment": "some comment",
     "credential_proposal": <json-ld object>,
@@ -131,7 +131,7 @@ Schema:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential",
+    "@type": "https://didcomm.org/issue-credential/1.0/offer-credential",
     "@id": "<uuid-of-offer-message>",
     "comment": "some comment",
     "credential_preview": <json-ld object>,
@@ -152,7 +152,7 @@ Description of fields:
 * `comment` -- an optional field that provides human readable information about this Credential Offer, so the offer can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview-credential);
 * `offers~attach` -- an array of attachments that further define the credential being offered. This might be used to clarify which formats or format versions will be issued.
-  * For Indy, the attachment includes a nonce and key correctness proof to facilitate integrity checks. It is a base64-encoded version of the data returned from [`indy_issuer_create_credential_offer()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
+  * For Indy, the attachment includes a nonce and key correctness proof to facilitate integrity checks. It is a base64url-encoded version of the data returned from [`indy_issuer_create_credential_offer()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L280).
 
 The Issuer may add a [`~payment-request` decorator](../0075-payment-decorators/README.md#payment_request) to this message to convey the need for payment before issuance. See the [payment section below](#payments-during-credential-exchange) for more details.
 
@@ -166,7 +166,7 @@ Schema:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/request-credential",
+    "@type": "https://didcomm.org/issue-credential/1.0/request-credential",
     "@id": "<uuid-of-request-message>",
     "comment": "some comment",
     "requests~attach": [
@@ -185,7 +185,7 @@ Description of Fields:
 
 * `comment` -- an optional field that provides human readable information about this Credential Request, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `requests~attach` -- an array of [attachments](../../concepts/0017-attachments/README.md) defining the requested formats for the credential.
-  * For Indy, the attachment is a base64-encoded version of the data returned from [`indy_prover_create_credential_req()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
+  * For Indy, the attachment is a base64url-encoded version of the data returned from [`indy_prover_create_credential_req()`](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L658).
 
 This message may have a [`~payment-receipt` decorator](../0075-payment-decorators/README.md#payment_receipt) to prove to the Issuer that the potential Holder has satisfied a payment requirement. See the [payment section below](#payments-during-credential-exchange).
 
@@ -197,7 +197,7 @@ Schema:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/issue-credential",
+    "@type": "https://didcomm.org/issue-credential/1.0/issue-credential",
     "@id": "<uuid-of-issue-message>",
     "comment": "some comment",
     "credentials~attach": [
@@ -216,7 +216,7 @@ Description of fields:
 
 * `comment` -- an optional field that provides human readable information about the issued credential, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `credentials~attach` -- an array of attachments containing the issued credentials.
-  * For Indy, the attachment contains data from libindy about credential to be issued, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
+  * For Indy, the attachment contains data from libindy about credential to be issued, base64url-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L338).
 
 If the issuer wants an acknowledgement that the issued credential was accepted, this message must be decorated with `~please-ack`, and it is then best practice for the new Holder to respond with an explicit `ack` message as described in [0317: Please ACK Decorator](../0317-please-ack/README.md).
 
@@ -244,7 +244,7 @@ This is not a message but an inner object for other messages in this protocol. I
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+    "@type": "https://didcomm.org/issue-credential/1.0/credential-preview",
     "attributes": [
         {
             "name": "<attribute name>",
@@ -269,7 +269,7 @@ The optional `mime-type` advises the issuer how to render a binary attribute, to
 The mandatory `value` holds the attribute value:
 
 * if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
-* if `mime-type` is not null, then `value` is always a base64-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64-decoding.
+* if `mime-type` is not null, then `value` is always a base64url-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64url-decoding.
 
 ## Threading
 

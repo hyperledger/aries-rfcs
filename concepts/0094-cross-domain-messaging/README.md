@@ -71,7 +71,7 @@ The term "DIDDoc" is used in this RFC as it is defined in the [DID Specification
 - associated with a DID, and
 - used for a relationship.
 
-A DID can be resolved to get its corresponding DIDDoc by any Agent that needs access to the DIDDoc. This is true whether talking about a DID on a Public Ledger, or a pairwise DID (using the [did:peer method](https://dhh1128.github.io/peer-did-method-spec/index.html)) persisted only to the parties of the relationship. In the case of pairwise DIDs, it's the (implementation specific) domain's responsibility to ensure such resolution is available to all Agents requiring it within the domain.
+A DID can be resolved to get its corresponding DIDDoc by any Agent that needs access to the DIDDoc. This is true whether talking about a DID on a Public Ledger, or a pairwise DID (using the [did:peer method](https://identity.foundation/peer-did-method-spec/index.html)) persisted only to the parties of the relationship. In the case of pairwise DIDs, it's the (implementation specific) domain's responsibility to ensure such resolution is available to all Agents requiring it within the domain.
 
 #### Messages are Private
 
@@ -175,7 +175,7 @@ If there are mediators specified in the DID service endpoint for the Receiver ag
 
 ```json
 {
-  "@type" : "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward",
+  "@type" : "https://didcomm.org/routing/1.0/forward",
   "@id": "54ad1a63-29bd-4a59-abed-1c5b1026e6fd",
   "to"   : "did:sov:1234abcd#4",
   "msg"  : { json object from <pack(AgentMessage,valueOf(did:sov:1234abcd#4), privKey(A.did@A:B#1))> }
@@ -245,7 +245,7 @@ The core message type "forward", version 1.0 of the "routing" family is defined 
 
 ```json
 {
-  "@type" : "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward",
+  "@type" : "https://didcomm.org/routing/1.0/forward",
   "@id": "54ad1a63-29bd-4a59-abed-1c5b1026e6fd",
   "to"   : "did:sov:1234abcd#4",
   "msg"  : { json object from <pack(AgentMessage,valueOf(did:sov:1234abcd#4), privKey(A.did@A:B#1))> }

@@ -57,7 +57,7 @@ other mechanism besides DIDComm message passing, that is fine.
 This RFC defines the `sync_connection` protocol, version 1.x, as identified by the
 following [PIURI](../../concepts/0003-protocols/README.md#piuri):
 
-    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/sync_connection/1.0
+    https://didcomm.org/sync_connection/1.0
 
 Of course, subsequent evolutions of the protocol will replace `1.0` with
 an appropriate update per [semver](../../concepts/0003-protocols/README.md#semver-rules-for-protocols)
@@ -70,7 +70,7 @@ A related, minor protocol is also defined in subdocs of this RFC:
 ### Roles
 
 The only role defined in this protocol is `peer`. However, see [this note in the
-peer DID method spec](https://dhh1128.github.io/peer-did-method-spec/#roles-and-agents)
+peer DID method spec](https://identity.foundation/peer-did-method-spec/#roles-and-agents-in-protocols)
 for some subtleties.
 
 ### States
@@ -91,7 +91,7 @@ sample looks like this:
 
 ```JSON
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/sync-connection/1.0/sync_state",
+  "@type": "https://didcomm.org/sync-connection/1.0/sync_state",
   "@id": "e61586dd-f50e-4ed5-a389-716a49817207",
   "for": "did:peer:11-479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",
   "base_hash": "d48f058771956a305e12a3b062a3ac81bd8653d7b1a88dd07db8f663f37bf8e0",

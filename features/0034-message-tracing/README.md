@@ -210,7 +210,7 @@ plaintext of the report, as utf8.
 
 ### Trace Report Attributes
 
-* `@type`: Should always be `"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/tracing/1.0/trace_report"`,
+* `@type`: Should always be `"https://didcomm.org/tracing/1.0/trace_report"`,
    or some evolved version thereof. Required for version control and to support trace sinks
    that process other HTTP payloads as well.
 * `msg_id`: The ID of the message that the handler is looking at when it composes the
