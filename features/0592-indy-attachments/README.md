@@ -367,7 +367,7 @@ A gist of test value pairs can be found [here](https://gist.github.com/swcurran/
 
 #### Notes on Encoding Claims
 
-- In converting any string integer to an integer, leading 0s in the string are (by definition) not part of the integer. They leading 0's remain in the (untouched) `raw` value.
+- In converting any string integer to an integer, leading 0s in the string are (by definition) not part of the integer. The leading 0's remain in the (untouched) `raw` value.
 - The use of AnonCreds predicates, such as proving "older than 21" based on a date of birth claim without sharing the date of birth, is based on an expression involving the `encoded` value. Thus, only `raw` integers or string integers can be used in AnonCreds predicates.
 
 ## Implementations
