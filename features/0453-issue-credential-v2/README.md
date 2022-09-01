@@ -307,13 +307,13 @@ Message Format:
     "more_available": "<count>",
     "formats" : [
         {
-            "attach_id" : "<attach@id value>",
+            "attach_id" : "<attachment identifier>",
             "format" : "<format-and-version>",
         }
     ],
     "credentials~attach": [
         {
-            "@id": "<attachment-id>",
+            "@id": "<attachment identifier>",
             "mime-type": "application/json",
             "data": {
                 "base64": "<bytes for base64>"
@@ -322,16 +322,16 @@ Message Format:
     ],
     "supplements": [
         {
-            "type": "hashlink_data",
-            "@id": "<attachment_id>",
+            "type": "hashlink-data",
+            "@id": "<attachment identifier>",
             "attrs": {
                 "key": "field",
                 "value": "<fieldname>"
             }
         },
         {
-            "type": "issuer_credential",
-            "@id": "<attachment_id>",
+            "type": "issuer-credential",
+            "@id": "<attachment identifier>",
         }
     ],
     "~attach" : [] //attachments referred to in supplements       
@@ -373,18 +373,20 @@ Supplements are used to provide information related to credentials. Each supplem
 - `@id` is the id of the attachment within the `~attach` list.
 - `attrs` is a list of key/value pairs, used with supplement types that need additional information for processing. If no key/value pairs are needed, `attrs` may be omitted.
 
-
 Official Supplement Types:
-- `issuer_credential`
+- `issuer-credential`
     - Contains a credential related to the Issuer of the credential being presented.
-- `hashlink_data` 
+- `hashlink-data` 
     - Contains binary data who's hashlink is contained within a presented credential.
     - This binary data MUST only be transmitted if the associated credential attribute containing the hashlink is also transmitted.
     - An attr key value pair of "field", and value of the attribute name must be sent in the attrs structure.
+    - During presentation, the verifier MUST check the validity of the hashlink in the presented credential against the associated message attachment prior to use. If the verification fails, the verifier MUST consider the attachment invalid.
 
 Holder Behavior
 
-It is expected that a holder retain supplements provided during issuance, and present them as appropriate during presentation. Some supplements (such as `hashlink_data`) require understanding of when to include, as noted in the Supplment details. Supplements of an unknown type SHOULD NOT be automatically be presented
+It is expected that a holder retain supplements provided during issuance, and present them as appropriate during presentation. Some supplements (such as `hashlink-data`) require understanding of when to include, as noted in the Supplment details. Supplements of an unknown type SHOULD NOT be automatically be presented
+
+> Note: Credential Supplements are a generalized form of the linked binary attachments detailed in [RFC 0641](../0641-linking-binary-objects-to-credentials/README.md). Though the methods of linking attributes differ, they may be used in combination by linking via ID _and_ the appropriate supplement metadata.
 
 ##### Credentials Attachment Registry
 
