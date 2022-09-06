@@ -375,11 +375,16 @@ Within a given major version of a protocol, an agent should:
 
 This leads to the following received message handling rules:
 
-- message types received with a minor versions below the minimum may be answered with a `problem-report` message with code `version-not-supported`
-- message types received with a minor version at or higher than the minimum supported and less than the current minor version are processed, ideally with a response using the same minor version of the received message
-  - The recipient may want to send a warning `problem-report` message with code `version-with-degraded-features`
-- message types received with a minor version higher than the current minor version are processed with any unrecognized fields ignored
-  - The recipient may want to send a warning `problem-report` message with code `fields-ignored-due-to-version-mismatch`
+- Message types received with minor versions below the minimum MAY be ignored, or preferably, MAY be answered only with a `problem-report` message with code `version-not-supported`
+- Message types received with a minor version **at or higher than** the minimum supported **and less than** the current minor version are processed as follows:
+  - The processing MAY be with the same minor version of the received message.
+    - To support this, an implementation must implement each minor version from minimum to current within the major version.
+  - The processing MAY be with the current minor version.
+    - This approach should be used if maintaining each minor version from minimum to current within the major version is impractical.
+  - In addition to responding with the protocol message (if necessary), the agent MAY also want to send a warning `problem-report` message with code `version-with-degraded-features`
+- Message types received with a minor version higher than the current minor version MUST processed with any unrecognized fields ignored
+  - The response MUST be with the current minor version.
+  - In addition to responding with the protocol message, an agent may want to send a warning `problem-report` message with code `fields-ignored-due-to-version-mismatch`
 
 As documented in the semver documentation, these requirements are not applied when
 major version 0 is used. In that case, minor version increments are considered breaking.
