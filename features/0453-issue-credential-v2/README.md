@@ -323,15 +323,15 @@ Message Format:
     "supplements": [
         {
             "type": "hashlink-data",
-            "@id": "<attachment identifier>",
-            "attrs": {
+            "ref": "<attachment identifier>",
+            "attrs": [{
                 "key": "field",
                 "value": "<fieldname>"
-            }
+            }]
         },
         {
             "type": "issuer-credential",
-            "@id": "<attachment identifier>",
+            "ref": "<attachment identifier>",
         }
     ],
     "~attach" : [] //attachments referred to in supplements       
@@ -360,7 +360,7 @@ Supplements are used to provide information related to credentials. Each supplem
 ```json
 {
     "type": "<supplement_type>",
-    "@id": "<attachment_id>",
+    "ref": "<attachment_id>",
     "attrs": [
         {
             "key": "<attr_key>",
@@ -370,7 +370,7 @@ Supplements are used to provide information related to credentials. Each supplem
 }
 ```
 - `type` SHOULD be from the following list. Compliance with this RFC indicates support of the official listed supplement types below.
-- `@id` is the id of the attachment within the `~attach` list.
+- `ref` is the id of the attachment within the `~attach` list.
 - `attrs` is a list of key/value pairs, used with supplement types that need additional information for processing. If no key/value pairs are needed, `attrs` may be omitted.
 
 Official Supplement Types:

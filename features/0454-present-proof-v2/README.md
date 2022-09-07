@@ -242,15 +242,15 @@ This message is a response to a Presentation Request message and contains signed
     "supplements": [
         {
             "type": "hashlink-data",
-            "@id": "<attachment identifier>",
-            "attrs": {
+            "ref": "<attachment identifier>",
+            "attrs": [{
                 "key": "field",
                 "value": "<fieldname>"
-            }
+            }]
         },
         {
             "type": "issuer-credential",
-            "@id": "<attachment identifier>",
+            "ref": "<attachment identifier>",
         }
     ],
     "~attach" : [] //attachments referred to in supplements   
