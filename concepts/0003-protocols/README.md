@@ -370,21 +370,22 @@ message family](https://semver.org/#spec-item-8).
 
 Within a given major version of a protocol, an agent should:
 
-- respond to a minimum supported minor version, defaulting to "0"
-- respond with or initiate a protocol instance the current fully supported minor version
+- Respond to a minimum supported minor version, defaulting to "0".
+  - An agent SHOULD keep minimum supported minor version at "0" unless it is unsecure or extremely complicated to do so.
+- Respond with or initiate a protocol instance the current fully supported minor version.
 
 This leads to the following received message handling rules:
 
-- Message types received with minor versions below the minimum MAY be ignored, or preferably, MAY be answered only with a `problem-report` message with code `version-not-supported`
-- Message types received with a minor version **at or higher than** the minimum supported **and less than** the current minor version are processed as follows:
+- Message types received with minor versions below the minimum MAY be ignored, or preferably, MAY be answered only with a `problem-report` message with code `version-not-supported`.
+- Message types received with a minor version __at or higher than__ the minimum supported __and less than__ the current minor version are processed as follows:
   - The processing MAY be with the same minor version of the received message.
     - To support this, an implementation must implement each minor version from minimum to current within the major version.
   - The processing MAY be with the current minor version.
     - This approach should be used if maintaining each minor version from minimum to current within the major version is impractical.
-  - In addition to responding with the protocol message (if necessary), the agent MAY also want to send a warning `problem-report` message with code `version-with-degraded-features`
-- Message types received with a minor version higher than the current minor version MUST processed with any unrecognized fields ignored
-  - The response MUST be with the current minor version.
-  - In addition to responding with the protocol message, an agent may want to send a warning `problem-report` message with code `fields-ignored-due-to-version-mismatch`
+  - In addition to responding with the protocol message (if necessary), the agent MAY also want to send a warning `problem-report` message with code `version-with-degraded-features`.
+- Message types received with a minor version higher than the current minor version MUST processed with any unrecognized fields ignored.
+  - The response MUST use the current minor version.
+  - In addition to responding with the protocol message, an agent MAY send a warning `problem-report` message with code `fields-ignored-due-to-version-mismatch`
 
 As documented in the semver documentation, these requirements are not applied when
 major version 0 is used. In that case, minor version increments are considered breaking.
