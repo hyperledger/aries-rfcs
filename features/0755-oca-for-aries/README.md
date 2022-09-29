@@ -28,7 +28,7 @@ credential without and with OCA overlays applied in two languages. All of the
 differences in the latter two screenshots from the first come from the
 issuer-supplied OCA data.
 
-![Example: Using OCA in Aries Bifold](./assets/bifold-oca-example.jpg)
+![Example: Using OCA in Aries Bifold](assets/bifold-oca-example.jpg)
 
 This RFC formalizes how Aries verifiable credential issuers (at least) can
 use OCA to publish the following information for each type of credential they
