@@ -163,7 +163,22 @@ Message format:
                 "base64": "<bytes for base64>"
             }
         }
-    ]
+    ],
+    "supplements": [
+        {
+            "type": "hashlink-data",
+            "ref": "<attachment identifier>",
+            "attrs": [{
+                "key": "field",
+                "value": "<fieldname>"
+            }]
+        },
+        {
+            "type": "issuer-credential",
+            "ref": "<attachment identifier>",
+        }
+    ],
+    "~attach" : [] //attachments referred to in supplements
 }
 ```
 
@@ -174,6 +189,8 @@ Description of attributes:
 * `credential_preview` -- an optional JSON-LD object that represents the credential data that Prover wants to receive. It matches the schema of [Credential Preview](#preview-credential).
 * `formats` -- contains an entry for each `filters~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `filters~attach` -- an array of attachments that further define the credential being proposed. This might be used to clarify which formats or format versions are wanted.
+* `supplements` -- an optional array of attachment descriptors detailing credential supplements. See the [Supplements Section](#supplements) for details.
+* `~attach` -- optional attachments related to the proposed credential. Each attachment should be detailed in a `supplements` entry, referenced by attachment identifier.
 
 ##### Propose Attachment Registry
 
@@ -212,7 +229,22 @@ Message Format:
                 "base64": "<bytes for base64>"
             }
         }
-    ]
+    ],
+    "supplements": [
+        {
+            "type": "hashlink-data",
+            "ref": "<attachment identifier>",
+            "attrs": [{
+                "key": "field",
+                "value": "<fieldname>"
+            }]
+        },
+        {
+            "type": "issuer-credential",
+            "ref": "<attachment identifier>",
+        }
+    ],
+    "~attach" : [] //attachments referred to in supplements
 }
 ```
 
@@ -225,6 +257,8 @@ Description of fields:
 * `credential_preview` -- a JSON-LD object that represents the credential data that Issuer is willing to issue. It matches the schema of [Credential Preview](#preview-credential);
 * `formats` -- contains an entry for each `offers~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `offers~attach` -- an array of attachments that further define the credential being offered. This might be used to clarify which formats or format versions will be issued.
+* `supplements` -- an optional array of attachment descriptors detailing credential supplements. See the [Supplements Section](#supplements) for details.
+* `~attach` -- optional attachments related to the offered credential. Each attachment should be detailed in a `supplements` entry, referenced by attachment identifier.
 
 The Issuer may add a [`~payment-request` decorator](../0075-payment-decorators/README.md#payment_request) to this message to convey the need for payment before issuance. See the [payment section below](#payments-during-credential-exchange) for more details.
 
@@ -266,7 +300,22 @@ Message Format:
                 "base64": "<bytes for base64>"
             }
         },
-    ]
+    ],
+    "supplements": [
+        {
+            "type": "hashlink-data",
+            "ref": "<attachment identifier>",
+            "attrs": [{
+                "key": "field",
+                "value": "<fieldname>"
+            }]
+        },
+        {
+            "type": "issuer-credential",
+            "ref": "<attachment identifier>",
+        }
+    ],
+    "~attach" : [] //attachments referred to in supplements
 }
 ```
 
@@ -276,6 +325,8 @@ Description of Fields:
 * `comment` -- an optional field that provides human readable information about this Credential Request, so it can be evaluated by human judgment. Follows [DIDComm conventions for l10n](../0043-l10n/README.md).
 * `formats` -- contains an entry for each `requests~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `requests~attach` -- an array of [attachments](../../concepts/0017-attachments/README.md) defining the requested formats for the credential.
+* `supplements` -- an optional array of attachment descriptors detailing credential supplements. See the [Supplements Section](#supplements) for details.
+* `~attach` -- optional attachments related to the requested credential. Each attachment should be detailed in a `supplements` entry, referenced by attachment identifier.
 
 This message may have a [`~payment-receipt` decorator](../0075-payment-decorators/README.md#payment_receipt) to prove to the Issuer that the potential Holder has satisfied a payment requirement. See the [payment section below](#payments-during-credential-exchange).
 
@@ -349,44 +400,10 @@ Description of fields:
   * When the Holder receives this message with the field set to a positive integer, the Holder's state moves to the `offer-received` state.
 * `formats` -- contains an entry for each `credentials~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 * `credentials~attach` -- an array of attachments containing the issued credential in the format(s) requested by the Holder.
-*  `supplements` -- an array of attachment descriptors detailing credential supplements. See the Supplements Section for details.
-* `~attach` -- attachments related to the issued credential. Each attachment should be detailed in a `supplements` entry, referenced by attachment id.
+* `supplements` -- an optional array of attachment descriptors detailing credential supplements. See the [Supplements Section](#supplements) for details.
+* `~attach` -- optional attachments related to the issued credential. Each attachment should be detailed in a `supplements` entry, referenced by attachment identifier.
 
 If the issuer wants an acknowledgement that the last issued credential was accepted, this message must be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. Outcome in the context of this protocol means the acceptance of the credential in whole, i.e. the credential is verified and the contents of the credential are acknowledged. Note that this is different from the default behavior as described in [0317: Please ACK Decorator](../0317-please-ack/README.md). It is then best practice for the new Holder to respond with an explicit `ack` message as described in the please ack decorator RFC. 
-
-##### Supplements
-Supplements are used to provide information related to credentials. Each supplement must be included as a message attachment in the `~attach` array, and have a descriptor contained in the `supplements` array with the following structure:
-
-```json
-{
-    "type": "<supplement_type>",
-    "ref": "<attachment_id>",
-    "attrs": [
-        {
-            "key": "<attr_key>",
-            "value": "<attr_value>"
-        }
-    ]
-}
-```
-- `type` SHOULD be from the following list. Compliance with this RFC indicates support of the official listed supplement types below.
-- `ref` is the id of the attachment within the `~attach` list.
-- `attrs` is a list of key/value pairs, used with supplement types that need additional information for processing. If no key/value pairs are needed, `attrs` may be omitted.
-
-Official Supplement Types:
-- `issuer-credential`
-    - Contains a credential related to the Issuer of the credential being presented.
-- `hashlink-data` 
-    - Contains binary data who's hashlink is contained within a presented credential.
-    - This binary data MUST only be transmitted if the associated credential attribute containing the hashlink is also transmitted.
-    - An attr key value pair of "field", and value of the attribute name must be sent in the attrs structure.
-    - During presentation, the verifier MUST check the validity of the hashlink in the presented credential against the associated message attachment prior to use. If the verification fails, the verifier MUST consider the attachment invalid.
-
-Holder Behavior
-
-It is expected that a holder retain supplements provided during issuance, and present them as appropriate during presentation. Some supplements (such as `hashlink-data`) require understanding of when to include, as noted in the Supplment details. Supplements of an unknown type SHOULD NOT be automatically be presented
-
-> Note: Credential Supplements are a generalized form of the linked binary attachments detailed in [RFC 0641](../0641-linking-binary-objects-to-credentials/README.md). Though the methods of linking attributes differ, they may be used in combination by linking via ID _and_ the appropriate supplement metadata.
 
 ##### Credentials Attachment Registry
 
@@ -433,6 +450,40 @@ The mandatory `value` holds the attribute value:
 
 * if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
 * if `mime-type` is not null, then `value` is always a base64url-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64url-decoding.
+
+#### Supplements
+Supplements are used to provide information related to credentials. Each supplement must be included as a message attachment in the `~attach` array, and have a descriptor contained in the `supplements` array with the following structure:
+
+```json
+{
+    "type": "<supplement_type>",
+    "ref": "<attachment_id>",
+    "attrs": [
+        {
+            "key": "<attr_key>",
+            "value": "<attr_value>"
+        }
+    ]
+}
+```
+- `type` SHOULD be from the following list. Compliance with this RFC indicates support of the official listed supplement types below.
+- `ref` is the id of the attachment within the `~attach` list.
+- `attrs` is a list of key/value pairs, used with supplement types that need additional information for processing. If no key/value pairs are needed, `attrs` may be omitted.
+
+Official Supplement Types:
+- `issuer-credential`
+    - Contains a credential related to the Issuer of the credential being presented.
+- `hashlink-data`
+    - Contains binary data who's hashlink is contained within a presented credential.
+    - This binary data MUST only be transmitted if the associated credential attribute containing the hashlink is also transmitted.
+    - An attr key value pair of "field", and value of the attribute name must be sent in the attrs structure.
+    - During presentation, the verifier MUST check the validity of the hashlink in the presented credential against the associated message attachment prior to use. If the verification fails, the verifier MUST consider the attachment invalid.
+
+Holder Behavior
+
+It is expected that a holder retain supplements provided during issuance, and present them as appropriate during presentation. Some supplements (such as `hashlink-data`) require understanding of when to include, as noted in the Supplement details. Supplements of an unknown type SHOULD NOT be automatically be presented.
+
+> Note: Credential Supplements are a generalized form of the linked binary attachments detailed in [RFC 0641](../0641-linking-binary-objects-to-credentials/README.md). Though the methods of linking attributes differ, they may be used in combination by linking via ID _and_ the appropriate supplement metadata.
 
 ## Threading
 
