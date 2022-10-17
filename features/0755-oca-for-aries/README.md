@@ -4,7 +4,9 @@
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2022-09-27
 - Status Note: In the process of being implemented in several Aries Frameworks (ACA-Py, AFJ)
-- Supersedes: Sort of supersedes [0013-Overlays](/concepts/0013-overlays/README.md) in that RFC is about OCA.
+- Supersedes: Supersedes [0013-Overlays](/concepts/0013-overlays/README.md) as
+  that RFC is/was about the OCA specification, while this covers the application of the OCA
+  Specification for Aries agents.
 - Start Date: 2022-09-25
 - Tags: [concept](/tags.md#concept)
 
@@ -44,15 +46,24 @@ issue.
   holder and verifier software can use in displaying the credential on-screen.
 - Information to improve the accessibility of the display of the credential.
 
-The flow of data between participants is as follows. An issuer creates OCA
-information for each type of verifiable credential it issues. On receipt of a
-credential of a given type from a given issuer, a holder can retrieve the OCA
-information published by the issuer and use that data to display the credential
+The standard flow of data between participants is as follows. An issuer creates
+OCA information for each type of verifiable credential it issues. On receipt of
+a credential of a given type from a given issuer, a holder can retrieve the OCA
+information published by that issuer and use that data to display the credential
 for its user(s) in the language of their choice and with credential branding
 from the issuer. Likewise, a verifier receiving a presentation derived from a
 given credential type can retrieve the OCA information published by the issuer
 for that type of credential for use in the processing and displaying of the
 claims.
+
+While the issuer providing the OCA Bundle for a credential type is the typical
+flow (fully detailed in this RFC), other flows are possible. For example, a
+publisher of a schema might provide an OCA Bundle used by holders of credentials
+based on that schema. Another possibility is that a given Aries agent (such as a
+mobile wallet) might have a repository of OCA Bundles for their agent
+deployments. When using such alternatives, agents retrieving an OCA Bundle have
+a way to verify the source of the OCA Bundle, such as having a cryptographic
+signature over the OCA Bundle from the designated publisher.
 
 ## Motivation
 
@@ -63,14 +74,12 @@ credentials. An AnonCreds verifiable credential contains the bare minimum of
 metadata about a credential--basically, just the non-standardized,
 developer-style names for the type of credential and the attributes within it.
 JSON-LD verifiable credentials has the capacity to add more information about
-the attributes in a credential, but the data is not easily accessed. The use of
-OCA allows the issuer to declare information about the verifiable credential
+the attributes in a credential, but the data is not easily accessed and is
+provide to enable machine processing rather than improving user experience. OCA
+allows credential issuers to declare information about the verifiable credential
 types it issues to improves the handling of those credentials by holder and
 verifier software, and to improve the on-screen display of the credential,
 including the application of issuer-specified branding elements.
-
-It is quite deliberate that the credential branding defined in this RFC does
-not attempt to achieve pixel-perfect on screen rendering of the equivalent
 
 ## Tutorial
 
@@ -80,10 +89,10 @@ type of verifiable credential.
 
 ``` Note
 
-In this overview, we assume the use of AnonCreds verifiable credentials and 
-the use of OCA specifically for verifiable credentials. OCA can also be used
-with the JSON-LD-style W3C Verifiable Credential Data Model, and can be applied to
-any data structure, not just verifiable credentials. As community  members apply
+In this overview, we assume the  
+the use of OCA specifically for verifiable credentials, and further, specifically for AnonCreds verifiable credentials. OCA can also be used be applied to
+any data structure, not just verifiable credentials, and for other verifiable credential models, such as those
+based on the JSON-LD- or JWT-style W3C Verifiable Credential Data Model. As the Aries community applies
 OCA to W3C Verifiable Credential Data Model credentials, we will extend this
 RFC.
 
@@ -104,22 +113,38 @@ managing OCA Source data.
 
 All OCA data begins with the [Capture
 Base](https://oca.colossi.network/v1.1.0-rc.html#capture-base). For AnonCreds,
-the Capture Base is the list of attributes in the schema for the given
+the Capture Base attributes are the list of attributes in the schema for the given
 credential type. The Capture Base also contains:
 
-- the type of the attribute, based on an enumerated list of [types defined in
+- the type of each attribute, based on an enumerated list of [types defined in
   the OCA
   specification](https://oca.colossi.network/v1.1.0-rc.html#attribute-type)
+  - See the note below about the addition to the core OCA data types of the
+    `dateint` data type for Aries use cases.
 - a list of the base attributes that will hold Personally Identifiable
 Information (PII). An issuer should use the [Kantara Initiative's Blinding
 Identity
 Taxonomy](https://docs.kantarainitiative.org/Blinding-Identity-Taxonomy-Report-Version-1.0.html)
 to identify the attributes to flag as being PII.
 
+##### The AnonCreds "dateint" Type
+
+A common data format used in Aries AnonCreds verifiable credentials is
+"`dateint`", as described in [RFC 0592](../0592-indy-attachments/README.md). A
+`dateint` is a date stored as an integer (for example `September 29, 2022` is
+the integer `20,220,929`). In the `attribute type` field of the Capture Base,
+`dateint` is a permitted value when used with Aries. A recipient of an OCA
+Bundle with a `dateint` SHOULD extract from the integer data value the year,
+month and day and display those elements in the style appropriate for the user.
+For example, a mobile app should display the data as a date based on the user's
+language/country setting.
+
+##### Other Overlays
+
 With the Capture Base defined, the following additional overlays MAY be declared
 by the Issuer and SHOULD be expected by the holder and verifier. The overlays flagged
 with "multilingual" can have multiple instances of the overlay, one for each issuer-supported
-language (English, French, Spanish, Braile, etc.).
+language (English, French, Spanish, etc.).
 
 - the [character_encoding
 overlay](https://oca.colossi.network/v1.1.0-rc.html#character-encoding-overlay)
@@ -138,67 +163,131 @@ overlay](https://oca.colossi.network/v1.1.0-rc.html#information-overlay) defines
 a description or help text about each attribute for a given language. There will
 be one overlay per issuer-supported language.
 - the multilingual [meta overlay](https://oca.colossi.network/v1.1.0-rc.html#meta-overlay) contains
-information about the credential itself, such as "name" and "description."
+information about the credential itself, such as "name" and "description." For Aries, the meta overlay
+SHOULD include additional fields specific to the Aries/verifiable credential use case, as follows:
+  - `issuer` - the name of the issuer of the credential.
+  - `issuer_description` - a description for the issuer of the credential.
+  - `issuer_url` - a URL for the issuer of the credential.
 
-##### The AnonCreds "dateint" Format
+#### Aries Specific "Branding" Overlay
 
-A common data format used in Aries AnonCreds verifiable credentials is "`dateint`", as
-described in [RFC 0592](../0592-indy-attachments/README.md). A `dateint` is a date stored
-as an integer (for example `September 29, 2022` is the integer `20,220,929`). In the format
-overlay, `dateint` is a permitted value when used with Aries. An recipient of an OCA Bundle
-with a `dateint` SHOULD extract from the integer data value the year, month and day and
-display those elements in the style appropriate for the user. For example, a mobile app
-should display the data as a date based on the user's language/country setting.
+In addition to the core OCA Overlays listed above, Aries agents use an
+additional "extension" overlay, the **branding overlay**, that gives the issuer
+a way to provide a series of data elements about the branding that they would
+like to see applied to a given type of credential. The `branding overlay` is a
+defined list of name/value pairs. Holders (and verifiers) can use the values
+when displaying the credential in a "Card" format of that type from that issuer.
 
-#### Aries Specific Overlays
+An example JSON in the branding overlay is as follows, along with a brief
+definition of the items, and a sample image of how the data elements are to be
+used. The sample is only for explaining the concepts. For reference, please
+us the complete guidance for issuers in populating the branding overlay and for
+holders/verifiers in how the items are intended to be used can be found in
+[Aries RFC 0756: The Aries Credential Branding Style
+Guide](https://docs.google.com/document/d/1_tMS2F3A9y6xStVM-37-qlf4mXU-hYDW/edit?usp=sharing&ouid=109116496535883458301&rtpof=true&sd=true).
 
-In addition to the core OCA Overlays listed above, Aries agents also use an
-additional "extension" overlay, the [credential_branding overlay](#), that
-provides the issuer with a way to provide a series of data elements about the
-credential branding that they would like to see applied. The credential_branding
-overlay provides a list of name/value pairs, and the holders (and verifiers) can
-use the values when displaying the credential of that type from that issuer. The
-holder/verifier controls the details of how the credentials are displayed, but
-the issuer does have some input into the branding. The following are the branding
-data elements the issuer can set:
+``` json
+{
+  "capture_base": "EPMaG1h2hVxKCZ5_3KoNNwgAyd4Eq8zrxK3xgaaRsz2M",
+  "type": "aries/overlays/branding/1.0",
+  "logo": "data:image/png;base64,iVBORw...",
+  "background_image": "data:image/png;base64,iVBORw0K...",
+  "background_color": "#2E86C1",
+  "header_background_color": "#3498DB",
+  "footer_background_color": "#3498DB",
+  "header_font_color": "#FFFFFF",
+  "footer_font_color": "#FFFFFF",
+  "primary_attribute": "family_name",
+  "secondary_attribute": "given_names",
+  "issued_date_attribute": "",
+  "expiry_date_attribute": "",
+  "footer_attribute": "issued"
+}
+```
 
-- logo_uri - a URI pointing to a logo to display with the credential.
-- logo_base64 - an inline, base64-encoded logo to display with the credential.
-- background_image_uri - a URI pointing to a background image to display under
-  the credential data.
-- background_image_base64 -  - an inline base64-encoded background image to display under the
-  credential data.
-- header_background_color - an RGB color code for the credential display header
-  background color.
-- footer_background_color - an RGB color code for the credential display footer
-  background color.
-- header_font_color - an RGB color code for the credential display header font
-  color.
-- footer_font_color - an RGB color code for the credential display footer font
-  color.
-- primary_attribute - the name of the primary capture base attribute to display
-  on the credential.
-- secondary_attribute - the name of the secondary capture base attribute to
-  display on the credential.
+![Sample: Using the Branding Overlay, from the Aries Credential Branding Style
+Guide](assets/Sample-use-of-Branding-Overlay.jpg)
 
-This [Aries Credential Branding Style Guide](https://docs.google.com/document/d/1_tMS2F3A9y6xStVM-37-qlf4mXU-hYDW/edit?usp=sharing&ouid=109116496535883458301&rtpof=true&sd=true)
-should be used by both issuer in creating their Credential Branding overlay, and by
-holder and verifier software makers in using the data in the Credential Branding overlay
-to present credentials.
+- logo - a URI pointing to a logo to display on the credential. The URI can be a
+HTTP URL, a
+[hashlink](https://datatracker.ietf.org/doc/html/draft-sporny-hashlink) or, to
+support inline images, a data URL (e.g.: data:image/png;base64,...) as defined
+by the [Data URL
+Scheme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs).
+The logo MUST adhere to the logo properties defined in [Aries RFC 0756: The
+Aries Credential Branding Style
+Guide](https://docs.google.com/document/d/1_tMS2F3A9y6xStVM-37-qlf4mXU-hYDW/edit?usp=sharing&ouid=109116496535883458301&rtpof=true&sd=true)
+- background_image - a URI pointing to a background image to display with the
+credential. The URI could be a HTTP URL, a
+[hashlink](https://datatracker.ietf.org/doc/html/draft-sporny-hashlink) or, to
+support inline images, a data URL (e.g.: data:image/png;base64,...) as defined
+by the [Data URL
+Scheme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs).
+The image MUST adhere to the background image properties defined in [Aries RFC
+0756: The Aries Credential Branding Style
+Guide](https://docs.google.com/document/d/1_tMS2F3A9y6xStVM-37-qlf4mXU-hYDW/edit?usp=sharing&ouid=109116496535883458301&rtpof=true&sd=true)
+- background_color - hex color code for the credential body to be used if no
+  `background_image` is provided.
+- header_background_color - hex color code for the credential header background.
+- footer_background_color - hex color code for the credential footer background.
+- header_font_color - hex color code for the credential header font.
+- footer_font_color - hex color code for the credential footer font.
+- body_font_color - hex color code for the credential body footer font.
+- primary_attribute - the name of a capture base attribute to be prominently
+  displayed in the body section of the credential.
+- secondary_attribute - the name of a capture base attribute to be displayed as
+  a secondary attribute in the body section of the credential.
+- issued_date_attribute - the name of a capture base attribute that is the date
+  of issuance of the credential. If there is no such attribute, leave blank.
+- expiry_date_attribute - the name of a capture base attribute that is the
+  expiry date of the credential. If there is no such attribute, leave blank.
+- footer_attribute - the name of a capture base attribute, or "issued" or
+  "expires". The selection will be used to display data on the footer of the
+  credential.
+  - If "issued" is used then if the "issued_date_attribute" is populated, that
+    attribute from the credential will be used. Otherwise the received time
+    metadata collected by the wallet will be used.
+  - If "expires" is used then the "expiry_date_attribute" MUST be defined.
+
 
 ``` todo
 
-To Do: Convert the Style Guide to a markdown file within the RFC folder.
+To Do: Convert the Style Guide to a markdown file create as a new RFC (per guidance from the Aries Working Group).
 
 ```
 
+It is quite deliberate that the credential branding defined in this RFC does
+**not** attempt to achieve pixel-perfect on screen rendering of the equivalent
+paper credential. There are two reasons for this.
+
+First, studies have shown that issuers do not want people to think that the
+digital credentials they have in their mobile wallet can be used as replacements
+for paper during person-to-person (non-digital) verifications. Digital
+credentials are even easier to forge than paper credentials when they are to be
+verified by a human, and we want to discourage using digital credentials in that
+way by not making digital credentials match their paper equivalents.
+
+Second, having each issuer provide pixel-perfect layout guidance to Aries agents
+that supports a responsive user interface on a wide range of devices (laptops,
+tablets and thousands of mobile phones) is extraordinarily complex. Further, a
+wallet having to create a consistent, helpful user experience will be severely
+hampered by the need to display credentials with many (perhaps hundreds) of
+different credential layouts and styles.
+
+Instead, the guidance is this RFC and the [Aries RFC 0756: The Aries Credential
+Branding Style
+Guide](https://docs.google.com/document/d/1_tMS2F3A9y6xStVM-37-qlf4mXU-hYDW/edit?usp=sharing&ouid=109116496535883458301&rtpof=true&sd=true)
+gives the issuer a few ways to brand their credentials, and holder/verifier apps
+the latitude to use those issuer-provided elements in a consistent way across
+all issuers and credentials.
+
 #### OCA Issuer Tools
 
-While a creator of an Aries OCA Bundle could manage the JSON content of the OCA
+While a creator of an Aries OCA Bundle can manage the JSON content of the OCA
 Bundle manually, it is not easy. An easier way to do that is to use an "Aries
 OCA Source" spreadsheet and use the `aries-oca-source-to-bundle` converter to
 create the bundle. Ideally, the Aries OCA Source spreadsheet file is stored in
-version control and a pipeline action (such as this GitHub action) can be used
+version control and a pipeline action (such as this [`todo` TBD] GitHub action) can be used
 to generated the OCA Bundle when the source file is updated.
 
 The OCA Source Spreadsheet contains the following:
@@ -207,13 +296,13 @@ The OCA Source Spreadsheet contains the following:
 - A Capture Base tab with information about the attributes in the credential.
 - A Branding tab with information about the issuer and the branding of the
   credential.
-- A country-language code per country-language to be supported with containing
-  all multilingual overlays.
+- A country-language code tab per country-language to be supported containing
+  the source data for all all multilingual overlays.
 
 The use of a spreadsheet, especially an online one, is particularly useful for
 this use case where it is expected that multiple translation experts will be
 called upon to provide the OCA Source data for each supported country-language
-combination.
+code.
 
 ``` todo
 
@@ -223,45 +312,41 @@ Add links to a sample starter spreadsheet and the referenced tools
 
 #### Issuing A Credential
 
-The primary mechanism for an issuer to provide an OCA Bundle to a holder is when
-issuing a credential using [RFC0453 Issue
-Credential](../0453-issue-credential-v2/), version 2.2 or later, the issuer can
-provide with the credential an OCA Bundle as a [credential supplement](). The
-type of the supplement is `issuer-oca-bundle`. The attachment MUST be
+The currently preferred mechanism for an issuer to provide an OCA Bundle to a
+holder is when issuing a credential using [RFC0453 Issue
+Credential](../0453-issue-credential-v2/), version 2.2 or later, the issuer
+provides, with the credential, an OCA Bundle as a [credential supplement](). The
+supplement type is `issuer-oca-bundle`. The OCA Bundle MUST be in the JSON form,
+not the ZIP format. The attachment MUST be
 [signed](../../concepts/0017-attachments#signing-attachments) by the issuer, and
 may be of [type `base64url`](../../concepts/0017-attachments#base64url), meaning
 the OCA Bundle is embedded in the message, or of [type
-`link`](../../concepts/0017-attachments#links). There are other mechanisms
-for issuers to get OCA Bundles to issuers outlined [here](#other-oca-bundle-sources).
+`link`](../../concepts/0017-attachments#links). There are other mechanisms for
+issuers to get OCA Bundles to issuers outlined
+[here](#other-oca-bundle-sources).
 
 An OCA Bundle attachment must be signed by the issuer so that if the holder
 passes the OCA Bundle on to the verifier, the verifier can be certain that the
 issuer provided the OCA Bundle, and that it was not created by the holder.
 
-``` todo
+##### Warning: External Attachments
 
-To Do: Add warning about the use of an attachment type of link being a potential "phone home"
-surveillance technique by the issuer. For example, an issuer might specify in the link URI a unique ID for every credential
-it issuers. The issuer would then know if/when the credential supplement was
-passed to a verifier and retrieved, letting the issuer know when and with whom
-a specific holder's credential was shared. This also applies to the "uri"
-elements of the Credential Branding overlay -- the logo and background image. Note that
-the "phone home" rule is not a problem for the holder getting the OCA Bundle -- the issuer already knows the holder,
-but it could be a problem if the holder passes a "tracking" OCA Bundle to its verifiers.
+The use of an attachment of type `link` for the OCA Bundle itself, or the use of
+external references to the two images (`logo` and `background_image`) in the
+branding overlay could provide malicious issuers with a mechanism for tracking
+the use of a holder's verifiable credential. Specifically, the issuer could:
 
-Proposals:
+- Make any or all of the OCA bundle external references a unique identifier for the holder.
+- When the holder retrieves the OCA bundle, the issuer does not learn anything
+  useful -- they know they have issued a credential to that holder.
+- If the holder passes the OCA bundle to verifiers and the verifiers resolve the
+  external references, the malicious issuer would learn that the holder has used
+  their verifiable credential in a presentation, and with what verifier.
 
-- Suggest that if there are links for either the OCA Bundle itself
-or for the images in the overlays, that the holder NOT pass the OCA Bundle to
-the verifier.
-- Break the "branding" element into two parts
-the logo/images ("assets overlay") and the rest of the settings ("branding overlay"). Stick
-to the "no links" rule above, but since the links are likely to be only with the "assets" OCA Bundle
-the verifier is more likely to get at least some of the data from the issuer.
-
-Other ideas?
-
-```
+A holder MAY choose not to attach an OCA Bundle to a verifier if it contains any
+external references. Non-malicious issuers are encouraged to **not** use
+external references in their OCA Bundles and as such, to minimize the inlined
+images in the branding overlay.
 
 ### Holder Activities
 
@@ -299,22 +384,21 @@ for that credential definition, and add it as a supplement to the message. The
 signature from the Issuer should be included with the supplement.
 
 A holder SHOULD not send an OCA Bundle to a verifier if the OCA Bundle is a
-link, or if any of the data items in the OCA Bundle are links. Such links could
-be an attempt by a malicious issuer to track the activity of a holder's
-credential and so for the safety of the holder, such OCA Bundles should not be
-provided to verifiers.
+link, or if any of the data items in the OCA Bundle are links, as noted in the
+in this [warning about external attachments in OCA
+Bundles](#warning-external-attachments).
 
 ### Verifier Activities
 
-A verifier might, on receipt of a presentation from a holder, also receive an
+A verifier MIGHT, on receipt of a presentation from a holder, also receive an
 OCA Bundle as a signed (by the issuer) attachment for some or all of the
 credential types in the presentation. This gives the verifier access to all of
-the same information about the credential as the holder. In a presentation
-only some of the claims from each credential are likely to be provided, so
-the "credential branding" OCA Bundle content might be less useful, the per
-attribute data, and especially the type, encoding, format and multilingual
-label/information data might be particularly useful when displaying the
-information to a person is necessary.
+the same OCA Bundle information about the credentials as the holder. In a
+presentation only some of the claims from each credential are likely to be
+provided, so the "credential branding" OCA Bundle content might be less useful,
+the per attribute data, and especially the type, encoding, format and
+multilingual label/information data might be particularly useful when displaying
+the information to a person is necessary.
 
 ### Other OCA Bundle Sources
 
@@ -342,19 +426,17 @@ the issuer did not sign and publish the OCA Bundle.
 
 ## Reference
 
-### Assets Overlay Specification
-
-### Branding Overlay Specification
-
-### Credential Supplement Examples 
-
+- The [OCA Specification v1.0](https://oca.colossi.network/specification/)
+- [Aries RFC 0756: The Aries Credential Branding Style
+Guide](https://docs.google.com/document/d/1_tMS2F3A9y6xStVM-37-qlf4mXU-hYDW/edit?usp=sharing&ouid=109116496535883458301&rtpof=true&sd=true)
 
 ## Drawbacks
 
-- The use of links either for OCA Bundles or for assets that are embedded in OCA
-  Bundles are both extremely useful and problematic, as documented in the RFC.
-  It would be nice to be able to allow links for/in the OCA Bundles without the
-  potential of being used to track the holder.
+- As noted in this [warning](#warning-external-attachments), the use of links
+  either for OCA Bundles or for the images that are embedded in OCA Bundles are
+  both extremely useful and problematic. It would be nice to be able to allow
+  links for/in the OCA Bundles without the potential of being used to track the
+  holder.
 - If the OCA Bundle is passed to the holder as a link, the issuer must continue
   to make that content available for as long as the holder might retain the
   credential. Putting the OCA Bundle on a ledger/blockchain might be a good way
@@ -368,8 +450,8 @@ support, multilingual support and the desire for issuers to brand their
 credentials.
 - The use of JSON-LD could provide some of the required capabilities covered by
 OCA (such as multilingual labels), but that solution requires adding
-considerable overhead and far more complicated processing to achieve a fraction
-of capabilities.
+considerable overhead and far more complicated processing to achieve a minimum
+of the capabilities available through OCA.
 - The current situation of having almost no metadata about credentials is
 extremely limiting.
   - Extracting best available metadata from the Schema and Credential Definition
@@ -389,10 +471,14 @@ None, as far as we are aware.
   holders/verifiers?
 - How do we balance the prevention of possible tracking by issuers, and the use
   of links to OCA Bundles or assets within OCA Bundles
-   
+
 ## Implementations
 
-The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+The following lists the implementations (if any) of this RFC. Please do a pull
+request to add your implementation. If the implementation is open source,
+include a link to the repo or to the implementation within the repo. Please be
+consistent in the "Name" field so that a mechanical processing of the RFCs can
+generate a list of all RFCs supported by an Aries implementation.
 
 *Implementation Notes* [may need to include a link to test results](/README.md#accepted).
 
