@@ -450,15 +450,25 @@ It seems inevitable that the length of some out-of-band message will be too long
 
 A usable QR code will always be able to be generated from the shortened form of the URL.
 
+
+#### URL Shortening Caveats
+
+Some HTTP libraries don't support stopping redirects from occuring on reception of a `301` or `302`, in this instance the redirect is automatically followed and will result in a response that **MAY** have a status of `200` and **MAY** contain a URL that can be processed as a normal `Out-of-Band` message.
+
+If the agent performs a HTTP GET with the `Accept` header requesting `application/json` MIME type the response can either contain the message in `json` or result in a redirect, processing of the response should attempt to determine which response type is received and process the message accordingly.
+
 #### Out-of-Band Message Publishing
 
 The _sender_ will publish or transmit the out-of-band message URL in a manner available to the intended _receiver_. After publishing, the sender is in the _await-response_ state, will the receiver is in the _prepare-response_ state.
 
 #### Out-of-Band Message Processing
 
-When they receiver receives the out-of-band message URL, there are two possible user flows, depending on whether the individual has an Aries agent. If the individual is new to Aries, they will likely load the URL in a browser. The resulting page **SHOULD** contain instructions on how to get started by installing an Aries agent. That install flow will transfer the out-of-band message to the newly installed software.
+If the receiver receives an `out-of-band` message in the form of a QR code, the receiver should attempt to decode the QR code to an out-of-band message URL for processing.
 
-A user that already has those steps accomplished will have the URL received by software directly. That software will base64URL decode the string and can read the out-of-band message directly out of the `oob` query parameter, without loading the URL.
+When the receiver receives the out-of-band message URL, there are two possible user flows, depending on whether the individual has an Aries agent. If the individual is new to Aries, they will likely load the URL in a browser. The resulting page **SHOULD** contain instructions on how to get started by installing an Aries agent. That install flow will transfer the out-of-band message to the newly installed software.
+
+A user that already has those steps accomplished will have the URL received by software directly. That software will attempt to base64URL decode the string and can read the out-of-band message directly out of the `oob` query parameter, without loading the URL. If this process fails then the software should attempt the steps to [process a shortened URL](#url-shortening). 
+
 
 > **NOTE**: In receiving the out-of-band message, the base64url decode implementation used **MUST**
 > correctly decode padded and unpadded base64URL encoded data.

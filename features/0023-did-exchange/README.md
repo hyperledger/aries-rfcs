@@ -173,13 +173,16 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
 * The [`~thread`](../../concepts/0008-message-id-and-threading/README.md#thread-object) decorator MUST be included:
   * It MUST include the ID of the parent thread (`pthid`) such that the `request` can be correlated to the corresponding (implicit or explicit) `invitation`. More on correlation [below](#correlating-requests-to-invitations).
   * It MAY include the `thid` property. This works according to the [`thid`](../../concepts/0008-message-id-and-threading/README.md#thread-id-thid) property in the thread decorator, meaning that if `thid` is not defined it is implicitly defined as the `@id` on the same `request` message.
-* The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute.
+* The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute. (See note on `label` below)
 * The `goal_code` (optional) is a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the request message. The goal code might be used particularly when the request is sent to a resolvable DID without reference to a specfic invitation.
 * The goal (optional) is a self-attested string that the receiver may want to display to the user about the context-specific goal of the request message.
 * The `did` attribute MUST be included. It indicates the DID being exchanged.
 * The `did_doc~attach` (optional), contains the DIDDoc associated with the `did`, if required.
   * If the `did` is resolvable (either an inline `peer:did` or a publicly resolvable DID), the `did_doc~attach` attribute should not be included.
   * If the DID is a `did:peer` DID, the DIDDoc must be as outlined in [RFC 0627 Static Peer DIDs](../0627-static-peer-dids/README.md).
+
+
+The `label` property was intended to be declared as an optional property, but was added to the RFC as a required property. If an agent wishes to not use a label in the request, an empty string (`""`) or the set value `Unspecified` may be used to indicate a non-value. This approach ensures existing AIP 2.0 implementations do not break.
 
 #### Correlating requests to invitations
 
