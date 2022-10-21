@@ -377,4 +377,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[Sirius SDK Java](https://github.com/Sirius-social/sirius-sdk-java/) | [IOTA Ledger](https://www.iota.org/) based implementation ([IOTA n-wise registry spec](https://github.com/Sirius-social/docs/blob/main/specs/iota-n-wise-registry.md))
+[Sirius SDK Java](https://github.com/Sirius-social/sirius-sdk-java/) | [IOTA Ledger](https://www.iota.org/) based implementation ([IOTA n-wise registry spec](https://github.com/Sirius-social/docs/blob/main/specs/iota-n-wise-registry.md)). See a detailed [example](https://github.com/Sirius-social/Notebooks/blob/main/notebooks/NwiseJava.ipynb) in Jupyter notebook.
