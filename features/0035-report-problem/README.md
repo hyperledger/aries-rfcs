@@ -237,6 +237,13 @@ Each item in the list must be a tagged pair (a JSON {key:value}, where the key n
 
 The following is a categorization of a number of examples of errors and (current) Best Practice handling for those types of errors. The new `problem-report` message type is used for some of these categories, but not all.
 
+### Unknown Error
+
+Errors of a known error code will be processed according to the understanding of what the code means. Support of a protocol includes support and proper processing of the error codes detailed within that protocol.
+
+Any error message with an unknown code SHOULD be treated as a warning, and the flow of the active protocol SHOULD continue. This default behavior avoids aborting an active protocol when
+an unknown message is received. 
+
 ### Error While Processing a Received Message
 
 An Agent Message sent by a Sender and received by its intended Recipient cannot be processed.
