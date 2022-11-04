@@ -32,7 +32,7 @@ Version: `1.0`
 
 When an agent would like to receive push notifications at record event changes, e.g. incoming credential offer, incoming connection request, etc., the agent could initiate the protocol by sending a message to the other agent.
 
-This protocol only defines how an agent would get the token that is necessary for push notifications.
+This protocol only defines how an agent would get the token and platform that is necessary for push notifications.
 
 Each platform has its own protocol so that we can easily use [0031: Discover Features 1.0](https://github.com/hyperledger/aries-rfcs/blob/main/features/0031-discover-features/README.md) and [0557: Discover Features 2.X](https://github.com/hyperledger/aries-rfcs/blob/main/features/0557-discover-features-v2/README.md) to see which specific services are supported by the other agent.
 
@@ -62,19 +62,21 @@ When a notification-receiver wants to receive push notifications from the notifi
 
 #### Set Device Info
 
-Message to set the device info using the fcm device token for push notifications.
+Message to set the device info using the fcm device token and device platform for push notifications.
 
 ```json
 {
   "@type": "https://didcomm.org/push-notifications-fcm/1.0/set-device-info",
   "@id": "<UUID>",
-  "device_token": "<DEVICE_TOKEN>"
+  "device_token": "<DEVICE_TOKEN>",
+  "device_platform": "<DEVICE_PLATFORM>"
 }
 ```
 
 Description of the fields:
 
 - `device_token` -- The token that is required by the notification provider (string, null)
+- `device_platform` -- The platform used by the sender, e.g. Android / iOS / Linux / etc. ([string](string), null)
 
 It is important to note that the set device info message can be used to set, update and remove the device info. To set, and update, these values the normal messages as stated above can be used. To remove yourself from receiving push notifications, you can send the same message where all values MUST be `null`. If either value is `null`, a `problem-report` MAY be sent back with `missing-value`.
 
@@ -97,13 +99,14 @@ Response to the get device info:
 {
   "@type": "https://didcomm.org/push-notifications-fcm/1.0/device-info",
   "device_token": "<DEVICE_TOKEN>",
+  "device_platform": "<DEVICE_PLATFORM>",
   "~thread": {
     "thid": "<GET_DEVICE_INFO_UUID>"
   }
 }
 ```
 
-This message can be used by the notification-receiver to receive their device info, e.g. `device_token`. If the notification-sender does not have this field for that connection, a `problem-report` MAY be used as a response with `not-registered-for-push-notifications`.
+This message can be used by the notification-receiver to receive their device info, e.g. `device_token` and `device_platform`. If the notification-sender does not have this field for that connection, a `problem-report` MAY be used as a response with `not-registered-for-push-notifications`.
 
 #### Adopted messages
 
@@ -111,13 +114,13 @@ In addition, the [`ack`](https://github.com/hyperledger/aries-rfcs/blob/08653f21
 
 ### Sending Push Notifications
 
-When an agent wants to send a push notification to another agent, the payload of the push notifications MUST include the `@type` property, and COULD include the `message_tag` property, to indicate the message is sent by the notification-sender. Guidelines on notification messages are not defined.
+When an agent wants to send a push notification to another agent, the payload of the push notifications MUST include the `@type` property, and COULD include the `message_tags` property, to indicate the message is sent by the notification-sender. Guidelines on notification messages are not defined.
 
 ```json
 {
   "@type": "https://didcomm.org/push-notifications-fcm",
-  "message_tag": "<MESSAGE_TAG>",
-  "message_id": "<MESSAGE_ID>",
+  "message_tags": ["<MESSAGE_TAG>"],
+  "message_ids": ["<MESSAGE_ID>"],
   ...
 }
 ```
@@ -125,8 +128,8 @@ When an agent wants to send a push notification to another agent, the payload of
 Description of the fields:
 
 - `@type` -- Indicator of what kind of notification it is. (This could help the notification-receiver with parsing if a notification comes from another agent, for example)
-- `message_tag` -- Optional field to connect the push notification to a DIDcomm message. As defined in [0334: jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0334-jwe-envelope) or [0019: encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope).
-- `message_id` -- Optional field to pickup the message from the mediator that the notification was linked to. As defined in [0685: Pickup Protocol 2.0](https://github.com/hyperledger/aries-rfcs/blob/main/features/0685-pickup-v2/README.md).
+- `message_tag` -- Optional list field to connect the push notification to a DIDcomm message, this can be used for batching multiple messages to a single notification. As defined in [0334: jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0334-jwe-envelope) or [0019: encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope).
+- `message_ids` -- Optional list field to pickup the message from the mediator that the notification was linked to, this can be used for batching multiple messages to a single notification. As defined in [0685: Pickup Protocol 2.0](https://github.com/hyperledger/aries-rfcs/blob/main/features/0685-pickup-v2/README.md).
 
 ## Drawbacks
 
