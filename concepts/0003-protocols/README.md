@@ -395,7 +395,10 @@ This leads to the following received message handling rules:
 version mismatches is because the recipient can detect the mismatch by looking
 at the [PIURI](#piuri), making the "warning" unnecessary, and because the
 `problem-report` message may be received after (and definitely at a different
-time than) the response message, and so the warning is of very little value to the recipient.
+time than) the response message, and so the warning is of very little value to
+the recipient. Recipients should still be aware that minor version mismatch
+warning `problem-report` messages may be received and handle them appropriately,
+likely by quietly ignoring them.
 
 As documented in the semver documentation, these requirements are not applied when
 major version 0 is used. In that case, minor version increments are considered breaking.
