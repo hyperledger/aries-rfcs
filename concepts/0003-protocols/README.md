@@ -381,24 +381,24 @@ This leads to the following received message handling rules:
   - The processing MAY be with the same minor version of the received message.
     - To support this, an implementation must implement each minor version from minimum to current within the major version.
   - The processing MAY be with the current minor version (higher than received).
-    - This approach is used because maintaining each minor version from minimum to current within the major version is impractical.
+    - This approach is used when maintaining each minor version from minimum to current within the major version is impractical.
     - Recipients of the response message SHOULD detect from the response [PIURI](#piuri) that a higher minor version was used in the response, and to compensate if needed and as necessary.
     - Prior wording of this protocol included the following suggestion that is now considered deprecated. See note below about deprecating the "warning" problem reports.
       - In addition to responding with the protocol message (if necessary), the agent MAY also want to send a warning `problem-report` message with code `version-with-degraded-features`.
-- Message types received with a minor version higher than the current minor version MUST processed with any unrecognized fields ignored.
+- Message types received with a minor version higher than the current minor version MUST be processed with any unrecognized fields ignored.
   - The response MUST use the current minor version.
   - Recipients of the response message SHOULD detect from the response [PIURI](#piuri) that a lower minor version was used in the response, and to compensate if needed and as necessary.
   - Prior wording of this protocol included the following that is now considered deprecated. See note below about deprecating the "warning" problem reports.
     - In addition to responding with the protocol message, an agent MAY send a warning `problem-report` message with code `fields-ignored-due-to-version-mismatch`
 
 **Note:** The deprecation of the "warning" `problem-reports` in cases of minor
-version mismatches is because the recipient can detect the mismatch by looking
-at the [PIURI](#piuri), making the "warning" unnecessary, and because the
-`problem-report` message may be received after (and definitely at a different
-time than) the response message, and so the warning is of very little value to
-the recipient. Recipients should still be aware that minor version mismatch
-warning `problem-report` messages may be received and handle them appropriately,
-likely by quietly ignoring them.
+version mismatches is because the recipient of the response can detect the
+mismatch by looking at the [PIURI](#piuri), making the "warning" unnecessary,
+and because the `problem-report` message may be received after (and definitely
+at a different time than) the response message, and so the warning is of very
+little value to the recipient. Recipients should still be aware that minor
+version mismatch warning `problem-report` messages may be received and handle
+them appropriately, likely by quietly ignoring them.
 
 As documented in the semver documentation, these requirements are not applied when
 major version 0 is used. In that case, minor version increments are considered breaking.
