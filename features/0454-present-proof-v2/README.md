@@ -10,6 +10,10 @@
 
 ## Version Change Log
 
+### 2.2 - Addition of Supplements
+
+An optional mechanism for providing credential supplements during presentation.
+
 ### 2.1 - Add ability to request multiple presentations
 
 A minor update to add mechanism for a Verifier to request the Prover submit multiple presentations in the "presentation" message(s), each presentation sourced from different credentials that satisfy the presentation request.
@@ -234,7 +238,22 @@ This message is a response to a Presentation Request message and contains signed
                 "links": ["https://ibb.co/TtgKkZY"]
             }
         }
-    ]
+    ],
+    "supplements": [
+        {
+            "type": "hashlink-data",
+            "ref": "<attachment identifier>",
+            "attrs": [{
+                "key": "field",
+                "value": "<fieldname>"
+            }]
+        },
+        {
+            "type": "issuer-credential",
+            "ref": "<attachment identifier>",
+        }
+    ],
+    "~attach" : [] //attachments referred to in supplements   
 }
 ```
 
@@ -245,6 +264,8 @@ Description of fields:
 * `last_presentation` -- an optional field that defaults to `true` to indicate this is the last presentation message to be sent in satisfying the presentation request. If the value is `false`, the Prover MUST send another presentation message with an additional presentation(s). The Prover's last `presentation` message MUST have a `last_presentation` value of `false` (explicitly or by default). If the `present_multiple` field is absent or `false` in the `request_presentation` message from the Verifier, the `last_presentation` field on the first/only `presentation` message MUST be true (explicitly or by default).
 * `formats` -- contains an entry for each `presentations~attach` array entry, providing the the value of the attachment `@id` and the verifiable presentation format and version of the attachment. Accepted values for the `format` items are provided in the per format [Attachment](#presentation-request-attachment-registry) registry immediately below.
 * `presentations~attach` -- an array of attachments containing the presentation in the requested format(s). If the `present_multiple` field is `true` in the `request_presentation` message from the Verifier, the Prover MAY include multiple presentations of the same format that satisfy the Presentation request from the Verifier.
+*  `supplements` -- an array of attachment descriptors detailing credential supplements. See the  Supplements Section in [0453: Issue Credential v2 Protocol](../0453-issue-credential-v2/README.md#supplements) for details, including the responsibilities of the verifier for various supplement types.
+* `~attach` -- attachments related to the issued credential. Each attachment should be detailed in a `supplements` entry, referenced by attachment id.
 
 If the `last_presentation` field is `false`, the Verifier's state SHOULD remain in the `request-sent` state (barring an error), with the expectation that additional `presentation` messages will be coming from the prover. If the `last_presentation` value is `true` (explicitly or by default) the Verifier MUST transition to their next appropriate state.
 
