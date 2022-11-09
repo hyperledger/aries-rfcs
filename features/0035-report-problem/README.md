@@ -172,6 +172,8 @@ to a message, the thread decorator is mostly redundant, as `~thread.thid` must e
 
 **description**: Contains human-readable, localized alternative string(s) that explain the problem. It is highly recommended that the message follow use the guidance in [the l10n RFC](../0043-l10n/README.md), allowing the error to be searched on the web and documented formally.
 
+**description.code**: Required. Contains the code that indicates the problem being communicated. Codes are described in protocol RFCs and other relevant places. New Codes SHOULD follow the [Problem Code](https://identity.foundation/didcomm-messaging/spec/#problem-codes) naming convention detailed in the DIDComm v2 spec.
+
 **problem_items**: A list of one or more key/value pairs that are parameters about the problem. Some examples might be:
 
 - a list of arguments that didn’t pass input validation
@@ -236,6 +238,12 @@ Each item in the list must be a tagged pair (a JSON {key:value}, where the key n
 ## Categorized Examples of Errors and (current) Best Practice Handling
 
 The following is a categorization of a number of examples of errors and (current) Best Practice handling for those types of errors. The new `problem-report` message type is used for some of these categories, but not all.
+
+### Unknown Error
+
+Errors of a known error code will be processed according to the understanding of what the code means. Support of a protocol includes support and proper processing of the error codes detailed within that protocol.
+
+Any unknown error code that starts with `w.` in the DIDComm v2 style may be considered a warning, and the flow of the active protocol SHOULD continue. All other unknown error codes SHOULD be considered to be an end to the active protocol.
 
 ### Error While Processing a Received Message
 
