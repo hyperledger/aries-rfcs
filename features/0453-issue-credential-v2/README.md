@@ -478,6 +478,8 @@ Official Supplement Types:
     - This binary data MUST only be transmitted if the associated credential attribute containing the hashlink is also transmitted.
     - An attr key value pair of "field", and value of the attribute name must be sent in the attrs structure.
     - During presentation, the verifier MUST check the validity of the hashlink in the presented credential against the associated message attachment prior to use. If the verification fails, the verifier MUST consider the attachment invalid.
+- `oca-bundle`
+    - Contains an OCA Bundle as specified in [RFC 0755: OCA for Aries](../0755-oca-for-aries/README.md).
 
 Holder Behavior
 
