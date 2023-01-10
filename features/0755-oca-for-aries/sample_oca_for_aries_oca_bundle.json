@@ -166,8 +166,7 @@
         {
             "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
             "digest": "Ez2CuXoeIpVsLp2qu5kUhXxBr3Mq_Ydgo_F-0TOb1LrI",
-            "type": "spec/overlays/meta/1.0",
-            "language": "branding",
+            "type": "aries/overlays/branding/1.0",
             "name": "",
             "description": "",
             "background_image": "data:image/png;base64,iVBORw...",

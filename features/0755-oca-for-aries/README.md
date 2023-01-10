@@ -60,7 +60,7 @@ issues.
 protocol] the issuer MAY include in the protocol's `credential-offer` or
 `credential` messages the OCA Bundle for the credential type as an `oca-bundle`
 [issue credential supplement].
-- On receipt, the holder software has full access to the OCA information
+- When provided, the holder software has full access to the OCA information
 published by that issuer and can use the OCA data to render the credential for
 its user(s) in the language of their choice, with credential branding from
 the issuer, based on the [RFC0756 OCA for Aries Style Guide].
@@ -239,18 +239,18 @@ combined with an app setting for showing the data in [short, medium, long or
 full
 form](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat).
 
-#### Aries Specific "branding" Meta Overlay
+#### Aries Specific "branding" Overlay
 
 In addition to the core OCA Overlays listed earlier, Aries issuers MAY include
-an additional Aries-specific Meta overlay, the **"branding" Meta overlay**, that
+an additional Aries-specific extension overlay, the **"branding" overlay**, that
 gives the issuer a way to provide a set of data elements about the branding that
-they would like to see applied to a given type of credential. The `branding Meta
-overlay` like the any other multilanguage Meta overlay (e.g. ones for English,
+they would like to see applied to a given type of credential. The `branding
+overlay` is similar to the multilanguage Meta overlay (e.g. ones for English,
 French and Spanish), with a specified set of name/value pairs. Holders (and
 verifiers) use the branding values from the issuer when rendering a credential
 of that type according the [RFC0756 OCA for Aries Style Guide].
 
-An example of the use of the Meta branding overlay is as follows, along with a
+An example of the use of the branding overlay is as follows, along with a
 definition of the name/value pair elements, and a sample image of how the
 elements are to be used. The sample is provide only to convey the concept of the
 branding overlay and how it is to be used. Issuers, holders and verifiers should
@@ -260,7 +260,7 @@ be provided and used in displaying credentials.
 ```
 {
   "capture_base": "EPMaG1h2hVxKCZ5_3KoNNwgAyd4Eq8zrxK3xgaaRsz2M",
-  "type":"spec/overlays/meta/1.0",
+  "type":"aries/overlays/branding/1.0",
   "logo": "data:image/png;base64,iVBORw...",
   "background_image": "data:image/png;base64,iVBORw0K...",
   "background_image_slice": "data:image/png;base64,iVBORw0K...",
@@ -279,31 +279,32 @@ Guide](assets/Sample-use-of-Branding-Overlay.jpg)
 [hashlink]: https://datatracker.ietf.org/doc/html/draft-sporny-hashlink
 [Data URL Scheme]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs
 
-- logo - a URI for a logo to display on the credential in some contexts.
+- `type` - a the type of the overlay, using the `aries` namespace.
+- `logo` - a URI for a logo to display on the credential in some contexts.
 The URI can be an HTTP URL, a [hashlink] or, to support inline images, a data
-URL (e.g.: data:image/png;base64,...) as defined by the [Data URL Scheme]. The
+URL (e.g.: `data:image/png;base64,...`) as defined by the [Data URL Scheme]. The
 logo MUST adhere to the logo properties defined in [RFC0756 OCA for Aries Style Guide].
-- background_image - a URI for a background image to display with the
+- `background_image` - a URI for a background image to display with the
 credential in some contexts. The URI could be an HTTP URL, a [hashlink] or, to
-support inline images, a data URL (e.g.: data:image/png;base64,...) as defined
+support inline images, a data URL (e.g.: `data:image/png;base64,...`) as defined
 by the [Data URL Scheme]. The image MUST adhere to the background image
 properties defined in [RFC0756 OCA for Aries Style Guide].
-- background_image_slice - a URI for a background image slice to display
+- `background_image_slice` - a URI for a background image slice to display
 with the credential in some contexts. The URI could be a HTTP URL, a [hashlink]
-or, to support inline images, a data URL (e.g.: data:image/png;base64,...) as
+or, to support inline images, a data URL (e.g.: `data:image/png;base64,...`) as
 defined by the [Data URL Scheme]. The image MUST adhere to the background image slice
 properties defined in [RFC0756 OCA for Aries Style Guide].
-- primary_background_color - hex color code for the primary background color of the
+- `primary_background_color` - hex color code for the primary background color of the
   credential to be used in some contexts.
-- secondary_background_color - hex color code for the secondary background color of the
+- `secondary_background_color` - hex color code for the secondary background color of the
   credential to be used in some contexts.
-- primary_attribute - the name of a capture base attribute to be displayed on
+- `primary_attribute` - the name of a capture base attribute to be displayed on
   the credential in some contexts.
-- secondary_attribute - the name of a capture base attribute to be displayed on
+- `secondary_attribute` - the name of a capture base attribute to be displayed on
   the credential in some contexts.
-- issued_date_attribute - the name of a capture base attribute that is the date
+- `issued_date_attribute` - the name of a capture base attribute that is the date
   of issuance of the credential. If there is no such attribute, leave blank.
-- expiry_date_attribute - the name of a capture base attribute that is the
+- `expiry_date_attribute` - the name of a capture base attribute that is the
   expiry date of the credential. If there is no such attribute, leave blank.
 
 It is deliberate that the credential branding defined in this RFC does **not**
@@ -362,6 +363,8 @@ as the tooling evolves.
   - Attribute Name, Attribute Type, Character Encoding, Format, Entry Codes, Unit.
   - Add a column "OL-ST: Standard" if not present, and populate with the appropriate standards. Most notably for Aries, is to use the standards "dateint" and "Unix Time" as indicating in the [Aries Specific Standards in the OCA Standard Overlay](#aries-specific-standards-in-the-oca-standard-overlay) section of this document.
 - Duplicate the sample language tab (`en`) and rename it "branding". Complete the tab as follows:
+  - > To Be Updated: We are working with the OCA Team at the Human Colossus
+    > Foundation to improve how this is done.
   - In column A (`OL-MN: Meta [Attribute Name]`), add the values:
     - "logo"
     - "background_image"
@@ -372,7 +375,7 @@ as the tooling evolves.
     - "secondary_attribute"
     - "issued_date_attribute"
     - "expiry_date_attribute"
-  - Complete column B (`OL-MV: Meta [Attribute Value]`) as appropriate for each column A name. See [this section of this RFC](#aries-specific-branding-meta-overlay) and the [RFC0756 OCA for Aries Style Guide] for details on populating the values.
+  - Complete column B (`OL-MV: Meta [Attribute Value]`) as appropriate for each column A name. See [this section of this RFC](#aries-specific-branding-overlay) and the [RFC0756 OCA for Aries Style Guide] for details on populating the values.
   - "logo", should automatically appear in Column A for the rows below "expiry_date_attribute", where column C of the spreadsheet is also populated. You can ignore those rows.
   - Leave columns D and higher blank.
 - Rename the sample language tab (`en`) to one of the language or language-country that as an issuer, you want to support.
@@ -389,8 +392,14 @@ as the tooling evolves.
 - Update each extra language tab.
 - Use the open source [OCA Parser from the Human Colossus Foundation] to convert the
   spreadsheet to JSON.
+  - NOTE: The current version of the parser is not generating the `Meta` overlays correctly.
   - Typically, this would be done when the source spreadsheet is updated in version control via an automated action.
   - The generated JSON is the OCA Bundle that will be send to Holders, as outlined in the [following section](#issuing-a-credential).
+- Find and update the generated JSON of the Meta overlay with language type
+  `branding` as follows, making sure to keep the resulting JSON valid.
+  - Remove the `language` item (with value `branding`)
+  - Change the `type` item's value to `"aries/overlays/branding/1.0"`
+  - > To Be Determined: How to update the `digest` element to have the right value.
 
 [OCA Template]: https://github.com/THCLab/oca-ecosystem/raw/main/examples/template.xlsx
 
@@ -402,7 +411,7 @@ make the process even easier.
 [OCA Parser from the Human Colossus Foundation]: https://github.com/THCLab/oca-rust
 
 Over time, we expect to see other tooling become available--notably, an
-interactive tool for issuers to use in populating their branding Meta overlay.
+interactive tool for issuers to use in populating their branding overlay.
 
 #### Issuing A Credential
 
@@ -440,7 +449,7 @@ time, but once issued, each OCA Bundle MUST remain accessible.
 
 The use of an attachment of type `link` for the OCA Bundle itself, or the use of
 external references to the images in the
-[branding Meta overlay](#aries-specific-branding-meta-overlay) could provide malicious issuers with
+[branding overlay](#aries-specific-branding-overlay) could provide malicious issuers with
 a mechanism for tracking the use of a holder's verifiable credential.
 Specifically, the issuer could:
 
@@ -455,7 +464,7 @@ Specifically, the issuer could:
 A holder MAY choose not to attach an OCA Bundle to a verifier if it contains any
 external references. Non-malicious issuers are encouraged to **not** use
 external references in their OCA Bundles and as such, to minimize the inlined
-images in the branding Meta overlay.
+images in the branding overlay.
 
 ### Holder Activities
 
@@ -490,7 +499,7 @@ credential metadata and attributes (labels, etc.).
   attribute data in the "information" overlay.
 - Consider using the PII flag in the Capture Base to provide guidance to the
   user about the sharing of PII.
-- Use the branding meta overlay and [RFC0756 OCA for Aries Style Guide] in
+- Use the branding overlay and [RFC0756 OCA for Aries Style Guide] in
   displaying the credential in various contexts (e.g., in a credential offer
   prompt, in a list, selected from a list, alone on a page, etc.).
 - Process the attribute data using the `type`, `encoding`, `format`, `unit` and
@@ -564,7 +573,7 @@ verifiers.
   credential. Putting the OCA Bundle on a verifiable data registry (such as a
   ledger/blockchain) might be a good way to publish such data.
 - The processing of an OCA Bundle, and particularly the processing of images in
-  the branding Meta overlay, provide an attack vector for malicious issuers.
+  the branding overlay, provide an attack vector for malicious issuers.
   Developers of holder software SHOULD take precautions in handling and
   displaying the data.
 
