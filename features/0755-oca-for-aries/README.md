@@ -390,6 +390,8 @@ as the tooling evolves.
     - "issuer"
     - "issuer_description"
     - "issuer_url"
+    - "credential_help"
+    - "credential_support_url"
     - "name", should automatically appear for the following rows where column C of the spreadsheet is also populated.
   - Complete column B (`OL-MV: Meta [Attribute Value]`) as appropriate for each column A name.
 - Duplicate and rename the initial language tab for each language or language-country that as an issuer, you want to support.
