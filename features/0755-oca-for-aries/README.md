@@ -185,11 +185,15 @@ overlay](https://oca.colossi.network/v1.1.0-rc.html#information-overlay)** provi
 a description or help text about each attribute for a given language. There will
 be one overlay per issuer-supported language.
 - The multilingual **[Meta overlay](https://oca.colossi.network/v1.1.0-rc.html#meta-overlay)** contains
-information about the credential itself, such as "name" and "description." For Aries, the meta overlay
+information about the credential itself. For Aries, the meta overlay
 SHOULD include the following additional name/value pairs, specific to the OCA for Aries use case:
+  - `name` - the name of the credential.
+  - `description` - a description of the credential.
   - `issuer` - the name of the issuer of the credential.
   - `issuer_description` - a description for the issuer of the credential.
   - `issuer_url` - a URL for the issuer of the credential.
+  - `credential_help` - help text about the credential
+  - `credential_support_url` - a URL for a service providing support in the use of the credential.
 - The **[Unit overlay](https://oca.colossi.network/specification/#unit-overlay)**
   allows the issuer to declare the units of measurement for the attributes in
   the overlay.
