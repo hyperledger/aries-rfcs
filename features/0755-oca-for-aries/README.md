@@ -169,10 +169,13 @@ overlay](https://oca.colossi.network/v1.1.0-rc.html#character-encoding-overlay)*
 contains the encoding for each attribute in the capture base.
 - The **[Format
 overlay](https://oca.colossi.network/v1.1.0-rc.html#format-overlay)** provides
-the input structure for each data attribute. The format may be useful in
-displaying the data in a style expected by the user, based on the content of the
-data and their language preferences. For example, displaying the elements of a
-date in the user's preferred format.
+the input structure for each data attribute. The format may be useful to the
+holder (or verifier) in displaying the data in a style expected by the user,
+such as knowing that a given field of `type` binary is an image in `image/jpeg`
+format.
+  - See the [section](#aries-specific-formats-in-the-oca-format-overlay)
+    about the Aries specific date/time related formats that Aries agents
+    SHOULD recognize: "dateint" and "Unix Time".
 - The multilingual **[Label
 overlay](https://oca.colossi.network/v1.1.0-rc.html#label-overlay)** provides a
 label to be used for each attribute for a given language. The label overlay also
@@ -208,34 +211,34 @@ SHOULD include the following additional name/value pairs, specific to the OCA fo
 
 [Capture Base]: https://oca.colossi.network/v1.1.0-rc.html#capture-base
 
-#### Aries-Specific Standards in the OCA Standard Overlay
+#### Aries-Specific Formats in the OCA Format Overlay
 
-Aries agents SHOULD recognize the attribute standards `dateint` and `Unix Time`
-in the [Standard
-  Overlay](https://oca.colossi.network/specification/#standard-overlay) and
-apply those standards to the corresponding attributes data according to how they
+Aries agents SHOULD recognize the attribute formats `dateint` and `Unix Time`
+in the [Format
+  Overlay](https://oca.colossi.network/specification/#format-overlay) and
+apply those formats to the corresponding attributes data according to how they
 are used in Aries.
 
 In AnonCreds, zero-knowledge proof (ZKP) predicates (used, for example, to prove
 older than a given age based on date of birth without sharing the actual date of
 birth) must be based on **integers**. The Aries-specific entries used in the
-Standard overlay `dateint` and `Unix Time` facilitate the use of AnonCreds
+Format overlay `dateint` and `Unix Time` facilitate the use of AnonCreds
 predicates for date and date/time attributes, respectively.
 
-- "`dateint`" in the Standard overlay indicates that the specified attribute's
+- "`dateint`" in the Format overlay indicates that the specified attribute's
 data is a date constructed according to the Aries `dateint` specification as
 described in [Aries RFC 0592](../0592-indy-attachments/README.md). Briefly,
 `dateint` is a date (YYYYMMDD) provided in a credential attribute as an integer
-(for example `September 29, 2022` is the integer `20,220,929`).
+(for example `September 29, 2022` is the integer `20220929` or `20,220,929`).
 
-- "`Unix Time`" in the Standard overlay indicates that the specified attribute's
+- "`Unix Time`" in the Format overlay indicates that the specified attribute's
 data is a date/time timestamp constructed according to the `Unix
 Time`[Unix/POSIX data standard](https://en.wikipedia.org/wiki/Unix_time) for
 date/time timestamps. Briefly, `Unix Time` is a date/time represented as the
 number of seconds since January 1, 1970 UTC.
 
-A recipient of an OCA Bundle with attributes referenced in the Standard overlay
-as using `dateint` or `Unix Time`Standards SHOULD convert the integer attribute
+A recipient of an OCA Bundle with attributes referenced in the Format overlay
+as using `dateint` or `Unix Time` formats SHOULD convert the integer attribute
 data into a date or date/time (respectively) and display the information as
 appropriate for the user. For example, a mobile app should display the data as a
 date or date/time based on the user's language/country setting, possibly
@@ -365,10 +368,10 @@ as the tooling evolves.
 - Fill in the "Main" tab with the attributes from the schema, completing the
   relevant columns for each attribute. Current columns to complete:
   - Attribute Name, Attribute Type, Character Encoding, Format, Entry Codes, Unit.
-  - Add a column "OL-ST: Standard" if not present, and populate with the appropriate standards. Most notably for Aries, is to use the standards "dateint" and "Unix Time" as indicating in the [Aries Specific Standards in the OCA Standard Overlay](#aries-specific-standards-in-the-oca-standard-overlay) section of this document.
+    - As needed, use the formats "dateint" and "Unix Time" as indicating in the [Aries Specific Formats in the OCA Formats Overlay](#aries-specific-formats-in-the-oca-format-overlay) section of this document.
 - Duplicate the sample language tab (`en`) and rename it "branding". Complete the tab as follows:
   - > To Be Updated: We are working with the OCA Team at the Human Colossus
-    > Foundation to improve how this is done.
+    > Foundation to improve how this is done, as some post generation updates are needed.
   - In column A (`OL-MN: Meta [Attribute Name]`), add the values:
     - "logo"
     - "background_image"
@@ -380,10 +383,10 @@ as the tooling evolves.
     - "issued_date_attribute"
     - "expiry_date_attribute"
   - Complete column B (`OL-MV: Meta [Attribute Value]`) as appropriate for each column A name. See [this section of this RFC](#aries-specific-branding-overlay) and the [RFC0756 OCA for Aries Style Guide] for details on populating the values.
-  - "logo", should automatically appear in Column A for the rows below "expiry_date_attribute", where column C of the spreadsheet is also populated. You can ignore those rows.
   - Leave columns D and higher blank.
 - Rename the sample language tab (`en`) to one of the language or language-country that as an issuer, you want to support.
-- Fill in the data for the first language, including:
+- Fill in the data in columns other than C (which is automatically populated from Main) for the first language as appropriate.
+- Populate column A and B as follows:
   - In column A (`OL-MN: Meta [Attribute Name]`), add the values:
     - "name"
     - "description"
@@ -392,26 +395,25 @@ as the tooling evolves.
     - "issuer_url"
     - "credential_help"
     - "credential_support_url"
-    - "name", should automatically appear for the following rows where column C of the spreadsheet is also populated.
   - Complete column B (`OL-MV: Meta [Attribute Value]`) as appropriate for each column A name.
 - Duplicate and rename the initial language tab for each language or language-country that as an issuer, you want to support.
-- Update each extra language tab.
+- Update each additional language tab.
 - Use the open source [OCA Parser from the Human Colossus Foundation] to convert the
-  spreadsheet to JSON.
-  - NOTE: The current version of the parser is not generating the `Meta` overlays correctly.
+  spreadsheet to JSON. The current command to use is `parser parse oca --path <OCA Excel File> > <output JSON OCA Bundle>`
   - Typically, this would be done when the source spreadsheet is updated in version control via an automated action.
   - The generated JSON is the OCA Bundle that will be send to Holders, as outlined in the [following section](#issuing-a-credential).
-- Find and update the generated JSON of the Meta overlay with language type
+- Post generation updates:
+  - Find and update the generated JSON of the Meta overlay with language type
   `branding` as follows, making sure to keep the resulting JSON valid.
-  - Remove the `language` item (with value `branding`)
-  - Change the `type` item's value to `"aries/overlays/branding/1.0"`
+    - Remove the `language` item (with value `branding`)
+    - Change the `type` item's value to `"aries/overlays/branding/1.0"`
   - > To Be Determined: How to update the `digest` element to have the right value.
 
 [OCA Template]: https://github.com/THCLab/oca-ecosystem/raw/main/examples/template.xlsx
 
 Scripting the process should be relatively simple, and our expectation is that
 the community will evolve the [Parser from the Human Colossus Foundation] to
-make the process even easier.
+simplify the process further.
 
 [sample OCA for Aries OCA Bundle]: ./sample_oca_for_aries_oca_bundle.json
 [OCA Parser from the Human Colossus Foundation]: https://github.com/THCLab/oca-rust

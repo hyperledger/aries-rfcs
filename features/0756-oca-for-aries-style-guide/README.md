@@ -112,6 +112,8 @@ A Credential User Interface (UI) pulls from a issuer-provided OCA Bundle the fol
     * Issuer name
     * Issuer description
     * Issuer URL
+    * Credential help text
+    * Credential support URL
 * **“branding” Overlay:**
     * **_logo_** - a URI for an inline or external logo image to display with the credential. See details below about the use and requirements for the image.
     * **_background_image_** -  a URI for an inline or external background image to display with the credential. See details below about the use and requirements for the image.
