@@ -1,4 +1,4 @@
-# 0767: did:legacypeer DID Method 
+# 0768: did:legacypeer DID Method 
 - Authors: Timo Glastra, [Sam Curren](telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2023-02-08
