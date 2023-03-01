@@ -212,19 +212,6 @@
         "language": "fr-CA",
         "name": "Informations d'identification de la personne",
         "type": "spec/overlays/meta/1.0"
-      },
-      {
-        "logo": "https://raw.githubusercontent.com/swcurran/aries-rfcs/oca4aries/features/0755-oca-for-aries/best-bc-logo.png",
-        "background_image_slice": "https://raw.githubusercontent.com/swcurran/aries-rfcs/oca4aries/features/best-bc-background-image-slice.png",
-        "background_image": "https://raw.githubusercontent.com/swcurran/aries-rfcs/oca4aries/features/best-bc-background-image.png",
-        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
-        "description": "",
-        "digest": "EBQbQEV6qSEGDzGLj1CqT4e6yzESjPimF-Swmyltw5jU",
-        "expiry_date_attribute": "expiry_date_dateint",
-        "name": "",
-        "primary_attribute": "family_name",
-        "secondary_attribute": "given_names",
-        "type": "aries/overlays/branding/1.0"
       }
     ]
   }

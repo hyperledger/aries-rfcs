@@ -17,19 +17,20 @@
 [OCA specification], a "standardized global solution for data capture and
 exchange." Given a data structure (such as a verifiable credential), OCA allows
 for the creation of purpose-specific overlays of information about that data
-structure. Each overlay provides some knowledge about the overall data structure
-or the individual attributes within it. The information in the overlays makes it
-possible to create useful software for capturing data, displaying it and
-exchanging it. While the [OCA website](https://oca.colossi.network/) and
-[OCA specification] can be reviewed for
-a detailed background of OCA and its various purposes, in this RFC we'll focus
-on its purpose in Aries, which is quite constrained and pragmatic--a mechanism
-for an issuer to provide information about a verifiable credential to allow
-holder and verifier software to display the credential in a human-friendly way,
-including the issuer's preferred branding. The image below shows an Aries mobile
-Wallet displaying the same credential without and with OCA overlays applied in
-two languages. All of the differences in the latter two screenshots from the
-first come from issuer-supplied OCA data.
+structure. Each overlay provides some knowledge (human and machine-readable)
+about the overall data structure or the individual attributes within it. The
+information in the overlays makes it possible to create useful software for
+capturing data, displaying it and exchanging it. While the [OCA
+website](https://oca.colossi.network/) and [OCA specification] can be reviewed
+for a detailed background of OCA and its various purposes, in this RFC we'll
+focus on its purpose in Aries, which is quite constrained and pragmatic--a
+mechanism for an issuer to provide information about a verifiable credential to
+allow holder and verifier software to display the credential in a human-friendly
+way, including using the viewers preferred language, and the issuer's preferred
+branding. The image below shows an Aries mobile Wallet displaying the same
+credential without and with OCA overlays applied in two languages. All of the
+differences in the latter two screenshots from the first come from
+issuer-supplied OCA data.
 
 [OCA Specification]: https://oca.colossi.network/specification/
 [RFC0756 OCA for Aries Style Guide]: ../0756-oca-for-aries-style-guide/README.md
@@ -127,9 +128,10 @@ different types (listed in the [next section](#oca-specification-overlays)).
 
 While an OCA Bundle can be manually maintained in an OCA Bundle JSON file, a
 common method of maintaining OCA source data is to use a spreadsheet, and
-generating the OCA Bundle from source. See the section of this RFC called [OCA
-Tooling](#oca-issuer-tools) for a link to an OCA Source spreadsheet, and
-information on tools available for managing OCA Source data.
+generating the OCA Bundle from the Excel source. See the section of this RFC
+called [OCA Tooling](#oca-issuer-tools) for a link to an OCA Source spreadsheet,
+and information on tools available for managing the OCA Source data and
+generating a corresponding OCA Bundle.
 
 The creation of the OCA Bundle and the configuration of the issuer's Aries
 Framework to deliver the OCA Bundle during credential issuance should be all
@@ -164,32 +166,25 @@ languages](https://oca.colossi.network/specification/#language).
 An OCA Bundle that contains overlay types that a holder or verifier does not
 expect MUST be processed, with the unexpected overlays ignored.
 
-- The **[Character Encoding
-overlay](https://oca.colossi.network/v1.1.0-rc.html#character-encoding-overlay)**
-contains the encoding for each attribute in the capture base.
-- The **[Format
-overlay](https://oca.colossi.network/v1.1.0-rc.html#format-overlay)** provides
+- The **[Character Encoding Overlay]** contains the encoding for each attribute
+in the capture base.
+- The **[Format Overlay]** provides
 the input structure for each data attribute. The format may be useful to the
 holder (or verifier) in displaying the data in a style expected by the user,
 such as knowing that a given field of `type` binary is an image in `image/jpeg`
 format.
-  - See the [section](#aries-specific-formats-in-the-oca-format-overlay)
-    about the Aries specific date/time related formats that Aries agents
-    SHOULD recognize: "dateint" and "Unix Time".
-- The multilingual **[Label
-overlay](https://oca.colossi.network/v1.1.0-rc.html#label-overlay)** provides a
-label to be used for each attribute for a given language. The label overlay also
-includes labels for attributes with enumerated values (called categories in the
-OCA specification). For example, a data attribute containing the codes "EN",
-"FR", "SP" could have a category entries that indicate the codes correspond to
-"English", "French" and "Spanish", respectively.
-- The multilingual **[Information
-overlay](https://oca.colossi.network/v1.1.0-rc.html#information-overlay)** provides
-a description or help text about each attribute for a given language. There will
-be one overlay per issuer-supported language.
-- The multilingual **[Meta overlay](https://oca.colossi.network/v1.1.0-rc.html#meta-overlay)** contains
-information about the credential itself. For Aries, the meta overlay
-SHOULD include the following additional name/value pairs, specific to the OCA for Aries use case:
+- The multilingual **[Label Overlay]** provides a label to be used for each
+attribute for a given language. The label overlay also includes labels for
+attributes with enumerated values (called categories in the OCA specification).
+For example, a data attribute containing the codes "EN", "FR", "SP" could have a
+category entries that indicate the codes correspond to "English", "French" and
+"Spanish", respectively.
+- The multilingual **[Information Overlay]** provides a description or help text
+about each attribute for a given language. There will be one overlay per
+issuer-supported language.
+- The multilingual **[Meta Overlay]** contains information about the credential
+itself. For Aries, the meta overlay SHOULD include the following additional
+name/value pairs, specific to the OCA for Aries use case:
   - `name` - the name of the credential.
   - `description` - a description of the credential.
   - `issuer` - the name of the issuer of the credential.
@@ -197,53 +192,80 @@ SHOULD include the following additional name/value pairs, specific to the OCA fo
   - `issuer_url` - a URL for the issuer of the credential.
   - `credential_help` - help text about the credential
   - `credential_support_url` - a URL for a service providing support in the use of the credential.
-- The **[Unit overlay](https://oca.colossi.network/specification/#unit-overlay)**
+- The **[Unit Overlay]**
   allows the issuer to declare the units of measurement for the attributes in
   the overlay.
-- The **[Standard
-  Overlay](https://oca.colossi.network/specification/#standard-overlay)** indicates
-  that some or all of the attributes use specific data standards populating the
-  attribute in a credential. This might be used, for example, for defining
-  the standard applied in populating a data attribute with a date or date/time.
-  - See the [section](#aries-specific-standards-in-the-oca-standard-overlay)
-    about the Aries specific date/time related standards that Aries agents
-    SHOULD recognize: "dateint" and "Unix Time".
+- The **[Standard Overlay]** indicates that some or all of the attributes use
+  specific data standards populating the attribute in a credential. This might
+  be used, for example, for defining the standard applied in populating a data
+  attribute with a date or date/time.
+- The **[Entry Code Overlay]** contains a list of enumerated values for each
+  data attribute that uses enumerated values. An example might be a list of
+  regional jurisdiction (such as provinces or states) short forms that will be
+  placed in an attribute (e.g., NY, ND, AL, CA, etc.). The attributes in the
+  credential are expected to be populated with one of the enumerated values.
+- The **[Entry Overlay]** contains a language-specific list of the meanings for
+  each enumerated value for each data attribute that uses enumerated values. For
+  our example of short forms of jurisdictions, the "meanings" would be the
+  expanded list per language supported (English, French, Spanish, etc.) of
+  jurisdictions (e.g., New York, North Dakota, Alabama, California, etc.).
 
 [Capture Base]: https://oca.colossi.network/v1.1.0-rc.html#capture-base
+[Character Encoding Overlay]: https://oca.colossi.network/v1.1.0-rc.html#character-encoding-overlay
+[Format Overlay]: https://oca.colossi.network/v1.1.0-rc.html#format-overlay
+[Label Overlay]: https://oca.colossi.network/v1.1.0-rc.html#label-overlay
+[Information Overlay]: https://oca.colossi.network/v1.1.0-rc.html#information-overlay
+[Meta Overlay]: https://oca.colossi.network/v1.1.0-rc.html#meta-overlay
+[Unit Overlay]: https://oca.colossi.network/specification/#unit-overlay
+[Standard Overlay]: https://oca.colossi.network/specification/#standard-overlay
+[Entry Code Overlay]: https://oca.colossi.network/specification/#entry-code-overlay
+[Entry Overlay]: https://oca.colossi.network/specification/#entry-overlay
 
-#### Aries-Specific Formats in the OCA Format Overlay
-
-Aries agents SHOULD recognize the attribute formats `dateint` and `Unix Time`
-in the [Format
-  Overlay](https://oca.colossi.network/specification/#format-overlay) and
-apply those formats to the corresponding attributes data according to how they
-are used in Aries.
+#### Aries-Specific Dates in the OCA Format Overlay
 
 In AnonCreds, zero-knowledge proof (ZKP) predicates (used, for example, to prove
 older than a given age based on date of birth without sharing the actual date of
-birth) must be based on **integers**. The Aries-specific entries used in the
-Format overlay `dateint` and `Unix Time` facilitate the use of AnonCreds
-predicates for date and date/time attributes, respectively.
+birth) must be based on **integers**. In the AnonCreds/Aries community, common
+ways for representing dates and date/times as integers so that they can be used
+in ZKP predicates are the `dateint` and `Unix Time` formats, respectively.
 
-- "`dateint`" in the Format overlay indicates that the specified attribute's
-data is a date constructed according to the Aries `dateint` specification as
-described in [Aries RFC 0592](../0592-indy-attachments/README.md). Briefly,
-`dateint` is a date (YYYYMMDD) provided in a credential attribute as an integer
-(for example `September 29, 2022` is the integer `20220929` or `20,220,929`).
+- "`dateint`" is a credential attribute that uses the Aries `dateint`
+specification as described in [Aries RFC
+0592](../0592-indy-attachments/README.md). Briefly, `dateint` is a date
+(YYYYMMDD) provided in a credential attribute as an integer (for example
+`September 29, 2022` is the integer `20220929` or `20,220,929`). `dateint` is
+also part of [ISO standard 1989 for COBOL Programming
+Interfaces](https://www.iso.org/standard/74527.html), described [here in an IBM
+document](https://www.ibm.com/docs/en/cobol-zos/6.3?topic=sf-format-arguments-return-values-date-time-intrinsic-functions#INFFORM__stand_date).
 
-- "`Unix Time`" in the Format overlay indicates that the specified attribute's
-data is a date/time timestamp constructed according to the `Unix
-Time`[Unix/POSIX data standard](https://en.wikipedia.org/wiki/Unix_time) for
-date/time timestamps. Briefly, `Unix Time` is a date/time represented as the
-number of seconds since January 1, 1970 UTC.
+- "`Unix Time`" is a credential attribute that is a date/time timestamp
+constructed according to the `Unix Time` [Unix/POSIX data
+standard](https://en.wikipedia.org/wiki/Unix_time). Briefly, `Unix Time` is a
+date/time represented as the number of seconds since January 1, 1970 UTC.
 
-A recipient of an OCA Bundle with attributes referenced in the Format overlay
-as using `dateint` or `Unix Time` formats SHOULD convert the integer attribute
-data into a date or date/time (respectively) and display the information as
+In an OCA for Aries OCA Bundle, a `dateint` and `Unix Time` attributes MUST
+have the following values in the indicated overlays:
+
+- `dateint`
+  - datatype `DateTime` in the [Capture Base]
+  - standard `urn:iso:std:iso:1989` in the [Standard Overlay]
+  - character encoding `utf-8` in the [Character Encoding Overlay]
+  - format `YYYYMMDD` in the [Format Overlay]
+  - Example: `20230114` for "January 14, 2023"
+- `Unix Time`
+  - datatype `DateTime` in the [Capture Base]
+  - standard `urn:unix:unix-time` in the [Standard Overlay]
+  - character encoding `utf-8` in the [Character Encoding Overlay]
+  - format `epoch` in the [Format Overlay]
+  - Example: `1673715495` for "Sat Jan 14 2023 16:58:15 GMT+0000"
+
+A recipient of an OCA Bundle with the combination of overlay values referenced
+above for `dateint` and `Unix Time` SHOULD convert the integer attribute data
+into a date or date/time (respectively) and display the information as
 appropriate for the user. For example, a mobile app should display the data as a
-date or date/time based on the user's language/country setting, possibly
-combined with an app setting for showing the data in [short, medium, long or
-full
+date or date/time based on the user's language/country setting and timezone,
+possibly combined with an app setting for showing the data in [short, medium,
+long or full
 form](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat).
 
 #### Aries Specific "branding" Overlay
@@ -261,32 +283,37 @@ An example of the use of the branding overlay is as follows, along with a
 definition of the name/value pair elements, and a sample image of how the
 elements are to be used. The sample is provide only to convey the concept of the
 branding overlay and how it is to be used. Issuers, holders and verifiers should
-use [RFC0756 OCA for Aries Style Guide] for details on how the elements are to
+refer to [RFC0756 OCA for Aries Style Guide] for details on how the elements are to
 be provided and used in displaying credentials.
 
 ```
 {
-  "capture_base": "EPMaG1h2hVxKCZ5_3KoNNwgAyd4Eq8zrxK3xgaaRsz2M",
-  "type":"aries/overlays/branding/1.0",
-  "logo": "data:image/png;base64,iVBORw...",
-  "background_image": "data:image/png;base64,iVBORw0K...",
-  "background_image_slice": "data:image/png;base64,iVBORw0K...",
-  "primary_background_color": "#2E86C1",
-  "secondary_background_color": "#2E86C1",
-  "primary_attribute": "family_name",
-  "secondary_attribute": "given_names",
-  "issued_date_attribute": "",
-  "expiry_date_attribute": "",
+    "type": "aries/overlays/branding/1.0"
+    "digest": "EBQbQEV6qSEGDzGLj1CqT4e6yzESjPimF-Swmyltw5jU",
+    "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+    "logo": "https://raw.githubusercontent.com/hyperledger/aries-rfcs/oca4aries/features/0755-oca-for-aries/best-bc-logo.png",
+    "background_image": "https://raw.githubusercontent.com/hyperledger/aries-rfcs/oca4aries/features/best-bc-background-image.png",
+    "background_image_slice": "https://raw.githubusercontent.com/hyperledger/aries-rfcs/oca4aries/features/best-bc-background-image-slice.png",
+    "primary_background_color": "#003366",
+    "secondary_background_color": "#003366",
+    "secondary_attribute": "given_names",
+    "primary_attribute": "family_name",
+    "secondary_attribute": "given_names",
+    "issued_date_attribute": "",
+    "expiry_date_attribute": "expiry_date_dateint",
 }
 ```
 
 ![Sample: Using the Branding Overlay, from the Aries Credential Branding Style
-Guide](assets/Sample-use-of-Branding-Overlay.jpg)
+Guide](assets/Sample-use-of-Branding-Overlay.png)
 
 [hashlink]: https://datatracker.ietf.org/doc/html/draft-sporny-hashlink
 [Data URL Scheme]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs
 
-- `type` - a the type of the overlay, using the `aries` namespace.
+- OCA Overlay-related items:
+  - `type` - a the type of the overlay, using the `aries` namespace.
+  - `digest` - the self-addressing identifier (SAID) for the overlay. Note that in this example, the SAID is not accurate for the data in the example.
+  - `capture_base` - the self-addressing identifier (SAID) for the capture base to which this overlay applies.
 - `logo` - a URI for a logo to display on the credential in some contexts.
 The URI can be an HTTP URL, a [hashlink] or, to support inline images, a data
 URL (e.g.: `data:image/png;base64,...`) as defined by the [Data URL Scheme]. The
@@ -316,9 +343,9 @@ properties defined in [RFC0756 OCA for Aries Style Guide].
 
 It is deliberate that the credential branding defined in this RFC does **not**
 attempt to achieve pixel-perfect on screen rendering of the equivalent paper
-credential. There are two reasons for this.
+credential. There are two reasons for this:
 
-* First, studies have shown that issuers do not want people to think that the
+- First, studies have shown that issuers do not want people to think that the
 digital credentials they have in their mobile wallet can be used as literal
 replacements for paper during person-to-person (non-digital) verifications by
 the holder showing their mobile device screen to the verifier. By showing
@@ -326,7 +353,7 @@ verifiers their screen, the holder may be oversharing their personal data. As
 well, digital credentials are even easier to forge than paper credentials when
 they are to be verified by a human, and we want to discourage using digital
 credentials in that way.
-* Second, having each issuer provide pixel-perfect layout guidance to Aries agents
+- Second, having each issuer provide pixel-perfect layout guidance to Aries agents
 that supports a responsive user interface on a wide range of devices (laptops,
 tablets and thousands of mobile phones) is extraordinarily complex. Further, a
 wallet wanting to provide a consistent, helpful user experience will be severely
@@ -335,8 +362,8 @@ different credential layouts and styles.
 
 Instead, the guidance in this RFC and the [RFC0756 OCA for Aries Style Guide]
 gives the issuer a few ways to brand their credentials, and holder/verifier apps
-information on how to use those issuer-provided elements in a consistent for all
-issuers and all credentials.
+information on how to use those issuer-provided elements in a manner consistent
+for all issuers and all credentials.
 
 #### OCA Issuer Tools
 
@@ -344,84 +371,99 @@ An Aries OCA Bundle can be managed as pure JSON as found in this [sample OCA for
 Aries OCA Bundle]. However, managing such multilingual content in JSON is not
 easy, particularly if the language translations come from team members not
 comfortable with working in JSON. An easier way to manage the data is to use an
-OCA source spreadsheet, and a converter to create the OCA Bundle
-JSON from the spreadsheet. We recommend that an issuer maintain the spreadsheet
-file in version control and use a pipeline action to generate the OCA Bundle
-when the source file is updated.
+OCA source spreadsheet for most of the data, some in a source JSON file, and to
+use a converter to create the OCA Bundle JSON from the two sources. We recommend
+that an issuer maintain the spreadsheet file and source JSON in version control
+and use a pipeline action to generate the OCA Bundle when the source files are
+updated.
 
-The OCA Source Spreadsheet contains the following:
+The OCA Source Spreadsheet, an [example of which is attached to this
+RFC](OCA4Aries.xlsx), contains the following:
 
-- An introductory tab with guidance on how to use the spreadsheet.
-- A "Main" tab with the "Capture Base" information overlays about the attributes
-  in the credential.
-- A language or country-language code tab per country-language to be supported
-  containing the source data for all all multilingual overlays.
-- An extra language code tab called "branding" with only the first two "Meta"
-  overlay columns populated with information about the and the branding of the
-  credential.
+- An introductory tab about the OCA content in the spreadsheet.
+- A tab with instructions on using the spreadsheet.
+- A "Main" tab with the "Capture Base" data, along with data for other, non-multilingual overlays.
+- A language or country-language code tab per country-language to be supported by the issuer
+  containing the source data for all multilingual overlays.
+
+The JSON Source file contains the [Aries-specific Branding
+Overlay](#aries-specific-branding-overlay). Attached to this RFC is an [example
+Branding Overlay JSON file](branding.json) that issuers can use to start.
 
 The following is how to create an OCA Source spreadsheet and from that, generate
 an OCA Bundle. Over time, we expect that this part of the RFC will be clarified
 as the tooling evolves.
 
-- Make a copy of the latest [OCA Template] from the [Human Colossus Foundation].
-- Fill in the "Main" tab with the attributes from the schema, completing the
-  relevant columns for each attribute. Current columns to complete:
-  - Attribute Name, Attribute Type, Character Encoding, Format, Entry Codes, Unit.
-    - As needed, use the formats "dateint" and "Unix Time" as indicating in the [Aries Specific Formats in the OCA Formats Overlay](#aries-specific-formats-in-the-oca-format-overlay) section of this document.
-- Duplicate the sample language tab (`en`) and rename it "branding". Complete the tab as follows:
-  - > To Be Updated: We are working with the OCA Team at the Human Colossus
-    > Foundation to improve how this is done, as some post generation updates are needed.
-  - In column A (`OL-MN: Meta [Attribute Name]`), add the values:
-    - "logo"
-    - "background_image"
-    - "background_image_slide"
-    - "primary_background_color"
-    - "secondary_background_color"
-    - "primary_attribute"
-    - "secondary_attribute"
-    - "issued_date_attribute"
-    - "expiry_date_attribute"
-  - Complete column B (`OL-MV: Meta [Attribute Value]`) as appropriate for each column A name. See [this section of this RFC](#aries-specific-branding-overlay) and the [RFC0756 OCA for Aries Style Guide] for details on populating the values.
-  - Leave columns D and higher blank.
-- Rename the sample language tab (`en`) to one of the language or language-country that as an issuer, you want to support.
-- Fill in the data in columns other than C (which is automatically populated from Main) for the first language as appropriate.
-- Populate column A and B as follows:
-  - In column A (`OL-MN: Meta [Attribute Name]`), add the values:
-    - "name"
-    - "description"
-    - "issuer"
-    - "issuer_description"
-    - "issuer_url"
-    - "credential_help"
-    - "credential_support_url"
-  - Complete column B (`OL-MV: Meta [Attribute Value]`) as appropriate for each column A name.
-- Duplicate and rename the initial language tab for each language or language-country that as an issuer, you want to support.
-- Update each additional language tab.
-- Use the open source [OCA Parser from the Human Colossus Foundation] to convert the
-  spreadsheet to JSON. The current command to use is `parser parse oca --path <OCA Excel File> > <output JSON OCA Bundle>`
-  - Typically, this would be done when the source spreadsheet is updated in version control via an automated action.
-  - The generated JSON is the OCA Bundle that will be send to Holders, as outlined in the [following section](#issuing-a-credential).
-- Post generation updates:
-  - Find and update the generated JSON of the Meta overlay with language type
-  `branding` as follows, making sure to keep the resulting JSON valid.
-    - Remove the `language` item (with value `branding`)
-    - Change the `type` item's value to `"aries/overlays/branding/1.0"`
-  - > To Be Determined: How to update the `digest` element to have the right value.
+- Creating/Maintaining the Excel File
+  - Make a copy of the latest [OCA Template] from the [Human Colossus Foundation].
+  - Fill in the "Main" tab with the attributes from the schema, completing the
+    relevant columns for each attribute. Current columns to complete:
+    - CB-CL: Classification
+    - CB-AN: Attribute Name
+    - CB-AT: Attribute Type
+    - CB-FA: Flagged Attribute
+    - OL-CH: Character Encoding
+    - OL-FT: Format
+    - OL-ST: Standard
+    - OL-EC: Entry Codes
+    - OL-UT: Unit
+  - As needed, populate the columns for "dateint" and "Unix Time" attributes as indicated in the [Aries Specific Dates in the OCA Formats Overlay](#aries-specific-dates-in-the-oca-format-overlay) section of this document.
+  - Rename the sample language tab (`en`) to one of the language or language-country that as an issuer, you want to support.
+  - Fill in the data in columns other than C (which is automatically populated from the `Main` tab) for the first language as appropriate.
+  - Populate column A and B as follows:
+    - In column A (`OL-MN: Meta [Attribute Name]`), add the values:
+      - "name"
+      - "description"
+      - "issuer"
+      - "issuer_description"
+      - "issuer_url"
+      - "credential_help"
+      - "credential_support_url"
+    - Complete column B (`OL-MV: Meta [Attribute Value]`) as appropriate for each column A name.
+  - Duplicate and rename the initial language tab for each language or language-country that as an issuer, you want to support.
+  - Update each additional language tab.
+- Creating/Maintaining the Branding JSON file
+  - Make a copy of the attached example [branding JSON file](branding.json), and update the values for the credential you are issuing.
+- Generating the OCA Bundle from the OCA for Aries Source files:
+  - Use the open source [OCA Parser from the Human Colossus Foundation] to convert the
+    spreadsheet to JSON. The current command to use is `parser parse oca --path <OCA Excel File> > <output Excel JSON OCA Bundle>`
+  - Use the open source [jq utility](https://stedolan.github.io/jq/) to add the `branding.json` file to the JSON Excel output to produce the OCA Bundle with the following command, replacing the file names in the command with the ones for your use:
+    - `jq ".[].overlays += $(cat BRANDING-JSON-FILE)" OCA-EXCEL-FILE > OCA-BUNDLE-JSON-FILE`
+    - From a command line in this folder, the following command can be run to generate the OCA Bundle JSON to standard output:
+      - `jq ".[].overlays += $(cat branding.json)" OCA4AriesExcel.json`
+
+> NOTE: The `capture_base` and `digest` fields in the branding overlay of the resulting OCA Bundle JSON file will **not** be updated to be proper self-addressing identifiers (SAIDs) as required by the [OCA Specification]. We are looking into how to automate the updating of those data elements.
 
 [OCA Template]: https://github.com/THCLab/oca-ecosystem/raw/main/examples/template.xlsx
 
-Scripting the process should be relatively simple, and our expectation is that
+Scripting the generation process should be relatively simple, and our expectation is that
 the community will evolve the [Parser from the Human Colossus Foundation] to
 simplify the process further.
 
 [sample OCA for Aries OCA Bundle]: ./sample_oca_for_aries_oca_bundle.json
 [OCA Parser from the Human Colossus Foundation]: https://github.com/THCLab/oca-rust
 
-Over time, we expect to see other tooling become available--notably, an
-interactive tool for issuers to use in populating their branding overlay.
+Over time, we expect to see other tooling become available--notably, a tool for
+issuers to see what credentials will look like when their OCA Bundle is applied.
 
 #### Issuing A Credential
+
+> This section of the specification remains under consideration. The use of the
+> `credential supplement` as currently described here is somewhat problematic
+> for a number of reasons.
+> 
+> - The issuer has no way to update the OCA Bundle for a given holder after
+>   issueance. We see this as a likely use case to enable, for example, an
+>   issuer supporting additional languages over time.
+> - The "External Attachments" risk, as described in [this section of this
+>   RFC](#warning-external-attachments).
+> - The complicated way for a verifier to get an OCA Bundle when needed after a
+>   presentation.
+>
+> We are currently investigating if an OCA Bundle can be published to the same
+> VDR as holds an AnonCreds Schema or Credential Definition. We think that would
+> overcome each of those concerns and make it easier to both publish and
+> retrieve OCA Bundles.
 
 The currently preferred mechanism for an issuer to provide an OCA Bundle to a
 holder is when issuing a credential using
@@ -457,7 +499,7 @@ time, but once issued, each OCA Bundle MUST remain accessible.
 
 The use of an attachment of type `link` for the OCA Bundle itself, or the use of
 external references to the images in the
-[branding overlay](#aries-specific-branding-overlay) could provide malicious issuers with
+[branding Overlay](#aries-specific-branding-overlay) could provide malicious issuers with
 a mechanism for tracking the use of a holder's verifiable credential.
 Specifically, the issuer could:
 
@@ -510,18 +552,21 @@ credential metadata and attributes (labels, etc.).
 - Use the branding overlay and [RFC0756 OCA for Aries Style Guide] in
   displaying the credential in various contexts (e.g., in a credential offer
   prompt, in a list, selected from a list, alone on a page, etc.).
-- Process the attribute data using the `type`, `encoding`, `format`, `unit` and
-  `standard` overlays and display tha attributes appropriately for a given user.
-  For example, display dates in a form suitable for the language and country
-  settings of the user.
+- Process the attribute data using the `type`, `character encoding`, `format`,
+  `unit` and `standard` overlays and display tha attributes appropriately for a
+  given user. For example, display dates in a form suitable for the language and
+  country settings of the user.
+- Where enumerated names are used for credential attributes, retrieve and use
+  the name-value pairs in the [Entry Code Overlay] and [Entry Overlay] to display the data.
 - Use the OCA-provide metadata about the credential, such as the
   name/description of the issuer, name/description of the credential type.
 
 A recommended tactic when adding OCA support to a holder is when a credential is
-issued without an associated OCA Bundle, generate one using the information
-available about the type of the credential, default images, and randomly
-generated colors. That allows for the creation of screens that assume an OCA
-Bundle is available.
+issued without an associated OCA Bundle, generate an OCA Bundle for the
+credential using the information available about the type of the credential,
+default images, and randomly generated colors. That allows for the creation of
+screens that assume an OCA Bundle is available. The [RFC0756 OCA for Aries Style
+Guide] contains guidelines for doing that.
 
 #### Adding OCA Bundles to Present Proof Messages
 
@@ -571,6 +616,10 @@ verifiers.
 
 ## Drawbacks
 
+- The use of credential supplements might not be the best way to publish OCA
+  Bundles. The Aries community is currently investigating if OCA Bundles can be
+  published to the Verifiable Data Registry upon which the schema and credential
+  definition are published.
 - As noted in this [warning](#warning-external-attachments), the use of links
   either for OCA Bundles or for the images that are embedded in OCA Bundles are
   both extremely useful and problematic. It would be nice to be able to allow
