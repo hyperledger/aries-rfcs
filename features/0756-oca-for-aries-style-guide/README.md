@@ -85,23 +85,26 @@ Bundles to render credentials on screen.
     - Paste over the section below with the generated markdown, moving the
       introduction section to the "Summary" part of this document above, correcting
       the link by removing the link target portion ("(https://...)") .
-    - Edit the image numbering as follows (assumes no images are moved):
-      - 1 to 11, 2 to 9, 3 to 6, 4 to 1, 5 to 14, 6 to 8, 
-      - 7 to 13, 8 to 3, 9 to 5, 10 to 10, 11 to 15, 12 to 4
-      - 13 to 16, 14 to 12, 15 to 17, 16 to 2, 17 to 7.
-    - Change all text "(images" to "(./images"
-    - Review the markdown against the Word doc to make sure the images are in the right order.
-    - Suggest updating the image mapping (above) if it changes...
+    - Make sure that the images in the Google document line up with the images in the images folder. As needed, rename, update and add images to get them to line up with the numbering the document. The image numbering (`NN` in `imageNN.png`) is in the order the image appears in the document, so an inserted images might trigger a major image file renumbering. Sorry...
+    - Change all text "images/" to "./images/"
+    - Review a preview of the rendered markdown against the Word doc to make sure the images are in the right order.
     
     Document: https://docs.google.com/document/d/1WPpwzV3uH7KIPAATHGactconcn1J_IQ9
     Extension: https://workspace.google.com/u/0/marketplace/app/docs_to_markdown/700168918607
 -->
 
-## OCA for Aries Style Guide
+<!-- Output copied to clipboard! -->
+
+<!-- You have some errors, warnings, or alerts. If you are using reckless mode, turn it off to see inline alerts.
+* ERRORs: 0
+* WARNINGs: 0
+* ALERTS: 18 -->
+
+OCA for Aries Style Guide
 
 Support for credential branding in Aries agents is provided by information provided from the issuer of a given credential type using Overlays Capture Architecture (OCA) overlays. Aries agents (software) use the issuer-provided OCA data when displaying (rendering) the issuer’s credential on screens. This style guide is for issuers to know what information to include in the OCA overlays and how those elements will be used by holders and verifiers. The style guide is also for Aries holder and verifier software makers about how to use the OCA data provided from issuers for a given credential type. It is up to the software makers to use OCA data provided by the issuers as outlined in this guide.
 
-For more information about the use of OCA in Aries, please see [RFC0755 OCA for Aries](https://github.com/hyperledger/aries-rfcs/).
+For more information about the use of OCA in Aries, please see[ RFC0755 OCA for Aries](https://github.com/hyperledger/aries-rfcs/).
 
 A Credential User Interface (UI) pulls from a issuer-provided OCA Bundle the following elements:
 
@@ -130,17 +133,19 @@ display on the credential.
 
 ### Credential Layouts
 
-This style guide defines two layouts for credentials, the credential list layout and the single credential layout. Holders and verifiers SHOULD display credentials using these layouts in the context of a screen containing either a list of credentials or a single credential, respectively.
+This style guide defines three layouts for credentials, the credential list layout, the stacked list layout, and the single credential layout. Holders and verifiers SHOULD display credentials using only these layouts in the context of a screen containing either a list of credentials or a single credential, respectively. Holders and verifiers MAY display other relevant information on the page along with one of the layouts.
+
+The stacked list is the same as the credential layout, with the credentials that are stacked cutoff between elements 6 and 7. Examples of the stacked layout can be seen in the[ Stacking](https://docs.google.com/document/d/1WPpwzV3uH7KIPAATHGactconcn1J_IQ9/edit#heading=h.27voxgccn7kf) section of this document. In the Stacked layout, one of the credentials in the stack may be displayed using the full credential list layout.
 
 
 <table>
   <tr>
    <td>
-<img src="images/image11.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
-<img src="images/image9.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image2.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
   </tr>
@@ -183,22 +188,22 @@ The numbered items in the layouts are as follows. In the list, the OCA data elem
     * Fallback: Empty
 
 
-![alt_text](images/image6.png "image_tooltip")
+![alt_text](./images/image3.png "image_tooltip")
 
 
 **_Figure: Template layers_**
 
-The font color is either black or white, as determined by calculating contrast levels (following [Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG2AA-Conformance)) against the background colors from either the OCA Bundle or the generated defaults.
+The font color is either black or white, as determined by calculating contrast levels (following[ Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG2AA-Conformance)) against the background colors from either the OCA Bundle or the generated defaults.
 
 
 <table>
   <tr>
    <td>
-<img src="images/image1.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image4.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
-<img src="images/image14.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image5.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
   </tr>
@@ -219,27 +224,35 @@ Images should be as small as possible to balance quality and download speed. To 
 
 <table>
   <tr>
-   <td>Preferred file type
+   <td>
+Preferred file type
    </td>
-   <td>SVG, JPG, PNG with transparent background, 
-   </td>
-  </tr>
-  <tr>
-   <td>Aspect ratio
-   </td>
-   <td>1:1
+   <td>
+SVG, JPG, PNG with transparent background, 
    </td>
   </tr>
   <tr>
-   <td>Recommended image size
+   <td>
+Aspect ratio
    </td>
-   <td>240x240 px
+   <td>
+1:1
    </td>
   </tr>
   <tr>
-   <td>Color space
+   <td>
+Recommended image size
    </td>
-   <td>RGB
+   <td>
+240x240 px
+   </td>
+  </tr>
+  <tr>
+   <td>
+Color space
+   </td>
+   <td>
+RGB
    </td>
   </tr>
 </table>
@@ -253,7 +266,7 @@ For issuers to better represent their brand, issuers may specify an image slice 
 Credential height is dependent on the content and can be unpredictable. Different languages (English, French, etc.) will add more length to names, OS level settings such as font changes or text enlargement will unpredictably change the height of the credential. The recommended image size below is suggested to accommodate for most situations. Note that since the image is top aligned, the top area of the image is certain to be displayed, while the bottom section of the image may not always be visible. 
 
 
-![alt_text](images/image8.jpg "image_tooltip")
+![alt_text](./images/image6.jpg "image_tooltip")
 
 
 **_Figure: Examples of the image slice behavior_**
@@ -264,11 +277,11 @@ Types of images best used in this area are abstract images or graphical art. Do 
 <table>
   <tr>
    <td>
-<img src="images/image13.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image7.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
-<img src="images/image3.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image8.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
   </tr>
@@ -290,27 +303,35 @@ Use images that are hard to interpret when cropped. Avoid words
 
 <table>
   <tr>
-   <td>Preferred file type
+   <td>
+Preferred file type
    </td>
-   <td>SVG, PNG, JPG
-   </td>
-  </tr>
-  <tr>
-   <td>Aspect ratio
-   </td>
-   <td>1:5
+   <td>
+SVG, PNG, JPG
    </td>
   </tr>
   <tr>
-   <td>Recommended image size
+   <td>
+Aspect ratio
    </td>
-   <td>240x1200 px
+   <td>
+1:5
    </td>
   </tr>
   <tr>
-   <td>Color space
+   <td>
+Recommended image size
    </td>
-   <td>RGB
+   <td>
+240x1200 px
+   </td>
+  </tr>
+  <tr>
+   <td>
+Color space
+   </td>
+   <td>
+RGB
    </td>
   </tr>
 </table>
@@ -325,11 +346,11 @@ The background image is to give issuers more opportunities to represent their br
 <table>
   <tr>
    <td>
-<img src="images/image5.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image9.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
-<img src="images/image10.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image10.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
   </tr>
@@ -351,27 +372,35 @@ Use this image as a marketing platform. Avoid the use of text.
 
 <table>
   <tr>
-   <td>Preferred file type
+   <td>
+Preferred file type
    </td>
-   <td>SVG, PNG, JPG
-   </td>
-  </tr>
-  <tr>
-   <td>Aspect ratio
-   </td>
-   <td>3:1
+   <td>
+SVG, PNG, JPG
    </td>
   </tr>
   <tr>
-   <td>Recommended image size
+   <td>
+Aspect ratio
    </td>
-   <td>1080x360 px
+   <td>
+3:1
    </td>
   </tr>
   <tr>
-   <td>Color space
+   <td>
+Recommended image size
    </td>
-   <td>RGB
+   <td>
+1080x360 px
+   </td>
+  </tr>
+  <tr>
+   <td>
+Color space
+   </td>
+   <td>
+RGB
    </td>
   </tr>
 </table>
@@ -389,7 +418,7 @@ To reduce visual clutter, the issued date (if present), expiry date (if present)
 * A credential is expiring soon or expired, based on _expiry_date_attribute_, if set.
 
 
-![alt_text](images/image15.png "image_tooltip")
+![alt_text](./images/image11.png "image_tooltip")
 
 
 **_Figure: An example demonstrating how the revocation date, expiry date or issued date may be represented._**
@@ -403,7 +432,7 @@ Issuers should be mindful of the length of text on the credential as lengthy tex
 
 
     
-![alt_text](images/image4.png "image_tooltip")
+![alt_text](./images/image12.png "image_tooltip")
 
 
 **_Figure: An example demonstrating how lengthy credentials can limit the number of visible credentials._**
@@ -411,7 +440,7 @@ Issuers should be mindful of the length of text on the credential as lengthy tex
 Be mindful of other factors that may increase the length of text and hence, the height of the credential such as translated languages or the font size configured at the OS level.
 
 
-![alt_text](images/image16.png "image_tooltip")
+![alt_text](./images/image13.png "image_tooltip")
 
 
 **_Figure: Examples showing the treatment of lengthy names_**
@@ -429,11 +458,11 @@ To limit personal information from being displayed on a card face, only specify 
 <table>
   <tr>
    <td>
-<img src="images/image12.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image14.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
-<img src="images/image17.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image15.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
   </tr>
@@ -458,16 +487,27 @@ Display attributes that contain private information.
 Credential size depends on the content of the credential and the size of the device. Text areas are resized according to the width. 
 
 
-![alt_text](images/image2.png "image_tooltip")
+![alt_text](./images/image16.png "image_tooltip")
 
 
 **_Figure: Treatment of the credential template on different devices_**
 
 
-![alt_text](images/image7.png "image_tooltip")
+![alt_text](./images/image17.png "image_tooltip")
 
 
 **_Figure: An example of credential on different devices_**
+
+
+### Stacking
+
+Credentials may be stacked to overlap each other to increase the number of visible credentials in the viewport. The header remains unchanged. The issuer name, logo and credential name will always be visible but the primary and secondary attributes and the image slice will be obscured. 
+
+
+![alt_text](./images/image18.png "image_tooltip")
+
+
+**_Figure: An example of stacked credentials with default and enlarged text._**
 
 
 ### Accessibility
@@ -477,10 +517,7 @@ The alt-tags for the logo and background images come from the multilingual OCA M
 
 ### More Variations
 
-To view more credential variations using this template, [view the Adobe XD file](https://xd.adobe.com/view/045a1969-719a-4aa5-848f-637ef1b7051a-5109/).
-
-
-
+To view more credential variations using this template,[ view the Adobe XD file](https://xd.adobe.com/view/045a1969-719a-4aa5-848f-637ef1b7051a-5109/).
 
 ## Drawbacks
 
