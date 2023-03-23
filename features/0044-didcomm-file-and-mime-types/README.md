@@ -54,12 +54,12 @@ Although the format of encrypted envelopes is derived from JSON and the JWT/JWE 
 of specs, no useful processing of these files will take place by viewing them as
 JSON, and viewing them as generic JWEs will greatly constrain which semantics are
 applied. Therefore, the recommended MIME type for *.dee files is
-`application/didcomm-enc-env`, with `application/jwe` as a fallback, and
+`application/didcomm-envelope-enc`, with `application/jwe` as a fallback, and
 `application/json` as an even less desirable fallback. (In this, we are making
 a choice similar to the one that views `*.docx` files primarily as
 `application/msword` instead of `application/xml`.) If format evolution takes
 place, the version could become a parameter as [described in RFC 1341](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html):
-`application/didcomm-enc-env;v=2`.
+`application/didcomm-envelope-enc;v=2`.
 
 A recipient using the media type value MUST treat it as if `“application/”` were prepended to any `"typ"` or `"cty"` value not containing a ‘/’ in compliance 
 with the [JWE](https://tools.ietf.org/html/rfc7516) /[JWS](https://tools.ietf.org/html/rfc7515)  family of specs.
@@ -195,7 +195,7 @@ Because media types differ from DIDComm V1 to V2, and because media types are ea
 
 Nature of Content | V1 | V2
 --- | --- | ---
-encrypted| `application/didcomm-enc-env`<br>DIDComm V1 Encrypted Envelope<br>*.dee | `application/didcomm-encrypted+json`<br>DIDComm Encrypted Message<br>*.dcem
+encrypted| `application/didcomm-envelope-enc`<br>DIDComm V1 Encrypted Envelope<br>*.dee | `application/didcomm-encrypted+json`<br>DIDComm Encrypted Message<br>*.dcem
 signed| `application/didcomm-sig-env`<br>DIDComm V1 Signed Envelope<br>*.dse | `application/didcomm-signed+json`<br>DIDComm Signed Message<br>*.dcsm
 plaintext| `application/json;flavor=didcomm-msg`<br>DIDComm V1 Message<br>*.dm | `application/didcomm-plain+json`<br>DIDComm Plaintext Message<br>*.dcpm
 
