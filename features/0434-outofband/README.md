@@ -141,9 +141,9 @@ While the _receiver_ is expected to respond with an initiating message from a `h
 
 If a message has a service block instead of a DID in the `services` list, you may enable reuse by encoding the key and endpoint of the service block in a [Peer DID numalgo 2](https://identity.foundation/peer-did-method-spec/#generation-method) and using that DID instead of a service block.
 
-If the receiver desires to reuse the existing connection and a `requests~attach` message is present, the receiver **SHOULD** respond to the attached message using the existing connection.
+If the receiver desires to reuse the existing connection and a `requests~attach` item is included in the message, the receiver **SHOULD** respond to one of the attached messages using the existing connection.
 
-If the receiver desires to reuse the existing connection and no `requests~attach` message is present, the receiver **SHOULD** attempt to do so with the `reuse` and `reuse-accepted` messages. This will notify the _inviter_ that the existing connection should be used, along with the context that can be used for follow-on interactions.
+If the receiver desires to reuse the existing connection and no `requests~attach` item is included in the message, the receiver **SHOULD** attempt to do so with the `reuse` and `reuse-accepted` messages. This will notify the _inviter_ that the existing connection should be used, along with the context that can be used for follow-on interactions.
 
 While the `invitation` message is passed unencrypted and out-of-band, both the `handshake-reuse` and `handshake-reuse-accepted` messages **MUST** be encrypted and transmitted as normal DIDComm messages.
 
