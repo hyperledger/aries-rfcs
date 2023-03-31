@@ -57,7 +57,7 @@ A complete [`propose-credential` message from the Issue Credential protocol 2.0]
   "formats": [
     {
       "attach_id": "<attach@id value>",
-      "format": "anoncreds/cred-filter@v1.0"
+      "format": "anoncreds/credential-filter@v1.0"
     }
   ],
   "filters~attach": [
@@ -116,11 +116,11 @@ A complete [`offer-credential` message from the Issue Credential protocol 2.0](.
 }
 ```
 
-### cred request format
+### Credential Request format
 
 This format is used to formally request a credential. It differs from the Credential Offer above in that it contains a cryptographic commitment to a link secret; an issuer can therefore use it to bind a concrete instance of an issued credential to the appropriate holder. (In contrast, the credential offer describes the schema and cred definition, but not enough information to actually issue to a specific holder.)
 
-The identifier for this format is `anoncreds/cred-request@v1.0`. It must follow the [structure of a Credential Request](https://hyperledger.github.io/anoncreds-spec/#credential-request) as defined in the AnonCreds specification.
+The identifier for this format is `anoncreds/credential-request@v1.0`. It must follow the [structure of a Credential Request](https://hyperledger.github.io/anoncreds-spec/#credential-request) as defined in the AnonCreds specification.
 
 The JSON structure might look like this:
 
