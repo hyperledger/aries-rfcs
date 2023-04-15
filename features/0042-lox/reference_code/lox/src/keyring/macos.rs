@@ -42,7 +42,7 @@ use crate::KeyRing;
 use crate::KeyRingSecret;
 use crate::keyring::get_username;
 use std::string::ToString;
-use std::collections::{HashMap, BTreeMap};
+use std::collections::BTreeMap;
 
 extern "C" {
     pub static kSecMatchLimitAll: CFStringRef;
@@ -61,7 +61,7 @@ impl MacOsKeyRing {
         [get_username(), id.to_string()].join(":")
     }
 
-    fn _find_internet_password(search_criteria: &HashMap<String, String>) -> Result<KeyRingSecret> {
+    fn _find_internet_password(search_criteria: &BTreeMap<String, String>) -> Result<KeyRingSecret> {
         let security_domain = search_criteria.get("security_domain").map(|s|s.as_str());
 
         let port = parse_port(search_criteria.get("port"));
@@ -80,7 +80,7 @@ impl MacOsKeyRing {
         Ok(KeyRingSecret(pass.to_owned()))
     }
 
-    fn _find_generic_password(search_criteria: &HashMap<String, String>) -> Result<KeyRingSecret> {
+    fn _find_generic_password(search_criteria: &BTreeMap<String, String>) -> Result<KeyRingSecret> {
         let (pass, _) = find_generic_password(None, &search_criteria["service"], &search_criteria["account"]).map_err(|e|e.to_string())?;
         Ok(KeyRingSecret(pass.to_owned()))
     }
@@ -281,12 +281,12 @@ fn keyring_type_to_i64(value: *const c_void) -> i64 {
     }
 }
 
-fn can_find_generic(criteria: &HashMap<String, String>) -> bool {
+fn can_find_generic(criteria: &BTreeMap<String, String>) -> bool {
     criteria.contains_key(&"account".to_string()) &&
     criteria.contains_key(&"service".to_string())
 }
 
-fn can_find_internet(criteria: &HashMap<String, String>) -> bool {
+fn can_find_internet(criteria: &BTreeMap<String, String>) -> bool {
     let mut result = true;
     for key in &["server", "account", "protocol", "authentication_type"] {
         result &= criteria.contains_key(key.clone());

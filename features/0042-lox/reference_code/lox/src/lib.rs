@@ -24,7 +24,6 @@ extern crate byteorder;
 extern crate users;
 
 #[cfg(any(target_os = "macos", target_os = "linux"))]
-use std::collections::HashMap;
 use std::collections::BTreeMap;
 use zeroize::Zeroize;
 
@@ -63,8 +62,8 @@ impl KeyRingSecret {
 pub mod keyring;
 
 #[cfg(any(target_os = "macos", target_os = "linux"))]
-fn parse_peek_criteria(id: &str) -> HashMap<String, String> {
-    let mut result = HashMap::new();
+fn parse_peek_criteria(id: &str) -> BTreeMap<String, String> {
+    let mut result = BTreeMap::new();
     if !id.is_empty() {
         for pair in id.split(",") {
             let s = pair.split("=").collect::<Vec<&str>>();
