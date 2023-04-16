@@ -9,7 +9,6 @@ def link_tags(fname):
         txt = f.read()
     m = tag_line_pat.search(txt)
     if m:
-        update = False
         tags = [t.strip() for t in m.group(1).split(',')]
         for i in range(len(tags)):
             tag = tags[i]

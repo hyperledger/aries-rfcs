@@ -1,9 +1,5 @@
 import argparse
-from operator import itemgetter
 import os
-from pathlib import Path
-import sys
-
 import rfcs
 
 

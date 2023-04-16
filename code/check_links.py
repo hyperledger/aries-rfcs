@@ -3,13 +3,13 @@ import re
 import requests
 import sys
 import traceback
-import urllib
 
 ROOT_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 LINK_PAT = re.compile(r'\[([^[(]+)\][(]([^)]+)\)', re.S)
 RFC_NAME_PAT = re.compile(r'\d{4}-[-_.a-z0-9]+', re.I)
 HTML_ANCHOR_PAT_TXT = r'<a[ \t\r\n]+[^>]*name=[\'"]X[\'"]'
-MD_ANCHOR_PAT = re.compile(r'^[ \t]*(?:\[[^]]+\][ \t]*:[ \t]*)?#+[ \t]*(.*)$', re.MULTILINE)
+MD_ANCHOR_PAT = re.compile(
+    r'^[ \t]*(?:\[[^]]+\][ \t]*:[ \t]*)?#+[ \t]*(.*)$', re.MULTILINE)
 COMMON_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'
 # The following URI patterns give errors even when we http HEAD them.
 SKIP_PATS = [
@@ -18,7 +18,8 @@ SKIP_PATS = [
     '://nvlpubs.nist.gov',
     '://crates.io'
 ]
-COMMIT_HASH_URI_PAT = re.compile('.*://github.com/hyperledger/[a-zA-Z-_]+/blob/[a-f0-9]+/text/([a-zA-Z0-9_-]+)(/.*)?$')
+COMMIT_HASH_URI_PAT = re.compile(
+    '.*://github.com/hyperledger/[a-zA-Z-_]+/blob/[a-f0-9]+/text/([a-zA-Z0-9_-]+)(/.*)?$')
 SHORTENER_PAT = re.compile('http://(bit.ly|t.co|goo.gl|youtu.be)')
 EMAIL_PAT = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 
@@ -38,7 +39,8 @@ def make_md_anchor(txt):
 
 def fragment_in_content(fragment, content, ct):
     if "html" in ct:
-        pat = re.compile(HTML_ANCHOR_PAT_TXT.replace('X', fragment), re.I or re.S)
+        pat = re.compile(HTML_ANCHOR_PAT_TXT.replace(
+            'X', fragment), re.I or re.S)
         if pat.search(content):
             return True
     else:
@@ -105,7 +107,8 @@ def handle_web_resource(uri, rfcs, cache):
             if rfc:
                 error = 'should reference RFC %s' % rfc
         if not error:
-            r = requests.head(uri, headers={'User-Agent': COMMON_USER_AGENT}, timeout=10)
+            r = requests.head(
+                uri, headers={'User-Agent': COMMON_USER_AGENT}, timeout=10)
             if r.status_code < 200 or r.status_code > 299:
                 error = "returns HTTP status code " + str(r.status_code)
             else:
@@ -197,9 +200,10 @@ def get_rfcs(folder):
     return [x for x in os.listdir(folder) if RFC_NAME_PAT.match(x) and os.path.isdir(os.path.join(folder, x))]
 
 
-def main(full_check = False):
+def main(full_check=False):
     error_count = 0
-    folders = [x for x in map(lambda x: os.path.join(ROOT_FOLDER, x), ["concepts", "features"]) if os.path.isdir(x)]
+    folders = [x for x in map(lambda x: os.path.join(ROOT_FOLDER, x), [
+                              "concepts", "features"]) if os.path.isdir(x)]
     rfcs = []
     for starting_point in folders:
         rfcs += get_rfcs(starting_point)
@@ -208,7 +212,8 @@ def main(full_check = False):
         for root, dirs, files in os.walk(starting_point):
             for file in files:
                 if file.endswith('.md'):
-                    error_count += check_links(os.path.join(root, file), rfcs, cache, full_check)
+                    error_count += check_links(os.path.join(root, file),
+                                               rfcs, cache, full_check)
     print('%s\n%d errors.' % (''.rjust(80), error_count))
     return error_count
 
