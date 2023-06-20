@@ -419,7 +419,9 @@ as the tooling evolves.
       - "issuer_url"
       - "credential_help"
       - "credential_support_url"
-    - Complete column B (`OL-MV: Meta [Attribute Value]`) as appropriate for each column A name.
+      - "watermark"
+        - The "watermark" is used to mark non-production credentials, as described in the ["non-production watermark" section of RFC0756 OCA for Aries Style Guide](../0756-oca-for-aries-style-guide#non-production-watermark)
+    - Complete column B (`OL-MV: Meta [Attribute Value]`) as appropriate for each column A name (listed above).
   - Duplicate and rename the initial language tab for each language or language-country that as an issuer, you want to support.
   - Update each additional language tab.
 - Creating/Maintaining the Branding JSON file

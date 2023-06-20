@@ -27,7 +27,7 @@ provided from issuers for a given credential type. It is up to the software
 makers to use OCA data provided by the issuers as outlined in this guide.
 
 For more information about the use of OCA in Aries, please see [RFC0755 OCA for
-Aries].
+Aries]
 
 ## Motivation
 
@@ -86,25 +86,22 @@ Bundles to render credentials on screen.
       introduction section to the "Summary" part of this document above, correcting
       the link by removing the link target portion ("(https://...)") .
     - Make sure that the images in the Google document line up with the images in the images folder. As needed, rename, update and add images to get them to line up with the numbering the document. The image numbering (`NN` in `imageNN.png`) is in the order the image appears in the document, so an inserted images might trigger a major image file renumbering. Sorry...
-    - Change all text "images/" to "./images/"
+    - Change all text "./images/" to "./images/"
     - Review a preview of the rendered markdown against the Word doc to make sure the images are in the right order.
     
     Document: https://docs.google.com/document/d/1WPpwzV3uH7KIPAATHGactconcn1J_IQ9
     Extension: https://workspace.google.com/u/0/marketplace/app/docs_to_markdown/700168918607
 -->
 
-<!-- Output copied to clipboard! -->
+<!-- Copy and paste the converted output. -->
 
 <!-- You have some errors, warnings, or alerts. If you are using reckless mode, turn it off to see inline alerts.
-* ERRORs: 0
+* ERRORs: 1
 * WARNINGs: 0
-* ALERTS: 18 -->
+* ALERTS: 21 -->
 
-OCA for Aries Style Guide
 
-Support for credential branding in Aries agents is provided by information provided from the issuer of a given credential type using Overlays Capture Architecture (OCA) overlays. Aries agents (software) use the issuer-provided OCA data when displaying (rendering) the issuer’s credential on screens. This style guide is for issuers to know what information to include in the OCA overlays and how those elements will be used by holders and verifiers. The style guide is also for Aries holder and verifier software makers about how to use the OCA data provided from issuers for a given credential type. It is up to the software makers to use OCA data provided by the issuers as outlined in this guide.
-
-For more information about the use of OCA in Aries, please see[ RFC0755 OCA for Aries](https://github.com/hyperledger/aries-rfcs/).
+## OCA for Aries Style Guide
 
 A Credential User Interface (UI) pulls from a issuer-provided OCA Bundle the following elements:
 
@@ -117,6 +114,7 @@ A Credential User Interface (UI) pulls from a issuer-provided OCA Bundle the fol
     * Issuer URL
     * Credential help text
     * Credential support URL
+    * Non-Production watermark
 * **“branding” Overlay:**
     * **_logo_** - a URI for an inline or external logo image to display with the credential. See details below about the use and requirements for the image.
     * **_background_image_** -  a URI for an inline or external background image to display with the credential. See details below about the use and requirements for the image.
@@ -135,7 +133,7 @@ display on the credential.
 
 This style guide defines three layouts for credentials, the credential list layout, the stacked list layout, and the single credential layout. Holders and verifiers SHOULD display credentials using only these layouts in the context of a screen containing either a list of credentials or a single credential, respectively. Holders and verifiers MAY display other relevant information on the page along with one of the layouts.
 
-The stacked list is the same as the credential layout, with the credentials that are stacked cutoff between elements 6 and 7. Examples of the stacked layout can be seen in the[ Stacking](https://docs.google.com/document/d/1WPpwzV3uH7KIPAATHGactconcn1J_IQ9/edit#heading=h.27voxgccn7kf) section of this document. In the Stacked layout, one of the credentials in the stack may be displayed using the full credential list layout.
+The stacked list is the same as the credential layout, with the credentials that are stacked cutoff between elements 6 and 7. Examples of the stacked layout can be seen in the [Stacking](#heading=h.27voxgccn7kf) section of this document. In the Stacked layout, one of the credentials in the stack may be displayed using the full credential list layout.
 
 
 <table>
@@ -188,12 +186,12 @@ The numbered items in the layouts are as follows. In the list, the OCA data elem
     * Fallback: Empty
 
 
-![alt_text](./images/image3.png "image_tooltip")
+![alt_text](images/image3.png "image_tooltip")
 
 
 **_Figure: Template layers_**
 
-The font color is either black or white, as determined by calculating contrast levels (following[ Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG2AA-Conformance)) against the background colors from either the OCA Bundle or the generated defaults.
+The font color is either black or white, as determined by calculating contrast levels (following [Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG2AA-Conformance)) against the background colors from either the OCA Bundle or the generated defaults.
 
 
 <table>
@@ -215,7 +213,7 @@ The font color is either black or white, as determined by calculating contrast l
 
 ### Logo Image Specifications
 
-The image in the top left corner is a space for the issuer logo. This space should not be used for anything other than the issuser logo. The logo image may be masked to fit within a rounded square with varying corner radii. Thus, the logo must be a square image (aspect ratio 1:1), as noted in the table below. 
+The image in the top left corner is a space for the issuer logo. This space should not be used for anything other than the issuer logo. The logo image may be masked to fit within a rounded square with varying corner radii. Thus, the logo must be a square image (aspect ratio 1:1), as noted in the table below. The background is default white, therefore logo files with a transparent background will overlay a white background.
 
 The following are the specifications for the credential logo for issuers. 
 
@@ -224,35 +222,27 @@ Images should be as small as possible to balance quality and download speed. To 
 
 <table>
   <tr>
-   <td>
-Preferred file type
+   <td>Preferred file type
    </td>
-   <td>
-SVG, JPG, PNG with transparent background, 
+   <td>SVG, JPG, PNG with transparent background, 
    </td>
   </tr>
   <tr>
-   <td>
-Aspect ratio
+   <td>Aspect ratio
    </td>
-   <td>
-1:1
+   <td>1:1
    </td>
   </tr>
   <tr>
-   <td>
-Recommended image size
+   <td>Recommended image size
    </td>
-   <td>
-240x240 px
+   <td>240x240 px
    </td>
   </tr>
   <tr>
-   <td>
-Color space
+   <td>Color space
    </td>
-   <td>
-RGB
+   <td>RGB
    </td>
   </tr>
 </table>
@@ -266,7 +256,7 @@ For issuers to better represent their brand, issuers may specify an image slice 
 Credential height is dependent on the content and can be unpredictable. Different languages (English, French, etc.) will add more length to names, OS level settings such as font changes or text enlargement will unpredictably change the height of the credential. The recommended image size below is suggested to accommodate for most situations. Note that since the image is top aligned, the top area of the image is certain to be displayed, while the bottom section of the image may not always be visible. 
 
 
-![alt_text](./images/image6.jpg "image_tooltip")
+![alt_text](images/image6.jpg "image_tooltip")
 
 
 **_Figure: Examples of the image slice behavior_**
@@ -303,35 +293,27 @@ Use images that are hard to interpret when cropped. Avoid words
 
 <table>
   <tr>
-   <td>
-Preferred file type
+   <td>Preferred file type
    </td>
-   <td>
-SVG, PNG, JPG
+   <td>SVG, PNG, JPG
    </td>
   </tr>
   <tr>
-   <td>
-Aspect ratio
+   <td>Aspect ratio
    </td>
-   <td>
-1:5
+   <td>1:10
    </td>
   </tr>
   <tr>
-   <td>
-Recommended image size
+   <td>Recommended image size
    </td>
-   <td>
-240x1200 px
+   <td>120x1200 px
    </td>
   </tr>
   <tr>
-   <td>
-Color space
+   <td>Color space
    </td>
-   <td>
-RGB
+   <td>RGB
    </td>
   </tr>
 </table>
@@ -372,35 +354,27 @@ Use this image as a marketing platform. Avoid the use of text.
 
 <table>
   <tr>
-   <td>
-Preferred file type
+   <td>Preferred file type
    </td>
-   <td>
-SVG, PNG, JPG
+   <td>SVG, PNG, JPG
    </td>
   </tr>
   <tr>
-   <td>
-Aspect ratio
+   <td>Aspect ratio
    </td>
-   <td>
-3:1
+   <td>3:1
    </td>
   </tr>
   <tr>
-   <td>
-Recommended image size
+   <td>Recommended image size
    </td>
-   <td>
-1080x360 px
+   <td>1080x360 px
    </td>
   </tr>
   <tr>
-   <td>
-Color space
+   <td>Color space
    </td>
-   <td>
-RGB
+   <td>RGB
    </td>
   </tr>
 </table>
@@ -418,7 +392,7 @@ To reduce visual clutter, the issued date (if present), expiry date (if present)
 * A credential is expiring soon or expired, based on _expiry_date_attribute_, if set.
 
 
-![alt_text](./images/image11.png "image_tooltip")
+![alt_text](images/image11.png "image_tooltip")
 
 
 **_Figure: An example demonstrating how the revocation date, expiry date or issued date may be represented._**
@@ -432,7 +406,7 @@ Issuers should be mindful of the length of text on the credential as lengthy tex
 
 
     
-![alt_text](./images/image12.png "image_tooltip")
+![alt_text](images/image12.png "image_tooltip")
 
 
 **_Figure: An example demonstrating how lengthy credentials can limit the number of visible credentials._**
@@ -440,7 +414,7 @@ Issuers should be mindful of the length of text on the credential as lengthy tex
 Be mindful of other factors that may increase the length of text and hence, the height of the credential such as translated languages or the font size configured at the OS level.
 
 
-![alt_text](./images/image13.png "image_tooltip")
+![alt_text](images/image13.png "image_tooltip")
 
 
 **_Figure: Examples showing the treatment of lengthy names_**
@@ -482,18 +456,59 @@ Display attributes that contain private information.
 **_Figure: Primary/secondary attribute Do’s and Don’ts_**
 
 
+### Non-production watermark
+
+To identify non-production credentials, issuers can add a watermark to their credentials. The watermark is a simple line of text that can be customized depending on the issuer needs. The line of text will also appear as a prefix to the credential name. The line of text should be succinct to ensure legibility. This watermark is not intended to be used for any other purpose than to mark non-production credentials. Ensure proper localization to the watermark is present in all languages.
+
+Example text include:
+
+
+
+* DEMO
+* SAMPLE
+* NON-PRODUCTION
+* TEST
+* DEVELOPMENT
+* DO NOT USE 
+
+<table>
+  <tr>
+   <td>
+
+<img src="./images/image16.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+   <td>
+<img src="./images/image17.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+  </tr>
+  <tr>
+   <td><strong>Do</strong>
+<p>
+Use succinct words to describe the type of issued credential. This ensures legibility and does not increase the size of the credential unnecessarily.
+   </td>
+   <td><strong>Don’t</strong>
+<p>
+Use long works or words that do not describe non-production credentials.
+   </td>
+  </tr>
+</table>
+
+
+
 ### Credential resizing
 
 Credential size depends on the content of the credential and the size of the device. Text areas are resized according to the width. 
 
 
-![alt_text](./images/image16.png "image_tooltip")
+![alt_text](images/image18.png "image_tooltip")
 
 
 **_Figure: Treatment of the credential template on different devices_**
 
 
-![alt_text](./images/image17.png "image_tooltip")
+![alt_text](images/image19.png "image_tooltip")
 
 
 **_Figure: An example of credential on different devices_**
@@ -504,7 +519,7 @@ Credential size depends on the content of the credential and the size of the dev
 Credentials may be stacked to overlap each other to increase the number of visible credentials in the viewport. The header remains unchanged. The issuer name, logo and credential name will always be visible but the primary and secondary attributes and the image slice will be obscured. 
 
 
-![alt_text](./images/image18.png "image_tooltip")
+![alt_text](images/image20.png "image_tooltip")
 
 
 **_Figure: An example of stacked credentials with default and enlarged text._**
@@ -517,7 +532,9 @@ The alt-tags for the logo and background images come from the multilingual OCA M
 
 ### More Variations
 
-To view more credential variations using this template,[ view the Adobe XD file](https://xd.adobe.com/view/045a1969-719a-4aa5-848f-637ef1b7051a-5109/).
+To view more credential variations using this template, [view the Adobe XD file](https://xd.adobe.com/view/045a1969-719a-4aa5-848f-637ef1b7051a-5109/).
+
+<!-- End of copy and paste the converted output. -->
 
 ## Drawbacks
 
