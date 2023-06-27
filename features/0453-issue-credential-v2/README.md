@@ -198,7 +198,8 @@ Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`propose-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#propose-credential-attachment-format) | 
 Linked Data Proof VC Detail  | `aries/ld-proof-vc-detail@v1.0` | [`ld-proof-vc-detail` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format) |
-Hyperledger Indy Credential Abstract | `hlindy/cred-filter@v2.0` | [`cred filter` format](../0592-indy-attachments/README.md#cred-filter-format)|
+Hyperledger Indy Credential Filter | `hlindy/cred-filter@v2.0` | [`cred filter` format](../0592-indy-attachments/README.md#cred-filter-format)|
+Hyperledger AnonCreds Credential Filter | `anoncreds/credential-filter@v1.0` | [`Credential Filter` format](../0771-anoncreds-attachments/README.md#credential-filter-format)|
 
 #### Offer Credential
 
@@ -271,6 +272,7 @@ Credential Format | Format Value | Link to Attachment Format | Comment |
 DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`offer-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#offer-credential-attachment-format) | 
 Hyperledger Indy Credential Abstract | `hlindy/cred-abstract@v2.0` | [`cred abstract` format](../0592-indy-attachments/README.md#cred-abstract-format)|
 Linked Data Proof VC Detail  | `aries/ld-proof-vc-detail@v1.0` | [`ld-proof-vc-detail` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format) |
+Hyperledger AnonCreds Credential Offer | `anoncreds/credential-offer@v1.0` | [`Credential Offer` format](../0771-anoncreds-attachments/README.md#credential-offer-format)|
 
 #### Request Credential
 
@@ -341,6 +343,7 @@ Credential Format | Format Value | Link to Attachment Format | Comment |
 DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`request-credential` attachment format](../0511-dif-cred-manifest-attach/README.md#request-credential-attachment-format) | 
 Hyperledger Indy Credential Request | `hlindy/cred-req@v2.0` | [`cred request` format](../0592-indy-attachments/README.md#cred-request-format)|
 Linked Data Proof VC Detail  | `aries/ld-proof-vc-detail@v1.0` | [`ld-proof-vc-detail` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format) |
+Hyperledger AnonCreds Credential Request | `anoncreds/credential-request@v1.0` | [`Credential Request` format](../0771-anoncreds-attachments/README.md#credential-request-format)|
 
 #### Issue Credential
 
@@ -411,6 +414,7 @@ Credential Format | Format Value | Link to Attachment Format | Comment |
 --- | --- | --- | --- | 
 Linked Data Proof VC  | `aries/ld-proof-vc@v1.0` | [`ld-proof-vc` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-attachment-format) |
 Hyperledger Indy Credential | `hlindy/cred@v2.0` | [credential format](../0592-indy-attachments/README.md#credential-format)|
+Hyperledger AnonCreds Credential| `anoncreds/credential@v1.0` | [`Credential` format](../0771-anoncreds-attachments/README.md#credential-format)|
 
 #### Adopted Problem Report
 
