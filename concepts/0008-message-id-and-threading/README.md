@@ -71,6 +71,10 @@ Message threading will be implemented as a [decorator](../0011-decorators/README
 The `~thread` decorator is generally required on any type of response, since
 this is what connects it with the original request.
 
+While not recommended, the initial message of a new protocol instance MAY have an
+empty (`{}`) `~thread` item. Aries agents receiving a message with an empty
+`~thread` item MUST gracefully handle such a message.
+
 #### Thread object
 
 A thread object has the following fields discussed below:
