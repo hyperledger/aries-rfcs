@@ -57,6 +57,7 @@
 * [0051: Decentralized Key Management](concepts/0051-dkms/README.md) (2019-03-29, [2 impls](concepts/0051-dkms/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0113: Question Answer Protocol 0.9](features/0113-question-answer/README.md) (2019-07-05, [2 impls](features/0113-question-answer/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0509: Action Menu Protocol](features/0509-action-menu/README.md) (2020-07-02 , [1 impl](features/0509-action-menu/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0748: N-wise DID Exchange Protocol 1.0](features/0748-n-wise-did-exchange/README.md) (2022-08-03, [1 impl](features/0748-n-wise-did-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 ## [PROPOSED](README.md#proposed)
 * [0013: Overlays](concepts/0013-overlays/README.md) (2019-05-20 &mdash; [`concept`](/tags.md#concept))
@@ -79,8 +80,8 @@
 * [0183: Revocation Notification 1.0](features/0183-revocation-notification/README.md) (2019-08-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0193: Coin Flip Protocol 1.0 ](features/0193-coin-flip/README.md) (2019-08-19 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0207: Credential Fraud Threat Model](concepts/0207-credential-fraud-threat-model/README.md) (2019-08-30 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
-* [0212: Pickup Protocol](features/0212-pickup/README.md) (2019-09-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0212: Pickup Protocol 2.0](features/0685-pickup-v2/README.md) (2019-09-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0212: Pickup Protocol](features/0212-pickup/README.md) (2019-09-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0213: Transfer Policy Protocol](features/0213-transfer-policy/README.md) (2019-09-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0214: "Help Me Discover" Protocol](features/0214-help-me-discover/README.md) (2019-09-10 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0217: Linkable Message Paths](concepts/0217-linkable-message-paths/README.md) (2019-09-10 &mdash; [`concept`](/tags.md#concept))
@@ -118,6 +119,9 @@
 * [0700: Out-of-Band through redirect](concepts/0700-oob-through-redirect/README.md) (2021-10-08 &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
 * [0721: Revocation Notification 2.0](features/0721-revocation-notification-v2/README.md) (2022-02-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0728: Device Binding Attachments](features/0728-device-binding-attachments/README.md) (2022-04-07 &mdash; [`feature`](/tags.md#feature))
+* [0734: Push Notifications fcm Protocol 1.0](features/0734-push-notifications-fcm/README.md) (2022-05-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0757: Push Notification](concepts/0757-push-notification/README.md) (2022-11-02  &mdash; [`concept`](/tags.md#concept))
+* [0771: AnonCreds Attachment Formats for Requesting and Presenting Credentials](features/0771-anoncreds-attachments/README.md) (2023-02-24 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 
 ## [RETIRED](README.md#retired)
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2020-10-14, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))

@@ -59,7 +59,7 @@ The Prover responds with a `presentation` message containing a
 
 ### `propose-presentation` attachment format
 
-Format identifier: `dif/presentation-exchange/definition@v1.0`
+Format identifier: `dif/presentation-exchange/definitions@v1.0`
 
 #### Examples: propose-presentation
 
@@ -72,7 +72,7 @@ Format identifier: `dif/presentation-exchange/definition@v1.0`
     "comment": "some comment",
     "formats" : [{
         "attach_id" : "143c458d-1b1c-40c7-ab85-4d16808ddf0a",
-        "format" : "dif/presentation-exchange/definition@v1.0"
+        "format" : "dif/presentation-exchange/definitions@v1.0"
     }],
     "proposal~attach": [{
         "@id": "143c458d-1b1c-40c7-ab85-4d16808ddf0a",
@@ -106,7 +106,9 @@ Format identifier: `dif/presentation-exchange/definition@v1.0`
 
 ### `request-presentation` attachment format
 
-Format identifier: `dif/presentation-exchange/definition@v1.0`
+Format identifier: `dif/presentation-exchange/definitions@v1.0`
+
+Since the format identifier defined above is the same as the one used in the `propose-presentation` message, it's recommended to consider both the message `@type` and the `format` to accuarately understand the contents of the attachment.
 
 The contents of the attachment is a JSON object containing the Verifier's presentation definition and an _options_ object
 with proof options:
@@ -145,7 +147,7 @@ Name|Status|Description
     "comment": "some comment",
     "formats" : [{
         "attach_id" : "ed7d9b1f-9eed-4bde-b81c-3aa7485cf947",
-        "format" : "dif/presentation-exchange/definition@v1.0"
+        "format" : "dif/presentation-exchange/definitions@v1.0"
     }],
     "request_presentations~attach": [{
         "@id": "ed7d9b1f-9eed-4bde-b81c-3aa7485cf947",
@@ -196,7 +198,7 @@ Name|Status|Description
     "comment": "some comment",
     "formats" : [{
         "attach_id" : "ed7d9b1f-9eed-4bde-b81c-3aa7485cf947",
-        "format" : "dif/presentation-exchange/definition@v1.0"
+        "format" : "dif/presentation-exchange/definitions@v1.0"
     }],
     "request_presentations~attach": [{
         "@id": "ed7d9b1f-9eed-4bde-b81c-3aa7485cf947",
