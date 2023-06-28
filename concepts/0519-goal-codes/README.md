@@ -126,17 +126,35 @@ aries | Hyperledger Aries Community | TBD
 The following goal codes are defined here because they already have demonstrated utility, based on early SSI work in Aries and elsewhere.
 
 ##### `aries.vc`
+
 Participate in some form of VC-based interaction. 
+
 ##### `aries.vc.issue`
+
 Issue a verifiable credential. 
+
 ##### `aries.vc.verify`
+
 Verify or validate VC-based assertions.
+
 ##### `aries.vc.revoke`
+
 Revoke a VC.
+
 ##### `aries.rel`
-Create, maintain, or end something that humans would consider a relationship. This should not to be confused with building a DIDComm channel. (Building a DIDComm channel is a low-level procedure, not a high-level goal.)
+
+Create, maintain, or end something that humans would consider a relationship.
+This may be accomplished by establishing, updating or deleting a DIDComm
+messaging connection that provides a secure communication channel for the
+relationship. The DIDComm connection itself is not the relationship, but would
+be used to carry out interactions between the parties to facilitate the
+relationship.
+
 ##### `aries.rel.build`
-Create a relationship. Carries the meaning implied today by a LinkedIn invitation to connect or a Facebook "Friend" request.
+
+Create a relationship. Carries the meaning implied today by a LinkedIn
+invitation to connect or a Facebook "Friend" request. Could be as limited
+as creating a DIDComm Connection.
 
 ## Implementations
 
