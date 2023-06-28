@@ -145,7 +145,7 @@ The media type of the envelope MUST be set in the `typ` [property](https://tools
 As discussed in [RFC 0434](../0434-outofband/README.md) and [RFC 0067](../0067-didcomm-diddoc-conventions/README.md), the `accept` property is used to advertise supported media types.
 The `accept` property may contain an envelope media type or a combination of the envelope media type and the content media type.
 In cases where the content media type is not present, the expectation is that the appropriate content media type can be inferred.
-For example, `application/didcomm-enc-env` indicates both Envelope v1 and DIDComm v1 and `application/didcomm-encrypted+json` indicates both Envelope v2 and DIDComm v2.
+For example, `application/didcomm-envelope-enc` indicates both Envelope v1 and DIDComm v1 and `application/didcomm-encrypted+json` indicates both Envelope v2 and DIDComm v2.
 However, some agents may choose to support Envelope v2 with a DIDComm v1 message payload.
 
 In case the `accept` property is set in both the DID service block and the out-of-band message, the out-of-band property takes precedence.
