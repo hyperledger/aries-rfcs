@@ -68,6 +68,7 @@ In order to support multiple credential revocation formats, the following dictat
 Revocation Format | Credential Identifier Format | Example |
 --- | --- | --- |
 `indy-anoncreds`  | `<revocation-registry-id>::<credential-revocation-id>` | `AsB27X6KRrJFsqZ3unNAH6:4:AsB27X6KRrJFsqZ3unNAH6:3:cl:48187:default:CL_ACCUM:3b24a9b0-a979-41e0-9964-2292f2b1b7e9::1` |
+`anoncreds`  | `<revocation-registry-id>::<credential-revocation-id>` | `did:indy:sovrin:5nDyJVP1NrcPAttP3xwMB9/anoncreds/v0/REV_REG_DEF/56495/npdb/TAG1::1` |
 
 ## Reference
 
