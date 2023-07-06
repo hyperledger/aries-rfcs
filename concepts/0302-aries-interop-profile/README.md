@@ -171,10 +171,10 @@ Since approval of the AIP 2.0 profile, the following RFCs have been clarified by
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Concept | [0003-protocols](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/concepts/0003-protocols) | [AIP V1.0, Reformatted](https://gist.github.com/swcurran/6976dc1fd1b10c51343cf3812288b345/revisions?diff=unified)
+Concept | [0003-protocols](https://github.com/hyperledger/aries-rfcs/tree/f1508877979e5bec6a037e28e004502fe9f89196/concepts/0003-protocols) | [AIP V1.0, Reformatted](https://gist.github.com/swcurran/6976dc1fd1b10c51343cf3812288b345/revisions?diff=unified)
 Concept | [0004-agents](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/concepts/0004-agents) | AIP V1.0, Unchanged
 Concept | [0005-didcomm](https://github.com/hyperledger/aries-rfcs/tree/1b4b014246d19c865c9b5520b97fe0376a86d8c4/concepts/0005-didcomm) | [AIP V1.0, Minimally Updated](https://gist.github.com/swcurran/788195ea0bccec53e1f9fe3509034341/revisions?diff=unified)
-Concept | [0008-message-id-and-threading](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/concepts/0008-message-id-and-threading) | [AIP V1.0, Updated](https://gist.github.com/swcurran/db72109ea4f2e336ac91f4fbab3f4048/revisions?diff=unified)
+Concept | [0008-message-id-and-threading](https://github.com/hyperledger/aries-rfcs/tree/06e6b0231cc969bc7c67b2ac23d3d2d8eebd3323/concepts/0008-message-id-and-threading) | [AIP V1.0, Updated](https://gist.github.com/swcurran/db72109ea4f2e336ac91f4fbab3f4048/revisions?diff=unified)
 Concept | [0011-decorators](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/concepts/0011-decorators) | [AIP V1.0, Updated](https://gist.github.com/swcurran/04229583a509f12258352f9c85b9c9b6/revisions?diff=unified)
 Concept | [0017-attachments](https://github.com/hyperledger/aries-rfcs/tree/7759addb1506d107fddec692403bbc9e55fe491f/concepts/0017-attachments) | [AIP V1.0, Updated](https://gist.github.com/swcurran/7d88f9866175af96a70e5c6c00fa0148/revisions?diff=unified)
 Concept | [0020-message-types](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/concepts/0020-message-types) | [AIP V1.0, Updated](https://gist.github.com/swcurran/8f95c25b5c778426d3a47fe6d7c46c70/revisions?diff=unified)<br>Mandates message prefix `https://didcomm.org` for Aries Protocol messages.
@@ -182,17 +182,17 @@ Concept | [0046-mediators-and-relays](https://github.com/hyperledger/aries-rfcs/
 Concept | [0047-json-LD-compatibility](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/concepts/0047-json-ld-compatibility) | [AIP V1.0, Minimally Updated](https://gist.github.com/swcurran/8ef311d793fc6964328687af3c0efd34/revisions?diff=unified)
 Concept | [0050-wallets](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/concepts/0050-wallets) | AIP V1.0, Unchanged
 Concept | [0094-cross-domain messaging](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/concepts/0094-cross-domain-messaging) | [AIP V1.0, Updated](https://gist.github.com/swcurran/e3f27e3ab85a260aaf279352ecc4e1fb/revisions?diff=unified)
-Concept | [0519-goal-codes](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/concepts/0519-goal-codes) | :new:
-Feature | [0015-acks](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0015-acks) | [AIP V1.0, Updated](https://gist.github.com/swcurran/81af391bfd79539edec530150045fe51/revisions?diff=unified)
+Concept | [0519-goal-codes](https://github.com/hyperledger/aries-rfcs/tree/9f3f280cfd2fbba18f217c64d38ae229600f56e6/concepts/0519-goal-codes) | :new:
+Feature | [0015-acks](https://github.com/hyperledger/aries-rfcs/tree/8415b2c7ec3e31246972b3d4257ef7547ad5e24e/features/0015-acks) | [AIP V1.0, Updated](https://gist.github.com/swcurran/81af391bfd79539edec530150045fe51/revisions?diff=unified)
 Feature | [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0019-encryption-envelope) | [AIP V1.0, Updated](https://gist.github.com/swcurran/c652dfd39706e50be4145568797e667a/revisions?diff=unified)<br>See envelope note below
 Feature | [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/bf3d796cc33ce78ed7cde7f5422b10719a68be21/features/0023-did-exchange) | :new:
 Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/f39481e92ad1a10dbc499cd4931a08c3497cee3f/features/0025-didcomm-transports) | [AIP V1.0, Minimally Updated](https://gist.github.com/swcurran/1e64cba5f6c524d38ad596209df090df/revisions?diff=unified)
-Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0035-report-problem) | [AIP V1.0, Updated](https://gist.github.com/swcurran/d9432abc436e6a069d6ffcd41dc86060/revisions?diff=unified)
-Feature | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0044-didcomm-file-and-mime-types) | :new:
+Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/b85603c2f5b1b123035b8754cb9ee26bbe28b670/features/0035-report-problem) | [AIP V1.0, Updated](https://gist.github.com/swcurran/d9432abc436e6a069d6ffcd41dc86060/revisions?diff=unified)
+Feature | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/8b1541285c7aa9a6f04f03b8c66f8ea1b29bc91c/features/0044-didcomm-file-and-mime-types) | :new:
 Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0048-trust-ping) | :new:
 Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0183-revocation-notification) | :new:
 Feature | [0360-use-did-key](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0360-use-did-key) | :new:
-Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/2bc7db66d15a55d70ce5bd16b2513a853c9d5749/features/0434-outofband) | :new:
+Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/c5844c63be8fae62f48bf4516e7cc05b57556639/features/0434-outofband) | :new:
 Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0453-issue-credential-v2) | Update to V2 Protocol
 Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0454-present-proof-v2) | Update to V2 Protocol
 Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0557-discover-features-v2) | :new:
@@ -218,7 +218,7 @@ Concept | [0441-present-proof-best-practices](https://github.com/hyperledger/ari
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
 Feature | [0593-json-ld-cred-attach](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0593-json-ld-cred-attach) | :new:
-Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/7a44f650d3cebf5b3047c1680618978393a497d5/features/0510-dif-pres-exch-attach) | :new:
+Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/9a6fcee20a86d0c76429cd0bdb74cc7f9520dddd/features/0510-dif-pres-exch-attach) | :new:
 
 #### BBSCRED: BBS+ Based Credentials
 
@@ -226,12 +226,12 @@ Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/
 --- | --- | ---
 Feature | [0593-json-ld-cred-attach](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0593-json-ld-cred-attach) | :new:
 Feature | [0646-bbs-credentials](https://github.com/hyperledger/aries-rfcs/blob/7a44f650d3cebf5b3047c1680618978393a497d5/features/0646-bbs-credentials/README.md) | :new:
-Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/7a44f650d3cebf5b3047c1680618978393a497d5/features/0510-dif-pres-exch-attach) | :new:
+Feature | [0510-dif-pres-exch-attach](https://github.com/hyperledger/aries-rfcs/tree/9a6fcee20a86d0c76429cd0bdb74cc7f9520dddd/features/0510-dif-pres-exch-attach) | :new:
 
 #### DIDCOMMV2PREP: DIDComm v2 Prep
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0587-encryption-envelope-v2](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0587-encryption-envelope-v2) | :new:<br>See envelope note below
+Feature | [0587-encryption-envelope-v2](https://github.com/hyperledger/aries-rfcs/tree/8b1541285c7aa9a6f04f03b8c66f8ea1b29bc91c/features/0587-encryption-envelope-v2) | :new:<br>See envelope note below
 
 #### CHAT: Chat related features
  RFC Type | RFC/Link to RFC Version | Note
@@ -265,6 +265,18 @@ The following clarifications have been made to RFCs that make up AIP 2.0:
 - RFC 0646 BBS Credentials: The RFC Status was changed to "Accepted."
 - RFC 0317 Please Ack: The RFC Status was changed to "Accepted" and added to the AIP 2.0 base requirements list. Original discussion included the please ack decorator, but it wasn't added to the AIP 2.0 list before releasing AIP 2.0.
 - RFC 0592 Indy Attachment Format: The encoding algorithm used for credential attributes was added from RFC 0036.
+
+An additional set of clarifications were made to the RFCs that make up AIP 2.0:
+
+- RFC 0003 Protocols: A clarification on the expected handling of minor protocols mismatches between DIDComm agents. [Applied Pull Request](https://github.com/hyperledger/aries-rfcs/pull/752)
+- RFC 0008 Message IDs and Threading: A recommendation that DIDComm agents should not send out empty `~thread` decorators, and should not error when receiving such a `~thread` decorator. [Applied Pull Request](https://github.com/hyperledger/aries-rfcs/pull/789)
+- RFC 0035 Report Problem: Adds an accidentally missed description of an item in the message. [Applied Pull Request](https://github.com/hyperledger/aries-rfcs/pull/756)
+- RFC 0519 Goal Codes: Removed advice that a "relationship" goal code is specifically precluded from use when simply creating a DIDComm connection for later, undefined usage. [Applied Pull Request](https://github.com/hyperledger/aries-rfcs/pull/785)
+- RFC 0015 ACKs: A clarification that an ACK message should never be sent with a status `FAIL`. Rather, a Problem Report message should be sent in place of such an Ack. [Applied Pull Request](https://github.com/hyperledger/aries-rfcs/pull/727)
+- RFC 0044: DIDComm File and MIME Types: A correction to the MIME type of a DIDComm message. [Applied Pull Request](https://github.com/hyperledger/aries-rfcs/pull/778)
+- RFC 0434 Out of Band: Clarification that a recipient could respond to one of multiple attached messages. [Applied Pull Request](https://github.com/hyperledger/aries-rfcs/pull/759)
+- RFC 0510 DIF Presentation Exchange Attachment: Correction to an identifier copied from the DID Presentation Exchange specification (`definition` to `definitions`). [Applied Pull Request](https://github.com/hyperledger/aries-rfcs/pull/)
+- RFC 0587 Encryption Envelope V2: A correction to the MIME type of a DIDComm message. [Applied Pull Request](https://github.com/hyperledger/aries-rfcs/pull/778)
 
 ### Previous Versions
 
