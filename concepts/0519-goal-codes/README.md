@@ -156,6 +156,12 @@ Create a relationship. Carries the meaning implied today by a LinkedIn
 invitation to connect or a Facebook "Friend" request. Could be as limited
 as creating a DIDComm Connection.
 
+##### `aries.vc.verifier.once`
+
+Create a DIDComm connection for the sole purpose of doing the one-time execution of a [Present Proof](/features/0454-present-proof-v2/README.md) protocol. Once the protocol execution is complete, both sides **SHOULD** delete the connection, as it will not be used again by either side.
+
+The purpose of the goal code flow is to accomplish the equivalent of a "connection-less" present proof by having the agents establish a DIDComm connection, execute the present proof protocol, and delete the connection. The need for this goal code is when an actual connection-less present proof cannot be used because the [out-of-band](/features/0434-outofband/README.md) (OOB) message (including the presentation request) is too large for the transport being used--most often a QR code (although it may be useful for Bluetooth scenarios as well)--and a URL shortner option is not available. By using a one-time connection, the OOB message is small enough to fit into easily into a QR code, the present proof protocol can be executed using the established connection, and at the end of the interaction, no connection remains for either side to use or manage.
+
 ## Implementations
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
