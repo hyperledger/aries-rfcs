@@ -1,4 +1,4 @@
-# Aries RFC 0000: Unqualified DID Transition
+# Aries RFC 0793: Unqualified DID Transition
 
 - Authors: [Sam Curren](mailto:swcurran@cloudcompass.ca)
 - Status: [PROPOSED](/README.md#proposed)
