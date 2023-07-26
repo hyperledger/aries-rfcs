@@ -60,7 +60,6 @@
 * [0748: N-wise DID Exchange Protocol 1.0](features/0748-n-wise-did-exchange/README.md) (2022-08-03, [1 impl](features/0748-n-wise-did-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 ## [PROPOSED](README.md#proposed)
-* [0013: Overlays](concepts/0013-overlays/README.md) (2019-05-20 &mdash; [`concept`](/tags.md#concept))
 * [0021: DIDComm Message Anatomy](concepts/0021-didcomm-message-anatomy/README.md) (2019-05-25 &mdash; [`concept`](/tags.md#concept) [`decorator`](/tags.md#decorator))
 * [0024: DIDComm over XMPP](features/0024-didcomm-over-xmpp/README.md) (2019-06-14 &mdash; [`feature`](/tags.md#feature))
 * [0028: Introduce Protocol 1.0](features/0028-introduce/README.md) (2019-04-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
@@ -80,8 +79,8 @@
 * [0183: Revocation Notification 1.0](features/0183-revocation-notification/README.md) (2019-08-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0193: Coin Flip Protocol 1.0 ](features/0193-coin-flip/README.md) (2019-08-19 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0207: Credential Fraud Threat Model](concepts/0207-credential-fraud-threat-model/README.md) (2019-08-30 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
-* [0212: Pickup Protocol 2.0](features/0685-pickup-v2/README.md) (2019-09-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0212: Pickup Protocol](features/0212-pickup/README.md) (2019-09-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0212: Pickup Protocol 2.0](features/0685-pickup-v2/README.md) (2019-09-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0213: Transfer Policy Protocol](features/0213-transfer-policy/README.md) (2019-09-03 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0214: "Help Me Discover" Protocol](features/0214-help-me-discover/README.md) (2019-09-10 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0217: Linkable Message Paths](concepts/0217-linkable-message-paths/README.md) (2019-09-10 &mdash; [`concept`](/tags.md#concept))
@@ -120,10 +119,14 @@
 * [0721: Revocation Notification 2.0](features/0721-revocation-notification-v2/README.md) (2022-02-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0728: Device Binding Attachments](features/0728-device-binding-attachments/README.md) (2022-04-07 &mdash; [`feature`](/tags.md#feature))
 * [0734: Push Notifications fcm Protocol 1.0](features/0734-push-notifications-fcm/README.md) (2022-05-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0755: Overlays Capture Architecture (OCA) For Aries](features/0755-oca-for-aries/README.md) (2023-01-15 &mdash; [`feature`](/tags.md#feature))
+* [0756: OCA for Aries Style Guide](features/0756-oca-for-aries-style-guide/README.md) (2023-01-05 &mdash; [`feature`](/tags.md#feature))
 * [0757: Push Notification](concepts/0757-push-notification/README.md) (2022-11-02  &mdash; [`concept`](/tags.md#concept))
 * [0771: AnonCreds Attachment Formats for Requesting and Presenting Credentials](features/0771-anoncreds-attachments/README.md) (2023-02-24 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
+* [0780: Use Data URLs for Images and More in Credential Attributes](features/0780-data-urls-images/README.md) (2023-03-31 &mdash; [`feature`](/tags.md#feature))
 
 ## [RETIRED](README.md#retired)
+* [0013: Overlays](concepts/0013-overlays/README.md) (2023-01-15 &mdash; [`concept`](/tags.md#concept))
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2020-10-14, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
