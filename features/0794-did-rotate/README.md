@@ -1,4 +1,4 @@
-# Aries RFC 0795: DID Rotate 1.0
+# Aries RFC 0794: DID Rotate 1.0
 
 - Authors: [Sam Curren](telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
