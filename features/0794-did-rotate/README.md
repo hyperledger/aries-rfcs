@@ -19,6 +19,10 @@ This protocol is only applicable to DIDComm v1 - in DIDComm v2 use the more effi
 This mechanism allows a party in a relationship to change the DID in use for the relationship. This may be used to switch DID methods,
 but also to switch to a new DID within the same DID method. Inspired by (but different from) the DID rotation feature of the DIDComm Messaging (DIDComm v2) spec.
 
+## Implications for Software Implementations
+
+This protocol enables the identifiers used in a relationship to change. Implementations will need to consider how data related to the relationship is managed. If the relationship DIDs are used as identifiers, those identifiers may need to be updated during the rotation to maintain data integrity.
+
 ## Tutorial
 
 ### Name and Version
@@ -50,7 +54,7 @@ Message Type URI: https://didcomm.org/did-rotate/1.0/rotate
 }
 ```
 
-The **rotating_party** is expected to receive messages on both the existing and new DIDs and their associated keys for a reasonable period that MUST extend at least until the following `ack` message has been received
+The **rotating_party** is expected to receive messages on both the existing and new DIDs and their associated keys for a reasonable period that MUST extend at least until the following `ack` message has been received.
 
 This message MUST be sent using authcrypt or as a signed message in order to establish the provenance of the new DID. Proper provenance prevents injection attacks that seek to take over a relationship. Any rotate message received without being authcrypted or signed MUST be discarded and not processed.
 
@@ -62,13 +66,17 @@ Message Type URI: https://didcomm.org/did-rotate/1.0/ack
 
 This message is still sent to the prior DID to acknowledge the receipt of the rotation. Following messages will be sent to the new DID.
 
-`to_did`: The new DID to be used to identify the **rotating_party**
+In order to correctly process out of order messages, the The **observing_party** may choose to receive messages from the old did for a reasonable period. This allows messages sent before rotation but received after rotation in the case of out of order message delivery.
+
+In this message, the `thid` (Thread ID) MUST be included to allow the `rotating_party` to correlate it with the sent `rotate` message.
 
 ```json
 {
     "@id": "123456780",
     "@type": "https://didcomm.org/did-rotate/1.0/ack",
-    "to_did": "did:example:newdid",
+      "~thread"          : {
+		"thid": "<id of rotate message>"
+	},
 
 }
 ```
@@ -77,9 +85,9 @@ This message is still sent to the prior DID to acknowledge the receipt of the ro
 
 If the **observing_party** receives a `rotate` message with a DID that they cannot resolve, they MUST return a problem-report message.
 
-The `code` must be set to one of the following:
-**e.did.unresolvable** - used for a DID who's method is supported, but will not resolve
-**e.did.method_unsupported** - used for a DID method for which the `observing_party` does not support resolution.
+The `description` `code` must be set to one of the following:
+- **e.did.unresolvable** - used for a DID who's method is supported, but will not resolve
+- **e.did.method_unsupported** - used for a DID method for which the `observing_party` does not support resolution.
 
 Upon receiving this message, the `rotating_party` must not complete the rotation and resolve the issue. Further rotation attempts must happen in a new thread.
 
