@@ -103,6 +103,23 @@ Upon receiving this message, the `rotating_party` must not complete the rotation
 }
 ```
 
+#### Hangup
+
+Message Type URI: https://didcomm.org/did-rotate/1.0/hangup
+
+This message is sent by the **rotating_party** to inform the **observing_party** that they are done with the relationship and will no longer be responding.
+
+There is no response message.
+
+Use of this message does not require or indicate that all data has been deleted by either party, just that interaction has ceased.
+
+```json
+{
+    "@id": "123456780",
+    "@type": "https://didcomm.org/did-rotate/1.0/hangup"
+}
+```
+
 ## Prior art
 
 This protocol is inspired buy the rotation feature of DIDComm Messaging (DIDComm v2). The implementation differs in important ways.
