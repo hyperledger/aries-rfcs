@@ -122,7 +122,7 @@ Use of this message does not require or indicate that all data has been deleted 
 
 ## Prior art
 
-This protocol is inspired buy the rotation feature of DIDComm Messaging (DIDComm v2). The implementation differs in important ways.
+This protocol is inspired by the rotation feature of DIDComm Messaging (DIDComm v2). The implementation differs in important ways.
 The DIDComm v2 method is a _post rotate_ operation: the first message sent AFTER the rotation contains the prior DID and a signature authorizing the rotation. This is efficient, but requires the use of a message header and a higher level of integration with message processing.
 This protocol is a _pre rotate_ operation: notifying the other party of the new DID in advance is a less efficient but simpler approach. This was done to minimize adoption pain. The pending move to DIDComm v2 will provide the efficiency.
 
