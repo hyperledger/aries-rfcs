@@ -13,11 +13,11 @@
 Historically, Aries use of the Indy SDK's wallet included the use of 'unqualified DIDs' or DIDs without a did: prefix and method. 
 This transition documents the process of migrating any such DIDs still in use to fully qualified DIDs.
 
-The transition from unqualified DIDs to peer:did:2 is described here: https://github.com/TimoGlastra/legacy-did-transformation
+This process involves the adoption of the Rotate DID protocol and algorithm 4 of the Peer DID Method, then the rotation from the unqualified DIDs to any fully qualified DID, with preference for did:peer:4.
 
-The use and support for did:peer:3 is also included in this transition.
+The adoption of these specs will further prepare the Aries community for adoption of DIDComm v2 by providing an avenue for adding DIDComm v2 compatible endpoints.
 
-This process ONLY applies to agent codebases using unqualified DIDs. Any codebases not using unqualified DIDs may ignore this process.
+Codebases that do not use unqualified DIDs MUST still adopt DID Rotation and did:peer:4 as part of this process, even if no unqualified DIDs must be rotated.
 
 This RFC follows the guidance in [RFC
 0345](../../concepts/0345-community-coordinated-update/README.md) about
@@ -27,13 +27,13 @@ interoperable agents remain interoperable throughout this transition.
 The transition from the unqualified to qualified DIDs will occur in four steps:
 
 - **Pre-work**: where we agree on the transition plan outlined in this RFC.
-  - Finalize did:peer:3 details, including feature discovery support of did:peer:3.
+  - Finalize did:peer:4 details, including feature discovery support of did:peer:4.
   - Verify transisiton plan and code.
-- **Step 1**: Agent builders MUST update all agent code bases and deployments to accept DIDs in the old (unqualified) and new (transitioned) forms. During this step, agents MUST continue the use of unqualified DIDs in all cases where they are currently being used.
+- **Step 1**: Agent builders MUST update all agent code bases and deployments to support DID Rotation and did:peer:4. 
   - Each agent builder SHOULD notify the community they have completed Step 1 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
-- **Step 2**: Agent builders MUST update all agent code bases and deployments to use only fully qualified DIDs in all communication. Unqualified DIDs received are matched by the receiving agent to the associated fully qualified DID.
+- **Step 2**: Agent builders using unqualified DIDs MUST no longer use new unqualified DIDs, and MUST use DID Rotation to rotate to a fully qualified DID.
   - Each agent builder SHOULD notify the community they have completed Step 2 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
-- **Step 3**: Agent builders SHOULD update their deployments to remove all support for receiving unqualified DIDs and MUST NOT use unqualified DIDs.
+- **Step 3**: Agent builders SHOULD update their deployments to remove all support for receiving unqualified DIDs from other agents.
 
 The community coordination triggers between the steps above will be as follows:
 
