@@ -96,6 +96,8 @@ If the **observing_party** receives a `rotate` message with a DID that they cann
 The `description` `code` must be set to one of the following:
 - **e.did.unresolvable** - used for a DID who's method is supported, but will not resolve
 - **e.did.method_unsupported** - used for a DID method for which the `observing_party` does not support resolution.
+- **e.did.doc_unsupported** - used for a DID for which the `observing_party` does not find information sufficient for a DIDComm connection in the resolved DID Document. This would include compatible key types and a DIDComm capable service endpoint.
+
 
 Upon receiving this message, the `rotating_party` must not complete the rotation and resolve the issue. Further rotation attempts must happen in a new thread.
 
