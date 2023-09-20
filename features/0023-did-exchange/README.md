@@ -350,7 +350,7 @@ The invitation's `recipientKeys` should be dedicated to envelopes authenticated 
 * The `~thread` decorator MUST be included. It contains a `thid` reference to the `@id` of the request message.
 * The `did` attribute MUST be included. It denotes the DID in use by the responder. Note that this MAY NOT be the same DID used in the invitation.
 * The `did_doc~attach` optional, contains the DID Doc associated with the `did`, if required.
-  * If the `did` is resolvable (either an inline `peer:did` or a publicly resolvable DID), the `did_doc~attach` attribute should not be included.
+  * If the `did` is resolvable (either an inline `did:peer` or a publicly resolvable DID), the `did_doc~attach` attribute should not be included.
   * If the DID is a `did:peer` identifier, the DIDDoc must be as outlined in [RFC 0627 Static Peer DIDs](../0627-static-peer-dids/README.md).
 * The `did_rotate~attach` attribute is optional, but SHOULD be included if the `did` attribute is resolvable and the `did_doc~attach` is not included. The value is the Base64url encoded DID, and signed with the key used in the invitation.
 
