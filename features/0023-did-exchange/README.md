@@ -16,6 +16,11 @@ This RFC describes the protocol to exchange DIDs between agents when establishin
 
 Aries agent developers want to create agents that are able to establish relationships with each other and exchange secure information using keys and endpoints in DID Documents. For this to happen there must be a clear protocol to exchange DIDs.
 
+## Version Change Log
+
+### 1.1 -  Signed Rotations without DID Documents
+Added the optional `did_rotate~attach` attachment for provenance of rotation without an attached DID Document. 
+
 ## Tutorial
 
 We will explain how DIDs are exchanged, with the roles, states, and messages required.
