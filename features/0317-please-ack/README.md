@@ -132,6 +132,7 @@ None specified.
 - Security and privacy implications of `~please_ack` decorators. Could they be used to mount a denial-of-service attack or to sniff info that's undesirable?
 - Signed (Non-repudiable) acks. How do you ask for an ACK that commits its sender to the acknowledgment in a way that's provable to third parties?
 - Multiplexed acks. How do you ask for, and supply, an ACK to all of Alice's agents instead of just to the one who sent the ACK? Does each agent need to request the ACK separately? Are there denial-of-service or other security issues?
+- ACK adopting. What message type should be used to send an ACK message in response to `~please_ack` when the `RECEIPT`/`OUTCOME`/both options are specified? Must/should protocols use the `notification/1.0/ack` whenever possible? What if the protocol has already adopted the ACK message? Must/should the adopted ACK be used in all cases, regardless of which option (`RECIPT`/`OUTCOME`) is specified? Is it allowed to use both original and adopted ACKs in the same protocol for different purposes (for example, the original ACK to response to `RECEIPT`-decorated messages, an adopted ACK to response to `OUTCOME`-decorated messages)? The rules should probably be clearly defined in this RFC to avoid incompatibility between different implementations of Aries agents.
 
 ## Implementations
 
