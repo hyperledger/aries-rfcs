@@ -162,7 +162,7 @@ Response to key list query, containing retrieved keys.
         {
             "recipient_key": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
         }
-    ]
+    ],
     "pagination": {
         "count": 30,
         "offset": 30,
