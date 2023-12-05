@@ -1,6 +1,6 @@
-# 0335: DIDComm Remote Procedure Call DRPC
+# 0804: DIDComm Remote Procedure Call (DRPC)
 
-- Authors: [Stephen Curran](swcurran@cloudcompass.ca) (BC Gov), [Clecio Varjao](clecio.varjao@gov.bc.ca) (BC Gov)
+- Authors: [Clecio Varjao](clecio.varjao@gov.bc.ca) (BC Gov), [Stephen Curran](swcurran@cloudcompass.ca) (BC Gov)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2023-11-29
 - Status Note: An evolution of the HTTP over DIDComm protocol to enable an Agent to request an arbitrary service from a connected Agent and get a response.
@@ -158,7 +158,7 @@ and process. How the `sender` and `responder` coordinate that understanding is
 out of scope of this protocol.
 
 The `request` message items have been chosen to make putting an HTTP request
-into the `request` message easy (borrowing directly from [RFC 0335 HTTP Over
+into the `request` message easy (borrowing from [RFC 0335 HTTP Over
 DIDComm]), but an HTTP request is not required. As long as `request_type`
 identifies the request being made, and the `responder` understands it, the
 message can be processed.
@@ -169,10 +169,9 @@ message can be processed.
 {
   "@type": "https://didcomm.org/drpc/1.0/request",
   "@id": "2a0ec6db-471d-42ed-84ee-f9544db9da4b",
-  "method": "<method>",
   "request": "<request>",
-  "headers": [],
-  "body": "<Data URL>"
+  "headers": [{"name": "Content-Type", "value": "application/json"}],
+  "body.base64": "<Base64 Encoded JSON>"
 }
 ```
 
@@ -180,15 +179,14 @@ The items in the message are as follows:
 
 - `@type` -- required, must be as above
 - `@id` -- required, must be as defined in [RFC 0005 DIDComm]
-- `method` -- optional, can be used to indicate an HTTP operation (`GET`, `PUT`, etc.) or any other value understood by the `responder`.
 - `request_type` -- **required**, an identifier indicating the type of the request. The value could be a URI, such as an HTTP URL, that the `sender` would like `responder` to resolve, or the value could be just a string understood by the `responder`.
-- `headers` -- optional, a JSON array typically used for conveying HTTP headers to be used in the processing of a `request_type` that is an HTTP URL. As with all parts of this protocol, the meaning is up to the participants of an instance of the protocol.
-  - When used for holding headers associated with an HTTP request, each element of the array is an object with two elements: `{"name": "<header-name>", "value": "<header-value>"}`.
-- `body` -- optional, a [Data URL] containing the data to be included with the request.
-  - The use of a [Data URL] provides the participants with some flexibility in sending the request data, providing a `mime-type` and giving the `sender` the option of providing [Base64 encoded] data.
-  - `tl;dr` A [Data URL] allows for the inline sending of a variety of data formats. It is a string in the format:
-    - `data:content/type;base64,<data>`, where `content/type` is an optional type of the data, `;base64` is optional and if present indicates the data has been [Base64 encoded], followed by the data.
+- `headers` -- optional, a JSON array typically used for conveying HTTP headers to be used in the processing of an HTTP URL `request_type`. As with all parts of this protocol, the meaning is up to the participants of an instance of the protocol.
+  - Each element of the array is an object with two elements: `{"name": "<header-name>", "value": "<header-value>"}`.
+  - When a `body` is included, a **required** element in the array is `"name": "Content-Type"` with the `"value"` being the `body`'s [MIME Type] (also know as the media type).
+- `body.base64` -- optional, the [Base64 encoded] body of the request.
+  - When Base64 decoded, the result must be in the format defined by the `Content-Type` value in the `headers` array.
 
+[MIME Type]: https://developer.mozilla.org/en-US/docs/Glossary/MIME_type
 [Data URL]: https://en.wikipedia.org/wiki/Data_URI_scheme
 [Base64 encoded]: https://en.wikipedia.org/wiki/Base64
 
@@ -222,8 +220,8 @@ understands the contents of the items, the message can be processed.
       "code":"",
       "string":""
   },
-  "headers": [],
-  "body": "<Data URL>"
+  "headers": [{"name": "Content-Type", "value": "application/json"}],
+  "body.base64": "<Base64 Encoded JSON>"
 }
 ```
 
@@ -232,11 +230,13 @@ The items in the message are as follows:
 - `@type` -- required, must be as above
 - `@id` -- required, must be as defined in [RFC 0005 DIDComm]
 - `status` -- optional, can be used to indicate the status of an HTTP request.
-- `headers` -- optional, a JSON array typically used for conveying HTTP headers from the processing of a `request` by calling an HTTP URL. As with all parts of this protocol, the meaning is up to the participants of an instance of the protocol.
-  - When used for holding headers associated with an HTTP request, each element of the array is an object with two elements:
-    - `{"name": "<header-name>", "value": "<header-value>"}`.
-- `body` -- optional, a [Data URL] containing the data from processing the request.
-  - See the details about the `body` item in the [request](#request-message)
+- `headers` -- optional, a JSON array typically used for conveying HTTP headers to be used in the processing of an HTTP URL `request_type`. As with all parts of this protocol, the meaning is up to the participants of an instance of the protocol.
+- `headers` -- optional, a JSON array typically used for conveying HTTP headers resulting from the processing of an HTTP URL `request`. As with all parts of this protocol, the meaning is up to the participants of an instance of the protocol.
+  - Each element of the array is an object with two elements: `{"name": "<header-name>", "value": "<header-value>"}`.
+  - When a `body` is included, a **required** element in the array is `"name": "Content-Type"` with the `"value"` being the `body`'s [MIME Type] (also know as the media type).
+- `body.base64` -- optional, the [Base64 encoded] body of the request.
+  - When Base64 decoded, the result must be in the format defined by the `Content-Type` value in the `headers` array.
+
 
 As with all DIDComm messages that are not the first in a protocol instance, a
 `~thread` decorator **MUST** be included in the `response` message.
