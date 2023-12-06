@@ -16,6 +16,11 @@ This RFC describes the protocol to exchange DIDs between agents when establishin
 
 Aries agent developers want to create agents that are able to establish relationships with each other and exchange secure information using keys and endpoints in DID Documents. For this to happen there must be a clear protocol to exchange DIDs.
 
+## Version Change Log
+
+### 1.1 -  Signed Rotations without DID Documents
+Added the optional `did_rotate~attach` attachment for provenance of rotation without an attached DID Document. 
+
 ## Tutorial
 
 We will explain how DIDs are exchanged, with the roles, states, and messages required.
@@ -325,6 +330,19 @@ The exchange response message is used to complete the exchange. This message is 
             "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
             }
       }
+   },
+   "did_rotate~attach": {
+      "mime-type": "text/string",
+      "data": {
+         "base64": "Qi5kaWRAQjpB",
+         "jws": {
+         "header": {
+            "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+         },
+         "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+         "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+         }
+      }
    }
 }
 ```
@@ -337,8 +355,9 @@ The invitation's `recipientKeys` should be dedicated to envelopes authenticated 
 * The `~thread` decorator MUST be included. It contains a `thid` reference to the `@id` of the request message.
 * The `did` attribute MUST be included. It denotes the DID in use by the responder. Note that this MAY NOT be the same DID used in the invitation.
 * The `did_doc~attach` optional, contains the DID Doc associated with the `did`, if required.
-  * If the `did` is resolvable (either an inline `peer:did` or a publicly resolvable DID), the `did_doc~attach` attribute should not be included.
+  * If the `did` is resolvable (either an inline `did:peer` or a publicly resolvable DID), the `did_doc~attach` attribute should not be included.
   * If the DID is a `did:peer` identifier, the DIDDoc must be as outlined in [RFC 0627 Static Peer DIDs](../0627-static-peer-dids/README.md).
+* The `did_rotate~attach` attribute is optional, but SHOULD be included if the `did` attribute is resolvable and the `did_doc~attach` is not included. The value is the Base64url encoded DID, and signed with the key used in the invitation.
 
 In addition to a new DID, the associated DID Doc might contain a new endpoint. This new DID and endpoint are to be used going forward in the relationship.
 
@@ -350,7 +369,7 @@ When the message is sent, the _responder_ are now in the `response-sent` state. 
 
 #### Response Processing
 
-When the requester receives the `response` message, they will decrypt the authenticated envelope which confirms the source's authenticity. After decryption validation, they will update their wallet with the new information, and use that information in sending the `complete` message.
+When the requester receives the `response` message, they will decrypt the authenticated envelope which confirms the source's authenticity. After decryption validation, the signature on the `did_doc~attach` or `did_rotate~attach` MUST be validated, if present. The key used in the signature MUST match the key used in the invitation. After attachment signature validation, they will update their wallet with the new information, and use that information in sending the `complete` message.
 
 #### Response Errors
 
