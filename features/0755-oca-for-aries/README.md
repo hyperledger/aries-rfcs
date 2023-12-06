@@ -190,7 +190,7 @@ name/value pairs, specific to the OCA for Aries use case:
   - `issuer` - the name of the issuer of the credential.
   - `issuer_description` - a description for the issuer of the credential.
   - `issuer_url` - a URL for the issuer of the credential.
-  - `credential_help` - help text about the credential
+  - `credential_help_text` - help text about the credential
   - `credential_support_url` - a URL for a service providing support in the use of the credential.
 - The **[Unit Overlay]**
   allows the issuer to declare the units of measurement for the attributes in
@@ -417,7 +417,7 @@ as the tooling evolves.
       - "issuer"
       - "issuer_description"
       - "issuer_url"
-      - "credential_help"
+      - "credential_help_text"
       - "credential_support_url"
       - "watermark"
         - The "watermark" is used to mark non-production credentials, as described in the ["non-production watermark" section of RFC0756 OCA for Aries Style Guide](../0756-oca-for-aries-style-guide#non-production-watermark)
