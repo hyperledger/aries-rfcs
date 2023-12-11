@@ -14,15 +14,15 @@ The DIDComm Remote Procedure Call (DRPC) protocol enables a [JSON-RPC]-based
 request-response interaction to be carried out across a DIDComm channel. The
 protocol is designed to enable custom interactions between connected agents, and
 to allow for the rapid prototyping of experimental DIDComm protocols. An agent
-sends a DIDComm message to request a remote service be invoked by another agent,
-and gets back a response in subsequent DIDComm message. The protocol enables any
-request to be conveyed that the other agent understands. Out of scope of this
-protocol is how the requesting agent discovers the services available from the
-responding agent, and how the two agents know the semantics of the [JSON-RPC]
-requests and responses. By using DIDComm between the requesting and responding
-agents, the security and privacy benefits of DIDComm are accomplished, and the
-generic parameters of the messages allow for flexibility in how and where the
-protocol can be used.
+sends a DIDComm message to request a [JSON-RPC] service be invoked by another
+agent, and gets back the [JSON-RPC]-format response in subsequent DIDComm
+message. The protocol enables any request to be conveyed that the other agent
+understands. Out of scope of this protocol is how the requesting agent discovers
+the services available from the responding agent, and how the two agents know
+the semantics of the specified [JSON-RPC] requests and responses. By using
+DIDComm between the requesting and responding agents, the security and privacy
+benefits of DIDComm are accomplished, and the generic parameters of the requests
+allow for flexibility in how and where the protocol can be used.
 
 [JSON-RPC]: https://www.jsonrpc.org/specification
 
@@ -41,9 +41,9 @@ stores. The sequence is as follows:
   from its publisher.
 - If not already available, a DIDComm connection between the wallet and the
   attestation service is created.
-- The wallet uses the RPC protocol to request a nonce from the service to be
+- The wallet uses the DRPC protocol to request a nonce from the service to be
   used in the attestation. The service responds with the nonce.
-- The wallet uses a new instance of the RPC protocol to request the attestation
+- The wallet uses a new instance of the DRPC protocol to request the attestation
   be performed. The service responds with the status of the attestation process.
 - The service completes the business process by initiating an Issue Credential
   process to issue an attestation verifiable credential.
@@ -74,17 +74,16 @@ verification) proxies the requests/responses to a backend ("behind the
 firewall") service. The wallet is implemented to use DRPC protocol instances to
 initiate the verification and receive the actions needed to carry out the steps
 of the verification (take picture, take video, instruct movements, etc.),
-sending to the Issuer agent the necessary data. The Issuer conveys the
-requests to the verification service and the responses back to the mobile
-wallet. At the end of the process, the Issuer can see the result of the process,
-and decide on the next actions between it and the mobile wallet, such as issuing a
-credential.
+sending to the Issuer agent the necessary data. The Issuer conveys the requests
+to the verification service and the responses back to the mobile wallet. At the
+end of the process, the Issuer can see the result of the process, and decide on
+the next actions between it and the mobile wallet, such as issuing a credential.
 
 Again, after using the DRPC protocol for developing and experimenting with the
 implementation, the creators of the protocol can decide to formalize their own
 custom, end-to-end protocol, or continue to use the DRPC protocol instances.
-Important is that they can begin without doing any custom Aries frameworks or
-plugins.
+Important is that they can begin development without doing any Aries frameworks
+customizations or plugins by using DRPC.
 
 ## Tutorial
 
@@ -116,7 +115,13 @@ request response protocol using JSON where the only data shared is:
 
 - a `method` that defines what needs to be done,
 - some `params` in JSON that are up to the requester/server to agree on, and
-- an `id` to connect the response to the request.
+- an (optional) `id` to connect the response to the request.
+
+The response is likewise simple:
+
+- a `result` item if the invocation completed successful containing the return results,
+- an `error` item if the invocation failed, containing details about the failure, and
+- the `id` from the request.
 
 An example of a simple [JSON-RPC] request/response pair from the specification is:
 
@@ -125,14 +130,15 @@ An example of a simple [JSON-RPC] request/response pair from the specification i
 <-- {"jsonrpc": "2.0", "result": 19, "id": 1}
 ```
 
-As will be seen in the DRPC messages below, the protocol uses the [JSON-RPC]
-format, leaving off the `id` in favor of the DIDComm `id` / `thid` model.
+A [JSON-RPC] request may be a batch of requests, each with a different `id` value,
+and the response a similar array, with an entry for each of the requests.
 
-[JSON-RPC] follows a very similar pattern to DIDComm. As a result, in this
-protocol we do not need to add any special handling around the `params` such as
-Base64 encoding, signing, headers and so on, as the parties interacting with the
-protocol by definition must have a shared understanding of the content of the
-`params` and can define any special handling needed amongst themselves.
+[JSON-RPC] follows a similar "parameters defined by the message type" pattern as
+DIDComm. As a result, in this protocol we do not need to add any special
+handling around the `params` such as Base64 encoding, signing, headers and so
+on, as the parties interacting with the protocol by definition must have a
+shared understanding of the content of the `params` and can define any special
+handling needed amongst themselves.
 
 It is expected (although not required) that an Aries Framework receiving a DRPC
 message will simply pass to its associated "business logic" (controller) the
@@ -213,9 +219,7 @@ The `request` message uses the same JSON items as [JSON-RPC], skipping the
 {
   "@type": "https://didcomm.org/drpc/1.0/request",
   "@id": "2a0ec6db-471d-42ed-84ee-f9544db9da4b",
-  "jsonrpc" : "2.0",
-  "method": "string",
-  "params": "<JSON item>"
+  "request" : "<JSON-RPC> request"
 }
 ```
 
@@ -223,24 +227,23 @@ The items in the message are as follows:
 
 - `@type` -- required, must be as above
 - `@id` -- required, must be as defined in [RFC 0005 DIDComm]
-- `jsonrpc` -- **required**, a string specifying the version of the [JSON-RPC] protocol. Currently "2.0", but may change over time.
-- `method` -- **required**, A string containing the name of the method to be invoked.
-  - Method names that begin with the word rpc followed by a period character (U+002E or ASCII 46) are reserved for rpc-internal methods and extensions and **MUST NOT** be used for anything else.
-- `params` -- optional, a JSON structured value that holds the parameter values to be used during the invocation of the method.
+- `request` -- **required**, an item containing a [JSON-RPC] request JSON structure.
+  - `request` **MUST** be either a single [JSON-RPC] request, or an array of [JSON-RPC] requests.
+  - Each [JSON-RPC] request **MUST** have the `jsonrpc` and `method` items.
+  - Each [JSON-RPC] request **MAY** have the `params` and `id` items.
+    - See the details below about the handling of `notification` [JSON-RPC] requests, requests where the `id` field is omitted.
+  - See the [JSON-RPC] specification for details about the `jsonrpc`, `method`, `params` and `id` JSON items.
 
-Since the [JSON-RPC] `id` is automatically included in the DIDComm `request`
-message via the DIDComm `@id`, the [JSON-RPC] request of the form `Notification`
-is not supported.
-
-Batch submission of [JSON-RPC] requests is *NOT* supported.
+Per the [JSON-RPC] specification, if the `id` field of a [JSON-RPC] request is omitted, the `server` should not respond. In this DRPC DIDComm protocol, the `server` is always expected to send a `response`, but **MUST NOT** include
+a [JSON-RPC] response for any [JSON-RPC] request for which the `id` is omitted. This is covered further
+in the [response message](#response-message) section (below).
 
 #### Response Message
 
 A `response` message is sent by the `server` to following the
 processing of the request to convey the output of the processing to the
-`client`. As with the `request` the format mostly matches that of a
-[JSON-RPC] response, with the exception of the `id`, which is handled
-via the `DIDComm` `~thread.thid`.
+`client`. As with the `request` the format mostly exactly that of a
+[JSON-RPC] response.
 
 It is assumed the `client` understands what the contents of the
 `response` message means in the context of the protocol instance. How the
@@ -252,13 +255,7 @@ protocol.
 {
   "@type": "https://didcomm.org/drpc/1.0/response",
   "@id": "63d6f6cf-b723-4eaf-874b-ae13f3e3e5c5",
-  "jsonrpc": "2.0",
-  "result": "<JSON Item>",
-  "error": {
-    "code": 1,
-    "message": "string",
-    "data": "<JSON item>"
-  }
+  "response": "<JSON-RPC> response"
 }
 ```
 
@@ -266,21 +263,24 @@ The items in the message are as follows:
 
 - `@type` -- required, must be as above
 - `@id` -- required, must be as defined in [RFC 0005 DIDComm]
-- `status` -- optional, can be used to indicate the status of an HTTP request.
-- `result` -- optional, a JSON item whose value is determined by the method invoked by the `server`.
-  - **REQUIRED** on success.
-  - **MUST NOT** exist if there was an error invoking the method.
-- `error` -- optional, **REQUIRED** if there was an error invoking the methof, and **MUST NOT** exist if there was not an error triggered during invocation.
-  - If included, the following are the fields in the `error` item:
-    - `code` -- **requred**, an integer that indicates the error type that occurred.
-    - `message` -- **required**, a string providing a short description of the error, that **SHOULD** be limited to a concise single sentence.
-    - `data` -- optional, a JSON item (primitive or structured) that contains additional information about the error.
-      - The value of this item is defined by the `server` (e.g., detailed error information, nested errors etc.).
+- `response` -- **required**, an item containing a [JSON-RPC] response JSON structure.
+  - `response` **MUST** be either single (possibly empty) [JSON-RPC] response, or an array of [JSON-RPC] requests.
+    - If all of the [JSON-RPC] requests in the `request` message are
+      *notifications* (e.g., the `id` item is omitted), the DIDComm `response`
+      message **MUST** be sent back with a value: `"response" : {}`.
+  - Each [JSON-RPC] response **MUST** have the `jsonrpc` and `id` items, and either a `result` or `error` item.
+    - See the [JSON-RPC] specification for details about the `jsonrpc`, `id`, `result` and `error` JSON items.
 
 As with all DIDComm messages that are not the first in a protocol instance, a
 `~thread` decorator **MUST** be included in the `response` message.
 
-If the `server` does not understand how to process the request, a `response`
+The special handling of the "all [JSON-RPC] requests are notifications" is to
+simplify the DRPC handling to know when a DRPC protocol instance is complete. If
+a `response` message is not always required, the DRPC handler would have to
+inspect the `request` message to look for `id`s to determine when the protocol
+completes.
+
+If the `server` does not understand how to process a [JSON-RPC] request, a `response`
 error should be returned with the `error.code` value `-32601`, `error.message`
 set to `Method not found`, and no `error.data` item, as per the [JSON-RPC]
 specification.
@@ -288,11 +288,11 @@ specification.
 ### Constraints
 
 The primary constraint with this protocol is that the two parties using the
-protocol must understand one another--what `method` to use, what to provide in
-the `params`, how to process the `request`, what the `response` means, and so
-on. It is not a protocol to be used between arbitrary parties, but rather one
-where the parties have knowledge outside of DIDComm of one another and their
-mutual capabilities.
+protocol must understand one another--what [JSON-RPC] request(s) to use, what
+parameters to provide, how to process the those requests, what the `response`
+means, and so on. It is not a protocol to be used between arbitrary parties, but
+rather one where the parties have knowledge outside of DIDComm of one another
+and their mutual capabilities.
 
 On the other hand, that constraint enables great flexibility for explicitly
 collaborating agents (such as a mobile wallet and the agent of its manufacturer)
@@ -309,11 +309,11 @@ purpose" protocols.
 
 ### Codes Catalog
 
-A `method` codes catalog *could* be developed over time and be included in this
-part of the RFC. This might an additional step in transitioning a given
-interaction implemented using DRPC into formally specified interaction. On the
-other hand, simply defining a full DIDComm protocol will often be a far better
-approach.
+A [JSON-RPC] request codes catalog *could* be developed over time and be
+included in this part of the RFC. This might an intermediate step in transitioning
+a given interaction implemented using DRPC into formally specified interaction.
+On the other hand, simply defining a full DIDComm protocol will often be a far
+better approach.
 
 At this time, there are no codes to be cataloged.
 
@@ -326,6 +326,15 @@ collaborating can use this protocol without having to first define a
 task-specific protocol.
 
 ## Rationale and alternatives
+
+We considered not supporting the *notification* and *batch* forms of the
+[JSON-RPC] specification, and decided it made sense to allow for the full
+support of the [JSON-RPC] specification, including requests of those forms. That
+said, we also found that the concept of **not** having a DRPC `response` message
+in some (likely, rare) cases based on the contents of the `request` JSON item
+(e.g., when all of the `id`s are omitted from the [JSON-RPC] requests) would
+unnecessarily complicate the DIDComm protocol instance handling about when it is
+complete. As a result, a DRPC `response` message is always required.
 
 This design builds on the experience of implementations of this kind of feature
 using [RFC 0095 Basic Message] and [RFC 0335 HTTP Over DIDComm]. This design
@@ -342,7 +351,7 @@ request-response transaction -- at the level of defining a DIDComm protocol.
 The use of `params` and leaving the content and semantics of the params up to
 the `client` and `server` means that they can define the appropriate handling of
 the parameters. This eliminates the need for the protocol to define, for
-example, that the data needs to be Base64 encoding for transmission, or if some
+example, that some data needs to be Base64 encoding for transmission, or if some
 values need to be cryptographically signed. Such details are left to the
 participants and how they are using the protocol.
 
@@ -351,9 +360,10 @@ participants and how they are using the protocol.
 This protocol has similar goals to the [RFC 0335 HTTP Over DIDComm] protocol,
 but takes a lighter weight, more flexible approach. We expect that implementing
 HTTP over DIDComm using this protocol will be as easy as using [RFC 0335 HTTP
-Over DIDComm], where the `params` data structure holds the `headers` and `body`
-elements for the HTTP request. On the other hand, using the explicit [RFC 0335
-HTTP Over DIDComm] is likely a better choice if it is available and needed.
+Over DIDComm], where the [JSON-RPC] request's `params` data structure holds the
+`headers` and `body` elements for the HTTP request. On the other hand, using the
+explicit [RFC 0335 HTTP Over DIDComm] is might be a better choice if it is
+available and exactly what is needed.
 
 [RFC 0335 HTTP Over DIDComm]: /features/0335-http-over-didcomm/README.md
 
@@ -372,8 +382,6 @@ approach is less than ideal in that:
 
 ## Unresolved questions
 
-- [JSON-RPC] includes the concept of batch requests, where a set of [JSON-RPC] objects are included in a single request. Should we add support for batch requests to this DRPC protocol?
-- [JSON-RPC] includes the concept of a "notification" request, where a response to the request is not needed. Should we add support for notification requests to this DRPC protocol?
 - Should we include the idea of a `request` having a goal code ([RFC 0519 Goal Codes])?
 
 [RFC 0519 Goal Codes]: /concepts/0519-goal-codes/README.md
