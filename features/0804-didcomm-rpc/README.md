@@ -216,11 +216,11 @@ The `request` message uses the same JSON items as [JSON-RPC], skipping the
 `id` in favor of the existing DIDComm `@id` and thread handling.
 
 ```jsonc
-{
-  "@type": "https://didcomm.org/drpc/1.0/request",
-  "@id": "2a0ec6db-471d-42ed-84ee-f9544db9da4b",
-  "request" : "<JSON-RPC> request"
-}
+  {
+    "@type": "https://didcomm.org/drpc/1.0/request",
+    "@id": "2a0ec6db-471d-42ed-84ee-f9544db9da4b",
+    "request" : {"jsonrpc": "2.0", "method": "subtract", "params": [42, 23], "id": 1}
+  }
 ```
 
 The items in the message are as follows:
@@ -252,11 +252,11 @@ protocol.
 
 ```jsonc
 
-{
-  "@type": "https://didcomm.org/drpc/1.0/response",
-  "@id": "63d6f6cf-b723-4eaf-874b-ae13f3e3e5c5",
-  "response": "<JSON-RPC> response"
-}
+  {
+    "@type": "https://didcomm.org/drpc/1.0/response",
+    "@id": "63d6f6cf-b723-4eaf-874b-ae13f3e3e5c5",
+    "response": {"jsonrpc": "2.0", "result": 19, "id": 1}
+  }
 ```
 
 The items in the message are as follows:
@@ -264,26 +264,29 @@ The items in the message are as follows:
 - `@type` -- required, must be as above
 - `@id` -- required, must be as defined in [RFC 0005 DIDComm]
 - `response` -- **required**, an item containing a [JSON-RPC] response JSON structure.
-  - `response` **MUST** be either single (possibly empty) [JSON-RPC] response, or an array of [JSON-RPC] requests.
+  - `response` **MUST** be either single (possibly empty) [JSON-RPC] response,
+    or an array of [JSON-RPC] responses.
     - If all of the [JSON-RPC] requests in the `request` message are
       *notifications* (e.g., the `id` item is omitted), the DIDComm `response`
-      message **MUST** be sent back with a value: `"response" : {}`.
+      message **MUST** be sent back with the value: `"response" : {}`.
   - Each [JSON-RPC] response **MUST** have the `jsonrpc` and `id` items, and either a `result` or `error` item.
     - See the [JSON-RPC] specification for details about the `jsonrpc`, `id`, `result` and `error` JSON items.
 
 As with all DIDComm messages that are not the first in a protocol instance, a
 `~thread` decorator **MUST** be included in the `response` message.
 
-The special handling of the "all [JSON-RPC] requests are notifications" is to
-simplify the DRPC handling to know when a DRPC protocol instance is complete. If
-a `response` message is not always required, the DRPC handler would have to
-inspect the `request` message to look for `id`s to determine when the protocol
-completes.
+The special handling of the "all [JSON-RPC] requests are notifications"
+described above is to simplify the DRPC handling to know when a DRPC protocol
+instance is complete. If a `response` message is not always required, the DRPC
+handler would have to inspect the `request` message to look for `id`s to
+determine when the protocol completes.
 
-If the `server` does not understand how to process a [JSON-RPC] request, a `response`
-error should be returned with the `error.code` value `-32601`, `error.message`
-set to `Method not found`, and no `error.data` item, as per the [JSON-RPC]
-specification.
+If the `server` does not understand how to process a given [JSON-RPC] request, a
+`response` error **SHOULD** be returned (as per the [JSON-RPC] specification) with:
+
+- `error.code` value `-32601`,
+- `error.message` set to `Method not found`, and
+- no `error.data` item.
 
 ### Constraints
 
