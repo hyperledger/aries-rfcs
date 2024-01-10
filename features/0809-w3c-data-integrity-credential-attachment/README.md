@@ -1,4 +1,4 @@
-# Aries RFC 0806: W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials
+# Aries RFC 0809: W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials
 
 - Authors: Timo Glastra (Animo Solutions)
 - Status: [PROPOSED](/README.md#proposed)
