@@ -1,0 +1,319 @@
+# Aries RFC 0806: W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials
+
+- Authors: Timo Glastra (Animo Solutions)
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2024-01-10
+- Status Note:
+- Supersedes: [Aries RFC 0593: JSON-LD Credential Attachment](https://github.com/hyperledger/aries-rfcs/blob/main/features/0593-json-ld-cred-attach/README.md)
+- Start Date: 2023-12-18
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
+
+## Summary
+
+This RFC registers an attachment format for use in the [issue-credential V2](../0453-issue-credential-v2/README.md) protocol based on W3C Verifiable Credentials with [Data Integrity Proofs](https://www.w3.org/TR/vc-data-integrity/) from the [VC Data Model](https://www.w3.org/TR/vc-data-model/#linked-data-proofs).
+
+## Motivation
+
+The Issue Credential protocol needs an attachment format to be able to exchange W3C verifiable credentials. It is desirable to make use of specifications developed in an open standards body, such as the [Credential Manifest](https://identity.foundation/credential-manifest/) for which the attachment format is described in [RFC 0511: Credential-Manifest Attachment format](../0511-dif-cred-manifest-attach/README.md). However, the _Credential Manifest_ is not finished and ready yet, and therefore there is a need to bridge the gap between standards.
+
+## Tutorial
+
+Complete examples of messages are provided in the [reference section](#reference).
+
+## Reference
+
+### Credential Offer Attachment Format
+
+Format identifier: `didcomm/w3c-di-vc-offer@v0.1`
+
+```json
+{
+  "cryptosuites_supported": [
+    "anoncredsvc-2023",
+    "eddsa-rdfc-2022",
+    "Ed25519Signature2020"
+  ],
+  "data_model_versions_supported": ["1.1", "2.0"],
+  "binding_required": true,
+  "binding_method": {
+    "anoncreds_link_secret": {
+      "nonce": "1234",
+      "cred_def_id": "did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT/credential-definition",
+      "key_correctness_proof": "<key_correctness_proof>"
+    },
+    "didcomm_signed_attachment": {
+      "algs_supported": ["EdDSA"],
+      "did_methods_supported": ["key", "web"],
+      "nonce": "1234"
+    }
+  },
+  "credential": {
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1",
+      "https://w3id.org/security/data-integrity/v2",
+      {
+        "@vocab": "https://www.w3.org/ns/credentials/issuer-dependent#"
+      }
+    ],
+    "type": ["VerifiableCredential"],
+    "issuer": "did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT",
+    "issuanceDate": "2024-01-10T04:44:29.563418Z",
+    "credentialSubject": {
+      "height": 175,
+      "age": 28,
+      "name": "Alex",
+      "sex": "male"
+    }
+  }
+}
+```
+
+- `cryptosuites_supported` - Required. List of strings indicated the supported cryptographic suites the issuer supports for signing the credential. The list MUST contain at least one value. The values must either represent the [`proof.type`](https://www.w3.org/TR/vc-data-integrity/#proofs) of the credential to be issued. In the case the `proof.type` value of `DataIntegrityProof` is supported, values may also include the associated supported [`cryptosuite`](https://www.w3.org/TR/vc-data-integrity/#dataintegrityproof) values. Inclusion of `DataIntegrityProof` is not recommend, as it does not indicate which specific cryptographic suites are supported.
+- `data_model_versions_supported` - Required. List of strings indicating the supported VC Data Model versions. The list MUST contain at least one value. The values MUST be a valid data model version. Current supported values include `1.1` and `2.0`.
+- `binding_required` - Optional. Boolean indicating whether the credential MUST be bound to the holder. If omitted, the credential is not required to be bound to the holder. If set to `true`, the credential MUST be bound to the holder using at least one of the binding methods defined in `binding_method`.
+- `binding_method` - Required if `binding_required` is true. Object containing key-value pairs of binding methods supported by the issuer to bind the credential to a holder. If the value is omitted, this indicates the issuer does not support any binding methods for issuance of the credential. See [Binding Methods](#binding-methods) for a registry of default binding methods supported as part of this RFC.
+- `credential` - Required. The credential to be issued. The credential should be compliant with the VC Data Model. The credential MUST NOT contain any proofs. Some properties MAY be omitted if they will only be available at time of issuance, such as `issuanceDate`, `issuer`, `credentialSubject.id`, `credentialStatus`, `credentialStatus.id`. The credential MUST be conformant with one of the data model versions indicated in `data_model_versions_supported`.
+
+### Credential Request Attachment Format
+
+Format identifier: `didcomm/w3c-di-vc-request@v0.1`
+
+This format is used to request a verifiable credential. The JSON structure might look like this:
+
+```json
+{
+  "data_model_version": "2.0",
+  "binding_proof": {
+    "anoncreds_link_secret": {
+      "entropy": "<random-entropy>",
+      "blinded_ms": {},
+      "blinded_ms_corectness_proof": {},
+      "nonce": "<random-nonce>"
+    },
+    "didcomm_signed_attachment": {
+      "attachment_id": "<@id of the attachment>"
+    }
+  }
+}
+```
+
+- `data_model_version` - Required. The data model version of the credential to be issued. The value MUST be a valid data model version and match one of the values from the `data_model_versions_supported` offer.
+- `binding_proof` - Required if `binding_required` is `true` in the offer. Object containing key-value pairs of proofs for the binding to the holder. The keys MUST match keys of the `binding_method` object from the offer. See [Binding Methods](#binding-methods) for a registry of default binding methods supported as part of this RFC.
+
+### Credential Attachment Format
+
+Format identifier: `didcomm/w3c-di-vc@v0.1`
+
+This format is used to transmit a verifiable credential. The JSON structure might look like this:
+
+```json
+{
+  "credential": {
+    // vc with proof object or array
+  }
+}
+```
+
+- `credential` - The signed credential. MUST be a valid verifiable credential object with one or more proofs and MUST conform to VC Data Model version as defined in the `data_model_version` of the request.
+
+A complete [`issue-credential` message from the Issue Credential protocol 2.0](../0453-issue-credential-v2/README.md#issue-credential) might look like this:
+
+```json
+{
+  "@id": "284d3996-ba85-45d9-964b-9fd5805517b6",
+  "@type": "https://didcomm.org/issue-credential/2.0/issue-credential",
+  "comment": "<some comment>",
+  "formats": [
+    {
+      "attach_id": "5b38af88-d36f-4f77-bb7a-2f04ab806eb8",
+      "format": "didcomm/w3c-di-vc@v0.1"
+    }
+  ],
+  "credentials~attach": [
+    {
+      "@id": "5b38af88-d36f-4f77-bb7a-2f04ab806eb8",
+      "mime-type": "application/ld+json",
+      "data": {
+        "base64": "ewogICAgICAgICAgIkBjb250ZXogWwogICAgICAg...(clipped)...RNVmR0SXFXZhWXgySkJBIgAgfQogICAgICAgIH0="
+      }
+    }
+  ]
+}
+```
+
+### Binding Methods
+
+The attachment format supports different methods to bind the credential to the receiver of the credential. In the offer message the issuer can indicate which binding methods are supported in the `binding_methods` object. Each key represents the id of the supported binding method.
+
+This section defines a set of binding methods supported by this attachment format, but other binding methods may be used. Based on the binding method, the request needs to include a `binding_proof` object where the key matches the key of the binding method from the offer.
+
+#### AnonCreds Link Secret
+
+Identifier: `anoncreds_link_secret`
+
+This binding method is intended to be used in combination with a credential containing an AnonCreds proof.
+
+##### Binding Method in Offer
+
+The structure of the binding method in the offer MUST match the structure of the [Credential Offer](https://hyperledger.github.io/anoncreds-spec/#credential-offer) as defiend in the AonCreds specification, with the exclusion of the `schema_id` key.
+
+```jsonc
+{
+  "nonce": "1234",
+  "cred_def_id": "did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT/credential-definition",
+  "key_correctness_proof": {
+    /* key correctness proof object */
+  }
+}
+```
+
+##### Binding Proof in Request
+
+The structure of the binding proof in the request MUST match the structure of the [Credential Request](https://hyperledger.github.io/anoncreds-spec/#credential-request) as defined in the AnonCreds specification.
+
+```jsonc
+{
+  "anoncreds_link_secret": {
+    "entropy": "<random-entropy>",
+    "blinded_ms": {
+      /* blinded ms object */
+    },
+    "blinded_ms_corectness_proof": {
+      /* blinded ms correctness proof object */
+    },
+    "nonce": "<random-nonce>"
+  }
+}
+```
+
+##### Binding in Credential
+
+The issued credential should be bound to the holder by including the blinded link secret in the credential as defined in the [Issue Credential section](https://hyperledger.github.io/anoncreds-spec/#issue-credential) of the AnonCreds specification. Credential bound using the AnonCreds link secret binding method MUST contain an proof conforming to the [AnonCreds W3C Proof](https://hyperledger.github.io/anoncreds-spec/#proofs-signatures) as defined in the AnonCreds specification.
+
+#### DIDComm Signed Attachment
+
+Identifier: `didcomm_signed_attachment`
+
+This binding method leverages [DIDComm signed attachments](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#signing-attachments) to bind a credential to a specific key and/or identifier.
+
+##### Binding Method in Offer
+
+```jsonc
+{
+  "didcomm_signed_attachment": {
+    "algs_supported": ["EdDSA"],
+    "did_methods_supported": ["key"],
+    "nonce": "b19439b0-4dc9-4c28-b796-99d17034fb5c"
+  }
+}
+```
+
+- `algs_supported` - Required. List of strings indicating the Json Web Algorithms supported by the issuer for verifying the signed attachment. The list MUST contain at least one value. The values MUST be a valid algorithm identifier as defined in the [JSON Web Signature and Encryption Algorithms](https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms) registry.
+- `did_methods_supported` - Required. List of strings indicating which did methods are supported by the issuer for binding the credential to the holder. Values should ONLY include the method identifier of the did method. Examples values include `key` or `web`.
+- `nonce` - Required. Nonce to be used in the request to prevent replay attacks of the signed attachment.
+
+##### Binding Proof in Request
+
+The binding proof in the request points to an appended attachment containing the signed attachment.
+
+```json
+{
+  "didcomm_signed_attachment": {
+    "attachment_id": "<@id of the attachment>"
+  }
+}
+```
+
+- `attachment_id` - The id of the appended attachment included in the request message that contains the signed attachment.
+
+###### Signed Attachment Content
+
+The attachment MUST be signed by including a signature in the `jws` field of the attachment. The data MUST be a JSON document encoded in the `base64` field of the attachment. The structure of the signed attachment is described below.
+
+**JWS Payload**
+
+```json
+{
+  "nonce": "<request_nonce>",
+  "aud": "did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT"
+}
+```
+
+- `nonce` - Required. The `nonce` from the `didcomm_signed_attachment` object within `binding_method` from the credential offer
+- `aud` - Required. Intended audience of the signed attachment. MUST be the same as the issuer identifier `issuer` or `issuer.id` from the `credential` in the offer. If the `issuer` is not included in the credential in the offer, the `aud` MUST be the same as the did of the recipient did of the DIDComm message containing the request message.
+
+**Protected Header**
+
+```json
+{
+  "alg": "EdDSA",
+  "kid": "did:key:z6MkkwiqX7BvkBbi37aNx2vJkCEYSKgHd2Jcgh4AUhi4YY1u#z6MkkwiqX7BvkBbi37aNx2vJkCEYSKgHd2Jcgh4AUhi4YY1u"
+}
+```
+
+- `alg`: REQUIRED. A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. MUST NOT be none or an identifier for a symmetric algorithm (MAC). MUST match one of the `algs_supported` entries from the offer `binding_method` object.
+- `kid`: REQUIRED. JOSE Header containing the DID URL pointing to a specific key in a did document. The did method of the DID URL MUST match with one of the `did_methods_supported` from the offer `binding_method` object.
+
+A signed attachment appended to a request message might look like this:
+
+```json
+{
+  "@id": "284d3996-ba85-45d9-964b-9fd5805517b6",
+  "@type": "https://didcomm.org/issue-credential/2.0/request-credential",
+  "comment": "<some comment>",
+  "formats": [
+    {
+      "attach_id": "5b38af88-d36f-4f77-bb7a-2f04ab806eb8",
+      "format": "didcomm/w3c-di-vc@v0.1"
+    }
+  ],
+  "~attach": [{
+      "@id": "123",
+      "mime-type": "application/json",
+      "data": {
+          "base64": "<base64-encoded-json-attachment-content>",
+          "jws": {
+            "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+            "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+          }
+      }
+
+  }]
+  "credentials~attach": [
+    {
+      "@id": "5b38af88-d36f-4f77-bb7a-2f04ab806eb8",
+      "mime-type": "application/ld+json",
+      "data": {
+        "base64": "ewogICAgICAgICAgIkBjb250ZXogWwogICAgICAg...(clipped)...RNVmR0SXFXZhWXgySkJBIgAgfQogICAgICAgIH0="
+      }
+    }
+  ]
+}
+```
+
+##### Binding in Credential
+
+The issued credential should be bound to the holder by including the did in the credential as `credentialSubject.id` or `holder`.
+
+## Drawbacks
+
+While it has a similar setup and structure compared to OpenID for Verifiable Credential Issuance, this attachment format only focuses on issuance of W3C Verifiable Credentials. Therefore another (but probably quite similar) attachment format needs to be defined to support issuance of non-W3C VCs
+
+## Rationale and alternatives
+
+[RFC 0593: JSON-LD Credential Attachment](https://github.com/hyperledger/aries-rfcs/blob/main/features/0593-json-ld-cred-attach/README.md), [W3C VC API](https://w3c-ccg.github.io/vc-api/) allows issuance of credentials using only linked data signatures, while [RFC 0592: Indy Attachment](https://github.com/hyperledger/aries-rfcs/blob/main/features/0592-indy-attachments/README.md) supports issuance of AnonCreds credentials. This attachment format aims to support issuance of both previous attachment formats (while for AnonCreds it now being in the W3C model), as well as supporting additional features such as issuance W3C JWT VCs, credentials with multiple proofs, and cryptographic binding of the credential to the holder.
+
+## Prior art
+
+The attachment format in this RFC is heavily inspired by [RFC 0593: JSON-LD Credential Attachment](https://github.com/hyperledger/aries-rfcs/blob/main/features/0593-json-ld-cred-attach/README.md), [W3C VC API](https://w3c-ccg.github.io/vc-api/) and [OpenID for Verifiable Credential Issuance](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html).
+
+## Unresolved questions
+
+- Should we support multi-credential offers?
+  - It may be desirable to have multi-format (so jwt or ldp_vc), or should that also be handled by multiple attachment formats?
+- Should we support `jwk` as well, in addition to `kid` in the header? Would allow a credential to be bound to a JWK rather than a did
+- With VCDM 2.0 being mostly ready for usage, it might be worth to support both v1.x and v2.x versions of the VCDM in this attachment format. Version support could be indicated in the proposal/offer/request messages using a `data_model_version` property. An implementer is not required to support all versions, but we would define both `v1.1` and `v2.0` as currently recognized data model versions.
+- Do we need to support multiple binding methods for a single credential?
+  - Relevant in case of W3C VC with AnonCreds + Ed22519
+- Wondering whether AnonCreds should be a separate format? Ideally not, but in that case we need to define some properties that can be included for specific proof.type values.
+- Is it required for the receiver to know upfront which proof type(s) the issuer will use to secure the integrity of the VC?
