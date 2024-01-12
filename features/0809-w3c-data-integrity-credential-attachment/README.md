@@ -80,6 +80,7 @@ This format is used to request a verifiable credential. The JSON structure might
   "binding_proof": {
     "anoncreds_link_secret": {
       "entropy": "<random-entropy>",
+      "cred_def_id": "did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT/credential-definition",
       "blinded_ms": {},
       "blinded_ms_corectness_proof": {},
       "nonce": "<random-nonce>"
@@ -126,7 +127,7 @@ A complete [`issue-credential` message from the Issue Credential protocol 2.0](.
   "credentials~attach": [
     {
       "@id": "5b38af88-d36f-4f77-bb7a-2f04ab806eb8",
-      "mime-type": "application/ld+json",
+      "mime-type": "application/json",
       "data": {
         "base64": "ewogICAgICAgICAgIkBjb250ZXogWwogICAgICAg...(clipped)...RNVmR0SXFXZhWXgySkJBIgAgfQogICAgICAgIH0="
       }
@@ -248,7 +249,7 @@ The attachment MUST be signed by including a signature in the `jws` field of the
 - `alg`: REQUIRED. A digital signature algorithm identifier such as per IANA "JSON Web Signature and Encryption Algorithms" registry. MUST NOT be none or an identifier for a symmetric algorithm (MAC). MUST match one of the `algs_supported` entries from the offer `binding_method` object.
 - `kid`: REQUIRED. JOSE Header containing the DID URL pointing to a specific key in a did document. The did method of the DID URL MUST match with one of the `did_methods_supported` from the offer `binding_method` object.
 
-A signed attachment appended to a request message might look like this:
+A signed binding request attachment appended to a request message might look like this:
 
 ```json
 {
@@ -258,7 +259,7 @@ A signed attachment appended to a request message might look like this:
   "formats": [
     {
       "attach_id": "5b38af88-d36f-4f77-bb7a-2f04ab806eb8",
-      "format": "didcomm/w3c-di-vc@v0.1"
+      "format": "didcomm/w3c-di-vc-request@v0.1"
     }
   ],
   "~attach": [
@@ -277,7 +278,7 @@ A signed attachment appended to a request message might look like this:
   "credentials~attach": [
     {
       "@id": "5b38af88-d36f-4f77-bb7a-2f04ab806eb8",
-      "mime-type": "application/ld+json",
+      "mime-type": "application/json",
       "data": {
         "base64": "ewogICAgICAgICAgIkBjb250ZXogWwogICAgICAg...(clipped)...RNVmR0SXFXZhWXgySkJBIgAgfQogICAgICAgIH0="
       }
