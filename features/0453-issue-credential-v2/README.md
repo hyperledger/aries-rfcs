@@ -273,6 +273,7 @@ DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`offer-credential` a
 Hyperledger Indy Credential Abstract | `hlindy/cred-abstract@v2.0` | [`cred abstract` format](../0592-indy-attachments/README.md#cred-abstract-format)|
 Linked Data Proof VC Detail  | `aries/ld-proof-vc-detail@v1.0` | [`ld-proof-vc-detail` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format) |
 Hyperledger AnonCreds Credential Offer | `anoncreds/credential-offer@v1.0` | [`Credential Offer` format](../0771-anoncreds-attachments/README.md#credential-offer-format)|
+W3C VC - Data Integrity Proof Credential Offer | `didcomm/w3c-di-vc-offer@v0.1` | [`Credential Offer` format](../0809-w3c-data-integrity-credential-attachment/README.md#credential-offer-attachment-format)|
 
 #### Request Credential
 
@@ -344,6 +345,7 @@ DIF Credential Manifest | `dif/credential-manifest@v1.0` | [`request-credential`
 Hyperledger Indy Credential Request | `hlindy/cred-req@v2.0` | [`cred request` format](../0592-indy-attachments/README.md#cred-request-format)|
 Linked Data Proof VC Detail  | `aries/ld-proof-vc-detail@v1.0` | [`ld-proof-vc-detail` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format) |
 Hyperledger AnonCreds Credential Request | `anoncreds/credential-request@v1.0` | [`Credential Request` format](../0771-anoncreds-attachments/README.md#credential-request-format)|
+W3C VC - Data Integrity Proof Credential Request | `didcomm/w3c-di-vc-request@v0.1` | [`Credential Request` format](../0809-w3c-data-integrity-credential-attachment/README.md#credential-request-attachment-format)|
 
 #### Issue Credential
 
@@ -415,6 +417,7 @@ Credential Format | Format Value | Link to Attachment Format | Comment |
 Linked Data Proof VC  | `aries/ld-proof-vc@v1.0` | [`ld-proof-vc` attachment format](../0593-json-ld-cred-attach/README.md#ld-proof-vc-attachment-format) |
 Hyperledger Indy Credential | `hlindy/cred@v2.0` | [credential format](../0592-indy-attachments/README.md#credential-format)|
 Hyperledger AnonCreds Credential| `anoncreds/credential@v1.0` | [`Credential` format](../0771-anoncreds-attachments/README.md#credential-format)|
+W3C VC - Data Integrity Proof Credential | `didcomm/w3c-di-vc@v0.1` | [`Credential` format](../0809-w3c-data-integrity-credential-attachment/README.md#credential-attachment-format)|
 
 #### Adopted Problem Report
 
