@@ -111,6 +111,8 @@ This format is used to transmit a verifiable credential. The JSON structure migh
 
 - `credential` - The signed credential. MUST be a valid verifiable credential object with one or more proofs and MUST conform to VC Data Model version as defined in the `data_model_version` of the request.
 
+It is up to the issuer to the pick an appropriate cryptographic suite to sign the credential. The issuer may use the cryptographic binding material provided by the holder to select the cryptographic suite. For example, when the `anoncreds_link_secret` binding method is used, the issuer should use an `DataIntegrityProof` with the `anoncredsvc-2023` cryptographic suite. When a holder provides a signed attachment as part of the binding proof using the `EdDSA` JWA alg, the issuer could use a `DateIntegrityProof` with the `eddsa-rdfc-2022` cryptographic suite. However, it is not required for the cryptographic suite used for the signature on the credential to be in any way related to the cryptographic suite used for the binding proof, unless the binding method explicitly requires this (for example the `anoncreds_link_secret` binding method).
+
 A complete [`issue-credential` message from the Issue Credential protocol 2.0](../0453-issue-credential-v2/README.md#issue-credential) might look like this:
 
 ```json
@@ -293,7 +295,9 @@ The issued credential should be bound to the holder by including the did in the 
 
 ## Drawbacks
 
-While it has a similar setup and structure compared to OpenID for Verifiable Credential Issuance, this attachment format only focuses on issuance of W3C Verifiable Credentials. Therefore another (but probably quite similar) attachment format needs to be defined to support issuance of non-W3C VCs
+- While it has a similar setup and structure compared to OpenID for Verifiable Credential Issuance, this attachment format only focuses on issuance of W3C Verifiable Credentials. Therefore another (but probably quite similar) attachment format needs to be defined to support issuance of non-W3C VCs
+- There is currently no way for an issuer or holder to indicate which cryptographic suites they support for the signature of the credential. Currently it's at the discretion of the issuer to decide which cryptographic suite to use. In a future (minor) version we can add an optional way for a) the issuer to indicate which cryptographic suites they support, and b) the holder to indicate which cryptographic suites they support.
+- There is currently no attachment format defined for a credential proposal. This makes it impossible for a holder to initiate the issuance of a credential using this attachment format. In a future (minor) version the proposal attachment format can be added.
 
 ## Rationale and alternatives
 
@@ -304,5 +308,3 @@ While it has a similar setup and structure compared to OpenID for Verifiable Cre
 The attachment format in this RFC is heavily inspired by [RFC 0593: JSON-LD Credential Attachment](https://github.com/hyperledger/aries-rfcs/blob/main/features/0593-json-ld-cred-attach/README.md), [W3C VC API](https://w3c-ccg.github.io/vc-api/) and [OpenID for Verifiable Credential Issuance](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html).
 
 ## Unresolved questions
-
--
