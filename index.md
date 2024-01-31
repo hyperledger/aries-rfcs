@@ -124,6 +124,8 @@
 * [0757: Push Notification](concepts/0757-push-notification/README.md) (2022-11-02  &mdash; [`concept`](/tags.md#concept))
 * [0771: AnonCreds Attachment Formats for Requesting and Presenting Credentials](features/0771-anoncreds-attachments/README.md) (2023-02-24 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 * [0780: Use Data URLs for Images and More in Credential Attributes](features/0780-data-urls-images/README.md) (2023-03-31 &mdash; [`feature`](/tags.md#feature))
+* [0793: Unqualified DID Transition](features/0793-unqualfied-dids-transition/README.md) (2023-07-11, [12 impls](features/0793-unqualfied-dids-transition/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`community-update`](/tags.md#community-update))
+* [0794: DID Rotate 1.0](features/0794-did-rotate/README.md) (2023-08-29  &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 
 ## [RETIRED](README.md#retired)
 * [0013: Overlays](concepts/0013-overlays/README.md) (2023-01-15 &mdash; [`concept`](/tags.md#concept))
