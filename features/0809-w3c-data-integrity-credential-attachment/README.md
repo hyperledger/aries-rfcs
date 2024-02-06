@@ -219,7 +219,7 @@ This binding method leverages [DIDComm signed attachments](https://github.com/hy
 ```
 
 - `algs_supported` - Required. List of strings indicating the Json Web Algorithms supported by the issuer for verifying the signed attachment. The list MUST contain at least one value. The values MUST be a valid algorithm identifier as defined in the [JSON Web Signature and Encryption Algorithms](https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms) registry.
-- `did_methods_supported` - Required. List of strings indicating which did methods are supported by the issuer for binding the credential to the holder. Values should ONLY include the method identifier of the did method. Examples values include `key` or `web`.
+- `did_methods_supported` - Required. List of strings indicating which did methods are supported by the issuer for binding the credential to the holder. The list MUST contain at least one value. Values should ONLY include the method identifier of the did method. Examples values include `key` or `web`.
 - `nonce` - Required. Nonce to be used in the request to prevent replay attacks of the signed attachment.
 
 ##### Binding Proof in Request
@@ -245,12 +245,10 @@ The attachment MUST be signed by including a signature in the `jws` field of the
 ```json
 {
   "nonce": "<request_nonce>",
-  "aud": "did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT"
 }
 ```
 
 - `nonce` - Required. The `nonce` from the `didcomm_signed_attachment` object within `binding_method` from the credential offer
-- `aud` - Required. Intended audience of the signed attachment. MUST be the same as the issuer identifier `issuer` or `issuer.id` from the `credential` in the offer. If the `issuer` is not included in the credential in the offer, the `aud` MUST be the same as the did of the recipient did of the DIDComm message containing the request message.
 
 **Protected Header**
 
