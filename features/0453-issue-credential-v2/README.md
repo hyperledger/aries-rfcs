@@ -1,7 +1,7 @@
 # Aries RFC 0453: Issue Credential Protocol 2.0
 
 - Authors: Nikita Khateev, Stephen Klump, Stephen Curran
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted) (2.1 and 2.2 have not received traction)
 - Since: 2021-04-15
 - Status Note:  See [RFC 0454](../0454-present-proof-v2/README.md) for the presentation part of using credentials. Version 2.1 adds issuing multiple credentials in one protocol instance.
 - Supersedes: [RFC 0036 Issue Credential v1.x](../0036-issue-credential/README.md)

@@ -1,7 +1,7 @@
 # Aries RFC 0048: Trust Ping Protocol 1.0
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2019-02-01
 - Status Note: Numerous implementations. 
 - Supersedes: [Indy HIPE 0032](https://github.com/hyperledger/indy-hipe/tree/main/text/0032-trust-ping)

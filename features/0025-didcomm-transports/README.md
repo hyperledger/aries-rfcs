@@ -1,7 +1,7 @@
 # Aries RFC 0025: DIDComm Transports
 
 - Authors: [Sam Curren](sam@sovrin.org)
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2019-12-05
 - Status Note:  
 - Supersedes: [INDY PR 94](https://github.com/hyperledger/indy-hipe/pull/94)
