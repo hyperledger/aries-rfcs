@@ -1,7 +1,7 @@
 # 0302: Aries Interop Profile
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [John Jordan](mailto:john.jordan@gov.bc.ca) Province of British Columbia
-- Status: [ACCEPTED](https://github.com/hyperledger/aries-rfcs/blob/main/README.md#accepted)
+- Status: [ADOPTED](https://github.com/hyperledger/aries-rfcs/blob/main/README.md#adopted)
 - Since: 2021-01-06
 - Status Note: This RFC defines an Aries Interop Profile process and Aries Interop Profile versions
 - Supersedes:
