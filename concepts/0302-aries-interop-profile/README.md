@@ -170,7 +170,7 @@ Since approval of the AIP 2.0 profile, the following RFCs have been clarified by
 - 2024-02: Clarifications and removals of RFCs that have been determined to be impractical for AIP 2.0.
   - See the [AIP 2.0 RFC Removed](#aip-20-rfcs-removed) section for details about the removed RFCs
   - See the updated [implementer's note on encryption envelopes in AIP 2.0](#implementers-note-about-didcomm-envelopes-and-the-accept-element) that highlights the removal of RFC 0587-encryption-envelope-v2.
-  - Pull request: [#XXX](https://github.com/hyperledger/aries-rfcs/pull/XXX)
+  - Pull request: [#814](https://github.com/hyperledger/aries-rfcs/pull/814)
 
 #### AIP 2.0 Changelog by Clarifications
 
