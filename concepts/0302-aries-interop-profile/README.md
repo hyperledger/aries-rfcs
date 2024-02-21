@@ -188,7 +188,9 @@ The following clarifications have been made to RFCs that make up AIP 2.0. This l
 - RFC 0023 DID Exchange: Status update to Adopted, added to example the use of a DID Rotate attachment to include a signature on the the DID.
 - RFC 0035 Report Problem: Clarification that a `description.code` is required, clarification on conventions for warnings.
 - RFC 0044 DIDComm File and MIME Types: Clarifications on fallbacks for the mime types and why, and on using JWEs.
+- RFC 0211 Route Coordination: Clarification to add a missing comma to an example.
 - RFC 0434 Out of Band: Clarification that did:peer:2 can be used for reuse.
+- RFC 0627 Static Peer DIDs: Clarifications that reflect the transition to Peer DIDs 2 and 4.
 - RFC 0592 Indy Attachments: Clarification on handling "unrevealed attributes" and on encoding integer strings as numbers (e.g. encoding both `"1"` vs. `1` as integers)
 - RFC 0510 DIF Presentation Exchange Attachment: Correction of reference into the DIF spec that there is an "s" on "definitions" in `dif/presentation-exchange/definitions@v1.0`
 
@@ -210,7 +212,7 @@ Concept | [0094-cross-domain messaging](https://github.com/hyperledger/aries-rfc
 Concept | [0519-goal-codes](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/concepts/0519-goal-codes) | :new:
 Feature | [0015-acks](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0015-acks) | [AIP V1.0, Updated](https://gist.github.com/swcurran/81af391bfd79539edec530150045fe51/revisions?diff=unified)
 Feature | [0019-encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0019-encryption-envelope) | [AIP V1.0, Updated](https://gist.github.com/swcurran/c652dfd39706e50be4145568797e667a/revisions?diff=unified)<br>See envelope note below
-Feature | [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0023-did-exchange) | :new:
+Feature | [0023-did-exchange](https://github.com/hyperledger/aries-rfcs/tree/bf3d796cc33ce78ed7cde7f5422b10719a68be21/features/0023-did-exchange) | :new:
 Feature | [0025-didcomm-transports](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0025-didcomm-transports) | [AIP V1.0, Minimally Updated](https://gist.github.com/swcurran/1e64cba5f6c524d38ad596209df090df/revisions?diff=unified)
 Feature | [0035-report-problem](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0035-report-problem) | [AIP V1.0, Updated](https://gist.github.com/swcurran/d9432abc436e6a069d6ffcd41dc86060/revisions?diff=unified)
 Feature | [0044-didcomm-file-and-mime-types](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0044-didcomm-file-and-mime-types) | :new:
@@ -220,13 +222,14 @@ Feature | [0360-use-did-key](https://github.com/hyperledger/aries-rfcs/tree/4e78
 Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0434-outofband) | :new:
 Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0453-issue-credential-v2) | Update to V2 Protocol
 Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0454-present-proof-v2) | Update to V2 Protocol
+Feature | [0627-static-peer-dids](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0627-static-peer-dids)  | The use of static peer DIDs in Aries has evolved and all AIP 2.0 implementations should be using DID Peer types 4 (preferred) or 2.
 Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0557-discover-features-v2) | :new:
 
 #### MEDIATE: Mediator Coordination
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/tree/55e1e1c6e339ef0843268b4f3349b95cb7bd49a5/features/0211-route-coordination) | :new:
+Feature | [0211-route-coordination](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0211-route-coordination) | :new:
 Feature | [0092-transport-return-route](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0092-transport-return-route) | :new:
 
 #### INDYCRED: Indy Based Credentials
@@ -268,14 +271,9 @@ Feature | [0095-basic-message](https://github.com/hyperledger/aries-rfcs/tree/c3
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0627-static-peer-dids](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0627-static-peer-dids)  | Removed from AIP 2.0
 Feature | [0317-please-ack](https://github.com/hyperledger/aries-rfcs/tree/9ff2cab45487a1f6f74254abc9134419f2ad5858/features/0317-please-ack)  | Removed from AIP 2.0
 Feature | [0587-encryption-envelope-v2](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0587-encryption-envelope-v2) | Removed from AIP 2.0
 
-- **0627-static-peer-dids**: Use of Static Peer DIDs has never been implemented
-  beyond a single use case, and the availability of a variety of specified [DID Peer]
-  DID types make the ongoing use of this DIDs unnecessary and confusing.
-  The related RFC has been changed to the status `Retired`.
 - **0317-please-ack**: While the idea of a generic ACK request to be sent either immediately `on receipt`, or `after processing` seemed like a good idea, attempts to implement the feature proved ill-advised.
   - The feature was never implemented, and there have been (as far as we know) no requests for its implementation. A good idea in theory, but not needed in practice.
   - The `on receipt` use of `please-ack` might be feasible as a generic feature, but does not appear to be useful except in protocol specific ways, such as in implementing a texting protocol to get "read receipts". However, even in that case, it is not useful for the existing 0095-basic-messaging protocol, because the protocol will be complete (and likely deleted) before the `ack` can be sent back to the sender. When an `on receipt` ACK is needed, it is much preferred to add it in a protocol specific way vs. in a generic way.
