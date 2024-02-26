@@ -1,7 +1,7 @@
 # Aries RFC 0037: Present Proof Protocol 1.0
 
 - Authors: Nikita Khateev
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted) (But should move to deprecated)
 - Since: 2019-05-28
 - Status Note:  This v1.x version of the protocol will be replaced by version v2 defined in [RFC 454](../0454-present-proof-v2/README.md).
 - Supersedes: [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md); also [Credential Exchange 0.1 -- IIW 2019](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view)

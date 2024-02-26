@@ -1,6 +1,6 @@
 # 0160: Connection Protocol
 - Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org)
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted) (But should move to deprecated)
 - Since: 2019-08-06
 - Status Note: This is the protocol with existing uses. It is expected that [RFC 0023 DID Exchange](../../features/0023-did-exchange/README.md) will replace this protocol.
 - Supersedes: [HIPE 0031 - Connection Protocol](https://github.com/hyperledger/indy-hipe/tree/main/text/0031-connection-protocol)

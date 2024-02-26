@@ -1,7 +1,7 @@
 # Aries RFC 0023: DID Exchange Protocol 1.0
 
 - Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org), [Stephen Curran](swcurran@cloudcompass.ca), [George Aristy](george.aristy@securekey.com)
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2021-04-15
 - Status Note: Replaces [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md) and is a part of [AIP 2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Supersedes: [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md)

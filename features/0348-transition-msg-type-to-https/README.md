@@ -1,7 +1,7 @@
 # Aries RFC 0348: Transition Message Type to HTTPs
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca)
-- Status: [ADOPTED](/README.md#adopted)
+- Status: [RETIRED](/README.md#retired)
 - Since: 2020-08-26
 - Status Note: In step 2 - community is updating implementations to send new formats. **Target Completion Date: 2020.10.15** 
 - Supersedes:
