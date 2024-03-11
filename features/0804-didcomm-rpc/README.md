@@ -1,6 +1,6 @@
 # 0804: DIDComm Remote Procedure Call (DRPC)
 
-- Authors: [Clecio Varjao](clecio.varjao@gov.bc.ca) (BC Gov), [Stephen Curran](swcurran@cloudcompass.ca) (BC Gov)
+- Authors: [Clecio Varjao](clecio.varjao@gov.bc.ca) (BC Gov), [Stephen Curran](swcurran@cloudcompass.ca) (BC Gov), [Akiff Manji](amanji@petridish.dev) (BC Gov)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2023-11-29
 - Status Note: An evolution of the HTTP over DIDComm protocol to enable an Agent to request an arbitrary service from a connected Agent and get a response.
@@ -125,7 +125,7 @@ The response is likewise simple:
 
 An example of a simple [JSON-RPC] request/response pair from the specification is:
 
-```
+```json
 --> {"jsonrpc": "2.0", "method": "subtract", "params": [42, 23], "id": 1}
 <-- {"jsonrpc": "2.0", "result": 19, "id": 1}
 ```
@@ -170,11 +170,13 @@ The `client` agent goes through the following states:
 
 The state transition table for the `client` is:
 
-| State / Events | Send Request                       | Receive Response               |
-| -------------- | ---------------------------------- | ------------------------------ |
-| *Start*        | Transition to <br>**request-sent** |                                |
-| request-sent   |                                    | Transition to <br>**complete** |
-| completed      |                                    |                                |
+| State / Events          | Send Request                       | Receive Response                |
+| ----------------------- | ---------------------------------- | ------------------------------- |
+| *Start*                 | Transition to <br>**request-sent** |                                 |
+| request-sent            |                                    | Transition to <br>**complete**  |
+| completed               |                                    |                                 |
+| problem-report received |                                    | Transition to <br>**abandoned** |
+| abandoned               |                                    |                                 |
 
 #### Server States
 
@@ -185,21 +187,23 @@ The `server` agent goes through the following states:
 
 The state transition table for the `server` is:
 
-| State / Events   | Receive Request                        | Send Response                  |
-| ---------------- | -------------------------------------- | ------------------------------ |
-| *Start*          | Transition to <br>**request-received** |                                |
-| request-received |                                        | Transition to <br>**complete** |
-| completed        |                                        |                                |
+| State / Events   | Receive Request                        | Send Response or Problem Report |
+| ---------------- | -------------------------------------- | ------------------------------- |
+| *Start*          | Transition to <br>**request-received** |                                 |
+| request-received |                                        | Transition to <br>**complete**  |
+| completed        |                                        |                                 |
 
 ### Messages
 
 The following are the messages in the DRPC protocol. The `response` message
-handles all possible responses, so the `ack` ([RFC 0015 ACKs]) and
-`problem-report` ([RFC 0035 Report Problem]) messages are **NOT** adopted by
-this protocol.
+handles all positive responses, so the `ack` ([RFC 0015 ACKs]) message is
+**NOT** adopted by this protocol. The [RFC 0035 Report Problem] is adopted by
+this protocol in the event that a `request` is not recognizable as a [JSON-RPC]
+message and as such, a [JSON-RPC] response message cannot be created. See the
+details below in the [Problem Report Message](#problem-report-message) section.
 
-[RFC 0015 ACKs]: /features/0015-acks/README.md)
-[RFC 0035 Report Problem]: /features/0035-report-problem/README.md
+[RFC 0015 ACKs]: ../features/0015-acks/README.md)
+[RFC 0035 Report Problem]: ../features/0035-report-problem/README.md
 
 #### Request Message
 
@@ -245,6 +249,10 @@ processing of the request to convey the output of the processing to the
 `client`. As with the `request` the format mostly exactly that of a
 [JSON-RPC] response.
 
+If the `request` is unrecognizable as a [JSON-RPC] message such that a
+[JSON-RPC] message cannot be generated, the `server` SHOULD send a [RFC 0035
+Report Problem] message to the `client`.
+
 It is assumed the `client` understands what the contents of the
 `response` message means in the context of the protocol instance. How the
 `client` and `server` coordinate that understanding is out of scope of this
@@ -287,6 +295,18 @@ If the `server` does not understand how to process a given [JSON-RPC] request, a
 - `error.code` value `-32601`,
 - `error.message` set to `Method not found`, and
 - no `error.data` item.
+
+#### Problem Report Message
+
+A [RFC 0035 Report Problem] message **SHOULD** be sent by the `server` instead
+of a `response` message only if the `request` is unrecognizable as a [JSON-RPC] message.
+An [JSON-RPC] errors **MUST** be provided to the `client` by the `server` via the
+`response` message, not a `problem-report`. The `client` **MUST NOT**
+respond to a `response` message, even if the `response` message is not a valid
+[JSON-RPC] response.  This is because once the `server` sends the `response`, the
+protocol is in the `completed` state (from the `server`'s perspective) and so
+is subject to deletion. As such, a follow up `problem-report` message would have
+an invalid `thid` (thread ID) and (at best) be thrown away by the `server`.
 
 ### Constraints
 
