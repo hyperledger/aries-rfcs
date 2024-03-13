@@ -1,39 +1,42 @@
-# Aries RFC 0348: Transition Message Type to HTTPs
+# Aries RFC 0793: Unqualified DID Transition
 
-- Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca)
-- Status: [RETIRED](/README.md#retired)
-- Since: 2020-08-26
-- Status Note: In step 2 - community is updating implementations to send new formats. **Target Completion Date: 2020.10.15** 
+- Authors: [Sam Curren](mailto:swcurran@cloudcompass.ca)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2023-07-11
+- Status Note: In Step 1 - **Target Deployment Date: 2024-02-28** 
 - Supersedes:
-- Start Date: 2019-12-13
+- Start Date: 2023-07-11
 - Tags: [feature](/tags.md#feature), [community-update](/tags.md#community-update)
 
 ## Summary
 
-Per issue [#225](https://github.com/hyperledger/aries-rfcs/issues/225), the
-Aries community has agreed to change the prefix for protocol message types that currently use
-`did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/` to use `https://didcomm.org/`. Examples of the two message types forms are:
+Historically, Aries use of the Indy SDK's wallet included the use of 'unqualified DIDs' or DIDs without a did: prefix and method. 
+This transition documents the process of migrating any such DIDs still in use to fully qualified DIDs.
 
-- Before: `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack`
-- After: `https://didcomm.org/notification/1.0/ack`
+This process involves the adoption of the Rotate DID protocol and algorithm 4 of the Peer DID Method, then the rotation from the unqualified DIDs to any fully qualified DID, with preference for did:peer:4.
+
+The adoption of these specs will further prepare the Aries community for adoption of DIDComm v2 by providing an avenue for adding DIDComm v2 compatible endpoints.
+
+Codebases that do not use unqualified DIDs MUST still adopt DID Rotation and did:peer:4 as part of this process, even if no unqualified DIDs must be rotated.
 
 This RFC follows the guidance in [RFC
 0345](../../concepts/0345-community-coordinated-update/README.md) about
 community-coordinated updates to (try to) ensure that independently deployed,
 interoperable agents remain interoperable throughout this transition.
 
-The transition from the old to new formats will occur in four steps:
+The transition from the unqualified to qualified DIDs will occur in four steps:
 
-- **DONE Pre-work**: where we agree on the transition plan outlined in this RFC.
-  - Any RFC updates related to this transition needed before starting the transition are completed.
-  - > To Do: Identify if there any prerequisite RFC changes to be made.
-- **DONE Step 1: Agent builders MUST update all agent code bases and deployments to accept incoming message types in the old (did) and new (https) formats. During this step, agents MUST default to sending out messages in the old format.**
+- **Pre-work**: where we agree on the transition plan outlined in this RFC.
+  - Finalize did:peer:4 details, including feature discovery support of did:peer:4.
+  - Verify transisiton plan and code.
+- **Step 1**: Agent builders MUST update all agent code bases and deployments to support DID Rotation and did:peer:4. 
   - Each agent builder SHOULD notify the community they have completed Step 1 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
-- **IN PROGRESS Step 2**: Agent builders MUST update all agent code bases and deployments to send out all messages using the new (https) format. The old (did) format is deprecated but will still be accepted. An agent deployment MAY send out an old format message type upon receipt of a message containing an old format message type.
+  - Target Date for code update: 2023-12-17
+  - Target Date fpr deployment update: 2024-02-28
+- **Step 2**: Agent builders using unqualified DIDs MUST no longer use new unqualified DIDs, and MUST use DID Rotation to rotate to a fully qualified DID.
   - Each agent builder SHOULD notify the community they have completed Step 2 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
-- **Step 3**: Agent builders SHOULD update their deployments to remove all support for receiving the old format and MUST NOT send out messages using the old message type format.
-
-> **Note**: Any RFCs that already use the new "https" message type should continue to use the use new format in all cases&mdash;accepting and sending. New protocols defined in new and updated RFCs should use the new "https" format.
+  - Target Date for finishing step 2: 2024-03-20
+- **Step 3**: Agent builders SHOULD update their deployments to remove all support for receiving unqualified DIDs from other agents.
 
 The community coordination triggers between the steps above will be as follows:
 
@@ -88,16 +91,15 @@ The following table lists the status of various agent code bases and deployments
 Name / Link | Implementation Notes
 --- | ---
 [Aries Protocol Test Suite](https://github.com/hyperledger/aries-protocol-test-suite) | No steps completed
-[Aries Toolbox](https://github.com/hyperledger/aries-toolbox) | Completed Step 1 [code change](https://github.com/hyperledger/aries-toolbox/pull/155). 
-[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | Completed Step 1 [code change](https://github.com/hyperledger/aries-framework-dotnet/pull/116)
+[Aries Framework - .NET](https://github.com/hyperledger/aries-framework-dotnet) | No steps completed
 [Trinsic.id](https://trinsic.id/) | No steps completed
-[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | Completed Step 1 [code change](https://github.com/hyperledger/aries-cloudagent-python/pull/379)
+[Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) | No steps completed
 [Aries Static Agent - Python](https://github.com/hyperledger/aries-staticagent-python) | No steps completed
-[Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | Completed Step 2
+[Aries Framework - Go](https://github.com/hyperledger/aries-framework-go) | No steps completed
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | No steps completed
 [Verity](https://www.evernym.com/products/) | No steps completed
-[Pico Labs](http://picolabs.io/) | Completed Step 2 even though [deprecated](https://github.com/picolab/G2S)
-[IBM](https://github.com/IBM-Blockchain-Identity/unknown) | Completed Step 1 [code change](https://github.com/hyperledger/indy-sdk/pull/2136)
-IBM Agent | Completed Step 1
-[Aries Cloud Agent - Pico](https://github.com/Picolab/aries-cloudagent-pico) | Completed Step 2 [code change](https://github.com/Picolab/aries-cloudagent-pico/commit/2fb4b5f714f32a300ec6ae2655cf9319c0ff3703)
-[Aries Framework JavaScript](https://github.com/hyperledger/aries-framework-javascript) | Completed Step 2 [code change](https://github.com/hyperledger/aries-framework-javascript/pull/213)
+[Pico Labs](http://picolabs.io/) | No steps completed
+[IBM](https://github.com/IBM-Blockchain-Identity/unknown) | No steps completed
+IBM Agent | No steps completed
+[Aries Cloud Agent - Pico](https://github.com/Picolab/aries-cloudagent-pico) | No steps completed
+[Aries Framework JavaScript](https://github.com/hyperledger/aries-framework-javascript) | No steps completed
