@@ -150,11 +150,6 @@ maybe their own decorators. However, reusing the field names and conventions
 in this RFC may still be desirable, if there is significant overlap in the
 concepts.
 
-### Requesting ACKs
-
-A decorator, `~please_ack`, allows one agent to request an ad hoc ACK from
-another agent. This is described in the [0317-please-ack RFC](../0317-please-ack/README.md).
-
 ## Reference
 
 ### `ack` message

@@ -44,7 +44,6 @@ Message format:
 {
   "@type": "https://didcomm.org/revocation_notification/2.0/revoke",
   "@id": "<uuid-revocation-notification>",
-  "~please_ack": ["RECEIPT","OUTCOME"],
   "revocation_format": "<revocation_format>",
   "credential_id": "<credential_id>",
   "comment": "Some comment"
@@ -52,8 +51,6 @@ Message format:
 ```
 
 Description of fields:
-
-* `~please_ack` (optional) -- as described by the [Please ACK Decorator RFC](https://github.com/hyperledger/aries-rfcs/tree/main/features/0317-please-ack).  If `OUTCOME` is specified, the `holder` should send an ack when the holder's agent has successfully notified the holder of the revocation.
 
 * `revocation_format` (required) -- the format of the credential revocation. Accepted values for the revocation format are provided in the "Revocation Credential Identification Formats" section immediately below.
 

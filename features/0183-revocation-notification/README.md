@@ -42,15 +42,12 @@ The `revoke` message sent by the `issuer` to the `holder` is as follows:
 {
   "@type": "https://didcomm.org/revocation_notification/1.0/revoke",
   "@id": "<uuid-revocation-notification>",
-  "~please_ack": ["RECEIPT","OUTCOME"],
   "thread_id": "<thread_id>",
   "comment": "Some comment"
 }
 ```
 
 Description of fields:
-
-* `~please_ack` (optional) -- as described by the [Please ACK Decorator RFC](https://github.com/hyperledger/aries-rfcs/tree/main/features/0317-please-ack).  If `OUTCOME` is specified, the `holder` should send an ack when the holder's agent has successfully notified the holder of the revocation.
 
 * `thread_id` (required) -- the [thread ID](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0008-message-id-and-threading#thread-id-thid) of the [issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2) protocol which was used to issue one or more credentials that have been revoked by the issuer.  If multiple credentials were issued, each credential has a different credential format but contains the same claims as described [here](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0453-issue-credential-v2#message-attachments); therefore, this message notifies the holder that all of these credentials have been revoked.
 
