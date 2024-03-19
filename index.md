@@ -124,6 +124,7 @@
 * [0771: AnonCreds Attachment Formats for Requesting and Presenting Credentials](features/0771-anoncreds-attachments/README.md) (2023-02-24 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 * [0780: Use Data URLs for Images and More in Credential Attributes](features/0780-data-urls-images/README.md) (2023-03-31 &mdash; [`feature`](/tags.md#feature))
 * [0794: DID Rotate 1.0](features/0794-did-rotate/README.md) (2023-08-29  &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0812: Compressing DIDComm messages using dictionaries (Ex. 0000: RFC Topic)](concepts/0812-compression-dictionary/README.md) (2022- &mdash; [`concept`](/tags.md#concept))
 
 ## [RETIRED](README.md#retired)
 * [0013: Overlays](concepts/0013-overlays/README.md) (2023-01-15 &mdash; [`concept`](/tags.md#concept))
