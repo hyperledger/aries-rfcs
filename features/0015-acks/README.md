@@ -12,11 +12,11 @@
 Explains how one party can send acknowledgment
 messages (ACKs) to confirm receipt and clarify the status of complex processes.
 
-## Change log
+## Change Log
 
-- Mar 22, 2022: Clarification that an Ack `Fail` must not be used, and that a [Report Problem](../0035-report-problem/README.md) must be used in its place. Remove Ack `Fail` from the RFC.
-
-- Mar 25, 2020: In the ~thread decorator section of the sample in the [Explicit ACKs section](#explicit-acks), 'myindex' was changed to 'sender_order' and 'lrecs' to 'received_orders'. This is in accordance with the field names as defined in [RFC 0008](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading#threaded-messages).
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+- 20220322: Clarification that an Ack `Fail` must not be used, and that a [Report Problem](../0035-report-problem/README.md) must be used in its place. Remove Ack `Fail` from the RFC.
+- 20200325: In the ~thread decorator section of the sample in the [Explicit ACKs section](#explicit-acks), 'myindex' was changed to 'sender_order' and 'lrecs' to 'received_orders'. This is in accordance with the field names as defined in [RFC 0008](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading#threaded-messages).
 
 ## Motivation
 

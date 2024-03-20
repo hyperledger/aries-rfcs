@@ -12,6 +12,10 @@
 Describes how a go-between can introduce two parties that
 it already knows, but that do not know each other.
 
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+
 ## Motivation
 
 Introductions are a fundamental activity in human relationships. They allow

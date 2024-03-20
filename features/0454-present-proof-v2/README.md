@@ -8,9 +8,10 @@
 - Start Date: 2020-05-27
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
 
-## Version Change Log
+## Change Log
 
-- Version 2.0 is the current version
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+- 20240311: Version 2.0 is the current version
 
 For a period of time, versions 2.1 and 2.2 where defined in this RFC. Those
 definitions were added prior to any implementations, and to date, there are no

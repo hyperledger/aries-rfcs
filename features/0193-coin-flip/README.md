@@ -11,6 +11,10 @@
 
 Specifies a safe way for two parties who are remote from one another and who do not trust one another to pick a random, binary outcome that neither can manipulate.
 
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+
 ## Motivation
 
 To guarantee fairness, it is often important to pick one party in a protocol to make a choice about what to do next. We need a way to do this that it more or less mirrors the randomness of flipping a coin.

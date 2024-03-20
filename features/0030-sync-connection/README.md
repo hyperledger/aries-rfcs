@@ -15,6 +15,10 @@ common store of state like a blockchain), whereby parties using [peer DIDs](
 https://openssi.github.io/peer-did-method-spec) can synchronize the state of
 their shared relationship by direct communication with one another.
 
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+
 ## Motivation
 
 For Alice and Bob to interact, they must establish and maintain state.

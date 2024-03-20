@@ -13,6 +13,10 @@
 Describes how to report errors and warnings in a powerful, interoperable way. All implementations
 of SSI agent or hub technology SHOULD implement this RFC.
 
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+
 ## Motivation
 
 Effective reporting of errors and warnings is difficult in any system, and particularly so in

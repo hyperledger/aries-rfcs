@@ -11,6 +11,10 @@
 
 This RFC defines the message format which an issuer uses to notify a holder that a previously issued credential has been revoked.
 
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+
 ## Motivation
 
 We need a standard protocol for an issuer to notify a holder that a previously issued credential has been revoked.

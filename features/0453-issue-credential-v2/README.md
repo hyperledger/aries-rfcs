@@ -8,10 +8,11 @@
 - Start Date: 2020-03-23
 - Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
 
-## Version Change Log
+## Change Log
 
-- 20240311 Removed references to payments in the protocol to clarify to those new to the protocol that they have not been implemented by anyone.
-- 20240313 Version 2.0 is the current version
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+- 20240313: Version 2.0 is the current version
+- 20240311: Removed references to payments in the protocol to clarify to those new to the protocol that they have not been implemented by anyone.
 
 For a period of time, versions 2.1 and 2.2 where defined in this RFC. Those
 definitions were added prior to any implementations, and to date, there are no
