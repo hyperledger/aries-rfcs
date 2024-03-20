@@ -38,7 +38,6 @@
 * [0092: Transports Return Route](features/0092-transport-return-route/README.md) (2019-12-06, [2 impls](features/0092-transport-return-route/README.md#implementations) &mdash; [`feature`](/tags.md#feature))
 * [0094: Cross-Domain Messaging](concepts/0094-cross-domain-messaging/README.md) (2018-10-29 &mdash; [`concept`](/tags.md#concept))
 * [0211: Mediator Coordination Protocol](features/0211-route-coordination/README.md) (2021-03-15, [2 impls](features/0211-route-coordination/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`test-anomaly`](/tags.md#test-anomaly))
-* [0317: Please ACK Decorator](features/0317-please-ack/README.md) (2019-12-26 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0360: did:key Usage](features/0360-use-did-key/README.md) (2021-04-15 &mdash; [`feature`](/tags.md#feature))
 * [0441: Prover and Verifier Best Practices for Proof Presentation](concepts/0441-present-proof-best-practices/README.md) (2021-04-15 &mdash; [`concept`](/tags.md#concept) [`credentials`](/tags.md#credentials))
 * [0496: Transition to the Out of Band and DID Exchange Protocols](features/0496-transition-to-oob-and-did-exchange/README.md) (2021-11-24 &mdash; [`feature`](/tags.md#feature) [`community-update`](/tags.md#community-update) [`test-anomaly`](/tags.md#test-anomaly))
@@ -124,12 +123,15 @@
 * [0771: AnonCreds Attachment Formats for Requesting and Presenting Credentials](features/0771-anoncreds-attachments/README.md) (2023-02-24 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 * [0780: Use Data URLs for Images and More in Credential Attributes](features/0780-data-urls-images/README.md) (2023-03-31 &mdash; [`feature`](/tags.md#feature))
 * [0794: DID Rotate 1.0](features/0794-did-rotate/README.md) (2023-08-29  &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0804: DIDComm Remote Procedure Call (DRPC)](features/0804-didcomm-rpc/README.md) (2023-11-29 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0809: W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials](features/0809-w3c-data-integrity-credential-attachment/README.md) (2024-01-10 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 
 ## [RETIRED](README.md#retired)
 * [0013: Overlays](concepts/0013-overlays/README.md) (2023-01-15 &mdash; [`concept`](/tags.md#concept))
 * [0234: Signature Decorator](features/0234-signature-decorator/README.md) (2020-10-14, [3 impls](features/0234-signature-decorator/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0250: Rich Schema Objects](concepts/0250-rich-schemas/README.md) (2019-10-08 &mdash; [`concept`](/tags.md#concept) [`rich-schemas`](/tags.md#rich-schemas))
 * [0303: V0.1 Credential Exchange (Deprecated)](features/0303-v01-credential-exchange/README.md) (2019-11-12, [4 impls](features/0303-v01-credential-exchange/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
+* [0317: Please ACK Decorator](features/0317-please-ack/README.md) (2019-12-26 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0348: Transition Message Type to HTTPs](features/0348-transition-msg-type-to-https/README.md) (2020-08-26, [14 impls](features/0348-transition-msg-type-to-https/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`community-update`](/tags.md#community-update))
 * [0627: Static Peer DIDs](features/0627-static-peer-dids/README.md) (2021-04-07 &mdash; [`feature`](/tags.md#feature))
 
