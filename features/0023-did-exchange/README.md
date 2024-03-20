@@ -1,6 +1,6 @@
-# Aries RFC 0023: DID Exchange Protocol 1.0
+# Aries RFC 0023: DID Exchange v1
 
-- Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org), [Stephen Curran](swcurran@cloudcompass.ca), [George Aristy](george.aristy@securekey.com)
+- Authors: [Ryan West](mailto:ryan.west@sovrin.org), [Daniel Bluhm](mailto:daniel.bluhm@sovrin.org), Matthew Hailstone, [Sam Curren](mailto:sam@sovrin.org), [Stephen Curran](mailto:swcurran@cloudcompass.ca), [George Aristy](mailto:george.aristy@securekey.com)
 - Status: [ADOPTED](/README.md#adopted)
 - Since: 2021-04-15
 - Status Note: Replaces [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md) and is a part of [AIP 2.0](../../concepts/0302-aries-interop-profile/README.md).
@@ -18,8 +18,9 @@ Aries agent developers want to create agents that are able to establish relation
 
 ## Version Change Log
 
-### 1.1 -  Signed Rotations without DID Documents
-Added the optional `did_rotate~attach` attachment for provenance of rotation without an attached DID Document. 
+### Version 1.1 -  Signed Rotations without DID Documents
+
+Added the optional `did_rotate~attach` attachment for provenance of rotation without an attached DID Document.
 
 ## Tutorial
 
@@ -100,7 +101,7 @@ No errors are sent in timeout situations. If the _requester_ or _responder_ wish
 
 ``` jsonc
 {
-  "@type": "https://didcomm.org/didexchange/1.0/problem_report",
+  "@type": "https://didcomm.org/didexchange/1.1/problem_report",
   "@id": "5678876542345",
   "~thread": { "thid": "<@id of message related to problem>" },
   "~l10n": { "locale": "en"},
@@ -146,7 +147,7 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
 ```jsonc
 {
   "@id": "5678876542345",
-  "@type": "https://didcomm.org/didexchange/1.0/request",
+  "@type": "https://didcomm.org/didexchange/1.1/request",
   "~thread": { 
       "thid": "5678876542345",
       "pthid": "<id of invitation>"
@@ -205,7 +206,7 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
 ```jsonc
 {
   "@id": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
-  "@type": "https://didcomm.org/didexchange/1.0/request",
+  "@type": "https://didcomm.org/didexchange/1.1/request",
   "~thread": { 
       "thid": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
       "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" 
@@ -236,7 +237,7 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
 ```jsonc
 {
   "@id": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
-  "@type": "https://didcomm.org/didexchange/1.0/request",
+  "@type": "https://didcomm.org/didexchange/1.1/request",
   "~thread": { 
       "thid": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
       "pthid": "did:example:21tDAKCERh95uGgKbJNHYp#didcomm" 
@@ -311,7 +312,7 @@ The exchange response message is used to complete the exchange. This message is 
 
 ```json
 {
-  "@type": "https://didcomm.org/didexchange/1.0/response",
+  "@type": "https://didcomm.org/didexchange/1.1/response",
   "@id": "12345678900987654321",
   "~thread": {
     "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>"
@@ -398,7 +399,7 @@ The exchange `complete` message is used to confirm the exchange to the _responde
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/didexchange/1.0/complete",
+  "@type": "https://didcomm.org/didexchange/1.1/complete",
   "@id": "12345678900987654321",
   "~thread": {
     "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>",
