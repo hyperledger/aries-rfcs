@@ -1,4 +1,4 @@
-# Aries RFC 0023: DID Exchange Protocol 1.0
+# Aries RFC 0023: DID Exchange v1
 
 - Authors: [Ryan West](mailto:ryan.west@sovrin.org), [Daniel Bluhm](mailto:daniel.bluhm@sovrin.org), Matthew Hailstone, [Sam Curren](mailto:sam@sovrin.org), [Stephen Curran](mailto:swcurran@cloudcompass.ca), [George Aristy](mailto:george.aristy@securekey.com)
 - Status: [ADOPTED](/README.md#adopted)
