@@ -159,14 +159,7 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
       "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
       "mime-type": "application/json",
       "data": {
-         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
-         "jws": {
-            "header": {
-               "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-            },
-            "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-            "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
-            }
+         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)"
       }
    }
 }
@@ -218,14 +211,7 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
       "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
       "mime-type": "application/json",
       "data": {
-         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
-         "jws": {
-            "header": {
-               "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-            },
-            "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-            "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
-            }
+         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)"
       }
    }
 }
@@ -249,14 +235,7 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
       "@id": "d2ab6f2b-5646-4de3-8c02-762f553ab804",
       "mime-type": "application/json",
       "data": {
-         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)",
-         "jws": {
-            "header": {
-               "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
-            },
-            "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
-            "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
-            }
+         "base64": "eyJ0eXAiOiJKV1Qi... (bytes omitted)"
       }
    }
 }
