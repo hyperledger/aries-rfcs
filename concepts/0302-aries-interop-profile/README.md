@@ -172,6 +172,10 @@ Since approval of the AIP 2.0 profile, the following RFCs have been clarified by
   - See the updated [implementer's note on encryption envelopes in AIP 2.0](#implementers-note-about-didcomm-envelopes-and-the-accept-element) that highlights the removal of RFC 0587-encryption-envelope-v2.
   - Pull request: [#814](https://github.com/hyperledger/aries-rfcs/pull/814)
 
+- 2024-03: Clarifications and removals of RFCs that have been determined to be impractical for AIP 2.0.
+  - See the [AIP 2.0 RFC Removed](#aip-20-rfcs-removed) section for details about the removed RFCs
+  - Pull request: [#820](https://github.com/hyperledger/aries-rfcs/pull/820)
+
 #### AIP 2.0 Changelog by Clarifications
 
 The original commit used in the definition of AIP 2.0 was: `b3a3942ef052039e73cd23d847f42947f8287da2`
@@ -190,7 +194,8 @@ The following clarifications have been made to RFCs that make up AIP 2.0. This l
 - RFC 0044 DIDComm File and MIME Types: Clarifications on fallbacks for the mime types and why, and on using JWEs.
 - RFC 0211 Route Coordination: Clarification to add a missing comma to an example.
 - RFC 0434 Out of Band: Clarification that did:peer:2 can be used for reuse.
-- RFC 0627 Static Peer DIDs: Clarifications that reflect the transition to Peer DIDs 2 and 4.
+- RFC 0453 Issue Credential: Clarification about the protocol version (2.0) and that payments are not part of AIP 2.0.
+- RFC 0454 Present Proof: Clarification about the protocol version (2.0) and that payments are not part of AIP 2.0.
 - RFC 0592 Indy Attachments: Clarification on handling "unrevealed attributes" and on encoding integer strings as numbers (e.g. encoding both `"1"` vs. `1` as integers)
 - RFC 0510 DIF Presentation Exchange Attachment: Correction of reference into the DIF spec that there is an "s" on "definitions" in `dif/presentation-exchange/definitions@v1.0`
 
@@ -220,9 +225,8 @@ Feature | [0048-trust-ping](https://github.com/hyperledger/aries-rfcs/tree/c3b0e
 Feature | [0183-revocation-notification](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0183-revocation-notification) | :new:
 Feature | [0360-use-did-key](https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0360-use-did-key) | :new:
 Feature | [0434-outofband](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0434-outofband) | :new:
-Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0453-issue-credential-v2) | Update to V2 Protocol
-Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0454-present-proof-v2) | Update to V2 Protocol
-Feature | [0627-static-peer-dids](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0627-static-peer-dids)  | The use of static peer DIDs in Aries has evolved and all AIP 2.0 implementations should be using DID Peer types 4 (preferred) or 2.
+Feature | [0453-issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/e8a23a7b80db5db5a12fd786aec9343116cf5147/features/0453-issue-credential-v2) | Update to V2 Protocol
+Feature | [0454-present-proof-v2](https://github.com/hyperledger/aries-rfcs/tree/e8a23a7b80db5db5a12fd786aec9343116cf5147/features/0454-present-proof-v2) | Update to V2 Protocol
 Feature | [0557-discover-features-v2](https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0557-discover-features-v2) | :new:
 
 #### MEDIATE: Mediator Coordination
@@ -265,14 +269,15 @@ Feature | [0095-basic-message](https://github.com/hyperledger/aries-rfcs/tree/c3
 > [!WARNING]  
 > After discussion amongst the Aries implementers, the following RFCs initially
 > in AIP 2.0 have been **removed** as both never implemented (as far as we know)
-> and impractical to implement. Since the RFCs have never been implemented,
+> and/or impractical to implement. Since the RFCs have never been implemented,
 > their removal does not have a practical impact on implementations. Commentary
 > below the table listing the removed RFCs provides the reasoning for the removal of each RFC.
 
  RFC Type | RFC/Link to RFC Version | Note
 --- | --- | ---
-Feature | [0317-please-ack](https://github.com/hyperledger/aries-rfcs/tree/9ff2cab45487a1f6f74254abc9134419f2ad5858/features/0317-please-ack)  | Removed from AIP 2.0
+Feature | [0317-please-ack](https://github.com/hyperledger/aries-rfcs/tree/e8a23a7b80db5db5a12fd786aec9343116cf5147/features/0317-please-ack)  | Removed from AIP 2.0
 Feature | [0587-encryption-envelope-v2](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0587-encryption-envelope-v2) | Removed from AIP 2.0
+Feature | [0627-static-peer-dids](https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0627-static-peer-dids)  | The use of static peer DIDs in Aries has evolved and all AIP 2.0 implementations should be using DID Peer types 4 (preferred), 1 or 2.
 
 - **0317-please-ack**: While the idea of a generic ACK request to be sent either immediately `on receipt`, or `after processing` seemed like a good idea, attempts to implement the feature proved ill-advised.
   - The feature was never implemented, and there have been (as far as we know) no requests for its implementation. A good idea in theory, but not needed in practice.
@@ -281,6 +286,7 @@ Feature | [0587-encryption-envelope-v2](https://github.com/hyperledger/aries-rfc
   - See the [RFC 0317 Please Ack](https://github.com/hyperledger/aries-rfcs/tree/main/features/0317-please-ack) for more details on it's change of status to `RETIRED` and links to unmerged PRs that attempted to design and implement the functionality.
 - 0587-encryption-envelope-v2
   - While this RFC will be crucial when the transition to DIDComm v2 is started, it is not of use until then, and hence not applicable to AIP 2.0.
+  - 0627-static-peer-dids: The inclusion of static peer DIDs was a transitory approach as the [DID Peer] specification evolved. The use of static peer DIDs is not in use in Aries, the [DID Peer] specification has stabilized, and the existing implementations are settled on the use of `did:peer` `4` (preferred), `2` and in some cases `1`. The removal of static peer DIDs from AIP 2.0 is to indicate where the community is currently and to lead newcomers to the community to follow the existing practices in the use of [DID Peer].
 
 [DID Peer]: https://identity.foundation/peer-did-method-spec/
 
