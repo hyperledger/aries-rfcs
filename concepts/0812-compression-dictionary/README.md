@@ -88,11 +88,77 @@ Dictionaries may need to be regularly rebuilt to adjust to new protocols. Some d
 
 ## Rationale and alternatives
 
+### QR Code Quality
+
+By reducing the size of QR codes for offline or cases where URL redirects are not available, the QR code becomes more manageable.
+
+### Reducing need for redirect support
+
+URL Shorterning services may introduce privacy concerns
+
+### Binary based format
+
+Instead of using compression, a binary file format would reduce overall message size.
+
+### Standard Compression without dictionaries
+
+#### gzip
+
+Using
+
+```
+gzip -9
+```
+
+We can reduce the size of the Out of Band invitation.
+
+```
+https://localhost:443?c=gzip&oob=H4sICODx-mUCA3RtcC50eHQAhZFdb5swFIbv9ysqdjtCykdC2E3TbC1qCpqaDy1M02Ts03CSYDvYkEDV_z6cTVsvJu3a5338nPO-WDe6lWBFVxZDFinRRLfdLFfppkiqXYzH7NNyNV3E249KAnVErW3xbOeEM-d6MHSQN6iJRsGtD1fWDTIDIqMhC4EMbRYGz7bvu8ye-MHEhskoIG4ejsdhYMYVVA1SUH3m24v1K_se-QE5mOc3XjYVZVlzpH--qoCiROB6Du0FcNHfQxt1o2QvupjSsevvJnfh0_S-PJfXKT3j-msZJlrNHmcPWTbPjkye7k7Wd4PrF0O-_Sfs6FUyDKpyl_qyUe3mYZ2ui1UzDW5lQmB037pflotgU5xW3ZNRe5vljUyJNz2tw7aLq8ybjzf1rE6yWubxXDNXLr3zQqnQ33XHi8jvm3zmTArk2uxfaC1V5DglMCRaVP5Ag9ID5AwpCg20GKCIfN-zXg2h6LtRBdnDD1kJLag4_F3pf_X2M3CmPWELpt6L0YHkcDAejyS3Xt_9BC2pH8MxAgAA
+```
+
+Using gzip, we can reduce the size of the Out of Band invitation from 775 bytes to 590 bytes. (76.13 % of original size)
+
+#### ZSTD without a dictionary
+
+Using
+
+```
+zstd -9
+```
+
+We can reduce the size of the Out of Band invitation.
+
+```
+https://localhost:443?c=zstd&oob=KLUv_WQxAW0MAPbYVCjgzMwDaJPAFkV01uPxaHNM71pq1L8QfLwg044FcGs2cBMMwwwjDC8ESQBJAE4AEMhKUkIT1LRQg_q0DQe1XxAXAvHi33T_dz9qMAYie6kGTWBoeziqnjVBxqJELJWDrPOWprs2DKY1SWhQfVhX9m1cVNEzuAsiRQsSBone1-QeLv-p2AD34RQiDjMBopHSo1YrxJvLEVagb0Cf7Oufv3pX_3ochyvk9zn3AyIFxKKK2ut_nWtqPh5TkyjlgDgEoWSa8pkqWbJ7YmnZyy5P4mEekynrrBCcF09kolj-rkNo8WwYilJpkEAFh9MrG1CRz7JdsMsCBtRflpiG66iZu6mTub89HBE9CZ5sO9kkywIAFVGjDBzXKMczl2714_YtB1e8cZclfEM3bS_dKuIkZYWfsVXf-Ovb-4ytfTNkhzd961wUVTrvve37ONuLEBE7oUZOHRQgMMKgpQeLQytzAcvFxYE1CCvGeoAVfTFYf7zoaWmohyZtK6wtoqCuRTa3JQrbbxSl8RATCDPtnYPf
+```
+
+Using zstd without a dictionary, we can reduce the Out of Band invitation from 775 bytes to 582 bytes. (75.10 % of original size)
+
+### DIDComm Compression
+
+It would be possible to use compression in DIDComm communications. Each message would be compressed individually, as DIDComm doesn't guarentee the order of messages being delievered.
+
+Things to consider
+
+* Compress may not want to be used until Discover features is shared
+* It may be possible to sharing custom dictionaries as a separate protocol
+
+### Process of creating new dictionaries
+
+To be defined
+
+### Distribution of dictionaries
+
+If dictionaries are used, they should be included in DIDComm libraries
+The dictionaries may be a dependency of a DIDComm library
 
 ## Prior art
 
 [zstd] (http://facebook.github.io/zstd/)
 [zstd manual](https://github.com/facebook/zstd/blob/dev/programs/zstd.1.md)
+[brotli](https://datatracker.ietf.org/doc/html/rfc7932)
+[zlib](https://en.wikipedia.org/wiki/Zlib)
+[DEFLATE](https://datatracker.ietf.org/doc/html/rfc1951)
 
 ## Unresolved questions
 
