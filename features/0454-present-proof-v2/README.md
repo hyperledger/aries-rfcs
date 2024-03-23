@@ -8,9 +8,10 @@
 - Start Date: 2020-05-27
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
 
-## Version Change Log
+## Change Log
 
-- Version 2.0 is the current version
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+- 20240311: Version 2.0 is the current version
 
 For a period of time, versions 2.1 and 2.2 where defined in this RFC. Those
 definitions were added prior to any implementations, and to date, there are no
@@ -95,7 +96,7 @@ For the most part, these states map onto the transitions shown in both the state
 
 - The final states for both the prover and verifier are `done` or `abandoned`, and once reached, no further updates to the protocol instance are expected.
 
-- The `ack-presentation` is sent or not based on the value of `will_confirm` in the `request-presentation`. A verifier may send an `ack-presentation` message in response to the prover including the `~please_ack` decorator in the `presentation` message. Whether an `ack-presentation` is expected or not determines whether the states `presentation-sent` and `presentation-received` are used at all in a protocol instance.
+- The `ack-presentation` is sent or not based on the value of `will_confirm` in the `request-presentation`. Whether an `ack-presentation` is expected or not determines whether the states `presentation-sent` and `presentation-received` are used at all in a protocol instance.
 
 - The `ack-presentation` message should reflect the business validation of the proof (does the proof satisfy the business need?) not just the cryptographic verification. Ideally, those are as tightly aligned as possible.
 

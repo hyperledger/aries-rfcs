@@ -11,6 +11,10 @@
 
 Specifies a safe way for two parties who are remote from one another and who do not trust one another to pick a random, binary outcome that neither can manipulate.
 
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+
 ## Motivation
 
 To guarantee fairness, it is often important to pick one party in a protocol to make a choice about what to do next. We need a way to do this that it more or less mirrors the randomness of flipping a coin.
@@ -129,7 +133,6 @@ This message is sent from Recorder to Caller, and embodies Step 4 of [the algori
   "salt": "01bf7abd-aa80-4389-bf8c-dba0f250bb1b",
   "winner": "caller",
   "comment": "You win.",
-  "~please_ack": {},
   "~thread": { 
     "thid": "518be002-de8e-456e-b3d5-8fe472477a86",
     "sender_order": 1 
@@ -144,8 +147,6 @@ The Caller should validate this message as follows:
 * Confirm that SHA256 hashes of `win` and `lose` salted with _salt_ results in the two _side strings_ from the `propose` message. This check is important because it eliminates the possibility that the Recorder could introduce variation to the commitment.
 
 Having validated the message thus far, Caller determines the winner by checking if the self computed hash of `win<salt>` equals the given hash at the `propose` message at the position chosen with the `call` message or not. If yes, then the value of the `winner` field must be `caller`; if not, then it must be `recorder`. The `winner` field must be present in the message, and its value must be correct, for the `reveal` message to be deemed fully valid. This confirms that both parties understand the outcome, and it prevents a Recorder from asserting a false outcome that is accepted by careless validation logic on the Caller side.
-
-The [`~please_ack` decorator](../0317-please-ack/README.md) is optional. If a superprotocol specifies the next step after a Coin Flip with sufficient precision, it may be unnecessary. However, it should be supported by implementations. The resulting `ack` message, if sent, is hereby [adopted into the Coin Flip protocol](../0015-acks/README.md#adopting-acks).
 
 The [`~timing.expires_time` decorator](../0032-message-timing/README.md#tutorial) may be used to impose a time limit on the processing of this message. If used, the protocol must restart if the subsequent `ack` or the next message in the superprotocol is not received before the time limit.
 

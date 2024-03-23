@@ -8,10 +8,11 @@
 - Start Date: 2020-03-23
 - Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)
 
-## Version Change Log
+## Change Log
 
-- 20240311 Removed references to payments in the protocol to clarify to those new to the protocol that they have not been implemented by anyone.
-- 20240313 Version 2.0 is the current version
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+- 20240313: Version 2.0 is the current version
+- 20240311: Removed references to payments in the protocol to clarify to those new to the protocol that they have not been implemented by anyone.
 
 For a period of time, versions 2.1 and 2.2 where defined in this RFC. Those
 definitions were added prior to any implementations, and to date, there are no
@@ -317,7 +318,6 @@ Description of fields:
 - `formats` -- contains an entry for each `credentials~attach` array entry, providing the the value of the attachment `@id` and the verifiable credential format and version of the attachment. Accepted values for the `format` items are provided in the per format "Attachment" sections immediately below.
 - `credentials~attach` -- an array of attachments containing the issued credentials.
 
-If the issuer wants an acknowledgement that he issued credential was accepted, this message must be decorated with the `~please-ack` decorator using the `OUTCOME` acknowledgement request. Outcome in the context of this protocol means the acceptance of the credential in whole, i.e. the credential is verified and the contents of the credential are acknowledged. Note that this is different from the default behavior as described in [0317: Please ACK Decorator](../0317-please-ack/README.md). It is then best practice for the new Holder to respond with an explicit `ack` message as described in the please ack decorator RFC.
 
 ##### Credentials Attachment Registry
 
