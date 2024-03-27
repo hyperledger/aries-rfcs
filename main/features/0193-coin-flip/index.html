@@ -1,0 +1,4903 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../0183-revocation-notification/">
+      
+      
+        <link rel="next" href="../../concepts/0207-credential-fraud-threat-model/">
+      
+      
+      <link rel="icon" href="https://raw.githubusercontent.com/hyperledger/aries-cloudagent-python/main/docs/assets/aries-favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.10">
+    
+    
+      
+        <title>0193 Coin Flip Protocol 1.0 - Hyperledger Aries Interoperability Profiles / RFCs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aries-rfc-0193-coin-flip-protocol-10" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Hyperledger Aries Interoperability Profiles / RFCs" class="md-header__button md-logo" aria-label="Hyperledger Aries Interoperability Profiles / RFCs" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/Hyperledger_Aries_Logo_White.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hyperledger Aries Interoperability Profiles / RFCs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              0193 Coin Flip Protocol 1.0
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hyperledger/aries-rfcs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hyperledger/aries-rfcs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Welcome
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../MAINTAINERS/" class="md-tabs__link">
+          
+  
+  Governance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aip2/0003-protocols/" class="md-tabs__link">
+          
+  
+  AIP 2.0
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/0003-protocols/" class="md-tabs__link">
+          
+  
+  ADOPTED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/0004-agents/" class="md-tabs__link">
+          
+  
+  ACCEPTED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/0029-message-trust-contexts/" class="md-tabs__link">
+          
+  
+  DEMONSTRATED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+          
+  
+  PROPOSED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/0013-overlays/" class="md-tabs__link">
+          
+  
+  RETIRED
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Hyperledger Aries Interoperability Profiles / RFCs" class="md-nav__button md-logo" aria-label="Hyperledger Aries Interoperability Profiles / RFCs" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/Hyperledger_Aries_Logo_White.png" alt="logo">
+
+    </a>
+    Hyperledger Aries Interoperability Profiles / RFCs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hyperledger/aries-rfcs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hyperledger/aries-rfcs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Welcome
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../RFCindex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    All RFCs by Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0000-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RFC Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0000-template-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol RFC Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MAINTAINERS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Maintainers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../github-issues/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Submitting Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LICENSE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SECURITY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AIP 2.0
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            AIP 2.0
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0003-protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0003 Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0004-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0004 Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0005-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0005 DID Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0008-message-id-and-threading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0008 Message ID and Threading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0011-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0011 Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0015-acks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0015 ACKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0017-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0017 Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0019-encryption-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0019 Encryption Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0020-message-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0020 Message Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0023-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0023 DID Exchange Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0025-didcomm-transports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0025 DIDComm Transports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0035-report-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0035 Report Problem Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0044-didcomm-file-and-mime-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0044 DIDComm File and MIME Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0046-mediators-and-relays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0046 Mediators and Relays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0047-json-ld-compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0047 JSON-LD Compatibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0048-trust-ping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0048 Trust Ping Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0050-wallets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0050 Wallets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0092-transport-return-route/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0092 Transports Return Route
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0094-cross-domain-messaging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0094 Cross-Domain Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0095-basic-message/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0095 Basic Message Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0183-revocation-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0183 Revocation Notification 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0211-route-coordination/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0211 Mediator Coordination Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0360-use-did-key/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0360 did:key Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0434-outofband/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0434 Out-of-Band Protocol 1.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0441-present-proof-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0441 Prover and Verifier Best Practices for Proof Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0453-issue-credential-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0453 Issue Credential Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0454-present-proof-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0454 Present Proof Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0510-dif-pres-exch-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0510 Presentation-Exchange Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0519-goal-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0519 Goal Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0557-discover-features-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0557 Discover Features Protocol v2.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0592-indy-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0592 Indy Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0593-json-ld-cred-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0593 JSON-LD Credential Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ADOPTED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ADOPTED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0003-protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0003 Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0005-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0005 DID Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0008-message-id-and-threading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0008 Message ID and Threading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0011-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0011 Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0019-encryption-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0019 Encryption Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0020-message-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0020 Message Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0021-didcomm-message-anatomy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0021 DIDComm Message Anatomy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0023-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0023 DID Exchange v1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0025-didcomm-transports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0025 DIDComm Transports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0031-discover-features/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0031 Discover Features Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0036-issue-credential/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0036 Issue Credential Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0037-present-proof/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0037 Present Proof Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0048-trust-ping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0048 Trust Ping Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0095-basic-message/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0095 Basic Message Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0160-connection-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0160 Connection Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0302-aries-interop-profile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0302 Aries Interop Profile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0434-outofband/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0434 Out-of-Band Protocol 1.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0453-issue-credential-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0453 Issue Credential Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0454-present-proof-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0454 Present Proof Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0510-dif-pres-exch-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0510 Presentation-Exchange Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0592-indy-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0592 Indy Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0593-json-ld-cred-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0593 JSON-LD Credential Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ACCEPTED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ACCEPTED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0004-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0004 Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0006-ssi-notation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0006 SSI Notation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0015-acks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0015 ACKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0017-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0017 Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0035-report-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0035 Report Problem Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0044-didcomm-file-and-mime-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0044 DIDComm File and MIME Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0046-mediators-and-relays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0046 Mediators and Relays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0047-json-ld-compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0047 JSON-LD Compatibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0049-repudiation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0049 Repudiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0050-wallets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0050 Wallets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0092-transport-return-route/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0092 Transports Return Route
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0094-cross-domain-messaging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0094 Cross-Domain Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0211-route-coordination/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0211 Mediator Coordination Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0360-use-did-key/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0360 did:key Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0441-present-proof-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0441 Prover and Verifier Best Practices for Proof Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0496 Transition to the Out of Band and DID Exchange Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0519-goal-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0519 Goal Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0557-discover-features-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0557 Discover Features Protocol v2.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0587-encryption-envelope-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0587 Encryption Envelope v2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0646-bbs-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0793-unqualfied-dids-transition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0793 Unqualified DID Transition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    DEMONSTRATED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            DEMONSTRATED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0029-message-trust-contexts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0029 Message Trust Contexts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0032-message-timing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0032 Message Timing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0042-lox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0042 LOX -- A more secure pluggable framework for protecting wallet keys
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0043-l10n/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0043 l10n (Locali[s|z]ation)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0051-dkms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0051 Decentralized Key Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0113-question-answer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0113 Question Answer Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0509-action-menu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0509 Action Menu Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0748-n-wise-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0748 N-wise DID Exchange Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    PROPOSED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            PROPOSED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Long Term Support
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0024-didcomm-over-xmpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0024 DIDComm over XMPP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0028-introduce/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0028 Introduce Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0030-sync-connection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0030 Sync Connection Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0034-message-tracing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0034 Message Tracing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0056-service-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0056 Service Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0066-non-repudiable-cryptographic-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0066 Non-Repudiable Signature for Cryptographic Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0067-didcomm-diddoc-conventions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0067 DIDComm DID document conventions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0074-didcomm-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0074 DIDComm Best Practices
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0075-payment-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0075 Payment Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0103-indirect-identity-control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0103 Indirect Identity Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0104-chained-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0104 Chained Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0114-predefined-identities/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0114 Predefined Identities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0116-evidence-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0116 Evidence Exchange Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0124-did-resolution-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0124 DID Resolution Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0167-data-consent-lifecycle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0167 Data Consent Lifecycle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0183-revocation-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0183 Revocation Notification 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    0193 Coin Flip Protocol 1.0
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    0193 Coin Flip Protocol 1.0
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change Log
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tutorial
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tutorial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#name-and-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      Name and Version
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#states" class="md-nav__link">
+    <span class="md-ellipsis">
+      States
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Messages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drawbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drawbacks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rationale-and-alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale and alternatives
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prior-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prior art
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unresolved-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unresolved questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0207-credential-fraud-threat-model/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0207 Credential Fraud Threat Model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0212 Pickup Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0212-pickup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0212 Pickup Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0213-transfer-policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0213 Transfer Policy Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0214-help-me-discover/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0214 "Help Me Discover" Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0217-linkable-message-paths/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0217 Linkable Message Paths
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0231-biometric-service-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0231 Biometric Service Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0249-rich-schema-contexts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0249 Aries Rich Schema Contexts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0257-private-credential-issuance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0257 Private Credential Issuance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0268-unified-didcomm-agent-deeplinking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0268 Unified DIDCOMM Deeplinking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0270-interop-test-suite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0270 Interop Test Suite
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0281-rich-schemas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0281 Aries Rich Schemas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0289-toip-stack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0289 The Trust Over IP Stack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0309-didauthz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0309 DIDAuthZ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0327-crypto-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0327 Crypto service Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0334-jwe-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0334 JWE envelope 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0335-http-over-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0335 HTTP Over DIDComm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0345-community-coordinated-update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0345 Community Coordinated Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0346-didcomm-between-two-mobile-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0346 DIDComm Between Two Mobile Agents Using Cloud Agent Mediator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0347-proof-negotiation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0347 Proof Negotiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0351-purpose-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0351 Purpose Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0418-rich-schema-encoding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0418 Aries Rich Schema Encoding Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0420-rich-schemas-common/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0420 Rich Schema Objects Common
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0428-prepare-issue-rich-credential/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0428 Prerequisites to Issue Rich Credential
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0429-prepare-req-rich-pres/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0429 Prerequisites to Request Rich Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0430-machine-readable-governance-frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0430 Machine-Readable Governance Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0440-kms-architectures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0440 KMS Architectures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0445-rich-schema-mapping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0445 Aries Rich Schema Mapping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0446-rich-schema-cred-def/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0446 Aries Rich Schema Credential Definition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0478-coprotocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0478 Coprotocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0482-coprotocol-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0482 Coprotocol Protocol 0.5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0511-dif-cred-manifest-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0511 Credential-Manifest Attachment format for requesting and presenting credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0559-pppu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0559 Privacy-Preserving Proof of Uniqueness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0566-issuer-hosted-custodidal-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0566 Issuer-Hosted Custodial Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0641-linking-binary-objects-to-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0641 Linking binary objects to credentials using hash based references
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0693-credential-representation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0693 Cross-Platform Credential Representation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0699-push-notifications-apns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0699 Push Notifications apns Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0700-oob-through-redirect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0700 Out-of-Band through redirect
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0721-revocation-notification-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0721 Revocation Notification 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0728-device-binding-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0728 Device Binding Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0734-push-notifications-fcm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0734 Push Notifications fcm Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0755-oca-for-aries/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0755 Overlays Capture Architecture (OCA) For Aries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0756-oca-for-aries-style-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0756 OCA for Aries Style Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0757-push-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0757 Push Notification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0771-anoncreds-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0780-data-urls-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0780 Use Data URLs for Images and More in Credential Attributes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0794-did-rotate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0794 DID Rotate 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0804-didcomm-rpc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0804 DIDComm Remote Procedure Call (DRPC)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0809-w3c-data-integrity-credential-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0809 W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RETIRED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            RETIRED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0013-overlays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0013 Overlays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0234-signature-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0234 Signature Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0250-rich-schemas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0250 Rich Schema Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0303-v01-credential-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0303 V0.1 Credential Exchange (Deprecated)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0317-please-ack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0317 Please ACK Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0348-transition-msg-type-to-https/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0348 Transition Message Type to HTTPs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0627-static-peer-dids/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0627 Static Peer DIDs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change Log
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tutorial
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tutorial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#name-and-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      Name and Version
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#states" class="md-nav__link">
+    <span class="md-ellipsis">
+      States
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Messages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drawbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drawbacks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rationale-and-alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale and alternatives
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prior-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prior art
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unresolved-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unresolved questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="aries-rfc-0193-coin-flip-protocol-10">Aries RFC 0193: Coin Flip Protocol 1.0<a class="headerlink" href="#aries-rfc-0193-coin-flip-protocol-10" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Authors: <a href="daniel.hardman@gmail.com">Daniel Hardman</a>, <a href="patrick@mindf.org">Patrick Stürmlinger</a></li>
+<li>Status: <a href="../../#proposed">PROPOSED</a></li>
+<li>Since: 2019-08-19</li>
+<li>Status Note: minor update in late 2020 </li>
+<li>Start Date: 2019-08-19</li>
+<li>Tags: <a href="../../tags/#feature">feature</a>, <a href="../../tags/#protocol">protocol</a></li>
+</ul>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>Specifies a safe way for two parties who are remote from one another and who do not trust one another to pick a random, binary outcome that neither can manipulate.</p>
+<h2 id="change-log">Change Log<a class="headerlink" href="#change-log" title="Permanent link">&para;</a></h2>
+<ul>
+<li>20240320: Clarification removing references to retired <code>~please_ack</code> decorator and RFC.</li>
+</ul>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
+<p>To guarantee fairness, it is often important to pick one party in a protocol to make a choice about what to do next. We need a way to do this that it more or less mirrors the randomness of flipping a coin.</p>
+<h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
+<h3 id="name-and-version">Name and Version<a class="headerlink" href="#name-and-version" title="Permanent link">&para;</a></h3>
+<p>This defines the <code>coinflip</code> protocol, version 1.x, as identified by the
+following <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/uris.md#piuri">PIURI</a>:</p>
+<div class="highlight"><pre><span></span><code>https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0
+</code></pre></div>
+<h3 id="roles">Roles<a class="headerlink" href="#roles" title="Permanent link">&para;</a></h3>
+<p>There are 2 roles in the protocol: <strong>Recorder</strong> and <strong>Caller</strong>. These role names parallel the roles in a physical coin flip: the <em>Recorder</em> performs a process that freezes/records the state of a flipped coin, and the <em>Caller</em> announces the state that they predict, before the state is known. If the caller predicts the state correctly, then the caller chooses what happens next; otherwise, the recorder chooses.</p>
+<h3 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">&para;</a></h3>
+<p>Before describing the messages, let's review the algorithm that will be used. This algorithm is not new; it is a simple commitment scheme <a href="https://en.wikipedia.org/wiki/Commitment_scheme">described on wikipedia</a> and implemented in various places. The RFC merely formalizes a simple commitment scheme for DIDComm in a way that the Caller chooses a side without knowing whether it's <code>win</code> or <code>lose</code>.</p>
+<ol>
+<li>
+<p>Recorder chooses a random <a href="https://tools.ietf.org/html/rfc4122">UUID</a>. A <a href="https://tools.ietf.org/html/rfc4122#section-4.4">version 4 UUID</a> is recommended, though any UUID version should be accepted. Note that the UUID is represented in lower case, with hyphens, and without enclosing curly braces. Suppose this value is <code>01bf7abd-aa80-4389-bf8c-dba0f250bb1b</code>. This UUID is called <strong>salt</strong>.</p>
+</li>
+<li>
+<p>Recorder builds two <strong>side strings</strong> by salting <code>win</code> and <code>lose</code> with the <em>salt</em> -- i.e., <code>win01bf7abd-aa80-4389-bf8c-dba0f250bb1b</code> and <code>lose01bf7abd-aa80-4389-bf8c-dba0f250bb1b</code>. Recorder then computes a SHA256 hash of each side string, which are <code>0C192E004440D8D6D6AF06A7A03A2B182903E9F048D4E7320DF6301DF0C135A5</code> and <code>C587E50CB48B1B0A3B5136BA9D238B739A6CD599EE2D16994537B75CA595C091</code> for our example, and randomly selects one <em>side string</em> as side1 and the other one as side2. Recorder sends them to Caller using the <a href="#propose"><code>propose</code> message described below</a>. Those hashes do commit Recorder to all inputs, without revealing which one is <code>win</code> or <code>lose</code>, and it's the Recorder's way of posing the Caller the question, "underside or topside"?</p>
+</li>
+<li>
+<p>Caller announces their committed choice -- for instance, <code>side2</code>, using the <a href="#call">'call' message described below</a>. This commits Caller to a particular side of the virtual coin.</p>
+</li>
+<li>
+<p>Recorder uses a <a href="#reveal">'reveal' message</a> to reveal the <em>salt</em>. Caller is now able to rebuild both <em>side strings</em> and both parties discover whether Caller guessed the <code>win</code> side or not. If Caller guessed the <code>win</code> side, Caller won. Otherwise Recorder won. Neither party is able to manipulate the outcome. This is guaranteed by Caller being able to verify that Recorder proposed two valid options, i.e. one side winning and one side losing, and Recorder knowing not to reveal any disclosed information before Caller made their choice.</p>
+</li>
+</ol>
+<h3 id="states">States<a class="headerlink" href="#states" title="Permanent link">&para;</a></h3>
+<p>The algorithm and the corresponding states are pictured in the following diagram:</p>
+<p><img alt="diagram" src="coin-flip.png" /></p>
+<blockquote>
+Note: This diagram was made in draw.io. To make changes:
+
+- upload the drawing HTML from this folder to the [draw.io](https://draw.io) site (Import From... Device), 
+- make changes,
+- export the picture as PNG and HTML to your local copy of this repo, and
+- submit a pull request.
+</blockquote>
+
+<p>This diagram only depicts the so-called "happy path". It is possible to experience problems for various reasons. If either party detects such an event, they should abandon the protocol and emit a <a href="../0035-report-problem/"><code>problem-report</code> message</a> to the other party. The <code>problem-report</code> message is <a href="../../0000-template-protocol/#adopted-messages">adopted into this protocol</a> for that purpose. Some values of <code>code</code> that may be used in such messages include:</p>
+<ul>
+<li><code>bad-message-sequence</code>: The message was sent out of order.</li>
+<li><code>bad-field-value</code>: The message contained a field with an invalid value. The offending fields are named in the <code>problem_items</code> array. </li>
+</ul>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<h3 id="messages">Messages<a class="headerlink" href="#messages" title="Permanent link">&para;</a></h3>
+<h4 id="propose"><code>propose</code><a class="headerlink" href="#propose" title="Permanent link">&para;</a></h4>
+<p>The protocol begins when Caller sends to Recorder a <code>propose</code> message that embodies Step 1 in the <a href="#algorithm">algorithm above</a>. It looks like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  &quot;@type&quot;: &quot;https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0/propose&quot;,
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  &quot;@id&quot;: &quot;518be002-de8e-456e-b3d5-8fe472477a86&quot;,
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  &quot;side1&quot;: &quot;C587E50CB48B1B0A3B5136BA9D238B739A6CD599EE2D16994537B75CA595C091&quot;,
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  &quot;side2&quot;: &quot;0C192E004440D8D6D6AF06A7A03A2B182903E9F048D4E7320DF6301DF0C135A5&quot;,
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  &quot;comment&quot;: &quot;Make your choice and let&#39;s who goes first.&quot;,
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  &quot;choice-id&quot;: &quot;did:sov:SLfEi9esrjzybysFxQZbfq;spec/tictactoe/1.0/who-goes-first&quot;,
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  &quot;caller-wins&quot;: &quot;did:example:abc123&quot;,  // Meaning of value defined in superprotocol
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  &quot;recorder-wins&quot;: &quot;did:example:xyz456&quot;, // Meaning of value defined in superprotocol
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  // Optional; connects to superprotocol
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  &quot;~thread&quot;: { 
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    &quot;pthid&quot;: &quot;a2be4118-4f60-bacd-c9a0-dfb581d6fd96&quot; 
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  }
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>}
+</code></pre></div>
+<p>The <code>@type</code> and <code>@id</code> fields are standard for DIDComm. The <code>side1</code> and <code>side2</code> fields convey the data required by Step 2 of the algorithm. The optional <code>comment</code> field follows <a href="../0043-l10n/">localization conventions</a> and is irrelevant unless the coin flip intends to invite human participation. The <code>~thread.pthid</code> <a href="../../concepts/0011-decorators/">decorator</a> is optional but should be common; it <a href="../../concepts/0008-message-id-and-threading/#threaded-messages">identifies the thread of the parent interaction</a> (the <a href="../../concepts/0003-protocols/#composable">superprotocol</a>).</p>
+<p>The <code>choice-id</code> field formally names a choice that a superprotocol has defined, and tells how the string values of the <code>caller-wins</code> and <code>recorder-wins</code> fields will be interpreted. In the example above, the choice is defined in the <a href="../../concepts/0003-protocols/tictactoe/#key-concepts">Tic-Tac-Toe Protocol</a>, which also specifies that <code>caller-wins</code> and <code>recorder-wins</code> will contain DIDs of the parties playing the game. Some other combinations that might make sense include:</p>
+<ul>
+<li>
+<p>In an auction protocol that uses a coin flip to break a tie between two bids of equal value, <code>choice-id</code> might be a string like <code>prefix/myauctionproto/1.0/bid-tie-break</code>, and the values of the <code>*-wins</code> fields might be the <code>id</code> properties of specific bid messages.</p>
+</li>
+<li>
+<p>In a protocol that models an American football game, the <code>choice-id</code> might be a string like <code>prefix/amfootball/1.0/who-kicks-off</code>, and the values of the <code>*-wins</code> fields might be the strings "home" and "visitor".</p>
+</li>
+<li>
+<p>In a protocol that models radioactive halflife, the decay of a particular neutron might use <code>choice-id</code> of <code>prefix/halflife/1.0/should-decay</code>, and the <code>*-wins</code> fields might be the strings "yes" and "no".</p>
+</li>
+</ul>
+<p>The <a href="../0032-message-timing/#tutorial"><code>~timing.expires_time</code> decorator</a> may be used to impose a time limit on the processing of this message. If used, the protocol must restart if the subsequent <code>call</code> message is not received by this time limit.</p>
+<h4 id="call"><code>call</code><a class="headerlink" href="#call" title="Permanent link">&para;</a></h4>
+<p>This message is sent from Caller to Recorder, and embodies Step 3 of <a href="#algorithm">the algorithm</a>. It looks like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  &quot;@type&quot;: &quot;https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0/call&quot;,
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  &quot;@id&quot;: &quot;1173fe5f-86c9-47d7-911b-b8eac7d5f2ad&quot;,
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  &quot;choice&quot;: &quot;side2&quot;,
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  &quot;comment&quot;: &quot;I pick side 2.&quot;,
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  &quot;~thread&quot;: { 
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    &quot;thid&quot;: &quot;518be002-de8e-456e-b3d5-8fe472477a86&quot;,
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    &quot;sender_order&quot;: 1 
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  }
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>}
+</code></pre></div>
+<p>Note the use of <code>~thread.thid</code> and <code>sender_order: 1</code> to connect this <code>call</code> to the preceding <code>propose</code>.</p>
+<p>The <a href="../0032-message-timing/#tutorial"><code>~timing.expires_time</code> decorator</a> may be used to impose a time limit on the processing of this message. If used, the protocol must restart if the subsequent <code>reveal</code> message is not received by this time limit.</p>
+<h4 id="reveal"><code>reveal</code><a class="headerlink" href="#reveal" title="Permanent link">&para;</a></h4>
+<p>This message is sent from Recorder to Caller, and embodies Step 4 of <a href="#algorithm">the algorithm</a>. It looks like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  &quot;@type&quot;: &quot;https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0/reveal&quot;,
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  &quot;@id&quot;: &quot;e2a9454d-783d-4663-874e-29ad10776115&quot;,
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  &quot;salt&quot;: &quot;01bf7abd-aa80-4389-bf8c-dba0f250bb1b&quot;,
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  &quot;winner&quot;: &quot;caller&quot;,
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  &quot;comment&quot;: &quot;You win.&quot;,
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  &quot;~thread&quot;: { 
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    &quot;thid&quot;: &quot;518be002-de8e-456e-b3d5-8fe472477a86&quot;,
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    &quot;sender_order&quot;: 1 
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  }
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>}
+</code></pre></div>
+<p>Note the use of <code>~thread.thid</code> and <code>sender_order: 1</code> to connect this <code>reveal</code> to the preceding <code>call</code>.</p>
+<p>The Caller should validate this message as follows:</p>
+<ul>
+<li>Confirm that SHA256 hashes of <code>win</code> and <code>lose</code> salted with <em>salt</em> results in the two <em>side strings</em> from the <code>propose</code> message. This check is important because it eliminates the possibility that the Recorder could introduce variation to the commitment.</li>
+</ul>
+<p>Having validated the message thus far, Caller determines the winner by checking if the self computed hash of <code>win&lt;salt&gt;</code> equals the given hash at the <code>propose</code> message at the position chosen with the <code>call</code> message or not. If yes, then the value of the <code>winner</code> field must be <code>caller</code>; if not, then it must be <code>recorder</code>. The <code>winner</code> field must be present in the message, and its value must be correct, for the <code>reveal</code> message to be deemed fully valid. This confirms that both parties understand the outcome, and it prevents a Recorder from asserting a false outcome that is accepted by careless validation logic on the Caller side.</p>
+<p>The <a href="../0032-message-timing/#tutorial"><code>~timing.expires_time</code> decorator</a> may be used to impose a time limit on the processing of this message. If used, the protocol must restart if the subsequent <code>ack</code> or the next message in the superprotocol is not received before the time limit.</p>
+<h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
+<p>The protocol is a bit chatty.</p>
+<h2 id="rationale-and-alternatives">Rationale and alternatives<a class="headerlink" href="#rationale-and-alternatives" title="Permanent link">&para;</a></h2>
+<p>It may be desirable to pick among more than 2 alternatives. This RFC could be extended easily to provide more options than win and lose. The algorithm itself would not change.</p>
+<h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
+<p>As mentioned in the introduction, the algorithm used in this protocol is a simple and well known form of cryptographic commitment, and is documented on Wikipedia. It is not new to this RFC.</p>
+<h2 id="unresolved-questions">Unresolved questions<a class="headerlink" href="#unresolved-questions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Do we need to use hashlink so we can move to a new hash algorithm if SHA256 is ever broken?</li>
+</ul>
+<h2 id="implementations">Implementations<a class="headerlink" href="#implementations" title="Permanent link">&para;</a></h2>
+<p>The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.</p>
+<table>
+<thead>
+<tr>
+<th>Name / Link</th>
+<th>Implementation Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../0183-revocation-notification/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 0183 Revocation Notification 1.0">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                0183 Revocation Notification 1.0
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../concepts/0207-credential-fraud-threat-model/" class="md-footer__link md-footer__link--next" aria-label="Next: 0207 Credential Fraud Threat Model">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                0207 Credential Fraud Threat Model
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.expand", "navigation.footer", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+    
+  </body>
+</html>

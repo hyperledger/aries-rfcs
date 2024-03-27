@@ -1,0 +1,11 @@
+
+{
+  "cant-route-to-agent": {
+    "en": "Unable to route to specified agent.",
+    "es": "No se puede enrutar este mensaje al agente especificado."
+  },
+  "remote-unsupported-encryption": {
+    "en": "The remote party uses {algo} encryption that I do not support."
+  }
+}
+

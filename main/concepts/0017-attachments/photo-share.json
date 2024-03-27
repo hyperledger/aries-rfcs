@@ -1,0 +1,13 @@
+{
+  "@type": "https://github.com/foo/bar/blob/master/abczyx/pix/1.0/favshare",
+  "comment": "I love this picture of the lake.",
+  "fav_photo~attach": {
+    "description": "Lake Titicaca at sunset, early April, 2019.",
+    "mime-type": "image/png",
+    "filename": "lake-shot.png",
+    "lastmod_time": "2018-12-24 18:24:07Z",
+    "content": {
+      "base64": "aGVsbG8sIHl ...(many bytes omitted)... Ugd29ybGQ="
+    }
+  }
+}

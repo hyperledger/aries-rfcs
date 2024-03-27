@@ -1,0 +1,4977 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../0268-unified-didcomm-agent-deeplinking/">
+      
+      
+        <link rel="next" href="../../features/0281-rich-schemas/">
+      
+      
+      <link rel="icon" href="https://raw.githubusercontent.com/hyperledger/aries-cloudagent-python/main/docs/assets/aries-favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.10">
+    
+    
+      
+        <title>0270 Interop Test Suite - Hyperledger Aries Interoperability Profiles / RFCs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#0270-interop-test-suite" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Hyperledger Aries Interoperability Profiles / RFCs" class="md-header__button md-logo" aria-label="Hyperledger Aries Interoperability Profiles / RFCs" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/Hyperledger_Aries_Logo_White.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hyperledger Aries Interoperability Profiles / RFCs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              0270 Interop Test Suite
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hyperledger/aries-rfcs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hyperledger/aries-rfcs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Welcome
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../MAINTAINERS/" class="md-tabs__link">
+          
+  
+  Governance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aip2/0003-protocols/" class="md-tabs__link">
+          
+  
+  AIP 2.0
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../0003-protocols/" class="md-tabs__link">
+          
+  
+  ADOPTED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../0004-agents/" class="md-tabs__link">
+          
+  
+  ACCEPTED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../0029-message-trust-contexts/" class="md-tabs__link">
+          
+  
+  DEMONSTRATED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../0799-long-term-support/" class="md-tabs__link">
+          
+  
+  PROPOSED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../0013-overlays/" class="md-tabs__link">
+          
+  
+  RETIRED
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Hyperledger Aries Interoperability Profiles / RFCs" class="md-nav__button md-logo" aria-label="Hyperledger Aries Interoperability Profiles / RFCs" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/Hyperledger_Aries_Logo_White.png" alt="logo">
+
+    </a>
+    Hyperledger Aries Interoperability Profiles / RFCs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hyperledger/aries-rfcs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hyperledger/aries-rfcs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Welcome
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../RFCindex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    All RFCs by Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0000-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RFC Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0000-template-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol RFC Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MAINTAINERS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Maintainers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../github-issues/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Submitting Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LICENSE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SECURITY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AIP 2.0
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            AIP 2.0
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0003-protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0003 Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0004-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0004 Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0005-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0005 DID Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0008-message-id-and-threading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0008 Message ID and Threading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0011-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0011 Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0015-acks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0015 ACKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0017-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0017 Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0019-encryption-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0019 Encryption Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0020-message-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0020 Message Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0023-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0023 DID Exchange Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0025-didcomm-transports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0025 DIDComm Transports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0035-report-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0035 Report Problem Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0044-didcomm-file-and-mime-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0044 DIDComm File and MIME Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0046-mediators-and-relays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0046 Mediators and Relays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0047-json-ld-compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0047 JSON-LD Compatibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0048-trust-ping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0048 Trust Ping Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0050-wallets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0050 Wallets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0092-transport-return-route/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0092 Transports Return Route
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0094-cross-domain-messaging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0094 Cross-Domain Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0095-basic-message/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0095 Basic Message Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0183-revocation-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0183 Revocation Notification 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0211-route-coordination/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0211 Mediator Coordination Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0360-use-did-key/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0360 did:key Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0434-outofband/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0434 Out-of-Band Protocol 1.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0441-present-proof-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0441 Prover and Verifier Best Practices for Proof Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0453-issue-credential-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0453 Issue Credential Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0454-present-proof-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0454 Present Proof Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0510-dif-pres-exch-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0510 Presentation-Exchange Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0519-goal-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0519 Goal Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0557-discover-features-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0557 Discover Features Protocol v2.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0592-indy-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0592 Indy Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0593-json-ld-cred-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0593 JSON-LD Credential Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ADOPTED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ADOPTED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0003-protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0003 Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0005-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0005 DID Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0008-message-id-and-threading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0008 Message ID and Threading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0011-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0011 Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0019-encryption-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0019 Encryption Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0020-message-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0020 Message Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0021-didcomm-message-anatomy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0021 DIDComm Message Anatomy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0023-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0023 DID Exchange v1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0025-didcomm-transports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0025 DIDComm Transports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0031-discover-features/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0031 Discover Features Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0036-issue-credential/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0036 Issue Credential Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0037-present-proof/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0037 Present Proof Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0048-trust-ping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0048 Trust Ping Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0095-basic-message/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0095 Basic Message Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0160-connection-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0160 Connection Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0302-aries-interop-profile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0302 Aries Interop Profile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0434-outofband/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0434 Out-of-Band Protocol 1.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0453-issue-credential-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0453 Issue Credential Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0454-present-proof-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0454 Present Proof Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0510-dif-pres-exch-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0510 Presentation-Exchange Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0592-indy-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0592 Indy Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0593-json-ld-cred-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0593 JSON-LD Credential Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ACCEPTED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ACCEPTED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0004-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0004 Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0006-ssi-notation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0006 SSI Notation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0015-acks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0015 ACKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0017-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0017 Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0035-report-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0035 Report Problem Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0044-didcomm-file-and-mime-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0044 DIDComm File and MIME Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0046-mediators-and-relays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0046 Mediators and Relays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0047-json-ld-compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0047 JSON-LD Compatibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0049-repudiation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0049 Repudiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0050-wallets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0050 Wallets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0092-transport-return-route/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0092 Transports Return Route
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0094-cross-domain-messaging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0094 Cross-Domain Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0211-route-coordination/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0211 Mediator Coordination Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0360-use-did-key/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0360 did:key Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0441-present-proof-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0441 Prover and Verifier Best Practices for Proof Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0496 Transition to the Out of Band and DID Exchange Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0519-goal-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0519 Goal Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0557-discover-features-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0557 Discover Features Protocol v2.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0587-encryption-envelope-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0587 Encryption Envelope v2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0646-bbs-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0793-unqualfied-dids-transition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0793 Unqualified DID Transition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    DEMONSTRATED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            DEMONSTRATED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0029-message-trust-contexts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0029 Message Trust Contexts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0032-message-timing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0032 Message Timing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0042-lox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0042 LOX -- A more secure pluggable framework for protecting wallet keys
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0043-l10n/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0043 l10n (Locali[s|z]ation)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0051-dkms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0051 Decentralized Key Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0113-question-answer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0113 Question Answer Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0509-action-menu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0509 Action Menu Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0748-n-wise-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0748 N-wise DID Exchange Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    PROPOSED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            PROPOSED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Long Term Support
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0024-didcomm-over-xmpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0024 DIDComm over XMPP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0028-introduce/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0028 Introduce Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0030-sync-connection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0030 Sync Connection Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0034-message-tracing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0034 Message Tracing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0056-service-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0056 Service Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0066-non-repudiable-cryptographic-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0066 Non-Repudiable Signature for Cryptographic Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0067-didcomm-diddoc-conventions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0067 DIDComm DID document conventions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0074-didcomm-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0074 DIDComm Best Practices
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0075-payment-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0075 Payment Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0103-indirect-identity-control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0103 Indirect Identity Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0104-chained-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0104 Chained Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0114-predefined-identities/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0114 Predefined Identities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0116-evidence-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0116 Evidence Exchange Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0124-did-resolution-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0124 DID Resolution Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0167-data-consent-lifecycle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0167 Data Consent Lifecycle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0183-revocation-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0183 Revocation Notification 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0193-coin-flip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0193 Coin Flip Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0207-credential-fraud-threat-model/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0207 Credential Fraud Threat Model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0212 Pickup Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0212-pickup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0212 Pickup Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0213-transfer-policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0213 Transfer Policy Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0214-help-me-discover/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0214 "Help Me Discover" Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0217-linkable-message-paths/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0217 Linkable Message Paths
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0231-biometric-service-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0231 Biometric Service Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0249-rich-schema-contexts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0249 Aries Rich Schema Contexts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0257-private-credential-issuance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0257 Private Credential Issuance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0268-unified-didcomm-agent-deeplinking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0268 Unified DIDCOMM Deeplinking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    0270 Interop Test Suite
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    0270 Interop Test Suite
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tutorial
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tutorial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Goals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dos-and-donts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dos and Don'ts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      General Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contract-between-suite-and-agent-under-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contract Between Suite and Agent Under Test
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#releasing-and-versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Releasing and Versioning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-naming-and-grouping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Naming and Grouping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interop-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interop Profile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backchannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backchannel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predefined-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Predefined Inventory
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unresolved-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unresolved questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0281-rich-schemas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0281 Aries Rich Schemas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0289-toip-stack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0289 The Trust Over IP Stack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0309-didauthz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0309 DIDAuthZ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0327-crypto-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0327 Crypto service Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0334-jwe-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0334 JWE envelope 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0335-http-over-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0335 HTTP Over DIDComm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0345-community-coordinated-update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0345 Community Coordinated Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0346-didcomm-between-two-mobile-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0346 DIDComm Between Two Mobile Agents Using Cloud Agent Mediator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0347-proof-negotiation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0347 Proof Negotiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0351-purpose-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0351 Purpose Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0418-rich-schema-encoding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0418 Aries Rich Schema Encoding Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0420-rich-schemas-common/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0420 Rich Schema Objects Common
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0428-prepare-issue-rich-credential/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0428 Prerequisites to Issue Rich Credential
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0429-prepare-req-rich-pres/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0429 Prerequisites to Request Rich Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0430-machine-readable-governance-frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0430 Machine-Readable Governance Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0440-kms-architectures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0440 KMS Architectures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0445-rich-schema-mapping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0445 Aries Rich Schema Mapping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0446-rich-schema-cred-def/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0446 Aries Rich Schema Credential Definition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0478-coprotocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0478 Coprotocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0482-coprotocol-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0482 Coprotocol Protocol 0.5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0511-dif-cred-manifest-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0511 Credential-Manifest Attachment format for requesting and presenting credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0559-pppu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0559 Privacy-Preserving Proof of Uniqueness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0566-issuer-hosted-custodidal-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0566 Issuer-Hosted Custodial Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0641-linking-binary-objects-to-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0641 Linking binary objects to credentials using hash based references
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0693-credential-representation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0693 Cross-Platform Credential Representation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0699-push-notifications-apns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0699 Push Notifications apns Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0700-oob-through-redirect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0700 Out-of-Band through redirect
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0721-revocation-notification-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0721 Revocation Notification 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0728-device-binding-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0728 Device Binding Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0734-push-notifications-fcm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0734 Push Notifications fcm Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0755-oca-for-aries/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0755 Overlays Capture Architecture (OCA) For Aries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0756-oca-for-aries-style-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0756 OCA for Aries Style Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0757-push-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0757 Push Notification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0771-anoncreds-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0780-data-urls-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0780 Use Data URLs for Images and More in Credential Attributes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0794-did-rotate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0794 DID Rotate 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0804-didcomm-rpc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0804 DIDComm Remote Procedure Call (DRPC)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0809-w3c-data-integrity-credential-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0809 W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RETIRED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            RETIRED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0013-overlays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0013 Overlays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0234-signature-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0234 Signature Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0250-rich-schemas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0250 Rich Schema Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0303-v01-credential-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0303 V0.1 Credential Exchange (Deprecated)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0317-please-ack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0317 Please ACK Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0348-transition-msg-type-to-https/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0348 Transition Message Type to HTTPs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0627-static-peer-dids/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0627 Static Peer DIDs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tutorial
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tutorial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Goals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dos-and-donts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dos and Don'ts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      General Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contract-between-suite-and-agent-under-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contract Between Suite and Agent Under Test
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#releasing-and-versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Releasing and Versioning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-naming-and-grouping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Naming and Grouping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interop-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interop Profile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backchannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backchannel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predefined-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Predefined Inventory
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unresolved-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unresolved questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="0270-interop-test-suite">0270: Interop Test Suite<a class="headerlink" href="#0270-interop-test-suite" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Authors: <a href="daniel.hardman@gmail.com">Daniel Hardman</a></li>
+<li>Status: <a href="../../#proposed">PROPOSED</a></li>
+<li>Since: 2019-10-25</li>
+<li>Status Note: Codifies some thinking about scope and mental model that are already socialized. Provides some new thinking as well.</li>
+<li>Supersedes: Partially, and in some ways, <a href="https://github.com/hyperledger/indy-hipe/blob/main/text/0015-agent-test-suite-interface/README.md">Indy HIPE 0015</a> and <a href="https://github.com/hyperledger/indy-hipe/blob/main/text/0016-agent-test-suite-v1/README.md">Indy HIPE 0016</a>. Also, represents answers to questions that the community first posed in <a href="https://hackmd.io/JW5b9xYCRGKqyqhVevTZ_g">this HackMD doc</a> and first attempted to answer in the <a href="https://github.com/hyperledger/indy-agent">indy-agent repo</a>.</li>
+<li>Start Date: 2018-10-25</li>
+<li>Tags: <a href="../../tags/#concept">concept</a></li>
+</ul>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>Describes the goals, scope, and interoperability contract of the Aries Interop Test Suite. Does NOT serve as a design doc for the test suite code, or as a developer guide explaining how the test suite can be run; see the <a href="https://github.com/hyperledger/aries-protocol-test-suite">test suite codebase</a> for that.</p>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
+<p>The Aries Interop Test Suite makes SSI interoperability publicly and objectively measurable. It is a major deliverable of the Aries project as a whole--not a minor detail that only test zealots care about. It's important that the entire SSI community understand what it offers, how it works, what its results mean, and how it should be used.</p>
+<h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
+<p>Interoperability is a buzzword in the SSI/decentralized identity space. We all want it.</p>
+<p>Without careful effort, though, interoperability is subjective and slippery. If products A and B implement the same spec, or if they demo cooperation in a single workflow, does that mean they can be used together? How much? For how long? Across which release boundaries? With what feature caveats?</p>
+<p>We need a methodology that gives crisp answers to questions like these--and it needs to be more efficient than continuously exercising every feature of every product against features of every other product.</p>
+<p>However, it's important to temper our ambitions. Standards, community specs, and reference implementations exist, and many of them come with tests or test suites of their own. Products can test themselves with these tools, and with custom tests written by their dev staffs, and make rough guesses about interoperability. The insight we're after is a bit different.</p>
+<h3 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h3>
+<p>What we need is a tool that achieves these goals:</p>
+<ol>
+<li>
+<p><strong>Evaluate practical interoperability</strong> of <a href="../0004-agents/">agents</a>.</p>
+<blockquote>
+<p><a href="../0004-agents/#the-agent-ness-continuum">Other software that offers SSI features</a> should also be testable. Here, such components are conflated with agents for simplicity, but it's understood that the suite targets protocol participants no matter what their technical classification.</p>
+</blockquote>
+</li>
+</ol>
+<p>Focus on remote interactions that deliver business value: <a href="../0003-protocols/">high-level protocols</a> built atop <a href="../0005-didcomm/">DIDComm</a>, such as <a href="../../features/0036-issue-credential/">credential issuance</a>, <a href="../../features/0037-present-proof/">proving</a>, and <a href="../../features/0028-introduce/">introducing</a>, where each <a href="../0003-protocols/#participants">participant</a> uses different software. DID methods, ledgers, crypto libraries, credential implementations, and DIDComm infrastructure should have separate tests that are out of scope here. None of these generate deep insight into whether packaged software is interoperable enough to justify purchase decisions; that's the gap we need to plug.</p>
+<ol>
+<li>
+<p><strong>Describe results in a formal, granular, reproducible way</strong> that supports comparison between agents A and B, and between A at two different points of time or in two different configurations.</p>
+<p>This implies a structured report, as well as support for versioning of the suite, the agents under test, and the results.</p>
+</li>
+<li>
+<p><strong>Track the collective community state of the art</strong>, so measurements are comprehensive and up-to-date, and so new ideas automatically encounter pressure to be vetted for interoperability.</p>
+<p>The test suite isn't a compliance tool, and it should be unopinionated about what's important and what's not. However, it should embody a broad list of testable features--<a href="../../#accepted">certainly, ones that are standard</a>, and often, <a href="../../#demonstrated">ones that are still maturing</a>.</p>
+</li>
+</ol>
+<h3 id="dos-and-donts">Dos and Don'ts<a class="headerlink" href="#dos-and-donts" title="Permanent link">&para;</a></h3>
+<p>Based on the preceding context, the following rules guide our understanding of the test suite scope:</p>
+<ul>
+<li><strong>DO</strong> organize testing around protocols, as this is the major way that interoperability questions manifest. "Can agent X issue credentials in a way that agent Y accepts?" is a question about whether X and Y support a common protocol.</li>
+<li><strong>DO</strong> test many protocols.</li>
+<li><strong>DO</strong> allow easy extension for new protocols, both as contributions inside the codebase and as external code added after the test suite is installed.</li>
+<li><strong>DO</strong> evaluate unhappy paths (timeouts, brownouts, graceful handling of version incompatibilities, <a href="../../features/0035-report-problem/">reporting</a>, <a href="../../features/0034-message-tracing/">troubleshooting</a>...), since practical interoperability is often a function of robustness in suboptimal circumstances. </li>
+<li><strong>DO</strong> test all relevant versions of each protocol. (The test suite does not need to maintain an unreasonably comprehensive inventory of all protocols; old protocols could be retired if they become difficult to support. An agent wishing to certify against an old protocol could download an old version of the test suite to certify. However, we generally want the test suite to support both breadth--many protocols--and depth--multiple protocol versions if they are all in active use.)</li>
+<li><strong>DO</strong> test roles in a protocol separately, and DO test only one agent at a time. The question isn't <em>"Does agent X support the issuance protocol?"</em> but rather <em>"Does agent X support</em> role Y <em>in the issuance protocol?"</em> All roles in a protocol other than the one role for the one tested agent should be played by the test suite. </li>
+<li><strong>DO</strong> test required and optional <a href="../0011-decorators/">decorators</a> to the extent that they are relevant to interoperability.</li>
+<li><strong>DO</strong> distinguish between required and optional features of a protocol in results.</li>
+<li><strong>DO</strong> provide value for agents that talk over transports besides HTTP: BlueTooth, SMTP, AMQP, and so forth -- but <strong>DON'T</strong> get bogged down in all the permutations of transport and routing.</li>
+<li><strong>DO</strong> describe results in a formally defined data structure that can be prettified in various ways.</li>
+<li><strong>DO</strong> allow the test suite to be an automated step in a CI/CD pipeline.</li>
+<li><strong>DO</strong> evaluate <em>message</em> correctness, but touch more lightly on <em>data</em> correctness. See <a href="../0017-attachments/#messages-versus-data">this discussion about the distinction between messages and data</a>, and note how the <a href="../../features/0036-issue-credential/">Issue Credential</a> and <a href="../../features/0037-present-proof/">Present Proof</a> protocols push credential and presentation format to a concern about the format of attached data, so the data can evolve at a different rate from the protocol.</li>
+</ul>
+<hr>
+
+<ul>
+<li><strong>DON'T</strong> attempt to replace proper unit, functional, or integration tests for agents.</li>
+<li><strong>DON'T</strong> attempt to replace pen-testing or security analyses.</li>
+<li><strong>DON'T</strong> attempt to replace formal methods (proofs of correctness/eventual consistency/security guarantees)</li>
+<li><strong>DON'T</strong> test governance, policy, regulatory compliance, or similar high-level concerns outside fundamental interoperability. </li>
+<li><strong>DON'T</strong> require manual interaction.</li>
+<li><strong>DON'T</strong> artificially link one protocol's results to another's.</li>
+<li><strong>DON'T</strong> attempt to release the test suite in sync with other Aries artifacts. Rather, use an independent release cadence that many uncoordinated agent projects can leverage per their own convenience.</li>
+<li><strong>DON'T</strong> impose unreasonable processes, tools, architecture constraints, or dependencies on builders of agents or test suite contributors. For example, if the test suite required the agent under test to be instrumented, and the instrumentation library weren't available on certain platforms, that would violate this rule. It should be possible for just about any agent to be put under test, long after its initial design, just by implementing the backchannel.</li>
+<li><strong>DON'T</strong> require that the test suite be runnable by an independent third party; trust results as reported by an agent's own developers. The suite might be relevant in a certification process, but is not intended to embody a certification process in and of itself.</li>
+<li><strong>DON'T</strong> worry about test suite performance much. We want tests to run in minutes, so we shouldn't do anything ridiculously time-consuming--but simplicity of the suite is more important than its efficiency.</li>
+</ul>
+<h3 id="general-approach">General Approach<a class="headerlink" href="#general-approach" title="Permanent link">&para;</a></h3>
+<p>We've chosen to pursue these goals by maintaining a modular interop test suite as a deliverable of the Aries project. The test suite is an agent in its own right, albeit an agent with deliberate misbehaviors, a security model unsuitable for production deployment, an independent release schedule, and a desire to use every possible version of every protocol.</p>
+<p>Currently the suite lives in the <code>aries-protocol-test-suite</code> repo, but the location and codebase could change without invalidating this RFC; the location is an implementation detail.</p>
+<h3 id="contract-between-suite-and-agent-under-test">Contract Between Suite and Agent Under Test<a class="headerlink" href="#contract-between-suite-and-agent-under-test" title="Permanent link">&para;</a></h3>
+<p>The contract between the test suite and the agents it tests is:</p>
+<h4 id="suite-will">Suite will...<a class="headerlink" href="#suite-will" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p>Be packaged for local installation.</p>
+<p>Packaging could take various convenient forms. Those testing an agent install the suite in an environment that they control, where their agent is already running, and then configure the suite to talk to their agent.</p>
+</li>
+<li>
+<p><em>Evaluate</em> the <strong>agent under test</strong> by engaging in protocol interactions over a <strong>frontchannel</strong>, and <em>control</em> the interactions over a <strong>backchannel</strong>.</p>
+<blockquote>
+<p>Note: Initially, this doc stipulated that both channels should use DIDComm over HTTP. This has triggered some dissonance. If an agent doesn't want to talk HTTP, should it have to, just to be tested? If an agent wants to be controlled over a RESTful interface, shouldn't it be allowed to do that? Answers to the preceding two questions have been proposed (use a generic adapter to transform the protocol, but don't make the test suite talk on a different frontchannel; unless all agents expose the same RESTful interface, the only thing we can count on is that agents will have DIDComm support, and the only methdology we have for uniform specification is to describe a DIDComm-based protocol, so yes, backchannel should be DIDComm). These two incompatible opinions are both alive and well in the community, and we are not yet converging on a consensus. Therefore, the actual implementation of the frontchannel and backchannel remains a bit muddy right now. Perhaps matters will clarify as we think longer and/or as we gain experience with implementation.</p>
+</blockquote>
+<p>Over the frontchannel, the test suite and the agent under test look like ordinary agents in the ecosystem; any messages sent over this channel could occur in the wild, with no clue that either party is in testing mode.</p>
+<p>The backchannel is the place where testing mode manifests. It lets the agent's initial state be set and reset with precision, guarantees its choices at forks in a workflow, eliminates any need for manual interaction, and captures notifications from the agent about errors. Depending on the agent under test, this backchannel may be very simple, or more complex. For more details, see <a href="#backchannel">Backchannel</a> below.</p>
+<p>Agents that interact over other transports on either channel can use transport adapters provided by the test suite, or write their own. HTTP is the least common denominator transport into which any other transports are reinterpreted. Adapting is the job of the agent developer, not the test suite--but the suite will try to make this as easy as possible.</p>
+<p><a href="https://docs.google.com/presentation/d/1Rn1gEnYXnIetC9IXrZynyh2FI6XHEE7n8wE6eIpvwZA/edit" target="imgsrc"><img src="channels.png" alt="channels"/></a></p>
+</li>
+<li>
+<p>Not probe for agent features. Instead, it will just run whatever subset of its test inventory is declared relevant by the agent under test.</p>
+<p>This lets simple agents do simple integrations with the test suite, and avoid lots of needless error handling on both sides.</p>
+</li>
+<li>
+<p>Use a set of predefined identities and a set of starting conditions that all agents under test must be able to recognize on demand; these are referenced on the backchannel in control messages. See <a href="#predefined-inventory">Predefined Inventory</a> below.</p>
+</li>
+<li>
+<p>Run tests in arbitrary orders and combinations, but only run one test at a time.</p>
+<p>Some agents may support lots of concurrency, but the test suite should not assume that all agents do.</p>
+</li>
+<li>
+<p>Produce an <a href="#interop-profile"><strong>interop profile</strong></a> for the agent under test, with respect to the tested features, for every successful run of the test suite.</p>
+<p>A "successful" run is one where the test suite runs to completion and believes it has valid data; it has nothing to do with how many tests are passed by the agent under test. The test suite will not emit profiles for unsuccessful runs.</p>
+<p>Interop profiles emitted by the test suite are the artifacts that should be <a href="../../#accepted">hyperlinked in the Implementation Notes section of protocol RFCs</a>. They could also be published (possibly in a prettified form) in release notes, distributed as a product or documentation artifact, or returned as an attachment with the <code>disclose</code> message of the <a href="../../features/0031-discover-features/">Discover Features protocol</a>.</p>
+</li>
+<li>
+<p>Have a very modest footprint in RAM and on disk, so running it in Docker containers, VMs, and CI/CD pipelines is practical.</p>
+</li>
+<li>
+<p>Run on modern desktop and server operating systems, but not necessarily on embedded or mobile platforms. However, since it interacts with the agent under test over a remote messaging technology, it should be able to test agents running on any platform that's capable of interacting over HTTP or over a transport that can be adapted to HTTP.</p>
+</li>
+<li>
+<p>Enforce reasonable timeouts unless configured not to do so (see note about user interaction below).</p>
+</li>
+</ol>
+<h4 id="agent-under-test-will">Agent under test will...<a class="headerlink" href="#agent-under-test-will" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p>Provide a consistent name for itself, and a semver-compatible version, so test results can be compared across test suite runs.</p>
+</li>
+<li>
+<p>Use the test suite configuration mechanism to make a claim about the tests that it believes are relevant, based on the features and roles it implements.</p>
+</li>
+<li>
+<p>Implement a distinction between test mode and non-test mode, such that:</p>
+<ul>
+<li>
+<p>Test mode causes the agent to expose and use a backchannel--but the backchannel does not introduce a risk of abuse in production mode.</p>
+</li>
+<li>
+<p>Test mode either causes the agent to need no interaction with a user (preferred), or is combined with test suite config that turns off timeouts (not ideal but may be useful for debugging and mobile agents). This is necessary so the test suite can be automated, or so unpredictable timing on user interaction doesn't cause spurious results.</p>
+</li>
+</ul>
+<p>The mechanism for implementing this mode distinction could be extremely primitive (conditional compilation, cmdline switches, config file, different binaries). It simply has to preserve ordinary control in the agent under test when it's in production, while ceding some control to the test suite as the suite runs.</p>
+</li>
+<li>
+<p>Faithfully create the start conditions implied by named states from the <a href="#predefined-inventory">Predefined Inventory</a>, when requested on the backchannel.</p>
+</li>
+<li>
+<p>Accurately report errors on the backchannel.</p>
+</li>
+</ol>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<h3 id="releasing-and-versioning">Releasing and Versioning<a class="headerlink" href="#releasing-and-versioning" title="Permanent link">&para;</a></h3>
+<p>Defining a release and versioning scheme is important, because the test suite's version is embedded in every interop profile it generates, and people who read test suite output need to reason about whether the results from two different test suites are comparable. By picking the right conventions, we can also avoid a lot of complexity and maintenance overhead.</p>
+<p>The test suite releases implicitly with every merged commit, and is versioned in a <a href="https://semver.org/">semver-compatible</a> way as follows:</p>
+<ul>
+<li>
+<p>The <code>major</code> version of the test suite version corresponds to the provisions of the contract defined in this RFC. Any breaking changes in this RFC will require an increment of the major number.</p>
+</li>
+<li>
+<p>The <code>minor</code> version of the test suite is a count of how many protocol+version combinations the community knows about. This number is derived from a list of known <a href="../0003-protocols/#piuri">PIURIs</a> that's autogenerated from metadata about protocols in the <code>aries-rfcs</code> repo. Publishing or versioning a protocol in the community thus automatically causes the test suite's minor version to increment.</p>
+</li>
+<li>
+<p>The <code>patch</code> version of the test suite is the 7-character short form of the git commit hash for the source code from which it is built.</p>
+</li>
+</ul>
+<p>The major version should change rarely, after significant community debate. The minor version should update on a weekly or monthly sort of timeframe as protocols accumulate and evolve in the community--without near-zero release effort by contributors to the test suite. The patch version is updated automatically with every commit. This is a very light process, but it still allows the test suite on Monday and the test suite on Friday to report versions like <code>1.39.5e22189</code> and <code>1.40.c5d8aaf</code>, to know which version of the test suite is later, to know that both versions implement the same contract, and to know that the later version is backwards-compatible with the earlier one.</p>
+<h3 id="test-naming-and-grouping">Test Naming and Grouping<a class="headerlink" href="#test-naming-and-grouping" title="Permanent link">&para;</a></h3>
+<p>Tests in the test suite are named in a comma-separated form that groups them by protocol, version, role, and behavior, in that order. For example, a test of the <code>holder</code> role in version <code>1.0</code> of the the <code>issue-credential</code> protocol, that checks to see if the holder sends a proper <code>ack</code> at the end, might be named:</p>
+<div class="highlight"><pre><span></span><code>issue-credential,1.0,holder,sends-final-ack
+</code></pre></div>
+<p>Because of punctuation, this format cannot be reflected in function names in code, and it also will probably not be reflected in file names in the test suite codebase. However, it provides useful grouping behavior when sorted, and it is convenient for parsing. It lets agents under test declare patterns of relevant tests with wildcards. An agent that supports the credential issuance but not holding, and that only supports the 1.1 version of the <code>issue-credential</code> protocol, can tell the test suite what's relevant with:</p>
+<div class="highlight"><pre><span></span><code>issue-credential,1.1,issuer,*
+</code></pre></div>
+<h3 id="interop-profile">Interop Profile<a class="headerlink" href="#interop-profile" title="Permanent link">&para;</a></h3>
+<p>The results of a test suite run are represented in a JSON object that looks like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    &quot;@type&quot;: &quot;Aries Test Suite Interop Profile v1&quot;
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    &quot;suite_version&quot;: &quot;1.39.5e22189&quot;,
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    &quot;under_test_name&quot;: &quot;Aries Static Agent Python&quot;,
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    &quot;under_test_version&quot;: &quot;0.9.3&quot;,
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    &quot;test_time&quot;: &quot;2019-11-23T18:59:06&quot;, // when test suite launched
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    &quot;results&quot;: [
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        {&quot;name&quot;: &quot;issue-credential,1.0,holder,ignores-spurious-response&quot;, &quot;pass&quot;: false },
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        {&quot;name&quot;: &quot;issue-credential,1.0,holder,sends-final-ack&quot;, &quot;pass&quot;: true },
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    ]
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>}
+</code></pre></div>
+<h3 id="backchannel">Backchannel<a class="headerlink" href="#backchannel" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>While the concept of a backchannel has been accepted by the community, there is not alignment with the definition of the backchannel provided here. Rather than maintaining this section as related work in the community evolves the concept, we're adding this note to say "this section will likely change." Once backchannel implementations stabilize with a core definition, we'll refine this section as appropriate.</p>
+</blockquote>
+<p>The backchannel between test suite and agent under test is managed as a standard DIDComm protocol. The identifier for the message family is X. The messages include:</p>
+<ul>
+<li><code>reset-state</code>: Sent from suite to agent. Throws away all current state and gives keys and relationships that must exist in the KMS, by referencing named items from the <a href="#predefined-inventory">Predefined Inventory</a>.</li>
+<li><code>start</code>: Sent from suite to agent. Triggers the agent under test to make the first move in a protocol. Identifies the role the agent should take, and possibly the message type the agent should emit to start, if more than one start message is possible. Also identifies the roles and endpoints for any other participants.</li>
+<li><code>control-next</code>: Sent from suite to agent. Tells the agent under test what to do the next time it is their turn to make a decision in the protocol. For example, if the protocol under test is tic-tac-toe, this might tell the agent under test what move to make. Does this in a generic way by attaching an approximation of the plaintext message the test suite wants the agent under test to emit. The agent can examine this JSON and act accordingly.</li>
+<li><code>problem-report</code>: Sent from agent to suite to report errors in the testing procedure itself. Any such message invalidates and abandons the current test.</li>
+<li><code>report-state-change</code>: Sent from agent to suite to report that it is now in a new state in the protocol.</li>
+</ul>
+<h3 id="predefined-inventory">Predefined Inventory<a class="headerlink" href="#predefined-inventory" title="Permanent link">&para;</a></h3>
+<p>TODO: link to the predefined identity for the test suite created by Daniel B, plus the RFC about other predefined DIDs. Any and all of these should be names as possible existing states in the KMS. Other initial states:</p>
+<ul>
+<li>totally empty KMS</li>
+<li>corrupt KMS</li>
+<li>100 random DIDs from various DID methods, with ratios per method configurable</li>
+</ul>
+<h2 id="unresolved-questions">Unresolved questions<a class="headerlink" href="#unresolved-questions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>What parts of the design do you expect to resolve through the
+enhancement proposal process before this gets merged?</li>
+<li>What parts of the design do you expect to resolve through the
+implementation of this feature before stabilization?</li>
+<li>What related issues do you consider out of scope for this 
+proposal that could be addressed in the future independently of the
+solution that comes out of this doc?</li>
+</ul>
+<h2 id="implementations">Implementations<a class="headerlink" href="#implementations" title="Permanent link">&para;</a></h2>
+<p>The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.</p>
+<p><em>Implementation Notes</em> <a href="../../#accepted">may need to include a link to test results</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Name / Link</th>
+<th>Implementation Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../0268-unified-didcomm-agent-deeplinking/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 0268 Unified DIDCOMM Deeplinking">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                0268 Unified DIDCOMM Deeplinking
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../features/0281-rich-schemas/" class="md-footer__link md-footer__link--next" aria-label="Next: 0281 Aries Rich Schemas">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                0281 Aries Rich Schemas
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.expand", "navigation.footer", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+    
+  </body>
+</html>

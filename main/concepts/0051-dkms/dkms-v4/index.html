@@ -1,0 +1,5134 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="https://raw.githubusercontent.com/hyperledger/aries-cloudagent-python/main/docs/assets/aries-favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.10">
+    
+    
+      
+        <title>DKMS (Decentralized Key Management System) Design and Architecture V4 - Hyperledger Aries Interoperability Profiles / RFCs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dkms-decentralized-key-management-system-design-and-architecture-v4" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Hyperledger Aries Interoperability Profiles / RFCs" class="md-header__button md-logo" aria-label="Hyperledger Aries Interoperability Profiles / RFCs" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/Hyperledger_Aries_Logo_White.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hyperledger Aries Interoperability Profiles / RFCs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DKMS (Decentralized Key Management System) Design and Architecture V4
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hyperledger/aries-rfcs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hyperledger/aries-rfcs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
+  Welcome
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../MAINTAINERS/" class="md-tabs__link">
+          
+  
+  Governance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aip2/0003-protocols/" class="md-tabs__link">
+          
+  
+  AIP 2.0
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../0003-protocols/" class="md-tabs__link">
+          
+  
+  ADOPTED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../0004-agents/" class="md-tabs__link">
+          
+  
+  ACCEPTED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../0029-message-trust-contexts/" class="md-tabs__link">
+          
+  
+  DEMONSTRATED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../0799-long-term-support/" class="md-tabs__link">
+          
+  
+  PROPOSED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../0013-overlays/" class="md-tabs__link">
+          
+  
+  RETIRED
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Hyperledger Aries Interoperability Profiles / RFCs" class="md-nav__button md-logo" aria-label="Hyperledger Aries Interoperability Profiles / RFCs" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/Hyperledger_Aries_Logo_White.png" alt="logo">
+
+    </a>
+    Hyperledger Aries Interoperability Profiles / RFCs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hyperledger/aries-rfcs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hyperledger/aries-rfcs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Welcome
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../RFCindex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    All RFCs by Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../0000-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RFC Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../0000-template-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol RFC Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MAINTAINERS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Maintainers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../github-issues/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Submitting Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../LICENSE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../SECURITY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AIP 2.0
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            AIP 2.0
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0003-protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0003 Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0004-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0004 Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0005-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0005 DID Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0008-message-id-and-threading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0008 Message ID and Threading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0011-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0011 Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0015-acks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0015 ACKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0017-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0017 Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0019-encryption-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0019 Encryption Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0020-message-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0020 Message Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0023-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0023 DID Exchange Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0025-didcomm-transports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0025 DIDComm Transports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0035-report-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0035 Report Problem Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0044-didcomm-file-and-mime-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0044 DIDComm File and MIME Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0046-mediators-and-relays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0046 Mediators and Relays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0047-json-ld-compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0047 JSON-LD Compatibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0048-trust-ping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0048 Trust Ping Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0050-wallets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0050 Wallets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0092-transport-return-route/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0092 Transports Return Route
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0094-cross-domain-messaging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0094 Cross-Domain Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0095-basic-message/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0095 Basic Message Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0183-revocation-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0183 Revocation Notification 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0211-route-coordination/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0211 Mediator Coordination Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0360-use-did-key/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0360 did:key Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0434-outofband/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0434 Out-of-Band Protocol 1.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0441-present-proof-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0441 Prover and Verifier Best Practices for Proof Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0453-issue-credential-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0453 Issue Credential Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0454-present-proof-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0454 Present Proof Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0510-dif-pres-exch-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0510 Presentation-Exchange Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0519-goal-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0519 Goal Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0557-discover-features-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0557 Discover Features Protocol v2.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0592-indy-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0592 Indy Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aip2/0593-json-ld-cred-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0593 JSON-LD Credential Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ADOPTED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ADOPTED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0003-protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0003 Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0005-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0005 DID Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0008-message-id-and-threading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0008 Message ID and Threading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0011-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0011 Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0019-encryption-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0019 Encryption Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0020-message-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0020 Message Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0021-didcomm-message-anatomy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0021 DIDComm Message Anatomy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0023-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0023 DID Exchange v1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0025-didcomm-transports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0025 DIDComm Transports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0031-discover-features/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0031 Discover Features Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0036-issue-credential/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0036 Issue Credential Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0037-present-proof/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0037 Present Proof Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0048-trust-ping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0048 Trust Ping Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0095-basic-message/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0095 Basic Message Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0160-connection-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0160 Connection Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0302-aries-interop-profile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0302 Aries Interop Profile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0434-outofband/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0434 Out-of-Band Protocol 1.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0453-issue-credential-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0453 Issue Credential Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0454-present-proof-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0454 Present Proof Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0510-dif-pres-exch-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0510 Presentation-Exchange Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0592-indy-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0592 Indy Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0593-json-ld-cred-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0593 JSON-LD Credential Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ACCEPTED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ACCEPTED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0004-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0004 Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0006-ssi-notation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0006 SSI Notation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0015-acks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0015 ACKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0017-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0017 Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0035-report-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0035 Report Problem Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0044-didcomm-file-and-mime-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0044 DIDComm File and MIME Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0046-mediators-and-relays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0046 Mediators and Relays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0047-json-ld-compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0047 JSON-LD Compatibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0049-repudiation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0049 Repudiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0050-wallets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0050 Wallets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0092-transport-return-route/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0092 Transports Return Route
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0094-cross-domain-messaging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0094 Cross-Domain Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0211-route-coordination/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0211 Mediator Coordination Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0360-use-did-key/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0360 did:key Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0441-present-proof-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0441 Prover and Verifier Best Practices for Proof Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0496 Transition to the Out of Band and DID Exchange Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0519-goal-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0519 Goal Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0557-discover-features-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0557 Discover Features Protocol v2.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0587-encryption-envelope-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0587 Encryption Envelope v2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0646-bbs-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0793-unqualfied-dids-transition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0793 Unqualified DID Transition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    DEMONSTRATED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            DEMONSTRATED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0029-message-trust-contexts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0029 Message Trust Contexts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0032-message-timing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0032 Message Timing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0042-lox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0042 LOX -- A more secure pluggable framework for protecting wallet keys
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0043-l10n/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0043 l10n (Locali[s|z]ation)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0051 Decentralized Key Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0113-question-answer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0113 Question Answer Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0509-action-menu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0509 Action Menu Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0748-n-wise-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0748 N-wise DID Exchange Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PROPOSED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            PROPOSED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Long Term Support
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0024-didcomm-over-xmpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0024 DIDComm over XMPP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0028-introduce/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0028 Introduce Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0030-sync-connection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0030 Sync Connection Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0034-message-tracing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0034 Message Tracing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0056-service-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0056 Service Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0066-non-repudiable-cryptographic-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0066 Non-Repudiable Signature for Cryptographic Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0067-didcomm-diddoc-conventions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0067 DIDComm DID document conventions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0074-didcomm-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0074 DIDComm Best Practices
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0075-payment-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0075 Payment Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0103-indirect-identity-control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0103 Indirect Identity Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0104-chained-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0104 Chained Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0114-predefined-identities/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0114 Predefined Identities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0116-evidence-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0116 Evidence Exchange Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0124-did-resolution-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0124 DID Resolution Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0167-data-consent-lifecycle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0167 Data Consent Lifecycle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0183-revocation-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0183 Revocation Notification 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0193-coin-flip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0193 Coin Flip Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0207-credential-fraud-threat-model/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0207 Credential Fraud Threat Model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0212 Pickup Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0212-pickup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0212 Pickup Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0213-transfer-policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0213 Transfer Policy Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0214-help-me-discover/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0214 "Help Me Discover" Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0217-linkable-message-paths/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0217 Linkable Message Paths
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0231-biometric-service-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0231 Biometric Service Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0249-rich-schema-contexts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0249 Aries Rich Schema Contexts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0257-private-credential-issuance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0257 Private Credential Issuance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0268-unified-didcomm-agent-deeplinking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0268 Unified DIDCOMM Deeplinking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0270-interop-test-suite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0270 Interop Test Suite
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0281-rich-schemas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0281 Aries Rich Schemas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0289-toip-stack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0289 The Trust Over IP Stack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0309-didauthz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0309 DIDAuthZ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0327-crypto-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0327 Crypto service Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0334-jwe-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0334 JWE envelope 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0335-http-over-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0335 HTTP Over DIDComm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0345-community-coordinated-update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0345 Community Coordinated Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0346-didcomm-between-two-mobile-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0346 DIDComm Between Two Mobile Agents Using Cloud Agent Mediator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0347-proof-negotiation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0347 Proof Negotiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0351-purpose-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0351 Purpose Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0418-rich-schema-encoding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0418 Aries Rich Schema Encoding Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0420-rich-schemas-common/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0420 Rich Schema Objects Common
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0428-prepare-issue-rich-credential/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0428 Prerequisites to Issue Rich Credential
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0429-prepare-req-rich-pres/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0429 Prerequisites to Request Rich Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0430-machine-readable-governance-frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0430 Machine-Readable Governance Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0440-kms-architectures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0440 KMS Architectures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0445-rich-schema-mapping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0445 Aries Rich Schema Mapping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0446-rich-schema-cred-def/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0446 Aries Rich Schema Credential Definition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0478-coprotocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0478 Coprotocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0482-coprotocol-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0482 Coprotocol Protocol 0.5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0511-dif-cred-manifest-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0511 Credential-Manifest Attachment format for requesting and presenting credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0559-pppu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0559 Privacy-Preserving Proof of Uniqueness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0566-issuer-hosted-custodidal-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0566 Issuer-Hosted Custodial Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0641-linking-binary-objects-to-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0641 Linking binary objects to credentials using hash based references
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0693-credential-representation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0693 Cross-Platform Credential Representation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0699-push-notifications-apns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0699 Push Notifications apns Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0700-oob-through-redirect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0700 Out-of-Band through redirect
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0721-revocation-notification-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0721 Revocation Notification 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0728-device-binding-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0728 Device Binding Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0734-push-notifications-fcm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0734 Push Notifications fcm Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0755-oca-for-aries/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0755 Overlays Capture Architecture (OCA) For Aries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0756-oca-for-aries-style-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0756 OCA for Aries Style Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0757-push-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0757 Push Notification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0771-anoncreds-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0780-data-urls-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0780 Use Data URLs for Images and More in Credential Attributes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0794-did-rotate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0794 DID Rotate 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0804-didcomm-rpc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0804 DIDComm Remote Procedure Call (DRPC)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0809-w3c-data-integrity-credential-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0809 W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RETIRED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            RETIRED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0013-overlays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0013 Overlays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0234-signature-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0234 Signature Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0250-rich-schemas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0250 Rich Schema Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0303-v01-credential-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0303 V0.1 Credential Exchange (Deprecated)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0317-please-ack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0317 Please ACK Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0348-transition-msg-type-to-https/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0348 Transition Message Type to HTTPs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0627-static-peer-dids/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0627 Static Peer DIDs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="dkms-decentralized-key-management-system-design-and-architecture-v4">DKMS (Decentralized Key Management System) Design and Architecture V4<a class="headerlink" href="#dkms-decentralized-key-management-system-design-and-architecture-v4" title="Permanent link">&para;</a></h1>
+<p>2019-03-29</p>
+<p><strong>Authors:</strong> Drummond Reed, Jason Law, Daniel Hardman, Mike Lodder</p>
+<p><strong>Contributors:</strong> Christopher Allen, Devin Fisher, Nathan George, Lovesh Harchandani, Dmitry Khovratovich, Corin Kochenower, Brent Zundel, Nathan George</p>
+<p><strong>Advisors</strong>: Stephen Wilson</p>
+<p><strong>STATUS:</strong> This design and architecture for a decentralized key management system (DKMS) has been developed by Evernym Inc. under <a href="https://www.dhs.gov/science-and-technology/news/2017/07/20/news-release-dhs-st-awards-749k-evernym-decentralized-key">a contract with the U.S. Department of Homeland Security Science &amp; Technology Directorate</a>. This fourth draft is being released on 29 Mar 2019 to begin an open public review and comment process in preparation for DKMS to be submitted to a standards development organization such as <a href="https://www.oasis-open.org/">OASIS</a> for formal standardization.</p>
+<p><strong>Acknowledgements:</strong> </p>
+<ul>
+<li>
+<p>Work on DKMS Design and Architecture has been funded in part by a Small Business Innovation Research (SBIR) grant from the <strong>U.S. Department of Homeland Security Science and Technology Directorate</strong>. The content of this specification does not necessarily reflect the position or the policy of the U.S. Government and no official endorsement should be inferred.</p>
+</li>
+<li>
+<p><strong>The Internet Security Research Lab at Brigham Young University</strong> gathered feedback on decentralized key management and recovery from user surveys and UX usability studies. They also provided feedback on earlier drafts of this document. Contributions were made by Kent Seamons (faculty), Daniel Zappala (faculty), Ken Reese, Brad Spendlove, Trevor Smith, and Luke Dickinson.</p>
+</li>
+</ul>
+<p><strong>Table of Contents</strong></p>
+<ol>
+<li>Introduction</li>
+<li>Design Goals and Requirements</li>
+<li>High Level Architecture</li>
+<li>Ledger Architecture</li>
+<li>Key Management Architecture</li>
+<li>Recovery Methods</li>
+<li>Recovery From Key Loss</li>
+<li>Recovery From Key Compromise</li>
+<li>DKMS Protocol</li>
+<li>Protocol Flows</li>
+<li>Open Issues and Future Work</li>
+<li>Future Standardization</li>
+</ol>
+<h1 id="1-introduction">1. Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h1>
+<h2 id="11-overview">1.1. Overview<a class="headerlink" href="#11-overview" title="Permanent link">&para;</a></h2>
+<p>DKMS (Decentralized Key Management System) is a new approach to cryptographic key management intended for use with blockchain and distributed ledger technologies (DLTs) where there are no centralized authorities. DKMS inverts a core assumption of conventional <a href="https://en.wikipedia.org/wiki/Public_key_infrastructure">PKI (public key infrastructure)</a> architecture, namely that public key certificates will be issued by centralized or federated <a href="https://en.wikipedia.org/wiki/Certificate_authority">certificate authorities</a> (CAs). With DKMS, the initial "root of trust" for all participants is any distributed ledger or decentralized protocol that supports a new form of root identity record called a DID (decentralized identifier).</p>
+<p>A DID is a globally unique identifier that is generated cryptographically and self-registered with the identity owner’s choice of a DID-compatible distributed ledger or decentralized protocol so no central registration authority is required. Each DID points to a DID document—a JSON or JSON-LD object containing the associated public verification key(s) and addresses of services such as off-ledger agent(s) supporting secure peer-to-peer interactions with the identity owner. For more on DIDs, see the <a href="https://github.com/WebOfTrustInfo/rwot6-santabarbara/blob/master/topics-and-advance-readings/did-primer.md">DID Primer</a>. For more on peer-to-peer interactions, see the <a href="../../0005-didcomm/">DID Communication explainer</a>.</p>
+<p>Since no third party is involved in the initial registration of a DID and DID document, it begins as "trustless". From this starting point, trust between DID-identified peers can be built up through the exchange of <a href="https://www.w3.org/2017/vc/charter.html">verifiable credentials</a>—credentials about identity attributes that include cryptographic proof of authenticity of authorship. These proofs can be verified by reference to the issuer’s DID and DID document. For more about verifiable credentials, see the <a href="https://github.com/WebOfTrustInfo/rwot6-santabarbara/blob/master/topics-and-advance-readings/verifiable-credentials-primer.md">
+Verifiable Credentials Primer</a>. </p>
+<p>This decentralized <a href="https://en.wikipedia.org/wiki/Web_of_trust">web of trust model</a> leverages the security, immutability, availability, and resiliency properties of distributed ledgers to provide highly scalable key distribution, verification, and recovery. This inversion of conventional <a href="https://en.wikipedia.org/wiki/Public_key_infrastructure">public key infrastructure</a> (PKI) into <a href="https://github.com/WebOfTrustInfo/rebooting-the-web-of-trust/blob/master/final-documents/dpki.pdf">decentralized PKI (DPKI)</a> removes centralized gatekeepers, making the benefits of PKI accessible to everyone. However this lack of centralized authorities for DKMS shifts the majority of responsibility for key management directly to participating identity owners. This demands the decentralized equivalent of the centralized cryptographic key management systems (CKMS) that are the current best practice in most enterprises. The purpose of this document is to specify a design and architecture that fulfills this market need.</p>
+<h2 id="12-market-need">1.2. Market Need<a class="headerlink" href="#12-market-need" title="Permanent link">&para;</a></h2>
+<p><a href="https://en.wikipedia.org/wiki/X.509">X.509 public key certificates</a>, as used in the TLS/SSL protocol for HTTPS secure Web browsing, have become the most widely adopted PKI in the world. However this system requires that all certificates be obtained from a relatively small list of trusted authorities—and that any changes to these certificates also be approved by someone in this chain of trust.</p>
+<p>This creates political and structural barriers to establishing and updating authoritative data. This friction is great enough that only a small fraction of Internet users are currently in position to use public/private key cryptography for their own identity, security, privacy, and trust management. This inability for people and organizations to interact privately as independent, verifiable peers on their own terms has many consequences:</p>
+<ol>
+<li>
+<p>It forces individuals and smaller organizations to rely on large federated identity providers and certificate authorities who are in a position to dictate security, privacy and business policies.</p>
+</li>
+<li>
+<p>It restricts the number of ways in which peers can discover each other and build new trust relationships—which in turn limits the health and resiliency of the digital economy.</p>
+</li>
+<li>
+<p>It discourages the use of modern cryptography for increased security and privacy, weakening our cybersecurity infrastructure.</p>
+</li>
+</ol>
+<p>Decentralized technologies such as distributed ledgers and edge protocols can remove these barriers and make it much easier to share and verify public keys. This enables each entity to manage its own authoritative key material without requiring approval from other parties. Furthermore, those changes can be seen immediately by the entity’s peers without requiring them to change their software or "certificate store".</p>
+<p>Maturing DLTs and protocols will bring DPKI into the mainstream—a combination of DIDs for decentralized identification and DKMS for decentralized key management. DPKI will provide a simple, secure, way to generate strong public/private key pairs, register them for easy discovery and verification, and rotate and retire them as needed to maintain strong security and privacy.</p>
+<h2 id="13-benefits">1.3. Benefits<a class="headerlink" href="#13-benefits" title="Permanent link">&para;</a></h2>
+<p>DKMS architecture and DPKI provides the following major benefits:</p>
+<ol>
+<li>
+<p><strong>No single point of failure.</strong> With DKMS, there is no central CA or other registration authority whose failure can jeopardize large swaths of users.</p>
+</li>
+<li>
+<p><strong>Interoperability.</strong> DKMS will enable any two identity owners and their applications to perform key exchange and create encrypted P2P connections without reliance on proprietary software, service providers, or federations.</p>
+</li>
+<li>
+<p><strong>Portability.</strong> DKMS will enable identity owners to avoid being locked into any specific implementation of a DKMS-compatible wallet, agent, or agency. Identity owners should—with the appropriate security safeguards—be able to use the DKMS protocol itself to move the contents of their wallet (though not necessarily the actual cryptographic keys) between compliant DKMS implementations.</p>
+</li>
+<li>
+<p><strong>Resilient trust infrastructure.</strong> DKMS incorporates all the advantages of distributed ledger technology for decentralized access to cryptographically verifiable data. It then adds on top of it a distributed web of trust where any peer can exchange keys, form connections, and issue/accept verifiable credentials from any other peer.</p>
+</li>
+<li>
+<p><strong>Key recovery.</strong> Rather than app-specific or domain-specific key recovery solutions, DKMS can build robust key recovery directly into the infrastructure, including agent-automated encrypted backup, DKMS key escrow services, and social recovery of keys, for example by backing up or sharding keys across trusted DKMS connections and agents.</p>
+</li>
+</ol>
+<h1 id="2-design-goals-and-requirements">2. Design Goals and Requirements<a class="headerlink" href="#2-design-goals-and-requirements" title="Permanent link">&para;</a></h1>
+<h2 id="21-conventional-ckms-requirements-nist-800-130-analysis">2.1. Conventional CKMS Requirements: NIST 800-130 Analysis<a class="headerlink" href="#21-conventional-ckms-requirements-nist-800-130-analysis" title="Permanent link">&para;</a></h2>
+<p>As a general rule, DKMS requirements are a derivation of CKMS requirements, adjusted for the lack of
+centralized authorities or systems for key management operations. Evernym’s DKMS team and subcontractors
+performed an extensive analysis of the applicability of conventional CKMS requirements to DKMS using 
+<a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-130.pdf">NIST Special Publication 800-130: A Framework for Designing Cryptographic Key Management Systems</a>. For a summary of the results, see:</p>
+<ul>
+<li>
+<p><a href="../pdf/spreadsheet.pdf">Evernym HSHQDC-17-C-00018 - DKMS Requirements Spreadsheet Based On NIST 800-130</a></p>
+</li>
+<li>
+<p><a href="../pdf/requirements-text.pdf">Evernym HSHQDC-17-C-00018 - DKMS Requirements Text Based on NIST 800-130</a></p>
+</li>
+<li>
+<p><a href="../pdf/report-30-june-2017.pdf">Evernym HSHQDC-17-C-00018 - DKMS Requirements Report - 30 June 2017</a></p>
+</li>
+</ul>
+<p>The most relevant special requirements are highlighted in the following sections.</p>
+<h2 id="22-decentralization">2.2. Decentralization<a class="headerlink" href="#22-decentralization" title="Permanent link">&para;</a></h2>
+<p>The DKMS design MUST NOT assume any reliance on a centralized authority for the system as a whole. The DKMS design MUST assume all participants are independent actors identified with DIDs conformant with the Decentralized Identifiers (DID) specification but otherwise acting in their own decentralized security and privacy domains. The DKMS design MUST support options for decentralized key recovery.</p>
+<p>What distinguishes DKMS from conventional CKMS is the fact that the entire design assumes decentralization: outside of the "meta-policies" established by the DKMS specification itself, there is no central authority to dictate policies that apply to all users. So global DKMS infrastructure must achieve interoperability organically based on a shared set of specifications, just like the Internet.</p>
+<p>Note that the need to maintain decentralization is most acute when it comes to key recovery: the advantages of decentralization are nullified if key recovery mechanisms reintroduce centralization.</p>
+<h2 id="23-privacy-and-pseudonymity">2.3. Privacy and Pseudonymity<a class="headerlink" href="#23-privacy-and-pseudonymity" title="Permanent link">&para;</a></h2>
+<p>The DKMS design MUST NOT introduce new means of correlating participants by virtue of using the DKMS standards. The DKMS design SHOULD increase privacy and security by enabling the use of pseudonyms, selective disclosure, and encrypted private channels of communication.</p>
+<p>Conventional PKI and CKMS rarely have anti-correlation as a primary requirement. DKMS should ensure that participants will have more, not less, control over their privacy as well as their security. This facet of DKMS requires an vigilant application of all the principles of <a href="https://en.wikipedia.org/wiki/Privacy_by_design">Privacy by Design</a>.</p>
+<h2 id="24-usability">2.4. Usability<a class="headerlink" href="#24-usability" title="Permanent link">&para;</a></h2>
+<p>DIDs and DKMS components intended to be used by individual identity owners MUST be safely usable without any special training or knowledge of cryptography or key management.</p>
+<p>In many ways this follows from decentralization: in a DKMS, there is no central authority to teach everyone how to use it or require specific user training. It must be automated and intuitive to a very high degree, similar to the usability achieved by modern encrypted OTT messaging products like Whatsapp, iMessage, and Signal.</p>
+<p>According to the BYU Internet Security Research Lab, this level of usability is a necessary property of any successfully deployed system. "We spent the 1990s building and deploying security that wasn’t really needed, and now that it’s actually desirable, we’re finding that nobody can use it" [<a href="https://researchspace.auckland.ac.nz/bitstream/handle/2292/262/262.pdf">Guttman and Grigg, IEEE Security and Privacy, 2005</a>]. The DKMS needs to be able to support a broad spectrum of applications, with both manual and automatic key management, in order to satisfy the numerous security and usability requirements of those applications.</p>
+<p>Again, this requirement is particularly acute when it comes to key recovery. Because there is no central authority to fall back on, the key recovery options must not only be anticipated and implemented in advance, but they must be easy enough for a non-technical user to employ while still preventing exploitation by an attacker.</p>
+<h2 id="25-automation">2.5. Automation<a class="headerlink" href="#25-automation" title="Permanent link">&para;</a></h2>
+<p>To maximize usability, the DKMS design SHOULD automate as many key management functions as possible while still meeting security and privacy requirements.</p>
+<p>This design principle follows directly from the usability requirement, and also from the inherent complexity of maintaining the security, privacy, and integrity of cryptographic primitives combined with the general lack of knowledge of most Internet users about any of these subjects.</p>
+<h2 id="26-key-derivation">2.6. Key Derivation<a class="headerlink" href="#26-key-derivation" title="Permanent link">&para;</a></h2>
+<p>In DKMS design it is NOT RECOMMENDED to copy private keys directly between wallets, even over encrypted connections. It is RECOMMENDED to use derived keys whenever possible to enable agent-specific and device-specific revocation.</p>
+<p>This design principle is based on security best practices, and also the growing industry experience with the <a href="https://en.bitcoin.it/wiki/BIP_0032">BIP32 standard</a> for management of the large numbers of private keys required by Bitcoin and other cryptocurrencies. However DKMS architecture can also accomplish this goal in other ways, such as using key signing keys ("key endorsement").</p>
+<h2 id="27-delegation-and-guardianship">2.7. Delegation and Guardianship<a class="headerlink" href="#27-delegation-and-guardianship" title="Permanent link">&para;</a></h2>
+<p>The DKMS design MUST enable key management to be delegated by one identity owner to another, including the DID concept of delegation.</p>
+<p>Although DKMS infrastructure enables "self-sovereign identity"—digital identifiers and identity wallets that are completely under the control of an identity owner and cannot be taken away by a third-party—not all individuals have the ability to be self-sovereign. They may be operating at a physical, economic, or network disadvantage that requires another identity owner (individual or org) to act as an agent on their behalf. </p>
+<p>Other identity owners may simply prefer to have others manage their keys for purposes of convenience, efficiency, or safety. In either case, this means DKMS architecture needs to incorporate the concept of <strong>delegation</strong> as defined in the <a href="https://w3c-ccg.github.io/did-spec/">Decentralized Identifiers (DID) specification</a> and in the <a href="https://docs.google.com/document/d/1gfIz5TT0cNp2kxGMLFXr19x1uoZsruUe_0glHst2fZ8/edit?pli=1#heading=h.oc1psevtq24m">Sovrin Glossary</a>.</p>
+<h2 id="28-portability">2.8. Portability<a class="headerlink" href="#28-portability" title="Permanent link">&para;</a></h2>
+<p>The DKMS design MUST enable an identity owner’s DKMS-compliant key management capabilities to be portable across multiple DKMS-compliant devices, applications, and service providers.</p>
+<p>While the NIST 800-130 specifications have an entire section on interoperability, those requirements are focused primarily on interoperability of CKMS components with each other and with external CKMS systems. They do not encompass the need for a decentralized identity owner to be able to port their key management capabilities from one CKMS device, application, or service provider to another.</p>
+<p>This is the DID and DKMS equivalent of <a href="https://en.wikipedia.org/wiki/Local_number_portability">telephone number portability</a>, and it is critical not only for the general acceptance of DKMS infrastructure, but to support the ability of DID owners to act with full autonomy and independence. As with telephone number portability, it also helps ensure a robust and competitive marketplace for DKMS-compliant products and services. (NOTE:  Note that "portability" here refers to the ability of a DID owner to use the same DID across multiple devices, software applications, service providers, etc. It does not mean that a particular DID that uses a particular DID method is portable across different distributed ledgers. DID methods are ledger-specific.)</p>
+<h2 id="29-extensibility">2.9. Extensibility<a class="headerlink" href="#29-extensibility" title="Permanent link">&para;</a></h2>
+<p>The DKMS design SHOULD be capable of being extended to support new cryptographic algorithms, keys, data structures, and modules, as well as new distributed ledger technologies and other security and privacy innovations.</p>
+<p>Section 7 of NIST 800-130 includes several requirements for conventional CKMS to be able to transition to newer and stronger cryptographic algorithms, but it does not go as far as is required for DKMS infrastructure, which must be capable of adapting to evolving Internet security and privacy infrastructure as well as rapid advances in distributed ledger technologies.</p>
+<p>It is worth noting that the DKMS specifications will not themselves include a trust framework (also called a <a href="https://docs.google.com/document/d/1gfIz5TT0cNp2kxGMLFXr19x1uoZsruUe_0glHst2fZ8/edit?pli=1#heading=h.it5rm9r2tq2r">governance framework</a>; rather, one or more trust frameworks can be layered over them to formalize certain types of extensions. This provides a flexible and adaptable method of extending DKMS to meet the needs of specific communities.</p>
+<h2 id="210-simplicity">2.10. Simplicity<a class="headerlink" href="#210-simplicity" title="Permanent link">&para;</a></h2>
+<p>Given the inherent complexity of key management, the DKMS design SHOULD aim to be as simple and interoperable as possible by pushing complexity to the edges and to extensions.</p>
+<p>Simplicity and elegance of design are common traits of most successful decentralized systems, starting with the packet-based design of the Internet itself. The less complex a system is, the easier it is to debug, evaluate, and adapt to future changes. Especially in light of the highly comprehensive scope of NIST 800-130, this requirement highlights a core difference with conventional CKMS design: the DKMS specification should NOT try to do everything, e.g., enumerate every possible type of key or role of user or application, but let those be defined locally in a way that is interoperable with the rest of the system.</p>
+<h2 id="211-open-system-and-open-standard">2.11. Open System and Open Standard<a class="headerlink" href="#211-open-system-and-open-standard" title="Permanent link">&para;</a></h2>
+<p>The DKMS design MUST be an open system based on open, royalty-free standards.</p>
+<p>While many CKMS systems are deployed using proprietary technology, the baseline DKMS infrastructure must, like the Internet itself, be an open, royalty-free system. It may, of course, have many proprietary extensions and solutions built on top of it.</p>
+<h1 id="3-high-level-architecture">3. High-Level Architecture<a class="headerlink" href="#3-high-level-architecture" title="Permanent link">&para;</a></h1>
+<p>At a high level, DKMS architecture consists of three logical layers:</p>
+<ol>
+<li>
+<p><strong>The DID layer</strong> is the foundational layer consisting of DIDs registered and resolved via distributed ledgers and/or decentralized protocols.</p>
+</li>
+<li>
+<p><strong>The cloud layer</strong> consists of server-side agents and wallets that provide a means of communicating and mediating between the DID layer and the edge layer. This layer enables encrypted peer-to-peer communications for exchange and verification of DIDs, public keys, and verifiable credentials.</p>
+</li>
+<li>
+<p><strong>The edge layer</strong> consists of the local devices, agents, and wallets used directly by identity owners to generate and store most private keys and perform most key management operations.</p>
+</li>
+</ol>
+<p>Figure 1 is an overview of this three-layer architecture:</p>
+<p><img alt="three-layer architecture diagram" src="../images/image_0.png" /></p>
+<p>Figure 1: The high-level three-layer DKMS architecture</p>
+<p>Figure 2 is a more detailed picture of the relationship between the different types of agents and wallets in DKMS architecture.</p>
+<p><img alt="three-layer architecture diagram" src="../images/agents-and-agencies.png" /></p>
+<p>Figure 2: Diagram of the types of agents and connections in DKMS architecture.</p>
+<h2 id="31-the-did-decentralized-identifier-layer">3.1. The DID (Decentralized Identifier) Layer<a class="headerlink" href="#31-the-did-decentralized-identifier-layer" title="Permanent link">&para;</a></h2>
+<p>The foundation for DKMS is laid by the <a href="https://w3c-ccg.github.io/did-spec/">DID specification</a>. DIDs can work with any decentralized source of truth such as a distributed ledger or edge protocol for which a DID method—a way of creating, reading, updating, and revoking a DID—has been specified. As globally unique identifiers, DIDs are patterned after URNs (Uniform Resource Names): colon-delimited strings consisting of a scheme name followed by a DID method name followed by a method-specific identifier. Here is an example DID that uses the Sovrin DID method:</p>
+<blockquote>
+<p><strong>did:sov:21tDAKCERh95uGgKbJNHYp</strong></p>
+</blockquote>
+<p>Each DID method specification defines:</p>
+<ol>
+<li>
+<p>The specific source of truth against which the DID method operates;</p>
+</li>
+<li>
+<p>The format of the method-specific identifier;</p>
+</li>
+<li>
+<p>The CRUD operations (create, read, update, delete) for DIDs and DID documents on that ledger.</p>
+</li>
+</ol>
+<p>DID resolver code can then be written to perform these CRUD operations on the target system with respect to any DID conforming to that DID method specification. Note that some distributed ledger technologies (DLTs) and distributed networks are better suited to DIDs than others. The DID specification itself is neutral with regard to DLTs; it is anticipated that those DLTs that are best suited for the purpose of DIDs will see the highest adoption rates.there will be Darwinian selection of the DLTs that are best fit for the purpose of DIDs.</p>
+<p>From a digital identity perspective, the primary problem that DIDs and DID documents solve is the need for a universally available, decentralized root of trust that any application or system can rely upon to discover and verify credentials about the DID subject. Such a solution enables us to move "beyond federation" into a world where any peer can enter into trusted interactions with any other peer, just as the Internet enabled any two peers to connect and communicate.</p>
+<h2 id="32-the-cloud-layer-cloud-agents-and-cloud-wallets">3.2. The Cloud Layer: Cloud Agents and Cloud Wallets<a class="headerlink" href="#32-the-cloud-layer-cloud-agents-and-cloud-wallets" title="Permanent link">&para;</a></h2>
+<p>While the DID specification covers the bottom layer of a decentralized public key infrastructure, the DKMS spec will concentrate on the two layers above it. The first of these, the cloud layer, is the server-side infrastructure that mediates between the ultimate peers—the edge devices used directly by identity owners—and the DID layer.</p>
+<p>While not strictly necessary from a pure logical point-of-view, in practice this server-side DKMS layer plays a similar role in DID infrastructure as email servers play in SMTP email infrastructure or Web servers play in Web infrastructure. Like email or Web servers, cloud agents and cloud wallets are designed to be available 24 x 7 to send and receive communications on behalf of their identity owners. They are also designed to perform communications, encryption, key management, data management, and data storage and backup processes that are not typically feasible for edge devices given their typical computational power, bandwidth, storage capacity, reliability and/or availability.</p>
+<p>Cloud agents and wallets will typically be hosted by a service provider called an <strong>agency</strong>. Agencies could be operated by any type of service provider—ISPs, telcos, search engines, social networks, banks, utility companies, governments, etc. A third party agency is not a requirement of DKMS architecture—any identity owner can also host their own cloud agents.</p>
+<p>From an architectural standpoint, it is critical that the cloud layer be designed so that it does not "recentralize" any aspect of DKMS. In other words, even if an identity owner chooses to use a specific DKMS service provider for a specific set of cloud agent functions, the identity owner should be able to substitute another DKMS service provider at a later date and retain complete portability of her DKMS keys, data and metadata.</p>
+<p>Another feature of the cloud layer is that cloud agents can use DIDs and DID documents to automatically negotiate mutually authenticated secure connections with each other using <a href="../../0005-didcomm/">DID Communication</a>, a protocol being designed for this purpose.</p>
+<h2 id="33-the-edge-layer-edge-agents-and-edge-wallets">3.3. The Edge Layer: Edge Agents and Edge Wallets<a class="headerlink" href="#33-the-edge-layer-edge-agents-and-edge-wallets" title="Permanent link">&para;</a></h2>
+<p>The edge layer is vital to DKMS because it is where identity owners interact directly with computing devices, operating systems, and applications. This layer consists of DKMS edge agents and edge wallets that are under the direct control of identity owners. When designed and implemented correctly, edge devices, agents, and wallets can also be the safest place to store private keys and other cryptographic material. They are the least accessible for network intrusion, and even a successful attack on any single client device would yield the private data for only a single user or at most a small family of users.</p>
+<p>Therefore, the edge layer is where most DKMS private keys and link secrets are generated and where most key operations and storage are performed. To meet the security and privacy requirements, DKMS architecture makes the following two assumptions:</p>
+<ol>
+<li>
+<p>A DKMS agent is always installed in an environment that includes a <a href="https://globalplatform.org/wp-content/uploads/2018/05/Introduction-to-Secure-Element-15May2018.pdf">secure element</a> or <a href="https://en.wikipedia.org/wiki/Trusted_Platform_Module">Trusted Platform Module</a> (for simplicity, this document will use the term "secure element" or “SE” for this module).</p>
+</li>
+<li>
+<p>Private keys used by the agent never leave the secure element. </p>
+</li>
+</ol>
+<p>By default edge agents are always paired with a corresponding cloud agent due to the many DKMS operations that a cloud agent enables, including communications via the DKMS protocol to other edge and cloud agents. However this is not strictly necessary. As shown in Figure 1, edge agents could also communicate directly, peer-to-peer, via a protocol such as Bluetooth, NFC, or another mesh network protocol. Edge agents may also establish secure connections with cloud agents or with others using DID Communication.</p>
+<h2 id="34-verifiable-credentials">3.4. Verifiable Credentials<a class="headerlink" href="#34-verifiable-credentials" title="Permanent link">&para;</a></h2>
+<p>By themselves, DIDs are "trustless", i.e., they carry no more inherent trust than an IP address. The primary difference is that they provide a mechanism for resolving the DID to a DID document containing the necessary cryptographic keys and endpoints to bootstrap secure communications with the associated agent.</p>
+<p>To achieve a higher level of trust, DKMS agents may exchange digitally signed credentials called <a href="https://w3c.github.io/vc-data-model/#what-is-a-verifiable-credential">verifiable credentials</a>. Verifiable credentials are being standardized by the W3C Working Group of the same name. The purpose is summarized in the <a href="https://www.w3.org/2017/vc/charter.html">charter</a>:</p>
+<p><em>It is currently difficult to express banking account information, education qualifications, healthcare data, and other sorts of machine-readable personal information that has been verified by a 3<sup>rd</sup> party on the Web. These sorts of data are often referred to as <strong>verifiable credentials</strong>. The mission of the Verifiable Credentials Working Group is to make expressing, exchanging, and verifying credentials easier and more secure on the Web.</em></p>
+<p>The following diagram from the <a href="https://www.w3.org/2017/vc/charter.html">W3C Verifiable Claims Working Group</a> illustrates the primary roles in the verifiable credential ecosystem and the close relationship between DIDs and verifiable credentials.</p>
+<p><img alt="verifiable credentials diagram" src="../images/verifiable-creds.png" /></p>
+<p>Figure 3: The W3C Verifiable Credentials ecosystem</p>
+<p>Note that what is being verified in a verifiable credential is the signature of the credential issuer. The strength of the actual credential depends on the degree of trust the verifier has in the issuer. For example, if a bank issues a credential saying that the subject of the credential has a certain credit card number, a merchant can rely on the credential if the merchant has a high degree of trust in the bank.</p>
+<p>The Verifiable Claims Working Group is standardizing both the format of credentials and of digital signatures on the credentials. Different digital signature formats require different cryptographic key material. For example, credentials that use a zero-knowledge signature format such as <a href="http://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf">Camenisch-Lysyanskaya (CL) signatures</a> require a "master secret" or “link secret” that enables the prover (the identity owner) to make proofs about the credential without revealing the underlying data or signatures in the credential (or the prover's DID with respect to the credential issuer). This allows for "credential presentations" that are unlinkable to each other. Link secrets are another type of cryptographic key material that must be stored in DKMS wallets.</p>
+<h1 id="4-ledger-architecture">4. Ledger Architecture<a class="headerlink" href="#4-ledger-architecture" title="Permanent link">&para;</a></h1>
+<p>A fundamental feature of DIDs and DKMS is that they will work with any modern blockchain, distributed ledger, distributed database, or distributed file system capable of supporting a DID method (which has a relatively simple set of requirements—see the <a href="https://w3c-ccg.github.io/did-spec/">DID specification</a>). For simplicity, this document will refer to all of these systems as "ledgers".</p>
+<p>There are a variety of ledger designs and governance models as illustrated in Figure 4. </p>
+<p><img alt="image alt text" src="../images/blockchain-type-matrix.png" /></p>
+<p>Figure 4: Blockchain and distributed ledger governance models</p>
+<p><strong>Public ledgers</strong> are available for anyone to access, while <strong>private ledgers</strong> have restricted access. <strong>Permissionless ledgers</strong> allow anyone to run a validator node of the ledger (a node that participates in the <a href="https://en.wikipedia.org/wiki/Consensus_%28computer_science%29#Some_consensus_protocols">consensus protocol</a>), and thus require proof-of-work, proof-of-stake, or other protections against <a href="https://en.wikipedia.org/wiki/Sybil_attack">Sybil attacks</a>. <strong>Permissioned ledgers</strong> restrict who can run a validator node, and thus can typically operate at a higher transaction rate.</p>
+<p>For decentralized identity management, a core requirement of DIDs and DKMS is that they can interoperate with any of these ledgers. However for privacy and scalability reasons, certain types of ledgers play specific roles in DKMS architecture.</p>
+<h2 id="41-public-ledgers">4.1. Public Ledgers<a class="headerlink" href="#41-public-ledgers" title="Permanent link">&para;</a></h2>
+<p>Public ledgers, whether permissionless or permissioned, are crucial to DKMS infrastructure because they provide an open global root of trust. To the extent that a particular public ledger has earned the public’s trust that it is strong enough to withstand attacks, tampering, or censorship, it is in a position to serve as a strong, universally-available root of trust for DIDs and the DID documents necessary for decentralized key management.</p>
+<p>Such a publicly available root of trust is particularly important for:</p>
+<ol>
+<li>
+<p><strong>Public DIDs</strong> (also called "anywise DIDs") that need to be recognized as trust anchors by a large number of verifiers.</p>
+</li>
+<li>
+<p><strong>Schema and credential definitions</strong> needed for broad semantic interoperability of verifiable credentials.</p>
+</li>
+<li>
+<p><strong>Revocation registries</strong> needed for revocation of verifiable credentials that use proofs.</p>
+</li>
+<li>
+<p><strong>Policy registries</strong> needed for authorization and revocation of DKMS agents (see section 9.2).</p>
+</li>
+<li>
+<p><strong>Anchoring transactions</strong> posted for verification or coordination purposes by smart contracts or other ledgers, including microledgers (below).</p>
+</li>
+</ol>
+<h2 id="42-private-ledgers">4.2. Private Ledgers<a class="headerlink" href="#42-private-ledgers" title="Permanent link">&para;</a></h2>
+<p>Although public ledgers may also be used for <strong>private DIDs</strong>—DIDs that are intended for use only by a restricted audience—this requires that their DID documents be carefully provisioned and managed to avoid any information that can be used for attack or correlation. This threat is lessened if private DIDs are registered and managed on a private ledger that has restricted access. However the larger the ledger, the more it will require the same precautions as a public ledger.</p>
+<h2 id="43-microledgers">4.3. Microledgers<a class="headerlink" href="#43-microledgers" title="Permanent link">&para;</a></h2>
+<p>From a privacy perspective—and particularly for compliance with privacy regulations such as the EU General Data Protection Regulation (GDPR)—the ideal identifier is a <strong>pairwise pseudonymous DID</strong>. This DID (and its corresponding DID document) is only known to the two parties in a relationship.</p>
+<p>Because pairwise pseudonymous DID documents contain the public keys and service endpoints necessary for the respective DKMS agents to connect and send encrypted, signed messages to each other, there is no need for pairwise pseudonymous DIDs to be registered on a public ledger or even a conventional private ledger. Rather they can use <strong>microledgers</strong>. </p>
+<p>A microledger is essentially identical to a conventional private ledger except it has only as many nodes as it has parties to the relationship. The same cryptographic steps are used:</p>
+<ol>
+<li>
+<p>Transactions are digitally signed by authorized private key(s).</p>
+</li>
+<li>
+<p>Transactions are cryptographically ordered and tamper evident.</p>
+</li>
+<li>
+<p>Transactions are replicated efficiently across agents using simple consensus protocols.
+These protocol, and the microledgers that provide their persistent state, constitute
+a root of trust for the relationship.</p>
+</li>
+</ol>
+<p>Microledgers are effectively permissionless because anyone can operate one
+in cooperation with anyone else—only the parties to the microledger relationship
+need to agree. If there is a danger of the parties to the microledger getting
+"out of sync" (e.g., if an attacker has compromised one party's agents such
+that the party's state is deadlocked, or one party's agents have all been
+lost so that the party is unable to receive a change-of-state from the other),
+the party’s agents can register a
+<a href="https://en.wikipedia.org/wiki/Dead_drop">dead drop point</a>. This is a
+pre-established endpoint and keys both parties can use to re-sync their
+microledgers and restore their connection.</p>
+<p>Microledgers play a special role in DKMS architecture because they are used to maintain pairwise pseudonymous connections between DKMS agents. The use of microledgers also helps enormously with the problems of scale—they can significantly reduce the load on public ledgers by moving management of pairwise pseudonymous DIDs and DID documents directly to DKMS agents.</p>
+<p>The protocols associated with microledgers include:</p>
+<ul>
+<li>A protocol to formally connect two parties and exchange DID Documents.</li>
+<li>A protocol to update and synchronize DID Documents.</li>
+<li>A protocol to query DID Documents.</li>
+</ul>
+<p>Today, the only known example of this approach is the <a href="https://identity.foundation/peer-did-method-spec/index.html"><code>did:peer</code> method</a>.
+It is possible that alternative implementations will emerge.</p>
+<h1 id="5-key-management-architecture">5. Key Management Architecture<a class="headerlink" href="#5-key-management-architecture" title="Permanent link">&para;</a></h1>
+<p>DKMS adheres to the principle of key separation where keys for different purposes should be cryptographically separated. This avoids use of the same key for multiple purposes. Keys are classified based on usage and the nature of information being protected. Any change to a key requires that the relevant DID method ensure that the change comes from the identity owner or her authorized delegate. All requests by unauthorized entities must be ignored or flagged by the DKMS agent. If anyone else can change any key material, the security of the system is compromised. </p>
+<p>DKMS architecture addresses what keys are needed, how they are used, where they should be stored and protected, how long they should live, and how they are revoked and/or recovered when lost or compromised.</p>
+<h2 id="51-key-types-and-key-descriptions">5.1. Key Types and Key Descriptions<a class="headerlink" href="#51-key-types-and-key-descriptions" title="Permanent link">&para;</a></h2>
+<p>NIST 800-130 framework requirement 6.1 requires a CKMS to specify and define each key type used. The following key layering and policies can be applied.</p>
+<ol>
+<li>
+<p>Master keys:             </p>
+<ol>
+<li>
+<p>Keys at the highest level, in that they themselves are not cryptographically protected. They are distributed manually or initially installed and protected by procedural controls and physical or electronic isolation.</p>
+</li>
+<li>
+<p>MAY be used for deriving other keys;</p>
+</li>
+<li>
+<p>MUST NOT ever be stored in cleartext.</p>
+</li>
+<li>
+<p>SHOULD never be stored in a single encrypted form, but only:</p>
+<ol>
+<li>
+<p>Saved in secure <a href="https://en.bitcoin.it/wiki/Cold_storage">offline storage</a>;</p>
+</li>
+<li>
+<p>Secured by high secure encrypted vaults, such as a <a href="https://en.wikipedia.org/wiki/Near-field_communication">secure element</a>, <a href="https://en.wikipedia.org/wiki/Trusted_Platform_Module">TPM</a>, or <a href="https://en.wikipedia.org/wiki/Trusted_execution_environment">TEE</a>.</p>
+</li>
+<li>
+<p>Distributed using a technique such as <a href="https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing">Shamir secret sharing</a>;</p>
+</li>
+<li>
+<p>Derived from <a href="https://en.wikipedia.org/wiki/Secure_multi-party_computation">secure multiparty computation</a>.</p>
+</li>
+<li>
+<p>Saved somewhere that requires secure interactions to access (which could mean slower retrieval times).</p>
+</li>
+</ol>
+</li>
+<li>
+<p>SHOULD be used only for creating signatures as proof of delegation for other keys.</p>
+</li>
+<li>
+<p>MUST be forgotten immediately after use–securely erased from memory, disk, and every location that accessed the key in plain text. </p>
+</li>
+</ol>
+</li>
+<li>
+<p>Key encrypting keys              </p>
+<ol>
+<li>
+<p>Symmetric or public keys used for key transport or storage of other keys.</p>
+</li>
+<li>
+<p>MAY themselves be secured under other keys.</p>
+</li>
+<li>
+<p>If they are not ephemeral, they SHOULD be stored in secure access-controlled devices, used in those devices and never exposed.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Data keys    </p>
+<ol>
+<li>
+<p>Used to provide cryptographic operations on user data (e.g., encryption, authentication). These are generally short-term symmetric keys; however, asymmetric signature private keys may also be considered data keys, and these are usually longer-term keys.</p>
+</li>
+<li>
+<p>SHOULD be dedicated to specific roles, such as authentication, securing communications, protecting storage, proving authorized delegation, constructing credentials, or generating proofs.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>The keys at one layer are used to protect items at a lower level. This constraint is intended to make attacks more difficult, and to limit exposure resulting from compromise of a specific key. For example, compromise of a key-encrypting-key (of which a master key is a special case) affects all keys protected thereunder. Consequently, special measures are used to protect master keys, including severely limiting access and use, hardware protection, and providing access to the key only under shared control.   </p>
+<p>In addition to key layering hierarchy, keys may be classified based on temporal considerations: </p>
+<ol>
+<li>
+<p><em>Long-term keys</em>. These include master keys, often key-encrypting keys, and keys used to facilitate key agreement.   </p>
+</li>
+<li>
+<p><em>Short-term keys</em>. These include keys established by key transport or key agreement, often used as data keys or session keys for a single communications session.</p>
+</li>
+</ol>
+<p>In general, communications applications involve short-term keys, while data storage applications require longer-term keys. Long-term keys typically protect short-term keys. </p>
+<p>The following policies apply to key descriptions:</p>
+<ol>
+<li>
+<p>Any DKMS-compliant key SHOULD use a DID-compliant key description.</p>
+</li>
+<li>
+<p>This key description MUST be published at least in the governing DID method specification.</p>
+</li>
+<li>
+<p>This key description SHOULD be aggregated in the <strong>Key Description Registry</strong> maintained by the W3C Credentials Community Group.</p>
+</li>
+</ol>
+<p>DKMS key management must encompass the keys needed by different DID methods as well as different verifiable credentials exchange protocols and signature formats. The following list includes the initial key types required by the Sovrin DID Method Spec and the Sovrin protocol for verifiable credentials exchange:</p>
+<ol>
+<li>
+<p><strong>Link secret:</strong> (one per entity) A high-entropy 256-bit integer included in every credential in blinded form. Used for proving credentials were issued to the same logical identity. A logical identity only has one link secret. The first DKMS agent provisioned by an identity owner creates this value and stores it in an encrypted wallet or in a secure element if available. Agents that receive credentials and present proofs must know this value. It can be transferred over secure channels between agents as necessary. If the link secret is changed, credentials issued with the new link secret value cannot be correlated with credentials using the old link secret value.</p>
+</li>
+<li>
+<p><strong>DID keys:</strong> (one per relationship per agent) Ed25519 keys used for non-repudiation signing and verification for DIDs. Each agent manages their own set of DID keys.</p>
+</li>
+<li>
+<p><strong>Agent policy keys:</strong> (one per agent) Ed25519 key pairs used with the agent policy registry. See section 9.2. The public key is stored with the agent policy registry. Transactions made to the policy registry are signed by the private key. The keys are used in zero-knowledge during proof presentation to show the agent is authorized by the identity owner to present the proof. Unauthorized agents MUST NOT be trusted by verifiers.</p>
+</li>
+<li>
+<p><strong>Agent recovery keys:</strong> (a fraction per trustee) Ed25519 keys. A public key is stored by the agent and used for encrypting backups. The private key is saved to an offline medium or split into shares and given to trustees. To encrypt a backup, an ephemeral X25519 key pair is created where the ephemeral private key is used to perform a Diffie-Hellman agreement with the public recovery key to create a wallet encryption key. The private ephemeral key is forgotten and the ephemeral public key is stored with the encrypted wallet backup. To decrypt a backup, the private recovery key performs a Diffie-Hellman agreement with the ephemeral public key to create the same wallet encryption key.</p>
+</li>
+<li>
+<p><strong>Wallet encryption keys:</strong> (one per wallet segment) 256 bit symmetric keys for encrypting wallets and backups. The key is generated by an agent then wrapped using secure enclaves (preferred) or derived from user inputs like strong passwords (see section 5.2). It MUST NOT be stored directly in secure enclaves when portability is a requirement.</p>
+</li>
+<li>
+<p><strong>Wallet permission keys:</strong> (one per permission) Symmetric keys or Ed25519 keypairs that allow fine-grained permissions over various data stored in the wallet i.e. wallet read-only access, credential group write access, or write all access.</p>
+</li>
+</ol>
+<h2 id="52-key-generation">5.2. Key Generation<a class="headerlink" href="#52-key-generation" title="Permanent link">&para;</a></h2>
+<p>NIST 800-130 framework requirement 6.19 requires that a CKMS design shall specify the key-generation methods to be used in the CKMS for each type of key. The following policies can be applied.</p>
+<ol>
+<li>
+<p>For any key represented in a DID document, the generation method MUST be included in the key description specification.</p>
+</li>
+<li>
+<p>Any parameters necessary to understand the generated key MUST be included in the key description.</p>
+</li>
+<li>
+<p>The key description SHOULD NOT include any metadata that enables correlation across key pairs.</p>
+</li>
+<li>
+<p>DKMS key types SHOULD use derivation functions that simplify and standardize key recovery. </p>
+</li>
+</ol>
+<p>A secure method for key creation is to use a seed value combined with a derivation algorithm. Key derivation functions (KDF), pseudo random number generators (PRNG), and Bitcoin’s <a href="https://en.bitcoin.it/wiki/BIP_0032">BIP32 standard</a> for hierarchical deterministic (HD) keys are all examples of key creation using a seed value with a derivation function or mapping.</p>
+<p>Hardware based key generation (like HSMs or TPMS) is usually more secure as they are typically designed to include more factors like white noise and temperature which are harder to corrupt.</p>
+<p>If KDFs or PRNGs are used, a passphrase, biometric input, or social data from multiple users combined with random salt SHOULD be used as the input to create the seed. Alternately a QR code or words from a list such as the <a href="https://en.wikipedia.org/wiki/PGP_word_list">PGP word list</a> can be used. In either case, the input MUST NOT be stored anywhere connected to the Internet.</p>
+<h2 id="53-multi-device-management">5.3. Multi-Device Management<a class="headerlink" href="#53-multi-device-management" title="Permanent link">&para;</a></h2>
+<p>Each device hosts an edge agent and edge wallet. All keys except for the link secret are unique per device. This allows for fine-grained (e.g., per relationship) control of authorized devices, as well as remote revocation. As part of the process for provisioning an edge agent, owners must choose what capabilities to grant. Capabilities must be flexible so owners can add or remove them depending on their needs.</p>
+<p>Wallet permissions SHOULD be controlled using keys that grant fixed permissions. One example of such a system is <a href="https://ieeexplore.ieee.org/document/4032481">Cryptree</a>.</p>
+<p>It is recommended that private keys never be reused across agents. If a secret is shared across agents, then there must be a way to remotely revoke the agent using a distributed ledger such that the secret is rendered useless on that agent. The DKMS architecture uses ledgers and diffused trust to enable fine grained control over individual keys and entire devices. An agent policy registry located on a ledger allows an owner to define agent authorizations and control over those authorizations. (See 9.2 Policy Registries). Agents must notify each other when a new agent is added to an authorized pool or removed in order to warn identity owners of unauthorized or malicious agents with a cloud agent acting as the synchronization hub.</p>
+<p>Techniques like distributed hash tables or gossip protocols SHOULD be employed to keep device data synchronized.</p>
+<h2 id="54-key-portability-and-migration">5.4. Key Portability and Migration<a class="headerlink" href="#54-key-portability-and-migration" title="Permanent link">&para;</a></h2>
+<p>As mentioned in section 2.8, portability of DKMS wallets and keys is an important requirement—if agencies or other service providers could "lock-in" identity owners, DIDs and DKMS would no longer be decentralized. Thus the DKMS protocol MUST support identity owners migrating their edge agents and cloud agents to the agency of their choice (including self-hosting). Agency-to-agency migration is not fully defined in this version of DKMS architecture, but it will be specified in a future version. See section 11.</p>
+<h1 id="6-recovery-methods">6. Recovery Methods<a class="headerlink" href="#6-recovery-methods" title="Permanent link">&para;</a></h1>
+<p>In key management, key recovery specifies how keys are reconstituted in case of loss or compromise. In decentralized identity management, recovery is even more important since identity owners have no "higher authority" to turn to for recovery.</p>
+<p>In this version of DKMS architecture, two recovery methods are recommended:</p>
+<ol>
+<li>
+<p><strong>Offline recovery</strong> uses physical media or removable digital media to store recovery keys.</p>
+</li>
+<li>
+<p><strong>Social recovery</strong> employs "trustees" who store encrypted recovery data on an identity owners behalf—typically in the trustees own agent(s).</p>
+</li>
+</ol>
+<p>These methods are not exclusive, i.e., both can be employed for additional safety.</p>
+<p>Both methods operate against encrypted backups of the identity owner’s digital identity wallet. Backups are encrypted by the edge agent with a backup recovery key. See section 5.1. While such backups may be stored in many locations, for simplicity this version of DKMS architecture assumes that cloud agents will provide an automated backup service for their respective edge agents.</p>
+<p>Future versions of this specification MAY specify additional recovery methods, include remote biometric recovery and recovery cooperatives.</p>
+<h2 id="61-offline-recovery">6.1. Offline Recovery<a class="headerlink" href="#61-offline-recovery" title="Permanent link">&para;</a></h2>
+<p>Offline recovery is the conventional form of backup. It can be performed using many different methods. In DKMS architecture, the standard strategy is to store an encrypted backup of the identity owner’s wallet at the owner’s cloud agent, and then store a private backup recovery key offline. The private backup recovery key can be printed to a paper wallet as one or more QR codes or text strings. It can also be saved to a file on a detachable media device such as a removable disk, hardware wallet or USB key. </p>
+<p>The primary downside to offline recovery is that the identity owner must not only safely store the offline copy, but remember the location and be able to able to access the offline copy when it is needed to recover.</p>
+<h2 id="62-social-recovery">6.2. Social Recovery<a class="headerlink" href="#62-social-recovery" title="Permanent link">&para;</a></h2>
+<p>Social recovery has two advantages over offline recovery:</p>
+<ol>
+<li>
+<p>The identity owner does not have to create an offline backup—the social recovery setup process can be accomplished entirely online.</p>
+</li>
+<li>
+<p>The identity owner does not have to safely store and remember the location of the offline backup.</p>
+</li>
+</ol>
+<p>However it is not a panacea:</p>
+<ol>
+<li>
+<p>The identity owner still needs to remember her trustees.</p>
+</li>
+<li>
+<p>Social recovery opens the opportunity, however remote, for an identity owner’s trustees to collude to take over the identity owner’s digital identity wallet.</p>
+</li>
+</ol>
+<p>A trustee is any person, institution, or service that agrees to assist an identity owner during recovery by (1) securely storing recovery material (called a "share") until a recovery is needed, and (2) positively identifying the identity owner and the authenticity of a recovery request before authorizing release of their shares.</p>
+<p>This second step is critical. Trustees MUST strongly authenticate an identity owner during recovery so as to detect if an attacker is trying exploit them to steal a key or secret. Software should aid in ensuring the authentication is strong, for example, confirming the trustee actually conversed with Alice, as opposed to getting an email from her.</p>
+<p>For social recovery, agents SHOULD split keys into shares and distribute them to trustees instead of sending each trustee a full copy. When recovery is needed, trustees can be contacted and the key will be recovered once enough shares have been received. An efficient and secure threshold secret sharing scheme, like <a href="https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing">Shamir</a><a href="https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing">'s</a><a href="https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing"> Secret Sharing</a>, SHOULD be used to generate the shares and recombine them. The number of trustees to use is the decision of the identity owner, however it is RECOMMENDED to use at least three with a threshold of at least two. </p>
+<p>The shares may be encrypted by a key derived from a KDF or PRNG whose input is something only the identity owner knows, has, or is or any combination of these.</p>
+<p><img alt="image alt text" src="../images/image_3.png" /></p>
+<p>Figure 5: Key sharing using Shamir Secret Sharing</p>
+<p>As the adoption interest in decentralized identity grows, social recovery has become a major focus of additional research and development in the industry. For example, at the Rebooting the Web of Trust <a class="magiclink magiclink-github magiclink-issue" href="https://github.com/squidfunk/mkdocs-material/issues/8" title="GitHub Issue: squidfunk/mkdocs-material #8">#8</a> conference held in Barcelona 1-3 March 2019, six papers on the topic were submitted (note that several of these also have extensive bibliographies):</p>
+<ol>
+<li>
+<p><a href="https://github.com/WebOfTrustInfo/rwot8-barcelona/blob/master/topics-and-advance-readings/social-key-recovery.md">A New Approach to Social Key Recovery</a> by Christopher Allen and Mark Friedenbach</p>
+</li>
+<li>
+<p><a href="https://github.com/WebOfTrustInfo/rwot8-barcelona/blob/master/topics-and-advance-readings/security_shamirs.md">Security Considerations of Shamir's Secret Sharing</a> by Peg</p>
+</li>
+<li>
+<p><a href="https://github.com/WebOfTrustInfo/rwot8-barcelona/blob/master/topics-and-advance-readings/implementing-threshold-schemes.md">Implementing of Threshold Schemes</a> by Daan Sprenkels</p>
+</li>
+<li>
+<p><a href="https://github.com/WebOfTrustInfo/rwot8-barcelona/blob/master/topics-and-advance-readings/Socia_%20Key_Recovery_design_implentation.md">Social Key Recovery Design and Implementation</a> by Hank Chiu, Hankuan Yu, Justin Lin &amp; Jon Tsai</p>
+</li>
+<li>
+<p><a href="https://github.com/satoshilabs/slips/blob/master/slip-0039.md">SLIP-0039: Shamir's Secret-Sharing for Mnemonic Codes</a> by The TREZOR Team</p>
+</li>
+</ol>
+<p>In addition, two new papers on the topic were started at the conference and are still in development at the time of publication:</p>
+<ol>
+<li>
+<p><a href="https://github.com/WebOfTrustInfo/rwot8-barcelona/blob/master/draft-documents/shamir-secret-sharing-best-practices.md">Shamir Secret Sharing Best Practices</a> by Christopher Allen et al.</p>
+</li>
+<li>
+<p><a href="https://github.com/WebOfTrustInfo/rwot8-barcelona/blob/master/draft-documents/Evaluating-social-recovery.md">Evaluating Social Schemes for Recovering Control of an Identifier</a> by Sean Gilligan, Peg, Adin Schmahmann, and Andrew Hughes</p>
+</li>
+</ol>
+<h1 id="7-recovery-from-key-loss">7. Recovery From Key Loss<a class="headerlink" href="#7-recovery-from-key-loss" title="Permanent link">&para;</a></h1>
+<p>Key loss as defined in this document means the owner can assume there is no further risk of compromise. Such scenarios include devices unable to function due to water, electricity, breaking, fire, hardware failure, acts of God, etc.  </p>
+<h2 id="71-agent-policy-key-loss">7.1. Agent Policy Key Loss<a class="headerlink" href="#71-agent-policy-key-loss" title="Permanent link">&para;</a></h2>
+<p>Loss of an agent policy key means the agent no longer has proof authorization and cannot make updates to the agent policy registry on the ledger. Identity owners SHOULD have backup agent policy keys that can revoke the current active agent policy key from the agent policy registry and issue a new agent policy key to the replacement agent.</p>
+<h2 id="72-did-key-loss">7.2. DID Key Loss<a class="headerlink" href="#72-did-key-loss" title="Permanent link">&para;</a></h2>
+<p>Loss of a DID key means the agent can no longer authenticate over the channel and cannot rotate the key. This key MUST be recoverable from the encrypted backup.</p>
+<h2 id="73-link-secret-loss">7.3. Link Secret Loss<a class="headerlink" href="#73-link-secret-loss" title="Permanent link">&para;</a></h2>
+<p>Loss of the link secret means the owner can no longer generate proofs for the verifiable credentials in her possession or be issued credentials under the same identity. The link secret MUST be recoverable from the encrypted backup.</p>
+<h2 id="74-credential-loss">7.4. Credential Loss<a class="headerlink" href="#74-credential-loss" title="Permanent link">&para;</a></h2>
+<p>Loss of credentials requires the owner to contact his credential issuers, reauthenticate, and request the issuers revoke existing credentials, if recovery from a backup is not possible. Credentials SHOULD be recoverable from the encrypted backup. </p>
+<h2 id="75-relationship-state-recovery">7.5. Relationship State Recovery<a class="headerlink" href="#75-relationship-state-recovery" title="Permanent link">&para;</a></h2>
+<p>Recovery of relationship state due to any of the above key-loss scenarios
+is enabled via the <a href="#95-dead-drops">dead drop mechanism</a>.</p>
+<h1 id="8-recovery-from-key-compromise">8. Recovery From Key Compromise<a class="headerlink" href="#8-recovery-from-key-compromise" title="Permanent link">&para;</a></h1>
+<p>Key compromise means that private keys and/or master keys have become or can become known either passively or actively. </p>
+<ol>
+<li>
+<p><strong>"Passively" means the identity owner is not aware of the compromise.</strong> An attacker may be eavesdropping or have remote communications with the agent but has not provided direct evidence of intrusion or malicious activity, such as impersonating the identity owner or committing fraud.</p>
+</li>
+<li>
+<p><strong>"Actively" means the identity owner knows her keys have been exposed.</strong> For example, the owner is locked out of her own devices and/or DKMS agents and wallets, or becomes aware of abuse or fraud.</p>
+</li>
+</ol>
+<p>To protect from either, there are techniques available: <strong>rotation,</strong> <strong>revocation</strong>, and quick <strong>recovery</strong>. Rotation helps to limit a passive compromise, while revocation and quick recovery help to limit an active one.</p>
+<h2 id="81-key-rotation">8.1. Key Rotation<a class="headerlink" href="#81-key-rotation" title="Permanent link">&para;</a></h2>
+<p>Keys SHOULD be changed periodically to limit tampering. When keys are rotated, the previous keys are revoked and new ones are added. It is RECOMMENDED for keys to expire for the following reasons:</p>
+<ul>
+<li>
+<p><strong>Technology advances.</strong> Encryption (and encryption breaking) technologies are constantly advancing.  Expiring keys helps enforce migrating to better technologies.</p>
+</li>
+<li>
+<p><strong>Mitigation of compromises.</strong> Keys that change often prevent attackers from using them even if they are able to steal them. Expiring keys spreads this immunity.</p>
+</li>
+<li>
+<p><strong>Changing needs.</strong> Key owners may only use certain secrets while performing a specific task. The task may end after a certain date and all secrets tied to that task should also be terminated. Expiring keys helps enforce this this policy.</p>
+</li>
+</ul>
+<h2 id="82-key-revocation">8.2. Key Revocation<a class="headerlink" href="#82-key-revocation" title="Permanent link">&para;</a></h2>
+<p>DKMS keys MUST be revocable. Verifiers MUST be able to determine the revocation status of a DKMS key. It is not good enough to simply forget a key because that does not protect against key compromise. Control over who can update a revocation list MUST be enforced so attackers cannot maliciously revoke user keys. (Note that a key revoked by an attacker reveals that the attacker knows a secret.)</p>
+<h2 id="83-agent-policy-key-compromise">8.3. Agent Policy Key Compromise<a class="headerlink" href="#83-agent-policy-key-compromise" title="Permanent link">&para;</a></h2>
+<p>Compromise of an agent’s policy key means an attacker can use the agent to impersonate the owner for proof presentation and make changes to the agent policy registry. Owners must be able to revoke any of their devices to prevent impersonation. For example, if the owner knows her device has been stolen, she will want to revoke all device permissions so even if the thief manages to break into the agent the DKMS data value is limited. Identity owners SHOULD have backup agent policy keys that are authorized to revoke the compromised key from the agent policy registry and issue a new agent policy key to the replacement agent.</p>
+<h2 id="84-did-key-compromise">8.4. DID Key Compromise<a class="headerlink" href="#84-did-key-compromise" title="Permanent link">&para;</a></h2>
+<p>Compromise of a DID key means an attacker can use the channel to impersonate the owner as well as potentially lock the owner out from further use if the attacker rotates the key before the owner realizes what has happened. This attack surface is minimized if keys are rotated on a regular basis. An identity owner MUST also be able to trigger a rotation manually upon discovery of a compromise. Owners SHOULD implement a diffuse trust model among multiple agents where a single compromised agent is not able to revoke a key because more than one agent is required to approve the action. </p>
+<h2 id="85-link-secret-compromise">8.5. Link Secret Compromise<a class="headerlink" href="#85-link-secret-compromise" title="Permanent link">&para;</a></h2>
+<p>Compromise of the owner link secret means an attacker may impersonate the owner when receiving verifiable credentials or use existing credentials for proof presentation. Note that unless the attacker is also able to use an agent that has "PROVE" authorization, the verifier will be able to detect an unauthorized agent. At this point the owner SHOULD revoke her credentials and request for them to be reissued with a new link secret.</p>
+<h2 id="86-credential-compromise">8.6. Credential Compromise<a class="headerlink" href="#86-credential-compromise" title="Permanent link">&para;</a></h2>
+<p>Compromise of a verifiable credential means an attacker has learned the attributes of the credential. Unless the attacker also manages to compromise the link secret and an authorized agent, he is not able to assert the credential, so the only loss is control of the underlying data.</p>
+<h2 id="87-relationship-state-recovery">8.7. Relationship State Recovery<a class="headerlink" href="#87-relationship-state-recovery" title="Permanent link">&para;</a></h2>
+<p>Recovery of relationship state due to any of the above key-compromise scenarios
+is enabled via the <a href="#95-dead-drops">dead drop mechanism</a>.</p>
+<h1 id="9-dkms-protocol">9. DKMS Protocol<a class="headerlink" href="#9-dkms-protocol" title="Permanent link">&para;</a></h1>
+<h2 id="91-microledger-transactions">9.1. Microledger Transactions<a class="headerlink" href="#91-microledger-transactions" title="Permanent link">&para;</a></h2>
+<p>DKMS architecture uses microledgers to represent the state of the authorized keys in a relationship. Just as with conventional ledgers, the structure is such that the parties to a relationship can verify it at any moment in time, as can a third party for auditing purposes. Microledgers are used between two parties where each party signs transactions using their DID keys. This allow changes to DID keys to be propagated in a secure manner where each transaction is signed with an existing key authorized in earlier transactions. </p>
+<h2 id="92-policy-registries">9.2. Policy Registries<a class="headerlink" href="#92-policy-registries" title="Permanent link">&para;</a></h2>
+<p>Each Identity Owner creates an authorization policy on the ledger. The policy
+allows an agent to have some combination of authorizations. This is a public
+record, but no information needs to be shared with any other party. Its purpose
+is to allow for management of device authorization in a flexible way, by allowing
+for agents to prove in zero knowledge that they are authorized by the identity owner.</p>
+<ul>
+<li>The authorization policy has a unique address on the ledger.</li>
+<li>Each of the identity owner's agents has a secret value.</li>
+<li>The agent makes a blinded commitment to the secret value.</li>
+<li>The agent then makes another blinded commitment to both the first commitment and the policy address.</li>
+<li>The first commitment is stored in the PROVE section of the authorization policy.</li>
+<li>The second commitment is stored by the ledger in a global registry (shared by all identity owners, or at least a large number of them, for herd privacy).</li>
+</ul>
+<p>When an agent is granted PROVE authorization, by adding a commitment to the
+agent's secret value to PROVE section of the authorization policy, the ledger adds
+the second commitment to the global prover registry. When an agent loses its PROVE
+authorization, the ledger removes the associated commitment from the prover registry.
+The ledger can enforce sophisticated owner defined rules like requiring multiple
+signatures to authorize updates to the Policy.</p>
+<p>An agent can now prove in zero knowledge that it is authorized because the ledger
+maintains a global registry for all agents with PROVE authorization for all identity
+owners. An agent can prove that its secret value and the policy address in which
+that value is given PROVE authorization are part of the global policy registry
+without revealing the secret value, or the policy address. By using a zero knowledge proof, the global policy registry does not enable correlation of any specific identity owner.</p>
+<h2 id="93-authenticated-encryption">9.3. Authenticated Encryption<a class="headerlink" href="#93-authenticated-encryption" title="Permanent link">&para;</a></h2>
+<p>The use of DIDs and microledgers allows communication between agents to use <strong>authenticated encryption</strong>. Agents use their DID verification keys for authenticating each other whenever a communication channel is established. Microledgers allow DID keys to have rooted mutual authentication for any two parties with a DID. In the sequence diagrams in section 10, all agent-to-agent communications that uses authenticated encryption is indicated by bold blue arrows.</p>
+<h2 id="94-recovery-connection">9.4. Recovery connection<a class="headerlink" href="#94-recovery-connection" title="Permanent link">&para;</a></h2>
+<p>Each Identity Owner begins a recovery operation by requesting their respective recovery information from trustees. After a trustee has confirmed the request originated with the identity owner and not a malicious party, a <strong>recovery connection</strong> is formed. This special type of connection is meant only for recovery purposes. Recovery connections are decommissioned when the minimum number of recovery shares have been received and the original encrypted wallet data has been restored. Identity owners can then resume normal connections because their keys have been recovered. Trustees SHOULD only send recovery shares to identity owners over a recovery connection.  </p>
+<h2 id="95-dead-drops">9.5. Dead Drops<a class="headerlink" href="#95-dead-drops" title="Permanent link">&para;</a></h2>
+<p>In scenarios where two parties to a connection move agencies (and thus service endpoints) at the same time, or one party's agents have been compromised such that it
+can no longer send or receive relationship state changes, there is a need
+for recovery not just of keys and agents, but of the state of the relationship.
+These scenarios may include malicious compromise of agents by an attacker
+such that neither the party nor the attacker controls enough agents to meet
+the thresholds set in the DID Document or the Authorization Policy, or complete
+loss of all agents due to some catastrophic event.</p>
+<p>In some cases, relationship state may be recoverable via encrypted backup
+of the agent wallets. In the event that this is not possible, the parties
+can make use of a <strong>dead drop</strong> to recover their relationship state.</p>
+<p>A dead drop is established and maintained as part of a pairwise relationship.
+The dead drop consists of a service endpoint and the public keys needed to
+verify the package that may be retrieved from that endpoint. The keys needed
+for the dead drop are derived from a combination of a Master key and the
+pairwise DID of the relationship that is being recovered.</p>
+<h1 id="10-protocol-flows">10. Protocol Flows<a class="headerlink" href="#10-protocol-flows" title="Permanent link">&para;</a></h1>
+<p>This section contains the UML sequence diagrams for all standard DKMS key management operations that use the DKMS protocol. Diagrams are listed in logical order of usage but may be reviewed in any order. Cross-references to reusable protocol sequences are represented as notes in <strong>blue</strong>. Other comments are in <strong>yellow</strong>.</p>
+<p>Table 1 is a glossary of the DKMS key names and types used in these diagrams.</p>
+<table>
+  <tr>
+    <td>Key Name</td>
+    <td>Description</td>
+  </tr>
+  <tr>
+    <td>A<sub>p</sub><sup>x-sv</sup></td>
+    <td>Agent Policy Secret Value for agent x</td>
+  </tr>
+  <tr>
+    <td>A<sub>p</sub><sup>x-svc</sup></td>
+    <td>Agent Policy Secret Value Commitment for agent x</td>
+  </tr>
+  <tr>
+    <td>A<sub>p</sub><sup>x-ac</sup></td>
+    <td>Agent Policy Address Commitment for agent x</td>
+  </tr>
+  <tr>
+    <td>A<sub>A</sub><sup>x-ID</sup></td>
+    <td>Alice's Agent to Agent Identifier for agent x</td>
+  </tr>
+  <tr>
+    <td>A<sub>A</sub><sup>x-vk</sup></td>
+    <td>Alice's Agent to Agent Public Verification Key for agent x</td>
+  </tr>
+  <tr>
+    <td>A<sub>A</sub><sup>x-sk</sup></td>
+    <td>Alice's Agent to Agent Private Signing Key for agent x</td>
+  </tr>
+  <tr>
+    <td>A<sub>B</sub><sup>DID</sup></td>
+    <td>Alice’s DID for connection with Bob</td>
+  </tr>
+  <tr>
+    <td>A<sub>B</sub><sup>x</sup></td>
+    <td>Alice’s key pair for connection with Bob for agent x</td>
+  </tr>
+  <tr>
+    <td>A<sub>B</sub><sup>x-vk</sup></td>
+    <td>Alice’s Public Verification Key for connection with Bob for agent x</td>
+  </tr>
+  <tr>
+    <td>A<sub>B</sub><sup>x-sk</sup></td>
+    <td>Alice’s Private Signing Key for connection with Bob for agent x</td>
+  </tr>
+  <tr>
+    <td>A<sub>W</sub><sup>x-k</sup></td>
+    <td>Wallet Encryption Key for agent x</td>
+  </tr>
+  <tr>
+    <td>A<sub>LS</sub></td>
+    <td>Alice's Link Secret</td>
+  </tr>
+</table>
+
+<p>Table 1: DKMS key names used in this section</p>
+<h2 id="101-edge-agent-start">10.1. Edge Agent Start<a class="headerlink" href="#101-edge-agent-start" title="Permanent link">&para;</a></h2>
+<p>An identity owner’s experience with DKMS begins with her first installation of a DKMS edge agent. This startup routine is reused by many other protocol sequences because it is needed each time an identity owner installs a new DKMS edge agent.</p>
+<p><img alt="image alt text" src="../images/01-edge-agent-start.png" /></p>
+<p>The first step after successful installation is to prompt the identity owner whether he/she already has a DKMS identity wallet or is instantiating one for the first time. If the owner already has a wallet, the owner is prompted to determine if the new edge agent installation is for the purpose of adding a new edge agent, or recovering from a lost or compromised edge agent. Each of these options references another protocol pattern.</p>
+<h2 id="102-provision-new-agent">10.2. Provision New Agent<a class="headerlink" href="#102-provision-new-agent" title="Permanent link">&para;</a></h2>
+<p>Any time a new agent is provisioned—regardless of whether it is an edge agent or a cloud agent—the same sequence of steps are necessary to set up the associated wallet and secure communications with the new agent.</p>
+<p><img alt="image alt text" src="../images/02-provision-new-agent.png" /></p>
+<p>As noted in section 3.3, DKMS architecture recommends that a DKMS agent be installed in an environment that includes a secure element. So the first step is for the edge agent to set up the credential the identity owner will use to unlock the secure element. On modern smartphones this will typically be a biometric, but it could be a PIN, passcode, or other factor, or a combination of factors.</p>
+<p>The edge agent then requests the secure element to create the key pairs necessary to establish the initial agent policies and to secure agent-to-agent communications. The edge agent also generates a ID to uniquely identify the agent across the identity owner’s set of DKMS agents.</p>
+<p>Finally the edge agent requests the secure element to create a wallet encryption key and then uses it to encrypt the edge wallet.</p>
+<h2 id="103-first-edge-agent">10.3. First Edge Agent<a class="headerlink" href="#103-first-edge-agent" title="Permanent link">&para;</a></h2>
+<p>The first time a new identity owner installs an edge agent, it must also set up the DKMS components that enable the identity owner to manage multiple separate DIDs and verifiable credentials as if they were from one logically unified digital identity. It must also lay the groundwork for the identity owner to install additional DKMS agents on other devices, each of which will maintain its own DKMS identity wallet while still enabling the identity owner to act as if they were all part of one logically unified identity wallet.</p>
+<p><img alt="image alt text" src="../images/03-first-edge-agent.png" /></p>
+<p>Link secrets are defined in section 5.1 and policy registries in section 9.2. The edge agent first needs to generate and store the link secret in the edge wallet. It then needs to generate the policy registry address and store it in the edge wallet. Now it is ready to update the agent policy registry.</p>
+<h2 id="104-update-agent-policy-registry">10.4. Update Agent Policy Registry<a class="headerlink" href="#104-update-agent-policy-registry" title="Permanent link">&para;</a></h2>
+<p>As explained in section 9.2, an agent policy registry is the master control point that an identity owner uses to authorize and revoke DKMS agent proof authorization (edge or cloud).</p>
+<p><img alt="image alt text" src="../images/04-update-agent-policy-registry.png" /></p>
+<p>Each time the identity owner takes an action to add, revoke, or change the permissions for an agent, the policy registry is updated. For example, at the end of the protocol sequence in section 10.3, the action is to write the first policy registry entries that authorize the first edge agent.</p>
+<h2 id="105-add-cloud-agent">10.5. Add Cloud Agent<a class="headerlink" href="#105-add-cloud-agent" title="Permanent link">&para;</a></h2>
+<p>The final step in first-time setup of an edge agent is creation of the corresponding cloud agent. As explained in section 3.3, the default in DKMS architecture is to always pair an edge agent with a corresponding cloud agent due to the many different key management functions this combination can automate.</p>
+<p><img alt="image alt text" src="../images/05-add-cloud-agent-01.png" /></p>
+<p><img alt="image alt text" src="../images/05-add-cloud-agent-02.png" /></p>
+<p>The process of registering a cloud agent begins with the edge agent contacting the <strong>agency agent</strong>. For purposes of this document, we will assume that the edge agent has a relationship with one or more agencies, and has a trusted method (such as a pre-installed DID) for establishing a secure connection using authenticated encryption.</p>
+<p>The target agency first returns a request for the consent required from the identity owner to register the cloud agent together with a request for the authorizations to be granted to the cloud agent. By default, cloud agents have no authorizations other than those granted by the identity owner. This enables identity owners to control what tasks a cloud agent may or may not perform on the identity owner’s behalf.</p>
+<p>Once the identity owner has returned consent and the selected authorizations, the agency agent provisions the new cloud agent and registers the cloud agent’s service endpoint using the agency’s routing extension. Note that this service endpoint is used only in agent-to-agent communications that are internal to the identity owner’s own agent domain. Outward-facing service endpoints are assigned as part of adding connections with their own DIDs.</p>
+<p>Once these tasks are performed, the results are returned to the edge agent and stored security in the edge wallet.</p>
+<h2 id="106-add-new-edge-agent">10.6. Add New Edge Agent<a class="headerlink" href="#106-add-new-edge-agent" title="Permanent link">&para;</a></h2>
+<p>Each time an identity owner installs a new edge agent after their first edge agent, the process must initialize the new agent and grant it the necessary authorizations to begin acting on the identity owner’s behalf.</p>
+<p><img alt="image alt text" src="../images/06-add-new-edge-agent.png" /></p>
+<p>Provisioning of the new edge agent (Edge Agent 2) starts by the identity owner installing the edge agent software (section 10.2) and then receiving instructions about how to provision the new edge agent from an existing edge agent (Edge Agent 1). Note that Edge Agent 1 must the authorization to add a new edge agent (not all edge agents have such authorization). The identity owner must also select the authorizations the edge agent will have (DKMS agent developers will compete to make such policy choices easy and intuitive for identity owners).</p>
+<p>There are multiple options for how the Edge Agent 2 may receive authorization from Edge Agent 1. One common method is for Edge Agent 1 to display a QR code or other machine-readable code scanned by Edge Agent 2. Another way is for Edge Agent 1 to provide a passcode or passphrase that the identity owner types into Edge Agent 2. Another method is sending an SMS or email with a helper URL. In all methods the ultimate result is that Edge Agent 2 must be able to connect via authenticated encryption with Edge Agent 1 in order to verify the connection and pass the new agent-to-agent encryption keys that will be used for secure communications between the two agents.</p>
+<p>Once this is confirmed by both agents, Edge Agent 1 will then use the Update Agent Policy Registry sequence (section 10.4) to add authorizations to the policy registry for Edge Agent 2.</p>
+<p>Once that is confirmed, provisioning of Edge Agent 2 is completed when Edge Agent 1 send the link secret and any verifiable credentials that the identity owner has authorized Edge Agent 2 to handle to Edge Agent 2, which securely stores them in Edge Agent 2’s wallet.</p>
+<h2 id="107-add-connection-to-public-did">10.7. Add Connection to Public DID<a class="headerlink" href="#107-add-connection-to-public-did" title="Permanent link">&para;</a></h2>
+<p>The primary purpose of DIDs and DKMS is to enable trusted digital connections. One of the most common use cases is when an identity owner needs to create a connection to an entity that has a public DID, for example any website that wants to support trusted decentralized identity connections with its users (for registration, authentication, verifiable credentials exchange, secure communications, etc.)</p>
+<p><img alt="image alt text" src="../images/07-add-connection-public-did-01.png" /></p>
+<p><img alt="image alt text" src="../images/07-add-connection-public-did-02.png" /></p>
+<p>Note that this sequence is entirely about agent-to-agent communications between DKMS agents to create a shared microledger and populate it with the pairwise pseudonymous DIDs that Alice and Org assign to each other together with the public keys and service endpoints they need to enable their agents to use authenticated encryption.</p>
+<p>First Alice’s edge agent creates the key pair and DID that it will assign to Org and uses those to initialize a new microledger. It then sends a request for Alice’s cloud agent to add its own key pair that Alice authorizes to act on that DID. These are returned to Alice’s edge agent who adds them to the microledger.</p>
+<p>Next Alice’s edge agent creates and sends a connection invitation to Alice’s cloud agent. Alice’s cloud agent resolves Org’s DID to its DID document to discover the endpoint for Org’s cloud agent (this resolution step is not shown in the diagram above). It then forwards the invitation to Org’s cloud agent who in turn forwards it to the system operating as Org’s edge agent.</p>
+<p>Org’s edge agent performs the mirror image of the same steps Alice’s edge agent took to create its own DID and key pair for Alice, adding those to the microledger, and authorizing its cloud agent to act on its behalf in this new relationship. </p>
+<p>When that is complete, Org’s edge agent returns its microledger updates via authenticated encryption to its cloud agent which forwards them to Alice’s cloud agent and finally to Alice’s edge agent. This completes the connection and Alice is notified of success.</p>
+<h2 id="108-add-connection-to-private-did-provisioned">10.8. Add Connection to Private DID (Provisioned)<a class="headerlink" href="#108-add-connection-to-private-did-provisioned" title="Permanent link">&para;</a></h2>
+<p>The other common use case for trusted connections is private peer-to-peer connections between two parties that do not initially connect via one or the other’s public DIDs. These connections can be initiated any way that one party can share a unique <strong>invitation address</strong>, i.e., via a URL sent via text, email, or posted on a blog, website, LinkedIn profile, etc.</p>
+<p><img alt="image alt text" src="../images/08-add-connection-private-did-provisioned-01.png" /></p>
+<p><img alt="image alt text" src="../images/08-add-connection-private-did-provisioned-02.png" /></p>
+<p>The flow in this sequence diagram is very similar to the flow in section 10.8 where Alice is connecting to a public organization. The only difference is that rather than beginning with Alice’s edge agent knowing a public DID for the Org, Alice’s edge agent knows Bob’s invitation address. This is a service, typically provided by an agency, that enables Bob’s cloud agent to accept connection invitations (typically with appropriate spam protections and other forms of connection invitation filtering).</p>
+<p>The end result is the same as in section 10.8: Alice and Bob have established a shared microledger with the pairwise pseudonymous DIDs and the public keys and endpoints they need to maintain their relationship. Note that with DIDs and DKMS, this is the first connection that Alice and Bob can maintain for life (and beyond) that is not dependent on any centralized service provider or registry. And this connection is available for Alice and Bob to use with any application they wish to authorize.</p>
+<h2 id="109-add-connection-to-private-did-unprovisioned">10.9. Add Connection to Private DID (Unprovisioned)<a class="headerlink" href="#109-add-connection-to-private-did-unprovisioned" title="Permanent link">&para;</a></h2>
+<p>This sequence is identical to section 10.8 except that Bob does not yet have a DKMS agent or wallet. So it addresses what is necessary for Alice to invite Bob to both start using a DKMS agent and to form a connection with Alice at the same time.</p>
+<p><img alt="image alt text" src="../images/09-add-connection-private-did-unprovisioned-01.png" /></p>
+<p><img alt="image alt text" src="../images/09-add-connection-private-did-unprovisioned-02.png" /></p>
+<p>The only difference between this sequence diagram and section 10.8 is the invitation delivery process. In 10.8, Bob already has a cloud agent, so the invitation can be delivered to an invitation address established at the hosting agency. In this sequence, Bob does not yet have cloud agent, so the invitation must be: a) anchored at a helper URL (typically provided by an agency), and b) delivered to Bob via some out-of-band means (typically an SMS, email, or other medium that can communicate a helper URL).</p>
+<p>When Bob receives the invitation, Bob clicks on the URL to go to the helper page and receive instructions about the invitation and how he can download a DKMS edge agent. He follows the instructions, installs the edge agent, which in turn provisions Bob’s cloud agent. When provisioning is complete, Bob’s edge agent retrieves Alice’s connection invitation from the helper URL. Since Bob is now fully provisioned, the rest of the sequence proceeds identically to section 10.8.</p>
+<h2 id="1010-rotate-did-keys">10.10. Rotate DID Keys<a class="headerlink" href="#1010-rotate-did-keys" title="Permanent link">&para;</a></h2>
+<p>As described in section 8.1, key rotation is a core security feature of DKMS. This diagram illustrates athe protocol for key rotation.</p>
+<p><img alt="image alt text" src="../images/10-rotate-did-key-01.png" /></p>
+<p><img alt="image alt text" src="../images/10-rotate-did-key-02.png" /></p>
+<p>Key rotation may be triggered by expiration of a key or by an another event such as agent recovery. The process begins with the identity owner’s edge agent generating its own new keys. If keys also need to be rotated in the cloud agent, the edge agent sends a key change request.</p>
+<p>The identity owner’s agent policy may require that key rotation requires authorization from two or more edge agents. If so, the first edge agent generates a one time passcode or QR code that the identity owner can use to authorize the key rotation at the second edge agent. Once the passcode is verified, the second edge agent signs the key rotation request and sends it to the first edge agent.</p>
+<p>Once the necessary authorizations have been received, the first edge agent writes the changes to the microledger for that DID. It then sends the updates to the microledger to the cloud agent for the other party to the DID relationship (Bob), who forwards it to Bob’s edge agent. Bob’s edge agent verifies the updates and adds the changes to its copy of the microledger.</p>
+<p>Bob’s edge agent then needs to broadcast the changes to Bob’s cloud agent and any other edge agent that Bob has authorized to interact with Alice. Once this is done, Alice and Bob are "in sync" with the rotated keys, and their connection is at full strength.</p>
+<h2 id="1011-delete-connection">10.11. Delete Connection<a class="headerlink" href="#1011-delete-connection" title="Permanent link">&para;</a></h2>
+<p>In decentralized identity, identity owners are always in control of their relationships. This means either party to a connection can terminate the relationship by deleting it. This diagram illustrates Alice deleting the connection she had with Bob.</p>
+<p><img alt="image alt text" src="../images/11-revoke-did.png" /></p>
+<p>All that is required to delete a connection is for the edge agent to add a DISABLE event to the microledger she established with Bob. As always, this change is propagated to Alice’s cloud agent and any other edge agents authorized to interact with the DID she assigned to Bob.</p>
+<p>Note that, just like in the real world, it is optional for Alice to notify Bob of this change in the state of their relationship. If she chooses to do so, her edge agent will propagate the DISABLE event to Bob’s copy of the microledger. If, when, and how Bob is notified by his edge agent(s) depends on Bob’s notification policies.</p>
+<h2 id="1012-revoke-edge-agent">10.12. Revoke Edge Agent<a class="headerlink" href="#1012-revoke-edge-agent" title="Permanent link">&para;</a></h2>
+<p>Key revocation is also a required feature of DKMS architecture as discussed in section 8.2. Revocation of keys for a specific DID is accomplished either through rotation of those keys (section 10.10) or deletion of the connection (section 10.11). However in certain cases, an identity owner may need to revoke an entire edge agent, effectively disabling all keys managed by that agent. This is appropriate if a device is lost, stolen, or suspected of compromise.</p>
+<p><img alt="image alt text" src="../images/12-revoke-edge-agent.png" /></p>
+<p>Revoking an edge agent is done from another edge agent that is authorized to revoke agents. If a single edge agent is authorized, the process is straightforward. The revoking edge agent sends a signed request to the policy registry address (section 9.2) on the ledger holding the policy registry. The ledger performs the update. The revoking edge agent then "removes" the keys for the revoked edge agent by disabling them.</p>
+<p>As a best practice, this event also should trigger key rotation by the edge agent.</p>
+<p>Note that an identity owner may have a stronger revocation policy, such as requiring two edge agents to authorize revocation of another edge agent. This sequence is very similar to requiring two edge agents to authorize a key rotation as described in section 10.10. However it could also cause Alice to be locked out of her edge agents if an attacker can gain control of enough devices. In this case Alice could use one of her recovery options (sections 10.16 and 10.17).</p>
+<h2 id="1013-recovery-setup">10.13. Recovery Setup<a class="headerlink" href="#1013-recovery-setup" title="Permanent link">&para;</a></h2>
+<p>As discussed in section 6, recovery is a paramount feature of DKMS—in decentralized key management, there is no "forgot password" button (and if there were, it would be a major security vulnerability). So it is particularly important that it be easy and natural for an identity owner to select and configure recovery options.</p>
+<p><img alt="image alt text" src="../images/13-recovery-setup.png" /></p>
+<p>The process begins with Alice’s edge agent prompting Alice to select among the two recovery options described in section 6: offline recovery and social recovery. Her edge agent then creates a key pair for backup encryption, encrypts a backup of her edge wallet, and stores it with her cloud agent.</p>
+<p>If Alice chooses social recovery, the next step is for Alice to add <strong>trustees</strong> as described in section 10.14. Once the trustee has accepted Alice’s invitation, Alice’s edge agent creates and shares a <strong>recovery data share</strong> for each trustee. This is a shard of a file containing a copy of her backup encryption key, her link secret, and the special recovery endpoint that was set up by her cloud agent when the recovery invitation was created (see section 10.14).</p>
+<p>Alice’s edge agent sends this recovery data share to her cloud agent who forwards it to the cloud agent for each of her trustees. Each cloud agent securely stores the share so its identity owner is ready in helping Alice to recover should the need arise. (See sections 10.17 and 10.18 for the actual social recovery process.)</p>
+<p>If Alice chooses offline recovery, her edge agent first creates a "paper wallet", which typically consists of a QR code or string of text that encodes the same data as in a recovery data share. Her edge agent then displays that paper wallet data to Alice for printing and storing in a safe place. Note that one of the primary usability challenges with offline recovery methods is Alice:</p>
+<ol>
+<li>
+<p>Following through with storage of the paper wallet.</p>
+</li>
+<li>
+<p>Properly securing storage of the paper wallet over long periods of time.</p>
+</li>
+<li>
+<p>Remembering the location of the paper wallet over long periods of time.</p>
+</li>
+</ol>
+<p>To some extent these can be addressed if the edge agent periodically reminds the identity owner to verify that his/her paper wallet is securely stored in a known location.</p>
+<h2 id="1014-add-trustee">10.14. Add Trustee<a class="headerlink" href="#1014-add-trustee" title="Permanent link">&para;</a></h2>
+<p>The secret to implementing social recovery in DKMS is using DKMS agents to automate the process of securely storing, sharing, and recovering encrypted backups of DKMS wallets with several of the identity owner’s connections. In DKMS architecture, these connections are currently called trustees. (Note: this is a placeholder term pending further usability research on the best name for this new role.)</p>
+<p><img alt="image alt text" src="../images/14-add-recovery-trustee.png" /></p>
+<p>Trustees are selected by the identity owner based on the owner’s trust. For each trustee, the edge agent requests the cloud agent to create a trustee invitation. The cloud agent generates and registers with the agency a unique URL that will be used only for this purpose. The edge agent then creates a recovery data share (defined in 10.13) and shards it as defined by the identity owner’s recovery policy.</p>
+<p>At this point there are two options for delivering the trustee invitation depending on whether the identity owner already has a connection with the trustee or not. If a connection exists, the edge agent sends the invitation to the cloud agent who forwards it to the trustee’s cloud agent who forwards it to an edge agent who notifies the trustee of the invitation.</p>
+<p>If a connection does not exist, the recovery invitation is delivered out of band in a process very similar to adding a connection to a private DID (sections 10.8 and 10.9).</p>
+<p>Once the trustee accepts the invitation, the response is returned to identity owner’s edge agent to complete the recovery setup process (section 10.13).</p>
+<h2 id="1015-update-recovery-setup">10.15. Update Recovery Setup<a class="headerlink" href="#1015-update-recovery-setup" title="Permanent link">&para;</a></h2>
+<p>With DKMS infrastructure, key recovery is a lifelong process. A DKMS wallet filled with keys, DIDs, and verifiable credentials is an asset constantly increasing in value. Thus it is critical that identity owners be able to update their recovery methods as their circumstances, devices, and connections change.</p>
+<p><img alt="image alt text" src="../images/15-recovery-update.png" /></p>
+<p>For social recovery, an identity owner may wish to add new trustees or delete existing ones. Whenever this happens, the owner’s edge agent must recalculate new recovery data shares to shard among the new set of trustees. This is a two step process: the new share must first be sent to all trustees in the new set and an acknowledgement must be received from all of them. Once that it done, the edge agent can send a commitment message to all trustees in the new set to complete the process.</p>
+<p>Updating offline recovery data is simply a matter of repeating the process of creating and printing out a paper wallet. An edge agent can automatically inform its identity owner of the need to do this when circumstances require it as well as automatically remind its owner to keep such offline information safe and accessible.</p>
+<h2 id="1016-offline-recovery">10.16. Offline Recovery<a class="headerlink" href="#1016-offline-recovery" title="Permanent link">&para;</a></h2>
+<p>One advantage of the offline recovery process is that it can be performed very quickly by the identity owner because it has no dependencies on outside parties.</p>
+<p><img alt="image alt text" src="../images/16-offline-recovery.png" /></p>
+<p>The identity owner simply initiates recovery on a newly installed edge agent. The edge agent prompts to scan the paper wallet (or input the text). From this data, it extracts the special recovery endpoint registered in the recovery setup process (section 10.13) and the backup decryption key. It then requests the encrypted backup from the recovery endpoint (which routes to the identity owner’s cloud agent), decrypts it, restores the edge wallet, and replaces the agent keys with new keys. The final steps are to update the agent policy registry and, as a best practice, rotate all DID keys.</p>
+<h2 id="1017-social-recovery">10.17. Social Recovery<a class="headerlink" href="#1017-social-recovery" title="Permanent link">&para;</a></h2>
+<p>Social recovery, while more complex than offline recovery, is also more automated, flexible, and resilient. The secret to making it easy and intuitive for identity owners is using DKMS agents to automate every aspect of the process except for the most social step: verification of the actual identity of the identity owner by trustees.</p>
+<p><img alt="image alt text" src="../images/17-social-recovery-01.png" /></p>
+<p><img alt="image alt text" src="../images/17-social-recovery-02.png" /></p>
+<p>Social recovery, like offline recovery, begins with the installation of a fresh edge agent. The identity owner selects the social recovery option and is prompted for the contact data her edge agent and cloud agent will need to send special new connection requests to her trustees. These special connection requests are then issued as described in section 10.8.</p>
+<p>These special connection requests are able to leverage the same secure DKMS infrastructure as the original connections while at the same time carrying the metadata needed for the trustee’s edge agent to recognize it is a recovery request. At that point, the single most important step in social recovery happens: <strong>the trustee verifying that it is really Alice making the recovery request</strong>, and not an impersonator using social engineering.</p>
+<p>Once the trustee is satisfied with the verification, the edge agent prompts the trustee to perform the next most important step: <strong>select the existing connection with Alice</strong> so that the trustee edge agent knows which connection is trying to recover. Only the trustee—a human being—can be trusted to make this association.</p>
+<p>At this point, the edge agent can correlate the old connection to Alice with the new connection to Alice, so it knows which recovery data share to select (see section 10.13). It can then decrypt the recovery data share with the identity owner’s private key, extracts the recovery endpoint, and re-encrypt the recovery data share with the public key of Alice’s new edge agent.</p>
+<p>Now the trustee’s edge agent is ready to return the recovery data share to Alice’s new cloud agent via the recovery endpoint. The cloud agent forwards it to Alice’s new edge agent. Once Alice’s new edge agent has the required set of recovery data shares, it decrypts and assembles them. It then uses that recovery data to complete the same final steps as offline recovery described in section 10.16.</p>
+<h1 id="11-open-issues-and-future-work">11. Open Issues and Future Work<a class="headerlink" href="#11-open-issues-and-future-work" title="Permanent link">&para;</a></h1>
+<ol>
+<li>
+<p><strong>DID specification.</strong> The DKMS specification has major dependencies on the DID specification which is still in progress at the W3C Credentials Community Group. Although we are not concerned that the resulting specification will not support DKMS requirements, we cannot be specific about certain details of how DKMS will interact with DIDs until that specification is finalized. However the strong market interest in DIDs led the Credentials Community Group to author an extensive <a href="https://w3c-ccg.github.io/did-use-cases/">DID Use Cases</a> document and submit a <a href="https://w3c-ccg.github.io/did-wg-charter/">Decentralized Identifier Working Group</a> charter to the W3C for consideration as a full Working Group. </p>
+</li>
+<li>
+<p><strong>DID methods.</strong> The number of DID methods has grown substantially as shown by the unofficial <a href="https://w3c-ccg.github.io/did-method-registry/">DID Method Registry</a> maintained by the W3C Credentials Community Group. Because different DID methods may support different levels of assurance about DKMS keys, more work may be required to assess about the role of different ledgers as a decentralized source of truth and the requirements of each ledger for the hosting of DIDs and DID documents.</p>
+</li>
+<li>
+<p><strong>Verifiable credentials interoperability.</strong> The <a href="https://www.w3.org/2017/vc/charter.html">W3C Verifiable Claims Working Group</a> is currently preparing its 1.0 Candidate Recommendation. As verifiable credentials mature, we need to say more about how different DKMS wallets and agents from different vendors can support interoperable verifiable credentials, including those with zero-knowledge credentials and proofs. Again, this may need to extend to an adjacent protocol.</p>
+</li>
+<li>
+<p><strong>DKMS wallet and agent portability.</strong> As mentioned in section 5.4, this aspect of the DKMS protocol is not fully specified and needs to be addressed in a subsequent version. This area of work is particularly active in the <a href="https://github.com/hyperledger/indy-agent">Hyperledger Indy Agent</a> development community. A recent "connectathon" hosted by the <a href="https://sovrin.org/">Sovrin Foundation</a> had 32 developers testing agent-to-agent protocol interoperability among 9 different code bases.</p>
+</li>
+<li>
+<p><strong>Secure elements, TPMs, and TEEs.</strong> Since DKMS is highly dependent on secure elements, more work is needed to specify how a device can communicate or verify its own security capabilities or its ability to attest to authentication factors for the identity owner.</p>
+</li>
+<li>
+<p><strong>Biometrics.</strong> While they can play a special role in the DKMS architecture because of their ability to intrinsically identify a unique individual, this same quality means a privacy breach of biometric attributes could be disastrous because they may be unrecoverable. So determining the role of biometrics and biometric service providers is a major area of future work.</p>
+</li>
+<li>
+<p><strong>Spam and DDOS attacks.</strong> There are several areas where this must be considered, particularly in relation to connection requests (section 10.7).</p>
+</li>
+<li>
+<p><strong>DID phishing.</strong> DKMS can only enable security, it cannot by itself prevent a malicious actor or agency sending malicious invitations to form malicious connections that appear to be legitimate connection invitations (section 10.9).</p>
+</li>
+<li>
+<p><strong>Usability testing.</strong> Although early research on the usability of DKMS wallets and agents was carried out by BYU Internet Security Research Lab, much more work remains to be done to develop the highly repeatable "user ceremonies" necessary for DKMS to succeed in the mass market.</p>
+</li>
+</ol>
+<h1 id="12-future-standardization">12. Future Standardization<a class="headerlink" href="#12-future-standardization" title="Permanent link">&para;</a></h1>
+<p>It is the recommendation of the authors that the work described in this document be carried forward to full Internet standardization. We believe <a href="https://www.oasis-open.org/">OASIS</a> is a strong candidate for this work due to its hosting of the <a href="https://en.wikipedia.org/wiki/Key_Management_Interoperability_Protocol_(KMIP)">Key Management Interoperability Protocol (KMIP)</a> at the <a href="https://www.oasis-open.org/committees/kmip/">KMIP Technical Committee</a> since 2010. Please contact the authors if you are interested in contributing to organizing an open standard effort for DKMS.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "navigation.expand", "navigation.footer", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+    
+  </body>
+</html>

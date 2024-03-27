@@ -1,0 +1,5314 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../0734-push-notifications-fcm/">
+      
+      
+        <link rel="next" href="../0756-oca-for-aries-style-guide/">
+      
+      
+      <link rel="icon" href="https://raw.githubusercontent.com/hyperledger/aries-cloudagent-python/main/docs/assets/aries-favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.10">
+    
+    
+      
+        <title>0755 Overlays Capture Architecture (OCA) For Aries - Hyperledger Aries Interoperability Profiles / RFCs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#0755-overlays-capture-architecture-oca-for-aries" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Hyperledger Aries Interoperability Profiles / RFCs" class="md-header__button md-logo" aria-label="Hyperledger Aries Interoperability Profiles / RFCs" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/Hyperledger_Aries_Logo_White.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hyperledger Aries Interoperability Profiles / RFCs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              0755 Overlays Capture Architecture (OCA) For Aries
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hyperledger/aries-rfcs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hyperledger/aries-rfcs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Welcome
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../MAINTAINERS/" class="md-tabs__link">
+          
+  
+  Governance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aip2/0003-protocols/" class="md-tabs__link">
+          
+  
+  AIP 2.0
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/0003-protocols/" class="md-tabs__link">
+          
+  
+  ADOPTED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/0004-agents/" class="md-tabs__link">
+          
+  
+  ACCEPTED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/0029-message-trust-contexts/" class="md-tabs__link">
+          
+  
+  DEMONSTRATED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+          
+  
+  PROPOSED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/0013-overlays/" class="md-tabs__link">
+          
+  
+  RETIRED
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Hyperledger Aries Interoperability Profiles / RFCs" class="md-nav__button md-logo" aria-label="Hyperledger Aries Interoperability Profiles / RFCs" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/Hyperledger_Aries_Logo_White.png" alt="logo">
+
+    </a>
+    Hyperledger Aries Interoperability Profiles / RFCs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hyperledger/aries-rfcs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hyperledger/aries-rfcs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Welcome
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../RFCindex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    All RFCs by Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0000-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RFC Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0000-template-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol RFC Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MAINTAINERS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Maintainers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../github-issues/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Submitting Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LICENSE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SECURITY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AIP 2.0
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            AIP 2.0
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0003-protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0003 Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0004-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0004 Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0005-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0005 DID Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0008-message-id-and-threading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0008 Message ID and Threading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0011-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0011 Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0015-acks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0015 ACKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0017-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0017 Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0019-encryption-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0019 Encryption Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0020-message-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0020 Message Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0023-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0023 DID Exchange Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0025-didcomm-transports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0025 DIDComm Transports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0035-report-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0035 Report Problem Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0044-didcomm-file-and-mime-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0044 DIDComm File and MIME Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0046-mediators-and-relays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0046 Mediators and Relays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0047-json-ld-compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0047 JSON-LD Compatibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0048-trust-ping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0048 Trust Ping Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0050-wallets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0050 Wallets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0092-transport-return-route/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0092 Transports Return Route
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0094-cross-domain-messaging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0094 Cross-Domain Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0095-basic-message/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0095 Basic Message Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0183-revocation-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0183 Revocation Notification 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0211-route-coordination/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0211 Mediator Coordination Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0360-use-did-key/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0360 did:key Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0434-outofband/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0434 Out-of-Band Protocol 1.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0441-present-proof-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0441 Prover and Verifier Best Practices for Proof Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0453-issue-credential-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0453 Issue Credential Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0454-present-proof-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0454 Present Proof Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0510-dif-pres-exch-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0510 Presentation-Exchange Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0519-goal-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0519 Goal Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0557-discover-features-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0557 Discover Features Protocol v2.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0592-indy-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0592 Indy Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0593-json-ld-cred-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0593 JSON-LD Credential Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ADOPTED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ADOPTED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0003-protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0003 Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0005-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0005 DID Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0008-message-id-and-threading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0008 Message ID and Threading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0011-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0011 Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0019-encryption-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0019 Encryption Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0020-message-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0020 Message Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0021-didcomm-message-anatomy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0021 DIDComm Message Anatomy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0023-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0023 DID Exchange v1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0025-didcomm-transports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0025 DIDComm Transports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0031-discover-features/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0031 Discover Features Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0036-issue-credential/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0036 Issue Credential Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0037-present-proof/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0037 Present Proof Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0048-trust-ping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0048 Trust Ping Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0095-basic-message/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0095 Basic Message Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0160-connection-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0160 Connection Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0302-aries-interop-profile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0302 Aries Interop Profile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0434-outofband/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0434 Out-of-Band Protocol 1.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0453-issue-credential-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0453 Issue Credential Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0454-present-proof-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0454 Present Proof Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0510-dif-pres-exch-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0510 Presentation-Exchange Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0592-indy-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0592 Indy Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0593-json-ld-cred-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0593 JSON-LD Credential Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ACCEPTED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ACCEPTED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0004-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0004 Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0006-ssi-notation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0006 SSI Notation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0015-acks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0015 ACKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0017-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0017 Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0035-report-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0035 Report Problem Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0044-didcomm-file-and-mime-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0044 DIDComm File and MIME Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0046-mediators-and-relays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0046 Mediators and Relays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0047-json-ld-compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0047 JSON-LD Compatibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0049-repudiation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0049 Repudiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0050-wallets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0050 Wallets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0092-transport-return-route/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0092 Transports Return Route
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0094-cross-domain-messaging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0094 Cross-Domain Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0211-route-coordination/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0211 Mediator Coordination Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0360-use-did-key/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0360 did:key Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0441-present-proof-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0441 Prover and Verifier Best Practices for Proof Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0496 Transition to the Out of Band and DID Exchange Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0519-goal-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0519 Goal Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0557-discover-features-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0557 Discover Features Protocol v2.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0587-encryption-envelope-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0587 Encryption Envelope v2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0646-bbs-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0793-unqualfied-dids-transition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0793 Unqualified DID Transition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    DEMONSTRATED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            DEMONSTRATED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0029-message-trust-contexts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0029 Message Trust Contexts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0032-message-timing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0032 Message Timing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0042-lox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0042 LOX -- A more secure pluggable framework for protecting wallet keys
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0043-l10n/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0043 l10n (Locali[s|z]ation)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0051-dkms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0051 Decentralized Key Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0113-question-answer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0113 Question Answer Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0509-action-menu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0509 Action Menu Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0748-n-wise-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0748 N-wise DID Exchange Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    PROPOSED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            PROPOSED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Long Term Support
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0024-didcomm-over-xmpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0024 DIDComm over XMPP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0028-introduce/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0028 Introduce Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0030-sync-connection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0030 Sync Connection Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0034-message-tracing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0034 Message Tracing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0056-service-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0056 Service Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0066-non-repudiable-cryptographic-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0066 Non-Repudiable Signature for Cryptographic Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0067-didcomm-diddoc-conventions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0067 DIDComm DID document conventions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0074-didcomm-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0074 DIDComm Best Practices
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0075-payment-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0075 Payment Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0103-indirect-identity-control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0103 Indirect Identity Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0104-chained-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0104 Chained Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0114-predefined-identities/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0114 Predefined Identities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0116-evidence-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0116 Evidence Exchange Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0124-did-resolution-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0124 DID Resolution Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0167-data-consent-lifecycle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0167 Data Consent Lifecycle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0183-revocation-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0183 Revocation Notification 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0193-coin-flip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0193 Coin Flip Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0207-credential-fraud-threat-model/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0207 Credential Fraud Threat Model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0212 Pickup Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0212-pickup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0212 Pickup Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0213-transfer-policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0213 Transfer Policy Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0214-help-me-discover/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0214 "Help Me Discover" Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0217-linkable-message-paths/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0217 Linkable Message Paths
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0231-biometric-service-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0231 Biometric Service Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0249-rich-schema-contexts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0249 Aries Rich Schema Contexts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0257-private-credential-issuance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0257 Private Credential Issuance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0268-unified-didcomm-agent-deeplinking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0268 Unified DIDCOMM Deeplinking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0270-interop-test-suite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0270 Interop Test Suite
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0281-rich-schemas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0281 Aries Rich Schemas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0289-toip-stack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0289 The Trust Over IP Stack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0309-didauthz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0309 DIDAuthZ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0327-crypto-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0327 Crypto service Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0334-jwe-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0334 JWE envelope 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0335-http-over-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0335 HTTP Over DIDComm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0345-community-coordinated-update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0345 Community Coordinated Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0346-didcomm-between-two-mobile-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0346 DIDComm Between Two Mobile Agents Using Cloud Agent Mediator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0347-proof-negotiation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0347 Proof Negotiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0351-purpose-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0351 Purpose Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0418-rich-schema-encoding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0418 Aries Rich Schema Encoding Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0420-rich-schemas-common/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0420 Rich Schema Objects Common
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0428-prepare-issue-rich-credential/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0428 Prerequisites to Issue Rich Credential
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0429-prepare-req-rich-pres/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0429 Prerequisites to Request Rich Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0430-machine-readable-governance-frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0430 Machine-Readable Governance Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0440-kms-architectures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0440 KMS Architectures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0445-rich-schema-mapping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0445 Aries Rich Schema Mapping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0446-rich-schema-cred-def/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0446 Aries Rich Schema Credential Definition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0478-coprotocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0478 Coprotocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0482-coprotocol-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0482 Coprotocol Protocol 0.5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0511-dif-cred-manifest-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0511 Credential-Manifest Attachment format for requesting and presenting credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0559-pppu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0559 Privacy-Preserving Proof of Uniqueness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0566-issuer-hosted-custodidal-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0566 Issuer-Hosted Custodial Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0641-linking-binary-objects-to-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0641 Linking binary objects to credentials using hash based references
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0693-credential-representation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0693 Cross-Platform Credential Representation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0699-push-notifications-apns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0699 Push Notifications apns Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0700-oob-through-redirect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0700 Out-of-Band through redirect
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0721-revocation-notification-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0721 Revocation Notification 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0728-device-binding-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0728 Device Binding Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0734-push-notifications-fcm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0734 Push Notifications fcm Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    0755 Overlays Capture Architecture (OCA) For Aries
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    0755 Overlays Capture Architecture (OCA) For Aries
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tutorial
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tutorial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issuer-activities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issuer Activities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#holder-activities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Holder Activities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verifier-activities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verifier Activities
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drawbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drawbacks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rationale-and-alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale and alternatives
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prior-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prior art
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unresolved-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unresolved questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0756-oca-for-aries-style-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0756 OCA for Aries Style Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0757-push-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0757 Push Notification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0771-anoncreds-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0780-data-urls-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0780 Use Data URLs for Images and More in Credential Attributes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0794-did-rotate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0794 DID Rotate 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0804-didcomm-rpc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0804 DIDComm Remote Procedure Call (DRPC)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0809-w3c-data-integrity-credential-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0809 W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RETIRED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            RETIRED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0013-overlays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0013 Overlays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0234-signature-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0234 Signature Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0250-rich-schemas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0250 Rich Schema Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0303-v01-credential-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0303 V0.1 Credential Exchange (Deprecated)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0317-please-ack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0317 Please ACK Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0348-transition-msg-type-to-https/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0348 Transition Message Type to HTTPs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0627-static-peer-dids/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0627 Static Peer DIDs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tutorial
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tutorial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issuer-activities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issuer Activities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#holder-activities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Holder Activities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verifier-activities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verifier Activities
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drawbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drawbacks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rationale-and-alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale and alternatives
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prior-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prior art
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unresolved-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unresolved questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="0755-overlays-capture-architecture-oca-for-aries">0755: Overlays Capture Architecture (OCA) For Aries<a class="headerlink" href="#0755-overlays-capture-architecture-oca-for-aries" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Authors: <a href="swcurran@gmail.com">Stephen Curran</a></li>
+<li>Status: <a href="../../#proposed">PROPOSED</a></li>
+<li>Since: 2023-01-15</li>
+<li>Status Note: In the process of being implemented in several Aries Frameworks (ACA-Py, AFJ)</li>
+<li>Supersedes: Supersedes <a href="../../concepts/0013-overlays/">0013-Overlays</a> as
+  that RFC is/was about the OCA specification, while this covers the application of the OCA
+  Specification for Aries agents.</li>
+<li>Start Date: 2022-09-25</li>
+<li>Version: 1.0</li>
+<li>Tags: <a href="../../tags/#feature">feature</a></li>
+</ul>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p><a href="https://oca.colossi.network/">Overlays Capture Architecture</a> (OCA) is, per the
+<a href="https://oca.colossi.network/specification/">OCA specification</a>, a "standardized global solution for data capture and
+exchange." Given a data structure (such as a verifiable credential), OCA allows
+for the creation of purpose-specific overlays of information about that data
+structure. Each overlay provides some knowledge (human and machine-readable)
+about the overall data structure or the individual attributes within it. The
+information in the overlays makes it possible to create useful software for
+capturing data, displaying it and exchanging it. While the <a href="https://oca.colossi.network/">OCA
+website</a> and <a href="https://oca.colossi.network/specification/">OCA specification</a> can be reviewed
+for a detailed background of OCA and its various purposes, in this RFC we'll
+focus on its purpose in Aries, which is quite constrained and pragmatic--a
+mechanism for an issuer to provide information about a verifiable credential to
+allow holder and verifier software to display the credential in a human-friendly
+way, including using the viewers preferred language, and the issuer's preferred
+branding. The image below shows an Aries mobile Wallet displaying the same
+credential without and with OCA overlays applied in two languages. All of the
+differences in the latter two screenshots from the first come from
+issuer-supplied OCA data.</p>
+<p><img alt="Example: Using OCA in Aries Bifold" src="assets/bifold-oca-example.jpg" /></p>
+<p>This RFC formalizes how Aries verifiable credential issuers can make a JSON <a href="https://oca.colossi.network/specification/#bundle">OCA
+Bundle</a> (a set of related OCA overlays about a base data structure) available to
+holders and verifiers that includes the following information for each type of
+credential they issue.</p>
+<ul>
+<li>Metadata about the credential, such as the Classification system upon which
+  the credential is based.</li>
+<li>Metadata about the credential in multiple languages, such as its name,
+  description, the name and description of the issuer and so on.</li>
+<li>Type, format, encoding, standard and units information about the credential's raw
+  attribute data.</li>
+<li>Metadata about the attributes within the credential in multiple languages,
+  such as a label and help text.</li>
+<li>A set of branding elements (logo, background image, color and so on) that
+  holder and verifier software are expected to use in displaying the credential.</li>
+</ul>
+<p>The standard flow of data between participants is as follows:</p>
+<ul>
+<li>An issuer creates an OCA Bundle for each type of verifiable credential it
+issues.</li>
+<li>During credential issuance using [RFC 0453 Issue Credential V2 v2.2 (or later)
+protocol] the issuer MAY include in the protocol's <code>credential-offer</code> or
+<code>credential</code> messages the OCA Bundle for the credential type as an <code>oca-bundle</code>
+<a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2#supplements">issue credential supplement</a>.</li>
+<li>When provided, the holder software has full access to the OCA information
+published by that issuer and can use the OCA data to render the credential for
+its user(s) in the language of their choice, with credential branding from
+the issuer, based on the <a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style Guide</a>.</li>
+<li>The holder MAY share the OCA Bundle with a verifier by using [RFC 0453 Issue
+Credential V2 v2.2 (or later) protocol] to add the <code>oca-bundle</code> credential
+supplement received from the issuer.</li>
+<li>On receipt, the verifier software has full access to the OCA information
+published by that issuer and can use the OCA data to render the credential for
+its user(s) in the language of their choice, with credential branding from
+the issuer, based on the <a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style Guide</a>.</li>
+</ul>
+<p>While the issuer providing the OCA Bundle for a credential type using the
+credential supplement mechanism is the typical flow (as detailed in this RFC),
+other flows, outside of the scope of this RFC are possible. See the <a href="#rationale-and-alternatives">rationale
+and alternatives section of this RFC for some
+examples</a>.</p>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
+<p>The core data models for verifiable credentials are more concerned about the
+correct cryptographic processing of the credentials than about general
+processing of the attribute data, and the user experience of those using
+credentials. An AnonCreds verifiable credential contains the bare minimum of
+metadata about a credential--basically, just the developer-style names for the
+type of credential and the attributes within it. JSON-LD-based verifiable
+credentials has the capacity to add more information about the attributes in a
+credential, but the data is not easily accessed and is provided to enable
+machine processing rather than improving user experience.</p>
+<p>OCA allows credential issuers to declare information about the verifiable
+credential types it issues to improve the handling of those credentials by
+holder and verifier Aries agents, and to improve the on-screen display of the
+credentials, through the application of issuer-specified branding elements.</p>
+<h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
+<p>The tutorial section of this RFC defines the coordination necessary for an
+the creation, publishing, retrieval and use of an OCA Bundle for a given
+type of verifiable credential.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>In this overview, we assume the the use of OCA specifically for verifiable
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>credentials, and further, specifically for AnonCreds verifiable credentials. OCA
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>can also be used be applied to any data structure, not just verifiable
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>credentials, and for other verifiable credential models, such as those based on
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>the JSON-LD- or JWT-style verifiable credentials. As the Aries
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>community applies OCA to other styles of verifiable credential, we
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>will extend this RFC.
+</code></pre></div>
+<h3 id="issuer-activities">Issuer Activities<a class="headerlink" href="#issuer-activities" title="Permanent link">&para;</a></h3>
+<p>The use of OCA as defined in this RFC begins with an issuer preparing an <a href="https://oca.colossi.network/specification/#bundle">OCA
+Bundle</a> for each type of credential they issue. An OCA Bundle is a JSON data
+structure consisting of the <a href="https://oca.colossi.network/v1.1.0-rc.html#capture-base">Capture Base</a>, and some additional overlays of
+different types (listed in the <a href="#oca-specification-overlays">next section</a>).</p>
+<p>While an OCA Bundle can be manually maintained in an OCA Bundle JSON file, a
+common method of maintaining OCA source data is to use a spreadsheet, and
+generating the OCA Bundle from the Excel source. See the section of this RFC
+called <a href="#oca-issuer-tools">OCA Tooling</a> for a link to an OCA Source spreadsheet,
+and information on tools available for managing the OCA Source data and
+generating a corresponding OCA Bundle.</p>
+<p>The creation of the OCA Bundle and the configuration of the issuer's Aries
+Framework to deliver the OCA Bundle during credential issuance should be all
+that a specific issuer needs to do in using OCA for Aries. An Aries Framework
+that supports OCA for Aries should handle the rest of the technical
+requirements.</p>
+<h4 id="oca-specification-overlays">OCA Specification Overlays<a class="headerlink" href="#oca-specification-overlays" title="Permanent link">&para;</a></h4>
+<p>All OCA data is based on a <a href="https://oca.colossi.network/v1.1.0-rc.html#capture-base">Capture Base</a>, which defines the data structure
+described in the overlays. For AnonCreds, the Capture Base attributes MUST be
+the list of attributes in the AnonCreds schema for the given credential type.
+The Capture Base also MUST contain:</p>
+<ul>
+<li>the type of each attribute, based on an enumerated list of <a href="https://oca.colossi.network/v1.1.0-rc.html#attribute-type">types defined in
+  the OCA
+  specification</a></li>
+<li>a list of the base attributes that will hold Personally Identifiable
+Information (PII) in an issued credential. An issuer SHOULD use the <a href="https://docs.kantarainitiative.org/Blinding-Identity-Taxonomy-Report-Version-1.0.html">Kantara
+Initiative's Blinding Identity
+Taxonomy</a>
+to identify the attributes to flag as being PII.</li>
+</ul>
+<p>With the Capture Base defined, the following additional overlay types MAY be
+created by the Issuer and SHOULD be expected by holders and verifiers.
+Overlay types flagged "multilingual" may have multiple instances of the overlay,
+one for each issuer-supported language (e.g en for English, fr French, SP
+Spanish, etc.) or country-language (e.g., en-CA for Canadian English, fr-CA for
+Canadian French), as defined in the <a href="https://oca.colossi.network/specification/#language">OCA Specification about
+languages</a>.</p>
+<p>An OCA Bundle that contains overlay types that a holder or verifier does not
+expect MUST be processed, with the unexpected overlays ignored.</p>
+<ul>
+<li>The <strong><a href="https://oca.colossi.network/v1.1.0-rc.html#character-encoding-overlay">Character Encoding Overlay</a></strong> contains the encoding for each attribute
+in the capture base.</li>
+<li>The <strong><a href="https://oca.colossi.network/v1.1.0-rc.html#format-overlay">Format Overlay</a></strong> provides
+the input structure for each data attribute. The format may be useful to the
+holder (or verifier) in displaying the data in a style expected by the user,
+such as knowing that a given field of <code>type</code> binary is an image in <code>image/jpeg</code>
+format.</li>
+<li>The multilingual <strong><a href="https://oca.colossi.network/v1.1.0-rc.html#label-overlay">Label Overlay</a></strong> provides a label to be used for each
+attribute for a given language. The label overlay also includes labels for
+attributes with enumerated values (called categories in the OCA specification).
+For example, a data attribute containing the codes "EN", "FR", "SP" could have a
+category entries that indicate the codes correspond to "English", "French" and
+"Spanish", respectively.</li>
+<li>The multilingual <strong><a href="https://oca.colossi.network/v1.1.0-rc.html#information-overlay">Information Overlay</a></strong> provides a description or help text
+about each attribute for a given language. There will be one overlay per
+issuer-supported language.</li>
+<li>The multilingual <strong><a href="https://oca.colossi.network/v1.1.0-rc.html#meta-overlay">Meta Overlay</a></strong> contains information about the credential
+itself. For Aries, the meta overlay SHOULD include the following additional
+name/value pairs, specific to the OCA for Aries use case:</li>
+<li><code>name</code> - the name of the credential.</li>
+<li><code>description</code> - a description of the credential.</li>
+<li><code>issuer</code> - the name of the issuer of the credential.</li>
+<li><code>issuer_description</code> - a description for the issuer of the credential.</li>
+<li><code>issuer_url</code> - a URL for the issuer of the credential.</li>
+<li><code>credential_help_text</code> - help text about the credential</li>
+<li><code>credential_support_url</code> - a URL for a service providing support in the use of the credential.</li>
+<li>The <strong><a href="https://oca.colossi.network/specification/#unit-overlay">Unit Overlay</a></strong>
+  allows the issuer to declare the units of measurement for the attributes in
+  the overlay.</li>
+<li>The <strong><a href="https://oca.colossi.network/specification/#standard-overlay">Standard Overlay</a></strong> indicates that some or all of the attributes use
+  specific data standards populating the attribute in a credential. This might
+  be used, for example, for defining the standard applied in populating a data
+  attribute with a date or date/time.</li>
+<li>The <strong><a href="https://oca.colossi.network/specification/#entry-code-overlay">Entry Code Overlay</a></strong> contains a list of enumerated values for each
+  data attribute that uses enumerated values. An example might be a list of
+  regional jurisdiction (such as provinces or states) short forms that will be
+  placed in an attribute (e.g., NY, ND, AL, CA, etc.). The attributes in the
+  credential are expected to be populated with one of the enumerated values.</li>
+<li>The <strong><a href="https://oca.colossi.network/specification/#entry-overlay">Entry Overlay</a></strong> contains a language-specific list of the meanings for
+  each enumerated value for each data attribute that uses enumerated values. For
+  our example of short forms of jurisdictions, the "meanings" would be the
+  expanded list per language supported (English, French, Spanish, etc.) of
+  jurisdictions (e.g., New York, North Dakota, Alabama, California, etc.).</li>
+</ul>
+<h4 id="aries-specific-dates-in-the-oca-format-overlay">Aries-Specific Dates in the OCA Format Overlay<a class="headerlink" href="#aries-specific-dates-in-the-oca-format-overlay" title="Permanent link">&para;</a></h4>
+<p>In AnonCreds, zero-knowledge proof (ZKP) predicates (used, for example, to prove
+older than a given age based on date of birth without sharing the actual date of
+birth) must be based on <strong>integers</strong>. In the AnonCreds/Aries community, common
+ways for representing dates and date/times as integers so that they can be used
+in ZKP predicates are the <code>dateint</code> and <code>Unix Time</code> formats, respectively.</p>
+<ul>
+<li>
+<p>"<code>dateint</code>" is a credential attribute that uses the Aries <code>dateint</code>
+specification as described in <a href="../0592-indy-attachments/">Aries RFC
+0592</a>. Briefly, <code>dateint</code> is a date
+(YYYYMMDD) provided in a credential attribute as an integer (for example
+<code>September 29, 2022</code> is the integer <code>20220929</code> or <code>20,220,929</code>). <code>dateint</code> is
+also part of <a href="https://www.iso.org/standard/74527.html">ISO standard 1989 for COBOL Programming
+Interfaces</a>, described <a href="https://www.ibm.com/docs/en/cobol-zos/6.3?topic=sf-format-arguments-return-values-date-time-intrinsic-functions#INFFORM__stand_date">here in an IBM
+document</a>.</p>
+</li>
+<li>
+<p>"<code>Unix Time</code>" is a credential attribute that is a date/time timestamp
+constructed according to the <code>Unix Time</code> <a href="https://en.wikipedia.org/wiki/Unix_time">Unix/POSIX data
+standard</a>. Briefly, <code>Unix Time</code> is a
+date/time represented as the number of seconds since January 1, 1970 UTC.</p>
+</li>
+</ul>
+<p>In an OCA for Aries OCA Bundle, a <code>dateint</code> and <code>Unix Time</code> attributes MUST
+have the following values in the indicated overlays:</p>
+<ul>
+<li><code>dateint</code></li>
+<li>datatype <code>DateTime</code> in the <a href="https://oca.colossi.network/v1.1.0-rc.html#capture-base">Capture Base</a></li>
+<li>standard <code>urn:iso:std:iso:1989</code> in the <a href="https://oca.colossi.network/specification/#standard-overlay">Standard Overlay</a></li>
+<li>character encoding <code>utf-8</code> in the <a href="https://oca.colossi.network/v1.1.0-rc.html#character-encoding-overlay">Character Encoding Overlay</a></li>
+<li>format <code>YYYYMMDD</code> in the <a href="https://oca.colossi.network/v1.1.0-rc.html#format-overlay">Format Overlay</a></li>
+<li>Example: <code>20230114</code> for "January 14, 2023"</li>
+<li><code>Unix Time</code></li>
+<li>datatype <code>DateTime</code> in the <a href="https://oca.colossi.network/v1.1.0-rc.html#capture-base">Capture Base</a></li>
+<li>standard <code>urn:unix:unix-time</code> in the <a href="https://oca.colossi.network/specification/#standard-overlay">Standard Overlay</a></li>
+<li>character encoding <code>utf-8</code> in the <a href="https://oca.colossi.network/v1.1.0-rc.html#character-encoding-overlay">Character Encoding Overlay</a></li>
+<li>format <code>epoch</code> in the <a href="https://oca.colossi.network/v1.1.0-rc.html#format-overlay">Format Overlay</a></li>
+<li>Example: <code>1673715495</code> for "Sat Jan 14 2023 16:58:15 GMT+0000"</li>
+</ul>
+<p>A recipient of an OCA Bundle with the combination of overlay values referenced
+above for <code>dateint</code> and <code>Unix Time</code> SHOULD convert the integer attribute data
+into a date or date/time (respectively) and display the information as
+appropriate for the user. For example, a mobile app should display the data as a
+date or date/time based on the user's language/country setting and timezone,
+possibly combined with an app setting for showing the data in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat">short, medium,
+long or full
+form</a>.</p>
+<h4 id="aries-specific-branding-overlay">Aries Specific "branding" Overlay<a class="headerlink" href="#aries-specific-branding-overlay" title="Permanent link">&para;</a></h4>
+<p>In addition to the core OCA Overlays listed earlier, Aries issuers MAY include
+an additional Aries-specific extension overlay, the <strong>"branding" overlay</strong>, that
+gives the issuer a way to provide a set of data elements about the branding that
+they would like to see applied to a given type of credential. The <code>branding
+overlay</code> is similar to the multilanguage Meta overlay (e.g. ones for English,
+French and Spanish), with a specified set of name/value pairs. Holders (and
+verifiers) use the branding values from the issuer when rendering a credential
+of that type according the <a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style Guide</a>.</p>
+<p>An example of the use of the branding overlay is as follows, along with a
+definition of the name/value pair elements, and a sample image of how the
+elements are to be used. The sample is provide only to convey the concept of the
+branding overlay and how it is to be used. Issuers, holders and verifiers should
+refer to <a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style Guide</a> for details on how the elements are to
+be provided and used in displaying credentials.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    &quot;type&quot;: &quot;aries/overlays/branding/1.0&quot;
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    &quot;digest&quot;: &quot;EBQbQEV6qSEGDzGLj1CqT4e6yzESjPimF-Swmyltw5jU&quot;,
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    &quot;capture_base&quot;: &quot;EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8&quot;,
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    &quot;logo&quot;: &quot;https://raw.githubusercontent.com/hyperledger/aries-rfcs/oca4aries/features/0755-oca-for-aries/best-bc-logo.png&quot;,
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    &quot;background_image&quot;: &quot;https://raw.githubusercontent.com/hyperledger/aries-rfcs/oca4aries/features/best-bc-background-image.png&quot;,
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    &quot;background_image_slice&quot;: &quot;https://raw.githubusercontent.com/hyperledger/aries-rfcs/oca4aries/features/best-bc-background-image-slice.png&quot;,
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    &quot;primary_background_color&quot;: &quot;#003366&quot;,
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    &quot;secondary_background_color&quot;: &quot;#003366&quot;,
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    &quot;secondary_attribute&quot;: &quot;given_names&quot;,
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    &quot;primary_attribute&quot;: &quot;family_name&quot;,
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    &quot;secondary_attribute&quot;: &quot;given_names&quot;,
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    &quot;issued_date_attribute&quot;: &quot;&quot;,
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    &quot;expiry_date_attribute&quot;: &quot;expiry_date_dateint&quot;,
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>}
+</code></pre></div>
+<p><img alt="Sample: Using the Branding Overlay, from the Aries Credential Branding Style
+Guide" src="assets/Sample-use-of-Branding-Overlay.png" /></p>
+<ul>
+<li>OCA Overlay-related items:</li>
+<li><code>type</code> - a the type of the overlay, using the <code>aries</code> namespace.</li>
+<li><code>digest</code> - the self-addressing identifier (SAID) for the overlay. Note that in this example, the SAID is not accurate for the data in the example.</li>
+<li><code>capture_base</code> - the self-addressing identifier (SAID) for the capture base to which this overlay applies.</li>
+<li><code>logo</code> - a URI for a logo to display on the credential in some contexts.
+The URI can be an HTTP URL, a <a href="https://datatracker.ietf.org/doc/html/draft-sporny-hashlink">hashlink</a> or, to support inline images, a data
+URL (e.g.: <code>data:image/png;base64,...</code>) as defined by the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs">Data URL Scheme</a>. The
+logo MUST adhere to the logo properties defined in <a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style Guide</a>.</li>
+<li><code>background_image</code> - a URI for a background image to display with the
+credential in some contexts. The URI could be an HTTP URL, a <a href="https://datatracker.ietf.org/doc/html/draft-sporny-hashlink">hashlink</a> or, to
+support inline images, a data URL (e.g.: <code>data:image/png;base64,...</code>) as defined
+by the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs">Data URL Scheme</a>. The image MUST adhere to the background image
+properties defined in <a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style Guide</a>.</li>
+<li><code>background_image_slice</code> - a URI for a background image slice to display
+with the credential in some contexts. The URI could be a HTTP URL, a <a href="https://datatracker.ietf.org/doc/html/draft-sporny-hashlink">hashlink</a>
+or, to support inline images, a data URL (e.g.: <code>data:image/png;base64,...</code>) as
+defined by the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs">Data URL Scheme</a>. The image MUST adhere to the background image slice
+properties defined in <a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style Guide</a>.</li>
+<li><code>primary_background_color</code> - hex color code for the primary background color of the
+  credential to be used in some contexts.</li>
+<li><code>secondary_background_color</code> - hex color code for the secondary background color of the
+  credential to be used in some contexts.</li>
+<li><code>primary_attribute</code> - the name of a capture base attribute to be displayed on
+  the credential in some contexts.</li>
+<li><code>secondary_attribute</code> - the name of a capture base attribute to be displayed on
+  the credential in some contexts.</li>
+<li><code>issued_date_attribute</code> - the name of a capture base attribute that is the date
+  of issuance of the credential. If there is no such attribute, leave blank.</li>
+<li><code>expiry_date_attribute</code> - the name of a capture base attribute that is the
+  expiry date of the credential. If there is no such attribute, leave blank.</li>
+</ul>
+<p>It is deliberate that the credential branding defined in this RFC does <strong>not</strong>
+attempt to achieve pixel-perfect on screen rendering of the equivalent paper
+credential. There are two reasons for this:</p>
+<ul>
+<li>First, studies have shown that issuers do not want people to think that the
+digital credentials they have in their mobile wallet can be used as literal
+replacements for paper during person-to-person (non-digital) verifications by
+the holder showing their mobile device screen to the verifier. By showing
+verifiers their screen, the holder may be oversharing their personal data. As
+well, digital credentials are even easier to forge than paper credentials when
+they are to be verified by a human, and we want to discourage using digital
+credentials in that way.</li>
+<li>Second, having each issuer provide pixel-perfect layout guidance to Aries agents
+that supports a responsive user interface on a wide range of devices (laptops,
+tablets and thousands of mobile phones) is extraordinarily complex. Further, a
+wallet wanting to provide a consistent, helpful user experience will be severely
+hampered by displaying credentials with many (perhaps hundreds) of completely
+different credential layouts and styles.</li>
+</ul>
+<p>Instead, the guidance in this RFC and the <a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style Guide</a>
+gives the issuer a few ways to brand their credentials, and holder/verifier apps
+information on how to use those issuer-provided elements in a manner consistent
+for all issuers and all credentials.</p>
+<h4 id="oca-issuer-tools">OCA Issuer Tools<a class="headerlink" href="#oca-issuer-tools" title="Permanent link">&para;</a></h4>
+<p>An Aries OCA Bundle can be managed as pure JSON as found in this <a href="sample_oca_for_aries_oca_bundle.json">sample OCA for
+Aries OCA Bundle</a>. However, managing such multilingual content in JSON is not
+easy, particularly if the language translations come from team members not
+comfortable with working in JSON. An easier way to manage the data is to use an
+OCA source spreadsheet for most of the data, some in a source JSON file, and to
+use a converter to create the OCA Bundle JSON from the two sources. We recommend
+that an issuer maintain the spreadsheet file and source JSON in version control
+and use a pipeline action to generate the OCA Bundle when the source files are
+updated.</p>
+<p>The OCA Source Spreadsheet, an <a href="OCA4Aries.xlsx">example of which is attached to this
+RFC</a>, contains the following:</p>
+<ul>
+<li>An introductory tab about the OCA content in the spreadsheet.</li>
+<li>A tab with instructions on using the spreadsheet.</li>
+<li>A "Main" tab with the "Capture Base" data, along with data for other, non-multilingual overlays.</li>
+<li>A language or country-language code tab per country-language to be supported by the issuer
+  containing the source data for all multilingual overlays.</li>
+</ul>
+<p>The JSON Source file contains the <a href="#aries-specific-branding-overlay">Aries-specific Branding
+Overlay</a>. Attached to this RFC is an <a href="branding.json">example
+Branding Overlay JSON file</a> that issuers can use to start.</p>
+<p>The following is how to create an OCA Source spreadsheet and from that, generate
+an OCA Bundle. Over time, we expect that this part of the RFC will be clarified
+as the tooling evolves.</p>
+<ul>
+<li>Creating/Maintaining the Excel File</li>
+<li>Make a copy of the latest <a href="https://github.com/THCLab/oca-ecosystem/raw/main/examples/template.xlsx">OCA Template</a> from the [Human Colossus Foundation].</li>
+<li>Fill in the "Main" tab with the attributes from the schema, completing the
+    relevant columns for each attribute. Current columns to complete:<ul>
+<li>CB-CL: Classification</li>
+<li>CB-AN: Attribute Name</li>
+<li>CB-AT: Attribute Type</li>
+<li>CB-FA: Flagged Attribute</li>
+<li>OL-CH: Character Encoding</li>
+<li>OL-FT: Format</li>
+<li>OL-ST: Standard</li>
+<li>OL-EC: Entry Codes</li>
+<li>OL-UT: Unit</li>
+</ul>
+</li>
+<li>As needed, populate the columns for "dateint" and "Unix Time" attributes as indicated in the <a href="#aries-specific-dates-in-the-oca-format-overlay">Aries Specific Dates in the OCA Formats Overlay</a> section of this document.</li>
+<li>Rename the sample language tab (<code>en</code>) to one of the language or language-country that as an issuer, you want to support.</li>
+<li>Fill in the data in columns other than C (which is automatically populated from the <code>Main</code> tab) for the first language as appropriate.</li>
+<li>Populate column A and B as follows:<ul>
+<li>In column A (<code>OL-MN: Meta [Attribute Name]</code>), add the values:</li>
+<li>"name"</li>
+<li>"description"</li>
+<li>"issuer"</li>
+<li>"issuer_description"</li>
+<li>"issuer_url"</li>
+<li>"credential_help_text"</li>
+<li>"credential_support_url"</li>
+<li>"watermark"<ul>
+<li>The "watermark" is used to mark non-production credentials, as described in the <a href="../0756-oca-for-aries-style-guide#non-production-watermark">"non-production watermark" section of RFC0756 OCA for Aries Style Guide</a></li>
+</ul>
+</li>
+<li>Complete column B (<code>OL-MV: Meta [Attribute Value]</code>) as appropriate for each column A name (listed above).</li>
+</ul>
+</li>
+<li>Duplicate and rename the initial language tab for each language or language-country that as an issuer, you want to support.</li>
+<li>Update each additional language tab.</li>
+<li>Creating/Maintaining the Branding JSON file</li>
+<li>Make a copy of the attached example <a href="branding.json">branding JSON file</a>, and update the values for the credential you are issuing.</li>
+<li>Generating the OCA Bundle from the OCA for Aries Source files:</li>
+<li>Use the open source <a href="https://github.com/THCLab/oca-rust">OCA Parser from the Human Colossus Foundation</a> to convert the
+    spreadsheet to JSON. The current command to use is <code>parser parse oca --path &lt;OCA Excel File&gt; &gt; &lt;output Excel JSON OCA Bundle&gt;</code></li>
+<li>Use the open source <a href="https://stedolan.github.io/jq/">jq utility</a> to add the <code>branding.json</code> file to the JSON Excel output to produce the OCA Bundle with the following command, replacing the file names in the command with the ones for your use:<ul>
+<li><code>jq ".[].overlays += $(cat BRANDING-JSON-FILE)" OCA-EXCEL-FILE &gt; OCA-BUNDLE-JSON-FILE</code></li>
+<li>From a command line in this folder, the following command can be run to generate the OCA Bundle JSON to standard output:</li>
+<li><code>jq ".[].overlays += $(cat branding.json)" OCA4AriesExcel.json</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>NOTE: The <code>capture_base</code> and <code>digest</code> fields in the branding overlay of the resulting OCA Bundle JSON file will <strong>not</strong> be updated to be proper self-addressing identifiers (SAIDs) as required by the <a href="https://oca.colossi.network/specification/">OCA Specification</a>. We are looking into how to automate the updating of those data elements.</p>
+</blockquote>
+<p>Scripting the generation process should be relatively simple, and our expectation is that
+the community will evolve the [Parser from the Human Colossus Foundation] to
+simplify the process further.</p>
+<p>Over time, we expect to see other tooling become available--notably, a tool for
+issuers to see what credentials will look like when their OCA Bundle is applied.</p>
+<h4 id="issuing-a-credential">Issuing A Credential<a class="headerlink" href="#issuing-a-credential" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>This section of the specification remains under consideration. The use of the
+<code>credential supplement</code> as currently described here is somewhat problematic
+for a number of reasons.</p>
+<ul>
+<li>The issuer has no way to update the OCA Bundle for a given holder after
+  issueance. We see this as a likely use case to enable, for example, an
+  issuer supporting additional languages over time.</li>
+<li>The "External Attachments" risk, as described in <a href="#warning-external-attachments">this section of this
+  RFC</a>.</li>
+<li>The complicated way for a verifier to get an OCA Bundle when needed after a
+  presentation.</li>
+</ul>
+<p>We are currently investigating if an OCA Bundle can be published to the same
+VDR as holds an AnonCreds Schema or Credential Definition. We think that would
+overcome each of those concerns and make it easier to both publish and
+retrieve OCA Bundles.</p>
+</blockquote>
+<p>The currently preferred mechanism for an issuer to provide an OCA Bundle to a
+holder is when issuing a credential using
+<a href="../0453-issue-credential-v2/">RFC0453 Issue Credential</a>, version 2.2 or later, the issuer
+provides, in the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2/README.md#offer-credential">credential offer
+message</a>,
+an OCA Bundle as a <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2/README.md#supplements">credential
+supplement</a>.</p>
+<ul>
+<li>The supplement type MUST be <code>oca-bundle</code>.</li>
+<li>The OCA Bundle MUST be in the JSON form of an OCA Bundle, not the ZIP format.</li>
+<li>The attachment MUST be
+<a href="../../concepts/0017-attachments/#signing-attachments">signed</a> by the
+issuer, and may be of <a href="../../concepts/0017-attachments/#base64url">type
+<code>base64url</code></a>, meaning the
+OCA Bundle is embedded in the message, or of <a href="../../concepts/0017-attachments/#links">type
+<code>link</code></a>.</li>
+</ul>
+<p>The reason OCA Bundle attachment must be signed by the issuer so that if the holder
+passes the OCA Bundle on to the verifier, the verifier can be certain that the
+issuer provided the OCA Bundle, and that it was not created by a malicious holder.</p>
+<p>Issuers should be aware that to ensure that the signature on a linked OCA Bundle
+(using the attachment <a href="../../concepts/0017-attachments/#links">type <code>link</code></a>)
+remains verifiable, the content resolved by the link must not change over time.
+For example, an Issuer might publish their OCA Bundles in a public GitHub
+repository, and send a link to the OCA Bundle during issuance. In that case the
+Issuer is advised to send a commit-based GitHub URL, rather than a branch-based
+reference. The Issuer may update the OCA Bundle sent to different holders over
+time, but once issued, each OCA Bundle MUST remain accessible.</p>
+<h4 id="warning-external-attachments">Warning: External Attachments<a class="headerlink" href="#warning-external-attachments" title="Permanent link">&para;</a></h4>
+<p>The use of an attachment of type <code>link</code> for the OCA Bundle itself, or the use of
+external references to the images in the
+<a href="#aries-specific-branding-overlay">branding Overlay</a> could provide malicious issuers with
+a mechanism for tracking the use of a holder's verifiable credential.
+Specifically, the issuer could:</p>
+<ul>
+<li>Make any or all of the OCA bundle external references a unique identifier for
+  the holder.</li>
+<li>When the holder retrieves the OCA bundle, the issuer does not learn anything
+  useful as they already know they have issued a credential to that holder.</li>
+<li>If the holder passes the OCA bundle to verifiers and the verifiers resolve the
+  external references, the malicious issuer would learn that the holder has used
+  their verifiable credential in a presentation, and perhaps, with what verifier.</li>
+</ul>
+<p>A holder MAY choose not to attach an OCA Bundle to a verifier if it contains any
+external references. Non-malicious issuers are encouraged to <strong>not</strong> use
+external references in their OCA Bundles and as such, to minimize the inlined
+images in the branding overlay.</p>
+<h3 id="holder-activities">Holder Activities<a class="headerlink" href="#holder-activities" title="Permanent link">&para;</a></h3>
+<p>Before processing a credential and an associated OCA Bundle, the holder SHOULD
+determine if the issuer is known in an ecosystem and has a sufficiently positive
+reputation. For example, the holder might determine if the issuer is in a suitable <a href="https://wiki.trustoverip.org/display/HOME/ToIP+Trust+Registry+Protocol+Specification">Trust Registry</a>
+or request a presentation from the issuer about their identity.</p>
+<p>On receipt of a credential with an OCA Bundle supplement, the holder SHOULD
+retrieve the OCA Bundle attachment, verify the signature is from the issuer's
+public DID, verify the signature, and verify that the [OCA Capture Base] is for
+the credential being offered or issued to the holder. If verified, the holder
+should associate the OCA Bundle with the credential, including the signature.</p>
+<p>The holder SHOULD take appropriate security precautions in handling the
+remainder of the OCA data, especially the images as they could contain a
+malicious payload. The security risk is comparable to a browser receiving a web
+page containing images.</p>
+<p>Holder software should be implemented to use the OCA Bundle when processing
+and displaying the credential as noted in the list below. Developers of holder
+software should be familiar with the overlays the issuer is likely to provide
+(see list <a href="#oca-specification-overlays">here</a>) and how to use them according to
+<a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style Guide</a>.</p>
+<ul>
+<li>Check the country and language settings of the current user and use the
+appropriate multilingual overlays to respect those settings in displaying
+credential metadata and attributes (labels, etc.).</li>
+<li>Consider adding multilingual informational popups in your app using the per
+  attribute data in the "information" overlay.</li>
+<li>Consider using the PII flag in the Capture Base to provide guidance to the
+  user about the sharing of PII.</li>
+<li>Use the branding overlay and <a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style Guide</a> in
+  displaying the credential in various contexts (e.g., in a credential offer
+  prompt, in a list, selected from a list, alone on a page, etc.).</li>
+<li>Process the attribute data using the <code>type</code>, <code>character encoding</code>, <code>format</code>,
+  <code>unit</code> and <code>standard</code> overlays and display tha attributes appropriately for a
+  given user. For example, display dates in a form suitable for the language and
+  country settings of the user.</li>
+<li>Where enumerated names are used for credential attributes, retrieve and use
+  the name-value pairs in the <a href="https://oca.colossi.network/specification/#entry-code-overlay">Entry Code Overlay</a> and <a href="https://oca.colossi.network/specification/#entry-overlay">Entry Overlay</a> to display the data.</li>
+<li>Use the OCA-provide metadata about the credential, such as the
+  name/description of the issuer, name/description of the credential type.</li>
+</ul>
+<p>A recommended tactic when adding OCA support to a holder is when a credential is
+issued without an associated OCA Bundle, generate an OCA Bundle for the
+credential using the information available about the type of the credential,
+default images, and randomly generated colors. That allows for the creation of
+screens that assume an OCA Bundle is available. The <a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style
+Guide</a> contains guidelines for doing that.</p>
+<h4 id="adding-oca-bundles-to-present-proof-messages">Adding OCA Bundles to Present Proof Messages<a class="headerlink" href="#adding-oca-bundles-to-present-proof-messages" title="Permanent link">&para;</a></h4>
+<p>Once a holder has an OCA Bundle that was issued with the credential, it MAY pass
+the OCA Bundle to a verifier when a presenting a proof that includes claims from
+that credential. This can be done via the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0454-present-proof-v2#22---addition-of-supplements">present proof credential supplements</a>
+approach, similar to what used when the credential was issued to the holder.
+When constructing the <code>present_proof</code> message to hold a proof, the holder would
+iterate through the credentials in the proof, and if there is an issuer-supplied
+OCA Bundle for the credentials, add the OCA Bundle as a supplement to the
+message. The signature from the Issuer MUST be included with the supplement.</p>
+<p>A holder SHOULD NOT send an OCA Bundle to a verifier if the OCA Bundle is a
+link, or if any of the data items in the OCA Bundle are links, as noted in the
+in the <a href="#warning-external-attachments">warning about external attachments in OCA
+Bundles</a>.</p>
+<h3 id="verifier-activities">Verifier Activities<a class="headerlink" href="#verifier-activities" title="Permanent link">&para;</a></h3>
+<p>On receipt of a presentation with OCA Bundle supplements, the verifier SHOULD
+retrieve the OCA Bundle attachments, verify the signatures are from the
+credential issuers' public DIDs, verify the signatures, and verify that the [OCA
+Capture Base] is for the credentials being presented to the verifier. If
+verified, the verifier should associate the OCA Bundle with the source
+credential from the presentation.</p>
+<p>On receipt of a presentation with OCA Bundle supplements, the verifier MAY
+process the OCA Bundle attachment and verify the issuer's signature. If it
+verifies, the verifier should associate the OCA Bundle with the source
+credential from the presentation. The verifier SHOULD take appropriate security
+precautions in handling the data, especially the images. The holder software
+should be implemented to use the OCA Bundle when processing and displaying the
+credential as noted in the list below.</p>
+<p>Developers of verifier software should be familiar with the overlays the issuer
+is likely to provide (see list <a href="#oca-specification-overlays">here</a>) and how to
+use them according to <a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style Guide</a>. The list of <a href="#holder-activities">how to
+use the OCA Bundle as a holder</a> applies equally to
+verifiers.</p>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The <a href="https://oca.colossi.network/specification/">OCA Specification</a></li>
+<li><a href="../0756-oca-for-aries-style-guide/">RFC0756 OCA for Aries Style Guide</a></li>
+</ul>
+<h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The use of credential supplements might not be the best way to publish OCA
+  Bundles. The Aries community is currently investigating if OCA Bundles can be
+  published to the Verifiable Data Registry upon which the schema and credential
+  definition are published.</li>
+<li>As noted in this <a href="#warning-external-attachments">warning</a>, the use of links
+  either for OCA Bundles or for the images that are embedded in OCA Bundles are
+  both extremely useful and problematic. It would be nice to be able to allow
+  links for/in the OCA Bundles without the potential of being used to track the
+  holder.</li>
+<li>If the OCA Bundle is passed to the holder as a link, the issuer must continue
+  to make that content available for as long as the holder might retain the
+  credential. Putting the OCA Bundle on a verifiable data registry (such as a
+  ledger/blockchain) might be a good way to publish such data.</li>
+<li>The processing of an OCA Bundle, and particularly the processing of images in
+  the branding overlay, provide an attack vector for malicious issuers.
+  Developers of holder software SHOULD take precautions in handling and
+  displaying the data.</li>
+</ul>
+<h2 id="rationale-and-alternatives">Rationale and alternatives<a class="headerlink" href="#rationale-and-alternatives" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The OCA architecture seems well suited to the Aries verifiable credential
+use case, supporting the important capabilities of data formats, accessibility
+support, multilingual support and the desire for issuers to brand their
+credentials.</li>
+<li>The use of JSON-LD could provide some of the required capabilities covered by
+OCA (such as multilingual labels), but that solution requires adding
+considerable overhead and far more complicated processing to achieve a minimum
+of the capabilities available through OCA.</li>
+<li>The current situation of having almost no metadata about credentials is
+extremely limiting.</li>
+<li>Extracting best available metadata from the Schema and Credential Definition
+    objects, converting developer attribute/credential names of human friendly
+    (e.g. "given_name" to Given Name, or "ssn" to "Ssn") and using that for the
+    display of a credential.</li>
+<li>The random generation of a background color for a given credential for use
+  when displaying a credential.</li>
+<li>There are other flows that could be used to get an OCA Bundle to holders and
+verifiers.</li>
+<li>A publisher of a schema might also publish an OCA Bundle based on the
+schema, for anyone to use.</li>
+<li>An Aries agent vendor (such as the creator of an Aries mobile wallet) might
+create a repository of OCA Bundles of common credential types for deployments of
+their agent.</li>
+<li>When using such alternatives, agents retrieving an OCA Bundle should have a
+way to verify the source of the OCA Bundle, such as having a cryptographic
+signature over the OCA Bundle from the designated publisher.</li>
+</ul>
+<h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
+<p>None, as far as we are aware.</p>
+<h2 id="unresolved-questions">Unresolved questions<a class="headerlink" href="#unresolved-questions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Are there better ways for issuers to publish OCA Bundles for consumption by
+  holders/verifiers?</li>
+<li>How do we balance the prevention of possible tracking by issuers, and the use
+  of links to OCA Bundles or assets within OCA Bundles.</li>
+</ul>
+<h2 id="implementations">Implementations<a class="headerlink" href="#implementations" title="Permanent link">&para;</a></h2>
+<p>The following lists the implementations (if any) of this RFC. Please do a pull
+request to add your implementation. If the implementation is open source,
+include a link to the repo or to the implementation within the repo. Please be
+consistent in the "Name" field so that a mechanical processing of the RFCs can
+generate a list of all RFCs supported by an Aries implementation.</p>
+<p><em>Implementation Notes</em> <a href="../../#accepted">may need to include a link to test results</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Name / Link</th>
+<th>Implementation Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../0734-push-notifications-fcm/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 0734 Push Notifications fcm Protocol 1.0">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                0734 Push Notifications fcm Protocol 1.0
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../0756-oca-for-aries-style-guide/" class="md-footer__link md-footer__link--next" aria-label="Next: 0756 OCA for Aries Style Guide">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                0756 OCA for Aries Style Guide
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.expand", "navigation.footer", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+    
+  </body>
+</html>

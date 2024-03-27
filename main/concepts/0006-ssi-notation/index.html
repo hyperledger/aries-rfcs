@@ -1,0 +1,5248 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../0004-agents/">
+      
+      
+        <link rel="next" href="../../features/0015-acks/">
+      
+      
+      <link rel="icon" href="https://raw.githubusercontent.com/hyperledger/aries-cloudagent-python/main/docs/assets/aries-favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.10">
+    
+    
+      
+        <title>0006 SSI Notation - Hyperledger Aries Interoperability Profiles / RFCs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aries-rfc-0006-ssi-notation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Hyperledger Aries Interoperability Profiles / RFCs" class="md-header__button md-logo" aria-label="Hyperledger Aries Interoperability Profiles / RFCs" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/Hyperledger_Aries_Logo_White.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hyperledger Aries Interoperability Profiles / RFCs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              0006 SSI Notation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hyperledger/aries-rfcs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hyperledger/aries-rfcs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Welcome
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../MAINTAINERS/" class="md-tabs__link">
+          
+  
+  Governance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aip2/0003-protocols/" class="md-tabs__link">
+          
+  
+  AIP 2.0
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../0003-protocols/" class="md-tabs__link">
+          
+  
+  ADOPTED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../0004-agents/" class="md-tabs__link">
+          
+  
+  ACCEPTED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../0029-message-trust-contexts/" class="md-tabs__link">
+          
+  
+  DEMONSTRATED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../0799-long-term-support/" class="md-tabs__link">
+          
+  
+  PROPOSED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../0013-overlays/" class="md-tabs__link">
+          
+  
+  RETIRED
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Hyperledger Aries Interoperability Profiles / RFCs" class="md-nav__button md-logo" aria-label="Hyperledger Aries Interoperability Profiles / RFCs" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/Hyperledger_Aries_Logo_White.png" alt="logo">
+
+    </a>
+    Hyperledger Aries Interoperability Profiles / RFCs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hyperledger/aries-rfcs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hyperledger/aries-rfcs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Welcome
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../RFCindex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    All RFCs by Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0000-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RFC Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0000-template-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol RFC Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MAINTAINERS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Maintainers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../github-issues/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Submitting Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LICENSE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SECURITY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AIP 2.0
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            AIP 2.0
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0003-protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0003 Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0004-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0004 Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0005-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0005 DID Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0008-message-id-and-threading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0008 Message ID and Threading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0011-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0011 Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0015-acks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0015 ACKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0017-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0017 Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0019-encryption-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0019 Encryption Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0020-message-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0020 Message Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0023-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0023 DID Exchange Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0025-didcomm-transports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0025 DIDComm Transports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0035-report-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0035 Report Problem Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0044-didcomm-file-and-mime-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0044 DIDComm File and MIME Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0046-mediators-and-relays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0046 Mediators and Relays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0047-json-ld-compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0047 JSON-LD Compatibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0048-trust-ping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0048 Trust Ping Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0050-wallets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0050 Wallets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0092-transport-return-route/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0092 Transports Return Route
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0094-cross-domain-messaging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0094 Cross-Domain Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0095-basic-message/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0095 Basic Message Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0183-revocation-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0183 Revocation Notification 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0211-route-coordination/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0211 Mediator Coordination Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0360-use-did-key/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0360 did:key Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0434-outofband/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0434 Out-of-Band Protocol 1.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0441-present-proof-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0441 Prover and Verifier Best Practices for Proof Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0453-issue-credential-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0453 Issue Credential Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0454-present-proof-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0454 Present Proof Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0510-dif-pres-exch-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0510 Presentation-Exchange Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0519-goal-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0519 Goal Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0557-discover-features-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0557 Discover Features Protocol v2.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0592-indy-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0592 Indy Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0593-json-ld-cred-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aries RFC 0593 JSON-LD Credential Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ADOPTED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ADOPTED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0003-protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0003 Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0005-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0005 DID Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0008-message-id-and-threading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0008 Message ID and Threading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0011-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0011 Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0019-encryption-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0019 Encryption Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0020-message-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0020 Message Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0021-didcomm-message-anatomy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0021 DIDComm Message Anatomy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0023-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0023 DID Exchange v1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0025-didcomm-transports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0025 DIDComm Transports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0031-discover-features/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0031 Discover Features Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0036-issue-credential/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0036 Issue Credential Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0037-present-proof/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0037 Present Proof Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0048-trust-ping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0048 Trust Ping Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0095-basic-message/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0095 Basic Message Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0160-connection-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0160 Connection Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0302-aries-interop-profile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0302 Aries Interop Profile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0434-outofband/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0434 Out-of-Band Protocol 1.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0453-issue-credential-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0453 Issue Credential Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0454-present-proof-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0454 Present Proof Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0510-dif-pres-exch-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0510 Presentation-Exchange Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0592-indy-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0592 Indy Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0593-json-ld-cred-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0593 JSON-LD Credential Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    ACCEPTED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ACCEPTED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0004-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0004 Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    0006 SSI Notation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    0006 SSI Notation
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tutorial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-domain-relationships" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Domain Relationships
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intra-domain-relationships" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intra-Domain Relationships
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constituents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constituents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#did-docs-and-did-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      DID Docs and DID References
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#counting-and-iteration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Counting and Iteration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Messages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      Encryption
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-punctuation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other punctuation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reserved-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reserved Tokens
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abnf" class="md-nav__link">
+    <span class="md-ellipsis">
+      ABNF
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drawbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drawbacks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rationale-and-alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale and alternatives
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prior-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prior art
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unresolved-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unresolved questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0015-acks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0015 ACKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0017-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0017 Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0035-report-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0035 Report Problem Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0044-didcomm-file-and-mime-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0044 DIDComm File and MIME Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0046-mediators-and-relays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0046 Mediators and Relays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0047-json-ld-compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0047 JSON-LD Compatibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0049-repudiation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0049 Repudiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0050-wallets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0050 Wallets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0092-transport-return-route/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0092 Transports Return Route
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0094-cross-domain-messaging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0094 Cross-Domain Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0211-route-coordination/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0211 Mediator Coordination Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0360-use-did-key/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0360 did:key Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0441-present-proof-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0441 Prover and Verifier Best Practices for Proof Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0496 Transition to the Out of Band and DID Exchange Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0519-goal-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0519 Goal Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0557-discover-features-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0557 Discover Features Protocol v2.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0587-encryption-envelope-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0587 Encryption Envelope v2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0646-bbs-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0793-unqualfied-dids-transition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0793 Unqualified DID Transition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    DEMONSTRATED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            DEMONSTRATED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0029-message-trust-contexts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0029 Message Trust Contexts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0032-message-timing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0032 Message Timing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0042-lox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0042 LOX -- A more secure pluggable framework for protecting wallet keys
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0043-l10n/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0043 l10n (Locali[s|z]ation)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0051-dkms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0051 Decentralized Key Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0113-question-answer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0113 Question Answer Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0509-action-menu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0509 Action Menu Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0748-n-wise-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0748 N-wise DID Exchange Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PROPOSED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            PROPOSED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Long Term Support
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0024-didcomm-over-xmpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0024 DIDComm over XMPP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0028-introduce/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0028 Introduce Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0030-sync-connection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0030 Sync Connection Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0034-message-tracing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0034 Message Tracing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0056-service-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0056 Service Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0066-non-repudiable-cryptographic-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0066 Non-Repudiable Signature for Cryptographic Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0067-didcomm-diddoc-conventions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0067 DIDComm DID document conventions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0074-didcomm-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0074 DIDComm Best Practices
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0075-payment-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0075 Payment Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0103-indirect-identity-control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0103 Indirect Identity Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0104-chained-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0104 Chained Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0114-predefined-identities/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0114 Predefined Identities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0116-evidence-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0116 Evidence Exchange Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0124-did-resolution-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0124 DID Resolution Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0167-data-consent-lifecycle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0167 Data Consent Lifecycle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0183-revocation-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0183 Revocation Notification 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0193-coin-flip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0193 Coin Flip Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0207-credential-fraud-threat-model/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0207 Credential Fraud Threat Model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0212 Pickup Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0212-pickup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0212 Pickup Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0213-transfer-policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0213 Transfer Policy Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0214-help-me-discover/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0214 "Help Me Discover" Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0217-linkable-message-paths/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0217 Linkable Message Paths
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0231-biometric-service-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0231 Biometric Service Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0249-rich-schema-contexts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0249 Aries Rich Schema Contexts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0257-private-credential-issuance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0257 Private Credential Issuance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0268-unified-didcomm-agent-deeplinking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0268 Unified DIDCOMM Deeplinking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0270-interop-test-suite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0270 Interop Test Suite
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0281-rich-schemas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0281 Aries Rich Schemas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0289-toip-stack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0289 The Trust Over IP Stack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0309-didauthz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0309 DIDAuthZ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0327-crypto-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0327 Crypto service Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0334-jwe-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0334 JWE envelope 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0335-http-over-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0335 HTTP Over DIDComm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0345-community-coordinated-update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0345 Community Coordinated Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0346-didcomm-between-two-mobile-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0346 DIDComm Between Two Mobile Agents Using Cloud Agent Mediator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0347-proof-negotiation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0347 Proof Negotiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0351-purpose-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0351 Purpose Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0418-rich-schema-encoding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0418 Aries Rich Schema Encoding Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0420-rich-schemas-common/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0420 Rich Schema Objects Common
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0428-prepare-issue-rich-credential/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0428 Prerequisites to Issue Rich Credential
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0429-prepare-req-rich-pres/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0429 Prerequisites to Request Rich Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0430-machine-readable-governance-frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0430 Machine-Readable Governance Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0440-kms-architectures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0440 KMS Architectures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0445-rich-schema-mapping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0445 Aries Rich Schema Mapping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0446-rich-schema-cred-def/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0446 Aries Rich Schema Credential Definition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0478-coprotocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0478 Coprotocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0482-coprotocol-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0482 Coprotocol Protocol 0.5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0511-dif-cred-manifest-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0511 Credential-Manifest Attachment format for requesting and presenting credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0559-pppu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0559 Privacy-Preserving Proof of Uniqueness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0566-issuer-hosted-custodidal-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0566 Issuer-Hosted Custodial Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0641-linking-binary-objects-to-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0641 Linking binary objects to credentials using hash based references
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0693-credential-representation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0693 Cross-Platform Credential Representation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0699-push-notifications-apns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0699 Push Notifications apns Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0700-oob-through-redirect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0700 Out-of-Band through redirect
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0721-revocation-notification-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0721 Revocation Notification 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0728-device-binding-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0728 Device Binding Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0734-push-notifications-fcm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0734 Push Notifications fcm Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0755-oca-for-aries/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0755 Overlays Capture Architecture (OCA) For Aries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0756-oca-for-aries-style-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0756 OCA for Aries Style Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0757-push-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0757 Push Notification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0771-anoncreds-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0780-data-urls-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0780 Use Data URLs for Images and More in Credential Attributes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0794-did-rotate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0794 DID Rotate 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0804-didcomm-rpc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0804 DIDComm Remote Procedure Call (DRPC)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0809-w3c-data-integrity-credential-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0809 W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RETIRED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            RETIRED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0013-overlays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0013 Overlays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0234-signature-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0234 Signature Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0250-rich-schemas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0250 Rich Schema Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0303-v01-credential-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0303 V0.1 Credential Exchange (Deprecated)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0317-please-ack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0317 Please ACK Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0348-transition-msg-type-to-https/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0348 Transition Message Type to HTTPs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0627-static-peer-dids/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0627 Static Peer DIDs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tutorial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-domain-relationships" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Domain Relationships
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intra-domain-relationships" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intra-Domain Relationships
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constituents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constituents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#did-docs-and-did-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      DID Docs and DID References
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#counting-and-iteration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Counting and Iteration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Messages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      Encryption
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-punctuation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other punctuation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reserved-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reserved Tokens
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abnf" class="md-nav__link">
+    <span class="md-ellipsis">
+      ABNF
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drawbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drawbacks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rationale-and-alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale and alternatives
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prior-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prior art
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unresolved-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unresolved questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="aries-rfc-0006-ssi-notation">Aries RFC 0006: SSI Notation<a class="headerlink" href="#aries-rfc-0006-ssi-notation" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Authors: Daniel Hardman</li>
+<li>Status: <a href="../../#accepted">ACCEPTED</a></li>
+<li>Since: 2018-09-01</li>
+<li>Status Note: broadly accepted but not heavily used; may need greater usage before it's ready for <a href="../../#rfc-lifecycle">ADOPTED</a> status.</li>
+<li>Start Date: 2018-05-03</li>
+<li>Tags: <a href="../../tags/#concept">concept</a></li>
+</ul>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>This RFC describes a simple, standard notation for various concepts related to decentralized and self-sovereign identity (SSI).</p>
+<p>The notation could be used in design docs, other RFCs, source code comments, chat channels, scripts, debug logs, and miscellaneous technical materials throughout the Aries ecosystem. We hope it is also used in the larger SSI community.</p>
+<p>This RFC is complementary to official terms like the ones curated in the <a href="https://trustoverip.org/working-groups/concepts-and-terminology/">TOIP Concepts and Terminology Working group</a>, the <a href="https://sovrin.org/library/glossary/">Sovrin Glossary</a>, and so forth.</p>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
+<p>All technical materials in our ecosystem hinge on fundamental concepts of self-sovereign identity such as controllers, keys, <a href="https://www.w3.org/TR/did-core/">DIDs</a>, and <a href="../0004-agents/">agents</a>. We need a standard, documented notation to refer to such things, so we can use it consistently, and so we can link to the notation's spec for definitive usage.</p>
+<h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
+<p>The following explanation is meant to be read sequentially and should provide a friendly overview for most who encounter the RFC. See the <a href="#reference">Reference section</a> for quick lookup.</p>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+<p>This notation aims to be:</p>
+<ul>
+<li>Precise</li>
+<li>Consistent</li>
+<li>Terse</li>
+<li>Easy to learn, understand, guess, and remember</li>
+<li>Representable in 7-bit ASCII plain text</li>
+</ul>
+<p>The final requirement deserves special comment. Cryptologists are a major stakeholder in SSI theory. They already have many notational conventions, some more standardized than others. Generally, their notation derives from advanced math and uses specialized symbols and fonts. These experts also tend to intersect strongly with academic circles, where LaTeX and similar rendering technologies are common.</p>
+<p>Despite the intersection between SSI, cryptology, and academia, SSI has to serve a broader audience. Its practicioners are not just mathematicians; they may include support and IT staff, lawyers specializing in intellectual property, business people, auditors, regulators, and individuals sometimes called "end users." In particular, SSI ecosystems are built and maintained by coders. Coders regularly write docs in markdown and html. They interact with one another on chat. They write emails and source code where comments might need to be embedded. They create UML diagrams. They type in shells. They paste code into slide decks and word processors. All of these behaviors militate against a notation that requires complex markup.</p>
+<p>Instead, we want something simple, clean, and universally supported. Hence the 7-bit ASCII requirement. A future version of this RFC, or an addendum to it, might explain how to map this 7-bit ASCII notation to various schemes that use mathematical symbols and are familiar to experts from other fields.</p>
+<h3 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h3>
+<h4 id="controllers-and-subjects">Controllers and Subjects<a class="headerlink" href="#controllers-and-subjects" title="Permanent link">&para;</a></h4>
+<p>An identified thing (the referent of an identifier) is called an <strong>identity subject</strong>. Identity subjects can include:</p>
+<ul>
+<li>passive things (pets, digital documents, symphonies, rivers, asteroids, strains of bacteria...)</li>
+<li>active things (people, institutions, IoT devices)</li>
+</ul>
+<p>The latter category may also act as an <strong>identity controller</strong> -- something that projects its intent with respect to identity onto the digital landscape.</p>
+<p>When an identity controller controls its own identity, we say that it has <strong>self sovereignty</strong> -- and we call it a <strong>self</strong>. (The term <strong>identity owner</strong> was originally used for an identity controller managing itself, but this hid some of the nuance and introduced <a href="https://medium.com/@hackylawyER/do-we-really-want-to-sell-ourselves-the-risks-of-a-property-law-paradigm-for-data-ownership-b217e42edffa">legal concepts of ownership that are problematic</a>, so we'll avoid it here.)</p>
+<p>In our notation, selves (or identity controllers) are denoted with a single <em>upper-case</em> ASCII alpha, often corresponding to a first initial of their human-friendly name. For example, Alice might be represented as <code>A</code>. By preference, the first half of the alphabet is used (because "x", "y", and "z" tend to have other ad-hoc meanings). When reading aloud, the spoken form of a symbol like this is the name of the letter. The relevant <a href="https://tools.ietf.org/html/rfc5234">ABNF</a> fragment is:</p>
+<p>```ABNF
+  ucase-alpha    = %x41-5A            ; A-Z
+  lcase-alpha    = %x61-7A            ; a-z
+  digit          = %x30-39            ; 0-9</p>
+<p>self = ucase-alpha
+  ```</p>
+<p>Identity subjects that are not self-controlled are referenced in our notation using a single <em>lower-case</em> ASCII alpha. For example, a movie might be <code>m</code>. For clarity in scenarios where multiple subjects are referenced, it is best to choose letters that differ in something other than case.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">  </span><span class="nc">controlled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">lcase-alpha</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nc">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">self</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">controlled</span>
+</code></pre></div>
+<p>The set of devices, keys, endpoints, data, and other resources controlled by or for a given subject is called the subject's <strong>identity domain</strong> (or just <strong>domain</strong> for short). When the controller is a self, the domain is <strong>self-sovereign</strong>; otherwise, the domain is <strong>controlled</strong>. Either way, the domain of an identity subject is like its private universe, so the name or symbol of a subject is often used to denote its domain as well; context eliminates ambiguity. You will see examples of this below.</p>
+<h4 id="association">Association<a class="headerlink" href="#association" title="Permanent link">&para;</a></h4>
+<p>Elements associated with a domain are named in a way that makes their association clear, using a <code>name@context</code> pattern familiar from email addresses: <code>1@A</code> (“one at A”) is agent 1 in A’s sovereign domain. (Note how we use an erstwhile identity owner symbol, <code>A</code>, to reference a domain here, but there is no ambiguity.) This fully qualified form of a subject reference is useful for clarification but is often not necessary.</p>
+<p>In addition to domains, this same associating notation may be used where a <em>relationship</em> is the context, because sometimes the association is to the relationship rather than to a participant. See the DID example in the next section.</p>
+<h4 id="agents">Agents<a class="headerlink" href="#agents" title="Permanent link">&para;</a></h4>
+<p>Agents are not subjects. They neither control or own a domain; rather, they live and act within it. They take instructions from the domain's controller. Agents (<a href="../0004-agents/#the-agent-ness-continuum">and hubs, and other things like them</a>) are the first example of elements associated with an identity subject. Despite this, agent-ish things are the primary focus of interactions within SSI ecosystems.</p>
+<p>Additionally, agents are distinct from devices, even though we often (and inaccurately) used them interchangeably. We may say things like "Alice's iPhone sends a message" when we more precisely mean "the agent on Alice's iPhone sends a message." In reality, there may be zero, one, or more than one agents running on a particular device.</p>
+<p>Agents are numbered and are represented by up to three digits and then with an association. In most discussions, one digit is plenty, but three digits are allowed so agents can be conveniently grouped by prefix (e.g., all edge agents in Alice's domain might begin with <code>1</code>, and all cloud might begin with <code>2</code>).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nc">agent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">1*3</span><span class="nc">digit</span><span class="w"> </span><span class="l">&quot;@&quot;</span><span class="w"> </span><span class="nc">subject</span>
+</code></pre></div>
+<h4 id="devices">Devices<a class="headerlink" href="#devices" title="Permanent link">&para;</a></h4>
+<p>Devices are another element inside a subject's domain. They are represented with two or more lower-case ASCII alphanumerics or underscore characters, where the first char cannot be a digit. They end with an association: <code>bobs_car@B</code>, <code>drone4@F</code>, <code>alices_iphone9@A</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nc">name-start-char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">lcase-alpha</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="l">&quot;_&quot;</span><span class="w">            </span><span class="c1">; a-z or underscore</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nc">name-other-char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">digit</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">lcase-alpha</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="l">&quot;_&quot;</span><span class="w">    </span><span class="c1">; 0-9 or a-z or underscore</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nc">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">name-start-char</span><span class="w"> </span><span class="o">1*</span><span class="nc">name-other-char</span><span class="w"> </span><span class="l">&quot;@&quot;</span><span class="w"> </span><span class="nc">subject</span>
+</code></pre></div>
+<h3 id="cross-domain-relationships">Cross-Domain Relationships<a class="headerlink" href="#cross-domain-relationships" title="Permanent link">&para;</a></h3>
+<h4 id="short-form-more-common">Short Form (more common)<a class="headerlink" href="#short-form-more-common" title="Permanent link">&para;</a></h4>
+<p>Alice’s pairwise relationship with Bob is represented with colon notation: <code>A:B</code>. This is read aloud as “A to B” (preferred because it’s short; alternatives such as “the A B relationship” or “A colon B” or “A with respect to B” are also valid). When written in the other order, it represents the same relationship as seen from Bob’s point of view. Note that passive subjects may also participate in relationships: <code>A:bobs_car</code>. (Contrast <a href="#intra-domain-relationships">Intra-Domain Relationships</a> below.)</p>
+<p>N-wise relationships (e.g., doctor, hospital, patient) are written with the perspective-governing subject's identifier, a single colon, then by all other identifiers for members of the relationship, in alphabetical order, separated by <code>+</code>: <code>A:B+C</code>, <code>B:A+C</code>. This is read aloud as in "A to B plus C."</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nc">next-subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;+&quot;</span><span class="w"> </span><span class="nc">subject</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nc">short-relationship</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="l">&quot;:&quot;</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="o">*</span><span class="nc">next-subject</span>
+</code></pre></div>
+<h4 id="long-form">Long Form<a class="headerlink" href="#long-form" title="Permanent link">&para;</a></h4>
+<p>Short form is convenient and brief, but it is inconsistent because each party to the relationship describes it differently. Sometimes this may be undesirable, so a long and consistent form is also supported. The long form of both pairwise and N-way relationships lists all participants to the right of the colon, in alphabetical order. Thus the long forms of the Alice to Bob relationship might be <code>A:A+B</code> (for Alice's view of this relationship) and <code>B:A+B</code> (for Bob's view). For a doctor, hospital, patient relationship, we might have <code>D:D+H+P</code>, <code>H:D+H+P</code>, and <code>P:D+H+P</code>. Note how the enumeration of parties to the right of the colon is consistent.</p>
+<p>Long form and short form are allowed to vary freely; any tools that parses this notation should treat them as synonyms and stylistic choices only.</p>
+<p>The ABNF for long form is identical to short form, except that we are guaranteed that after the colon, we will see at least two parties and one <code>+</code> character:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nc">long-relationship</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="l">&quot;:&quot;</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="o">1*</span><span class="nc">next-subject</span>
+</code></pre></div>
+<h4 id="generalized-relationships">Generalized Relationships<a class="headerlink" href="#generalized-relationships" title="Permanent link">&para;</a></h4>
+<h5 id="contexts">Contexts<a class="headerlink" href="#contexts" title="Permanent link">&para;</a></h5>
+<p>Some models for SSI emphasize the concept of <strong>personas</strong> or <strong>contexts</strong>. These are essentially "masks" that an identity controller enables, exposing a limited subset of the subject's identity to an audience that shares that context. For example, Alice might assume one persona in her employment relationships, another for government interactions, another for friends, and another when she's a customer.</p>
+<p>Contexts or personas can be modeled as a relationship with a generalized audience: <code>A:Work</code>, <code>A:Friends</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nc">general-audience</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ucase-alpha</span><span class="w"> </span><span class="o">1*</span><span class="nc">name-other-char</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nc">general-relationship</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="l">&quot;:&quot;</span><span class="w"> </span><span class="nc">general-audience</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nc">relationship</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">short-relationship</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">long-relationship</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">general-relationship</span>
+</code></pre></div>
+<h5 id="any">Any<a class="headerlink" href="#any" title="Permanent link">&para;</a></h5>
+<p>The concept of public DIDs suggests that someone may think about a relationship as unbounded, or as not varying no matter who the other subject is. For example, a company may create a public DID and advertise it to the world, intending for this connection point to begin relationships with customers, partners, and vendors alike. While best practice suggests that such relationships be used with care, and that they primarily serve to bootstrap pairwise relationships, the notation still needs to represent the possibility.</p>
+<p>The <a href="#reserved-tokens">token <code>Any</code> is reserved</a> for these semantics. If Acme Corp is represented as <code>A</code>, then Acme's public persona could be denoted with <code>A:Any</code>. When <code>Any</code> is used, it is never the subject whose perspective is captured; it is always a faceless "other". This means that <code>Any</code> appears only on the right side of a colon in a relationship, and it probably doesn't make sense to combine it with other participants since it would subsume them all.</p>
+<h5 id="self">Self<a class="headerlink" href="#self" title="Permanent link">&para;</a></h5>
+<p>It is sometimes useful to model a relationship with onesself. This is done with the reserved token <code>Self</code>.</p>
+<h3 id="intra-domain-relationships">Intra-Domain Relationships<a class="headerlink" href="#intra-domain-relationships" title="Permanent link">&para;</a></h3>
+<p>Within a domain, relationships among agents or devices is sometimes interesting. Such relationships use the <code>~</code> (tilde) character. Thus, the intra-domain relationship between Alice's agent 1 and agent 2 is written <code>1~2</code> and read as "one tilde two".</p>
+<h3 id="constituents">Constituents<a class="headerlink" href="#constituents" title="Permanent link">&para;</a></h3>
+<p>Items that belong to a domain rather than having independent identity of their own (for example, data, money, keys) use dot notation for containment or ownership: <code>A.ls</code>, (A’s link secret), <code>A.policy</code>, etc.</p>
+<p>Names for constituents use the same rules as names for agents and devices.</p>
+<p>Alice’s DID for her relationship with Bob is an inert constituent datum, but it is properly associated with the relationship rather than just Alice. It is thus represented with <code>A.did@A:B</code>. (The <a href="#reserved-tokens">token <code>did</code> is reserved</a> for DIDs). This is read as “A’s DID at A to B”. Bob’s complementary DID would be <code>B.did@B:A</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nc">inert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">name-start-char</span><span class="w"> </span><span class="o">1*</span><span class="nc">name-other-char</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nc">nested</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;.&quot;</span><span class="w"> </span><span class="nc">inert</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nc">owned-inert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="o">1*</span><span class="nc">nested</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nc">associated-to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">identity-owner</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">relationship</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nc">associated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="o">0*</span><span class="nc">nested</span><span class="w"> </span><span class="l">&quot;@&quot;</span><span class="w"> </span><span class="nc">associated-to</span>
+</code></pre></div>
+<p>If <code>A</code> has a cloud agent <code>2</code>, then the public key (verification key or verkey) and private, secret key (signing key or sigkey) used by <code>2</code> in <code>A:B</code> would be: <code>2.pk@A:B</code> and <code>2.sk@A:B</code>. This is read as “2 dot P K at A to B” and “2 dot S K at A to B”. Here, <code>2</code> is known to belong to <code>A</code> because it takes <code>A</code>’s perspective on <code>A:B</code>--it would be equivalent but unnecessary to write <code>A.2.pk@A:B</code>.</p>
+<h3 id="did-docs-and-did-references">DID Docs and DID References<a class="headerlink" href="#did-docs-and-did-references" title="Permanent link">&para;</a></h3>
+<p>The mention of keys belonging to agents naturally raises the question of DID docs and the things they contain. How do they relate to our notation?</p>
+<p><a href="https://w3c-ccg.github.io/did-spec/#generic-did-syntax">DIDs are designed to be URIs</a>, and items that carry an <code>id</code> property within a DID Doc <a href="https://w3c-ccg.github.io/did-spec/#fragments">can be referenced with standard URI fragment notation</a>. This allows someone, for example, to refer to the first public key used by one of the agents owned by Alice with a notation like: <code>did:sov:VUrvFeWW2cPv9hkNZ2ms2a;#key1</code>.</p>
+<p>This notation is important and useful, but it is somewhat orthogonal to the concerns of this RFC. In the context of SSI notation, we are not DID-centric; we are subject centric, and subject are identified by a single capital alpha instead of by their DID. This helps with brevity. It lets us ignore the specific DID value and instead focus on the higher level semantics; compare:</p>
+<blockquote><code>{A.did@A:B}/B --> B</code></blockquote>
+
+<p>...to:</p>
+<blockquote><code>did:sov:PXqKt8sVsDu9T7BpeNqBfe</code> sends its DID for
+<code>did:sov:6tb15mkMRagD7YA3SBZg3p</code> to
+<code>did:sov:6tb15mkMRagD7YA3SBZg3p</code>,
+using the agent possessing <code>did:sov:PXqKt8sVsDu9T7BpeNqBfe;#key1</code>
+to encrypt with the corresponding signing key.</blockquote>
+
+<p>We expect DID reference notation (the verbose text above) to be relevant for concrete communication between computers, and SSI notation (the terse equivalent shown first) to be more convenient for symbolic, higher level discussions between human beings. Occasionally, we may get very specific and map SSI notation into DID notation (e.g., <code>A.1.vk = did:sov:PXqKt8sVsDu9T7BpeNqBfe;#key1</code>).</p>
+<h3 id="counting-and-iteration">Counting and Iteration<a class="headerlink" href="#counting-and-iteration" title="Permanent link">&para;</a></h3>
+<p>Sometimes, a concept or value evolves over time. For example, a given discussion might need to describe a DID Doc or an endpoint or a key across multiple state changes. In mathematical notation, this would typically be modeled with subscripts. In our notation, we use square brackets, and we number beginning from zero. <code>A.pk[0]@A:B</code> would be the first pubkey used by A in the <code>A:B</code> relationship; <code>A.pk[1]@A:B</code> would be the second pubkey, and so on. Likewise, a sequence of messages could be represented with <code>msg[0]</code>, <code>msg[1]</code>, and <code>msg[2]</code>.</p>
+<h3 id="messages">Messages<a class="headerlink" href="#messages" title="Permanent link">&para;</a></h3>
+<p>Messages are represented as quoted string literals, or with the <a href="#reserved-tokens">reserved token</a> <code>msg</code>, or with kebab-case names that explain their semantics, as in <code>cred-offer</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nc">string-literal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">%x22</span><span class="w"> </span><span class="nc">c-literal</span><span class="w"> </span><span class="l">%x22</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nc">kebab-char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">lcase-alpha</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">digit</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nc">kebab-suffix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;-&quot;</span><span class="w"> </span><span class="o">1*</span><span class="nc">hint-char</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nc">kebab-msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">1*</span><span class="nc">kebab-char</span><span class="w"> </span><span class="o">*</span><span class="nc">kebab-suffix</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nc">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;msg&quot;</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">string-literal</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">kebab-msg</span>
+</code></pre></div>
+<h3 id="payments">Payments<a class="headerlink" href="#payments" title="Permanent link">&para;</a></h3>
+<p>Economic activity is part of rich SSI ecosystems, and requires notation. A <strong>payment address</strong> is denoted with the <a href="#reserved-tokens"><code>pay</code> reserved token</a>; <code>A.pay[4]</code> would be A's fifth payment address. The public key and secret key for a payment address use the <a href="#reserved-tokens"><code>ppk</code> and <code>psk</code> reserved token</a>, respectively. Thus, one way to reference the payment keys for that payment address would be <code>A.pay[4].ppk</code> and <code>A.pay[4].psk</code>. (Keys are normally held by agents, not by people--and every agent has its own keys. Thus, another notation for the public key pertaining to this address might be <code>A.1.pay[4].ppk</code>. This is an area of clumsiness that needs further study.)</p>
+<h3 id="encryption">Encryption<a class="headerlink" href="#encryption" title="Permanent link">&para;</a></h3>
+<p>Encryption deserves special consideration in the SSI world. It often figures prominently in discussions about security and privacy, and our notation needs to be able to represent it carefully.</p>
+<p>The following crypto operations are recognized by the notation, without making a strong claim about how the operations are implemented. (For example, inline Diffie Helman and an ephemeral symmetric key might be used for the *_crypt algorithms. What is interesting to the notation isn't the low-level details, but the general semantics achieved.)</p>
+<ul>
+<li>
+<p><code>anon_crypt(msg, recipient_pubkey)</code> -- Encrypt only for recipient, achieving confidentiality. Sender is anonymous. Parties may have had no prior contact, though sender must discover recipient's pubkey. The message is tamper evident.</p>
+</li>
+<li>
+<p><code>auth_crypt(msg, recipient_pubkey, sender_privkey)</code> -- Encrypt only for recipient, achieving confidentiality. Recipient learns sender’s pubkey but can’t prove to anybody else who the sender is (making the message repudiable). Parties may have had no prior contact, though sender must discover recipient's pubkey. The message is tamper evident.</p>
+</li>
+<li>
+<p><code>sign(msg, signer_privkeys)</code> -- Associate a signature with a message, making the message <a href="../0049-repudiation/">non-repudiable</a>. This also makes the message tamper-evident. A signature does not automatically encrypt and therefore is not a way to achieve confidentiality. Note that complex signature schemes (multisig, M of N, ring) use this operation as well.</p>
+</li>
+<li>
+<p><code>verify(msg, signature, signer_pubkeys)</code> -- Verify a signature over a message with select keys. Note that complex verification schemes (multiverify, M of N, ring) use this operation as well.</p>
+</li>
+<li>
+<p><code>sym_crypt(msg, sym_key)</code> -- Symmetrically encrypt for anyone who has the symmetric key, achieving a limited form of confidentiality. Key must be shared in advance with both parties. Likely tamper evident. If multiple parties know the symmetric key, the sender is not knowable to the recipient.</p>
+</li>
+</ul>
+<p>The notation for these crypto primitives uses curly braces around the message, with suffixes to clarify semantics. Generally, it identifies a recipient as an identity owner or thing, without clarifying the key that's used--the pairwise key for their DID is assumed.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nc">asymmetric</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;/&quot;</span><span class="w">                                   </span><span class="c1">; suffix</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nc">symmetric</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;*&quot;</span><span class="w">                                   </span><span class="c1">; suffix</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nc">sign</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;#&quot;</span><span class="w">                                   </span><span class="c1">; suffix</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nc">multiplex</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;%&quot;</span><span class="w">                                   </span><span class="c1">; suffix</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nc">verify</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;?&quot;</span><span class="w">                                   </span><span class="c1">; suffix</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nc">anon-crypt</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;{&quot;</span><span class="w"> </span><span class="nc">message</span><span class="w"> </span><span class="l">&quot;}&quot;</span><span class="w"> </span><span class="nc">asymmetric</span><span class="w"> </span><span class="nc">subject</span><span class="w">          </span><span class="c1">; e.g., {&quot;hi&quot;}/B</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">                </span><span class="c1">; sender is first subject in relationship, receiver is second</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="nc">auth-crypt</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;{&quot;</span><span class="w"> </span><span class="nc">message</span><span class="w"> </span><span class="l">&quot;}&quot;</span><span class="w"> </span><span class="nc">asymmetric</span><span class="w"> </span><span class="nc">short-relationship</span><span class="w"> </span><span class="c1">; e.g., {&quot;hi&quot;}/A:B</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="nc">sym-crypt</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;{&quot;</span><span class="w"> </span><span class="nc">message</span><span class="w"> </span><span class="l">&quot;}&quot;</span><span class="w"> </span><span class="nc">symmetric</span><span class="w"> </span><span class="nc">subject</span><span class="w">           </span><span class="c1">; e.g., {&quot;hi&quot;}*B</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="nc">verify</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;{&quot;</span><span class="w"> </span><span class="nc">message</span><span class="w"> </span><span class="l">&quot;}&quot;</span><span class="w"> </span><span class="nc">verify</span><span class="w"> </span><span class="nc">subject</span><span class="w">              </span><span class="c1">; e.g., {&quot;hi&quot;}?B</span>
+</code></pre></div>
+<p>The relative order of suffixes reflects whether encryption or signing takes place first: <code>{"hello"}*B#</code> says that symmetric encryption happens first, and then a signature is computed over the cypertext; <code>{"hello"#}*B</code> says that plaintext is signed, and then both the plaintext and the signature are encrypted. (The <code>{"hello"}#*B</code> variant is nonsensical because it splits the encryption notation in half).</p>
+<p>All suffixes can be further decorated with a parenthesized algorithm name, if precision is required: <code>{"hello"}*(aes256)B</code> or <code>{"hello"}/(rsa1024)A:B</code> or <code>{"hello"#(ecdsa)}/B</code>.</p>
+<p>With signing, usually the signer and sender are assumed to be identical, and the notation omits any clarification about the signer. However, this can be added after <code>#</code> to be explicit. Thus, <code>{msg#B}/C</code> would be a message with plaintext signed by B, anon-encrypted for C. Similarly, <code>{msg#(ring-rabin)BGJM}/A:C</code> would be a message with plaintext signed according to a Rabin ring signature algorithm, by B, G, J, and M, and then auth-encrypted by A for C.</p>
+<p>Signing verification would be over the corresponding message and which entities perform the action. <code>{msg#A}?B</code> would be a message with plaintext signed by A verified by B. <code>{msg#(threshold-sig)ABC}?DE</code> would be a plaintext message signed according to a threshold signature algorithm by A, B, C and then verified by D and E.</p>
+<p>Multiplexed asymmetric encryption is noted above, but has not yet been described. This is a technique whereby a message body is encrypted with an ephemeral symmetric key, and then the ephemeral key is encrypted asymmetrically for multiple potential recipients (each of which has a unique but tiny payload [the key] to decrypt, which in turn unlocks the main payload). The notation for this looks like <code>{msg}%BCDE</code> for multiplexed anon_crypt (sender is anonymous), and like <code>{msg}%A:BCDE</code> for multiplexed auth_crypt (sender is authenticated by their private key).</p>
+<h3 id="other-punctuation">Other punctuation<a class="headerlink" href="#other-punctuation" title="Permanent link">&para;</a></h3>
+<p>Message sending is represented with arrows: <code>-&gt;</code> is most common, though <code>&lt;-</code> is also reasonable in some cases. Message content and notes about sending can be embedded in the hyphens of sending arrow, as in this example, where the notation says an unknown party uses http to transmit "hello", anon-enrcypted for Alice:</p>
+<p><code>&lt;unknown&gt; -- http: {"hello"}/A --&gt; 1</code></p>
+<p>Parentheses have traditional meaning (casual usage in written language, plus grouping and precedence).</p>
+<p>Angle braces <code>&lt;</code> and <code>&gt;</code> are for placeholders; any reasonable explanatory text may appear inside the angle braces, so to represent Alice's relationship with a not-yet-known subject, the notation might show something like <code>A:&lt;TBD&gt;</code>.</p>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>A</code>: a self (sovereign identity subject) like Alice or Acme Corp.</li>
+<li><code>alices_pixel@A</code> or <code>bobs_alexa@B</code>: an object in a given domain</li>
+<li><code>7@A</code>: an agent, arbitrarily assigned number 7</li>
+<li><code>A:B</code> or <code>A:A+B</code>: The Alice to Bob relationship, as seen from Alice's perspective (short form, then long form). Bob's view of this relationship would be <code>B:A</code> or <code>B:A+B</code>.</li>
+<li><code>B:ACD</code> or <code>B:A+B+C+D</code>: The 4-way relationship between A, B, C, and D, as seen from B's perspective (short form, then long form)</li>
+<li><code>A:Dating</code>: Alice's dating persona</li>
+<li><code>A.pay[3].ppk</code>: The public payment key for the fourth payment address belonging to A.</li>
+<li><code>F.did@F:Any</code>: Faber's public DID.</li>
+<li><code>C.ls</code>: Carol's link secret.</li>
+<li><code>D.padr</code>: Doug's policy address.</li>
+<li><code>F.state@F:A</code>: F's state for the F:A relationship.</li>
+<li><code>A.uri@A:B</code>: Alice's URI (endpoint of DID doc) in the Alice to Bob relationship.</li>
+<li><code>F.uri@F:Any</code>: The endpoint where the DID doc for Faber's public DID is hosted.</li>
+<li><code>escrow-offer</code>: A message that represents step 1a in a standard negotiation about escrow. (The escrow concept is unknown to the notation, and we don't know the format of its messages, but we know they are used in a standard way because of the <code>-offer</code> kebab suffix).</li>
+<li><code>{msg}/A</code>: A message anon-encrypted for A.</li>
+<li><code>{"hello"}/A:B</code>: A message auth-encrypted for B by A.</li>
+<li><code>{bail-req#(p2sh)DF}/(rsa)B</code>: A message that represents step 1b or step 2 in a standard negotiaion about bail. This message was signed as plaintext using the p2sh multisig algorithm by D and F, and was then anon-encrypted for B using an RSA algorithm.</li>
+<li><code>{advice-receipt}*A</code>: A message that that represents step 4 in a standard negotiaion about advice. The message was symmetrically encrypted and sent to A.</li>
+<li><code>{msg[4]}%C:1+2</code>: A message (5<sup>th</sup> in sequence) that was multiplex-encrypted by C for agents 1 and 2.</li>
+</ul>
+<h3 id="reserved-tokens">Reserved Tokens<a class="headerlink" href="#reserved-tokens" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>Any</code>: The name for the public side of a relationship between a specific subject and the public.</li>
+<li><code>Self</code>: The name for one's one identity in a self relationship.</li>
+<li><code>did</code>: The DID belonging to an subject in a given relationship, as in <code>A.did@A:B</code></li>
+<li><code>ipk</code> and <code>isk</code>: Issuer public (verification) key and issuer secret key.</li>
+<li><code>key</code>: A symmetric key.</li>
+<li><code>ls</code>: The link secret belonging to an subject, as in <code>A.ls</code>.</li>
+<li><code>state</code>: The state belonging to an subject in a given relationship, as in <code>A.state@A:B</code></li>
+<li><code>msg</code>: A generic message.</li>
+<li><code>-offer</code>: kebab suffix for messages that express willingness to give
+   something.</li>
+<li><code>padr</code>: a policy address, as in <code>F.padr</code>.</li>
+<li><code>pay</code>: A payment address belonging to an identity owner, as in <code>C.pay</code>.</li>
+<li><code>ppk</code> and <code>psk</code>: Payment address public (verification) and secret key (control
+   cryptocurrency).</li>
+<li><code>pk</code>: The public verification key (verkey) portion of an asymmetric keypair. The more specific form, <code>vk</code>, is only recommended if elliptic curve crypto is specifically intended.</li>
+<li><code>-receipt</code>: kebab suffix for messages that formally acknowledge receipt after receiving a delivered item.</li>
+<li><code>-req</code>: kebab suffix for messages that formally request something.</li>
+<li><code>rpk</code> and <code>rsk</code>: Revocation public (verification) and secret key.</li>
+<li><code>sk</code>: The private key (privkey, sigkey) portion of an asymmetric keypair.</li>
+<li><code>uri</code>: An endpoint for a relationship, as in <code>B.uri@A:B</code></li>
+<li><code>vk</code>: The public verification key (verkey) portion of an asymmetric keypair. The more generic form, <code>pk</code>, is recommended instead, unless elliptic curve crypto is specifically intended.</li>
+<li><code>wallet</code>: An identity wallet belonging to an subject.</li>
+</ul>
+<h3 id="abnf">ABNF<a class="headerlink" href="#abnf" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nc">ucase-alpha</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="l">%x41-5A</span><span class="w">                        </span><span class="c1">; A-Z</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nc">lcase-alpha</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="l">%x61-7A</span><span class="w">                        </span><span class="c1">; a-z</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nc">digit</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="l">%x30-39</span><span class="w">                        </span><span class="c1">; 0-9</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nc">name-start-char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">lcase-alpha</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="l">&quot;_&quot;</span><span class="w">             </span><span class="c1">; a-z or underscore</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nc">name-other-char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">digit</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">lcase-alpha</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="l">&quot;_&quot;</span><span class="w">     </span><span class="c1">; 0-9 or a-z or underscore</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="nc">identity-owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ucase-alpha</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="nc">thing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">lcase-alpha</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="nc">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">identity-owner</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">thing</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="nc">agent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">1*3</span><span class="nc">digit</span><span class="w"> </span><span class="l">&quot;@&quot;</span><span class="w"> </span><span class="nc">subject</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="nc">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">name-start-char</span><span class="w"> </span><span class="o">1*</span><span class="nc">name-other-char</span><span class="w"> </span><span class="l">&quot;@&quot;</span><span class="w"> </span><span class="nc">subject</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="nc">next-subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;+&quot;</span><span class="w"> </span><span class="nc">subject</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="nc">short-relationship</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="l">&quot;:&quot;</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="o">*</span><span class="nc">next-subject</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="nc">long-relationship</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="l">&quot;:&quot;</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="o">1*</span><span class="nc">next-subject</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="nc">general-audience</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ucase-alpha</span><span class="w"> </span><span class="o">1*</span><span class="nc">name-other-char</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="nc">general-relationship</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="l">&quot;:&quot;</span><span class="w"> </span><span class="nc">general-audience</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="nc">relationship</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">short-relationship</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">long-relationship</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">general-relationship</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="nc">inert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">name-start-char</span><span class="w"> </span><span class="o">1*</span><span class="nc">name-other-char</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="nc">nested</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;.&quot;</span><span class="w"> </span><span class="nc">inert</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="nc">owned-inert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="o">1*</span><span class="nc">nested</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="nc">associated-to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">identity-owner</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">relationship</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="nc">associated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">subject</span><span class="w"> </span><span class="o">0*</span><span class="nc">nested</span><span class="w"> </span><span class="l">&quot;@&quot;</span><span class="w"> </span><span class="nc">associated-to</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="nc">string-literal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">%x22</span><span class="w"> </span><span class="nc">c-literal</span><span class="w"> </span><span class="l">%x22</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="nc">kebab-char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">lcase-alpha</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">digit</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="nc">kebab-suffix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;-&quot;</span><span class="w"> </span><span class="o">1*</span><span class="nc">hint-char</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="nc">kebab-msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">1*</span><span class="nc">kebab-char</span><span class="w"> </span><span class="o">*</span><span class="nc">kebab-suffix</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="nc">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;msg&quot;</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">string-literal</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">kebab-msg</span>
+<a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>
+<a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="nc">asymmetric</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;/&quot;</span><span class="w">                                   </span><span class="c1">; suffix</span>
+<a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a><span class="nc">symmetric</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;*&quot;</span><span class="w">                                   </span><span class="c1">; suffix</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a><span class="nc">sign</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;#&quot;</span><span class="w">                                   </span><span class="c1">; suffix</span>
+<a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a><span class="nc">multiplex</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;%&quot;</span><span class="w">                                   </span><span class="c1">; suffix</span>
+<a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a>
+<a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a><span class="nc">anon-crypt</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;{&quot;</span><span class="w"> </span><span class="nc">message</span><span class="w"> </span><span class="l">&quot;}&quot;</span><span class="w"> </span><span class="nc">asymmetric</span><span class="w"> </span><span class="nc">subject</span><span class="w">          </span><span class="c1">; e.g., {&quot;hi&quot;}/B</span>
+<a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a>
+<a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a><span class="w">                </span><span class="c1">; sender is first subject in relationship, receiver is second</span>
+<a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a><span class="nc">auth-crypt</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;{&quot;</span><span class="w"> </span><span class="nc">message</span><span class="w"> </span><span class="nc">asymmetric</span><span class="w"> </span><span class="nc">short-relationship</span><span class="w"> </span><span class="c1">; e.g., {&quot;hi&quot;}/A:B</span>
+<a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a>
+<a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a><span class="nc">sym-crypt</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="l">&quot;{&quot;</span><span class="w"> </span><span class="nc">message</span><span class="w"> </span><span class="l">&quot;}&quot;</span><span class="w"> </span><span class="nc">symmetric</span><span class="w"> </span><span class="nc">subject</span><span class="w">           </span><span class="c1">; e.g., {&quot;hi&quot;}*B</span>
+</code></pre></div>
+<h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Creates one more formalism to learn. SSI is already a dense topic with a steep learning curve.</li>
+<li>Creates something that needs to be version-controlled.</li>
+</ul>
+<h2 id="rationale-and-alternatives">Rationale and alternatives<a class="headerlink" href="#rationale-and-alternatives" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Could use informal verbiage instead. However, it would be inconsistent and poorly documented.</li>
+</ul>
+<h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX</a> provides powerful
+and beautiful rendering of complex formal concepts, and uses escape sequences that are
+pure ASCII. There is a <a href="https://sourceforge.net/projects/jlatex/">JVM-based parser/renderer for Latex</a>; perhaps similar things exist for other
+programming languages as well.</p>
+<p>However, LaTeX has drawbacks. It focuses on rendering,
+not on the semantics behind what's rendered. In
+this respect, it is a bit like HTML 1.0 before CSS--you can bold or underline,
+but you're usually encoding what something looks like, not what it means. (LaTeX
+does support logical styles and sections, but this introduces far more complexity
+than we need.)</p>
+<p>The LaTeX snippet <code>e^{-x_y}</code> should render like this:</p>
+<p><img alt="e^{-x_y} rendered by LaTeX engine" src="expression.png" /></p>
+<p>This is great--but it doesn't say anything about what <code>e</code>, <code>x</code>, and <code>y</code> <em>mean</em>. Thus a LaTeX
+solution would still have to define conventions for meaning in a separate spec.
+These conventions would have to find representations that are not obvious
+(LaTeX recommends no particular rendering for encryption functions, keys,
+ownership, association). And such a spec would have to be careful not to
+ascribe meaning to a rendering that conflicts with assumptions of
+knowledgeable LaTeX users (e.g., using <code>\sqrt</code> for something other than
+its mathematical square root function in the vocabulary would raise eyebrows).</p>
+<p>Highly formatted LaTeX is also quite verbose.</p>
+<p>A very simple form of LaTeX could be used (e.g., just superscripts and subscripts)--
+but this would have to solve some of the problems mentioned below, in the
+DKMS section.</p>
+</li>
+<li>
+<p><a href="http://asciimath.org/">ASCIIMath</a> has many of the same benefits and drawbacks as
+LaTeX. It is less ubiquitous.</p>
+</li>
+<li>
+<p>The key management notation introduced in "<a href="http://bit.ly/dkmsv3">DKMS (Decentralized Key Management
+System) V3</a>" overlaps significantly with the concerns of this notation (render <a href="https://github.com/hyperledger/indy-sdk/blob/677a0439487a1b7ce64c2e62671ed3e0079cc11f/doc/design/005-dkms/08-add-connection-private-did-provisioned.puml">this
+diagram</a> for an example). However, it does not encompass all the concerns
+explored here, so it would have to be expanded before it could be complete.</p>
+</li>
+</ul>
+<p>Also, experiments with superscripts and subscripts in this format led to semantic
+  dead ends or undesirable nesting when patterns were applied consistently. For
+  example, one thought had us representing Alice's verkey, signing key, and DID for her
+  Bob relationship with A<sub>B</sub><sup>VK</sup>, A<sub>B</sub><sup>SK</sup>.
+  and A<sub>B</sub><sup>DID</sup>. This was fine until we asked how to represent
+  the verkey for Alice's agent in the Alice to Bob relationship; is that
+  A<sub>B</sub><sup>DID<sup>VK</sup></sup>? And what about Alice's link secret, that
+  isn't relationship-specific? And how would we handle N-way relationships?</p>
+<h2 id="unresolved-questions">Unresolved questions<a class="headerlink" href="#unresolved-questions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Do we need to support non-ASCII characters in the notation? (I suggest no--for coders
+  wishing to share simple algebra-like notes in comments or on chat, ASCII is a reasonable
+  least-common denominator usable with any keyboard or natural language. Adding more complicates
+  too many things.)</li>
+<li>Do we need special notation for credentials, proofs, and the like? If so, how does
+  this relate to ZKLang?</li>
+<li>Do we need notation for security contexts of messages?</li>
+</ul>
+<h2 id="implementations">Implementations<a class="headerlink" href="#implementations" title="Permanent link">&para;</a></h2>
+<p>The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.</p>
+<table>
+<thead>
+<tr>
+<th>Name / Link</th>
+<th>Implementation Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://openssi.github.io/peer-did-method-spec/">Peer DID Method Spec</a></td>
+<td>uses notation in diagrams</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../0004-agents/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 0004 Agents">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                0004 Agents
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../features/0015-acks/" class="md-footer__link md-footer__link--next" aria-label="Next: 0015 ACKs">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                0015 ACKs
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.expand", "navigation.footer", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+    
+  </body>
+</html>

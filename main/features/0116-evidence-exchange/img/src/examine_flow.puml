@@ -1,0 +1,39 @@
+@startuml
+
+title Evidence Exchange Protocol: Examiner Flow
+
+actor PERSON as "Alice"
+participant HOLDER as "Alice's Agent"
+participant EXAMINER as "Examiner@Issuer"
+participant ISOR as "Issuer's System of Record"
+participant IPSP as "Identity Proofing\n Service Provider"
+
+group Examiner Vetting Process (In-Person Proofing)
+autonumber 10
+PERSON->EXAMINER: Present paper/plastic document.
+EXAMINER->EXAMINER: Perform due diligence processing\n based on buisness and regulatory requirements.
+EXAMINER->ISOR: Scan document and store in System of Record (SOR).
+EXAMINER->ISOR: Write attestations pertaining to\n claims of confidence for each identity trait associated with a Holder.
+end
+
+group Examiner Vetting Process (Remote Proofing using digital documents)
+autonumber 10
+PERSON->EXAMINER: Present digital document.
+note right: This can be in the form of a document\n upload or via a remote url (i.e.: Dropbox)
+EXAMINER->ISOR: Integrity check document. Store in System of Record (SOR).
+EXAMINER->EXAMINER: Perform due diligence processing based\n on buisness and regulatory requirements.
+EXAMINER->ISOR: Write attestations pertaining to claims of\n confidence for each identity trait associated with a Holder.
+end
+
+group Examiner Vetting Process (Remote Proofing using 3rd Party service providers)
+autonumber 10
+PERSON->EXAMINER: Present identity evidence.
+note right: User may use a self-service mobile app to scan\n artifacts that will be used by a 3rd Party verification service.
+EXAMINER->IPSP: Inspect and validate evidence.
+IPSP->EXAMINER: Provide digital assertions\n affirming validity of evidence\n and due-diligence performed.
+EXAMINER->ISOR: Store digital assertions in System of Record (SOR).
+EXAMINER->EXAMINER: Perform due diligence processing based\n on buisness and regulatory requirements.
+EXAMINER->ISOR: Write attestations pertaining to claims of\n confidence for each identity trait associated with a Holder.
+end
+
+@enduml

@@ -1,0 +1,8 @@
+
+{
+  "@type": "did:sov:SLfEi9esrjzybysFxQZbfq;spec/tictactoe/1.0/move",
+  "~thread": { "thid": "518be002-de8e-456e-b3d5-8fe472477a86", "sender_order": 1 },
+  "moves": ["X:B2", "O:A1", "X:A2"],
+  "me": "X"
+}
+

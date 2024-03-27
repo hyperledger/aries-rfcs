@@ -1,0 +1,32 @@
+@startuml
+
+title Credential Lifecycle Management
+
+actor PERSON as "Person"
+participant EXAMINER as "Examiner"
+participant IPSP as "Identity Proofing\n Service Provider"
+participant ISOR as "Issuer's\n System of Record"
+participant ISSUER as "Issuer"
+participant HOLDER as "Holder"
+participant VERIFIER as "Verifier"
+
+group In-Person Proofing Process
+PERSON->EXAMINER: Present physical or\n digital documents.
+EXAMINER->EXAMINER: Gather, inspect and\n validate documents.
+EXAMINER->ISOR: Store documents in\n System of Record (SOR).
+end
+
+group Remote Proofing Process
+PERSON->EXAMINER: Present identity evidence.
+EXAMINER->IPSP: Inspect and\n validate evidence.
+IPSP->EXAMINER: Provide digital assertions\n affirming validity of evidence\n and due-diligence performed.
+EXAMINER->ISOR: Store digital assertions in\n System of Record (SOR).
+end
+
+ISSUER->ISOR: Gather claims to\n publish credentials.
+ISSUER->HOLDER: Issue credentials based\n on attestations in SOR.
+VERIFIER->HOLDER: Challenge.
+HOLDER->VERIFIER: Prove.
+VERIFIER->VERIFIER: Verify.
+
+@enduml

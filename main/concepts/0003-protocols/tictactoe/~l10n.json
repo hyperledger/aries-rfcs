@@ -1,0 +1,8 @@
+{
+  "~l10n": {
+    "locales": [{"locale": "en", "fields": ["comment"]}],
+    "catalogs": [
+      "https://github.com/hyperledger/indy-hipe/blob/a0d57d1f/text/protocols/catalog.json"
+    ]
+  }
+}

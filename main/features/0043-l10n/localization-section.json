@@ -1,0 +1,8 @@
+
+{
+  "~l10n": {
+    "locales": {"en": ["note", "fallback_plan"]},
+    "catalogs": ["https://github.com/x/y/blob/dc525a27d3b75/text/myfamily/catalog.json"]
+  }
+}
+
