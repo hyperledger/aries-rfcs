@@ -17,6 +17,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument('--version', '-v', help='The AIP version to display. Defaults to the current version(s) in the local file')
 parser.add_argument('--diffs', '-d', dest='diffs', action='store_true',
                     help='Display the diffs of any updated RFCs found')
+parser.add_argument('--list', '-l', help='List the RFCs and commits in the AIP with a prefixed by the name of a (for example) shell script')
  
 # parse the arguments
 args = parser.parse_args()
@@ -64,10 +65,10 @@ for line in txt:
     if aip_version:
         # Check if we want all the AIPs in the file or this one
         if ( not(args.version) or aip_version.group(1) == args.version ):
-            print("Aries Interop Profile: %s" % (aip_version.group(1)))
+            print("# Aries Interop Profile: %s" % (aip_version.group(1)))
             ListVersionRFCs = True
         else:
-            # Not this one...don't list the changed verion
+            # Not this one...don't list the changed version
             ListVersionRFCs = False
     
     rfc = re.search(_aip_commit_and_file, line)
@@ -78,7 +79,9 @@ for line in txt:
         protocol = rfc.group(5)
         changed = re.search(protocol, subprocess.run(['git', 'diff', '--name-only', commit, 'main'], stdout=subprocess.PIPE).stdout.decode('utf-8'))
         # Has this RFC changed since it was set in the RFC?
-        if changed:
+        if args.list:
+            print('%s %s %s' % (args.list, protocol, commit))
+        elif changed:
             # Yes - list it.
             print('>>>>>>>> Changed protocol: %s, latest commit to protocol: %s' % (protocol, 
                 subprocess.run(['git', 'log', '-n', '1', '--pretty=format:%H', '--', protocol], stdout=subprocess.PIPE).stdout.decode('utf-8')))
