@@ -35,5 +35,5 @@ jobs:
           python --version
           # Generate the content into the docs folder
           code/genSite.sh
-          mike deploy --push --update-aliases $VERSION $ALIAS
+          mike deploy --push --update-aliases main latest
           mike set-default latest
