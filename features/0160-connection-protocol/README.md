@@ -1,5 +1,5 @@
 # 0160: Connection Protocol
-- Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org)
+- Authors: [Ryan West](mailto:ryan.west@sovrin.org), [Daniel Bluhm](mailto:daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](mailto:sam@sovrin.org)
 - Status: [ADOPTED](/README.md#adopted) (But should move to deprecated)
 - Since: 2019-08-06
 - Status Note: This is the protocol with existing uses. It is expected that [RFC 0023 DID Exchange](../../features/0023-did-exchange/README.md) will replace this protocol.

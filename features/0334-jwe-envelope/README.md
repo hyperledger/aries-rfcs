@@ -1,6 +1,6 @@
 # Aries RFC 0334: JWE envelope 1.0
 
-- Authors: [Baha A. Shaaban](mailto:baha.shaaban@securekey.com) (SecureKey Technologies Inc.), [Troy Ronda](mailto:troy.ronda@securekey.com) (SecureKey Technologies Inc.)
+- Authors: [Baha A. Shaaban](mailto:mailto:baha.shaaban@securekey.com) (SecureKey Technologies Inc.), [Troy Ronda](mailto:mailto:troy.ronda@securekey.com) (SecureKey Technologies Inc.)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-11-28
 - Status Note: RFC under development

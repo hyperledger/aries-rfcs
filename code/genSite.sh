@@ -21,11 +21,30 @@ python code/aipUpdates.py -v 2.0 -l "./code/cpAIPs.sh" | \
 source copy_aip.sh
 rm copy_aip.sh
 
+# Cleanup a few things in README, contributing and 0000-templates
+for i in docs/contributing.md docs/README.md docs/0000*.md; do 
+   sed \
+     -e 's#../../##g' \
+     -e 's#index.md#RFCindex.md#' \
+     -e 's#LICENSE)#LICENSE.md)#' \
+   $i >$i.tmp
+   mv $i.tmp $i
+done
+
+
+# Cleanup missing mailtos -- will always be needed for aip2 folder, but will be cleaned up in files
+for i in docs/features/*/README.md docs/concepts/*/README.md docs/aip2/*/README.md; do 
+  sed -e '/Authors/s#](#](mailto:#g' -e 's#mailto:mailto:#mailto:#g'  $i >$i.tmp; mv $i.tmp $i
+done
+
 # Cleanup the links in the RFCs
 for i in docs/features/*/README.md docs/concepts/*/README.md docs/aip2/*/README.md; do 
    sed \
      -e 's#(/#(../../#g' \
      -e 's#index.md#RFCindex.md#' \
+     -e 's#[\./]*\(concepts\)#../../\1#g' \
+     -e 's#[\./]*\(features\)#../../\1#g' \
+     -e 's#discover-../../#discover-#g' \
      $i >$i.tmp
    mv $i.tmp $i
 done

@@ -1,5 +1,5 @@
 # 0212: Pickup Protocol
-- Authors: [Sam Curren](telegramsam@gmail.com)
+- Authors: [Sam Curren](mailto:telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-03
 - Status Note: Initial version

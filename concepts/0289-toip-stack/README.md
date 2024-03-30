@@ -1,5 +1,5 @@
 # 0289: The Trust Over IP Stack
-- Authors: Matthew Davie, [Dan Gisolfi](dan.gisolfi@gmail.com), [Daniel Hardman](daniel.hardman@evernym.com), [John Jordan](john.jordan@gov.bc.ca), Darrell O'Donnell, [Drummond Reed](drummond.reed@evernym.com), [Oskar van Deventer](oskar.vandeventer@tno.nl)
+- Authors: Matthew Davie, [Dan Gisolfi](mailto:dan.gisolfi@gmail.com), [Daniel Hardman](mailto:daniel.hardman@evernym.com), [John Jordan](mailto:john.jordan@gov.bc.ca), Darrell O'Donnell, [Drummond Reed](mailto:drummond.reed@evernym.com), [Oskar van Deventer](mailto:oskar.vandeventer@tno.nl)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-11-04
 - Status Note: Initial Proposal

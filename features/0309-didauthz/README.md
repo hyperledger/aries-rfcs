@@ -1,5 +1,5 @@
 # Aries RFC 0309: DIDAuthZ
-- Authors: [George Aristy](george.aristy@gmail.com) SecureKey Technologies
+- Authors: [George Aristy](mailto:george.aristy@gmail.com) SecureKey Technologies
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-11-14
 - Status Note: This RFC is under development.

@@ -1,6 +1,6 @@
 # Aries RFC 0794: DID Rotate 1.0
 
-- Authors: [Sam Curren](telegramsam@gmail.com)
+- Authors: [Sam Curren](mailto:telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2023-08-29 
 - Status Note: 

@@ -1,6 +1,6 @@
 # Aries RFC 0046: Mediators and Relays
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-02-01
 - Status Note: Socialized and broadly understood in other conceptual RFCs about routing.

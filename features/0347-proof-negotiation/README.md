@@ -1,6 +1,6 @@
 # Aries RFC 0347: Proof Negotiation
 
-- Authors: [Philipp Rieblinger](p.rieblinger@esatus.com), [Sebastian Weidenbach](s.weidenbach@esatus.com)
+- Authors: [Philipp Rieblinger](mailto:p.rieblinger@esatus.com), [Sebastian Weidenbach](mailto:s.weidenbach@esatus.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-12-13
 - Status Note: Initial proposal after discussion on rocketchat

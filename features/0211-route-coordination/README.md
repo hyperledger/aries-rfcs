@@ -1,5 +1,5 @@
 # 0211: Mediator Coordination Protocol
-- Authors: [Sam Curren](telegramsam@gmail.com), [Daniel Bluhm](daniel@indicio.tech), [Adam Burdett](burdettadam@gmail.com)
+- Authors: [Sam Curren](mailto:telegramsam@gmail.com), [Daniel Bluhm](mailto:daniel@indicio.tech), [Adam Burdett](mailto:burdettadam@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2021-03-15
 - Status Note: Discussed and implemented and part of AIP 2.0.

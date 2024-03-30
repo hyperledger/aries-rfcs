@@ -1,6 +1,6 @@
 # 0755: Overlays Capture Architecture (OCA) For Aries
 
-- Authors: [Stephen Curran](swcurran@gmail.com)
+- Authors: [Stephen Curran](mailto:swcurran@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2023-01-15
 - Status Note: In the process of being implemented in several Aries Frameworks (ACA-Py, AFJ)
@@ -33,7 +33,7 @@ differences in the latter two screenshots from the first come from
 issuer-supplied OCA data.
 
 [OCA Specification]: https://oca.colossi.network/specification/
-[RFC0756 OCA for Aries Style Guide]: ../0756-oca-for-aries-style-guide/README.md
+[RFC0756 OCA for Aries Style Guide]: ../../features/0756-oca-for-aries-style-guide/README.md
 
 ![Example: Using OCA in Aries Bifold](assets/bifold-oca-example.jpg)
 
@@ -420,7 +420,7 @@ as the tooling evolves.
       - "credential_help_text"
       - "credential_support_url"
       - "watermark"
-        - The "watermark" is used to mark non-production credentials, as described in the ["non-production watermark" section of RFC0756 OCA for Aries Style Guide](../0756-oca-for-aries-style-guide#non-production-watermark)
+        - The "watermark" is used to mark non-production credentials, as described in the ["non-production watermark" section of RFC0756 OCA for Aries Style Guide](../../features/0756-oca-for-aries-style-guide/README.md#non-production-watermark)
     - Complete column B (`OL-MV: Meta [Attribute Value]`) as appropriate for each column A name (listed above).
   - Duplicate and rename the initial language tab for each language or language-country that as an issuer, you want to support.
   - Update each additional language tab.

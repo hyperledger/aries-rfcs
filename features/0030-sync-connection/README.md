@@ -1,6 +1,6 @@
 # Aries RFC 0030: Sync Connection Protocol 1.0
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-07-03
 - Status Note: used by the [peer DID method spec](https://openssi.github.io/peer-did-method-spec). Implementation beginning. 

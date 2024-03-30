@@ -1,5 +1,5 @@
 # 0335: HTTP Over DIDComm
-- Authors: [Filip Burlacu](filip.burlacu@securekey.com) (SecureKey)
+- Authors: [Filip Burlacu](mailto:filip.burlacu@securekey.com) (SecureKey)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-12-03
 - Status Note: implementation is being explored by SecureKey  

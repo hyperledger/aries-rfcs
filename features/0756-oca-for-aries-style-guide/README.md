@@ -1,6 +1,6 @@
 # 0756: OCA for Aries Style Guide
 
-- Authors: [Stephen Curran](swcurran@cloudcompass.ca)
+- Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2023-01-05
 - Status Note: This is a companion RFC to [RFC 0755: OCA for Aries]. This RFC is

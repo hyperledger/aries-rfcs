@@ -1,5 +1,5 @@
 # Aries RFC 0478: Coprotocols
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-05-19
 - Status Note: Sister RFC to [Aries RFC 0482](../../features/0482-coprotocol-protocol/README.md), which documents a specific protocol to facilitate protocol interactions. Socialized on Aries community call in Feb 2020, using [these slides](https://docs.google.com/presentation/d/17hk6QqLW5M9E4TBPZwXIUBu9eEinMNXReceyZTF4LpA/edit). Discussed again in May 2020. Source files for graphics are either checked in or are published at https://j.mp/2XgyjH3.

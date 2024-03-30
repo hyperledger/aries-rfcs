@@ -1,6 +1,6 @@
 # Aries RFC 0793: Unqualified DID Transition
 
-- Authors: [Sam Curren](mailto:swcurran@cloudcompass.ca)
+- Authors: [Sam Curren](mailto:mailto:swcurran@cloudcompass.ca)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2023-07-11
 - Status Note: In Step 1 - **Target Deployment Date: 2024-02-28** 

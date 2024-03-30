@@ -1,6 +1,6 @@
 # 0804: DIDComm Remote Procedure Call (DRPC)
 
-- Authors: [Clecio Varjao](clecio.varjao@gov.bc.ca) (BC Gov), [Stephen Curran](swcurran@cloudcompass.ca) (BC Gov), [Akiff Manji](amanji@petridish.dev) (BC Gov)
+- Authors: [Clecio Varjao](mailto:clecio.varjao@gov.bc.ca) (BC Gov), [Stephen Curran](mailto:swcurran@cloudcompass.ca) (BC Gov), [Akiff Manji](mailto:amanji@petridish.dev) (BC Gov)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2023-11-29
 - Status Note: An evolution of the HTTP over DIDComm protocol to enable an Agent to request an arbitrary service from a connected Agent and get a response.
@@ -202,7 +202,7 @@ this protocol in the event that a `request` is not recognizable as a [JSON-RPC]
 message and as such, a [JSON-RPC] response message cannot be created. See the
 details below in the [Problem Report Message](#problem-report-message) section.
 
-[RFC 0015 ACKs]: ../features/0015-acks/README.md)
+[RFC 0015 ACKs]: ../features/0015-acks/README.md
 [RFC 0035 Report Problem]: ../features/0035-report-problem/README.md
 
 #### Request Message

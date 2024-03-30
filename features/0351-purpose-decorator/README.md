@@ -1,5 +1,5 @@
 # Aries RFC 0351: Purpose Decorator
-- Authors: [Filip Burlacu](filip.burlacu@securekey.com)
+- Authors: [Filip Burlacu](mailto:filip.burlacu@securekey.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-12-16
 - Status Note: implementation is being explored by SecureKey

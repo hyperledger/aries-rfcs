@@ -1,6 +1,6 @@
 # Aries RFC 0094: Cross-Domain Messaging
 
-- Authors: [Stephen Curran](swcurran@gmail.com)
+- Authors: [Stephen Curran](mailto:swcurran@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2018-10-29
 - Status Note: Socialized and broadly understood in other conceptual RFCs about routing. 

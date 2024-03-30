@@ -1,5 +1,5 @@
 # Aries RFC 0217: Linkable Message Paths
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-10
 - Status Note: Purely theoretical at this point, but may be relevant to efforts to join subprotocols to superprotocols. Mentioned in [RFC 0214 "Help Me Discover" Protocol](../../features/0214-help-me-discover/README.md).

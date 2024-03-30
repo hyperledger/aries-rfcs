@@ -1,6 +1,6 @@
 # RFC 0780: Use Data URLs for Images and More in Credential Attributes
 
-- Authors: [Stephen Curran](swcurran@cloudcompass.ca), [Clecio Varjao](clecio.varjao@gov.bc.ca)
+- Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [Clecio Varjao](mailto:clecio.varjao@gov.bc.ca)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2023-03-31
 - Status Note: New RFC being proposed.

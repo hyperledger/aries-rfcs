@@ -1,5 +1,5 @@
 # Aries RFC 0249: Aries Rich Schema Contexts
-- Authors: [Brent Zundel](mailto:brent.zundel@evernym.com), [Ken Ebert](mailto:ken@sovrin.org), [Alexander Shcherbakov](mailto:alexander.shcherbakov@evernym.com)
+- Authors: [Brent Zundel](mailto:mailto:brent.zundel@evernym.com), [Ken Ebert](mailto:mailto:ken@sovrin.org), [Alexander Shcherbakov](mailto:mailto:alexander.shcherbakov@evernym.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-10-08
 - Status Note: Part of proposed Rich Schema capabilities for credentials 

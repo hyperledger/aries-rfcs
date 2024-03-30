@@ -1,6 +1,6 @@
 # Aries RFC 0699: Push Notifications apns Protocol 1.0
 
-- Authors: [Timo Glastra](mailto:timo@animo.id) (Animo Solutions) & [Berend Sliedrecht](mailto:berend@animo.id) (Animo Solutions)
+- Authors: [Timo Glastra](mailto:mailto:timo@animo.id) (Animo Solutions) & [Berend Sliedrecht](mailto:mailto:berend@animo.id) (Animo Solutions)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2021-10-07
 - Status Note: Initial version

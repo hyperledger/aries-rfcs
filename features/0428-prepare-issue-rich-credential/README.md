@@ -1,5 +1,5 @@
 # 0428: Prerequisites to Issue Rich Credential
-- Authors: [Brent Zundel](<brent.zundel@evernym.com>), [Ken Ebert](<ken@sovrin.org>)
+- Authors: [Brent Zundel](mailto:<brent.zundel@evernym.com>), [Ken Ebert](mailto:<ken@sovrin.org>)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-02-20
 - Status Note: Part of proposed Rich Schema capabilities for credentials 
