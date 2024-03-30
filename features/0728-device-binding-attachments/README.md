@@ -1,5 +1,5 @@
 # Aries RFC 0728 : Device Binding Attachments
-- Authors: [Paul Bastian](mailto:paul.bastian@bdr.de), [Sebastian Bickerle](mailto:sebastian.bickerle@main-incubator.com)
+- Authors: [Paul Bastian](mailto:mailto:paul.bastian@bdr.de), [Sebastian Bickerle](mailto:mailto:sebastian.bickerle@main-incubator.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2022-04-07
 - Status Note: This is an initial draft 

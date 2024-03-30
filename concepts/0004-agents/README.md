@@ -1,6 +1,6 @@
 # Aries RFC 0004: Agents
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-01-15
 - Status Note: On a standards track and beginning to influence many mental models, but not yet [ADOPTED](/README.md#rfc-lifecycle). 

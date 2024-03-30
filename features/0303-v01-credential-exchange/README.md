@@ -1,6 +1,6 @@
 # Aries RFC 0303: V0.1 Credential Exchange (Deprecated)
 
-- Authors: [Tomislav Markovski](mailto:tomislav@streetcred.id), [Andrew Whitehead](mailto:andrew@1crm.com), [Stephen Curran](mailto:swcurran@cloudcompass.ca)
+- Authors: [Tomislav Markovski](mailto:mailto:tomislav@streetcred.id), [Andrew Whitehead](mailto:mailto:andrew@1crm.com), [Stephen Curran](mailto:mailto:swcurran@cloudcompass.ca)
 - Status: [RETIRED](../../README.md#retired)
 - Since: 2019-11-12
 - Status Note: Deprecated, but in common use in existing deployments of Aries agents. See [Implementations](#implementations) 

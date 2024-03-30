@@ -1,5 +1,5 @@
 # 0519: Goal Codes
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2021-04-15
 - Status Note: Used in several protocols that are part of [AIP 2.0](../0302-aries-interop-profile/README.md), such as the [Out-of-Band](../../features/0434-outofband/README.md) protocol.

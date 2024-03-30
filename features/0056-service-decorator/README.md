@@ -1,6 +1,6 @@
 # Aries RFC 0056: Service Decorator
 
-- Authors: [Sam Curren](sam@sovrin.org), Tobias Looker
+- Authors: [Sam Curren](mailto:sam@sovrin.org), Tobias Looker
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-06-03
 - Status Note: Needs refinement and validation, will be useful in any connectionless communication.

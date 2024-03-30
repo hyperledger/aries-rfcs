@@ -341,7 +341,7 @@ Here is the paper that defines
 [Camenisch-Lysyanskaya signatures.][CL-signatures] They are the source for
 [Indy's AnonCreds protocol](https://github.com/hyperledger/indy-hipe/pull/109).
 
-[CL-signatures]: (https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf)
+[CL-signatures]: https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf
 
 ## Drawbacks
 

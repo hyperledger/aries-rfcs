@@ -202,7 +202,7 @@ this protocol in the event that a `request` is not recognizable as a [JSON-RPC]
 message and as such, a [JSON-RPC] response message cannot be created. See the
 details below in the [Problem Report Message](#problem-report-message) section.
 
-[RFC 0015 ACKs]: ../features/0015-acks/README.md)
+[RFC 0015 ACKs]: ../features/0015-acks/README.md
 [RFC 0035 Report Problem]: ../features/0035-report-problem/README.md
 
 #### Request Message
