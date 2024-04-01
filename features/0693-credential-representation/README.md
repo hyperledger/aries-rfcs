@@ -1,9 +1,9 @@
 # 0693: Cross-Platform Credential Representation
 
 - Authors: [Horacio Nunez](mailto:horacio.nunez@kiva.org) (Kiva Protocol)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2021-07-06
-- Status Note:
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes:
 - Start Date: 2021-02-10
 - Tags: [feature](/tags.md#feature)

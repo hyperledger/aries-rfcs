@@ -1,8 +1,8 @@
 # Aries RFC 0482: Coprotocol Protocol 0.5
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-05-19
-- Status Note: Sister to [Aries RFC 0478](../../concepts/0478-coprotocols/README.md), which explains background concepts. Socialized on Aries community call in Feb 2020, using [these slides](https://docs.google.com/presentation/d/17hk6QqLW5M9E4TBPZwXIUBu9eEinMNXReceyZTF4LpA/edit). Discussed again in May 2020. Source files for graphics are either checked in or are published at https://j.mp/2XgyjH3.
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Start Date: 2020-02-03
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 

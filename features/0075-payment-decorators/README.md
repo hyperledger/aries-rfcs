@@ -1,9 +1,9 @@
 # Aries RFC 0075: Payment Decorators
 
 - Authors: [Sam Curren](sam@sovrin.org), [Daniel Hardman](daniel.hardman@gmail.com), Tomislav Markovski
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-06-11
-- Status Note: Still being studied. 
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes: [Indy HIPE PR #129]( https://github.com/hyperledger/indy-hipe/pull/129)
 - Start Date: 2019-04-22
 - Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)

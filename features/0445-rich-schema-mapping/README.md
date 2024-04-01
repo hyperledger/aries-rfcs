@@ -1,8 +1,8 @@
 # Aries RFC 0445: Aries Rich Schema Mapping
 - Author: [Alexander Shcherbakov](mailto:alexander.shcherbakov@evernym.com), [Ken Ebert](mailto:ken@sovrin.org), [Brent Zundel](mailto:brent.zundel@evernym.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-03-16
-- Status Note: Part of proposed Rich Schema capabilities for credentials 
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes:
 - Start Date: 2019-03-16
 - Tags: [feature](/tags.md#feature), [rich-schemas](/tags.md#rich-schemas)

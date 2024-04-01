@@ -1,9 +1,9 @@
 # Aries RFC 0794: DID Rotate 1.0
 
 - Authors: [Sam Curren](telegramsam@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2023-08-29 
-- Status Note: 
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2024-03-02
+- Status Note: Implemented in the [Aries Cloud Agent Python](https://github.com/hyperledger/aries-cloudagent-python)
 - Start Date: 2023-08-18 
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 - URI: https://didcomm.org/did-rotate/1.0

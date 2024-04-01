@@ -1,8 +1,8 @@
 # 0289: The Trust Over IP Stack
 - Authors: Matthew Davie, [Dan Gisolfi](dan.gisolfi@gmail.com), [Daniel Hardman](daniel.hardman@evernym.com), [John Jordan](john.jordan@gov.bc.ca), Darrell O'Donnell, [Drummond Reed](drummond.reed@evernym.com), [Oskar van Deventer](oskar.vandeventer@tno.nl)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-11-04
-- Status Note: Initial Proposal
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No recent progress and no implementations have been created.
 - Start Date: 2019-01-01
 - Tags: [concept](/tags.md#concept), stack, trust layer, governance framework
 

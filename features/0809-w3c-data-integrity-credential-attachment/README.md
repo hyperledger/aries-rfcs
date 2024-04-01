@@ -1,9 +1,9 @@
 # Aries RFC 0809: W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials
 
 - Authors: Timo Glastra (Animo Solutions)
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2024-01-10
-- Status Note:
+- Status Note: Implemented in [Aries Cloud Agent Python](https://github.com/hyperledger/aries-cloudagent-python) and [Credo](https://github.com/openwallet-foundation/credo-ts)
 - Supersedes: [Aries RFC 0593: JSON-LD Credential Attachment](https://github.com/hyperledger/aries-rfcs/blob/main/features/0593-json-ld-cred-attach/README.md)
 - Start Date: 2023-12-18
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials), [test-anomaly](/tags.md#test-anomaly)

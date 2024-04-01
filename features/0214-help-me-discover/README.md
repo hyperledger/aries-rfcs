@@ -1,8 +1,8 @@
 # Aries RFC 0214: "Help Me Discover" Protocol
 - Authors: [George Aristy](george.aristy@securekey.com), [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-09-10
-- Status Note: implementation is being explored by SecureKey  
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Start Date: 2018-08-20
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 

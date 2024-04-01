@@ -6,7 +6,7 @@ RFC = collections.namedtuple('RFC', 'title abspath relpath category folder num a
                              ' status_note start_date supersedes superseded_by tags content_idx impl_count impl_table')
 
 
-status_list = ["ADOPTED", "ACCEPTED", "DEMONSTRATED", "PROPOSED", "RETIRED"]
+status_list = ["ADOPTED", "ACCEPTED", "DEMONSTRATED", "PROPOSED", "STALLED", "RETIRED"]
 
 
 root_folder = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))

@@ -1,12 +1,9 @@
 # 0755: Overlays Capture Architecture (OCA) For Aries
 
 - Authors: [Stephen Curran](swcurran@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2023-01-15
-- Status Note: In the process of being implemented in several Aries Frameworks (ACA-Py, AFJ)
-- Supersedes: Supersedes [0013-Overlays](/concepts/0013-overlays/README.md) as
-  that RFC is/was about the OCA specification, while this covers the application of the OCA
-  Specification for Aries agents.
+- Status: [DEMONSTRATED](/README.md#demonstrated)
+- Since: 2024-03-02
+- Status Note: Implemented in the [Bifold Wallet](https://github.com/openwallet-foundation/bifold-wallet)
 - Start Date: 2022-09-25
 - Version: 1.0
 - Tags: [feature](/tags.md#feature)

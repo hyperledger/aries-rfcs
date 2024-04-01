@@ -1,9 +1,9 @@
 # Aries RFC 0347: Proof Negotiation
 
 - Authors: [Philipp Rieblinger](p.rieblinger@esatus.com), [Sebastian Weidenbach](s.weidenbach@esatus.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-12-13
-- Status Note: Initial proposal after discussion on rocketchat
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes: 
 - Start Date: 2019-09-09
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)

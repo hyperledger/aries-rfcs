@@ -1,9 +1,9 @@
 # Aries RFC 0193: Coin Flip Protocol 1.0 
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com), [Patrick Stürmlinger](patrick@mindf.org)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-08-19
-- Status Note: minor update in late 2020 
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Start Date: 2019-08-19
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
