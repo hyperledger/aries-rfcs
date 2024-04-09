@@ -1,5 +1,5 @@
 # 0212: Pickup Protocol
-- Authors: [Sam Curren](telegramsam@gmail.com)
+- Authors: [Sam Curren](telegramsam@gmail.com), [Pavel Minenkov](minikspb@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-03
 - Status Note: Initial version
@@ -60,9 +60,36 @@ A request to have multiple waiting messages sent inside a `batch` message.
 {
     "@id": "123456781",
     "@type": "https://didcomm.org/messagepickup/1.0/batch-pickup",
-    "batch_size": 10
+    "batch_size": 10,
+    "~timing": {
+      "delay_milli": 3000
+    }
 }
 ```
+
+`batch_size` is count of messages that **recipient** wants to retrieve
+
+#### message timings 
+[feature-0032](https://github.com/Purik/aries-rfcs/tree/0212_pickup/features/0032-message-timing)
+
+`~timings.delay_milli` *(optional)* is timeout in milliseconds _recipient_ is ready to wait. For example, if **recipient** has set
+this value to "3000ms" and batch_size has set to `5` then it says: give me all datta immediately if you have `5` messages in queue 
+otherwise I'm ready to wait for "3000ms". If _message_holder_ keep in queue `message_count < 5` then it should delay response
+to try to fill all requested `batch_size` in requested `~timings.delay_milli` time. 
+
+In other words combination of `batch_size` and `~timings.delay_milli` delegate to _message_holder_ responsibility
+to fill all requested `batch_size` for restricted `~timings.delay_milli` time.
+
+Cases:
+  - _message_holder_ has `10` messages in the queue. _recipient_ requested batch with `batch_size = 3`. 
+    _message_holder_ will return batch with `3` messages and `7` messages continue to keep
+  - _message_holder_ has `10` messages in the queue. _recipient_ requested batch with `batch_size = 30`.
+    _message_holder_ will return batch with `10` messages and queue will be empty
+  - _message_holder_ has `10` messages in the queue. _recipient_ requested batch with `batch_size = 30` and `~timings.delay_milli = 3000 (3000 msec)`
+    _message_holder_ delay response cause of it queue has not size corresponded for `30` requesting size, suppose 
+    _message_holder_ received `5` messages within `3000 msec`, so it will respond with `10+5=15` messages in response
+  - _message_holder_ has `0` messages in the queue. _recipient_ requested batch with `batch_size = 30` and `~timings.delay_milli = 3000 (3000 msec)`
+    _message_holder_ did not receive any messages within `3000 msec` so it will return empty messages list. 
 
 ### Batch
 A message that contains multiple waiting messages.
@@ -126,10 +153,55 @@ Used to receive another message implicitly. This message has no expected behavio
 ```json=
 {
     "@id": "123456781",
-    "@type": "https://didcomm.org/messagepickup/1.0/noop"
+    "@type": "https://didcomm.org/messagepickup/1.0/noop",
+    "~timing": {
+      "delay_milli": 3000
+    }
 }
 ```
 
+It is useful to work with [Mediation flow](https://github.com/Sirius-social/didcomm-mediator/blob/main/docs/Mediation.md)
+in cases when **recipient** and **batch_recipient** are same entity. **recipient** may declare it with set [`serviceEndpoint`: `didcomm:transport/queue`](https://github.com/decentralized-identity/didcomm-messaging/blob/main/extensions/return_route/main.md#queue-transport)
+
+`~timing.delay_milli` is optional attribute
+
+
+For mediator case this message is similar to `https://didcomm.org/messagepickup/1.0/batch` with `batch_size=1`
+with some exception:
+  - If _message_holder_ has empty queue then it will return `problem_report` with `empty_queue` problem code.
+    Expected `noop` request make sense for filled queues  
+  - If _message_holder_ has empty queue **BUT** _recipient_ has set `~timing.delay_milli` then _message_holder_
+    will delay for `~timing.delay_milli` or less to wait incoming message. If message was received within
+    specific time period, it will make response immediately else return `problem_report` with `timeout_occurred` problem code.
+    In other words `~timings.delay_milli` delegate to _message_holder_ responsibility
+    to try to make response within restricted `~timings.delay_milli` time.
+
+
+Cases:
+  - _message_holder_ has `10` messages in the queue. _recipient_. 
+    _message_holder_ will make response immediately
+  - _message_holder_ has `0` messages in the queue.
+    _message_holder_ will return `problem_report` with `empty_queue` problem code.
+  - _message_holder_ has `0` messages in the queue and _recipient_ has set `~timings.delay_milli = 3000 (3000 msec)`
+    _message_holder_ did not receive any messages within `3000 msec` so it will return `problem_report` with `timeout_occurred` problem code.
+  - _message_holder_ has `0` messages in the queue and _recipient_ has set `~timings.delay_milli = 3000 (3000 msec)`
+    _message_holder_ received some messages after `1000 msec` so it will return immediately
+
+    
+### Problem reports & problem codes
+```json=
+{
+    "@id": "123456781",
+    "@type": "https://didcomm.org/messagepickup/1.0/problem_report",
+    "problem-code": "timeout_occurred",
+    "explain": "Message queue is empty, timeout occurred"
+}
+```
+problem codes:
+ - **timeout_occurred**: **message_holder** can't fill response with messages cause of message queue is empty. 
+  typically, in scenarios if `~timing.delay_milli` is set
+ - **empty_queue**: _message_holder_ can not process request cause of queue is empty
+ - **invalid_request**: unexpected request type
 
 ## Prior art
 
@@ -145,4 +217,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
- |  |
+ [DIDComm mediator](https://github.com/Sirius-social/didcomm-mediator/blob/main/docs/Mediation.md#using-a-mediator) | Open source cloud-based mediator.
