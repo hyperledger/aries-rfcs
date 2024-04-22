@@ -29,7 +29,6 @@ Format identifier: `didcomm/w3c-di-vc-offer@v0.1`
 ```json
 {
   "options": {
-    "data_model_version": "v2",
     "binding_method": {
       "anoncreds_link_secret": {
         "nonce": "1234",
