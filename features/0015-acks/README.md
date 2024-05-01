@@ -1,8 +1,8 @@
 # Aries RFC 0015: ACKs
 
 - Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [ACCEPTED](/README.md#accepted)
-- Since: 2021-04-15
+- Status: [ADOPTED](/README.md#adopted)
+- Since: 2024-05-01
 - Status Note: Broadly implemented, adopted into many protocols and part of [AIP 1 and 2](../../concepts/0302-aries-interop-profile/README.md).
 - Start Date: 2018-12-26
 - Tags: [feature](/tags.md#feature)

@@ -1,8 +1,8 @@
 # 0212: Pickup Protocol 2.0
 
 - Authors: [Sam Curren](telegramsam@gmail.com), [James Ebert](james.ebert@indicio.tech)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-09-03
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2024-05-01
 - Status Note: Initial version
 - Start Date: 2020-12-22
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)

@@ -3,7 +3,7 @@
 - Authors: [Horacio Nunez](mailto:horacio.nunez@kiva.org) (Kiva Protocol)
 - Status: [STALLED](/README.md#stalled)
 - Since: 2024-04-03
-- Status Note: No implementations have been created.
+- Status Note: Superseded by [RFC 0755 OCA for Aries](../../features/0755-oca-for-aries/README.md)
 - Supersedes:
 - Start Date: 2021-02-10
 - Tags: [feature](/tags.md#feature)

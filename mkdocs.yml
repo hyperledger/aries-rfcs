@@ -126,127 +126,128 @@ nav:
     - 0005 DID Communication: concepts/0005-didcomm/README.md
     - 0008 Message ID and Threading: concepts/0008-message-id-and-threading/README.md
     - 0011 Decorators: concepts/0011-decorators/README.md
+    - 0015 ACKs: features/0015-acks/README.md
+    - 0017 Attachments: concepts/0017-attachments/README.md
     - 0019 Encryption Envelope: features/0019-encryption-envelope/README.md
     - 0020 Message Types: concepts/0020-message-types/README.md
     - 0021 DIDComm Message Anatomy: concepts/0021-didcomm-message-anatomy/README.md
     - 0023 DID Exchange v1: features/0023-did-exchange/README.md
     - 0025 DIDComm Transports: features/0025-didcomm-transports/README.md
     - 0031 Discover Features Protocol 1.0: features/0031-discover-features/README.md
+    - 0035 Report Problem Protocol 1.0: features/0035-report-problem/README.md
     - 0036 Issue Credential Protocol 1.0: features/0036-issue-credential/README.md
     - 0037 Present Proof Protocol 1.0: features/0037-present-proof/README.md
     - 0048 Trust Ping Protocol 1.0: features/0048-trust-ping/README.md
+    - 0092 Transports Return Route: features/0092-transport-return-route/README.md
+    - 0094 Cross-Domain Messaging: concepts/0094-cross-domain-messaging/README.md
     - 0095 Basic Message Protocol 1.0: features/0095-basic-message/README.md
     - 0160 Connection Protocol: features/0160-connection-protocol/README.md
+    - 0211 Mediator Coordination Protocol: features/0211-route-coordination/README.md
     - 0302 Aries Interop Profile: concepts/0302-aries-interop-profile/README.md
+    - 0360 did:key Usage: features/0360-use-did-key/README.md
     - 0434 Out-of-Band Protocol 1.1: features/0434-outofband/README.md
+    - 0441 Prover and Verifier Best Practices for Proof Presentation: concepts/0441-present-proof-best-practices/README.md
     - 0453 Issue Credential Protocol 2.0: features/0453-issue-credential-v2/README.md
     - 0454 Present Proof Protocol 2.0: features/0454-present-proof-v2/README.md
     - 0510 Presentation-Exchange Attachment format for requesting and presenting proofs: features/0510-dif-pres-exch-attach/README.md
+    - 0557 Discover Features Protocol v2.x: features/0557-discover-features-v2/README.md
     - 0592 Indy Attachment Formats for Requesting and Presenting Credentials: features/0592-indy-attachments/README.md
     - 0593 JSON-LD Credential Attachment format for requesting and issuing credentials: features/0593-json-ld-cred-attach/README.md
 - ACCEPTED:
     - 0004 Agents: concepts/0004-agents/README.md
     - 0006 SSI Notation: concepts/0006-ssi-notation/README.md
-    - 0015 ACKs: features/0015-acks/README.md
-    - 0017 Attachments: concepts/0017-attachments/README.md
-    - 0035 Report Problem Protocol 1.0: features/0035-report-problem/README.md
     - 0044 DIDComm File and MIME Types: features/0044-didcomm-file-and-mime-types/README.md
     - 0046 Mediators and Relays: concepts/0046-mediators-and-relays/README.md
     - 0047 JSON-LD Compatibility: concepts/0047-json-ld-compatibility/README.md
     - 0049 Repudiation: concepts/0049-repudiation/README.md
     - 0050 Wallets: concepts/0050-wallets/README.md
-    - 0092 Transports Return Route: features/0092-transport-return-route/README.md
-    - 0094 Cross-Domain Messaging: concepts/0094-cross-domain-messaging/README.md
-    - 0211 Mediator Coordination Protocol: features/0211-route-coordination/README.md
-    - 0360 did:key Usage: features/0360-use-did-key/README.md
-    - 0441 Prover and Verifier Best Practices for Proof Presentation: concepts/0441-present-proof-best-practices/README.md
+    - 0183 Revocation Notification 1.0: features/0183-revocation-notification/README.md
+    - 0212 Pickup Protocol 2.0: features/0685-pickup-v2/README.md
     - 0496 Transition to the Out of Band and DID Exchange Protocols: features/0496-transition-to-oob-and-did-exchange/README.md
     - 0519 Goal Codes: concepts/0519-goal-codes/README.md
-    - 0557 Discover Features Protocol v2.x: features/0557-discover-features-v2/README.md
     - 0587 Encryption Envelope v2: features/0587-encryption-envelope-v2/README.md
     - 0646 W3C Credential Exchange using BBS+ Signatures: features/0646-bbs-credentials/README.md
+    - 0721 Revocation Notification 2.0: features/0721-revocation-notification-v2/README.md
     - 0793 Unqualified DID Transition: features/0793-unqualfied-dids-transition/README.md
+    - 0794 DID Rotate 1.0: features/0794-did-rotate/README.md
 - DEMONSTRATED:
-    - 0029 Message Trust Contexts: concepts/0029-message-trust-contexts/README.md
     - 0032 Message Timing: features/0032-message-timing/README.md
     - 0042 LOX -- A more secure pluggable framework for protecting wallet keys: features/0042-lox/README.md
     - 0043 l10n (Locali[s|z]ation): features/0043-l10n/README.md
-    - 0051 Decentralized Key Management: concepts/0051-dkms/README.md
     - 0113 Question Answer Protocol 0.9: features/0113-question-answer/README.md
     - 0509 Action Menu Protocol: features/0509-action-menu/README.md
     - 0748 N-wise DID Exchange Protocol 1.0: features/0748-n-wise-did-exchange/README.md
+    - 0755 Overlays Capture Architecture (OCA) For Aries: features/0755-oca-for-aries/README.md
+    - 0756 OCA for Aries Style Guide: features/0756-oca-for-aries-style-guide/README.md
+    - 0780 Use Data URLs for Images and More in Credential Attributes: features/0780-data-urls-images/README.md
+    - 0804 DIDComm Remote Procedure Call (DRPC): features/0804-didcomm-rpc/README.md
+    - 0809 W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials: features/0809-w3c-data-integrity-credential-attachment/README.md
 - PROPOSED:
     - 0799 Long Term Support: concepts/0799-long-term-support/README.md
-    - 0024 DIDComm over XMPP: features/0024-didcomm-over-xmpp/README.md
     - 0028 Introduce Protocol 1.0: features/0028-introduce/README.md
-    - 0030 Sync Connection Protocol 1.0: features/0030-sync-connection/README.md
     - 0034 Message Tracing: features/0034-message-tracing/README.md
     - 0056 Service Decorator: features/0056-service-decorator/README.md
     - 0066 Non-Repudiable Signature for Cryptographic Envelope: features/0066-non-repudiable-cryptographic-envelope/README.md
     - 0067 DIDComm DID document conventions: features/0067-didcomm-diddoc-conventions/README.md
     - 0074 DIDComm Best Practices: concepts/0074-didcomm-best-practices/README.md
-    - 0075 Payment Decorators: features/0075-payment-decorators/README.md
     - 0103 Indirect Identity Control: concepts/0103-indirect-identity-control/README.md
     - 0104 Chained Credentials: concepts/0104-chained-credentials/README.md
-    - 0114 Predefined Identities: features/0114-predefined-identities/README.md
-    - 0116 Evidence Exchange Protocol 0.9: features/0116-evidence-exchange/README.md
     - 0124 DID Resolution Protocol 0.9: features/0124-did-resolution-protocol/README.md
     - 0167 Data Consent Lifecycle: concepts/0167-data-consent-lifecycle/README.md
-    - 0183 Revocation Notification 1.0: features/0183-revocation-notification/README.md
-    - 0193 Coin Flip Protocol 1.0 : features/0193-coin-flip/README.md
-    - 0207 Credential Fraud Threat Model: concepts/0207-credential-fraud-threat-model/README.md
     - 0212 Pickup Protocol: features/0212-pickup/README.md
-    - 0212 Pickup Protocol 2.0: features/0685-pickup-v2/README.md
-    - 0213 Transfer Policy Protocol: features/0213-transfer-policy/README.md
     - 0214 "Help Me Discover" Protocol: features/0214-help-me-discover/README.md
-    - 0217 Linkable Message Paths: concepts/0217-linkable-message-paths/README.md
     - 0231 Biometric Service Provider: concepts/0231-biometric-service-provider/README.md
-    - 0249 Aries Rich Schema Contexts: features/0249-rich-schema-contexts/README.md
-    - 0257 Private Credential Issuance: concepts/0257-private-credential-issuance/README.md
     - 0268 Unified DIDCOMM Deeplinking: concepts/0268-unified-didcomm-agent-deeplinking/README.md
     - 0270 Interop Test Suite: concepts/0270-interop-test-suite/README.md
+    - 0345 Community Coordinated Update: concepts/0345-community-coordinated-update/README.md
+    - 0346 DIDComm Between Two Mobile Agents Using Cloud Agent Mediator: concepts/0346-didcomm-between-two-mobile-agents/README.md
+    - 0347 Proof Negotiation: features/0347-proof-negotiation/README.md
+    - 0430 Machine-Readable Governance Frameworks: concepts/0430-machine-readable-governance-frameworks/README.md
+    - 0440 KMS Architectures : concepts/0440-kms-architectures/README.md
+    - 0511 Credential-Manifest Attachment format for requesting and presenting credentials: features/0511-dif-cred-manifest-attach/README.md
+    - 0559 Privacy-Preserving Proof of Uniqueness: concepts/0559-pppu/README.md
+    - 0566 Issuer-Hosted Custodial Agents: concepts/0566-issuer-hosted-custodidal-agents/README.md
+    - 0641 Linking binary objects to credentials using hash based references: features/0641-linking-binary-objects-to-credentials/README.md
+    - 0699 Push Notifications apns Protocol 1.0: features/0699-push-notifications-apns/README.md
+    - 0700 Out-of-Band through redirect: concepts/0700-oob-through-redirect/README.md
+    - 0728 Device Binding Attachments: features/0728-device-binding-attachments/README.md
+    - 0734 Push Notifications fcm Protocol 1.0: features/0734-push-notifications-fcm/README.md
+    - 0757 Push Notification: concepts/0757-push-notification/README.md
+    - 0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials: features/0771-anoncreds-attachments/README.md
+- STALLED:
+    - 0024 DIDComm over XMPP: features/0024-didcomm-over-xmpp/README.md
+    - 0029 Message Trust Contexts: concepts/0029-message-trust-contexts/README.md
+    - 0030 Sync Connection Protocol 1.0: features/0030-sync-connection/README.md
+    - 0075 Payment Decorators: features/0075-payment-decorators/README.md
+    - 0114 Predefined Identities: features/0114-predefined-identities/README.md
+    - 0116 Evidence Exchange Protocol 0.9: features/0116-evidence-exchange/README.md
+    - 0193 Coin Flip Protocol 1.0 : features/0193-coin-flip/README.md
+    - 0207 Credential Fraud Threat Model: concepts/0207-credential-fraud-threat-model/README.md
+    - 0213 Transfer Policy Protocol: features/0213-transfer-policy/README.md
+    - 0217 Linkable Message Paths: concepts/0217-linkable-message-paths/README.md
+    - 0249 Aries Rich Schema Contexts: features/0249-rich-schema-contexts/README.md
+    - 0250 Rich Schema Objects: concepts/0250-rich-schemas/README.md
+    - 0257 Private Credential Issuance: concepts/0257-private-credential-issuance/README.md
     - 0281 Aries Rich Schemas: features/0281-rich-schemas/README.md
     - 0289 The Trust Over IP Stack: concepts/0289-toip-stack/README.md
     - 0309 DIDAuthZ: features/0309-didauthz/README.md
     - 0327 Crypto service Protocol 1.0: features/0327-crypto-service/README.md
     - 0334 JWE envelope 1.0: features/0334-jwe-envelope/README.md
     - 0335 HTTP Over DIDComm: features/0335-http-over-didcomm/README.md
-    - 0345 Community Coordinated Update: concepts/0345-community-coordinated-update/README.md
-    - 0346 DIDComm Between Two Mobile Agents Using Cloud Agent Mediator: concepts/0346-didcomm-between-two-mobile-agents/README.md
-    - 0347 Proof Negotiation: features/0347-proof-negotiation/README.md
     - 0351 Purpose Decorator: features/0351-purpose-decorator/README.md
     - 0418 Aries Rich Schema Encoding Objects: features/0418-rich-schema-encoding/README.md
     - 0420 Rich Schema Objects Common: concepts/0420-rich-schemas-common/README.md
     - 0428 Prerequisites to Issue Rich Credential: features/0428-prepare-issue-rich-credential/README.md
     - 0429 Prerequisites to Request Rich Presentation: features/0429-prepare-req-rich-pres/README.md
-    - 0430 Machine-Readable Governance Frameworks: concepts/0430-machine-readable-governance-frameworks/README.md
-    - 0440 KMS Architectures : concepts/0440-kms-architectures/README.md
     - 0445 Aries Rich Schema Mapping: features/0445-rich-schema-mapping/README.md
     - 0446 Aries Rich Schema Credential Definition: features/0446-rich-schema-cred-def/README.md
     - 0478 Coprotocols: concepts/0478-coprotocols/README.md
     - 0482 Coprotocol Protocol 0.5: features/0482-coprotocol-protocol/README.md
-    - 0511 Credential-Manifest Attachment format for requesting and presenting credentials: features/0511-dif-cred-manifest-attach/README.md
-    - 0559 Privacy-Preserving Proof of Uniqueness: concepts/0559-pppu/README.md
-    - 0566 Issuer-Hosted Custodial Agents: concepts/0566-issuer-hosted-custodidal-agents/README.md
-    - 0641 Linking binary objects to credentials using hash based references: features/0641-linking-binary-objects-to-credentials/README.md
     - 0693 Cross-Platform Credential Representation: features/0693-credential-representation/README.md
-    - 0699 Push Notifications apns Protocol 1.0: features/0699-push-notifications-apns/README.md
-    - 0700 Out-of-Band through redirect: concepts/0700-oob-through-redirect/README.md
-    - 0721 Revocation Notification 2.0: features/0721-revocation-notification-v2/README.md
-    - 0728 Device Binding Attachments: features/0728-device-binding-attachments/README.md
-    - 0734 Push Notifications fcm Protocol 1.0: features/0734-push-notifications-fcm/README.md
-    - 0755 Overlays Capture Architecture (OCA) For Aries: features/0755-oca-for-aries/README.md
-    - 0756 OCA for Aries Style Guide: features/0756-oca-for-aries-style-guide/README.md
-    - 0757 Push Notification: concepts/0757-push-notification/README.md
-    - 0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials: features/0771-anoncreds-attachments/README.md
-    - 0780 Use Data URLs for Images and More in Credential Attributes: features/0780-data-urls-images/README.md
-    - 0794 DID Rotate 1.0: features/0794-did-rotate/README.md
-    - 0804 DIDComm Remote Procedure Call (DRPC): features/0804-didcomm-rpc/README.md
-    - 0809 W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials: features/0809-w3c-data-integrity-credential-attachment/README.md
 - RETIRED:
     - 0013 Overlays: concepts/0013-overlays/README.md
+    - 0051 Decentralized Key Management: concepts/0051-dkms/README.md
     - 0234 Signature Decorator: features/0234-signature-decorator/README.md
-    - 0250 Rich Schema Objects: concepts/0250-rich-schemas/README.md
     - 0303 V0.1 Credential Exchange (Deprecated): features/0303-v01-credential-exchange/README.md
     - 0317 Please ACK Decorator: features/0317-please-ack/README.md
     - 0348 Transition Message Type to HTTPs: features/0348-transition-msg-type-to-https/README.md

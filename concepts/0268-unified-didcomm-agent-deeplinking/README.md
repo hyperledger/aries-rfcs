@@ -1,8 +1,8 @@
 # Aries RFC 0268: Unified DIDCOMM Deeplinking
 - Authors: [Dev Bharel](dev@spaceman.id), [Alexi Falquier](alexis@spaceman.id)
-- Status: [STALLED](/README.md#stalled)
-- Since: 2024-04-03
-- Status Note: No recent progress and no implementations have been created.
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2019-10-23
+- Status Note: Proposed
 - Start Date: 2018-10-04
 - Tags: [concept](/tags.md#concept)
 

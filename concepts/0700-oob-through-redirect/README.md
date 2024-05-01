@@ -1,9 +1,9 @@
 # Aries RFC 0700: Out-of-Band through redirect
 
 - Authors: [Sudesh Shetty](sudesh.shetty@securekey.com)
-- Status: [STALLED](/README.md#stalled)
-- Since: 2024-04-03
-- Status Note: No recent progress and no implementations have been created.
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2021-10-08
+- Status Note: implementation is being explored by SecureKey
 - Start Date: 2019-10-08
 - Tags: [concept](/tags.md#concept), [decorator](/tags.md#decorator)
 

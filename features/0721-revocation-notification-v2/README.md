@@ -1,7 +1,7 @@
 # Aries RFC 0721: Revocation Notification 2.0
 - Authors: Keith Smith, Daniel Bluhm, James Ebert
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2022-02-15
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2024-05-01
 - Status Note: Updates the credential identifiers format after discussions while implementing [RFC 0183 Revocation Notification](../0183-revocation-notification/README.md)
 - Supersedes: [RFC 0183 Revocation Notification](../0183-revocation-notification/README.md)
 - Start Date: 2021-11-01
