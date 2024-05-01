@@ -208,6 +208,7 @@ nav:
     - 0559 Privacy-Preserving Proof of Uniqueness: concepts/0559-pppu/README.md
     - 0566 Issuer-Hosted Custodial Agents: concepts/0566-issuer-hosted-custodidal-agents/README.md
     - 0641 Linking binary objects to credentials using hash based references: features/0641-linking-binary-objects-to-credentials/README.md
+    - 0693 Cross-Platform Credential Representation: features/0693-credential-representation/README.md
     - 0699 Push Notifications apns Protocol 1.0: features/0699-push-notifications-apns/README.md
     - 0700 Out-of-Band through redirect: concepts/0700-oob-through-redirect/README.md
     - 0728 Device Binding Attachments: features/0728-device-binding-attachments/README.md
@@ -243,7 +244,6 @@ nav:
     - 0446 Aries Rich Schema Credential Definition: features/0446-rich-schema-cred-def/README.md
     - 0478 Coprotocols: concepts/0478-coprotocols/README.md
     - 0482 Coprotocol Protocol 0.5: features/0482-coprotocol-protocol/README.md
-    - 0693 Cross-Platform Credential Representation: features/0693-credential-representation/README.md
 - RETIRED:
     - 0013 Overlays: concepts/0013-overlays/README.md
     - 0051 Decentralized Key Management: concepts/0051-dkms/README.md
