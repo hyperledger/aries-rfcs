@@ -69,7 +69,7 @@ for i in docs/aip2/*/README.md ; do head -n 1 $i | sed -e "s/# /    - /" -e "s/:
 
 # Navigation for all RFCs by Status
 python code/generate_mkdocs_index.py
-cat ${MKDOCSIDX} | sed "s# : concepts/0799#0799 Long Term Support: concepts/0799#" >>${MKDOCSTMP}
+cat ${MKDOCSIDX} >>${MKDOCSTMP}
 rm ${MKDOCSIDX}
 
 mv ${MKDOCSTMP} ${MKDOCS}
