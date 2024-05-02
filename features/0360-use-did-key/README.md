@@ -1,8 +1,8 @@
 # Aries RFC 0360: did:key Usage
 
 - Authors: [Tobias Looker](tobias.looker@mattr.global), [Stephen Curran](mailto:swcurran@cloudcompass.ca)
-- Status: [ACCEPTED](/README.md#accepted)
-- Since: 2021-04-15
+- Status: [ADOPTED](/README.md#adopted)
+- Since: 2024-05-01
 - Status Note: Referenced in a number of Aries RFCs and formalized as part of [AIP 2.0](../../concepts/0302-aries-interop-profile/README.md) did:key method is a [W3C CCG work item](https://w3c-ccg.github.io/community/work_items.html)
 - Start Date: 2019-12-17
 - Tags: [feature](/tags.md#feature)

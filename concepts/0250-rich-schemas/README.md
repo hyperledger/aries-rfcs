@@ -1,8 +1,8 @@
 # RFC 0250: Rich Schema Objects
 - Author: [Ken Ebert](ken@sovrin.org), [Brent Zundel](brent.zundel@evernym.com)
-- Status: [RETIRED](/README.md#retired)
-- Since: 2019-10-08
-- Status Note: Port of [this HIPE](https://github.com/hyperledger/indy-hipe/tree/main/text/0119-rich-schemas/README.md)
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No recent progress and no implementations have been created.
 - Supersedes: [this HIPE](https://github.com/hyperledger/indy-hipe/tree/main/text/0119-rich-schemas/README.md)
 - Start Date: 2019-03-19
 - Tags: [concept](/tags.md#concept), [rich-schemas](/tags.md#rich-schemas)

@@ -2,7 +2,7 @@
 - Authors: [Sam Curren](telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-03
-- Status Note: Initial version 
+- Status Note: Initial version
 - Start Date: 2019-09-03
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 

@@ -14,6 +14,9 @@ sed -e "s#/tags.md#tags.md#g" index.md > docs/RFCindex.md
 # Features and Concept -- collect all of the RFCs
 cp -r features concepts docs
 
+# Update the index.md file
+python code/generate_index.py
+
 # Make a copy of AIP 2 RFCs using the right commit for each
 python code/aipUpdates.py -v 2.0 -l "./code/cpAIPs.sh" | \
    sed -e "/0317-please-ack/d" -e "/0587-encryption-envelope-v2/d" -e "/0627-static-peer-dids/d" \

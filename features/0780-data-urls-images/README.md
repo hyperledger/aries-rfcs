@@ -1,9 +1,9 @@
 # RFC 0780: Use Data URLs for Images and More in Credential Attributes
 
 - Authors: [Stephen Curran](swcurran@cloudcompass.ca), [Clecio Varjao](clecio.varjao@gov.bc.ca)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2023-03-31
-- Status Note: New RFC being proposed.
+- Status: [DEMONSTRATED](/README.md#demonstrated)
+- Since: 2024-03-02
+- Status Note: Implemented in the [Bifold Wallet](https://github.com/openwallet-foundation/bifold-wallet)
 - Supersedes: None
 - Start Date: 2023-03-31
 - Tags: [feature](/tags.md#feature)

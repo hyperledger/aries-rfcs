@@ -1,12 +1,9 @@
 # 0756: OCA for Aries Style Guide
 
 - Authors: [Stephen Curran](swcurran@cloudcompass.ca)
-- Status: [PROPOSED](/README.md#proposed)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2023-01-05
-- Status Note: This is a companion RFC to [RFC 0755: OCA for Aries]. This RFC is
-  a style guide for Issuers and Holders about how the Overlays Capture
-  Architecture (OCA) technical components outlined the companion RFC are to be
-  applied in displaying verifiable credentials.
+- Status Note: Implemented in the [Bifold Wallet](https://github.com/openwallet-foundation/bifold-wallet)
 - Supersedes: N/A
 - Start Date: 2022-11-15
 - Version: 1.0

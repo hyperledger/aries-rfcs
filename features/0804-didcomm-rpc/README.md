@@ -1,9 +1,9 @@
 # 0804: DIDComm Remote Procedure Call (DRPC)
 
 - Authors: [Clecio Varjao](clecio.varjao@gov.bc.ca) (BC Gov), [Stephen Curran](swcurran@cloudcompass.ca) (BC Gov), [Akiff Manji](amanji@petridish.dev) (BC Gov)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2023-11-29
-- Status Note: An evolution of the HTTP over DIDComm protocol to enable an Agent to request an arbitrary service from a connected Agent and get a response.
+- Status: [DEMONSTRATED](/README.md#demonstrated)
+- Since: 2024-03-02
+- Status Note: Implemented in an [Aries Cloud Agent Python plugin](https://github.com/hyperledger/aries-acapy-plugins), and [Credo TS](https://github.com/openwallet-foundation/credo-ts)
 - Supersedes:
 - Start Date: 2023-11-29
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)

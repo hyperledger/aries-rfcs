@@ -1,8 +1,8 @@
 # Aries RFC 0092: Transports Return Route
 
 - Authors: [Sam Curren](sam@sovrin.org)
-- Status: [ACCEPTED](/README.md#accepted)
-- Since: 2019-12-06
+- Status: [ADOPTED](/README.md#adopted)
+- Since: 2024-05-01
 - Status Note:  
 - Supersedes: [INDY HIPE PR 116](https://github.com/hyperledger/indy-hipe/pull/116)
 - Start Date: 2019-03-04

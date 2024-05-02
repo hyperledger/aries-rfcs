@@ -1,9 +1,9 @@
 # Aries RFC 0051: Decentralized Key Management
 
 - Authors: [Drummond Reed](drummond@connect.me) et al.
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-03-29
-- Status Note: Somewhat familiar to many in the community, and influential in the designs of other RFCs--but not yet deeply explored or socialized.
+- Status: [RETIRED](/README.md#retired)
+- Since: 2024-04-03
+- Status Note: Covered elsewhere and not specific to Aries.
 - Start Date: 2018-09-01 (approx, backdated)
 - Tags: [concept](/tags.md#concept)
 

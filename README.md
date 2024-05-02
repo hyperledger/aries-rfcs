@@ -20,7 +20,18 @@ Aries RFC includes an "implementations" section and all RFCs with a status great
 
 RFCs go through a standard lifecycle.
 
-![lifecycle](lifecycle.png)
+<!-- To edit this lifecycle drawing:
+ - Copy the URL below
+ - Navigate to https://www.plantuml.com/plantuml/uml/
+ - Paste the URL into the text area in the middle of the screen beside the "Decode URL" button.
+ - Click the "Decode URL" button and the editable Plantuml definition of the drawing will be in the top of the box.
+ - Edit the lifecycle drawing as desired.
+ - When complete, copy the resulting URL from the box. Note that the copied URL is missing the leading "https:".
+ - Replace the URL below, ensuring to add the `https:` at the beginning.
+ - Done!
+ -->
+
+![lifecycle](https://www.plantuml.com/plantuml/png/TP1DZeCm38NtEKK6rbnXHAKUe6gNg8iKN43AJ-GOUlsIoa60mYQs_Db-UQu3AQJ9QF570nYGy_X2PKayI178uWuq8dI5L45oBilbINm9MZFdVCjlwBmBiQR7Vg0U0IoZAnXd0w6YBBwqBVWJv3sw-O1MfQefVvLdzR_J43l1gdCVk-bCSeAJJ0Uh7lPeU5CJ7SSUlX0lESUyAeytLZ3wMpdVLt1Cq-iFqvoemNQJqLy0)
 
 #### PROPOSED
 To __propose__ an RFC, [use these instructions to raise a PR](
@@ -39,6 +50,10 @@ To get an RFC __accepted__, [build consensus](contributing.md#how-to-get-an-RFC-
 To get an RFC __adopted__, [socialize and implement](contributing.md#how-to-get-an-rfc-adopted). An RFC gets this status once it has significant momentum--when implementations accumulate, or when the mental model it advocates has begun to permeate our discourse. In other words, adoption is acknowledgment of a _de facto_ standard.
 
 To __refine__ an RFC, propose changes to it through additional PRs. Typically these changes are driven by experience that accumulates during or after adoption. Minor refinements that just improve clarity can happen inline with lightweight review. Status is still ADOPTED.
+
+#### STALLED
+An RFC is __stalled__ when a [proposed](#proposed) RFC makes
+no progress towards implementation such that it is extremely unlikely it will ever move forward. The __stalled__ state differs from [retired](#retired) in that it is an RFC that has never been implemented or superseded. Like the [retired](#retired) state, it is (likely) an end state and the RFC will not proceed further. Such an RFC remains in the repository on the off chance it will ring a chord with others, be returned to the [proposed](#proposed) state, and continue to evolve.
 
 #### RETIRED
 An RFC is __retired__ when it is withdrawn from community consideration by its authors, when implementation seems permanently stalled, or when significant refinements require a superseding document. If a retired RFC has been superseded, its `Superseded By` field should contain a link to the newer spec, and the newer spec's `Supersedes` field should contain a link to the older spec. Permalinks are not broken.

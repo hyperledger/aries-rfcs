@@ -1,8 +1,8 @@
 # Aries RFC 0257: Private Credential Issuance
 - Authors: Daniel Hardman and Lovesh Harchandani
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-10-16
-- Status Note: under study  
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No recent progress and no implementations have been created.
 - Start Date: 2019-08-26
 - Tags: [concept](/tags.md#concept), [protocol](/tags.md#protocol)
 

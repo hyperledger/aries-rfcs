@@ -1,9 +1,9 @@
 # Aries RFC 0114: Predefined Identities
 
 - Authors: Daniel Hardman
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-07-10
-- Status Note: (explanation of current status; if adopted, links to impls or derivative ideas; if superseded, link to replacement)
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Start Date: 2019-07-10
 - Tags: [feature](/tags.md#feature)
 
