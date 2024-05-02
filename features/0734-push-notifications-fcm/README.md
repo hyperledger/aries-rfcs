@@ -1,6 +1,6 @@
 # Aries RFC 0734: Push Notifications fcm Protocol 1.0
 
-- Authors: [Timo Glastra](mailto:mailto:timo@animo.id) (Animo Solutions) & [Berend Sliedrecht](mailto:mailto:berend@animo.id) (Animo Solutions)
+- Authors: [Timo Glastra](mailto:timo@animo.id) (Animo Solutions) & [Berend Sliedrecht](mailto:berend@animo.id) (Animo Solutions)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2022-05-12
 - Status Note: Initial version

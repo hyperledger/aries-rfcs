@@ -1,6 +1,6 @@
 # Aries RFC 0794: DID Rotate 1.0
 
-- Authors: [Sam Curren](telegramsam@gmail.com)
+- Authors: [Sam Curren](mailto:telegramsam@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2024-03-02
 - Status Note: Implemented in the [Aries Cloud Agent Python](https://github.com/hyperledger/aries-cloudagent-python)

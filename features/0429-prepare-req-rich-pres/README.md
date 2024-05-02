@@ -1,5 +1,5 @@
 # 0429: Prerequisites to Request Rich Presentation
-- Authors: [Brent Zundel](<brent.zundel@evernym.com>), [Ken Ebert](<ken@sovrin.org>)
+- Authors: [Brent Zundel](mailto:brent.zundel@evernym.com), [Ken Ebert](mailto:ken@sovrin.org)
 - Status: [STALLED](/README.md#stalled)
 - Since: 2024-04-03
 - Status Note: No implementations have been created.

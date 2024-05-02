@@ -1,4 +1,4 @@
-# 0799 Aries Long Term Support Releases
+# 0799: Aries Long Term Support Releases
 - Authors: [Sam Curren](mailto:telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2023-11-07 

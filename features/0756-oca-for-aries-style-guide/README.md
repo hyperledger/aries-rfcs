@@ -1,6 +1,6 @@
 # 0756: OCA for Aries Style Guide
 
-- Authors: [Stephen Curran](swcurran@cloudcompass.ca)
+- Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2023-01-05
 - Status Note: Implemented in the [Bifold Wallet](https://github.com/openwallet-foundation/bifold-wallet)

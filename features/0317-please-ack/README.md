@@ -1,6 +1,6 @@
 # Aries RFC 0317: Please ACK Decorator
 
-- Authors: [Daniel Hardman](mailto:mailto:daniel.hardman@gmail.com), [Timo Glastra](mailto:mailto:timo@animo.id)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com), [Timo Glastra](mailto:timo@animo.id)
 - Status: [RETIRED](/README.md#retired)
 - Since: 2019-12-26
 - Status Note: Attempts at implementation demonstrate that a general purpose `~please_ack` capability is not practical, and needs to be implemented on a per protocol basis, for protocols where the functionality makes sense.

@@ -1,6 +1,6 @@
 # 0755: Overlays Capture Architecture (OCA) For Aries
 
-- Authors: [Stephen Curran](swcurran@gmail.com)
+- Authors: [Stephen Curran](mailto:swcurran@gmail.com)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2024-03-02
 - Status Note: Implemented in the [Bifold Wallet](https://github.com/openwallet-foundation/bifold-wallet)

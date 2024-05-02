@@ -1,6 +1,6 @@
 # Aries RFC 0771: AnonCreds Attachment Formats for Requesting and Presenting Credentials
 
-- Authors: [Timo Glastra](mailto:mailto:timo@animo.id), [Daniel Hardman](mailto:mailto:daniel.hardman@gmail.com)
+- Authors: [Timo Glastra](mailto:timo@animo.id), [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2023-02-24
 - Status Note: Formalizes the AnonCreds attachments for issuing credentials and presenting proofs over DIDComm.

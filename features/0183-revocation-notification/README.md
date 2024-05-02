@@ -1,5 +1,5 @@
 # Aries RFC 0183: Revocation Notification 1.0
-- Authors: [Keith Smith]
+- Authors: Keith Smith
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2024-05-01
 - Status Note: Initial proposal after discussion on rocketchat

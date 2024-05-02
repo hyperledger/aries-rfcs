@@ -1,6 +1,6 @@
 # Aries RFC 0075: Payment Decorators
 
-- Authors: [Sam Curren](sam@sovrin.org), [Daniel Hardman](daniel.hardman@gmail.com), Tomislav Markovski
+- Authors: [Sam Curren](mailto:sam@sovrin.org), [Daniel Hardman](mailto:daniel.hardman@gmail.com), Tomislav Markovski
 - Status: [STALLED](/README.md#stalled)
 - Since: 2024-04-03
 - Status Note: No implementations have been created.
