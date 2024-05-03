@@ -8,8 +8,8 @@ If you are here to learn about Aries, we recommend you use the [the RFC Index](i
 
 There are 2 types of Aries RFCs:
 
-* RFCs that describe individual features (in the [features](./features) folder)
-* RFCs that explain concepts underpinning many features (in the [concepts](./concepts) folder)
+* RFCs that describe individual features (in the `./features` folder)
+* RFCs that explain concepts underpinning many features (in the `./concepts` folder)
 
 RFCs are for developers *building on* Aries. They don't provide guidance on how Aries components
 implement features internally; individual Aries repos have design docs for that. Each
@@ -44,7 +44,7 @@ exploring.
 __Demonstrated__ RFCs have one or more implementations available, listed in the "Implementations" section of the RFC document. As with the PROPOSED status, demonstrated RFCs haven't been endorsed by the community, but the ideas put forth have been more thoroughly explored through the implementation(s). The demonstrated status is an optional step in the lifecycle. For protocol-related RFCs, work on protocol tests SHOULD begin in the [test suite repo](https://github.com/hyperledger/aries-protocol-test-suite) by the time this status is assigned.
 
 #### ACCEPTED
-To get an RFC __accepted__, [build consensus](contributing.md#how-to-get-an-RFC-accepted) for your RFC on [chat](https://chat.hyperledger.org/channel/aries) and in community meetings. If your RFC is a feature that's protocol- or decorator-related, it MUST have reasonable tests in the [test suite repo](https://github.com/hyperledger/aries-protocol-test-suite), it MUST list the test suite in the protocol RFC's [Implementations section](../0000-template.md#implementations), at least one other implementation must have passed the relevant portions of the test suite, and all implementations listed in this section of the RFC MUST hyperlink to their test results. An accepted RFC is incubating on a standards track; the community has decided to polish it and is exploring or pursuing implementation.
+To get an RFC __accepted__, [build consensus](contributing.md#how-to-get-an-RFC-accepted) for your RFC on [chat](https://chat.hyperledger.org/channel/aries) and in community meetings. If your RFC is a feature that's protocol- or decorator-related, it MUST have reasonable tests in the [test suite repo](https://github.com/hyperledger/aries-agent-test-harness), it MUST list the test suite in the protocol RFC's [Implementations section](/0000-template.md#implementations), at least one other implementation must have passed the relevant portions of the test suite, and all implementations listed in this section of the RFC MUST hyperlink to their test results. An accepted RFC is incubating on a standards track; the community has decided to polish it and is exploring or pursuing implementation.
 
 #### ADOPTED
 To get an RFC __adopted__, [socialize and implement](contributing.md#how-to-get-an-rfc-adopted). An RFC gets this status once it has significant momentum--when implementations accumulate, or when the mental model it advocates has begun to permeate our discourse. In other words, adoption is acknowledgment of a _de facto_ standard.

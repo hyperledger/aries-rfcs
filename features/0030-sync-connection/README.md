@@ -1,6 +1,6 @@
 # Aries RFC 0030: Sync Connection Protocol 1.0
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [STALLED](/README.md#stalled)
 - Since: 2024-04-03
 - Status Note: No implementations have been created.

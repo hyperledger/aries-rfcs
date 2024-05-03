@@ -42,11 +42,11 @@
 * [0049: Repudiation](concepts/0049-repudiation/README.md) (2019-03-01 &mdash; [`concept`](/tags.md#concept))
 * [0050: Wallets](concepts/0050-wallets/README.md) (2018-07-01, [1 impl](concepts/0050-wallets/README.md#implementations) &mdash; [`concept`](/tags.md#concept))
 * [0183: Revocation Notification 1.0](features/0183-revocation-notification/README.md) (2024-05-01 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
-* [0212: Pickup Protocol 2.0](features/0685-pickup-v2/README.md) (2024-05-01 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0496: Transition to the Out of Band and DID Exchange Protocols](features/0496-transition-to-oob-and-did-exchange/README.md) (2021-11-24 &mdash; [`feature`](/tags.md#feature) [`community-update`](/tags.md#community-update) [`test-anomaly`](/tags.md#test-anomaly))
 * [0519: Goal Codes](concepts/0519-goal-codes/README.md) (2021-04-15 &mdash; [`concept`](/tags.md#concept))
 * [0587: Encryption Envelope v2](features/0587-encryption-envelope-v2/README.md) (2021-04-15 &mdash; [`feature`](/tags.md#feature))
 * [0646: W3C Credential Exchange using BBS+ Signatures](features/0646-bbs-credentials/README.md) (2021-04-28 &mdash; [`feature`](/tags.md#feature))
+* [0685: Pickup Protocol 2.0](features/0685-pickup-v2/README.md) (2024-05-01 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0721: Revocation Notification 2.0](features/0721-revocation-notification-v2/README.md) (2024-05-01 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0793: Unqualified DID Transition](features/0793-unqualfied-dids-transition/README.md) (2023-07-11, [12 impls](features/0793-unqualfied-dids-transition/README.md#implementations) &mdash; [`feature`](/tags.md#feature) [`community-update`](/tags.md#community-update))
 * [0794: DID Rotate 1.0](features/0794-did-rotate/README.md) (2024-03-02 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
@@ -65,7 +65,6 @@
 * [0809: W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials](features/0809-w3c-data-integrity-credential-attachment/README.md) (2024-01-10 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
 
 ## [PROPOSED](README.md#proposed)
-* [: ](concepts/0799-long-term-support/README.md) (2023-11-07  &mdash; [`concept`](/tags.md#concept))
 * [0028: Introduce Protocol 1.0](features/0028-introduce/README.md) (2019-04-15 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0034: Message Tracing](features/0034-message-tracing/README.md) (2018-10-24 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
 * [0056: Service Decorator](features/0056-service-decorator/README.md) (2019-06-03 &mdash; [`feature`](/tags.md#feature) [`decorator`](/tags.md#decorator))
@@ -98,6 +97,7 @@
 * [0734: Push Notifications fcm Protocol 1.0](features/0734-push-notifications-fcm/README.md) (2022-05-12 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol))
 * [0757: Push Notification](concepts/0757-push-notification/README.md) (2022-11-02  &mdash; [`concept`](/tags.md#concept))
 * [0771: AnonCreds Attachment Formats for Requesting and Presenting Credentials](features/0771-anoncreds-attachments/README.md) (2023-02-24 &mdash; [`feature`](/tags.md#feature) [`protocol`](/tags.md#protocol) [`credentials`](/tags.md#credentials) [`test-anomaly`](/tags.md#test-anomaly))
+* [0799: Aries Long Term Support Releases](concepts/0799-long-term-support/README.md) (2023-11-07  &mdash; [`concept`](/tags.md#concept))
 
 ## [STALLED](README.md#stalled)
 * [0024: DIDComm over XMPP](features/0024-didcomm-over-xmpp/README.md) (2024-04-03 &mdash; [`feature`](/tags.md#feature))

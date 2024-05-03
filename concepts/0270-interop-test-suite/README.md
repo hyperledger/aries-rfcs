@@ -1,5 +1,5 @@
 # 0270: Interop Test Suite
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-10-25
 - Status Note: Codifies some thinking about scope and mental model that are already socialized. Provides some new thinking as well.

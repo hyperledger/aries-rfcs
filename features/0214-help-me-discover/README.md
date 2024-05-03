@@ -1,5 +1,5 @@
 # Aries RFC 0214: "Help Me Discover" Protocol
-- Authors: [George Aristy](george.aristy@securekey.com), [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [George Aristy](mailto:george.aristy@securekey.com), [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-10
 - Status Note: implementation is being explored by SecureKey

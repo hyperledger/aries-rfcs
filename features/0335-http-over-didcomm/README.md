@@ -1,5 +1,5 @@
 # 0335: HTTP Over DIDComm
-- Authors: [Filip Burlacu](filip.burlacu@securekey.com) (SecureKey)
+- Authors: [Filip Burlacu](mailto:filip.burlacu@securekey.com) (SecureKey)
 - Status: [STALLED](/README.md#stalled)
 - Since: 2024-04-03
 - Status Note: No implementations have been created.

@@ -1,5 +1,5 @@
 # 0440: KMS Architectures 
-- Authors: [Michael Lodder](mike@sovrin.org)
+- Authors: [Michael Lodder](mailto:mike@sovrin.org)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-03-06
 - Status Note: Proposed

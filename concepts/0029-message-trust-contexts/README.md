@@ -1,6 +1,6 @@
 # Aries RFC 0029: Message Trust Contexts
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [STALLED](/README.md#stalled)
 - Since: 2024-04-03
 - Status Note: Not practically applied.

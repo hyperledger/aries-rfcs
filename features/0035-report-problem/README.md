@@ -1,6 +1,6 @@
 # Aries RFC 0035: Report Problem Protocol 1.0
 
-- Authors: [Stephen Curran](swcurran@cloudcompass.ca), [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [ADOPTED](/README.md#adopted)
 - Since: 2024-05-01
 - Status Note: Implemented in multiple codebases.

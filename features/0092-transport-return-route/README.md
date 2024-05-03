@@ -1,6 +1,6 @@
 # Aries RFC 0092: Transports Return Route
 
-- Authors: [Sam Curren](sam@sovrin.org)
+- Authors: [Sam Curren](mailto:sam@sovrin.org)
 - Status: [ADOPTED](/README.md#adopted)
 - Since: 2024-05-01
 - Status Note:  

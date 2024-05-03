@@ -162,11 +162,11 @@ nav:
     - 0049 Repudiation: concepts/0049-repudiation/README.md
     - 0050 Wallets: concepts/0050-wallets/README.md
     - 0183 Revocation Notification 1.0: features/0183-revocation-notification/README.md
-    - 0212 Pickup Protocol 2.0: features/0685-pickup-v2/README.md
     - 0496 Transition to the Out of Band and DID Exchange Protocols: features/0496-transition-to-oob-and-did-exchange/README.md
     - 0519 Goal Codes: concepts/0519-goal-codes/README.md
     - 0587 Encryption Envelope v2: features/0587-encryption-envelope-v2/README.md
     - 0646 W3C Credential Exchange using BBS+ Signatures: features/0646-bbs-credentials/README.md
+    - 0685 Pickup Protocol 2.0: features/0685-pickup-v2/README.md
     - 0721 Revocation Notification 2.0: features/0721-revocation-notification-v2/README.md
     - 0793 Unqualified DID Transition: features/0793-unqualfied-dids-transition/README.md
     - 0794 DID Rotate 1.0: features/0794-did-rotate/README.md
@@ -183,7 +183,6 @@ nav:
     - 0804 DIDComm Remote Procedure Call (DRPC): features/0804-didcomm-rpc/README.md
     - 0809 W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials: features/0809-w3c-data-integrity-credential-attachment/README.md
 - PROPOSED:
-    - 0799 Long Term Support: concepts/0799-long-term-support/README.md
     - 0028 Introduce Protocol 1.0: features/0028-introduce/README.md
     - 0034 Message Tracing: features/0034-message-tracing/README.md
     - 0056 Service Decorator: features/0056-service-decorator/README.md
@@ -216,6 +215,7 @@ nav:
     - 0734 Push Notifications fcm Protocol 1.0: features/0734-push-notifications-fcm/README.md
     - 0757 Push Notification: concepts/0757-push-notification/README.md
     - 0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials: features/0771-anoncreds-attachments/README.md
+    - 0799 Aries Long Term Support Releases: concepts/0799-long-term-support/README.md
 - STALLED:
     - 0024 DIDComm over XMPP: features/0024-didcomm-over-xmpp/README.md
     - 0029 Message Trust Contexts: concepts/0029-message-trust-contexts/README.md

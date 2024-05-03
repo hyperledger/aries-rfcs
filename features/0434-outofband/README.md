@@ -1,6 +1,6 @@
 # Aries RFC 0434: Out-of-Band Protocol 1.1
 
-- Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, [Stephen Curran](swcurran@cloudcompass.ca), [Sam Curren](sam@sovrin.org), [George Aristy](george.aristy@securekey.com)
+- Authors: [Ryan West](mailto:ryan.west@sovrin.org), [Daniel Bluhm](mailto:daniel.bluhm@sovrin.org), Matthew Hailstone, [Stephen Curran](mailto:swcurran@cloudcompass.ca), [Sam Curren](mailto:sam@sovrin.org), [George Aristy](mailto:george.aristy@securekey.com)
 - Status: [ADOPTED](/README.md#adopted)
 - Since: 2020-03-01
 - Status Note: This RFC extracts the `invitation` messages from the [DID Exchange](../../features/0023-did-exchange/README.md) protocol (and perhaps [Connection](../../features/0160-connection-protocol/README.md)), and replaces the combined `present_proof/1.0/request` combined with the `~service` decorator to define an ephemeral (connection-less) challenge.

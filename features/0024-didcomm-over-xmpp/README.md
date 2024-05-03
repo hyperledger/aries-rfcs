@@ -1,6 +1,6 @@
 # Aries RFC 0024: DIDComm over XMPP
 
-- Authors: [Oskar van Deventer](oskar.vandeventer@tno.nl), [Galit Rahim](galit.rahim@tno.nl), [Alexander Blom](alexander.blom@bloqzone.com)
+- Authors: [Oskar van Deventer](mailto:oskar.vandeventer@tno.nl), [Galit Rahim](mailto:galit.rahim@tno.nl), [Alexander Blom](mailto:alexander.blom@bloqzone.com)
 - Status: [STALLED](/README.md#stalled)
 - Since: 2024-04-03
 - Status Note: No implementations have been created.
