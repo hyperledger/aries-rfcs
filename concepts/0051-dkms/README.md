@@ -1,6 +1,6 @@
 # Aries RFC 0051: Decentralized Key Management
 
-- Authors: [Drummond Reed](drummond@connect.me) et al.
+- Authors: [Drummond Reed](mailto:drummond@connect.me) et al.
 - Status: [RETIRED](/README.md#retired)
 - Since: 2024-04-03
 - Status Note: Covered elsewhere and not specific to Aries.

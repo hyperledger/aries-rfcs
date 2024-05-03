@@ -1,5 +1,5 @@
 # 0207: Credential Fraud Threat Model
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [STALLED](/README.md#stalled)
 - Since: 2024-04-03
 - Status Note: No implementations have been created. Socialized on an informal credential fraud study group (https://groups.google.com/d/forum/credential-fraud-study) circa 2019.  

@@ -1,5 +1,5 @@
 # RFC 0250: Rich Schema Objects
-- Author: [Ken Ebert](ken@sovrin.org), [Brent Zundel](brent.zundel@evernym.com)
+- Author: [Ken Ebert](mailto:ken@sovrin.org), [Brent Zundel](mailto:brent.zundel@evernym.com)
 - Status: [STALLED](/README.md#stalled)
 - Since: 2024-04-03
 - Status Note: No recent progress and no implementations have been created.
