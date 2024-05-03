@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -3102,27 +3102,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0028-introduce/" class="md-nav__link">
         
   
@@ -3779,6 +3758,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4877,7 +4877,7 @@
 
 <h1 id="aries-rfc-0748-n-wise-did-exchange-protocol-10">Aries RFC 0748: N-wise DID Exchange Protocol 1.0<a class="headerlink" href="#aries-rfc-0748-n-wise-did-exchange-protocol-10" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="mikelytaev@gmail.com">Mikhail Lytaev</a>, <a href="minikspb@gmail.com">Pavel Minenkov</a></li>
+<li>Authors: <a href="mailto:mikelytaev@gmail.com">Mikhail Lytaev</a>, <a href="mailto:minikspb@gmail.com">Pavel Minenkov</a></li>
 <li>Status: <a href="../../#demonstrated">DEMONSTRATED</a></li>
 <li>Since: 2022-08-03</li>
 <li>Status Note: Under research</li>
@@ -4887,9 +4887,9 @@
 <li>URI: <a href="https://didcomm.org/n-wise/1.0">https://didcomm.org/n-wise/1.0</a></li>
 </ul>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
-<p>This RFC defines a protocol for creating and managing relationships within a group of SSI subjects. In a certain sense, this RFC is a generalization of the pairwise concept and protocols <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0160-connection-protocol">0160-connection-protocol</a> and <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0023-did-exchange">0023-did-exchange</a> for an arbitrary number of parties (n-wise).</p>
+<p>This RFC defines a protocol for creating and managing relationships within a group of SSI subjects. In a certain sense, this RFC is a generalization of the pairwise concept and protocols <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0160-connection-protocol">0160-connection-protocol</a> and <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0023-did-exchange">0023-did-exchange</a> for an arbitrary number of parties (n-wise).</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
-<p>SSI subjects and <a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0004-agents">agents</a> representing them must have a way to establish relationships with each other in a trustful manner. In the simplest case, when only two participants are involved, this goal is achieved using <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0023-did-exchange/README.md">0023-did-exchange</a> protocol by creating and securely sharing their DID Documents directly between agents. However, it is often desirable to organize an interaction involving more than two paries. The number of parties of such an interaction may change over time, and most of the agents may be mobile ones. The simplest and most frequently used example of such interaction is a group chat in instant messenger. The trusted nature of SSI technology makes it possible to use group relationships for holding legally significant unions, such as board of directors, territorial community or dissertation councils.</p>
+<p>SSI subjects and <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0004-agents">agents</a> representing them must have a way to establish relationships with each other in a trustful manner. In the simplest case, when only two participants are involved, this goal is achieved using <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0023-did-exchange/README.md">0023-did-exchange</a> protocol by creating and securely sharing their DID Documents directly between agents. However, it is often desirable to organize an interaction involving more than two paries. The number of parties of such an interaction may change over time, and most of the agents may be mobile ones. The simplest and most frequently used example of such interaction is a group chat in instant messenger. The trusted nature of SSI technology makes it possible to use group relationships for holding legally significant unions, such as board of directors, territorial community or dissertation councils.</p>
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
 <h3 id="name-and-version">Name and Version<a class="headerlink" href="#name-and-version" title="Permanent link">&para;</a></h3>
 <p>n-wise, version 1.0</p>
@@ -4902,7 +4902,7 @@
 <h4 id="directly-on-the-agents-side-edge-chain">Directly on the agent's side (Edge chain)<a class="headerlink" href="#directly-on-the-agents-side-edge-chain" title="Permanent link">&para;</a></h4>
 </li>
 <li>
-<p>This approach is the closest to <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0023-did-exchange/README.md">0023-did-exchange</a> protocol. However since there are more than two participants, an additional consensus procedure is required to correctly account for changes in the n-wise state. This option is suitable if the participants are represented by cloud agents which are (almost) always online. In this case, a consensus can be established between them using the well-known algorithms (RAFT, Paxos, BFT). However, if most of the agents are mobile and are online only occasionally, the mentioned consensus algorithms are not applicable. So it is preferable to use external solutions for storing and updating the n-wise states.</p>
+<p>This approach is the closest to <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0023-did-exchange/README.md">0023-did-exchange</a> protocol. However since there are more than two participants, an additional consensus procedure is required to correctly account for changes in the n-wise state. This option is suitable if the participants are represented by cloud agents which are (almost) always online. In this case, a consensus can be established between them using the well-known algorithms (RAFT, Paxos, BFT). However, if most of the agents are mobile and are online only occasionally, the mentioned consensus algorithms are not applicable. So it is preferable to use external solutions for storing and updating the n-wise states.</p>
 </li>
 <li>
 <h4 id="public-or-private-distributed-ledger">Public or private distributed ledger<a class="headerlink" href="#public-or-private-distributed-ledger" title="Permanent link">&para;</a></h4>

@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2600,27 +2600,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2689,6 +2668,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -3085,27 +3085,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3770,6 +3749,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4867,11 +4867,11 @@
 <li>Tags: <a href="../../tags/#concept">concept</a></li>
 </ul>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
-<p>This RFC describes a simple, standard notation for various concepts related to decentralized and self-sovereign identity (SSI).</p>
+<p>This RFC describes a simple, standard notation for various ../../concepts related to decentralized and self-sovereign identity (SSI).</p>
 <p>The notation could be used in design docs, other RFCs, source code comments, chat channels, scripts, debug logs, and miscellaneous technical materials throughout the Aries ecosystem. We hope it is also used in the larger SSI community.</p>
-<p>This RFC is complementary to official terms like the ones curated in the <a href="https://trustoverip.org/working-groups/concepts-and-terminology/">TOIP Concepts and Terminology Working group</a>, the <a href="https://sovrin.org/library/glossary/">Sovrin Glossary</a>, and so forth.</p>
+<p>This RFC is complementary to official terms like the ones curated in the <a href="https://trustoverip.org/working-groups../../concepts-and-terminology/">TOIP Concepts and Terminology Working group</a>, the <a href="https://sovrin.org/library/glossary/">Sovrin Glossary</a>, and so forth.</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
-<p>All technical materials in our ecosystem hinge on fundamental concepts of self-sovereign identity such as controllers, keys, <a href="https://www.w3.org/TR/did-core/">DIDs</a>, and <a href="../0004-agents/">agents</a>. We need a standard, documented notation to refer to such things, so we can use it consistently, and so we can link to the notation's spec for definitive usage.</p>
+<p>All technical materials in our ecosystem hinge on fundamental ../../concepts of self-sovereign identity such as controllers, keys, <a href="https://www.w3.org/TR/did-core/">DIDs</a>, and <a href="../0004-agents/">agents</a>. We need a standard, documented notation to refer to such things, so we can use it consistently, and so we can link to the notation's spec for definitive usage.</p>
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
 <p>The following explanation is meant to be read sequentially and should provide a friendly overview for most who encounter the RFC. See the <a href="#reference">Reference section</a> for quick lookup.</p>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
@@ -4894,7 +4894,7 @@
 <li>active things (people, institutions, IoT devices)</li>
 </ul>
 <p>The latter category may also act as an <strong>identity controller</strong> -- something that projects its intent with respect to identity onto the digital landscape.</p>
-<p>When an identity controller controls its own identity, we say that it has <strong>self sovereignty</strong> -- and we call it a <strong>self</strong>. (The term <strong>identity owner</strong> was originally used for an identity controller managing itself, but this hid some of the nuance and introduced <a href="https://medium.com/@hackylawyER/do-we-really-want-to-sell-ourselves-the-risks-of-a-property-law-paradigm-for-data-ownership-b217e42edffa">legal concepts of ownership that are problematic</a>, so we'll avoid it here.)</p>
+<p>When an identity controller controls its own identity, we say that it has <strong>self sovereignty</strong> -- and we call it a <strong>self</strong>. (The term <strong>identity owner</strong> was originally used for an identity controller managing itself, but this hid some of the nuance and introduced <a href="https://medium.com/@hackylawyER/do-we-really-want-to-sell-ourselves-the-risks-of-a-property-law-paradigm-for-data-ownership-b217e42edffa">legal ../../concepts of ownership that are problematic</a>, so we'll avoid it here.)</p>
 <p>In our notation, selves (or identity controllers) are denoted with a single <em>upper-case</em> ASCII alpha, often corresponding to a first initial of their human-friendly name. For example, Alice might be represented as <code>A</code>. By preference, the first half of the alphabet is used (because "x", "y", and "z" tend to have other ad-hoc meanings). When reading aloud, the spoken form of a symbol like this is the name of the letter. The relevant <a href="https://tools.ietf.org/html/rfc5234">ABNF</a> fragment is:</p>
 <p>```ABNF
   ucase-alpha    = %x41-5A            ; A-Z
@@ -5142,7 +5142,7 @@ to encrypt with the corresponding signing key.</blockquote>
 <ul>
 <li>
 <p><a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX</a> provides powerful
-and beautiful rendering of complex formal concepts, and uses escape sequences that are
+and beautiful rendering of complex formal ../../concepts, and uses escape sequences that are
 pure ASCII. There is a <a href="https://sourceforge.net/projects/jlatex/">JVM-based parser/renderer for Latex</a>; perhaps similar things exist for other
 programming languages as well.</p>
 <p>However, LaTeX has drawbacks. It focuses on rendering,

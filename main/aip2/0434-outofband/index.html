@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2651,27 +2651,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2740,6 +2719,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -3136,27 +3136,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3821,6 +3800,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4961,11 +4961,11 @@
 
 <h1 id="aries-rfc-0434-out-of-band-protocol-11">Aries RFC 0434: Out-of-Band Protocol 1.1<a class="headerlink" href="#aries-rfc-0434-out-of-band-protocol-11" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="ryan.west@sovrin.org">Ryan West</a>, <a href="daniel.bluhm@sovrin.org">Daniel Bluhm</a>, Matthew Hailstone, <a href="swcurran@cloudcompass.ca">Stephen Curran</a>, <a href="sam@sovrin.org">Sam Curren</a>, <a href="george.aristy@securekey.com">George Aristy</a></li>
+<li>Authors: <a href="mailto:ryan.west@sovrin.org">Ryan West</a>, <a href="mailto:daniel.bluhm@sovrin.org">Daniel Bluhm</a>, Matthew Hailstone, <a href="mailto:swcurran@cloudcompass.ca">Stephen Curran</a>, <a href="mailto:sam@sovrin.org">Sam Curren</a>, <a href="mailto:george.aristy@securekey.com">George Aristy</a></li>
 <li>Status: <a href="../../#adopted">ADOPTED</a></li>
 <li>Since: 2020-03-01</li>
 <li>Status Note: This RFC extracts the <code>invitation</code> messages from the <a href="../../features/0023-did-exchange/">DID Exchange</a> protocol (and perhaps <a href="../../features/0160-connection-protocol/">Connection</a>), and replaces the combined <code>present_proof/1.0/request</code> combined with the <code>~service</code> decorator to define an ephemeral (connection-less) challenge.</li>
-<li>Supersedes: Invitation Message in <a href="https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0160-connection-protocol/README.md#0-invitation-to-connect">0160-Connections</a> and Invitation Message in <a href="https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0023-did-exchange/README.md#0-invitation-to-exchange">0023-DID-Exchange</a>.</li>
+<li>Supersedes: Invitation Message in <a href="https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf../../features/0160-connection-protocol/README.md#0-invitation-to-connect">0160-Connections</a> and Invitation Message in <a href="https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf../../features/0023-did-exchange/README.md#0-invitation-to-exchange">0023-DID-Exchange</a>.</li>
 <li>Start Date: 2020-03-01</li>
 <li>Tags: <a href="../../tags/#feature">feature</a>, <a href="../../tags/#protocol">protocol</a>, <a href="../../tags/#test-anomaly">test-anomaly</a></li>
 <li>URI: <code>https://didcomm.org/out-of-band/%VER</code></li>
@@ -5192,10 +5192,10 @@ If <code>accept</code> is not specified, the receiver uses its preferred choice 
 <li>The sender <strong>MUST</strong> put the array into their order of preference, and, as such, the receiver <strong>SHOULD</strong> prefer the entries in order.</li>
 </ul>
 <p>The attributes in the inline form parallel the attributes of a DID Document for increased meaning. The <code>recipientKeys</code> and <code>routingKeys</code> within the inline block decorator <strong>MUST</strong> be <a href="https://digitalbazaar.github.io/did-method-key/"><code>did:key</code> references</a>.</p>
-<p>As defined in the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0094-cross-domain-messaging">DIDComm Cross Domain Messaging RFC</a>, if <code>routingKeys</code> is present and non-empty, additional forwarding wrapping are necessary in the response message.</p>
+<p>As defined in the <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0094-cross-domain-messaging">DIDComm Cross Domain Messaging RFC</a>, if <code>routingKeys</code> is present and non-empty, additional forwarding wrapping are necessary in the response message.</p>
 <p>When considering routing and options for out-of-band messages, keep in mind that the more detail in the message, the longer the URL will be and (if used) the more dense (and harder to scan) the QR code will be.</p>
 <h5 id="service-endpoint">Service Endpoint<a class="headerlink" href="#service-endpoint" title="Permanent link">&para;</a></h5>
-<p>The service endpoint used to transmit the response is either present in the out-of-band message or available in the DID Document of a presented DID. If the endpoint is itself a DID, the <code>serviceEndpoint</code> in the DIDDoc of the resolved DID <strong>MUST</strong> be a URI, and the <code>recipientKeys</code> <strong>MUST</strong> contain a single key. That key is appended to the end of the list of <code>routingKeys</code> for processing. For more information about message forwarding and routing, see <a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0094-cross-domain-messaging">RFC 0094 Cross Domain Messaging</a>.</p>
+<p>The service endpoint used to transmit the response is either present in the out-of-band message or available in the DID Document of a presented DID. If the endpoint is itself a DID, the <code>serviceEndpoint</code> in the DIDDoc of the resolved DID <strong>MUST</strong> be a URI, and the <code>recipientKeys</code> <strong>MUST</strong> contain a single key. That key is appended to the end of the list of <code>routingKeys</code> for processing. For more information about message forwarding and routing, see <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0094-cross-domain-messaging">RFC 0094 Cross Domain Messaging</a>.</p>
 <h3 id="adoption-messages">Adoption Messages<a class="headerlink" href="#adoption-messages" title="Permanent link">&para;</a></h3>
 <p>The <code>problem_report</code> message <strong>MAY</strong> be adopted by the out-of-band protocol if the agent wants to respond with problem reports to invalid messages, such as attempting to reuse a single-use invitation.</p>
 <h3 id="constraints">Constraints<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h3>
@@ -5261,13 +5261,13 @@ If <code>accept</code> is not specified, the receiver uses its preferred choice 
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>  &quot;impact&quot;: &quot;thread&quot;
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>}
 </code></pre></div>
-<p>See the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0035-report-problem">problem-report</a> protocol for details on the items in the example.</p>
+<p>See the <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0035-report-problem">problem-report</a> protocol for details on the items in the example.</p>
 <h3 id="flow-overview">Flow Overview<a class="headerlink" href="#flow-overview" title="Permanent link">&para;</a></h3>
 <p>In an out-of-band message the <em>sender</em> gives information to the <em>receiver</em> about the kind of DIDComm protocol response messages it can handle and how to deliver the response. The receiver uses that information to determine what DIDComm protocol/message to use in responding to the sender, and (from the service item or an existing connection) how to deliver the response to the sender.</p>
 <p>The handling of the response is specified by the protocol used.</p>
 <blockquote>
 <p>To Do: Make sure that the following remains in the DID Exchange/Connections RFCs</p>
-<p>Any Published DID that expresses support for DIDComm by defining a  <a href="https://w3c.github.io/did-core/#service-endpoints"><code>service</code></a> that follows the <a href="../0067-didcomm-diddoc-conventions/README.md#service-conventions">DIDComm conventions</a> serves as an implicit invitation. If an <em>invitee</em> wishes to connect to any Published DID, they need not wait for an out-of-band invitation message. Rather, they can designate their own label and initiate the appropriate protocol (e.g. <a href="https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0160-connection-protocol/README.md#0-invitation-to-connect">0160-Connections</a> or <a href="https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0023-did-exchange/README.md#0-invitation-to-exchange">0023-DID-Exchange</a>) for establishing a connection.</p>
+<p>Any Published DID that expresses support for DIDComm by defining a  <a href="https://w3c.github.io/did-core/#service-endpoints"><code>service</code></a> that follows the <a href="../0067-didcomm-diddoc-conventions/README.md#service-conventions">DIDComm conventions</a> serves as an implicit invitation. If an <em>invitee</em> wishes to connect to any Published DID, they need not wait for an out-of-band invitation message. Rather, they can designate their own label and initiate the appropriate protocol (e.g. <a href="https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf../../features/0160-connection-protocol/README.md#0-invitation-to-connect">0160-Connections</a> or <a href="https://github.com/hyperledger/aries-rfcs/blob/9b0aaa39df7e8bd434126c4b33c097aae78d65bf../../features/0023-did-exchange/README.md#0-invitation-to-exchange">0023-DID-Exchange</a>) for establishing a connection.</p>
 </blockquote>
 <h3 id="standard-out-of-band-message-encoding">Standard Out-of-Band Message Encoding<a class="headerlink" href="#standard-out-of-band-message-encoding" title="Permanent link">&para;</a></h3>
 <p>Using a standard out-of-band message encoding allows for easier interoperability between multiple projects and software platforms. Using a URL for that standard encoding provides a built in fallback flow for users who are unable to automatically process the message. Those new users will load the URL in a browser as a default behavior, and may be presented with instructions on how to install software capable of processing the message. Already onboarded users will be able to process the message without loading in a browser via mobile app URL capture, or via capability detection after being loaded in a browser.</p>
@@ -5401,7 +5401,7 @@ correctly decode padded and unpadded base64URL encoded data.</p>
 <h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The out-of-band message/response process is similar to other key exchange protocols.</li>
-<li>The <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0160-connection-protocol">Connections</a> and <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0023-did-exchange">DID Exchange</a> protocols have (or had) their own <code>invitation</code> method.</li>
+<li>The <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0160-connection-protocol">Connections</a> and <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0023-did-exchange">DID Exchange</a> protocols have (or had) their own <code>invitation</code> method.</li>
 <li>The <code>~service</code> decorator in combination with a request/response-type protocol message (such as present-proof/request) has previously used in place of the out-of-band <code>request</code> message.</li>
 </ul>
 <h2 id="unresolved-questions">Unresolved questions<a class="headerlink" href="#unresolved-questions" title="Permanent link">&para;</a></h2>

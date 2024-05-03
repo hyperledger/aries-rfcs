@@ -324,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2823,27 +2823,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3508,6 +3487,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4990,7 +4990,7 @@
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">  </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PP31yGbQGBz9zgq9kAxhCA&quot;</span>
 <a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="p">}</span>
 </code></pre></div>
-<p><code>typ</code> header field is the DIDComm Transports value as mentioned in <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0025-didcomm-transports#reference">RFC-0025</a>. This RFC states the prefix <code>application/</code> but according to <a href="https://www.iana.org/assignments/media-types/media-types.xhtml#application">IANA Media types</a> the prefix is implied therefore not needed here.</p>
+<p><code>typ</code> header field is the DIDComm Transports value as mentioned in <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0025-didcomm-transports#reference">RFC-0025</a>. This RFC states the prefix <code>application/</code> but according to <a href="https://www.iana.org/assignments/media-types/media-types.xhtml#application">IANA Media types</a> the prefix is implied therefore not needed here.</p>
 <h3 id="anoncrypt-using-ecdh-es-key-wrapping-mode-and-a256gcm-content-encryption">Anoncrypt using ECDH-ES key wrapping mode and A256GCM content encryption<a class="headerlink" href="#anoncrypt-using-ecdh-es-key-wrapping-mode-and-a256gcm-content-encryption" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;protected&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">base</span><span class="mi">64</span><span class="err">url(</span><span class="p">{</span>
@@ -5057,7 +5057,7 @@
 <h3 id="concrete-examples">Concrete examples<a class="headerlink" href="#concrete-examples" title="Permanent link">&para;</a></h3>
 <p>See concrete <a href="anoncrypt-examples/">anoncrypt</a> and <a href="authcrypt-examples/">authcrypt</a> examples</p>
 <h2 id="jwe-detached-mode-nested-envelopes">JWE detached mode nested envelopes<a class="headerlink" href="#jwe-detached-mode-nested-envelopes" title="Permanent link">&para;</a></h2>
-<p>There are situations in DIDComm messaging where an envelope could be nested inside another envelope -- particularly <a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0046-mediators-and-relays">RFC 46: Mediators and Relays</a>. Normally nesting envelopes implies that the envelope payloads will incur additional encryption and encoding operations at each parent level in the nesting. This section describes a mechanism to extract the nested payloads outside the nesting structure to avoid these additional operations.</p>
+<p>There are situations in DIDComm messaging where an envelope could be nested inside another envelope -- particularly <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0046-mediators-and-relays">RFC 46: Mediators and Relays</a>. Normally nesting envelopes implies that the envelope payloads will incur additional encryption and encoding operations at each parent level in the nesting. This section describes a mechanism to extract the nested payloads outside the nesting structure to avoid these additional operations.</p>
 <h3 id="detached-mode">Detached mode<a class="headerlink" href="#detached-mode" title="Permanent link">&para;</a></h3>
 <p>JWS defines <a href="https://tools.ietf.org/html/rfc7515#appendix-F">detached mode</a> where the payload can be removed. As stated in IETF RFC7515, this strategy has the following benefit:</p>
 <blockquote>
@@ -5127,8 +5127,8 @@
 <h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The <a href="https://tools.ietf.org/html/rfc7518">JWE</a> family of encryption methods.</li>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope">Aries RFC 0019-encryption-envelope</a> suggested envelope formats will be superseded by this RFC.</li>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0025-didcomm-transports#reference">Aries RFC 0025-didcomm-transports</a> for the content type used in the proposed envelopes.</li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0019-encryption-envelope">Aries RFC 0019-encryption-envelope</a> suggested envelope formats will be superseded by this RFC.</li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0025-didcomm-transports#reference">Aries RFC 0025-didcomm-transports</a> for the content type used in the proposed envelopes.</li>
 <li><a href="https://github.com/digitalbazaar/minimal-cipher">minimal-cipher</a> implementation</li>
 <li><a href="https://github.com/hyperledger/aries-framework-go/">Aries-Framework-Go</a> has an experimental (X)Chacha20Poly1305 Packer implementation based on Aries-RFCs <a href="https://github.com/hyperledger/aries-rfcs/issues/133#issuecomment-535199768">issue-133</a></li>
 <li><a href="https://www.iana.org/assignments/media-types/media-types.xhtml#application">IANA Media Types</a></li>

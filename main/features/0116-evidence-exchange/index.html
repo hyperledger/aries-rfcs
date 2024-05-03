@@ -324,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2823,27 +2823,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3508,6 +3487,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4953,7 +4953,7 @@
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>The goal of this protocol is to allow Holders to provider an inquiring Verifier with a secure and trusted mechanism for obtaining access to the foundational evidence that enabled the Issuer the assurances necessary to create the <a href="eep_glossary/">Verifiable Credential(s)</a> that the Holder has presented to the Verifier. To this end, a P2P evidence exchange protocol is required that will allow parties using <a href="https://github.com/openssi/peer-did-method-spec">Pair-wise Peer DIDs</a> to exchange evidence in support of the issuance of <em>Verified Credentials</em> without any dependencies on a  centralized storage facility.</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
-<p>During the identity verification process, an entity <em>may</em> require access to the genesis documents used to establish digital credentials issued by a credential issuing entity or <a href="eep_glossary/">Credential Service Provider (CSP)</a>.  In support of the transition from existing business verification processes to emerging business processes that rely on digitally verified credentials using protocols such as <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0036-issue-credential">0036-issue-credential</a> and <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0037-present-proof">0037-present-proof</a>, we need to establish a protocol that allow entities to make this transition while remaining compliant with business and regulatory requirements. Therefore, <strong>we need a mechanism for Verifiers to obtain access to vetted evidence (physical or digital information or documentation) without requiring a relationship or interaction with the Issuer</strong>.</p>
+<p>During the identity verification process, an entity <em>may</em> require access to the genesis documents used to establish digital credentials issued by a credential issuing entity or <a href="eep_glossary/">Credential Service Provider (CSP)</a>.  In support of the transition from existing business verification processes to emerging business processes that rely on digitally verified credentials using protocols such as <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0036-issue-credential">0036-issue-credential</a> and <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0037-present-proof">0037-present-proof</a>, we need to establish a protocol that allow entities to make this transition while remaining compliant with business and regulatory requirements. Therefore, <strong>we need a mechanism for Verifiers to obtain access to vetted evidence (physical or digital information or documentation) without requiring a relationship or interaction with the Issuer</strong>.</p>
 <blockquote>
 <p>While this protocol <em>should</em> be supported by all persona, its relevance to decentralized identity ecosystems is highly dependent on the business policies of a market segment of Verifiers. For more details see the <a href="#persona">Persona</a> section.</p>
 </blockquote>
@@ -5222,7 +5222,7 @@
 <p>These forms of <em>Identity Evidence</em> are examples of trusted credentials that an Examiner relies on during their vetting process.</p>
 <p><img alt="examiner-workflow" src="img/examine_flow.png" /></p>
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
-<p>The evidence exchange protocol builds on the attachment decorator within DIDComm using the the <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#inlining">Inlining Method</a> for <em>Digital Assertions</em> and the <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#appending">Appending Method</a> for <em>Original Documents</em>.</p>
+<p>The evidence exchange protocol builds on the attachment decorator within DIDComm using the the <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0017-attachments/README.md#inlining">Inlining Method</a> for <em>Digital Assertions</em> and the <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0017-attachments/README.md#appending">Appending Method</a> for <em>Original Documents</em>.</p>
 <p>The protocol is comprised of the following messages and associated actions:</p>
 <table>
 <thead>
@@ -5257,7 +5257,7 @@
 </table>
 <p><img alt="digital_doc_flow" src="img/digital_doc_flow.png" /></p>
 <h3 id="request-evidence-message">Request Evidence Message<a class="headerlink" href="#request-evidence-message" title="Permanent link">&para;</a></h3>
-<p>This message should be used as an accompaniment to an <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0036-issue-credential#issue-credential">issue credential message</a>. Upon receipt and storage of a credential the Holder should compose an <code>evidence_request</code> for each credential received from the Issuer. The Holder may use this message to get an update for new and existing credentials from the Issuer.</p>
+<p>This message should be used as an accompaniment to an <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0036-issue-credential#issue-credential">issue credential message</a>. Upon receipt and storage of a credential the Holder should compose an <code>evidence_request</code> for each credential received from the Issuer. The Holder may use this message to get an update for new and existing credentials from the Issuer.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/evidence_exchange/1.0/evidence_request&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6a4986dd-f50e-4ed5-a389-718e61517207&quot;</span><span class="p">,</span>
@@ -5396,7 +5396,7 @@ Description of attributes:</p>
 <a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="w">  </span><span class="p">]</span>
 <a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a><span class="p">}</span>
 </code></pre></div>
-<p>This message adheres to the attribute <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#base64">content formats outlined in the Aries Attachments RFC </a> with the following additions:</p>
+<p>This message adheres to the attribute <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0017-attachments/README.md#base64">content formats outlined in the Aries Attachments RFC </a> with the following additions:</p>
 <ul>
 <li><code>mime-type</code>: Describes the MIME type of the attached content. Optional but recommended.</li>
 <li><code>filename</code>: A hint about the name that might be used if this attachment is persisted as a file. It is not required, and need not be unique. If this field is present and mime-type is not, the extension on the filename may be used to infer a MIME type.</li>
@@ -5472,7 +5472,7 @@ Description of attributes:</p>
 <a id="__codelineno-4-63" name="__codelineno-4-63" href="#__codelineno-4-63"></a><span class="w">  </span><span class="p">]</span>
 <a id="__codelineno-4-64" name="__codelineno-4-64" href="#__codelineno-4-64"></a><span class="p">}</span>
 </code></pre></div>
-<p>This message adheres to the attribute <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#base64">content formats outlined in the Aries Attachments RFC </a> and builds on the <a href="#by-value-attachments">By Value Attachments</a> with the following additions:</p>
+<p>This message adheres to the attribute <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0017-attachments/README.md#base64">content formats outlined in the Aries Attachments RFC </a> and builds on the <a href="#by-value-attachments">By Value Attachments</a> with the following additions:</p>
 <ul>
 <li><code>links</code>: A list of zero or more locations at which the content may be fetched.</li>
 <li><code>url</code>: Link to the external document.</li>
@@ -5480,7 +5480,7 @@ Description of attributes:</p>
 </ul>
 <p>Upon completion of the Evidence Request and Response exchange, the Holder's Agent is now able to present any Verifier that has accepted a specific Issuer credential with the supporting evidence from the Issuer. This evidence, depending on the Holder's preferences may be direct or via a link to an external resource. For example, regardless of the delivery method used between the Issuer and Holder, the Holder's Agent may decide to fetch all documents and store them itself and then provide Verifiers with by-reference access upon request.</p>
 <h3 id="evidence-access-request-message">Evidence Access Request Message<a class="headerlink" href="#evidence-access-request-message" title="Permanent link">&para;</a></h3>
-<p>Upon the successful processing of a <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0037-present-proof#presentation">credential proof presentation message</a>, a Verifier may desire to request supporting evidence for the processed credential. This <code>evidence_access_request</code> message is built by the Verifier and sent to the  Holder's agent. Similar to the <code>request_evidence</code> message, the Verifier may use this message to get an update for new and existing credentials associated with the Holder. The intent of this message is for the Verifier to establish trust by obtaining a copy of the available evidence and performing the necessary content validation.</p>
+<p>Upon the successful processing of a <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0037-present-proof#presentation">credential proof presentation message</a>, a Verifier may desire to request supporting evidence for the processed credential. This <code>evidence_access_request</code> message is built by the Verifier and sent to the  Holder's agent. Similar to the <code>request_evidence</code> message, the Verifier may use this message to get an update for new and existing credentials associated with the Holder. The intent of this message is for the Verifier to establish trust by obtaining a copy of the available evidence and performing the necessary content validation.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/evidence_exchange/1.0/evidence_access_request&quot;</span><span class="p">,</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7c3f991836-4ed5-f50e-7207-718e6151a389&quot;</span><span class="p">,</span>
@@ -5499,7 +5499,7 @@ Description of attributes:</p>
 <li><code>issuerDID</code>: The public DID of the Issuer that issued the credential represented by the associated ID. This DID is derived from the credential validation process.</li>
 </ul>
 <p><img alt="verify-workflow" src="img/verify_cred_flow.png" /></p>
-<p>This protocol is intended to be flexible and applicable to a variety of use cases. While our discussion has circulated around the use of the protocol as follow-up to the processing of a credential proof presentment flow, the fact is that the protocol can be used at any point after a Pair-wise DID Exchange has been successfully established and is therefore in the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0023-did-exchange#complete">complete state</a> as defined by the DID Exchange Protocol. An <code>IssuerDID</code> (or DID of the an entity that is one of the two parties in a private pair-wise relationship) is assumed to be known under all possible conditions once the relationship is in the complete state.</p>
+<p>This protocol is intended to be flexible and applicable to a variety of use cases. While our discussion has circulated around the use of the protocol as follow-up to the processing of a credential proof presentment flow, the fact is that the protocol can be used at any point after a Pair-wise DID Exchange has been successfully established and is therefore in the <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0023-did-exchange#complete">complete state</a> as defined by the DID Exchange Protocol. An <code>IssuerDID</code> (or DID of the an entity that is one of the two parties in a private pair-wise relationship) is assumed to be known under all possible conditions once the relationship is in the complete state.</p>
 <h3 id="evidence-access-response-message">Evidence Access Response Message<a class="headerlink" href="#evidence-access-response-message" title="Permanent link">&para;</a></h3>
 <p>This message is required for a Holder Agent in response to an <code>evidence_access_request</code> message. The format of the <code>~attach</code> attribute will be determined by the storage management preferences of the Holder's Agent. As such the Holder can respond by-value or by-reference. To build the response, the Holder will validate that the supplied Issuer DID corresponds to the credential represented by the supplied ID. If the Issuer relied on one or more <em>IPSPs</em> during the <em>Identity Proofing Process</em>, then this message will also include an inline attachment using the <code>examiner_assertions</code> attribute. Upon successful processing of a <code>evidence_access_response</code> message, the Verifier will store evidence details in its system of record.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
@@ -5529,7 +5529,7 @@ Description of attributes:</p>
 <a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">  </span><span class="p">]</span>
 <a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="p">}</span>
 </code></pre></div>
-<p>This message adheres to the attribute <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#base64">content formats outlined in the Aries Attachments RFC </a> and leverages the same <a href="#evidence-response-message">Evidence Response Message</a> attribute descriptions.</p>
+<p>This message adheres to the attribute <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0017-attachments/README.md#base64">content formats outlined in the Aries Attachments RFC </a> and leverages the same <a href="#evidence-response-message">Evidence Response Message</a> attribute descriptions.</p>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Centralized Shared-KYC Trends</li>
@@ -5548,7 +5548,7 @@ Description of attributes:</p>
 <h2 id="rationale-and-alternatives">Rationale and alternatives<a class="headerlink" href="#rationale-and-alternatives" title="Permanent link">&para;</a></h2>
 <p>As noted in the <a href="#reference">references</a> section, there are a number of trending KYC Document proofing options that are being considered. Many leverage the notion of a centralized blockchain ledger for sharing documents. This effectively places control outside of the Holder and enables the sharing of documents in a B2B manner. Such approaches do not capitalize on the <a href="https://github.io/peer-did-method-spec/index.html#advantages">advantages of Pair-wise Peer DIDs</a>.</p>
 <h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
-<p>This protocol builds on the foundational capabilities of DIDComm messages, most notable being the <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md">attachment decorator</a> within DIDComm.</p>
+<p>This protocol builds on the foundational capabilities of DIDComm messages, most notable being the <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0017-attachments/README.md">attachment decorator</a> within DIDComm.</p>
 <h2 id="unresolved-questions">Unresolved questions<a class="headerlink" href="#unresolved-questions" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Should this be a separate protocol or an update to issuer-credential?</li>

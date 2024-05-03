@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2826,27 +2826,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3665,6 +3644,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4649,7 +4649,7 @@
 
 <h1 id="aries-rfc-0067-didcomm-did-document-conventions">Aries RFC 0067: DIDComm DID document conventions<a class="headerlink" href="#aries-rfc-0067-didcomm-did-document-conventions" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="tobias.looker@mattr.global">Tobias Looker</a>, <a href="swcurran@gmail.com">Stephen Curran</a></li>
+<li>Authors: <a href="mailto:tobias.looker@mattr.global">Tobias Looker</a>, <a href="mailto:swcurran@gmail.com">Stephen Curran</a></li>
 <li>Status: <a href="../../#proposed">PROPOSED</a></li>
 <li>Since: 2019-06-10</li>
 <li>Status Note: This revises the former <a href="https://github.com/hyperledger/indy-hipe/pull/92">INDY HIPE</a></li>
@@ -4721,7 +4721,7 @@
 1. There are two main situations that an agent will be in prior to preparing a new message.</p>
 <blockquote>
 <ul>
-<li>The agent is responding to a message that has just been received and has the context of the sender key of the previous message. In this case, a targeted lookup of the <code>did-communication</code> service definition can be done to find the service definition that features the sender key as a recipient key which would ensure that the response was delivered back to the sender.</li>
+<li>The agent is responding to a message that has just been received and has the context of the sender key of the previous message. In this case, a targeted lookup of the <code>did-communication</code> service definition can be done to find the service definition that ../../features the sender key as a recipient key which would ensure that the response was delivered back to the sender.</li>
 <li>The agent is creating a new message to a connection and will use the default <code>did-communication</code> service definition for preparation of a message. In this case, the default <code>did-communication</code> service definition would be used by resolving the lowest priority service definition from the connections DID document.</li>
 </ul>
 </blockquote>

@@ -324,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2823,27 +2823,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3508,6 +3487,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4871,7 +4871,7 @@
 
 <h1 id="rfc-0250-rich-schema-objects">RFC 0250: Rich Schema Objects<a class="headerlink" href="#rfc-0250-rich-schema-objects" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Author: <a href="ken@sovrin.org">Ken Ebert</a>, <a href="brent.zundel@evernym.com">Brent Zundel</a></li>
+<li>Author: <a href="mailto:ken@sovrin.org">Ken Ebert</a>, <a href="mailto:brent.zundel@evernym.com">Brent Zundel</a></li>
 <li>Status: <a href="../../#stalled">STALLED</a></li>
 <li>Since: 2024-04-03</li>
 <li>Status Note: No recent progress and no implementations have been created.</li>
@@ -5033,7 +5033,7 @@ the schema for "person."</p>
 system.</p>
 <h3 id="mappings">Mappings<a class="headerlink" href="#mappings" title="Permanent link">&para;</a></h3>
 <p>Rich schemas are complex, hierarchical, and possibly nested objects. The
-<a href="(https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf)">Camenisch-Lysyanskaya signature</a> scheme used in anonymous
+<a href="https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf">Camenisch-Lysyanskaya signature</a> scheme used in anonymous
 credentials requires the attributes to be represented by an array of
 256-bit integers. Converting data specified by a rich schema into a flat
 array of integers requires a mapping object.</p>
@@ -5053,7 +5053,7 @@ of integers signed by the issuer is valid, but that the attribute values
 were transformed and ordered according to the mapping referenced in the
 credential definition.</p>
 <p>Note: The anonymous credential signature scheme introduced here is
-<a href="(https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf)">Camenisch-Lysyanskaya signatures</a>. It is the use of this
+<a href="https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf">Camenisch-Lysyanskaya signatures</a>. It is the use of this
 signature scheme in combination with rich schema objects that necessitates
 a mapping object. If another signature scheme is used which does not have
 the same requirements, a mapping object may not be necessary or a different
@@ -5061,7 +5061,7 @@ mapping object may need to be defined.</p>
 <h3 id="encodings">Encodings<a class="headerlink" href="#encodings" title="Permanent link">&para;</a></h3>
 <p>All attribute values to be signed in an anonymous credential must be
 transformed into 256-bit integers in order to support the current
-<a href="(https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf)">Camenisch-Lysyanskaya signature</a> scheme.</p>
+<a href="https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf">Camenisch-Lysyanskaya signature</a> scheme.</p>
 <p>The introduction of rich schemas and their associated range of possible
 attribute value data types require correspondingly rich encoding
 algorithms. The purpose of the encoding object is to specify the
@@ -5154,7 +5154,7 @@ a presentation from them.</p>
 <p>The signature types used for anonymous credentials are the same as those
 currently used in Indy's anonymous credential and Fabric's idemix systems.
 Here is the paper that defines
-<a href="(https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf)">Camenisch-Lysyanskaya signatures.</a> They are the source for
+<a href="https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf">Camenisch-Lysyanskaya signatures.</a> They are the source for
 <a href="https://github.com/hyperledger/indy-hipe/pull/109">Indy's AnonCreds protocol</a>.</p>
 <h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
 <ul>

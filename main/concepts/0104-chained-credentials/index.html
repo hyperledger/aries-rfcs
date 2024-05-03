@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2826,27 +2826,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3725,6 +3704,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4789,7 +4789,7 @@
 <p>Chained credentials do not require any modification to the <a href="https://www.w3.org/TR/vc-data-model/">standard data model for verifiable credentials</a>; rather, they leverage the data model in a simple, predictable way. Chaining conventions work (with some feature variations) for any W3C-conformant verifiable credential type, not just the ones developed inside Hyperledger.</p>
 <h6 id="note-object-capabilities">Note: object capabilities<a class="headerlink" href="#note-object-capabilities" title="Permanent link">&para;</a></h6>
 <blockquote>
-<p>When chained credentials are used to delegate, the result is an <a href="https://en.wikipedia.org/wiki/Capability-based_security">object capabilities (OCAP)</a> solution similar to <a href="https://w3c-ccg.github.io/zcap-ld/">ZCAP-LD</a> in scope, features, and intent. However, such <strong>chained capabilities</strong> accomplish their goals a bit differently. See <a href="contrast-zcap-ld/">here</a> for an explanation of the divergence and redundancy.</p>
+<p>When chained credentials are used to delegate, the result is an <a href="https://en.wikipedia.org/wiki/Capability-based_security">object capabilities (OCAP)</a> solution similar to <a href="https://w3c-ccg.github.io/zcap-ld/">ZCAP-LD</a> in scope, ../../features, and intent. However, such <strong>chained capabilities</strong> accomplish their goals a bit differently. See <a href="contrast-zcap-ld/">here</a> for an explanation of the divergence and redundancy.</p>
 </blockquote>
 <h6 id="note-sister-rfc">Note: sister RFC<a class="headerlink" href="#note-sister-rfc" title="Permanent link">&para;</a></h6>
 <blockquote>
@@ -4850,7 +4850,7 @@
 <p>When chained credentials are used to convey authority (the delegate credential subtype), they are quite different from ACLs. ACLs map an identity to a list of permissions. Delegate credentials entitle their holder to whatever permissions the credential enumerates. Holding may or may not be transferrable. If it is not transferrable, then <a href="../0207-credential-fraud-threat-model/">fraud prevention must be considered</a>. If the credential isn't bound to a holder, then it's a bearer token and is an even more canonical OCAP.</p>
 </blockquote>
 <h4 id="special-sauce">Special Sauce<a class="headerlink" href="#special-sauce" title="Permanent link">&para;</a></h4>
-<p>A chained credential delivers these features by obeying some special conventions over and above the core requirements of an ordinary VC:</p>
+<p>A chained credential delivers these ../../features by obeying some special conventions over and above the core requirements of an ordinary VC:</p>
 <ol>
 <li>
 <p>It contains a special field named <code>schema</code> that is a base64url-encoded representation of <em>its own schema</em>. This makes the credential self-contained in the sense that it doesn't depend on a schema or credential definition defined by an external authority (though it could optionally embody one). This field is always disclosed in presentations.</p>
@@ -4862,13 +4862,13 @@
 <p>When a presentation is created from a chained credential, <code>provenanceProofs</code> is either disclosed (for non-ZKP proofs), or is used as evidence to prove the same thing (for ZKPs).</p>
 </li>
 <li>
-<p>It is associated (through a name in its <code>type</code> field array and through a URI in its <code>trustFrameworkURI</code> field) with a <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0103-indirect-identity-control/README.md#proxy-trust-framework">trust framework</a> that describes provenancing rules. For general chained credentials, this is optional; for delegate credentails, it is required. The trust framework may partially describe the semantics of some schema variants for a family of chained credentials, as well as how provenance is attenuated or categorized. For example, a trust framework jointly published by Ur Wheelz and other car rental companies might describe delegate credential schemas for car owners, car rental offices, drivers, insurers, maintenance staff, and guest users of cars. It might specify that the permissions delegatable in these credentials include <code>drive</code>, <code>maintain</code>, <code>rent</code>, <code>sell</code>, <code>retire</code>, <code>delegate-further</code>, and so forth. The trust framework would do more than enumerate these values; it would define exactly what they mean, how they interact with one another, and what permissions are expected to be in force in various circumstances.</p>
+<p>It is associated (through a name in its <code>type</code> field array and through a URI in its <code>trustFrameworkURI</code> field) with a <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0103-indirect-identity-control/README.md#proxy-trust-framework">trust framework</a> that describes provenancing rules. For general chained credentials, this is optional; for delegate credentails, it is required. The trust framework may partially describe the semantics of some schema variants for a family of chained credentials, as well as how provenance is attenuated or categorized. For example, a trust framework jointly published by Ur Wheelz and other car rental companies might describe delegate credential schemas for car owners, car rental offices, drivers, insurers, maintenance staff, and guest users of cars. It might specify that the permissions delegatable in these credentials include <code>drive</code>, <code>maintain</code>, <code>rent</code>, <code>sell</code>, <code>retire</code>, <code>delegate-further</code>, and so forth. The trust framework would do more than enumerate these values; it would define exactly what they mean, how they interact with one another, and what permissions are expected to be in force in various circumstances.</p>
 </li>
 <li>
 <p>The reputation of non-root holders in a provenance chain become irrelevant as far as credential trust is concerned--trust is based on an unbroken chain back to a root public attester, not on published, permanent characteristics of secondary issuers. Only the root attester needs to have a public DID. Other issuer keys and DIDs can be private and pairwise.</p>
 </li>
 <li>
-<p>If it is a delegate credential, it also meets all the requirements to be a <strong>proxy credential</strong> as described in <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0103-indirect-identity-control/README.md#proxy-credential">Aries RFC 0103: Indirect Identity Control</a>. Specifically:</p>
+<p>If it is a delegate credential, it also meets all the requirements to be a <strong>proxy credential</strong> as described in <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0103-indirect-identity-control/README.md#proxy-credential">Aries RFC 0103: Indirect Identity Control</a>. Specifically:</p>
 <ul>
 <li>
 <p>It uses <code>credentialSubject.holder.*</code> fields to bind it to a particular holder, if applicable.</p>
@@ -4890,10 +4890,10 @@
 <p>Offline mode works exactly the same way as it works for ordinary credentials, and with exactly the same latency and caching properties.</p>
 <p>Chained credentials may contain ordinary credential attributes that describe the holder or other subjects, including ZKP-style blinded link secrets. This allows chained credentials to be combined with other VCs in composite presentations.</p>
 <h4 id="sample-credentials">Sample credentials<a class="headerlink" href="#sample-credentials" title="Permanent link">&para;</a></h4>
-<p>Here is JSON that might embody credentials C1, C2, and C3 from our use case. Note that these examples suppress a few details that seem uninteresting, and they also introduce some new concepts that are described more fully in the <a href="#reference">Reference</a> section.</p>
+<p>Here is JSON that might embody credentials C1, C2, and C3 from our use case. Note that these examples suppress a few details that seem uninteresting, and they also introduce some new ../../concepts that are described more fully in the <a href="#reference">Reference</a> section.</p>
 <h5 id="c1-delegates-management-of-car-to-ur-wheelz-houston">C1 (delegates management of car to Ur Wheelz Houston)<a class="headerlink" href="#c1-delegates-management-of-car-to-ur-wheelz-houston" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    &quot;@context&quot;: [&quot;https://w3.org/2018/credentials/v1&quot;, &quot;https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0104-delegatable-credentials&quot;],
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    &quot;@context&quot;: [&quot;https://w3.org/2018/credentials/v1&quot;, &quot;https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0104-delegatable-credentials&quot;],
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    &quot;type&quot;: [&quot;VerifiableCredential&quot;, &quot;Proxy.D/CarRentalTF/1.0/subsidiary&quot;],
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    &quot;schema&quot;: &quot;WwogICJAY29udGV4dCIsIC8vSlN... (clipped for brevity) ...ob2x&quot;,
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    &quot;provenanceProofs&quot;: [

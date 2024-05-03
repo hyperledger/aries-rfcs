@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2826,27 +2826,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3665,6 +3644,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4649,7 +4649,7 @@
 
 <h1 id="aries-rfc-0347-proof-negotiation">Aries RFC 0347: Proof Negotiation<a class="headerlink" href="#aries-rfc-0347-proof-negotiation" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="p.rieblinger@esatus.com">Philipp Rieblinger</a>, <a href="s.weidenbach@esatus.com">Sebastian Weidenbach</a></li>
+<li>Authors: <a href="mailto:p.rieblinger@esatus.com">Philipp Rieblinger</a>, <a href="mailto:s.weidenbach@esatus.com">Sebastian Weidenbach</a></li>
 <li>Status: <a href="../../#proposed">PROPOSED</a></li>
 <li>Since: 2019-12-13</li>
 <li>Status Note: Initial proposal after discussion on rocketchat</li>
@@ -4658,7 +4658,7 @@
 <li>Tags: <a href="../../tags/#feature">feature</a>, <a href="../../tags/#protocol">protocol</a></li>
 </ul>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
-<p>This RFC proposes an extension to <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0037-present-proof#aries-rfc-0037-present-proof-protocol-10">Aries RFC 0037: Present Proof Protocol 1.0</a> by taking the concept of groups out of the <a href="https://github.com/decentralized-identity/credential-manifest/blob/master/explainer.md">DID credential manifest</a> and including them in the present proof protocol. Additionally to the rules described in the credential manifest, an option to provide alternative attributes with a weight is being introduced here. Also, the possibility to include not only attributes, but also credentials and openids in a proof by using a "type" was taken from the DID credential manifest. 
+<p>This RFC proposes an extension to <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0037-present-proof#aries-rfc-0037-present-proof-protocol-10">Aries RFC 0037: Present Proof Protocol 1.0</a> by taking the concept of groups out of the <a href="https://github.com/decentralized-identity/credential-manifest/blob/master/explainer.md">DID credential manifest</a> and including them in the present proof protocol. Additionally to the rules described in the credential manifest, an option to provide alternative attributes with a weight is being introduced here. Also, the possibility to include not only attributes, but also credentials and openids in a proof by using a "type" was taken from the DID credential manifest. 
 The goal of this is an approach to make proof presentation more flexible, allowing attributes to be required or optional as well as allowing a choose-from-a-list scenario. 
 So far, proof requests were to be replied to with a proof response that contained all attributes listed in the proof request. To this, this RFC adds a way to mark attributes as optional, so that they are communicated as nice-to-have to the user of a wallet.</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
@@ -4899,7 +4899,7 @@ The base64url-encoded content above would decode to this data:
 <a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>}
 </code></pre></div></p>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
-<p>The "<a class="magiclink magiclink-github magiclink-mention" href="https://github.com/id" title="GitHub User: id">@id</a>"-Tag and thread decorator in the above JSON-messages is taken from <a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0008-message-id-and-threading">RFC 0008</a>.</p>
+<p>The "<a class="magiclink magiclink-github magiclink-mention" href="https://github.com/id" title="GitHub User: id">@id</a>"-Tag and thread decorator in the above JSON-messages is taken from <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0008-message-id-and-threading">RFC 0008</a>.</p>
 <h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
 <p>If a user needs to choose from a list of credentials each time a proof request with a "pick_one"-rule is being requested, some users may dislike this, as this process requires a significant amount of user interaction and, thereby, time. This could be mitigated by an 'optional'-rule which requests all of the options the 'pick one'-rule offers. Wallets can then offer two pre-settings: "privacy first", which offers as little data and as many interactions with the user as possible, while "usability first" automatically selects the 'optional'-rule and sends more data, not asking the user before everytime. The example dialog from the Okuna manifesto referred to before shows a great way to implement this. It offers the user the most privacy-friendly option by default (which is what the GDPR requires) or the prividing of optional data. Futhermore, the optional data can be customized to include or exclude specific data.</p>
 <h2 id="rationale-and-alternatives">Rationale and alternatives<a class="headerlink" href="#rationale-and-alternatives" title="Permanent link">&para;</a></h2>
@@ -4907,12 +4907,12 @@ The base64url-encoded content above would decode to this data:
 An alternative way of implementing the proof negotiation is performing it ahead of the proof request in a seperate request and response.
 The problem with not implementing this feature would be that a proof request may need to be repeated over and over again with a different list of requested attributes each time, until a list is transferred which the specific user can reply to. This process would be unnecessarily complicated and can be facilitated by implementing this here concept.</p>
 <h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0037-present-proof">RFC0037-present-proof</a> is the foundation which this RFC builds on using groups from the <a href="https://github.com/decentralized-identity/credential-manifest">credential manifest</a> by 
+<p><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0037-present-proof">RFC0037-present-proof</a> is the foundation which this RFC builds on using groups from the <a href="https://github.com/decentralized-identity/credential-manifest">credential manifest</a> by 
 the decentralized identity foundation, a "format that normalizes the definition of requirements for the issuance of a credential".</p>
 <h2 id="unresolved-questions">Unresolved questions<a class="headerlink" href="#unresolved-questions" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The above proof request includes a schema ID for every credential requests. This was taken from the DID credential manifest. It may make more sense to include a credential definition ID there, as a credential could potentially be built from one credential definition but this credential definition from several schemas.</li>
-<li>The exact layout and syntax of the proof request above is open to debate, it was designed to stick as close as possible to existing RFCs and concepts.</li>
+<li>The exact layout and syntax of the proof request above is open to debate, it was designed to stick as close as possible to existing RFCs and ../../concepts.</li>
 <li>Can this feature be implemented in a way that does not break proof requests from anoncreds version 1.x?</li>
 <li>Writing this RFC rose the question if the length of a proof request is limited in any way. A JSON-message containing the attributes in the proof can theoretically be infinitely long. Is this being handled in any way? It may lead to overflows at some point.</li>
 <li>This RFC describes the negotiation of a proof inside the proof request itself. Depending on the functionality around proofs it may be more desirable to implement the proof negotiation as a seperate protocol which is used before the actual proof request.</li>

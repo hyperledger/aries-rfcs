@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2826,27 +2826,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3647,6 +3626,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4613,7 +4613,7 @@
 
 <h1 id="aries-rfc-0430-machine-readable-governance-frameworks">Aries RFC 0430: Machine-Readable Governance Frameworks<a class="headerlink" href="#aries-rfc-0430-machine-readable-governance-frameworks" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="daniel.hardman@gmail.com">Daniel Hardman</a></li>
+<li>Authors: <a href="mailto:daniel.hardman@gmail.com">Daniel Hardman</a></li>
 <li>Status: <a href="../../#proposed">PROPOSED</a></li>
 <li>Since: 2020-02-24</li>
 <li>Status Note: early proposal only  </li>
@@ -4623,7 +4623,7 @@
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>Explains how governance frameworks are embodied in formal data structures, so it's possible to react to them with software, not just with human intelligence.</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
-<p>We need to be able to write software that reacts to arbitrary governance frameworks in standard ways. This will allow <a href="#desirable-features">various desirable features</a>.</p>
+<p>We need to be able to write software that reacts to arbitrary governance frameworks in standard ways. This will allow <a href="#desirable-../../features">various desirable ../../features</a>.</p>
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
 <p>A <strong>governance framework</strong> (also called a <strong>trust framework</strong> in some contexts) is a set of rules that establish trust about process (and indirectly, about outcomes) in a given context. For example, the rules that bind buyers, merchants, vendors, and a global credit card company like Mastercard or Visa constitute a governance framework in a financial services context &mdash; and they have a corresponding trust mark to make the governance framework's relevance explicit. The rules by which certificate authorities are vetted and accepted by browser manufacturers, and by which CAs issue derivative certificates, constitute a governance framework in a web context. Trust frameworks are like guy wires: they balance opposing forces to produce careful alignment and optimal behavior.</p>
 <p><a href="https://www.flickr.com/photos/popcorncx/31899289874/"><img alt="guy wires: Stephen Edmonds, Flickr, CC-BY-SA 2.0" src="guy-wires.jpg" /></a></p>
@@ -4652,12 +4652,12 @@
 </ul>
 <h4 id="sample-data-structure">Sample Data Structure<a class="headerlink" href="#sample-data-structure" title="Permanent link">&para;</a></h4>
 <p>Trust frameworks generally begin as human-friendly content. They have to be created, reviewed, and agreed upon by experts from various disciplines: legal, business, humanitarian, government, trade groups, advocacy groups, etc. Developers can help by surfacing how rules are (or are not) susceptible to modeling in formal data structures. This can lead to an iterative process, where data structures and human conversations create refinement pressure on each other until the framework is ready for release.</p>
-<p>[TODO: The following blurb of JSON is one way to embody what we're after. I can imagine other approaches but haven't thought them through in detail. I'm less interested in the details of the JSON, for now, than in the concepts we're trying to communicate and automate. So have a conversation about whether this format works for us, or should be tweaked/replaced.]</p>
+<p>[TODO: The following blurb of JSON is one way to embody what we're after. I can imagine other approaches but haven't thought them through in detail. I'm less interested in the details of the JSON, for now, than in the ../../concepts we're trying to communicate and automate. So have a conversation about whether this format works for us, or should be tweaked/replaced.]</p>
 <p>Each problem domain will probably have unique requirements. Therefore, we start with a general governance framework recipe, but plan for extension. We use JSON-LD for this purpose. Here we present a simple example for the problem domain of university credentials in Germany. It manifests just the components of a governance framework that are common across all contexts; additional JSON-LD <code>@context</code> values can be added to introduce more structure as needed. (See <a href="#field-details">Field Details</a> for explanatory comments.)</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    &quot;@context&quot;: [
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        // The first context must be this RFC&#39;s context. It defines core properties.
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        &quot;https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0430-machine-readable-governance-frameworks/context.jsonld&quot;, 
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        &quot;https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0430-machine-readable-governance-frameworks/context.jsonld&quot;, 
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        // Additional contexts can be added to extend.
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        &quot;https://kmk.org/uni-accred-trust-fw&quot;
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    ],

@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2341,27 +2341,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2430,6 +2409,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2953,27 +2953,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3638,6 +3617,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4595,7 +4595,7 @@
 
 <h1 id="aries-rfc-0794-did-rotate-10">Aries RFC 0794: DID Rotate 1.0<a class="headerlink" href="#aries-rfc-0794-did-rotate-10" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="telegramsam@gmail.com">Sam Curren</a></li>
+<li>Authors: <a href="mailto:telegramsam@gmail.com">Sam Curren</a></li>
 <li>Status: <a href="../../#accepted">ACCEPTED</a></li>
 <li>Since: 2024-03-02</li>
 <li>Status Note: Implemented in the <a href="https://github.com/hyperledger/aries-cloudagent-python">Aries Cloud Agent Python</a></li>
@@ -4635,7 +4635,7 @@ but also to switch to a new DID within the same DID method. For non-updatable DI
 <h4 id="ack">Ack<a class="headerlink" href="#ack" title="Permanent link">&para;</a></h4>
 <p>Message Type URI: <a href="https://didcomm.org/did-rotate/1.0/ack">https://didcomm.org/did-rotate/1.0/ack</a></p>
 <p>This message has been adopted from [the <code>ack</code> protocol]
-(<a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0015-acks">https://github.com/hyperledger/aries-rfcs/tree/main/features/0015-acks</a>).</p>
+(<a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0015-acks">https://github.com/hyperledger/aries-rfcs/tree/main../../features/0015-acks</a>).</p>
 <p>This message is still sent to the prior DID to acknowledge the receipt of the rotation. Following messages will be sent to the new DID.</p>
 <p>In order to correctly process out of order messages, the The <strong>observing_party</strong> may choose to receive messages from the old DID for a reasonable period. This allows messages sent before rotation but received after rotation in the case of out of order message delivery.</p>
 <p>In this message, the <code>thid</code> (Thread ID) MUST be included to allow the <code>rotating_party</code> to correlate it with the sent <code>rotate</code> message.</p>
@@ -4651,7 +4651,7 @@ but also to switch to a new DID within the same DID method. For non-updatable DI
 <h4 id="problem-report">Problem Report<a class="headerlink" href="#problem-report" title="Permanent link">&para;</a></h4>
 <p>Message Type URI: <a href="https://didcomm.org/did-rotate/1.0/problem-report">https://didcomm.org/did-rotate/1.0/problem-report</a></p>
 <p>This message has been adopted from [the <code>report-problem</code> protocol]
-(<a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0035-report-problem/README.md">https://github.com/hyperledger/aries-rfcs/blob/main/features/0035-report-problem/README.md</a>).</p>
+(<a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0035-report-problem/README.md">https://github.com/hyperledger/aries-rfcs/blob/main../../features/0035-report-problem/README.md</a>).</p>
 <p>If the <strong>observing_party</strong> receives a <code>rotate</code> message with a DID that they cannot resolve, they MUST return a problem-report message.</p>
 <p>The <code>description</code> <code>code</code> must be set to one of the following:
 - <strong>e.did.unresolvable</strong> - used for a DID who's method is supported, but will not resolve

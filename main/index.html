@@ -324,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2412,27 +2412,6 @@
   
   
     <li class="md-nav__item">
-      <a href="features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2501,6 +2480,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2897,27 +2897,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3582,6 +3561,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4487,11 +4487,11 @@
 <p>This repo holds Request for Comment (RFCs) for the Aries project. They describe important
 topics (<a href="contributing/#do-you-need-an-RFC">not minor details</a>) that we want to
 standardize across the Aries ecosystem.</p>
-<p>If you are here to learn about Aries, we recommend you use the <a href="index.md">the RFC Index</a> for a current listing of all RFCs and their statuses.</p>
+<p>If you are here to learn about Aries, we recommend you use the <a href="RFCindex/">the RFC Index</a> for a current listing of all RFCs and their statuses.</p>
 <p>There are 2 types of Aries RFCs:</p>
 <ul>
-<li>RFCs that describe individual features (in the <a href="./features">features</a> folder)</li>
-<li>RFCs that explain concepts underpinning many features (in the <a href="./concepts">concepts</a> folder)</li>
+<li>RFCs that describe individual features (in the <code>./features</code> folder)</li>
+<li>RFCs that explain concepts underpinning many features (in the <code>./concepts</code> folder)</li>
 </ul>
 <p>RFCs are for developers <em>building on</em> Aries. They don't provide guidance on how Aries components
 implement features internally; individual Aries repos have design docs for that. Each
@@ -4519,7 +4519,7 @@ exploring.</p>
 <h4 id="demonstrated">DEMONSTRATED<a class="headerlink" href="#demonstrated" title="Permanent link">&para;</a></h4>
 <p><strong>Demonstrated</strong> RFCs have one or more implementations available, listed in the "Implementations" section of the RFC document. As with the PROPOSED status, demonstrated RFCs haven't been endorsed by the community, but the ideas put forth have been more thoroughly explored through the implementation(s). The demonstrated status is an optional step in the lifecycle. For protocol-related RFCs, work on protocol tests SHOULD begin in the <a href="https://github.com/hyperledger/aries-protocol-test-suite">test suite repo</a> by the time this status is assigned.</p>
 <h4 id="accepted">ACCEPTED<a class="headerlink" href="#accepted" title="Permanent link">&para;</a></h4>
-<p>To get an RFC <strong>accepted</strong>, <a href="contributing/#how-to-get-an-RFC-accepted">build consensus</a> for your RFC on <a href="https://chat.hyperledger.org/channel/aries">chat</a> and in community meetings. If your RFC is a feature that's protocol- or decorator-related, it MUST have reasonable tests in the <a href="https://github.com/hyperledger/aries-protocol-test-suite">test suite repo</a>, it MUST list the test suite in the protocol RFC's <a href="../0000-template.md#implementations">Implementations section</a>, at least one other implementation must have passed the relevant portions of the test suite, and all implementations listed in this section of the RFC MUST hyperlink to their test results. An accepted RFC is incubating on a standards track; the community has decided to polish it and is exploring or pursuing implementation.</p>
+<p>To get an RFC <strong>accepted</strong>, <a href="contributing/#how-to-get-an-RFC-accepted">build consensus</a> for your RFC on <a href="https://chat.hyperledger.org/channel/aries">chat</a> and in community meetings. If your RFC is a feature that's protocol- or decorator-related, it MUST have reasonable tests in the <a href="https://github.com/hyperledger/aries-agent-test-harness">test suite repo</a>, it MUST list the test suite in the protocol RFC's <a href="/0000-template.md#implementations">Implementations section</a>, at least one other implementation must have passed the relevant portions of the test suite, and all implementations listed in this section of the RFC MUST hyperlink to their test results. An accepted RFC is incubating on a standards track; the community has decided to polish it and is exploring or pursuing implementation.</p>
 <h4 id="adopted">ADOPTED<a class="headerlink" href="#adopted" title="Permanent link">&para;</a></h4>
 <p>To get an RFC <strong>adopted</strong>, <a href="contributing/#how-to-get-an-rfc-adopted">socialize and implement</a>. An RFC gets this status once it has significant momentum--when implementations accumulate, or when the mental model it advocates has begun to permeate our discourse. In other words, adoption is acknowledgment of a <em>de facto</em> standard.</p>
 <p>To <strong>refine</strong> an RFC, propose changes to it through additional PRs. Typically these changes are driven by experience that accumulates during or after adoption. Minor refinements that just improve clarity can happen inline with lightweight review. Status is still ADOPTED.</p>
@@ -4532,7 +4532,7 @@ no progress towards implementation such that it is extremely unlikely it will ev
 <p>See notes about this in <a href="contributing/#changing-an-rfc-status">Contributing</a>.</p>
 <h2 id="about">About<a class="headerlink" href="#about" title="Permanent link">&para;</a></h2>
 <h4 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h4>
-<p>This repository is licensed under an <a href="LICENSE">Apache 2 License</a>. It is protected
+<p>This repository is licensed under an <a href="LICENSE/">Apache 2 License</a>. It is protected
 by a <a href="https://developercertificate.org/">Developer Certificate of Origin</a> on every commit.
 This means that any contributions you make must be licensed in an Apache-2-compatible
 way, and must be free from patent encumbrances or additional terms and conditions. By

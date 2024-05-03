@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2486,27 +2486,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2575,6 +2554,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2971,27 +2971,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3656,6 +3635,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4669,10 +4669,10 @@ The <code>issuer</code> sends the <code>revoke</code> message to the <code>holde
 <p>Description of fields:</p>
 <ul>
 <li>
-<p><code>~please_ack</code> (optional) -- as described by the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0317-please-ack">Please ACK Decorator RFC</a>.  If <code>OUTCOME</code> is specified, the <code>holder</code> should send an ack when the holder's agent has successfully notified the holder of the revocation.</p>
+<p><code>~please_ack</code> (optional) -- as described by the <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0317-please-ack">Please ACK Decorator RFC</a>.  If <code>OUTCOME</code> is specified, the <code>holder</code> should send an ack when the holder's agent has successfully notified the holder of the revocation.</p>
 </li>
 <li>
-<p><code>thread_id</code> (required) -- the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0008-message-id-and-threading#thread-id-thid">thread ID</a> of the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2">issue-credential-v2</a> protocol which was used to issue one or more credentials that have been revoked by the issuer.  If multiple credentials were issued, each credential has a different credential format but contains the same claims as described <a href="https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0453-issue-credential-v2#message-attachments">here</a>; therefore, this message notifies the holder that all of these credentials have been revoked.</p>
+<p><code>thread_id</code> (required) -- the <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0008-message-id-and-threading#thread-id-thid">thread ID</a> of the <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0453-issue-credential-v2">issue-credential-v2</a> protocol which was used to issue one or more credentials that have been revoked by the issuer.  If multiple credentials were issued, each credential has a different credential format but contains the same claims as described <a href="https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6../../features/0453-issue-credential-v2#message-attachments">here</a>; therefore, this message notifies the holder that all of these credentials have been revoked.</p>
 </li>
 <li>
 <p><code>comment</code> (optional) -- a field that provides some human readable information about the revocation notification.  This is typically the reason for the revocation as deemed appropriate by the issuer.</p>
@@ -4680,9 +4680,9 @@ The <code>issuer</code> sends the <code>revoke</code> message to the <code>holde
 </ul>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <ul>
-<li>See the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2">issue-credential-v2</a> protocol.</li>
-<li>See the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0008-message-id-and-threading#thread-id-thid">thread ID</a> description.</li>
-<li>See the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0317-please-ack">Please ACK Decorator RFC</a>.</li>
+<li>See the <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0453-issue-credential-v2">issue-credential-v2</a> protocol.</li>
+<li>See the <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0008-message-id-and-threading#thread-id-thid">thread ID</a> description.</li>
+<li>See the <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0317-please-ack">Please ACK Decorator RFC</a>.</li>
 </ul>
 <h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
 <p>If we later added support for more general event subscription and notification message flows, this would be redundant.</p>

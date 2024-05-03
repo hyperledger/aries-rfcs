@@ -324,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2823,27 +2823,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3508,6 +3487,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4662,7 +4662,7 @@
 objects. They are the standard mechanism for defining shared semantic
 meaning among rich schema objects.</p>
 <p>Context objects are processed in a generic way defined in 
-<a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common">Rich Schema Objects Common</a>.</p>
+<a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0420-rich-schemas-common">Rich Schema Objects Common</a>.</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
 <p><code>@context</code> is JSON-LD’s namespacing mechanism. Contexts allow rich schema
 objects to use a common vocabulary when referring to common attributes,
@@ -4696,10 +4696,10 @@ If the Context needs to be evolved, a new Context with a new version or name nee
 <p>Aries will provide a means for writing contexts to and reading contexts
 from a verifiable data registry (such as a distributed ledger).</p>
 <p><code>@context</code> will be written to the ledger in a generic way defined in 
-<a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry">Rich Schema Objects Common</a>.</p>
+<a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry">Rich Schema Objects Common</a>.</p>
 <h3 id="aries-data-registry-interface">Aries Data Registry Interface<a class="headerlink" href="#aries-data-registry-interface" title="Permanent link">&para;</a></h3>
 <p>Aries Data Registry Interface methods for adding and retrieving <code>@context</code> from the
-ledger comply with the generic approach described in <a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#aries-data-registry-interface">Rich Schema Objects Common</a>.</p>
+ledger comply with the generic approach described in <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0420-rich-schemas-common#aries-data-registry-interface">Rich Schema Objects Common</a>.</p>
 <p>This means the following methods can be used:
 - <code>write_rich_schema_object</code>
 - <code>read_rich_schema_object_by_id</code>
@@ -4711,8 +4711,8 @@ may be found <a href="https://w3c.github.io/vc-data-model/#contexts">here</a>.</
 <a href="https://w3c.github.io/json-ld-syntax/#the-context">here</a> and
 <a href="https://w3c.github.io/json-ld-syntax/#advanced-context-usage">here</a>.</p>
 <ul>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas">0250: Rich Schema Objects</a></li>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common">0420: Rich Schema Objects Common</a> </li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0250-rich-schemas">0250: Rich Schema Objects</a></li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0420-rich-schemas-common">0420: Rich Schema Objects Common</a> </li>
 </ul>
 <h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
 <p>Requiring a <code>@context</code> for each rich schema object introduces more

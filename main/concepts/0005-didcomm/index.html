@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2450,27 +2450,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2539,6 +2518,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2935,27 +2935,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3620,6 +3599,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4559,7 +4559,7 @@
 
 <h1 id="aries-rfc-0005-did-communication">Aries RFC 0005: DID Communication<a class="headerlink" href="#aries-rfc-0005-did-communication" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="daniel.hardman@gmail.com">Daniel Hardman</a></li>
+<li>Authors: <a href="mailto:daniel.hardman@gmail.com">Daniel Hardman</a></li>
 <li>Status: <a href="../../#adopted">ADOPTED</a></li>
 <li>Since: 2019-11-21</li>
 <li>Status Note: Mature as concept, with multiple implementations.</li>
@@ -4571,7 +4571,7 @@
 <p>Explain the basics of <strong>DID communication</strong> (<strong>DIDComm</strong>) at a
 high level, and link to other RFCs to promote deeper exploration.</p>
 <blockquote>
-<p>NOTE: The version of DIDComm collectively defined in Aries RFCs is known by the label "DIDComm V1." A <a href="https://identity.foundation/didcomm-messaging/spec/">newer version of DIDComm</a> ("DIDComm V2") is now being <a href="https://github.com/decentralized-identity/didcomm-messaging">incubated</a> at DIF. Many concepts are the same between the two versions, but there are some differences in the details. For information about detecting V1 versus V2, see <a href="../../features/0044-didcomm-file-and-mime-types/#detecting-didcomm-versions">Detecting DIDComm Versions</a>.</p>
+<p>NOTE: The version of DIDComm collectively defined in Aries RFCs is known by the label "DIDComm V1." A <a href="https://identity.foundation/didcomm-messaging/spec/">newer version of DIDComm</a> ("DIDComm V2") is now being <a href="https://github.com/decentralized-identity/didcomm-messaging">incubated</a> at DIF. Many ../../concepts are the same between the two versions, but there are some differences in the details. For information about detecting V1 versus V2, see <a href="../../features/0044-didcomm-file-and-mime-types/#detecting-didcomm-versions">Detecting DIDComm Versions</a>.</p>
 </blockquote>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
 <p>The DID communication between <a href="../0004-agents/">agents</a> and <a href="../0004-agents/#the-agent-ness-continuum">agent-like things</a> is a rich subject with a lot of tribal
@@ -4583,13 +4583,13 @@ We need a standard high-level reference.</p>
 <blockquote>
 <p>This discussion assumes that you have a reasonable grasp on topics like
 <a href="https://medium.com/evernym/the-three-models-of-digital-identity-relationships-ca0727cb5186">self-sovereign identity</a>,
-<a href="https://w3c-ccg.github.io/did-spec/">DIDs and DID docs</a>, and <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0004-agents/README.md">agents</a>. If you find yourself
+<a href="https://w3c-ccg.github.io/did-spec/">DIDs and DID docs</a>, and <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0004-agents/README.md">agents</a>. If you find yourself
 lost, please review that material for background and starting assumptions.</p>
 </blockquote>
 <p>Agent-like things have to interact with one another to get work done. How they
 talk in general is DIDComm, the subject of this RFC. The specific interactions enabled by
 DIDComm--connecting and maintaining relationships, issuing credentials,
-providing proof, etc.--are called <strong>protocols</strong>; they are described <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md">elsewhere</a>.</p>
+providing proof, etc.--are called <strong>protocols</strong>; they are described <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0003-protocols/README.md">elsewhere</a>.</p>
 <h3 id="rough-overview">Rough Overview<a class="headerlink" href="#rough-overview" title="Permanent link">&para;</a></h3>
 <p>A typical DIDComm interaction works like this:</p>
 <blockquote>
@@ -4731,7 +4731,7 @@ parties do it the same way.</p>
 </tr>
 <tr>
 <td><a href="https://github.com/hyperledger/aries-framework-go">Aries Framework - Go</a></td>
-<td>For building agents, hubs and other DIDComm features in GoLang.</td>
+<td>For building agents, hubs and other DIDComm ../../features in GoLang.</td>
 </tr>
 <tr>
 <td><a href="https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/">Connect.Me</a></td>

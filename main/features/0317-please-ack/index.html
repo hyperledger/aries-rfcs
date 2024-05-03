@@ -324,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2823,27 +2823,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3508,6 +3487,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4687,10 +4687,10 @@
 <li>Tags: <a href="../../tags/#feature">feature</a>, <a href="../../tags/#decorator">decorator</a></li>
 </ul>
 <h2 id="retirement-of-please_ack">Retirement of <code>~please_ack</code><a class="headerlink" href="#retirement-of-please_ack" title="Permanent link">&para;</a></h2>
-<p>The <code>please_ack</code> decorator was initially added to <a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0302-aries-interop-profile#aries-interop-profile-version-20">Aries Interop Protocol 2.0</a>. However, this was done prior to attempts at an implementation. When such an attempt was made, it was found that the decorator is not practical as a general purpose mechanism. The capability assumed that the feature would be general purpose and could be applied outside of the protocols with which it was used. That assumption proved impossible to implement. The inclusion of the <code>~please_ack</code> decorator cannot be implemented without altering any protocol with which it is used, and so it is not practical. Instead, any protocols that can benefit from such a feature can be extended to explicitly support the feature.</p>
+<p>The <code>please_ack</code> decorator was initially added to <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0302-aries-interop-profile#aries-interop-profile-version-20">Aries Interop Protocol 2.0</a>. However, this was done prior to attempts at an implementation. When such an attempt was made, it was found that the decorator is not practical as a general purpose mechanism. The capability assumed that the feature would be general purpose and could be applied outside of the protocols with which it was used. That assumption proved impossible to implement. The inclusion of the <code>~please_ack</code> decorator cannot be implemented without altering any protocol with which it is used, and so it is not practical. Instead, any protocols that can benefit from such a feature can be extended to explicitly support the feature.</p>
 <p>For the <code>"on": ["OUTCOME"]</code> type of ACK, the problem manifests in two ways. First, the definition of <code>OUTCOME</code> is protocol (and in fact, protocol message) specific. The definition of "complete" for each message is specific to each message, so there is no "general purpose" way to know when an <code>OUTCOME</code> ACK is to be sent. Second, the addition of a <code>~please_ack</code> decorator changes the protocol state machine for a given protocol, introducing additional states, and hence, additional state handling. Supporting <code>"on": ["OUTCOME"]</code> processing requires making changes to all protocols, which would be better handled on a per protocol basis, and where useful (which, it was found, is rare), adding messages and states. For example, what is the point of an extra <code>ACK</code> message on an <code>OUTCOME</code> in the middle of a protocol that itself results in the sending of the response message?</p>
 <p>Our experimentation found that it would be easier to achieve a general purpose <code>"on": ["RECEIPT"]</code> capability, but even then there were problems. Most notably, the capability is most useful when added to the last message of a protocol, where the message sender would like confirmation that the recipient got the message. However, it is precisely that use of the feature that also introduces breaking changes to the protocol state machine for the protocols to which it applies, requiring per protocol updates. So while the feature would be marginally useful in some cases, the complexity cost of the capability -- and the lack of demand for its creation -- led us to retire the entire RFC.</p>
-<p>For more details on the great work done by <a href="https://github.com/alexsdsr">Alexander Sukhachev @alexsdsr</a>, please see these pull requests, including both the changes proposed in the PRs, and the subsequent conversations about the features.</p>
+<p>For more details on the great work done by <a href="https://github.com/alexsdsr">Alexander Sukhachev @alexsdsr</a>, please see these pull requests, including both the changes proposed in the PRs, and the subsequent conversations about the ../../features.</p>
 <ul>
 <li><a href="https://github.com/hyperledger/aries-cloudagent-python/pull/2540">Aries Cloud Agent Python PR 2540 - PleaseAck.md document</a></li>
 <li><a href="https://github.com/hyperledger/aries-cloudagent-python/pull/2546">Aries Cloud Agent Python PR 2546 - DRAFT: please_ack support PoC for the 0453-issue-credential-v2 protocol</a></li>
@@ -4771,7 +4771,7 @@ request:</p>
 <h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
 <p>None specified.</p>
 <h2 id="rationale-and-alternatives">Rationale and alternatives<a class="headerlink" href="#rationale-and-alternatives" title="Permanent link">&para;</a></h2>
-<p>The first version of this RFC was a lot more advanced, but also introduced a lot of complexities. A lot of complex features have been removed so it could be included in AIP 2.0 in a simpler form. More advanced features <a href="https://github.com/hyperledger/aries-rfcs/blob/2e6007b224f6888aec79b20bbddea3c4d533042a/features/0317-please-ack/README.md">from the initial RFC</a> can be added back in when needed.</p>
+<p>The first version of this RFC was a lot more advanced, but also introduced a lot of complexities. A lot of complex ../../features have been removed so it could be included in AIP 2.0 in a simpler form. More advanced ../../features <a href="https://github.com/hyperledger/aries-rfcs/blob/2e6007b224f6888aec79b20bbddea3c4d533042a../../features/0317-please-ack/README.md">from the initial RFC</a> can be added back in when needed.</p>
 <h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
 <p>None specified.</p>
 <h2 id="unresolved-questions">Unresolved questions<a class="headerlink" href="#unresolved-questions" title="Permanent link">&para;</a></h2>

@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2826,27 +2826,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3647,6 +3626,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4613,7 +4613,7 @@
 
 <h1 id="aries-rfc-0700-out-of-band-through-redirect">Aries RFC 0700: Out-of-Band through redirect<a class="headerlink" href="#aries-rfc-0700-out-of-band-through-redirect" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="sudesh.shetty@securekey.com">Sudesh Shetty</a></li>
+<li>Authors: <a href="mailto:sudesh.shetty@securekey.com">Sudesh Shetty</a></li>
 <li>Status: <a href="../../#proposed">PROPOSED</a></li>
 <li>Since: 2021-10-08</li>
 <li>Status Note: implementation is being explored by SecureKey</li>
@@ -4642,9 +4642,9 @@ User's holder application decodes invitation from query string, performs issue c
 <p>A redirect URL from inviter to connect can consist of following elements,</p>
 <ul>
 <li><code>domain and path</code>: domain and path are managed by inviter application and it can be a target application to which this out-of-band invitation is targeted. The target application can be a agent based application or a selection service which can present various application selection options to user.</li>
-<li><code>out-of-band message</code>: A query parameter <code>oob</code> containing out-of-band message of Base64URLEncoded json format. Refer <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0434-outofband/README.md#standard-out-of-band-message-encoding">Standard Out-of-Band Message Encoding</a> to learn more.</li>
+<li><code>out-of-band message</code>: A query parameter <code>oob</code> containing out-of-band message of Base64URLEncoded json format. Refer <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0434-outofband/README.md#standard-out-of-band-message-encoding">Standard Out-of-Band Message Encoding</a> to learn more.</li>
 <li><code>out-of-band message ID</code>: It seems inevitable that the length of some out-of-band message will be too long to produce a useable redirect URL or QR Code. A query parameter <code>oobid</code> containing out-of-band invitation URL which can be resolved to fetch actual invitation message.
-Refer <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0434-outofband/README.md#url-shortening">Out-of-Band URL Shortening</a> to learn more.</li>
+Refer <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0434-outofband/README.md#url-shortening">Out-of-Band URL Shortening</a> to learn more.</li>
 </ul>
 <h5 id="sample-1-redirect-invitation">Sample 1: redirect invitation<a class="headerlink" href="#sample-1-redirect-invitation" title="Permanent link">&para;</a></h5>
 <p>Invitation:</p>
@@ -4698,14 +4698,14 @@ verifier can send a URL to wallet application requesting redirect.  This decorat
 </code></pre></div>
 <p>where,</p>
 <ul>
-<li><code>status</code>: The value of this property MUST be one of the statuses defined <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0015-acks/README.md#ack-status">here</a></li>
+<li><code>status</code>: The value of this property MUST be one of the statuses defined <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0015-acks/README.md#ack-status">here</a></li>
 <li><code>url</code>: URL to which recipient of this message is requested to redirect.</li>
 </ul>
 <p>Some of the DIDComm messages which can use <code>~web-redirect</code> details to send redirect request.</p>
 <ul>
 <li>protocol acknowledgment messages</li>
 <li>problem reports</li>
-<li>protocol messages which concludes the protocol, like <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0453-issue-credential-v2/README.md#issue-credential">Issue Credential</a> message.</li>
+<li>protocol messages which concludes the protocol, like <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0453-issue-credential-v2/README.md#issue-credential">Issue Credential</a> message.</li>
 </ul>
 <h3 id="putting-all-together">Putting all together<a class="headerlink" href="#putting-all-together" title="Permanent link">&para;</a></h3>
 <h4 id="sending-invitation-to-recipient-through-redirect">Sending Invitation to Recipient through redirect<a class="headerlink" href="#sending-invitation-to-recipient-through-redirect" title="Permanent link">&para;</a></h4>

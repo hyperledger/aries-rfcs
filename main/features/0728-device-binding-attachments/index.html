@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2826,27 +2826,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3656,6 +3635,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4669,7 +4669,7 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    - `path` -- JsonPath to a requested attribute which represents a public key of a hardware bound key pair - represented as did:key
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>The `device-binding-challenge` must be attached to the `request-presentations~attach` array of the `request-presentation` message defined by [RFC-0037](https://github.com/hyperledger/aries-rfcs/blob/main/features/0037-present-proof/README.md#request-presentation) and [RFC-0454](https://github.com/hyperledger/aries-rfcs/tree/main/features/0454-present-proof-v2#request-presentation).
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>The `device-binding-challenge` must be attached to the `request-presentations~attach` array of the `request-presentation` message defined by [RFC-0037](https://github.com/hyperledger/aries-rfcs/blob/main../../features/0037-present-proof/README.md#request-presentation) and [RFC-0454](https://github.com/hyperledger/aries-rfcs/tree/main../../features/0454-present-proof-v2#request-presentation).
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>#### Example request-presentation messages
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
@@ -4760,9 +4760,9 @@
 </ul>
 </li>
 </ul>
-<p>The <code>device-binding-response</code> must be attached to the <code>device_binding~attach</code> array of a <code>presentation</code> message defined by <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0037-present-proof/README.md#presentation">RFC-0037</a> or <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0454-present-proof-v2#presentation">RFC-0454</a>.</p>
+<p>The <code>device-binding-response</code> must be attached to the <code>device_binding~attach</code> array of a <code>presentation</code> message defined by <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0037-present-proof/README.md#presentation">RFC-0037</a> or <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0454-present-proof-v2#presentation">RFC-0454</a>.</p>
 <ul>
-<li><code>jws</code> -- Nonce from <a href="#device-binding-challenge">device-binding-challenge</a> signed with the corresponding private key as a Json Web Signature object, acording to Aries <a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0017-attachments#signing-attachments">RFC-0017</a>.</li>
+<li><code>jws</code> -- Nonce from <a href="#device-binding-challenge">device-binding-challenge</a> signed with the corresponding private key as a Json Web Signature object, acording to Aries <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0017-attachments#signing-attachments">RFC-0017</a>.</li>
 </ul>
 <h3 id="example-presentation-messages">Example presentation messages<a class="headerlink" href="#example-presentation-messages" title="Permanent link">&para;</a></h3>
 <p>The following represents a presentation message with an attached libindy presentation and a corresponding device-binding-response.</p>

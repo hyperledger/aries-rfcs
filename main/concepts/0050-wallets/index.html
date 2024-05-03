@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2585,27 +2585,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2674,6 +2653,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -3070,27 +3070,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3755,6 +3734,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4839,12 +4839,12 @@
 </ul>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>Specify the external interfaces of identity wallets in the Indy ecosystem, as well
-as some background concepts, theory, tradeoffs, and internal implementation guidelines.</p>
+as some background ../../concepts, theory, tradeoffs, and internal implementation guidelines.</p>
 <p><img alt="identity wallet" src="identity-wallet.png" /></p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
 <p>Wallets are a familiar component metaphor that SSI has adopted from the world of
 cryptocurrencies. The translation isn't perfect, though; crypto wallets have only a
-subset of the features that an identity wallet needs. This causes problems, as
+subset of the ../../features that an identity wallet needs. This causes problems, as
 coders may approach wallets in Indy with assumptions that are more narrow than
 our actual design target.</p>
 <p>Since wallets are a major vector for hacking and cybersecurity issues, casual or
@@ -4916,7 +4916,7 @@ subject of this spec.</p>
 <h4 id="not-a-cryptocurrency-wallet">Not A Cryptocurrency Wallet<a class="headerlink" href="#not-a-cryptocurrency-wallet" title="Permanent link">&para;</a></h4>
 <p>The cryptocurrency community has popularized the term "wallet"--and because
 identity wallets share with crypto wallets both high-tech crypto and a need
-to store secrets, it is tempting to equate these two concepts. However, an
+to store secrets, it is tempting to equate these two ../../concepts. However, an
 identity wallet can hold more than just cryptocurrency keys, just as a physical
 wallet can hold more than paper currency. Also, identity wallets may need to
 manage hundreds of millions of relationships (in the case of large organizations),
@@ -4995,12 +4995,12 @@ secrets motivates the following logical organization of identity wallets in Indy
 provided by indy-sdk, and implemented only once. This is the block labeled
 <code>encryption, query (wallet core)</code> in the diagram. The implementation in this layer
 guarantees proper encryption and secret-handling. It also provides some <a href="#tags-and-queries">query
-features</a>.
+../../features</a>.
 Records (items) to be stored in a wallet are referenced by a public handle if they are secrets.
 This public handle might be a public key in a key pair, for example. Records that are
 not secrets can be returned directly across the API boundary.</p>
 <p>Underneath, this common wallet code in libindy is supplemented with pluggable storage--
-a technology that provides persistence and query features. This pluggable storage could
+a technology that provides persistence and query ../../features. This pluggable storage could
 be a file system, an object store, an RDBMS, a NoSQL DB, a Graph DB, a key~value store,
 or almost anything similar. The pluggable storage is registered with the wallet layer
 by providing a series of C-callable functions (callbacks). The
@@ -5116,7 +5116,7 @@ to plug different storages for covering of different use cases. Default storage 
 with libindy will be sqlite based and well suited for agents running on edge devices.
 The API endpoint <code>register_wallet_storage</code> will allow Indy Developers to register
 a custom storage implementation as a set of handlers.</p>
-<p>A storage implementation does not need any special security features. It stores data that
+<p>A storage implementation does not need any special security ../../features. It stores data that
 was already encrypted by libindy (or data that needs no encryption/protection, in the
 case of unencrypted tag values). It searches data in whatever form it is persisted, without
 any translation. It returns data as persisted, and lets the common wallet infrastructure

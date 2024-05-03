@@ -324,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2823,27 +2823,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3508,6 +3487,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4613,7 +4613,7 @@
 
 <h1 id="aries-rfc-0029-message-trust-contexts">Aries RFC 0029: Message Trust Contexts<a class="headerlink" href="#aries-rfc-0029-message-trust-contexts" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="daniel.hardman@gmail.com">Daniel Hardman</a></li>
+<li>Authors: <a href="mailto:daniel.hardman@gmail.com">Daniel Hardman</a></li>
 <li>Status: <a href="../../#stalled">STALLED</a></li>
 <li>Since: 2024-04-03</li>
 <li>Status Note: Not practically applied.</li>
@@ -4654,7 +4654,7 @@
 <h3 id="message-trust-contexts">Message Trust Contexts<a class="headerlink" href="#message-trust-contexts" title="Permanent link">&para;</a></h3>
 <p>The DID Communication ecosystem formalizes the idea of a <strong>Message Trust Context</strong> (<strong>MTC</strong>) to expose such questions, make their answers explicit, and encourage thoughtful choices based on the answers.</p>
 <p>An MTC is an object that holds trust context for a message. This context follows a message throughout its processing journey inside the agent that receives it, and it should be analyzed and updated for decision-making purposes throughout.</p>
-<p>Protocols should be designed with standard MTCs in mind. Thus, it is desirable that all implementations share common names for certain concepts, so we can discuss them conveniently in design docs, error messages, logs, and so forth. The standard dimensions of trust tracked in an MTC break down into two groups:</p>
+<p>Protocols should be designed with standard MTCs in mind. Thus, it is desirable that all implementations share common names for certain ../../concepts, so we can discuss them conveniently in design docs, error messages, logs, and so forth. The standard dimensions of trust tracked in an MTC break down into two groups:</p>
 <h4 id="crypto-related">Crypto-related<a class="headerlink" href="#crypto-related" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Confidentiality</strong>: Could the plaintext content of the message I just received over this channel have been observed by another party?</li>
@@ -4718,7 +4718,7 @@ lacks Integrity guarantees (-i)." This notation can help diagnose trust problems
 <p>MTCs apply to the entirety of the associated message's attributes. However, <em>embedded</em> and <em>appended</em> message
 attachments present the unique situation of nested content with the potential for a trust context that differs from the
 parent message.</p>
-<p>The <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#embedding">attachment descriptor</a>,
+<p>The <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0017-attachments/README.md#embedding">attachment descriptor</a>,
 used for both <em>embedded</em> and <em>appended</em> attachments, shares the same MTC as the parent message. Unpacked attachment data
 have their own Trust Contexts populated as appropriate depending on how the data was retrieved, whether the attachment
 is signed, whether an integrity checksum was provided and verified, etc.</p>

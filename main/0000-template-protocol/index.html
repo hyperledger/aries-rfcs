@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2573,27 +2573,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2662,6 +2641,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -3058,27 +3058,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3743,6 +3722,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4805,7 +4805,7 @@
 
 <h1 id="aries-rfc-0000-your-protocol-09">Aries RFC 0000: Your Protocol 0.9<a class="headerlink" href="#aries-rfc-0000-your-protocol-09" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="you@github-email">your name</a> -- email is optional</li>
+<li>Authors: <a href="mailto:you@github-email">your name</a> -- email is optional</li>
 <li>Status: <a href="/README.md#proposed">PROPOSED</a></li>
 <li>Since: 2019-12-26 (date you submit your PR)</li>
 <li>Status Note: (explanation of current status)  </li>
@@ -4827,7 +4827,7 @@
 <p>Name and Version</p>
 <p>Specify the official name of the protocol and its version, e.g., "My Protocol 0.9".</p>
 <p>Protocol names are often either lower_snake_case or kebob-case. The non-version components of the protocol named are matched exactly.</p>
-<p>URI: <a href="https://didcomm.org/lets_do_lunch/">https://didcomm.org/lets_do_lunch/</a><version>/<messageType></p>
+<p>URI: <code>https://didcomm.org/lets_do_lunch/&lt;version&gt;/&lt;messageType&gt;</code></p>
 <p>Message types and protocols are identified with special URIs that match certain conventions. See <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md#message-type-and-protocol-identifier-uris">Message Type and Protocol Identifier URIs</a> for more details.</p>
 <p>The version of a protocol is declared carefully. See <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md#semver-rules-for-protocols">Semver Rules for Protocols</a> for details.</p>
 <h3 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h3>
@@ -4928,7 +4928,7 @@ the alias defined inside the namespace of the <code>rendezvous</code> protocol:<
 When adoption is specified, it should include a <strong>minimum
 adopted version</strong> of the adopted message type: "This protocol adopts
 <code>ack</code> with version &gt;= 1.4". All versions of the adopted message that share
-the same major number should be compatible, given the <a href="concepts/0003-protocols/semver.md">semver rules</a>
+the same major number should be compatible, given the <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md#semver-rules-for-protocols">semver rules</a>
 that apply to protocols.</p>
 <h3 id="constraints">Constraints<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h3>
 <p>Many protocols have constraints that help parties build trust.

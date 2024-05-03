@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2546,27 +2546,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2635,6 +2614,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -3031,27 +3031,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3716,6 +3695,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4751,7 +4751,7 @@
 
 <h1 id="aries-rfc-0015-acks">Aries RFC 0015: ACKs<a class="headerlink" href="#aries-rfc-0015-acks" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="daniel.hardman@gmail.com">Daniel Hardman</a></li>
+<li>Authors: <a href="mailto:daniel.hardman@gmail.com">Daniel Hardman</a></li>
 <li>Status: <a href="../../#accepted">ACCEPTED</a></li>
 <li>Since: 2021-04-15</li>
 <li>Status Note: Broadly implemented, adopted into many protocols and part of <a href="../../concepts/0302-aries-interop-profile/">AIP 1 and 2</a>.</li>
@@ -4767,7 +4767,7 @@ messages (ACKs) to confirm receipt and clarify the status of complex processes.<
 <p>Mar 22, 2022: Clarification that an Ack <code>Fail</code> must not be used, and that a <a href="../0035-report-problem/">Report Problem</a> must be used in its place. Remove Ack <code>Fail</code> from the RFC.</p>
 </li>
 <li>
-<p>Mar 25, 2020: In the ~thread decorator section of the sample in the <a href="#explicit-acks">Explicit ACKs section</a>, 'myindex' was changed to 'sender_order' and 'lrecs' to 'received_orders'. This is in accordance with the field names as defined in <a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading#threaded-messages">RFC 0008</a>.</p>
+<p>Mar 25, 2020: In the ~thread decorator section of the sample in the <a href="#explicit-acks">Explicit ACKs section</a>, 'myindex' was changed to 'sender_order' and 'lrecs' to 'received_orders'. This is in accordance with the field names as defined in <a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d../../concepts/0008-message-id-and-threading#threaded-messages">RFC 0008</a>.</p>
 </li>
 </ul>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
@@ -4873,7 +4873,7 @@ sophisticated or fine-grained that the simple settings offered here.
 In such cases, developers should write their own ACK message type(s) and
 maybe their own decorators. However, reusing the field names and conventions
 in this RFC may still be desirable, if there is significant overlap in the
-concepts.</p>
+../../concepts.</p>
 <h3 id="requesting-acks">Requesting ACKs<a class="headerlink" href="#requesting-acks" title="Permanent link">&para;</a></h3>
 <p>A decorator, <code>~please_ack</code>, allows one agent to request an ad hoc ACK from
 another agent. This is described in the <a href="../0317-please-ack/README.md">0317-please-ack RFC</a>.</p>

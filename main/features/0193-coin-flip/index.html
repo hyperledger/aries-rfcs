@@ -324,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2823,27 +2823,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3508,6 +3487,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4715,7 +4715,7 @@
 
 <h1 id="aries-rfc-0193-coin-flip-protocol-10">Aries RFC 0193: Coin Flip Protocol 1.0<a class="headerlink" href="#aries-rfc-0193-coin-flip-protocol-10" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="daniel.hardman@gmail.com">Daniel Hardman</a>, <a href="patrick@mindf.org">Patrick Stürmlinger</a></li>
+<li>Authors: <a href="mailto:daniel.hardman@gmail.com">Daniel Hardman</a>, <a href="mailto:patrick@mindf.org">Patrick Stürmlinger</a></li>
 <li>Status: <a href="../../#stalled">STALLED</a></li>
 <li>Since: 2024-04-03</li>
 <li>Status Note: No implementations have been created.</li>
@@ -4733,8 +4733,8 @@
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
 <h3 id="name-and-version">Name and Version<a class="headerlink" href="#name-and-version" title="Permanent link">&para;</a></h3>
 <p>This defines the <code>coinflip</code> protocol, version 1.x, as identified by the
-following <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/uris.md#piuri">PIURI</a>:</p>
-<div class="highlight"><pre><span></span><code>https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0
+following <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0003-protocols/uris.md#piuri">PIURI</a>:</p>
+<div class="highlight"><pre><span></span><code>https://github.com/hyperledger/aries-rfcs../../features/0193-coin-flip/1.0
 </code></pre></div>
 <h3 id="roles">Roles<a class="headerlink" href="#roles" title="Permanent link">&para;</a></h3>
 <p>There are 2 roles in the protocol: <strong>Recorder</strong> and <strong>Caller</strong>. These role names parallel the roles in a physical coin flip: the <em>Recorder</em> performs a process that freezes/records the state of a flipped coin, and the <em>Caller</em> announces the state that they predict, before the state is known. If the caller predicts the state correctly, then the caller chooses what happens next; otherwise, the recorder chooses.</p>
@@ -4776,7 +4776,7 @@ Note: This diagram was made in draw.io. To make changes:
 <h4 id="propose"><code>propose</code><a class="headerlink" href="#propose" title="Permanent link">&para;</a></h4>
 <p>The protocol begins when Caller sends to Recorder a <code>propose</code> message that embodies Step 1 in the <a href="#algorithm">algorithm above</a>. It looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  &quot;@type&quot;: &quot;https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0/propose&quot;,
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  &quot;@type&quot;: &quot;https://github.com/hyperledger/aries-rfcs../../features/0193-coin-flip/1.0/propose&quot;,
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  &quot;@id&quot;: &quot;518be002-de8e-456e-b3d5-8fe472477a86&quot;,
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  &quot;side1&quot;: &quot;C587E50CB48B1B0A3B5136BA9D238B739A6CD599EE2D16994537B75CA595C091&quot;,
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  &quot;side2&quot;: &quot;0C192E004440D8D6D6AF06A7A03A2B182903E9F048D4E7320DF6301DF0C135A5&quot;,
@@ -4791,7 +4791,7 @@ Note: This diagram was made in draw.io. To make changes:
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>}
 </code></pre></div>
 <p>The <code>@type</code> and <code>@id</code> fields are standard for DIDComm. The <code>side1</code> and <code>side2</code> fields convey the data required by Step 2 of the algorithm. The optional <code>comment</code> field follows <a href="../0043-l10n/">localization conventions</a> and is irrelevant unless the coin flip intends to invite human participation. The <code>~thread.pthid</code> <a href="../../concepts/0011-decorators/">decorator</a> is optional but should be common; it <a href="../../concepts/0008-message-id-and-threading/#threaded-messages">identifies the thread of the parent interaction</a> (the <a href="../../concepts/0003-protocols/#composable">superprotocol</a>).</p>
-<p>The <code>choice-id</code> field formally names a choice that a superprotocol has defined, and tells how the string values of the <code>caller-wins</code> and <code>recorder-wins</code> fields will be interpreted. In the example above, the choice is defined in the <a href="../../concepts/0003-protocols/tictactoe/#key-concepts">Tic-Tac-Toe Protocol</a>, which also specifies that <code>caller-wins</code> and <code>recorder-wins</code> will contain DIDs of the parties playing the game. Some other combinations that might make sense include:</p>
+<p>The <code>choice-id</code> field formally names a choice that a superprotocol has defined, and tells how the string values of the <code>caller-wins</code> and <code>recorder-wins</code> fields will be interpreted. In the example above, the choice is defined in the <a href="../../concepts/0003-protocols/tictactoe/#key-../../concepts">Tic-Tac-Toe Protocol</a>, which also specifies that <code>caller-wins</code> and <code>recorder-wins</code> will contain DIDs of the parties playing the game. Some other combinations that might make sense include:</p>
 <ul>
 <li>
 <p>In an auction protocol that uses a coin flip to break a tie between two bids of equal value, <code>choice-id</code> might be a string like <code>prefix/myauctionproto/1.0/bid-tie-break</code>, and the values of the <code>*-wins</code> fields might be the <code>id</code> properties of specific bid messages.</p>
@@ -4807,7 +4807,7 @@ Note: This diagram was made in draw.io. To make changes:
 <h4 id="call"><code>call</code><a class="headerlink" href="#call" title="Permanent link">&para;</a></h4>
 <p>This message is sent from Caller to Recorder, and embodies Step 3 of <a href="#algorithm">the algorithm</a>. It looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  &quot;@type&quot;: &quot;https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0/call&quot;,
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  &quot;@type&quot;: &quot;https://github.com/hyperledger/aries-rfcs../../features/0193-coin-flip/1.0/call&quot;,
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  &quot;@id&quot;: &quot;1173fe5f-86c9-47d7-911b-b8eac7d5f2ad&quot;,
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  &quot;choice&quot;: &quot;side2&quot;,
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  &quot;comment&quot;: &quot;I pick side 2.&quot;,
@@ -4822,7 +4822,7 @@ Note: This diagram was made in draw.io. To make changes:
 <h4 id="reveal"><code>reveal</code><a class="headerlink" href="#reveal" title="Permanent link">&para;</a></h4>
 <p>This message is sent from Recorder to Caller, and embodies Step 4 of <a href="#algorithm">the algorithm</a>. It looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  &quot;@type&quot;: &quot;https://github.com/hyperledger/aries-rfcs/features/0193-coin-flip/1.0/reveal&quot;,
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  &quot;@type&quot;: &quot;https://github.com/hyperledger/aries-rfcs../../features/0193-coin-flip/1.0/reveal&quot;,
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  &quot;@id&quot;: &quot;e2a9454d-783d-4663-874e-29ad10776115&quot;,
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  &quot;salt&quot;: &quot;01bf7abd-aa80-4389-bf8c-dba0f250bb1b&quot;,
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  &quot;winner&quot;: &quot;caller&quot;,

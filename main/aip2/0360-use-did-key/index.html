@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2462,27 +2462,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2551,6 +2530,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2947,27 +2947,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3632,6 +3611,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4583,7 +4583,7 @@
 
 <h1 id="aries-rfc-0360-didkey-usage">Aries RFC 0360: did:key Usage<a class="headerlink" href="#aries-rfc-0360-didkey-usage" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="tobias.looker@mattr.global">Tobias Looker</a>, <a href="mailto:swcurran@cloudcompass.ca">Stephen Curran</a></li>
+<li>Authors: <a href="mailto:tobias.looker@mattr.global">Tobias Looker</a>, <a href="mailto:swcurran@cloudcompass.ca">Stephen Curran</a></li>
 <li>Status: <a href="../../#accepted">ACCEPTED</a></li>
 <li>Since: 2021-04-15</li>
 <li>Status Note: Referenced in a number of Aries RFCs and formalized as part of <a href="../../concepts/0302-aries-interop-profile/">AIP 2.0</a> did:key method is a <a href="https://w3c-ccg.github.io/community/work_items.html">W3C CCG work item</a></li>
@@ -4602,7 +4602,7 @@
 <p>At the cost of adding/building a did:key resolver we get a DID standard way to access the key and key type, including specific information on how the key can be used. The resolver may be trivial or complex. In a trivial version, the key type is assumed, and the key can be easily extracted from the string. In a more complete implementation, the key type can be checked, and standard DID URL handling can be used to extract parts of the DIDDoc for specific purposes. For example, in the <a href="https://digitalbazaar.github.io/did-method-key/#example-2-a-did-document-derived-from-a-did-key">ed25519 <code>did:key</code> DIDDoc</a>, the existence of the <code>keyAgreement</code> entry implies that the key can be used in a Diffie-Hellman exchange, without the developer guessing, or using the key incorrectly.</p>
 <p>Note that simply knowing the key type is not necessarily sufficient to be able to use the key. The cryptography supporting the processing data using the key must also be available in the agent. However, the multicodec and did:key capabilities will simplify adding support for new key types in the future.</p>
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
-<p>An example of the use of the replacement of a verkey with <code>did:key</code> can be found in the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0056-service-decorator">~service decorator RFC</a>. Notably in the example at the beginning of the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0056-service-decorator#tutorial">tutorial</a> section, the verkeys in the <code>recipientKeys</code> and <code>routingKeys</code> items would be changed from native keys to use <code>did:key</code> as follows:</p>
+<p>An example of the use of the replacement of a verkey with <code>did:key</code> can be found in the <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0056-service-decorator">~service decorator RFC</a>. Notably in the example at the beginning of the <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0056-service-decorator#tutorial">tutorial</a> section, the verkeys in the <code>recipientKeys</code> and <code>routingKeys</code> items would be changed from native keys to use <code>did:key</code> as follows:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    &quot;@type&quot;: &quot;somemessagetype&quot;,
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    &quot;~service&quot;: {
@@ -4627,17 +4627,17 @@
 <p>The <code>did:key</code> method uses the strings that are the DID, public key and key type to construct ("resolve") a DIDDoc based on a template defined by the <code>did:key</code> specification. Further, the <code>did:key</code> resolver generates, in the case of an ed25519 public signing key, a key that can be used as part of a Diffie-Hellman exchange appropriate for encryption in the <code>keyAgreement</code> section of the DIDDoc. Presumably, as the <code>did:key</code> method supports other key types, similar DIDDoc templates will become part of the specification. Key types that don't support a signing/key exchange transformation would not have a <code>keyAgreement</code> entry in the resolved DIDDoc.</p>
 <p>The following currently implemented RFCs would be affected by acceptance of this RFC. In these RFCs, the JSON items that currently contain naked public keys (mostly the items <code>recipientKeys</code> and <code>routingKeys</code>) would be changed to use <code>did:key</code> references where applicable. Note that in these items public DIDs could also be used if applicable for a given use case.</p>
 <ul>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0023-did-exchange">0023-did-exchange</a> - Invitation Message</li>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0028-introduce">0028-introduce</a></li>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0056-service-decorator">0056-service-decorator</a></li>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0160-connection-protocol">0160-connection-protocol</a></li>
-<li><a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0434-outofband/README.md">0434-out-of-band-protocols</a></li>
-<li><a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0211-route-coordination/README.md">0211-mediator-coordination-protocol</a></li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0023-did-exchange">0023-did-exchange</a> - Invitation Message</li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0028-introduce">0028-introduce</a></li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0056-service-decorator">0056-service-decorator</a></li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0160-connection-protocol">0160-connection-protocol</a></li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0434-outofband/README.md">0434-out-of-band-protocols</a></li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0211-route-coordination/README.md">0211-mediator-coordination-protocol</a></li>
 </ul>
 <p>Service entries in <code>did:peer</code> DIDDocs (such as in RFCs
-<a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0094-cross-domain-messaging">0094-cross-domain-messaging</a>
+<a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0094-cross-domain-messaging">0094-cross-domain-messaging</a>
 and
-<a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0067-didcomm-diddoc-conventions">0067-didcomm-diddoc-conventions</a>)
+<a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0067-didcomm-diddoc-conventions">0067-didcomm-diddoc-conventions</a>)
 should <strong>NOT</strong> use a <code>did:key</code> public key representation. Instead, service
 entries in the DIDDoc should reference keys defined internally in the DIDDoc
 where appropriate.</p>

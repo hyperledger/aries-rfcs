@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2528,27 +2528,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2617,6 +2596,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -3013,27 +3013,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3698,6 +3677,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4731,8 +4731,8 @@
 </ul>
 <p>"Agent builders" are organizations or teams that are developing open source code upon which agents can be built (e.g. <a href="https://github.com/hyperledger/aries-framework-dotnet">aries-framework-dotnet</a>), or deployable agents (e.g. <a href="https://github.com/hyperledger/aries-mobileagent-xamarin">Aries Mobile Agent Xamarin</a>), or commercially available agents.</p>
 <p>An Aries Interop Profile (AIP) version provides a clearly defined set of versions of RFCs for Aries agent builders to target their agent implementation when they wish it to be interoperable with other agents supporting the same Aries Interop Profile version. The Aries Interop Profile versioning process is intended to provide clarity and predictability for Aries agent builders and others in the broader Aries community. The process is not concerned with proposing new, or evolving existing, RFCs, nor with the development of Aries code bases.</p>
-<p>At all times, the <a href="#reference">Reference</a> section of this RFC defines one or more current Aries Interop Profile versions -- a number and set of links to specific commits of concept and features RFCs, along with a list of all previous Aries Interop Profile versions. Several current Aries Interop Profile versions can coexist during periods when multiple major Aries Interop Profile versions are in active use (e.g. 1.x and 2.x). Each entry in the previous versions list includes a link to the commit of this RFC associated with that Aries Interop Profile version. The <a href="#reference">Reference</a> section MAY include one <code>&lt;major&gt;.next</code> version for each existing current major Aries Interop Profile versions. Such "next" versions are proposals for what is to be included in the next minor AIP version.</p>
-<p>Once a suitably populated Aries test suite is available, each Aries Interop Profile version will include a link to the relevant subset of test cases. The test cases will include only those targeting the specific versions of the concepts and features RFCs in that version of Aries Interop Profile. A process for maintaining the link between the Aries Interop Profile version and the test cases will be defined in this RFC once the Aries test suite is further evolved.</p>
+<p>At all times, the <a href="#reference">Reference</a> section of this RFC defines one or more current Aries Interop Profile versions -- a number and set of links to specific commits of concept and ../../features RFCs, along with a list of all previous Aries Interop Profile versions. Several current Aries Interop Profile versions can coexist during periods when multiple major Aries Interop Profile versions are in active use (e.g. 1.x and 2.x). Each entry in the previous versions list includes a link to the commit of this RFC associated with that Aries Interop Profile version. The <a href="#reference">Reference</a> section MAY include one <code>&lt;major&gt;.next</code> version for each existing current major Aries Interop Profile versions. Such "next" versions are proposals for what is to be included in the next minor AIP version.</p>
+<p>Once a suitably populated Aries test suite is available, each Aries Interop Profile version will include a link to the relevant subset of test cases. The test cases will include only those targeting the specific versions of the ../../concepts and ../../features RFCs in that version of Aries Interop Profile. A process for maintaining the link between the Aries Interop Profile version and the test cases will be defined in this RFC once the Aries test suite is further evolved.</p>
 <p>This RFC includes a <a href="#aries-agent-builders-and-agents">section</a> maintained by Aries agent builders listing their Aries agents or agent deployments (whether open or closed source). This list SHOULD include the following information for each listed agent:</p>
 <ul>
 <li>The name, version and link to the agent (code or deployment)</li>
@@ -4763,7 +4763,7 @@ run the following from the root of the repo:</p>
 <p>AIP 2.0 is organized into a set of base requirements, and additional optional targets. These requirements are listed below. When indicating levels of support for AIP 2.0, subtargets are indicated in this format: <code>AIP 2.0/INDYCREDS/MEDIATE</code> with the subtargets listed in any order.</p>
 <p>Any RFCs within a single AIP Version and it's subtargets MUST refer to the exact same version of the RFC.</p>
 <h3 id="discover-features-usage">Discover Features Usage<a class="headerlink" href="#discover-features-usage" title="Permanent link">&para;</a></h3>
-<p>AIP Targets can be disclosed in the discover_features protocol, using the <code>feature-type</code> of <code>aip</code>. The feature's <code>id</code> is <code>AIP&lt;major&gt;.&lt;minor&gt;</code> for base compatibility, and <code>AIP&lt;major&gt;.&lt;minor&gt;/&lt;subtarget&gt;</code> for subtargets, each subtarget being included individually.</p>
+<p>AIP Targets can be disclosed in the discover_../../features protocol, using the <code>feature-type</code> of <code>aip</code>. The feature's <code>id</code> is <code>AIP&lt;major&gt;.&lt;minor&gt;</code> for base compatibility, and <code>AIP&lt;major&gt;.&lt;minor&gt;/&lt;subtarget&gt;</code> for subtargets, each subtarget being included individually.</p>
 <p>Example:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/discover-features/2.0/disclosures&quot;</span><span class="p">,</span>
@@ -4793,79 +4793,79 @@ run the following from the root of the repo:</p>
 <tbody>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/9b7ab9814f2e7d1108f74aca6f3d2e5d62899473/concepts/0003-protocols">0003-protocols</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/9b7ab9814f2e7d1108f74aca6f3d2e5d62899473../../concepts/0003-protocols">0003-protocols</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/f1e420f76abd9ff4af5c15d375fa6cf8c2cacb33/concepts/0004-agents">0004-agents</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/f1e420f76abd9ff4af5c15d375fa6cf8c2cacb33../../concepts/0004-agents">0004-agents</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/f1e420f76abd9ff4af5c15d375fa6cf8c2cacb33/concepts/0005-didcomm">0005-didcomm</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/f1e420f76abd9ff4af5c15d375fa6cf8c2cacb33../../concepts/0005-didcomm">0005-didcomm</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading">0008-message-id-and-threading</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d../../concepts/0008-message-id-and-threading">0008-message-id-and-threading</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/965a975f953d72e370d2b6fb28eec538ec756c6d/concepts/0011-decorators">0011-decorators</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/965a975f953d72e370d2b6fb28eec538ec756c6d../../concepts/0011-decorators">0011-decorators</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0017-attachments">0017-attachments</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d../../concepts/0017-attachments">0017-attachments</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0020-message-types">0020-message-types</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d../../concepts/0020-message-types">0020-message-types</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0046-mediators-and-relays">0046-mediators-and-relays</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d../../concepts/0046-mediators-and-relays">0046-mediators-and-relays</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/53c2e7accc8394c9c7b09563c0eec3c564c133c6/concepts/0047-json-ld-compatibility">0047-json-LD-compatibility</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/53c2e7accc8394c9c7b09563c0eec3c564c133c6../../concepts/0047-json-ld-compatibility">0047-json-LD-compatibility</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0050-wallets">0050-wallets</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d../../concepts/0050-wallets">0050-wallets</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0094-cross-domain-messaging">0094-cross-domain messaging</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d../../concepts/0094-cross-domain-messaging">0094-cross-domain messaging</a></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/5cc750f0fe18e3918401489066566f22474e25a8/features/0015-acks">0015-acks</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/5cc750f0fe18e3918401489066566f22474e25a8../../features/0015-acks">0015-acks</a></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/9b0aaa39df7e8bd434126c4b33c097aae78d65bf/features/0019-encryption-envelope">0019-encryption-envelope</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/9b0aaa39df7e8bd434126c4b33c097aae78d65bf../../features/0019-encryption-envelope">0019-encryption-envelope</a></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4d9775490359e234ab8d1c152bca6f534e92a38d/features/0160-connection-protocol">0160-connection-protocol</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4d9775490359e234ab8d1c152bca6f534e92a38d../../features/0160-connection-protocol">0160-connection-protocol</a></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/b490ebe492985e1be9804fc0763119238b2e51ab/features/0025-didcomm-transports">0025-didcomm-transports</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/b490ebe492985e1be9804fc0763119238b2e51ab../../features/0025-didcomm-transports">0025-didcomm-transports</a></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/89d14c15ab35b667e7a9d04fe42d4d48b10468cf/features/0035-report-problem">0035-report-problem</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/89d14c15ab35b667e7a9d04fe42d4d48b10468cf../../features/0035-report-problem">0035-report-problem</a></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/bb42a6c35e0d5543718fb36dd099551ab192f7b0/features/0036-issue-credential">0036-issue-credential</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/bb42a6c35e0d5543718fb36dd099551ab192f7b0../../features/0036-issue-credential">0036-issue-credential</a></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4fae574c03f9f1013db30bf2c0c676b1122f7149/features/0037-present-proof">0037-present-proof</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4fae574c03f9f1013db30bf2c0c676b1122f7149../../features/0037-present-proof">0037-present-proof</a></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/527849ec3aa2a8fd47a7bb6c57f918ff8bcb5e8c/features/0056-service-decorator">0056-service-decorator</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/527849ec3aa2a8fd47a7bb6c57f918ff8bcb5e8c../../features/0056-service-decorator">0056-service-decorator</a></td>
 </tr>
 </tbody>
 </table>
@@ -4982,127 +4982,127 @@ run the following from the root of the repo:</p>
 <tbody>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/concepts/0003-protocols">0003-protocols</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../concepts/0003-protocols">0003-protocols</a></td>
 <td><a href="https://gist.github.com/swcurran/6976dc1fd1b10c51343cf3812288b345/revisions?diff=unified">AIP V1.0, Reformatted</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/concepts/0004-agents">0004-agents</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63../../concepts/0004-agents">0004-agents</a></td>
 <td>AIP V1.0, Unchanged</td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/concepts/0005-didcomm">0005-didcomm</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../concepts/0005-didcomm">0005-didcomm</a></td>
 <td><a href="https://gist.github.com/swcurran/788195ea0bccec53e1f9fe3509034341/revisions?diff=unified">AIP V1.0, Minimally Updated</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/concepts/0008-message-id-and-threading">0008-message-id-and-threading</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../concepts/0008-message-id-and-threading">0008-message-id-and-threading</a></td>
 <td><a href="https://gist.github.com/swcurran/db72109ea4f2e336ac91f4fbab3f4048/revisions?diff=unified">AIP V1.0, Updated</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/concepts/0011-decorators">0011-decorators</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../concepts/0011-decorators">0011-decorators</a></td>
 <td><a href="https://gist.github.com/swcurran/04229583a509f12258352f9c85b9c9b6/revisions?diff=unified">AIP V1.0, Updated</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/7759addb1506d107fddec692403bbc9e55fe491f/concepts/0017-attachments">0017-attachments</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/7759addb1506d107fddec692403bbc9e55fe491f../../concepts/0017-attachments">0017-attachments</a></td>
 <td><a href="https://gist.github.com/swcurran/7d88f9866175af96a70e5c6c00fa0148/revisions?diff=unified">AIP V1.0, Updated</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/concepts/0020-message-types">0020-message-types</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../concepts/0020-message-types">0020-message-types</a></td>
 <td><a href="https://gist.github.com/swcurran/8f95c25b5c778426d3a47fe6d7c46c70/revisions?diff=unified">AIP V1.0, Updated</a><br>Mandates message prefix <code>https://didcomm.org</code> for Aries Protocol messages.</td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/45b4233fcffda14f1339380ae2233289f21296b0/concepts/0046-mediators-and-relays">0046-mediators-and-relays</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/45b4233fcffda14f1339380ae2233289f21296b0../../concepts/0046-mediators-and-relays">0046-mediators-and-relays</a></td>
 <td><a href="https://gist.github.com/swcurran/2486b63615f7a36c1e997b6c8b10c245/revisions?diff=unified">AIP V1.0, Minimally Updated</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/concepts/0047-json-ld-compatibility">0047-json-LD-compatibility</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63../../concepts/0047-json-ld-compatibility">0047-json-LD-compatibility</a></td>
 <td><a href="https://gist.github.com/swcurran/8ef311d793fc6964328687af3c0efd34/revisions?diff=unified">AIP V1.0, Minimally Updated</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/concepts/0050-wallets">0050-wallets</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63../../concepts/0050-wallets">0050-wallets</a></td>
 <td>AIP V1.0, Unchanged</td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/concepts/0094-cross-domain-messaging">0094-cross-domain messaging</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2../../concepts/0094-cross-domain-messaging">0094-cross-domain messaging</a></td>
 <td><a href="https://gist.github.com/swcurran/e3f27e3ab85a260aaf279352ecc4e1fb/revisions?diff=unified">AIP V1.0, Updated</a></td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/concepts/0519-goal-codes">0519-goal-codes</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../concepts/0519-goal-codes">0519-goal-codes</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0015-acks">0015-acks</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0015-acks">0015-acks</a></td>
 <td><a href="https://gist.github.com/swcurran/81af391bfd79539edec530150045fe51/revisions?diff=unified">AIP V1.0, Updated</a></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0019-encryption-envelope">0019-encryption-envelope</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0019-encryption-envelope">0019-encryption-envelope</a></td>
 <td><a href="https://gist.github.com/swcurran/c652dfd39706e50be4145568797e667a/revisions?diff=unified">AIP V1.0, Updated</a><br>See envelope note below</td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/bf3d796cc33ce78ed7cde7f5422b10719a68be21/features/0023-did-exchange">0023-did-exchange</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/bf3d796cc33ce78ed7cde7f5422b10719a68be21../../features/0023-did-exchange">0023-did-exchange</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0025-didcomm-transports">0025-didcomm-transports</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0025-didcomm-transports">0025-didcomm-transports</a></td>
 <td><a href="https://gist.github.com/swcurran/1e64cba5f6c524d38ad596209df090df/revisions?diff=unified">AIP V1.0, Minimally Updated</a></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0035-report-problem">0035-report-problem</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0035-report-problem">0035-report-problem</a></td>
 <td><a href="https://gist.github.com/swcurran/d9432abc436e6a069d6ffcd41dc86060/revisions?diff=unified">AIP V1.0, Updated</a></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0044-didcomm-file-and-mime-types">0044-didcomm-file-and-mime-types</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0044-didcomm-file-and-mime-types">0044-didcomm-file-and-mime-types</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0048-trust-ping">0048-trust-ping</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0048-trust-ping">0048-trust-ping</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0183-revocation-notification">0183-revocation-notification</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63../../features/0183-revocation-notification">0183-revocation-notification</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/features/0360-use-did-key">0360-use-did-key</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63../../features/0360-use-did-key">0360-use-did-key</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0434-outofband">0434-outofband</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0434-outofband">0434-outofband</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/e8a23a7b80db5db5a12fd786aec9343116cf5147/features/0453-issue-credential-v2">0453-issue-credential-v2</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/e8a23a7b80db5db5a12fd786aec9343116cf5147../../features/0453-issue-credential-v2">0453-issue-credential-v2</a></td>
 <td>Update to V2 Protocol</td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/e8a23a7b80db5db5a12fd786aec9343116cf5147/features/0454-present-proof-v2">0454-present-proof-v2</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/e8a23a7b80db5db5a12fd786aec9343116cf5147../../features/0454-present-proof-v2">0454-present-proof-v2</a></td>
 <td>Update to V2 Protocol</td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0557-discover-features-v2">0557-discover-features-v2</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2../../features/0557-discover-features-v2">0557-discover-features-v2</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 </tbody>
@@ -5119,12 +5119,12 @@ run the following from the root of the repo:</p>
 <tbody>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0211-route-coordination">0211-route-coordination</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0211-route-coordination">0211-route-coordination</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2/features/0092-transport-return-route">0092-transport-return-route</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/b3a3942ef052039e73cd23d847f42947f8287da2../../features/0092-transport-return-route">0092-transport-return-route</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 </tbody>
@@ -5141,12 +5141,12 @@ run the following from the root of the repo:</p>
 <tbody>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0592-indy-attachments">0592-indy-attachments</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0592-indy-attachments">0592-indy-attachments</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /> Evolved from AIP V1.0</td>
 </tr>
 <tr>
 <td>Concept</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63/concepts/0441-present-proof-best-practices">0441-present-proof-best-practices</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/4e78319e5f79df2003ddf37f8f497d0fae20cc63../../concepts/0441-present-proof-best-practices">0441-present-proof-best-practices</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 </tbody>
@@ -5163,12 +5163,12 @@ run the following from the root of the repo:</p>
 <tbody>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0593-json-ld-cred-attach">0593-json-ld-cred-attach</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0593-json-ld-cred-attach">0593-json-ld-cred-attach</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0510-dif-pres-exch-attach">0510-dif-pres-exch-attach</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0510-dif-pres-exch-attach">0510-dif-pres-exch-attach</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 </tbody>
@@ -5185,22 +5185,22 @@ run the following from the root of the repo:</p>
 <tbody>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0593-json-ld-cred-attach">0593-json-ld-cred-attach</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0593-json-ld-cred-attach">0593-json-ld-cred-attach</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/blob/7a44f650d3cebf5b3047c1680618978393a497d5/features/0646-bbs-credentials/README.md">0646-bbs-credentials</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/blob/7a44f650d3cebf5b3047c1680618978393a497d5../../features/0646-bbs-credentials/README.md">0646-bbs-credentials</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0510-dif-pres-exch-attach">0510-dif-pres-exch-attach</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0510-dif-pres-exch-attach">0510-dif-pres-exch-attach</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 </tbody>
 </table>
-<h4 id="chat-chat-related-features">CHAT: Chat related features<a class="headerlink" href="#chat-chat-related-features" title="Permanent link">&para;</a></h4>
+<h4 id="chat-chat-related-features">CHAT: Chat related ../../features<a class="headerlink" href="#chat-chat-related-features" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -5212,7 +5212,7 @@ run the following from the root of the repo:</p>
 <tbody>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0095-basic-message">0095-basic-message</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0095-basic-message">0095-basic-message</a></td>
 <td><img alt="🆕" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f195.svg" title=":new:" /></td>
 </tr>
 </tbody>
@@ -5237,17 +5237,17 @@ below the table listing the removed RFCs provides the reasoning for the removal 
 <tbody>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/e8a23a7b80db5db5a12fd786aec9343116cf5147/features/0317-please-ack">0317-please-ack</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/e8a23a7b80db5db5a12fd786aec9343116cf5147../../features/0317-please-ack">0317-please-ack</a></td>
 <td>Removed from AIP 2.0</td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0587-encryption-envelope-v2">0587-encryption-envelope-v2</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0587-encryption-envelope-v2">0587-encryption-envelope-v2</a></td>
 <td>Removed from AIP 2.0</td>
 </tr>
 <tr>
 <td>Feature</td>
-<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00/features/0627-static-peer-dids">0627-static-peer-dids</a></td>
+<td><a href="https://github.com/hyperledger/aries-rfcs/tree/c3b0e2120ad24810598375663b6922b980f85d00../../features/0627-static-peer-dids">0627-static-peer-dids</a></td>
 <td>The use of static peer DIDs in Aries has evolved and all AIP 2.0 implementations should be using DID Peer types 4 (preferred), 1 or 2.</td>
 </tr>
 </tbody>
@@ -5257,7 +5257,7 @@ below the table listing the removed RFCs provides the reasoning for the removal 
 <li>The feature was never implemented, and there have been (as far as we know) no requests for its implementation. A good idea in theory, but not needed in practice.</li>
 <li>The <code>on receipt</code> use of <code>please-ack</code> might be feasible as a generic feature, but does not appear to be useful except in protocol specific ways, such as in implementing a texting protocol to get "read receipts". However, even in that case, it is not useful for the existing 0095-basic-messaging protocol, because the protocol will be complete (and likely deleted) before the <code>ack</code> can be sent back to the sender. When an <code>on receipt</code> ACK is needed, it is much preferred to add it in a protocol specific way vs. in a generic way.</li>
 <li>The <code>after processing</code> use of <code>please-ack</code> turned out to be impossible because its introduction changes every protocol state machine in protocol specific ways. We have determined that it is not possible to "generically" (without changing each protocol) to add such a feature and so we have decided that if there is a use case of <code>please-ack</code>-style functionality in a given protocol, it should be added/included in that protocol. Further, no one has requested that the feature be used in any implementation.</li>
-<li>See the <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0317-please-ack">RFC 0317 Please Ack</a> for more details on it's change of status to <code>RETIRED</code> and links to unmerged PRs that attempted to design and implement the functionality.</li>
+<li>See the <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0317-please-ack">RFC 0317 Please Ack</a> for more details on it's change of status to <code>RETIRED</code> and links to unmerged PRs that attempted to design and implement the functionality.</li>
 <li>0587-encryption-envelope-v2</li>
 <li>While this RFC will be crucial when the transition to DIDComm v2 is started, it is not of use until then, and hence not applicable to AIP 2.0.</li>
 <li>0627-static-peer-dids: The inclusion of static peer DIDs was a transitory approach as the <a href="https://identity.foundation/peer-did-method-spec/">DID Peer</a> specification evolved. The use of static peer DIDs is not in use in Aries, the <a href="https://identity.foundation/peer-did-method-spec/">DID Peer</a> specification has stabilized, and the existing implementations are settled on the use of <code>did:peer</code> <code>4</code> (preferred), <code>2</code> and in some cases <code>1</code>. The removal of static peer DIDs from AIP 2.0 is to indicate where the community is currently and to lead newcomers to the community to follow the existing practices in the use of <a href="https://identity.foundation/peer-did-method-spec/">DID Peer</a>.</li>

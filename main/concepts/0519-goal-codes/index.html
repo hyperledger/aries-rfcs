@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2341,27 +2341,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2602,6 +2581,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2998,27 +2998,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3683,6 +3662,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4685,7 +4685,7 @@
 
 <h1 id="0519-goal-codes">0519: Goal Codes<a class="headerlink" href="#0519-goal-codes" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="daniel.hardman@gmail.com">Daniel Hardman</a></li>
+<li>Authors: <a href="mailto:daniel.hardman@gmail.com">Daniel Hardman</a></li>
 <li>Status: <a href="../../#accepted">ACCEPTED</a></li>
 <li>Since: 2021-04-15</li>
 <li>Status Note: Used in several protocols that are part of <a href="../0302-aries-interop-profile/">AIP 2.0</a>, such as the <a href="../../features/0434-outofband/">Out-of-Band</a> protocol.</li>
@@ -4698,7 +4698,7 @@
 <p><a href="../0004-agents/">Agents</a> exist to achieve the intents of their owners. Those intents largely unfold through <a href="../0003-protocols/">protocols</a>. Sometimes intelligent action in these protocols depends on a party declaring their intent. We need a standard way to do that.</p>
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
 <p>Our early learnings in SSI focused on VC-based proving with a very loose, casual approach to context. We did demos where Alice connects with a potential employer, Acme Corp -- and we assumed that each of the interacting parties had a shared understanding of one another's needs and purposes.</p>
-<p>But in a mature SSI ecosystem, where unknown agents can contact one another for arbitrary reasons, this context is not always easy to deduce. Acme Corp's agent may support many different protocols, and Alice may interact with Acme in the capacity of customer or potential employee or vendor. Although we have <a href="../../features/0031-discover-features/">feature discovery</a> to learn what's possible, and we have <a href="../0430-machine-readable-governance-frameworks/">machine-readable governance frameworks</a> to tell us what rules might apply in a given context, we haven't had a way to establish the context in the first place. When Alice contacts Acme, a context is needed before a governance framework is selectable, and before we know which features are desirable.</p>
+<p>But in a mature SSI ecosystem, where unknown agents can contact one another for arbitrary reasons, this context is not always easy to deduce. Acme Corp's agent may support many different protocols, and Alice may interact with Acme in the capacity of customer or potential employee or vendor. Although we have <a href="../../features/0031-discover-features/">feature discovery</a> to learn what's possible, and we have <a href="../0430-machine-readable-governance-frameworks/">machine-readable governance frameworks</a> to tell us what rules might apply in a given context, we haven't had a way to establish the context in the first place. When Alice contacts Acme, a context is needed before a governance framework is selectable, and before we know which ../../features are desirable.</p>
 <p>The key ingredient in context is <strong>intent</strong>. If Alice says to Acme, "I'd like to connect,", Acme wants to be able to trigger different behavior depending on whether Alice's intent is to be a customer, apply for a job, or audit Acme's taxes. This is the purpose of a goal code.</p>
 <h3 id="the-goal-code-datatype">The goal code datatype<a class="headerlink" href="#the-goal-code-datatype" title="Permanent link">&para;</a></h3>
 <p>To express intent, this RFC formally introduces the goal code datatype. When a field in a <a href="../0005-didcomm/">DIDComm</a> message contains a goal code, its semantics and format match the description given here. (Goal codes are often declared via the <code>~thread</code> decorator, but may also appear in ordinary message fields. See the <a href="#scope">Scope section</a> below. Convention is to name this field "goal_code" where possible; however, this is only a convention, and individual protocols may adapt to it however they wish.)</p>

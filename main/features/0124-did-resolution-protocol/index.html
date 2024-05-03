@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2826,27 +2826,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3707,6 +3686,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4733,8 +4733,7 @@
 
 <h1 id="aries-rfc-0124-did-resolution-protocol-09">Aries RFC 0124: DID Resolution Protocol 0.9<a class="headerlink" href="#aries-rfc-0124-did-resolution-protocol-09" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="markus@danubetech.com">Markus Sabadello</a>, 
-  <a href="luis.gomezalonso@sicpa.com">Luis Gómez Alonso</a></li>
+<li>Authors: <a href="mailto:markus@danubetech.com">Markus Sabadello</a>, <a href="mailto:luis.gomezalonso@sicpa.com">Luis Gómez Alonso</a></li>
 <li>Status: <a href="../../#proposed">PROPOSED</a></li>
 <li>Since: 2019-07-13</li>
 <li>Status Note: Not implemented, but has been discussed as part of the <a href="https://github.com/hyperledger/aries-rfcs/issues/101">Aries DID Resolution</a> work.</li>
@@ -4746,10 +4745,10 @@
 to resolve DIDs and dereference DID URLs.</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
 <p>DID Resolution is an important feature of Aries. It is a prerequisite for the <code>unpack()</code> function in
-<a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0005-didcomm">DIDComm</a>, especially in
+<a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0005-didcomm">DIDComm</a>, especially in
 <a href="../../concepts/0094-cross-domain-messaging/">Cross-Domain Messaging</a>, since cryptographic
 keys must be discovered from DIDs in order to enable trusted communication between the
-<a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0004-agents">agents</a> associated with DIDs.
+<a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0004-agents">agents</a> associated with DIDs.
 DID Resolution is also required for other operations, e.g. for verifying credentials or for discovering
 <a href="../0067-didcomm-diddoc-conventions/">DIDComm service endpoints</a>.</p>
 <p>Ideally, DID Resolution should be implemented as a local API (<strong>TODO:</strong> link to other RFC?). In some
@@ -4766,7 +4765,7 @@ invokes another DID Resolver via a "remote" binding (such as HTTP(S) or DIDComm)
 <p><a href="https://w3c-ccg.github.io/did-resolution/#binding-architectures"><img alt="DID Resolver Bindings" src="binding-chained.png" /></a></p>
 <h3 id="name-and-version">Name and Version<a class="headerlink" href="#name-and-version" title="Permanent link">&para;</a></h3>
 <p>This defines the <code>did_resolution</code> protocol, version 0.1, as identified by the
-following <a href="https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/uris.md#piuri">PIURI</a>:</p>
+following <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0003-protocols/uris.md#piuri">PIURI</a>:</p>
 <div class="highlight"><pre><span></span><code>https://didcomm.org/did_resolution/0.1
 </code></pre></div>
 <h3 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h3>

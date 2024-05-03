@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2826,27 +2826,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3698,6 +3677,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4715,7 +4715,7 @@
 
 <h1 id="0270-interop-test-suite">0270: Interop Test Suite<a class="headerlink" href="#0270-interop-test-suite" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="daniel.hardman@gmail.com">Daniel Hardman</a></li>
+<li>Authors: <a href="mailto:daniel.hardman@gmail.com">Daniel Hardman</a></li>
 <li>Status: <a href="../../#proposed">PROPOSED</a></li>
 <li>Since: 2019-10-25</li>
 <li>Status Note: Codifies some thinking about scope and mental model that are already socialized. Provides some new thinking as well.</li>
@@ -4730,7 +4730,7 @@
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
 <p>Interoperability is a buzzword in the SSI/decentralized identity space. We all want it.</p>
 <p>Without careful effort, though, interoperability is subjective and slippery. If products A and B implement the same spec, or if they demo cooperation in a single workflow, does that mean they can be used together? How much? For how long? Across which release boundaries? With what feature caveats?</p>
-<p>We need a methodology that gives crisp answers to questions like these--and it needs to be more efficient than continuously exercising every feature of every product against features of every other product.</p>
+<p>We need a methodology that gives crisp answers to questions like these--and it needs to be more efficient than continuously exercising every feature of every product against ../../features of every other product.</p>
 <p>However, it's important to temper our ambitions. Standards, community specs, and reference implementations exist, and many of them come with tests or test suites of their own. Products can test themselves with these tools, and with custom tests written by their dev staffs, and make rough guesses about interoperability. The insight we're after is a bit different.</p>
 <h3 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h3>
 <p>What we need is a tool that achieves these goals:</p>
@@ -4738,7 +4738,7 @@
 <li>
 <p><strong>Evaluate practical interoperability</strong> of <a href="../0004-agents/">agents</a>.</p>
 <blockquote>
-<p><a href="../0004-agents/#the-agent-ness-continuum">Other software that offers SSI features</a> should also be testable. Here, such components are conflated with agents for simplicity, but it's understood that the suite targets protocol participants no matter what their technical classification.</p>
+<p><a href="../0004-agents/#the-agent-ness-continuum">Other software that offers SSI ../../features</a> should also be testable. Here, such components are conflated with agents for simplicity, but it's understood that the suite targets protocol participants no matter what their technical classification.</p>
 </blockquote>
 </li>
 </ol>
@@ -4750,7 +4750,7 @@
 </li>
 <li>
 <p><strong>Track the collective community state of the art</strong>, so measurements are comprehensive and up-to-date, and so new ideas automatically encounter pressure to be vetted for interoperability.</p>
-<p>The test suite isn't a compliance tool, and it should be unopinionated about what's important and what's not. However, it should embody a broad list of testable features--<a href="../../#accepted">certainly, ones that are standard</a>, and often, <a href="../../#demonstrated">ones that are still maturing</a>.</p>
+<p>The test suite isn't a compliance tool, and it should be unopinionated about what's important and what's not. However, it should embody a broad list of testable ../../features--<a href="../../#accepted">certainly, ones that are standard</a>, and often, <a href="../../#demonstrated">ones that are still maturing</a>.</p>
 </li>
 </ol>
 <h3 id="dos-and-donts">Dos and Don'ts<a class="headerlink" href="#dos-and-donts" title="Permanent link">&para;</a></h3>
@@ -4763,7 +4763,7 @@
 <li><strong>DO</strong> test all relevant versions of each protocol. (The test suite does not need to maintain an unreasonably comprehensive inventory of all protocols; old protocols could be retired if they become difficult to support. An agent wishing to certify against an old protocol could download an old version of the test suite to certify. However, we generally want the test suite to support both breadth--many protocols--and depth--multiple protocol versions if they are all in active use.)</li>
 <li><strong>DO</strong> test roles in a protocol separately, and DO test only one agent at a time. The question isn't <em>"Does agent X support the issuance protocol?"</em> but rather <em>"Does agent X support</em> role Y <em>in the issuance protocol?"</em> All roles in a protocol other than the one role for the one tested agent should be played by the test suite. </li>
 <li><strong>DO</strong> test required and optional <a href="../0011-decorators/">decorators</a> to the extent that they are relevant to interoperability.</li>
-<li><strong>DO</strong> distinguish between required and optional features of a protocol in results.</li>
+<li><strong>DO</strong> distinguish between required and optional ../../features of a protocol in results.</li>
 <li><strong>DO</strong> provide value for agents that talk over transports besides HTTP: BlueTooth, SMTP, AMQP, and so forth -- but <strong>DON'T</strong> get bogged down in all the permutations of transport and routing.</li>
 <li><strong>DO</strong> describe results in a formally defined data structure that can be prettified in various ways.</li>
 <li><strong>DO</strong> allow the test suite to be an automated step in a CI/CD pipeline.</li>
@@ -4805,7 +4805,7 @@
 <p><a href="https://docs.google.com/presentation/d/1Rn1gEnYXnIetC9IXrZynyh2FI6XHEE7n8wE6eIpvwZA/edit" target="imgsrc"><img src="channels.png" alt="channels"/></a></p>
 </li>
 <li>
-<p>Not probe for agent features. Instead, it will just run whatever subset of its test inventory is declared relevant by the agent under test.</p>
+<p>Not probe for agent ../../features. Instead, it will just run whatever subset of its test inventory is declared relevant by the agent under test.</p>
 <p>This lets simple agents do simple integrations with the test suite, and avoid lots of needless error handling on both sides.</p>
 </li>
 <li>
@@ -4816,7 +4816,7 @@
 <p>Some agents may support lots of concurrency, but the test suite should not assume that all agents do.</p>
 </li>
 <li>
-<p>Produce an <a href="#interop-profile"><strong>interop profile</strong></a> for the agent under test, with respect to the tested features, for every successful run of the test suite.</p>
+<p>Produce an <a href="#interop-profile"><strong>interop profile</strong></a> for the agent under test, with respect to the tested ../../features, for every successful run of the test suite.</p>
 <p>A "successful" run is one where the test suite runs to completion and believes it has valid data; it has nothing to do with how many tests are passed by the agent under test. The test suite will not emit profiles for unsuccessful runs.</p>
 <p>Interop profiles emitted by the test suite are the artifacts that should be <a href="../../#accepted">hyperlinked in the Implementation Notes section of protocol RFCs</a>. They could also be published (possibly in a prettified form) in release notes, distributed as a product or documentation artifact, or returned as an attachment with the <code>disclose</code> message of the <a href="../../features/0031-discover-features/">Discover Features protocol</a>.</p>
 </li>
@@ -4836,7 +4836,7 @@
 <p>Provide a consistent name for itself, and a semver-compatible version, so test results can be compared across test suite runs.</p>
 </li>
 <li>
-<p>Use the test suite configuration mechanism to make a claim about the tests that it believes are relevant, based on the features and roles it implements.</p>
+<p>Use the test suite configuration mechanism to make a claim about the tests that it believes are relevant, based on the ../../features and roles it implements.</p>
 </li>
 <li>
 <p>Implement a distinction between test mode and non-test mode, such that:</p>

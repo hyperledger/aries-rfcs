@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2477,27 +2477,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2566,6 +2545,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2962,27 +2962,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3647,6 +3626,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4620,7 +4620,7 @@ changes are not RFC-worthy, and changes that are internal in nature,
 invisible to those consuming Aries, should be documented elsewhere.</p>
 <h3 id="preparation">Preparation<a class="headerlink" href="#preparation" title="Permanent link">&para;</a></h3>
 <p>Before writing an RFC, consider exploring the idea on
-<a href="https://chat.hyperledger.org/channel/aries">chat</a>, on community calls
+<a href="https://chat.hyperledger.org">the aries chat channel</a>, on community calls
 (see the <a href="https://wiki.hyperledger.org/community/calendar-public-meetings">Hyperledger Community Calendar</a>),
 or on <a href="mailto:aries@lists.hyperledger.org">aries@lists.hyperledger.org</a>. Encouraging feedback from maintainers
 is a good sign that you're on the right track.</p>
@@ -4632,8 +4632,8 @@ is a good sign that you're on the right track.</p>
     for guidance.</li>
 <li>Decide which parent folder is appropriate for your RFC.
     If it is about a specific protocol or decorator or feature, its parent
-    should be /features; if it is about a concept that will be used in many
-    different features, its parent should be /concepts.</li>
+    should be <code>/features</code>; if it is about a concept that will be used in many
+    different features, its parent should be <code>/concepts</code>.</li>
 <li>Create the folder and copy either <code>0000-template.md</code> or <code>0000-template-protocol.md</code> (if your RFC is for a protocol) to <code>&lt;parent&gt;/&lt;your folder name&gt;/README.md</code>.</li>
 <li>Fill in the RFC. <a href="https://tools.ietf.org/html/rfc2119">Use MUST and SHOULD per standard conventions</a>. Put care into the details: RFCs that do not present
     convincing motivation, demonstrate an understanding of the impact of the
@@ -4648,13 +4648,8 @@ is a good sign that you're on the right track.</p>
     this repo to figure out what the next PR number will be). Rename your folder from
     <code>&lt;your folder name&gt;</code> to <code>&lt;your 4-digit number&gt;-&lt;your folder name&gt;</code>. At the
     top of your README.md, modify the title so it is in the form: <code>&lt;your 4-digit
-    number&gt;: Friendly Version of Your Title</code>. Commit your changes.</li>
-<li>In the root of the repo, run <code>python code/generate_index.py</code> to update the index
-    with your new RFC.</li>
-<li>In the root of your repo, run <code>pytest code</code> to see whether your RFC passes all
-    automated tests. The RFC tests are simple. They just check for things like
-    naming conventions and hyperlink correctness.</li>
-<li>Commit the updated version of /index.md and push your changes.</li>
+    number&gt;: Friendly Version of Your Title</code>.</li>
+<li>Commit and push your changes.</li>
 <li>Submit a pull request.</li>
 </ul>
 <p>Make sure that all of your commits satisfy the <a href="https://github.com/probot/dco#how-it-works">DCO requirements</a> of the repo and conform
@@ -4670,7 +4665,7 @@ in the lifecycle, submit a PR with the following characteristics:</p>
 <li>The title of the PR should include a deadline date for merging the PR and the referenced RFC.</li>
 <li>Example: <code>Status to Accepted, deadline 2019.08.15, RFC 0095-basic-message</code></li>
 <li>The PR comment should document why the status is being changed.</li>
-<li>The deadline date should be 2 weeks after announcing the proposed status change on an Aries WG call. The PR should also be announced on the <a href="https://chat.hyperledger.org/channel/aries">#aries rocketchat channel</a>.</li>
+<li>The deadline date should be 2 weeks after announcing the proposed status change on an Aries WG call. The PR should also be announced on the <a href="https://chat.hyperledger.org">#aries  channel</a>.</li>
 <li>Barring negative feedback from the community, the repo's maintainers should merge the PR after the deadline.</li>
 <li>The deadline should be moved by two weeks after addressing each substantive change to the RFC made during the status change review period.</li>
 </ul>
@@ -4711,7 +4706,7 @@ status to <a href="../#status--adopted">ADOPTED</a>.  If the community is friend
 to the idea, the doc will enter a two-week "Final Comment Period" (FCP), after
 which there will be a vote on disposition.</p>
 <h3 id="intellectual-property">Intellectual Property<a class="headerlink" href="#intellectual-property" title="Permanent link">&para;</a></h3>
-<p>This repository is licensed under an <a href="LICENSE">Apache 2 License</a>. It is protected
+<p>This repository is licensed under an <a href="../LICENSE/">Apache 2 License</a>. It is protected
 by a <a href="https://developercertificate.org/">Developer Certificate of Origin</a> on every commit.
 This means that any contributions you make must be licensed in an Apache-2-compatible
 way, and must be free from patent encumbrances or additional terms and conditions. By

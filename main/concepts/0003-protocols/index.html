@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2660,27 +2660,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2749,6 +2728,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -3145,27 +3145,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3830,6 +3809,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4979,7 +4979,7 @@
 
 <h1 id="aries-rfc-0003-protocols">Aries RFC 0003: Protocols<a class="headerlink" href="#aries-rfc-0003-protocols" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="daniel.hardman@gmail.com">Daniel Hardman</a></li>
+<li>Authors: <a href="mailto:daniel.hardman@gmail.com">Daniel Hardman</a></li>
 <li>Status: <a href="../../#adopted">ADOPTED</a></li>
 <li>Since: 2019-04-01</li>
 <li>Status Note: standards track and beginning to influence many mental models, but not yet <a href="../../#rfc-lifecycle">ADOPTED</a>.</li>
@@ -5062,7 +5062,7 @@ a sort of "recipe":</p>
 <li>Going through security at the airport when we fly</li>
 <li>Applying for a loan</li>
 </ul>
-<p>In the context of decentralized identity, protocols manifest at many different levels of the stack: at the lowest levels of networking, in cryptographic algorithms like Diffie Hellman, in the management of DIDs, in the conventions of <a href="../0005-didcomm/">DIDComm</a>, and in higher-level interactions that solve problems for people with only minimal interest in the technology they're using. However, this RFC focuses on the last of these layers, where use cases and personas are transformed into features with obvious social value like:</p>
+<p>In the context of decentralized identity, protocols manifest at many different levels of the stack: at the lowest levels of networking, in cryptographic algorithms like Diffie Hellman, in the management of DIDs, in the conventions of <a href="../0005-didcomm/">DIDComm</a>, and in higher-level interactions that solve problems for people with only minimal interest in the technology they're using. However, this RFC focuses on the last of these layers, where use cases and personas are transformed into ../../features with obvious social value like:</p>
 <ul>
 <li><a href="../../features/0023-did-exchange/">Connecting with one another</a></li>
 <li><a href="../../features/0036-issue-credential/">Requesting and issuing credentials</a></li>
@@ -5185,7 +5185,7 @@ to send a warning <code>problem-report</code> message with code <code>fields-ign
 <h3 id="how-to-define-a-protocol">How to Define a Protocol<a class="headerlink" href="#how-to-define-a-protocol" title="Permanent link">&para;</a></h3>
 <p>To define a protocol, write an RFC. Specific instructions for
 protocol RFCs, and a discussion about the theory behind detailed
-protocol concepts, are given in the <a href="#instructions-for-protocol-rfcs">instructions for protocol RFCs</a>
+protocol ../../concepts, are given in the <a href="#instructions-for-protocol-rfcs">instructions for protocol RFCs</a>
 and in the <a href="../../0000-template-protocol/">protocol RFC template</a>.</p>
 <p>The <a href="tictactoe/">tictactoe protocol</a> is attached to this RFC as an example.</p>
 <p><a href="tictactoe/"><img alt="tictactoe protocol" src="tictactoe/tile.png" /></a></p>
@@ -5305,7 +5305,7 @@ message family</a>.</li>
 <li>This approach is used when maintaining each minor version from minimum to current within the major version is impractical.</li>
 <li>Recipients of the response message SHOULD detect from the response <a href="#piuri">PIURI</a> that a higher minor version was used in the response, and to compensate if needed and as necessary.</li>
 <li>Prior wording of this protocol included the following suggestion that is now considered deprecated. See note below about deprecating the "warning" problem reports.</li>
-<li>In addition to responding with the protocol message (if necessary), the agent MAY also want to send a warning <code>problem-report</code> message with code <code>version-with-degraded-features</code>.</li>
+<li>In addition to responding with the protocol message (if necessary), the agent MAY also want to send a warning <code>problem-report</code> message with code <code>version-with-degraded-../../features</code>.</li>
 </ul>
 </li>
 <li>Message types received with a minor version higher than the current minor version MUST be processed with any unrecognized fields ignored.</li>
@@ -5330,7 +5330,7 @@ major version 0 is used. In that case, minor version increments are considered b
 use when initiating an instance of the protocol.</p>
 <p>An agent should reject messages from protocols or unsupported protocol major versions with
 a <code>problem-report</code> message with code <code>version-not-supported</code>. Agents that receive such a
-<code>problem-report</code> message may use the <a href="../../features/0031-discover-features/">discover features protocol</a>
+<code>problem-report</code> message may use the <a href="../../features/0031-discover-features/">discover ../../features protocol</a>
 to resolve the mismatch.</p>
 <h4 id="semver-examples">Semver Examples<a class="headerlink" href="#semver-examples" title="Permanent link">&para;</a></h4>
 <h5 id="initiator">Initiator<a class="headerlink" href="#initiator" title="Permanent link">&para;</a></h5>
@@ -5343,7 +5343,7 @@ version in the message type of its first message.</p>
 <p>Agents for Bob (the recipient) should reject messages from protocols with major
 versions different from those they support. For major version 0, they should also
 reject protocols with minor versions they don't support, since semver stipulates
-that <a href="https://semver.org/#spec-item-4">features are not stable before 1.0</a>. For
+that <a href="https://semver.org/#spec-item-4">../../features are not stable before 1.0</a>. For
 example, if B.1 supports only versions 2.0 and 2.1 of protocol X, it should reject
 any messages from version 3 or version 1 or 0. In most cases, rejecting a message
 means sending a <code>problem-report</code> that the message is unsupported. The <code>code</code> field
@@ -5356,13 +5356,13 @@ These messages will be robustly compatible.</p>
 <p>For major version &gt;= 1, recipients should also accept messages that differ only in that
 the message's minor version is earlier than their own preference. In such a case, the
 recipient should degrade gracefully to use the earlier version of the protocol. If the
-earlier version lacks important features, the recipient may optionally choose to send,
-in addition to a response, a <code>problem-report</code> with code <code>version-with-degraded-features</code>.</p>
+earlier version lacks important ../../features, the recipient may optionally choose to send,
+in addition to a response, a <code>problem-report</code> with code <code>version-with-degraded-../../features</code>.</p>
 <p>If a recipient supports protocol X version 1.0, it should tentatively
 accept messages with later minor versions (e.g., 1.2). Message types that
 differ in only in minor version are guaranteed to be compatible <em>for the
 feature set of the earlier version</em>. That is, a 1.0-capable agent can support
-1.0 features using a 1.2 message, though of course it will lose any features
+1.0 ../../features using a 1.2 message, though of course it will lose any ../../features
 that 1.2 added. Thus, accepting such a message could have two possible outcomes:</p>
 <ol>
 <li>
@@ -5480,7 +5480,7 @@ the shared goal of running a game to completion. Yet choices about moves are cle
 unfolds. These choices are made by controllers--Bob and Carol--while the agents responsible for the work of
 moving the game forward wait with the protocol suspended.</p>
 <p>In this case, Bob and Carol could be analyzed as parties to the protocol, as well as controllers. But in other
-cases, the concepts are distinct. For example, in a protocol to issue credentials, the issuing institution
+cases, the ../../concepts are distinct. For example, in a protocol to issue credentials, the issuing institution
 might use an AI and/or business automation as a controller.</p>
 <h3 id="instructions-for-protocol-rfcs">Instructions for Protocol RFCs<a class="headerlink" href="#instructions-for-protocol-rfcs" title="Permanent link">&para;</a></h3>
 <p>A protocol RFC conforms to general RFC patterns, but includes some specific substructure.</p>

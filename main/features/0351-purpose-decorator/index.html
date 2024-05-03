@@ -324,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2823,27 +2823,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3508,6 +3487,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4631,7 +4631,7 @@
 
 <h1 id="aries-rfc-0351-purpose-decorator">Aries RFC 0351: Purpose Decorator<a class="headerlink" href="#aries-rfc-0351-purpose-decorator" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="filip.burlacu@securekey.com">Filip Burlacu</a></li>
+<li>Authors: <a href="mailto:filip.burlacu@securekey.com">Filip Burlacu</a></li>
 <li>Status: <a href="../../#stalled">STALLED</a></li>
 <li>Since: 2024-04-03</li>
 <li>Status Note: No implementations have been created.</li>
@@ -4676,7 +4676,7 @@ The purpose is the mechanism for determining which recipient(s) should be sent a
  - Can always safely process concurrently with subsequent applications handling the same message.</p>
 <p>This allows the agent to send the message to such listeners concurrently with the next highest-priority listener that does not always-fall-through.</p>
 <h3 id="example-protocol">Example Protocol<a class="headerlink" href="#example-protocol" title="Permanent link">&para;</a></h3>
-<p>This is an example protocol which makes use of the <code>~purpose</code> decorator and other Aries concepts to provide a message format that can carry arbitrary payloads for non-DIDComm edge applications.</p>
+<p>This is an example protocol which makes use of the <code>~purpose</code> decorator and other Aries ../../concepts to provide a message format that can carry arbitrary payloads for non-DIDComm edge applications.</p>
 <h4 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h4>
 <p>This RFC allows messages to be sent over DIDComm by applications that are not DIDComm-enabled, by using Aries agents as intermediaries. Both the sender and the recipient can be non-DIDComm applications.</p>
 <h5 id="non-didcomm-sender">Non-DIDComm Sender<a class="headerlink" href="#non-didcomm-sender" title="Permanent link">&para;</a></h5>

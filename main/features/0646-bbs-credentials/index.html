@@ -12,7 +12,7 @@
         <link rel="prev" href="../0587-encryption-envelope-v2/">
       
       
-        <link rel="next" href="../0721-revocation-notification-v2/">
+        <link rel="next" href="../0685-pickup-v2/">
       
       
       <link rel="icon" href="https://raw.githubusercontent.com/hyperledger/aries-cloudagent-python/main/docs/assets/aries-favicon.png">
@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2341,27 +2341,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2612,6 +2591,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -3004,27 +3004,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3689,6 +3668,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4707,7 +4707,7 @@
 </ul>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>This RFC describes how the Hyperledger Aries community should use <a href="https://w3c-ccg.github.io/ldp-bbs2020/">BBS+ Signatures</a> that conform with the <a href="https://w3c-ccg.github.io/ld-proofs/">Linked-Data Proofs Specification</a> to perform exchange of credentials that comply with the <a href="https://www.w3.org/TR/vc-data-model/">W3C Verifiable Credential specification</a>.</p>
-<p>Key features include:</p>
+<p>Key ../../features include:</p>
 <ul>
 <li>zero-knowledge proofs (ZKPs),</li>
 <li>selective disclosure,</li>
@@ -4715,10 +4715,10 @@
 <li>signature blinding,</li>
 <li>compatibility with privacy preserving revocation.</li>
 </ul>
-<p>This RFC sets guidelines for their safe usage and describes privacy-enabling features that should be incorporated.</p>
+<p>This RFC sets guidelines for their safe usage and describes privacy-enabling ../../features that should be incorporated.</p>
 <p>The usage of zero-knowledge proofs, selective disclosure and signature blinding are already supported using the specifications as described in this document. Support for private holder binding and privacy preserving revocation will be added in the future.</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
-<p>Aries currently supports credential formats used by Indy (Anoncreds based on JSON) and Aries-Framework-Go. BBS+ signatures with JSON-LD Proofs provide a unified credential format that includes strong privacy protecting anti-correlation features and wide interoperability with verifiable credentials outside the Aries ecosystem.</p>
+<p>Aries currently supports credential formats used by Indy (Anoncreds based on JSON) and Aries-Framework-Go. BBS+ signatures with JSON-LD Proofs provide a unified credential format that includes strong privacy protecting anti-correlation ../../features and wide interoperability with verifiable credentials outside the Aries ecosystem.</p>
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
 <h3 id="issuing-credentials">Issuing Credentials<a class="headerlink" href="#issuing-credentials" title="Permanent link">&para;</a></h3>
 <p>This section highlights the process of issuing credentials with BBS+ signatures. The first section (<a href="#creating-bbs-credentials">Creating BBS+ Credentials</a>) highlights the process of <strong>creating</strong> credentials with BBS+ signatures, while the next section focusses on the the process of <strong>exchanging</strong> credentials with BBS+ signatures (<a href="#exchanging-bbs-credentials">Exchanging BBS+ Credentials</a>).</p>
@@ -4776,13 +4776,13 @@
 </code></pre></div>
 <h4 id="exchanging-bbs-credentials">Exchanging BBS+ Credentials<a class="headerlink" href="#exchanging-bbs-credentials" title="Permanent link">&para;</a></h4>
 <p>While the process of creating credentials with BBS+ signatures is defined in specifications outside of Aries, the process of exchanging credentials with BBS+ signatures is defined within Aries.</p>
-<p>Credentials with BBS+ signatures can be exchanged by following <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2">RFC 0453: Issue Credential Protocol 2.0</a>. The Issue Credential 2.0 provides a registry of attachment formats that can be used for credential exchange. Currently, agents are expected to use the format as described in RFC 0593 (see below).</p>
+<p>Credentials with BBS+ signatures can be exchanged by following <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0453-issue-credential-v2">RFC 0453: Issue Credential Protocol 2.0</a>. The Issue Credential 2.0 provides a registry of attachment formats that can be used for credential exchange. Currently, agents are expected to use the format as described in RFC 0593 (see below).</p>
 <blockquote>
-<p>NOTE: Once <a href="https://identity.foundation/credential-manifest/">Credential Manifest</a> v1.0 is released, RFC 0593 is expected to be deprecated and replaced by an updated version of <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0511-dif-cred-manifest-attach/README.md">RFC 0511: Credential-Manifest Attachment format</a></p>
+<p>NOTE: Once <a href="https://identity.foundation/credential-manifest/">Credential Manifest</a> v1.0 is released, RFC 0593 is expected to be deprecated and replaced by an updated version of <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0511-dif-cred-manifest-attach/README.md">RFC 0511: Credential-Manifest Attachment format</a></p>
 </blockquote>
 <h5 id="0593-json-ld-credential-attachment-format">0593: JSON-LD Credential Attachment format<a class="headerlink" href="#0593-json-ld-credential-attachment-format" title="Permanent link">&para;</a></h5>
-<p><a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0593-json-ld-cred-attach/README.md">RFC 0593: JSON-LD Credential Attachment format for requesting and issuing credentials</a> defines a very simple, feature-poor attachment format for issuing JSON-LD credentials.</p>
-<p>The only requirement for exchanging BBS+ credentials, in addition to the requirements as specified in <a href="#creating-bbs-credentials">Creating BBS+ Credentials</a> and <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0593-json-ld-cred-attach/README.md">RFC 0593</a>, is the <code>options.proofType</code> in the <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format"><code>ld-proof-vc-detail</code></a> MUST be <code>BbsBlsSignature2020</code>.</p>
+<p><a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0593-json-ld-cred-attach/README.md">RFC 0593: JSON-LD Credential Attachment format for requesting and issuing credentials</a> defines a very simple, feature-poor attachment format for issuing JSON-LD credentials.</p>
+<p>The only requirement for exchanging BBS+ credentials, in addition to the requirements as specified in <a href="#creating-bbs-credentials">Creating BBS+ Credentials</a> and <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0593-json-ld-cred-attach/README.md">RFC 0593</a>, is the <code>options.proofType</code> in the <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0593-json-ld-cred-attach/README.md#ld-proof-vc-detail-attachment-format"><code>ld-proof-vc-detail</code></a> MUST be <code>BbsBlsSignature2020</code>.</p>
 <h3 id="presenting-derived-credentials">Presenting Derived Credentials<a class="headerlink" href="#presenting-derived-credentials" title="Permanent link">&para;</a></h3>
 <p>This section highlights the process of creating and presenting derived BBS+ credentials containing a BBS+ proof of knowledge.</p>
 <h4 id="deriving-credentials">Deriving Credentials<a class="headerlink" href="#deriving-credentials" title="Permanent link">&para;</a></h4>
@@ -4817,10 +4817,10 @@
 <li><a href="https://github.com/hyperledger/aries-cloudagent-python/blob/main/aries_cloudagent/vc/ld_proofs/suites/BbsBlsSignatureProof2020.py#L347-L381">Aries Cloud Agent Python</a></li>
 </ul>
 <h4 id="exchanging-derived-credentials">Exchanging Derived Credentials<a class="headerlink" href="#exchanging-derived-credentials" title="Permanent link">&para;</a></h4>
-<p>The presentation of credentials with BBS+ signatures can be exchanged by following <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0454-present-proof-v2">RFC 0454: Present Proof Protocol 2.0</a>. The Present Proof Protocol 2.0 provides a registry of attachment formats that can be used for presentation exchange. Although agents can use any attachment format they want, agents are expected to use the format as described in RFC 0510 (see below).</p>
+<p>The presentation of credentials with BBS+ signatures can be exchanged by following <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0454-present-proof-v2">RFC 0454: Present Proof Protocol 2.0</a>. The Present Proof Protocol 2.0 provides a registry of attachment formats that can be used for presentation exchange. Although agents can use any attachment format they want, agents are expected to use the format as described in RFC 0510 (see below).</p>
 <h5 id="0510-presentation-exchange-attachment-format">0510: Presentation-Exchange Attachment format<a class="headerlink" href="#0510-presentation-exchange-attachment-format" title="Permanent link">&para;</a></h5>
-<p><a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0510-dif-pres-exch-attach/README.md">RFC 0510: Presentation-Exchange Attachment format for requesting and presenting proofs</a> defines an attachment format based on the <a href="https://identity.foundation/presentation-exchange/">DIF Presentation Exchange</a> specification.</p>
-<p>The following part of this section describes the requirements of exchanging derived credentials using the Presentation Exchange Attachment format, in addition to the requirements as specified above and in <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0510-dif-pres-exch-attach/README.md">RFC 0510</a>.</p>
+<p><a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0510-dif-pres-exch-attach/README.md">RFC 0510: Presentation-Exchange Attachment format for requesting and presenting proofs</a> defines an attachment format based on the <a href="https://identity.foundation/presentation-exchange/">DIF Presentation Exchange</a> specification.</p>
+<p>The following part of this section describes the requirements of exchanging derived credentials using the Presentation Exchange Attachment format, in addition to the requirements as specified above and in <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0510-dif-pres-exch-attach/README.md">RFC 0510</a>.</p>
 <p>The Presentation Exchange MUST include the <code>ldp_vp</code> <a href="https://identity.foundation/presentation-exchange/#claim-format-designations">Claim Format Designation</a>. In turn the <code>proof_type</code> property of the <code>ldp_vp</code> claim format designation MUST include the <code>BbsBlsSignatureProof2020</code> proof type.</p>
 <h4 id="example-bbs-derived-credential">Example BBS+ Derived Credential<a class="headerlink" href="#example-bbs-derived-credential" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
@@ -4859,7 +4859,7 @@
 <ul>
 <li><code>id</code> properties are always disclosed in derived credentials due to how JSON-LD works.</li>
 <li>Required properties from the VC Data Model MUST be disclosed in derived credentials.</li>
-<li>BBS+ credentials SHOULD not be used in conjunction with non-ZKP signature as this removes the privacy features of BBS.</li>
+<li>BBS+ credentials SHOULD not be used in conjunction with non-ZKP signature as this removes the privacy ../../features of BBS.</li>
 </ul>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <h3 id="interoperability-with-existing-credential-formats">Interoperability with Existing Credential Formats<a class="headerlink" href="#interoperability-with-existing-credential-formats" title="Permanent link">&para;</a></h3>
@@ -4883,9 +4883,9 @@ require reissuing credentials that were previously in a different format.</p>
 </ul>
 <h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
 <p>Existing implementations of BBS+ Signatures do not support ZKP proof predicates, but it is theoretically possible to support numeric date predicates. ZKP proof predicates are considered a key feature of CL signatures, and a migration to BBS+ LD-Proofs will lose this capability. The Indy maintainers consider this a reasonable trade-off to get the other benefits of BBS+ LD-Proofs. A mechanism to support predicates can hopefully be added in future work.</p>
-<p>As mentioned in the <a href="#private-holder-binding">Private Holder Binding</a> section, the <a href="https://w3c-ccg.github.io/ldp-bbs2020/">BBS+ LD-Proofs</a> specification does not define a mechanism for private holder binding yet. This means implementing this RFC does not provide all privacy-enabling features that should be incorporated until the <code>BbsBlsBoundSignature2020</code> and <code>BbsBlsBoundSignatureProof2020</code> signature suites are formally defined.</p>
+<p>As mentioned in the <a href="#private-holder-binding">Private Holder Binding</a> section, the <a href="https://w3c-ccg.github.io/ldp-bbs2020/">BBS+ LD-Proofs</a> specification does not define a mechanism for private holder binding yet. This means implementing this RFC does not provide all privacy-enabling ../../features that should be incorporated until the <code>BbsBlsBoundSignature2020</code> and <code>BbsBlsBoundSignatureProof2020</code> signature suites are formally defined.</p>
 <h2 id="rationale-and-alternatives">Rationale and alternatives<a class="headerlink" href="#rationale-and-alternatives" title="Permanent link">&para;</a></h2>
-<p>BBS+ LD-Proofs is a reasonable evolution of CL Signatures, as it supports most of the same features (with the exception of ZKP Proof Predicates), while producing smaller credentials that require less computation resources to validate (a key requirement for mobile use cases).</p>
+<p>BBS+ LD-Proofs is a reasonable evolution of CL Signatures, as it supports most of the same ../../features (with the exception of ZKP Proof Predicates), while producing smaller credentials that require less computation resources to validate (a key requirement for mobile use cases).</p>
 <p>BBS+ LD-Proofs are receiving broad support across the verifiable credentials implementation community, so supporting this signature format will be strategic for interoperability and allow Aries to promote the privacy preserving capabilities such as zero knowledge proofs and private holder binding.</p>
 <h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
 <p>Indy Anoncreds used CL Signatures to meet many of the use cases currently envisioned for BBS+ LD-Proofs.</p>
@@ -4894,10 +4894,10 @@ require reissuing credentials that were previously in a different format.</p>
 <p>It was then further refined by
 <a href="https://eprint.iacr.org/2016/663.pdf">Camenisch, Drijvers, and Lehmann in section 4.3 of this paper from 2016</a>.</p>
 <p>In 2019, Evernym and Sovrin proposed <a href="https://github.com/hyperledger/ursa-docs/tree/main/specs/anoncreds2">BBS+ Signatures as the foundation for Indy Anoncreds 2.0</a>,
-which in conjunction with <a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas">Rich Schemas</a>
+which in conjunction with <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0250-rich-schemas">Rich Schemas</a>
 addressed a similar set of goals and capabilities as those addressed here, but were ultimately too heavy a solution.</p>
-<p>In 2020, Mattr provided <a href="https://w3c-ccg.github.io/ldp-bbs2020/">a draft specification for BBS+ LD-Proofs</a> that comply with <a href="https://w3c-ccg.github.io/ld-proofs/">the Linked Data proof specification</a> in the W3C Credentials Community Group. The authors acknowledged that their approach did not support two key Anoncreds features: proof predicates and link secrets.</p>
-<p><a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0593-json-ld-cred-attach">Aries RFC 593</a> describes the JSON-LD credential format.</p>
+<p>In 2020, Mattr provided <a href="https://w3c-ccg.github.io/ldp-bbs2020/">a draft specification for BBS+ LD-Proofs</a> that comply with <a href="https://w3c-ccg.github.io/ld-proofs/">the Linked Data proof specification</a> in the W3C Credentials Community Group. The authors acknowledged that their approach did not support two key Anoncreds ../../features: proof predicates and link secrets.</p>
+<p><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0593-json-ld-cred-attach">Aries RFC 593</a> describes the JSON-LD credential format.</p>
 <h2 id="unresolved-questions">Unresolved questions<a class="headerlink" href="#unresolved-questions" title="Permanent link">&para;</a></h2>
 <p>See the above note in <a href="#drawbacks">the Drawbacks Section</a> about ZKP predicates.</p>
 <h2 id="implementations">Implementations<a class="headerlink" href="#implementations" title="Permanent link">&para;</a></h2>
@@ -4969,13 +4969,13 @@ addressed a similar set of goals and capabilities as those addressed here, but w
         
         
           
-          <a href="../0721-revocation-notification-v2/" class="md-footer__link md-footer__link--next" aria-label="Next: 0721 Revocation Notification 2.0">
+          <a href="../0685-pickup-v2/" class="md-footer__link md-footer__link--next" aria-label="Next: 0685 Pickup Protocol 2.0">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                0721 Revocation Notification 2.0
+                0685 Pickup Protocol 2.0
               </div>
             </div>
             <div class="md-footer__button md-icon">

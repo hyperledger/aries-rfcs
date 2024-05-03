@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2341,27 +2341,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2629,6 +2608,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -3025,27 +3025,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3710,6 +3689,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4751,7 +4751,7 @@
 <p>This RFC proposes that we support the definition of envelopes from <a href="https://identity.foundation/didcomm-messaging/spec">DIDComm Messaging</a>.</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
 <p>This RFC defines ciphersuites for envelopes such that we can achieve better compatability with DIDComm Messaging being specified at DIF.
-The ciphersuites defined in this RFC are a subset of the definitions in <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0334-jwe-envelope">Aries RFC 0334-jwe-envelope</a>.</p>
+The ciphersuites defined in this RFC are a subset of the definitions in <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0334-jwe-envelope">Aries RFC 0334-jwe-envelope</a>.</p>
 <h2 id="encryption-algorithms">Encryption Algorithms<a class="headerlink" href="#encryption-algorithms" title="Permanent link">&para;</a></h2>
 <p>DIDComm defines both the concept of authenticated sender encryption (aka <code>Authcrypt</code>) and anonymous sender encryption (aka <code>Anoncrypt</code>).
 In general, Aries RFCs and protocols use <code>Authcrypt</code> to exchange messages.
@@ -4861,7 +4861,7 @@ When the <code>cty</code> property contains <code>application/json;flavor=didcom
 <a href="https://identity.foundation/didcomm-messaging/spec">DIDComm Messaging</a> will specify appropriate media types for DIDComm v2.
 To advertise the combination of Envelope v2 with a DIDComm v1 message, the media type is <code>application/didcomm-encrypted+json;cty=application/json</code>.</p>
 <h2 id="additional-aip-impacts">Additional AIP impacts<a class="headerlink" href="#additional-aip-impacts" title="Permanent link">&para;</a></h2>
-<p>Implementors supporting an AIP sub-target that contains this RFC (e.g., <code>DIDCOMMV2PREP</code>) MAY choose to only support Envelope v2 without support for the original envelope declared in <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope">RFC 0019</a>. In these cases, the <code>accept</code> property will not contain <code>didcomm/aip2;env=rfc19</code> media type.</p>
+<p>Implementors supporting an AIP sub-target that contains this RFC (e.g., <code>DIDCOMMV2PREP</code>) MAY choose to only support Envelope v2 without support for the original envelope declared in <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0019-encryption-envelope">RFC 0019</a>. In these cases, the <code>accept</code> property will not contain <code>didcomm/aip2;env=rfc19</code> media type.</p>
 <h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
 <p>The DIDComm v2 specification is a draft. However, the aries-framework-go project has already implemented the new envelope format.</p>
 <h2 id="rationale-and-alternatives">Rationale and alternatives<a class="headerlink" href="#rationale-and-alternatives" title="Permanent link">&para;</a></h2>
@@ -4870,9 +4870,9 @@ To advertise the combination of Envelope v2 with a DIDComm v1 message, the media
 <h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The <a href="https://tools.ietf.org/html/rfc7518">JWE</a> family of encryption methods.</li>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope">Aries RFC 0019-encryption-envelope</a> suggested envelope formats will be superseded by this RFC.</li>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0025-didcomm-transports#reference">Aries RFC 0025-didcomm-transports</a> for the content type used in the proposed envelopes.</li>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0334-jwe-envelope">Aries RFC 0334-jwe-envelope</a>.</li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0019-encryption-envelope">Aries RFC 0019-encryption-envelope</a> suggested envelope formats will be superseded by this RFC.</li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0025-didcomm-transports#reference">Aries RFC 0025-didcomm-transports</a> for the content type used in the proposed envelopes.</li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0334-jwe-envelope">Aries RFC 0334-jwe-envelope</a>.</li>
 <li><a href="https://identity.foundation/didcomm-messaging/spec">DIDComm Messaging</a>.</li>
 <li><a href="https://github.com/digitalbazaar/minimal-cipher">minimal-cipher</a> implementation</li>
 <li><a href="https://tools.ietf.org/html/draft-madden-jose-ecdh-1pu-03">Public Key Authenticated Encryption for JOSE: ECDH-1PU</a></li>

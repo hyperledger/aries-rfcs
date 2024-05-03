@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2826,27 +2826,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3674,6 +3653,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4691,7 +4691,7 @@ For the implementation for Android (using fcm), please refer to <a href="../0734
 <h3 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h3>
 <p>When an agent would like to receive push notifications at record event changes, e.g. incoming credential offer, incoming connection request, etc., the agent could initiate the protocol by sending a message to the other agent.</p>
 <p>This protocol only defines how an agent would get the token which is necessary for push notifications.</p>
-<p>Each platform is has its own protocol so that we can easily use <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0031-discover-features/README.md">0031: Discover Features 1.0</a> and <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0557-discover-features-v2/README.md">0557: Discover Features 2.X</a> to see which specific services are supported by the other agent.</p>
+<p>Each platform is has its own protocol so that we can easily use <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0031-discover-features/README.md">0031: Discover Features 1.0</a> and <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0557-discover-features-v2/README.md">0557: Discover Features 2.X</a> to see which specific services are supported by the other agent.</p>
 <h3 id="roles">Roles<a class="headerlink" href="#roles" title="Permanent link">&para;</a></h3>
 <p><strong>notification-sender</strong></p>
 <p><strong>notification-receiver</strong></p>
@@ -4738,7 +4738,7 @@ For the implementation for Android (using fcm), please refer to <a href="../0734
 </code></pre></div>
 <p>This message can be used by the notification-receiver to receive their device info, e.g. <code>device_token</code>. If the notification-sender does not have this field for that connection, a <code>problem-report</code> MAY be used as a response with <code>not-registered-for-push-notifications</code>.</p>
 <h4 id="adopted-messages">Adopted messages<a class="headerlink" href="#adopted-messages" title="Permanent link">&para;</a></h4>
-<p>In addition, the <a href="https://github.com/hyperledger/aries-rfcs/blob/08653f21a489bf4717b54e4d7fd2d0bdfe6b4d1a/features/0015-acks/README.md"><code>ack</code></a> message is adopted into the protocol for confirmation by the notification-sender. The ack message SHOULD be sent in response to any of the set-device-info messages.</p>
+<p>In addition, the <a href="https://github.com/hyperledger/aries-rfcs/blob/08653f21a489bf4717b54e4d7fd2d0bdfe6b4d1a../../features/0015-acks/README.md"><code>ack</code></a> message is adopted into the protocol for confirmation by the notification-sender. The ack message SHOULD be sent in response to any of the set-device-info messages.</p>
 <h3 id="sending-push-notifications">Sending Push Notifications<a class="headerlink" href="#sending-push-notifications" title="Permanent link">&para;</a></h3>
 <p>When an agent wants to send a push notification to another agent, the payload of the push notifications MUST include the <code>@type</code> property, and COULD include the <code>message_tag</code> property, to indicate the message is sent by the notification-sender. Guidelines on notification messages are not defined.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
@@ -4751,8 +4751,8 @@ For the implementation for Android (using fcm), please refer to <a href="../0734
 <p>Description of the fields:</p>
 <ul>
 <li><code>@type</code> -- Indicator of what kind of notification it is. (This could help the notification-receiver with parsing if a notification comes from another agent, for example)</li>
-<li><code>message_tag</code> -- Optional field to connect the push notification to a DIDcomm message. As defined in <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0334-jwe-envelope">0334: jwe-envelope</a> or <a href="https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope">0019: encryption-envelope</a>.</li>
-<li><code>message_id</code> -- Optional field to pickup the message from the mediator that the notification was linked to. As defined in <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0685-pickup-v2/README.md">0685: Pickup Protocol 2.0</a>.</li>
+<li><code>message_tag</code> -- Optional field to connect the push notification to a DIDcomm message. As defined in <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0334-jwe-envelope">0334: jwe-envelope</a> or <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../features/0019-encryption-envelope">0019: encryption-envelope</a>.</li>
+<li><code>message_id</code> -- Optional field to pickup the message from the mediator that the notification was linked to. As defined in <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0685-pickup-v2/README.md">0685: Pickup Protocol 2.0</a>.</li>
 </ul>
 <h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
 <p>Each service requires a considerable amount of domain knowledge. The RFC can be extended with new services over time.</p>

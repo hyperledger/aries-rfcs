@@ -324,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2823,27 +2823,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3508,6 +3487,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4861,7 +4861,7 @@ The protocol could include more roles (e.g. a <code>proxy</code>) which could be
 </ul>
 <p>In this scenario <code>DocuArch</code> has no way to learn about what is in the payload which is sent between <code>Sender</code> and <code>Receiver</code> as only the person who is in possession of the private key is able to decrypt the payload - which is the <code>Receiver</code>.
 Therfore the decrypted payload is only available on the <code>Receivers</code> client side app which is in communication with the Agent on behalf of the users DID identity.</p>
-<p>Such features within the Agent allow companies to build faster and more secure systems as the identity management and key management part comes from Agents and they just interact with it via API.</p>
+<p>Such ../../features within the Agent allow companies to build faster and more secure systems as the identity management and key management part comes from Agents and they just interact with it via API.</p>
 <h3 id="messages">Messages<a class="headerlink" href="#messages" title="Permanent link">&para;</a></h3>
 <p>Protocol: did:sov:1234;spec/crypto-service/1.0</p>
 <p><strong>encrypt</strong></p>
@@ -4936,7 +4936,7 @@ Therfore the decrypted payload is only available on the <code>Receivers</code> c
 <h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
 <h2 id="-potentialy-expose-agent-for-different-types-of-attacts-eg-someone-would-try-to-decrypt-your-private-documents-without-you-being-notice-of-that">- Potentialy expose Agent for different types of attacts: e.g. someone would try to decrypt your private documents without you being notice of that.<a class="headerlink" href="#-potentialy-expose-agent-for-different-types-of-attacts-eg-someone-would-try-to-decrypt-your-private-documents-without-you-being-notice-of-that" title="Permanent link">&para;</a></h2>
 <h2 id="rationale-and-alternatives">Rationale and alternatives<a class="headerlink" href="#rationale-and-alternatives" title="Permanent link">&para;</a></h2>
-<p>We can not expect that each services will switch directly to the DIDComm and other features of the agents. Not all features are even desier to have within agent. But if the Agent can exposer base API for identity management and crypto operations this would allow others to build on top of it much more richer ans secure applications and platforms.</p>
+<p>We can not expect that each services will switch directly to the DIDComm and other ../../features of the agents. Not all ../../features are even desier to have within agent. But if the Agent can exposer base API for identity management and crypto operations this would allow others to build on top of it much more richer ans secure applications and platforms.</p>
 <p>We are not aware of any alternatives atm. Anyone?</p>
 <h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
 <p>Similar approach is taken within HSM world where API is expose to the outside world without exposing keys. Here we take same approach in the context of KMS within Agent.</p>

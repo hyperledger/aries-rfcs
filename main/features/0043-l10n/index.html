@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2884,27 +2884,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3569,6 +3548,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4568,7 +4568,7 @@ field is known to be localizable, with current content also in English.</p>
 developers can add localization support to their messages without changing
 field names or schema, and with only a minor semver revision to a message's
 version.</p>
-<p>We expect most message types to use localization features in more or less this
+<p>We expect most message types to use localization ../../features in more or less this
 form. In fact, if localization settings have much in common across a message
 family, the <code>Localization</code> section of a RFC may be defined not just for a
 message <em>type</em>, but for a whole message <em>family</em>.</p>
@@ -4643,7 +4643,7 @@ searched before the more general catalogs.</p>
 <p>This section is not normative in this version of the RFC. It is considered
 experimental for now.</p>
 </blockquote>
-<p>Let's consider a scenario that pushes the localization features to their
+<p>Let's consider a scenario that pushes the localization ../../features to their
 limit. Suppose we have a family of DIDComm messages that's designed to
 exchange genealogical records. The main message type, <code>record</code>, has a
 fairly simple schema: it just contains <code>record_type</code>, <code>record_date</code>, and
@@ -4680,7 +4680,7 @@ that have mixed field locales (fields in a variety of locales).</p>
 <p>The major problem with this feature is that it introduces complexity. However,
 it is complexity that most developers can ignore unless or until they care
 about localization. Once that becomes a concern, the complexity provides
-important features--and it remains nicely encapsulated.</p>
+important ../../features--and it remains nicely encapsulated.</p>
 <h1 id="rationale-and-alternatives">Rationale and alternatives<a class="headerlink" href="#rationale-and-alternatives" title="Permanent link">&para;</a></h1>
 <p>We could choose not to support this feature.</p>
 <p>We could also use <a href="https://w3c.github.io/json-ld-syntax/#string-internationalization">JSON-LD's <code>@language</code> feature</a>.

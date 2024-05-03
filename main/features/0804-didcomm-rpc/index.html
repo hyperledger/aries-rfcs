@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -3046,27 +3046,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3731,6 +3710,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4781,7 +4781,7 @@
 
 <h1 id="0804-didcomm-remote-procedure-call-drpc">0804: DIDComm Remote Procedure Call (DRPC)<a class="headerlink" href="#0804-didcomm-remote-procedure-call-drpc" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="clecio.varjao@gov.bc.ca">Clecio Varjao</a> (BC Gov), <a href="swcurran@cloudcompass.ca">Stephen Curran</a> (BC Gov), <a href="amanji@petridish.dev">Akiff Manji</a> (BC Gov)</li>
+<li>Authors: <a href="mailto:clecio.varjao@gov.bc.ca">Clecio Varjao</a> (BC Gov), <a href="mailto:swcurran@cloudcompass.ca">Stephen Curran</a> (BC Gov), <a href="mailto:amanji@petridish.dev">Akiff Manji</a> (BC Gov)</li>
 <li>Status: <a href="../../#demonstrated">DEMONSTRATED</a></li>
 <li>Since: 2024-03-02</li>
 <li>Status Note: Implemented in an <a href="https://github.com/hyperledger/aries-acapy-plugins">Aries Cloud Agent Python plugin</a>, and <a href="https://github.com/openwallet-foundation/credo-ts">Credo TS</a></li>
@@ -4861,7 +4861,7 @@ customizations or plugins by using DRPC.</p>
 </code></pre></div>
 <h3 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h3>
 <blockquote>
-<p>This RFC assumes that you are familiar with <a href="/concepts/0005-didcomm/README.md">DID communication</a>.</p>
+<p>This RFC assumes that you are familiar with <a href="../../concepts/0005-didcomm/">DID communication</a>.</p>
 </blockquote>
 <p>The protocol consists of a DIDComm <code>request</code> message carrying an arbitrary
 <a href="https://www.jsonrpc.org/specification">JSON-RPC</a> request to a responding agent, and a second message that carries the
@@ -4994,8 +4994,8 @@ perform any of the actual processing of the request.</p>
 </table>
 <h3 id="messages">Messages<a class="headerlink" href="#messages" title="Permanent link">&para;</a></h3>
 <p>The following are the messages in the DRPC protocol. The <code>response</code> message
-handles all positive responses, so the <code>ack</code> (<a href="../features/0015-acks/README.md)">RFC 0015 ACKs</a>) message is
-<strong>NOT</strong> adopted by this protocol. The <a href="../features/0035-report-problem/README.md">RFC 0035 Report Problem</a> is adopted by
+handles all positive responses, so the <code>ack</code> (<a href="../0015-acks/">RFC 0015 ACKs</a>) message is
+<strong>NOT</strong> adopted by this protocol. The <a href="../0035-report-problem/">RFC 0035 Report Problem</a> is adopted by
 this protocol in the event that a <code>request</code> is not recognizable as a <a href="https://www.jsonrpc.org/specification">JSON-RPC</a>
 message and as such, a <a href="https://www.jsonrpc.org/specification">JSON-RPC</a> response message cannot be created. See the
 details below in the <a href="#problem-report-message">Problem Report Message</a> section.</p>
@@ -5038,7 +5038,7 @@ processing of the request to convey the output of the processing to the
 <code>client</code>. As with the <code>request</code> the format mostly exactly that of a
 <a href="https://www.jsonrpc.org/specification">JSON-RPC</a> response.</p>
 <p>If the <code>request</code> is unrecognizable as a <a href="https://www.jsonrpc.org/specification">JSON-RPC</a> message such that a
-<a href="https://www.jsonrpc.org/specification">JSON-RPC</a> message cannot be generated, the <code>server</code> SHOULD send a <a href="../features/0035-report-problem/README.md">RFC 0035
+<a href="https://www.jsonrpc.org/specification">JSON-RPC</a> message cannot be generated, the <code>server</code> SHOULD send a <a href="../0035-report-problem/">RFC 0035
 Report Problem</a> message to the <code>client</code>.</p>
 <p>It is assumed the <code>client</code> understands what the contents of the
 <code>response</code> message means in the context of the protocol instance. How the
@@ -5082,7 +5082,7 @@ determine when the protocol completes.</p>
 <li>no <code>error.data</code> item.</li>
 </ul>
 <h4 id="problem-report-message">Problem Report Message<a class="headerlink" href="#problem-report-message" title="Permanent link">&para;</a></h4>
-<p>A <a href="../features/0035-report-problem/README.md">RFC 0035 Report Problem</a> message <strong>SHOULD</strong> be sent by the <code>server</code> instead
+<p>A <a href="../0035-report-problem/">RFC 0035 Report Problem</a> message <strong>SHOULD</strong> be sent by the <code>server</code> instead
 of a <code>response</code> message only if the <code>request</code> is unrecognizable as a <a href="https://www.jsonrpc.org/specification">JSON-RPC</a> message.
 An <a href="https://www.jsonrpc.org/specification">JSON-RPC</a> errors <strong>MUST</strong> be provided to the <code>client</code> by the <code>server</code> via the
 <code>response</code> message, not a <code>problem-report</code>. The <code>client</code> <strong>MUST NOT</strong>
@@ -5131,7 +5131,7 @@ in some (likely, rare) cases based on the contents of the <code>request</code> J
 unnecessarily complicate the DIDComm protocol instance handling about when it is
 complete. As a result, a DRPC <code>response</code> message is always required.</p>
 <p>This design builds on the experience of implementations of this kind of feature
-using <a href="/features/0095-basic-message/README.md">RFC 0095 Basic Message</a> and <a href="/features/0335-http-over-didcomm/README.md">RFC 0335 HTTP Over DIDComm</a>. This design
+using <a href="../0095-basic-message/">RFC 0095 Basic Message</a> and <a href="../0335-http-over-didcomm/">RFC 0335 HTTP Over DIDComm</a>. This design
 tries to build off the learnings gained from both of those implementations.</p>
 <p>Based on feedback to an original version of the RFC, we looked as well at
 using <a href="https://grpc.io/">gRPC</a> as the core of this protocol, versus <a href="https://www.jsonrpc.org/specification">JSON-RPC</a>. Our assessment
@@ -5145,27 +5145,27 @@ example, that some data needs to be Base64 encoding for transmission, or if some
 values need to be cryptographically signed. Such details are left to the
 participants and how they are using the protocol.</p>
 <h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
-<p>This protocol has similar goals to the <a href="/features/0335-http-over-didcomm/README.md">RFC 0335 HTTP Over DIDComm</a> protocol,
+<p>This protocol has similar goals to the <a href="../0335-http-over-didcomm/">RFC 0335 HTTP Over DIDComm</a> protocol,
 but takes a lighter weight, more flexible approach. We expect that implementing
-HTTP over DIDComm using this protocol will be as easy as using <a href="/features/0335-http-over-didcomm/README.md">RFC 0335 HTTP
+HTTP over DIDComm using this protocol will be as easy as using <a href="../0335-http-over-didcomm/">RFC 0335 HTTP
 Over DIDComm</a>, where the <a href="https://www.jsonrpc.org/specification">JSON-RPC</a> request's <code>params</code> data structure holds the
 <code>headers</code> and <code>body</code> elements for the HTTP request. On the other hand, using the
-explicit <a href="/features/0335-http-over-didcomm/README.md">RFC 0335 HTTP Over DIDComm</a> is might be a better choice if it is
+explicit <a href="../0335-http-over-didcomm/">RFC 0335 HTTP Over DIDComm</a> is might be a better choice if it is
 available and exactly what is needed.</p>
 <p>One of the example use cases for this protocol has been implemented by "hijacking" the
-<a href="/features/0095-basic-message/README.md">RFC 0095 Basic Message</a> protocol to carry out the needed request/response actions. This
+<a href="../0095-basic-message/">RFC 0095 Basic Message</a> protocol to carry out the needed request/response actions. This
 approach is less than ideal in that:</p>
 <ul>
-<li>That is not the intended use of <a href="/features/0095-basic-message/README.md">RFC 0095 Basic Message</a>, which is to send a
+<li>That is not the intended use of <a href="../0095-basic-message/">RFC 0095 Basic Message</a>, which is to send a
   basic, human consumable message to the other agent.</li>
 <li>The request method and parameters have to be encoded into the basic message.</li>
-<li>The <a href="/features/0095-basic-message/README.md">RFC 0095 Basic Message</a> protocol is a single message protocols, so each
+<li>The <a href="../0095-basic-message/">RFC 0095 Basic Message</a> protocol is a single message protocols, so each
   request-response interaction requires two instances of the protocol, and for
   the controllers to manage connecting the interactions together.</li>
 </ul>
 <h2 id="unresolved-questions">Unresolved questions<a class="headerlink" href="#unresolved-questions" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Should we include the idea of a <code>request</code> having a goal code (<a href="/concepts/0519-goal-codes/README.md">RFC 0519 Goal Codes</a>)?</li>
+<li>Should we include the idea of a <code>request</code> having a goal code (<a href="../../concepts/0519-goal-codes/">RFC 0519 Goal Codes</a>)?</li>
 </ul>
 <h2 id="implementations">Implementations<a class="headerlink" href="#implementations" title="Permanent link">&para;</a></h2>
 <p>The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.</p>

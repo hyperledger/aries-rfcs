@@ -324,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2823,27 +2823,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3508,6 +3487,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4718,7 +4718,7 @@
 The public keys can be used for signing the credentials by the Issuer according to the order and encoding of attributes
 defined by the referenced Mapping.</p>
 <p>Credential Definition objects are processed in a generic way defined in 
-<a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common">Rich Schema Objects Common</a>.</p>
+<a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0420-rich-schemas-common">Rich Schema Objects Common</a>.</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
 <p>The current format for Indy credential definitions provides a method for
 issuers to specify a schema and provide public key data for credentials
@@ -4742,7 +4742,7 @@ However, rotation of Issuer's keys should be done carefully as it will invalidat
 credentials issued for this key.</p>
 <h3 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h3>
 <p>Credential definition's properties follow the generic template defined in 
-<a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry">Rich Schema Common</a>.</p>
+<a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry">Rich Schema Common</a>.</p>
 <p>Credential Definition's <code>content</code> field is a JSON-serialized string with the following fields:</p>
 <h4 id="signaturetype">signatureType<a class="headerlink" href="#signaturetype" title="Permanent link">&para;</a></h4>
 <p>Type of the signature. ZKP scheme <code>CL</code> (Camenisch-Lysyanskaya) is the only type currently
@@ -4773,10 +4773,10 @@ property. A Credential Definition is referenced by its <code>id</code>.</p>
 <p>Aries will provide a means for writing contexts to and reading contexts
 from a verifiable data registry (such as a distributed ledger).</p>
 <p>A Credential Definition object will be written to the ledger in a generic way defined in 
-<a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry">Rich Schema Objects Common</a>.</p>
+<a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry">Rich Schema Objects Common</a>.</p>
 <h3 id="aries-data-registry-interface">Aries Data Registry Interface<a class="headerlink" href="#aries-data-registry-interface" title="Permanent link">&para;</a></h3>
 <p>Aries Data Registry Interface methods for adding and retrieving a Credential Definition object from the
-ledger comply with the generic approach described in <a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#aries-data-registry-interface">Rich Schema Objects Common</a>.</p>
+ledger comply with the generic approach described in <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0420-rich-schemas-common#aries-data-registry-interface">Rich Schema Objects Common</a>.</p>
 <p>This means the following methods can be used:
 - <code>write_rich_schema_object</code>
 - <code>read_rich_schema_object_by_id</code>
@@ -4786,8 +4786,8 @@ ledger comply with the generic approach described in <a href="https://github.com
 <a href="https://github.com/sovrin-foundation/aries-credx-framework-rs/blob/master/src/encoding/mod.rs">reference implementation of various transformation algorithms</a>.</p>
 <p><a href="https://www.researchgate.net/publication/220922101_A_Signature_Scheme_with_Efficient_Protocols">Here</a> is the paper that defines Camenisch-Lysyanskaya signatures.</p>
 <ul>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas">0250: Rich Schema Objects</a></li>
-<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common">0420: Rich Schema Objects Common</a> </li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0250-rich-schemas">0250: Rich Schema Objects</a></li>
+<li><a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0420-rich-schemas-common">0420: Rich Schema Objects Common</a> </li>
 </ul>
 <h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
 <p>This increases the complexity of issuing verifiable credentials and

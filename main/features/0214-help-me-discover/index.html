@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2338,27 +2338,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2427,6 +2406,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2826,27 +2826,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3698,6 +3677,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4715,7 +4715,7 @@
 
 <h1 id="aries-rfc-0214-help-me-discover-protocol">Aries RFC 0214: "Help Me Discover" Protocol<a class="headerlink" href="#aries-rfc-0214-help-me-discover-protocol" title="Permanent link">&para;</a></h1>
 <ul>
-<li>Authors: <a href="george.aristy@securekey.com">George Aristy</a>, <a href="daniel.hardman@gmail.com">Daniel Hardman</a></li>
+<li>Authors: <a href="mailto:george.aristy@securekey.com">George Aristy</a>, <a href="mailto:daniel.hardman@gmail.com">Daniel Hardman</a></li>
 <li>Status: <a href="../../#proposed">PROPOSED</a></li>
 <li>Since: 2019-09-10</li>
 <li>Status Note: implementation is being explored by SecureKey</li>
@@ -4735,8 +4735,8 @@
 </code></pre></div>
 <h3 id="roles-and-states">Roles and States<a class="headerlink" href="#roles-and-states" title="Permanent link">&para;</a></h3>
 <p>This protocol embodies a standard request-response pattern, and therefore has <strong>requester</strong> and <strong>responder</strong> roles. A <code>request</code> message describes what's wanted. A <code>response</code> message conveys whatever knowledge the responder wants to offer to be helpful. Standard state evolution applies:</p>
-<p><img alt="diagram" src="https://github.com/hyperledger/aries-rfcs/raw/master/concepts/0003-protocols/request-response.png" /></p>
-<p><a href="https://docs.google.com/spreadsheets/d/1smY8qhG1qqGs0NH9g2hV4b7mDqrM6MIsmNI93tor2qk/edit#gid=1176419697"><img alt="states" src="https://github.com/hyperledger/aries-rfcs/raw/master/features/0031-discover-features/state-machines.png" /></a></p>
+<p><img alt="diagram" src="https://github.com/hyperledger/aries-rfcs/raw/master../../concepts/0003-protocols/request-response.png" /></p>
+<p><a href="https://docs.google.com/spreadsheets/d/1smY8qhG1qqGs0NH9g2hV4b7mDqrM6MIsmNI93tor2qk/edit#gid=1176419697"><img alt="states" src="https://github.com/hyperledger/aries-rfcs/raw/master../../features/0031-discover-features/state-machines.png" /></a></p>
 <h3 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h3>
 <p>The following requirements do not change this simple framework, but they introduce some complexity into the messages:</p>
 <ul>
@@ -4744,7 +4744,7 @@
 <li>It is desirable that criteria should be expressed in a way that harmonizes with proof requests, which also need a criteria language. </li>
 <li>It must be possible for the responder to give partial answers: "I do know a good mechanic, but not one that lives close to you."</li>
 <li>It must be possible for the responder to give compound answers: "Here's an item that satisfies critiera 1 and 3, and here's a different itme that satisfies criteria 2 and 4."</li>
-<li>It must be possible for this protocol to precede another protocol (e.g., <a href="https://github.com/hyperledger/aries-rfcs/blob/main/features/0028-introduce/README.md">RFC 0028 Introduce Protocol</a>) in such a way that what follows can refer back to items in this protocol in an unambiguous way, as in "Here's an introduction to the party that I just told you about, that satisfies criteria 3 and 4 from the 'Help Me Discover' request you recently made."</li>
+<li>It must be possible for this protocol to precede another protocol (e.g., <a href="https://github.com/hyperledger/aries-rfcs/blob/main../../features/0028-introduce/README.md">RFC 0028 Introduce Protocol</a>) in such a way that what follows can refer back to items in this protocol in an unambiguous way, as in "Here's an introduction to the party that I just told you about, that satisfies criteria 3 and 4 from the 'Help Me Discover' request you recently made."</li>
 </ul>
 <h3 id="messages">Messages<a class="headerlink" href="#messages" title="Permanent link">&para;</a></h3>
 <h4 id="request"><code>request</code><a class="headerlink" href="#request" title="Permanent link">&para;</a></h4>

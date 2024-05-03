@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../../features/0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2459,27 +2459,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../features/0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2548,6 +2527,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2944,27 +2944,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3629,6 +3608,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4587,17 +4587,17 @@
 <li>Tags: <a href="../../tags/#feature">feature</a>, <a href="../../tags/#protocol">protocol</a>, <a href="../../tags/#test-anomaly">test-anomaly</a></li>
 </ul>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
-<p>Describes how one agent can query another to discover which features it supports, and to what extent.</p>
+<p>Describes how one agent can query another to discover which ../../features it supports, and to what extent.</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
-<p>Though some agents will support just one feature and will be statically configured to interact with just one other party, many exciting uses of agents are more dynamic and unpredictable. When Alice and Bob meet, they won't know in advance which features are supported by one another's agents. They need a way to find out.</p>
+<p>Though some agents will support just one feature and will be statically configured to interact with just one other party, many exciting uses of agents are more dynamic and unpredictable. When Alice and Bob meet, they won't know in advance which ../../features are supported by one another's agents. They need a way to find out.</p>
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
 <p>This is version 2.0 of the Discover Features protocol, and its fully qualified <a href="../../concepts/0003-protocols/#piuri">PIURI</a> for the Discover Features protocol is:</p>
 <div class="highlight"><pre><span></span><code>https://didcomm.org/discover-features/2.0
 </code></pre></div>
 <p>This version is conceptually similar to <a href="../0031-discover-features/README.md">version 1.0 of this protocol</a>. It differs in its ability to ask about multiple feature types, and to ask multiple questions and receive multiple answers in a single round trip.</p>
 <h3 id="roles">Roles<a class="headerlink" href="#roles" title="Permanent link">&para;</a></h3>
-<p>There are two roles in the <code>discover-features</code> protocol: <code>requester</code> and <code>responder</code>. Normally, the requester asks the responder about the features it supports, and the responder answers. Each role uses a single message type.</p>
-<p>It is also possible to proactively disclose features; in this case a requester receives a response without asking for it. This may eliminate some chattiness in certain use cases (e.g., where two-way connectivity is limited).</p>
+<p>There are two roles in the <code>discover-features</code> protocol: <code>requester</code> and <code>responder</code>. Normally, the requester asks the responder about the ../../features it supports, and the responder answers. Each role uses a single message type.</p>
+<p>It is also possible to proactively disclose ../../features; in this case a requester receives a response without asking for it. This may eliminate some chattiness in certain use cases (e.g., where two-way connectivity is limited).</p>
 <h3 id="states">States<a class="headerlink" href="#states" title="Permanent link">&para;</a></h3>
 <p>The state progression is very simple. In the normal case, it is simple request-response; in a proactive disclosure, it's a simple one-way notification.</p>
 <h4 id="requester">Requester<a class="headerlink" href="#requester" title="Permanent link">&para;</a></h4>
@@ -4616,11 +4616,11 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  ]
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>}
 </code></pre></div>
-<p>Queries messages contain one or more <strong>query objects</strong> in the <code>queries</code> array. Each query essentially says, "Please tell me what features of type X you support, where the feature identifiers match this (potentially wildcarded) string." This particular example asks an agent if it supports any 1.x versions of the <a href="../../concepts/0003-protocols/tictactoe/">tictactoe protocol</a>, and if it supports any <a href="../../concepts/0519-goal-codes/">goal codes</a> that begin with "aries.".</p>
+<p>Queries messages contain one or more <strong>query objects</strong> in the <code>queries</code> array. Each query essentially says, "Please tell me what ../../features of type X you support, where the feature identifiers match this (potentially wildcarded) string." This particular example asks an agent if it supports any 1.x versions of the <a href="../../concepts/0003-protocols/tictactoe/">tictactoe protocol</a>, and if it supports any <a href="../../concepts/0519-goal-codes/">goal codes</a> that begin with "aries.".</p>
 <p>Implementations of this protocol must recognize the following values for <code>feature-type</code>: <code>protocol</code>, <code>goal-code</code>, <code>gov-fw</code>, <code>didcomm-version</code>, and <code>decorator</code>/<code>header</code>. (The concept known as <code>decorator</code> in DIDComm v1 approximately maps to the concept known as <code>header</code> in DIDComm v2. The two values should be considered synonyms and must both be recognized.) Additional values of <code>feature-type</code> may be standardized by raising a PR against this RFC that defines the new type and increments the minor protocol version number; non-standardized values are also valid, but there is no guarantee that their semantics will be recognized.</p>
 <p>Identifiers for feature types vary. For protocols, identifiers are PIURIs. For goal codes, identifiers are goal code values. For governance frameworks, identifiers are URIs where the framework is published (typically the <a href="../../concepts/0430-machine-readable-governance-frameworks/#data_uri"><code>data_uri</code> field if machine-readable</a>. For DIDComm versions, identifiers are the URIs where DIDComm versions are developed (<code>https://github.com/hyperledger/aries-rfcs</code> for V1 and <code>https://github.com/decentralized-identity/didcomm-messaging</code> for V2; see <a href="../0044-didcomm-file-and-mime-types/#detecting-didcomm-versions">"Detecting DIDComm Versions" in RFC 0044</a> for more details).</p>
 <p>The <code>match</code> field of a query descriptor may use the * wildcard. By itself, a <code>match</code> with just the wildcard says, "I'm interested in anything you want to share with me." But usually, this wildcard will be to match a prefix that's a little more specific, as in the example that matches any 1.x version.</p>
-<p>Any agent may send another agent this message type at any time. Implementers of agents that intend to support dynamic relationships and rich features are <em>strongly</em> encouraged to implement support for this message, as it is likely to be among the first messages exchanged with a stranger.</p>
+<p>Any agent may send another agent this message type at any time. Implementers of agents that intend to support dynamic relationships and rich ../../features are <em>strongly</em> encouraged to implement support for this message, as it is likely to be among the first messages exchanged with a stranger.</p>
 <h5 id="disclosures-message-type"><code>disclosures</code> Message Type<a class="headerlink" href="#disclosures-message-type" title="Permanent link">&para;</a></h5>
 <p>A <code>discover-features/disclosures</code> message looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
@@ -4640,7 +4640,7 @@
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>}
 </code></pre></div>
 <p>The <code>disclosures</code> field is a JSON array of zero or more <strong>disclosure objects</strong> that describe a feature. Each descriptor has a <code>feature-type</code> field that contains data corresponding to <code>feature-type</code> in a query object, and an <code>id</code> field that unambiguously identifies a single item of that feature type. When the item is a protocol, the disclosure object may also contain a <code>roles</code> array that enumerates the roles the responding agent can play in the associated protocol. Future feature types may add additional optional fields, though no other fields are being standardized with this version of the RFC.</p>
-<p>Disclosures messages say, "Here are some features I support (that matched your queries)."</p>
+<p>Disclosures messages say, "Here are some ../../features I support (that matched your queries)."</p>
 <h5 id="sparse-disclosures">Sparse Disclosures<a class="headerlink" href="#sparse-disclosures" title="Permanent link">&para;</a></h5>
 <p>Disclosures do not have to contain exhaustive detail. For example, the following response omits the optional <code>roles</code> field but may be just as useful as one that includes it:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{
@@ -4653,19 +4653,19 @@
 </code></pre></div>
 <p>Less detail probably suffices because agents do not need to know everything about one another's implementations in order to start an interaction--usually the flow will organically reveal what's needed. For example, the <code>outcome</code> message in the <code>tictactoe</code> protocol isn't needed until the end, and is optional anyway. Alice can start a tictactoe game with Bob and will eventually see whether he has the right idea about <code>outcome</code> messages.</p>
 <p>The missing <code>roles</code> in this disclosure does not say, "I support no roles in this protocol." It says, "I support the protocol but I'm providing no detail about specific roles." Similar logic applies to any other omitted fields.</p>
-<p>An empty <code>disclosures</code> array does not say, "I support no features that match your query." It says, "I'm not disclosing to you that I support any features (that match your query)." An agent might not tell another that it supports a feature for various reasons, including: the trust that it imputes to the other party based on cumulative interactions so far, whether it's in the middle of upgrading a plugin, whether it's currently under high load, and so forth. And responses to a <code>discover-features</code> query are not guaranteed to be true forever; agents can be upgraded or downgraded, although they probably won't churn in their feature profiles from moment to moment.</p>
+<p>An empty <code>disclosures</code> array does not say, "I support no ../../features that match your query." It says, "I'm not disclosing to you that I support any ../../features (that match your query)." An agent might not tell another that it supports a feature for various reasons, including: the trust that it imputes to the other party based on cumulative interactions so far, whether it's in the middle of upgrading a plugin, whether it's currently under high load, and so forth. And responses to a <code>discover-features</code> query are not guaranteed to be true forever; agents can be upgraded or downgraded, although they probably won't churn in their feature profiles from moment to moment.</p>
 <h3 id="privacy-considerations">Privacy Considerations<a class="headerlink" href="#privacy-considerations" title="Permanent link">&para;</a></h3>
 <p>Because the wildcards in a <code>queries</code> message can be very inclusive, the <code>discover-features</code> protocol could be used to mine information suitable for agent fingerprinting, in much the same way that browser fingerprinting works. This is antithetical to the ethos of our ecosystem, and represents bad behavior. Agents should use <code>discover-features</code> to answer legitimate questions, and not to build detailed profiles of one another. However, fingerprinting may be attempted anyway.</p>
 <p>For agents that want to maintain privacy, several best practices are recommended:</p>
 <h5 id="follow-selective-disclosure">Follow selective disclosure.<a class="headerlink" href="#follow-selective-disclosure" title="Permanent link">&para;</a></h5>
-<p>Only reveal supported features based on trust in the relationship. Even if you support a protocol, you may not wish to use it in every relationship. Don't tell others about features you do not plan to use with them.</p>
+<p>Only reveal supported ../../features based on trust in the relationship. Even if you support a protocol, you may not wish to use it in every relationship. Don't tell others about ../../features you do not plan to use with them.</p>
 <p>Patterns are easier to see in larger data samples. However, a pattern of ultra-minimal data is also a problem, so use good judgment about how forthcoming to be.</p>
 <h5 id="vary-the-format-of-responses">Vary the format of responses.<a class="headerlink" href="#vary-the-format-of-responses" title="Permanent link">&para;</a></h5>
 <p>Sometimes, you might prettify your agent plaintext message one way, sometimes another.</p>
 <h5 id="vary-the-order-of-items-in-the-disclosures-array">Vary the order of items in the <code>disclosures</code> array.<a class="headerlink" href="#vary-the-order-of-items-in-the-disclosures-array" title="Permanent link">&para;</a></h5>
 <p>If more than one key matches a query, do not always return them in alphabetical order or version order. If you do return them in order, do not always return them in ascending order.</p>
 <h5 id="consider-adding-some-spurious-details">Consider adding some spurious details.<a class="headerlink" href="#consider-adding-some-spurious-details" title="Permanent link">&para;</a></h5>
-<p>If a query could match multiple features, then occasionally you might add some made-up features as matches. If a wildcard allows multiple versions of a protocol, then sometimes you might use some made-up <em>versions</em>. And sometimes not. (Doing this too aggressively might reveal your agent implementation, so use sparingly.)</p>
+<p>If a query could match multiple ../../features, then occasionally you might add some made-up ../../features as matches. If a wildcard allows multiple versions of a protocol, then sometimes you might use some made-up <em>versions</em>. And sometimes not. (Doing this too aggressively might reveal your agent implementation, so use sparingly.)</p>
 <h5 id="vary-how-you-query-too">Vary how you query, too.<a class="headerlink" href="#vary-how-you-query-too" title="Permanent link">&para;</a></h5>
 <p>How you ask questions may also be fingerprintable.</p>
 <h2 id="implementations">Implementations<a class="headerlink" href="#implementations" title="Permanent link">&para;</a></h2>

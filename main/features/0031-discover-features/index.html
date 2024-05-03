@@ -326,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../concepts/0799-long-term-support/" class="md-tabs__link">
+        <a href="../0028-introduce/" class="md-tabs__link">
           
   
   PROPOSED
@@ -2501,27 +2501,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../0685-pickup-v2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0212 Pickup Protocol 2.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
         
   
@@ -2590,6 +2569,27 @@
   
   <span class="md-ellipsis">
     0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
   </span>
   
 
@@ -2986,27 +2986,6 @@
             PROPOSED
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0799 Long Term Support
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -3671,6 +3650,27 @@
   
   <span class="md-ellipsis">
     0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
   </span>
   
 
@@ -4664,19 +4664,19 @@
 <li>Authors: Daniel Hardman</li>
 <li>Status: <a href="../../#adopted">ADOPTED</a> (may be RETIRED when <a href="./">v2.0</a> of the protocol has enough gravitas)</li>
 <li>Since: 2019-05-01</li>
-<li>Status Note: One of our earliest DIDComm protocols; reached FCP (standards track) status in Indy, and implemented in at least two codebases there. Converted to an Aries RFC Implemented in a handful of Aries codebases. With the advent of DIDComm v2 at DIF, it became clear that we wanted to discover features beyond just protocol support, so this version of the protocol is now superseded by <a href="../0557-discover-features-v2/">v2.0 in RFC 0557</a>.</li>
+<li>Status Note: One of our earliest DIDComm protocols; reached FCP (standards track) status in Indy, and implemented in at least two codebases there. Converted to an Aries RFC Implemented in a handful of Aries codebases. With the advent of DIDComm v2 at DIF, it became clear that we wanted to discover ../../features beyond just protocol support, so this version of the protocol is now superseded by <a href="../0557-discover-features-v2/">v2.0 in RFC 0557</a>.</li>
 <li>Supersedes: <a href="https://github.com/hyperledger/indy-hipe/pull/73">Indy HIPE PR #73</a>.</li>
 <li>Start Date: 2018-12-17</li>
 <li>Tags: <a href="../../tags/#feature">feature</a>, <a href="../../tags/#protocol">protocol</a>, <a href="../../tags/#test-anomaly">test-anomaly</a></li>
 </ul>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
-<p>Describes how agents can query one another to discover which features
+<p>Describes how agents can query one another to discover which ../../features
 it supports, and to what extent.</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
 <p>Though some agents will support just one protocol and will be
 statically configured to interact with just one other party, many
 exciting uses of agents are more dynamic and unpredictable. When
-Alice and Bob meet, they won't know in advance which features are
+Alice and Bob meet, they won't know in advance which ../../features are
 supported by one another's agents. They need a way to find out.</p>
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
 <p>This RFC introduces a protocol for discussing the protocols an agent
@@ -4714,7 +4714,7 @@ me." But usually, this wildcard will be to match a prefix that's a little
 more specific, as in the example that matches any 1.x version.</p>
 <p>Any agent may send another agent this message type at any time.
 Implementers of agents that intend to support dynamic relationships
-and rich features are <em>strongly</em> encouraged to implement support
+and rich ../../features are <em>strongly</em> encouraged to implement support
 for this message, as it is likely to be among the first messages
 exchanged with a stranger.</p>
 <h5 id="disclose-message-type"><code>disclose</code> Message Type<a class="headerlink" href="#disclose-message-type" title="Permanent link">&para;</a></h5>
@@ -4780,7 +4780,7 @@ anyway.</p>
 <p>For agents that want to maintain privacy, several best practices are
 recommended:</p>
 <h5 id="follow-selective-disclosure">Follow selective disclosure.<a class="headerlink" href="#follow-selective-disclosure" title="Permanent link">&para;</a></h5>
-<p>Only reveal supported features based on trust in the relationship.
+<p>Only reveal supported ../../features based on trust in the relationship.
 Even if you support a protocol, you may not wish to use it in
 every relationship. Don't tell others about protocols you do
 not plan to use with them.</p>
@@ -4815,7 +4815,7 @@ decorator:</p>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;~l10n&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;locales&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;en&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;comment&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;catalogs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;https://github.com/hyperledger/aries-rfcs/blob/a9ad499/features/0031-discover-features/catalog.json&quot;</span><span class="p">]</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;catalogs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;https://github.com/hyperledger/aries-rfcs/blob/a9ad499../../features/0031-discover-features/catalog.json&quot;</span><span class="p">]</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
@@ -4834,7 +4834,7 @@ The catalog looks like this (see <a href="catalog.json">catalog.json</a>):</p>
 <p>For more information, see the <a href="../0043-l10n/">localization RFC</a>.</p>
 <h2 id="unresolved-questions">Unresolved questions<a class="headerlink" href="#unresolved-questions" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Do we want to support the discovery of features that are not protocol-related?</li>
+<li>Do we want to support the discovery of ../../features that are not protocol-related?</li>
 </ul>
 <h2 id="implementations">Implementations<a class="headerlink" href="#implementations" title="Permanent link">&para;</a></h2>
 <p>The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.</p>
