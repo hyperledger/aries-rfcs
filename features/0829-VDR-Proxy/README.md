@@ -162,7 +162,7 @@ The `request` message uses the following format:
 
 ```jsonc
   {
-    "@type": "https://didcomm.org/drpc/1.0/request",
+    "@type": "https://didcomm.org/vdrproxy/1.0/request",
     "@id": "2a0ec6db-471d-42ed-84ee-f9544db9da4b",
     "request" : [
       {
@@ -197,7 +197,7 @@ Report Problem] message to the `client`.
 ```jsonc
 
   {
-    "@type": "https://didcomm.org/drpc/1.0/response",
+    "@type": "https://didcomm.org/vdrproxy/1.0/response",
     "@id": "63d6f6cf-b723-4eaf-874b-ae13f3e3e5c5",
     "response": [
       {
