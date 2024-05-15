@@ -3,7 +3,7 @@
 - Authors: [Sam Curren](mailto:swcurran@cloudcompass.ca)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2023-07-11
-- Status Note: In Step 1 - **Target Deployment Date: 2024-02-28** 
+- Status Note: In Step 1 - **Target Deployment Date: 2024-07-02** 
 - Supersedes:
 - Start Date: 2023-07-11
 - Tags: [feature](/tags.md#feature), [community-update](/tags.md#community-update)
@@ -31,11 +31,11 @@ The transition from the unqualified to qualified DIDs will occur in four steps:
   - Verify transisiton plan and code.
 - **Step 1**: Agent builders MUST update all agent code bases and deployments to support DID Rotation and did:peer:4. 
   - Each agent builder SHOULD notify the community they have completed Step 1 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
-  - Target Date for code update: 2023-12-17
-  - Target Date fpr deployment update: 2024-02-28
+  - Target Date for code update: 2024-05-01
+  - Target Date fpr deployment update: 2024-07-02
 - **Step 2**: Agent builders using unqualified DIDs MUST no longer use new unqualified DIDs, and MUST use DID Rotation to rotate to a fully qualified DID.
   - Each agent builder SHOULD notify the community they have completed Step 2 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
-  - Target Date for finishing step 2: 2024-03-20
+  - Target Date for finishing step 2: 2024-11-01
 - **Step 3**: Agent builders SHOULD update their deployments to remove all support for receiving unqualified DIDs from other agents.
 
 The community coordination triggers between the steps above will be as follows:
