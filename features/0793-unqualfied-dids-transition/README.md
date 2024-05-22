@@ -32,7 +32,7 @@ The transition from the unqualified to qualified DIDs will occur in four steps:
 - **Step 1**: Agent builders MUST update all agent code bases and deployments to support DID Rotation and did:peer:4. 
   - Each agent builder SHOULD notify the community they have completed Step 1 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
   - Target Date for code update: 2024-05-01
-  - Target Date fpr deployment update: 2024-07-02
+  - Target Date for deployment update: 2024-07-02
 - **Step 2**: Agent builders using unqualified DIDs MUST no longer use new unqualified DIDs, and MUST use DID Rotation to rotate to a fully qualified DID.
   - Each agent builder SHOULD notify the community they have completed Step 2 by submitting a PR to update their entry in the [implementations](#implementations) accordingly.
   - Target Date for finishing step 2: 2024-11-01
