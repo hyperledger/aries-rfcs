@@ -1,7 +1,7 @@
 # Aries RFC 0496: Transition to the Out of Band Protocol
 
 - Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca)
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2021-11-24
 - Status Note: In step 2 - All systems using OOB. **Target Completion Date: 2024-07-02**
 - Supersedes:
@@ -28,7 +28,7 @@ The transition from the old to new messages will occur in four steps:
   - See the section below on [Step 1 out-of-band messages](#step-1-out-of-band-messages)
   - During Step 1, all agents should continue to send the current invitation and connection-less protocol messages.
   - Each agent builder SHOULD notify the community they have completed Step 1 by submitting a PR to update their entry in the [implementations](#implementations) section of this RFC.
-- **Step 2**: Agent builders update all agent code bases and deployments to send out out-of-band invitations equivalent to the current invitation and connection-less protocol messages, and Agent builders add full out-of-band and did-exchange ([RFC 0023](../0023-did-exchange/README.md)) protocol support to all agent code bases and deployments.
+- **Step 2**: Agent builders update all agent code bases and deployments to send out out-of-band invitations equivalent to the current invitation and connection-less protocol messages, and Agent builders add full out-of-band protocol support to all agent code bases and deployments.
   - Messages from existing RFCs being replaced by the out-of-band protocol are marked as `deprecated`.
   - Full out-of-band support is **NOT** required&mdash;just support for the out-of-band equivalents of the old `invitation` messages.
   - When sending or receiving `did:peer` DIDs, the DIDs MUST conform to the [Peer DID Specification](https://identity.foundation/peer-did-method-spec/).
