@@ -2232,6 +2232,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0496 Transition to the Out of Band Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../0510-dif-pres-exch-attach/" class="md-nav__link">
         
   
@@ -2515,27 +2536,6 @@
   
   <span class="md-ellipsis">
     0183 Revocation Notification 1.0
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    0496 Transition to the Out of Band and DID Exchange Protocols
   </span>
   
 
@@ -4789,6 +4789,9 @@ The <em>invitee</em> uses provisional information to send a DID and DID document
 The <em>inviter</em> uses received DID document information to send a DID and DID document to the <em>invitee</em>.
 The <em>invitee</em> sends the <em>inviter</em> an ack or any other message that confirms the response was received.</p>
 <h2 id="0-invitation-to-connect">0. Invitation to Connect<a class="headerlink" href="#0-invitation-to-connect" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Note: This Invitation message is deprecated, and should use an invitation message from the <a href="../0434-outofband/">Out Of Band Protocol</a></p>
+</blockquote>
 <p>An invitation to connect may be transferred using any method that can reliably transmit text. The result  must be the essential data necessary to initiate a <a href="#1-connection-request">Connection Request</a> message. A connection invitation is an agent message with agent plaintext format, but is an <strong>out-of-band communication</strong> and therefore not communicated using wire level encoding or encryption. The necessary data that an invitation to connect must result in is:</p>
 <ul>
 <li>
