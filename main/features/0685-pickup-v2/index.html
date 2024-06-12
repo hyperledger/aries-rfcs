@@ -2528,8 +2528,26 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Reference">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Message Types">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Status Request
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#status" class="md-nav__link">
@@ -2541,9 +2559,60 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#delivery-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delivery Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-delivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Delivery
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#messages-received" class="md-nav__link">
     <span class="md-ellipsis">
       Messages Received
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-recipients" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple Recipients
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live Mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Live Mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#live-mode-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live Mode Change
     </span>
   </a>
   
@@ -4570,8 +4639,26 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Reference">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Message Types">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Status Request
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#status" class="md-nav__link">
@@ -4583,9 +4670,60 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#delivery-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delivery Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-delivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Delivery
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#messages-received" class="md-nav__link">
     <span class="md-ellipsis">
       Messages Received
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-recipients" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple Recipients
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live Mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Live Mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#live-mode-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live Mode Change
     </span>
   </a>
   
@@ -4672,159 +4810,128 @@ rather than being pushed to the queue. See <a href="#live-mode">Live Mode</a> fo
 </ul>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <p>Each message sent MUST use the <code>~transport</code> decorator as follows, which has been adopted from <a href="../0092-transport-return-route/">RFC 0092 transport return route</a> protocol. This has been omitted from the examples for brevity.</p>
-<p>```json=
-"~transport": {
-    "return_route": "all"
-}
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>## Message Types
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>### Status Request
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Sent by the _Recipient_ to the _Mediator_ to request a `status` message.
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>#### Example:
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>```json=
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>{
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    &quot;@id&quot;: &quot;123456781&quot;,
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    &quot;@type&quot;: &quot;https://didcomm.org/messagepickup/2.0/status-request&quot;,
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    &quot;recipient_key&quot;: &quot;&lt;key for messages&gt;&quot;
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>}
-</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&quot;~transport&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&quot;return_route&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;all&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="message-types">Message Types<a class="headerlink" href="#message-types" title="Permanent link">&para;</a></h2>
+<h3 id="status-request">Status Request<a class="headerlink" href="#status-request" title="Permanent link">&para;</a></h3>
+<p>Sent by the <em>Recipient</em> to the <em>Mediator</em> to request a <code>status</code> message.</p>
+<h4 id="example">Example:<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123456781&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/messagepickup/2.0/status-request&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">&quot;recipient_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;key for messages&gt;&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
+</code></pre></div>
 <p><code>recipient_key</code> is optional. When specified, the <em>Mediator</em> MUST only return status related to that recipient key. This allows the <em>Recipient</em> to discover if any messages are in the queue that were sent to a specific key. You can find more details about <code>recipient_key</code> and how it's managed in <a href="https://github.com/hyperledger/aries-rfcs/blob/master../../features/0211-route-coordination/README.md">0211-route-coordination</a>.</p>
 <h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
 <p>Status details about waiting messages.</p>
-<h4 id="example">Example:<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
-<p>```json=
-{
-    "<a class="magiclink magiclink-github magiclink-mention" href="https://github.com/id" title="GitHub User: id">@id</a>": "123456781",
-    "<a class="magiclink magiclink-github magiclink-mention" href="https://github.com/type" title="GitHub User: type">@type</a>": "<a href="https://didcomm.org/messagepickup/2.0/status">https://didcomm.org/messagepickup/2.0/status</a>",
-    "recipient_key": "<key for messages>",
-    "message_count": 7,
-    "longest_waited_seconds": 3600,
-    "newest_received_time": "2019-05-01 12:00:00Z",
-    "oldest_received_time": "2019-05-01 12:00:01Z",
-    "total_bytes": 8096,
-    "live_delivery": false
-}
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>`message_count` is the only REQUIRED attribute. The others MAY be present if offered by the _Mediator_.
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>`longest_waited_seconds` is in seconds, and is the longest delay of any message in the queue.
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>`total_bytes` represents the total size of all messages.
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>If a `recipient_key` was specified in the `status-request` message, the matching value MUST be specified 
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>in the `recipient_key` attribute of the status message.
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>`live_delivery` state is also indicated in the status message. 
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>&gt; Note: due to the potential for confusing what the actual state of the message queue
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>&gt; is, a status message MUST NOT be put on the pending message queue and MUST only
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>&gt; be sent when the _Recipient_ is actively connected (HTTP request awaiting
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>&gt; response, WebSocket, etc.).
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>### Delivery Request
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>A request from the _Recipient_ to the _Mediator_ to have pending messages delivered. 
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>#### Examples:
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>```json=
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>{
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    &quot;@id&quot;: &quot;123456781&quot;,
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    &quot;@type&quot;: &quot;https://didcomm.org/messagepickup/2.0/delivery-request&quot;,
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>    &quot;limit&quot;: 10,
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>    &quot;recipient_key&quot;: &quot;&lt;key for messages&gt;&quot;
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>}
-</code></pre></div></p>
-<p>```json=
-{
-    "<a class="magiclink magiclink-github magiclink-mention" href="https://github.com/type" title="GitHub User: type">@type</a>": "<a href="https://didcomm.org/messagepickup/2.0/delivery-request">https://didcomm.org/messagepickup/2.0/delivery-request</a>",
-    "limit": 1
-}
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>`limit` is a REQUIRED attribute, and after receipt of this message, the _Mediator_ SHOULD deliver up to the `limit` indicated. 
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>`recipient_key` is optional. When [specified](), the _Mediator_ MUST only return messages sent to that recipient key.
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>If no messages are available to be sent, a `status` message MUST be sent immediately.
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>Delivered messages MUST NOT be deleted until delivery is acknowledged by a `messages-received` message.
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>### Message Delivery
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>Messages delivered from the queue must be delivered in a batch `delivery` message as attachments. The ID of each attachment is used to confirm receipt. The ID is an opaque value, and the _Recipient_ should not infer anything from the value.
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>The ONLY valid type of attachment for this message is a DIDComm Message in encrypted form.
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>The `recipient_key` attribute is only included when responding to a `delivery-request` message that indicates a `recipient_key`.
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>```json=
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>{
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    &quot;@id&quot;: &quot;123456781&quot;,
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    &quot;~thread&quot;: {
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        &quot;thid&quot;: &quot;&lt;message id of delivery-request message&gt;&quot;
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>      },
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    &quot;@type&quot;: &quot;https://didcomm.org/messagepickup/2.0/delivery&quot;,
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    &quot;recipient_key&quot;: &quot;&lt;key for messages&gt;&quot;,
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    &quot;~attach&quot;: [{
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>        &quot;@id&quot;: &quot;&lt;messageid&gt;&quot;,
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>        &quot;data&quot;: {
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>            &quot;base64&quot;: &quot;&quot;
-<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>        }
-<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>    }]
-<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>}
-</code></pre></div></p>
+<h4 id="example_1">Example:<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123456781&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/messagepickup/2.0/status&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">&quot;recipient_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;key for messages&gt;&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">&quot;message_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">&quot;longest_waited_seconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">&quot;newest_received_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-05-01 12:00:00Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">&quot;oldest_received_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-05-01 12:00:01Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">&quot;total_bytes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8096</span><span class="p">,</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">&quot;live_delivery&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">}</span>
+</code></pre></div>
+<p><code>message_count</code> is the only REQUIRED attribute. The others MAY be present if offered by the <em>Mediator</em>.</p>
+<p><code>longest_waited_seconds</code> is in seconds, and is the longest delay of any message in the queue.</p>
+<p><code>total_bytes</code> represents the total size of all messages.</p>
+<p>If a <code>recipient_key</code> was specified in the <code>status-request</code> message, the matching value MUST be specified 
+in the <code>recipient_key</code> attribute of the status message.</p>
+<p><code>live_delivery</code> state is also indicated in the status message. </p>
+<blockquote>
+<p>Note: due to the potential for confusing what the actual state of the message queue
+is, a status message MUST NOT be put on the pending message queue and MUST only
+be sent when the <em>Recipient</em> is actively connected (HTTP request awaiting
+response, WebSocket, etc.).</p>
+</blockquote>
+<h3 id="delivery-request">Delivery Request<a class="headerlink" href="#delivery-request" title="Permanent link">&para;</a></h3>
+<p>A request from the <em>Recipient</em> to the <em>Mediator</em> to have pending messages delivered. </p>
+<h4 id="examples">Examples:<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123456781&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/messagepickup/2.0/delivery-request&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;recipient_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;key for messages&gt;&quot;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/messagepickup/2.0/delivery-request&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">&quot;limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
+</code></pre></div>
+<p><code>limit</code> is a REQUIRED attribute, and after receipt of this message, the <em>Mediator</em> SHOULD deliver up to the <code>limit</code> indicated. </p>
+<p><code>recipient_key</code> is optional. When <a href="">specified</a>, the <em>Mediator</em> MUST only return messages sent to that recipient key.</p>
+<p>If no messages are available to be sent, a <code>status</code> message MUST be sent immediately.</p>
+<p>Delivered messages MUST NOT be deleted until delivery is acknowledged by a <code>messages-received</code> message.</p>
+<h3 id="message-delivery">Message Delivery<a class="headerlink" href="#message-delivery" title="Permanent link">&para;</a></h3>
+<p>Messages delivered from the queue must be delivered in a batch <code>delivery</code> message as attachments. The ID of each attachment is used to confirm receipt. The ID is an opaque value, and the <em>Recipient</em> should not infer anything from the value.</p>
+<p>The ONLY valid type of attachment for this message is a DIDComm Message in encrypted form.</p>
+<p>The <code>recipient_key</code> attribute is only included when responding to a <code>delivery-request</code> message that indicates a <code>recipient_key</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123456781&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">&quot;~thread&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="nt">&quot;thid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;message id of delivery-request message&gt;&quot;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/messagepickup/2.0/delivery&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">&quot;recipient_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;key for messages&gt;&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">&quot;~attach&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">        </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;messageid&gt;&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">        </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">            </span><span class="nt">&quot;base64&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="p">}]</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="p">}</span>
+</code></pre></div>
 <p>This method of delivery does incur an encoding cost, but is much simpler to implement and a more robust interaction.</p>
 <h3 id="messages-received">Messages Received<a class="headerlink" href="#messages-received" title="Permanent link">&para;</a></h3>
 <p>After receiving messages, the <em>Recipient</em> sends an ack message indiciating 
 which messages are safe to clear from the queue.</p>
-<h4 id="example_1">Example:<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h4>
-<p>```json=
-{
-    "<a class="magiclink magiclink-github magiclink-mention" href="https://github.com/type" title="GitHub User: type">@type</a>": "<a href="https://didcomm.org/messagepickup/2.0/messages-received">https://didcomm.org/messagepickup/2.0/messages-received</a>",
-    "message_id_list": ["123","456"]
-}
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>`message_id_list` is a list of ids of each message received. The id of each message is present in the attachment descriptor of each attached message of a `delivery` message.
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Upon receipt of this message, the _Mediator_ knows which messages have been received, and can remove them from the collection of queued messages with confidence. The mediator SHOULD send an updated `status` message reflecting the changes to the queue.
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>### Multiple Recipients
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>If a message arrives at a _Mediator_ addressed to multiple _Recipients_, the message MUST be queued for each _Recipient_ independently. If one of the addressed _Recipients_ retrieves a message and indicates it has been received, that message MUST still be held and then removed by the other addressed _Recipients_.
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>## Live Mode
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>Live mode is the practice of delivering newly arriving messages directly to a connected _Recipient_. It is disabled by default and only activated by the _Recipient_. Messages that arrive when Live Mode is off MUST be stored in the queue for retrieval as described above. If Live Mode is active, and the connection is broken, a new inbound connection starts with Live Mode disabled.
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>Messages already in the queue are not affected by Live Mode - they must still be requested with `delivery-request` messages.
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>Live mode MUST only be enabled when a persistent transport is used, such as WebSockets.
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>_Recipients_ have three modes of possible operation for message delivery with various abilities and level of development complexity:
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>1. Never activate live mode. Poll for new messages with a `status_request` message, and retrieve them when available.
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>2. Retrieve all messages from queue, and then activate Live Mode. This simplifies message processing logic in the _Recipient_.
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>3. Activate Live Mode immediately upon connecting to the _Mediator_. Retrieve messages from the queue as possible. When receiving a message delivered live, the queue may be queried for any waiting messages delivered to the same key for processing.
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>### Live Mode Change
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>Live Mode is changed with a `live-delivery-change` message.
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>#### Example:
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>```json=
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>{
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>    &quot;@type&quot;: &quot;https://didcomm.org/messagepickup/2.0/live-delivery-change&quot;,
-<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>    &quot;live_delivery&quot;: true
-<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>}
-</code></pre></div></p>
+<h4 id="example_2">Example:<a class="headerlink" href="#example_2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/messagepickup/2.0/messages-received&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">&quot;message_id_list&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;123&quot;</span><span class="p">,</span><span class="s2">&quot;456&quot;</span><span class="p">]</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
+</code></pre></div>
+<p><code>message_id_list</code> is a list of ids of each message received. The id of each message is present in the attachment descriptor of each attached message of a <code>delivery</code> message.</p>
+<p>Upon receipt of this message, the <em>Mediator</em> knows which messages have been received, and can remove them from the collection of queued messages with confidence. The mediator SHOULD send an updated <code>status</code> message reflecting the changes to the queue.</p>
+<h3 id="multiple-recipients">Multiple Recipients<a class="headerlink" href="#multiple-recipients" title="Permanent link">&para;</a></h3>
+<p>If a message arrives at a <em>Mediator</em> addressed to multiple <em>Recipients</em>, the message MUST be queued for each <em>Recipient</em> independently. If one of the addressed <em>Recipients</em> retrieves a message and indicates it has been received, that message MUST still be held and then removed by the other addressed <em>Recipients</em>.</p>
+<h2 id="live-mode">Live Mode<a class="headerlink" href="#live-mode" title="Permanent link">&para;</a></h2>
+<p>Live mode is the practice of delivering newly arriving messages directly to a connected <em>Recipient</em>. It is disabled by default and only activated by the <em>Recipient</em>. Messages that arrive when Live Mode is off MUST be stored in the queue for retrieval as described above. If Live Mode is active, and the connection is broken, a new inbound connection starts with Live Mode disabled.</p>
+<p>Messages already in the queue are not affected by Live Mode - they must still be requested with <code>delivery-request</code> messages.</p>
+<p>Live mode MUST only be enabled when a persistent transport is used, such as WebSockets.</p>
+<p><em>Recipients</em> have three modes of possible operation for message delivery with various abilities and level of development complexity:</p>
+<ol>
+<li>Never activate live mode. Poll for new messages with a <code>status_request</code> message, and retrieve them when available.</li>
+<li>Retrieve all messages from queue, and then activate Live Mode. This simplifies message processing logic in the <em>Recipient</em>.</li>
+<li>Activate Live Mode immediately upon connecting to the <em>Mediator</em>. Retrieve messages from the queue as possible. When receiving a message delivered live, the queue may be queried for any waiting messages delivered to the same key for processing.</li>
+</ol>
+<h3 id="live-mode-change">Live Mode Change<a class="headerlink" href="#live-mode-change" title="Permanent link">&para;</a></h3>
+<p>Live Mode is changed with a <code>live-delivery-change</code> message.</p>
+<h4 id="example_3">Example:<a class="headerlink" href="#example_3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/messagepickup/2.0/live-delivery-change&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">&quot;live_delivery&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">}</span>
+</code></pre></div>
 <p>Upon receiving the <code>live_delivery_change</code> message, the <em>Mediator</em> MUST respond with a <code>status</code> message.</p>
 <p>If sent with <code>live_delivery</code> set to <code>true</code> on a connection incapable of live delivery, a <code>problem_report</code> SHOULD be sent as follows:</p>
-<p><code>json=
-{
-  "@type": "https://didcomm.org/notification/1.0/problem-report",
-  "~thread": {
-    "pthid": "&lt;message id of offending live_delivery_change&gt;"
-  },
-  "description": "Connection does not support Live Delivery"
-}</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/notification/1.0/problem-report&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">&quot;~thread&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">&quot;pthid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;message id of offending live_delivery_change&gt;&quot;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Connection does not support Live Delivery&quot;</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">}</span>
+</code></pre></div>
 <h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
 <p>Version 1.0 of this protocol served as the main inspiration for this version. Version 1.0 suffered from not being very explicit, and an incomplete model of message delivery signaling.</p>
 <h2 id="alternatives">Alternatives<a class="headerlink" href="#alternatives" title="Permanent link">&para;</a></h2>
