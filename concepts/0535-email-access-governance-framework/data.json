@@ -1,0 +1,12 @@
+{
+    "@context": ["https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/context.jsonld"],
+    "name": "Email Access"
+    "version": "0.1",
+    "description": "Proof of email access, useful for proving a common identifier and/or validating an email address without performing a live loop-back test."
+    "last_updated": "2020-09-16",
+    "docs_uri": "http://github.com/hyperledger/aries-rfcs/blob/master/",
+    "data_uri": "<uri to machine readable portion of this example>",
+    "schemas": ["schemaidhere"],
+    "roles": ["issuer"], 
+    "rules": [ {"when": {"id": "did:example:abc123"}, "thus": "issuer"} ]
+}   
