@@ -1,0 +1,5 @@
+@startuml
+Inviter -> Invitee: invite action with goal code, optional\npayload, optional ~please_ack
+Invitee --> Inviter: (optional) initial ACK with status =\nPENDING
+Invitee --> Inviter: (optional) final ACK with outcome,\noptional payload
+@enduml

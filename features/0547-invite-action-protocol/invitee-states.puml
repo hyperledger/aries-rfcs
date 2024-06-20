@@ -1,0 +1,15 @@
+@startuml
+scale 350 width
+[*] --> deciding
+deciding --> [*]: ignore
+deciding --> acting: invitation accepted
+state acting {
+  [*] --> ack_at_pending: send ack\nat pending
+  [*] --> pending: no ack\nat pending
+  ack_at_pending --> pending
+}
+pending --> [*]: no ack\nat outcome
+pending -->ack_at_outcome: send ack\nat outcome
+ack_at_outcome --> [*]
+
+@enduml
