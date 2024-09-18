@@ -49,7 +49,7 @@ Message format:
 
 ```JSON
 {
-  "@type": "https://didcomm.org/revocation_notification/2.0/revoke",
+  "@type": "https://didcomm.org/revocation_notification/2.1/revoke",
   "@id": "<uuid-revocation-notification>",
   "revocation_format": "<revocation_format>",
   "credential_id": "<credential_id>",
@@ -73,7 +73,7 @@ Message format:
 
 ```JSON
 {
-  "@type": "https://didcomm.org/revocation_notification/2.0/unrevoke",
+  "@type": "https://didcomm.org/revocation_notification/2.1/unrevoke",
   "@id": "<uuid-revocation-notification>",
   "revocation_format": "<revocation_format>",
   "credential_id": "<credential_id>",

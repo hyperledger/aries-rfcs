@@ -9,7 +9,7 @@
 
 ## Summary
 
-This RFC defines the message format which an issuer uses to notify a holder that a previously issued credential has been revoked or unrevoked.
+This RFC defines the message format which an issuer uses to notify a holder that a previously issued credential has been revoked.
 
 ## Change Log
 
@@ -17,7 +17,7 @@ This RFC defines the message format which an issuer uses to notify a holder that
 
 ## Motivation
 
-We need a standard protocol for an issuer to notify a holder that a previously issued credential has been revoked or unrevoked.
+We need a standard protocol for an issuer to notify a holder that a previously issued credential has been revoked.
 
 For example, suppose a passport agency revokes Alice's passport.
 The passport agency (an issuer) may want to notify Alice (a holder) that her passport has been revoked so that she
@@ -25,23 +25,20 @@ knows that she will be unable to use her passport to travel.
 
 ## Tutorial
 
-The Revocation Notification protocol is a very simple protocol consisting of two messages:
+The Revocation Notification protocol is a very simple protocol consisting of a single message:
 
 * Revoke - issuer to holder
-* Unrevoke - issuer to holder
 
-This simple protocol allows an issuer to choose to notify a holder that a previously issued credential has been revoked or unrevoked.
+This simple protocol allows an issuer to choose to notify a holder that a previously issued credential has been revoked.
 
-It is the issuer's prerogative whether or not to notify the holder that a credential has been (un)revoked.  It is not a security risk if the issuer does not notify the holder that the credential has been (un)revoked, nor if the message is lost.  The holder will still be unable to use a revoked credential without this notification.
+It is the issuer's prerogative whether or not to notify the holder that a credential has been revoked.  It is not a security risk if the issuer does not notify the holder that the credential has been revoked, nor if the message is lost.  The holder will still be unable to use a revoked credential without this notification.
 
 ### Roles
 
 There are two parties involved in a Revocation Notification: `issuer` and `holder`.
-The `issuer` sends the `revoke` or `unrevoke` message to the `holder`.
+The `issuer` sends the `revoke` message to the `holder`.
 
 ### Messages
-
-#### Revoke
 
 The `revoke` message sent by the `issuer` to the `holder` is as follows:
 
@@ -59,26 +56,6 @@ Description of fields:
 * `thread_id` (required) -- the [thread ID](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0008-message-id-and-threading#thread-id-thid) of the [issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2) protocol which was used to issue one or more credentials that have been revoked by the issuer.  If multiple credentials were issued, each credential has a different credential format but contains the same claims as described [here](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0453-issue-credential-v2#message-attachments); therefore, this message notifies the holder that all of these credentials have been revoked.
 
 * `comment` (optional) -- a field that provides some human readable information about the revocation notification.  This is typically the reason for the revocation as deemed appropriate by the issuer.
-
-#### Unrevoke
-
-The `unrevoke` message sent by the `issuer` to the `holder` is as follows:
-
-```JSON
-{
-  "@type": "https://didcomm.org/revocation_notification/1.0/unrevoke",
-  "@id": "<uuid-revocation-notification>",
-  "thread_id": "<thread_id>",
-  "comment": "Some comment"
-}
-```
-
-Description of fields:
-
-* `thread_id` (required) -- the [thread ID](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0008-message-id-and-threading#thread-id-thid) of the [issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2) protocol which was used to issue one or more credentials that have been revoked by the issuer.  If multiple credentials were issued, each credential has a different credential format but contains the same claims as described [here](https://github.com/hyperledger/aries-rfcs/tree/b982c24b9083dd5dddff6343dbf534cd1cfe36a6/features/0453-issue-credential-v2#message-attachments); therefore, this message notifies the holder that all of these credentials have been revoked.
-
-* `comment` (optional) -- a field that provides some human readable information about the revocation notification.  This is typically the reason for the revocation as deemed appropriate by the issuer.
-
 
 ## Reference
 
