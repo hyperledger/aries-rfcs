@@ -1,6 +1,6 @@
 # Aries RFC 0067: DIDComm DID document conventions
 
-- Authors: [Tobias Looker](tobias.looker@mattr.global), [Stephen Curran](swcurran@gmail.com)
+- Authors: [Tobias Looker](mailto:tobias.looker@mattr.global), [Stephen Curran](mailto:swcurran@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-06-10
 - Status Note: This revises the former [INDY HIPE](https://github.com/hyperledger/indy-hipe/pull/92)
@@ -163,7 +163,7 @@ Alices agent goes to prepare a message `desired_msg` for Bob.
 
 1. Alices agent resolves the above DID document `did:example:1234abcd` for Bob and resolves the `did-communication` service definition.
 2. Alices agent then packs `desired_msg` in an encrypted envelope message to the resolved keys defined in the `recipientKeys` array.
-3. Because the the `routingKeys` array is not empty, a content level message of type `forward` is prepared where the `to` field of the forward message is set to the resolved keys and the `msg` field of the forward message is set to the encrypted envelope from the previous step.
+3. Because the `routingKeys` array is not empty, a content level message of type `forward` is prepared where the `to` field of the forward message is set to the resolved keys and the `msg` field of the forward message is set to the encrypted envelope from the previous step.
 4. The resulting forward message from the previous step is then packed inside another encrypted envelope for the first and only key in the `routingKeys` array.
 5. Inspection of the service endpoint, reveals it is a did url and leads to resolving another `did-communication` service definition, this time owned and controlled by `agents-r-us`.
 6. Because in the `agents-r-us` service definition there is a recipient key. A content level message of type `forward` is prepared where the `to` field of the forward message is set to the recipient key and the `msg` field of the forward message is set to the encrypted envelope from the previous step.

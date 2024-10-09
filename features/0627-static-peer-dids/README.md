@@ -1,6 +1,6 @@
 # Aries RFC 0627: Static Peer DIDs
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [ACCEPTED](/README.md#accepted)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
+- Status: [RETIRED](/README.md#retired)
 - Since: 2021-04-07
 - Status Note: formally freezes a set of features that have been relatively stable for about 18 months
 - Start Date: 2021-03-24

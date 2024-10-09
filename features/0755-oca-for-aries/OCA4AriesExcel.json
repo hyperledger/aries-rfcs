@@ -1,0 +1,218 @@
+[
+  {
+    "capture_base": {
+      "attributes": {
+        "birthdate_dateint": "DateTime",
+        "country": "Text",
+        "expiry_date_dateint": "DateTime",
+        "family_name": "Text",
+        "given_names": "Text",
+        "issuing_jurisdiction": "Text",
+        "locality": "Text",
+        "picture": "Binary",
+        "postal_code": "Text",
+        "region": "Text",
+        "street_address": "Text"
+      },
+      "classification": "",
+      "digest": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+      "flagged_attributes": [
+        "given_names",
+        "family_name",
+        "birthdate_dateint",
+        "street_address",
+        "locality",
+        "region",
+        "postal_code",
+        "country",
+        "picture",
+        "expiry_date_dateint"
+      ],
+      "type": "spec/capture_base/1.0"
+    },
+    "overlays": [
+      {
+        "attribute_character_encoding": {
+          "birthdate_dateint": "utf-8",
+          "country": "utf-8",
+          "expiry_date_dateint": "utf-8",
+          "family_name": "utf-8",
+          "given_names": "utf-8",
+          "issuing_jurisdiction": "utf-8",
+          "locality": "utf-8",
+          "picture": "base64",
+          "postal_code": "utf-8",
+          "region": "utf-8",
+          "street_address": "utf-8"
+        },
+        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+        "default_character_encoding": "utf-8",
+        "digest": "Ek-rB1QH1LWWFp21WtxjO-eaCzIHm1jL3QTXqTc5CYiQ",
+        "type": "spec/overlays/character_encoding/1.0"
+      },
+      {
+        "attribute_categories": [],
+        "attribute_labels": {
+          "birthdate_dateint": "Date of Birth",
+          "country": "Country",
+          "expiry_date_dateint": "Expiry Date",
+          "family_name": "Family Name",
+          "given_names": "Given Names",
+          "issuing_jurisdiction": "Issuing Jurisdiction",
+          "locality": "Locality",
+          "picture": "Photo (if issued)",
+          "postal_code": "Postal Code",
+          "region": "Region",
+          "street_address": "Street Address"
+        },
+        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+        "category_labels": {},
+        "digest": "EZlM7u7Waz53UZQqWnbK1t11PC_sLBaV03esGRg9EvP8",
+        "language": "en-CA",
+        "type": "spec/overlays/label/1.0"
+      },
+      {
+        "attribute_information": {
+          "birthdate_dateint": "The date of birth of the person",
+          "country": "The country code of the person's address",
+          "expiry_date_dateint": "The expiry date of this [credential / ID]",
+          "family_name": "The legal family name of the person",
+          "given_names": "The legal first name(s) of the person",
+          "issuing_jurisdiction": "The jurisdiction (province, territory, or federal) that issued this [credential / ID]",
+          "locality": "The city name or locality name of the person's address",
+          "picture": "A verified photo of the person (if issued)",
+          "postal_code": "The postal code of the person's address",
+          "region": "For Canadian addresses, the province or territory of the person's address. For other countries, the regional code of the person's address.",
+          "street_address": "The full address of the person, excluding locality, region, and postal code"
+        },
+        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+        "digest": "EgbEwEyKPpfkzJyb4TKHUfRKUpY-EuvJEQxDPSIg-PeU",
+        "language": "en-CA",
+        "type": "spec/overlays/information/1.0"
+      },
+      {
+        "attribute_categories": [],
+        "attribute_labels": {
+          "birthdate_dateint": "Date de naissance",
+          "country": "Pays",
+          "expiry_date_dateint": "Date d'expiration",
+          "family_name": "Nom de famille",
+          "given_names": "Prénoms",
+          "issuing_jurisdiction": "Autorité de délivrance",
+          "locality": "Localité",
+          "picture": "Photo (si délivrée)",
+          "postal_code": "Code postal",
+          "region": "Région",
+          "street_address": "Adresse municipale"
+        },
+        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+        "category_labels": {},
+        "digest": "E-8GcJ-wUUkea3cYV-7jzVNYV2Lb9gkAbfmQzmxCPyQU",
+        "language": "fr-CA",
+        "type": "spec/overlays/label/1.0"
+      },
+      {
+        "attribute_information": {
+          "birthdate_dateint": "La date de naissance de la personne",
+          "country": "Le code du pays de l'adresse de la personne",
+          "expiry_date_dateint": "La date d'expiration de ce/cette [justificatif / pièce d'identité].",
+          "family_name": "Le nom de famille légal de la personne",
+          "given_names": "Le ou les prénoms légaux de la personne",
+          "issuing_jurisdiction": "L'autorité (province, territoire ou fédéral) qui a délivré ce/cette [justificatif / pièce d'identité]",
+          "locality": "Le nom de la ville ou de la localité de l'adresse de la personne",
+          "picture": "Une photo vérifiée de la personne (si délivrée)",
+          "postal_code": "Le code postal de l'adresse de la personne",
+          "region": "Pour les adresses canadiennes, la province ou le territoire de l'adresse de la personne. Pour les autres pays, l’indicatif régional de l'adresse de la personne",
+          "street_address": "L'adresse complète de la personne, sans la localité, la région et le code postal"
+        },
+        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+        "digest": "EPukcZklEiGw87fzn2WD6o7mgDcM-wVvTs327JMLnT_s",
+        "language": "fr-CA",
+        "type": "spec/overlays/information/1.0"
+      },
+      {
+        "attribute_formats": {
+          "birthdate_dateint": "YYYYMMDD",
+          "expiry_date_dateint": "YYYYMMDD",
+          "picture": "image/jpeg"
+        },
+        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+        "digest": "EbDQxonRzsXsZxMeflemhNSbaV3FZon6C114U4jdPc24",
+        "type": "spec/overlays/format/1.0"
+      },
+      {
+        "attribute_standards": {
+          "birthdate_dateint": "urn:iso:std:iso:1989",
+          "expiry_date_dateint": "urn:iso:std:iso:1989"
+        },
+        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+        "digest": "ExyElGOmvaHOBtZhOTnNlpblsqpDUcb3xE_qxWgO-GCc",
+        "type": "spec/overlays/standard/1.0"
+      },
+      {
+        "attribute_entry_codes": {
+          "issuing_jurisdiction": [
+            "BC",
+            "ON",
+            "QC"
+          ]
+        },
+        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+        "digest": "E8C3mJfLUPM0tasawt7FeuhiTvxQ7QDPaGBRCEpKfvJU",
+        "type": "spec/overlays/entry_code/1.0"
+      },
+      {
+        "attribute_entries": {
+          "issuing_jurisdiction": {
+            "BC": "Colombie-Britannique",
+            "ON": "Ontario",
+            "QC": "Québec"
+          }
+        },
+        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+        "digest": "EDeOfI580ee7MDfRriE9FxMoY0VDOOvsRyXEafw_yL0Y",
+        "language": "fr-CA",
+        "type": "spec/overlays/entry/1.0"
+      },
+      {
+        "attribute_entries": {
+          "issuing_jurisdiction": {
+            "BC": "British Columbia",
+            "ON": "Ontario",
+            "QC": "Québec"
+          }
+        },
+        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+        "digest": "Ej5eE3PhtzglfUMIO9-cmPWYnZcgk7Q9kQG4RuqPY4I8",
+        "language": "en-CA",
+        "type": "spec/overlays/entry/1.0"
+      },
+      {
+        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+        "credential_help_text": "Example credential help text.",
+        "credential_support_url": "https://www.gov.bc.ca/",
+        "description": "A Canadian schema used for the identity of a person",
+        "digest": "EhGmnV8_T-Gw646j8r8kI2RHRVv6Znx8XrOPFKoLnRR8",
+        "issuer": "Government of British Columbia",
+        "issuer_description": "Government of British Columbia",
+        "issuer_url": "https://www.gov.bc.ca/",
+        "language": "en-CA",
+        "name": "Person Credential",
+        "type": "spec/overlays/meta/1.0"
+      },
+      {
+        "capture_base": "EKpcSmz06sJs0b4g24e0Jc7OerbJrGN2iMVEnwLYKBS8",
+        "credential_help_text": "Exemple de texte d'aide sur les informations d'identification.",
+        "credential_support_url": "https://www.gov.bc.ca/",
+        "description": "Schéma canadien utilisé pour l'identité d'une personne",
+        "digest": "EboSiMc4qQKjoRKkQuBiBZbDoZxnP4XLn7yaY6NDHOGA",
+        "issuer": "Gouvernement de la Colombie-Britannique",
+        "issuer_description": "Gouvernement de la Colombie-Britannique",
+        "issuer_url": "https://www.gov.bc.ca/",
+        "language": "fr-CA",
+        "name": "Informations d'identification de la personne",
+        "type": "spec/overlays/meta/1.0"
+      }
+    ]
+  }
+]

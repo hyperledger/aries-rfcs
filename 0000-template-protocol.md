@@ -1,6 +1,6 @@
 # Aries RFC 0000: Your Protocol 0.9
 
-- Authors: [your name](you@github-email) -- email is optional
+- Authors: [your name](mailto:you@github-email) -- email is optional
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-12-26 (date you submit your PR)
 - Status Note: (explanation of current status)  
@@ -31,7 +31,7 @@ Specify the official name of the protocol and its version, e.g., "My Protocol 0.
 
 Protocol names are often either lower_snake_case or kebob-case. The non-version components of the protocol named are matched exactly.
 
-URI: https://didcomm.org/lets_do_lunch/<version>/<messageType>
+URI: `https://didcomm.org/lets_do_lunch/<version>/<messageType>`
 
 Message types and protocols are identified with special URIs that match certain conventions. See [Message Type and Protocol Identifier URIs](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md#message-type-and-protocol-identifier-uris) for more details.
 
@@ -159,7 +159,7 @@ Adoption should be declared in an "Adopted" subsection of "Messages".
 When adoption is specified, it should include a __minimum
 adopted version__ of the adopted message type: "This protocol adopts
 `ack` with version >= 1.4". All versions of the adopted message that share
-the same major number should be compatible, given the [semver rules](concepts/0003-protocols/semver.md)
+the same major number should be compatible, given the [semver rules](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md#semver-rules-for-protocols)
 that apply to protocols.
 
 ### Constraints

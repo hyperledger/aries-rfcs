@@ -1,8 +1,8 @@
 # Aries RFC 0035: Report Problem Protocol 1.0
 
-- Authors: [Stephen Curran](swcurran@cloudcompass.ca), [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [ACCEPTED](/README.md#accepted)
-- Since: 2021-03-15
+- Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [Daniel Hardman](mailto:daniel.hardman@gmail.com)
+- Status: [ADOPTED](/README.md#adopted)
+- Since: 2024-05-01
 - Status Note: Implemented in multiple codebases.
 - Supersedes: [Indy HIPE PR #65]( https://github.com/hyperledger/indy-hipe/pull/65)
 - Start Date: 2018-11-26
@@ -12,6 +12,10 @@
 
 Describes how to report errors and warnings in a powerful, interoperable way. All implementations
 of SSI agent or hub technology SHOULD implement this RFC.
+
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
 
 ## Motivation
 
@@ -117,11 +121,6 @@ Reporting problems uses a simple one-step [notification protocol](
 
 The protocol includes the standard `notifier` and `notified` roles. It
 defines a single message type `problem-report`, introduced here.
-It also [adopts](../../0000-template-protocol.md#adopted-messages) the
-`ack` message from the [`ACK 1.0` protocol](../0015-acks/README.md),
-to accommodate the possibility that the [`~please_ack`](../0317-please-ack/README.md)
-[decorator]( ../../concepts/0011-decorators/README.md) may be used on the
- notification.
 
 A `problem-report` communicates about a problem when an agent-to-agent message is
 possible and a recipient for the problem report is known. This covers, for example,
@@ -171,6 +170,8 @@ the problem report is the second member (`~thread.sender_order` = 0). In such ca
 to a message, the thread decorator is mostly redundant, as `~thread.thid` must equal `@id`.
 
 **description**: Contains human-readable, localized alternative string(s) that explain the problem. It is highly recommended that the message follow use the guidance in [the l10n RFC](../0043-l10n/README.md), allowing the error to be searched on the web and documented formally.
+
+**description.code**: Required. Contains the code that indicates the problem being communicated. Codes are described in protocol RFCs and other relevant places. New Codes SHOULD follow the [Problem Code](https://identity.foundation/didcomm-messaging/spec/#problem-codes) naming convention detailed in the DIDComm v2 spec.
 
 **problem_items**: A list of one or more key/value pairs that are parameters about the problem. Some examples might be:
 
@@ -236,6 +237,12 @@ Each item in the list must be a tagged pair (a JSON {key:value}, where the key n
 ## Categorized Examples of Errors and (current) Best Practice Handling
 
 The following is a categorization of a number of examples of errors and (current) Best Practice handling for those types of errors. The new `problem-report` message type is used for some of these categories, but not all.
+
+### Unknown Error
+
+Errors of a known error code will be processed according to the understanding of what the code means. Support of a protocol includes support and proper processing of the error codes detailed within that protocol.
+
+Any unknown error code that starts with `w.` in the DIDComm v2 style may be considered a warning, and the flow of the active protocol SHOULD continue. All other unknown error codes SHOULD be considered to be an end to the active protocol.
 
 ### Error While Processing a Received Message
 

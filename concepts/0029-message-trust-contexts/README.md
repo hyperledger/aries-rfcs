@@ -1,9 +1,9 @@
 # Aries RFC 0029: Message Trust Contexts
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-05-10
-- Status Note: Only implemented in one codebase and in the sample code here.
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: Not practically applied.
 - Supersedes: [Indy HIPE PR #120](https://github.com/hyperledger/indy-hipe/pull/120)
 - Start Date: 2018-02-10 (approx, backdated)
 - Tags: [concept](/tags.md#concept)

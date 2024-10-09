@@ -1,7 +1,7 @@
 # Aries RFC 0721: Revocation Notification 2.0
 - Authors: Keith Smith, Daniel Bluhm, James Ebert
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2022-02-15
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2024-05-01
 - Status Note: Updates the credential identifiers format after discussions while implementing [RFC 0183 Revocation Notification](../0183-revocation-notification/README.md)
 - Supersedes: [RFC 0183 Revocation Notification](../0183-revocation-notification/README.md)
 - Start Date: 2021-11-01
@@ -11,9 +11,13 @@
 
 This RFC defines the message format which an issuer uses to notify a holder that a previously issued credential has been revoked.
 
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+
 ## Motivation
 
-We need a standard protocol for an issuer to notify a holder that a previously issued credential has been revoked.
+We need a standard protocol for an issuer to notify a holder that a previously issued credential has been revoked or unrevoked.
 
 For example, suppose a passport agency revokes Alice's passport.
 The passport agency (an issuer) may want to notify Alice (a holder) that her passport has been revoked so that she
@@ -21,20 +25,23 @@ knows that she will be unable to use her passport to travel.
 
 ## Tutorial
 
-The Revocation Notification protocol is a very simple protocol consisting of a single message:
+The Revocation Notification protocol is a very simple protocol consisting of two messages:
 
 * Revoke - issuer to holder
+* Unrevoke - issuer to holder
 
-This simple protocol allows an issuer to choose to notify a holder that a previously issued credential has been revoked.
+This simple protocol allows an issuer to choose to notify a holder that a previously issued credential has been revoked or unrevoked.
 
-It is the issuer's prerogative whether or not to notify the holder that a credential has been revoked.  It is not a security risk if the issuer does not notify the holder that the credential has been revoked, nor if the message is lost.  The holder will still be unable to use a revoked credential without this notification.
+It is the issuer's prerogative whether or not to notify the holder that a credential has been (un)revoked.  It is not a security risk if the issuer does not notify the holder that the credential has been (un)revoked, nor if the message is lost.  The holder will still be unable to use a revoked credential without this notification.
 
 ### Roles
 
 There are two parties involved in a Revocation Notification: `issuer` and `holder`.
-The `issuer` sends the `revoke` message to the `holder`.
+The `issuer` sends the `revoke` or `unrevoke` message to the `holder`.
 
 ### Messages
+
+#### Revoke
 
 The `revoke` message sent by the `issuer` to the `holder`. The holder should verify that the `revoke` message came from the connection that was originally used to issue the credential.
 
@@ -42,9 +49,8 @@ Message format:
 
 ```JSON
 {
-  "@type": "https://didcomm.org/revocation_notification/2.0/revoke",
+  "@type": "https://didcomm.org/revocation_notification/2.1/revoke",
   "@id": "<uuid-revocation-notification>",
-  "~please_ack": ["RECEIPT","OUTCOME"],
   "revocation_format": "<revocation_format>",
   "credential_id": "<credential_id>",
   "comment": "Some comment"
@@ -53,7 +59,29 @@ Message format:
 
 Description of fields:
 
-* `~please_ack` (optional) -- as described by the [Please ACK Decorator RFC](https://github.com/hyperledger/aries-rfcs/tree/main/features/0317-please-ack).  If `OUTCOME` is specified, the `holder` should send an ack when the holder's agent has successfully notified the holder of the revocation.
+* `revocation_format` (required) -- the format of the credential revocation. Accepted values for the revocation format are provided in the "Revocation Credential Identification Formats" section immediately below.
+
+* `credential_id` (required) -- the individual credential identifier of a credential issued using the [issue-credential-v2](https://github.com/hyperledger/aries-rfcs/tree/main/features/0453-issue-credential-v2) protocol that has been revoked by the issuer. Accepted values for the credential id format are provided in the "Revocation Credential Identification Formats" section immediately below.
+
+* `comment` (optional) -- a field that provides some human readable information about the revocation notification.  This is typically the reason for the revocation as deemed appropriate by the issuer.
+
+#### Unrevoke
+
+The `unrevoke` message sent by the `issuer` to the `holder`. The holder should verify that the `unrevoke` message came from the connection that was originally used to issue the credential.
+
+Message format:
+
+```JSON
+{
+  "@type": "https://didcomm.org/revocation_notification/2.1/unrevoke",
+  "@id": "<uuid-revocation-notification>",
+  "revocation_format": "<revocation_format>",
+  "credential_id": "<credential_id>",
+  "comment": "Some comment"
+}
+```
+
+Description of fields:
 
 * `revocation_format` (required) -- the format of the credential revocation. Accepted values for the revocation format are provided in the "Revocation Credential Identification Formats" section immediately below.
 
@@ -68,6 +96,7 @@ In order to support multiple credential revocation formats, the following dictat
 Revocation Format | Credential Identifier Format | Example |
 --- | --- | --- |
 `indy-anoncreds`  | `<revocation-registry-id>::<credential-revocation-id>` | `AsB27X6KRrJFsqZ3unNAH6:4:AsB27X6KRrJFsqZ3unNAH6:3:cl:48187:default:CL_ACCUM:3b24a9b0-a979-41e0-9964-2292f2b1b7e9::1` |
+`anoncreds`  | `<revocation-registry-id>::<credential-revocation-id>` | `did:indy:sovrin:5nDyJVP1NrcPAttP3xwMB9/anoncreds/v0/REV_REG_DEF/56495/npdb/TAG1::1` |
 
 ## Reference
 

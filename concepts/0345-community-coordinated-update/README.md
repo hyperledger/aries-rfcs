@@ -1,5 +1,5 @@
 # 0345: Community Coordinated Update
-- Authors: [Sam Curren](telegramsam@gmail.com)
+- Authors: [Sam Curren](mailto:telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-12-26 (date you submit your PR)
 - Status Note: Initial Draft

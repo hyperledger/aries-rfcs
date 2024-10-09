@@ -1,7 +1,7 @@
 # Aries RFC 0020: Message Types
 
 - Authors: Daniel Bluhm, Sam Curren
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2019-05-24
 - Status Note:  
 - Supersedes: [HIPE 0021 Message Types](https://github.com/hyperledger/indy-hipe/tree/main/text/0021-message-types)
