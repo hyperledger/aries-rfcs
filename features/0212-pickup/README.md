@@ -1,5 +1,6 @@
 # 0212: Pickup Protocol
-- Authors: [Sam Curren](telegramsam@gmail.com)
+
+- Authors: [Sam Curren](mailto:telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-03
 - Status Note: Initial version
@@ -32,41 +33,52 @@ batch retrieval can be executed when many messages ...
 ## Reference
 
 ### StatusRequest
+
 Sent by the _recipient_ to the _message_holder_ to request a `status` message.
-```json=
+
+```json
 {
-    "@id": "123456781",
-    "@type": "https://didcomm.org/messagepickup/1.0/status-request"
+  "@id": "123456781",
+  "@type": "https://didcomm.org/messagepickup/1.0/status-request"
 }
 ```
+
 ### Status
+
 Status details about pending messages
-```json=
+
+```json
 {
-    "@id": "123456781",
-    "@type": "https://didcomm.org/messagepickup/1.0/status",
-    "message_count": 7,
-    "duration_waited": 3600,
-    "last_added_time": "2019-05-01 12:00:00Z",
-    "last_delivered_time": "2019-05-01 12:00:01Z",
-    "last_removed_time": "2019-05-01 12:00:01Z",
-    "total_size": 8096
+  "@id": "123456781",
+  "@type": "https://didcomm.org/messagepickup/1.0/status",
+  "message_count": 7,
+  "duration_waited": 3600,
+  "last_added_time": "2019-05-01 12:00:00Z",
+  "last_delivered_time": "2019-05-01 12:00:01Z",
+  "last_removed_time": "2019-05-01 12:00:01Z",
+  "total_size": 8096
 }
 ```
+
 `message_count` is the only required attribute. The others may be present if offered by the _message_holder_.
+
 ### Batch Pickup
+
 A request to have multiple waiting messages sent inside a `batch` message.
-```json=
+
+```json
 {
-    "@id": "123456781",
-    "@type": "https://didcomm.org/messagepickup/1.0/batch-pickup",
-    "batch_size": 10
+  "@id": "123456781",
+  "@type": "https://didcomm.org/messagepickup/1.0/batch-pickup",
+  "batch_size": 10
 }
 ```
 
 ### Batch
+
 A message that contains multiple waiting messages.
-```json=
+
+```json
 {
     "@id": "123456781",
     "@type": "https://didcomm.org/messagepickup/1.0/batch",
@@ -87,22 +99,29 @@ A message that contains multiple waiting messages.
     ]
 }
 ```
+
 ### Message Query With Message Id List
+
 A request to read single or multiple messages with a message message id array.
-```json=
+
+```json
 {
-    "@id": "123456781",
-    "@type": "https://didcomm.org/messagepickup/1.0/list-pickup",
-    "message_ids": [
-        "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
-        "344a51cf-379f-40ab-ab2c-711dab3f53a9a"
-        ]
+  "@id": "123456781",
+  "@type": "https://didcomm.org/messagepickup/1.0/list-pickup",
+  "message_ids": [
+    "06ca25f6-d3c5-48ac-8eee-1a9e29120c31",
+    "344a51cf-379f-40ab-ab2c-711dab3f53a9a"
+  ]
 }
 ```
+
 `message_ids` message id array for picking up messages. Any message id in `message_ids` could be delivered via several ways to the recipient (Push notification or with an envoloped message).
+
 ### Message List Query Response
+
 A response to query with message id list.
-```json=
+
+```json
 {
     "@type": "https://didcomm.org/messagepickup/1.0/list-response",
     "messages~attach": [
@@ -121,15 +140,17 @@ A response to query with message id list.
     ]
 }
 ```
+
 ### Noop
+
 Used to receive another message implicitly. This message has no expected behavior when received.
-```json=
+
+```json
 {
-    "@id": "123456781",
-    "@type": "https://didcomm.org/messagepickup/1.0/noop"
+  "@id": "123456781",
+  "@type": "https://didcomm.org/messagepickup/1.0/noop"
 }
 ```
-
 
 ## Prior art
 
@@ -143,6 +164,6 @@ Concepts here borrow heavily from a [document](https://hackmd.io/@8VtAqKThQ6mKa9
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name / Link | Implementation Notes
---- | ---
- |  |
+| Name / Link | Implementation Notes |
+| ----------- | -------------------- |
+|             |

@@ -1,8 +1,8 @@
 # Aries RFC 0418: Aries Rich Schema Encoding Objects
 - Author: [Ken Ebert](mailto:ken@sovrin.org), [Mike Lodder](mailto:mike@sovrin.org), [Brent Zundel](mailto:brent.zundel@evernym.com), [Alexander Shcherbakov](mailto:alexander.shcherbakov@evernym.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-02-10
-- Status Note: Part of proposed Rich Schema capabilities for credentials 
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes:
 - Start Date: 2019-03-19
 - Tags: [feature](/tags.md#feature), [rich-schemas](/tags.md#rich-schemas)

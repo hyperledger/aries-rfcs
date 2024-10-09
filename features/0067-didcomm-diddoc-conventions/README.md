@@ -1,6 +1,6 @@
 # Aries RFC 0067: DIDComm DID document conventions
 
-- Authors: [Tobias Looker](tobias.looker@mattr.global), [Stephen Curran](swcurran@gmail.com)
+- Authors: [Tobias Looker](mailto:tobias.looker@mattr.global), [Stephen Curran](mailto:swcurran@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-06-10
 - Status Note: This revises the former [INDY HIPE](https://github.com/hyperledger/indy-hipe/pull/92)

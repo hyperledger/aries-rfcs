@@ -1,5 +1,5 @@
 # Aries RFC 0430: Machine-Readable Governance Frameworks
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-02-24
 - Status Note: early proposal only  

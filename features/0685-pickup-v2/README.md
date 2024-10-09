@@ -1,8 +1,8 @@
-# 0212: Pickup Protocol 2.0
+# 0685: Pickup Protocol 2.0
 
-- Authors: [Sam Curren](telegramsam@gmail.com), [James Ebert](james.ebert@indicio.tech)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-09-03
+- Authors: [Sam Curren](mailto:telegramsam@gmail.com), [James Ebert](mailto:james.ebert@indicio.tech)
+- Status: [ACCEPTED](/README.md#accepted)
+- Since: 2024-05-01
 - Status Note: Initial version
 - Start Date: 2020-12-22
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
@@ -45,7 +45,7 @@ rather than being pushed to the queue. See [Live Mode](#live-mode) for more deta
 
 Each message sent MUST use the `~transport` decorator as follows, which has been adopted from [RFC 0092 transport return route](/features/0092-transport-return-route/README.md) protocol. This has been omitted from the examples for brevity.
 
-```json=
+```json
 "~transport": {
     "return_route": "all"
 }
@@ -58,7 +58,7 @@ Each message sent MUST use the `~transport` decorator as follows, which has been
 Sent by the _Recipient_ to the _Mediator_ to request a `status` message.
 #### Example:
 
-```json=
+```json
 {
     "@id": "123456781",
     "@type": "https://didcomm.org/messagepickup/2.0/status-request",
@@ -74,7 +74,7 @@ Status details about waiting messages.
 
 #### Example:
 
-```json=
+```json
 {
     "@id": "123456781",
     "@type": "https://didcomm.org/messagepickup/2.0/status",
@@ -110,7 +110,7 @@ A request from the _Recipient_ to the _Mediator_ to have pending messages delive
 
 #### Examples:
 
-```json=
+```json
 {
     "@id": "123456781",
     "@type": "https://didcomm.org/messagepickup/2.0/delivery-request",
@@ -119,7 +119,7 @@ A request from the _Recipient_ to the _Mediator_ to have pending messages delive
 }
 ```
 
-```json=
+```json
 {
     "@type": "https://didcomm.org/messagepickup/2.0/delivery-request",
     "limit": 1
@@ -143,7 +143,7 @@ The ONLY valid type of attachment for this message is a DIDComm Message in encry
 
 The `recipient_key` attribute is only included when responding to a `delivery-request` message that indicates a `recipient_key`.
 
-```json=
+```json
 {
     "@id": "123456781",
     "~thread": {
@@ -168,7 +168,7 @@ which messages are safe to clear from the queue.
 
 #### Example:
 
-```json=
+```json
 {
     "@type": "https://didcomm.org/messagepickup/2.0/messages-received",
     "message_id_list": ["123","456"]
@@ -201,7 +201,7 @@ Live Mode is changed with a `live-delivery-change` message.
 
 #### Example:
 
-```json=
+```json
 {
     "@type": "https://didcomm.org/messagepickup/2.0/live-delivery-change",
     "live_delivery": true
@@ -212,7 +212,7 @@ Upon receiving the `live_delivery_change` message, the _Mediator_ MUST respond w
 
 If sent with `live_delivery` set to `true` on a connection incapable of live delivery, a `problem_report` SHOULD be sent as follows:
 
-```json=
+```json
 {
   "@type": "https://didcomm.org/notification/1.0/problem-report",
   "~thread": {

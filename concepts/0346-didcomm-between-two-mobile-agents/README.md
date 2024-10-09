@@ -1,5 +1,5 @@
 # 0346: DIDComm Between Two Mobile Agents Using Cloud Agent Mediator
-- Author: [Sukalpo Mitra](sukalpomitra@gmail.com)
+- Author: [Sukalpo Mitra](mailto:sukalpomitra@gmail.com)
 - Start Date: 2019-06-23
 - Tags: [concept](/tags.md#concept)
 - Status: [PROPOSED](/README.md#proposed)

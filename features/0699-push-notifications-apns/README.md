@@ -119,6 +119,7 @@ When an agent wants to send a push notification to another agent, the payload of
 {
   "@type": "https://didcomm.org/push-notifications-apns",
   "message_tag": "<MESSAGE_TAG>",
+  "message_id": "<MESSAGE_ID>",
   ...
 }
 ```
@@ -127,6 +128,7 @@ Description of the fields:
 
 - `@type` -- Indicator of what kind of notification it is. (This could help the notification-receiver with parsing if a notification comes from another agent, for example)
 - `message_tag` -- Optional field to connect the push notification to a DIDcomm message. As defined in [0334: jwe-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0334-jwe-envelope) or [0019: encryption-envelope](https://github.com/hyperledger/aries-rfcs/tree/main/features/0019-encryption-envelope).
+- `message_id` -- Optional field to pickup the message from the mediator that the notification was linked to. As defined in [0685: Pickup Protocol 2.0](https://github.com/hyperledger/aries-rfcs/blob/main/features/0685-pickup-v2/README.md).
 
 ## Drawbacks
 
