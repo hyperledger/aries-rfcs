@@ -1,7 +1,7 @@
 # Aries RFC 0510: Presentation-Exchange Attachment format for requesting and presenting proofs
 
 - Authors: George Aristy (SecureKey Technologies)
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2020-07-21
 - Status Note:  
 - Supersedes: 

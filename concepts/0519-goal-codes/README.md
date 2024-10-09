@@ -1,5 +1,5 @@
 # 0519: Goal Codes
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2021-04-15
 - Status Note: Used in several protocols that are part of [AIP 2.0](../0302-aries-interop-profile/README.md), such as the [Out-of-Band](../../features/0434-outofband/README.md) protocol.
@@ -155,6 +155,12 @@ relationship.
 Create a relationship. Carries the meaning implied today by a LinkedIn
 invitation to connect or a Facebook "Friend" request. Could be as limited
 as creating a DIDComm Connection.
+
+##### `aries.vc.verifier.once`
+
+Create a DIDComm connection for the sole purpose of doing the one-time execution of a [Present Proof](/features/0454-present-proof-v2/README.md) protocol. Once the protocol execution is complete, both sides **SHOULD** delete the connection, as it will not be used again by either side.
+
+The purpose of the goal code flow is to accomplish the equivalent of a "connection-less" present proof by having the agents establish a DIDComm connection, execute the present proof protocol, and delete the connection. The need for this goal code is when an actual connection-less present proof cannot be used because the [out-of-band](/features/0434-outofband/README.md) (OOB) message (including the presentation request) is too large for the transport being used--most often a QR code (although it may be useful for Bluetooth scenarios as well)--and a URL shortner option is not available. By using a one-time connection, the OOB message is small enough to fit into easily into a QR code, the present proof protocol can be executed using the established connection, and at the end of the interaction, no connection remains for either side to use or manage.
 
 ## Implementations
 

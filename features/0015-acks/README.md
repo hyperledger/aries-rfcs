@@ -1,8 +1,8 @@
 # Aries RFC 0015: ACKs
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [ACCEPTED](/README.md#accepted)
-- Since: 2021-04-15
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
+- Status: [ADOPTED](/README.md#adopted)
+- Since: 2024-05-01
 - Status Note: Broadly implemented, adopted into many protocols and part of [AIP 1 and 2](../../concepts/0302-aries-interop-profile/README.md).
 - Start Date: 2018-12-26
 - Tags: [feature](/tags.md#feature)
@@ -12,11 +12,11 @@
 Explains how one party can send acknowledgment
 messages (ACKs) to confirm receipt and clarify the status of complex processes.
 
-## Change log
+## Change Log
 
-- Mar 22, 2022: Clarification that an Ack `Fail` must not be used, and that a [Report Problem](../0035-report-problem/README.md) must be used in its place. Remove Ack `Fail` from the RFC.
-
-- Mar 25, 2020: In the ~thread decorator section of the sample in the [Explicit ACKs section](#explicit-acks), 'myindex' was changed to 'sender_order' and 'lrecs' to 'received_orders'. This is in accordance with the field names as defined in [RFC 0008](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading#threaded-messages).
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+- 20220322: Clarification that an Ack `Fail` must not be used, and that a [Report Problem](../0035-report-problem/README.md) must be used in its place. Remove Ack `Fail` from the RFC.
+- 20200325: In the ~thread decorator section of the sample in the [Explicit ACKs section](#explicit-acks), 'myindex' was changed to 'sender_order' and 'lrecs' to 'received_orders'. This is in accordance with the field names as defined in [RFC 0008](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading#threaded-messages).
 
 ## Motivation
 
@@ -149,11 +149,6 @@ In such cases, developers should write their own ACK message type(s) and
 maybe their own decorators. However, reusing the field names and conventions
 in this RFC may still be desirable, if there is significant overlap in the
 concepts.
-
-### Requesting ACKs
-
-A decorator, `~please_ack`, allows one agent to request an ad hoc ACK from
-another agent. This is described in the [0317-please-ack RFC](../0317-please-ack/README.md).
 
 ## Reference
 

@@ -1,8 +1,8 @@
 # 0420: Rich Schema Objects Common
 - Author: [Alexander Shcherbakov](mailto:alexander.shcherbakov@evernym.com), [Brent Zundel](mailto:brent.zundel@evernym.com), [Ken Ebert](mailto:ken@sovrin.org) 
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-02-13
-- Status Note: Part of proposed Rich Schema capabilities for credentials 
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No recent progress and no implementations have been created.
 - Start Date: 2020-02-05
 - Tags: [concept](/tags.md#concept), [rich-schemas](/tags.md#rich-schemas)
 

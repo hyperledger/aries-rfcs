@@ -1,5 +1,5 @@
 # Aries RFC 0234: Signature Decorator
-- Authors: [Kyle Den Hartog](kyle.denhartog@evernym.com)
+- Authors: [Kyle Den Hartog](mailto:kyle.denhartog@evernym.com)
 - Status: [RETIRED](/README.md#retired)
 - Since: 2020-10-14
 - Status Note: This decorator is retired, replaced with the use of the signed form of the attachment decorator

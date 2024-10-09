@@ -1,7 +1,7 @@
 # Aries RFC 0011: Decorators
 
 - Authors: Daniel Hardman
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2019-01-31
 - Status Note: broadly used in Indy, but not yet harmonized with DIF work on hubs.
 - Start Date: 2018-12-14

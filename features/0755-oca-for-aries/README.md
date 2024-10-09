@@ -1,12 +1,9 @@
 # 0755: Overlays Capture Architecture (OCA) For Aries
 
-- Authors: [Stephen Curran](swcurran@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2023-01-15
-- Status Note: In the process of being implemented in several Aries Frameworks (ACA-Py, AFJ)
-- Supersedes: Supersedes [0013-Overlays](/concepts/0013-overlays/README.md) as
-  that RFC is/was about the OCA specification, while this covers the application of the OCA
-  Specification for Aries agents.
+- Authors: [Stephen Curran](mailto:swcurran@gmail.com)
+- Status: [DEMONSTRATED](/README.md#demonstrated)
+- Since: 2024-03-02
+- Status Note: Implemented in the [Bifold Wallet](https://github.com/openwallet-foundation/bifold-wallet)
 - Start Date: 2022-09-25
 - Version: 1.0
 - Tags: [feature](/tags.md#feature)
@@ -33,7 +30,7 @@ differences in the latter two screenshots from the first come from
 issuer-supplied OCA data.
 
 [OCA Specification]: https://oca.colossi.network/specification/
-[RFC0756 OCA for Aries Style Guide]: ../0756-oca-for-aries-style-guide/README.md
+[RFC0756 OCA for Aries Style Guide]: ../../features/0756-oca-for-aries-style-guide/README.md
 
 ![Example: Using OCA in Aries Bifold](assets/bifold-oca-example.jpg)
 
@@ -190,7 +187,7 @@ name/value pairs, specific to the OCA for Aries use case:
   - `issuer` - the name of the issuer of the credential.
   - `issuer_description` - a description for the issuer of the credential.
   - `issuer_url` - a URL for the issuer of the credential.
-  - `credential_help` - help text about the credential
+  - `credential_help_text` - help text about the credential
   - `credential_support_url` - a URL for a service providing support in the use of the credential.
 - The **[Unit Overlay]**
   allows the issuer to declare the units of measurement for the attributes in
@@ -417,10 +414,10 @@ as the tooling evolves.
       - "issuer"
       - "issuer_description"
       - "issuer_url"
-      - "credential_help"
+      - "credential_help_text"
       - "credential_support_url"
       - "watermark"
-        - The "watermark" is used to mark non-production credentials, as described in the ["non-production watermark" section of RFC0756 OCA for Aries Style Guide](../0756-oca-for-aries-style-guide#non-production-watermark)
+        - The "watermark" is used to mark non-production credentials, as described in the ["non-production watermark" section of RFC0756 OCA for Aries Style Guide](../../features/0756-oca-for-aries-style-guide/README.md#non-production-watermark)
     - Complete column B (`OL-MV: Meta [Attribute Value]`) as appropriate for each column A name (listed above).
   - Duplicate and rename the initial language tab for each language or language-country that as an issuer, you want to support.
   - Update each additional language tab.

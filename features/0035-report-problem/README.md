@@ -1,8 +1,8 @@
 # Aries RFC 0035: Report Problem Protocol 1.0
 
-- Authors: [Stephen Curran](swcurran@cloudcompass.ca), [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [ACCEPTED](/README.md#accepted)
-- Since: 2021-03-15
+- Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [Daniel Hardman](mailto:daniel.hardman@gmail.com)
+- Status: [ADOPTED](/README.md#adopted)
+- Since: 2024-05-01
 - Status Note: Implemented in multiple codebases.
 - Supersedes: [Indy HIPE PR #65]( https://github.com/hyperledger/indy-hipe/pull/65)
 - Start Date: 2018-11-26
@@ -12,6 +12,10 @@
 
 Describes how to report errors and warnings in a powerful, interoperable way. All implementations
 of SSI agent or hub technology SHOULD implement this RFC.
+
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
 
 ## Motivation
 
@@ -117,11 +121,6 @@ Reporting problems uses a simple one-step [notification protocol](
 
 The protocol includes the standard `notifier` and `notified` roles. It
 defines a single message type `problem-report`, introduced here.
-It also [adopts](../../0000-template-protocol.md#adopted-messages) the
-`ack` message from the [`ACK 1.0` protocol](../0015-acks/README.md),
-to accommodate the possibility that the [`~please_ack`](../0317-please-ack/README.md)
-[decorator]( ../../concepts/0011-decorators/README.md) may be used on the
- notification.
 
 A `problem-report` communicates about a problem when an agent-to-agent message is
 possible and a recipient for the problem report is known. This covers, for example,

@@ -1,7 +1,7 @@
 # Aries RFC 0019: Encryption Envelope
 
-- Authors: [Kyle Den Hartog](kyle.denhartog@evernym.com), [Stephen Curran](swcurran@gmail.com), [Sam Curren](sam@sovrin.org), [Mike Lodder](mike@sovrin.org)
-- Status: [ACCEPTED](/README.md#accepted)
+- Authors: [Kyle Den Hartog](mailto:kyle.denhartog@evernym.com), [Stephen Curran](mailto:swcurran@gmail.com), [Sam Curren](mailto:sam@sovrin.org), [Mike Lodder](mailto:mike@sovrin.org)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2019-05-04
 - Status Note:  
 - Supersedes: [INDY 0028 Wire Level Format](https://github.com/hyperledger/indy-hipe/tree/main/text/0028-wire-message-format)

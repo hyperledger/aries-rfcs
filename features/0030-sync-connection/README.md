@@ -1,9 +1,9 @@
 # Aries RFC 0030: Sync Connection Protocol 1.0
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-07-03
-- Status Note: used by the [peer DID method spec](https://openssi.github.io/peer-did-method-spec). Implementation beginning. 
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes: [Indy HIPE PR #104](https://github.com/hyperledger/indy-hipe/pull/104)
 - Start Date: 2018-10-01
 - Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator), [protocol](/tags.md#protocol)
@@ -14,6 +14,10 @@ Define a set of non-centralized protocols (that is, ones that do not involve a
 common store of state like a blockchain), whereby parties using [peer DIDs](
 https://openssi.github.io/peer-did-method-spec) can synchronize the state of
 their shared relationship by direct communication with one another.
+
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
 
 ## Motivation
 
