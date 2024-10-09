@@ -1,6 +1,6 @@
 # Aries RFC 0066: Non-Repudiable Signature for Cryptographic Envelope
 
-- Authors: [Kyle Den Hartog](indy@kyledenhartog.com)
+- Authors: [Kyle Den Hartog](mailto:indy@kyledenhartog.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-04-15
 - Status Note: This is a second attempt to integrate non-repudiable digital signatures based on learnings and discussions over the past few months. This focuses only on the signing of entire messages. Signature Decorators will be handled seperately.
@@ -57,7 +57,7 @@ Starting with an initial `connections/1.0/invitation` message like this:
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation",
+    "@type": "https://didcomm.org/connections/1.0/invitation",
     "@id": "12345678900987654321",
     "label": "Alice",
     "recipientKeys": ["8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"],
@@ -130,7 +130,7 @@ Next we'll take our content layer message which as an example is the JSON provid
 ```json
 {
     "@id": "123456780",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0/message",
+    "@type": "https://didcomm.org/basicmessage/1.0/message",
     "~l10n": { "locale": "en" },
     "sent_time": "2019-01-15 18:42:01Z",
     "content": "Your hovercraft is full of eels."
@@ -209,7 +209,7 @@ Now Base64URL decode that section and you'll get the original message:
 {
     "content": "Your hovercraft is full of eels.",
     "sent_time": "2019-01-15 18:42:01Z",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0/message",
+    "@type": "https://didcomm.org/basicmessage/1.0/message",
     "@id": "123456780",
     "~l10n": {"locale": "en"}
 }

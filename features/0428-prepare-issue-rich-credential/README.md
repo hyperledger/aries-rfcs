@@ -1,8 +1,8 @@
 # 0428: Prerequisites to Issue Rich Credential
-- Authors: [Brent Zundel](<brent.zundel@evernym.com>), [Ken Ebert](<ken@sovrin.org>)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-02-20
-- Status Note: Part of proposed Rich Schema capabilities for credentials 
+- Authors: [Brent Zundel](mailto:brent.zundel@evernym.com), [Ken Ebert](mailto:ken@sovrin.org)
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes: 
 - Start Date: 2020-02-19 
 - Tags: [feature](/tags.md#feature), [rich-schemas](/tags.md#rich-schemas)
@@ -44,7 +44,7 @@ use is already present.
    definition refers to the issuer DID.
 1. Using the credential definition, mapping, and schema(s) issue to the holder a
 credential based on the credential definition and the supplied claim data. The
-[Issue Credential Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential)
+[Issue Credential Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/main/features/0036-issue-credential)
 will be the model for another RFC containing minor modifications to issue a
 credential using the new rich schema objects. 
 
@@ -54,13 +54,13 @@ Subsequent credentials may be issued by repeating only the last step.
 
 ## Reference
 
-- [RFC 0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
-- [RFC 0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common)
-- [RFC 0249: Aries Rich Schema Contexts](https://github.com/hyperledger/aries-rfcs/tree/master/features/0249-rich-schema-contexts)
-- [RFC 0281: Aries Rich Schemas](https://github.com/hyperledger/aries-rfcs/tree/master/features/0281-rich-schemas)
-- [RFC XXXX: Aries Rich Schema Mappings](https://github.com/hyperledger/aries-rfcs/tree/master/features/XXXX-rich-schema-mappings)
-- [RFC XXXX: Aries Rich Schema Credential Definitions](https://github.com/hyperledger/aries-rfcs/tree/master/features/XXXX-rich-schema-cred-defs)
-- [RFC 0036: Issue Credential Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0036-issue-credential)
+- [RFC 0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas)
+- [RFC 0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common)
+- [RFC 0249: Aries Rich Schema Contexts](https://github.com/hyperledger/aries-rfcs/tree/main/features/0249-rich-schema-contexts)
+- [RFC 0281: Aries Rich Schemas](https://github.com/hyperledger/aries-rfcs/tree/main/features/0281-rich-schemas)
+- [RFC XXXX: Aries Rich Schema Mappings](https://github.com/hyperledger/aries-rfcs/tree/main/features/XXXX-rich-schema-mappings)
+- [RFC XXXX: Aries Rich Schema Credential Definitions](https://github.com/hyperledger/aries-rfcs/tree/main/features/XXXX-rich-schema-cred-defs)
+- [RFC 0036: Issue Credential Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/main/features/0036-issue-credential)
 
 
 

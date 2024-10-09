@@ -1,11 +1,11 @@
 # 0440: KMS Architectures 
-- Authors: [Michael Lodder](mike@sovrin.org)
+- Authors: [Michael Lodder](mailto:mike@sovrin.org)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-03-06
 - Status Note: Proposed
-- Supersedes: [Wallets](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0050-wallets/README.md), uses concepts from [LOX](https://github.com/hyperledger/aries-rfcs/blob/master/features/0042-lox/README.md)
+- Supersedes: [Wallets](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0050-wallets/README.md), uses concepts from [LOX](https://github.com/hyperledger/aries-rfcs/blob/main/features/0042-lox/README.md)
 - Start Date: 2019-12-02
-- Tags: concept
+- Tags: [concept](/tags.md#concept)
 
 ## Summary
 
@@ -48,7 +48,7 @@ The components are listed below and described in detail in the following section
 1. LOX - 
     * Handle user authentication
     * Access control enforcement
-    * Session/context establishment and management to the previous layers as described [here](https://github.com/hyperledger/aries-rfcs/blob/master/features/0042-lox/README.md).
+    * Session/context establishment and management to the previous layers as described [here](https://github.com/hyperledger/aries-rfcs/blob/main/features/0042-lox/README.md).
 
 ## Architecture
 
@@ -161,7 +161,7 @@ Upon authentication to LOX, LOX should establish connections to the enclave comp
 which should appear opaque to the client. LOX may need to authenticate to the enclave component or persistence component
 depending on where client access credentials are stored by implementors. Its preferable to store these in keychains
 or keystores if possible where the access is determined by the operating system and can include stronger mechanisms like
-TouchID or FaceID and hardware tokens in addition to passwords or pins. As described in [LOX](https://github.com/hyperledger/aries-rfcs/blob/master/features/0042-lox/README.md),
+TouchID or FaceID and hardware tokens in addition to passwords or pins. As described in [LOX](https://github.com/hyperledger/aries-rfcs/blob/main/features/0042-lox/README.md),
 the credentials for accessing the enclave and persistence layer can then be retrieved or generated if the client is new
 and stored in a secure manner. 
 

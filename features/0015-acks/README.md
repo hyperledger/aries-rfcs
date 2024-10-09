@@ -1,10 +1,9 @@
 # Aries RFC 0015: ACKs
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-12-26
-- Status Note: Broadly socialized and beginning to be implemented. Several protocols assume ACK behavior. May be nearing the maturity and uptake appropriate for ACCEPTED status. Note: this RFC 
-- Supersedes: [Indy HIPE PR #77](https://github.com/hyperledger/indy-hipe/pull/77)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
+- Status: [ADOPTED](/README.md#adopted)
+- Since: 2024-05-01
+- Status Note: Broadly implemented, adopted into many protocols and part of [AIP 1 and 2](../../concepts/0302-aries-interop-profile/README.md).
 - Start Date: 2018-12-26
 - Tags: [feature](/tags.md#feature)
 
@@ -13,9 +12,11 @@
 Explains how one party can send acknowledgment
 messages (ACKs) to confirm receipt and clarify the status of complex processes.
 
-## Change log
+## Change Log
 
-- Mar 25, 2020: In the ~thread decorator section of the sample in the [Explicit ACKs section](#explicit-acks), 'myindex' was changed to 'sender_order' and 'lrecs' to 'received_orders'. This is in accordance with the field names as defined in [RFC 0008](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading#threaded-messages).
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+- 20220322: Clarification that an Ack `Fail` must not be used, and that a [Report Problem](../0035-report-problem/README.md) must be used in its place. Remove Ack `Fail` from the RFC.
+- 20200325: In the ~thread decorator section of the sample in the [Explicit ACKs section](#explicit-acks), 'myindex' was changed to 'sender_order' and 'lrecs' to 'received_orders'. This is in accordance with the field names as defined in [RFC 0008](https://github.com/hyperledger/aries-rfcs/tree/64e5e55c123b2efaf38f4b0911a71a1c40a7f29d/concepts/0008-message-id-and-threading#threaded-messages).
 
 ## Motivation
 
@@ -72,7 +73,7 @@ this:
 
 ``` jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack",
+  "@type": "https://didcomm.org/notification/1.0/ack",
   "@id": "06d474e0-20d3-4cbf-bea6-6ba7e1891240",
   "status": "OK",
   "~thread": {
@@ -91,21 +92,27 @@ It may also be appropriate to send an ack at other key points in an interaction
 As discussed in [0003: Protocols](../../concepts/0003-protocols/README.md), a protocol can [adopt the ack message into
 its own namespace](../../0000-template-protocol.md#adopted-messages).
 This allows the type of an ack to change from:
-    `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/ack`
+    `https://didcomm.org/notification/1.0/ack`
 to something like:
-    `did:sov:protocolOwnersDID;spec/otherProtocol/2.0/ack`.
+    `https://didcomm.org/otherProtocol/2.0/ack`.
 Thus, message routing
 logic can see the ack as part of the other protocol, and send it to the relevant
 handler--but still have all the standardization of generic acks.
 
 ### ack status
 
-The `status` field in an ack tells whether the ack is final or not with respect to
-the message being acknowledged. It has 3 predefined values: `OK` (which means an
-outcome has occurred, and it was positive); `FAIL` (an outcome has occurred, and
-it was negative); and `PENDING`, which acknowledges that no outcome is yet known.
-In addition, more advanced usage is possible. See the [details in the Reference
-section](#reference).
+The `status` field in an ack tells whether the ack is final or not with respect
+to the message being acknowledged. It has 2 predefined values: `OK` (which means
+an outcome has occurred, and it was positive); and `PENDING`, which acknowledges
+that no outcome is yet known.
+
+There is not an ack `status` of `FAIL`. In the case of a protocol failure a
+[Report Problem](../0035-report-problem/README.md) message must be used to
+inform the other party(ies). For more details, see the [next
+section](#relationship-to-problem-report).
+
+In addition, more advanced ack usage is possible. See the [details in the
+Reference section](#reference).
 
 ### Relationship to `problem-report`
 
@@ -120,14 +127,14 @@ arises, best practice is to report it to the sender of the message that
 triggered the problem. This is the subject of the [problem reporting mechanism](../0035-report-problem/README.md).
 
 A `problem_report` is inherently a sort of ACK. In fact, the `ack` message type
-and the `problem_report` message type are both members of the same `notification`
-message family. Both help a sender learn about status. Therefore, a
-requirement for an `ack` can *often* be satisfied by a `problem_report` message.
-Where this is truly the case, it is recommended, as it decreases chattiness.
+and the `problem_report` message type are both members of the same
+`notification` message family. Both help a sender learn about status. Therefore,
+a requirement for an `ack` is that a status of `FAIL` be satisfied by a
+`problem_report` message.
 
-But notice the hedge word "often." We are hedging for at least two reasons.
-First, some `ack`s may be sent before a final outcome, so a final `problem_report`
-may not be enough. Second, an ack request may be sent after a previous
+However, there is some subtlety in the use of the two types of messages.
+Some `ack`s may be sent before a final outcome, so a final `problem_report`
+may not be enough. As well, an ack request may be sent after a previous
 `ack` or `problem_report` was lost in transit. Because of these caveats, developers
 whose code creates or consumes acks should be thoughtful about where the two message
 types overlap, and where they do not. Carelessness here is likely to cause subtle,
@@ -143,18 +150,13 @@ maybe their own decorators. However, reusing the field names and conventions
 in this RFC may still be desirable, if there is significant overlap in the
 concepts.
 
-### Requesting ACKs
-
-A decorator, `~please_ack`, allows one agent to request an ad hoc ACK from
-another agent. This is described in the [0317-please-ack RFC](../0317-please-ack/README.md).
-
 ## Reference
 
 ### `ack` message
 
 #### __`status`__
 
-Required. As discussed [above](#ack-status), this tells whether the ack is final
+Required, values `OK` or `PENDING`. As discussed [above](#ack-status), this tells whether the ack is final
 or not with respect to the message being acknowledged.
 
 #### __`~thread.thid`__

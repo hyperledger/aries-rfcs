@@ -6,7 +6,7 @@
 - Status Note: Implemented and demonstrated in the [Aries Cloud Agent Python](https://github.com/hyperledger/aries-cloudagent-python) code base 
 - Supersedes: 
 - Start Date: 2020-06-24
-- Tags: [feature](/tags.md#feature)
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 - Protocol Name: action-menu
 - Version: 1.0
 - URI: `https://didcomm.org/action-menu/%VER`
@@ -197,8 +197,8 @@ N/A
 
 There are several existing RFCs that relate to the general problem of "Discovery" 
 
-* [Aries RFC 0031 : Discover Features Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0031-discover-features) -- This RFC provides _Aries Protocol_ discovery between two Agents but no direction on user interface display or action handling.
-* [Aries RFC 0214 : "Help Me Discover" Protocol](https://github.com/hyperledger/aries-rfcs/tree/master/features/0214-help-me-discover) -- This RFC introduces the concept of a query language protocol between agents to obtain "referal" to a third agent. 
+* [Aries RFC 0031 : Discover Features Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/main/features/0031-discover-features) -- This RFC provides _Aries Protocol_ discovery between two Agents but no direction on user interface display or action handling.
+* [Aries RFC 0214 : "Help Me Discover" Protocol](https://github.com/hyperledger/aries-rfcs/tree/main/features/0214-help-me-discover) -- This RFC introduces the concept of a query language protocol between agents to obtain "referal" to a third agent. 
 
 ## Unresolved questions
 

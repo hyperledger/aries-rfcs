@@ -1,10 +1,10 @@
 # Aries RFC 0049: Repudiation
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-03-01
 - Status Note: Well understood and baked into various protocol designs and DIDComm processes--but not yet ratified by the larger Aries community. 
-- Supersedes: [Indy HIPE 0037]( https://github.com/hyperledger/indy-hipe/tree/master/text/0037-repudiation)
+- Supersedes: [Indy HIPE 0037]( https://github.com/hyperledger/indy-hipe/tree/main/text/0037-repudiation)
 - Start Date: 2018-03-01 (backdated)
 - Tags: [concept](/tags.md#concept)
 

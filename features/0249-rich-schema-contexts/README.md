@@ -1,8 +1,8 @@
 # Aries RFC 0249: Aries Rich Schema Contexts
 - Authors: [Brent Zundel](mailto:brent.zundel@evernym.com), [Ken Ebert](mailto:ken@sovrin.org), [Alexander Shcherbakov](mailto:alexander.shcherbakov@evernym.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-10-08
-- Status Note: Part of proposed Rich Schema capabilities for credentials 
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes: 
 - Start Date: 2019-06-07 
 - Tags: [feature](/tags.md#feature), [rich-schemas](/tags.md#rich-schemas)
@@ -16,7 +16,7 @@ meaning among rich schema objects.
 
 
 Context objects are processed in a generic way defined in 
-[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common).
+[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common).
 
 ## Motivation
 [motivation]: #motivation
@@ -62,11 +62,11 @@ Aries will provide a means for writing contexts to and reading contexts
 from a verifiable data registry (such as a distributed ledger).
 
 `@context` will be written to the ledger in a generic way defined in 
-[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
+[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
 
 ### Aries Data Registry Interface
 Aries Data Registry Interface methods for adding and retrieving `@context` from the
-ledger comply with the generic approach described in [Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#aries-data-registry-interface).
+ledger comply with the generic approach described in [Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#aries-data-registry-interface).
 
 This means the following methods can be used:
 - `write_rich_schema_object`
@@ -84,8 +84,8 @@ More information on `@context` from the JSON-LD specification may be found
 [here](https://w3c.github.io/json-ld-syntax/#the-context) and
 [here](https://w3c.github.io/json-ld-syntax/#advanced-context-usage).
 
-- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
-- [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common) 
+- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas)
+- [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common) 
 
 ## Drawbacks
 

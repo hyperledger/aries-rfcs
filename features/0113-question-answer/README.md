@@ -1,6 +1,6 @@
 # Aries RFC 0113: Question Answer Protocol 0.9
 
-- Authors: [Douglas Wightman](douglas.wightman@evernym.com)
+- Authors: [Douglas Wightman](mailto:douglas.wightman@evernym.com)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-07-05
 - Start Date: 2019-02-07
@@ -38,13 +38,13 @@ In this tutorial Alice (the responder) receives the packet and must respond to t
 
 All messages in this protocol are part of the "Question/Answer 1.0" message family uniquely identified by this DID reference:
 
-    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/questionanswer/1.0
+    https://didcomm.org/questionanswer/1.0
 
 The protocol begins when the questioner sends a `questionanswer` message to the responder:
 
 ```JSON
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/questionanswer/1.0/question",
+  "@type": "https://didcomm.org/questionanswer/1.0/question",
   "@id": "518be002-de8e-456e-b3d5-8fe472477a86",
   "question_text": "Alice, are you on the phone with Bob from Faber Bank right now?",
   "question_detail": "This is optional fine-print giving context to the question and its various answers.",
@@ -69,13 +69,13 @@ The response message is then sent using the ~sig message decorator:
 
 ```JSON
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/questionanswer/1.0/answer",
+  "@type": "https://didcomm.org/questionanswer/1.0/answer",
   "~thread": { "thid": "518be002-de8e-456e-b3d5-8fe472477a86", "seqnum": 0 },
   "response": "Yes, it's me",
   "response~sig": {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single"
+    "@type": "https://didcomm.org/signature/1.0/ed25519Sha512_single"
     "signature": "<digital signature function output>",
-    "sig_data": "<base64(HASH("Alice, are you on the phone with Bob?"+"Yes, it's me"+"<nonce>"))>",
+    "sig_data": "<base64url(HASH("Alice, are you on the phone with Bob?"+"Yes, it's me"+"<nonce>"))>",
     "signers": ["<responder_key>"],
     }
   "~timing": {

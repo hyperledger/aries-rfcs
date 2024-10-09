@@ -1,16 +1,16 @@
 # Aries RFC 0347: Proof Negotiation
 
-- Authors: [Philipp Rieblinger](p.rieblinger@esatus.com), [Sebastian Weidenbach](s.weidenbach@esatus.com)
+- Authors: [Philipp Rieblinger](mailto:p.rieblinger@esatus.com), [Sebastian Weidenbach](mailto:s.weidenbach@esatus.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-12-13
 - Status Note: Initial proposal after discussion on rocketchat
 - Supersedes: 
 - Start Date: 2019-09-09
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 
-This RFC proposes an extension to [Aries RFC 0037: Present Proof Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof#aries-rfc-0037-present-proof-protocol-10) by taking the concept of groups out of the [DID credential manifest](https://github.com/decentralized-identity/credential-manifest/blob/master/explainer.md) and including them in the present proof protocol. Additionally to the rules described in the credential manifest, an option to provide alternative attributes with a weight is being introduced here. Also, the possibility to include not only attributes, but also credentials and openids in a proof by using a "type" was taken from the DID credential manifest. 
+This RFC proposes an extension to [Aries RFC 0037: Present Proof Protocol 1.0](https://github.com/hyperledger/aries-rfcs/tree/main/features/0037-present-proof#aries-rfc-0037-present-proof-protocol-10) by taking the concept of groups out of the [DID credential manifest](https://github.com/decentralized-identity/credential-manifest/blob/master/explainer.md) and including them in the present proof protocol. Additionally to the rules described in the credential manifest, an option to provide alternative attributes with a weight is being introduced here. Also, the possibility to include not only attributes, but also credentials and openids in a proof by using a "type" was taken from the DID credential manifest. 
 The goal of this is an approach to make proof presentation more flexible, allowing attributes to be required or optional as well as allowing a choose-from-a-list scenario. 
 So far, proof requests were to be replied to with a proof response that contained all attributes listed in the proof request. To this, this RFC adds a way to mark attributes as optional, so that they are communicated as nice-to-have to the user of a wallet.
  
@@ -35,7 +35,7 @@ Example of a proof presentation request (from verifier):
 
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/request-presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/request-presentation",
     "@id": "98fd8d82-81a6-4409-acc2-c35ea39d0f28",
     "comment": "some comment",
     "request_presentations~attach": [
@@ -43,16 +43,16 @@ Example of a proof presentation request (from verifier):
             "@id": "libindy-request-presentation-0",
             "mime-type": "application/json",
             "data":  {
-                "base64": "<yaml-formatted string describing attachments, base64-encoded because of libindy>"
+                "base64": "<yaml-formatted string describing attachments, base64url-encoded because of libindy>"
             }
         }
     ]
 }
 ```
-The base64-encoded content above decodes to the following data structure, a presentation preview:
+The base64url-encoded content above decodes to the following data structure, a presentation preview:
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
 	"@context": "https://path.to/schemas/credentials",
 	"comment":"some comment",
 	"~thread": {
@@ -88,7 +88,7 @@ The base64-encoded content above decodes to the following data structure, a pres
 			"name": "routing_number",
 			"group": ["A"],
 			"cred_def_id": "<cred_def_id>",
-			// "mime-type": "<mime-type>" is missing, so this defaults to a json-formatted string; if it was non-null, 'value' would be interpreted as a base64-encoded string representing a binary BLOB with mime-type telling how to interpret it after base64-decoding
+			// "mime-type": "<mime-type>" is missing, so this defaults to a json-formatted string; if it was non-null, 'value' would be interpreted as a base64url-encoded string representing a binary BLOB with mime-type telling how to interpret it after base64url-decoding
 			"value": {
 				"type": "string",
 				"maxLength": 9
@@ -193,7 +193,7 @@ The following data structure is an example for a valid answer to the above crede
 Valid proof presentation:
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/proof-presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/proof-presentation",
     "@id": "98fd8d82-81a6-4409-acc2-c35ea39d0f28",
     "comment": "some comment",
     "presentations~attach": [
@@ -201,16 +201,16 @@ Valid proof presentation:
             "@id": "libindy-presentation-0",
             "mime-type": "application/json",
             "data": {
-                "base64": "<yaml-formatted string describing attachments, base64-encoded because of libindy>"
+                "base64": "<yaml-formatted string describing attachments, base64url-encoded because of libindy>"
             }
         }
     ]
 }
 ```
-The base64-encoded content above would decode to this data:
+The base64url-encoded content above would decode to this data:
 ```
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
 	"@context": "https://path.to/schemas/credentials"
 	"comment":"some comment",
 	"~thread": {
@@ -269,7 +269,7 @@ The base64-encoded content above would decode to this data:
 ```
 ## Reference
 
-The "@id"-Tag and thread decorator in the above JSON-messages is taken from [RFC 0008](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0008-message-id-and-threading).
+The "@id"-Tag and thread decorator in the above JSON-messages is taken from [RFC 0008](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0008-message-id-and-threading).
 
 ## Drawbacks
 
@@ -282,7 +282,7 @@ An alternative way of implementing the proof negotiation is performing it ahead 
 The problem with not implementing this feature would be that a proof request may need to be repeated over and over again with a different list of requested attributes each time, until a list is transferred which the specific user can reply to. This process would be unnecessarily complicated and can be facilitated by implementing this here concept.
 
 ## Prior art
-[RFC0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/master/features/0037-present-proof) is the foundation which this RFC builds on using groups from the [credential manifest](https://github.com/decentralized-identity/credential-manifest) by 
+[RFC0037-present-proof](https://github.com/hyperledger/aries-rfcs/tree/main/features/0037-present-proof) is the foundation which this RFC builds on using groups from the [credential manifest](https://github.com/decentralized-identity/credential-manifest) by 
 the decentralized identity foundation, a "format that normalizes the definition of requirements for the issuance of a credential".
 
 ## Unresolved questions

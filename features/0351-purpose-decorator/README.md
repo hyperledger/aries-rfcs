@@ -1,11 +1,11 @@
 # Aries RFC 0351: Purpose Decorator
-- Authors: [Filip Burlacu](filip.burlacu@securekey.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-12-16
-- Status Note: implementation is being explored by SecureKey
+- Authors: [Filip Burlacu](mailto:filip.burlacu@securekey.com)
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes:
 - Start Date: 2019-12-05
-- Tags: feature, decorator
+- Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
 
 ## Summary
 

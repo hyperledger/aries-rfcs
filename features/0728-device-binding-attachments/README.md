@@ -1,0 +1,270 @@
+# Aries RFC 0728 : Device Binding Attachments
+
+- Authors: [Paul Bastian](mailto:paul.bastian@bdr.de), [Sebastian Bickerle](mailto:sebastian.bickerle@main-incubator.com)
+- Status: [PROPOSED](/README.md#proposed)
+- Since: 2022-04-07
+- Status Note: This is an initial draft
+- Start Date: 2022-01-01
+- Tags: [feature](/tags.md#feature)
+
+## Summary
+
+Extends existing present-proof protocols to allow proofing the control of a hardware bound key embedded within a verfiable credential.
+
+## Motivation
+
+To enable use-cases which require a high level of assurance a verifier must reach a high degree of confidence that a verifiable credential (VC) can only be used by the person it was issued for. One way to enforce this requirement is that the issuer additionally binds the VC to a hardware bound public key and therefore binding the credential to the device, as discussed in the [DIF Wallet Security WG](https://github.com/decentralized-identity/wallet-security). The issaunce process, including the attestation of the wallet and the hardware bound key is off-scope for this Aries RFC. A valid presentation of the VC then requires an additional challenge which proofs that the presenter is in control of the corresponding private key. Since the proof of control must be part of legitimate presentation it makes sense to extend all current `present-proof` protocols.
+
+Note: The focus so far has been on AnonCreds, we will also look into device binding of W3C VC, however this is currently lacking in the examples.
+
+Warning: **This concept is primarily meant for regulated, high-security usecases**. Please review the drawbacks before considering using this.
+
+## Tutorial
+
+To proof the control of a hardware bound key the holder must answer a challenge for one or more public keys embedded within verifiable credentials.
+
+### Challenge
+
+The following challenge object must be provided by the verifier.
+
+#### device-binding-challenge
+
+```json
+{
+  "@type": "https://didcomm.org/device-binding/%ver/device-binding-challenge",
+  "@id": "<uuid-challenge-response>",
+  "nonce": "<nonce>", // recommend at least 128-bit unsigned integer
+  "requests": [
+    {
+      "id": "libindy-request-presentation-0",
+      "path": "$.requested_attributes.attr2_referent.names.hardwareDid"
+    }
+  ]
+}
+```
+
+Description of attributes:
+
+- `nonce` -- a nonce which has to be signed by the holder to proof control
+- `requests` -- an array of referenced presentation requests
+  - `id` -- reference to an attached presentation request of `request-presentation` message (e.g. libindy request)
+  - `path` -- JsonPath to a requested attribute which represents a public key of a hardware bound key pair - represented as did:key
+
+The `device-binding-challenge` must be attached to the `request-presentations~attach` array of the `request-presentation` message defined by [RFC-0037](https://github.com/hyperledger/aries-rfcs/blob/main/features/0037-present-proof/README.md#request-presentation) and [RFC-0454](https://github.com/hyperledger/aries-rfcs/tree/main/features/0454-present-proof-v2#request-presentation).
+
+#### Example request-presentation messages
+
+The following represents a request-presentation message with an attached libindy presentation request and a corresponding device-binding-challenge.
+
+**Present Proof v1**
+
+```json
+{
+    "@type": "https://didcomm.org/present-proof/1.0/request-presentation",
+    "@id": "<uuid-request>",
+    "comment": "some comment",
+    "request_presentations~attach": [
+        {
+            "@id": "libindy-request-presentation-0",
+            "mime-type": "application/json",
+            "data":  {
+                "base64": "<bytes for base64>"
+            }
+        }
+    ],
+    "device_binding~attach": [
+        {
+            "@id": "device-binding-challenge-0"
+            "mime-type": "application/json",
+            "data":  {
+                "base64": "<device-binding-challenge>"
+            }
+        }
+    ]
+}
+```
+
+**Present Proof v2**
+
+```json
+{
+    "@type": "https://didcomm.org/present-proof/2.0/request-presentation",
+    "@id": "<uuid-request>",
+    "goal_code": "<goal-code>",
+    "comment": "some comment",
+    "will_confirm": true,
+    "present_multiple": false,
+    "formats" : [
+        {
+            "attach_id" : "libindy-request-presentation-0",
+            "format" : "hlindy/proof-req@v2.0",
+        }
+    ],
+    "request_presentations~attach": [
+        {
+            "@id": "libindy-request-presentation-0",
+            "mime-type": "application/json",
+            "data":  {
+                "base64": "<base64 data>"
+            }
+        }
+    ],
+    "device_binding~attach": [
+        {
+            "@id": "device-binding-challenge-0"
+            "mime-type": "application/json",
+            "data":  {
+                "base64": "<device-binding-challenge>" // inner object
+            }
+        }
+    ]
+}
+```
+
+### Response
+
+The following response must be generated by the holder of the VC.
+
+#### device-binding-reponse
+
+```json
+{
+  "@type": "https://didcomm.org/device-binding/%ver/device-binding-response",
+  "@id": "<uuid-challenge-response>",
+  "proofs": [
+    {
+      "id": "libindy-presentation-0",
+      "path": "$.requested_proof.revealed_attrs.attr1_referent.raw"
+    }
+  ]
+}
+```
+
+Description of attributes:
+
+- `proofs` -- an array of proofs for different hardware keys which must match the `requests` array from the [device-binding-challenge](#device-binding-challenge)
+  - `id` -- reference to presentation of VC with an embeded hardware bound key
+  - `path` -- JsonPath to raw value of hardware bound public key within the attached presentation of the VC represented as did:key
+
+The `device-binding-response` must be attached to the `device_binding~attach` array of a `presentation` message defined by [RFC-0037](https://github.com/hyperledger/aries-rfcs/blob/main/features/0037-present-proof/README.md#presentation) or [RFC-0454](https://github.com/hyperledger/aries-rfcs/tree/main/features/0454-present-proof-v2#presentation).
+
+- `jws` -- Nonce from [device-binding-challenge](#device-binding-challenge) signed with the corresponding private key as a Json Web Signature object, acording to Aries [RFC-0017](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0017-attachments#signing-attachments).
+
+### Example presentation messages
+
+The following represents a presentation message with an attached libindy presentation and a corresponding device-binding-response.
+
+**Present Proof v1**
+
+```json
+{
+  "@type": "https://didcomm.org/present-proof/1.0/presentation",
+  "@id": "<uuid-presentation>",
+  "comment": "some comment",
+  "presentations~attach": [
+    {
+      "@id": "libindy-presentation-0",
+      "mime-type": "application/json",
+      "data": {
+        "base64": "<bytes for base64>"
+      }
+    }
+  ],
+  "device_binding~attach": [
+    {
+      "@id": "device-binding-response-0",
+      "mime-type": "application/json",
+      "data": {
+        "base64": "<device-binding-response>",
+        "jws": {
+          "header": {
+            "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+          },
+          "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+          "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+        }
+      }
+    }
+  ]
+}
+```
+
+**Present Proof v2**
+
+```json
+{
+    "@type": "https://didcomm.org/present-proof/%VER/presentation",
+    "@id": "<uuid-presentation>",
+    "goal_code": "<goal-code>",
+    "comment": "some comment",
+    "last_presentation": true,
+    "formats" : [
+        {
+            "attach_id" : "libindy-presentation-0",
+            "format" : "hlindy/proof-req@v2.0",
+        }
+    ],
+    "presentations~attach": [
+        {
+            "@id": "libindy-presentation-0",
+            "mime-type": "application/json",
+            "data": {
+                "base64": "<libindy presentation>"
+            }
+        }
+    ],
+    "device_binding~attach": [
+        {
+            "@id": "device-binding-response-0"
+            "mime-type": "application/json",
+            "data":  {
+                "base64": "<device-binding-response>",
+                "jws": {
+                    "header": {
+                        "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+                    },
+                    "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+                    "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+                }
+            }
+        }
+    ]
+}
+```
+
+## Reference
+
+- [DIF Wallet Security Github Page](https://github.com/decentralized-identity/wallet-security)
+
+## Drawbacks
+
+Including a hardware-bound public key (as an attribute) into a Verifiable Credential/AnonCred is necessary for this concept but introduces a globally unique and therefore trackable identifier. As this public key is revealed to the verifier, there is a higher risk of correlation. The Issuer must always use a hardware-bound key for a single credential and the Wallet should enforce to never reuse the key. Additionally, the holder should ideally be informed about the increased correlation risk by the wallet UX.
+
+## Rationale and alternatives
+
+The rationale behind this proposal is to formalize the way a holder wallet can proof the control of a (hardware-bound) key.
+
+This proposal tries to extend existing protocols to reduce the implementation effort for existing solutions. It might be reasonable to include this only in a new version of the present proof protocol (e.g. present-proof v3).
+
+## Prior art
+
+None to our knowledge.
+
+## Unresolved questions
+
+- What is the best way to reference hardware bound keys within VCs and presentations?
+  - Do we need a standardised attribute name for the hardware backed public key (e.g. "HardwareDid")
+  - Can we just reference the hardware key within the request object?
+  - Is it required to explicitly define the accepted signing algorithm within the `device-binding-challenge` object?
+- What kind of key encoding do we choose?
+  - did:key, base64-encoded JWK and did:jwk in discussion
+
+## Implementations
+
+The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
+
+_Implementation Notes_ [may need to include a link to test results](/README.md#accepted).
+
+| Name / Link | Implementation Notes |
+| ----------- | -------------------- |
+|  |

@@ -29,7 +29,7 @@ capture 3 cells of the grid in a straight line.
 ### Name and Version
 
 This defines the `tictactoe` protocol, version 1.x, as identified by the
-following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/uris.md#piuri):
+following [PIURI](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0003-protocols#message-type-and-protocol-identifier-uris):
 
     did:sov:SLfEi9esrjzybysFxQZbfq;spec/tictactoe/1.0
 
@@ -78,7 +78,7 @@ but it would be an error on the part of the other player, and would
 trigger a `problem-report` message as described above, leaving the
 state unchanged.
 
-In the `receive-move` state, `send move` is an impossible event for a
+In the `their-move` state, `send move` is an impossible event for a
 properly behaving player. All 3 of the other events could occur, causing
 a state transition.
 

@@ -1,9 +1,9 @@
 # Aries RFC 0029: Message Trust Contexts
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-05-10
-- Status Note: Only implemented in one codebase and in the sample code here.
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: Not practically applied.
 - Supersedes: [Indy HIPE PR #120](https://github.com/hyperledger/indy-hipe/pull/120)
 - Start Date: 2018-02-10 (approx, backdated)
 - Tags: [concept](/tags.md#concept)
@@ -133,12 +133,12 @@ MTCs apply to the entirety of the associated message's attributes. However, _emb
 attachments present the unique situation of nested content with the potential for a trust context that differs from the
 parent message.
 
-The [attachment descriptor](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md#embedding),
+The [attachment descriptor](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0017-attachments/README.md#embedding),
 used for both _embedded_ and _appended_ attachments, shares the same MTC as the parent message. Unpacked attachment data
 have their own Trust Contexts populated as appropriate depending on how the data was retrieved, whether the attachment
 is signed, whether an integrity checksum was provided and verified, etc.
 
-Attachments delivered by the parent message, i.e. as Base64 encoded data, inherit relevant trust contexts from the
+Attachments delivered by the parent message, i.e. as base64url-encoded data, inherit relevant trust contexts from the
 parent, such as `confidentiality` and `authenticated_origin`, when the message was delivered as an authenticated
 encrypted message.
 

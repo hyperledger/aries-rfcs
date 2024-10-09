@@ -18,7 +18,7 @@ This is not strictly required, but it is good hygiene.
 This RFC defines the `abandon_connection` protocol, version 1.x, as identified by the
 following [PIURI](../../../concepts/0003-protocols/README.md#piuri):
 
-    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/abandon_connection/1.0
+    https://didcomm.org/abandon_connection/1.0
 
 Of course, subsequent evolutions of the protocol will replace `1.0` with
 an appropriate update per [semver](../../../concepts/0003-protocols/README.md#semver-rules-for-protocols)
@@ -27,7 +27,7 @@ rules.
 ### Roles
 
 This is a [classic one-step notification](
-https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/README.md#types-of-protocols),
+https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md#types-of-protocols),
 so it uses the predefined roles of `notifier` and `notified`.
 
 ![request-response pattern](../../../concepts/0003-protocols/notification.png)
@@ -50,9 +50,8 @@ An `announce` message from Alice to Bob looks like this:
 
 ```json
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/abandon_connection/1.0/announce",
-  "@id": "c17147d2-ada6-4d3c-a489-dc1e1bf778ab",
-  "~please_ack": {}
+  "@type": "https://didcomm.org/abandon_connection/1.0/announce",
+  "@id": "c17147d2-ada6-4d3c-a489-dc1e1bf778ab"
 }
 ```
 
@@ -64,20 +63,3 @@ forth. The nature of the relationship, the need for a historical audit trail, re
 requirements, and many other factors may influence what's appropriate; the protocol
 simply requires that the message be understood to have permanent termination semantics.
 
-It may be desirable to use the [`~please_ack` decorator](../../0317-please-ack/README.md)
-to request acknowledgment that the severance has been processed. The example shows
-this, but including it is optional.
-
-##### `ack`
-
-The [`ack` message](../../0015-acks/README.md#explicit-acks) is [adopted](
-../../../0000-template-protocol.md#adopted-messages) into this protocol. If an
-`announce` message includes the
-`~please_ack` decorator and the ack is sent, it looks something like this:
-
-```json
-{
-"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/abandon_connection/1.0/ack",
-"~thread": { "thid": "c17147d2-ada6-4d3c-a489-dc1e1bf778ab" }
-}
-```

@@ -1,18 +1,19 @@
 # Aries RFC 0000: Your Protocol 0.9
 
-- Authors: [your name](you@github-email) -- email is optional
+- Authors: [your name](mailto:you@github-email) -- email is optional
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-12-26 (date you submit your PR)
 - Status Note: (explanation of current status)  
 - Supersedes: (link to anything this RFC supersedes)
 - Start Date: 2018-12-26 (date you started working on this idea)
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
+- URI: https://didcomm.org/your_protocol_name/%VER
 
 ## Summary
 
 One paragraph explanation of the feature.
 
-> If the RFC you are proposing is **NOT** a protocol, please use [this template](https://github.com/hyperledger/aries-rfcs/tree/master/0000-template.md) as a starting point.
+> If the RFC you are proposing is **NOT** a protocol, please use [this template](https://github.com/hyperledger/aries-rfcs/tree/main/0000-template.md) as a starting point.
 
 > When completing this template and before submitting as a PR, please remove the template text in sections (other than **Implementations**). The implementations section should remain as is.
 
@@ -30,11 +31,11 @@ Specify the official name of the protocol and its version, e.g., "My Protocol 0.
 
 Protocol names are often either lower_snake_case or kebob-case. The non-version components of the protocol named are matched exactly.
 
-URI: https://didcomm.org/lets_do_lunch/<version>/<messageType>
+URI: `https://didcomm.org/lets_do_lunch/<version>/<messageType>`
 
-Message types and protocols are identified with special URIs that match certain conventions. See [Message Type and Protocol Identifier URIs](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0003-protocols/uris.md) for more details.
+Message types and protocols are identified with special URIs that match certain conventions. See [Message Type and Protocol Identifier URIs](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md#message-type-and-protocol-identifier-uris) for more details.
 
-The version of a protocol is declared carefully. See [Semver Rules for Protocols](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0003-protocols/semver.md) for details.
+The version of a protocol is declared carefully. See [Semver Rules for Protocols](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md#semver-rules-for-protocols) for details.
 
 ### Key Concepts
 
@@ -49,7 +50,7 @@ variants.
 
 ### Roles
 
-> See [this note](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0003-protocols/roles-participants-etc.md) for definitions of the terms
+> See [this note](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0003-protocols/roles-participants-etc.md) for definitions of the terms
 "role", "participant", and "party".
 
 Provides a formal name to each role in the protocol, says who and how many can
@@ -60,7 +61,7 @@ credential must be known to the issuer").
 
 The formal names for each role are important because they are used when [agents
 discover one another's
-capabilities](https://github.com/hyperledger/aries-rfcs/tree/master/features/0031-discover-features);
+capabilities](https://github.com/hyperledger/aries-rfcs/tree/main/features/0031-discover-features);
 an agent doesn't just claim that it supports a protocol; it makes a claim about
 which *roles* in the protocol it supports. An agent that supports credential
 issuance and an agent that supports credential holding may have very different
@@ -75,7 +76,7 @@ errors, and what should happen to state as a result. A formal representation of
 this information is provided in a _state machine matrix_. It lists events as
 columns, and states as rows; a cell answers the question, "If I am in state X
 (=row), and event Y (=column) occurs, what happens to my state?" The [Tic Tac
-Toe example](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/tictactoe/README.md#states) is typical.
+Toe example](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/tictactoe/README.md#states) is typical.
 
 [Choreography Diagrams](
 https://www.visual-paradigm.com/guide/bpmn/bpmn-orchestration-vs-choreography-vs-collaboration/#bpmn-choreography)
@@ -91,8 +92,8 @@ the matrix form is used in many early RFCs. We leave it up to
 the community to settle on whether it wants to strongly recommend specific
 diagram types.
 
-The formal names for each state are important, as they are used in [`ack`s](https://github.com/hyperledger/aries-rfcs/tree/master/features/0015-acks)
-and [`problem-report`s](https://github.com/hyperledger/aries-rfcs/tree/master/features/0035-report-problem)).
+The formal names for each state are important, as they are used in [`ack`s](https://github.com/hyperledger/aries-rfcs/tree/main/features/0015-acks)
+and [`problem-report`s](https://github.com/hyperledger/aries-rfcs/tree/main/features/0035-report-problem)).
 For example, a `problem-report` message declares which state the sender
 arrived at because of the problem. This helps other participants
 to react to errors with confidence. Formal state names are also used in the
@@ -102,14 +103,14 @@ By convention, state names use lower-kebab-case. They are compared
 case-sensitively.
 
 State management in protocols is a deep topic. For more information, please
-see [State Details and State Machines](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/state-details.md).
+see [State Details and State Machines](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/state-details.md).
 
 ### Messages
 
 This section describes each message in the protocol. It should also note the names and
 versions of messages from other message families that are adopted by the
-protocol (e.g., an [`ack`](https://github.com/hyperledger/aries-rfcs/tree/master/features/0015-acks)
-or a [`problem-report`](https://github.com/hyperledger/aries-rfcs/tree/master/features/0035-report-problem)).
+protocol (e.g., an [`ack`](https://github.com/hyperledger/aries-rfcs/tree/main/features/0015-acks)
+or a [`problem-report`](https://github.com/hyperledger/aries-rfcs/tree/main/features/0035-report-problem)).
 Typically this section is written as a narrative, showing each message
 type in the context of an end-to-end sample interaction. All possible
 fields may not appear; an exhaustive catalog is saved for the "Reference"
@@ -117,7 +118,7 @@ section.
 
 Sample messages that are presented in the narrative should also be checked
 in next to the markdown of the RFC, in [DIDComm Plaintext format](
-https://github.com/hyperledger/aries-rfcs/tree/master/features/0044-didcomm-file-and-mime-types#didcomm-messages-dm).
+https://github.com/hyperledger/aries-rfcs/tree/main/features/0044-didcomm-file-and-mime-types#didcomm-messages-dm).
 
 The _message_ element of a message type URI are typically lower_camel_case or lower-kebab-case, matching
 the style of the protocol. JSON items in messages are lower_camel_case and inconsistency in the
@@ -152,13 +153,13 @@ and its definition announces that it has adopted generic 1.x `ack`
 messages. When such `ack` messages are sent, the `@type` should now use
 the alias defined inside the namespace of the `rendezvous` protocol:
 
-![diff on @type caused by adoption](concepts/0003-protocols/adoption.png)
+[![diff on @type caused by adoption](concepts/0003-protocols/adoption.png)](https://docs.google.com/presentation/d/15UAkh_2WfDk7wlto7pSL7YU9NJr_XVMgGAOeNIRbzK8/edit#slide=id.g9e66a1f72d_0_0)
 
 Adoption should be declared in an "Adopted" subsection of "Messages".
 When adoption is specified, it should include a __minimum
 adopted version__ of the adopted message type: "This protocol adopts
 `ack` with version >= 1.4". All versions of the adopted message that share
-the same major number should be compatible, given the [semver rules](concepts/0003-protocols/semver.md)
+the same major number should be compatible, given the [semver rules](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/README.md#semver-rules-for-protocols)
 that apply to protocols.
 
 ### Constraints
@@ -182,7 +183,7 @@ needs to be known about all message fields, this is where the data type,
 validation rules, and semantics of each field in each message type are
 details. Enumerating possible values, or providing ABNF or regexes is
 encouraged. Following conventions such as [those for date-
-and time-related fields](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0074-didcomm-best-practices#date-time-conventions)
+and time-related fields](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0074-didcomm-best-practices#date-time-conventions)
 can save a lot of time here.
 
 Each message type should be associated with one or more roles in the 
@@ -210,15 +211,15 @@ If communication in the protocol involves humans, then localization of
 message content may be relevant. Default settings for localization of
 all messages in the protocol can be specified in an `l10n.json` file
 described here and checked in with the RFC. See ["Decorators at Message
-Type Scope"](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0011-decorators#decorator-scope)
-in the [Localization RFC](https://github.com/hyperledger/aries-rfcs/tree/master/features/0043-l10n).
+Type Scope"](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0011-decorators#decorator-scope)
+in the [Localization RFC](https://github.com/hyperledger/aries-rfcs/tree/main/features/0043-l10n).
 
 ### Codes Catalog
 
 If the protocol has a formally defined catalog of codes (e.g., for errors
 or for statuses), define them in this section. See ["Message Codes and
-Catalogs"](https://github.com/hyperledger/aries-rfcs/blob/master/features/0043-l10n/README.md#message-codes-and-catalogs)
-in the [Localization RFC](https://github.com/hyperledger/aries-rfcs/blob/master/features/0043-l10n).
+Catalogs"](https://github.com/hyperledger/aries-rfcs/blob/main/features/0043-l10n/README.md#message-codes-and-catalogs)
+in the [Localization RFC](https://github.com/hyperledger/aries-rfcs/blob/main/features/0043-l10n).
 
 ## Drawbacks
 
@@ -270,7 +271,7 @@ solution that comes out of this doc?
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-*Implementation Notes* [may need to include a link to test results](README.md#accepted).
+*Implementation Notes* [may need to include a link to test results](/README.md#accepted).
 
 Name / Link | Implementation Notes
 --- | ---

@@ -1,6 +1,6 @@
 # Aries RFC 0124: DID Resolution Protocol 0.9
 
-- Authors: [Markus Sabadello](markus@danubetech.com)
+- Authors: [Markus Sabadello](mailto:markus@danubetech.com), [Luis Gómez Alonso](mailto:luis.gomezalonso@sicpa.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-07-13
 - Status Note: Not implemented, but has been discussed as part of the [Aries DID Resolution](https://github.com/hyperledger/aries-rfcs/issues/101) work.
@@ -15,10 +15,10 @@ to resolve DIDs and dereference DID URLs.
 ## Motivation
 
 DID Resolution is an important feature of Aries. It is a prerequisite for the `unpack()` function in
-[DIDComm](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0005-didcomm), especially in
+[DIDComm](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0005-didcomm), especially in
 [Cross-Domain Messaging](../../concepts/0094-cross-domain-messaging/README.md), since cryptographic
 keys must be discovered from DIDs in order to enable trusted communication between the
-[agents](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0004-agents) associated with DIDs.
+[agents](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0004-agents) associated with DIDs.
 DID Resolution is also required for other operations, e.g. for verifying credentials or for discovering
 [DIDComm service endpoints](../../features/0067-didcomm-diddoc-conventions/README.md).
 
@@ -42,9 +42,9 @@ invokes another DID Resolver via a "remote" binding (such as HTTP(S) or DIDComm)
 ### Name and Version
 
 This defines the `did_resolution` protocol, version 0.1, as identified by the
-following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0003-protocols/uris.md#piuri):
+following [PIURI](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0003-protocols/uris.md#piuri):
 
-    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1
+    https://didcomm.org/did_resolution/0.1
 
 ### Key Concepts
 
@@ -84,10 +84,30 @@ resolving DIDs for at least one DID method.
 | resolving            |                 | *new interaction*                    | transition to "done"       |
 | done                 |                 |                                      |                            |
 
+
+##### States for `requester` role in a failure scenario
+
+|                      | EVENTS:         | send `resolve`                      | receive `resolve_result` |
+| -------------------- | --------------- | ------------------------------------ | -------------------------- |
+| **STATES**           |                 |                                      |                            |
+| preparing-request    |                 | transition to "awaiting-response"    | *different interaction*    |
+| awaiting-response    |                 | *impossible*                         | error reporting       |
+| problem reported                 |                 |                                      |                            |
+
+
+##### States for `resolver` role in a failure scenario
+
+|                      | EVENTS:         | receive `resolve`                   | send `resolve_result`    |
+| -------------------- | --------------- | ------------------------------------ | -------------------------- |
+| **STATES**           |                 |                                      |                            |
+| awaiting-request     |                 | transition to "resolving"            | *impossible*               |
+| resolving            |                 | *new interaction*                    | error reporting       |
+| problem reported                |                 |                                      |                            |
+
 ### Messages
 
 All messages in this protocol are part of the "did_resolution 0.1" message
-family uniquely identified by this DID reference: `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1`
+family uniquely identified by this DID reference: `https://didcomm.org/did_resolution/0.1`
 
 ##### `resolve` message
 
@@ -95,7 +115,7 @@ The protocol begins when the `requester` sends a `resolve` message
 to the `resolver`. It looks like this:
 
 	{
-		"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1/resolve",
+		"@type": "https://didcomm.org/did_resolution/0.1/resolve",
 		"@id": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t",
 		"did": "did:sov:WRfXPg8dantKVubE3HX8pw",
 		"input_options": {
@@ -122,7 +142,7 @@ It represents the result of the [DID Resolution](https://w3c-ccg.github.io/did-r
 It looks like this:
 
 	{
-		"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1/resolve_result",
+		"@type": "https://didcomm.org/did_resolution/0.1/resolve_result",
 		"~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
 		"did_document": {
 			"@context": "https://w3id.org/did/v0.11",
@@ -145,7 +165,7 @@ If the `input_options` field of the `resolve` message contains an entry `result_
 which includes a DID Document plus additional metadata:
 
 	{
-		"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/did_resolution/0.1/resolve_result",
+		"@type": "https://didcomm.org/did_resolution/0.1/resolve_result",
 		"~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
 		"did_document": {
 			"@context": "https://w3id.org/did/v0.11",
@@ -172,6 +192,19 @@ which includes a DID Document plus additional metadata:
 			"attrResponse": { ... }
 		}
 	}
+##### `problem-report` failure message
+
+The `resolve_result` will also report failure messages in case of impossibility to resolve a DID.
+It represents the problem report indicating that the resolver could not resolve the DID, and the reason of the failure.
+It looks like this:
+
+	{
+		"@type": "https://didcomm.org/did_resolution/0.1/resolve_result",
+		"~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
+		"explain_ltxt": "Could not resolve DID did:sov:WRfXPg8dantKVubE3HX8pw not found by resolver xxx",
+            ...
+	}
+
 
 ## Reference
 

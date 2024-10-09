@@ -1,6 +1,6 @@
 # Aries RFC 0056: Service Decorator
 
-- Authors: [Sam Curren](sam@sovrin.org), Tobias Looker
+- Authors: [Sam Curren](mailto:sam@sovrin.org), Tobias Looker
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-06-03
 - Status Note: Needs refinement and validation, will be useful in any connectionless communication.
@@ -23,7 +23,7 @@ The `~service` decorator on a message contains the service definition that you m
 
 Usage looks like this, with the contents defined the [Service Endpoint section of the DID Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints):
 
-```json=
+```json
 {
     "@type": "somemessagetype",
     "~service": {
@@ -34,11 +34,9 @@ Usage looks like this, with the contents defined the [Service Endpoint section o
 }
 ```
 
-
-
 ## Reference
 
-The contents of the `~service` decorator are defined by the  [Service Endpoint section of the DID Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints).
+The contents of the `~service` decorator are defined by the [Service Endpoint section of the DID Spec](https://w3c-ccg.github.io/did-spec/#service-endpoints).
 
 The decorator should not be used when the message recipient already has a service endpoint.
 
@@ -65,6 +63,6 @@ The Connect Protocol had previously included this same information as an attribu
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name / Link | Implementation Notes
---- | ---
- |  |
+| Name / Link | Implementation Notes |
+| ----------- | -------------------- |
+|             |

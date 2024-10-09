@@ -1,11 +1,19 @@
 # Aries RFC 0234: Signature Decorator
-- Authors: [Kyle Den Hartog](kyle.denhartog@evernym.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-09-27
-- Status Note: Retroactive port of [this HIPE](https://github.com/kdenhartog/indy-hipe/blob/d421fc77bae87c780aad346d15c0c49939adc281/text/digital-signatures/README.md) (never merged) on which the `connection` protocol depends
+- Authors: [Kyle Den Hartog](mailto:kyle.denhartog@evernym.com)
+- Status: [RETIRED](/README.md#retired)
+- Since: 2020-10-14
+- Status Note: This decorator is retired, replaced with the use of the signed form of the attachment decorator
+([RFC 0017](../../concepts/0017-attachments/README.md#signing-attachments))
 - Supersedes: [this HIPE](https://github.com/kdenhartog/indy-hipe/blob/d421fc77bae87c780aad346d15c0c49939adc281/text/digital-signatures/README.md) (never merged)
 - Start Date: 2019-01-07
 - Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
+
+## RFC ARCHIVED
+
+DO NOT USE THIS RFC.
+
+Use the signed form of the attachment decorator ([RFC 0017](../concepts/../../concepts/0017-attachments/README.md#signing-attachments))
+instead of this decorator.
 
 ## Summary
 
@@ -27,7 +35,7 @@ We'll use the following message as an example:
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/example/1.0/test_message",
+    "@type": "https://didcomm.org/example/1.0/test_message",
     "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
     "msg": {
         "text": "Hello World!",
@@ -40,10 +48,10 @@ Digitally signing the `msg` object with the `ed25519sha256_single` scheme result
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/example/1.0/test_message",
+    "@type": "https://didcomm.org/example/1.0/test_message",
     "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
     "msg~sig": {
-      "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/signature/1.0/ed25519Sha512_single",
+      "@type": "https://didcomm.org/signature/1.0/ed25519Sha512_single",
       "sig_data": "base64URL(64bit_integer_from_unix_epoch|msg_object)",
       "signature": "base64URL(digital signature function output)",
       "signer": "base64URL(inlined_signing_verkey)"

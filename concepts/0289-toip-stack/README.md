@@ -1,10 +1,10 @@
 # 0289: The Trust Over IP Stack
-- Authors: Matthew Davie, [Dan Gisolfi](dan.gisolfi@gmail.com), [Daniel Hardman](daniel.hardman@evernym.com), [John Jordan](john.jordan@gov.bc.ca), Darrell O'Donnell, [Drummond Reed](drummond.reed@evernym.com), [Oskar van Deventer](oskar.vandeventer@tno.nl)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-11-04
-- Status Note: Initial Proposal
+- Authors: Matthew Davie, [Dan Gisolfi](mailto:dan.gisolfi@gmail.com), [Daniel Hardman](mailto:daniel.hardman@evernym.com), [John Jordan](mailto:john.jordan@gov.bc.ca), Darrell O'Donnell, [Drummond Reed](mailto:drummond.reed@evernym.com), [Oskar van Deventer](mailto:oskar.vandeventer@tno.nl)
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No recent progress and no implementations have been created.
 - Start Date: 2019-01-01
-- Tags: concept, stack, trust layer, governance framework
+- Tags: [concept](/tags.md#concept), stack, trust layer, governance framework
 
 ## Summary
 
@@ -287,7 +287,7 @@ Holders often need to verify that a credential was requested by an authoritative
 
 ### Countermeasures against coercion
 
-The concept of "self-sovereign" identity presumes that parties are free to enter a transaction, to share personal and confidential information, and to walk away when requests by the other party are deemed unreasonable or even unlawful. In practice, this is often not the case: "What do you give an 800-pound gorilla?", answer: "Anything that it asks for". Examples of such 800-pound gorillas are some big-tech websites, immigration offices and uniformed individuals alleging to represent law-enforcement [20]. Also the typical client-server nature of web transactions reinforces this power imbalance, where the human party behind its client agent feels coerced in surrendering personal data as otherwise they are denied access to a product, service or location. Point in case are the infamous cookie walls, where a visitor of a website get the choice between "accept all cookies or go into the maze-without-exit".
+The concept of "self-sovereign" identity presumes that parties are free to enter a transaction, to share personal and confidential information, and to walk away when requests by the other party are deemed unreasonable or even unlawful. In practice, this is often not the case: "What do you give an 800-pound gorilla?", answer: "Anything that it asks for". Examples of such 800-pound gorillas are some big-tech websites, immigration offices and uniformed individuals alleging to represent law-enforcement [20][21]. Also the typical client-server nature of web transactions reinforces this power imbalance, where the human party behind its client agent feels coerced in surrendering personal data as otherwise they are denied access to a product, service or location. Point in case are the infamous cookie walls, where a visitor of a website get the choice between "accept all cookies or go into the maze-without-exit".
 
 Governance frameworks may be certified to implement one or more potential countermeasures against different types of coercion. In case of a machine readable governance framework, some of such countermeasures may be automatically enforced, safeguarding its user from being coerced into action against their own interest. Different governance frameworks may choose different balances between full self-sovereignty and tight control, depending of the interests that are at play as well as applicable legislation.
 
@@ -326,7 +326,7 @@ This RFC will be updated to track the evolution of the ToIP stack as it is furth
 7. Uniform Resource Names (URNs), [RFC 8141](https://tools.ietf.org/html/rfc8141), April 2017; accessed November 2, 2019.
 8. Greg Slepak, Christopher Allen, et al, [Decentralized Public Key Infrastructure](https://github.com/WebOfTrustInfo/rwot1-sf/blob/master/draft-documents/Decentralized-Public-Key-Infrastructure-CURRENT.md), December 2015, accessed January 24, 2020.
 9. W3C Credentials Community Group, [DID Method Registry](https://w3c-ccg.github.io/did-method-registry/), June 2019; accessed July 6, 2019.
-10. Daniel Hardman, [DID Communication](https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0005-didcomm/README.md), January 2019; accessed July 6, 2019.
+10. Daniel Hardman, [DID Communication](https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0005-didcomm/README.md), January 2019; accessed July 6, 2019.
 11. Daniel Hardman et al, [Peer DID Method 1.0 Specification](https://openssi.github.io/peer-did-method-spec/), July 2019; accessed July 6, 2019.
 12. Drummond Reed, Jason Law, Daniel Hardman, Mike Lodder, [DKMS Design and Architecture V4](http://bit.ly/dkms-v4), March 2019; accessed November 2, 2019.
 13. Samuel M. Smith, [Key Event Receipt Infrastructure (KERI)](https://arxiv.org/abs/1907.02143) , July 2019, accessed February 4, 2020.
@@ -336,7 +336,8 @@ This RFC will be updated to track the evolution of the ToIP stack as it is furth
 17. Sovrin Foundation, [Sovrin Governance Framework V2](https://sovrin.org/governance-framework/), March 2019; accessed December 21, 2019.
 18. DIACC, [Pan-Canadian Trust Framework](https://diacc.ca/pan-canadian-trust-framework/), May 2019; accessed July 6, 2019.
 19. Governments of British Columbia, Ontario, and Canada, [Verifiable Organizations Network (VON)](https://vonx.io/),June 2019; accessed July 6, 2019.
-20. Oskar van Deventer et al, TNO, Netherlands, [Self-Sovereign Identity - The Good, The Bad And The Ugly]( https://blockchain.tno.nl/blog/self-sovereign-identity-the-good-the-bad-and-the-ugly/),May 2019.
+20. Oskar van Deventer et al, TNO, Netherlands, [Self-Sovereign Identity - The Good, The Bad And The Ugly]( https://blockchain.tno.nl/blog/self-sovereign-identity-the-good-the-bad-and-the-ugly/), May 2019.
+21. Oskar van Deventer (TNO), Alexander Blom (Bloqzone), Line Kofoed (Bloqzone) [Verify the Verifier - anti-coersion by design](https://blockchain.tno.nl/blog/verify-the-verifier-anti-coercion-by-design/), October 2020.
 
 ## Implementations
 

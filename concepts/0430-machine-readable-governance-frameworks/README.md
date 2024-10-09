@@ -1,5 +1,5 @@
 # Aries RFC 0430: Machine-Readable Governance Frameworks
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-02-24
 - Status Note: early proposal only  
@@ -59,7 +59,7 @@ Each problem domain will probably have unique requirements. Therefore, we start 
 {
     "@context": [
         // The first context must be this RFC's context. It defines core properties.
-        "https://github.com/hyperledger/aries-rfcs/blob/master/0430-machine-readable-governance-frameworks/context.jsonld", 
+        "https://github.com/hyperledger/aries-rfcs/blob/main/concepts/0430-machine-readable-governance-frameworks/context.jsonld", 
         // Additional contexts can be added to extend.
         "https://kmk.org/uni-accred-trust-fw"
     ],
@@ -168,9 +168,9 @@ Alice is holding a mobile app that manages credentials for her. She clicks an in
 
 ![possible trust rules acceptance screen](ux-accept-tf.png)
 
-Her app knew to display this message because the issuer, Faber College, communicated its reliance on this governance framework (by referencing its `data_uri`) as part of an early step in the issuance process (e.g., in the invitation or in the [`offer-credential` message](../../features/0036-issue-credential/README.md#propose-credential)). Notice how metadata from the governance framework &mdash; its title, version, topics, and descriptions &mdash; show up in the prompt. Notice as well that governance frameworks have reputations. This helps users determine whether the rules are legitimate and worth using. The "More Info" tab would link to the governance framework's `docs_uri` page.
+Her app knew to display this message because the issuer, Faber College, communicated its reliance on this governance framework (by referencing its `data_uri`) as part of an early step in the issuance process (e.g., in the invitation or in the [`offer-credential` message](../../features/0036-issue-credential/README.md#offer-credential)). Notice how metadata from the governance framework &mdash; its title, version, topics, and descriptions &mdash; show up in the prompt. Notice as well that governance frameworks have reputations. This helps users determine whether the rules are legitimate and worth using. The "More Info" tab would link to the governance framework's `docs_uri` page.
 
-Alice doesn't have to re-accept the governance framework if she's already using it (e.g., if she already activated it in her mobile app because she's it's relevant to other credentials she holds). As a person works regularly within a particular credential domain, decisions like these will become cached and seamless. However, we're showing the step here, for completeness.
+Alice doesn't have to re-accept the governance framework if she's already using it (e.g., if she already activated it in her mobile app because it's relevant to other credentials she holds). As a person works regularly within a particular credential domain, decisions like these will become cached and seamless. However, we're showing the step here, for completeness.
 
 Suppose that Alice accepts the proposed rules. The governance framework requires that she also accept the KMK terms of service. These might require her to report any errors in her credential promptly, and clarify that she has the right to appeal under certain conditions (see the `redress` section of the governance framework data structure). They might also discuss the KMK governance framework's requirement for random auditing (see the `audit` section).
 
@@ -212,7 +212,7 @@ And:
 
 ![upgrade governance framework](ux-upgrade-tf.png)
 
-The point here is not the specifics in the UI we're positing. Different UX designers may may different choices. Rather, it's that by publishing a carefully versioned, machine-readable governance framework, such UIs become possible. The user's experience becomes less about individual circumstances, and more about general patterns that have known reputations, dependable safeguards, and so forth.
+The point here is not the specifics in the UI we're positing. Different UX designers may make different choices. Rather, it's that by publishing a carefully versioned, machine-readable governance framework, such UIs become possible. The user's experience becomes less about individual circumstances, and more about general patterns that have known reputations, dependable safeguards, and so forth.
 
 #### Versioning
 

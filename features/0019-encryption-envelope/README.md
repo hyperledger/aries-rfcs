@@ -1,16 +1,16 @@
 # Aries RFC 0019: Encryption Envelope
 
-- Authors: [Kyle Den Hartog](kyle.denhartog@evernym.com), [Stephen Curran](swcurran@gmail.com), [Sam Curren](sam@sovrin.org), [Mike Lodder](mike@sovrin.org)
-- Status: [ACCEPTED](/README.md#accepted)
+- Authors: [Kyle Den Hartog](mailto:kyle.denhartog@evernym.com), [Stephen Curran](mailto:swcurran@gmail.com), [Sam Curren](mailto:sam@sovrin.org), [Mike Lodder](mailto:mike@sovrin.org)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2019-05-04
 - Status Note:  
-- Supersedes: [INDY 0028 Wire Level Format](https://github.com/hyperledger/indy-hipe/tree/master/text/0028-wire-message-format)
+- Supersedes: [INDY 0028 Wire Level Format](https://github.com/hyperledger/indy-hipe/tree/main/text/0028-wire-message-format)
 - Start Date: 2018-07-10 (approximate, backdated)
 - Tags: [feature](/tags.md#feature)
 
 ## Summary
 
-There are two layers of messages that combine to enable **interoperable** self-sovereign agent-to-agent communication. At the highest level are [DIDComm Plaintext Messages](../0044-didcomm-file-and-mime-types/README.md#didcomm-messages-dm) - messages sent between identities to accomplish some shared goal (e.g., establishing a connection, issuing a verifiable credential, sharing a chat). DIDComm Plaintext Messages are delivered via the second, lower layer of messaging - DIDComm Encrypted Envelopes. A [DIDComm Encrypted Envelope](../0044-didcomm-file-and-mime-types/README.md#didcomm-encrypted-envelope-dee) is a wrapper (envelope) around a plaintext message to permit secure sending and routing. A plaintext message going from its sender to its receiver passes through many agents, and an encryption envelope is used for each hop of the journey.
+There are two layers of messages that combine to enable **interoperable** self-sovereign agent-to-agent communication. At the highest level are [DIDComm Plaintext Messages](../0044-didcomm-file-and-mime-types/README.md#didcomm-v1-messages-dm) - messages sent between identities to accomplish some shared goal (e.g., establishing a connection, issuing a verifiable credential, sharing a chat). DIDComm Plaintext Messages are delivered via the second, lower layer of messaging - DIDComm Encrypted Envelopes. A [DIDComm Encrypted Envelope](../0044-didcomm-file-and-mime-types/README.md#didcomm-v1-encrypted-envelope-dee) is a wrapper (envelope) around a plaintext message to permit secure sending and routing. A plaintext message going from its sender to its receiver passes through many agents, and an encryption envelope is used for each hop of the journey.
 
 This RFC describes the DIDComm Encrypted Envelope format and the `pack()` and `unpack()` functions that implement this format.
 
@@ -304,7 +304,7 @@ For a reference unpack implementation, see https://github.com/hyperledger/indy-s
 
 ```json
 {
-    "message": "{ \"@id\": \"123456780\",\"@type\":\"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0/message\",\"sent_time\": \"2019-01-15 18:42:01Z\",\"content\": \"Your hovercraft is full of eels.\"}",
+    "message": "{ \"@id\": \"123456780\",\"@type\":\"https://didcomm.org/basicmessage/1.0/message\",\"sent_time\": \"2019-01-15 18:42:01Z\",\"content\": \"Your hovercraft is full of eels.\"}",
     "recipient_verkey": "HKTAiYM8cE2kKC9KaNMZLYj4GS8uWCYMBxP2i1Y92zum",
     "sender_verkey": "DWwLsbKCRAbYtfYnQNmzfKV7ofVhMBi6T4o3d2SCxVuX"
 }
@@ -314,7 +314,7 @@ For a reference unpack implementation, see https://github.com/hyperledger/indy-s
 
 ```json
 {
-    "message": "{ \"@id\": \"123456780\",\"@type\":\"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0/message\",\"sent_time\": \"2019-01-15 18:42:01Z\",\"content\": \"Your hovercraft is full of eels.\"}",
+    "message": "{ \"@id\": \"123456780\",\"@type\":\"https://didcomm.org/basicmessage/1.0/message\",\"sent_time\": \"2019-01-15 18:42:01Z\",\"content\": \"Your hovercraft is full of eels.\"}",
     "recipient_verkey": "2GXmuCN2JCxSqMRVftBHLxVJKSL5bXyzM8DsPzGqQoNj"
 }
 ```

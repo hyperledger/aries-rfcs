@@ -1,9 +1,9 @@
 # Aries RFC 0030: Sync Connection Protocol 1.0
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-07-03
-- Status Note: used by the [peer DID method spec](https://openssi.github.io/peer-did-method-spec). Implementation beginning. 
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes: [Indy HIPE PR #104](https://github.com/hyperledger/indy-hipe/pull/104)
 - Start Date: 2018-10-01
 - Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator), [protocol](/tags.md#protocol)
@@ -14,6 +14,10 @@ Define a set of non-centralized protocols (that is, ones that do not involve a
 common store of state like a blockchain), whereby parties using [peer DIDs](
 https://openssi.github.io/peer-did-method-spec) can synchronize the state of
 their shared relationship by direct communication with one another.
+
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
 
 ## Motivation
 
@@ -57,7 +61,7 @@ other mechanism besides DIDComm message passing, that is fine.
 This RFC defines the `sync_connection` protocol, version 1.x, as identified by the
 following [PIURI](../../concepts/0003-protocols/README.md#piuri):
 
-    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/sync_connection/1.0
+    https://didcomm.org/sync_connection/1.0
 
 Of course, subsequent evolutions of the protocol will replace `1.0` with
 an appropriate update per [semver](../../concepts/0003-protocols/README.md#semver-rules-for-protocols)
@@ -91,7 +95,7 @@ sample looks like this:
 
 ```JSON
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/sync-connection/1.0/sync_state",
+  "@type": "https://didcomm.org/sync-connection/1.0/sync_state",
   "@id": "e61586dd-f50e-4ed5-a389-716a49817207",
   "for": "did:peer:11-479cbc07c3f991725836a3aa2a581ca2029198aa420b9d99bc0e131d9f3e2cbe",
   "base_hash": "d48f058771956a305e12a3b062a3ac81bd8653d7b1a88dd07db8f663f37bf8e0",

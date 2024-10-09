@@ -1,8 +1,8 @@
 # Aries RFC 0446: Aries Rich Schema Credential Definition
 - Author: [Alexander Shcherbakov](mailto:alexander.shcherbakov@evernym.com), [Ken Ebert](mailto:ken@sovrin.org), [Brent Zundel](mailto:brent.zundel@evernym.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-03-16
-- Status Note: Part of proposed Rich Schema capabilities for credentials 
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes:
 - Start Date: 2019-03-16
 - Tags: [feature](/tags.md#feature), [rich-schemas](/tags.md#rich-schemas)
@@ -16,7 +16,7 @@ The public keys can be used for signing the credentials by the Issuer according 
 defined by the referenced Mapping.
 
 Credential Definition objects are processed in a generic way defined in 
-[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common).
+[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common).
 
 
 ## Motivation
@@ -52,7 +52,7 @@ credentials issued for this key.
 
 ### Properties
 Credential definition's properties follow the generic template defined in 
-[Rich Schema Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
+[Rich Schema Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
 
 Credential Definition's `content` field is a JSON-serialized string with the following fields:
 
@@ -93,12 +93,12 @@ Aries will provide a means for writing contexts to and reading contexts
 from a verifiable data registry (such as a distributed ledger).
 
 A Credential Definition object will be written to the ledger in a generic way defined in 
-[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
+[Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#how-rich-schema-objects-are-stored-in-the-data-registry).
 
 
 ### Aries Data Registry Interface
 Aries Data Registry Interface methods for adding and retrieving a Credential Definition object from the
-ledger comply with the generic approach described in [Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common#aries-data-registry-interface).
+ledger comply with the generic approach described in [Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common#aries-data-registry-interface).
 
 This means the following methods can be used:
 - `write_rich_schema_object`
@@ -109,13 +109,12 @@ This means the following methods can be used:
 [reference]: #reference
 
 The following is a 
-[reference implementation of various transformation algorithms](https://github.com/sovrin-foundation/aries-credx-framework-rs/blob/master/src/encoding/mod.rs)
-Here is the paper that defines
-[Camenisch-Lysyanskaya signatures.][CL-signatures] 
-[CL-signatures]: (https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf)
+[reference implementation of various transformation algorithms](https://github.com/sovrin-foundation/aries-credx-framework-rs/blob/master/src/encoding/mod.rs).
 
-- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
-- [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0420-rich-schemas-common) 
+[Here](https://www.researchgate.net/publication/220922101_A_Signature_Scheme_with_Efficient_Protocols) is the paper that defines Camenisch-Lysyanskaya signatures.
+
+- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas)
+- [0420: Rich Schema Objects Common](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0420-rich-schemas-common) 
 
 
 ## Drawbacks

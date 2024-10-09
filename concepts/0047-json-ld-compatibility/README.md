@@ -1,10 +1,10 @@
 # Aries RFC 0047: JSON-LD Compatibility
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-02-20
 - Status Note: Has guided Indy design choices for several months. Not yet ratified by greater Aries community. 
-- Supersedes: [Indy HIPE 0035](https://github.com/hyperledger/indy-hipe/tree/master/text/0035-json-ld-compatibility)
+- Supersedes: [Indy HIPE 0035](https://github.com/hyperledger/indy-hipe/tree/main/text/0035-json-ld-compatibility)
 - Start Date: 2019-01-23
 - Tags: [concept](/tags.md#concept), [decorator](/tags.md#decorator)
 

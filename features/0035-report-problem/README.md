@@ -1,17 +1,21 @@
 # Aries RFC 0035: Report Problem Protocol 1.0
 
-- Authors: [Stephen Curran](swcurran@cloudcompass.ca), [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [DEMONSTRATED](/README.md#demonstrated)
-- Since: 2019-04-01
-- Status Note: Implemented in several codebases. Not yet fully harmonized.
+- Authors: [Stephen Curran](mailto:swcurran@cloudcompass.ca), [Daniel Hardman](mailto:daniel.hardman@gmail.com)
+- Status: [ADOPTED](/README.md#adopted)
+- Since: 2024-05-01
+- Status Note: Implemented in multiple codebases.
 - Supersedes: [Indy HIPE PR #65]( https://github.com/hyperledger/indy-hipe/pull/65)
 - Start Date: 2018-11-26
-- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
 
 ## Summary
 
 Describes how to report errors and warnings in a powerful, interoperable way. All implementations
 of SSI agent or hub technology SHOULD implement this RFC.
+
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
 
 ## Motivation
 
@@ -113,15 +117,10 @@ Reporting problems uses a simple one-step [notification protocol](
 ../../concepts/0003-protocols/README.md#types-of-protocols). Its official [PIURI](
 ../../concepts/0003-protocols/README.md#piuri) is:
 
-    did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/report-problem/1.0
+    https://didcomm.org/report-problem/1.0
 
 The protocol includes the standard `notifier` and `notified` roles. It
 defines a single message type `problem-report`, introduced here.
-It also [adopts](../../0000-template-protocol.md#adopted-messages) the
-`ack` message from the [`ACK 1.0` protocol](../0015-acks/README.md),
-to accommodate the possibility that the [`~please_ack`](../0317-please-ack/README.md)
-[decorator]( ../../concepts/0011-decorators/README.md) may be used on the
- notification.
 
 A `problem-report` communicates about a problem when an agent-to-agent message is
 possible and a recipient for the problem report is known. This covers, for example,
@@ -139,7 +138,7 @@ of the following:
 
 ```jsonc
 {
-  "@type"            : "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/report-problem/1.0/problem-report",
+  "@type"            : "https://didcomm.org/report-problem/1.0/problem-report",
   "@id"              : "an identifier that can be used to discuss this error message",
   "~thread"          : "info about the threading context in which the error occurred (if any)",
   "description"      : { "en": "localized message", "code": "symbolic-name-for-error" },
@@ -171,6 +170,8 @@ the problem report is the second member (`~thread.sender_order` = 0). In such ca
 to a message, the thread decorator is mostly redundant, as `~thread.thid` must equal `@id`.
 
 **description**: Contains human-readable, localized alternative string(s) that explain the problem. It is highly recommended that the message follow use the guidance in [the l10n RFC](../0043-l10n/README.md), allowing the error to be searched on the web and documented formally.
+
+**description.code**: Required. Contains the code that indicates the problem being communicated. Codes are described in protocol RFCs and other relevant places. New Codes SHOULD follow the [Problem Code](https://identity.foundation/didcomm-messaging/spec/#problem-codes) naming convention detailed in the DIDComm v2 spec.
 
 **problem_items**: A list of one or more key/value pairs that are parameters about the problem. Some examples might be:
 
@@ -215,13 +216,13 @@ Each item in the list must be a tagged pair (a JSON {key:value}, where the key n
 
 ``` jsonc
 {
-  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/notification/1.0/problem-report",
+  "@type": "https://didcomm.org/notification/1.0/problem-report",
   "@id": "7c9de639-c51c-4d60-ab95-103fa613c805",
   "~thread": {
     "pthid": "1e513ad4-48c9-444e-9e7e-5b8b45c5e325",
     "sender_order": 1
   },
-  "~l10n"            : {"catalog": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/error-codes"},
+  "~l10n"            : {"catalog": "https://didcomm.org/error-codes"},
   "description"      : "Unable to find a route to the specified recipient.",
   "description~l10n" : {"code": "cant-find-route" },
   "problem_items"    : [
@@ -236,6 +237,12 @@ Each item in the list must be a tagged pair (a JSON {key:value}, where the key n
 ## Categorized Examples of Errors and (current) Best Practice Handling
 
 The following is a categorization of a number of examples of errors and (current) Best Practice handling for those types of errors. The new `problem-report` message type is used for some of these categories, but not all.
+
+### Unknown Error
+
+Errors of a known error code will be processed according to the understanding of what the code means. Support of a protocol includes support and proper processing of the error codes detailed within that protocol.
+
+Any unknown error code that starts with `w.` in the DIDComm v2 style may be considered a warning, and the flow of the active protocol SHOULD continue. All other unknown error codes SHOULD be considered to be an end to the active protocol.
 
 ### Error While Processing a Received Message
 
@@ -331,6 +338,20 @@ If the decision is to retry, it would be good to have support in areas covered b
 
 Excessive retrying can exacerbate an existing system issue. If the reason for the timeout is because there is a "too many messages to be processed" situation, then sending retries simply makes the problem worse. As such, a reasonable backoff strategy should be used (e.g. exponentially increasing times between retries). As well, a [strategy used at Uber](https://eng.uber.com/reliable-reprocessing/) is to flag and handle retries differently from regular messages. The analogy with Uber is not pure - that is a single-vendor system - but the notion of flagging retries such that retry messages can be handled differently is a good approach.
 
+### Caveat: Problem Report Loops
+
+Implementers should consider and mitigate the risk of an endless loop of error messages. For example:
+
+- Alice sends a message to Bob that Bob doesn't recognize. Bob sends a `Problem Report` message to Alice.
+- Alice doesn't understand the message from Bob and sends a `Problem Report` to Bob.
+- Bob doesn't understand the message from Alice and sends a `Problem Report` to Alice. And so on...
+
+#### Recommended Handling
+
+How agents mitigate the risk of this problem is implementation specific, balancing loop-tracking overhead versus the likelihood of occurrence.
+For example, an agent implementation might have a counter on a connection object that is incremented when certain types of `Problem Report` messages are sent on that connection,
+and reset when any other message is sent. The agent could stop sending those types of `Problem Report` messages after the counter reaches a given value.
+
 ## Reference
 
 TBD
@@ -363,6 +384,6 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | The `problem-report` message is [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol.
-[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | The `problem-report` message is [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol.
-[Streetcred.id](https://streetcred.id/) | Commercial mobile and web app built using Aries Framework - .NET
+[RFC 0036: Issue Credential Protocol](../0036-issue-credential/README.md) | The `problem-report` message is [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol. [MISSING test results](/tags.md#test-anomaly)
+[RFC 0037: Present Proof Protocol](../0037-present-proof/README.md) | The `problem-report` message is [adopted](../../0000-template-protocol.md#adopted-messages) by this protocol. [MISSING test results](/tags.md#test-anomaly)
+[Trinsic.id](https://trinsic.id/) | Commercial mobile and web app built using Aries Framework - .NET [MISSING test results](/tags.md#test-anomaly)

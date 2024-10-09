@@ -1,7 +1,7 @@
 # Aries RFC 0095: Basic Message Protocol 1.0
 
 - Authors: Sam Curren
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2019-08-06
 - Status Note:  
 - Supersedes: [Indy 0033](https://github.com/hyperledger/indy-hipe/edit/master/text/0033-basic-message/README.md)
@@ -39,7 +39,7 @@ There are many useful features of user messaging systems that we will not be add
 
 ## Reference
 
-**Protocol**: did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0/
+**Protocol**: https://didcomm.org/basicmessage/1.0/
 
 **message**
 
@@ -52,7 +52,7 @@ Example:
 ```json
 {
     "@id": "123456780",
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/basicmessage/1.0/message",
+    "@type": "https://didcomm.org/basicmessage/1.0/message",
     "~l10n": { "locale": "en" },
     "sent_time": "2019-01-15 18:42:01Z",
     "content": "Your hovercraft is full of eels."

@@ -1,12 +1,12 @@
 # Aries RFC 0327: Crypto service Protocol 1.0
 
 - Authors: Robert Mitwicki, Wolfgang Lamot
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-11-20 (date you submit your PR)
-- Status Note: RFC under development
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes:
 - Start Date: 2019-11-01
-- Tags: feature, protocol
+- Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol)
 
 ## Summary
 

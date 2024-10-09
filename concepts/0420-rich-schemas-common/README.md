@@ -1,8 +1,8 @@
 # 0420: Rich Schema Objects Common
 - Author: [Alexander Shcherbakov](mailto:alexander.shcherbakov@evernym.com), [Brent Zundel](mailto:brent.zundel@evernym.com), [Ken Ebert](mailto:ken@sovrin.org) 
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2020-02-13
-- Status Note: Part of proposed Rich Schema capabilities for credentials 
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No recent progress and no implementations have been created.
 - Start Date: 2020-02-05
 - Tags: [concept](/tags.md#concept), [rich-schemas](/tags.md#rich-schemas)
 
@@ -12,7 +12,7 @@
 A low-level description of the components of an anonymous credential ecosystem that supports rich schemas,
 W3C Verifiable Credentials and Presentations, and correspondingly rich presentation requests. 
 
-Please see [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas) 
+Please see [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas) 
 for high-level description.
 
 This RFC provides more low-level description of Rich Schema objects defining how they are identified and referenced.
@@ -20,7 +20,7 @@ It also defines a general template and common part for all Rich Schema objects.
 
 ## Motivation
 
-Please see [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
+Please see [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas)
 for use cases and high-level description of why Rich Schemas are needed.
 
 This RFC serves as a low-level design of common parts between all Rich Schema objects, and can help developers to 
@@ -138,7 +138,7 @@ Any write request for Rich Schema object has the same fields:
 'ver': <format version>                        # string                              
 ```
 - `id` is a unique ID (for example a DID with a id-string being base58 representation of the SHA2-256 hash of the `content` field)
-- The `content` field here contains a Rich Schema object in JSON-LD format (see [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)).
+- The `content` field here contains a Rich Schema object in JSON-LD format (see [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas)).
 It's passed and stored as-is.
 The `content` field must be serialized in the canonical form. The canonicalization scheme we recommend is the IETF draft 
  [JSON Canonicalization Scheme (JCS).](https://tools.ietf.org/id/draft-rundgren-json-canonicalization-scheme-16.html)
@@ -249,9 +249,9 @@ error: {
 ```
 
 ## Reference
-- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/master/concepts/0250-rich-schemas)
-- [0249: Aries Rich Schema Contexts](https://github.com/hyperledger/aries-rfcs/tree/master/features/0249-rich-schema-contexts) 
-- [0281: Aries Rich Schemas](https://github.com/hyperledger/aries-rfcs/tree/master/features/0281-rich-schemas)
+- [0250: Rich Schema Objects](https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0250-rich-schemas)
+- [0249: Aries Rich Schema Contexts](https://github.com/hyperledger/aries-rfcs/tree/main/features/0249-rich-schema-contexts) 
+- [0281: Aries Rich Schemas](https://github.com/hyperledger/aries-rfcs/tree/main/features/0281-rich-schemas)
 
 ## Drawbacks
 

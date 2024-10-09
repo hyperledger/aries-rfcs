@@ -1,6 +1,6 @@
 # Aries RFC 0042: LOX -- A more secure pluggable framework for protecting wallet keys
 
-- Authors: [Michael Lodder](mike@sovrin.org)
+- Authors: [Michael Lodder](mailto:mike@sovrin.org)
 - Status: [DEMONSTRATED](/README.md#demonstrated)
 - Since: 2019-05-30
 - Start Date: 2019-05-30
@@ -50,7 +50,7 @@ Some systems back keyrings with hardware to increase security. The following flo
 ### Secure Enclaves
 
 Secure enclaves are used to describe HSMs, TPMs, and TEEs.
-An explaination of how secure enclaves work is detailed [here](https://github.com/hyperledger/indy-hipe/tree/master/text/0013-wallets#enclave-wrapping).
+An explaination of how secure enclaves work is detailed [here](https://github.com/hyperledger/indy-hipe/tree/main/text/0013-wallets#enclave-wrapping).
 
 
 ### Details
@@ -126,7 +126,7 @@ Trying to account for all of these will be difficult and may require changes to 
 
 ## Prior art
 
-A brief overview of enclaves and their services have been discussed in the [Indy wallet HIPE](https://github.com/hyperledger/indy-hipe/tree/master/text/0013-wallets).
+A brief overview of enclaves and their services have been discussed in the [Indy wallet HIPE](https://github.com/hyperledger/indy-hipe/tree/main/text/0013-wallets).
 
 ## Unresolved questions
 
@@ -138,4 +138,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 
 Name / Link | Implementation Notes
 --- | ---
-[Reference Code](https://github.com/hyperledger/aries-rfcs/tree/master/features/0042-lox/reference_code) | Example rust code that implements Lox using OS keychains
+[Reference Code](https://github.com/hyperledger/aries-rfcs/tree/main/features/0042-lox/reference_code) | Example rust code that implements Lox using OS keychains

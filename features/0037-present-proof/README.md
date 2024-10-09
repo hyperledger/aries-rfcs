@@ -1,7 +1,7 @@
 # Aries RFC 0037: Present Proof Protocol 1.0
 
 - Authors: Nikita Khateev
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted) (But should move to deprecated)
 - Since: 2019-05-28
 - Status Note:  This v1.x version of the protocol will be replaced by version v2 defined in [RFC 454](../0454-present-proof-v2/README.md).
 - Supersedes: [Indy HIPE PR #89](https://github.com/hyperledger/indy-hipe/blob/2e85595e9a948a2fbfd58400191d112caff5a14b/text/credential-exchange-message-family/README.md); also [Credential Exchange 0.1 -- IIW 2019](https://hackmd.io/@QNKW9ANJRy6t81D7IfgiZQ/HkklVzww4?type=view)
@@ -71,7 +71,7 @@ An optional message sent by the Prover to the verifier to initiate a proof prese
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/propose-presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/propose-presentation",
     "@id": "<uuid-propose-presentation>",
     "comment": "some comment",
     "presentation_proposal": <json-ld object>
@@ -89,7 +89,7 @@ From a verifier to a prover, the `request-presentation` message describes values
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/request-presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/request-presentation",
     "@id": "<uuid-request>",
     "comment": "some comment",
     "request_presentations~attach": [
@@ -108,7 +108,7 @@ Description of fields:
 
 * `comment` -- a field that provides some human readable information about this request for a presentation.
 * `request_presentations~attach` -- an array of attachments defining the acceptable formats for the presentation.
-  * For Indy, the attachment contains data from libindy about the presentation request, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
+  * For Indy, the attachment contains data from libindy about the presentation request, base64url-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1214).
 
 ### Presentation
 
@@ -116,7 +116,7 @@ This message is a response to a Presentation Request message and contains signed
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation",
     "@id": "<uuid-presentation>",
     "comment": "some comment",
     "presentations~attach": [
@@ -135,7 +135,7 @@ Description of fields:
 
 * `comment` -- a field that provides some human readable information about this presentation.
 * `presentations~attach` -- an array of attachments containing the presentation in the requested format(s).
-  * For Indy, the attachment contains data from libindy that is the presentation, base64-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404).
+  * For Indy, the attachment contains data from libindy that is the presentation, base64url-encoded, as returned from `libindy`. For more information see the [Libindy API](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404).
 
 #### Verifying Claims of Indy-based Verifiable Credentials
 
@@ -161,7 +161,7 @@ This is not a message but an inner object for other messages in this protocol. I
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
     "attributes": [
         {
             "name": "<attribute_name>",
@@ -207,7 +207,7 @@ The optional `mime-type` advises the verifier how to render a binary attribute, 
 The optional `value`, when present, holds the value of the attribute to reveal in presentation:
 
 * if `mime-type` is missing (null), then `value` is a string. In other words, implementations interpret it the same as any other key+value pair in JSON
-* if `mime-type` is not null, then `value` is always a base64-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64-decoding.
+* if `mime-type` is not null, then `value` is always a base64url-encoded string that represents a binary BLOB, and `mime-type` tells how to interpret the BLOB after base64-decoding.
 
 An attribute specification must specify a `value`, a `cred_def_id`, or both:
 
@@ -226,7 +226,7 @@ For example, a holder with multiple account credentials could use a presentation
 
 ```jsonc
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/presentation-preview",
+    "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
     "attributes": [
         {
             "name": "account",

@@ -1,9 +1,9 @@
 # Aries RFC 0075: Payment Decorators
 
-- Authors: [Sam Curren](sam@sovrin.org), [Daniel Hardman](daniel.hardman@gmail.com), Tomislav Markovski
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-06-11
-- Status Note: Still being studied. 
+- Authors: [Sam Curren](mailto:sam@sovrin.org), [Daniel Hardman](mailto:daniel.hardman@gmail.com), Tomislav Markovski
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes: [Indy HIPE PR #129]( https://github.com/hyperledger/indy-hipe/pull/129)
 - Start Date: 2019-04-22
 - Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
@@ -237,7 +237,7 @@ this (note the snake_case since we are not matching a W3C spec):
 and that the transfer relates to this payment request instead of another. This might be a ledger's transaction ID,
 for example.
 
-**proof**: Optional. A base64-encoded blob that contains directly verifiable proof that the
+**proof**: Optional. A base64url-encoded blob that contains directly verifiable proof that the
 transaction took place. This might be useful for payments enacted by a [triple-signed receipt](
 http://opentransactions.org/wiki/index.php/Triple-Signed_Receipts)
 mechanism, for example. When this is present, `transaction_id` becomes optional. For ledgers
@@ -257,7 +257,7 @@ credential under discussion.
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue_credential/1.0/offer_credential",
+    "@type": "https://didcomm.org/issue_credential/1.0/offer_credential",
     "@id": "5bc1989d-f5c1-4eb1-89dd-21fd47093d96",
     "cred_def_id": "KTwaKJkvyjKKf55uc6U8ZB:3:CL:59:tag1",
     "~payment_request": {
@@ -294,7 +294,7 @@ This Credential Request is sent to the issuer, indicating that they have paid th
 
 ```json
 {
-    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue_credential/1.0/request_credential",
+    "@type": "https://didcomm.org/issue_credential/1.0/request_credential",
     "@id": "94af9be9-5248-4a65-ad14-3e7a6c3489b6",
     "~thread": { "thid": "5bc1989d-f5c1-4eb1-89dd-21fd47093d96" },
     "cred_def_id": "KTwaKJkvyjKKf55uc6U8ZB:3:CL:59:tag1",

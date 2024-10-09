@@ -1,7 +1,7 @@
 # Aries RFC 0025: DIDComm Transports
 
-- Authors: [Sam Curren](sam@sovrin.org)
-- Status: [ACCEPTED](/README.md#accepted)
+- Authors: [Sam Curren](mailto:sam@sovrin.org)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2019-12-05
 - Status Note:  
 - Supersedes: [INDY PR 94](https://github.com/hyperledger/indy-hipe/pull/94)
@@ -22,7 +22,13 @@ Standardized transport methods are detailed here.
 
 ### HTTP(S)
 
-HTTP(S) is the first transport for DID Communication that has received heavy attention.
+HTTP(S) is the first, and most used transport for DID Communication that has received heavy attention. 
+
+While it is recognized that all DIDComm messages are secured through strong encryption, making HTTPS somewhat redundant, it will likely cause issues with mobile clients because venders (Apple and Google) are limiting application access to the HTTP protocol. For example, on iOS 9 or above where [ATS])(https://developer.apple.com/documentation/bundleresources/information_property_list/nsapptransportsecurity) is in effect, any URLs using HTTP must have an exception hard coded in the application prior to uploading to the iTunes Store. This makes DIDComm unreliable as the agent initiating the the request provides an endpoint for communication that the mobile client must use. If the agent provides a URL using the HTTP protocol it will likely be unusable due to low level operating system limitations.
+
+As a best practice, when HTTP is used in situations where a mobile client (iOS or Android) may be involved it is highly recommended to use the HTTPS protocol, specifically TLS 1.2 or above. 
+
+Other important notes on the subject of using HTTP(S) include:
 
 - Messages are transported via HTTP POST.
 - The MIME Type for the POST request is `application/didcomm-envelope-enc`; see [RFC 0044: DIDComm File and MIME Types](../0044-didcomm-file-and-mime-types/README.md) for more details.
@@ -58,7 +64,7 @@ XMPP is an effective transport for incoming DID-Communication messages directly 
 - Independent of cloud agents and routing agents, as messages arrive directly at the mobile agent.
 - Well suited for direct consumer-to-consumer SSI transactions, from one mobile agent directly to another mobile agent without any DID-Communication intermediaries.
 - Simple encapsulation of DIDcom messages, getting trust from the DIDcom Encryption Envelope.
-- Specified in [Aries RFC 0024: DIDCom-over-XMPP](https://github.com/hyperledger/aries-rfcs/tree/master/features/0024-didcomm-over-xmpp)
+- Specified in [Aries RFC 0024: DIDCom-over-XMPP](https://github.com/hyperledger/aries-rfcs/tree/main/features/0024-didcomm-over-xmpp)
 
 #### Known Implementations
 
