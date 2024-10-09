@@ -76,7 +76,7 @@ Message to set the device info using the fcm device token and device platform fo
 Description of the fields:
 
 - `device_token` -- The token that is required by the notification provider (string, null)
-- `device_platform` -- The platform used by the sender, e.g. Android / iOS / Linux / etc. ([string](string), null)
+- `device_platform` -- The platform used by the sender, e.g. Android / iOS / Linux / etc. (string, null)
 
 It is important to note that the set device info message can be used to set, update and remove the device info. To set, and update, these values the normal messages as stated above can be used. To remove yourself from receiving push notifications, you can send the same message where all values MUST be `null`. If either value is `null`, a `problem-report` MAY be sent back with `missing-value`.
 

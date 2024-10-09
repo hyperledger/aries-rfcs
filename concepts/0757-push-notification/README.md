@@ -1,5 +1,5 @@
 # 0757: Push Notification
-- Authors: [Sam Curren](telegramsam@gmail.com)
+- Authors: [Sam Curren](mailto:telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2022-11-02 
 - Status Note:  

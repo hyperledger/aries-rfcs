@@ -1,6 +1,6 @@
 # Aries RFC 0025: DIDComm Transports
 
-- Authors: [Sam Curren](sam@sovrin.org)
+- Authors: [Sam Curren](mailto:sam@sovrin.org)
 - Status: [ADOPTED](/README.md#adopted)
 - Since: 2019-12-05
 - Status Note:  

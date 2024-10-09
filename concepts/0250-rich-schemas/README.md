@@ -1,8 +1,8 @@
 # RFC 0250: Rich Schema Objects
-- Author: [Ken Ebert](ken@sovrin.org), [Brent Zundel](brent.zundel@evernym.com)
-- Status: [RETIRED](/README.md#retired)
-- Since: 2019-10-08
-- Status Note: Port of [this HIPE](https://github.com/hyperledger/indy-hipe/tree/main/text/0119-rich-schemas/README.md)
+- Author: [Ken Ebert](mailto:ken@sovrin.org), [Brent Zundel](mailto:brent.zundel@evernym.com)
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No recent progress and no implementations have been created.
 - Supersedes: [this HIPE](https://github.com/hyperledger/indy-hipe/tree/main/text/0119-rich-schemas/README.md)
 - Start Date: 2019-03-19
 - Tags: [concept](/tags.md#concept), [rich-schemas](/tags.md#rich-schemas)
@@ -341,7 +341,7 @@ Here is the paper that defines
 [Camenisch-Lysyanskaya signatures.][CL-signatures] They are the source for
 [Indy's AnonCreds protocol](https://github.com/hyperledger/indy-hipe/pull/109).
 
-[CL-signatures]: (https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf)
+[CL-signatures]: https://groups.csail.mit.edu/cis/pubs/lysyanskaya/cl02b.pdf
 
 ## Drawbacks
 

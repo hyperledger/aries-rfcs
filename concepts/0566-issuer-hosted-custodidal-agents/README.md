@@ -1,5 +1,5 @@
 # 0566: Issuer-Hosted Custodial Agents
-- Authors: [Sam Curren](telegramsam@gmail.com)
+- Authors: [Sam Curren](mailto:telegramsam@gmail.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-11-16
 - Status Note: Draft

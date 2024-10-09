@@ -1,9 +1,9 @@
 # Aries RFC 0024: DIDComm over XMPP
 
-- Authors: [Oskar van Deventer](oskar.vandeventer@tno.nl), [Galit Rahim](galit.rahim@tno.nl), [Alexander Blom](alexander.blom@bloqzone.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-06-14
-- Status Note:  , moving from Indy to Aries.
+- Authors: [Oskar van Deventer](mailto:oskar.vandeventer@tno.nl), [Galit Rahim](mailto:galit.rahim@tno.nl), [Alexander Blom](mailto:alexander.blom@bloqzone.com)
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes: [Indy DIDComm-over-XMPP](https://github.com/Oskar-van-Deventer/indy-hipe/tree/main/text/didcom-over-xmpp)
 - Start Date: 2019-04-23
 - Tags: [feature](/tags.md#feature)

@@ -1,6 +1,6 @@
 # Aries RFC 0003: Protocols
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [ADOPTED](/README.md#adopted)
 - Since: 2019-04-01
 - Status Note: standards track and beginning to influence many mental models, but not yet [ADOPTED](/README.md#rfc-lifecycle).
