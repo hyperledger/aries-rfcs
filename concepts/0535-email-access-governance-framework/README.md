@@ -8,6 +8,9 @@
 
 ## Summary
 
+
+> Note: This RFC was created in advance of the [Credential Trust Establishment](https://identity.foundation/credential-trust-establishment/) spec work at the DIF. The concepts are good, but the governance mechanism should be updated to use this newer spec before action is taken.
+
 This Governance Framework is community managed.
 
 When making connections from one person to another over DIDComm, it is useful to be able to gain proof of something to verify that the connection is with the right person and has not been subject to a MITM attack. We expect this Governance Framework to be one of many used for the purpose of helping to verify identity attributes in the creation of trusted channels.
