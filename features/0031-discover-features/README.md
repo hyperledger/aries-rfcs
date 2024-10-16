@@ -1,7 +1,7 @@
 # Aries RFC 0031: Discover Features Protocol 1.0
 
 - Authors: Daniel Hardman
-- Status: [ACCEPTED](/README.md#accepted) (may be RETIRED when [v2.0](README.md) of the protocol has enough gravitas)
+- Status: [ADOPTED](/README.md#adopted) (may be RETIRED when [v2.0](README.md) of the protocol has enough gravitas)
 - Since: 2019-05-01
 - Status Note: One of our earliest DIDComm protocols; reached FCP (standards track) status in Indy, and implemented in at least two codebases there. Converted to an Aries RFC Implemented in a handful of Aries codebases. With the advent of DIDComm v2 at DIF, it became clear that we wanted to discover features beyond just protocol support, so this version of the protocol is now superseded by [v2.0 in RFC 0557](../0557-discover-features-v2/README.md).
 - Supersedes: [Indy HIPE PR #73](https://github.com/hyperledger/indy-hipe/pull/73).

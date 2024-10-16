@@ -1,6 +1,6 @@
 # Aries RFC 0046: Mediators and Relays
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
 - Status: [ACCEPTED](/README.md#accepted)
 - Since: 2019-02-01
 - Status Note: Socialized and broadly understood in other conceptual RFCs about routing.
@@ -245,3 +245,4 @@ Name / Link | Implementation Notes
 --- | ---
 [Connect.Me](https://www.evernym.com/blog/connect-me-sovrin-digital-wallet/) | Free mobile app from Evernym. Installed via app store on iOS and Android. 
 [Verity](https://www.evernym.com/products/) | Commercially licensed enterprise agent, SaaS or on-prem.
+[DIDComm mediator](https://github.com/Sirius-social/didcomm-mediator) | Open source cloud-based mediator with Firebase support.

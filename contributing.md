@@ -12,7 +12,7 @@ invisible to those consuming Aries, should be documented elsewhere.
 ### Preparation
 
 Before writing an RFC, consider exploring the idea on
-[chat](https://chat.hyperledger.org/channel/aries), on community calls
+[the aries chat channel](https://chat.hyperledger.org), on community calls
 (see the [Hyperledger Community Calendar](
 https://wiki.hyperledger.org/community/calendar-public-meetings)),
 or on [aries@lists.hyperledger.org](
@@ -27,8 +27,8 @@ is a good sign that you're on the right track.
     for guidance.
   - Decide which parent folder is appropriate for your RFC.
     If it is about a specific protocol or decorator or feature, its parent
-    should be /features; if it is about a concept that will be used in many
-    different features, its parent should be /concepts.
+    should be `/features`; if it is about a concept that will be used in many
+    different features, its parent should be `/concepts`.
   - Create the folder and copy either `0000-template.md` or `0000-template-protocol.md` (if your RFC is for a protocol) to `<parent>/<your folder name>/README.md`.
   - Fill in the RFC. [Use MUST and SHOULD per standard conventions](https://tools.ietf.org/html/rfc2119). Put care into the details: RFCs that do not present
     convincing motivation, demonstrate an understanding of the impact of the
@@ -43,13 +43,8 @@ is a good sign that you're on the right track.
     this repo to figure out what the next PR number will be). Rename your folder from
     `<your folder name>` to `<your 4-digit number>-<your folder name>`. At the
     top of your README.md, modify the title so it is in the form: `<your 4-digit
-    number>: Friendly Version of Your Title`. Commit your changes.
-  - In the root of the repo, run `python code/generate_index.py` to update the index
-    with your new RFC.
-  - In the root of your repo, run `pytest code` to see whether your RFC passes all
-    automated tests. The RFC tests are simple. They just check for things like
-    naming conventions and hyperlink correctness.
-  - Commit the updated version of /index.md and push your changes.
+    number>: Friendly Version of Your Title`.
+  - Commit and push your changes.
   - Submit a pull request.
 
 Make sure that all of your commits satisfy the [DCO requirements](
@@ -70,7 +65,7 @@ in the lifecycle, submit a PR with the following characteristics:
 - The title of the PR should include a deadline date for merging the PR and the referenced RFC.
   - Example: `Status to Accepted, deadline 2019.08.15, RFC 0095-basic-message`
 - The PR comment should document why the status is being changed.
-- The deadline date should be 2 weeks after announcing the proposed status change on an Aries WG call. The PR should also be announced on the [#aries rocketchat channel](https://chat.hyperledger.org/channel/aries).
+- The deadline date should be 2 weeks after announcing the proposed status change on an Aries WG call. The PR should also be announced on the [#aries  channel](https://chat.hyperledger.org).
 - Barring negative feedback from the community, the repo's maintainers should merge the PR after the deadline.
 - The deadline should be moved by two weeks after addressing each substantive change to the RFC made during the status change review period.
 

@@ -1,8 +1,8 @@
 # Aries RFC 0249: Aries Rich Schema Contexts
 - Authors: [Brent Zundel](mailto:brent.zundel@evernym.com), [Ken Ebert](mailto:ken@sovrin.org), [Alexander Shcherbakov](mailto:alexander.shcherbakov@evernym.com)
-- Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-10-08
-- Status Note: Part of proposed Rich Schema capabilities for credentials 
+- Status: [STALLED](/README.md#stalled)
+- Since: 2024-04-03
+- Status Note: No implementations have been created.
 - Supersedes: 
 - Start Date: 2019-06-07 
 - Tags: [feature](/tags.md#feature), [rich-schemas](/tags.md#rich-schemas)

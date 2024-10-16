@@ -1,7 +1,7 @@
-# Aries RFC 0023: DID Exchange Protocol 1.0
+# Aries RFC 0023: DID Exchange v1
 
-- Authors: [Ryan West](ryan.west@sovrin.org), [Daniel Bluhm](daniel.bluhm@sovrin.org), Matthew Hailstone, Stephen Curran, [Sam Curren](sam@sovrin.org), [Stephen Curran](swcurran@cloudcompass.ca), [George Aristy](george.aristy@securekey.com)
-- Status: [ACCEPTED](/README.md#accepted)
+- Authors: [Ryan West](mailto:ryan.west@sovrin.org), [Daniel Bluhm](mailto:daniel.bluhm@sovrin.org), Matthew Hailstone, [Sam Curren](mailto:sam@sovrin.org), [Stephen Curran](mailto:swcurran@cloudcompass.ca), [George Aristy](mailto:george.aristy@securekey.com)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2021-04-15
 - Status Note: Replaces [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md) and is a part of [AIP 2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Supersedes: [RFC 0160 - Connection Protocol](../../features/0160-connection-protocol/README.md)
@@ -15,6 +15,12 @@ This RFC describes the protocol to exchange DIDs between agents when establishin
 ## Motivation
 
 Aries agent developers want to create agents that are able to establish relationships with each other and exchange secure information using keys and endpoints in DID Documents. For this to happen there must be a clear protocol to exchange DIDs.
+
+## Version Change Log
+
+### Version 1.1 -  Signed Rotations without DID Documents
+
+Added the optional `did_rotate~attach` attachment for provenance of rotation without an attached DID Document.
 
 ## Tutorial
 
@@ -95,7 +101,7 @@ No errors are sent in timeout situations. If the _requester_ or _responder_ wish
 
 ``` jsonc
 {
-  "@type": "https://didcomm.org/didexchange/1.0/problem_report",
+  "@type": "https://didcomm.org/didexchange/1.1/problem_report",
   "@id": "5678876542345",
   "~thread": { "thid": "<@id of message related to problem>" },
   "~l10n": { "locale": "en"},
@@ -141,7 +147,7 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
 ```jsonc
 {
   "@id": "5678876542345",
-  "@type": "https://didcomm.org/didexchange/1.0/request",
+  "@type": "https://didcomm.org/didexchange/1.1/request",
   "~thread": { 
       "thid": "5678876542345",
       "pthid": "<id of invitation>"
@@ -173,13 +179,16 @@ The _requester_ may provision a new DID according to the DID method spec. For a 
 * The [`~thread`](../../concepts/0008-message-id-and-threading/README.md#thread-object) decorator MUST be included:
   * It MUST include the ID of the parent thread (`pthid`) such that the `request` can be correlated to the corresponding (implicit or explicit) `invitation`. More on correlation [below](#correlating-requests-to-invitations).
   * It MAY include the `thid` property. This works according to the [`thid`](../../concepts/0008-message-id-and-threading/README.md#thread-id-thid) property in the thread decorator, meaning that if `thid` is not defined it is implicitly defined as the `@id` on the same `request` message.
-* The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute.
+* The `label` attribute provides a suggested label for the DID being exchanged. This allows the user to tell multiple exchange requests apart. This is not a trusted attribute. (See note on `label` below)
 * The `goal_code` (optional) is a self-attested code the receiver may want to display to the user or use in automatically deciding what to do with the request message. The goal code might be used particularly when the request is sent to a resolvable DID without reference to a specfic invitation.
 * The goal (optional) is a self-attested string that the receiver may want to display to the user about the context-specific goal of the request message.
 * The `did` attribute MUST be included. It indicates the DID being exchanged.
 * The `did_doc~attach` (optional), contains the DIDDoc associated with the `did`, if required.
   * If the `did` is resolvable (either an inline `peer:did` or a publicly resolvable DID), the `did_doc~attach` attribute should not be included.
   * If the DID is a `did:peer` DID, the DIDDoc must be as outlined in [RFC 0627 Static Peer DIDs](../0627-static-peer-dids/README.md).
+
+
+The `label` property was intended to be declared as an optional property, but was added to the RFC as a required property. If an agent wishes to not use a label in the request, an empty string (`""`) or the set value `Unspecified` may be used to indicate a non-value. This approach ensures existing AIP 2.0 implementations do not break.
 
 #### Correlating requests to invitations
 
@@ -197,7 +206,7 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
 ```jsonc
 {
   "@id": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
-  "@type": "https://didcomm.org/didexchange/1.0/request",
+  "@type": "https://didcomm.org/didexchange/1.1/request",
   "~thread": { 
       "thid": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
       "pthid": "032fbd19-f6fd-48c5-9197-ba9a47040470" 
@@ -228,7 +237,7 @@ When a `request` responds to an implicit invitation, its `~thread.pthid` MUST co
 ```jsonc
 {
   "@id": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
-  "@type": "https://didcomm.org/didexchange/1.0/request",
+  "@type": "https://didcomm.org/didexchange/1.1/request",
   "~thread": { 
       "thid": "a46cdd0f-a2ca-4d12-afbf-2e78a6f1f3ef",
       "pthid": "did:example:21tDAKCERh95uGgKbJNHYp#didcomm" 
@@ -303,7 +312,7 @@ The exchange response message is used to complete the exchange. This message is 
 
 ```json
 {
-  "@type": "https://didcomm.org/didexchange/1.0/response",
+  "@type": "https://didcomm.org/didexchange/1.1/response",
   "@id": "12345678900987654321",
   "~thread": {
     "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>"
@@ -322,6 +331,19 @@ The exchange response message is used to complete the exchange. This message is 
             "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
             }
       }
+   },
+   "did_rotate~attach": {
+      "mime-type": "text/string",
+      "data": {
+         "base64": "Qi5kaWRAQjpB",
+         "jws": {
+         "header": {
+            "kid": "did:key:z6MkmjY8GnV5i9YTDtPETC2uUAW6ejw3nk5mXF5yci5ab7th"
+         },
+         "protected": "eyJhbGciOiJFZERTQSIsImlhdCI6MTU4Mzg4... (bytes omitted)",
+         "signature": "3dZWsuru7QAVFUCtTd0s7uc1peYEijx4eyt5... (bytes omitted)"
+         }
+      }
    }
 }
 ```
@@ -334,8 +356,9 @@ The invitation's `recipientKeys` should be dedicated to envelopes authenticated 
 * The `~thread` decorator MUST be included. It contains a `thid` reference to the `@id` of the request message.
 * The `did` attribute MUST be included. It denotes the DID in use by the responder. Note that this MAY NOT be the same DID used in the invitation.
 * The `did_doc~attach` optional, contains the DID Doc associated with the `did`, if required.
-  * If the `did` is resolvable (either an inline `peer:did` or a publicly resolvable DID), the `did_doc~attach` attribute should not be included.
+  * If the `did` is resolvable (either an inline `did:peer` or a publicly resolvable DID), the `did_doc~attach` attribute should not be included.
   * If the DID is a `did:peer` identifier, the DIDDoc must be as outlined in [RFC 0627 Static Peer DIDs](../0627-static-peer-dids/README.md).
+* The `did_rotate~attach` attribute is optional, but SHOULD be included if the `did` attribute is resolvable and the `did_doc~attach` is not included. The value is the Base64url encoded DID, and signed with the key used in the invitation.
 
 In addition to a new DID, the associated DID Doc might contain a new endpoint. This new DID and endpoint are to be used going forward in the relationship.
 
@@ -347,7 +370,7 @@ When the message is sent, the _responder_ are now in the `response-sent` state. 
 
 #### Response Processing
 
-When the requester receives the `response` message, they will decrypt the authenticated envelope which confirms the source's authenticity. After decryption validation, they will update their wallet with the new information, and use that information in sending the `complete` message.
+When the requester receives the `response` message, they will decrypt the authenticated envelope which confirms the source's authenticity. After decryption validation, the signature on the `did_doc~attach` or `did_rotate~attach` MUST be validated, if present. The key used in the signature MUST match the key used in the invitation. After attachment signature validation, they will update their wallet with the new information, and use that information in sending the `complete` message.
 
 #### Response Errors
 
@@ -376,7 +399,7 @@ The exchange `complete` message is used to confirm the exchange to the _responde
 
 ```jsonc
 {
-  "@type": "https://didcomm.org/didexchange/1.0/complete",
+  "@type": "https://didcomm.org/didexchange/1.1/complete",
   "@id": "12345678900987654321",
   "~thread": {
     "thid": "<The Thread ID is the Message ID (@id) of the first message in the thread>",

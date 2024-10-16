@@ -1,6 +1,6 @@
 # Aries RFC 0231: Biometric Service Provider
 
-- Authors: [John Callahan](jcallahan@acm.org), [Daniel Hardman](daniel.hardman@gmail.com), [Asem Othman](aothman@veridiumid.com)
+- Authors: [John Callahan](mailto:jcallahan@acm.org), [Daniel Hardman](mailto:daniel.hardman@gmail.com), [Asem Othman](mailto:aothman@veridiumid.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-09-24
 - Status Note: Proposed for now based on authors joint work

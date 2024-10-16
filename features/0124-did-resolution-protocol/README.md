@@ -1,7 +1,6 @@
 # Aries RFC 0124: DID Resolution Protocol 0.9
 
-- Authors: [Markus Sabadello](markus@danubetech.com), 
-  [Luis Gómez Alonso](luis.gomezalonso@sicpa.com)
+- Authors: [Markus Sabadello](mailto:markus@danubetech.com), [Luis Gómez Alonso](mailto:luis.gomezalonso@sicpa.com)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2019-07-13
 - Status Note: Not implemented, but has been discussed as part of the [Aries DID Resolution](https://github.com/hyperledger/aries-rfcs/issues/101) work.

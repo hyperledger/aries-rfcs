@@ -1,7 +1,7 @@
 # Aries RFC 0008: Message ID and Threading
 
-- Authors: [Daniel Bluhm](daniel.bluhm@sovrin.org), [Sam Curren](sam@sovin.org), [Daniel Hardman](daniel.hardman@gmail.com)
-- Status: [ACCEPTED](/README.md#accepted)
+- Authors: [Daniel Bluhm](mailto:daniel.bluhm@sovrin.org), [Sam Curren](mailto:sam@sovin.org), [Daniel Hardman](mailto:daniel.hardman@gmail.com)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2018-10-01
 - Status Note: Implemented broadly in Indy, but not yet elsewhere.
 - Start Date: 2018-08-03
@@ -70,6 +70,10 @@ Message threading will be implemented as a [decorator](../0011-decorators/README
 
 The `~thread` decorator is generally required on any type of response, since
 this is what connects it with the original request.
+
+While not recommended, the initial message of a new protocol instance MAY have an
+empty (`{}`) `~thread` item. Aries agents receiving a message with an empty
+`~thread` item MUST gracefully handle such a message.
 
 #### Thread object
 

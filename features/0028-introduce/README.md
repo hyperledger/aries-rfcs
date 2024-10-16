@@ -12,6 +12,10 @@
 Describes how a go-between can introduce two parties that
 it already knows, but that do not know each other.
 
+## Change Log
+
+- 20240320: Clarification removing references to retired `~please_ack` decorator and RFC.
+
 ## Motivation
 
 Introductions are a fundamental activity in human relationships. They allow
@@ -218,8 +222,7 @@ introducee is the object of the sender's interest:
 ```
 
 The recipient can choose whether or not to honor it in their own way, on
-their own schedule. However, a `~please_ack` decorator could be used to make
-it more interactive, and a `problem_report` could be returned if the
+their own schedule. However, a `problem_report` could be returned if the
 recipient chooses not to honor it.
 
 ### Advanced Use Cases

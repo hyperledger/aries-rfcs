@@ -1,7 +1,7 @@
 # Aries RFC 0592: Indy Attachment Formats for Requesting and Presenting Credentials
 
 - Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com)
-- Status: [ACCEPTED](/README.md#accepted)
+- Status: [ADOPTED](/README.md#adopted)
 - Since: 2021-04-15
 - Status Note: Formalizes the Indy AnonCreds attachments for issuing credentials and presenting proofs. A part of the Indy AnonCreds subtarget of [AIP v2.0](../../concepts/0302-aries-interop-profile/README.md).
 - Supersedes: less formally documented Indy attachment formats documented in [Aries RFC 0036](../0036-issue-credential/README.md), [Aries RFC 0037](../0037-present-proof/README.md), etc.
@@ -163,6 +163,8 @@ A concrete, issued Indy credential may be transmitted over many protocols, but i
 
 This is a credential that's designed to be _held_ but not _shared directly_. It is stored in the holder's wallet and used to [derive a novel ZKP](https://youtu.be/bnbNtjsKb4k?t=1280) or [W3C-compatible verifiable presentation](https://docs.google.com/document/d/1ntLZGMah8iJ_TWQdbrNNW9OVwPbIWkkCMiid7Be1PrA/edit#heading=h.vw0mboesl528) just in time for each sharing of credential material.
 
+The encoded values of the credential MUST follow the encoding algorithm as described in [Encoding Claims](#encoding-claims).
+
 This is the format emitted by libindy's [indy_issuer_create_credential()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L383) function. It is JSON-based and might look like this:
 
 ```jsonc
@@ -211,6 +213,8 @@ Here is a sample proof request that embodies the following: "Using a government-
 ### proof format
 
 This is the format of an Indy-style ZKP. It plays the same role as a W3C-style verifiable presentation (VP) and can be [mapped to one](https://docs.google.com/document/d/1ntLZGMah8iJ_TWQdbrNNW9OVwPbIWkkCMiid7Be1PrA/edit#heading=h.vw0mboesl528).
+
+The raw values encoded in the presentation SHOULD be verified against the encoded values using the encoding algorithm as described below in [Encoding Claims](#encoding-claims).
 
 The identifier for this format is `hlindy/proof@v2.0`. It is a version of the (JSON-based) data emitted by libindy's [indy_prover_create_proof()](https://github.com/hyperledger/indy-sdk/blob/57dcdae74164d1c7aa06f2cccecaae121cefac25/libindy/src/api/anoncreds.rs#L1404)) function. A proof that responds to the [previous proof request sample](#proof-request-format) looks like this:
 
@@ -323,6 +327,48 @@ The identifier for this format is `hlindy/proof@v2.0`. It is a version of the (J
 }
 ```
 
+### Unrevealed Attributes
+
+AnonCreds supports a holder responding to a proof request with some of the
+requested claims included in an `unrevealed_attrs` array, as seen in the example
+above, with `attr2_referent`. Assuming the rest of the proof is valid, AnonCreds
+will indicate that a proof with unrevealed attributes has been successfully
+verified. It is the responsibility of the verifier to determine if the purpose
+of the verification has been met if some of the attributes are not revealed.
+
+There are at least a few valid use cases for this approach:
+
+- A verifier may ask for, but not require, that a prover provide all of the
+  requested attributes.
+- A verifier may ask for claims from several credentials, expecting holders to
+  only have some of the credentials. The holders respond with claims from the
+  credentials they have, and leave the other attributes unrevealed.
+  - For example, a verifier may ask for a national identity card and an resident
+    card, knowing that most holders will have one or the other.
+
+### Encoding Claims
+
+Claims in AnonCreds-based verifiable credentials are put into the credential in two forms, `raw` and `encoded`. `raw` is the actual data value, and `encoded` is the (possibly derived) integer value that is used in presentations. At this time, AnonCreds does not take an opinion on the method used for encoding the raw value.
+
+AnonCreds issuers and verifiers must agree on the encoding method so that the verifier can check that the `raw` value returned in a presentation corresponds to the proven `encoded` value. The following is the encoding algorithm that MUST be used by Issuers when creating credentials and SHOULD be verified by Verifiers receiving presentations:
+
+- keep any 32-bit integer as is
+- convert any string integer (e.g. `"1234"`) to be a 32-bit integer (e.g. `1234`)
+- for data of any other type:
+  - convert to string (use string "None" for null)
+  - encode via utf-8 to bytes
+  - apply SHA-256 to digest the bytes
+  - convert the resulting digest bytes, big-endian, to integer
+  - stringify the integer as a decimal.
+
+An example implementation in Python can be found [here](https://github.com/hyperledger/aries-cloudagent-python/blob/0000f924a50b6ac5e6342bff90e64864672ee935/aries_cloudagent/messaging/util.py#L106).
+
+A gist of test value pairs can be found [here](https://gist.github.com/swcurran/78e5a9e8d11236f003f6a6263c6619a6).
+
+#### Notes on Encoding Claims
+
+- In converting any string integer to an integer, leading 0s in the string are (by definition) not part of the integer. The leading 0's remain in the (untouched) `raw` value.
+- The use of AnonCreds predicates, such as proving "older than 21" based on a date of birth claim without sharing the date of birth, is based on an expression involving the `encoded` value. Thus, only `raw` integers or string integers can be used in AnonCreds predicates.
 
 ## Implementations
 

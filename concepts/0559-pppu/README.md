@@ -1,5 +1,5 @@
 # Aries RFC 0559: Privacy-Preserving Proof of Uniqueness
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com), Drummond Reed, Lovesh Harchandani, Jason Law, Brent Zundel
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com), Drummond Reed, Lovesh Harchandani, Jason Law, Brent Zundel
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2020-10-21
 - Status Note: documents ideas mentioned at RWOT 9 (Sep 2019) and in informal conversations before and since. This is a defensive publication by the Aries community, to prevent such ideas from being encumbered by patents.  

@@ -1,11 +1,29 @@
 # Aries RFC 0317: Please ACK Decorator
 
-- Authors: [Daniel Hardman](daniel.hardman@gmail.com), [Timo Glastra](mailto:timo@animo.id)
-- Status: [PROPOSED](/README.md#proposed)
+- Authors: [Daniel Hardman](mailto:daniel.hardman@gmail.com), [Timo Glastra](mailto:timo@animo.id)
+- Status: [RETIRED](/README.md#retired)
 - Since: 2019-12-26
-- Status Note: Separated from the ACK protocol. A lot of complex features were removed for inclusion in AIP 2.0 (see note at bottom)
+- Status Note: Attempts at implementation demonstrate that a general purpose `~please_ack` capability is not practical, and needs to be implemented on a per protocol basis, for protocols where the functionality makes sense.
 - Start Date: 2018-12-26
 - Tags: [feature](/tags.md#feature), [decorator](/tags.md#decorator)
+
+## Retirement of `~please_ack`
+
+The `please_ack` decorator was initially added to [Aries Interop Protocol 2.0]. However, this was done prior to attempts at an implementation. When such an attempt was made, it was found that the decorator is not practical as a general purpose mechanism. The capability assumed that the feature would be general purpose and could be applied outside of the protocols with which it was used. That assumption proved impossible to implement. The inclusion of the `~please_ack` decorator cannot be implemented without altering any protocol with which it is used, and so it is not practical. Instead, any protocols that can benefit from such a feature can be extended to explicitly support the feature.
+
+For the `"on": ["OUTCOME"]` type of ACK, the problem manifests in two ways. First, the definition of `OUTCOME` is protocol (and in fact, protocol message) specific. The definition of "complete" for each message is specific to each message, so there is no "general purpose" way to know when an `OUTCOME` ACK is to be sent. Second, the addition of a `~please_ack` decorator changes the protocol state machine for a given protocol, introducing additional states, and hence, additional state handling. Supporting `"on": ["OUTCOME"]` processing requires making changes to all protocols, which would be better handled on a per protocol basis, and where useful (which, it was found, is rare), adding messages and states. For example, what is the point of an extra `ACK` message on an `OUTCOME` in the middle of a protocol that itself results in the sending of the response message?
+
+Our experimentation found that it would be easier to achieve a general purpose `"on": ["RECEIPT"]` capability, but even then there were problems. Most notably, the capability is most useful when added to the last message of a protocol, where the message sender would like confirmation that the recipient got the message. However, it is precisely that use of the feature that also introduces breaking changes to the protocol state machine for the protocols to which it applies, requiring per protocol updates. So while the feature would be marginally useful in some cases, the complexity cost of the capability -- and the lack of demand for its creation -- led us to retire the entire RFC.
+
+For more details on the great work done by [Alexander Sukhachev @alexsdsr](https://github.com/alexsdsr), please see these pull requests, including both the changes proposed in the PRs, and the subsequent conversations about the features.
+
+- [Aries Cloud Agent Python PR 2540 - PleaseAck.md document](https://github.com/hyperledger/aries-cloudagent-python/pull/2540)
+- [Aries Cloud Agent Python PR 2546 - DRAFT: please_ack support PoC for the 0453-issue-credential-v2 protocol](https://github.com/hyperledger/aries-cloudagent-python/pull/2546)
+- [Aries RFCs - Update the 'unresolved questions' section of the 0317-please-ack RFC](https://github.com/hyperledger/aries-rfcs/pull/801)
+
+Much thanks for Alexander for the effort he put into trying to implement this capability.
+
+[Aries Interop Protocol 2.0]: https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0302-aries-interop-profile#aries-interop-profile-version-20
 
 ## Summary
 
@@ -137,6 +155,6 @@ None specified.
 
 The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.
 
-Name / Link | Implementation Notes
---- | ---
- | 
+| Name / Link | Implementation Notes |
+| ----------- | -------------------- |
+|  |

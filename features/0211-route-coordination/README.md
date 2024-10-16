@@ -1,7 +1,7 @@
 # 0211: Mediator Coordination Protocol
-- Authors: [Sam Curren](telegramsam@gmail.com), [Daniel Bluhm](daniel@indicio.tech), [Adam Burdett](burdettadam@gmail.com)
-- Status: [ACCEPTED](/README.md#accepted)
-- Since: 2021-03-15
+- Authors: [Sam Curren](mailto:telegramsam@gmail.com), [Daniel Bluhm](mailto:daniel@indicio.tech), [Adam Burdett](mailto:burdettadam@gmail.com)
+- Status: [ADOPTED](/README.md#adopted)
+- Since: 2024-05-01
 - Status Note: Discussed and implemented and part of AIP 2.0.
 - Start Date: 2019-09-03
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [test-anomaly](/tags.md#test-anomaly)
@@ -162,7 +162,7 @@ Response to key list query, containing retrieved keys.
         {
             "recipient_key": "did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
         }
-    ]
+    ],
     "pagination": {
         "count": 30,
         "offset": 30,
@@ -200,3 +200,4 @@ The following lists the implementations (if any) of this RFC. Please do a pull r
 Name / Link | Implementation Notes
 --- | ---
 [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python/blob/main/Mediation.md) | Added in ACA-Py 0.6.0 [MISSING test results](/tags.md#test-anomaly)****
+[DIDComm mediator](https://github.com/Sirius-social/didcomm-mediator) | Open source cloud-based mediator.

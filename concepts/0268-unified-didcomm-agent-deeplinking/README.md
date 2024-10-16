@@ -1,8 +1,8 @@
 # Aries RFC 0268: Unified DIDCOMM Deeplinking
-- Authors: [Dev Bharel](dev@spaceman.id), [Alexi Falquier](alexis@spaceman.id)
+- Authors: [Dev Bharel](mailto:dev@spaceman.id), [Alexi Falquier](mailto:alexis@spaceman.id)
 - Status: [PROPOSED](/README.md#proposed)
-- Since: 2019-10-23 
-- Status Note: Proposed  
+- Since: 2019-10-23
+- Status Note: Proposed
 - Start Date: 2018-10-04
 - Tags: [concept](/tags.md#concept)
 
@@ -69,6 +69,7 @@ Furthermore, messages must also be base64 encoded serialized jsons, stripped of 
 
 This puts extra work on wallet developers to ensure a good experience. 
 
+On iOS only one app can be registered to handle `didcomm://` at a time; the first one to be installed will prevent others from using this custom scheme.
 
 ## Rationale and alternatives
 
