@@ -6,7 +6,7 @@
 - Status Note: Implemented in the [Bifold Wallet](https://github.com/openwallet-foundation/bifold-wallet)
 - Supersedes: N/A
 - Start Date: 2022-11-15
-- Version: 1.0
+- Version: 1.1
 - Tags: [feature](/tags.md#feature)
 
 [RFC0755 OCA for Aries]: ../0755-oca-for-aries/README.md
@@ -136,11 +136,11 @@ The stacked list is the same as the credential layout, with the credentials that
 <table>
   <tr>
    <td>
-<img src="./images/image1.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image1_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
-<img src="./images/image2.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image2_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
   </tr>
@@ -181,9 +181,11 @@ The numbered items in the layouts are as follows. In the list, the OCA data elem
     * Fallback: If tracked, the date the credential was received by the Holder, else empty.
 11. `expiry_date_attribute`
     * Fallback: Empty
+12. `Contact detail button`
+    * Fallback: Empty
 
 
-![alt_text](images/image3.png "image_tooltip")
+![alt_text](images/image3_1.png "image_tooltip")
 
 
 **_Figure: Template layers_**
@@ -194,11 +196,11 @@ The font color is either black or white, as determined by calculating contrast l
 <table>
   <tr>
    <td>
-<img src="./images/image4.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image 4_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
-<img src="./images/image5.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image5_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
   </tr>
@@ -253,7 +255,7 @@ For issuers to better represent their brand, issuers may specify an image slice 
 Credential height is dependent on the content and can be unpredictable. Different languages (English, French, etc.) will add more length to names, OS level settings such as font changes or text enlargement will unpredictably change the height of the credential. The recommended image size below is suggested to accommodate for most situations. Note that since the image is top aligned, the top area of the image is certain to be displayed, while the bottom section of the image may not always be visible. 
 
 
-![alt_text](images/image6.jpg "image_tooltip")
+![alt_text](images/image6_1.png "image_tooltip")
 
 
 **_Figure: Examples of the image slice behavior_**
@@ -264,11 +266,11 @@ Types of images best used in this area are abstract images or graphical art. Do 
 <table>
   <tr>
    <td>
-<img src="./images/image7.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image7_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
-<img src="./images/image8.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image8_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
   </tr>
@@ -325,11 +327,11 @@ The background image is to give issuers more opportunities to represent their br
 <table>
   <tr>
    <td>
-<img src="./images/image9.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image9_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
-<img src="./images/image10.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image10_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
   </tr>
@@ -389,7 +391,7 @@ To reduce visual clutter, the issued date (if present), expiry date (if present)
 * A credential is expiring soon or expired, based on _expiry_date_attribute_, if set.
 
 
-![alt_text](images/image11.png "image_tooltip")
+![alt_text](images/image11_1.png "image_tooltip")
 
 
 **_Figure: An example demonstrating how the revocation date, expiry date or issued date may be represented._**
@@ -403,7 +405,7 @@ Issuers should be mindful of the length of text on the credential as lengthy tex
 
 
     
-![alt_text](images/image12.png "image_tooltip")
+![alt_text](images/image12_1.png "image_tooltip")
 
 
 **_Figure: An example demonstrating how lengthy credentials can limit the number of visible credentials._**
@@ -411,7 +413,7 @@ Issuers should be mindful of the length of text on the credential as lengthy tex
 Be mindful of other factors that may increase the length of text and hence, the height of the credential such as translated languages or the font size configured at the OS level.
 
 
-![alt_text](images/image13.png "image_tooltip")
+![alt_text](images/image13_1.png "image_tooltip")
 
 
 **_Figure: Examples showing the treatment of lengthy names_**
@@ -429,11 +431,11 @@ To limit personal information from being displayed on a card face, only specify 
 <table>
   <tr>
    <td>
-<img src="./images/image14.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image14_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
-<img src="./images/image15.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image15_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
   </tr>
@@ -472,11 +474,11 @@ Example text include:
   <tr>
    <td>
 
-<img src="./images/image16.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image16_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
-<img src="./images/image17.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image17_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
   </tr>
@@ -499,13 +501,13 @@ Use long works or words that do not describe non-production credentials.
 Credential size depends on the content of the credential and the size of the device. Text areas are resized according to the width. 
 
 
-![alt_text](images/image18.png "image_tooltip")
+![alt_text](images/image18_1.png "image_tooltip")
 
 
 **_Figure: Treatment of the credential template on different devices_**
 
 
-![alt_text](images/image19.png "image_tooltip")
+![alt_text](images/image19_1.png "image_tooltip")
 
 
 **_Figure: An example of credential on different devices_**
@@ -513,10 +515,10 @@ Credential size depends on the content of the credential and the size of the dev
 
 ### Stacking
 
-Credentials may be stacked to overlap each other to increase the number of visible credentials in the viewport. The header remains unchanged. The issuer name, logo and credential name will always be visible but the primary and secondary attributes and the image slice will be obscured. 
+Credentials may be stacked to overlap each other to increase the number of visible credentials in the viewport. The header remains unchanged. The credential name will always be visible. The issuer name, logo, attributes and image slice will be obscured. 
 
 
-![alt_text](images/image20.png "image_tooltip")
+![alt_text](images/image20_1.png "image_tooltip")
 
 
 **_Figure: An example of stacked credentials with default and enlarged text._**
