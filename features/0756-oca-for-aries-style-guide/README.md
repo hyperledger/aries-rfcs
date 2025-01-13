@@ -6,7 +6,7 @@
 - Status Note: Implemented in the [Bifold Wallet](https://github.com/openwallet-foundation/bifold-wallet)
 - Supersedes: N/A
 - Start Date: 2022-11-15
-- Version: 1.1
+- Versions: 1.0 and 1.1
 - Tags: [feature](/tags.md#feature)
 
 [RFC0755 OCA for Aries]: ../0755-oca-for-aries/README.md
@@ -132,7 +132,28 @@ This style guide defines three layouts for credentials, the credential list layo
 
 The stacked list is the same as the credential layout, with the credentials that are stacked cutoff between elements 6 and 7. Examples of the stacked layout can be seen in the [Stacking](#heading=h.27voxgccn7kf) section of this document. In the Stacked layout, one of the credentials in the stack may be displayed using the full credential list layout.
 
+**Version 1.0**
+<table>
+  <tr>
+   <td>
+<img src="./images/image1.png" width="" alt="alt_text" title="image_tooltip">
 
+   </td>
+   <td>
+<img src="./images/image2.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+  </tr>
+  <tr>
+   <td><strong>Credential List Layout</strong>
+   </td>
+   <td><strong>Single Credential Layout</strong>
+   </td>
+  </tr>
+</table>
+
+
+**Version 1.1**
 <table>
   <tr>
    <td>
@@ -151,7 +172,6 @@ The stacked list is the same as the credential layout, with the credentials that
    </td>
   </tr>
 </table>
-
 
 **_Figure: Credential Layouts_**
 
@@ -181,6 +201,9 @@ The numbered items in the layouts are as follows. In the list, the OCA data elem
     * Fallback: If tracked, the date the credential was received by the Holder, else empty.
 11. `expiry_date_attribute`
     * Fallback: Empty
+
+**added with version 1.1**
+
 12. `Contact detail button`
     * Fallback: Empty
 
@@ -192,6 +215,24 @@ The numbered items in the layouts are as follows. In the list, the OCA data elem
 
 The font color is either black or white, as determined by calculating contrast levels (following [Web Content Accessibility Guidelines](https://www.w3.org/WAI/WCAG2AA-Conformance)) against the background colors from either the OCA Bundle or the generated defaults.
 
+
+**Version 1.0**
+
+<table>
+  <tr>
+   <td>
+<img src="./images/image4.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+   <td>
+<img src="./images/image5.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+  </tr>
+</table>
+
+
+**Version 1.1**
 
 <table>
   <tr>
@@ -247,7 +288,6 @@ Images should be as small as possible to balance quality and download speed. To 
 </table>
 
 
-
 ### Background Image Slice Specifications
 
 For issuers to better represent their brand, issuers may specify an image slice that will be used as outlined in the samples below. Note the use of the image in a long, narrow space and the dynamic height. The image slice will be top aligned, scaled (preserving aspect ratio) and cropped as needed to fill the space.
@@ -255,13 +295,47 @@ For issuers to better represent their brand, issuers may specify an image slice 
 Credential height is dependent on the content and can be unpredictable. Different languages (English, French, etc.) will add more length to names, OS level settings such as font changes or text enlargement will unpredictably change the height of the credential. The recommended image size below is suggested to accommodate for most situations. Note that since the image is top aligned, the top area of the image is certain to be displayed, while the bottom section of the image may not always be visible. 
 
 
-![alt_text](images/image6_1.png "image_tooltip")
+**Version 1.0**
 
+![alt_text](images/image6.jpg "image_tooltip")
+
+
+**Version 1.1**
+
+![alt_text](images/image6_1.png "image_tooltip")
 
 **_Figure: Examples of the image slice behavior_**
 
 Types of images best used in this area are abstract images or graphical art. Do not use images that are difficult to interpret when cropped.
 
+
+**Version 1.0**
+
+<table>
+  <tr>
+   <td>
+<img src="./images/image7.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+   <td>
+<img src="./images/image8.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+  </tr>
+  <tr>
+   <td><strong>Do</strong>
+<p>
+Use an abstract image that can work even when cropped unexpectedly. 
+   </td>
+   <td><strong>Don’t</strong>
+<p>
+Use images that are hard to interpret when cropped. Avoid words
+   </td>
+  </tr>
+</table>
+
+
+**Version 1.1**
 
 <table>
   <tr>
@@ -285,7 +359,6 @@ Use images that are hard to interpret when cropped. Avoid words
    </td>
   </tr>
 </table>
-
 
 **_Figure: Background image slice Do’s and Don’ts_**
 
@@ -324,6 +397,34 @@ Use images that are hard to interpret when cropped. Avoid words
 The background image is to give issuers more opportunities to represent their brand and is used in some credential display screens. Avoid text in the background image.
 
 
+**Version 1.0**
+
+<table>
+  <tr>
+   <td>
+<img src="./images/image9.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+   <td>
+<img src="./images/image10.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+  </tr>
+  <tr>
+   <td><strong>Do</strong>
+<p>
+Use an image that represents your brand.
+   </td>
+   <td><strong>Don’t</strong>
+<p>
+Use this image as a marketing platform. Avoid the use of text.
+   </td>
+  </tr>
+</table>
+
+
+**Version 1.1**
+
 <table>
   <tr>
    <td>
@@ -346,7 +447,6 @@ Use this image as a marketing platform. Avoid the use of text.
    </td>
   </tr>
 </table>
-
 
 **_Figure: Background image Do’s and Don’ts_**
 
@@ -390,9 +490,14 @@ To reduce visual clutter, the issued date (if present), expiry date (if present)
 * A credential is revoked, if the credential is revocable and is known to have been revoked.
 * A credential is expiring soon or expired, based on _expiry_date_attribute_, if set.
 
+**Version 1.0**
+
+![alt_text](images/image11.png "image_tooltip")
+
+
+**Version 1.1**
 
 ![alt_text](images/image11_1.png "image_tooltip")
-
 
 **_Figure: An example demonstrating how the revocation date, expiry date or issued date may be represented._**
 
@@ -404,14 +509,26 @@ The interpretation of the issued date, expiry date and revocation status may be 
 Issuers should be mindful of the length of text on the credential as lengthy text will dynamically change the height of the credential. Expansive credentials risk reducing the number of fully visible credentials in a list.
 
 
-    
-![alt_text](images/image12_1.png "image_tooltip")
+**Version 1.0**    
 
+![alt_text](images/image12.png "image_tooltip")
+
+
+**Version 1.1**   
+
+![alt_text](images/image12_1.png "image_tooltip")
 
 **_Figure: An example demonstrating how lengthy credentials can limit the number of visible credentials._**
 
 Be mindful of other factors that may increase the length of text and hence, the height of the credential such as translated languages or the font size configured at the OS level.
 
+
+**Version 1.0**
+
+![alt_text](images/image13.png "image_tooltip")
+
+
+**Version 1.1**
 
 ![alt_text](images/image13_1.png "image_tooltip")
 
@@ -427,6 +544,34 @@ Note that wallet builders or holders may limit the visibility of the primary and
 
 To limit personal information from being displayed on a card face, only specify what is absolutely necessary for wallet holders to differentiate between credentials of the same type. Do not display private information such as medical related attributes.
 
+
+**Version 1.0**
+
+<table>
+  <tr>
+   <td>
+<img src="./images/image14.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+   <td>
+<img src="./images/image15.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+  </tr>
+  <tr>
+   <td><strong>Do</strong>
+<p>
+Use attributes that help users identify their credentials. Always consider if a primary and secondary attribute is absolutely necessary.
+   </td>
+   <td><strong>Don’t</strong>
+<p>
+Display attributes that contain private information.
+   </td>
+  </tr>
+</table>
+
+
+**Version 1.1**
 
 <table>
   <tr>
@@ -451,7 +596,6 @@ Display attributes that contain private information.
   </tr>
 </table>
 
-
 **_Figure: Primary/secondary attribute Do’s and Don’ts_**
 
 
@@ -469,6 +613,36 @@ Example text include:
 * TEST
 * DEVELOPMENT
 * DO NOT USE 
+
+
+**Version 1.0**
+
+<table>
+  <tr>
+   <td>
+
+<img src="./images/image16.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+   <td>
+<img src="./images/image17.png" width="" alt="alt_text" title="image_tooltip">
+
+   </td>
+  </tr>
+  <tr>
+   <td><strong>Do</strong>
+<p>
+Use succinct words to describe the type of issued credential. This ensures legibility and does not increase the size of the credential unnecessarily.
+   </td>
+   <td><strong>Don’t</strong>
+<p>
+Use long works or words that do not describe non-production credentials.
+   </td>
+  </tr>
+</table>
+
+
+**Version 1.1**
 
 <table>
   <tr>
@@ -495,31 +669,49 @@ Use long works or words that do not describe non-production credentials.
 </table>
 
 
-
 ### Credential resizing
 
 Credential size depends on the content of the credential and the size of the device. Text areas are resized according to the width. 
 
 
-![alt_text](images/image18_1.png "image_tooltip")
+**Version 1.0**
 
+![alt_text](images/image18.png "image_tooltip")
+
+
+**Version 1.1**
+
+![alt_text](images/image18_1.png "image_tooltip")
 
 **_Figure: Treatment of the credential template on different devices_**
 
 
-![alt_text](images/image19_1.png "image_tooltip")
+**Version 1.0**
 
+![alt_text](images/image19.png "image_tooltip")
+
+**Version 1.1**
+
+![alt_text](images/image19_1.png "image_tooltip")
 
 **_Figure: An example of credential on different devices_**
 
 
 ### Stacking
 
-Credentials may be stacked to overlap each other to increase the number of visible credentials in the viewport. The header remains unchanged. The credential name will always be visible. The issuer name, logo, attributes and image slice will be obscured. 
+Credentials may be stacked to overlap each other to increase the number of visible credentials in the viewport. The header remains unchanged. The issuer name, logo and credential name will always be visible, but the primary and secondary attributes and the image slice will be obscured. 
 
+In version 1.1, the credential name will always be visible. The issuer name, logo, attributes and the image slice will be obscured. 
+
+
+**Version 1.0**
+
+![alt_text](images/image20.png "image_tooltip")
+
+
+**Version 1.1**
 
 ![alt_text](images/image20_1.png "image_tooltip")
-
 
 **_Figure: An example of stacked credentials with default and enlarged text._**
 
