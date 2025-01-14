@@ -208,6 +208,13 @@ The numbered items in the layouts are as follows. In the list, the OCA data elem
     * Fallback: Empty
 
 
+**Version 1.0**
+
+![alt_text](images/image3.png "image_tooltip")
+
+
+
+**Version 1.1**
 ![alt_text](images/image3_1.png "image_tooltip")
 
 
