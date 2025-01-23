@@ -23,6 +23,8 @@ also for Aries holder and verifier software makers about how to use the OCA data
 provided from issuers for a given credential type. It is up to the software
 makers to use OCA data provided by the issuers as outlined in this guide.
 
+There are 2 versions of the OCA that can be used. Version 1.1 does not remove version 1.0, but rather propose a different view for credential layout. It is to the wallet maintainer to chose which one would be used in their application.
+
 For more information about the use of OCA in Aries, please see [RFC0755 OCA for
 Aries]
 
@@ -260,7 +262,11 @@ The font color is either black or white, as determined by calculating contrast l
 
 ### Logo Image Specifications
 
-The image in the top left corner is a space for the issuer logo. This space should not be used for anything other than the issuer logo. The logo image may be masked to fit within a rounded square with varying corner radii. Thus, the logo must be a square image (aspect ratio 1:1), as noted in the table below. The background is default white, therefore logo files with a transparent background will overlay a white background.
+This space should not be used for anything other than the issuer logo. The logo image may be masked to fit within a rounded square with varying corner radii. Thus, the logo must be a square image (aspect ratio 1:1), as noted in the table below. The background is default white, therefore logo files with a transparent background will overlay a white background.
+
+For version 1.0, the issuer logo is located at the top left of the credential.
+
+With version 1.1, the issuer logo is located on the bottom of the credential, left of the issuer's name.
 
 The following are the specifications for the credential logo for issuers. 
 
