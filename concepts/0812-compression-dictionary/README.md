@@ -1,4 +1,4 @@
-# 0812: Compressing DIDComm messages using dictionaries (Ex. 0000: RFC Topic)
+# 0812: Compressing DIDComm messages using dictionaries
 - Authors: [Kim Ebert](kim@indicio.tech)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2022-

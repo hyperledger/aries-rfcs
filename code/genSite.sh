@@ -40,6 +40,8 @@ for i in docs/features/*/README.md docs/concepts/*/README.md docs/aip2/*/README.
   sed -e '/Authors/s#](#](mailto:#g' -e 's#mailto:mailto:#mailto:#g'  $i >$i.tmp; mv $i.tmp $i
 done
 
+# To Do: Check that there is EXACTLY one ":" in the RFC Readme first line or error.
+
 # Cleanup the links in the RFCs
 for i in docs/features/*/README.md docs/concepts/*/README.md docs/aip2/*/README.md; do 
    sed \
@@ -65,7 +67,7 @@ echo '# RFCs by AIP and Status' >>${MKDOCSTMP}
 
 # Navigation for AIP 2.0 files
 echo "- AIP 2.0:" >>${MKDOCSTMP}
-for i in docs/aip2/*/README.md ; do head -n 1 $i | sed -e "s/# /    - /" -e "s/: / /" -e "s#\$#: $i#" -e "s#docs/##"; done >>${MKDOCSTMP}
+for i in docs/aip2/*/README.md ; do head -n 1 $i | sed -e "s/# /    - /" -e "s/: / /" -e "s#\$#: $i#" -e "s#docs/##" -e "s/Aries RFC //"; done >>${MKDOCSTMP}
 
 # Navigation for all RFCs by Status
 python code/generate_mkdocs_index.py
